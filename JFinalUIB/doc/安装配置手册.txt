@@ -12,10 +12,13 @@ Jfinal   +   charisma  +  beetl +  postgresql 实现的用户权限管理和日�
 用户名：admins
 密码：000000 六个零
 
-代码说明：
+6.代码说明：
 
-	在beetl方面主要重写了BeetlRender和BeetlRenderFactory实现视图耗时的计算功能，通过handle得到总耗时减去视图耗时，得到action耗时
+	A.权限设计流程：两条线
+		一是用户--》分组--》角色--》功能
+		二是用户--》岗位--》功能
 	
-	权限设计流程：两条线
-	一是用户--》分组--》角色--》功能
-	二是用户--》岗位--》功能
+	B.在beetl方面主要重写了BeetlRender和BeetlRenderFactory实现视图耗时的计算功能，通过handle得到总耗时减去视图耗时，得到action耗时
+	
+	C.所有的基础数据都在oscache做了缓存，比如用户、分组、角色、功能、岗位等等，
+		主要是在ParamInit类，项目启动进行缓存，其它只要涉及到缓存数据的操作会同步更新缓存
