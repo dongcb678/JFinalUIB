@@ -26,7 +26,7 @@
 			<form class="form-horizontal" id="editForm" action="${cxt}/jf/dict/save" method="POST">
 				<% include("/pingtai/dict/form.html"){} %>
 				<div class="form-actions">
-					<bu:hasPrivilegeBody url="/jf/dict/save">
+					<% if(hasPrivilegeUrl("/jf/dict/save", reqSysLog.userids)){ %>
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
 					<% } %>
 					<button class="btn" onclick="ajaxUrl('/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html');">退出</button>
