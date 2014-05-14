@@ -218,7 +218,7 @@ function deptRadioDiaLog(deptId, deptName, checkedIds){//ids默认选中：4
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/dept/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/department/radio.jsp", "ids" : checkedIds, "deptId" : deptId, "deptName" : deptName },
+		data : { "toUrl" : "/pingtai/department/radio.html", "ids" : checkedIds, "deptId" : deptId, "deptName" : deptName },
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -239,7 +239,7 @@ function deptCheckboxDiaLog(deptId, deptName, checkedIds){//ids默认选中：4,
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/dept/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/department/checkbox.jsp", "ids" : checkedIds, "deptId" : deptId, "deptName" : deptName },
+		data : { "toUrl" : "/pingtai/department/checkbox.html", "ids" : checkedIds, "deptId" : deptId, "deptName" : deptName },
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -260,7 +260,7 @@ function dictRadioDiaLog(dictId, dictName, checkedIds){
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/dict/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/dict/radio.jsp", "ids" : checkedIds, "dictId" : dictId, "dictName" : dictName },
+		data : { "toUrl" : "/pingtai/dict/radio.html", "ids" : checkedIds, "dictId" : dictId, "dictName" : dictName },
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -281,7 +281,7 @@ function moduleRadioDiaLog(moduleId, moduleName, checkedIds){
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/module/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/module/radio.jsp", "ids" : checkedIds, "moduleId" : moduleId, "moduleName" : moduleName },
+		data : { "toUrl" : "/pingtai/module/radio.html", "ids" : checkedIds, "moduleId" : moduleId, "moduleName" : moduleName },
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -302,7 +302,7 @@ function stationRadioDiaLog(stationId, stationName, checkedIds){
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/station/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/station/radio.jsp", "ids" : checkedIds, "stationId" : stationId, "stationName" : stationName },
+		data : { "toUrl" : "/pingtai/station/radio.html", "ids" : checkedIds, "stationId" : stationId, "stationName" : stationName },
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -323,7 +323,7 @@ function stationCheckboxDiaLog(stationId, stationName, checkedIds){
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/station/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/station/checkbox.jsp", "ids" : checkedIds, "stationId" : stationId, "stationName" : stationName },
+		data : { "toUrl" : "/pingtai/station/checkbox.html", "ids" : checkedIds, "stationId" : stationId, "stationName" : stationName },
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -344,7 +344,7 @@ function userRadioDiaLog(userId, userName, checkedIds){
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/user/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/user/radio.jsp", "ids" : checkedIds, "userId" : userId, "userName" : userName },
+		data : { "toUrl" : "/pingtai/user/radio.html", "ids" : checkedIds, "userId" : userId, "userName" : userName },
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -368,7 +368,7 @@ function userCheckboxDiaLog(userId, userName, deptIds, deptNames, checkedDeptIds
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/user/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/user/checkbox.jsp", 
+		data : { "toUrl" : "/pingtai/user/checkbox.html", 
 			"checkedDeptIds" : checkedDeptIds, "checkedUserIds" : checkedUserIds,
 			"userId" : userId, "userName" : userName, "deptIds" : deptIds, "deptNames" : deptNames 
 			},
@@ -392,7 +392,7 @@ function setDeptPrincipalDiaLog(deptId){
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/dept/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/department/userTree.jsp", "ids" : deptId },
+		data : { "toUrl" : "/pingtai/department/userTree.html", "ids" : deptId },
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -411,7 +411,7 @@ function setMenuOperatorDiaLog(menuIds){
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/operator/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/menu/operatorTree.jsp", "ids" : menuIds },
+		data : { "toUrl" : "/pingtai/menu/operatorTree.html", "ids" : menuIds },
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -430,7 +430,7 @@ function setRoleOperatorDiaLog(roleIds){
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/operator/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/role/operatorTree.jsp", "ids" : roleIds},
+		data : { "toUrl" : "/pingtai/role/operatorTree.html", "ids" : roleIds},
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
@@ -449,7 +449,7 @@ function setStationOperatorDiaLog(stationIds){
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/operator/toUrl",
-		data : { "toUrl" : "/WEB-INF/view/pingtai/station/operatorTree.jsp", "ids" : stationIds},
+		data : { "toUrl" : "/pingtai/station/operatorTree.html", "ids" : stationIds},
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
