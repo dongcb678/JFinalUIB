@@ -62,83 +62,67 @@
 						<tr>
 							<th onclick="orderbyFun('onames')">
 								功能
-				      			<bu:splitOrder name="onames" />
 							</th>
 							<th width="100" onclick="orderbyFun('u.username')">
 								用户
-				      			<bu:splitOrder name="u.username" />
 							</th>
 							<th width="35" onclick="orderbyFun('status')">
 								状态
-				      			<bu:splitOrder name="status" />
 							</th>
 							<th width="100" onclick="orderbyFun('ips')">
 								IP
-				      			<bu:splitOrder name="ips" />
 							</th>
 							<th width="150" onclick="orderbyFun('startDate')">
 								时间
-				      			<bu:splitOrder name="startDate" />
 							</th>
 							<th width="45" onclick="orderbyFun('actionHaoShi')">
 								控制器
-				      			<bu:splitOrder name="actionHaoShi" />
 							</th>
 							<th width="40" onclick="orderbyFun('viewHaoShi')">
 								视图
-				      			<bu:splitOrder name="viewHaoShi" />
 							</th>
 							<th width="45" onclick="orderbyFun('haoShi')">
 								总耗时
-				      			<bu:splitOrder name="haoShi" />
 							</th>
 							<th width="140">操作</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:set var="view" scope="page">
-							<bu:hasPrivilegeBool url="/jf/sysLog/view"/>
-						</c:set>
-						<c:set var="delete" scope="page">
-							<bu:hasPrivilegeBool url="/jf/sysLog/delete"/>
-						</c:set>
-						<c:forEach items="${splitPage.page.list}" var="record">
+						<%
+							var view = hasPrivilegeUrl("/jf/sysLog/view", reqSysLog.userids);
+							var delete = hasPrivilegeUrl("/jf/sysLog/delete", reqSysLog.userids);
+						%>
+						<% for(sysLog in splitPage.page.list){ %>
 							<tr>
-								<td align="center">${record.columns["onames"] }：${record.columns.ourl }</td>
-								<td align="center">${record.columns["username"] }</td>
+								<td align="center">${sysLog["onames"] }：${sysLog.ourl }</td>
+								<td align="center">${sysLog["username"] }</td>
 								<td align="center">
-									<c:choose>
-										<c:when test='${record.columns["status"] eq "1"}'>
-											<span class="label label-success">成功</span>
-										</c:when>
-										<c:when test='${record.columns["status"] eq "0"}'>
-											<span class="label label-warning">失败</span>
-										</c:when>
-									</c:choose>
+									<% if(sysLog["status"] == "1"){%>
+										<span class="label label-success">成功</span>
+									<% } else if(sysLog["status"] == "0"){%>
+										<span class="label label-warning">失败</span>
+									<% } %>
 								</td>
-								<td align="center">${record.columns["ips"] }</td>
+								<td align="center">${sysLog["ips"] }</td>
 								<td align="center">
-									<fmt:formatDate value='${record.columns["startdate"]}' type="both" pattern="yyyy-MM-dd HH:mm:ss:SSS"/>
+									${sysLog.startdate !, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}
 								</td>
-								<td align="center">${record.columns["actionhaoshi"] }</td>
-								<td align="center">${record.columns["viewhaoshi"] }</td>
+								<td align="center">${sysLog["actionhaoshi"] }</td>
+								<td align="center">${sysLog["viewhaoshi"] }</td>
 								<td align="center">
-									<c:choose>
-										<c:when test='${record.columns["haoshi"] > 1000}'>
-											<span class="label label-warning">${record.columns["haoshi"] }</span>
-										</c:when>
-										<c:otherwise>
-											<span class="label label-success">${record.columns["haoshi"] }</span>
-										</c:otherwise>
-									</c:choose>
+									<% if(sysLog["haoshi"] > 1000){%>
+										<span class="label label-warning">${sysLog["haoshi"] }</span>
+									<% } else {%>
+										<span class="label label-success">${sysLog["haoshi"] }</span>
+									<% } %>	
 								</td>
 								<td class="center">
-									<c:if test='${pageScope.view eq "true"}'>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/sysLog/view/${record.columns.ids}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
-									</c:if>
-									<c:if test='${pageScope.delete eq "true"}'>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/sysLog/delete/${record.columns.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
-									</c:if>
+									<% if(view == true){ %>
+										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/sysLog/view/${sysLog.ids}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
+									<% } %>
+									<% if(delete == true){ %>
+										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/sysLog/delete/${sysLog.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
+									<% } %>
 								</td>
 							</tr>
 						<% } %>
