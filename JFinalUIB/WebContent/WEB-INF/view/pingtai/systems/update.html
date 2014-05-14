@@ -20,12 +20,12 @@
 		
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt}/jf/systems/update" method="POST">
-				<input type="hidden" name="systems.ids" value="${systems.ids}" >
+				<input type="hidden" name="systems.ids" value="${systems.ids!}" >
 				<% include("/pingtai/systems/form.html"){} %>
 				<div class="form-actions">
-					<bu:hasPrivilegeBody url="/jf/systems/update">
+					<% if(hasPrivilegeUrl("/jf/systems/update", reqSysLog.userids)){ %>
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
-					</bu:hasPrivilegeBody>
+					<% } %>
 					<button class="btn" onclick="ajaxUrl('/jf/systems');">退出</button>
 				</div>
 			</form>

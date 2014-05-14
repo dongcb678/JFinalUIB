@@ -16,9 +16,9 @@
 			<div class="box-header well" data-original-title>
 				<h2><i class="icon-edit"></i> 系统查询</h2>
 				<div class="box-icon">
-					<bu:hasPrivilegeBody url="/pingtai/systems/add.html">
+					<% if(hasPrivilegeUrl("/pingtai/systems/add.html", reqSysLog.userids)){ %>
 						<a href="#" class="btn btn-round" title="添加系统" onclick="ajaxUrl('/jf/systems/toUrl?toUrl=/pingtai/systems/add.html');"><i class="icon-plus-sign"></i></a>
-					</bu:hasPrivilegeBody>
+					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
 				</div>
@@ -28,7 +28,7 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">名称</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${fn:escapeXml(param["_query.names"])}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
@@ -58,53 +58,44 @@
 						<tr>
 							<th onclick="orderbyFun('names')">
 								名称
-								<bu:splitOrder name="names" />
 							</th>
 							<th onclick="orderbyFun('numbers')">
 								编号
-								<bu:splitOrder name="numbers" />
 							</th>
 							<th onclick="orderbyFun('orderids')">
 								排序
-								<bu:splitOrder name="orderids" />
 							</th>
 							<th width="280">操作</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:set var="edit" scope="page">
-							<bu:hasPrivilegeBool url="/jf/systems/edit"/>
-						</c:set>
-						<c:set var="delete" scope="page">
-							<bu:hasPrivilegeBool url="/jf/systems/delete"/>
-						</c:set>
-						<c:set var="module" scope="page">
-							<bu:hasPrivilegeBool url="/jf/module"/>
-						</c:set>
-						<c:set var="menu" scope="page">
-							<bu:hasPrivilegeBool url="/jf/menu"/>
-						</c:set>
-						<c:forEach items="${splitPage.page.list}" var="record">
+						<%
+							var edit = hasPrivilegeUrl("/jf/systems/edit", reqSysLog.userids);
+							var delete = hasPrivilegeUrl("/jf/systems/delete", reqSysLog.userids);
+							var module = hasPrivilegeUrl("/jf/module", reqSysLog.userids);
+							var menu = hasPrivilegeUrl("/jf/menu", reqSysLog.userids);
+						%>
+						<% for(systems in splitPage.page.list){ %>
 							<tr>
-								<td>${record.columns["names"]}</td>
-								<td>${record.columns["numbers"]}</td>
-								<td>${record.columns["orderids"]}</td>
+								<td>${systems["names"]}</td>
+								<td>${systems["numbers"]}</td>
+								<td>${systems["orderids"]}</td>
 								<td class="center">
-									<c:if test='${pageScope.edit eq "true"}'>
-										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/systems/edit/${record.columns.ids}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
-									</c:if>
-									<c:if test='${pageScope.delete eq "true"}'>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/systems/delete/${record.columns.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
-									</c:if>
-									<c:if test='${pageScope.module eq "true"}'>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/module?systemsIds=${record.columns.ids}');"> <i class="icon-zoom-in icon-white"></i> 模块</a>
-									</c:if>
-									<c:if test='${pageScope.menu eq "true"}'>
+									<% if(edit == true){ %>
+										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/systems/edit/${systems.ids}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+									<% } %>
+									<% if(delete == true){ %>
+										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/systems/delete/${systems.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
+									<% } %>
+									<% if(module == true){ %>
+										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/module?systemsIds=${systems.ids}');"> <i class="icon-zoom-in icon-white"></i> 模块</a>
+									<% } %>
+									<% if(menu == true){ %>
 										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/menu?systemsIds=${record.columns.ids}');"> <i class="icon-zoom-in icon-white"></i> 菜单</a> 
-									</c:if>
+									<% } %>
 								</td>
 							</tr>
-						</c:forEach>
+						<% } %>
 					</tbody>
 				</table>
 				<div id="splitPageDiv" class="pagination pagination-centered"></div>
