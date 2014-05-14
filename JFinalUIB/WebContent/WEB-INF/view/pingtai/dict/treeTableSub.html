@@ -1,30 +1,30 @@
-<c:set var="edit" scope="page">
-	<bu:hasPrivilegeBool url="/jf/dict/edit"/>
-</c:set>
-<c:set var="delete" scope="page">
-	<bu:hasPrivilegeBool url="/jf/dict/delete"/>
-</c:set>
+<%
+	var edit = hasPrivilegeUrl("/jf/dict/edit", reqSysLog.userids);
+	var delete = hasPrivilegeUrl("/jf/dict/delete", reqSysLog.userids);
+%>
 
-<c:forEach items="${list}" var="dict">
+<% for(dict in list){ %>
    	<tr id="${dict.ids}" pId="${dict.parentids}" hasChild='${dict.levels != 4 ? "true" : "false"}'>
 		<td>
-			<c:choose>
-				<c:when test='${dict.levels eq "1"}'><img alt="" src="${cxt}/jsFile/zTree/css/zTreeStyle/img/diy/1_open.png"></c:when>
-				<c:when test='${dict.levels eq "2"}'><img alt="" src="${cxt}/jsFile/zTree/css/zTreeStyle/img/diy/2.png"></c:when>
-				<c:when test='${dict.levels eq "3"}'><img alt="" src="${cxt}/jsFile/zTree/css/zTreeStyle/img/diy/3.png"></c:when>
-			</c:choose>
+			<% if(dict.levels == "1"){ %>
+				<img alt="" src="${cxt}/jsFile/zTree/css/zTreeStyle/img/diy/1_open.png">
+			<% }else if(dict.levels == "2"){ %>
+				<img alt="" src="${cxt}/jsFile/zTree/css/zTreeStyle/img/diy/2.png">
+			<% }else if(dict.levels == "3"){ %>
+				<img alt="" src="${cxt}/jsFile/zTree/css/zTreeStyle/img/diy/3.png">
+			<% } %>
 			<span controller='true'>${dict.levels }级</span>
 		</td>
 		<td>${dict.names }</td>
 		<td>
-			<c:if test='${dict.levels != 0}'>
-				<c:if test='${pageScope.edit eq "true"}'>
+			<% if(dict.levels != 0){ %>
+				<% if(edit == true){ %>
 					<a href='#' onclick='update("${dict.ids}")'>修改</a>&nbsp;&nbsp;
-				</c:if>
-				<c:if test='${pageScope.delete eq "true"}'>
+				<% } %>
+				<% if(delete == true){ %>
 					<a href='#' onclick='deleteFunc("${dict.ids}")'>删除</a>
-				</c:if>
-			</c:if>
+				<% } %>
+			<% } %>
 		</td>
 	</tr>
 <% } %>

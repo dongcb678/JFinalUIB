@@ -1,10 +1,3 @@
-<c:set var="edit" scope="page">
-	<bu:hasPrivilegeBool url="/jf/dict/edit"/>
-</c:set>
-<c:set var="delete" scope="page">
-	<bu:hasPrivilegeBool url="/jf/dict/delete"/>
-</c:set>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +46,7 @@
 	    });	
 		
 		function update(ids){
-			var has = ${pageScope.edit};
+			var has = ${hasPrivilegeUrl("/jf/dict/edit", reqSysLog.userids)};
 			if(has){
 				parent.window.ajaxUrl('/jf/dict/edit/' + ids);
 			}else{
@@ -62,7 +55,7 @@
 		}
 	
 		function deleteFunc(ids){
-			var has = ${pageScope.delete};
+			var has = ${hasPrivilegeUrl("/jf/dict/delete", reqSysLog.userids)};
 			if(has){
 				parent.window.ajaxUrl('/jf/dict/delete/' + ids);
 			}else{
@@ -81,7 +74,7 @@
                 <td>名称</td>
            		<td>操作</td>
 			</tr>
-	        <c:forEach items="${list}" var="dict">
+	        <% for(dict in list){ %>
 	        	<tr id="${dict.ids}" pId="${dict.parentids}" hasChild='${dict.levels != 4 ? "true" : "false"}'>
 					<td>
 						<img alt="" src="${cxt}/jsFile/zTree/css/zTreeStyle/img/diy/1_close.png">
