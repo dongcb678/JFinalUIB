@@ -3,7 +3,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt}/jf/dept/treeData',
+			url : '${cxt!}/jf/dept/treeData',
 			autoParam : ["id=ids"],//, "name=n", "level=lv"
 			//otherParam : {"otherParam" : "zTreeAsyncTest"},
 			dataFilter : filter,
@@ -181,7 +181,7 @@
 
 	//////////////////选中事件处理////////////////////
 	
-	var className = "dark", checkedNodeIds = "${paramMap.ids}", checkedNodeName = "";
+	var className = "dark", checkedNodeIds = "${paramMap.ids!}", checkedNodeName = "";
 	
 	function beforeCheck(treeId, treeNode) {
 		className = (className === "dark" ? "":"dark");
@@ -260,8 +260,8 @@
 			checkedNodeIds = checkedNodeIds.substring(0, checkedNodeIds.length-1);
 			checkedNodeName = checkedNodeName.substring(0, checkedNodeName.length-1);
 		}
-		$("#${paramMap.deptId}").val(checkedNodeIds);
-		$("#${paramMap.deptName}").val(checkedNodeName);
+		$("#${paramMap.deptId!}").val(checkedNodeIds);
+		$("#${paramMap.deptName!}").val(checkedNodeName);
 	}
 	
 	//////////////////初始化////////////////////

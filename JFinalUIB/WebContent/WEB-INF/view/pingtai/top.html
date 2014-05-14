@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 			</a>
 			<a class="brand" href="#" onclick="ajaxUrl('/jf/index/content');"> 
-				<img alt="Charisma Logo" src="${cxt}/ui/charisma/img/logo20.png" /> 
+				<img alt="Charisma Logo" src="${cxt!}/ui/charisma/img/logo20.png" /> 
 				<span>JFinalUI</span>
 			</a>
 			
@@ -40,7 +40,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<% for(systems in systemsList){ %>
-						<li><a href="${cxt}/jf/index?ids=${systems.ids}">${systems.names}</a></li>
+						<li><a href="${cxt!}/jf/index?ids=${systems.ids!}">${systems.names!}</a></li>
 						<li class="divider"></li>
 					<% } %>
 				</ul>
@@ -50,14 +50,14 @@
 			<!-- user dropdown starts -->
 			<div class="btn-group pull-right" >
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-user"></i><span class="hidden-phone"> ${cookieMap.userName.value}</span>
+					<i class="icon-user"></i><span class="hidden-phone"> ${cookieMap.userName.value!}</span>
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="#">用户信息</a></li>
 					<li><a href="#">密码设置</a></li>
 					<li class="divider"></li>
-					<li><a href="${cxt}/jf/login/logout">退出系统</a></li>
+					<li><a href="${cxt!}/jf/login/logout">退出系统</a></li>
 				</ul>
 			</div>
 			<!-- user dropdown ends -->

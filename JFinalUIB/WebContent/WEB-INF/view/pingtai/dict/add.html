@@ -23,7 +23,7 @@
 		</div>
 		
 		<div class="box-content">
-			<form class="form-horizontal" id="editForm" action="${cxt}/jf/dict/save" method="POST">
+			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/dict/save" method="POST">
 				<% include("/pingtai/dict/form.html"){} %>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/dict/save", reqSysLog.userids)){ %>

@@ -19,7 +19,7 @@
 		</div>
 		
 		<div class="box-content">
-			<form class="form-horizontal" id="editForm" action="${cxt}/jf/role/update" method="POST">
+			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/role/update" method="POST">
 				<input type="hidden" name="role.ids" value="${role.ids!}" >
 				<% include("/pingtai/role/form.html"){} %>
 				<div class="form-actions">

@@ -3,7 +3,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt}/jf/user/treeData',
+			url : '${cxt!}/jf/user/treeData',
 			autoParam : ["id=deptIds"],//, "name=n", "level=lv"
 			//otherParam : {"station.ids" : '${paramMap["station.ids"]!}'},
 			dataFilter : filter,
@@ -187,10 +187,10 @@
 	
 	var className = "dark"; 
 	
-	var checkedDeptNodeIds = "${paramMap.checkedDeptIds}";
+	var checkedDeptNodeIds = "${paramMap.checkedDeptIds!}";
 	var checkedDeptNodeNames = "";
 	
-	var checkedUserNodeIds = "${paramMap.checkedUserIds}";
+	var checkedUserNodeIds = "${paramMap.checkedUserIds!}";
 	var checkedUserNodeNames = "";
 	
 	function beforeCheck(treeId, treeNode) {
@@ -308,11 +308,11 @@
 			"userIds" : checkedUserNodeIds, "userNames" : checkedUserNodeNames
 		}; */
 
-		$("#${paramMap.deptIds}").val(checkedDeptNodeIds);
-		$("#${paramMap.deptNames}").val(checkedDeptNodeNames);
+		$("#${paramMap.deptIds!}").val(checkedDeptNodeIds);
+		$("#${paramMap.deptNames!}").val(checkedDeptNodeNames);
 		
-		$("#${paramMap.userId}").val(checkedUserNodeIds);
-		$("#${paramMap.userName}").val(checkedUserNodeNames);
+		$("#${paramMap.userId!}").val(checkedUserNodeIds);
+		$("#${paramMap.userName!}").val(checkedUserNodeNames);
 	}
 
 	//////////////////初始化////////////////////

@@ -5,7 +5,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt}/jf/dept/treeData',
+			url : '${cxt!}/jf/dept/treeData',
 			autoParam : ["id=ids"],//, "name=n", "level=lv"
 			//otherParam : {"otherParam" : "zTreeAsyncTest"},
 			dataFilter : filter,
@@ -69,7 +69,7 @@
 		zTree.selectNode(treeNode);
 		if(confirm("确认删除<" + treeNode.name + ">部门吗？")){
 			$.post(
-				"${cxt}/jf/dept/delete",
+				"${cxt!}/jf/dept/delete",
 				{ "ids" : treeNode.id },
 				function(data){//返回数据库标示
 					if(data == "error"){
@@ -91,7 +91,7 @@
 		}else{
 			$.ajax({
 				type : "post",
-				url : "${cxt}/jf/dept/update",
+				url : "${cxt!}/jf/dept/update",
 				data : { "ids" : treeNode.id, "names" : newName },
 				dataType : "html",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -128,7 +128,7 @@
 			
 			$.ajax({
 				type : "post",
-				url : "${cxt}/jf/dept/save",
+				url : "${cxt!}/jf/dept/save",
 				data : { 
 					"pIds" : treeNode.id, 
 					"names" : addName, 
@@ -374,7 +374,7 @@
 			var dragId = treeNodes[0].id;//被拖拽部门
 			var targetId = targetNode.id;//拖拽到的目标部门
 			$.post(
-				"${cxt}/jf/dept/update",
+				"${cxt!}/jf/dept/update",
 				{ "ids" : dragId, "pIds" : targetId },
 				function(data){//返回数据库标示
 			     	if(data == "error"){
@@ -397,34 +397,6 @@
 		zTree.setting.edit.drag.autoExpandTrigger = $("#callbackTrigger").attr("checked");
 	}
 
-	// 更新设置部门负责人
-	function setDeptPrincipal(deptIds){
-		$.ajax({
-		   	type: "POST",
-		   	url: "${cxt}/jf/dept/getPrincipal",//1.查询部门负责人
-		   	data: 'ids=' + deptIds,
-			async : false,
-		   	success: function(data){
-		   		var json = eval(data);
-		   		if(json[0].status == "success"){
-					var principalIds = json[0].ids; 
-					var url = "${cxt}/jf/dept/toUrl?toUrl=/pingtai/user/radioIframe.html&ids=" + principalIds;
-					var options = { mask : true, width : 500, height : 430, param : "{msg:'message'}" ,close :function (data){
-						var checkValue = user_radioTreeIframe.getCheckValue();
-						if(checkValue.ids != ''){
-							//2.设置部门负责人
-							$.post("${cxt}/jf/dept/update", { "ids" : deptIds, "principalIds" : checkValue.ids });
-						}
-						return true;
-					}};
-					$.pdialog.open(url, "dlg_page11", "设置部门负责人", options);
-		     	}else{
-		     		alert("设置岗位拥有的功能权限失败！");
-		     	}
-		   	}
-		});
-	}
-	
 	//////////////////初始化////////////////////
 
 	$(document).ready(function(){

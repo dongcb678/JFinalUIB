@@ -1,13 +1,13 @@
-<input type="hidden" id="_totalRow" value="${splitPage.page.totalRow}"><!-- 总行数 -->
-<input type="hidden" id="_pageSize" value="${splitPage.page.pageSize}"><!-- 每页显示多少航 -->
-<input type="hidden" id="_pageNumber" value="${splitPage.page.pageNumber}"><!-- 当前第几页 -->
-<input type="hidden" id="_totalPage" value="${splitPage.page.totalPage}"><!-- 总页数 -->
+<input type="hidden" id="_totalRow" value="${splitPage.page.totalRow!}"><!-- 总行数 -->
+<input type="hidden" id="_pageSize" value="${splitPage.page.pageSize!}"><!-- 每页显示多少航 -->
+<input type="hidden" id="_pageNumber" value="${splitPage.page.pageNumber!}"><!-- 当前第几页 -->
+<input type="hidden" id="_totalPage" value="${splitPage.page.totalPage!}"><!-- 总页数 -->
 
 <input type="hidden" id="_isSelectPage" value="true">
 <input type="hidden" id="_isSelectSize" value="true">
 
-<input type="hidden" id="_orderColunm" value="${splitPage.orderColunm}">
-<input type="hidden" id="_orderMode" value="${splitPage.orderMode}">
+<input type="hidden" id="_orderColunm" value="${splitPage.orderColunm!}">
+<input type="hidden" id="_orderMode" value="${splitPage.orderMode!}">
 
 <script type="text/javascript">
 	$(document).ready(function() {

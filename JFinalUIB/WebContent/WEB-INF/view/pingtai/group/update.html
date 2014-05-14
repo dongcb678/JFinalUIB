@@ -19,8 +19,8 @@
 		</div>
 		
 		<div class="box-content">
-			<form class="form-horizontal" id="editForm" action="${cxt}/jf/group/update" method="POST">
-				<input type="hidden" name="group.ids" value="${group.ids}" >
+			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/group/update" method="POST">
+				<input type="hidden" name="group.ids" value="${group.ids!}" >
 				<% include("/pingtai/group/form.html"){} %>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/group/update", reqSysLog.userids)){ %>

@@ -5,7 +5,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt}/jf/module/treeData',
+			url : '${cxt!}/jf/module/treeData',
 			autoParam : ["id=ids"],//, "name=n", "level=lv"
 			//otherParam : {"otherParam" : "zTreeAsyncTest"},
 			dataFilter : filter,
@@ -185,8 +185,8 @@
 	}
 	
 	function setCheckValue(){
-		$("#${paramMap.moduleId}").val(checkedNodeIds);
-		$("#${paramMap.moduleName}").val(checkedNodeName);
+		$("#${paramMap.moduleId!}").val(checkedNodeIds);
+		$("#${paramMap.moduleName!}").val(checkedNodeName);
 	}
 	
 	//////////////////初始化////////////////////

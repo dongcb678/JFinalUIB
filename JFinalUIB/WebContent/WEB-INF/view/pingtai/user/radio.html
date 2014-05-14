@@ -3,7 +3,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt}/jf/user/treeData',
+			url : '${cxt!}/jf/user/treeData',
 			autoParam : ["id=deptIds"],//, "name=n", "level=lv"
 			//otherParam : {"user.ids" : 'qqq'},
 			dataFilter : filter,
@@ -197,8 +197,8 @@
 	}
 	
 	function setCheckValue(){
-		$("#${paramMap.userId}").val(checkedNodeIds);
-		$("#${paramMap.userName}").val(checkedNodeName);
+		$("#${paramMap.userId!}").val(checkedNodeIds);
+		$("#${paramMap.userName!}").val(checkedNodeName);
 	}
 	
 	//////////////////初始化////////////////////

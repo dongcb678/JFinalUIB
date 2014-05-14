@@ -5,7 +5,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt}/jf/user/treeData',
+			url : '${cxt!}/jf/user/treeData',
 			autoParam : ["id=deptIds"],//, "name=n", "level=lv"
 			//otherParam : {"user.ids" : 'qqq'},
 			dataFilter : filter,
@@ -206,7 +206,7 @@
 	function getDeptPrincipal(){
 		$.ajax({
 		   	type: "POST",
-		   	url: "${cxt}/jf/dept/getPrincipal",
+		   	url: "${cxt!}/jf/dept/getPrincipal",
 		   	data: 'ids=${paramMap.ids!}',
 			async : false,
 		   	success: function(data){
@@ -224,7 +224,7 @@
 	function setCheckValue(){
 		checkedNodeIds = checkedNodeIds.replace(/user_/g, '');
 		if(userIds != checkedNodeIds){
-			$.post("${cxt}/jf/dept/update", { "ids" : '${paramMap.ids!}', "principalIds" : checkedNodeIds });
+			$.post("${cxt!}/jf/dept/update", { "ids" : '${paramMap.ids!}', "principalIds" : checkedNodeIds });
 		}
 	}
 	

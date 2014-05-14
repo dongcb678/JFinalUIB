@@ -19,7 +19,7 @@
 		</div>
 		
 		<div class="box-content">
-			<form class="form-horizontal" id="editForm" action="${cxt}/jf/user/save" method="POST">
+			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/user/save" method="POST">
 				<% include("/pingtai/user/form.html", {"operatorType" : "add"}){} %>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/user/save", reqSysLog.userids)){ %>

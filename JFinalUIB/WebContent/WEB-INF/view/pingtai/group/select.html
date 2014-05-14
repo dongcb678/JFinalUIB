@@ -24,7 +24,7 @@
 			groupIds += checkedGroup.options[i].value + ",";
 	    }
 		
-		var userIds = "${ids}";
+		var userIds = "${ids!}";
 		$.ajax({
 			type : "post",
 			url : cxt + "/user/setGroup",

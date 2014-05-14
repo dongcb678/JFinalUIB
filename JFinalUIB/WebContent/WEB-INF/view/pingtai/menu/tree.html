@@ -5,7 +5,7 @@
 	var setting = {
 		async: {
 			enable: true,
-			url:"${cxt}/jf/menu/treeData",
+			url:"${cxt!}/jf/menu/treeData",
 			autoParam:["id=ids"],//, "name=n", "level=lv"
 			otherParam:{"systemsIds" : '${systemsIds!}'},
 			dataFilter: filter,
@@ -69,7 +69,7 @@
 		zTree.selectNode(treeNode);
 		if(confirm("确认删除<" + treeNode.name + ">菜单吗？")){
 			$.post(
-				"${cxt}/jf/menu/delete",
+				"${cxt!}/jf/menu/delete",
 				{ "ids" : treeNode.id },
 				function(data){//返回数据库标示
 					if(data != treeNode.id){
@@ -91,7 +91,7 @@
 		}else{
 			$.ajax({
 				type : "post",
-				url : "${cxt}/jf/menu/update",
+				url : "${cxt!}/jf/menu/update",
 				data : { "ids" : treeNode.id, "names" : newName },
 				dataType : "html",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -127,7 +127,7 @@
 			
 			$.ajax({
 				type : "post",
-				url : "${cxt}/jf/menu/save",
+				url : "${cxt!}/jf/menu/save",
 				data : { "pIds" : treeNode.id, "names" : addName, "orderIds" : orderIds },
 				dataType : "html",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -372,7 +372,7 @@
 			var dragId = treeNodes[0].id;//被拖拽菜单
 			var targetId = targetNode.id;//拖拽到的目标菜单
 			$.post(
-				"${cxt}/jf/menu/update",
+				"${cxt!}/jf/menu/update",
 				{ "ids" : dragId, "pIds" : targetId },
 				function(data){//返回数据库标示
 			     	if(data != dragId){
