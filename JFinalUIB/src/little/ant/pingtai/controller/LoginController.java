@@ -51,7 +51,6 @@ public class LoginController extends BaseController {
 		}else{
 			redirect("/jf/login");
 		}
-		render("/pingtai/index.html");
 	}
 
 	/**
