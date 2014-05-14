@@ -16,7 +16,7 @@
 			<div class="box-header well" data-original-title>
 				<h2><i class="icon-edit"></i> 功能查询</h2>
 				<div class="box-icon">
-					<bu:hasPrivilegeBody url="/pingtai/operator/add.html">
+					<% if(hasPrivilegeUrl("/pingtai/operator/add.html", reqSysLog.userids)){ %>
 						<a href="#" class="btn btn-round" title="添加功能" onclick="ajaxUrl('/jf/operator/toUrl?toUrl=/pingtai/operator/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
@@ -65,66 +65,64 @@
 						<tr>
 							<th onclick="orderbyFun('s.names')">
 								系统
-								<bu:splitOrder name="s.names" />
 							</th>
 							<th onclick="orderbyFun('m.names')">
 								模块
-								<bu:splitOrder name="m.names" />
 							</th>
 							<th onclick="orderbyFun('names')">
 								操作名
-								<bu:splitOrder name="names" />
 							</th>
 							<th onclick="orderbyFun('url')">
 								URL
-	      						<bu:splitOrder name="url" />
 	      					</th>
 							<th onclick="orderbyFun('rowFilter')">
 								行级过滤
-								<bu:splitOrder name="rowFilter" />
 							</th>
 							<th onclick="orderbyFun('splitPage')">
 								是否分页
-	      						<bu:splitOrder name="splitPage" />
 							</th>
 							<th onclick="orderbyFun('formToken')">
 								重复验证
-	      						<bu:splitOrder name="formToken" />
 							</th>
 							<th onclick="orderbyFun('privilege')">
 								权限验证
-	      						<bu:splitOrder name="privilege" />
 							</th>
 							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:set var="view" scope="page">
-							<bu:hasPrivilegeBool url="/jf/operator/view"/>
-						</c:set>
-						<c:set var="edit" scope="page">
-							<bu:hasPrivilegeBool url="/jf/operator/edit"/>
-						</c:set>
-						<c:set var="delete" scope="page">
-							<bu:hasPrivilegeBool url="/jf/operator/delete"/>
-						</c:set>
-						<c:forEach items="${splitPage.page.list}" var="record">
+						<%
+							var view = hasPrivilegeUrl("/jf/operator/view", reqSysLog.userids);
+							var edit = hasPrivilegeUrl("/jf/operator/edit", reqSysLog.userids);
+							var delete = hasPrivilegeUrl("/jf/operator/delete", reqSysLog.userids);
+						%>
+						<% for(operator in splitPage.page.list){ %>
 							<tr>
-								<td>${record.columns.systemsnames}</td>
-								<td>${record.columns.modulenames}</td>
-								<td>${record.columns["names"]}</td>
-								<td>${record.columns["url"] }</td>
-								<td class="center">${record.columns["rowFilter"] eq "0" ? "否" : "是" }</td>
-								<td class="center">${record.columns["splitPage"] eq "0" ? "否" : "是" }</td>
-								<td class="center"><span class="label label-success">${record.columns["formToken"] eq "0" ? "否" : "是" }</span></td>
-								<td class="center">${record.columns["privilege"] eq "0" ? "否" : "是" }</td>
+								<td>${operator.systemsnames}</td>
+								<td>${operator.modulenames}</td>
+								<td>${operator["names"]}</td>
+								<td>${operator["url"] }</td>
 								<td class="center">
-									<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/operator/view/${record.columns.ids}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
-									<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/operator/edit/${record.columns.ids}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
-									<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/operator/delete/${record.columns.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
+									<% if(operator["rowFilter"] == "0"){print("否");}else{print("是");} %>
+								</td>
+								<td class="center">
+									<% if(operator["splitPage"] == "0"){print("否");}else{print("是");} %>
+								</td>
+								<td class="center">
+									<span class="label label-success">
+										<% if(operator["formToken"] == "0"){print("否");}else{print("是");} %>
+									</span>
+								</td>
+								<td class="center">
+									<% if(operator["privilege"] == "0"){print("否");}else{print("是");} %>
+								</td>
+								<td class="center">
+									<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/operator/view/${operator.ids}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
+									<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/operator/edit/${operator.ids}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+									<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/operator/delete/${operator.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
 								</td>
 							</tr>
-						</c:forEach>
+						<% } %>
 					</tbody>
 				</table>
 				<div id="splitPageDiv" class="pagination pagination-centered"></div>

@@ -25,19 +25,19 @@
 					<div class="control-group">
 						<label class="control-label">所属模块</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${operator.modulenames}">
+							<input type="text" disabled="disabled" value="${operator.modulenames!}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">名称</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${operator.names}">
+							<input type="text" disabled="disabled" value="${operator.names!}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">是否权限验证</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value='${operator.privilege eq "1" ? "是":"否" }'>
+							<input type="text" disabled="disabled" value='${operator.privilege == "1" ? "是":"否" }'>
 						</div>
 					</div>
 					<div class="control-group">
@@ -49,37 +49,37 @@
 					<div class="control-group">
 						<label class="control-label">是否分页</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value='${operator.splitpage eq "1" ? "是":"否" }'>
+							<input type="text" disabled="disabled" value='${operator.splitpage == "1" ? "是":"否" }'>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">是否需要行级过滤</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value='${operator.rowfilter eq "1" ? "是":"否" }'>
+							<input type="text" disabled="disabled" value='${operator.rowfilter == "1" ? "是":"否" }'>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">表单重复提交验证</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value='${operator.formtoken eq "1" ? "是":"否" }'>
+							<input type="text" disabled="disabled" value='${operator.formtoken == "1" ? "是":"否" }'>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">IP黑名单验证</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value='${operator.ipblack eq "1" ? "是":"否" }'>
+							<input type="text" disabled="disabled" value='${operator.ipblack == "1" ? "是":"否" }'>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">操作完成返回url</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${operator.returnurl}">
+							<input type="text" disabled="disabled" value="${operator.returnurl!}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">返回参数keys</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${operator.returnparamkeys}">
+							<input type="text" disabled="disabled" value="${operator.returnparamkeys!}">
 						</div>
 					</div>
 					<div class="form-actions">

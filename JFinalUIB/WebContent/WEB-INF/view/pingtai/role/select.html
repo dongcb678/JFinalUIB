@@ -59,7 +59,7 @@
 				<select id="allRole" multiple size="18" ondblclick="addChecked(this);" >
 					<c:forEach items="${noCheckedList}" var="role">
 						<option value='${role.ids }'>${role.names }</option>
-					</c:forEach>
+					<% } %>
 			  	</select>
 			</div>
 		</div>
@@ -77,7 +77,7 @@
 				<select id="checkedRole" multiple size="18" ondblclick="delChecked(this);" >
 					<c:forEach items="${checkedList}" var="role">
 						<option value='${role.ids }'>${role.names }</option>
-					</c:forEach>
+					<% } %>
 			  	</select>
 			</div>
 		</div>

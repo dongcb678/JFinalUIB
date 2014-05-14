@@ -20,17 +20,17 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">上级字典</label>
 		<div class="controls">
-			<input type="hidden" id="moduleId" name="operator.moduleids" value="${operator.moduleids}"/>
-			<input type="text" id="moduleName" name="operator.modulenames" value="${operator.modulenames}" 
+			<input type="hidden" id="moduleId" name="operator.moduleids" value="${operator.moduleids!}"/>
+			<input type="text" id="moduleName" name="operator.modulenames" value="${operator.modulenames!}" 
 				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="moduleRadioDiaLog('moduleId', 'moduleName', '${operator.moduleids }');">选择</button>
+			<button class="btn" type="button" onclick="moduleRadioDiaLog('moduleId', 'moduleName', '${operator.moduleids!}');">选择</button>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">名称</label>
 		<div class="controls">
-			<input type="text" name="operator.names" value="${operator.names}" 
+			<input type="text" name="operator.names" value="${operator.names!}" 
 				class="input-xlarge" maxlength="25" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
 			<span class="help-inline">2-25位中文字母数字</span>
 		</div>
@@ -39,8 +39,8 @@ function dataVali(form){
 		<label class="control-label">是否权限验证</label>
 		<div class="controls">
 			<select name="operator.privilege" class="combox">
-				<option value="1" ${operator.privilege eq "1" ? "selected='selected'":"" }>是</option>
-				<option value="0" ${operator.privilege eq "0" ? "selected='selected'":"" }>否</option>
+				<option value="1" ${operator.privilege! == "1" ? "selected='selected'":"" }>是</option>
+				<option value="0" ${operator.privilege! == "0" ? "selected='selected'":"" }>否</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
@@ -48,7 +48,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">操作URL</label>
 		<div class="controls">
-			<input type="text" name="operator.url" value="${operator.url}" 
+			<input type="text" name="operator.url" value="${operator.url!}" 
 				class="input-xlarge" maxlength="200" vMin="1" vType="length" onblur="onblurVali(this);">
 			<span class="help-inline">1-200位字符</span>
 		</div>
@@ -57,8 +57,8 @@ function dataVali(form){
 		<label class="control-label">是否分页</label>
 		<div class="controls">
 			<select name="operator.splitpage" class="combox">
-				<option value="0" ${operator.splitpage eq "0" ? "selected='selected'":"" }>否</option>
-				<option value="1" ${operator.splitpage eq "1" ? "selected='selected'":"" }>是</option>
+				<option value="0" ${operator.splitpage! == "0" ? "selected='selected'":"" }>否</option>
+				<option value="1" ${operator.splitpage! == "1" ? "selected='selected'":"" }>是</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
@@ -67,8 +67,8 @@ function dataVali(form){
 		<label class="control-label">是否需要行级过滤</label>
 		<div class="controls">
 			<select name="operator.rowfilter" class="combox">
-				<option value="0" ${operator.rowfilter eq "0" ? "selected='selected'":"" }>否</option>
-				<option value="1" ${operator.rowfilter eq "1" ? "selected='selected'":"" }>是</option>
+				<option value="0" ${operator.rowfilter! == "0" ? "selected='selected'":"" }>否</option>
+				<option value="1" ${operator.rowfilter! == "1" ? "selected='selected'":"" }>是</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
@@ -77,8 +77,8 @@ function dataVali(form){
 		<label class="control-label">表单重复提交验证</label>
 		<div class="controls">
 			<select name="operator.formtoken" class="combox">
-				<option value="0" ${operator.formtoken eq "0" ? "selected='selected'":"" }>否</option>
-				<option value="1" ${operator.formtoken eq "1" ? "selected='selected'":"" }>是</option>
+				<option value="0" ${operator.formtoken! == "0" ? "selected='selected'":"" }>否</option>
+				<option value="1" ${operator.formtoken! == "1" ? "selected='selected'":"" }>是</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
@@ -87,8 +87,8 @@ function dataVali(form){
 		<label class="control-label">IP黑名单验证</label>
 		<div class="controls">
 			<select name="operator.ipblack" class="combox">
-				<option value="0" ${operator.ipblack eq "0" ? "selected='selected'":"" }>否</option>
-				<option value="1" ${operator.ipblack eq "1" ? "selected='selected'":"" }>是</option>
+				<option value="0" ${operator.ipblack! == "0" ? "selected='selected'":"" }>否</option>
+				<option value="1" ${operator.ipblack! == "1" ? "selected='selected'":"" }>是</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
@@ -96,7 +96,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">操作完成返回url</label>
 		<div class="controls">
-			<input type="text" name="operator.returnurl" value="${operator.returnurl}" 
+			<input type="text" name="operator.returnurl" value="${operator.returnurl!}" 
 				class="input-xlarge" maxlength="200" vMin="0" vType="length" onblur="onblurVali(this);">
 			<span class="help-inline"></span>
 		</div>
@@ -104,7 +104,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">返回参数keys</label>
 		<div class="controls">
-			<input type="text" name="operator.returnparamkeys" value="${operator.returnparamkeys}" 
+			<input type="text" name="operator.returnparamkeys" value="${operator.returnparamkeys!}" 
 				class="input-xlarge" maxlength="100" vMin="0" vType="length" onblur="onblurVali(this);">
 			<span class="help-inline"></span>
 		</div>
