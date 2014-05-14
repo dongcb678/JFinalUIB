@@ -35,7 +35,7 @@
 	};
 
 	//节点数据过滤
-	var userIds = '${param.ids}';
+	var userIds = '${paramMap.ids}';
 	var userIdsNode = 'user_' + userIds;
 	function filter(treeId, parentNode, childNodes) {
 		if (!childNodes) {
@@ -184,7 +184,7 @@
 
 	//////////////////选中事件处理////////////////////
 	
-	var className = "dark", checkedNodeIds = '${param.ids}', checkedNodeName = "";
+	var className = "dark", checkedNodeIds = '${paramMap.ids}', checkedNodeName = "";
 	
 	function beforeCheck(treeId, treeNode) {
 		className = (className === "dark" ? "":"dark");
@@ -197,8 +197,8 @@
 	}
 	
 	function setCheckValue(){
-		$("#${param.userId}").val(checkedNodeIds);
-		$("#${param.userName}").val(checkedNodeName);
+		$("#${paramMap.userId}").val(checkedNodeIds);
+		$("#${paramMap.userName}").val(checkedNodeName);
 	}
 	
 	//////////////////初始化////////////////////
@@ -216,12 +216,6 @@
 	}, 500);
 </script>
 	
-<%-- 
-<a id="expandAllBtn" href="#">全部展开</a>
-<a id="asyncAllBtn" href="#" onclick="return false;">后台自动全部加载</a>
-<a id="resetBtn" href="#" onclick="return false;">重置</a>
---%>
-
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">×</button>
 	<h3>用户单选</h3>

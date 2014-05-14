@@ -1,4 +1,4 @@
-<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
 
 <script type="text/javascript">
 	
@@ -211,7 +211,7 @@
 		$.ajax({
 		   	type: "POST",
 		   	url: "${cxt}/jf/menu/getOperator",
-		   	data: 'ids=${param.ids}',
+		   	data: 'ids=${paramMap.ids}',
 			async : false,
 		   	success: function(data){
 		   		if(data != "error"){
@@ -231,7 +231,7 @@
 			$.ajax({
 			   	type: "POST",
 			   	url: "${cxt}/jf/menu/setOperator",
-			   	data: { "ids" : "${param.ids}", "operatorIds" : checkedOperatorIds},
+			   	data: { "ids" : "${paramMap.ids}", "operatorIds" : checkedOperatorIds},
 				async : false,
 			   	success: function(data){
 			   		if(data != "error"){

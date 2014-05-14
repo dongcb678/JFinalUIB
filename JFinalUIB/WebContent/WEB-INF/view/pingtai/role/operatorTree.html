@@ -1,4 +1,4 @@
-<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
 
 <script type="text/javascript">
 	
@@ -7,7 +7,7 @@
 			enable : true,
 			url : '${cxt}/jf/operator/treeData',
 			autoParam : ["id=moduleIds"],//, "name=n", "level=lv"
-			otherParam : {"ids" : '${param.ids}'},
+			otherParam : {"ids" : '${paramMap.ids}'},
 			dataFilter : filter,
 			type : "post"
 		},
@@ -277,7 +277,7 @@
 		$.ajax({
 		   	type: "POST",
 		   	url: "${cxt}/jf/role/getOperator",
-		   	data: 'ids=${param.ids}',
+		   	data: 'ids=${paramMap.ids}',
 			async : false,
 		   	success: function(data){
 		   		if(data != "error"){
@@ -301,7 +301,7 @@
 			$.ajax({
 			   	type: "POST",
 			   	url: "${cxt}/jf/role/setOperator",
-			   	data: { "ids" : "${param.ids}", "moduleIds" : checkedModuleNodeIds, "operatorIds" : checkedOperatorNodeIds},
+			   	data: { "ids" : "${paramMap.ids}", "moduleIds" : checkedModuleNodeIds, "operatorIds" : checkedOperatorNodeIds},
 				async : false,
 			   	success: function(data){
 			   		if(data != "error"){
@@ -329,12 +329,6 @@
 		expandAll();
 	}, 500);
 </script>
-
-<%-- 
-<a id="expandAllBtn" href="#">全部展开</a>
-<a id="asyncAllBtn" href="#" onclick="return false;">后台自动全部加载</a>
-<a id="resetBtn" href="#" onclick="return false;">重置</a>
---%>
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">×</button>

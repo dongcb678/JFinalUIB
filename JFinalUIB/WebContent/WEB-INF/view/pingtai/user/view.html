@@ -25,67 +25,67 @@
 					<div class="control-group">
 						<label class="control-label">所在部门</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${user.departmentnames }">
+							<input type="text" disabled="disabled" value="${user.departmentnames! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">所在岗位</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${user.stationnames }">
+							<input type="text" disabled="disabled" value="${user.stationnames! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">数据权限</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${user.usernames }">
+							<input type="text" disabled="disabled" value="${user.usernames! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">身份证号码</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${userInfo.idcard }">
+							<input type="text" disabled="disabled" value="${userInfo.idcard! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">真实姓名</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${userInfo.names }">
+							<input type="text" disabled="disabled" value="${userInfo.names! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">登录名</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${user.username }">
+							<input type="text" disabled="disabled" value="${user.username! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">邮箱</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${userInfo.email }">
+							<input type="text" disabled="disabled" value="${userInfo.email! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">手机号</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${userInfo.mobile }">
+							<input type="text" disabled="disabled" value="${userInfo.mobile! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">电话</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${userInfo.telephone }">
+							<input type="text" disabled="disabled" value="${userInfo.telephone! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">QQ</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${userInfo.qq }">
+							<input type="text" disabled="disabled" value="${userInfo.qq! }">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">生日</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value='<fmt:formatDate value="${userInfo.birthday}" type="both" pattern="yyyy-MM-dd"/>'>
+							<input type="text" disabled="disabled" value='${userInfo.birthday !, dateFormat="yyyy-MM-dd"}'>
 						</div>
 					</div>
 					<div class="form-actions">

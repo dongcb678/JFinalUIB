@@ -93,7 +93,7 @@ public class JfinalConfig extends JFinalConfig {
 		
 		//me.setMainRenderFactory(new MyJspRenderFactory());
 		me.setMainRenderFactory(new MyBeetlRenderFactory());
-		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate; // 获取GroupTemplate ,可以设置共享变量等操作
+		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
 		
 		me.setError401View("");

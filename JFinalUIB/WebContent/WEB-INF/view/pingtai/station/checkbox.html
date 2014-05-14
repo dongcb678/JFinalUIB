@@ -1,4 +1,4 @@
-<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
 
 <script type="text/javascript">
 	
@@ -36,7 +36,7 @@
 	};
 
 	//节点数据过滤 + 默认选中
-	var stationIds = '${param.ids}';
+	var stationIds = '${paramMap.ids}';
 	function filter(treeId, parentNode, childNodes) {
 		if (!childNodes) {
 			return null;
@@ -183,7 +183,7 @@
 
 	//////////////////选中事件处理////////////////////
 	
-	var className = "dark", checkedNodeIds = "${param.ids}", checkedNodeName = "";
+	var className = "dark", checkedNodeIds = "${paramMap.ids}", checkedNodeName = "";
 	
 	function beforeCheck(treeId, treeNode) {
 		className = (className === "dark" ? "":"dark");
@@ -260,8 +260,8 @@
 		if(checkedNodeIds != ""){
 			checkedNodeName = checkedNodeName.substring(0, checkedNodeName.length-1);
 		}
-		$("#${param.stationId}").val(checkedNodeIds);
-		$("#${param.stationName}").val(checkedNodeName);
+		$("#${paramMap.stationId}").val(checkedNodeIds);
+		$("#${paramMap.stationName}").val(checkedNodeName);
 	}
 	
 	//////////////////初始化////////////////////
@@ -278,12 +278,6 @@
 		expandAll();
 	}, 500);
 </script>
-
-	<%-- 
-	<a id="expandAllBtn" href="#">全部展开</a>
-	<a id="asyncAllBtn" href="#" onclick="return false;">后台自动全部加载</a>
-	<a id="resetBtn" href="#" onclick="return false;">重置</a>
-	--%>
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">×</button>

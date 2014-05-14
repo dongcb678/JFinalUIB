@@ -1,4 +1,4 @@
-<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
 
 <script type="text/javascript">
 	
@@ -185,8 +185,8 @@
 	}
 	
 	function setCheckValue(){
-		$("#${param.moduleId}").val(checkedNodeIds);
-		$("#${param.moduleName}").val(checkedNodeName);
+		$("#${paramMap.moduleId}").val(checkedNodeIds);
+		$("#${paramMap.moduleName}").val(checkedNodeName);
 	}
 	
 	//////////////////初始化////////////////////
@@ -203,12 +203,6 @@
 		expandAll();
 	}, 500);
 </script>
-
-<%-- 
-<a id="expandAllBtn" href="#">全部展开</a>
-<a id="asyncAllBtn" href="#" onclick="return false;">后台自动全部加载</a>
-<a id="resetBtn" href="#" onclick="return false;">重置</a>
---%>
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">×</button>
