@@ -28,7 +28,7 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">名称</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]!}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
@@ -73,13 +73,13 @@
 								<td>${role["names"]}</td>
 								<td class="center">
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/role/edit/${role.ids}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/role/edit/${role.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/role/delete/${role.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>	
+										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/role/delete/${role.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>	
 									<% } %>
 									<% if(operator  == true){ %>
-										<a class="btn btn-success" href="#" onclick="setRoleOperatorDiaLog('${role.ids}');"> <i class="icon-zoom-in icon-white"></i> 功能</a> 
+										<a class="btn btn-success" href="#" onclick="setRoleOperatorDiaLog('${role.ids!}');"> <i class="icon-zoom-in icon-white"></i> 功能</a> 
 									<% } %>
 								</td>
 							</tr>

@@ -36,7 +36,7 @@
 	};
 
 	//节点数据过滤 + 默认选中
-	var stationIds = '${paramMap.ids}';
+	var stationIds = '${paramMap["ids"]!}';
 	function filter(treeId, parentNode, childNodes) {
 		if (!childNodes) {
 			return null;

@@ -207,7 +207,7 @@
 		$.ajax({
 		   	type: "POST",
 		   	url: "${cxt}/jf/dept/getPrincipal",
-		   	data: 'ids=${paramMap.ids}',
+		   	data: 'ids=${paramMap.ids!}',
 			async : false,
 		   	success: function(data){
 		   		if(data != "error"){
@@ -224,7 +224,7 @@
 	function setCheckValue(){
 		checkedNodeIds = checkedNodeIds.replace(/user_/g, '');
 		if(userIds != checkedNodeIds){
-			$.post("${cxt}/jf/dept/update", { "ids" : '${paramMap.ids}', "principalIds" : checkedNodeIds });
+			$.post("${cxt}/jf/dept/update", { "ids" : '${paramMap.ids!}', "principalIds" : checkedNodeIds });
 		}
 	}
 	

@@ -28,7 +28,7 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">名称</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]!}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
@@ -82,16 +82,16 @@
 								<td>${systems["orderids"]}</td>
 								<td class="center">
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/systems/edit/${systems.ids}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/systems/edit/${systems.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/systems/delete/${systems.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/systems/delete/${systems.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 									<% if(module == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/module?systemsIds=${systems.ids}');"> <i class="icon-zoom-in icon-white"></i> 模块</a>
+										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/module?systemsIds=${systems.ids!}');"> <i class="icon-zoom-in icon-white"></i> 模块</a>
 									<% } %>
 									<% if(menu == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/menu?systemsIds=${systems.ids}');"> <i class="icon-zoom-in icon-white"></i> 菜单</a> 
+										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/menu?systemsIds=${systems.ids!}');"> <i class="icon-zoom-in icon-white"></i> 菜单</a> 
 									<% } %>
 								</td>
 							</tr>

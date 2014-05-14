@@ -35,7 +35,7 @@
 	};
 
 	//节点数据过滤
-	var userIds = '${paramMap.ids}';
+	var userIds = '${paramMap["ids"]!}';
 	var userIdsNode = 'user_' + userIds;
 	function filter(treeId, parentNode, childNodes) {
 		if (!childNodes) {
@@ -184,7 +184,7 @@
 
 	//////////////////选中事件处理////////////////////
 	
-	var className = "dark", checkedNodeIds = '${paramMap.ids}', checkedNodeName = "";
+	var className = "dark", checkedNodeIds = '${paramMap.ids!}', checkedNodeName = "";
 	
 	function beforeCheck(treeId, treeNode) {
 		className = (className === "dark" ? "":"dark");

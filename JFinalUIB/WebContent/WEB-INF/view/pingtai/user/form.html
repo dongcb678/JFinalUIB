@@ -30,7 +30,7 @@ function dataVali(form){
 			<input type="hidden" id="deptId" name="user.departmentids" value="${user.departmentids!}"/>
 			<input type="text" id="deptName" name="user.departmentnames" value="${user.departmentnames!}" 
 				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="deptRadioDiaLog('deptId', 'deptName', '${user.departmentids! }');">选择</button>
+			<button class="btn" type="button" onclick="deptRadioDiaLog('deptId', 'deptName', '${user.departmentids!}');">选择</button>
 			<span class="help-inline"></span>
 		</div>
 	</div>
@@ -40,7 +40,7 @@ function dataVali(form){
 			<input type="hidden" id="stationId" name="user.stationids" value="${user.stationids!}"/>
 			<input type="text" id="stationName" name="user.stationnames" value="${user.stationnames!}" 
 				class="input-xlarge" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="stationRadioDiaLog('stationId', 'stationName', '${user.stationids! }');">选择</button>
+			<button class="btn" type="button" onclick="stationRadioDiaLog('stationId', 'stationName', '${user.stationids!}');">选择</button>
 			<span class="help-inline"></span>
 		</div>
 	</div>
@@ -54,7 +54,7 @@ function dataVali(form){
 			<input type="text" id="userName" name="user.usernames" value="${user.usernames!}" 
 				class="input-xlarge" readonly="readonly" maxlength="10000" vMin="1" vType="length" onblur="onblurVali(this);">
 			
-			<button class="btn" type="button" onclick="userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${user.deptids! }', '${user.userids! }');">选择</button>
+			<button class="btn" type="button" onclick="userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${user.deptids!}', '${user.userids!}');">选择</button>
 			<span class="help-inline"></span>
 		</div>
 	</div>
@@ -134,7 +134,7 @@ function dataVali(form){
 		<label class="control-label">生日</label>
 		<div class="controls">
 			<input type="text" name="userInfo.birthday" readonly="readonly"
-				value='${userInfo.birthday !, dateFormat="yyyy-MM-dd"}' 
+				value='${userInfo.birthday!, dateFormat="yyyy-MM-dd"}' 
 				class="input-xlarge datepicker" maxlength="11" vMin="0" vType="length" onblur="onblurVali(this);">
 			<span class="help-inline">yyyy年mm月dd日</span>
 		</div>

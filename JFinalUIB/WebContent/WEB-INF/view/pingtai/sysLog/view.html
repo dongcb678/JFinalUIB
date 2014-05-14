@@ -43,7 +43,7 @@
 					<div class="control-group">
 						<label class="control-label">权限认证状态</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value='${sysLog.status == "0" ? "失败" : "成功" }'>
+							<input type="text" disabled="disabled" value='${sysLog.status! == "0" ? "失败" : "成功"}'>
 						</div>
 					</div>
 					<% if(isEmpty(sysLog.cause)){ %>

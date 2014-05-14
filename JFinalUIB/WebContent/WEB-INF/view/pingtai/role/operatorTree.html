@@ -7,7 +7,7 @@
 			enable : true,
 			url : '${cxt}/jf/operator/treeData',
 			autoParam : ["id=moduleIds"],//, "name=n", "level=lv"
-			otherParam : {"ids" : '${paramMap.ids}'},
+			otherParam : {"ids" : '${paramMap["ids"]!}'},
 			dataFilter : filter,
 			type : "post"
 		},
@@ -277,7 +277,7 @@
 		$.ajax({
 		   	type: "POST",
 		   	url: "${cxt}/jf/role/getOperator",
-		   	data: 'ids=${paramMap.ids}',
+		   	data: 'ids=${paramMap["ids"]!}',
 			async : false,
 		   	success: function(data){
 		   		if(data != "error"){

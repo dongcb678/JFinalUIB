@@ -34,7 +34,7 @@
 	};
 
 	//节点数据过滤
-	var departmentIds = '${paramMap.ids}';
+	var departmentIds = '${paramMap.ids!}';
 	function filter(treeId, parentNode, childNodes) {
 		if (!childNodes) {
 			return null;

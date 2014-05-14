@@ -7,7 +7,7 @@
 			enable: true,
 			url:"${cxt}/jf/menu/treeData",
 			autoParam:["id=ids"],//, "name=n", "level=lv"
-			otherParam:{"systemsIds" : '${systemsIds}'},
+			otherParam:{"systemsIds" : '${systemsIds!}'},
 			dataFilter: filter,
 			type: "post"
 		},

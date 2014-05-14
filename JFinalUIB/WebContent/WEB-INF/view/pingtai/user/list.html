@@ -30,14 +30,14 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">账号</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.userName" value='${paramMap["_query.userName"]}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.userName" value='${paramMap["_query.userName"]!}' maxlength="20" >
 						</div>
 				  	</div>
 				  
 				  	<div class="control-group">
 						<label class="control-label">邮箱</label>
 						<div class="controls">
-					  		<input class="input-xlarge" type="text" name="_query.email" value='${paramMap["_query.email"]}' maxlength="40" >
+					  		<input class="input-xlarge" type="text" name="_query.email" value='${paramMap["_query.email"]!}' maxlength="40" >
 						</div>
 				  	</div>
 				
@@ -99,16 +99,16 @@
 								<td class="center"><span class="label label-success">${user["mobile"] }</span></td>
 								<td class="center">
 									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/user/view/${user.ids}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/user/view/${user.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
 									<% } %>
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/user/edit/${user.ids}');"> <i class="icon-edit icon-white"></i> 编辑</a>
+										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/user/edit/${user.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a>
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/user/delete/${user.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/user/delete/${user.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 									<% if(group == true){ %>
-										<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${user.ids}');"> <i class="icon-trash icon-white"></i> 分组</a>
+										<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${user.ids!}');"> <i class="icon-trash icon-white"></i> 分组</a>
 									<% } %>
 								</td>
 							</tr>

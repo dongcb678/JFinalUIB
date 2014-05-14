@@ -5,7 +5,7 @@
 			enable : true,
 			url : '${cxt}/jf/user/treeData',
 			autoParam : ["id=deptIds"],//, "name=n", "level=lv"
-			//otherParam : {"station.ids" : '${param["station.ids"]}'},
+			//otherParam : {"station.ids" : '${paramMap["station.ids"]!}'},
 			dataFilter : filter,
 			type : "post"
 		},
@@ -34,8 +34,8 @@
 	};
 
 	//节点数据过滤 + 默认选中
-	var deptIds = '${paramMap.checkedDeptIds}';
-	var userIds = '${paramMap.checkedUserIds}';
+	var deptIds = '${paramMap.checkedDeptIds!}';
+	var userIds = '${paramMap.checkedUserIds!}';
 	function filter(treeId, parentNode, childNodes) {
 		if (!childNodes) {
 			return null;

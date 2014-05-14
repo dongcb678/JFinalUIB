@@ -58,7 +58,7 @@
 			<div class="box-content">
 				<select id="allRole" multiple size="18" ondblclick="addChecked(this);" >
 					<% for(role in noCheckedList){ %>
-						<option value='${role.ids }'>${role.names }</option>
+						<option value='${role.ids!}'>${role.names!}</option>
 					<% } %>
 			  	</select>
 			</div>
@@ -76,7 +76,7 @@
 			<div class="box-content">
 				<select id="checkedRole" multiple size="18" ondblclick="delChecked(this);" >
 					<% for(role in checkedList){ %>
-						<option value='${role.ids }'>${role.names }</option>
+						<option value='${role.ids!}'>${role.names!}</option>
 					<% } %>
 			  	</select>
 			</div>

@@ -25,14 +25,14 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">功能名称</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]!}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">用户名称</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.username" value='${paramMap["_query.username"]}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.username" value='${paramMap["_query.username"]!}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
@@ -118,10 +118,10 @@
 								</td>
 								<td class="center">
 									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/sysLog/view/${sysLog.ids}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
+										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/sysLog/view/${sysLog.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/sysLog/delete/${sysLog.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/sysLog/delete/${sysLog.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 								</td>
 							</tr>
