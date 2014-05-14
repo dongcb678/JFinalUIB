@@ -20,8 +20,8 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">上级字典</label>
 		<div class="controls">
-			<input type="hidden" id="moduleId" name="operator.moduleids" value="${operator.moduleids }"/>
-			<input type="text" id="moduleName" name="operator.modulenames" value="${operator.modulenames }" 
+			<input type="hidden" id="moduleId" name="operator.moduleids" value="${operator.moduleids}"/>
+			<input type="text" id="moduleName" name="operator.modulenames" value="${operator.modulenames}" 
 				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
 			<button class="btn" type="button" onclick="moduleRadioDiaLog('moduleId', 'moduleName', '${operator.moduleids }');">选择</button>
 			<span class="help-inline"></span>
@@ -30,7 +30,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">名称</label>
 		<div class="controls">
-			<input type="text" name="operator.names" value="${operator.names }" 
+			<input type="text" name="operator.names" value="${operator.names}" 
 				class="input-xlarge" maxlength="25" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
 			<span class="help-inline">2-25位中文字母数字</span>
 		</div>
@@ -48,7 +48,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">操作URL</label>
 		<div class="controls">
-			<input type="text" name="operator.url" value="${operator.url }" 
+			<input type="text" name="operator.url" value="${operator.url}" 
 				class="input-xlarge" maxlength="200" vMin="1" vType="length" onblur="onblurVali(this);">
 			<span class="help-inline">1-200位字符</span>
 		</div>
@@ -96,7 +96,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">操作完成返回url</label>
 		<div class="controls">
-			<input type="text" name="operator.returnurl" value="${operator.returnurl }" 
+			<input type="text" name="operator.returnurl" value="${operator.returnurl}" 
 				class="input-xlarge" maxlength="200" vMin="0" vType="length" onblur="onblurVali(this);">
 			<span class="help-inline"></span>
 		</div>
@@ -104,7 +104,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">返回参数keys</label>
 		<div class="controls">
-			<input type="text" name="operator.returnparamkeys" value="${operator.returnparamkeys }" 
+			<input type="text" name="operator.returnparamkeys" value="${operator.returnparamkeys}" 
 				class="input-xlarge" maxlength="100" vMin="0" vType="length" onblur="onblurVali(this);">
 			<span class="help-inline"></span>
 		</div>

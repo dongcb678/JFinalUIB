@@ -20,7 +20,7 @@
 		
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt}/jf/operator/save" method="POST">
-				<%@ include file="/pingtai/operator/form.html" %>
+				<% include("/pingtai/operator/form.html"){} %>
 				<div class="form-actions">
 					<bu:hasPrivilegeBody url="/jf/operator/save">
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>

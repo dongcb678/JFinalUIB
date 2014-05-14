@@ -24,8 +24,8 @@
 		
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt}/jf/dict/update" method="POST">
-				<input type="hidden" name="dict.ids" value="${dict.ids }" >
-				<%@ include file="/pingtai/dict/form.html" %>
+				<input type="hidden" name="dict.ids" value="${dict.ids}" >
+				<% include("/pingtai/dict/form.html"){} %>
 				<div class="form-actions">
 					<bu:hasPrivilegeBody url="/jf/dict/save">
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>

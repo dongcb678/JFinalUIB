@@ -57,7 +57,7 @@
 			</div>
 			<div class="box-content">
 				<select id="allRole" multiple size="18" ondblclick="addChecked(this);" >
-					<c:forEach items="${noCheckedList }" var="role">
+					<c:forEach items="${noCheckedList}" var="role">
 						<option value='${role.ids }'>${role.names }</option>
 					</c:forEach>
 			  	</select>
@@ -75,7 +75,7 @@
 			</div>
 			<div class="box-content">
 				<select id="checkedRole" multiple size="18" ondblclick="delChecked(this);" >
-					<c:forEach items="${checkedList }" var="role">
+					<c:forEach items="${checkedList}" var="role">
 						<option value='${role.ids }'>${role.names }</option>
 					</c:forEach>
 			  	</select>

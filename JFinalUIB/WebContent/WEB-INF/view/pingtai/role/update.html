@@ -20,8 +20,8 @@
 		
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt}/jf/role/update" method="POST">
-				<input type="hidden" name="role.ids" value="${role.ids }" >
-				<%@ include file="/pingtai/role/form.html" %>
+				<input type="hidden" name="role.ids" value="${role.ids}" >
+				<% include("/pingtai/role/form.html"){} %>
 				<div class="form-actions">
 					<bu:hasPrivilegeBody url="/jf/role/update">
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>

@@ -16,9 +16,9 @@
 			<div class="box-header well" data-original-title>
 				<h2><i class="icon-edit"></i> 分组查询</h2>
 				<div class="box-icon">
-					<bu:hasPrivilegeBody url="/pingtai/group/add.html">
+					<% if(hasPrivilegeUrl("/pingtai/group/add.html", reqSysLog.userids)){ %>
 						<a href="#" class="btn btn-round" title="添加分组" onclick="ajaxUrl('/jf/group/toUrl?toUrl=/pingtai/group/add.html');"><i class="icon-plus-sign"></i></a>
-					</bu:hasPrivilegeBody>
+					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
 				</div>
@@ -28,7 +28,7 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">名称</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${fn:escapeXml(param["_query.names"])}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
@@ -64,31 +64,27 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:set var="edit" scope="page">
-							<bu:hasPrivilegeBool url="/jf/systems/edit"/>
-						</c:set>
-						<c:set var="delete" scope="page">
-							<bu:hasPrivilegeBool url="/jf/systems/delete"/>
-						</c:set>
-						<c:set var="role" scope="page">
-							<bu:hasPrivilegeBool url="/jf/role/select"/>
-						</c:set>
-						<c:forEach items="${splitPage.page.list }" var="record">
+						<%
+							var edit = hasPrivilegeUrl("/jf/group/edit", reqSysLog.userids);
+							var delete = hasPrivilegeUrl("/jf/group/delete", reqSysLog.userids);
+							var role = hasPrivilegeUrl("/jf/role/select", reqSysLog.userids);
+						%>
+						<% for(group in splitPage.page.list){ %>
 							<tr>
-								<td>${record.columns["names"]}</td>
+								<td>${group["names"]}</td>
 								<td class="center">
-									<c:if test='${pageScope.edit eq "true"}'>
-										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/group/edit/${record.columns.ids}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
-									</c:if>
-									<c:if test='${pageScope.delete eq "true"}'>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/group/delete/${record.columns.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
-									</c:if>
-									<c:if test='${pageScope.role eq "true"}'>
-										<a class="btn btn-danger" href="#" onclick="roleSelectDialog('${record.columns.ids}');"> <i class="icon-trash icon-white"></i> 角色</a>	
-									</c:if>
+									<% if(edit == true){ %>
+										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/group/edit/${group.ids}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+									<% } %>
+									<% if(delete == true){ %>
+										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/group/delete/${group.ids}');"> <i class="icon-trash icon-white"></i> 删除</a>
+									<% } %>
+									<% if(role == true){ %>
+										<a class="btn btn-danger" href="#" onclick="roleSelectDialog('${group.ids}');"> <i class="icon-trash icon-white"></i> 角色</a>	
+									<% } %>
 								</td>
 							</tr>
-						</c:forEach>
+						<% } %>
 					</tbody>
 				</table>
 				<div id="splitPageDiv" class="pagination pagination-centered"></div>

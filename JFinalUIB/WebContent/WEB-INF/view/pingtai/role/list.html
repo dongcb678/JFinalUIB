@@ -73,7 +73,7 @@
 						<c:set var="operator" scope="page">
 							<bu:hasPrivilegeBool url="/pingtai/role/operatorTree.html"/>
 						</c:set>
-						<c:forEach items="${splitPage.page.list }" var="record">
+						<c:forEach items="${splitPage.page.list}" var="record">
 							<tr>
 								<td>${record.columns["names"]}</td>
 								<td class="center">

@@ -102,7 +102,7 @@
 						<c:set var="delete" scope="page">
 							<bu:hasPrivilegeBool url="/jf/sysLog/delete"/>
 						</c:set>
-						<c:forEach items="${splitPage.page.list }" var="record">
+						<c:forEach items="${splitPage.page.list}" var="record">
 							<tr>
 								<td align="center">${record.columns["onames"] }：${record.columns.ourl }</td>
 								<td align="center">${record.columns["username"] }</td>

@@ -20,8 +20,8 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">上级分类</label>
 		<div class="controls">
-			<input type="hidden" id="parentId" name="dict.parentids" value="${dict.parentids }"/>
-			<input type="text" id="parentName" value="${dict.parentnames }" 
+			<input type="hidden" id="parentId" name="dict.parentids" value="${dict.parentids}"/>
+			<input type="text" id="parentName" value="${dict.parentnames}" 
 				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
 			<button class="btn" type="button" onclick="dictRadioDiaLog('parentId', 'parentName', '${dict.parentids }');">选择</button>
 			<span class="help-inline"></span>
@@ -30,7 +30,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">名称</label>
 		<div class="controls">
-			<input type="text" name="dict.names" value="${dict.names }" 
+			<input type="text" name="dict.names" value="${dict.names}" 
 				class="input-xlarge" maxlength="25" vMin="1" vType="chinaLetterNumber" onblur="onblurVali(this);">
 			<span class="help-inline">1-10位中文字母数字</span>
 		</div>
@@ -38,7 +38,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">排序</label>
 		<div class="controls">
-			<input type="text" name="dict.orderids" value="${dict.orderids }" 
+			<input type="text" name="dict.orderids" value="${dict.orderids}" 
 				class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">
 			<span class="help-inline">2-10位中文字母数字</span>
 		</div>

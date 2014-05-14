@@ -7,7 +7,7 @@
 				<% if(isEmpty(one.subList) == false){ %>
 					<li class="nav-header hidden-tablet">${one.names }</li>
 					<% for(two in one.subList){ %>
-						<li title="${two.names }">
+						<li title="${two.names}">
 							<% if(strutil.contain(two.url, ".html") == false){ %>
 								<a class="ajax-link" href="${cxt}${two.url}">
 									<i class="icon-th"></i>

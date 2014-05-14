@@ -81,8 +81,8 @@
                 <td>名称</td>
            		<td>操作</td>
 			</tr>
-	        <c:forEach items="${list }" var="dict">
-	        	<tr id="${dict.ids }" pId="${dict.parentids }" hasChild='${dict.levels != 4 ? "true" : "false"}'>
+	        <c:forEach items="${list}" var="dict">
+	        	<tr id="${dict.ids}" pId="${dict.parentids}" hasChild='${dict.levels != 4 ? "true" : "false"}'>
 					<td>
 						<img alt="" src="${cxt}/jsFile/zTree/css/zTreeStyle/img/diy/1_close.png">
 						<span controller='true'>${dict.levels }级</span>
@@ -90,9 +90,9 @@
 					<td>${dict.names }</td>
 					<td>
 						<!-- 
-						<a href='#' onclick='view("${dict.ids }")'>查看</a>&nbsp;&nbsp;
-						<a href='#' onclick='update("${dict.ids }")'>修改</a>&nbsp;&nbsp;
-						<a href='#' onclick='deleteFunc("${dict.ids }")'>删除</a>&nbsp;&nbsp;
+						<a href='#' onclick='view("${dict.ids}")'>查看</a>&nbsp;&nbsp;
+						<a href='#' onclick='update("${dict.ids}")'>修改</a>&nbsp;&nbsp;
+						<a href='#' onclick='deleteFunc("${dict.ids}")'>删除</a>&nbsp;&nbsp;
 						-->
 					</td>
 				</tr>

@@ -84,7 +84,7 @@
 						<c:set var="menu" scope="page">
 							<bu:hasPrivilegeBool url="/jf/menu"/>
 						</c:set>
-						<c:forEach items="${splitPage.page.list }" var="record">
+						<c:forEach items="${splitPage.page.list}" var="record">
 							<tr>
 								<td>${record.columns["names"]}</td>
 								<td>${record.columns["numbers"]}</td>

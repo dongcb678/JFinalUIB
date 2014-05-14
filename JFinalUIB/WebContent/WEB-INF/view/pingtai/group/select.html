@@ -57,9 +57,9 @@
 			</div>
 			<div class="box-content">
 				<select id="allGroup" multiple size="18" ondblclick="addChecked(this);" >
-					<c:forEach items="${noCheckedList }" var="group">
-						<option value='${group.ids }'>${group.names }</option>
-					</c:forEach>
+					<% for(group in noCheckedList){ %>
+						<option value='${group.ids }'>${group.names!}</option>
+					<% } %>
 			  	</select>
 			</div>
 		</div>
@@ -75,9 +75,9 @@
 			</div>
 			<div class="box-content">
 				<select id="checkedGroup" multiple size="18" ondblclick="delChecked(this);" >
-					<c:forEach items="${checkedList }" var="group">
-						<option value='${group.ids }'>${group.names }</option>
-					</c:forEach>
+					<% for(group in checkedList){ %>
+						<option value='${group.ids }'>${group.names!}</option>
+					<% } %>
 			  	</select>
 			</div>
 		</div>

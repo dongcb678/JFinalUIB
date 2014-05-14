@@ -108,7 +108,7 @@
 						<c:set var="delete" scope="page">
 							<bu:hasPrivilegeBool url="/jf/operator/delete"/>
 						</c:set>
-						<c:forEach items="${splitPage.page.list }" var="record">
+						<c:forEach items="${splitPage.page.list}" var="record">
 							<tr>
 								<td>${record.columns.systemsnames}</td>
 								<td>${record.columns.modulenames}</td>
