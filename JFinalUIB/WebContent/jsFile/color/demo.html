@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+	<link rel="stylesheet" href="css/jquery.bigcolorpicker.css" type="text/css" />
+   <title>Jquery实现颜色选择器插件</title>
+<meta name="author" content="Jquery-School" />
+<meta name="Copyright" content="Jquery-School,www.jq-school.com" />
+<meta name="keywords" content="Jquery,Jquery资源,前端设计,div+css" />
+<meta name="description" content="" />
+	<script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.bigcolorpicker.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			//1、用法
+			$("#f1").bigColorpicker("f1","L",10);
+			
+			//2、用法
+			$("#bn").bigColorpicker("f3");
+
+			//3、用法
+			$("#img").bigColorpicker(function(el,color){
+				$(el).css("backgroundColor",color);
+			});
+
+			//4、用法
+			$(":text[name='t']").bigColorpicker(function(el,color){
+				$(el).val(color);
+			});
+			
+			//5、用法
+			$(":input[f='bnn']").bigColorpicker(function(el,color){
+				$("#" + $(el).attr("data-target"))
+				             .val(color);
+			});
+			
+			$("#f333").bigColorpicker("f3","L",6);
+		});
+	</script>
+	<style type="text/css">
+
+a{text-decoration:none;outline:none; color:#666666;}
+a:hover{text-decoration:none}
+img{border:0}
+ul{list-style:none;margin:0;}
+h2{
+	color:#6CBD45;
+	font-size:14px;
+	font-weight:bold;
+	padding-bottom:0.5em;
+	margin:0;
+}
+
+h3{
+	font-size:13px;
+	font-weight:bold;
+	
+	
+}
+	#meun{color:#fff; padding-left:10px;}
+#meun img{ float:left;}
+#submeun{ margin-left:70px; float:left;}
+#submeun li{ text-align:center;  margin-right:10px; float:left;  display:inline;}
+#submeun li a{ color:#fff;height:50px; line-height:50px;  font-size:14px; font-weight:bold; text-align:center;  padding-left:15px; padding-right:15px;display:block;}
+#submeun li.cur{ text-align:center; background:#82ce18; margin-right:10px;float:left;  display:inline;}
+#top{
+	background-color:#000;
+	margin: 0em 0 10px 0em;
+
+	border-style:solid; border-width:1px; border-color:#E5E5E5;
+	height:50px;
+	line-height:50px;
+}
+h2.subtitle{
+	font-size:13px;
+	float:right;
+	color:#6CBD45;
+	margin:0 10px;
+	text-align:right;
+}
+
+h1.title{
+	height:50px;    
+    font-size:12px;
+	background:url(logo.png) no-repeat;
+	
+}
+h1.title a:link,h1.title a:visited,h1.title a:hover{
+	color:#000;
+	text-decoration:none;
+}
+
+
+		#img{
+			width:35px;
+			height:35px;
+			display:block;
+		}
+		#qq{
+			width:37px;
+			height:37px;
+			display:block;
+			border: solid 1px ;
+		}
+	</style>
+</head>
+<body>
+<div id="top">
+  <h2 class="subtitle"> JQuery让你的前端设计更精彩！</h2>
+  <div id="meun"><a href="/" title="Jquery-School"><img src="http://www.jq-school.com/logo.png" border="0" /></a>
+    <ul id="submeun">
+      <li><a href="/">首 页</a></li>    
+	   <li class="cur"><a href="javascript:void(0)">颜色选择器插件</a></li>
+    </ul>
+  </div>
+  </div>
+	<div style="margin: 10px auto;border: solid 1px #F0F0F0;padding: 10px;" >
+		<input type="text" id="f1"/>
+		<br />
+		<br />		
+		<input type="text" id="f333"/>
+	</div>
+
+	<div style="margin: 10px auto;border: solid 1px #F0F0F0;padding: 10px;" >
+		<input type="text" id="f3"/><input id="bn" type="button" value="选色" />
+	</div>
+	<div style="margin: 0 auto;border: solid 1px #F0F0F0;padding: 10px;" >
+		<div id= "qq">
+			<a href="javascript:void(0)" id="img" ></a>
+		</div>
+	</div>
+	
+	<div style="margin: 10px auto;border: solid 1px #F0F0F0;padding: 10px;" >
+		<input type="text" name="t" />
+			<br />
+			<br />
+		<input type="text" name="t" />
+			<br />
+			<br />
+		<input type="text" name="t" />
+			<br />
+			<br />
+		<input type="text" name="t" />
+	</div>
+	
+	<div style="margin: 10px auto;border: solid 1px #F0F0F0;padding: 10px;" >
+		<input type="text" id="bn1"/> <input f="bnn" data-target="bn1" type="button" value="选色" />
+			<br />
+			<br />
+		<input type="text" id="bn2"/> <input f="bnn" data-target="bn2" type="button" value="选色" />
+			<br />
+			<br />
+		<input type="text" id="bn3"/> <input f="bnn" data-target="bn3" type="button" value="选色" />
+			<br />
+			<br />
+		<input type="text" id="bn4"/> <input f="bnn" data-target="bn4" type="button" value="选色" />
+	</div>	
+</body>
+</html>

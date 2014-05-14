@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<script type="text/javascript">
+
+<%-- 数据验证 --%>
+function dataVali(form){
+	var errorCount = formVali(form);
+	if(errorCount != 0){
+		var messageButton = $('#messageButtonId');
+		messageButton.attr("data-noty-options", '{"text":"有'+errorCount+'错误，请修正！","layout":"bottom","type":"information","closeButton":"true"}');
+		messageButton.click();
+ 		return false;
+	}
+	
+	ajaxForm("editForm");
+}
+
+</script>
+
+<fieldset>
+	<div class="control-group">
+		<label class="control-label">名称</label>
+		<div class="controls">
+			<input type="text" name="role.names" value="${role.names }" 
+				class="input-xlarge" maxlength="25" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">2-10位中文字母数字</span>
+		</div>
+	</div>
+</fieldset>

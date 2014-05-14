@@ -1,0 +1,12 @@
+
+1.关于jfinal源码修改：
+	
+	由于要计算视图耗时，要重写了所有的render方法，
+	所以修改了Controller类中的变量修饰符private为protected
+	ActionRender类改为public
+	
+	其它的修改输出中文修改之类的都是无关紧要的
+
+2.关于charisma：
+	自己参照php-version整理了一份java-version
+	主要是修改了charisma.js，结合jquery.form实现所有页面的ajax交互，原本它是针对特定浏览器支持ajax

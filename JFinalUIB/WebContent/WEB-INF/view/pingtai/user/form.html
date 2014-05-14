@@ -1,0 +1,142 @@
+<script type="text/javascript">
+
+function dataVali(form){
+	var messageButton = $('#messageButtonId');
+	
+	var pass1Id = $("#pass1Id").val();
+	var pass2Id = $("#pass2Id").val();
+	if(pass1Id != pass2Id){
+		messageButton.attr("data-noty-options", '{"text":"两次输入密码不一致，请从新输入！","layout":"bottom","type":"information","closeButton":"true"}');
+		messageButton.click();
+ 		return false;
+	}
+	
+	var errorCount = formVali(form);
+	if(errorCount != 0){
+		messageButton.attr("data-noty-options", '{"text":"有'+errorCount+'错误，请修正！","layout":"bottom","type":"information","closeButton":"true"}');
+		messageButton.click();
+ 		return false;
+	}
+	
+	ajaxForm("editForm");
+}
+
+</script>
+
+<fieldset>
+	<div class="control-group">
+		<label class="control-label">所在部门</label>
+		<div class="controls">
+			<input type="hidden" id="deptId" name="user.departmentids" value="${user.departmentids! }"/>
+			<input type="text" id="deptName" name="user.departmentnames" value="${user.departmentnames! }" 
+				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
+			<button class="btn" type="button" onclick="deptRadioDiaLog('deptId', 'deptName', '${user.departmentids! }');">选择</button>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">所在岗位</label>
+		<div class="controls">
+			<input type="hidden" id="stationId" name="user.stationids" value="${user.stationids! }"/>
+			<input type="text" id="stationName" name="user.stationnames" value="${user.stationnames! }" 
+				class="input-xlarge" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
+			<button class="btn" type="button" onclick="stationRadioDiaLog('stationId', 'stationName', '${user.stationids! }');">选择</button>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">数据权限</label>
+		<div class="controls">
+			<input type="hidden" id="deptId2" name="user.deptids" value="${user.deptids! }" />
+			<input type="hidden" id="deptName2" name="user.deptnames" value="${user.deptnames! }" />
+			
+			<input type="hidden" id="userId" name="user.userids" value="${user.userids! }" />
+			<input type="text" id="userName" name="user.usernames" value="${user.usernames! }" 
+				class="input-xlarge" readonly="readonly" maxlength="10000" vMin="1" vType="length" onblur="onblurVali(this);">
+			
+			<button class="btn" type="button" onclick="userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${user.deptids! }', '${user.userids! }');">选择</button>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">身份证号码</label>
+		<div class="controls">
+			<input type="text" name="userInfo.idcard" value="${userInfo.idcard! }" 
+				class="input-xlarge" maxlength="18" vMin="15" vType="idCard" onblur="onblurVali(this);">
+			<span class="help-inline">15-18位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">真实姓名</label>
+		<div class="controls">
+			<input type="text" name="userInfo.names" value="${userInfo.names! }" 
+				class="input-xlarge" maxlength="10" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">2-10位中文字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">登录名</label>
+		<div class="controls">
+			<input type="text" name="user.username" value="${user.username! }" 
+				class="input-xlarge" maxlength="16" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">5-16位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">输入密码</label>
+		<div class="controls">
+			<input type="password" id="pass1Id" name="password" class="input-xlarge" 
+				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">6-18位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">确认密码</label>
+		<div class="controls">
+			<input type="password" id="pass2Id" class="input-xlarge" 
+				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">6-18位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">邮箱</label>
+		<div class="controls">
+			<input type="text" name="userInfo.email" value="${userInfo.email! }" 
+				class="input-xlarge" maxlength="30" vMin="6" vType="email" onblur="onblurVali(this);">
+			<span class="help-inline">6-30位邮箱规则</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">手机号</label>
+		<div class="controls">
+			<input type="text" name="userInfo.mobile" value="${userInfo.mobile !}" 
+				class="input-xlarge" maxlength="11" vMin="11" vType="phone" onblur="onblurVali(this);">
+			<span class="help-inline">11位数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">电话</label>
+		<div class="controls">
+			<input type="text" name="userInfo.telephone" value="${userInfo.telephone !}" 
+				class="input-xlarge" maxlength="20" vMin="0" vType="tell" onblur="onblurVali(this);">
+			<span class="help-inline">5-20位</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">QQ</label>
+		<div class="controls">
+			<input type="text" name="userInfo.qq" value="${userInfo.qq !}" 
+				class="input-xlarge" maxlength="20" vMin="0" vType="qq" onblur="onblurVali(this);">
+			<span class="help-inline">5-20位数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">生日</label>
+		<div class="controls">
+			<input type="text" name="userInfo.birthday" readonly="readonly"
+				value='${userInfo.birthday !, dateFormat="yyyy-MM-dd"}' 
+				class="input-xlarge datepicker" maxlength="11" vMin="0" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">yyyy年mm月dd日</span>
+		</div>
+	</div>
+</fieldset>

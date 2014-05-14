@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>软键盘</title>
+<link type="text/css" href="keyboard_style_1.css" rel="stylesheet" />
+<style>
+input{ width:150px; height:14px; border:1px solid #1774b3; font-size:12px; padding:2px 0 4px 4px;}
+</style>
+<script src="base.js"></script>
+<script src="keyboard.js"></script>
+<script>
+$(function(){
+	$(".hs_keyboard2").plugins_keyboard();
+	$(".hs_keyboard").plugins_keyboard({type:"mini"});
+	$(".hs_keyboard3").plugins_keyboard({type:"mini",other:"mini2"});
+})
+</script>
+</head>
+
+	  <input type="text" class="hs_keyboard" /> &nbsp;&nbsp;&nbsp;&nbsp;
+
+
+	  <input type="text" class="hs_keyboard2" />&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+	  <input type="text" class="hs_keyboard3" />
+
+	<p>
+		var settings = {button:true,ordered:false,loadinit:false,event:&quot;focus&quot;,same:false,change:&quot;each&quot;,shadow:true};<br />
+		以上为默认配置
+	</p>
+
+	<p>说明：</p>
+	<p>
+		//type[mini,设置mini，则呈现数字小键盘],<br />
+		//button[boolean,是否有按钮],<br />
+		//ordered[boolean,排列类型是否为顺序，顺序如23456，89012，abcde，xyzabc；乱序如13425，acdeb],<br />
+		//loadinit[boolean是否在页面加载时候加载],<br />
+		//event[click/focus有按钮情况下点击按钮或聚焦展开,没按钮则固定为聚焦],<br />
+		//same[boolean,多个插件调用时，每个同类键盘[如，数字迷你键盘为一类]排序都相同,设置为true时候change失效],<br />
+		//change[each,设置为each每次展开都变，否则排序加载时变一次],<br />
+		//shadow[boolean,是否有投影], <br />
+		//other[min2,附加功能，配置为mini2，在type为mini的情况下进入第二种模式].<br />
+		<br />
+	</p>
+
+	<p>调用方法：</p>
+	<p>
+		$(function(){<br />
+			$(".hs_keyboard").plugins_keyboard(settings);<br />
+		})<br />
+	</p>
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="bu" uri="http://www.4bu4.com" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<div>
+	<ul class="breadcrumb">
+		<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxUrl('/jf/systems');">系统管理</a> <span class="divider">/</span></li>
+		<li><a href="#">添加系统</a></li>
+	</ul>
+</div>
+
+<div class="row-fluid sortable">
+	<div class="box span12">
+		<div class="box-header well" data-original-title>
+			<h2>
+				<i class="icon-edit"></i> 添加系统
+			</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		
+		<div class="box-content">
+			<form class="form-horizontal" id="editForm" action="${cxt}/jf/systems/save" method="POST">
+				<%@ include file="/pingtai/systems/form.html" %>
+				<div class="form-actions">
+					<bu:hasPrivilegeBody url="/jf/systems/save">
+						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
+					</bu:hasPrivilegeBody>
+					<button class="btn" onclick="ajaxUrl('/jf/systems');">退出</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--/span-->
+</div>
+<!--/row-->

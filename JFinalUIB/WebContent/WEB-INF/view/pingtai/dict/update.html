@@ -1,0 +1,40 @@
+<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib prefix="bu" uri="http://www.4bu4.com" %>
+
+<div>
+	<ul class="breadcrumb">
+		<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxUrl('/jf/dict');">字典管理</a> <span class="divider">/</span></li>
+		<li><a href="#">添加字典</a></li>
+	</ul>
+</div>
+
+<div class="row-fluid sortable">
+	<div class="box span12">
+		<div class="box-header well" data-original-title>
+			<h2>
+				<i class="icon-edit"></i> 添加字典
+			</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		
+		<div class="box-content">
+			<form class="form-horizontal" id="editForm" action="${cxt}/jf/dict/update" method="POST">
+				<input type="hidden" name="dict.ids" value="${dict.ids }" >
+				<%@ include file="/pingtai/dict/form.html" %>
+				<div class="form-actions">
+					<bu:hasPrivilegeBody url="/jf/dict/save">
+						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
+					</bu:hasPrivilegeBody>
+					<button class="btn" onclick="ajaxUrl('/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html');">退出</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--/span-->
+</div>
+<!--/row-->

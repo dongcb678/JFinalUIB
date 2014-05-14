@@ -1,0 +1,195 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="bu" uri="http://www.4bu4.com" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<div>
+	<ul class="breadcrumb">
+		<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxUrl('/jf/sysLog');">日志管理</a> <span class="divider">/</span></li>
+		<li><a href="#">查看日志</a></li>
+	</ul>
+</div>
+
+<div class="row-fluid sortable">
+	<div class="box span12">
+		
+		<div class="box-header well" data-original-title>
+			<h2>
+				<i class="icon-edit"></i> 查看日志
+			</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		
+		<div class="box-content">
+			<form class="form-horizontal" method="POST">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label">操作名称</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.onames }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">操作url</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.ourl }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">客户端IP</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.ips }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">权限认证状态</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value='${sysLog.status eq "0" ? "失败" : "成功" }'>
+						</div>
+					</div>
+					<c:choose>
+						<c:when test="${empty sysLog.cause}"></c:when>
+						<c:when test='${sysLog.cause eq "0"}'>
+							<div class="control-group">
+								<label class="control-label">没有权限</label>
+								<div class="controls">
+									<input type="text" disabled="disabled" value=''>
+								</div>
+							</div>
+						</c:when>
+						<c:when test='${sysLog.cause eq "1"}'>
+							<div class="control-group">
+								<label class="control-label">URL不存在</label>
+								<div class="controls">
+									<input type="text" disabled="disabled" value=''>
+								</div>
+							</div>
+						</c:when>
+					</c:choose>
+					<div class="control-group">
+						<label class="control-label">创建者</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.username }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">开始时间</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value='<fmt:formatDate value="${sysLog.startdate}" type="both" pattern="yyyy-MM-dd HH:mm:ss:SSS"/>'>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">结束时间</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value='<fmt:formatDate value="${sysLog.enddate}" type="both" pattern="yyyy-MM-dd HH:mm:ss:SSS"/>'>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">总耗时</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.haoshi }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">action耗时</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.actionhaoshi }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">视图耗时</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.viewhaoshi }">
+						</div>
+					</div>
+					<c:if test='${not empty sysLog.description}'>
+						<div class="control-group">
+							<label class="control-label">描述</label>
+							<div class="controls">
+								<textarea class="cleditor" rows="3">${sysLog.description }</textarea>
+							</div>
+						</div>
+					</c:if>
+					<div class="control-group">
+						<label class="control-label">method</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.method }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">X-Requested-With</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.xrequestedwith }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Host</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.host }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Accept-Language</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${sysLog.acceptlanguage }</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Accept-Encoding</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.acceptencoding }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Accept</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.accept }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Connection</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.connection }">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">完整请求路径</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${sysLog.requestpath }</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">User-Agent</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${sysLog.useragent }</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">referer</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${sysLog.referer }</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">cookie</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${sysLog.cookie }</textarea>
+						</div>
+					</div>
+					<div class="form-actions">
+						<button class="btn" onclick="ajaxUrl('/jf/sysLog');">退出</button>
+					</div>
+				</fieldset>
+			</form>
+
+		</div>
+	
+	</div>
+	<!--/span-->
+</div>
+<!--/row-->

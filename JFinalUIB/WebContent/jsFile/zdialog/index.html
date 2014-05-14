@@ -1,0 +1,646 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="about" content="
+----------------------------------------------
+ - zDialog 2.1
+ - 王朝辉
+ - QQ：4845587 E-mail:wzh@wangzhaohui.com
+----------------------------------------------
+" />
+<title>【推荐】超漂亮的ZCMS弹出框效果（兼容主流浏览器）</title>
+<style>
+body { background: #ffffff; color: #444; }
+a { color: #07c; text-decoration: none; border: 0; background-color: transparent; }
+body, div, q, iframe, form, h5 { margin: 0; padding: 0; }
+img, fieldset { border: none 0; }
+body, td, textarea { word-break: break-all; word-wrap: break-word; line-height:1.6; }
+body, input, textarea, select, button { margin: 0; font-size: 14px; font-family: Tahoma, SimSun, sans-serif; }
+div, p, table, th, td { font-size:1em; font-family:inherit; line-height:inherit; }
+h5 { font-size:12px; }
+ol li,ul li{ margin-bottom:0.5em;}
+pre, code { font-family: "Courier New", Courier, monospace; word-wrap:break-word; line-height:1.4; font-size:12px;}
+pre{background:#f6f6f6; border:#eee solid 1px; margin:1em 0.5em; padding:0.5em 1em;}
+#content { padding-left:50px; padding-right:50px; }
+#content h2 { font-size:20px; color:#069; padding-top:8px; margin-bottom:8px; }
+#content h3 { margin:8px 0; font-size:14px; COLOR:#693; }
+#content h4 { margin:8px 0; font-size:16px; COLOR:#690; }
+#content div.item { margin-top:10px; margin-bottom:10px; border:#eee solid 4px; padding:10px; }
+hr { clear:both; margin:7px 0; +margin: 0;
+border:0 none; font-size: 1px; line-height:1px; color: #069; background-color:#069; height: 1px; }
+.infobar { background:#fff9e3; border:1px solid #fadc80; color:#743e04; }
+</style>
+<script type="text/javascript" src="zDrag.js"></script>
+<script type="text/javascript" src="zDialog.js"></script>
+<script type="text/javascript">
+function open1()
+{
+	Dialog.open({URL:"test.html"});
+}
+function open2()
+{
+	var diag = new Dialog();
+	diag.Width = 600;
+	diag.Height = 300;
+	diag.Title = "设定了高宽和标题的普通窗口";
+	diag.URL = "test.html";
+	diag.MsgForESC="你确定要关闭当前对话框？";
+	diag.show();
+}
+function open3()
+{
+	var diag = new Dialog();
+	diag.Width = 900;
+	diag.Height = 400;
+	diag.Title = "内容页为外部连接的窗口";
+	diag.URL = "test.html";
+	diag.show();
+}
+function open4()
+{
+	var diag = new Dialog();
+	diag.Width = 300;
+	diag.Height = 100;
+	diag.Title = "内容页为html代码的窗口";
+	diag.InnerHtml='<div style="text-align:center;color:red;font-size:14px;">直接输出html，使用 <b>InnerHtml</b> 属性。</div>'
+	diag.OKEvent = function(){diag.close();};//点击确定后调用的方法
+	diag.show();
+}
+function open5()
+{
+	var diag = new Dialog();
+	diag.Width = 300;
+	diag.Height = 150;
+	diag.Title = "内容页为隐藏的元素的html";
+	diag.InvokeElementId="forlogin"
+	diag.OKEvent = function(){topWin.getDom("username").value||Dialog.alert("用户名不能为空");topWin.getDom("userpwd").value||Dialog.alert("密码不能为空")};//点击确定后调用的方法
+	diag.show();
+}
+function open6()
+{
+	var diag = new Dialog();
+	diag.Modal = false;
+	diag.Left = 400;
+	diag.Title = "弹出没有遮罩层的窗口";
+	diag.URL = "test.html";
+	diag.show();
+}
+function closdlg()
+{
+    Dialog.close();
+}
+function open7()
+{
+	var diag = new Dialog();
+	diag.Width = 200;
+	diag.Height = 100;
+	diag.Modal = false;
+	diag.Title = "在指定位置弹出窗口";
+	diag.Top="100%";
+	diag.Left="100%";
+	diag.URL = "test.html";
+	diag.show();
+}
+function open8()
+{
+	var diag = new Dialog();
+	diag.Title = "返回值到调用页面";
+	diag.URL = "test.html";
+	diag.OKEvent = function(){getDom('getval').value = diag.innerFrame.contentWindow.document.getElementById('a').value;diag.close();};
+	diag.show();
+	var doc=diag.innerFrame.contentWindow.document;
+	doc.open();
+	doc.write('<html><body><input id="a" type="text"/>请在文本框里输入一些值</body></html>') ;
+	doc.close();
+}
+function open9()
+{
+	Dialog.alert("提示：你点击了一个按钮");
+}
+function open10()
+{
+	Dialog.confirm('警告：您确认要XXOO吗？',function(){Dialog.alert("yeah，周末到了，正是好时候")});
+}
+function open11()
+{
+	var diag = new Dialog();
+	diag.Title = "创建其它按钮";
+	diag.URL = "test.html";
+	diag.show();
+	diag.addButton("next","下一步",function(){
+		var doc=diag.innerFrame.contentWindow.document;
+		doc.open();
+		doc.write('<html><body>进入了下一步</body></html>') ;
+		doc.close();
+		diag.removeButton(this);
+	})
+}
+function open12()
+{
+	var diag = new Dialog();
+	diag.Title = "带有说明栏的新窗口";
+	diag.Width = 900;
+	diag.Height = 400;
+	diag.URL = "test.html";
+	diag.MessageTitle = "泽元网站内容管理系统";
+	diag.Message = "泽元网站内容管理系统是一个基于J2EE及AJAX技术的企业级网站内容管理系统";
+	diag.show();
+}
+
+function open13()
+{
+	var diag = new Dialog();
+	diag.URL = "test.html";
+	diag.show();
+}
+
+function open14()
+{
+	var diag = new Dialog();
+	diag.OnLoad=function(){alert("页面载入完成")};
+	diag.URL = "test.html";
+	diag.show();
+}
+function open15()
+{
+	var diag = new Dialog();
+	diag.Title = "点击取消或关闭按钮时执行方法";
+	diag.ShowButtonRow=true;
+	diag.CancelEvent=function(){Dialog.confirm("你确定要关闭当前对话框？",function(){diag.close()})};
+	diag.URL = "test.html";
+	diag.show();
+}
+function open16()
+{
+	var diag = new Dialog();
+	diag.Title = "修改中窗体尺寸";
+	diag.URL = "javascript:void(document.write(\'这是弹出窗口中的内容\'))";
+	diag.OKEvent = function(){
+		var doc=diag.innerFrame.contentWindow.document;
+		doc.open();
+		doc.write('<html><body>窗口尺寸改为600*300</body></html>') ;
+		doc.close();
+		diag.setSize(600,300);
+		diag.okButton.disabled=true;
+	};
+	diag.show();
+	diag.okButton.value="改变窗口大小"
+}
+
+function open17(val)
+{
+	var diag = new Dialog();
+	diag.AutoClose=5;
+	diag.ShowCloseButton=false;
+	diag.URL = "javascript:void(document.write(\'这是弹出窗口中的内容\'))";
+	diag.show();
+}
+
+function open18()
+{
+	var diag = new Dialog();
+	diag.Title="设置确定按钮及取消按钮的属性";
+	diag.ShowButtonRow=true;
+	diag.OkButtonText=" OK ";
+	diag.CancelButtonText="Cancel";
+	diag.URL = "javascript:void(document.write('确定改为OK，取消改为Cancel'))";
+	diag.show();
+}
+
+
+function open19()
+{
+	var diag = new Dialog();
+	diag.Title = "窗体内的按钮操作父Dialog";
+	diag.URL = "test.html";
+	diag.CancelEvent=function(){alert("我要关闭了");diag.close();};
+	diag.show();
+	var doc=diag.innerFrame.contentWindow.document;
+	doc.open();
+	doc.write('<html><body><input type="button" id="a" value="修改父Dialog尺寸" onclick="ownerDialog.setSize(function(min,max){return Math.round(min+(Math.random()*(max-min)))}(300,800))" /> <input type="button" id="b" value="关闭父窗口" onclick="ownerDialog.close()" /> <input type="button" id="c" value="点击窗口取消按钮" onclick="ownerDialog.cancelButton.onclick()" /></body></html>') ;
+	doc.close();
+}
+function open20()
+{
+	var diag = new Dialog();
+	diag.Width = 600;
+	diag.Height = 300;
+	diag.Title = "新建站点";
+	diag.URL = "bigform.html";
+	diag.OKEvent = function(){Dialog.alert("点击确定可以提交表单");diag.close();};
+	diag.MessageTitle = "大表单";
+	diag.Message = '如果表单比较大需要用户拖动滚动条，建议表单分步填写';
+	diag.show();
+}
+function open21()
+{
+	var diag = new Dialog();
+	diag.Width = 600;
+	diag.Height = 200;
+	diag.Title = "新建站点";
+	diag.URL = "bigform.html";
+	diag.OKEvent = function(){Dialog.alert("点击确定可以提交表单");diag.close();};
+	diag.MessageTitle = "大表单分步填写";
+	diag.Message = '如果表单比较大需要用户拖动滚动条，建议表单分步填写';
+	diag.OnLoad=function(){diag.innerWin.stepFormInit("wrap","TABLE");};
+	diag.show();
+}
+function open22(){
+	var diag = new Dialog();
+	diag.URL = "test.html";
+	diag.OKEvent=function(){diag.innerDoc.getElementById('form1').submit();diag.submited=true;};
+	diag.OnLoad=function(){
+		if(diag.submited){
+			alert('表单已经提交成功\n'+location+'\n接下来将刷新父窗口。');
+			diag.openerWindow.location.reload();
+            try{
+				diag.close();
+            }catch(e){}
+		}
+	};
+	diag.show();
+}
+</script>
+</head>
+<body>
+<div id="content">
+<div id="ad"></div>
+  <a href="http://www.yanglipeng.info/"><h2>zDialog v2.1 - samples</h2></a>
+  <hr size="2" />
+  <br />
+  <div style="border:1px dashed #ccc;padding:20px;">
+     
+    <ol>
+      <li>代替window.open、window.alert、window.confirm；提供良好的用户体验；</li>
+      <li>水晶质感，设计细腻，外观漂亮；</li>
+      <li>兼容ie6/7/8、firefox2/3、Opera；弹出框在ie6下不会被select控件穿透；</li>
+      <li>无外部css文件，引用Dialog.js即可使用；</li>
+      <li>对iframe下的应用作了充分考虑，适合复杂的系统应用；</li>
+      <li>Dialog显示的内容（三种）：1、指向一个URL的iframe窗口；2、页面内隐藏的元素中的html内容；3、直接输出一段html内容；</li>
+      <li>按ESC键可关闭弹出框；</li>
+    </ol>
+  </div>
+  <br />
+  <div style="border:1px dashed #ccc;padding:20px;">
+    <h4>主调函数参数说明：</h4>
+    <span style="color:rgb(0, 0, 255); ">Dialog.open({ID,Title,URL,InnerHtml,InvokeElementId,Width,Height,Top,Left,Drag,OKEvent,ShowButtonRow,MessageTitle,Message,AutoClose,OnLoad})</span><br>
+<ul>    <li><span style="color:rgb(255, 0, 0); ">ID</span>：窗口id号，可省略。每个窗口的id必须是唯一的不能重复。</li>
+    <li><span style="color:rgb(255, 0, 0); ">Title</span>：窗口标题。如不写此项默认值为""。</li>
+    <li><span style="color:rgb(255, 0, 0); ">URL</span>：  窗口内容页地址，或使用相对路径或绝对路径，注意如果使用<a href="http://yanglipeng.kk7z.com/">http://www.host.com</a>形式的绝对地址，则http://不能省略。</li>
+    <li><span style="color:rgb(255, 0, 0); ">InnerHtml</span>：  窗口内容html代码，用于直接输出html内容，注意不要让生成的内容因为不适当的宽度或定位方式而破坏了Dialog的外观。</li>
+    <li><span style="color:rgb(255, 0, 0); ">InvokeElementId</span>：  本页面内隐藏的元素的id，用于显示页面内隐藏的元素中的html内容，注意不要让内容因为不适当的宽度或定位方式而破坏了Dialog的外观。</li>
+    <li><span style="color:rgb(255, 0, 0); ">Width</span>：窗口宽度（dialog内容区宽度），值为数值型，默认值为窗口可见宽的40%。</li>
+    <li><span style="color:rgb(255, 0, 0); ">Height</span>：窗口高度（dialog内容区高度），值为数值型，默认值为Dialog宽的50%。</li>
+    <li><span style="color:rgb(255, 0, 0); ">Left</span>：窗口距浏览器左边距离，值为数值型或字符串型（当使用百分比时为字符串型），如Left:"0%",Top:"0%"为左上，Left:"50%",Top:"50%"为居中，Left:"100%",Top:"100%"为右下。</li>
+    <li><span style="color:rgb(255, 0, 0); ">Top</span>：窗口距浏览器顶端距离，值为数值型或字符串型（百分比）。</li>
+    <li><span style="color:rgb(255, 0, 0); ">Drag</span>：是否允许拖动窗口，值为布尔型(true|false)，默认值为true，注意需要页面引用了Drag.js。</li>
+    <li><span style="color:rgb(255, 0, 0); ">OKEvent</span>：点击确定按钮后执行的函数。</li>
+    <li><span style="color:rgb(255, 0, 0); ">CancelEvent</span>：点击取消按钮或点击关闭按钮后执行的函数，默认为关闭本Dialog。</li>
+    <li><span style="color:rgb(255, 0, 0); ">OkButtonText</span>：默认的确定按钮上的文字，值为字符串型，默认值为"确 定"。</li>
+    <li><span style="color:rgb(255, 0, 0); ">CancelButtonText</span>：默认的取消按钮上的文字，值为字符串型，默认值为"取 消"。</li>
+    <li><span style="color:rgb(255, 0, 0); ">ShowButtonRow</span>：是否不显示按钮栏，值为布尔型(true|false)，默认值为false，当定义了OKEvent或调用了addButton时自动设为true。</li>
+    <li><span style="color:rgb(255, 0, 0); ">MessageTitle,Message</span>：自定义的窗口说明栏中的小标题和说明。</li>
+    <li><span style="color:rgb(255, 0, 0); ">ShowMessageRow</span>：是否显示窗口说明栏，值为布尔型(true|false)，默认值为false，当定义了MessageTitle或Message时自动设为true。</li>
+    <li><span style="color:rgb(255, 0, 0); ">AutoClose</span>：是否自行关闭，值为数值型，默认值为false。</li>
+    <li><span style="color:rgb(255, 0, 0); ">ShowCloseButton</span>：是否显示关闭按钮，值为布尔型(true|false)，默认值为true。</li>
+    <li><span style="color:rgb(255, 0, 0); ">OnLoad</span>：窗口内容载入完成后执行的程序，值为函数型。</li>
+    <li><span style="color:rgb(255, 0, 0); ">MsgForESC</span>：按ESC时弹出的提示信息，默认为空，不弹出提示信息，值为字符串。</li>
+    <li><span style="color:rgb(255, 0, 0); ">Animator</span>：遮罩背景是否渐变出现，值为布尔型(true|false)，在ie6及其以下版本ie中默认为false，其他浏览器默认为true。</li>
+</ul>    </div>
+  <br />
+  <h3>1. 普通窗口 </h3>
+  <div class="item">
+    <input type="button" id="a" value="普通窗口" onclick="open1()"/><select><option>在IE6下能够挡住select控件</option></select>
+    <br/>
+<pre>
+	<font color="#800000">Dialog.open({</font><font color="#008080">URL</font><font color="#800000">:</font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">});</font>
+</pre>
+</div>
+  <h3>2. 设定了高宽和标题的普通窗口 </h3>
+  <div class="item">
+    <input type="button" id="b" value="设定了高宽和标题的普通窗口" onclick="open2()"/>
+    <br/>
+    <pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Width = 600;</font>
+	<font color="#800000">diag.Height = 300;</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;设定了高宽和标题的普通窗口&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+</div>
+  <h3>3. 内容页为外部连接的窗口</h3>
+  <div class="item">
+    <input type="button" id="c" value="内容页为外部连接的窗口" onclick="open3()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Width = 900;</font>
+	<font color="#800000">diag.Height = 400;</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;内容页为外部连接的窗口&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;http://demo.zving.com/&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+</div>
+  <h3>4. 内容页为html代码的窗口</h3>
+  <div class="item">
+    <input type="button" id="d" value="内容页为html代码的窗口" onclick="open4()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Width = 300;</font>
+	<font color="#800000">diag.Height = 100;</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;内容页为html代码的窗口&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.InnerHtml=</font><font color="#ff00ff">'&lt;div style=&quot;text-align:center;color:red;font-size:14px;&quot;&gt;直接输出html，使用 &lt;b&gt;InnerHtml&lt;/b&gt; 属性。&lt;/div&gt;'</font>
+	<font color="#800000">diag.OKEvent = </font><font color="#0000ff">function</font><font color="#800000">(){diag.close();};</font><font color="#008000">//点击确定后调用的方法</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+</div>
+  <h3>5. 内容页为隐藏的元素的html内容</h3>
+  <div class="item">
+    <input type="button" id="e" value="内容页为隐藏的元素的html内容" onclick="open5()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Width = 300;</font>
+	<font color="#800000">diag.Height = 150;</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;内容页为隐藏的元素的html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.InvokeElementId=</font><font color="#ff00ff">&quot;forlogin&quot;</font>
+	<font color="#800000">diag.OKEvent = </font><font color="#0000ff">function</font><font color="#800000">(){</font><font color="#0000ff">getDom</font><font color="#800000">(</font><font color="#ff00ff">&quot;username&quot;</font><font color="#800000">).</font><font color="#008080">value</font><font color="#800000">||Dialog.alert(</font><font color="#ff00ff">&quot;用户名不能为空&quot;</font><font color="#800000">);
+	    	</font><font color="#0000ff">getDom</font><font color="#800000">(</font><font color="#ff00ff">&quot;userpwd&quot;</font><font color="#800000">).</font><font color="#008080">value</font><font color="#800000">||Dialog.alert(</font><font color="#ff00ff">&quot;密码不能为空&quot;</font><font color="#800000">)};</font><font color="#008000">//点击确定后调用的方法</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+<div id="forlogin">
+      <table width="100%" border="0" align="center" cellpadding="4" cellspacing="4" bordercolor="#666666">
+        <tr>
+          <td colspan="2" bgcolor="#eeeeee">用户登陆</td>
+        </tr>
+        <tr>
+          <td width="50" align="right">用户名</td>
+          <td><input type="text" id="username" /></td>
+        </tr>
+        <tr>
+          <td align="right">密　码</td>
+          <td><input type="text" id="userpwd"  /></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <h3>6. 在调用页面按钮关闭弹出窗口</h3>
+  <div class="item">
+    <input type="button" id="f" value="弹出没有遮罩层的窗口" onclick="open6()"/>
+    <input type="button" value="关闭弹出窗口" onclick="closdlg();"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Modal = </font><font color="#0000ff">false</font><font color="#800000">;</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;弹出没有遮罩层的窗口&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+<span>关闭窗口按钮代码：<font color="#800000"> Dialog.close();</font></span> </div>
+  <h3>7. 在指定位置弹出窗口</h3>
+  <div class="item">
+    <input type="button" id="g" value="在指定位置弹出窗口" onclick="open7()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Width = 200;</font>
+	<font color="#800000">diag.Height = 100;</font>
+	<font color="#800000">diag.Modal = </font><font color="#0000ff">false</font><font color="#800000">;</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;在指定位置弹出窗口&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#800080">Top</font><font color="#800000">=</font><font color="#ff00ff">&quot;100%&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.Left=</font><font color="#ff00ff">&quot;100%&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+<span>注：可使用数字或百分比（带百分比符号的字符串）来定义相对于当前窗口的位置，换算效果同css中用百分比定义背景图位置，如Left:"0%",Top:"0%"为左上，Left:"50%",Top:"50%"为居中，Left:"100%",Top:"100%"为右下。</span> </div>
+  <h3>8. 返回值到调用页面</h3>
+  <div class="item">
+    <input type="button" id="h" value="返回值到调用页面" onclick="open8()"/>
+    <input type="text" id="getval" value="窗口的值返回到这里"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;返回值到调用页面&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.OKEvent = </font><font color="#0000ff">function</font><font color="#800000">(){</font><font color="#0000ff">getDom</font><font color="#800000">(</font><font color="#ff00ff">'getval'</font><font color="#800000">).</font><font color="#008080">value </font><font color="#800000">= diag.innerFrame.</font><font color="#008080">contentWindow</font><font color="#800000">.</font><font color="#ff0000">document</font><font color="#800000">.getElementById(</font><font color="#ff00ff">'a'</font><font color="#800000">).</font><font color="#008080">value</font><font color="#800000">;diag.close();};</font>
+	<font color="#800000">diag.show();</font>
+	<font color="#0000ff">var </font><font color="#800000">doc=diag.innerFrame.</font><font color="#008080">contentWindow</font><font color="#800000">.</font><font color="#ff0000">document</font><font color="#800000">;</font>
+	<font color="#800000">doc.open();</font>
+	<font color="#800000">doc.write(</font><font color="#ff00ff">'&lt;html&gt;&lt;body&gt;&lt;input id=&quot;a&quot; type=&quot;text&quot;/&gt;请在文本框里输入一些值&lt;/body&gt;&lt;/html&gt;'</font><font color="#800000">) ;</font>
+	<font color="#800000">doc.close();</font>
+</pre>
+</div>
+  <h3>9. 代替window.alert及window.confirm</h3>
+  <div class="item">
+    <input type="button" id="i" value="alert" onclick="open9()"/>
+    <input type="button" id="j"  value="confirm" onclick="open10();"/>
+    <br/>
+<pre>
+	<font color="#800000">Dialog.alert(</font><font color="#ff00ff">&quot;提示：你点击了一个按钮&quot;</font><font color="#800000">);</font>
+
+	<font color="#800000">Dialog.confirm(</font><font color="#ff00ff">'警告：您确认要XXOO吗？'</font><font color="#800000">,</font><font color="#0000ff">function</font><font color="#800000">(){Dialog.alert(</font><font color="#ff00ff">&quot;yeah，周末到了，正是好时候&quot;</font><font color="#800000">)});</font>
+</pre>
+<span>注：Dialog.alert(msg, func, w, h)第二个参数为点击“确定”按钮后执行的函数。<br>
+Dialog.confirm(msg, funcOK, funcCal, w, h)第二个参数为点击“确定”按钮后执行的函数，第三个参数为点击“取消”按钮后执行的函数。</span>
+</div>
+  <h3>10. 创建其它按钮</h3>
+  <div class="item">
+    <input type="button" id="j" value="创建其它按钮" onclick="open11()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;创建其它按钮&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+	<font color="#800000">diag.addButton(</font><font color="#ff00ff">&quot;next&quot;</font><font color="#800000">,</font><font color="#ff00ff">&quot;下一步&quot;</font><font color="#800000">,</font><font color="#0000ff">function</font><font color="#800000">(){</font>
+		<font color="#0000ff">var </font><font color="#800000">doc=diag.innerFrame.</font><font color="#008080">contentWindow</font><font color="#800000">.</font><font color="#ff0000">document</font><font color="#800000">;</font>
+		<font color="#800000">doc.open();</font>
+		<font color="#800000">doc.write(</font><font color="#ff00ff">'&lt;html&gt;&lt;body&gt;进入了下一步&lt;/body&gt;&lt;/html&gt;'</font><font color="#800000">) ;</font>
+		<font color="#800000">doc.close();</font>
+	<font color="#800000">})</font>
+</pre>
+</div>
+  <h3>11. 带有内容说明栏的新窗口</h3>
+  <div class="item">
+    <input type="button" id="k" value="弹出带说明栏的新窗口" onclick="open12()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;带有说明栏的新窗口&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.Width = 900;</font>
+	<font color="#800000">diag.Height = 400;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;http://demo.zving.com/&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.MessageTitle = </font><font color="#ff00ff">&quot;泽元网站内容管理系统&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.Message = </font><font color="#ff00ff">&quot;泽元网站内容管理系统是一个基于J2EE及AJAX技术的企业级网站内容管理系统&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+</div>
+  <h3>12. 显示窗体内容页面标题</h3>
+  <div class="item">
+    <input type="button" id="m" value="显示窗体内容页面标题" onclick="open13()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;http://demo.zving.com/&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+<span>注：如果窗体内为iframe内容页，并且没有设置Title属性，并且引用页和当前页在同一个域内，则显示显示窗体内容页面标题。</span> </div>
+  <h3>13. 在弹窗的内容载入完成后，执行方法</h3>
+  <div class="item">
+    <input type="button" id="n" value="在弹窗载入完成后，执行方法" onclick="open14()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.OnLoad=</font><font color="#0000ff">function</font><font color="#800000">(){alert(</font><font color="#ff00ff">&quot;页面载入完成&quot;</font><font color="#800000">)};</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;http://demo.zving.com/&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+<span>注：如果窗体内为iframe内容页，要在载入完成后对内容页作操作，必须考虑访问权限，如引用页和当前页应在同一个域内。</span> </div>
+  <h3>14. 点击取消及关闭时执行方法</h3>
+  <div id="hiddencontent" style="display:none;width:400px;height:100px;" class="infobar">
+    <div style="text-align:right;padding-right:5px;border:0;height:10px;font-size:9px;color:#666;"><a href="javascript:lhgdialog.hidden('hiddencontent','');">X</a></div>
+    <div style="padding:10px;">我是隐藏内容</div>
+  </div>
+  <div class="item">
+    <input type="button" id="o" value=" 点击取消及关闭时执行方法 " onclick="open15()"/>
+   <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;点击取消或关闭按钮时执行方法&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.CancelEvent=</font><font color="#0000ff">function</font><font color="#800000">(){alert(</font><font color="#ff00ff">&quot;点击取消或关闭按钮时执行方法&quot;</font><font color="#800000">);diag.close();};</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+</div>
+  <h3>15. 不允许拖拽</h3>
+  <div class="item">
+    <input type="button" id="p" value="不允许拖拽" onclick="Dialog.open({Drag:false,URL:'test.html'})"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Drag=</font><font color="#0000ff">false</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+</div>
+  <h3>16. 动态改变窗口大小</h3>
+  <div class="item">
+    <input type="button" id="q" value="动态改变窗口大小" onclick="open16()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;修改中窗体尺寸&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;javascript:void(document.write(\'这是弹出窗口中的内容\'))&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.OKEvent = </font><font color="#0000ff">function</font><font color="#800000">(){</font>
+		<font color="#0000ff">var </font><font color="#800000">doc=diag.innerFrame.</font><font color="#008080">contentWindow</font><font color="#800000">.</font><font color="#ff0000">document</font><font color="#800000">;</font>
+		<font color="#800000">doc.open();</font>
+		<font color="#800000">doc.write(</font><font color="#ff00ff">'&lt;html&gt;&lt;body&gt;窗口尺寸改为600*300&lt;/body&gt;&lt;/html&gt;'</font><font color="#800000">) ;</font>
+		<font color="#800000">doc.close();</font>
+		<font color="#800000">diag.setSize(600,300);</font>
+		<font color="#800000">diag.okButton.disabled=</font><font color="#0000ff">true</font><font color="#800000">;</font>
+	<font color="#800000">};</font>
+	<font color="#800000">diag.show();</font>
+	<font color="#800000">diag.okButton.</font><font color="#008080">value</font><font color="#800000">=</font><font color="#ff00ff">&quot;改变窗口大小&quot;</font>
+</pre>
+</div>
+  <h3>17. 弹出窗口自动关闭</h3>
+  <div class="item">
+    <input type="button" id="r" value="自动关闭" onclick="open17(1)"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.AutoClose=5;</font>
+	<font color="#800000">diag.ShowCloseButton=</font><font color="#0000ff">false</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;javascript:void(document.write(\'这是弹出窗口中的内容\'))&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+<span>注：AutoClose为自动关闭时间，单位秒</span> </div>
+  <h3>18. 设置确定按钮及取消按钮的属性</h3>
+  <div class="item">
+    <input type="button" id="s" value="设置确定按钮及取消按钮的属性" onclick="open18()"/>
+    <br/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Title=</font><font color="#ff00ff">&quot;设置确定按钮及取消按钮的属性&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.ShowButtonRow=</font><font color="#0000ff">true</font><font color="#800000">;</font>
+	<font color="#800000">diag.OkButtonText</font><font color="#800000">=</font><font color="#ff00ff">&quot; OK &quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.CancelButtonText</font><font color="#800000">=</font><font color="#ff00ff">&quot;Cancel&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+<br/>
+  </div>
+  <h3>19. 窗体内的按钮操作父Dialog</h3>
+  <div class="item">
+    <input type="button" id="t" value="窗体内的按钮操作父Dialog" onclick="open19()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;窗体内的按钮操作父Dialog&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.show();</font>
+	<font color="#0000ff">var </font><font color="#800000">doc=diag.innerFrame.</font><font color="#008080">contentWindow</font><font color="#800000">.</font><font color="#ff0000">document</font><font color="#800000">;</font>
+	<font color="#800000">doc.open();</font>
+	<font color="#800000">doc.write(</font><font color="#ff00ff">'&lt;html&gt;&lt;body&gt;\
+		&lt;input type=&quot;button&quot; id=&quot;a&quot; value=&quot;修改父Dialog尺寸&quot; \
+		onclick=&quot;ownerDialog.setSize(function(min,max){return Math.round(min+(Math.random()*(max-min)))}(300,800))&quot; /&gt;\
+		&lt;input type=&quot;button&quot; id=&quot;b&quot; value=&quot;关闭父窗口&quot; onclick=&quot;ownerDialog.close()&quot; /&gt;\
+		&lt;input type=&quot;button&quot; id=&quot;c&quot; value=&quot;点击窗口取消按钮&quot; onclick=&quot;ownerDialog.cancelButton.onclick()&quot; /&gt;\
+		&lt;/body&gt;&lt;/html&gt;'</font><font color="#800000">) ;</font>
+	<font color="#800000">doc.close();</font>
+</pre>
+</div>
+  <h3>20. 提交表单后，刷新父窗口</h3>
+  <div class="item">
+    <input type="button" id="t" value="提交表单后，刷新父窗口" onclick="open22()"/>
+    <br/>
+<pre>
+	<font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+	<font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;test.html&quot;</font><font color="#800000">;</font>
+	<font color="#800000">diag.OKEvent=</font><font color="#0000ff">function</font><font color="#800000">(){diag.innerDoc.getElementById(</font><font color="#ff00ff">'form1'</font><font color="#800000">).submit();diag.submited=</font><font color="#0000ff">true</font><font color="#800000">;};</font>
+	<font color="#800000">diag.OnLoad=</font><font color="#0000ff">function</font><font color="#800000">(){</font>
+		<font color="#0000ff">if</font><font color="#800000">(diag.submited){</font>
+			<font color="#800000">alert(</font><font color="#ff00ff">'表单已经提交成功\n'</font><font color="#800000">+</font><font color="#ff0000">location</font><font color="#800000">+</font><font color="#ff00ff">'\n接下来将刷新父窗口。'</font><font color="#800000">);</font>
+			<font color="#800000">diag.</font><font color="#008080">openerWindow</font><font color="#800000">.</font><font color="#ff0000">location</font><font color="#800000">.reload();</font>
+            <font color="#0000ff">try</font><font color="#800000">{</font>
+				<font color="#800000">diag.close();</font>
+            <font color="#800000">}</font><font color="#0000ff">catch</font><font color="#800000">(e){}</font>
+		<font color="#800000">}</font>
+	<font color="#800000">};</font>
+	<font color="#800000">diag.show();</font>
+</pre>
+<span>说明：如果要通过js来判断表单是否提交成功，可以在弹出框的页面内通过后台输出一个js变量如表单提交成功后在页面内输出&lt;script&gt;submitsuccess=true&lt;/script&gt;</span>&lt;div class=&quot;info success&quot;&gt;表单提交成功&lt;/div&gt; ，然后加上提交成功与否的判断，如上示例代码的第六行位置可改为<br>
+if(diag..innerWin.submitOK)
+alert('表单已经提交成功')
+else
+alert('表单提交失败')
+</div>
+  <h3>21. 进一步的应用 —— 大表单分步填写</h3>
+  <div class="item">
+    <input type="button" id="t" value="普通的大表单填写" onclick="open20()"/>
+    <input type="button" id="t" value="大表单分步填写" onclick="open21()"/>
+    <br/>
+<pre>
+        <font color="#0000ff">var </font><font color="#800000">diag = </font><font color="#0000ff">new </font><font color="#800000">Dialog();</font>
+        <font color="#800000">diag.Width = 600;</font>
+        <font color="#800000">diag.Height = 200;</font>
+        <font color="#800000">diag.Title = </font><font color="#ff00ff">&quot;新建站点&quot;</font><font color="#800000">;</font>
+        <font color="#800000">diag.</font><font color="#008080">URL </font><font color="#800000">= </font><font color="#ff00ff">&quot;bigform.html&quot;</font><font color="#800000">;</font>
+        <font color="#800000">diag.OKEvent = </font><font color="#0000ff">function</font><font color="#800000">(){Dialog.alert(</font><font color="#ff00ff">&quot;点击确定可以提交表单&quot;</font><font color="#800000">);diag.close();};</font>
+        <font color="#800000">diag.MessageTitle = </font><font color="#ff00ff">&quot;大表单分步填写&quot;</font><font color="#800000">;</font>
+        <font color="#800000">diag.Message = </font><font color="#ff00ff">'如果表单比较大需要用户拖动滚动条，建议表单分步填写'</font><font color="#800000">;</font>
+        <font color="#800000">diag.OnLoad=</font><font color="#0000ff">function</font><font color="#800000">(){diag.innerWin.stepFormInit(</font><font color="#ff00ff">&quot;wrap&quot;</font><font color="#800000">,</font><font color="#ff00ff">&quot;TABLE&quot;</font><font color="#800000">);};</font>
+        <font color="#800000">diag.show();</font>
+</pre>
+<span>注：表单拆分及步骤控制见弹出窗内的源代码（stepFormInit方法），还附赠一个校验类哦。</span></div>
+  
+ 
+
+</div>
+</body>
+</html>

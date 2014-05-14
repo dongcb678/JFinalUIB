@@ -1,0 +1,93 @@
+<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script type="text/javascript">
+	
+	function addChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("checkedGroup").add(option);
+		setGroup();
+	}
+
+	function delChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("allGroup").add(option);
+		setGroup();
+	}
+	
+	function setGroup(){
+		var checkedGroup = document.getElementById("checkedGroup");
+		var length = checkedGroup.length;
+		var groupIds = "";
+		for (var i=0; i<length; i++){
+			groupIds += checkedGroup.options[i].value + ",";
+	    }
+		
+		var userIds = "${ids}";
+		$.ajax({
+			type : "post",
+			url : cxt + "/user/setGroup",
+			data : { "ids" : userIds, "groupIds" : groupIds },
+			dataType : "html",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			async: false,
+			success:function(data){
+				
+			}
+		});
+	}
+</script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h3>用户分组选择</h3>
+</div>
+
+<div class="modal-body">
+	<div class="row-fluid sortable">
+		<div class="box span6">
+			<div class="box-header well" data-original-title>
+				<h2>
+					<i class="icon-user"></i> 未选择
+				</h2>
+				<div class="box-icon">
+					
+				</div>
+			</div>
+			<div class="box-content">
+				<select id="allGroup" multiple size="18" ondblclick="addChecked(this);" >
+					<c:forEach items="${noCheckedList }" var="group">
+						<option value='${group.ids }'>${group.names }</option>
+					</c:forEach>
+			  	</select>
+			</div>
+		</div>
+		
+		<div class="box span6">
+			<div class="box-header well" data-original-title>
+				<h2>
+					<i class="icon-user"></i> 已选择
+				</h2>
+				<div class="box-icon">
+					
+				</div>
+			</div>
+			<div class="box-content">
+				<select id="checkedGroup" multiple size="18" ondblclick="delChecked(this);" >
+					<c:forEach items="${checkedList }" var="group">
+						<option value='${group.ids }'>${group.names }</option>
+					</c:forEach>
+			  	</select>
+			</div>
+		</div>
+	</div>  
+</div>
+
+<div class="modal-footer">
+	<a href="#" class="btn" data-dismiss="modal">关闭</a>
+</div>
