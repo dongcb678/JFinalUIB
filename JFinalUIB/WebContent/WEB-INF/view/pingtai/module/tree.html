@@ -130,7 +130,7 @@
 					"pIds" : treeNode.id, 
 					"names" : addName, 
 					"orderIds" : orderIds, 
-					"systemIds" : '${fn:escapeXml(param["systemIds"])}'
+					"systemIds" : '${paramMap["systemIds"]}'
 				},
 				dataType : "html",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",

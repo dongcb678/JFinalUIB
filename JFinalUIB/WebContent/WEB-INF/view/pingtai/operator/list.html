@@ -28,14 +28,14 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">名称</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${fn:escapeXml(param["_query.names"])}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]}' maxlength="20" >
 						</div>
 				  	</div>
 				  
 				  	<div class="control-group">
 						<label class="control-label">URL</label>
 						<div class="controls">
-					  		<input class="input-xlarge" type="text" name="_query.url" value='${fn:escapeXml(param["_query.url"])}' maxlength="40" >
+					  		<input class="input-xlarge" type="text" name="_query.url" value='${paramMap["_query.url"]}' maxlength="40" >
 						</div>
 				  	</div>
 				
