@@ -96,11 +96,10 @@ public class JfinalConfig extends JFinalConfig {
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
 		
-		me.setError401View("");
-		me.setError403View("");
-		me.setError404View("");
-		me.setError500View("");
-		me.setErrorView(414, "");//请求 URI 太长
+		me.setError401View("/common/401.html");
+		me.setError403View("/common/403.html");
+		me.setError404View("/common/404.html");
+		me.setError500View("/common/500.html");
 	}
 	
 	/**

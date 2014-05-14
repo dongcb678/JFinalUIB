@@ -1,13 +1,11 @@
-<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>404-页面没有找到</title>
+    <title>400-错误的请求</title>
     
-	<link rel="icon" href="${pageScope.cxt}/files/images/favicon.ico" type="image/x-icon" />
-	<link rel="shortcut icon" href="${pageScope.cxt}/files/images/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
 	
 	<meta name="robots" content="nofollow">
 	<meta http-equiv="pragma" content="no-cache">
@@ -78,12 +76,12 @@
 <body>
 	
 	<p class="error-code">
-		404 
+		400
 	</p>
 	<p class="not-found">Not<br/>Found</p>
 	<div class="clear"></div>
 	<div class="content">
-		您访问的页面没有找到。
+		您的请求是错误的。
 		<br/><a href="${requestScope.cxt}/jf/">回到主页</a> 或者<br/><form>搜索<br/><input autofocus type="text" name="search" /></form>
 	</div>
 	
@@ -95,6 +93,6 @@
   		<p class="message">request_uri：${requestScope["javax.servlet.forward.request_uri"]}</p>
   		<p class="message">error.message：${requestScope["javax.servlet.error.message"]}</p>
     </div>
-    
+	
 </body>
 </html>

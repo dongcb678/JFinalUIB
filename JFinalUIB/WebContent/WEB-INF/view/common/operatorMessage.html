@@ -1,5 +1,3 @@
-<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-
 <div>
 	<ul class="breadcrumb">
 		<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
@@ -21,7 +19,7 @@
 		
 		<div class="box-content">
 			<h1>
-				操作提示：<small>${requestScope.msg }.</small>
+				操作提示：<small>${msg!}.</small>
 			</h1>
 			<div id="errorId" style="text-align: center;"></div>
 		</div>

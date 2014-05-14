@@ -1,18 +1,11 @@
-<%@ page language="java" isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
-<%@ page import="java.io.*, java.util.*, little.ant.pingtai.utils.*" %>
-
-<%
-	response.setStatus(500);
-%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>500-服务器内部错误</title>
+    <title>404-页面没有找到</title>
     
-	<link rel="icon" href="${pageScope.cxt}/files/images/favicon.ico" type="image/x-icon" />
-	<link rel="shortcut icon" href="${pageScope.cxt}/files/images/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
 	
 	<meta name="robots" content="nofollow">
 	<meta http-equiv="pragma" content="no-cache">
@@ -83,12 +76,12 @@
 <body>
 	
 	<p class="error-code">
-		500
+		404 
 	</p>
 	<p class="not-found">Not<br/>Found</p>
 	<div class="clear"></div>
 	<div class="content">
-		500-服务器内部错误。
+		您访问的页面没有找到。
 		<br/><a href="${requestScope.cxt}/jf/">回到主页</a> 或者<br/><form>搜索<br/><input autofocus type="text" name="search" /></form>
 	</div>
 	
@@ -99,32 +92,6 @@
   		<p class="message">exception_type：${requestScope["javax.servlet.error.exception_type"]}</p>
   		<p class="message">request_uri：${requestScope["javax.servlet.forward.request_uri"]}</p>
   		<p class="message">error.message：${requestScope["javax.servlet.error.message"]}</p>
-  		<p class="message">
-		<%--
-			//exception.printStackTrace();
-			//ByteArrayOutputStream ostr = new ByteArrayOutputStream();
-			//exception.printStackTrace(new PrintStream(ostr));
-			//out.print(ostr);
-			
-			ByteArrayOutputStream ostr = new ByteArrayOutputStream();
-			PrintStream s = new PrintStream(ostr);
-			s.println(ToolWeb.getHTMLToString(exception.toString()));
-		    StackTraceElement[] trace = exception.getStackTrace();
-		    for (int i=0; i < trace.length; i++) {
-		        s.println("\tat " + ToolWeb.getHTMLToString(trace[i].toString()));
-		    }
-		    Throwable ourCause = exception.getCause();
-		    while(ourCause!=null) {
-		    	s.println("Caused by: " + ToolWeb.getHTMLToString(ourCause.toString()));
-		    	trace = ourCause.getStackTrace();
-		      for (int i=0; i < trace.length; i++) {
-		          s.println("\tat " + ToolWeb.getHTMLToString(trace[i].toString()));
-		      }
-		    	ourCause = ourCause.getCause();
-		    }
-		    out.print(ostr);
-		--%>
-		</p>
     </div>
     
 </body>

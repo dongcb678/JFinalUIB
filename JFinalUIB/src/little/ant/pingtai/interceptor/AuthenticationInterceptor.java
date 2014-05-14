@@ -149,22 +149,21 @@ public class AuthenticationInterceptor implements Interceptor {
 	 * @param type
 	 */
 	private void toInfoJsp(BaseController contro, String uri, int type) {
-		String toPage = "/view/operatorMessage.jsp";
-		String msg = null;
-		
 		if(type == 1){// 未登录处理
-			toPage = "/login/logout";
+			contro.render("/login/logout");
+			return ;
 		}
+		
+		String toPage = "/common/operatorMessage.html";
+		String msg = null;
 		
 		if(type == 2){// 权限验证失败处理
 			msg = "权限验证失败!";
 			
 		}else if(type == 3){// IP验证失败
-			toPage = "/view/operatorMessage.jsp";
 			msg = "IP验证失败!";
 			
 		}else if(type == 4){// 表单验证失败
-			toPage = "/view/operatorMessage.jsp";
 			msg = "请不要重复提交表单数据!";
 		}
 		
