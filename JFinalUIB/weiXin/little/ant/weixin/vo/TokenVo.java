@@ -1,15 +1,15 @@
 package little.ant.weixin.vo;
 
 /**
- * 获取access token
+ * access token
  * @author 董华健
  */
-public class Token {
+public class TokenVo {
 
-	private String access_token;
-	private String expires_in;
-	private String errcode;
-	private String errmsg;
+	private String access_token;//获取到的凭证
+	private String expires_in;	//凭证有效时间，单位：秒 
+	private String errcode;		//错误码
+	private String errmsg;		//错误提示
 
 	public String getAccess_token() {
 		return access_token;

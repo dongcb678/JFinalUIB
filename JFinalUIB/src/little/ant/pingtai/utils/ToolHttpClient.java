@@ -45,11 +45,15 @@ public class ToolHttpClient {
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		} finally {
 			try {
-				httpClient.close();
+				if(null != httpClient){
+					httpClient.close();
+				}
 			} catch (IOException e) {
 				log.error("httpClient.close()异常");
 			}
@@ -65,19 +69,22 @@ public class ToolHttpClient {
 	 * @return
 	 */
 	public static String post(String url, String data, String contentType) {
-		if (null == contentType) {
-			contentType = "application/json";
-		}
 		CloseableHttpClient httpClient = null;
 		try {
 			httpClient = HttpClients.createDefault();
 			HttpPost httpPost = new HttpPost(url);
-
-			StringEntity stringEntity = new StringEntity(data);
-			stringEntity.setContentEncoding("UTF-8");
-			stringEntity.setContentType(contentType);
-			httpPost.setEntity(stringEntity);
-
+			
+			if(null != data){
+				StringEntity stringEntity = new StringEntity(data);
+				stringEntity.setContentEncoding("UTF-8");
+				if (null != contentType) {
+					stringEntity.setContentType(contentType);
+				}else{
+					stringEntity.setContentType("application/json");
+				}
+				httpPost.setEntity(stringEntity);
+			}
+			
 			RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(2000).setConnectTimeout(2000).build();// 设置请求和传输超时时间
 			httpPost.setConfig(requestConfig);
 
@@ -99,12 +106,19 @@ public class ToolHttpClient {
 			log.error("IO异常:" + url);
 		} finally {
 			try {
-				httpClient.close();
+				if(null != httpClient){
+					httpClient.close();
+				}
 			} catch (IOException e) {
 				log.error("httpClient.close()异常");
 			}
 		}
 		return null;
 	}
+	
+	public static void main(String[] args){
+		//System.out.println(get("http://127.0.0.1:89/jf/login"));
 
+		System.out.println(post("http://127.0.0.1:89/jf/login", null, null));
+	}
 }

@@ -3,23 +3,20 @@ package little.ant.weixin.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ToolConstant {
-	
+import little.ant.pingtai.run.JfinalConfig;
+import little.ant.pingtai.utils.ToolHttpClient;
+import little.ant.weixin.vo.TokenVo;
+
+import com.alibaba.fastjson.JSON;
+
+/**
+ * 微信工具类
+ * @author 董华健
+ */
+public class ToolWeiXin {
+
 	//开发者的Token
 	public static String token = "whai888386822323" ;
-	
-	//获得凭证的URL
-	//public static String accessTokenURL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
-	public static String accessTokenURL = "http://1.sxjhwx.sinaapp.com/";
-	
-	//第三方用户唯一凭证
-	public static String appid = "";
-	
-	//第三方用户唯一凭证密钥，既appsecret 
-	public static String secret  = "" ;
-	
-	//获取access_token填写client_credential 
-	public static String grantType  = "client_credential" ;
 	
 	//创建菜单URL
 	public static String createMenuURL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
@@ -30,6 +27,9 @@ public class ToolConstant {
 	//删除菜单URL
 	public static String deleteMenuURL = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
 	
+	/**
+	 * 错误码Map
+	 */
 	private static Map<String, String> errCode = new HashMap<String , String>();
 	
 	/**
@@ -41,6 +41,20 @@ public class ToolConstant {
 		return errCode.get(code);
 	}
 	
+	/**
+	 * 从微信得到accessToken的凭证
+	 * @return
+	 */
+	public static TokenVo getAccessToken() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(JfinalConfig.weixinTokenUrl).append("?").append("grant_type=client_credential");
+		sb.append("&appid=").append(JfinalConfig.weixinAppID);
+		sb.append("&secret=").append(JfinalConfig.weixinAppSecret);
+		String jsonStr = ToolHttpClient.get(sb.toString());
+		TokenVo weiXinVo = JSON.parseObject(jsonStr, TokenVo.class);
+		return weiXinVo;
+	}
+
 	static {
 		errCode.put("-1", "系统繁忙");
 		errCode.put("0", "请求成功");

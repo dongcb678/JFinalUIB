@@ -10,7 +10,7 @@ import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.service.BaseService;
 import little.ant.weixin.model.Recevie;
-import little.ant.weixin.utils.ToolConstant;
+import little.ant.weixin.utils.ToolWeiXin;
 
 import org.apache.log4j.Logger;
 
@@ -30,7 +30,7 @@ public class MessageService extends BaseService {
 	 */
 	public boolean checkSignature(String signature, String timestamp, String nonce) {
 		try {
-			String[] strSet = new String[] { ToolConstant.token, timestamp, nonce };
+			String[] strSet = new String[] { ToolWeiXin.token, timestamp, nonce };
 			java.util.Arrays.sort(strSet);
 			String total = "";
 			for (String string : strSet) {

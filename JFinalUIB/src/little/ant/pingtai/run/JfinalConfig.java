@@ -70,23 +70,31 @@ public class JfinalConfig extends JFinalConfig {
 	public static int passErrorCount;
 	public static int passErrorHour;
 	
+	public static String weixinAppID;
+	public static String weixinAppSecret;
+	public static String weixinTokenUrl;
+	
 	/**
 	 * 配置常量
 	 */
 	public void configConstant(Constants me) {
 		loadPropertyFile("init.properties");
 
-		driverClass = getProperty("driverClass").trim();
-		jdbcUrl = getProperty("jdbcUrl").trim();
-		userName = getProperty("userName").trim();
-		passWord = getProperty("passWord").trim();
+		driverClass = getProperty("system.driverClass").trim();
+		jdbcUrl = getProperty("system.jdbcUrl").trim();
+		userName = getProperty("system.userName").trim();
+		passWord = getProperty("system.passWord").trim();
 		
-		devMode = getPropertyToBoolean("devMode", false);
+		devMode = getPropertyToBoolean("system.devMode", false);
 		
-		securityKey = getProperty("securityKey").trim();
+		securityKey = getProperty("system.securityKey").trim();
 		
-		passErrorCount = getPropertyToInt("passErrorCount", 3);
-		passErrorHour = getPropertyToInt("passErrorHour", 3);
+		passErrorCount = getPropertyToInt("system.passErrorCount", 3);
+		passErrorHour = getPropertyToInt("system.passErrorHour", 3);
+		
+		weixinAppID = getProperty("weixin.AppID").trim();
+		weixinAppSecret = getProperty("weixin.AppSecret").trim();
+		weixinTokenUrl = getProperty("weixin.TokenUrl").trim();
 		
 		me.setEncoding("UTF-8"); 
 		me.setDevMode(devMode);

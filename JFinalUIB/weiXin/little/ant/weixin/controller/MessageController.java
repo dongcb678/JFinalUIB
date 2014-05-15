@@ -16,13 +16,14 @@ public class MessageController extends BaseController {
 	private MessageService receiveService = new MessageService();
 	
 	public void index(){
-		String echostr  = getPara("echostr");
-		if(echostr != null ){
-			//申请成为开发者
-			String signature = getPara("signature");
-			String timestamp = getPara("timestamp");
-			String nonce = getPara("nonce");
+		String echostr  = getPara("echostr");	//随机字符串
+		if(echostr != null && !echostr.isEmpty()){ // 验证URL有效性
+			String timestamp = getPara("timestamp");//时间戳
+			String signature = getPara("signature");//微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数
+			String nonce = getPara("nonce");		//随机数
+			
 			log.info("signature:" + signature + "  timestamp:" + timestamp + "  nonce:" + nonce + "  echostr:" + echostr) ;
+			
 			boolean flag = receiveService.checkSignature(signature, timestamp, nonce);
 			if(flag){
 				renderText(echostr);
