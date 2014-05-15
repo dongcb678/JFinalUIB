@@ -2,6 +2,7 @@ package little.ant.pingtai.run;
 
 import little.ant.pingtai.beetl.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.MyBeetlRenderFactory;
+import little.ant.pingtai.beetl.StringEquals;
 import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.controller.DepartmentController;
 import little.ant.pingtai.controller.DictController;
@@ -95,6 +96,7 @@ public class JfinalConfig extends JFinalConfig {
 		me.setMainRenderFactory(new MyBeetlRenderFactory());
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
+		groupTemplate.registerFunction("stringEquals", new StringEquals());
 		
 		me.setError401View("/common/401.html");
 		me.setError403View("/common/403.html");
