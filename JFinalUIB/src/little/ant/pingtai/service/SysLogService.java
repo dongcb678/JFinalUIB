@@ -53,6 +53,18 @@ public class SysLogService extends BaseService {
 			formSqlSb.append(" and u.username like ? ");
 			paramValue.add("%" + username.trim() + "%");
 		}
+
+		String ips = queryParam.get("ips");//ip
+		if(null!=ips && !ips.equals("")){
+			formSqlSb.append(" and s.ips like ? ");
+			paramValue.add("%" + ips.trim() + "%");
+		}
+
+		String status = queryParam.get("status");//状态
+		if(null!=status && !status.equals("")){
+			formSqlSb.append(" and s.status = ? ");
+			paramValue.add(status);
+		}
 	}
 	
 }

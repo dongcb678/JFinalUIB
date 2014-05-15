@@ -30,9 +30,27 @@
 				  	</div>
 				  	
 				  	<div class="control-group">
-						<label class="control-label" for="focusedInput">用户名称</label>
+						<label class="control-label" for="focusedInput">用户账号</label>
 						<div class="controls">
 					  		<input class="input-xlarge focused" type="text" name="_query.username" value='${paramMap["_query.username"]!}' maxlength="20" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="control-group">
+						<label class="control-label" for="focusedInput">IP</label>
+						<div class="controls">
+					  		<input class="input-xlarge focused" type="text" name="_query.ips" value='${paramMap["_query.ips"]!}' maxlength="20" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="control-group">
+						<label class="control-label" for="focusedInput">状态</label>
+						<div class="controls">
+					  		<select name="_query.status" class="combox">
+								<option></option>
+								<option value="1" ${paramMap["_query.status"]! == "1" ? "selected='selected'":"" }>成功</option>
+								<option value="0" ${paramMap["_query.status"]! == "0" ? "selected='selected'":"" }>失败</option>
+							</select>
 						</div>
 				  	</div>
 				  	
