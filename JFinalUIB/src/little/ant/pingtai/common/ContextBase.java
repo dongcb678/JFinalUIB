@@ -221,7 +221,7 @@ public class ContextBase {
 			e.printStackTrace();
 		}
 
-		byte[] keyByte = Base64.decodeBase64(JfinalConfig.securityKey);
+		byte[] keyByte = Base64.decodeBase64(JfinalConfig.system_securityKey);
 
 		// 加密
 		byte[] securityByte = null;
@@ -259,7 +259,7 @@ public class ContextBase {
 		// 解密
 		byte[] securityByte = Base64.decodeBase64(encodeCookie);
 
-		byte[] keyByte = Base64.decodeBase64(JfinalConfig.securityKey);
+		byte[] keyByte = Base64.decodeBase64(JfinalConfig.system_securityKey);
 
 		byte[] dataByte = null;
 		try {

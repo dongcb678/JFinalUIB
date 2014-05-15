@@ -80,10 +80,10 @@ public class LoginService extends BaseService {
 
 		// 3.密码错误次数超限
 		int errorCount = user.getLong("errorcount").intValue();
-		if(errorCount >= JfinalConfig.passErrorCount){
+		if(errorCount >= JfinalConfig.system_passErrorCount){
 			Date stopDate = user.getDate("stopDate");
 			int hourSpace = ToolDateTime.getDateHourSpace(new Date(), stopDate);
-			if(hourSpace < JfinalConfig.passErrorHour){
+			if(hourSpace < JfinalConfig.system_passErrorHour){
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
 				Db.update(" update pt_user u set u.stopdate=null, u.errorcount=0 where u.ids = ? ", user.getStr("ids"));

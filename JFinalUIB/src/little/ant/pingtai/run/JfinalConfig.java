@@ -58,21 +58,20 @@ public class JfinalConfig extends JFinalConfig {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(JfinalConfig.class);
 			
-	public static String driverClass;
-	public static String jdbcUrl;
-	public static String userName;
-	public static String passWord;
+	public static String system_driverClass;
+	public static String system_jdbcUrl;
+	public static String system_userName;
+	public static String system_passWord;
+	public static boolean system_devMode;
+	public static String system_securityKey;
+	public static int system_passErrorCount;
+	public static int system_passErrorHour;
 	
-	public static boolean devMode;
-	
-	public static String securityKey;
-	
-	public static int passErrorCount;
-	public static int passErrorHour;
-	
-	public static String weixinAppID;
-	public static String weixinAppSecret;
-	public static String weixinTokenUrl;
+	public static String weixin_appID;
+	public static String weixin_appSecret;
+	public static String weixin_tokenUrl;
+	public static String weixin_mediaUploadUrl;
+	public static String weixin_mediaGetUrl;
 	
 	/**
 	 * 配置常量
@@ -80,27 +79,25 @@ public class JfinalConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		loadPropertyFile("init.properties");
 
-		driverClass = getProperty("system.driverClass").trim();
-		jdbcUrl = getProperty("system.jdbcUrl").trim();
-		userName = getProperty("system.userName").trim();
-		passWord = getProperty("system.passWord").trim();
+		system_driverClass = getProperty("system.driverClass").trim();
+		system_jdbcUrl = getProperty("system.jdbcUrl").trim();
+		system_userName = getProperty("system.userName").trim();
+		system_passWord = getProperty("system.passWord").trim();
+		system_devMode = getPropertyToBoolean("system.devMode", false);
+		system_securityKey = getProperty("system.securityKey").trim();
+		system_passErrorCount = getPropertyToInt("system.passErrorCount", 3);
+		system_passErrorHour = getPropertyToInt("system.passErrorHour", 3);
 		
-		devMode = getPropertyToBoolean("system.devMode", false);
-		
-		securityKey = getProperty("system.securityKey").trim();
-		
-		passErrorCount = getPropertyToInt("system.passErrorCount", 3);
-		passErrorHour = getPropertyToInt("system.passErrorHour", 3);
-		
-		weixinAppID = getProperty("weixin.AppID").trim();
-		weixinAppSecret = getProperty("weixin.AppSecret").trim();
-		weixinTokenUrl = getProperty("weixin.TokenUrl").trim();
+		weixin_appID = getProperty("weixin.appID").trim();
+		weixin_appSecret = getProperty("weixin.appSecret").trim();
+		weixin_tokenUrl = getProperty("weixin.tokenUrl").trim();
+		weixin_mediaUploadUrl = getProperty("weixin.mediaUploadUrl").trim();
+		weixin_mediaGetUrl = getProperty("weixin.mediaGetUrl").trim();
 		
 		me.setEncoding("UTF-8"); 
-		me.setDevMode(devMode);
+		me.setDevMode(system_devMode);
 		me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
 		
-		//me.setMainRenderFactory(new MyJspRenderFactory());
 		me.setMainRenderFactory(new MyBeetlRenderFactory());
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
@@ -137,7 +134,7 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public void configPlugin(Plugins me) {
 		// 1.配置Druid数据库连接池插件
-		DruidPlugin druidPlugin = new DruidPlugin(jdbcUrl, userName, passWord, driverClass);
+		DruidPlugin druidPlugin = new DruidPlugin(system_jdbcUrl, system_userName, system_passWord, system_driverClass);
 		me.add(druidPlugin);
 
 		// 2.缓存

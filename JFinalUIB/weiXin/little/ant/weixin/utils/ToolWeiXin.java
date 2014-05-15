@@ -16,16 +16,7 @@ import com.alibaba.fastjson.JSON;
 public class ToolWeiXin {
 
 	//开发者的Token
-	public static String token = "whai888386822323" ;
-	
-	//创建菜单URL
-	public static String createMenuURL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
-	
-	//查询菜单URL
-	public static String queryMenuURL = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN";
-	
-	//删除菜单URL
-	public static String deleteMenuURL = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
+	public static String token = "" ;
 	
 	/**
 	 * 错误码Map
@@ -47,9 +38,9 @@ public class ToolWeiXin {
 	 */
 	public static TokenVo getAccessToken() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(JfinalConfig.weixinTokenUrl).append("?").append("grant_type=client_credential");
-		sb.append("&appid=").append(JfinalConfig.weixinAppID);
-		sb.append("&secret=").append(JfinalConfig.weixinAppSecret);
+		sb.append(JfinalConfig.weixin_tokenUrl).append("?").append("grant_type=client_credential");
+		sb.append("&appid=").append(JfinalConfig.weixin_appID);
+		sb.append("&secret=").append(JfinalConfig.weixin_appSecret);
 		String jsonStr = ToolHttpClient.get(sb.toString());
 		TokenVo weiXinVo = JSON.parseObject(jsonStr, TokenVo.class);
 		return weiXinVo;
