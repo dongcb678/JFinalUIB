@@ -153,10 +153,14 @@ public class AuthenticationInterceptor implements Interceptor {
 			contro.render("/login/logout");
 			return ;
 		}
+
+		String referer = contro.getRequest().getHeader("Referer"); 
+		String toPage = "/common/msgAjax.html";
+		if(null == referer || referer.isEmpty()){
+			toPage = "/common/msg.html";
+		}
 		
-		String toPage = "/common/operatorMessage.html";
 		String msg = null;
-		
 		if(type == 2){// 权限验证失败处理
 			msg = "权限验证失败!";
 			
@@ -167,7 +171,6 @@ public class AuthenticationInterceptor implements Interceptor {
 			msg = "请不要重复提交表单数据!";
 		}
 		
-		String referer = contro.getRequest().getHeader("Referer"); 
 		contro.setAttr("referer", referer);
 		contro.setAttr("msg", msg);
 		contro.render(toPage);
