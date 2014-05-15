@@ -7,8 +7,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import little.ant.pingtai.beetl.MyBeetlRender;
 import little.ant.pingtai.common.ContextBase;
-import little.ant.pingtai.jfinal.MyJspRender;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.thread.ThreadSysLog;
 import little.ant.pingtai.utils.ToolUtils;
@@ -66,8 +66,8 @@ public class GlobalHandler extends Handler {
 		
 		// 视图耗时
 		long renderTime = 0;
-		if(null != request.getAttribute(MyJspRender.renderTimeKey)){
-			renderTime = (long) request.getAttribute(MyJspRender.renderTimeKey);
+		if(null != request.getAttribute(MyBeetlRender.renderTimeKey)){
+			renderTime = (long) request.getAttribute(MyBeetlRender.renderTimeKey);
 		}
 		reqSysLog.set("viewhaoshi", renderTime);
 		

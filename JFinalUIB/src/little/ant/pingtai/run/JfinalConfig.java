@@ -1,6 +1,7 @@
 package little.ant.pingtai.run;
 
 import little.ant.pingtai.beetl.HasPrivilegeUrl;
+import little.ant.pingtai.beetl.MyBeetlRenderFactory;
 import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.controller.DepartmentController;
 import little.ant.pingtai.controller.DictController;
@@ -18,7 +19,6 @@ import little.ant.pingtai.controller.UserController;
 import little.ant.pingtai.handler.GlobalHandler;
 import little.ant.pingtai.interceptor.AuthenticationInterceptor;
 import little.ant.pingtai.interceptor.ParamPkgInterceptor;
-import little.ant.pingtai.jfinal.MyBeetlRenderFactory;
 import little.ant.pingtai.model.Department;
 import little.ant.pingtai.model.Dict;
 import little.ant.pingtai.model.Group;

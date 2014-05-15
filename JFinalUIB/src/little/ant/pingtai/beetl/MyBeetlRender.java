@@ -1,4 +1,4 @@
-package little.ant.pingtai.jfinal;
+package little.ant.pingtai.beetl;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
@@ -22,7 +22,7 @@ public class MyBeetlRender extends BeetlRender {
 		super.render();
 		long end = System.currentTimeMillis();
 		long renderTime = end - start;
-		request.setAttribute(MyJspRender.renderTimeKey, renderTime);
+		request.setAttribute(MyBeetlRender.renderTimeKey, renderTime);
 		log.debug("MyJspRender render end");
 	}
 

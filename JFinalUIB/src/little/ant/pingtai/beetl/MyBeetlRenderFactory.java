@@ -1,4 +1,4 @@
-package little.ant.pingtai.jfinal;
+package little.ant.pingtai.beetl;
 
 import org.apache.log4j.Logger;
 import org.beetl.ext.jfinal.BeetlRender;
@@ -8,7 +8,7 @@ import com.jfinal.render.Render;
 
 public class MyBeetlRenderFactory extends BeetlRenderFactory {
 	
-	private static Logger log = Logger.getLogger(MyJspRenderFactory.class);
+	private static Logger log = Logger.getLogger(MyBeetlRenderFactory.class);
 
 	public Render getRender(String view) {
 		log.debug("MyJspRenderFactory start");
