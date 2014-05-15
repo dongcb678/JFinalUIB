@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.service.BaseService;
-import little.ant.weixin.model.Recevie;
+import little.ant.weixin.model.RecevieOrdinary;
 import little.ant.weixin.utils.ToolWeiXin;
 
 import org.apache.log4j.Logger;
@@ -58,56 +58,40 @@ public class MessageService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public String getSendMessage(HttpServletRequest request) {
-		// 接收内容
+	public String getParseMessage(HttpServletRequest request) {
 		String recverMsg = ContextBase.requestStream(request);
-		Recevie recevie = JSON.parseObject(recverMsg, Recevie.class);
+		log.info("接收的微信消息内容：" + recverMsg);
+		RecevieOrdinary recevie = JSON.parseObject(recverMsg, RecevieOrdinary.class);
+		log.info("接收内容解析成对象");
 		
-		// 获取客户微信账号
 		String fromUserName = recevie.getFromUserName();
+		log.info("获取客户微信账号" + fromUserName);
 		
-		// 根据微信号查询用户信息
+		log.info("根据微信号查询用户信息");
 		User user = User.dao.findFirst(" select * form pt_user where weixin=? ", fromUserName);
 		
 		String returnMsg = "";
-		// 如果msgType不为空，并且为event 则为事件消息推送
-		if (recevie.getMsgType() != null && recevie.getMsgType().equals("event")) {
-			if (recevie.getEvent().equals("subscribe")) {
-				// 事件订阅
-				returnMsg = "";
-			} else if (recevie.getEvent().equals("unsubscribe")) {
-				// 取消事件订阅
-				returnMsg = "";
-			} else {
-				// 自定义菜单
-				returnMsg = "";
-			}
-		} else if (recevie.getContent().equals("余额")) {
-			// 判断是否绑定
-			if (user == null) {
-				returnMsg = "";
-			} else {
-				//String idCard = user.getStr("idcard");//身份证号
-				returnMsg = "";
-			}
-		} else if (recevie.getContent().equals("解除") || recevie.getContent().equals("解除绑定")) {
+		String msgType = recevie.getMsgType();
+		if(msgType == null || msgType.isEmpty()){
+			return returnMsg;
+		}
+		
+		if(msgType.equals("event")){//事件推送
 			
-		} else if (recevie.getContent().equals("查询")) {
+		}else if(msgType.equals("text")){// 文本消息
 			
-		} else if (recevie.getContent().equals("帮助")) {
+		}else if(msgType.equals("image")){// 图片消息
 			
-		} else if (recevie.getContent().equals("绑定")) {
+		}else if(msgType.equals("voice")){// 语音消息
 			
-		} else if (recevie.getContent().equals("菜单")) {
+		}else if(msgType.equals("video")){// 视频消息
 			
-		} else if (recevie.getContent().equals("地图")) {
+		}else if(msgType.equals("location")){// 地理位置消息
 			
-		} else {
+		}else if(msgType.equals("link")){// 链接消息
 			
 		}
 
-		log.debug("接收的微信消息内容：" + recverMsg);
-		log.debug("返回给微信消息内容：" + returnMsg);
 		return returnMsg;
 	}
 	

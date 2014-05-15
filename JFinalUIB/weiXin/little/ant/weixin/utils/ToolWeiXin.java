@@ -5,7 +5,7 @@ import java.util.Map;
 
 import little.ant.pingtai.run.JfinalConfig;
 import little.ant.pingtai.utils.ToolHttpClient;
-import little.ant.weixin.vo.TokenVo;
+import little.ant.weixin.model.RecevieToken;
 
 import com.alibaba.fastjson.JSON;
 
@@ -36,13 +36,13 @@ public class ToolWeiXin {
 	 * 从微信得到accessToken的凭证
 	 * @return
 	 */
-	public static TokenVo getAccessToken() {
+	public static RecevieToken getAccessToken() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(JfinalConfig.weixin_tokenUrl).append("?").append("grant_type=client_credential");
 		sb.append("&appid=").append(JfinalConfig.weixin_appID);
 		sb.append("&secret=").append(JfinalConfig.weixin_appSecret);
 		String jsonStr = ToolHttpClient.get(sb.toString());
-		TokenVo weiXinVo = JSON.parseObject(jsonStr, TokenVo.class);
+		RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);
 		return weiXinVo;
 	}
 
