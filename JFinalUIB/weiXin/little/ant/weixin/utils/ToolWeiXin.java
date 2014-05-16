@@ -13,13 +13,19 @@ import com.alibaba.fastjson.JSON;
  * @author 董华健
  */
 public class ToolWeiXin {
-
+	
+	/**
+	 * 通讯常量
+	 */
 	public static String weixin_appID;
 	public static String weixin_appSecret;
 	public static String weixin_tokenUrl;
 	public static String weixin_mediaUploadUrl;
 	public static String weixin_mediaGetUrl;
 
+	/**
+	 * 事件类型
+	 */
 	public static final String recevie_event = "event";
 	public static final String recevie_event_subscribe = "subscribe";
 	public static final String recevie_event_unsubscribe = "unsubscribe";
@@ -28,6 +34,9 @@ public class ToolWeiXin {
 	public static final String recevie_event_click = "CLICK";
 	public static final String recevie_event_view = "VIEW";
 	
+	/**
+	 * 消息类型
+	 */
 	public static final String recevie_msg_text = "text";
 	public static final String recevie_msg_image = "image";
 	public static final String recevie_msg_voice = "voice";
@@ -35,8 +44,10 @@ public class ToolWeiXin {
 	public static final String recevie_msg_location = "location";
 	public static final String recevie_msg_link = "link";
 	
-	//开发者的Token
-	public static String token = "weixinchat" ;
+	/**
+	 * 开发者的Token
+	 */
+	public static final String token = "weixinchat" ;
 	
 	/**
 	 * 错误码Map
