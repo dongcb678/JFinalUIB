@@ -1,16 +1,10 @@
-package little.ant.weixin.model;
-
-import com.jfinal.plugin.activerecord.Model;
+package little.ant.weixin.vo;
 
 /**
  * 接收获取access token消息
  * @author 董华健
  */
-public class RecevieToken extends Model<RecevieToken> {
-	
-	private static final long serialVersionUID = 2051998642258015518L;
-	
-	public static final RecevieToken dao = new RecevieToken();
+public class RecevieToken  {
 	
 	private String access_token;//获取到的凭证
 	private String expires_in;	//凭证有效时间，单位：秒 

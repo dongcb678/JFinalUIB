@@ -118,7 +118,28 @@ public class ToolHttpClient {
 	
 	public static void main(String[] args){
 		//System.out.println(get("http://127.0.0.1:89/jf/login"));
+		//System.out.println(post("http://127.0.0.1:89/jf/login", null, null));
+		
+		//System.out.println(get("http://littleant.duapp.com/msg"));
 
-		System.out.println(post("http://127.0.0.1:89/jf/login", null, null));
+		/*String returnMsg = "<xml>";
+		returnMsg += "<ToUserName><![CDATA[dongcb678]]></ToUserName>";
+		returnMsg += "<FromUserName><![CDATA[jiu_guang]]></FromUserName>";
+		returnMsg += "<CreateTime>"+new Date().getTime()+"</CreateTime>";
+		returnMsg += "<MsgType><![CDATA[text]]></MsgType>";
+		returnMsg += "<Content><![CDATA[你好]]></Content>";
+		returnMsg += "</xml>";*/
+		
+		String returnMsg = "<xml>";
+		returnMsg += " <ToUserName><![CDATA[jiu_guang]]></ToUserName>";
+		returnMsg += " <FromUserName><![CDATA[dongcb678]]></FromUserName> ";
+		returnMsg += " <CreateTime>1348831860</CreateTime>";
+		returnMsg += " <MsgType><![CDATA[text]]></MsgType>";
+		returnMsg += " <Content><![CDATA[this is a test]]></Content>";
+		returnMsg += " <MsgId>1234567890123456</MsgId>";
+		returnMsg += " </xml>";
+		
+		System.out.println(post("http://127.0.0.1:88/msg", returnMsg, "application/xml"));
+		//System.out.println(post("http://littleant.duapp.com/msg", returnMsg, "application/xml"));
 	}
 }

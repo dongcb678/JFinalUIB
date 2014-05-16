@@ -3,9 +3,8 @@ package little.ant.weixin.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-import little.ant.pingtai.run.JfinalConfig;
 import little.ant.pingtai.utils.ToolHttpClient;
-import little.ant.weixin.model.RecevieToken;
+import little.ant.weixin.vo.RecevieToken;
 
 import com.alibaba.fastjson.JSON;
 
@@ -15,8 +14,29 @@ import com.alibaba.fastjson.JSON;
  */
 public class ToolWeiXin {
 
+	public static String weixin_appID;
+	public static String weixin_appSecret;
+	public static String weixin_tokenUrl;
+	public static String weixin_mediaUploadUrl;
+	public static String weixin_mediaGetUrl;
+
+	public static final String recevie_event = "event";
+	public static final String recevie_event_subscribe = "subscribe";
+	public static final String recevie_event_unsubscribe = "unsubscribe";
+	public static final String recevie_event_scan = "SCAN";
+	public static final String recevie_event_location = "LOCATION";
+	public static final String recevie_event_click = "CLICK";
+	public static final String recevie_event_view = "VIEW";
+	
+	public static final String recevie_msg_text = "text";
+	public static final String recevie_msg_image = "image";
+	public static final String recevie_msg_voice = "voice";
+	public static final String recevie_msg_video = "video";
+	public static final String recevie_msg_location = "location";
+	public static final String recevie_msg_link = "link";
+	
 	//开发者的Token
-	public static String token = "" ;
+	public static String token = "weixinchat" ;
 	
 	/**
 	 * 错误码Map
@@ -38,9 +58,9 @@ public class ToolWeiXin {
 	 */
 	public static RecevieToken getAccessToken() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(JfinalConfig.weixin_tokenUrl).append("?").append("grant_type=client_credential");
-		sb.append("&appid=").append(JfinalConfig.weixin_appID);
-		sb.append("&secret=").append(JfinalConfig.weixin_appSecret);
+		sb.append(weixin_tokenUrl).append("?").append("grant_type=client_credential");
+		sb.append("&appid=").append(weixin_appID);
+		sb.append("&secret=").append(weixin_appSecret);
 		String jsonStr = ToolHttpClient.get(sb.toString());
 		RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);
 		return weiXinVo;

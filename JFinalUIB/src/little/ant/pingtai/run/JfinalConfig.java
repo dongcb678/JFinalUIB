@@ -33,6 +33,7 @@ import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadSysLog;
+import little.ant.weixin.utils.ToolWeiXin;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
@@ -67,12 +68,6 @@ public class JfinalConfig extends JFinalConfig {
 	public static int system_passErrorCount;
 	public static int system_passErrorHour;
 	
-	public static String weixin_appID;
-	public static String weixin_appSecret;
-	public static String weixin_tokenUrl;
-	public static String weixin_mediaUploadUrl;
-	public static String weixin_mediaGetUrl;
-	
 	/**
 	 * 配置常量
 	 */
@@ -88,11 +83,11 @@ public class JfinalConfig extends JFinalConfig {
 		system_passErrorCount = getPropertyToInt("system.passErrorCount", 3);
 		system_passErrorHour = getPropertyToInt("system.passErrorHour", 3);
 		
-		weixin_appID = getProperty("weixin.appID").trim();
-		weixin_appSecret = getProperty("weixin.appSecret").trim();
-		weixin_tokenUrl = getProperty("weixin.tokenUrl").trim();
-		weixin_mediaUploadUrl = getProperty("weixin.mediaUploadUrl").trim();
-		weixin_mediaGetUrl = getProperty("weixin.mediaGetUrl").trim();
+		ToolWeiXin.weixin_appID = getProperty("weixin.appID").trim();
+		ToolWeiXin.weixin_appSecret = getProperty("weixin.appSecret").trim();
+		ToolWeiXin.weixin_tokenUrl = getProperty("weixin.tokenUrl").trim();
+		ToolWeiXin.weixin_mediaUploadUrl = getProperty("weixin.mediaUploadUrl").trim();
+		ToolWeiXin.weixin_mediaGetUrl = getProperty("weixin.mediaGetUrl").trim();
 		
 		me.setEncoding("UTF-8"); 
 		me.setDevMode(system_devMode);

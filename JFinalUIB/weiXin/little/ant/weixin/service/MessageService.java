@@ -3,18 +3,23 @@ package little.ant.weixin.service;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-
-import little.ant.pingtai.common.ContextBase;
-import little.ant.pingtai.model.User;
 import little.ant.pingtai.service.BaseService;
-import little.ant.weixin.model.RecevieOrdinary;
+import little.ant.pingtai.utils.ToolXml;
 import little.ant.weixin.utils.ToolWeiXin;
+import little.ant.weixin.vo.RecevieEventLocation;
+import little.ant.weixin.vo.RecevieEventMenu;
+import little.ant.weixin.vo.RecevieEventQRCode;
+import little.ant.weixin.vo.RecevieEventSubscribe;
+import little.ant.weixin.vo.RecevieMsgImage;
+import little.ant.weixin.vo.RecevieMsgLink;
+import little.ant.weixin.vo.RecevieMsgLocation;
+import little.ant.weixin.vo.RecevieMsgText;
+import little.ant.weixin.vo.RecevieMsgVideo;
+import little.ant.weixin.vo.RecevieMsgVoice;
 
 import org.apache.log4j.Logger;
-
-import com.alibaba.fastjson.JSON;
 
 public class MessageService extends BaseService {
 
@@ -54,45 +59,190 @@ public class MessageService extends BaseService {
 	}
 
 	/**
-	 * 接受微信消息，并判断回复消息内容
-	 * @param request
+	 * 消息处理
+	 * @param recverMsg
 	 * @return
 	 */
-	public String getParseMessage(HttpServletRequest request) {
-		String recverMsg = ContextBase.requestStream(request);
-		log.info("接收的微信消息内容：" + recverMsg);
-		RecevieOrdinary recevie = JSON.parseObject(recverMsg, RecevieOrdinary.class);
-		log.info("接收内容解析成对象");
-		
-		String fromUserName = recevie.getFromUserName();
-		log.info("获取客户微信账号" + fromUserName);
-		
-		log.info("根据微信号查询用户信息");
-		User user = User.dao.findFirst(" select * form pt_user where weixin=? ", fromUserName);
-		
-		String returnMsg = "";
-		String msgType = recevie.getMsgType();
-		if(msgType == null || msgType.isEmpty()){
-			return returnMsg;
-		}
-		
-		if(msgType.equals("event")){//事件推送
+	public String messageProcess(String recverMsg) {
+		// 消息类型
+		String msgType = ToolXml.getStairText(recverMsg, "msgType");
+
+		StringBuffer sb = new StringBuffer();
+
+		// 1.事件推送
+		if (msgType.equals(ToolWeiXin.recevie_event)) {
+			String event = ToolXml.getStairText(recverMsg, "Event");
+			if(event.equals(ToolWeiXin.recevie_event_subscribe)){//订阅
+				String eventKey = ToolXml.getStairText(recverMsg, "EventKey");
+				if(null == eventKey){//订阅
+					RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, RecevieEventSubscribe.class);
+					String toUserName = subscribe.getToUserName();// 开发者
+					String fromUserName = subscribe.getFromUserName();// 发送者
+					sb.append("<xml>");
+					sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+					sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+					sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+					sb.append("<MsgType><![CDATA[text]]></MsgType>");
+					sb.append("<Content><![CDATA[订阅]]></Content>");
+					sb.append("</xml>");
+					
+				}else{// 扫描二维码事件1：如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值关注事件推送给开发者。
+					RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, RecevieEventQRCode.class);
+					String toUserName = qrCode.getToUserName();// 开发者
+					String fromUserName = qrCode.getFromUserName();// 发送者
+					sb.append("<xml>");
+					sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+					sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+					sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+					sb.append("<MsgType><![CDATA[text]]></MsgType>");
+					sb.append("<Content><![CDATA[扫描二维码事件1]]></Content>");
+					sb.append("</xml>");
+				}
+				
+			}else if(event.equals(ToolWeiXin.recevie_event_unsubscribe)){//取消订阅
+				RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, RecevieEventSubscribe.class);
+				String toUserName = subscribe.getToUserName();// 开发者
+				String fromUserName = subscribe.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[取消订阅]]></Content>");
+				sb.append("</xml>");
+				
+			}else if(event.equals(ToolWeiXin.recevie_event_scan)){//扫描二维码事件2：如果用户已经关注公众号，则微信会将带场景值扫描事件推送给开发者。
+				RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, RecevieEventQRCode.class);
+				String toUserName = qrCode.getToUserName();// 开发者
+				String fromUserName = qrCode.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[扫描二维码事件2]]></Content>");
+				sb.append("</xml>");
+				
+			}else if(event.equals(ToolWeiXin.recevie_event_location)){//上报地理位置事件
+				RecevieEventLocation location = (RecevieEventLocation) ToolXml.xmlToBean(recverMsg, RecevieEventLocation.class);
+				String toUserName = location.getToUserName();// 开发者
+				String fromUserName = location.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[扫描二维码事件2]]></Content>");
+				sb.append("</xml>");
+				
+			}else if(event.equals(ToolWeiXin.recevie_event_click)){//点击菜单拉取消息时的事件推送
+				RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, RecevieEventMenu.class);
+				String toUserName = menu.getToUserName();// 开发者
+				String fromUserName = menu.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[点击菜单拉取消息]]></Content>");
+				sb.append("</xml>");
+				
+			}else if(event.equals(ToolWeiXin.recevie_event_view)){//点击菜单跳转链接时的事件推送
+				RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, RecevieEventMenu.class);
+				String toUserName = menu.getToUserName();// 开发者
+				String fromUserName = menu.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[点击菜单跳转链接]]></Content>");
+				sb.append("</xml>");
+			}
 			
-		}else if(msgType.equals("text")){// 文本消息
-			
-		}else if(msgType.equals("image")){// 图片消息
-			
-		}else if(msgType.equals("voice")){// 语音消息
-			
-		}else if(msgType.equals("video")){// 视频消息
-			
-		}else if(msgType.equals("location")){// 地理位置消息
-			
-		}else if(msgType.equals("link")){// 链接消息
-			
+		} else {
+			// 接收普通消息
+			if (msgType.equals(ToolWeiXin.recevie_msg_text)) {// 文本消息
+				RecevieMsgText text = (RecevieMsgText) ToolXml.xmlToBean(recverMsg, RecevieMsgText.class);
+				String toUserName = text.getToUserName();// 开发者
+				String fromUserName = text.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[文本消息]]></Content>");
+				sb.append("</xml>");
+
+			} else if (msgType.equals(ToolWeiXin.recevie_msg_image)) {// 图片消息
+				RecevieMsgImage image = (RecevieMsgImage) ToolXml.xmlToBean(recverMsg, RecevieMsgImage.class);
+				String toUserName = image.getToUserName();// 开发者
+				String fromUserName = image.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[图片消息]]></Content>");
+				sb.append("</xml>");
+
+			} else if (msgType.equals(ToolWeiXin.recevie_msg_voice)) {// 语音消息
+				RecevieMsgVoice voice = (RecevieMsgVoice) ToolXml.xmlToBean(recverMsg, RecevieMsgVoice.class);
+				String toUserName = voice.getToUserName();// 开发者
+				String fromUserName = voice.getFromUserName();// 发送者
+				String recognition = voice.getRecognition();// 语音识别结果
+				if (null != recognition) {// 接收语音识别结果
+
+				} else {
+
+				}
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[语音消息]]></Content>");
+				sb.append("</xml>");
+
+			} else if (msgType.equals(ToolWeiXin.recevie_msg_video)) {// 视频消息
+				RecevieMsgVideo video = (RecevieMsgVideo) ToolXml.xmlToBean(recverMsg, RecevieMsgVideo.class);
+				String toUserName = video.getToUserName();// 开发者
+				String fromUserName = video.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[视频消息]]></Content>");
+				sb.append("</xml>");
+
+			} else if (msgType.equals(ToolWeiXin.recevie_msg_location)) {// 地理位置消息
+				RecevieMsgLocation location = (RecevieMsgLocation) ToolXml.xmlToBean(recverMsg, RecevieMsgLocation.class);
+				String toUserName = location.getToUserName();// 开发者
+				String fromUserName = location.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[地理位置消息]]></Content>");
+				sb.append("</xml>");
+
+			} else if (msgType.equals(ToolWeiXin.recevie_msg_link)) {// 链接消息
+				RecevieMsgLink link = (RecevieMsgLink) ToolXml.xmlToBean(recverMsg, RecevieMsgLink.class);
+				String toUserName = link.getToUserName();// 开发者
+				String fromUserName = link.getFromUserName();// 发送者
+				sb.append("<xml>");
+				sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
+				sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
+				sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
+				sb.append("<MsgType><![CDATA[text]]></MsgType>");
+				sb.append("<Content><![CDATA[链接消息]]></Content>");
+				sb.append("</xml>");
+			}
 		}
 
-		return returnMsg;
+		return sb.toString();
 	}
-	
+
 }

@@ -1,5 +1,6 @@
 package little.ant.weixin.controller;
 
+import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.weixin.service.MessageService;
 
@@ -24,22 +25,27 @@ public class MessageController extends BaseController {
 	 */
 	public void index(){
 		String echostr  = getPara("echostr");	//随机字符串
+		String timestamp = getPara("timestamp");//时间戳
+		String signature = getPara("signature");//微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数
+		String nonce = getPara("nonce");
+		boolean flag = receiveService.checkSignature(signature, timestamp, nonce);
 		if(echostr != null && !echostr.isEmpty()){ // 验证URL有效性
 			log.info("开发者验证");
-			String timestamp = getPara("timestamp");//时间戳
-			String signature = getPara("signature");//微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数
-			String nonce = getPara("nonce");	
-			boolean flag = receiveService.checkSignature(signature, timestamp, nonce);
 			if(flag){
 				renderText(echostr);
-			}else{
-				renderText("error");
+				return;
 			}
 		}else{
-			log.info("接受并发送微信消息") ;
-			String msg = receiveService.getParseMessage(getRequest());
-			renderText(msg);
+			if(flag){
+				String recverMsg = ContextBase.requestStream(getRequest());
+				log.info("接收微信发送过来的消息" + recverMsg);
+				String responseMsg = receiveService.messageProcess(recverMsg);
+				log.info("返回消息" + responseMsg);
+				renderText(responseMsg);
+				return;
+			}
 		}
+		renderText("");
 	}
 	
 }
