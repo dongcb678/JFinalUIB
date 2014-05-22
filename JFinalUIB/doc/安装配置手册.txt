@@ -2,7 +2,8 @@ Jfinal   +   charisma  +  beetl +  postgresql 实现的用户权限管理和日�
 
 1.直接解压导入eclipse
  
-2.导入数据库文件/doc/jfinaluib.backup ， pgAdmin III 新建个库右键恢复备份文件
+2.导入数据库文件/doc/jfinaluib.backup ， pgAdmin III 新建个库右键恢复备份文件；
+	public.sql文件是Navicat Premium导出的一份完整文件，也可以用Navicat Premium恢复；
  
 3.修改/WEB-INF/init.properties 数据库连接信息
  
