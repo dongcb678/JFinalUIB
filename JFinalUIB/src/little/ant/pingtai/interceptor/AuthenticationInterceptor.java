@@ -126,7 +126,16 @@ public class AuthenticationInterceptor implements Interceptor {
 			reqSysLog.set("actionstartdate", new java.sql.Timestamp(actionStartDate.getTime()));
 			reqSysLog.set("actionstarttime", actionStartDate.getTime());
 
-			ai.invoke();
+			try {
+				ai.invoke();
+			} catch (Exception e) {
+				log.info("业务逻辑代码遇到异常时保存日志!");
+				reqSysLog.set("status", "0");//失败
+				reqSysLog.set("description", "URL不存在");
+				reqSysLog.set("cause", "3");//业务代码异常
+			} finally {
+				
+			}
 			
 		}else{
 			log.info("URI不存在!");

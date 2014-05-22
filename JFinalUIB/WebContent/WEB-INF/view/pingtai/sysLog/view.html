@@ -50,16 +50,30 @@
 						
 					<% }else if(sysLog.cause == "0"){ %>
 						<div class="control-group">
-							<label class="control-label">没有权限</label>
+							<label class="control-label">失败原因</label>
 							<div class="controls">
-								<input type="text" disabled="disabled" value=''>
+								<input type="text" disabled="disabled" value='没有权限'>
 							</div>
 						</div>
 					<% }else if(sysLog.cause == "1"){ %>
 						<div class="control-group">
-							<label class="control-label">URL不存在</label>
+							<label class="control-label">失败原因</label>
 							<div class="controls">
-								<input type="text" disabled="disabled" value=''>
+								<input type="text" disabled="disabled" value='URL不存在'>
+							</div>
+						</div>
+					<% }else if(sysLog.cause == "2"){ %>
+						<div class="control-group">
+							<label class="control-label">失败原因</label>
+							<div class="controls">
+								<input type="text" disabled="disabled" value='未登陆'>
+							</div>
+						</div>
+					<% }else if(sysLog.cause == "3"){ %>
+						<div class="control-group">
+							<label class="control-label">失败原因</label>
+							<div class="controls">
+								<input type="text" disabled="disabled" value='业务代码异常'>
 							</div>
 						</div>
 					<% } %>
