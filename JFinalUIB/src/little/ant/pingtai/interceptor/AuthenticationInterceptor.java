@@ -133,6 +133,10 @@ public class AuthenticationInterceptor implements Interceptor {
 				reqSysLog.set("status", "0");//失败
 				reqSysLog.set("description", "URL不存在");
 				reqSysLog.set("cause", "3");//业务代码异常
+				
+				log.info("返回失败提示页面!");
+				toInfoJsp(contro, uri, 5);
+				
 			} finally {
 				
 			}
@@ -178,6 +182,9 @@ public class AuthenticationInterceptor implements Interceptor {
 			
 		}else if(type == 4){// 表单验证失败
 			msg = "请不要重复提交表单数据!";
+			
+		}else if(type == 5){// 业务代码异常
+			msg = "业务代码异常!";
 		}
 		
 		contro.setAttr("referer", referer);
