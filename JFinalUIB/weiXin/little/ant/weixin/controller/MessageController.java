@@ -3,6 +3,7 @@ package little.ant.weixin.controller;
 import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.weixin.service.MessageService;
+import little.ant.weixin.utils.ToolSignature;
 
 import org.apache.log4j.Logger;
 
@@ -28,7 +29,7 @@ public class MessageController extends BaseController {
 		String timestamp = getPara("timestamp");//时间戳
 		String signature = getPara("signature");//微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数
 		String nonce = getPara("nonce");
-		boolean flag = receiveService.checkSignature(signature, timestamp, nonce);
+		boolean flag = ToolSignature.checkSignature(signature, timestamp, nonce);
 		if(echostr != null && !echostr.isEmpty()){ // 验证URL有效性
 			log.info("开发者验证");
 			if(flag){
