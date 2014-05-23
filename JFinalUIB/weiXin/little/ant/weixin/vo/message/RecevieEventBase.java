@@ -1,15 +1,17 @@
-package little.ant.weixin.vo;
+package little.ant.weixin.vo.message;
 
 /**
- * 响应消息基础类
+ * 接收事件基础类
+ * 
  * @author 董华健
  */
-public class ResponseMsgBase {
-	
-	private String ToUserName;	 //是	 接收方帐号（收到的OpenID）
-	private String FromUserName;	// 是	开发者微信号
-	private String CreateTime;	 //是	 消息创建时间 （整型）
-	private String MsgType;	// 是	 text
+public class RecevieEventBase {
+
+	private String ToUserName; // 开发者微信号
+	private String FromUserName; // 发送方帐号（一个OpenID）
+	private String CreateTime; // 消息创建时间 （整型）
+	private String MsgType; // 消息类型，event
+	private String Event; // 事件类型，subscribe(订阅)、unsubscribe(取消订阅)
 	
 	public String getToUserName() {
 		return ToUserName;
@@ -34,6 +36,12 @@ public class ResponseMsgBase {
 	}
 	public void setMsgType(String msgType) {
 		MsgType = msgType;
+	}
+	public String getEvent() {
+		return Event;
+	}
+	public void setEvent(String event) {
+		Event = event;
 	}
 	
 }

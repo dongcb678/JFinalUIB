@@ -1,4 +1,4 @@
-package little.ant.weixin.vo;
+package little.ant.weixin.vo.message;
 
 /**
  * 接收地理位置消息

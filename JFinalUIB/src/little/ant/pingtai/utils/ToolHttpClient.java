@@ -2,6 +2,13 @@ package little.ant.pingtai.utils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -11,6 +18,9 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -23,13 +33,18 @@ public class ToolHttpClient {
 
 	/**
 	 * 进行HttpClient get连接
+	 * @param isHttps 是否ssl链接
 	 * @param url
 	 * @return
 	 */
-	public static String get(String url) {
+	public static String get(boolean isHttps, String url) {
 		CloseableHttpClient httpClient = null;
 		try {
-			httpClient = HttpClients.createDefault();
+			if(!isHttps){
+				httpClient = HttpClients.createDefault();
+			}else{
+				httpClient = createSSLInsecureClient();
+			}
 			HttpGet httpget = new HttpGet(url);
 			//httpget.addHeader(new BasicHeader("", ""));
 			//httpget.addHeader("", "");
@@ -63,15 +78,20 @@ public class ToolHttpClient {
 
 	/**
 	 * 进行HttpClient post连接
+	 * @param isHttps 是否ssl链接
 	 * @param url
 	 * @param data
 	 * @param contentType
 	 * @return
 	 */
-	public static String post(String url, String data, String contentType) {
+	public static String post(boolean isHttps, String url, String data, String contentType) {
 		CloseableHttpClient httpClient = null;
 		try {
-			httpClient = HttpClients.createDefault();
+			if(!isHttps){
+				httpClient = HttpClients.createDefault();
+			}else{
+				httpClient = createSSLInsecureClient();
+			}
 			HttpPost httpPost = new HttpPost(url);
 			
 			if(null != data){
@@ -116,6 +136,30 @@ public class ToolHttpClient {
 		return null;
 	}
 	
+	/**
+	 * HTTPS访问对象，信任所有证书
+	 * @return
+	 */
+	public static CloseableHttpClient createSSLInsecureClient() {
+		try {
+			SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+				//信任所有
+				public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+					return true;
+				}}).build();
+			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
+			return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+		} catch (KeyManagementException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		}
+		return  HttpClients.createDefault();
+	}
+
+	
 	public static void main(String[] args){
 		//System.out.println(get("http://127.0.0.1:89/jf/login"));
 		//System.out.println(post("http://127.0.0.1:89/jf/login", null, null));
@@ -130,16 +174,18 @@ public class ToolHttpClient {
 		returnMsg += "<Content><![CDATA[你好]]></Content>";
 		returnMsg += "</xml>";*/
 		
-		String returnMsg = "<xml>";
+		/*String returnMsg = "<xml>";
 		returnMsg += " <ToUserName><![CDATA[jiu_guang]]></ToUserName>";
 		returnMsg += " <FromUserName><![CDATA[dongcb678]]></FromUserName> ";
 		returnMsg += " <CreateTime>1348831860</CreateTime>";
 		returnMsg += " <MsgType><![CDATA[text]]></MsgType>";
 		returnMsg += " <Content><![CDATA[this is a test]]></Content>";
 		returnMsg += " <MsgId>1234567890123456</MsgId>";
-		returnMsg += " </xml>";
+		returnMsg += " </xml>";*/
 		
-		System.out.println(post("http://127.0.0.1:88/msg", returnMsg, "application/xml"));
+		//System.out.println(post("http://127.0.0.1:88/msg", returnMsg, "application/xml"));
 		//System.out.println(post("http://littleant.duapp.com/msg", returnMsg, "application/xml"));
+		
+		System.out.println(post(true, "https://www.oschina.net/home/login?goto_page=http%3A%2F%2Fwww.oschina.net%2F", null, "application/text"));
 	}
 }

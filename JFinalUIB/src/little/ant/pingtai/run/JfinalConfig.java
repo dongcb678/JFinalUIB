@@ -85,9 +85,7 @@ public class JfinalConfig extends JFinalConfig {
 		
 		ToolWeiXin.weixin_appID = getProperty("weixin.appID").trim();
 		ToolWeiXin.weixin_appSecret = getProperty("weixin.appSecret").trim();
-		ToolWeiXin.weixin_tokenUrl = getProperty("weixin.tokenUrl").trim();
-		ToolWeiXin.weixin_mediaUploadUrl = getProperty("weixin.mediaUploadUrl").trim();
-		ToolWeiXin.weixin_mediaGetUrl = getProperty("weixin.mediaGetUrl").trim();
+		ToolWeiXin.weixin_token = getProperty("weixin.token").trim();
 		
 		me.setEncoding("UTF-8"); 
 		me.setDevMode(system_devMode);

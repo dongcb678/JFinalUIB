@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
-import little.ant.weixin.vo.RecevieMsgText;
+import little.ant.weixin.vo.message.RecevieMsgText;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

@@ -1,4 +1,4 @@
-package little.ant.weixin.vo;
+package little.ant.weixin.vo.message;
 
 /**
  * 回复语音消息

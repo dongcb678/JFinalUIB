@@ -1,4 +1,4 @@
-package little.ant.weixin.vo;
+package little.ant.weixin.vo.message;
 
 /**
  * 自定义菜单事件
