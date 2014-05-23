@@ -64,28 +64,28 @@
 					<thead>
 						<tr>
 							<th onclick="orderbyFun('s.names')">
-								系统
+								系统${orderBy("s.names", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th onclick="orderbyFun('m.names')">
-								模块
+								模块${orderBy("m.names", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th onclick="orderbyFun('names')">
-								操作名
+								操作名${orderBy("names", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th onclick="orderbyFun('url')">
-								URL
+								URL${orderBy("url", splitPage.orderColunm, splitPage.orderMode)}
 	      					</th>
 							<th onclick="orderbyFun('rowFilter')">
-								行级过滤
+								行级过滤${orderBy("rowFilter", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th onclick="orderbyFun('splitPage')">
-								是否分页
+								是否分页${orderBy("splitPage", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th onclick="orderbyFun('formToken')">
-								重复验证
+								重复验证${orderBy("formToken", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th onclick="orderbyFun('privilege')">
-								权限验证
+								权限验证${orderBy("privilege", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th>操作</th>
 						</tr>

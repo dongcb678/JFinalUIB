@@ -41,8 +41,10 @@ public abstract class BaseController extends Controller {
 	 * @param mode
 	 */
 	public void defaultOrder(String colunm, String mode){
-		splitPage.setOrderColunm(colunm);
-		splitPage.setOrderMode(mode);
+		if(null == splitPage.getOrderColunm() || splitPage.getOrderColunm().isEmpty()){
+			splitPage.setOrderColunm(colunm);
+			splitPage.setOrderMode(mode);
+		}
 	}
 	
 	/**

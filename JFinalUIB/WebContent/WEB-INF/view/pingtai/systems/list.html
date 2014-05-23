@@ -57,13 +57,13 @@
 					<thead>
 						<tr>
 							<th onclick="orderbyFun('names')">
-								名称
+								名称${orderBy("names", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th onclick="orderbyFun('numbers')">
-								编号
+								编号${orderBy("numbers", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th onclick="orderbyFun('orderids')">
-								排序
+								排序${orderBy("orderids", splitPage.orderColunm, splitPage.orderMode)}
 							</th>
 							<th width="280">操作</th>
 						</tr>
