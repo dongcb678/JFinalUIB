@@ -78,7 +78,7 @@ public class AuthenticationInterceptor implements Interceptor {
 					reqSysLog.set("description", "未登录");
 					reqSysLog.set("cause", "2");//2 未登录
 					
-					toInfoJsp(contro, uri, 1);
+					toInfoJsp(contro, 1);
 					return;
 				}
 				
@@ -92,7 +92,7 @@ public class AuthenticationInterceptor implements Interceptor {
 					reqSysLog.set("cause", "0");//没有权限
 					
 					log.info("返回失败提示页面!");
-					toInfoJsp(contro, uri, 2);
+					toInfoJsp(contro, 2);
 					return;
 				}
 			}
@@ -112,7 +112,7 @@ public class AuthenticationInterceptor implements Interceptor {
 					
 				}else if(tokenCookie.equals(tokenRequest)){
 					log.info("表单重复提交!");
-					toInfoJsp(contro, uri, 4);
+					toInfoJsp(contro, 4);
 					return;
 					
 				}else{
@@ -135,7 +135,7 @@ public class AuthenticationInterceptor implements Interceptor {
 				reqSysLog.set("cause", "3");//业务代码异常
 				
 				log.info("返回失败提示页面!");
-				toInfoJsp(contro, uri, 5);
+				toInfoJsp(contro, 5);
 				
 			} finally {
 				
@@ -150,7 +150,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			reqSysLog.set("cause", "1");//URL不存在
 			
 			log.info("返回失败提示页面!");
-			toInfoJsp(contro, uri, 2);
+			toInfoJsp(contro, 2);
 			return;
 		}
 	}
@@ -158,10 +158,9 @@ public class AuthenticationInterceptor implements Interceptor {
 	/**
 	 * 提示信息展示页
 	 * @param contro
-	 * @param uri
 	 * @param type
 	 */
-	private void toInfoJsp(BaseController contro, String uri, int type) {
+	private void toInfoJsp(BaseController contro, int type) {
 		if(type == 1){// 未登录处理
 			contro.render("/login/logout");
 			return ;

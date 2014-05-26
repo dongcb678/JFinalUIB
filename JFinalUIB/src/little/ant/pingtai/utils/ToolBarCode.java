@@ -28,42 +28,56 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 /**
  * 条码处理
+ * 
  * @author 董华健
  */
-public class ToolBarCode {  
-	
+public class ToolBarCode {
+
 	/**
 	 * 生成二维码
+	 * 
 	 * @param content
+	 *            条码文本内容
 	 * @param width
+	 *            条码宽度
 	 * @param height
+	 *            条码高度
 	 * @param fileType
+	 *            文件类型，如png
 	 * @param savePath
+	 *            保存路径
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public static void encode(String content, int width, int height, String fileType, String savePath){
+	public static void encode(String content, int width, int height, String fileType, String savePath) {
 		try {
 			content = new String(content.getBytes("UTF-8"), "UTF-8");// 二维码内容
 			Hashtable hints = new Hashtable();
 			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 			BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);
 			File file = new File(savePath);
-			MatrixToImageWriter.writeToFile(bitMatrix, "png", file);
+			MatrixToImageWriter.writeToFile(bitMatrix, fileType, file);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 生成带logo的二维码
+	 * 
 	 * @param content
+	 *            条码文本内容
 	 * @param width
+	 *            条码宽度
 	 * @param height
+	 *            条码高度
 	 * @param logoPath
+	 *            条码中logo的路径
 	 * @param fileType
+	 *            文件类型，如png
 	 * @param savePath
+	 *            保存路径
 	 */
-	public static void encodeLogo(String content, int width, int height, String logoPath, String fileType, String savePath){
+	public static void encodeLogo(String content, int width, int height, String logoPath, String fileType, String savePath) {
 		try {
 			BitMatrix matrix = MatrixToImageWriterEx.createQRCode(content, width, height);
 			MatrixToLogoImageConfig logoConfig = new MatrixToLogoImageConfig(Color.BLUE, 4);
@@ -72,9 +86,10 @@ public class ToolBarCode {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 解码
+	 * 
 	 * @param filePath
 	 * @return
 	 */
@@ -103,28 +118,28 @@ public class ToolBarCode {
 	}
 
 	public static void main(String[] args) {
-		String content = "http://www.4bu4.com";
+		String content = "http://www.hikvision.com.cn";
 		int width = 200;
 		int height = 200;
-		String logoPath = "d:/logo.png"; 
-		String fileType = "jpg"; 
+		String logoPath = "d:/logo.png";
+		String fileType = "jpg";
 		String savePath = "d:/code.jpg";
-		
+
 		encode(content, width, height, fileType, savePath);
 
 		encodeLogo(content, width, height, logoPath, fileType, savePath);
-		
+
 		String text = decode(savePath);
 		System.out.println(text);
 	}
-	
-}  
+
+}
 
 /**
  * 定制logo属性类
  */
 class MatrixToLogoImageConfig {
-	
+
 	// logo默认边框颜色
 	public static final Color DEFAULT_BORDERCOLOR = Color.RED;
 	// logo默认边框宽度
@@ -163,8 +178,7 @@ class MatrixToLogoImageConfig {
 }
 
 /**
- * 生成二维码logo扩展类，此类是在zxing的基础上进行扩展的，
- * 用于在二维码上定制自己的logo
+ * 生成二维码logo扩展类，此类是在zxing的基础上进行扩展的， 用于在二维码上定制自己的logo
  */
 class MatrixToImageWriterEx {
 
