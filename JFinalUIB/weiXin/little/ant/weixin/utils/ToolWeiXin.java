@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import little.ant.pingtai.utils.ToolHttpClient;
+import little.ant.pingtai.utils.ToolHttp;
 import little.ant.weixin.vo.message.RecevieToken;
 
 import com.alibaba.fastjson.JSON;
@@ -52,7 +52,7 @@ public class ToolWeiXin {
 		sb.append("&appid=").append(weixin_appID);
 		sb.append("&secret=").append(weixin_appSecret);
 		try {
-			String jsonStr = ToolHttpClient.get(true, sb.toString());
+			String jsonStr = ToolHttp.get(true, sb.toString());
 			RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);
 			log.info("获取AccessToken：" + jsonStr);
 			return weiXinVo;

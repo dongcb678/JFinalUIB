@@ -7,7 +7,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import little.ant.pingtai.utils.ToolHttpClient;
+import little.ant.pingtai.utils.ToolHttp;
 import little.ant.pingtai.utils.ToolString;
 import little.ant.weixin.vo.cservice.WeixinQRCode;
 
@@ -35,7 +35,7 @@ public class ToolQRCode {
 		String jsonMsg = "{\"expire_seconds\": %d, \"action_name\": \"QR_SCENE\", \"action_info\": {\"scene\": {\"scene_id\": %d}}}";
 		// 创建临时带参二维码
 		try {
-			String jsonStr = ToolHttpClient.post(true, requestUrl, String.format(jsonMsg, expireSeconds, sceneId), "application/json");
+			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonMsg, expireSeconds, sceneId), "application/json");
 			WeixinQRCode weixinQRCode = JSON.parseObject(jsonStr, WeixinQRCode.class);
 			return weixinQRCode;
 		} catch (Exception e) {
@@ -59,7 +59,7 @@ public class ToolQRCode {
 		String jsonMsg = "{\"action_name\": \"QR_LIMIT_SCENE\", \"action_info\": {\"scene\": {\"scene_id\": %d}}}";
 		// 创建永久带参二维码
 		try {
-			String jsonStr = ToolHttpClient.post(true, requestUrl, String.format(jsonMsg, sceneId), "application/json");
+			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonMsg, sceneId), "application/json");
 			WeixinQRCode weixinQRCode = JSON.parseObject(jsonStr, WeixinQRCode.class);
 			String ticket = weixinQRCode.getTicket();
 			return ticket;

@@ -1,6 +1,6 @@
 package little.ant.weixin.utils;
 
-import little.ant.pingtai.utils.ToolHttpClient;
+import little.ant.pingtai.utils.ToolHttp;
 import little.ant.weixin.vo.menu.RecevieMenuCreate;
 import little.ant.weixin.vo.menu.RecevieMenuDelete;
 import little.ant.weixin.vo.menu.ResponseMenu;
@@ -42,7 +42,7 @@ public class ToolMenu {
 		
 		// 发起POST请求创建菜单
 		try {
-			String returnJson = ToolHttpClient.post(true, url, jsonMenu, "application/json");
+			String returnJson = ToolHttp.post(true, url, jsonMenu, "application/json");
 			RecevieMenuCreate menuCreate = JSON.parseObject(returnJson, RecevieMenuCreate.class);
 			if (null != menuCreate) {
 				String errorCode = menuCreate.getErrcode();
@@ -70,7 +70,7 @@ public class ToolMenu {
 		String requestUrl = menu_get_url.replace("ACCESS_TOKEN", accessToken);
 		// 发起GET请求查询菜单
 		try {
-			String returnJson = ToolHttpClient.get(true, requestUrl);
+			String returnJson = ToolHttp.get(true, requestUrl);
 			return returnJson;
 		}catch (Exception e) {
 			log.error("ToolMenu.getMenu查询菜单异常，accessToken：" + accessToken);
@@ -88,7 +88,7 @@ public class ToolMenu {
 		String requestUrl = menu_delete_url.replace("ACCESS_TOKEN", accessToken);
 		// 发起GET请求删除菜单
 		try {
-			String returnJson = ToolHttpClient.get(true, requestUrl);
+			String returnJson = ToolHttp.get(true, requestUrl);
 			RecevieMenuDelete menuDelete = JSON.parseObject(returnJson, RecevieMenuDelete.class);
 			if (null != menuDelete) {
 				String errorCode = menuDelete.getErrcode();

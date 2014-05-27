@@ -3,7 +3,7 @@ package little.ant.weixin.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.pingtai.utils.ToolHttpClient;
+import little.ant.pingtai.utils.ToolHttp;
 import little.ant.weixin.vo.cservice.Article;
 import little.ant.weixin.vo.cservice.Music;
 
@@ -113,7 +113,7 @@ public class ToolCustomerService {
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
 		// 发送客服消息
 		try {
-			String jsonStr = ToolHttpClient.post(true, requestUrl, jsonMsg, "application/json");
+			String jsonStr = ToolHttp.post(true, requestUrl, jsonMsg, "application/json");
 			JSONObject jSONObject = JSON.parseObject(jsonStr);
 			if (null != jSONObject) {
 				String errorCode = jSONObject.getString("errcode");

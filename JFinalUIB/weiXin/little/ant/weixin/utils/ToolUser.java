@@ -1,6 +1,6 @@
 package little.ant.weixin.utils;
 
-import little.ant.pingtai.utils.ToolHttpClient;
+import little.ant.pingtai.utils.ToolHttp;
 import little.ant.weixin.vo.cservice.WeixinUserInfo;
 import little.ant.weixin.vo.cservice.WeixinUserList;
 
@@ -25,7 +25,7 @@ public class ToolUser {
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
 		// 获取用户信息
 		try {
-			String jsonStr = ToolHttpClient.get(true, requestUrl);
+			String jsonStr = ToolHttp.get(true, requestUrl);
 			WeixinUserInfo weixinUserInfo = JSONObject.parseObject(jsonStr, WeixinUserInfo.class);
 			return weixinUserInfo;
 		} catch (Exception e) {
@@ -50,7 +50,7 @@ public class ToolUser {
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken).replace("NEXT_OPENID", nextOpenId);
 		// 获取关注者列表
 		try {
-			String jsonStr = ToolHttpClient.get(true, requestUrl);
+			String jsonStr = ToolHttp.get(true, requestUrl);
 			WeixinUserList weixinUserList = JSONObject.parseObject(jsonStr, WeixinUserList.class);
 			return weixinUserList;
 		} catch (Exception e) {

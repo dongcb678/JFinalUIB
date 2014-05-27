@@ -2,7 +2,7 @@ package little.ant.weixin.utils;
 
 import org.apache.log4j.Logger;
 
-import little.ant.pingtai.utils.ToolHttpClient;
+import little.ant.pingtai.utils.ToolHttp;
 import little.ant.weixin.vo.oauth.RecevieOauth2Token;
 import little.ant.weixin.vo.oauth.RecevieSNSUserInfo;
 
@@ -28,7 +28,7 @@ public class ToolOAuth {
 		requestUrl = requestUrl.replace("CODE", code);
 		// 获取网页授权凭证
 		try {
-			String jsonStr = ToolHttpClient.get(true, requestUrl);
+			String jsonStr = ToolHttp.get(true, requestUrl);
 			RecevieOauth2Token wat = JSON.parseObject(jsonStr, RecevieOauth2Token.class);
 			return wat;
 		} catch (Exception e) {
@@ -51,7 +51,7 @@ public class ToolOAuth {
 		requestUrl = requestUrl.replace("REFRESH_TOKEN", refreshToken);
 		// 刷新网页授权凭证
 		try {
-			String jsonStr = ToolHttpClient.get(true, requestUrl);
+			String jsonStr = ToolHttp.get(true, requestUrl);
 			RecevieOauth2Token wat = JSON.parseObject(jsonStr, RecevieOauth2Token.class);
 			return wat;
 		} catch (Exception e) {
@@ -73,7 +73,7 @@ public class ToolOAuth {
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
 		// 通过网页授权获取用户信息
 		try {
-			String jsonStr = ToolHttpClient.get(true, requestUrl);
+			String jsonStr = ToolHttp.get(true, requestUrl);
 			RecevieSNSUserInfo snsUserInfo = JSON.parseObject(jsonStr, RecevieSNSUserInfo.class);
 			return snsUserInfo;
 		} catch (Exception e) {

@@ -2,7 +2,7 @@ package little.ant.weixin.utils;
 
 import java.util.List;
 
-import little.ant.pingtai.utils.ToolHttpClient;
+import little.ant.pingtai.utils.ToolHttp;
 import little.ant.weixin.vo.cservice.WeixinGroup;
 
 import org.apache.log4j.Logger;
@@ -26,7 +26,7 @@ public class ToolGroup {
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
 		// 查询分组
 		try {
-			String jsonStr = ToolHttpClient.get(true, requestUrl);
+			String jsonStr = ToolHttp.get(true, requestUrl);
 			List<WeixinGroup> weixinGroupList = (List<WeixinGroup>) JSONArray.parseObject(jsonStr, WeixinGroup.class);
 			return weixinGroupList;
 		} catch (Exception e) {
@@ -50,7 +50,7 @@ public class ToolGroup {
 		String jsonData = "{\"group\" : {\"name\" : \"%s\"}}";
 		// 创建分组
 		try {
-			String jsonStr = ToolHttpClient.post(true, requestUrl, String.format(jsonData, groupName), "application/json");
+			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonData, groupName), "application/json");
 			WeixinGroup weixinGroup = JSONObject.parseObject(jsonStr, WeixinGroup.class);
 			return weixinGroup;
 		} catch (Exception e) {
@@ -76,7 +76,7 @@ public class ToolGroup {
 		String jsonData = "{\"group\": {\"id\": %d, \"name\": \"%s\"}}";
 		// 修改分组名
 		try {
-			String jsonStr = ToolHttpClient.post(true, requestUrl, String.format(jsonData, groupId, groupName), "application/json");
+			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonData, groupId, groupName), "application/json");
 			WeixinGroup weixinGroup = JSONObject.parseObject(jsonStr, WeixinGroup.class);
 			if (null != weixinGroup.getErrcode() && weixinGroup.getErrcode().equals("0")) {
 				result = true;
@@ -105,7 +105,7 @@ public class ToolGroup {
 		String jsonData = "{\"openid\":\"%s\",\"to_groupid\":%d}";
 		// 移动用户分组
 		try {
-			String jsonStr = ToolHttpClient.post(true, requestUrl, String.format(jsonData, openId, groupId), "application/json");
+			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonData, openId, groupId), "application/json");
 			WeixinGroup weixinGroup = JSONObject.parseObject(jsonStr, WeixinGroup.class);
 			if (null != weixinGroup.getErrcode() && weixinGroup.getErrcode().equals("0")) {
 				result = true;
