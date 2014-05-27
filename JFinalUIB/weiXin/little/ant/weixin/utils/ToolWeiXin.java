@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import little.ant.pingtai.utils.ToolHttpClient;
-import little.ant.weixin.vo.token.RecevieToken;
+import little.ant.weixin.vo.message.RecevieToken;
 
 import com.alibaba.fastjson.JSON;
 

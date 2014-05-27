@@ -20,7 +20,7 @@ import little.ant.pingtai.model.User;
 import little.ant.pingtai.run.JfinalConfig;
 import little.ant.pingtai.utils.ToolDateTime;
 import little.ant.pingtai.utils.ToolSecurityIDEA;
-import little.ant.pingtai.utils.ToolUrlBase64;
+import little.ant.pingtai.utils.ToolString;
 import little.ant.pingtai.utils.ToolWeb;
 
 import org.apache.commons.codec.binary.Base64;
@@ -234,7 +234,7 @@ public class ContextBase {
 
 		// Base64编码
 		try {
-			securityCookie = ToolUrlBase64.encode(securityCookie);
+			securityCookie = ToolString.encode(securityCookie);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -251,7 +251,7 @@ public class ContextBase {
 	public static String[] decodeCookieAuthToken(String encodeCookie) {
 		// Base64解码
 		try {
-			encodeCookie = ToolUrlBase64.decode(encodeCookie);
+			encodeCookie = ToolString.decode(encodeCookie);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

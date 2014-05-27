@@ -1,4 +1,4 @@
-package little.ant.weixin.vo.token;
+package little.ant.weixin.vo.message;
 
 /**
  * 接收获取access token消息
