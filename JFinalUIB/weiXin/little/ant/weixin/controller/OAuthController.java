@@ -2,8 +2,8 @@ package little.ant.weixin.controller;
 
 import little.ant.pingtai.controller.BaseController;
 import little.ant.weixin.service.OAuthService;
+import little.ant.weixin.utils.ToolOAuth;
 import little.ant.weixin.utils.ToolSignature;
-import little.ant.weixin.utils.ToolWeiXinAdvanced;
 import little.ant.weixin.vo.oauth.RecevieOauth2Token;
 import little.ant.weixin.vo.oauth.RecevieSNSUserInfo;
 
@@ -27,13 +27,13 @@ public class OAuthController extends BaseController {
 		boolean flag = ToolSignature.checkSignature(signature, timestamp, nonce);
 		if(!"authdeny".equals(code) && flag){
 			// 获取网页授权access_token
-			RecevieOauth2Token weixinOauth2Token = ToolWeiXinAdvanced.getOauth2AccessToken("APPID", "APPSECRET", code);
+			RecevieOauth2Token weixinOauth2Token = ToolOAuth.getOauth2AccessToken("APPID", "APPSECRET", code);
 			// 网页授权接口访问凭证
 			String accessToken = weixinOauth2Token.getAccessToken();
 			// 用户标识
 			String openId = weixinOauth2Token.getOpenId();
 			// 获取用户信息
-			RecevieSNSUserInfo snsUserInfo = ToolWeiXinAdvanced.getSNSUserInfo(accessToken, openId);
+			RecevieSNSUserInfo snsUserInfo = ToolOAuth.getSNSUserInfo(accessToken, openId);
 
 			// 设置要传递的参数
 			setAttr("snsUserInfo", snsUserInfo);

@@ -17,7 +17,7 @@ import little.ant.weixin.vo.message.RecevieMsgVoice;
  * 接收消息处理
  * @author 董华健
  */
-public class ToolRecevie {
+public class ToolMessage {
 
 	/**
 	 * 事件类型

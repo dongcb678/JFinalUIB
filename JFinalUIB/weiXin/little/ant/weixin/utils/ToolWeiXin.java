@@ -51,10 +51,15 @@ public class ToolWeiXin {
 		sb.append(weixin_token_url).append("?").append("grant_type=client_credential");
 		sb.append("&appid=").append(weixin_appID);
 		sb.append("&secret=").append(weixin_appSecret);
-		String jsonStr = ToolHttpClient.get(true, sb.toString());
-		RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);
-		log.info("获取AccessToken：" + jsonStr);
-		return weiXinVo;
+		try {
+			String jsonStr = ToolHttpClient.get(true, sb.toString());
+			RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);
+			log.info("获取AccessToken：" + jsonStr);
+			return weiXinVo;
+		} catch (Exception e) {
+			log.error("ToolWeiXin.getAccessToken从微信得到accessToken的凭证异常");
+			return null;
+		}
 	}
 	
 	static {

@@ -41,22 +41,24 @@ public class ToolMenu {
 		String jsonMenu = JSON.toJSONString(menu);
 		
 		// 发起POST请求创建菜单
-		String returnJson = ToolHttpClient.post(true, url, jsonMenu, "application/json");
-		
-		RecevieMenuCreate menuCreate = JSON.parseObject(returnJson, RecevieMenuCreate.class);
-
-		if (null != menuCreate) {
-			String errorCode = menuCreate.getErrcode();
-			if (null != errorCode && errorCode.equals("0")) {
-				result = true;
-			} else {
-				result = false;
-				String errorMsg = menuCreate.getErrmsg();
-				log.error("创建菜单失败: " + errorMsg);
+		try {
+			String returnJson = ToolHttpClient.post(true, url, jsonMenu, "application/json");
+			RecevieMenuCreate menuCreate = JSON.parseObject(returnJson, RecevieMenuCreate.class);
+			if (null != menuCreate) {
+				String errorCode = menuCreate.getErrcode();
+				if (null != errorCode && errorCode.equals("0")) {
+					result = true;
+				} else {
+					result = false;
+					String errorMsg = menuCreate.getErrmsg();
+					log.error("创建菜单失败: " + errorMsg);
+				}
 			}
+			return result;
+		} catch (Exception e) {
+			log.error("ToolMenu.createMenu创建菜单异常，accessToken：" + accessToken + " jsonMenu：" + jsonMenu);
+			return result;
 		}
-
-		return result;
 	}
 
 	/**
@@ -67,8 +69,13 @@ public class ToolMenu {
 	public static String getMenu(String accessToken) {
 		String requestUrl = menu_get_url.replace("ACCESS_TOKEN", accessToken);
 		// 发起GET请求查询菜单
-		String returnJson = ToolHttpClient.get(true, requestUrl);
-		return returnJson;
+		try {
+			String returnJson = ToolHttpClient.get(true, requestUrl);
+			return returnJson;
+		}catch (Exception e) {
+			log.error("ToolMenu.getMenu查询菜单异常，accessToken：" + accessToken);
+			return null;
+		}
 	}
 
 	/**
@@ -80,18 +87,23 @@ public class ToolMenu {
 		boolean result = false;
 		String requestUrl = menu_delete_url.replace("ACCESS_TOKEN", accessToken);
 		// 发起GET请求删除菜单
-		String returnJson = ToolHttpClient.get(true, requestUrl);
-		RecevieMenuDelete menuDelete = JSON.parseObject(returnJson, RecevieMenuDelete.class);
-		if (null != menuDelete) {
-			String errorCode = menuDelete.getErrcode();
-			if (null != errorCode && errorCode.equals("0")) {
-				result = true;
-			} else {
-				result = false;
-				String errorMsg = menuDelete.getErrmsg();
-				log.error("删除菜单失败：" + errorMsg);
+		try {
+			String returnJson = ToolHttpClient.get(true, requestUrl);
+			RecevieMenuDelete menuDelete = JSON.parseObject(returnJson, RecevieMenuDelete.class);
+			if (null != menuDelete) {
+				String errorCode = menuDelete.getErrcode();
+				if (null != errorCode && errorCode.equals("0")) {
+					result = true;
+				} else {
+					result = false;
+					String errorMsg = menuDelete.getErrmsg();
+					log.error("删除菜单失败：" + errorMsg);
+				}
 			}
+			return result;
+		}catch (Exception e) {
+			log.error("ToolMenu.deleteMenu删除菜单异常，accessToken：" + accessToken);
+			return result;
 		}
-		return result;
 	}
 }
