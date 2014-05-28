@@ -3,6 +3,7 @@ package little.ant.pingtai.utils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Iterator;
 
 import little.ant.weixin.vo.message.RecevieMsgText;
@@ -12,6 +13,11 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.core.util.QuickWriter;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.wutka.jox.JOXBeanInputStream;
 import com.wutka.jox.JOXBeanOutputStream;
 
@@ -100,6 +106,27 @@ public class ToolXml {
 		String classNameTemp = fullClassName.substring(fullClassName.lastIndexOf(".") + 1, fullClassName.length());
 		return classNameTemp.substring(0, 1) + classNameTemp.substring(1);
 	}
+	
+	protected static String PREFIX_CDATA = "<![CDATA[";
+	protected static String SUFFIX_CDATA = "]]>";
+
+	public static XStream getXStream() {
+		XStream xstream = new XStream(new DomDriver() {
+			public HierarchicalStreamWriter createWriter(Writer out) {
+				return new PrettyPrintWriter(out) {
+					protected void writeText(QuickWriter writer, String text) {
+						if (text.startsWith(PREFIX_CDATA) && text.endsWith(SUFFIX_CDATA)) {
+							writer.write(text);
+						} else {
+							//super.writeText(writer, text);
+							super.writeText(writer, PREFIX_CDATA + text + SUFFIX_CDATA);
+						}
+					}
+				};
+			};
+		});
+		return xstream;
+	}
 
 	public static void main(String[] args) {
 		String xml = "<xml>";
@@ -112,14 +139,30 @@ public class ToolXml {
 		xml += "<MsgId>11</MsgId>";
 		xml += "</xml>";
 
-		RecevieMsgText recevie = (RecevieMsgText) xmlToBean(xml, RecevieMsgText.class);
+//		RecevieMsgText recevie = (RecevieMsgText) xmlToBean(xml, RecevieMsgText.class);
 //		System.out.println(recevie.getToUserName());
 //		System.out.println(recevie.getFromUserName());
 //		System.out.println(recevie.getMsgType());
 		
-		System.out.println(beanToXML(recevie));
+		//System.out.println(beanToXML(recevie));
 		
 		//System.out.println(getStairText(xml, "msgId"));
+
+		XStream xStream = getXStream();
+		RecevieMsgText recevie = (RecevieMsgText) xStream.fromXML(xml);
+		System.out.println(recevie.getToUserName());
+		System.out.println(recevie.getFromUserName());
+		System.out.println(recevie.getMsgType());
+		
+//		XStream xStream2 = getXStream();
+//		xStream2.alias("xml", RecevieMsgText.class);
+//		String content = xStream2.toXML(recevie);
+//		content = content.replaceAll("&lt;", "<");// <
+//		content = content.replaceAll("&gt;", ">");// >
+//		System.out.println(content);
+		
 	}
+	
+
 
 }
