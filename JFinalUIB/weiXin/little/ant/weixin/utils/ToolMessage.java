@@ -19,6 +19,7 @@ import little.ant.weixin.vo.message.RecevieMsgText;
 import little.ant.weixin.vo.message.RecevieMsgVideo;
 import little.ant.weixin.vo.message.RecevieMsgVoice;
 import little.ant.weixin.vo.message.ResponseMsgNews;
+import little.ant.weixin.vo.message.ResponseMsgText;
 
 /**
  * 接收消息处理
@@ -53,17 +54,22 @@ public class ToolMessage {
 	 * @return
 	 */
 	public static String recevie_event_subscribe(RecevieEventSubscribe subscribe){
-		StringBuffer sb = new StringBuffer();
-		String toUserName = subscribe.getToUserName();// 开发者
-		String fromUserName = subscribe.getFromUserName();// 发送者
-		sb.append("<xml>");
-		sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
-		sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
-		sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
-		sb.append("<MsgType><![CDATA[text]]></MsgType>");
-		sb.append("<Content><![CDATA[订阅]]></Content>");
-		sb.append("</xml>");
-		return sb.toString();
+		String toUserName = subscribe.getToUserName();//开发者
+		String fromUserName = subscribe.getFromUserName();//发送者
+		//关注提示语
+		StringBuffer contentBuffer = new StringBuffer();
+		contentBuffer.append("您是否有过出门在外四处找ATM或厕所的经历？").append("\n\n");
+		contentBuffer.append("您是否有过出差在外搜寻美食或娱乐场所的经历？").append("\n\n");
+		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
+		
+		//返回xml
+		ResponseMsgText text = new ResponseMsgText();
+		text.setToUserName(fromUserName);
+		text.setFromUserName(toUserName);
+		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setMsgType("text");
+		text.setContent(contentBuffer.toString());
+		return ToolXml.beanToXML(text);
 	}
 	
 	/**
@@ -72,17 +78,22 @@ public class ToolMessage {
 	 * @return
 	 */
 	public static String recevie_event_subscribe_scan(RecevieEventQRCode qrCode){
-		StringBuffer sb = new StringBuffer();
 		String toUserName = qrCode.getToUserName();// 开发者
 		String fromUserName = qrCode.getFromUserName();// 发送者
-		sb.append("<xml>");
-		sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
-		sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
-		sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
-		sb.append("<MsgType><![CDATA[text]]></MsgType>");
-		sb.append("<Content><![CDATA[扫描二维码事件1]]></Content>");
-		sb.append("</xml>");
-		return sb.toString();
+		//关注提示语
+		StringBuffer contentBuffer = new StringBuffer();
+		contentBuffer.append("您是否有过出门在外四处找ATM或厕所的经历？").append("\n\n");
+		contentBuffer.append("您是否有过出差在外搜寻美食或娱乐场所的经历？").append("\n\n");
+		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
+		
+		//返回xml
+		ResponseMsgText text = new ResponseMsgText();
+		text.setToUserName(fromUserName);
+		text.setFromUserName(toUserName);
+		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setMsgType("text");
+		text.setContent(contentBuffer.toString());
+		return ToolXml.beanToXML(text);
 	}
 	
 	/**
@@ -91,17 +102,20 @@ public class ToolMessage {
 	 * @return
 	 */
 	public static String recevie_event_unsubscribe(RecevieEventSubscribe subscribe){
-		StringBuffer sb = new StringBuffer();
 		String toUserName = subscribe.getToUserName();// 开发者
 		String fromUserName = subscribe.getFromUserName();// 发送者
-		sb.append("<xml>");
-		sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
-		sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
-		sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
-		sb.append("<MsgType><![CDATA[text]]></MsgType>");
-		sb.append("<Content><![CDATA[取消订阅]]></Content>");
-		sb.append("</xml>");
-		return sb.toString();
+		//关注提示语
+		StringBuffer contentBuffer = new StringBuffer();
+		contentBuffer.append("谢谢！欢迎下次光临！:）").append("\n\n");
+		
+		//返回xml
+		ResponseMsgText text = new ResponseMsgText();
+		text.setToUserName(fromUserName);
+		text.setFromUserName(toUserName);
+		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setMsgType("text");
+		text.setContent(contentBuffer.toString());
+		return ToolXml.beanToXML(text);
 	}
 
 	/**
@@ -339,15 +353,13 @@ public class ToolMessage {
 		String content = contentBuffer.toString();
 		
 		//返回xml
-		StringBuffer sb = new StringBuffer();
-		sb.append("<xml>");
-		sb.append("<ToUserName><![CDATA["+fromUserName+"]]></ToUserName>");
-		sb.append("<FromUserName><![CDATA["+toUserName+"]]></FromUserName>");
-		sb.append("<CreateTime>"+new Date().getTime()+"</CreateTime>");
-		sb.append("<MsgType><![CDATA[text]]></MsgType>");
-		sb.append("<Content><![CDATA[").append(content).append("]]></Content>");
-		sb.append("</xml>");
-		return sb.toString();
+		ResponseMsgText text = new ResponseMsgText();
+		text.setToUserName(fromUserName);
+		text.setFromUserName(toUserName);
+		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setMsgType("text");
+		text.setContent(content);
+		return ToolXml.beanToXML(text);
 	}
 
 	/**
@@ -368,22 +380,9 @@ public class ToolMessage {
 		sb.append("</xml>");
 		return sb.toString();
 	}
-	/**
-	 * 关注提示语
-	 * 
-	 * @return
-	 */
-	private static String getSubscribeMsg() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("您是否有过出门在外四处找ATM或厕所的经历？").append("\n\n");
-		buffer.append("您是否有过出差在外搜寻美食或娱乐场所的经历？").append("\n\n");
-		buffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
-		return buffer.toString();
-	}
-
+	
 	/**
 	 * 使用说明
-	 * 
 	 * @return
 	 */
 	private static String getUsage() {
