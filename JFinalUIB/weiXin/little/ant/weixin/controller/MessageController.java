@@ -3,7 +3,10 @@ package little.ant.weixin.controller;
 import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.weixin.service.MessageService;
+import little.ant.weixin.utils.ToolOAuth;
 import little.ant.weixin.utils.ToolSignature;
+import little.ant.weixin.vo.oauth.RecevieOauth2Token;
+import little.ant.weixin.vo.oauth.RecevieSNSUserInfo;
 
 import org.apache.log4j.Logger;
 
@@ -38,15 +41,41 @@ public class MessageController extends BaseController {
 			}
 		}else{
 			if(flag){
+				String accountId = getPara("accountId");// 公众账号标识
 				String recverMsg = ContextBase.requestStream(getRequest());
 				log.info("接收微信发送过来的消息" + recverMsg);
-				String responseMsg = receiveService.messageProcess(recverMsg);
+				String responseMsg = receiveService.messageProcess(accountId, recverMsg);
 				log.info("返回消息" + responseMsg);
 				renderText(responseMsg);
 				return;
 			}
 		}
 		renderText("");
+	}
+	
+	/**
+	 * 授权后的回调请求处理
+	 */
+	public void oauth2(){
+		String code = getPara("code");// 用户同意授权后，能获取到code
+		String timestamp = getPara("timestamp");//时间戳
+		String signature = getPara("signature");//微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数
+		String nonce = getPara("nonce");
+		boolean flag = ToolSignature.checkSignature(signature, timestamp, nonce);
+		if(!"authdeny".equals(code) && flag){
+			// 获取网页授权access_token
+			RecevieOauth2Token weixinOauth2Token = ToolOAuth.getOauth2AccessToken("APPID", "APPSECRET", code);
+			// 网页授权接口访问凭证
+			String accessToken = weixinOauth2Token.getAccessToken();
+			// 用户标识
+			String openId = weixinOauth2Token.getOpenId();
+			// 获取用户信息
+			RecevieSNSUserInfo snsUserInfo = ToolOAuth.getSNSUserInfo(accessToken, openId);
+
+			// 设置要传递的参数
+			setAttr("snsUserInfo", snsUserInfo);
+		}
+		render("/index.html");
 	}
 	
 }

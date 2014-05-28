@@ -107,16 +107,19 @@ public class ToolXml {
 		xml += "<ToUserName><![CDATA[jiu_guang]]></ToUserName>";
 		xml += "<FromUserName><![CDATA[dongcb678]]></FromUserName>";
 		xml += "<CreateTime>11</CreateTime>";
-		xml += "<MsgType><![CDATA[text]]></MsgType>";
+		xml += "<MsgType><![CDATA[text\\//]]></MsgType>";
 		xml += "<Content><![CDATA[wentest]]></Content>";
 		xml += "<MsgId>11</MsgId>";
 		xml += "</xml>";
 
 		RecevieMsgText recevie = (RecevieMsgText) xmlToBean(xml, RecevieMsgText.class);
-		System.out.println(recevie.getToUserName());
-		System.out.println(recevie.getFromUserName());
+//		System.out.println(recevie.getToUserName());
+//		System.out.println(recevie.getFromUserName());
+//		System.out.println(recevie.getMsgType());
 		
-		System.out.println(getStairText(xml, "msgId"));
+		System.out.println(beanToXML(recevie));
+		
+		//System.out.println(getStairText(xml, "msgId"));
 	}
 
 }
