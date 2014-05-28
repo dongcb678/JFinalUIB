@@ -30,70 +30,95 @@ public class MessageService extends BaseService {
 		// 消息类型
 		String msgType = ToolXml.getStairText(recverMsg, "msgType");
 
-		String responseMsg = null;
-		
 		// 1.事件推送
 		if (msgType.equals(ToolMessage.recevie_event)) {
+			log.info("事件推送类型消息处理");
 			String event = ToolXml.getStairText(recverMsg, "Event");
-			if(event.equals(ToolMessage.recevie_event_subscribe)){//订阅
-				String eventKey = ToolXml.getStairText(recverMsg, "EventKey");
-				if(null == eventKey){//订阅
-					RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, RecevieEventSubscribe.class);
-					responseMsg = ToolMessage.recevie_event_subscribe(subscribe);
-					
-				}else{// 扫描二维码事件1：如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值关注事件推送给开发者。
-					RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, RecevieEventQRCode.class);
-					responseMsg = ToolMessage.recevie_event_subscribe_scan(qrCode);
-					
-				}
-				
-			}else if(event.equals(ToolMessage.recevie_event_unsubscribe)){//取消订阅
+			return event(event, recverMsg);
+			
+		} else {// 2.普通消息
+			log.info("普通消息处理");
+			return message(msgType, recverMsg);
+		}
+	}
+	
+	/**
+	 * 事件类型的消息
+	 * @param event
+	 * @param recverMsg
+	 * @return
+	 */
+	public String event(String event, String recverMsg){
+		String responseMsg = null;
+		
+		if(event.equals(ToolMessage.recevie_event_subscribe)){//订阅
+			String eventKey = ToolXml.getStairText(recverMsg, "EventKey");
+			if(null == eventKey){//订阅
 				RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, RecevieEventSubscribe.class);
-				responseMsg = ToolMessage.recevie_event_unsubscribe(subscribe);
+				responseMsg = ToolMessage.recevie_event_subscribe(subscribe);
 				
-			}else if(event.equals(ToolMessage.recevie_event_scan)){//扫描二维码事件2：如果用户已经关注公众号，则微信会将带场景值扫描事件推送给开发者。
+			}else{// 扫描二维码事件1：如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值关注事件推送给开发者。
 				RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, RecevieEventQRCode.class);
-				responseMsg = ToolMessage.recevie_event_scan(qrCode);
+				responseMsg = ToolMessage.recevie_event_subscribe_scan(qrCode);
 				
-			}else if(event.equals(ToolMessage.recevie_event_location)){//上报地理位置事件
-				RecevieEventLocation location = (RecevieEventLocation) ToolXml.xmlToBean(recverMsg, RecevieEventLocation.class);
-				responseMsg = ToolMessage.recevie_event_location(location);
-				
-			}else if(event.equals(ToolMessage.recevie_event_click)){//点击菜单拉取消息时的事件推送
-				RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, RecevieEventMenu.class);
-				responseMsg = ToolMessage.recevie_event_click(menu);
-				
-			}else if(event.equals(ToolMessage.recevie_event_view)){//点击菜单跳转链接时的事件推送
-				RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, RecevieEventMenu.class);
-				responseMsg = ToolMessage.recevie_event_view(menu);
 			}
 			
-		} else {
-			//接收普通消息
-			if (msgType.equals(ToolMessage.recevie_msg_text)) {// 文本消息
-				RecevieMsgText text = (RecevieMsgText) ToolXml.xmlToBean(recverMsg, RecevieMsgText.class);
-				responseMsg = ToolMessage.recevie_msg_text(text);
+		}else if(event.equals(ToolMessage.recevie_event_unsubscribe)){//取消订阅
+			RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, RecevieEventSubscribe.class);
+			responseMsg = ToolMessage.recevie_event_unsubscribe(subscribe);
+			
+		}else if(event.equals(ToolMessage.recevie_event_scan)){//扫描二维码事件2：如果用户已经关注公众号，则微信会将带场景值扫描事件推送给开发者。
+			RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, RecevieEventQRCode.class);
+			responseMsg = ToolMessage.recevie_event_scan(qrCode);
+			
+		}else if(event.equals(ToolMessage.recevie_event_location)){//上报地理位置事件
+			RecevieEventLocation location = (RecevieEventLocation) ToolXml.xmlToBean(recverMsg, RecevieEventLocation.class);
+			responseMsg = ToolMessage.recevie_event_location(location);
+			
+		}else if(event.equals(ToolMessage.recevie_event_click)){//点击菜单拉取消息时的事件推送
+			RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, RecevieEventMenu.class);
+			responseMsg = ToolMessage.recevie_event_click(menu);
+			
+		}else if(event.equals(ToolMessage.recevie_event_view)){//点击菜单跳转链接时的事件推送
+			RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, RecevieEventMenu.class);
+			responseMsg = ToolMessage.recevie_event_view(menu);
+		}
+		
+		return responseMsg;
+	}
+	
+	/**
+	 * 普通消息
+	 * @param msgType
+	 * @param recverMsg
+	 * @return
+	 */
+	public String message(String msgType, String recverMsg){
+		String responseMsg = null;
+		
+		if (msgType.equals(ToolMessage.recevie_msg_text)) {// 文本消息
+			RecevieMsgText text = (RecevieMsgText) ToolXml.xmlToBean(recverMsg, RecevieMsgText.class);
+			responseMsg = ToolMessage.recevie_msg_text(text);
 
-			} else if (msgType.equals(ToolMessage.recevie_msg_image)) {// 图片消息
-				RecevieMsgImage image = (RecevieMsgImage) ToolXml.xmlToBean(recverMsg, RecevieMsgImage.class);
-				responseMsg = ToolMessage.recevie_msg_image(image);
+		} else if (msgType.equals(ToolMessage.recevie_msg_image)) {// 图片消息
+			RecevieMsgImage image = (RecevieMsgImage) ToolXml.xmlToBean(recverMsg, RecevieMsgImage.class);
+			responseMsg = ToolMessage.recevie_msg_image(image);
 
-			} else if (msgType.equals(ToolMessage.recevie_msg_voice)) {// 语音消息
-				RecevieMsgVoice voice = (RecevieMsgVoice) ToolXml.xmlToBean(recverMsg, RecevieMsgVoice.class);
-				responseMsg = ToolMessage.recevie_msg_voice(voice);
-				
-			} else if (msgType.equals(ToolMessage.recevie_msg_video)) {// 视频消息
-				RecevieMsgVideo video = (RecevieMsgVideo) ToolXml.xmlToBean(recverMsg, RecevieMsgVideo.class);
-				responseMsg = ToolMessage.recevie_msg_video(video);
-				
-			} else if (msgType.equals(ToolMessage.recevie_msg_location)) {// 地理位置消息
-				RecevieMsgLocation location = (RecevieMsgLocation) ToolXml.xmlToBean(recverMsg, RecevieMsgLocation.class);
-				responseMsg = ToolMessage.recevie_msg_location(location);
-				
-			} else if (msgType.equals(ToolMessage.recevie_msg_link)) {// 链接消息
-				RecevieMsgLink link = (RecevieMsgLink) ToolXml.xmlToBean(recverMsg, RecevieMsgLink.class);
-				responseMsg = ToolMessage.recevie_msg_link(link);
-			}
+		} else if (msgType.equals(ToolMessage.recevie_msg_voice)) {// 语音消息
+			RecevieMsgVoice voice = (RecevieMsgVoice) ToolXml.xmlToBean(recverMsg, RecevieMsgVoice.class);
+			responseMsg = ToolMessage.recevie_msg_voice(voice);
+			
+		} else if (msgType.equals(ToolMessage.recevie_msg_video)) {// 视频消息
+			RecevieMsgVideo video = (RecevieMsgVideo) ToolXml.xmlToBean(recverMsg, RecevieMsgVideo.class);
+			responseMsg = ToolMessage.recevie_msg_video(video);
+			
+		} else if (msgType.equals(ToolMessage.recevie_msg_location)) {// 地理位置消息
+			RecevieMsgLocation location = (RecevieMsgLocation) ToolXml.xmlToBean(recverMsg, RecevieMsgLocation.class);
+			responseMsg = ToolMessage.recevie_msg_location(location);
+			
+		} else if (msgType.equals(ToolMessage.recevie_msg_link)) {// 链接消息
+			RecevieMsgLink link = (RecevieMsgLink) ToolXml.xmlToBean(recverMsg, RecevieMsgLink.class);
+			responseMsg = ToolMessage.recevie_msg_link(link);
 		}
 		
 		return responseMsg;

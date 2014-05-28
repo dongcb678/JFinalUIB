@@ -79,7 +79,7 @@ public class ToolQRCode {
 		String filePath = null;
 		// 拼接请求地址
 		String requestUrl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET";
-		requestUrl = requestUrl.replace("TICKET", ToolString.urlEncodeUTF8(ticket));
+		requestUrl = requestUrl.replace("TICKET", ToolString.urlEncode(ticket));
 		try {
 			URL url = new URL(requestUrl);
 			HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();

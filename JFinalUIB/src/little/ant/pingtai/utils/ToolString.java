@@ -54,7 +54,7 @@ public abstract class ToolString {
 	 * @param source
 	 * @return
 	 */
-	public static String urlEncodeUTF8(String source) {
+	public static String urlEncode(String source) {
 		String result = source;
 		try {
 			result = java.net.URLEncoder.encode(source, ENCODING);

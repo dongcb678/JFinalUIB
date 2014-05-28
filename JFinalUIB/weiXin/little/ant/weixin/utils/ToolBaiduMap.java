@@ -1,20 +1,19 @@
 package little.ant.weixin.utils;
 
-import little.ant.pingtai.utils.ToolString;
-import little.ant.weixin.vo.cservice.Article;
-import little.ant.weixin.vo.map.BaiduPlace;
-import little.ant.weixin.vo.map.UserLocation;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import little.ant.pingtai.utils.ToolString;
+import little.ant.weixin.vo.cservice.Article;
+import little.ant.weixin.vo.map.BaiduPlace;
+import little.ant.weixin.vo.map.UserLocation;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -37,10 +36,10 @@ public class ToolBaiduMap {
 	 * @return List<BaiduPlace>
 	 * @throws UnsupportedEncodingException
 	 */
-	public static List<BaiduPlace> searchPlace(String query, String lng, String lat) throws Exception {
+	public static List<BaiduPlace> searchPlace(String query, String lng, String lat) {
 		// 拼装请求地址
 		String requestUrl = "http://api.map.baidu.com/place/v2/search?&query=QUERY&location=LAT,LNG&radius=2000&output=xml&scope=2&page_size=10&page_num=0&ak=CA21bdecc75efc1664af5a195c30bb4e";
-		requestUrl = requestUrl.replace("QUERY", URLEncoder.encode(query, "UTF-8"));
+		requestUrl = requestUrl.replace("QUERY", ToolString.urlEncode(query));
 		requestUrl = requestUrl.replace("LAT", lat);
 		requestUrl = requestUrl.replace("LNG", lng);
 		// 调用Place API圆形区域检索

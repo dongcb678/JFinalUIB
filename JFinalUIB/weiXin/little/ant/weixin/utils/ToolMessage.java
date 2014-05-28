@@ -1,7 +1,13 @@
 package little.ant.weixin.utils;
 
 import java.util.Date;
+import java.util.List;
 
+import little.ant.pingtai.utils.ToolUtils;
+import little.ant.pingtai.utils.ToolXml;
+import little.ant.weixin.vo.cservice.Article;
+import little.ant.weixin.vo.map.BaiduPlace;
+import little.ant.weixin.vo.map.UserLocation;
 import little.ant.weixin.vo.message.RecevieEventLocation;
 import little.ant.weixin.vo.message.RecevieEventMenu;
 import little.ant.weixin.vo.message.RecevieEventQRCode;
@@ -12,6 +18,7 @@ import little.ant.weixin.vo.message.RecevieMsgLocation;
 import little.ant.weixin.vo.message.RecevieMsgText;
 import little.ant.weixin.vo.message.RecevieMsgVideo;
 import little.ant.weixin.vo.message.RecevieMsgVoice;
+import little.ant.weixin.vo.message.ResponseMsgNews;
 
 /**
  * 接收消息处理
@@ -179,15 +186,48 @@ public class ToolMessage {
 	 * @return
 	 */
 	public static String recevie_msg_text(RecevieMsgText text){
-		StringBuffer sb = new StringBuffer();
 		String toUserName = text.getToUserName();//开发者
 		String fromUserName = text.getFromUserName();//发送者
+		String content = text.getContent();
+		String responseContent = "文本消息";
+		if (content.startsWith("附近")) {// 周边搜索
+			String keyWord = content.replaceAll("附近", "").trim();
+			// 获取用户最后一次发送的地理位置
+			little.ant.weixin.model.UserLocation location = little.ant.weixin.model.UserLocation.dao.findFirst("select * form wx_userlocation where open_id=? order by createdate desc ", fromUserName);
+			// 未获取到
+			if (null == location) {
+				responseContent = getUsage();
+			} else {
+				// 根据转换后（纠偏）的坐标搜索周边POI
+				String bd09Lng = location.getStr("bd09_lng");
+				String bd09Lat = location.getStr("bd09_lat");
+				List<BaiduPlace> placeList = ToolBaiduMap.searchPlace(keyWord, bd09Lng, bd09Lat);
+				// 未搜索到POI
+				if (null == placeList || 0 == placeList.size()) {
+					responseContent = String.format("/难过，您发送的位置附近未搜索到“%s”信息！", keyWord);
+				} else {
+					List<Article> articleList = ToolBaiduMap.makeArticleList(placeList, bd09Lng, bd09Lat);
+					// 回复图文消息
+					ResponseMsgNews newsMessage = new ResponseMsgNews();
+					newsMessage.setToUserName(fromUserName);
+					newsMessage.setFromUserName(toUserName);
+					newsMessage.setCreateTime(String.valueOf(new Date().getTime()));
+					newsMessage.setMsgType("news");
+					newsMessage.setArticles(articleList);
+					newsMessage.setArticleCount(String.valueOf(articleList.size()));
+					return ToolXml.beanToXML(newsMessage);
+				}
+			}
+		}
+		
+		// 返回xml
+		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
 		sb.append("<ToUserName><![CDATA["+fromUserName+"]]></ToUserName>");
 		sb.append("<FromUserName><![CDATA["+toUserName+"]]></FromUserName>");
 		sb.append("<CreateTime>"+new Date().getTime()+"</CreateTime>");
 		sb.append("<MsgType><![CDATA[text]]></MsgType>");
-		sb.append("<Content><![CDATA[文本消息]]></Content>");
+		sb.append("<Content><![CDATA[").append(responseContent).append("]]></Content>");
 		sb.append("</xml>");
 		return sb.toString();
 	}
@@ -261,15 +301,51 @@ public class ToolMessage {
 	 * @return
 	 */
 	public static String recevie_msg_location(RecevieMsgLocation location){
-		StringBuffer sb = new StringBuffer();
 		String toUserName = location.getToUserName();//开发者
 		String fromUserName = location.getFromUserName();//发送者
+		// 用户发送的经纬度
+		String lng = location.getLocation_Y();
+		String lat = location.getLocation_X();
+		// 坐标转换后的经纬度
+		String bd09Lng = null;
+		String bd09Lat = null;
+		// 调用接口转换坐标
+		UserLocation userLocation = ToolBaiduMap.convertCoord(lng, lat);
+		if (null != userLocation) {
+			bd09Lng = userLocation.getBd09Lng();
+			bd09Lat = userLocation.getBd09Lat();
+		}
+		
+		// 保存用户地理位置
+		little.ant.weixin.model.UserLocation uLocation = new little.ant.weixin.model.UserLocation();
+		uLocation.set("ids", ToolUtils.getUuidByJdk(true));
+		uLocation.set("open_id", fromUserName);
+		uLocation.set("lng", lng);
+		uLocation.set("lat", lat);
+		uLocation.set("bd09_lng", bd09Lng);
+		uLocation.set("bd09_lat", bd09Lat);
+		long starttime = new Date().getTime();
+		uLocation.set("createdate", new java.sql.Timestamp(starttime));//创建时间
+		uLocation.save();
+		
+		//回显信息
+		StringBuffer contentBuffer = new StringBuffer();
+		contentBuffer.append("[愉快]").append("成功接收您的位置！").append("\n\n");
+		contentBuffer.append("您可以输入搜索关键词获取周边信息了，例如：").append("\n");
+		contentBuffer.append("        附近ATM").append("\n");
+		contentBuffer.append("        附近KTV").append("\n");
+		contentBuffer.append("        附近厕所").append("\n");
+		contentBuffer.append("必须以“附近”两个字开头！");
+		String content = contentBuffer.toString();
+		
+		//返回xml
+		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
 		sb.append("<ToUserName><![CDATA["+fromUserName+"]]></ToUserName>");
 		sb.append("<FromUserName><![CDATA["+toUserName+"]]></FromUserName>");
 		sb.append("<CreateTime>"+new Date().getTime()+"</CreateTime>");
 		sb.append("<MsgType><![CDATA[text]]></MsgType>");
-		sb.append("<Content><![CDATA[地理位置消息]]></Content>");
+		sb.append("<Content><![CDATA[").append(content).append("]]></Content>");
 		sb.append("</xml>");
 		return sb.toString();
 	}
@@ -292,5 +368,31 @@ public class ToolMessage {
 		sb.append("</xml>");
 		return sb.toString();
 	}
+	/**
+	 * 关注提示语
+	 * 
+	 * @return
+	 */
+	private static String getSubscribeMsg() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("您是否有过出门在外四处找ATM或厕所的经历？").append("\n\n");
+		buffer.append("您是否有过出差在外搜寻美食或娱乐场所的经历？").append("\n\n");
+		buffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
+		return buffer.toString();
+	}
 
+	/**
+	 * 使用说明
+	 * 
+	 * @return
+	 */
+	private static String getUsage() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("周边搜索使用说明").append("\n\n");
+		buffer.append("1）发送地理位置").append("\n");
+		buffer.append("点击窗口底部的“+”按钮，选择“位置”，点“发送”").append("\n\n");
+		buffer.append("2）指定关键词搜索").append("\n");
+		buffer.append("格式：附近+关键词\n例如：附近ATM、附近KTV、附近厕所");
+		return buffer.toString();
+	}
 }
