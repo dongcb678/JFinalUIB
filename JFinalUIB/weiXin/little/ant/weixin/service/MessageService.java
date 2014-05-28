@@ -22,10 +22,11 @@ public class MessageService extends BaseService {
 
 	/**
 	 * 消息处理
-	 * @param recverMsg
+	 * @param accountId 公众账号标识
+	 * @param recverMsg 接收的消息xml
 	 * @return
 	 */
-	public String messageProcess(String recverMsg) {
+	public String messageProcess(String accountId, String recverMsg) {
 		// 消息类型
 		String msgType = ToolXml.getStairText(recverMsg, "msgType");
 

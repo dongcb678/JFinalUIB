@@ -38,9 +38,10 @@ public class MessageController extends BaseController {
 			}
 		}else{
 			if(flag){
+				String accountId = getPara("accountId");// 公众账号标识
 				String recverMsg = ContextBase.requestStream(getRequest());
 				log.info("接收微信发送过来的消息" + recverMsg);
-				String responseMsg = receiveService.messageProcess(recverMsg);
+				String responseMsg = receiveService.messageProcess(accountId, recverMsg);
 				log.info("返回消息" + responseMsg);
 				renderText(responseMsg);
 				return;
