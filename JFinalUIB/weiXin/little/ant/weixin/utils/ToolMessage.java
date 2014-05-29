@@ -1,10 +1,13 @@
 package little.ant.weixin.utils;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import little.ant.pingtai.utils.ToolUtils;
 import little.ant.pingtai.utils.ToolXml;
+import little.ant.weixin.model.Message;
 import little.ant.weixin.vo.map.RecevieBaiduPlace;
 import little.ant.weixin.vo.map.RecevieUserLocation;
 import little.ant.weixin.vo.message.RecevieEventLocation;
@@ -48,14 +51,35 @@ public class ToolMessage {
 	public static final String recevie_msg_location = "location";
 	public static final String recevie_msg_link = "link";
 	
+	public static final String message_inout_in = "0";
+	public static final String message_inout_out = "1";
+	public static final String message_datatype_xml = "0";
+	public static final String message_datatype_json = "1";
+	
 	/**
 	 * 订阅
-	 * @param subscribe
+	 * @param recverMsg
 	 * @return
 	 */
-	public static String recevie_event_subscribe(RecevieEventSubscribe subscribe){
-		String toUserName = subscribe.getToUserName();//开发者
-		String fromUserName = subscribe.getFromUserName();//发送者
+	public static String recevie_event_subscribe(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieEventSubscribe.class);
+		RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, map);
+		
+		//请求数据入库
+		Message messageIn = new Message();
+		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
+		messageIn.set("inout", message_inout_in);
+		messageIn.set("datatype", message_datatype_xml);
+		messageIn.set("datacontent", recverMsg);//请求数据
+		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("ToUserName", subscribe.getToUserName());	// 开发者微信号
+		messageIn.set("FromUserName", subscribe.getFromUserName());// 发送方帐号（一个OpenID）
+		messageIn.set("CreateTime",subscribe.getCreateTime());// 消息创建时间 （整型）
+		messageIn.set("MsgType", subscribe.getMsgType());// 消息类型，event
+		messageIn.set("Event", subscribe.getEvent());// 事件类型，subscribe(订阅)、unsubscribe(取消订阅)
+
 		//关注提示语
 		StringBuffer contentBuffer = new StringBuffer();
 		contentBuffer.append("您是否有过出门在外四处找ATM或厕所的经历？").append("\n\n");
@@ -64,22 +88,41 @@ public class ToolMessage {
 		
 		//返回xml
 		ResponseMsgText text = new ResponseMsgText();
-		text.setToUserName(fromUserName);
-		text.setFromUserName(toUserName);
+		text.setToUserName(subscribe.getFromUserName());
+		text.setFromUserName(subscribe.getToUserName());
 		text.setCreateTime(String.valueOf(new Date().getTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		return ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text);
+		
+		//返回数据入库
+		Message messageOut = new Message();
+		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
+		messageOut.set("inout", message_inout_out);
+		messageOut.set("datatype", message_datatype_xml);
+		messageOut.set("datacontent", responseXml);//返回数据
+		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
+		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
+		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
+		messageOut.set("MsgType", text.getMsgType());// 消息类型，event
+		
+		return responseXml;
 	}
 	
 	/**
 	 * 订阅：扫描二维码事件1：如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值关注事件推送给开发者。
-	 * @param subscribe
+	 * @param recverMsg
 	 * @return
 	 */
-	public static String recevie_event_subscribe_scan(RecevieEventQRCode qrCode){
+	public static String recevie_event_subscribe_scan(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieEventQRCode.class);
+		RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = qrCode.getToUserName();// 开发者
 		String fromUserName = qrCode.getFromUserName();// 发送者
+		
 		//关注提示语
 		StringBuffer contentBuffer = new StringBuffer();
 		contentBuffer.append("您是否有过出门在外四处找ATM或厕所的经历？").append("\n\n");
@@ -98,12 +141,17 @@ public class ToolMessage {
 	
 	/**
 	 * 取消订阅
-	 * @param subscribe
+	 * @param recverMsg
 	 * @return
 	 */
-	public static String recevie_event_unsubscribe(RecevieEventSubscribe subscribe){
+	public static String recevie_event_unsubscribe(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieEventSubscribe.class);
+		RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = subscribe.getToUserName();// 开发者
 		String fromUserName = subscribe.getFromUserName();// 发送者
+		
 		//关注提示语
 		StringBuffer contentBuffer = new StringBuffer();
 		contentBuffer.append("谢谢！欢迎下次光临！:）").append("\n\n");
@@ -123,10 +171,16 @@ public class ToolMessage {
 	 * @param qrCode
 	 * @return
 	 */
-	public static String recevie_event_scan(RecevieEventQRCode qrCode){
-		StringBuffer sb = new StringBuffer();
+	public static String recevie_event_scan(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieEventQRCode.class);
+		RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = qrCode.getToUserName();// 开发者
 		String fromUserName = qrCode.getFromUserName();// 发送者
+
+		//返回xml
+		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
 		sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
 		sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
@@ -142,10 +196,16 @@ public class ToolMessage {
 	 * @param location
 	 * @return
 	 */
-	public static String recevie_event_location(RecevieEventLocation location){
-		StringBuffer sb = new StringBuffer();
+	public static String recevie_event_location(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieEventLocation.class);
+		RecevieEventLocation location = (RecevieEventLocation) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = location.getToUserName();// 开发者
 		String fromUserName = location.getFromUserName();// 发送者
+
+		//返回xml
+		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
 		sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
 		sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
@@ -161,10 +221,16 @@ public class ToolMessage {
 	 * @param menu
 	 * @return
 	 */
-	public static String recevie_event_click(RecevieEventMenu menu){
-		StringBuffer sb = new StringBuffer();
+	public static String recevie_event_click(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieEventMenu.class);
+		RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = menu.getToUserName();// 开发者
 		String fromUserName = menu.getFromUserName();// 发送者
+
+		//返回xml
+		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
 		sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
 		sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
@@ -180,10 +246,16 @@ public class ToolMessage {
 	 * @param menu
 	 * @return
 	 */
-	public static String recevie_event_view(RecevieEventMenu menu){
-		StringBuffer sb = new StringBuffer();
+	public static String recevie_event_view(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieEventMenu.class);
+		RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = menu.getToUserName();// 开发者
 		String fromUserName = menu.getFromUserName();// 发送者
+
+		//返回xml
+		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
 		sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
 		sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
@@ -199,10 +271,15 @@ public class ToolMessage {
 	 * @param text
 	 * @return
 	 */
-	public static String recevie_msg_text(RecevieMsgText text){
+	public static String recevie_msg_text(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieMsgText.class);
+		RecevieMsgText text = (RecevieMsgText) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = text.getToUserName();//开发者
 		String fromUserName = text.getFromUserName();//发送者
 		String content = text.getContent();
+		
 		String responseContent = "文本消息";
 		if (content.startsWith("附近")) {// 周边搜索
 			String keyWord = content.replaceAll("附近", "").trim();
@@ -251,10 +328,16 @@ public class ToolMessage {
 	 * @param image
 	 * @return
 	 */
-	public static String recevie_msg_image(RecevieMsgImage image){
-		StringBuffer sb = new StringBuffer();
+	public static String recevie_msg_image(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieMsgImage.class);
+		RecevieMsgImage image = (RecevieMsgImage) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = image.getToUserName();//开发者
 		String fromUserName = image.getFromUserName();//发送者
+
+		// 返回xml
+		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
 		sb.append("<ToUserName><![CDATA["+fromUserName+"]]></ToUserName>");
 		sb.append("<FromUserName><![CDATA["+toUserName+"]]></FromUserName>");
@@ -270,11 +353,17 @@ public class ToolMessage {
 	 * @param voice
 	 * @return
 	 */
-	public static String recevie_msg_voice(RecevieMsgVoice voice){
-		StringBuffer sb = new StringBuffer();
+	public static String recevie_msg_voice(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieMsgVoice.class);
+		RecevieMsgVoice voice = (RecevieMsgVoice) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = voice.getToUserName();//开发者
 		String fromUserName = voice.getFromUserName();//发送者
 		String recognition = voice.getRecognition();// 语音识别结果
+
+		// 返回xml
+		StringBuffer sb = new StringBuffer();
 		if(null != recognition){//接收语音识别结果
 			
 		}else{
@@ -295,10 +384,16 @@ public class ToolMessage {
 	 * @param video
 	 * @return
 	 */
-	public static String recevie_msg_video(RecevieMsgVideo video){
-		StringBuffer sb = new StringBuffer();
+	public static String recevie_msg_video(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieMsgVideo.class);
+		RecevieMsgVideo video = (RecevieMsgVideo) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = video.getToUserName();//开发者
 		String fromUserName = video.getFromUserName();//发送者
+
+		// 返回xml
+		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
 		sb.append("<ToUserName><![CDATA["+fromUserName+"]]></ToUserName>");
 		sb.append("<FromUserName><![CDATA["+toUserName+"]]></FromUserName>");
@@ -314,15 +409,20 @@ public class ToolMessage {
 	 * @param location
 	 * @return
 	 */
-	public static String recevie_msg_location(RecevieMsgLocation location){
+	public static String recevie_msg_location(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieMsgLocation.class);
+		RecevieMsgLocation location = (RecevieMsgLocation) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = location.getToUserName();//开发者
 		String fromUserName = location.getFromUserName();//发送者
-		// 用户发送的经纬度
-		String lng = location.getLocation_Y();
-		String lat = location.getLocation_X();
+		String lng = location.getLocation_Y();// 用户发送的经纬度
+		String lat = location.getLocation_X();// 用户发送的经纬度
+		
 		// 坐标转换后的经纬度
 		String bd09Lng = null;
 		String bd09Lat = null;
+		
 		// 调用接口转换坐标
 		RecevieUserLocation userLocation = ToolBaiduMap.convertCoord(lng, lat);
 		if (null != userLocation) {
@@ -367,10 +467,16 @@ public class ToolMessage {
 	 * @param link
 	 * @return
 	 */
-	public static String recevie_msg_link(RecevieMsgLink link){
-		StringBuffer sb = new StringBuffer();
+	public static String recevie_msg_link(String recverMsg){
+		//请求数据封装
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieMsgLink.class);
+		RecevieMsgLink link = (RecevieMsgLink) ToolXml.xmlToBean(recverMsg, map);
 		String toUserName = link.getToUserName();//开发者
 		String fromUserName = link.getFromUserName();//发送者
+
+		//返回xml
+		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
 		sb.append("<ToUserName><![CDATA["+fromUserName+"]]></ToUserName>");
 		sb.append("<FromUserName><![CDATA["+toUserName+"]]></FromUserName>");
