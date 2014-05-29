@@ -6,26 +6,26 @@ package little.ant.weixin.vo.message;
  */
 public class RecevieEventLocation extends RecevieEventBase {
 	
-	private String Latitude;	 //地理位置纬度
-	private String Longitude;	 //地理位置经度
-	private String Precision;	 //地理位置精度
+	private long Latitude;	 //地理位置纬度
+	private long Longitude;	 //地理位置经度
+	private long Precision;	 //地理位置精度
 	
-	public String getLatitude() {
+	public long getLatitude() {
 		return Latitude;
 	}
-	public void setLatitude(String latitude) {
+	public void setLatitude(long latitude) {
 		Latitude = latitude;
 	}
-	public String getLongitude() {
+	public long getLongitude() {
 		return Longitude;
 	}
-	public void setLongitude(String longitude) {
+	public void setLongitude(long longitude) {
 		Longitude = longitude;
 	}
-	public String getPrecision() {
+	public long getPrecision() {
 		return Precision;
 	}
-	public void setPrecision(String precision) {
+	public void setPrecision(long precision) {
 		Precision = precision;
 	}
 	
