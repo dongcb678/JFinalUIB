@@ -74,11 +74,13 @@ public class ToolMessage {
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		
 		messageIn.set("ToUserName", subscribe.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", subscribe.getFromUserName());// 发送方帐号（一个OpenID）
 		messageIn.set("CreateTime",subscribe.getCreateTime());// 消息创建时间 （整型）
 		messageIn.set("MsgType", subscribe.getMsgType());// 消息类型，event
 		messageIn.set("Event", subscribe.getEvent());// 事件类型，subscribe(订阅)、unsubscribe(取消订阅)
+		messageIn.save();
 
 		//关注提示语
 		StringBuffer contentBuffer = new StringBuffer();
@@ -105,7 +107,9 @@ public class ToolMessage {
 		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
-		messageOut.set("MsgType", text.getMsgType());// 消息类型，event
+		messageOut.set("MsgType", text.getMsgType());// 消息类型
+		messageOut.set("content", text.getContent());// 消息内容
+		messageOut.save();
 		
 		return responseXml;
 	}
@@ -120,8 +124,23 @@ public class ToolMessage {
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
 		map.put("xml", RecevieEventQRCode.class);
 		RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, map);
-		String toUserName = qrCode.getToUserName();// 开发者
-		String fromUserName = qrCode.getFromUserName();// 发送者
+
+		//请求数据入库
+		Message messageIn = new Message();
+		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
+		messageIn.set("inout", message_inout_in);
+		messageIn.set("datatype", message_datatype_xml);
+		messageIn.set("datacontent", recverMsg);//请求数据
+		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		
+		messageIn.set("ToUserName", qrCode.getToUserName());	// 开发者微信号
+		messageIn.set("FromUserName", qrCode.getFromUserName());// 发送方帐号（一个OpenID）
+		messageIn.set("CreateTime",qrCode.getCreateTime());// 消息创建时间 （整型）
+		messageIn.set("MsgType", qrCode.getMsgType());// 消息类型，event
+		messageIn.set("Event", qrCode.getEvent());// 事件类型，subscribe(订阅)、unsubscribe(取消订阅)
+		messageIn.set("EventKey", qrCode.getEventKey());//事件KEY值，qrscene_为前缀，后面为二维码的参数值
+		messageIn.set("Ticket", qrCode.getTicket());//二维码的ticket，可用来换取二维码图片
+		messageIn.save();
 		
 		//关注提示语
 		StringBuffer contentBuffer = new StringBuffer();
@@ -131,12 +150,28 @@ public class ToolMessage {
 		
 		//返回xml
 		ResponseMsgText text = new ResponseMsgText();
-		text.setToUserName(fromUserName);
-		text.setFromUserName(toUserName);
+		text.setToUserName(qrCode.getFromUserName());
+		text.setFromUserName(qrCode.getToUserName());
 		text.setCreateTime(String.valueOf(new Date().getTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		return ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text);
+		
+		//返回数据入库
+		Message messageOut = new Message();
+		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
+		messageOut.set("inout", message_inout_out);
+		messageOut.set("datatype", message_datatype_xml);
+		messageOut.set("datacontent", responseXml);//返回数据
+		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
+		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
+		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
+		messageOut.set("MsgType", text.getMsgType());// 消息类型
+		messageOut.set("content", text.getContent());// 消息内容
+		messageOut.save();
+		
+		return responseXml;
 	}
 	
 	/**
@@ -149,8 +184,21 @@ public class ToolMessage {
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
 		map.put("xml", RecevieEventSubscribe.class);
 		RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, map);
-		String toUserName = subscribe.getToUserName();// 开发者
-		String fromUserName = subscribe.getFromUserName();// 发送者
+		
+		//请求数据入库
+		Message messageIn = new Message();
+		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
+		messageIn.set("inout", message_inout_in);
+		messageIn.set("datatype", message_datatype_xml);
+		messageIn.set("datacontent", recverMsg);//请求数据
+		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		
+		messageIn.set("ToUserName", subscribe.getToUserName());	// 开发者微信号
+		messageIn.set("FromUserName", subscribe.getFromUserName());// 发送方帐号（一个OpenID）
+		messageIn.set("CreateTime",subscribe.getCreateTime());// 消息创建时间 （整型）
+		messageIn.set("MsgType", subscribe.getMsgType());// 消息类型，event
+		messageIn.set("Event", subscribe.getEvent());// 事件类型，subscribe(订阅)、unsubscribe(取消订阅)
+		messageIn.save();
 		
 		//关注提示语
 		StringBuffer contentBuffer = new StringBuffer();
@@ -158,12 +206,28 @@ public class ToolMessage {
 		
 		//返回xml
 		ResponseMsgText text = new ResponseMsgText();
-		text.setToUserName(fromUserName);
-		text.setFromUserName(toUserName);
+		text.setToUserName(subscribe.getFromUserName());
+		text.setFromUserName(subscribe.getToUserName());
 		text.setCreateTime(String.valueOf(new Date().getTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		return ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text);
+
+		//返回数据入库
+		Message messageOut = new Message();
+		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
+		messageOut.set("inout", message_inout_out);
+		messageOut.set("datatype", message_datatype_xml);
+		messageOut.set("datacontent", responseXml);//返回数据
+		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
+		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
+		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
+		messageOut.set("MsgType", text.getMsgType());// 消息类型
+		messageOut.set("content", text.getContent());// 消息内容
+		messageOut.save();
+		
+		return responseXml;
 	}
 
 	/**
@@ -176,19 +240,53 @@ public class ToolMessage {
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
 		map.put("xml", RecevieEventQRCode.class);
 		RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, map);
-		String toUserName = qrCode.getToUserName();// 开发者
-		String fromUserName = qrCode.getFromUserName();// 发送者
 
+		//请求数据入库
+		Message messageIn = new Message();
+		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
+		messageIn.set("inout", message_inout_in);
+		messageIn.set("datatype", message_datatype_xml);
+		messageIn.set("datacontent", recverMsg);//请求数据
+		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		
+		messageIn.set("ToUserName", qrCode.getToUserName());	// 开发者微信号
+		messageIn.set("FromUserName", qrCode.getFromUserName());// 发送方帐号（一个OpenID）
+		messageIn.set("CreateTime",qrCode.getCreateTime());// 消息创建时间 （整型）
+		messageIn.set("MsgType", qrCode.getMsgType());// 消息类型，event
+		messageIn.set("Event", qrCode.getEvent());// 事件类型，subscribe(订阅)、unsubscribe(取消订阅)
+		messageIn.set("EventKey", qrCode.getEventKey());//事件KEY值，qrscene_为前缀，后面为二维码的参数值
+		messageIn.set("Ticket", qrCode.getTicket());//二维码的ticket，可用来换取二维码图片
+		messageIn.save();
+		
+		//关注提示语
+		StringBuffer contentBuffer = new StringBuffer();
+		contentBuffer.append("您已经关注了哦！").append("\n\n");
+		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
+		
 		//返回xml
-		StringBuffer sb = new StringBuffer();
-		sb.append("<xml>");
-		sb.append("<ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>");
-		sb.append("<FromUserName><![CDATA[" + toUserName + "]]></FromUserName>");
-		sb.append("<CreateTime>" + new Date().getTime() + "</CreateTime>");
-		sb.append("<MsgType><![CDATA[text]]></MsgType>");
-		sb.append("<Content><![CDATA[扫描二维码事件2]]></Content>");
-		sb.append("</xml>");
-		return sb.toString();
+		ResponseMsgText text = new ResponseMsgText();
+		text.setToUserName(qrCode.getFromUserName());
+		text.setFromUserName(qrCode.getToUserName());
+		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setMsgType("text");
+		text.setContent(contentBuffer.toString());
+		String responseXml = ToolXml.beanToXml(text);
+		
+		//返回数据入库
+		Message messageOut = new Message();
+		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
+		messageOut.set("inout", message_inout_out);
+		messageOut.set("datatype", message_datatype_xml);
+		messageOut.set("datacontent", responseXml);//返回数据
+		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
+		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
+		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
+		messageOut.set("MsgType", text.getMsgType());// 消息类型
+		messageOut.set("content", text.getContent());// 消息内容
+		messageOut.save();
+		
+		return responseXml;
 	}
 	
 	/**
