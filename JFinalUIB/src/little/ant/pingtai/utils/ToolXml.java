@@ -1,10 +1,10 @@
 package little.ant.pingtai.utils;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import little.ant.weixin.vo.message.RecevieMsgText;
 
@@ -18,10 +18,53 @@ import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
-import com.wutka.jox.JOXBeanInputStream;
-import com.wutka.jox.JOXBeanOutputStream;
+import com.thoughtworks.xstream.mapper.MapperWrapper;
 
 public class ToolXml {
+	
+	/**
+	 * 获取XStream对象
+	 * @return
+	 */
+	public static XStream getXStream() {
+		//在文本前后加上<![CDATA[和]]>
+		DomDriver domDriver = new DomDriver() {
+			public HierarchicalStreamWriter createWriter(Writer out) {
+				return new PrettyPrintWriter(out) {
+					protected void writeText(QuickWriter writer, String text) {
+						if (text.startsWith("<![CDATA[") && text.endsWith("]]>")) {
+							writer.write(text);
+						} else {
+							//super.writeText(writer, text);
+							super.writeText(writer, "<![CDATA[" + text + "]]>");
+						}
+					}
+				};
+			};
+		};
+		
+		//去除XML属性在JavaBean中映射不到属性值的异常
+		XStream xStream = new XStream(domDriver){       
+			protected MapperWrapper wrapMapper(MapperWrapper next) {                 
+				return new MapperWrapper(next) {
+					@SuppressWarnings("rawtypes")
+					public boolean shouldSerializeMember(Class definedIn, String fieldName) {                      
+						if (definedIn == Object.class) {                     
+							try {                      
+								return this.realClass(fieldName) != null;                      
+							} catch(Exception e) {                      
+								return false;                      
+							}                      
+						} else {                             
+							return super.shouldSerializeMember(definedIn, fieldName);                         
+						}                     
+					}                 
+				};            
+			}         
+		};
+
+		return xStream;
+	}
 
 	/**
 	 * 获取xml一级节点文本值，不区分元素名称大小写
@@ -51,83 +94,32 @@ public class ToolXml {
 	/**
 	 * 把xml转bean对象
 	 * @param xml
-	 * @param className
+	 * @param map
 	 * @return
 	 */
-	public static Object xmlToBean(String xml, Class<?> className) {
-		ByteArrayInputStream xmlData = new ByteArrayInputStream(xml.getBytes());
-		JOXBeanInputStream joxIn = new JOXBeanInputStream(xmlData);
-		try {
-			return (Object) joxIn.readObject(className);
-		} catch (IOException exc) {
-			exc.printStackTrace();
-			return null;
-		} finally {
-			try {
-				xmlData.close();
-				joxIn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	public static Object xmlToBean(String xml, Map<String, Class<?>> map) {
+		XStream xStream = getXStream();
+		Set<String> keys = map.keySet();
+		for (String key : keys) {
+			xStream.alias(key, map.get(key));
 		}
+		return xStream.fromXML(xml);
 	}
-
+	
 	/**
 	 * bean对象转xml
 	 * @param bean
 	 * @return
 	 */
-	public static String beanToXML(Object bean) {
-		ByteArrayOutputStream xmlData = new ByteArrayOutputStream();
-		JOXBeanOutputStream joxOut = new JOXBeanOutputStream(xmlData);
-		try {
-			joxOut.writeObject(beanName(bean), bean);
-			return xmlData.toString();
-		} catch (IOException exc) {
-			exc.printStackTrace();
-			return null;
-		} finally {
-			try {
-				xmlData.close();
-				joxOut.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * 获取bean名称
-	 * @param bean
-	 * @return
-	 */
-	private static String beanName(Object bean) {
-		String fullClassName = bean.getClass().getName();
-		String classNameTemp = fullClassName.substring(fullClassName.lastIndexOf(".") + 1, fullClassName.length());
-		return classNameTemp.substring(0, 1) + classNameTemp.substring(1);
+	public static String beanToXml(Object bean){
+		XStream xStream = getXStream();
+		xStream.alias("xml", RecevieMsgText.class);
+		String content = xStream.toXML(bean);
+		content = content.replaceAll("&lt;", "<");// <
+		content = content.replaceAll("&gt;", ">");// >
+		return content;
 	}
 	
-	protected static String PREFIX_CDATA = "<![CDATA[";
-	protected static String SUFFIX_CDATA = "]]>";
-
-	public static XStream getXStream() {
-		XStream xstream = new XStream(new DomDriver() {
-			public HierarchicalStreamWriter createWriter(Writer out) {
-				return new PrettyPrintWriter(out) {
-					protected void writeText(QuickWriter writer, String text) {
-						if (text.startsWith(PREFIX_CDATA) && text.endsWith(SUFFIX_CDATA)) {
-							writer.write(text);
-						} else {
-							//super.writeText(writer, text);
-							super.writeText(writer, PREFIX_CDATA + text + SUFFIX_CDATA);
-						}
-					}
-				};
-			};
-		});
-		return xstream;
-	}
-
 	public static void main(String[] args) {
 		String xml = "<xml>";
 		xml += "<URL><![CDATA[http://littleant.duapp.com/msg]]></URL>";
@@ -139,30 +131,15 @@ public class ToolXml {
 		xml += "<MsgId>11</MsgId>";
 		xml += "</xml>";
 
-//		RecevieMsgText recevie = (RecevieMsgText) xmlToBean(xml, RecevieMsgText.class);
-//		System.out.println(recevie.getToUserName());
-//		System.out.println(recevie.getFromUserName());
-//		System.out.println(recevie.getMsgType());
-		
-		//System.out.println(beanToXML(recevie));
-		
-		//System.out.println(getStairText(xml, "msgId"));
-
-		XStream xStream = getXStream();
-		RecevieMsgText recevie = (RecevieMsgText) xStream.fromXML(xml);
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		map.put("xml", RecevieMsgText.class);
+		RecevieMsgText recevie = (RecevieMsgText) xmlToBean(xml, map);
 		System.out.println(recevie.getToUserName());
 		System.out.println(recevie.getFromUserName());
 		System.out.println(recevie.getMsgType());
 		
-//		XStream xStream2 = getXStream();
-//		xStream2.alias("xml", RecevieMsgText.class);
-//		String content = xStream2.toXML(recevie);
-//		content = content.replaceAll("&lt;", "<");// <
-//		content = content.replaceAll("&gt;", ">");// >
-//		System.out.println(content);
-		
+		System.out.println(beanToXml(recevie));
 	}
 	
-
 
 }

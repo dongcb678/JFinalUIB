@@ -84,4 +84,16 @@ public abstract class ToolString {
 			fileExt = ".mp4";
 		return fileExt;
 	}
+	
+	/**
+	 * 获取bean名称
+	 * @param bean
+	 * @return
+	 */
+	public static String beanName(Object bean) {
+		String fullClassName = bean.getClass().getName();
+		String classNameTemp = fullClassName.substring(fullClassName.lastIndexOf(".") + 1, fullClassName.length());
+		return classNameTemp.substring(0, 1) + classNameTemp.substring(1);
+	}
+	
 }

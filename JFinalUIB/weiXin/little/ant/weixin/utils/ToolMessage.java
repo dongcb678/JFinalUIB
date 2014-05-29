@@ -69,7 +69,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(new Date().getTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		return ToolXml.beanToXML(text);
+		return ToolXml.beanToXml(text);
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(new Date().getTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		return ToolXml.beanToXML(text);
+		return ToolXml.beanToXml(text);
 	}
 	
 	/**
@@ -115,7 +115,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(new Date().getTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		return ToolXml.beanToXML(text);
+		return ToolXml.beanToXml(text);
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class ToolMessage {
 					newsMessage.setMsgType("news");
 					newsMessage.setArticles(articleList);
 					newsMessage.setArticleCount(String.valueOf(articleList.size()));
-					return ToolXml.beanToXML(newsMessage);
+					return ToolXml.beanToXml(newsMessage);
 				}
 			}
 		}
@@ -359,7 +359,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(new Date().getTime()));
 		text.setMsgType("text");
 		text.setContent(content);
-		return ToolXml.beanToXML(text);
+		return ToolXml.beanToXml(text);
 	}
 
 	/**
