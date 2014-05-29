@@ -1,9 +1,9 @@
-package little.ant.weixin.vo.cservice;
+package little.ant.weixin.vo.message;
 
 /**
- * 图文model
+ * 图文
  */
-public class Article {
+public class ResponseMsgArticle {
 	
 	// 图文消息名称
 	private String Title;

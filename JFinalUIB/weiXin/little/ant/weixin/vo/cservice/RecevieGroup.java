@@ -3,7 +3,7 @@ package little.ant.weixin.vo.cservice;
 /**
  * 公众账号分组信息
  */
-public class WeixinGroup {
+public class RecevieGroup {
 	
 	// 分组id
 	private int id;

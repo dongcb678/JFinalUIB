@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.List;
 
 import little.ant.pingtai.utils.ToolString;
-import little.ant.weixin.vo.cservice.Article;
-import little.ant.weixin.vo.map.BaiduPlace;
-import little.ant.weixin.vo.map.UserLocation;
+import little.ant.weixin.vo.map.RecevieBaiduPlace;
+import little.ant.weixin.vo.map.RecevieUserLocation;
+import little.ant.weixin.vo.message.ResponseMsgArticle;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -36,7 +36,7 @@ public class ToolBaiduMap {
 	 * @return List<BaiduPlace>
 	 * @throws UnsupportedEncodingException
 	 */
-	public static List<BaiduPlace> searchPlace(String query, String lng, String lat) {
+	public static List<RecevieBaiduPlace> searchPlace(String query, String lng, String lat) {
 		// 拼装请求地址
 		String requestUrl = "http://api.map.baidu.com/place/v2/search?&query=QUERY&location=LAT,LNG&radius=2000&output=xml&scope=2&page_size=10&page_num=0&ak=CA21bdecc75efc1664af5a195c30bb4e";
 		requestUrl = requestUrl.replace("QUERY", ToolString.urlEncode(query));
@@ -45,7 +45,7 @@ public class ToolBaiduMap {
 		// 调用Place API圆形区域检索
 		String respXml = httpRequest(requestUrl);
 		// 解析返回的xml
-		List<BaiduPlace> placeList = parsePlaceXml(respXml);
+		List<RecevieBaiduPlace> placeList = parsePlaceXml(respXml);
 		return placeList;
 	}
 
@@ -91,8 +91,8 @@ public class ToolBaiduMap {
 	 * @return List<BaiduPlace>
 	 */
 	@SuppressWarnings("unchecked")
-	private static List<BaiduPlace> parsePlaceXml(String xml) {
-		List<BaiduPlace> placeList = null;
+	private static List<RecevieBaiduPlace> parsePlaceXml(String xml) {
+		List<RecevieBaiduPlace> placeList = null;
 		try {
 			Document document = DocumentHelper.parseText(xml);
 			// 得到xml根元素
@@ -103,7 +103,7 @@ public class ToolBaiduMap {
 			List<Element> resultElementList = resultsElement.elements("result");
 			// 判断<result>集合的大小
 			if (resultElementList.size() > 0) {
-				placeList = new ArrayList<BaiduPlace>();
+				placeList = new ArrayList<RecevieBaiduPlace>();
 				// POI名称
 				Element nameElement = null;
 				// POI地址信息
@@ -124,7 +124,7 @@ public class ToolBaiduMap {
 					telephoneElement = resultElement.element("telephone");
 					detailInfoElement = resultElement.element("detail_info");
 
-					BaiduPlace place = new BaiduPlace();
+					RecevieBaiduPlace place = new RecevieBaiduPlace();
 					place.setName(nameElement.getText());
 					place.setAddress(addressElement.getText());
 					place.setLng(locationElement.element("lng").getText());
@@ -157,14 +157,14 @@ public class ToolBaiduMap {
 	 * @param bd09Lat 纬度
 	 * @return List<Article>
 	 */
-	public static List<Article> makeArticleList(List<BaiduPlace> placeList, String bd09Lng, String bd09Lat) {
+	public static List<ResponseMsgArticle> makeArticleList(List<RecevieBaiduPlace> placeList, String bd09Lng, String bd09Lat) {
 		// 项目的根路径
 		String basePath = "http://0.weixinmptest.duapp.com/";
-		List<Article> list = new ArrayList<Article>();
-		BaiduPlace place = null;
+		List<ResponseMsgArticle> list = new ArrayList<ResponseMsgArticle>();
+		RecevieBaiduPlace place = null;
 		for (int i = 0; i < placeList.size(); i++) {
 			place = placeList.get(i);
-			Article article = new Article();
+			ResponseMsgArticle article = new ResponseMsgArticle();
 			article.setTitle(place.getName() + "\n距离约" + place.getDistance() + "米");
 			// P1表示用户发送的位置（坐标转换后），p2表示当前POI所在位置
 			article.setUrl(String.format(basePath + "route.jsp?p1=%s,%s&p2=%s,%s", bd09Lng, bd09Lat, place.getLng(), place.getLat()));
@@ -185,13 +185,13 @@ public class ToolBaiduMap {
 	 * @param lat 纬度
 	 * @return UserLocation
 	 */
-	public static UserLocation convertCoord(String lng, String lat) {
+	public static RecevieUserLocation convertCoord(String lng, String lat) {
 		// 百度坐标转换接口
 		String convertUrl = "http://api.map.baidu.com/ag/coord/convert?from=2&to=4&x={x}&y={y}";
 		convertUrl = convertUrl.replace("{x}", lng);
 		convertUrl = convertUrl.replace("{y}", lat);
 
-		UserLocation location = new UserLocation();
+		RecevieUserLocation location = new RecevieUserLocation();
 		try {
 			String jsonCoord = httpRequest(convertUrl);
 			JSONObject jsonObject = JSONObject.parseObject(jsonCoord);

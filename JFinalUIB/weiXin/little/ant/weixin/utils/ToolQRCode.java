@@ -9,7 +9,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 import little.ant.pingtai.utils.ToolHttp;
 import little.ant.pingtai.utils.ToolString;
-import little.ant.weixin.vo.cservice.WeixinQRCode;
+import little.ant.weixin.vo.cservice.RecevieQRCode;
 
 import org.apache.log4j.Logger;
 
@@ -27,7 +27,7 @@ public class ToolQRCode {
 	 * @param sceneId 场景ID
 	 * @return WeixinQRCode
 	 */
-	public static WeixinQRCode createTemporaryQRCode(String accessToken, int expireSeconds, int sceneId) {
+	public static RecevieQRCode createTemporaryQRCode(String accessToken, int expireSeconds, int sceneId) {
 		// 拼接请求地址
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=ACCESS_TOKEN";
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
@@ -36,7 +36,7 @@ public class ToolQRCode {
 		// 创建临时带参二维码
 		try {
 			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonMsg, expireSeconds, sceneId), "application/json");
-			WeixinQRCode weixinQRCode = JSON.parseObject(jsonStr, WeixinQRCode.class);
+			RecevieQRCode weixinQRCode = JSON.parseObject(jsonStr, RecevieQRCode.class);
 			return weixinQRCode;
 		} catch (Exception e) {
 			log.error("ToolQRCode.createTemporaryQRCode创建临时带参二维码异常，accessToken：" + accessToken + " expireSeconds：" + expireSeconds + " sceneId：" + sceneId);
@@ -60,7 +60,7 @@ public class ToolQRCode {
 		// 创建永久带参二维码
 		try {
 			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonMsg, sceneId), "application/json");
-			WeixinQRCode weixinQRCode = JSON.parseObject(jsonStr, WeixinQRCode.class);
+			RecevieQRCode weixinQRCode = JSON.parseObject(jsonStr, RecevieQRCode.class);
 			String ticket = weixinQRCode.getTicket();
 			return ticket;
 		} catch (Exception e) {
@@ -118,7 +118,7 @@ public class ToolQRCode {
 		/**
 		 * 创建临时二维码
 		 */
-		WeixinQRCode weixinQRCode = createTemporaryQRCode(accessToken, 900, 111111);
+		RecevieQRCode weixinQRCode = createTemporaryQRCode(accessToken, 900, 111111);
 		// 临时二维码的ticket
 		System.out.println(weixinQRCode.getTicket());
 		// 临时二维码的有效时间

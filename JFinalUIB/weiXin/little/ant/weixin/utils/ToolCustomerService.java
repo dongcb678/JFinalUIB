@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.pingtai.utils.ToolHttp;
-import little.ant.weixin.vo.cservice.Article;
-import little.ant.weixin.vo.cservice.Music;
+import little.ant.weixin.vo.cservice.ResponseMusic;
+import little.ant.weixin.vo.message.ResponseMsgArticle;
 
 import org.apache.log4j.Logger;
 
@@ -75,9 +75,9 @@ public class ToolCustomerService {
 	 * @param music 音乐对象
 	 * @return
 	 */
-	public static String makeMusicCustomMessage(String openId, Music music) {
+	public static String makeMusicCustomMessage(String openId, ResponseMusic music) {
 		String jsonMsg = "{\"touser\":\"%s\",\"msgtype\":\"music\",\"music\":%s}";
-		jsonMsg = String.format(jsonMsg, openId, JSON.toJSONString(jsonMsg));
+		jsonMsg = String.format(jsonMsg, openId, JSON.toJSONString(music));
 		// 将jsonMsg中的thumbmediaid替换为thumb_media_id
 		jsonMsg = jsonMsg.replace("thumbmediaid", "thumb_media_id");
 		return jsonMsg;
@@ -90,7 +90,7 @@ public class ToolCustomerService {
 	 * @param articleList 图文消息列表
 	 * @return
 	 */
-	public static String makeNewsCustomMessage(String openId, List<Article> articleList) {
+	public static String makeNewsCustomMessage(String openId, List<ResponseMsgArticle> articleList) {
 		String jsonMsg = "{\"touser\":\"%s\",\"msgtype\":\"news\",\"news\":{\"articles\":%s}}";
 		jsonMsg = String.format(jsonMsg, openId, JSONArray.toJSONString(articleList).replaceAll("\"", "\\\""));
 		// 将jsonMsg中的picUrl替换为picurl
@@ -147,17 +147,17 @@ public class ToolCustomerService {
 		/**
 		 * 发送客服消息（图文消息）
 		 */
-		Article article1 = new Article();
+		ResponseMsgArticle article1 = new ResponseMsgArticle();
 		article1.setTitle("微信上也能斗地主");
 		article1.setDescription("");
 		article1.setPicUrl("http://www.egouji.com/xiaoq/game/doudizhu_big.png");
 		article1.setUrl("http://resource.duopao.com/duopao/games/small_games/weixingame/Doudizhu/doudizhu.htm");
-		Article article2 = new Article();
+		ResponseMsgArticle article2 = new ResponseMsgArticle();
 		article2.setTitle("傲气雄鹰\n80后不得不玩的经典游戏");
 		article2.setDescription("");
 		article2.setPicUrl("http://www.egouji.com/xiaoq/game/aoqixiongying.png");
 		article2.setUrl("http://resource.duopao.com/duopao/games/small_games/weixingame/Plane/aoqixiongying.html");
-		List<Article> list = new ArrayList<Article>();
+		List<ResponseMsgArticle> list = new ArrayList<ResponseMsgArticle>();
 		list.add(article1);
 		list.add(article2);
 		// 组装图文客服消息

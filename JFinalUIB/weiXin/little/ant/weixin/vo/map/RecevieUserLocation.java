@@ -3,7 +3,7 @@ package little.ant.weixin.vo.map;
 /**
  * 用户地理位置model
  */
-public class UserLocation {
+public class RecevieUserLocation {
 	
 	private String openId;
 	private String lng;

@@ -4,7 +4,7 @@ package little.ant.weixin.vo.map;
  * 地址信息
  * @author 董华健
  */
-public class BaiduPlace implements Comparable<BaiduPlace> {
+public class RecevieBaiduPlace implements Comparable<RecevieBaiduPlace> {
 
 	// 名称
 	private String name;
@@ -68,7 +68,7 @@ public class BaiduPlace implements Comparable<BaiduPlace> {
 	}
 
 	@Override
-	public int compareTo(BaiduPlace baiduPlace) {
+	public int compareTo(RecevieBaiduPlace baiduPlace) {
 		return this.distance - baiduPlace.getDistance();
 	}
 

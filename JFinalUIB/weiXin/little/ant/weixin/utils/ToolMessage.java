@@ -5,9 +5,8 @@ import java.util.List;
 
 import little.ant.pingtai.utils.ToolUtils;
 import little.ant.pingtai.utils.ToolXml;
-import little.ant.weixin.vo.cservice.Article;
-import little.ant.weixin.vo.map.BaiduPlace;
-import little.ant.weixin.vo.map.UserLocation;
+import little.ant.weixin.vo.map.RecevieBaiduPlace;
+import little.ant.weixin.vo.map.RecevieUserLocation;
 import little.ant.weixin.vo.message.RecevieEventLocation;
 import little.ant.weixin.vo.message.RecevieEventMenu;
 import little.ant.weixin.vo.message.RecevieEventQRCode;
@@ -18,6 +17,7 @@ import little.ant.weixin.vo.message.RecevieMsgLocation;
 import little.ant.weixin.vo.message.RecevieMsgText;
 import little.ant.weixin.vo.message.RecevieMsgVideo;
 import little.ant.weixin.vo.message.RecevieMsgVoice;
+import little.ant.weixin.vo.message.ResponseMsgArticle;
 import little.ant.weixin.vo.message.ResponseMsgNews;
 import little.ant.weixin.vo.message.ResponseMsgText;
 
@@ -215,12 +215,12 @@ public class ToolMessage {
 				// 根据转换后（纠偏）的坐标搜索周边POI
 				String bd09Lng = location.getStr("bd09_lng");
 				String bd09Lat = location.getStr("bd09_lat");
-				List<BaiduPlace> placeList = ToolBaiduMap.searchPlace(keyWord, bd09Lng, bd09Lat);
+				List<RecevieBaiduPlace> placeList = ToolBaiduMap.searchPlace(keyWord, bd09Lng, bd09Lat);
 				// 未搜索到POI
 				if (null == placeList || 0 == placeList.size()) {
 					responseContent = String.format("/难过，您发送的位置附近未搜索到“%s”信息！", keyWord);
 				} else {
-					List<Article> articleList = ToolBaiduMap.makeArticleList(placeList, bd09Lng, bd09Lat);
+					List<ResponseMsgArticle> articleList = ToolBaiduMap.makeArticleList(placeList, bd09Lng, bd09Lat);
 					// 回复图文消息
 					ResponseMsgNews newsMessage = new ResponseMsgNews();
 					newsMessage.setToUserName(fromUserName);
@@ -324,7 +324,7 @@ public class ToolMessage {
 		String bd09Lng = null;
 		String bd09Lat = null;
 		// 调用接口转换坐标
-		UserLocation userLocation = ToolBaiduMap.convertCoord(lng, lat);
+		RecevieUserLocation userLocation = ToolBaiduMap.convertCoord(lng, lat);
 		if (null != userLocation) {
 			bd09Lng = userLocation.getBd09Lng();
 			bd09Lat = userLocation.getBd09Lat();

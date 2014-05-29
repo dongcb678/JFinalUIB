@@ -3,7 +3,7 @@ package little.ant.weixin.vo.cservice;
 /**
  * 临时二维码信息
  */
-public class WeixinQRCode {
+public class RecevieQRCode {
 	
 	// 获取的二维码ticket
 	private String ticket;

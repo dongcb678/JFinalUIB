@@ -3,7 +3,7 @@ package little.ant.weixin.vo.cservice;
 /**
  * 微信用户的基本信息
  */
-public class WeixinUserInfo {
+public class RecevieUserInfo {
 	
 	// 用户的标识
 	private String openId;

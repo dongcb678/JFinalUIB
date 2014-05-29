@@ -3,7 +3,7 @@ package little.ant.weixin.vo.cservice;
 /**
  * 音乐model
  */
-public class Music {
+public class ResponseMusic {
 	
 	// 音乐标题
 	private String Title;

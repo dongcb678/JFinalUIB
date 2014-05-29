@@ -3,7 +3,7 @@ package little.ant.weixin.utils;
 import java.util.List;
 
 import little.ant.pingtai.utils.ToolHttp;
-import little.ant.weixin.vo.cservice.WeixinGroup;
+import little.ant.weixin.vo.cservice.RecevieGroup;
 
 import org.apache.log4j.Logger;
 
@@ -20,14 +20,14 @@ public class ToolGroup {
 	 * @param accessToken 调用接口凭证
 	 */
 	@SuppressWarnings( { "unchecked" })
-	public static List<WeixinGroup> getGroups(String accessToken) {
+	public static List<RecevieGroup> getGroups(String accessToken) {
 		// 拼接请求地址
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/groups/get?access_token=ACCESS_TOKEN";
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
 		// 查询分组
 		try {
 			String jsonStr = ToolHttp.get(true, requestUrl);
-			List<WeixinGroup> weixinGroupList = (List<WeixinGroup>) JSONArray.parseObject(jsonStr, WeixinGroup.class);
+			List<RecevieGroup> weixinGroupList = (List<RecevieGroup>) JSONArray.parseObject(jsonStr, RecevieGroup.class);
 			return weixinGroupList;
 		} catch (Exception e) {
 			log.error("ToolGroup.getGroups查询分组异常，accessToken：" + accessToken);
@@ -42,7 +42,7 @@ public class ToolGroup {
 	 * @param groupName 分组名称
 	 * @return
 	 */
-	public static WeixinGroup createGroup(String accessToken, String groupName) {
+	public static RecevieGroup createGroup(String accessToken, String groupName) {
 		// 拼接请求地址
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/groups/create?access_token=ACCESS_TOKEN";
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
@@ -51,7 +51,7 @@ public class ToolGroup {
 		// 创建分组
 		try {
 			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonData, groupName), "application/json");
-			WeixinGroup weixinGroup = JSONObject.parseObject(jsonStr, WeixinGroup.class);
+			RecevieGroup weixinGroup = JSONObject.parseObject(jsonStr, RecevieGroup.class);
 			return weixinGroup;
 		} catch (Exception e) {
 			log.error("ToolGroup.createGroup创建分组异常，accessToken：" + accessToken + " groupName：" + groupName);
@@ -77,7 +77,7 @@ public class ToolGroup {
 		// 修改分组名
 		try {
 			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonData, groupId, groupName), "application/json");
-			WeixinGroup weixinGroup = JSONObject.parseObject(jsonStr, WeixinGroup.class);
+			RecevieGroup weixinGroup = JSONObject.parseObject(jsonStr, RecevieGroup.class);
 			if (null != weixinGroup.getErrcode() && weixinGroup.getErrcode().equals("0")) {
 				result = true;
 			}
@@ -106,7 +106,7 @@ public class ToolGroup {
 		// 移动用户分组
 		try {
 			String jsonStr = ToolHttp.post(true, requestUrl, String.format(jsonData, openId, groupId), "application/json");
-			WeixinGroup weixinGroup = JSONObject.parseObject(jsonStr, WeixinGroup.class);
+			RecevieGroup weixinGroup = JSONObject.parseObject(jsonStr, RecevieGroup.class);
 			if (null != weixinGroup.getErrcode() && weixinGroup.getErrcode().equals("0")) {
 				result = true;
 			}
@@ -124,16 +124,16 @@ public class ToolGroup {
 		/**
 		 * 查询分组
 		 */
-		List<WeixinGroup> groupList = getGroups(accessToken);
+		List<RecevieGroup> groupList = getGroups(accessToken);
 		// 循环输出各分组信息
-		for (WeixinGroup group : groupList) {
+		for (RecevieGroup group : groupList) {
 			System.out.println(String.format("ID：%d 名称：%s 用户数：%d", group.getId(), group.getName(), group.getCount()));
 		}
 
 		/**
 		 * 创建分组
 		 */
-		WeixinGroup group = createGroup(accessToken, "公司员工");
+		RecevieGroup group = createGroup(accessToken, "公司员工");
 		System.out.println(String.format("成功创建分组：%s id：%d", group.getName(), group.getId()));
 
 		/**

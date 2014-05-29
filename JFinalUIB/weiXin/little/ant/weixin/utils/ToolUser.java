@@ -1,8 +1,8 @@
 package little.ant.weixin.utils;
 
 import little.ant.pingtai.utils.ToolHttp;
-import little.ant.weixin.vo.cservice.WeixinUserInfo;
-import little.ant.weixin.vo.cservice.WeixinUserList;
+import little.ant.weixin.vo.cservice.RecevieUserInfo;
+import little.ant.weixin.vo.cservice.RecevieUserList;
 
 import org.apache.log4j.Logger;
 
@@ -19,14 +19,14 @@ public class ToolUser {
 	 * @param openId 用户标识
 	 * @return WeixinUserInfo
 	 */
-	public static WeixinUserInfo getUserInfo(String accessToken, String openId) {
+	public static RecevieUserInfo getUserInfo(String accessToken, String openId) {
 		// 拼接请求地址
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID";
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
 		// 获取用户信息
 		try {
 			String jsonStr = ToolHttp.get(true, requestUrl);
-			WeixinUserInfo weixinUserInfo = JSONObject.parseObject(jsonStr, WeixinUserInfo.class);
+			RecevieUserInfo weixinUserInfo = JSONObject.parseObject(jsonStr, RecevieUserInfo.class);
 			return weixinUserInfo;
 		} catch (Exception e) {
 			log.error("ToolUser.getUserInfo获取用户信息异常，accessToken：" + accessToken + " openId：" + openId);
@@ -41,7 +41,7 @@ public class ToolUser {
 	 * @param nextOpenId 第一个拉取的openId，不填默认从头开始拉取
 	 * @return WeixinUserList
 	 */
-	public static WeixinUserList getUserList(String accessToken, String nextOpenId) {
+	public static RecevieUserList getUserList(String accessToken, String nextOpenId) {
 		if (null == nextOpenId){
 			nextOpenId = "";
 		}
@@ -51,7 +51,7 @@ public class ToolUser {
 		// 获取关注者列表
 		try {
 			String jsonStr = ToolHttp.get(true, requestUrl);
-			WeixinUserList weixinUserList = JSONObject.parseObject(jsonStr, WeixinUserList.class);
+			RecevieUserList weixinUserList = JSONObject.parseObject(jsonStr, RecevieUserList.class);
 			return weixinUserList;
 		} catch (Exception e) {
 			log.error("ToolUser.getUserInfo获取用户信息异常，accessToken：" + accessToken + " nextOpenId：" + nextOpenId);
@@ -66,7 +66,7 @@ public class ToolUser {
 		/**
 		 * 获取用户信息
 		 */
-		WeixinUserInfo user = getUserInfo(accessToken, "oEdzejiHCDqafJbz4WNJtWTMbDcE");
+		RecevieUserInfo user = getUserInfo(accessToken, "oEdzejiHCDqafJbz4WNJtWTMbDcE");
 		System.out.println("OpenID：" + user.getOpenId());
 		System.out.println("关注状态：" + user.getSubscribe());
 		System.out.println("关注时间：" + user.getSubscribeTime());
@@ -81,7 +81,7 @@ public class ToolUser {
 		/**
 		 * 获取关注者列表
 		 */
-		WeixinUserList weixinUserList = getUserList(accessToken, "");
+		RecevieUserList weixinUserList = getUserList(accessToken, "");
 		System.out.println("总关注用户数：" + weixinUserList.getTotal());
 		System.out.println("本次获取用户数：" + weixinUserList.getCount());
 		System.out.println("OpenID列表：" + weixinUserList.getOpenIdList().toString());

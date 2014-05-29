@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 关注用户列表
  */
-public class WeixinUserList {
+public class RecevieUserList {
 	
 	// 公众账号的总关注用户数
 	private int total;
