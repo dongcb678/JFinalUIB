@@ -2,7 +2,7 @@ package little.ant.weixin.controller;
 
 import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.controller.BaseController;
-import little.ant.weixin.service.MessageService;
+import little.ant.weixin.service.WeiXinService;
 import little.ant.weixin.utils.ToolOAuth;
 import little.ant.weixin.utils.ToolSignature;
 import little.ant.weixin.vo.oauth.RecevieOauth2Token;
@@ -14,11 +14,11 @@ import org.apache.log4j.Logger;
  * 接收微信消息
  * @author 董华健
  */
-public class MessageController extends BaseController {
+public class WeiXinController extends BaseController {
 
-	private static Logger log = Logger.getLogger(MessageController.class);
+	private static Logger log = Logger.getLogger(WeiXinController.class);
 	
-	private MessageService receiveService = new MessageService();
+	private WeiXinService receiveService = new WeiXinService();
 	
 	/**
 	 * 1.在开发者首次提交验证申请时，微信服务器将发送GET请求到填写的URL上，并且带上四个参数（signature、timestamp、nonce、echostr），

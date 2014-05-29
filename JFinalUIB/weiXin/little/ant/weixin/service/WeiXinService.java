@@ -19,9 +19,9 @@ import little.ant.weixin.vo.message.RecevieMsgVoice;
 
 import org.apache.log4j.Logger;
 
-public class MessageService extends BaseService {
+public class WeiXinService extends BaseService {
 
-	private static Logger log = Logger.getLogger(MessageService.class);
+	private static Logger log = Logger.getLogger(WeiXinService.class);
 
 	/**
 	 * 消息处理

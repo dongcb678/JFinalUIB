@@ -34,6 +34,7 @@ import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadSysLog;
+import little.ant.weixin.controller.WeiXinController;
 import little.ant.weixin.model.Article;
 import little.ant.weixin.model.Message;
 import little.ant.weixin.model.Location;
@@ -111,6 +112,7 @@ public class JfinalConfig extends JFinalConfig {
 	 * 配置路由
 	 */
 	public void configRoute(Routes me) {
+		// 系统路由
 		me.add("/jf/", IndexController.class);
 		me.add("/jf/index", IndexController.class);
 		me.add("/jf/login", LoginController.class);
@@ -125,6 +127,8 @@ public class JfinalConfig extends JFinalConfig {
 		me.add("/jf/sysLog", SysLogController.class);
 		me.add("/jf/systems", SystemsController.class);
 		me.add("/jf/user", UserController.class);
+		// 微信路由
+		me.add("/jf/weiXin", WeiXinController.class);
 	}
 	
 	/**
@@ -141,6 +145,7 @@ public class JfinalConfig extends JFinalConfig {
 		// 3.配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 		arp.setDialect(new PostgreSqlDialect());// 数据库方言
+		// 系统表
 		arp.addMapping("pt_department", "ids", Department.class);
 		arp.addMapping("pt_dict", "ids", Dict.class);
 		arp.addMapping("pt_group", "ids", Group.class);
@@ -153,7 +158,7 @@ public class JfinalConfig extends JFinalConfig {
 		arp.addMapping("pt_systems", "ids", Systems.class);
 		arp.addMapping("pt_user", "ids", User.class);
 		arp.addMapping("pt_userinfo", "ids", UserInfo.class);
-		
+		// 微信表
 		arp.addMapping("wx_message", "ids", Message.class);
 		arp.addMapping("wx_article", "ids", Article.class);
 		arp.addMapping("wx_user", "ids", little.ant.weixin.model.User.class);
