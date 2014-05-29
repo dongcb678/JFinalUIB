@@ -207,7 +207,7 @@ public class ToolMessage {
 		if (content.startsWith("附近")) {// 周边搜索
 			String keyWord = content.replaceAll("附近", "").trim();
 			// 获取用户最后一次发送的地理位置
-			little.ant.weixin.model.UserLocation location = little.ant.weixin.model.UserLocation.dao.findFirst("select * form wx_userlocation where open_id=? order by createdate desc ", fromUserName);
+			little.ant.weixin.model.Location location = little.ant.weixin.model.Location.dao.findFirst("select * form wx_userlocation where open_id=? order by createdate desc ", fromUserName);
 			// 未获取到
 			if (null == location) {
 				responseContent = getUsage();
@@ -331,7 +331,7 @@ public class ToolMessage {
 		}
 		
 		// 保存用户地理位置
-		little.ant.weixin.model.UserLocation uLocation = new little.ant.weixin.model.UserLocation();
+		little.ant.weixin.model.Location uLocation = new little.ant.weixin.model.Location();
 		uLocation.set("ids", ToolUtils.getUuidByJdk(true));
 		uLocation.set("open_id", fromUserName);
 		uLocation.set("lng", lng);

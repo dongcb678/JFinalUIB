@@ -34,7 +34,9 @@ import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadSysLog;
-import little.ant.weixin.model.UserLocation;
+import little.ant.weixin.model.Article;
+import little.ant.weixin.model.Message;
+import little.ant.weixin.model.Location;
 import little.ant.weixin.utils.ToolWeiXin;
 
 import org.apache.log4j.Logger;
@@ -151,7 +153,12 @@ public class JfinalConfig extends JFinalConfig {
 		arp.addMapping("pt_systems", "ids", Systems.class);
 		arp.addMapping("pt_user", "ids", User.class);
 		arp.addMapping("pt_userinfo", "ids", UserInfo.class);
-		arp.addMapping("wx_userlocation", "ids", UserLocation.class);
+		
+		arp.addMapping("wx_message", "ids", Message.class);
+		arp.addMapping("wx_article", "ids", Article.class);
+		arp.addMapping("wx_user", "ids", little.ant.weixin.model.User.class);
+		arp.addMapping("wx_group", "ids", little.ant.weixin.model.Group.class);
+		arp.addMapping("wx_location", "ids", Location.class);
 		me.add(arp);
 	}
 	
