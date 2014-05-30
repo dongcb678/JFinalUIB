@@ -36,9 +36,8 @@ import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadSysLog;
 import little.ant.weixin.controller.MessageController;
 import little.ant.weixin.model.Article;
-import little.ant.weixin.model.Message;
 import little.ant.weixin.model.Location;
-import little.ant.weixin.utils.ToolWeiXin;
+import little.ant.weixin.model.Message;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
@@ -85,14 +84,12 @@ public class JfinalConfig extends JFinalConfig {
 		system_jdbcUrl = getProperty("system.jdbcUrl").trim();
 		system_userName = getProperty("system.userName").trim();
 		system_passWord = getProperty("system.passWord").trim();
+		
 		system_devMode = getPropertyToBoolean("system.devMode", false);
+		
 		system_securityKey = getProperty("system.securityKey").trim();
 		system_passErrorCount = getPropertyToInt("system.passErrorCount", 3);
 		system_passErrorHour = getPropertyToInt("system.passErrorHour", 3);
-		
-		ToolWeiXin.weixin_appID = getProperty("weixin.appID").trim();
-		ToolWeiXin.weixin_appSecret = getProperty("weixin.appSecret").trim();
-		ToolWeiXin.weixin_token = getProperty("weixin.token").trim();
 		
 		me.setEncoding("UTF-8"); 
 		me.setDevMode(system_devMode);

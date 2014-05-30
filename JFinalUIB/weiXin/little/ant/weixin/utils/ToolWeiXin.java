@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import little.ant.pingtai.common.EhcacheFactory;
 import little.ant.pingtai.utils.ToolHttp;
 import little.ant.weixin.vo.message.RecevieToken;
 
@@ -21,9 +22,9 @@ public class ToolWeiXin {
 	/**
 	 * 通讯常量
 	 */
-	public static String weixin_appID;
-	public static String weixin_appSecret;
-	public static String weixin_token = "weixinchat";//开发者的Token，必须和开发者配置保持一致
+	public static String weixin_appID_key = "weixinAppID";
+	public static String weixin_appSecret_key = "weixinAppSecret";
+	public static String weixin_token_key = "weixinToken";//开发者的Token，必须和开发者配置保持一致weixinchat
 	
 	// 获取token
 	public static String weixin_token_url = "https://api.weixin.qq.com/cgi-bin/token";
@@ -49,8 +50,8 @@ public class ToolWeiXin {
 	public static RecevieToken getAccessToken() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(weixin_token_url).append("?").append("grant_type=client_credential");
-		sb.append("&appid=").append(weixin_appID);
-		sb.append("&secret=").append(weixin_appSecret);
+		sb.append("&appid=").append(EhcacheFactory.getInstance().get("system", weixin_appID_key));
+		sb.append("&secret=").append(EhcacheFactory.getInstance().get("system", weixin_appSecret_key));
 		try {
 			String jsonStr = ToolHttp.get(true, sb.toString());
 			RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);

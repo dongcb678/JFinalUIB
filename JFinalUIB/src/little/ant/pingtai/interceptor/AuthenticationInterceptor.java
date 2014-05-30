@@ -54,7 +54,7 @@ public class AuthenticationInterceptor implements Interceptor {
 
 		log.info("druid特殊处理");
 		if(uri.startsWith("/druid/")){
-			uri = "/WEB-INF/view/pingtai/druid/iframe.jsp";
+			uri = "/pingtai/druid/iframe.html";
 		}
 		
 		log.info("获取URI对象!");

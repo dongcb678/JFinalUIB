@@ -20,7 +20,7 @@ public class LoginValidator extends Validator {
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/login/vali")){
-			controller.render("/WEB-INF/view/pingtai/login.jsp");
+			controller.render("/pingtai/login.html");
 		}
 	}
 	

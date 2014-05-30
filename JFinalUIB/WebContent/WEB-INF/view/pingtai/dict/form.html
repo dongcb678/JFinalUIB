@@ -1,5 +1,3 @@
-
-
 <script type="text/javascript">
 
 function dataVali(form){
@@ -33,6 +31,22 @@ function dataVali(form){
 			<input type="text" name="dict.names" value="${dict.names!}" 
 				class="input-xlarge" maxlength="25" vMin="1" vType="chinaLetterNumber" onblur="onblurVali(this);">
 			<span class="help-inline">1-10位中文字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">编号</label>
+		<div class="controls">
+			<input type="text" name="dict.numbers" value="${dict.numbers!}" 
+				class="input-xlarge" maxlength="50" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">5-50位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">值</label>
+		<div class="controls">
+			<input type="text" name="dict.values" value="${dict.values!}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
 		</div>
 	</div>
 	<div class="control-group">

@@ -33,7 +33,7 @@ public class DictController extends BaseController {
 	@Before(DictValidator.class)
 	public void save() {
 		dictService.save(getModel(Dict.class));
-		redirect("/jf/dict/toUrl?toUrl=/WEB-INF/view/pingtai/dict/treeTableIframe.html");
+		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html");
 	}
 	
 	public void edit() {
@@ -47,12 +47,12 @@ public class DictController extends BaseController {
 	@Before(DictValidator.class)
 	public void update() {
 		dictService.update(getModel(Dict.class));
-		redirect("/jf/dict/toUrl?toUrl=/WEB-INF/view/pingtai/dict/treeTableIframe.html");
+		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html", true);
 	}
 	
 	public void delete() {
 		dictService.delete(getPara());
-		redirect("/jf/dict/toUrl?toUrl=/WEB-INF/view/pingtai/dict/treeTableIframe.html");
+		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html");
 	}
 
 }

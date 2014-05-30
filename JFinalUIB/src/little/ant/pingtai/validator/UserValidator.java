@@ -34,10 +34,10 @@ public class UserValidator extends Validator {
 
 		String actionKey = getActionKey();
 		if (actionKey.equals("/user/save")){
-			controller.render("/WEB-INF/view/user/add.jsp");
+			controller.render("/pingtai/user/add.jsp");
 		
 		}else if (actionKey.equals("/user/update")){
-			controller.render("/WEB-INF/view/user/update.jsp");
+			controller.render("/pingtai/user/update.jsp");
 		}
 	}
 }

@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import little.ant.pingtai.common.EhcacheFactory;
+
 import org.apache.log4j.Logger;
 
 public class ToolSignature {
@@ -20,7 +22,8 @@ public class ToolSignature {
 	 */
 	public static boolean checkSignature(String signature, String timestamp, String nonce) {
 		try {
-			String[] strSet = new String[] { ToolWeiXin.weixin_token, timestamp, nonce };
+			String weixin_token = (String) EhcacheFactory.getInstance().get("system", ToolWeiXin.weixin_token_key);
+			String[] strSet = new String[] { weixin_token, timestamp, nonce };
 			java.util.Arrays.sort(strSet);
 			String total = "";
 			for (String string : strSet) {
