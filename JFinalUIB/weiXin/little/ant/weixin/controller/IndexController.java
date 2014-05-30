@@ -18,5 +18,12 @@ public class IndexController extends BaseController {
 	public void index(){
 		
 	}
+
+	/**
+	 * 首页content
+	 */
+	public void content(){
+		render("/weiXin/content.html");
+	}
 	
 }

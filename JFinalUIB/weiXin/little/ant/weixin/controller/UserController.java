@@ -16,7 +16,9 @@ public class UserController extends BaseController {
 	private UserService userService = new UserService();
 	
 	public void index(){
-		
+		log.debug("微信用户管理：分页");
+		userService.list(splitPage);
+		render("/weiXin/user/list.html");
 	}
 	
 }

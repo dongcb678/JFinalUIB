@@ -64,11 +64,13 @@ public class JfinalConfig extends JFinalConfig {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(JfinalConfig.class);
 			
-	public static String system_driverClass;
-	public static String system_jdbcUrl;
-	public static String system_userName;
-	public static String system_passWord;
-	public static boolean system_devMode;
+	private static String system_driverClass;
+	private static String system_jdbcUrl;
+	private static String system_userName;
+	private static String system_passWord;
+	
+	private static boolean system_devMode;
+	
 	public static String system_securityKey;
 	public static int system_passErrorCount;
 	public static int system_passErrorHour;
@@ -113,60 +115,61 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public void configRoute(Routes me) {
 		// 系统路由
-		me.add("/jf/", IndexController.class);
-		me.add("/jf/index", IndexController.class);
-		me.add("/jf/login", LoginController.class);
-		me.add("/jf/dept", DepartmentController.class);
-		me.add("/jf/dict", DictController.class);
-		me.add("/jf/group", GroupController.class);
-		me.add("/jf/menu", MenuController.class);
-		me.add("/jf/module", ModuleController.class);
-		me.add("/jf/operator", OperatorController.class);
-		me.add("/jf/role", RoleController.class);
-		me.add("/jf/station", StationController.class);
-		me.add("/jf/sysLog", SysLogController.class);
-		me.add("/jf/systems", SystemsController.class);
-		me.add("/jf/user", UserController.class);
+		me.add("/jf/", IndexController.class); // 系统管理主页
+		me.add("/jf/index", IndexController.class); // 系统管理主页
+		me.add("/jf/login", LoginController.class); // 登陆管理
+		me.add("/jf/dept", DepartmentController.class); // 部门管理
+		me.add("/jf/dict", DictController.class); // 字典管理
+		me.add("/jf/group", GroupController.class); // 分组管理
+		me.add("/jf/menu", MenuController.class); // 菜单管理
+		me.add("/jf/module", ModuleController.class); // 模块管理
+		me.add("/jf/operator", OperatorController.class); // 功能管理
+		me.add("/jf/role", RoleController.class); // 角色管理
+		me.add("/jf/station", StationController.class); // 岗位管理
+		me.add("/jf/sysLog", SysLogController.class); // 日志管理
+		me.add("/jf/systems", SystemsController.class); // 系统管理
+		me.add("/jf/user", UserController.class); // 用户管理
+		
 		// 微信路由
-		me.add("/jf/wx/message", MessageController.class);
-		me.add("/jf/wx/index", little.ant.weixin.controller.IndexController.class);
-		me.add("/jf/wx/user", little.ant.weixin.controller.UserController.class);
-		me.add("/jf/wx/group", little.ant.weixin.controller.GroupController.class);
+		me.add("/jf/wx/index", little.ant.weixin.controller.IndexController.class); // 微信管理首页
+		me.add("/jf/wx/message", MessageController.class); // 接收消息处理和管理
+		me.add("/jf/wx/user", little.ant.weixin.controller.UserController.class); // 微信用户管理
+		me.add("/jf/wx/group", little.ant.weixin.controller.GroupController.class); // 微信用户分组管理
 	}
 	
 	/**
 	 * 配置插件
 	 */
 	public void configPlugin(Plugins me) {
-		// 1.配置Druid数据库连接池插件
+		// 1. 配置Druid数据库连接池插件
 		DruidPlugin druidPlugin = new DruidPlugin(system_jdbcUrl, system_userName, system_passWord, system_driverClass);
 		me.add(druidPlugin);
 
-		// 2.缓存
-		me.add(new EhCachePlugin());
+		// 2. 缓存
+		me.add(new EhCachePlugin()); // EhCache缓存
 		
-		// 3.配置ActiveRecord插件
+		// 3. 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
-		arp.setDialect(new PostgreSqlDialect());// 数据库方言
-		// 系统表
-		arp.addMapping("pt_department", "ids", Department.class);
-		arp.addMapping("pt_dict", "ids", Dict.class);
-		arp.addMapping("pt_group", "ids", Group.class);
-		arp.addMapping("pt_menu", "ids", Menu.class);
-		arp.addMapping("pt_module", "ids", Module.class);
-		arp.addMapping("pt_operator", "ids", Operator.class);
-		arp.addMapping("pt_role", "ids", Role.class);
-		arp.addMapping("pt_station", "ids", Station.class);
-		arp.addMapping("pt_syslog", "ids", Syslog.class);
-		arp.addMapping("pt_systems", "ids", Systems.class);
-		arp.addMapping("pt_user", "ids", User.class);
-		arp.addMapping("pt_userinfo", "ids", UserInfo.class);
-		// 微信表
-		arp.addMapping("wx_message", "ids", Message.class);
-		arp.addMapping("wx_article", "ids", Article.class);
-		arp.addMapping("wx_user", "ids", little.ant.weixin.model.User.class);
-		arp.addMapping("wx_group", "ids", little.ant.weixin.model.Group.class);
-		arp.addMapping("wx_location", "ids", Location.class);
+		arp.setDialect(new PostgreSqlDialect()); // 数据库方言
+		// 3.1 系统表
+		arp.addMapping("pt_department", "ids", Department.class); // 部门表
+		arp.addMapping("pt_dict", "ids", Dict.class); // 字典表
+		arp.addMapping("pt_group", "ids", Group.class); // 用户分组表
+		arp.addMapping("pt_menu", "ids", Menu.class); // 菜单表
+		arp.addMapping("pt_module", "ids", Module.class); // 模块表
+		arp.addMapping("pt_operator", "ids", Operator.class); // 功能表
+		arp.addMapping("pt_role", "ids", Role.class); // 角色表
+		arp.addMapping("pt_station", "ids", Station.class); // 岗位表
+		arp.addMapping("pt_syslog", "ids", Syslog.class); // 系统日志表
+		arp.addMapping("pt_systems", "ids", Systems.class); // 系统表
+		arp.addMapping("pt_user", "ids", User.class); // 用户表
+		arp.addMapping("pt_userinfo", "ids", UserInfo.class); // 用户明细表
+		// 3.2 微信表
+		arp.addMapping("wx_message", "ids", Message.class); // 消息表
+		arp.addMapping("wx_article", "ids", Article.class); // 消息图文表
+		arp.addMapping("wx_user", "ids", little.ant.weixin.model.User.class); // 微信用户表
+		arp.addMapping("wx_group", "ids", little.ant.weixin.model.Group.class); // 微信用户分组表
+		arp.addMapping("wx_location", "ids", Location.class); // 微信用户地理位置表
 		me.add(arp);
 	}
 	
@@ -175,25 +178,23 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public void configInterceptor(Interceptors me) {
 		//me.add(new SessionInViewInterceptor()); // 支持在使用session
-		me.add(new AuthenticationInterceptor());
-		me.add(new ParamPkgInterceptor());
+		me.add(new AuthenticationInterceptor()); // 权限认证拦截器
+		me.add(new ParamPkgInterceptor()); // 参数封装拦截器
 	}
 	
 	/**
 	 * 配置处理器
 	 */
 	public void configHandler(Handlers me) {
-		me.add(new GlobalHandler());
+		me.add(new GlobalHandler()); // 全局配置处理器，主要是记录日志
 	}
 	
 	/**
 	 * 系统启动完成后执行
 	 */
 	public void afterJFinalStart() {
-		// 缓存参数
-		new ParamInit().start();
-		// 启动操作日志入库线程
-		ThreadSysLog.startSaveDBThread();
+		new ParamInit().start(); // 缓存参数
+		ThreadSysLog.startSaveDBThread(); // 启动操作日志入库线程
 	}
 	
 	/**
