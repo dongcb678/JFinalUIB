@@ -87,7 +87,7 @@ public class ModuleService extends BaseService {
 		
 		Module module = new Module();
 		module.set("ids", ids);
-		module.set("isparent", "false");
+		module.set("isparent", "true");
 		module.set("parentmoduleids", pIds);
 		module.set("orderids", orderIds);
 		module.set("names", names);

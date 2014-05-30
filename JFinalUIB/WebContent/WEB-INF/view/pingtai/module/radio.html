@@ -37,12 +37,24 @@
 	};
 
 	//节点数据过滤
+	var moduleIds = '${paramMap.ids},';
 	function filter(treeId, parentNode, childNodes) {
 		if (!childNodes) {
 			return null;
 		}
+		var childNode;
+		var childNodeId;
+		var childNodeName;
+		var zTree = $.fn.zTree.getZTreeObj("zTreeContent");
 		for (var i=0, l=childNodes.length; i<l; i++) {
-			childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+			childNode = childNodes[i];
+			childNodeId = childNode.id;
+			childNodeName = childNode.name;
+			childNode.name = childNodeName.replace(/\.n/g, '.');
+			
+			if(moduleIds != '' && moduleIds.indexOf(childNodeId + ',') != -1){
+				zTree.checkNode(childNode, true, false, false);
+			}
 		}
 		return childNodes;
 	}
@@ -172,7 +184,7 @@
 
 	//////////////////选中事件处理////////////////////
 	
-	var className = "dark", checkedNodeIds = "", checkedNodeName = "";
+	var className = "dark", checkedNodeIds = "${paramMap.ids!}", checkedNodeName = "";
 	
 	function beforeCheck(treeId, treeNode) {
 		className = (className === "dark" ? "":"dark");

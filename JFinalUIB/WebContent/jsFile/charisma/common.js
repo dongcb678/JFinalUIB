@@ -50,7 +50,7 @@ function splitPageOut(totalRow, pageSize, pageNumber, totalPages, isSelectPage, 
 	//alert(totalRow+"--"+pageSize+"--"+pageNumber+"--"+totalPages);
 	var splitStr = '<ul>';
 	
-	if (pageNumber == 1) {
+	if (pageNumber == 1 || totalPages == 0) {
 		splitStr += '<li><a href="javascript:void(0)">上一页</a></li>';
 	} else {
 		splitStr += '<li><a href="javascript:splitPage(' + (pageNumber - 1) + ');">上一页</a></li>';
@@ -74,7 +74,7 @@ function splitPageOut(totalRow, pageSize, pageNumber, totalPages, isSelectPage, 
         }
     }
 	
-	if (pageNumber == totalPages) {
+	if (pageNumber == totalPages || totalPages == 0) {
 		splitStr += '<li><a href="javascript:void(0)">下一页</a></li>';
 	} else {
 		splitStr += '<li><a href="javascript:splitPage(' + (pageNumber + 1) + ');">下一页</a></li>';
@@ -88,6 +88,9 @@ function splitPageOut(totalRow, pageSize, pageNumber, totalPages, isSelectPage, 
 			} else {
 				splitStr += '<option value="' + i + '">跳转到第' + i + '页</option>';
 			}
+		}
+		if(totalPages == 0){
+			splitStr += '<option value="0">无跳转数据</option>';
 		}
 		splitStr += '</select>';
 		splitStr += '<li>&nbsp;&nbsp;';
