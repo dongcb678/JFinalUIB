@@ -2,7 +2,6 @@ package little.ant.pingtai.controller;
 
 import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.service.SystemsService;
-import little.ant.pingtai.utils.ToolUtils;
 import little.ant.pingtai.validator.SystemsValidator;
 
 import org.apache.log4j.Logger;
@@ -23,8 +22,7 @@ public class SystemsController extends BaseController {
 	
 	@Before(SystemsValidator.class)
 	public void save() {
-		ids = ToolUtils.getUuidByJdk(true);
-		getModel(Systems.class).set("ids", ids).save();
+		systemsService.save(getModel(Systems.class));
 		redirect("/jf/systems");
 	}
 	
@@ -40,7 +38,7 @@ public class SystemsController extends BaseController {
 	}
 	
 	public void delete() {
-		Systems.dao.deleteById(getPara());
+		systemsService.delete(getPara());
 		redirect("/jf/systems");
 	}
 
