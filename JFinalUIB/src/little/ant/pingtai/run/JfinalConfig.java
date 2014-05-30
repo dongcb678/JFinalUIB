@@ -53,7 +53,6 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
-import com.jfinal.render.ViewType;
 
 /**
  * API引导式配置
@@ -93,7 +92,7 @@ public class JfinalConfig extends JFinalConfig {
 		
 		me.setEncoding("UTF-8"); 
 		me.setDevMode(system_devMode);
-		me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
+		//me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
 		
 		me.setMainRenderFactory(new MyBeetlRenderFactory());
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
