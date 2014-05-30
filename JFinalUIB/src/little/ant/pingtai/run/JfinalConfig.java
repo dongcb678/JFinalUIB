@@ -34,7 +34,7 @@ import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadSysLog;
-import little.ant.weixin.controller.WeiXinController;
+import little.ant.weixin.controller.MessageController;
 import little.ant.weixin.model.Article;
 import little.ant.weixin.model.Message;
 import little.ant.weixin.model.Location;
@@ -128,7 +128,10 @@ public class JfinalConfig extends JFinalConfig {
 		me.add("/jf/systems", SystemsController.class);
 		me.add("/jf/user", UserController.class);
 		// 微信路由
-		me.add("/jf/weiXin", WeiXinController.class);
+		me.add("/jf/wx/message", MessageController.class);
+		me.add("/jf/wx/index", little.ant.weixin.controller.IndexController.class);
+		me.add("/jf/wx/user", little.ant.weixin.controller.UserController.class);
+		me.add("/jf/wx/group", little.ant.weixin.controller.GroupController.class);
 	}
 	
 	/**

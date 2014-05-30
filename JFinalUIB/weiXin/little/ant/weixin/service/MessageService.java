@@ -9,9 +9,9 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.tx.Tx;
 
-public class WeiXinService extends BaseService {
+public class MessageService extends BaseService {
 
-	private static Logger log = Logger.getLogger(WeiXinService.class);
+	private static Logger log = Logger.getLogger(MessageService.class);
 
 	/**
 	 * 消息处理

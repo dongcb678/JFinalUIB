@@ -51,10 +51,13 @@ public class ToolMessage {
 	public static final String recevie_msg_location = "location";
 	public static final String recevie_msg_link = "link";
 	
-	public static final String message_inout_in = "0";
-	public static final String message_inout_out = "1";
-	public static final String message_datatype_xml = "0";
-	public static final String message_datatype_json = "1";
+	/**
+	 * wx_message表字段值
+	 */
+	public static final String message_inout_in = "0";//接受的消息
+	public static final String message_inout_out = "1";//发出的消息
+	public static final String message_datatype_xml = "0";//数据类型XML
+	public static final String message_datatype_json = "1";//数据类型JSON
 	
 	/**
 	 * 订阅

@@ -8,9 +8,9 @@ import little.ant.weixin.vo.oauth.RecevieSNSUserInfo;
 
 import com.alibaba.fastjson.JSON;
 
-public class ToolOAuth {
+public class ToolOAuth2 {
 
-	private static Logger log = Logger.getLogger(ToolOAuth.class);
+	private static Logger log = Logger.getLogger(ToolOAuth2.class);
 	
 	/**
 	 * 获取网页授权凭证

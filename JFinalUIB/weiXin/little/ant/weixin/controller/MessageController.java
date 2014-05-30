@@ -2,8 +2,8 @@ package little.ant.weixin.controller;
 
 import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.controller.BaseController;
-import little.ant.weixin.service.WeiXinService;
-import little.ant.weixin.utils.ToolOAuth;
+import little.ant.weixin.service.MessageService;
+import little.ant.weixin.utils.ToolOAuth2;
 import little.ant.weixin.utils.ToolSignature;
 import little.ant.weixin.vo.oauth.RecevieOauth2Token;
 import little.ant.weixin.vo.oauth.RecevieSNSUserInfo;
@@ -14,11 +14,11 @@ import org.apache.log4j.Logger;
  * 接收微信消息
  * @author 董华健
  */
-public class WeiXinController extends BaseController {
+public class MessageController extends BaseController {
 
-	private static Logger log = Logger.getLogger(WeiXinController.class);
+	private static Logger log = Logger.getLogger(MessageController.class);
 	
-	private WeiXinService receiveService = new WeiXinService();
+	private MessageService messageService = new MessageService();
 	
 	/**
 	 * 1.在开发者首次提交验证申请时，微信服务器将发送GET请求到填写的URL上，并且带上四个参数（signature、timestamp、nonce、echostr），
@@ -44,7 +44,7 @@ public class WeiXinController extends BaseController {
 				String accountId = getPara("accountId");// 公众账号标识
 				String recverMsg = ContextBase.requestStream(getRequest());
 				log.info("接收微信发送过来的消息" + recverMsg);
-				String responseMsg = receiveService.messageProcess(accountId, recverMsg);
+				String responseMsg = messageService.messageProcess(accountId, recverMsg);
 				log.info("返回消息" + responseMsg);
 				renderText(responseMsg);
 				return;
@@ -64,13 +64,13 @@ public class WeiXinController extends BaseController {
 		boolean flag = ToolSignature.checkSignature(signature, timestamp, nonce);
 		if(!"authdeny".equals(code) && flag){
 			// 获取网页授权access_token
-			RecevieOauth2Token weixinOauth2Token = ToolOAuth.getOauth2AccessToken("APPID", "APPSECRET", code);
+			RecevieOauth2Token weixinOauth2Token = ToolOAuth2.getOauth2AccessToken("APPID", "APPSECRET", code);
 			// 网页授权接口访问凭证
 			String accessToken = weixinOauth2Token.getAccessToken();
 			// 用户标识
 			String openId = weixinOauth2Token.getOpenId();
 			// 获取用户信息
-			RecevieSNSUserInfo snsUserInfo = ToolOAuth.getSNSUserInfo(accessToken, openId);
+			RecevieSNSUserInfo snsUserInfo = ToolOAuth2.getSNSUserInfo(accessToken, openId);
 
 			// 设置要传递的参数
 			setAttr("snsUserInfo", snsUserInfo);
