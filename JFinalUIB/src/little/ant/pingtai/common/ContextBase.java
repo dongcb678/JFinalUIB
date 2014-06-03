@@ -64,6 +64,9 @@ public class ContextBase {
 			for (String groupIdsTemp : groupIdsArr) {
 				Group group = (Group) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
+				if(null == roleIdsStr || roleIdsStr.equals("")){
+					continue;
+				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
 					Role role = (Role) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIdsTemp);
@@ -81,6 +84,9 @@ public class ContextBase {
 			for (String ids : stationIdsArr) {
 				Station station = (Station) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
+				if(null == operatorIdsStr || operatorIdsStr.equals("")){
+					continue;
+				}
 				if (operatorIdsStr.indexOf(operatorIds) != -1) {
 					return true;
 				}
@@ -109,6 +115,9 @@ public class ContextBase {
 			for (String groupIdsTemp : groupIdsArr) {
 				Group group = (Group) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
+				if(null == roleIdsStr || roleIdsStr.equals("")){
+					continue;
+				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
 					Role role = (Role) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIdsTemp);
@@ -127,6 +136,9 @@ public class ContextBase {
 			for (String ids : stationIdsArr) {
 				Station station = (Station) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
+				if(null == operatorIdsStr || operatorIdsStr.equals("")){
+					continue;
+				}
 				if (operatorIdsStr.indexOf(operatorIds) != -1) {
 					return true;
 				}
