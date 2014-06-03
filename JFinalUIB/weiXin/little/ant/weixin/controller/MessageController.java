@@ -3,8 +3,8 @@ package little.ant.weixin.controller;
 import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.weixin.service.MessageService;
-import little.ant.weixin.utils.ToolOAuth2;
-import little.ant.weixin.utils.ToolSignature;
+import little.ant.weixin.tools.ToolOAuth2;
+import little.ant.weixin.tools.ToolSignature;
 import little.ant.weixin.vo.oauth.RecevieOauth2Token;
 import little.ant.weixin.vo.oauth.RecevieSNSUserInfo;
 

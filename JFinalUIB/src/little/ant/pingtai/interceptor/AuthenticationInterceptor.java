@@ -13,7 +13,7 @@ import little.ant.pingtai.handler.GlobalHandler;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.model.User;
-import little.ant.pingtai.utils.ToolWeb;
+import little.ant.pingtai.tools.ToolWeb;
 
 import org.apache.log4j.Logger;
 

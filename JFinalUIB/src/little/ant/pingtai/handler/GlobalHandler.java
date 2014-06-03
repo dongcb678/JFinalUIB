@@ -11,8 +11,8 @@ import little.ant.pingtai.beetl.MyBeetlRender;
 import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.thread.ThreadSysLog;
-import little.ant.pingtai.utils.ToolUtils;
-import little.ant.pingtai.utils.ToolWeb;
+import little.ant.pingtai.tools.ToolUtils;
+import little.ant.pingtai.tools.ToolWeb;
 
 import org.apache.log4j.Logger;
 

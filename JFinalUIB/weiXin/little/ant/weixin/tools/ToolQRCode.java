@@ -1,4 +1,4 @@
-package little.ant.weixin.utils;
+package little.ant.weixin.tools;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -7,8 +7,8 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import little.ant.pingtai.utils.ToolHttp;
-import little.ant.pingtai.utils.ToolString;
+import little.ant.pingtai.tools.ToolHttp;
+import little.ant.pingtai.tools.ToolString;
 import little.ant.weixin.vo.qrcode.RecevieQRCode;
 
 import org.apache.log4j.Logger;

@@ -1,4 +1,4 @@
-package little.ant.weixin.utils;
+package little.ant.weixin.tools;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

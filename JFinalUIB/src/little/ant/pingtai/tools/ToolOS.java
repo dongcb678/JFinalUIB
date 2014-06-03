@@ -1,4 +1,4 @@
-package little.ant.pingtai.utils;
+package little.ant.pingtai.tools;
 
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;

@@ -1,9 +1,9 @@
-package little.ant.weixin.utils;
+package little.ant.weixin.tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.pingtai.utils.ToolHttp;
+import little.ant.pingtai.tools.ToolHttp;
 import little.ant.weixin.vo.message.ResponseMsgArticle;
 import little.ant.weixin.vo.music.ResponseMusic;
 

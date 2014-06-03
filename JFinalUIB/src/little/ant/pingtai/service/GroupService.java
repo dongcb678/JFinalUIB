@@ -9,7 +9,7 @@ import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.User;
-import little.ant.pingtai.utils.ToolUtils;
+import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 

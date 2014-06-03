@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import little.ant.pingtai.model.Syslog;
-import little.ant.pingtai.utils.ToolUtils;
+import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 

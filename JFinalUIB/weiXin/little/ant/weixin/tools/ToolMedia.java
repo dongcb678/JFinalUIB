@@ -1,4 +1,4 @@
-package little.ant.weixin.utils;
+package little.ant.weixin.tools;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import little.ant.pingtai.utils.ToolString;
+import little.ant.pingtai.tools.ToolString;
 import little.ant.weixin.vo.media.RecevieMedia;
 
 import org.apache.log4j.Logger;

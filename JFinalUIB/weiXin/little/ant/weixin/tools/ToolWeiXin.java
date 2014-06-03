@@ -1,4 +1,4 @@
-package little.ant.weixin.utils;
+package little.ant.weixin.tools;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import little.ant.pingtai.common.EhcacheFactory;
-import little.ant.pingtai.utils.ToolHttp;
+import little.ant.pingtai.tools.ToolHttp;
 import little.ant.weixin.vo.message.RecevieToken;
 
 import com.alibaba.fastjson.JSON;

@@ -1,12 +1,12 @@
-package little.ant.weixin.utils;
+package little.ant.weixin.tools;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.utils.ToolUtils;
-import little.ant.pingtai.utils.ToolXml;
+import little.ant.pingtai.tools.ToolUtils;
+import little.ant.pingtai.tools.ToolXml;
 import little.ant.weixin.model.Message;
 import little.ant.weixin.vo.map.RecevieBaiduPlace;
 import little.ant.weixin.vo.map.RecevieUserLocation;

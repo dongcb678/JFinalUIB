@@ -1,8 +1,8 @@
-package little.ant.weixin.utils;
+package little.ant.weixin.tools;
 
 import java.util.List;
 
-import little.ant.pingtai.utils.ToolHttp;
+import little.ant.pingtai.tools.ToolHttp;
 import little.ant.weixin.vo.user.RecevieGroup;
 
 import org.apache.log4j.Logger;

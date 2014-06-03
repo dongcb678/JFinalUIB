@@ -1,4 +1,4 @@
-package little.ant.pingtai.utils;
+package little.ant.pingtai.tools;
 
 import java.text.DateFormat;
 import java.text.ParseException;

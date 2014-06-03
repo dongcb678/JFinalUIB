@@ -4,7 +4,7 @@ import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.service.LoginService;
-import little.ant.pingtai.utils.ToolWeb;
+import little.ant.pingtai.tools.ToolWeb;
 import little.ant.pingtai.validator.LoginValidator;
 
 import org.apache.log4j.Logger;
