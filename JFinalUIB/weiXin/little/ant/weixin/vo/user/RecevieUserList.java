@@ -1,4 +1,4 @@
-package little.ant.weixin.vo.cservice;
+package little.ant.weixin.vo.user;
 
 import java.util.List;
 

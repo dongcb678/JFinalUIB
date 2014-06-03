@@ -1,4 +1,4 @@
-package little.ant.weixin.vo.cservice;
+package little.ant.weixin.vo.qrcode;
 
 /**
  * 临时二维码信息

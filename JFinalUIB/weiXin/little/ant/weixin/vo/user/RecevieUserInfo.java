@@ -1,4 +1,4 @@
-package little.ant.weixin.vo.cservice;
+package little.ant.weixin.vo.user;
 
 /**
  * 微信用户的基本信息

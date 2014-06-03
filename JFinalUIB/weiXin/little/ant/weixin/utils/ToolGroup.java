@@ -3,7 +3,7 @@ package little.ant.weixin.utils;
 import java.util.List;
 
 import little.ant.pingtai.utils.ToolHttp;
-import little.ant.weixin.vo.cservice.RecevieGroup;
+import little.ant.weixin.vo.user.RecevieGroup;
 
 import org.apache.log4j.Logger;
 
