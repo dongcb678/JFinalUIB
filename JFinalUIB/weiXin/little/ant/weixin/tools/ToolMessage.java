@@ -7,6 +7,7 @@ import java.util.Map;
 
 import little.ant.pingtai.tools.ToolUtils;
 import little.ant.pingtai.tools.ToolXml;
+import little.ant.weixin.model.Location;
 import little.ant.weixin.model.Message;
 import little.ant.weixin.vo.map.RecevieBaiduPlace;
 import little.ant.weixin.vo.map.RecevieUserLocation;
@@ -494,12 +495,13 @@ public class ToolMessage {
 		messageIn.set("content", recevieText.getContent());// 文本消息内容
 		messageIn.save();
 		
+		String responseXml = "";
 		String responseContent = "文本消息";
 		String content = recevieText.getContent();
 		if (content.startsWith("附近")) {// 周边搜索
 			String keyWord = content.replaceAll("附近", "").trim();
 			// 获取用户最后一次发送的地理位置
-			little.ant.weixin.model.Location location = little.ant.weixin.model.Location.dao.findFirst("select * form wx_userlocation where open_id=? order by createdate desc ", recevieText.getFromUserName());
+			Location location = Location.dao.findFirst("select * form wx_userlocation where open_id=? order by createdate desc ", recevieText.getFromUserName());
 			// 未获取到
 			if (null == location) {
 				responseContent = getUsage();
@@ -521,33 +523,48 @@ public class ToolMessage {
 					newsMessage.setMsgType("news");
 					newsMessage.setArticles(articleList);
 					newsMessage.setArticleCount(String.valueOf(articleList.size()));
-					return ToolXml.beanToXml(newsMessage);
+					responseXml = ToolXml.beanToXml(newsMessage);
+
+					//返回数据入库
+					Message messageOut = new Message();
+					messageOut.set("ids", ToolUtils.getUuidByJdk(true));
+					messageOut.set("inout", message_inout_out);
+					messageOut.set("datatype", message_datatype_xml);
+					messageOut.set("datacontent", responseXml);//返回数据
+					messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+					messageOut.set("ToUserName", newsMessage.getToUserName());	// 开发者微信号
+					messageOut.set("FromUserName", newsMessage.getFromUserName());// 发送方帐号（一个OpenID）
+					messageOut.set("CreateTime",newsMessage.getCreateTime());// 消息创建时间 （整型）
+					messageOut.set("MsgType", newsMessage.getMsgType());// 消息类型
+					messageOut.save();
 				}
 			}
 		}
 		
-		//返回xml
-		ResponseMsgText responseText = new ResponseMsgText();
-		responseText.setToUserName(recevieText.getFromUserName());
-		responseText.setFromUserName(recevieText.getToUserName());
-		responseText.setCreateTime(String.valueOf(new Date().getTime()));
-		responseText.setMsgType("text");
-		responseText.setContent(responseContent);
-		String responseXml = ToolXml.beanToXml(responseText);
-		
-		//返回数据入库
-		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
-		messageOut.set("datatype", message_datatype_xml);
-		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
-		messageOut.set("ToUserName", responseText.getToUserName());	// 开发者微信号
-		messageOut.set("FromUserName", responseText.getFromUserName());// 发送方帐号（一个OpenID）
-		messageOut.set("CreateTime",responseText.getCreateTime());// 消息创建时间 （整型）
-		messageOut.set("MsgType", responseText.getMsgType());// 消息类型
-		messageOut.set("content", responseText.getContent());// 消息内容
-		messageOut.save();
+		if(null == responseXml || responseXml.isEmpty()){
+			//返回xml
+			ResponseMsgText responseText = new ResponseMsgText();
+			responseText.setToUserName(recevieText.getFromUserName());
+			responseText.setFromUserName(recevieText.getToUserName());
+			responseText.setCreateTime(String.valueOf(new Date().getTime()));
+			responseText.setMsgType("text");
+			responseText.setContent(responseContent);
+			responseXml = ToolXml.beanToXml(responseText);
+			
+			//返回数据入库
+			Message messageOut = new Message();
+			messageOut.set("ids", ToolUtils.getUuidByJdk(true));
+			messageOut.set("inout", message_inout_out);
+			messageOut.set("datatype", message_datatype_xml);
+			messageOut.set("datacontent", responseXml);//返回数据
+			messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+			messageOut.set("ToUserName", responseText.getToUserName());	// 开发者微信号
+			messageOut.set("FromUserName", responseText.getFromUserName());// 发送方帐号（一个OpenID）
+			messageOut.set("CreateTime",responseText.getCreateTime());// 消息创建时间 （整型）
+			messageOut.set("MsgType", responseText.getMsgType());// 消息类型
+			messageOut.set("content", responseText.getContent());// 消息内容
+			messageOut.save();
+		}
 		
 		return responseXml;
 	}
