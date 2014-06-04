@@ -58,11 +58,6 @@ public class IndexService extends BaseService {
 		// 转换成过滤SQL
 		String fitler = toSql(operatorIdsSb.toString()).replace("operator_", "");
 		
-		// 默认系统
-		if(null == systemsIds || systemsIds.isEmpty()){
-			systemsIds = "8a40c0353fa828a6013fa898d4ac0020";
-		}
-		
 		// 查询根菜单节点
 		Menu menu = Menu.dao.findFirst(" select ids from pt_menu where parentmenuids is null and systemsIds = ? ", systemsIds);
 		String parentmenuids = menu.getStr("ids");

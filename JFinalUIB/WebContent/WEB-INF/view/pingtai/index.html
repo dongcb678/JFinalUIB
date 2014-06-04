@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>JFinalUI</title>
+	<title>JFinalUIB</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
@@ -76,8 +76,6 @@
 			<div id="content" class="span10">
 			<!-- content starts -->
 				
-				<% include("/pingtai/content.html"){} %>
-			
 			<!-- content ends -->
 			</div><!--/#content.span10-->
 		
@@ -217,6 +215,18 @@
 	 		stepSecond: 5
 	 	});
 		 */
+		 
+		var currentSystemsIds = "${ids!}";
+		if(currentSystemsIds == "8a40c0353fa828a6013fa898d4ac0020"){ // 平台
+			ajaxUrl("/jf/index/content");
+		
+		}else if(currentSystemsIds == "0c1230c98ef34e58947903fab5a4fa85"){ // 易信
+			ajaxUrl("/jf/yx/index/content");
+		
+		}else if(currentSystemsIds == "d3a5c976c4c24751b6b00ec775692683"){ // 微信
+			ajaxUrl("/jf/wx/index/content");
+		}
+		
 	</script>
 	
 </body>

@@ -30,6 +30,9 @@ public class IndexController extends BaseController {
 		User user = ContextBase.getCurrentUser(getRequest()); // cookie认证自动登陆处理
 		if(null != user){//后台
 			systemsList = Systems.dao.find(" select ids, names from pt_systems order by orderids asc ");
+			if(null == ids || ids.isEmpty()){ // 默认系统
+				ids = "8a40c0353fa828a6013fa898d4ac0020";
+			}
 			menuList = indexService.menu(ids, user);
 			render("/pingtai/index.html");
 		}else{
