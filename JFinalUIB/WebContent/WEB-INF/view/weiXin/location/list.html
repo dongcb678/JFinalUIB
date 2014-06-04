@@ -5,7 +5,7 @@
 	<div>
 		<ul class="breadcrumb">
 			<li>
-				<a href="#" onclick="ajaxUrl('/jf/wx/index/content');">主页</a> <span class="divider">/</span>
+				<a href="#" onclick="ajaxContent('/jf/wx/index/content');">主页</a> <span class="divider">/</span>
 			</li>
 			<li>
 				<a href="#">位置管理</a>
@@ -90,7 +90,7 @@
 								<td>${location.createdate !, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}</td>
 								<td class="center">
 									<% if(delete == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/wx/location/delete/${location.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/location/delete/${location.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
 									<% } %>
 								</td>
 							</tr>

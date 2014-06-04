@@ -4,7 +4,7 @@
 	
 	<div>
 		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+			<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
 			<li>
 				<a href="#">分组管理</a>
 			</li>
@@ -136,10 +136,10 @@
 								</td>
 								<td class="center">
 									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/sysLog/view/${sysLog.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/sysLog/view/${sysLog.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/sysLog/delete/${sysLog.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/sysLog/delete/${sysLog.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 								</td>
 							</tr>

@@ -48,7 +48,7 @@
 		function update(ids){
 			var has = ${hasPrivilegeUrl("/jf/dict/edit", reqSysLog.userids)};
 			if(has){
-				parent.window.ajaxUrl('/jf/dict/edit/' + ids);
+				parent.window.ajaxContent('/jf/dict/edit/' + ids);
 			}else{
 				alertMsg.error('没有操作权限！');
 			}
@@ -57,7 +57,7 @@
 		function deleteFunc(ids){
 			var has = ${hasPrivilegeUrl("/jf/dict/delete", reqSysLog.userids)};
 			if(has){
-				parent.window.ajaxUrl('/jf/dict/delete/' + ids);
+				parent.window.ajaxContent('/jf/dict/delete/' + ids);
 			}else{
 				alertMsg.error('没有操作权限！');
 			}

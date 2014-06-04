@@ -21,12 +21,18 @@ public class UserController extends BaseController {
 	
 	private String deptIds;
 	private String groupIds;
-
+	
+	/**
+	 * 默认列表
+	 */
 	public void index() {
 		userService.list(splitPage);
 		render("/pingtai/user/list.html");
 	}
 	
+	/**
+	 * 保存
+	 */
 	@Before(UserValidator.class)
 	public void save() {
 		String password = getPara("password");
@@ -36,6 +42,9 @@ public class UserController extends BaseController {
 		render("/pingtai/user/add.html");
 	}
 	
+	/**
+	 * 准备更新
+	 */
 	public void edit() {
 		User user = User.dao.findById(getPara());
 		setAttr("user", user);
@@ -43,6 +52,9 @@ public class UserController extends BaseController {
 		render("/pingtai/user/update.html");
 	}
 	
+	/**
+	 * 更新
+	 */
 	@Before(UserValidator.class)
 	public void update() {
 		String password = getPara("password");
@@ -52,6 +64,9 @@ public class UserController extends BaseController {
 		redirect("/jf/user");
 	}
 
+	/**
+	 * 查看
+	 */
 	public void view() {
 		User user = User.dao.findById(getPara());
 		setAttr("user", user);
@@ -59,20 +74,37 @@ public class UserController extends BaseController {
 		render("/pingtai/user/view.html");
 	}
 	
+	/**
+	 * 删除
+	 */
 	public void delete() {
 		userService.delete(getPara());
 		redirect("/jf/user");
 	}
 
+	/**
+	 * 用户树ztree节点数据
+	 */
 	public void treeData() {
 		String json = userService.childNodeData(deptIds);
 		renderJson(json);
 	}
 	
+	/**
+	 * 设置用户拥有的组
+	 */
 	public void setGroup(){
 		userService.setGroup(ids, groupIds);
 		renderText(ids);
 	}
+	
+	/**
+	 * 密码变更
+	 */
+	public void passChange(){
+		
+	}
+	
 }
 
 

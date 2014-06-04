@@ -193,7 +193,7 @@ function ajaxForm(formId){
  * @param url
  * @param data
  */
-function ajaxUrl(url, data){
+function ajaxContent(url, data){
 	$.ajax({
 		type : "post",
 		url : encodeURI(encodeURI(cxt + url)),
@@ -202,11 +202,32 @@ function ajaxUrl(url, data){
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		async: false,
 		cache: false,
-		success:function(data){
-			$("#content").html(data);
+		success:function(returnData){
+			$("#content").html(returnData);
 	    	$('#loading').remove();
 			$('#content').fadeIn();
 			docReady();
+		}
+	});
+}
+
+/**
+ * ajax请求url替换DiaLog
+ * @param url
+ * @param data
+ */
+function ajaxDiaLog(url, data){
+	$.ajax({
+		type : "post",
+		url : encodeURI(encodeURI(cxt + url)),
+		data : data,
+		dataType : "html",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		async: false,
+		cache: false,
+		success:function(returnData){
+			$('#myModal').html(returnData);
+			$('#myModal').modal('show');
 		}
 	});
 }

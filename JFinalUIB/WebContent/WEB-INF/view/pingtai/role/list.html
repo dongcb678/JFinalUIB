@@ -4,7 +4,7 @@
 	
 	<div>
 		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+			<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
 			<li>
 				<a href="#">角色管理</a>
 			</li>
@@ -17,7 +17,7 @@
 				<h2><i class="icon-edit"></i> 角色查询</h2>
 				<div class="box-icon">
 					<% if(hasPrivilegeUrl("/pingtai/role/add.html", reqSysLog.userids)){ %>
-						<a href="#" class="btn btn-round" title="添加角色" onclick="ajaxUrl('/jf/role/toUrl?toUrl=/pingtai/role/add.html');"><i class="icon-plus-sign"></i></a>
+						<a href="#" class="btn btn-round" title="添加角色" onclick="ajaxContent('/jf/role/toUrl?toUrl=/pingtai/role/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -73,10 +73,10 @@
 								<td>${role["names"]}</td>
 								<td class="center">
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/role/edit/${role.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/role/edit/${role.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/role/delete/${role.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>	
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/role/delete/${role.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>	
 									<% } %>
 									<% if(operator  == true){ %>
 										<a class="btn btn-success" href="#" onclick="setRoleOperatorDiaLog('${role.ids!}');"> <i class="icon-zoom-in icon-white"></i> 功能</a> 

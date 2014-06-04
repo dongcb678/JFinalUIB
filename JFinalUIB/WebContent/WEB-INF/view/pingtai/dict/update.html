@@ -1,7 +1,7 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
-		<li><a href="#" onclick="ajaxUrl('/jf/dict');">字典管理</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/dict');">字典管理</a> <span class="divider">/</span></li>
 		<li><a href="#">添加字典</a></li>
 	</ul>
 </div>
@@ -26,7 +26,7 @@
 					<% if(hasPrivilegeUrl("/jf/dict/save", reqSysLog.userids)){ %>
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
 					<% } %>
-					<button class="btn" onclick="ajaxUrl('/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html');">退出</button>
+					<button class="btn" onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html');">退出</button>
 				</div>
 			</form>
 		</div>

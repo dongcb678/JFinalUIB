@@ -4,7 +4,7 @@
 	
 	<div>
 		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+			<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
 			<li>
 				<a href="#">系统管理</a>
 			</li>
@@ -17,7 +17,7 @@
 				<h2><i class="icon-edit"></i> 系统查询</h2>
 				<div class="box-icon">
 					<% if(hasPrivilegeUrl("/pingtai/systems/add.html", reqSysLog.userids)){ %>
-						<a href="#" class="btn btn-round" title="添加系统" onclick="ajaxUrl('/jf/systems/toUrl?toUrl=/pingtai/systems/add.html');"><i class="icon-plus-sign"></i></a>
+						<a href="#" class="btn btn-round" title="添加系统" onclick="ajaxContent('/jf/systems/toUrl?toUrl=/pingtai/systems/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -82,16 +82,16 @@
 								<td>${systems["orderids"]}</td>
 								<td class="center">
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/systems/edit/${systems.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/systems/edit/${systems.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/systems/delete/${systems.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/systems/delete/${systems.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 									<% if(module == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/module?systemsIds=${systems.ids!}');"> <i class="icon-zoom-in icon-white"></i> 模块</a>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/module?systemsIds=${systems.ids!}');"> <i class="icon-zoom-in icon-white"></i> 模块</a>
 									<% } %>
 									<% if(menu == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/menu?systemsIds=${systems.ids!}');"> <i class="icon-zoom-in icon-white"></i> 菜单</a> 
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/menu?systemsIds=${systems.ids!}');"> <i class="icon-zoom-in icon-white"></i> 菜单</a> 
 									<% } %>
 								</td>
 							</tr>

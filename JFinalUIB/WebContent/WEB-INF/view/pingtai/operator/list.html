@@ -4,7 +4,7 @@
 	
 	<div>
 		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+			<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
 			<li>
 				<a href="#">功能管理</a>
 			</li>
@@ -17,7 +17,7 @@
 				<h2><i class="icon-edit"></i> 功能查询</h2>
 				<div class="box-icon">
 					<% if(hasPrivilegeUrl("/pingtai/operator/add.html", reqSysLog.userids)){ %>
-						<a href="#" class="btn btn-round" title="添加功能" onclick="ajaxUrl('/jf/operator/toUrl?toUrl=/pingtai/operator/add.html');"><i class="icon-plus-sign"></i></a>
+						<a href="#" class="btn btn-round" title="添加功能" onclick="ajaxContent('/jf/operator/toUrl?toUrl=/pingtai/operator/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -117,9 +117,9 @@
 									<% if(operator["privilege"] == "0"){print("否");}else{print("是");} %>
 								</td>
 								<td class="center">
-									<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/operator/view/${operator.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
-									<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/operator/edit/${operator.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
-									<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/operator/delete/${operator.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
+									<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/operator/view/${operator.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
+									<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/operator/edit/${operator.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+									<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/operator/delete/${operator.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
 								</td>
 							</tr>
 						<% } %>

@@ -5,7 +5,7 @@
 	<div>
 		<ul class="breadcrumb">
 			<li>
-				<a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span>
+				<a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span>
 			</li>
 			<li>
 				<a href="#">用户管理</a>
@@ -19,7 +19,7 @@
 				<h2><i class="icon-edit"></i> 用户查询</h2>
 				<div class="box-icon">
 					<% if(hasPrivilegeUrl("/pingtai/user/add.html", reqSysLog.userids)){ %>
-						<a href="#" class="btn btn-round" title="添加用户" onclick="ajaxUrl('/jf/user/toUrl?toUrl=/pingtai/user/add.html');"><i class="icon-plus-sign"></i></a>
+						<a href="#" class="btn btn-round" title="添加用户" onclick="ajaxContent('/jf/user/toUrl?toUrl=/pingtai/user/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -99,13 +99,13 @@
 								<td class="center"><span class="label label-success">${user["mobile"] }</span></td>
 								<td class="center">
 									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxUrl('/jf/user/view/${user.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/user/view/${user.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
 									<% } %>
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxUrl('/jf/user/edit/${user.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a>
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/user/edit/${user.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a>
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxUrl('/jf/user/delete/${user.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/user/delete/${user.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 									<% if(group == true){ %>
 										<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${user.ids!}');"> <i class="icon-trash icon-white"></i> 分组</a>

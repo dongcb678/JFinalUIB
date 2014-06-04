@@ -1,0 +1,69 @@
+<script type="text/javascript">
+	
+	function passChange(form){
+		var messageButton = $('#messageButtonId');
+		
+		var newPass1 = $("#newPass1").val();
+		var newPass2 = $("#newPass2").val();
+		if(newPass1 != newPass2){
+			messageButton.attr("data-noty-options", '{"text":"两次输入密码不一致，请从新输入！","layout":"bottom","type":"information","closeButton":"true"}');
+			messageButton.click();
+	 		return false;
+		}
+		
+		var errorCount = formVali(form);
+		if(errorCount != 0){
+			messageButton.attr("data-noty-options", '{"text":"有'+errorCount+'错误，请修正！","layout":"bottom","type":"information","closeButton":"true"}');
+			messageButton.click();
+	 		return false;
+		}
+		
+		ajaxForm("passChangeForm");
+	}
+	
+</script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">X</button>
+	<h3>密码设置</h3>
+</div>
+
+<form id="passChangeForm" action="${cxt!}/jf/user/passChange" method="POST">
+
+	<div class="modal-body">
+			<div class="form-actions">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label">旧密码</label>
+						<div class="controls">
+							<input type="password" id="oldPass" name="password" class="input-xlarge" 
+								maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
+							<span class="help-inline">6-18位字母数字</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">新密码</label>
+						<div class="controls">
+							<input type="password" id="newPass1" name="password" class="input-xlarge" 
+								maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
+							<span class="help-inline">6-18位字母数字</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">确认新密码</label>
+						<div class="controls">
+							<input type="password" id="newPass2" class="input-xlarge" 
+								maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
+							<span class="help-inline">6-18位字母数字</span>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+	</div>
+	
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">关闭</a>
+		<a href="#" class="btn btn-primary" data-dismiss="modal" onclick="passChange(this.form);">确定</a>
+	</div>	
+	
+</form>

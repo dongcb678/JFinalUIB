@@ -1,6 +1,6 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxUrl('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
 		<li>
 			<a href="#">字典树</a>
 		</li>
@@ -14,7 +14,7 @@
 			<div class="box-icon">
 				<% if(hasPrivilegeUrl("/pingtai/dict/add.html", reqSysLog.userids)){ %>
 					<a href="#" class="btn btn-round" title="添加字典" 
-						onclick="ajaxUrl('/jf/dict/toUrl?toUrl=/pingtai/dict/add.html');"><i class="icon-plus-sign"></i></a>
+						onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/add.html');"><i class="icon-plus-sign"></i></a>
 				<% } %>
 				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
 				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
