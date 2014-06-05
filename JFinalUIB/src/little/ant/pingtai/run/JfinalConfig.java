@@ -33,6 +33,7 @@ import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadSysLog;
+import little.ant.pingtai.tools.ToolString;
 import little.ant.weixin.controller.LocationController;
 import little.ant.weixin.controller.MessageController;
 import little.ant.weixin.model.Article;
@@ -90,7 +91,7 @@ public class JfinalConfig extends JFinalConfig {
 		system_passErrorCount = getPropertyToInt("system.passErrorCount", 3);
 		system_passErrorHour = getPropertyToInt("system.passErrorHour", 3);
 		
-		me.setEncoding("UTF-8"); 
+		me.setEncoding(ToolString.encoding); 
 		me.setDevMode(system_devMode);
 		//me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
 		

@@ -85,7 +85,7 @@ public class ToolComment {
         StringBuffer buffer = new StringBuffer();  
         String line = null; // 用来保存每行读取的内容  
         InputStream is = new FileInputStream(filePathAndName);  
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));  
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, ToolString.encoding));  
         try {  
             line = reader.readLine();  
         } catch (IOException e) {  
@@ -140,7 +140,7 @@ public class ToolComment {
                 f.getParentFile().mkdirs();  
             }  
             FileOutputStream out = new FileOutputStream(filePathAndName);  
-            byte[] bytes = filecontent.getBytes("UTF-8");  
+            byte[] bytes = filecontent.getBytes(ToolString.encoding);  
             out.write(bytes);  
             out.flush();  
             out.close();  

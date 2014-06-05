@@ -6,6 +6,7 @@ import java.util.List;
 
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Syslog;
+import little.ant.pingtai.tools.ToolString;
 
 import org.apache.log4j.Logger;
 
@@ -55,7 +56,7 @@ public abstract class BaseController extends Controller {
 		String value = getRequest().getParameter(name);
 		if(null != value && !value.isEmpty()){
 			try {
-				value = URLDecoder.decode(value, "UTF-8");
+				value = URLDecoder.decode(value, ToolString.encoding);
 			} catch (UnsupportedEncodingException e) {
 				log.error("decode异常："+value);
 			}

@@ -66,7 +66,7 @@ public class ToolHttp {
 				//System.out.println(response.getStatusLine());
 				HttpEntity entity = response.getEntity();
 				if (entity != null) {
-					String out = EntityUtils.toString(entity, "UTF-8");
+					String out = EntityUtils.toString(entity, ToolString.encoding);
 					return out;
 				}
 			}
@@ -108,7 +108,7 @@ public class ToolHttp {
 			
 			if(null != data){
 				StringEntity stringEntity = new StringEntity(data);
-				stringEntity.setContentEncoding("UTF-8");
+				stringEntity.setContentEncoding(ToolString.encoding);
 				if (null != contentType) {
 					stringEntity.setContentType(contentType);
 				}else{
@@ -124,7 +124,7 @@ public class ToolHttp {
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				HttpEntity entity = response.getEntity();
 				if (entity != null) {
-					String out = EntityUtils.toString(entity, "UTF-8");
+					String out = EntityUtils.toString(entity, ToolString.encoding);
 					return out;
 				}
 			}
@@ -203,7 +203,7 @@ public class ToolHttp {
 			if (null != outputStr) {
 				OutputStream outputStream = conn.getOutputStream();
 				// 注意编码格式
-				outputStream.write(outputStr.getBytes("UTF-8"));
+				outputStream.write(outputStr.getBytes(ToolString.encoding));
 				outputStream.close();
 			}
 

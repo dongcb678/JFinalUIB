@@ -262,11 +262,11 @@ public class ToolWeb {
 			File file = new File(ftlDirectory);// .ftl模板目录
 			configuration.setDirectoryForTemplateLoading(file);
 			configuration.setObjectWrapper(new DefaultObjectWrapper());
-			Template template = configuration.getTemplate(ftlName, "UTF-8");
+			Template template = configuration.getTemplate(ftlName, ToolString.encoding);
 
 			File file2 = new File(htmlPath);// 生成html目录
 			fileOutputStream = new FileOutputStream(file2);
-			outputStreamWriter = new OutputStreamWriter(fileOutputStream, "UTF-8");
+			outputStreamWriter = new OutputStreamWriter(fileOutputStream, ToolString.encoding);
 			BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
 			template.process(paramaterMap, bufferedWriter);
 			bufferedWriter.flush();

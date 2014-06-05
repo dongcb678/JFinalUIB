@@ -50,9 +50,9 @@ public class ToolBarCode {
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	public static void encode(String content, int width, int height, String fileType, String savePath) {
 		try {
-			content = new String(content.getBytes("UTF-8"), "UTF-8");// 二维码内容
+			content = new String(content.getBytes(ToolString.encoding), ToolString.encoding);// 二维码内容
 			Hashtable hints = new Hashtable();
-			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+			hints.put(EncodeHintType.CHARACTER_SET, ToolString.encoding);
 			BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);
 			File file = new File(savePath);
 			MatrixToImageWriter.writeToFile(bitMatrix, fileType, file);
@@ -109,7 +109,7 @@ public class ToolBarCode {
 		Result result;
 		try {
 			Hashtable hints = new Hashtable();
-			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+			hints.put(EncodeHintType.CHARACTER_SET, ToolString.encoding);
 			result = new MultiFormatReader().decode(bitmap, hints);
 		} catch (ReaderException re) {
 			return re.toString();

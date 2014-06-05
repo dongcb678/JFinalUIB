@@ -209,7 +209,7 @@ public class ToolDirFile {
     		File file = new File(filePath);
     		response.setContentType("application/x-msdownload");//设置response的编码方式
             response.setContentLength((int)file.length());//写明要下载的文件的大小
-			response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes("UTF-8"), "iso-8859-1")); //解决中文乱码
+			response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes(ToolString.encoding), "iso-8859-1")); //解决中文乱码
 	        
 	        //读出文件到i/o流
 	        fis = new FileInputStream(file);

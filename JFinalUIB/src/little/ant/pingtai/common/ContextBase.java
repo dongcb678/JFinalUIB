@@ -157,11 +157,11 @@ public class ContextBase {
 	 */
 	public static void outPage(HttpServletResponse response, String content) {
 		response.setContentType("text/html; charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding(ToolString.encoding);
 		// PrintWriter out = response.getWriter();
 		// out.print(content);
 		try {
-			response.getOutputStream().write(content.getBytes("UTF-8"));// char
+			response.getOutputStream().write(content.getBytes(ToolString.encoding));// char
 																		// to
 																		// byte
 																		// 性能提升
@@ -181,14 +181,14 @@ public class ContextBase {
 	public static void outDownCsv(HttpServletResponse response, String content) {
 		response.setContentType("application/download; charset=gb18030");
 		try {
-			response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(ToolDateTime.getCurrentDateTimeMillisecond() + ".csv", "UTF-8"));
+			response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(ToolDateTime.getCurrentDateTimeMillisecond() + ".csv", ToolString.encoding));
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
 		// PrintWriter out = response.getWriter();
 		// out.write(content);
 		try {
-			response.getOutputStream().write(content.getBytes("UTF-8"));
+			response.getOutputStream().write(content.getBytes(ToolString.encoding));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}// char to byte 性能提升
@@ -228,7 +228,7 @@ public class ContextBase {
 		String authToken = token.toString();
 		byte[] authTokenByte = null;
 		try {
-			authTokenByte = authToken.getBytes("UTF-8");
+			authTokenByte = authToken.getBytes(ToolString.encoding);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -354,7 +354,7 @@ public class ContextBase {
 		String value = request.getParameter(name);
 		if (null != value && !value.isEmpty()) {
 			try {
-				value = URLDecoder.decode(value, "UTF-8").trim();
+				value = URLDecoder.decode(value, ToolString.encoding).trim();
 			} catch (UnsupportedEncodingException e) {
 				log.error("decode异常：" + value);
 			}
