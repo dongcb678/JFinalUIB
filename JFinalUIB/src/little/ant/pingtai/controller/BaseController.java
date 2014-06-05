@@ -61,7 +61,7 @@ public abstract class BaseController extends Controller {
 				log.error("decode异常："+value);
 			}
 		}
-		return super.getPara(name);
+		return value;
 	}
 	
 	/************************************		get 	set 	方法		************************************************/
