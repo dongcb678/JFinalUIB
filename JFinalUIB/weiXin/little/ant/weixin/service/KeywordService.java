@@ -6,6 +6,7 @@ import java.util.Map;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.service.BaseService;
 import little.ant.pingtai.tools.ToolUtils;
+import little.ant.weixin.lucene.DocKeyword;
 import little.ant.weixin.model.Keyword;
 
 import org.apache.log4j.Logger;
@@ -24,6 +25,8 @@ public class KeywordService extends BaseService {
 		keyword.set("ids", ids);
 		keyword.save();
 		
+		new DocKeyword().add(keyword); // 索引
+		
 		return ids;
 	}
 
@@ -33,6 +36,7 @@ public class KeywordService extends BaseService {
 	 */
 	public void update(Keyword keyword){
 		keyword.update();
+		new DocKeyword().update(keyword); // 索引
 	}
 
 	/**
@@ -41,6 +45,7 @@ public class KeywordService extends BaseService {
 	 */
 	public void delete(String ids){
 		Keyword.dao.deleteById(ids);
+		new DocKeyword().delete(ids); // 索引
 	}
 	
 	/**

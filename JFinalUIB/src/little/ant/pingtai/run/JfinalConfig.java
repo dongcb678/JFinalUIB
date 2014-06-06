@@ -37,6 +37,7 @@ import little.ant.pingtai.tools.ToolString;
 import little.ant.weixin.controller.KeywordController;
 import little.ant.weixin.controller.LocationController;
 import little.ant.weixin.controller.MessageController;
+import little.ant.weixin.lucene.DocKeyword;
 import little.ant.weixin.model.Article;
 import little.ant.weixin.model.Keyword;
 import little.ant.weixin.model.Location;
@@ -196,6 +197,7 @@ public class JfinalConfig extends JFinalConfig {
 	public void afterJFinalStart() {
 		new ParamInit().start(); // 缓存参数
 		ThreadSysLog.startSaveDBThread(); // 启动操作日志入库线程
+		new DocKeyword().run(); // 创建自动回复lucene索引
 	}
 	
 	/**
