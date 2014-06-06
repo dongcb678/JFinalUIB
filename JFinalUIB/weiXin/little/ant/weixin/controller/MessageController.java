@@ -5,10 +5,13 @@ import little.ant.pingtai.controller.BaseController;
 import little.ant.weixin.service.MessageService;
 import little.ant.weixin.tools.ToolOAuth2;
 import little.ant.weixin.tools.ToolSignature;
+import little.ant.weixin.validator.KeywordValidator;
 import little.ant.weixin.vo.oauth.RecevieOauth2Token;
 import little.ant.weixin.vo.oauth.RecevieSNSUserInfo;
 
 import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Before;
 
 /**
  * 接收微信消息
@@ -27,6 +30,7 @@ public class MessageController extends BaseController {
 	 * 2.此后，每次开发者接收用户消息的时候，微信也都会带上前面三个参数（signature、timestamp、nonce）访问开发者设置的URL，
 	 * 开发者依然通过对签名的效验判断此条消息的真实性。效验方式与首次提交验证申请一致。 
 	 */
+	@Before(KeywordValidator.class)
 	public void index(){
 		String echostr  = getPara("echostr");	//随机字符串
 		String timestamp = getPara("timestamp");//时间戳
@@ -56,6 +60,7 @@ public class MessageController extends BaseController {
 	/**
 	 * 授权后的回调请求处理
 	 */
+	@Before(KeywordValidator.class)
 	public void oauth2(){
 		String code = getPara("code");// 用户同意授权后，能获取到code
 		String timestamp = getPara("timestamp");//时间戳

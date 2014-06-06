@@ -5,22 +5,20 @@ import org.apache.log4j.Logger;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 
-public class MessageValidator extends Validator {
+public class UserValidator extends Validator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(MessageValidator.class);
+	private static Logger log = Logger.getLogger(UserValidator.class);
 	
 	protected void validate(Controller controller) {
 		
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(MessageValidator.class);
+		controller.keepModel(UserValidator.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/wx/message")){
-			
-		} else if (actionKey.equals("/jf/wx/message/oauth2")){
+		if (actionKey.equals("/jf/wx/user")){
 			
 		}
 			

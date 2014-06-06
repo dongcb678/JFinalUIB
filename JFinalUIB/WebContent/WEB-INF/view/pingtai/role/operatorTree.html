@@ -236,7 +236,7 @@
 				}else{
 					checkedModuleNodeIds = checkedModuleNodeIds.replace(id, "");
 				}
-			}else{
+			}else if(treeNodeId.indexOf('operator_') != -1){
 				if(checked && checkedOperatorNodeIds.indexOf(id) == -1){
 					checkedOperatorNodeIds += id;
 				}else{
@@ -261,10 +261,10 @@
 			}else{
 				checkedModuleNodeIds = checkedModuleNodeIds.replace(id, "");
 			}
-		}else{
+		}else if(treeNodeId.indexOf('operator_') != -1){
 			if(checked && checkedOperatorNodeIds.indexOf(id) == -1){
 				checkedOperatorNodeIds += id;
-			}else{
+			}else {
 				checkedOperatorNodeIds = checkedOperatorNodeIds.replace(id, "");
 			}
 		}

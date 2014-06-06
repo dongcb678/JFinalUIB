@@ -34,9 +34,11 @@ import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadSysLog;
 import little.ant.pingtai.tools.ToolString;
+import little.ant.weixin.controller.KeywordController;
 import little.ant.weixin.controller.LocationController;
 import little.ant.weixin.controller.MessageController;
 import little.ant.weixin.model.Article;
+import little.ant.weixin.model.Keyword;
 import little.ant.weixin.model.Location;
 import little.ant.weixin.model.Message;
 
@@ -132,6 +134,7 @@ public class JfinalConfig extends JFinalConfig {
 		me.add("/jf/wx/user", little.ant.weixin.controller.UserController.class); // 微信用户管理
 		me.add("/jf/wx/group", little.ant.weixin.controller.GroupController.class); // 微信用户分组管理
 		me.add("/jf/wx/location", LocationController.class); // 微信用户位置
+		me.add("/jf/wx/keyword", KeywordController.class); // 自动回复关键字维护
 	}
 	
 	/**
@@ -164,9 +167,10 @@ public class JfinalConfig extends JFinalConfig {
 		// 3.2 微信表
 		arp.addMapping("wx_message", "ids", Message.class); // 消息表
 		arp.addMapping("wx_article", "ids", Article.class); // 消息图文表
-		arp.addMapping("wx_user", "ids", little.ant.weixin.model.User.class); // 微信用户表
-		arp.addMapping("wx_group", "ids", little.ant.weixin.model.Group.class); // 微信用户分组表
-		arp.addMapping("wx_location", "ids", Location.class); // 微信用户地理位置表
+		arp.addMapping("wx_user", "ids", little.ant.weixin.model.User.class); // 用户表
+		arp.addMapping("wx_group", "ids", little.ant.weixin.model.Group.class); // 用户分组表
+		arp.addMapping("wx_location", "ids", Location.class); // 用户地理位置表
+		arp.addMapping("wx_keyword", "ids", Keyword.class); // 自动回复配置
 		me.add(arp);
 	}
 	

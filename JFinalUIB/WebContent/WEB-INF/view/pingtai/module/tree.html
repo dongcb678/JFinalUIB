@@ -136,10 +136,9 @@
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				async: false,
 				success:function(data){
-					var json = eval(data);
-			     	if(json.ids != "error"){
+			     	if(data != ""){
 						var zTree = $.fn.zTree.getZTreeObj("zTreeContent");
-			     		zTree.addNodes(treeNode, {id : json.ids, pId : treeNode.id, name : addName});
+			     		zTree.addNodes(treeNode, {id : data, pId : treeNode.id, name : addName});
 			     	}else{
 			     		alert("新增模块失败！");
 			     	}
