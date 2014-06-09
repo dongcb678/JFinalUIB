@@ -55,8 +55,8 @@ public class ToolMessage {
 	/**
 	 * wx_message表字段值
 	 */
-	public static final String message_inout_in = "0";//接受的消息
-	public static final String message_inout_out = "1";//发出的消息
+	public static final String message_inouts_in = "0";//接受的消息
+	public static final String message_inouts_out = "1";//发出的消息
 	public static final String message_datatype_xml = "0";//数据类型XML
 	public static final String message_datatype_json = "1";//数据类型JSON
 	
@@ -74,7 +74,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -104,7 +104,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -132,7 +132,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -164,7 +164,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -192,7 +192,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -220,7 +220,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -248,7 +248,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -279,7 +279,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -307,7 +307,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -319,7 +319,7 @@ public class ToolMessage {
 		messageIn.set("Event", location.getEvent());// 事件类型，subscribe(订阅)、unsubscribe(取消订阅)
 		messageIn.set("Latitude", location.getLatitude());//地理位置纬度
 		messageIn.set("Longitude", location.getLongitude());//地理位置经度
-		messageIn.set("Precision", location.getPrecision());//地理位置精度
+		messageIn.set("Precisions", location.getPrecision());//地理位置精度
 		messageIn.save();
 		
 		//关注提示语
@@ -339,7 +339,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -367,7 +367,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -397,7 +397,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -425,7 +425,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -455,7 +455,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -483,7 +483,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -528,7 +528,7 @@ public class ToolMessage {
 					//返回数据入库
 					Message messageOut = new Message();
 					messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-					messageOut.set("inout", message_inout_out);
+					messageOut.set("inouts", message_inouts_out);
 					messageOut.set("datatype", message_datatype_xml);
 					messageOut.set("datacontent", responseXml);//返回数据
 					messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -554,7 +554,7 @@ public class ToolMessage {
 			//返回数据入库
 			Message messageOut = new Message();
 			messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-			messageOut.set("inout", message_inout_out);
+			messageOut.set("inouts", message_inouts_out);
 			messageOut.set("datatype", message_datatype_xml);
 			messageOut.set("datacontent", responseXml);//返回数据
 			messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -583,7 +583,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -613,7 +613,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -641,7 +641,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -678,7 +678,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -706,7 +706,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -737,7 +737,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -767,7 +767,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -827,7 +827,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -855,7 +855,7 @@ public class ToolMessage {
 		//请求数据入库
 		Message messageIn = new Message();
 		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
-		messageIn.set("inout", message_inout_in);
+		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
 		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
@@ -886,7 +886,7 @@ public class ToolMessage {
 		//返回数据入库
 		Message messageOut = new Message();
 		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
-		messageOut.set("inout", message_inout_out);
+		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间

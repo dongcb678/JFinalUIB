@@ -14,6 +14,7 @@ import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Department;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
+import little.ant.pingtai.run.JfinalConfig;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
 import little.ant.pingtai.tools.ToolUtils;
 
@@ -149,23 +150,43 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String childNodeData(String deptIds){
-		String sql = null;
+		StringBuffer sql = new StringBuffer();
 		List<Department> deptList = null;
 
+		String dbType = (String) JfinalConfig.getParamMapValue(JfinalConfig.db_type_key);
+		
 		// 查询部门数据
 		if (null != deptIds) {
-			sql = " select 'dept_' || ids as ids, names, isParent, images from pt_department where parentDepartmentIds = ? order by orderIds asc ";
-			deptList = Department.dao.find(sql, deptIds.replace("dept_", ""));
+			sql.append(" select ");
+			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
+				sql.append(" 'dept_' || ids as ids, ");
+			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
+				sql.append(" concat('dept_' , ids) as ids, ");
+			}
+			sql.append(" names, isParent, images from pt_department where parentDepartmentIds = ? order by orderIds asc ");
+			deptList = Department.dao.find(sql.toString(), deptIds.replace("dept_", ""));
 		} else {
-			sql = " select 'dept_' || ids as ids, names, isParent, images from pt_department where parentDepartmentIds is null order by orderIds asc ";
-			deptList = Department.dao.find(sql);
+			sql.append(" select ");
+			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
+				sql.append(" 'dept_' || ids as ids, ");
+			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
+				sql.append(" concat('dept_' , ids) as ids, ");
+			}
+			sql.append(" names, isParent, images from pt_department where parentDepartmentIds is null order by orderIds asc ");
+			deptList = Department.dao.find(sql.toString());
 		}
 
 		// 查询用户数据
 		List<User> userList = null;
 		if (null != deptIds) {
-			sql = " select 'user_' || ids as ids, userName as names from pt_user where departmentIds = ? order by userName asc ";
-			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
+			sql.append(" select ");
+			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
+				sql.append(" 'user_' || ids as ids, ");
+			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
+				sql.append(" concat('user_' , ids) as ids, ");
+			}
+			sql.append(" userName as names from pt_user where departmentIds = ? order by userName asc ");
+			userList = User.dao.find(sql.toString(), deptIds.replace("dept_", ""));
 		}
 
 		StringBuffer sb = new StringBuffer();

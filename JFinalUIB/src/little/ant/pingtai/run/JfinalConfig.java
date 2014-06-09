@@ -1,5 +1,8 @@
 package little.ant.pingtai.run;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import little.ant.pingtai.beetl.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.MyBeetlRenderFactory;
 import little.ant.pingtai.beetl.OrderBy;
@@ -54,6 +57,8 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
+import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
@@ -65,17 +70,39 @@ public class JfinalConfig extends JFinalConfig {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(JfinalConfig.class);
-			
-	private static String system_driverClass;
-	private static String system_jdbcUrl;
-	private static String system_userName;
-	private static String system_passWord;
+
+	protected static Map<String, Object> paramMap = new HashMap<String, Object>();
 	
-	private static boolean system_devMode;
+	/**
+	 * 加密
+	 */
+	public static final String config_securityKey_key = "config.securityKey";
 	
-	public static String system_securityKey;
-	public static int system_passErrorCount;
-	public static int system_passErrorHour;
+	/**
+	 * 密码错误次数
+	 */
+	public static final String config_passErrorCount_key = "config.passErrorCount";
+	
+	/**
+	 * 密码错误最大次数后间隔登陆时间
+	 */
+	public static final String config_passErrorHour_key = "config.passErrorHour";
+	
+	/**
+	 * 解决数据库差异
+	 */
+	public static final String db_type_key = "db_append_key";
+	public static final String db_type_postgresql = "postgresql";
+	public static final String db_type_mysql = "mysql";
+	
+	/**
+	 * 获取系统配置参数值
+	 * @param key
+	 * @return
+	 */
+	public static Object getParamMapValue(String key){
+		return paramMap.get(key);
+	}
 	
 	/**
 	 * 配置常量
@@ -83,19 +110,13 @@ public class JfinalConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		loadPropertyFile("init.properties");
 
-		system_driverClass = getProperty("system.driverClass").trim();
-		system_jdbcUrl = getProperty("system.jdbcUrl").trim();
-		system_userName = getProperty("system.userName").trim();
-		system_passWord = getProperty("system.passWord").trim();
-		
-		system_devMode = getPropertyToBoolean("system.devMode", false);
-		
-		system_securityKey = getProperty("system.securityKey").trim();
-		system_passErrorCount = getPropertyToInt("system.passErrorCount", 3);
-		system_passErrorHour = getPropertyToInt("system.passErrorHour", 3);
+		paramMap.put(config_securityKey_key, getProperty(config_securityKey_key).trim());
+		paramMap.put(config_passErrorCount_key, getPropertyToInt(config_passErrorCount_key, 3));
+		paramMap.put(config_passErrorHour_key, getPropertyToInt(config_passErrorHour_key, 3));
+		paramMap.put(db_type_key, getProperty("db.type").trim());// 数据库差异处理
 		
 		me.setEncoding(ToolString.encoding); 
-		me.setDevMode(system_devMode);
+		me.setDevMode(getPropertyToBoolean("config.devMode", false));
 		//me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
 		
 		me.setMainRenderFactory(new MyBeetlRenderFactory());
@@ -142,16 +163,39 @@ public class JfinalConfig extends JFinalConfig {
 	 * 配置插件
 	 */
 	public void configPlugin(Plugins me) {
-		// 1. 配置Druid数据库连接池插件
-		DruidPlugin druidPlugin = new DruidPlugin(system_jdbcUrl, system_userName, system_passWord, system_driverClass);
-		me.add(druidPlugin);
+		ActiveRecordPlugin arp = null;
+		// 1.数据库类型判断
+		String db_type = getProperty("db.type").trim();
+		if(db_type.equals(db_type_postgresql)){ // pg
+			// 1.1 配置Druid数据库连接池插件
+			String postgresql_driverClass = getProperty("postgresql.driverClass").trim();
+			String postgresql_jdbcUrl = getProperty("postgresql.jdbcUrl").trim();
+			String postgresql_userName = getProperty("postgresql.userName").trim();
+			String postgresql_passWord = getProperty("postgresql.passWord").trim();
+			DruidPlugin druidPlugin = new DruidPlugin(postgresql_jdbcUrl, postgresql_userName, postgresql_passWord, postgresql_driverClass);
+			me.add(druidPlugin);
+
+			// 1.2 配置ActiveRecord插件
+			arp = new ActiveRecordPlugin(druidPlugin);
+			arp.setDialect(new PostgreSqlDialect()); // 数据库方言
+			
+		}else if(db_type.equals(db_type_mysql)){ // mysql
+			// 1.1 配置Druid数据库连接池插件
+			String mysql_jdbcUrl = getProperty("mysql.jdbcUrl").trim();
+			String mysql_userName = getProperty("mysql.userName").trim();
+			String mysql_passWord = getProperty("mysql.passWord").trim();
+			DruidPlugin druidPlugin = new DruidPlugin(mysql_jdbcUrl, mysql_userName, mysql_passWord);
+			me.add(druidPlugin);
+
+			// 1.2 配置ActiveRecord插件
+			arp = new ActiveRecordPlugin(druidPlugin);
+			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 小写
+			arp.setDialect(new MysqlDialect()); // 数据库方言
+		}
 
 		// 2. 缓存
 		me.add(new EhCachePlugin()); // EhCache缓存
 		
-		// 3. 配置ActiveRecord插件
-		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
-		arp.setDialect(new PostgreSqlDialect()); // 数据库方言
 		// 3.1 系统表
 		arp.addMapping("pt_department", "ids", Department.class); // 部门表
 		arp.addMapping("pt_dict", "ids", Dict.class); // 字典表
@@ -165,6 +209,7 @@ public class JfinalConfig extends JFinalConfig {
 		arp.addMapping("pt_systems", "ids", Systems.class); // 系统表
 		arp.addMapping("pt_user", "ids", User.class); // 用户表
 		arp.addMapping("pt_userinfo", "ids", UserInfo.class); // 用户明细表
+		
 		// 3.2 微信表
 		arp.addMapping("wx_message", "ids", Message.class); // 消息表
 		arp.addMapping("wx_article", "ids", Article.class); // 消息图文表
@@ -174,7 +219,7 @@ public class JfinalConfig extends JFinalConfig {
 		arp.addMapping("wx_keyword", "ids", Keyword.class); // 自动回复配置
 		me.add(arp);
 	}
-	
+
 	/**
 	 * 配置全局拦截器
 	 */
@@ -206,7 +251,7 @@ public class JfinalConfig extends JFinalConfig {
 	public void beforeJFinalStop() {
 		
 	}
-
+	
 	/**
 	 * 建议使用 JFinal 手册推荐的方式启动项目
 	 * 运行此 main 方法可以启动项目，此main方法可以放置在任意的Class类定义中，不一定要放于此

@@ -9,6 +9,7 @@ import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.model.Operator;
+import little.ant.pingtai.run.JfinalConfig;
 import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
@@ -72,26 +73,46 @@ public class OperatorService extends BaseService {
 	 * @throws Exception
 	 */
 	public String childNodeData(String moduleIds){
-		String sqlModule = null;
+		StringBuffer sqlModule = new StringBuffer();
 		List<Module> listModule = null;
 
-		String sqlOperator = null;
+		StringBuffer sqlOperator = new StringBuffer();
 		List<Operator> listOperator = new ArrayList<Operator>(0);
+		
+		String dbType = (String) JfinalConfig.getParamMapValue(JfinalConfig.db_type_key);
 
 		if (null == moduleIds) {
 			// 1.模块功能初始化调用
-			sqlModule = " select 'module_' || pm.ids as ids, (select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, "
-					+ "pm.isParent, pm.images from pt_module pm where pm.parentModuleIds is null order by pm.orderIds asc ";
-			listModule = Module.dao.find(sqlModule);
+			sqlModule.append(" select ");
+			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
+				sqlModule.append(" 'module_' || pm.ids as ids, ");
+			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
+				sqlModule.append(" concat('module_' , pm.ids) as ids, ");
+			}
+			sqlModule.append(" (select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, ");
+			sqlModule.append(" pm.isParent, pm.images from pt_module pm where pm.parentModuleIds is null order by pm.orderIds asc ");
+			listModule = Module.dao.find(sqlModule.toString());
 			
 		} else if (null != moduleIds) {
 			moduleIds = moduleIds.replace("module_", "");
 			// 2.通用子节点查询
-			sqlModule = " select 'module_' || ids as ids, names, isParent , images from pt_module where parentModuleIds = ? order by orderIds asc ";
-			listModule = Module.dao.find(sqlModule, moduleIds);
+			sqlModule.append(" select ");
+			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
+				sqlModule.append(" 'module_' || ids as ids, ");
+			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
+				sqlModule.append(" concat('module_' , ids) as ids, ");
+			}
+			sqlModule.append(" names, isParent , images from pt_module where parentModuleIds = ? order by orderIds asc ");
+			listModule = Module.dao.find(sqlModule.toString(), moduleIds);
 
-			sqlOperator = " select 'operator_' || ids as ids, names from pt_operator where moduleIds = ? order by url asc ";
-			listOperator = Operator.dao.find(sqlOperator, moduleIds);
+			sqlOperator.append(" select ");
+			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
+				sqlOperator.append(" 'operator_' || ids as ids, ");
+			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
+				sqlOperator.append(" concat('operator_' , ids) as ids, ");
+			}
+			sqlOperator.append(" names from pt_operator where moduleIds = ? order by url asc ");
+			listOperator = Operator.dao.find(sqlOperator.toString(), moduleIds);
 		}
 
 		StringBuffer sb = new StringBuffer();
