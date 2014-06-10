@@ -1,0 +1,13 @@
+
+1.关于charisma：
+	参照php-version整理了一份java-version
+	主要是修改了charisma.js，结合jquery.form实现所有页面的ajax交互，原本它只是针对特定浏览器支持ajax
+	
+2.权限设计流程：两条线
+	一是用户--》分组--》角色--》功能
+	二是用户--》岗位--》功能
+
+3.在beetl方面主要重写了BeetlRender和BeetlRenderFactory实现视图耗时的计算功能，通过handle得到总耗时减去视图耗时，得到action耗时
+
+4.所有的基础数据都在ehcache做了缓存，比如用户、分组、角色、功能、岗位等等，
+		主要是在ParamInit类，项目启动进行缓存，其它只要涉及到缓存数据的操作会同步更新缓存

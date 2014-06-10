@@ -91,7 +91,6 @@ public class JfinalConfig extends JFinalConfig {
 	/**
 	 * 解决数据库差异
 	 */
-	public static final String db_type_key = "db_append_key";
 	public static final String db_type_postgresql = "postgresql";
 	public static final String db_type_mysql = "mysql";
 	
@@ -113,7 +112,6 @@ public class JfinalConfig extends JFinalConfig {
 		paramMap.put(config_securityKey_key, getProperty(config_securityKey_key).trim());
 		paramMap.put(config_passErrorCount_key, getPropertyToInt(config_passErrorCount_key, 3));
 		paramMap.put(config_passErrorHour_key, getPropertyToInt(config_passErrorHour_key, 3));
-		paramMap.put(db_type_key, getProperty("db.type").trim());// 数据库差异处理
 		
 		me.setEncoding(ToolString.encoding); 
 		me.setDevMode(getPropertyToBoolean("config.devMode", false));

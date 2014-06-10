@@ -14,7 +14,6 @@ import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Department;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
-import little.ant.pingtai.run.JfinalConfig;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
 import little.ant.pingtai.tools.ToolUtils;
 
@@ -150,43 +149,21 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String childNodeData(String deptIds){
-		StringBuffer sql = new StringBuffer();
-		List<Department> deptList = null;
-
-		String dbType = (String) JfinalConfig.getParamMapValue(JfinalConfig.db_type_key);
-		
 		// 查询部门数据
+		List<Department> deptList = null;
 		if (null != deptIds) {
-			sql.append(" select ");
-			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
-				sql.append(" 'dept_' || ids as ids, ");
-			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
-				sql.append(" concat('dept_' , ids) as ids, ");
-			}
-			sql.append(" names, isParent, images from pt_department where parentDepartmentIds = ? order by orderIds asc ");
-			deptList = Department.dao.find(sql.toString(), deptIds.replace("dept_", ""));
+			String sql = " select ids, names, isParent, images from pt_department where parentDepartmentIds = ? order by orderIds asc ";
+			deptList = Department.dao.find(sql, deptIds.replace("dept_", ""));
 		} else {
-			sql.append(" select ");
-			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
-				sql.append(" 'dept_' || ids as ids, ");
-			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
-				sql.append(" concat('dept_' , ids) as ids, ");
-			}
-			sql.append(" names, isParent, images from pt_department where parentDepartmentIds is null order by orderIds asc ");
-			deptList = Department.dao.find(sql.toString());
+			String sql = " select ids, names, isParent, images from pt_department where parentDepartmentIds is null order by orderIds asc ";
+			deptList = Department.dao.find(sql);
 		}
 
 		// 查询用户数据
 		List<User> userList = null;
 		if (null != deptIds) {
-			sql.append(" select ");
-			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
-				sql.append(" 'user_' || ids as ids, ");
-			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
-				sql.append(" concat('user_' , ids) as ids, ");
-			}
-			sql.append(" userName as names from pt_user where departmentIds = ? order by userName asc ");
-			userList = User.dao.find(sql.toString(), deptIds.replace("dept_", ""));
+			String sql = " select ids, userName as names from pt_user where departmentIds = ? order by userName asc ";
+			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
 		}
 
 		StringBuffer sb = new StringBuffer();
@@ -197,7 +174,7 @@ public class UserService extends BaseService {
 			int userSize = userList.size() - 1;
 			for (User user : userList) {
 				sb.append(" { ");
-				sb.append(" id : '").append(user.getStr("ids")).append("', ");
+				sb.append(" id : '").append("user_").append(user.getStr("ids")).append("', ");
 				sb.append(" name : '").append(user.getStr("names")).append("', ");
 				sb.append(" isParent : false, ");
 				sb.append(" font : {'font-weight':'bold'}, ");
@@ -217,7 +194,7 @@ public class UserService extends BaseService {
 		// 封装部门数据
 		for (Department dept : deptList) {
 			sb.append(" { ");
-			sb.append(" id : '").append(dept.get("ids")).append("', ");
+			sb.append(" id : '").append("dept_").append(dept.get("ids")).append("', ");
 			sb.append(" name : '").append(dept.get("names")).append("', ");
 
 			if (null != deptIds) {

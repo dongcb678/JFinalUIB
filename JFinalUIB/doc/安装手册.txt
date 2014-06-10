@@ -1,0 +1,21 @@
+Jfinal   +   charisma  +  beetl +  postgresql（同时支持MySQL） 实现的用户权限管理和日志记录
+
+1.直接解压导入eclipse
+ 
+2.导入数据库文件
+	2.1 PostgreSQL
+		/doc/数据库/PostgreSQL/jfinaluib.backup ， pgAdmin III 新建个库右键恢复备份文件；
+		public.sql文件是Navicat Premium导出的一份完整文件，也可以用Navicat Premium恢复；
+	2.2 MySQL
+		/doc/数据库/MySQL/jfinaluib.sql,是Navicat Premium导出的一份完整文件，也可以用Navicat Premium恢复
+ 
+3.修改/WEB-INF/init.properties 
+	根据db.type的值修改对应的数据库连接信息
+ 
+4.启动项目
+ 
+5.访问入口http://127.0.0.1:89/jf/login  
+用户名：admins
+密码：000000 六个零
+
+

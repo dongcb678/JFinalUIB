@@ -9,7 +9,6 @@ import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.model.Operator;
-import little.ant.pingtai.run.JfinalConfig;
 import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
@@ -66,63 +65,37 @@ public class OperatorService extends BaseService {
 	
 	/**
 	 * 获取子节点数据
-	 * 
-	 * @param station
-	 * @param module
+	 * @param moduleIds
 	 * @return
-	 * @throws Exception
 	 */
 	public String childNodeData(String moduleIds){
-		StringBuffer sqlModule = new StringBuffer();
-		List<Module> listModule = null;
-
-		StringBuffer sqlOperator = new StringBuffer();
-		List<Operator> listOperator = new ArrayList<Operator>(0);
+		List<Module> listModule = new ArrayList<Module>();
+		List<Operator> operatorList = new ArrayList<Operator>();
 		
-		String dbType = (String) JfinalConfig.getParamMapValue(JfinalConfig.db_type_key);
-
 		if (null == moduleIds) {
 			// 1.模块功能初始化调用
-			sqlModule.append(" select ");
-			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
-				sqlModule.append(" 'module_' || pm.ids as ids, ");
-			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
-				sqlModule.append(" concat('module_' , pm.ids) as ids, ");
-			}
-			sqlModule.append(" (select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, ");
-			sqlModule.append(" pm.isParent, pm.images from pt_module pm where pm.parentModuleIds is null order by pm.orderIds asc ");
-			listModule = Module.dao.find(sqlModule.toString());
+			String sqlModule = " select pm.ids as ids, (select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, ";
+			sqlModule += " pm.isParent, pm.images from pt_module pm where pm.parentModuleIds is null order by pm.orderIds asc ";
+			listModule = Module.dao.find(sqlModule);
 			
 		} else if (null != moduleIds) {
 			moduleIds = moduleIds.replace("module_", "");
 			// 2.通用子节点查询
-			sqlModule.append(" select ");
-			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
-				sqlModule.append(" 'module_' || ids as ids, ");
-			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
-				sqlModule.append(" concat('module_' , ids) as ids, ");
-			}
-			sqlModule.append(" names, isParent , images from pt_module where parentModuleIds = ? order by orderIds asc ");
-			listModule = Module.dao.find(sqlModule.toString(), moduleIds);
+			String sqlModule = " select ids, names, isParent , images from pt_module where parentModuleIds = ? order by orderIds asc ";
+			listModule = Module.dao.find(sqlModule, moduleIds);
 
-			sqlOperator.append(" select ");
-			if(dbType.equals(JfinalConfig.db_type_postgresql)){// pg
-				sqlOperator.append(" 'operator_' || ids as ids, ");
-			}else if(dbType.equals(JfinalConfig.db_type_mysql)){// mysql
-				sqlOperator.append(" concat('operator_' , ids) as ids, ");
-			}
-			sqlOperator.append(" names from pt_operator where moduleIds = ? order by url asc ");
-			listOperator = Operator.dao.find(sqlOperator.toString(), moduleIds);
+			String sqlOperator = " select ids, names from pt_operator where moduleIds = ? order by url asc ";
+			operatorList = Operator.dao.find(sqlOperator, moduleIds);
 		}
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
 
-		int operatorSize = listOperator.size();
+		int operatorSize = operatorList.size();
 		int operatorIndexSize = operatorSize - 1;
-		for (Operator operator : listOperator) {
+		for (Operator operator : operatorList) {
 			sb.append(" { ");
-			sb.append(" id : '").append(operator.getStr("ids")).append("', ");
+			sb.append(" id : '").append("operator_").append(operator.getStr("ids")).append("', ");
 			sb.append(" name : '").append(operator.getStr("names")).append("', ");
 			sb.append(" isParent : false, ");
 
@@ -131,7 +104,7 @@ public class OperatorService extends BaseService {
 			sb.append(" font : {'font-weight':'bold'}, ");
 			sb.append(" icon : '/jsFile/zTree/css/zTreeStyle/img/diy/5.png' ");
 			sb.append(" }");
-			if (listOperator.indexOf(operator) < operatorIndexSize) {
+			if (operatorList.indexOf(operator) < operatorIndexSize) {
 				sb.append(", ");
 			}
 		}
@@ -143,7 +116,7 @@ public class OperatorService extends BaseService {
 		}
 		for (Module module : listModule) {
 			sb.append(" { ");
-			sb.append(" id : '").append(module.getStr("ids")).append("', ");
+			sb.append(" id : '").append("module_").append(module.getStr("ids")).append("', ");
 			sb.append(" name : '").append(module.getStr("names")).append("', ");
 			sb.append(" isParent : ").append(module.getStr("isparent")).append(", ");
 			sb.append(" font : {'font-weight':'bold'}, ");
