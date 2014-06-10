@@ -13,7 +13,7 @@ import little.ant.pingtai.model.UserInfo;
 import org.apache.log4j.Logger;
 
 /**
- * 系统缓存操作类
+ * 系统初始化缓存操作类
  * @author 董华健  2012-10-16 下午1:16:56
  */
 public class ParamInit extends Thread {

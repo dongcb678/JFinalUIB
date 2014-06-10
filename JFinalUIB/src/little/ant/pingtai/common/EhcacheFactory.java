@@ -9,7 +9,7 @@ import net.sf.ehcache.Element;
 import org.apache.log4j.Logger;
 
 /**
- * Ehcache缓存
+ * Ehcache缓存操作工厂类
  * @author 董华健
  */
 public class EhcacheFactory {

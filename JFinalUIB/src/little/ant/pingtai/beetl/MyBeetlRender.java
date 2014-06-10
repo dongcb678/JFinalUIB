@@ -4,6 +4,10 @@ import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
 import org.beetl.ext.jfinal.BeetlRender;
 
+/**
+ * 继承BeetlRender，实现视图耗时的计算
+ * @author 董华健
+ */
 public class MyBeetlRender extends BeetlRender {
 
 	private static final long serialVersionUID = 508975754500775679L;
@@ -17,13 +21,13 @@ public class MyBeetlRender extends BeetlRender {
 	}
 
 	public void render() {
-		log.debug("MyJspRender render start");
+		log.debug("MyBeetlRender render start");
 		long start = System.currentTimeMillis();
 		super.render();
 		long end = System.currentTimeMillis();
 		long renderTime = end - start;
 		request.setAttribute(MyBeetlRender.renderTimeKey, renderTime);
-		log.debug("MyJspRender render end");
+		log.debug("MyBeetlRender render end");
 	}
 
 }

@@ -9,7 +9,7 @@ import little.ant.pingtai.tools.ToolUtils;
 import org.apache.log4j.Logger;
 
 /**
- * 操作日志处理
+ * 操作日志入库处理
  */
 public class ThreadSysLog {
 
@@ -61,7 +61,7 @@ public class ThreadSysLog {
 					}
 				});
 
-				insertDbThread.setName("little-ant-Thread-SysLog-insertDB-" + 1);
+				insertDbThread.setName("little-ant-Thread-SysLog-insertDB-" + (i + 1));
 				insertDbThread.start();
 			}
 		} catch (Exception e) {

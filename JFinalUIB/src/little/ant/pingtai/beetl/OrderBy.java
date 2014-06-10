@@ -5,7 +5,7 @@ import org.beetl.core.Context;
 import org.beetl.core.Function;
 
 /**
- * 分页列表排序
+ * 分页列表排序函数
  * @author 董华健
  */
 public class OrderBy implements Function {

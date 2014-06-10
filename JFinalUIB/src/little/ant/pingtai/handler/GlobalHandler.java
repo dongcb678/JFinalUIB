@@ -11,13 +11,17 @@ import little.ant.pingtai.beetl.MyBeetlRender;
 import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.thread.ThreadSysLog;
-import little.ant.pingtai.tools.ToolUtils;
 import little.ant.pingtai.tools.ToolWeb;
 
 import org.apache.log4j.Logger;
 
 import com.jfinal.handler.Handler;
 
+/**
+ * 全局Handler，设置一些通用功能
+ * @author 董华健
+ * 描述：主要是一些全局变量的设置，再就是日志记录开始和结束操作
+ */
 public class GlobalHandler extends Handler {
 	
 	private static Logger log = Logger.getLogger(GlobalHandler.class);
@@ -35,9 +39,6 @@ public class GlobalHandler extends Handler {
 		log.info("设置 web 路径");
 		String cxt = ContextBase.getContextAllPath(request);
 		request.setAttribute("cxt", cxt);
-
-		log.info("生成 request id");
-		request.setAttribute("requesId", ToolUtils.getUuidByJdk(false));
 		
 		log.debug("beetl cookie处理");
 		Map<String, Cookie> cookieMap = ToolWeb.readCookieMap(request);

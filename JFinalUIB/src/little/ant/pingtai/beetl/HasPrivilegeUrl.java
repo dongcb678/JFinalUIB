@@ -6,6 +6,10 @@ import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 
+/**
+ * 页面按钮权限验证函数
+ * @author 董华健
+ */
 public class HasPrivilegeUrl implements Function {
 
 	private static Logger log = Logger.getLogger(HasPrivilegeUrl.class);

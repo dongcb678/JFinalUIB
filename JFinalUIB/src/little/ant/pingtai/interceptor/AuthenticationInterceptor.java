@@ -21,7 +21,7 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 
 /**
- * 参数封装拦截器：param packaging interceptor
+ * 权限认证拦截器
  * @author 董华健
  */
 public class AuthenticationInterceptor implements Interceptor {

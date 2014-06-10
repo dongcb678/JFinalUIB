@@ -2,6 +2,10 @@ package little.ant.pingtai.common;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 常量数据字典
+ * @author 董华健
+ */
 public abstract class DictKeys {
 
 	@SuppressWarnings("unused")
