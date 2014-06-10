@@ -1,8 +1,8 @@
 package little.ant.weixin.model;
 
-import com.jfinal.plugin.activerecord.Model;
+import little.ant.pingtai.model.BaseModel;
 
-public class Message extends Model<Message> {
+public class Message extends BaseModel<Message> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 	

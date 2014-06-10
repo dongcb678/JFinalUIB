@@ -67,7 +67,7 @@ public class IndexService extends BaseService {
 		for (Menu oneMenu : oneList) {
 			String sql = " select m.names, o.url  from pt_menu m left join pt_operator o on m.operatorids=o.ids where parentmenuids = ? and m.operatorids in (" + fitler + ") order by orderids asc ";
 			// 二级菜单
-			List<Menu> twoList = Menu.dao.find(sql, oneMenu.get("ids"));
+			List<Menu> twoList = Menu.dao.find(sql, oneMenu.getPrimaryKeyValue());
 			oneMenu.put("subList", twoList);
 		}
 		return oneList;

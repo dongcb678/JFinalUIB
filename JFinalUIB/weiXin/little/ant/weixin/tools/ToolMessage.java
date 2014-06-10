@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.tools.ToolUtils;
 import little.ant.pingtai.tools.ToolXml;
 import little.ant.weixin.model.Location;
 import little.ant.weixin.model.Message;
@@ -73,7 +72,6 @@ public class ToolMessage {
 		
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -103,7 +101,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -131,7 +128,6 @@ public class ToolMessage {
 
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -163,7 +159,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -191,7 +186,6 @@ public class ToolMessage {
 		
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -219,7 +213,6 @@ public class ToolMessage {
 
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -247,7 +240,6 @@ public class ToolMessage {
 
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -278,7 +270,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -306,7 +297,6 @@ public class ToolMessage {
 		
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -338,7 +328,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -366,7 +355,6 @@ public class ToolMessage {
 		
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -396,7 +384,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -424,7 +411,6 @@ public class ToolMessage {
 
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -454,7 +440,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -482,7 +467,6 @@ public class ToolMessage {
 
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -527,7 +511,6 @@ public class ToolMessage {
 
 					//返回数据入库
 					Message messageOut = new Message();
-					messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 					messageOut.set("inouts", message_inouts_out);
 					messageOut.set("datatype", message_datatype_xml);
 					messageOut.set("datacontent", responseXml);//返回数据
@@ -553,7 +536,6 @@ public class ToolMessage {
 			
 			//返回数据入库
 			Message messageOut = new Message();
-			messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 			messageOut.set("inouts", message_inouts_out);
 			messageOut.set("datatype", message_datatype_xml);
 			messageOut.set("datacontent", responseXml);//返回数据
@@ -582,7 +564,6 @@ public class ToolMessage {
 
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -612,7 +593,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -640,7 +620,6 @@ public class ToolMessage {
 
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -677,7 +656,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -705,7 +683,6 @@ public class ToolMessage {
 
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -736,7 +713,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -766,7 +742,6 @@ public class ToolMessage {
 		
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -796,7 +771,6 @@ public class ToolMessage {
 		
 		// 保存用户地理位置
 		little.ant.weixin.model.Location uLocation = new little.ant.weixin.model.Location();
-		uLocation.set("ids", ToolUtils.getUuidByJdk(true));
 		uLocation.set("open_id", location.getFromUserName());
 		uLocation.set("lng", lng);
 		uLocation.set("lat", lat);
@@ -826,7 +800,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -854,7 +827,6 @@ public class ToolMessage {
 
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("ids", ToolUtils.getUuidByJdk(true));
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -885,7 +857,6 @@ public class ToolMessage {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("ids", ToolUtils.getUuidByJdk(true));
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据

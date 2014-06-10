@@ -3,7 +3,6 @@ package little.ant.pingtai.service;
 import java.util.List;
 
 import little.ant.pingtai.model.Menu;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -77,10 +76,7 @@ public class MenuService extends BaseService {
 			images = orderIds + ".png";
 		}
 
-		String ids = ToolUtils.getUuidByJdk(true);
-		
 		Menu menu = new Menu();
-		menu.set("ids", ids);
 		menu.set("isparent", "false");
 		menu.set("parentmenuids", pIds);
 		menu.set("orderids", orderIds);
@@ -88,7 +84,7 @@ public class MenuService extends BaseService {
 		menu.set("images", images);
 		menu.save();
 		
-		return ids;
+		return menu.getStr("ids");
 	}
 	
 	/**

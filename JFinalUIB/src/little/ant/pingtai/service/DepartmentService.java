@@ -3,7 +3,6 @@ package little.ant.pingtai.service;
 import java.util.List;
 
 import little.ant.pingtai.model.Department;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -76,10 +75,7 @@ public class DepartmentService extends BaseService {
 			images = orderIds + ".png";
 		}
 
-		String ids = ToolUtils.getUuidByJdk(true);
-		
 		Department dept = new Department();
-		dept.set("ids", ids);
 		dept.set("isparent", "false");
 		dept.set("parentdepartmentids", pIds);
 		dept.set("orderids", orderIds);
@@ -87,7 +83,7 @@ public class DepartmentService extends BaseService {
 		dept.set("images", images);
 		dept.save();
 		
-		return ids;
+		return dept.getStr("ids");
 	}
 	
 	/**

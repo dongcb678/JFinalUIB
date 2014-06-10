@@ -9,7 +9,6 @@ import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.model.Operator;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -24,15 +23,14 @@ public class OperatorService extends BaseService {
 	 * @return
 	 */
 	public String save(Operator operator){
-		String ids = ToolUtils.getUuidByJdk(true);
-		operator.set("ids", ids).save();
+		operator.save();
 		
 		// 缓存
 		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
 		cacheFactory.add(EhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + operator.getStr("ids"), operator);
 		cacheFactory.add(EhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + operator.getStr("url"), operator);
 		
-		return ids;
+		return operator.getStr("ids");
 	}
 
 	/**

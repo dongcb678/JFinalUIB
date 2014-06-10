@@ -3,7 +3,6 @@ package little.ant.pingtai.service;
 import java.util.List;
 
 import little.ant.pingtai.model.Module;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -83,10 +82,7 @@ public class ModuleService extends BaseService {
 			images = orderIds + ".png";
 		}
 
-		String ids = ToolUtils.getUuidByJdk(true);
-		
 		Module module = new Module();
-		module.set("ids", ids);
 		module.set("isparent", "true");
 		module.set("parentmoduleids", pIds);
 		module.set("systemsids", pDept.getStr("systemsids"));//冗余系统ids
@@ -95,7 +91,7 @@ public class ModuleService extends BaseService {
 		module.set("images", images);
 		module.save();
 		
-		return ids;
+		return module.getStr("ids");
 	}
 	
 	/**

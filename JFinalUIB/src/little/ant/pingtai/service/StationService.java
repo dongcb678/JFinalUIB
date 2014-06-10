@@ -5,7 +5,6 @@ import java.util.List;
 import little.ant.pingtai.common.EhcacheFactory;
 import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.model.Station;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -75,10 +74,7 @@ public class StationService extends BaseService {
 			images = orderIds + ".png";
 		}
 		
-		String ids = ToolUtils.getUuidByJdk(true);
-		
 		Station station = new Station();
-		station.set("ids", ids);
 		station.set("isparent", "false");
 		station.set("parentstationids", pIds);
 		station.set("orderids", orderIds);
@@ -90,7 +86,7 @@ public class StationService extends BaseService {
 		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
 		cacheFactory.add(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + station.getStr("ids"), station);
 		
-		return ids;
+		return station.getStr("ids");
 	}
 	
 	/**

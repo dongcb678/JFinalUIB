@@ -9,7 +9,6 @@ import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Role;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -24,13 +23,12 @@ public class RoleService extends BaseService {
 	 * @return
 	 */
 	public String save(Role role){
-		String ids = ToolUtils.getUuidByJdk(true);
-		role.set("ids", ids).save();
+		role.save();
 		
 		// 缓存
 		EhcacheFactory.getInstance().add(EhcacheFactory.cache_name_system, ParamInit.cacheStart_role + role.getStr("ids"), role);
 		
-		return ids;
+		return role.getPrimaryKeyValue();
 	}
 
 	/**

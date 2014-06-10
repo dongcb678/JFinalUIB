@@ -1,8 +1,6 @@
 package little.ant.pingtai.model;
 
-import com.jfinal.plugin.activerecord.Model;
-
-public class User extends Model<User> {
+public class User extends BaseModel<User> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 	

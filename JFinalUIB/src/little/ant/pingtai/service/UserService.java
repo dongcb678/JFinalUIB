@@ -15,7 +15,6 @@ import little.ant.pingtai.model.Department;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -43,14 +42,10 @@ public class UserService extends BaseService {
 			user.set("password", encryptedPassword);
 
 			// 保存用户信息
-			String userInfoIds = ToolUtils.getUuidByJdk(true);
-			userInfo.set("ids", userInfoIds);
 			userInfo.save();
 			
 			// 保存用户
-			String userIds = ToolUtils.getUuidByJdk(true);
-			user.set("ids", userIds);
-			user.set("userinfoids", userInfoIds);
+			user.set("userinfoids", userInfo.getStr("ids"));
 			user.save();
 
 			// 缓存
@@ -194,7 +189,7 @@ public class UserService extends BaseService {
 		// 封装部门数据
 		for (Department dept : deptList) {
 			sb.append(" { ");
-			sb.append(" id : '").append("dept_").append(dept.get("ids")).append("', ");
+			sb.append(" id : '").append("dept_").append(dept.getPrimaryKeyValue()).append("', ");
 			sb.append(" name : '").append(dept.get("names")).append("', ");
 
 			if (null != deptIds) {

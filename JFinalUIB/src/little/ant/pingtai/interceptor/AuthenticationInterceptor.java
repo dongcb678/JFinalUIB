@@ -65,7 +65,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			log.info("URI存在!");
 			
 			Operator operator = (Operator) operatorObj;
-			reqSysLog.set("operatorids", operator.get("ids"));
+			reqSysLog.set("operatorids", operator.getPrimaryKeyValue());
 			
 			if(operator.get("privilege").equals("1")){// 是否需要权限验证
 				log.info("需要权限验证!");
@@ -82,7 +82,7 @@ public class AuthenticationInterceptor implements Interceptor {
 					return;
 				}
 				
-				reqSysLog.set("userids", user.get("ids"));
+				reqSysLog.set("userids", user.getPrimaryKeyValue());
 				if(!ContextBase.hasPrivilegeOperator(operator, user)){// 权限验证
 					log.info("权限验证失败，没有权限!");
 					

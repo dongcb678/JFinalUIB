@@ -5,7 +5,6 @@ import java.util.List;
 import little.ant.pingtai.common.EhcacheFactory;
 import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.model.Dict;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -35,11 +34,9 @@ public class DictService extends BaseService {
 		}
 
 		dict.set("isparent", "false").set("levels", parent.getLong("levels") + 1);
-
-		String ids = ToolUtils.getUuidByJdk(true);
-		dict.set("ids", ids);
-		dict.set("paths", parent.get("paths") + "/" + ids);
 		dict.save();
+		
+		dict.set("paths", parent.get("paths") + "/" + dict.getStr("ids")).update();
 		
 		// 缓存
 		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
@@ -57,7 +54,7 @@ public class DictService extends BaseService {
 		parent.set("isparent", "true").update();
 		
 		dict.set("parentids", pIds).set("levels", parent.getLong("levels") + 1);
-		dict.set("paths", parent.get("paths") + "/" + dict.get("ids"));
+		dict.set("paths", parent.get("paths") + "/" + dict.getPrimaryKeyValue());
 		dict.update();
 		
 		// 缓存

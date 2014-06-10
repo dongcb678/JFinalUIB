@@ -5,7 +5,6 @@ import java.util.Map;
 
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.service.BaseService;
-import little.ant.pingtai.tools.ToolUtils;
 import little.ant.weixin.lucene.DocKeyword;
 import little.ant.weixin.model.Keyword;
 
@@ -21,13 +20,11 @@ public class KeywordService extends BaseService {
 	 * @return
 	 */
 	public String save(Keyword keyword){
-		String ids = ToolUtils.getUuidByJdk(true);
-		keyword.set("ids", ids);
 		keyword.save();
 		
 		new DocKeyword().add(keyword); // 索引
 		
-		return ids;
+		return keyword.getStr("ids");
 	}
 
 	/**

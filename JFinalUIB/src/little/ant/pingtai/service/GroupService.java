@@ -9,7 +9,6 @@ import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.User;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -24,13 +23,12 @@ public class GroupService extends BaseService {
 	 * @return
 	 */
 	public String save(Group group){
-		String ids = ToolUtils.getUuidByJdk(true);
-		group.set("ids", ids).save();
+		group.save();
 		
 		// 缓存
 		EhcacheFactory.getInstance().add(EhcacheFactory.cache_name_system, ParamInit.cacheStart_group + group.getStr("ids"), group);
 		
-		return ids;
+		return group.getStr("ids");
 	}
 
 	/**

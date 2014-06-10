@@ -4,7 +4,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import little.ant.pingtai.model.Syslog;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -50,7 +49,7 @@ public class ThreadSysLog {
 								Syslog sysLog = queue.take();
 								
 								// 日志入库
-								sysLog.set("ids", ToolUtils.getUuidByJdk(true)).save();
+								sysLog.save();
 							} catch (Exception e) {
 								log.error("保存操作日志到数据库异常");
 								e.printStackTrace();

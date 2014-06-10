@@ -7,7 +7,6 @@ import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.model.Systems;
-import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
 
@@ -26,14 +25,11 @@ public class SystemsService extends BaseService {
 	@Before(Tx.class)
 	public void save(Systems systems){
 		// 保存系统
-		String systemsIds = ToolUtils.getUuidByJdk(true);
-		systems.set("ids", systemsIds);
 		systems.save();
 		
 		// 初始化模块根节点
 		Module module = new Module();
-		module.set("ids", ToolUtils.getUuidByJdk(true));
-		module.set("systemsids", systemsIds);
+		module.set("systemsids", systems.getStr("ids"));
 		module.set("isparent", "true");
 		module.set("images", "3.png");
 		module.set("orderids", 1);
@@ -42,8 +38,7 @@ public class SystemsService extends BaseService {
 		
 		// 初始化菜单根节点
 		Menu menu = new Menu();
-		menu.set("ids", ToolUtils.getUuidByJdk(true));
-		menu.set("systemsids", systemsIds);
+		menu.set("systemsids", systems.getStr("ids"));
 		menu.set("isparent", "true");
 		menu.set("images", "3.png");
 		menu.set("orderids", 1);
