@@ -6,6 +6,7 @@ import java.util.Map;
 import little.ant.pingtai.beetl.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.MyBeetlRenderFactory;
 import little.ant.pingtai.beetl.OrderBy;
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.controller.DepartmentController;
 import little.ant.pingtai.controller.DictController;
@@ -71,28 +72,10 @@ public class JfinalConfig extends JFinalConfig {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(JfinalConfig.class);
 
-	protected static Map<String, Object> paramMap = new HashMap<String, Object>();
-	
 	/**
-	 * 加密
+	 * 保存系统配置参数值
 	 */
-	public static final String config_securityKey_key = "config.securityKey";
-	
-	/**
-	 * 密码错误次数
-	 */
-	public static final String config_passErrorCount_key = "config.passErrorCount";
-	
-	/**
-	 * 密码错误最大次数后间隔登陆时间
-	 */
-	public static final String config_passErrorHour_key = "config.passErrorHour";
-	
-	/**
-	 * 解决数据库差异
-	 */
-	public static final String db_type_postgresql = "postgresql";
-	public static final String db_type_mysql = "mysql";
+	private static Map<String, Object> paramMap = new HashMap<String, Object>();
 	
 	/**
 	 * 获取系统配置参数值
@@ -109,9 +92,9 @@ public class JfinalConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		loadPropertyFile("init.properties");
 
-		paramMap.put(config_securityKey_key, getProperty(config_securityKey_key).trim());
-		paramMap.put(config_passErrorCount_key, getPropertyToInt(config_passErrorCount_key, 3));
-		paramMap.put(config_passErrorHour_key, getPropertyToInt(config_passErrorHour_key, 3));
+		paramMap.put(DictKeys.config_securityKey_key, getProperty(DictKeys.config_securityKey_key).trim());
+		paramMap.put(DictKeys.config_passErrorCount_key, getPropertyToInt(DictKeys.config_passErrorCount_key, 3));
+		paramMap.put(DictKeys.config_passErrorHour_key, getPropertyToInt(DictKeys.config_passErrorHour_key, 3));
 		
 		me.setEncoding(ToolString.encoding); 
 		me.setDevMode(getPropertyToBoolean("config.devMode", false));
@@ -164,7 +147,7 @@ public class JfinalConfig extends JFinalConfig {
 		ActiveRecordPlugin arp = null;
 		// 1.数据库类型判断
 		String db_type = getProperty("db.type").trim();
-		if(db_type.equals(db_type_postgresql)){ // pg
+		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
 			// 1.1 配置Druid数据库连接池插件
 			String postgresql_driverClass = getProperty("postgresql.driverClass").trim();
 			String postgresql_jdbcUrl = getProperty("postgresql.jdbcUrl").trim();
@@ -177,7 +160,7 @@ public class JfinalConfig extends JFinalConfig {
 			arp = new ActiveRecordPlugin(druidPlugin);
 			arp.setDialect(new PostgreSqlDialect()); // 数据库方言
 			
-		}else if(db_type.equals(db_type_mysql)){ // mysql
+		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
 			// 1.1 配置Druid数据库连接池插件
 			String mysql_jdbcUrl = getProperty("mysql.jdbcUrl").trim();
 			String mysql_userName = getProperty("mysql.userName").trim();

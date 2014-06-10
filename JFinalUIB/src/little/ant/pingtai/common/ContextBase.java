@@ -232,7 +232,7 @@ public class ContextBase {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		String securityKey = (String) JfinalConfig.getParamMapValue(JfinalConfig.config_securityKey_key);
+		String securityKey = (String) JfinalConfig.getParamMapValue(DictKeys.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		// 加密
@@ -271,7 +271,7 @@ public class ContextBase {
 		// 解密
 		byte[] securityByte = Base64.decodeBase64(encodeCookie);
 
-		String securityKey = (String) JfinalConfig.getParamMapValue(JfinalConfig.config_securityKey_key);
+		String securityKey = (String) JfinalConfig.getParamMapValue(DictKeys.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		byte[] dataByte = null;

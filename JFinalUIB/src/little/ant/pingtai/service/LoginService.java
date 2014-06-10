@@ -80,11 +80,11 @@ public class LoginService extends BaseService {
 
 		// 3.密码错误次数超限
 		int errorCount = user.getLong("errorcount").intValue();
-		int passErrorCount = (int) JfinalConfig.getParamMapValue(JfinalConfig.config_passErrorCount_key);
+		int passErrorCount = (int) JfinalConfig.getParamMapValue(DictKeys.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate("stopDate");
 			int hourSpace = ToolDateTime.getDateHourSpace(new Date(), stopDate);
-			int passErrorHour = (int) JfinalConfig.getParamMapValue(JfinalConfig.config_passErrorHour_key);
+			int passErrorHour = (int) JfinalConfig.getParamMapValue(DictKeys.config_passErrorHour_key);
 			if(hourSpace < passErrorHour){
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
