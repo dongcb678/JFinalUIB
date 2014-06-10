@@ -29,9 +29,8 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * 重写save方法，设置主键值
 	 */
 	public boolean save() {
-		Table table = TableMapping.me().getTable(this.getClass());
 		String ids = ToolUtils.getUuidByJdk(true);
-		this.set(table.getPrimaryKey(), ids);
+		this.set(getTable().getPrimaryKey(), ids);
 		return super.save();
 	}
 	
@@ -40,8 +39,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * @return
 	 */
 	public String getPrimaryKeyValue(){
-		Table table = TableMapping.me().getTable(this.getClass());
-		return this.getStr(table.getPrimaryKey());
+		return this.getStr(getTable().getPrimaryKey());
 	}
 
 }
