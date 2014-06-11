@@ -1,8 +1,12 @@
 package little.ant.pingtai.model;
 
+import org.apache.log4j.Logger;
+
 public class Menu extends BaseModel<Menu> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
+
+	private static Logger log = Logger.getLogger(Menu.class);
 	
 	public static final Menu dao = new Menu();
 	

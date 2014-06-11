@@ -5,6 +5,8 @@ import java.util.Set;
 
 import little.ant.pingtai.tools.ToolUtils;
 
+import org.apache.log4j.Logger;
+
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
@@ -19,6 +21,8 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 
 	private static final long serialVersionUID = -900378319414539856L;
 
+	private static Logger log = Logger.getLogger(BaseModel.class);
+	
 	/**
 	 * 获取表映射对象
 	 * 
@@ -74,9 +78,13 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			}
 			field.setAccessible(false);
 		} catch (NoSuchFieldException | SecurityException e) {
+			log.error("业务Model类必须继承BaseModel");
 			e.printStackTrace();
+			throw new RuntimeException("业务Model类必须继承BaseModel");
 		} catch (IllegalArgumentException | IllegalAccessException e) {
+			log.error("BaseModel访问modifyFlag异常");
 			e.printStackTrace();
+			throw new RuntimeException("BaseModel访问modifyFlag异常");
 		}
 		boolean versionModify = modifyFlag.contains("version");
 		if(versionModify && getTable().hasColumnLabel("version")){ // 是否需要乐观锁控制
