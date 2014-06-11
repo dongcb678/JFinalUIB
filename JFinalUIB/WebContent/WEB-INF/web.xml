@@ -6,18 +6,24 @@
 	
 	<display-name>JFinalUIB</display-name>
 	
-	<!-- URL 缓存 -->
-	<filter>
-		<filter-name>pageCacheFilter</filter-name>
-		<filter-class>net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter</filter-class>
-		<async-supported>true</async-supported>
-	</filter>
-	<filter-mapping>
-		<filter-name>pageCacheFilter</filter-name>
-		<url-pattern>/jf/ca/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
+	<!-- log4j -->
+	<servlet>  
+    	<servlet-name>log4j</servlet-name>  
+    	<servlet-class>little.ant.pingtai.servlet.Log4j</servlet-class>  
+	    <init-param>  
+	        <param-name>log4j_init_path</param-name>  
+	        <param-value>\WEB-INF\classes\log4j.properties</param-value>  
+	    </init-param>  
+     	<init-param>  
+         	<param-name>log4j_file_path</param-name>  
+        	<param-value>\WEB-INF\log\</param-value>  
+    	</init-param>  
+    	<load-on-startup>0</load-on-startup>  
+ 	</servlet>
+	<servlet-mapping>
+		<servlet-name>log4j</servlet-name>
+		<url-pattern>/se/log4j</url-pattern>
+	</servlet-mapping>
 	
 	<!-- Druid 数据源查看 -->
 	<servlet>
@@ -32,6 +38,19 @@
 		<servlet-name>DruidStatView</servlet-name>
 		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>
+	
+	<!-- URL 缓存 -->
+	<filter>
+		<filter-name>pageCacheFilter</filter-name>
+		<filter-class>net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter</filter-class>
+		<async-supported>true</async-supported>
+	</filter>
+	<filter-mapping>
+		<filter-name>pageCacheFilter</filter-name>
+		<url-pattern>/jf/ca/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
 	
 	<!-- JFinal -->
 	<filter>
