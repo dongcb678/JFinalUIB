@@ -21,7 +21,11 @@
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/user/update" method="POST">
 				<input type="hidden" name="user.ids" value="${user.ids!}" >
+				<input type="hidden" name="user.version" value="${user.version! + 1}">
+				
 				<input type="hidden" name="userInfo.ids" value="${userInfo.ids!}" >
+				<input type="hidden" name="userInfo.version" value="${userInfo.version! + 1}">
+				
 				<% include("/pingtai/user/form.html", {"operatorType" : "update"}){}%>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/user/update", reqSysLog.userids)){ %>

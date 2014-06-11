@@ -131,7 +131,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			} catch (Exception e) {
 				log.info("业务逻辑代码遇到异常时保存日志!");
 				reqSysLog.set("status", "0");//失败
-				reqSysLog.set("description", "URL不存在");
+				reqSysLog.set("description", e.getMessage());
 				reqSysLog.set("cause", "3");//业务代码异常
 				
 				log.info("返回失败提示页面!");

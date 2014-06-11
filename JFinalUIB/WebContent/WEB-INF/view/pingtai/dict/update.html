@@ -21,6 +21,8 @@
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/dict/update" method="POST">
 				<input type="hidden" name="dict.ids" value="${dict.ids!}" >
+				<input type="hidden" name="dict.version" value="${dict.version! + 1}">
+				
 				<% include("/pingtai/dict/form.html"){} %>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/dict/save", reqSysLog.userids)){ %>
