@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
- * Log4j在线即时查看
+ * Log4j在线查看
  */
 //@WebServlet(urlPatterns = { "/se/log4j" }, asyncSupported = true)
 public class Log4j extends HttpServlet {

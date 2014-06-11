@@ -13,6 +13,11 @@ import javax.servlet.AsyncContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * log4j异步输出处理类
+ * @author 董华健
+ *
+ */
 public class Log4jAsyncWriter extends Writer {
 
 	private static final Log log = LogFactory.getLog(Log4jAsyncWriter.class);

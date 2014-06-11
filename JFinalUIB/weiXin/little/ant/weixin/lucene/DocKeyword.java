@@ -58,7 +58,7 @@ public class DocKeyword extends DocBase {
 	 * 索引全部
 	 * @author 董华健 
 	 */
-	public void indexAllKeyword() {
+	private void indexAllKeyword() {
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		IndexWriter ramIndexWriter = getRamIndexWriter();//调用RAM写
 		Document document = new Document();
@@ -281,7 +281,7 @@ public class DocKeyword extends DocBase {
 	 * @param diskIndexWriter
 	 * @param diskDir
 	 */
-	protected void close() {
+	public void close() {
 		if(null != ramIndexWriter){
 			try {
 				ramIndexWriter.close();

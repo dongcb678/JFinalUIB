@@ -230,7 +230,7 @@ public class JfinalConfig extends JFinalConfig {
 	 * 系统关闭前调用
 	 */
 	public void beforeJFinalStop() {
-		
+		new DocKeyword().close(); // 释放资源
 	}
 	
 	/**
