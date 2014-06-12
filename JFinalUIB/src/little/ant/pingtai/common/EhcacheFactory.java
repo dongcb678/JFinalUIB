@@ -20,19 +20,19 @@ public class EhcacheFactory {
 	public static final String cache_name_page = "SimplePageCachingFilter";//URL缓存
 	public static final String cache_name_system = "system";//系统缓存，主要是权限和数据字典等
 	
-	public static final EhcacheFactory ehcacheImpl = new EhcacheFactory();
-
-	private CacheManager cacheManager; 
+	private static EhcacheFactory ehcacheImpl = new EhcacheFactory();
+	
+	private static CacheManager cacheManager = CacheManager.getInstance();
 	
 	private EhcacheFactory() {
-		cacheManager = CacheManager.getInstance();
+		
 	}
 	
 	public static EhcacheFactory getInstance() {
 		return ehcacheImpl;
 	}
 	
-	public CacheManager getCacheManager() {
+	public static CacheManager getCacheManager() {
 		return cacheManager;
 	}
 
