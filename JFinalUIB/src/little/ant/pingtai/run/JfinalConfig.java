@@ -230,7 +230,11 @@ public class JfinalConfig extends JFinalConfig {
 	 * 系统关闭前调用
 	 */
 	public void beforeJFinalStop() {
-		new DocKeyword().close(); // 释放资源
+		// 释放lucene索引资源
+		new DocKeyword().close();
+		
+		// 释放日志入库线程
+		ThreadSysLog.setThreadRun(false);
 	}
 	
 	/**

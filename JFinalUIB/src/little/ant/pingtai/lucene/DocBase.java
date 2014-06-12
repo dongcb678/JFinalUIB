@@ -50,21 +50,52 @@ public abstract class DocBase implements Runnable {
 	protected static final int splitDataSize = 10000;//初始化索引，每批次处理一万行
 	
 	protected static final Analyzer analyzer = new IKAnalyzer();//分词器
-
+	
+	/**
+	 * 获取索引路径
+	 * @return
+	 */
 	protected abstract String getIndexPath();
 	
+	/**
+	 * 获取索引目录：磁盘
+	 * @return
+	 */
 	protected abstract Directory getDiskDir();
-
+	
+	/**
+	 * 获取索引读写对象：磁盘
+	 * @return
+	 */
 	protected abstract IndexWriter getDiskIndexWriter();
 
+	/**
+	 * 获取索引目录：内存
+	 * @return
+	 */
 	protected abstract Directory getRamDir();
 
+	/**
+	 * 获取索引读写对象：内存
+	 * @return
+	 */
 	protected abstract IndexWriter getRamIndexWriter();
 	
+	/**
+	 * 内存索引转磁盘
+	 */
 	protected abstract void ramToDisk();
 
+	/**
+	 * 获取Reader
+	 * @return
+	 */
 	protected abstract IndexReader getReader();
 
+	/**
+	 * 获取Searcher
+	 * @return
+	 */
 	protected abstract IndexSearcher getSearcher();
 
 	/**

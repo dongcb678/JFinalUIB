@@ -37,10 +37,13 @@ import com.jfinal.kit.PathKit;
 public class DocKeyword extends DocBase {
 
 	private static String indexPath;
+	
 	private static Directory diskDir;
 	private static IndexWriter diskIndexWriter;
+	
 	private static Directory ramDir;
 	private static IndexWriter ramIndexWriter;
+	
 	private static IndexReader reader;
 	private static IndexSearcher searcher;
 	
@@ -80,7 +83,7 @@ public class DocKeyword extends DocBase {
 	 * @param keyword
 	 */
 	public void add(Keyword keyword) {
-		IndexWriter diskIndexWriter = getDiskIndexWriter();
+		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		Document document = new Document();
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		addDoc(diskIndexWriter, keyword, document, fields);
@@ -90,6 +93,8 @@ public class DocKeyword extends DocBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		ramToDisk();//把RAM写同步更新到DISK
 	}
 	
 	/**
@@ -97,7 +102,7 @@ public class DocKeyword extends DocBase {
 	 * @param keyword
 	 */
 	public void update(Keyword keyword){
-		IndexWriter diskIndexWriter = getDiskIndexWriter();
+		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		Document document = new Document();
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		updateDoc(diskIndexWriter, keyword, document, fields);
@@ -114,7 +119,7 @@ public class DocKeyword extends DocBase {
 	 * @param ids
 	 */
 	public void delete(String ids){
-		IndexWriter diskIndexWriter = getDiskIndexWriter();
+		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		deleteDoc(diskIndexWriter, ids);
 	}
 	
@@ -282,6 +287,16 @@ public class DocKeyword extends DocBase {
 	 * @param diskDir
 	 */
 	public void close() {
+		if(null != searcher){
+			searcher = null;
+		}
+		if(null != reader){
+			try {
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		if(null != ramIndexWriter){
 			try {
 				ramIndexWriter.close();
