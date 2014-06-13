@@ -207,7 +207,22 @@ function ajaxContent(url, data){
 	    	$('#loading').remove();
 			$('#content').fadeIn();
 			docReady();
-		}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) { 
+			// 这个方法有三个参数：XMLHttpRequest 对象，错误信息，（可能）捕获的错误对象。
+			// 通常情况下textStatus和errorThown只有其中一个有值
+            // alert(XMLHttpRequest.status);
+            // alert(XMLHttpRequest.readyState);
+            // alert(textStatus);
+			alert("请求出现错误！");
+	    	$('#loading').remove();
+			$('#content').fadeIn();
+			docReady();
+        },
+        complete: function(XMLHttpRequest, textStatus) { 
+        	// 请求完成后回调函数 (请求成功或失败时均调用)。参数： XMLHttpRequest 对象，成功信息字符串。
+            // 调用本次AJAX请求时传递的options参数
+        }
 	});
 }
 
