@@ -25,21 +25,21 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">功能名称</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${paramMap["_query.names"]!}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${escapeXml(paramMap["_query.names"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">用户账号</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.username" value='${paramMap["_query.username"]!}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.username" value='${escapeXml(paramMap["_query.username"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">IP</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.ips" value='${paramMap["_query.ips"]!}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.ips" value='${escapeXml(paramMap["_query.ips"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	

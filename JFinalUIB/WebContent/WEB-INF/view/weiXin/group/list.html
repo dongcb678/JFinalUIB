@@ -27,7 +27,7 @@
 				  	<div class="control-group">
 						<label class="control-label">组名称</label>
 						<div class="controls">
-					  		<input class="input-xlarge" type="text" name="_query.name" value='${paramMap["_query.name"]!}' maxlength="40" >
+					  		<input class="input-xlarge" type="text" name="_query.name" value='${escapeXml(paramMap["_query.name"])}' maxlength="40" >
 						</div>
 				  	</div>
 					

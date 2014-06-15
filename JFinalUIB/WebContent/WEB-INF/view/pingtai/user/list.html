@@ -30,14 +30,14 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">账号</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.userName" value='${paramMap["_query.userName"]!}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.userName" value='${escapeXml(paramMap["_query.userName"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  
 				  	<div class="control-group">
 						<label class="control-label">邮箱</label>
 						<div class="controls">
-					  		<input class="input-xlarge" type="text" name="_query.email" value='${paramMap["_query.email"]!}' maxlength="40" >
+					  		<input class="input-xlarge" type="text" name="_query.email" value='${escapeXml(paramMap["_query.email"])}' maxlength="40" >
 						</div>
 				  	</div>
 				

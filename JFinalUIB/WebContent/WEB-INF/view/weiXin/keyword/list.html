@@ -30,21 +30,21 @@
 				  	<div class="control-group">
 						<label class="control-label">问题</label>
 						<div class="controls">
-					  		<input class="input-xlarge" type="text" name="_query.question" value='${paramMap["_query.question"]!}' maxlength="40" >
+					  		<input class="input-xlarge" type="text" name="_query.question" value='${escapeXml(paramMap["_query.question"])}' maxlength="40" >
 						</div>
 				  	</div>
 				  	
 				  	<div class="control-group">
 						<label class="control-label">问题关键字</label>
 						<div class="controls">
-					  		<input class="input-xlarge" type="text" name="_query.questionkey" value='${paramMap["_query.questionkey"]!}' maxlength="40" >
+					  		<input class="input-xlarge" type="text" name="_query.questionkey" value='${escapeXml(paramMap["_query.questionkey"])}' maxlength="40" >
 						</div>
 				  	</div>
 					
 				  	<div class="control-group">
 						<label class="control-label">答案</label>
 						<div class="controls">
-					  		<input class="input-xlarge" type="text" name="_query.answer" value='${paramMap["_query.answer"]!}' maxlength="40" >
+					  		<input class="input-xlarge" type="text" name="_query.answer" value='${escapeXml(paramMap["_query.answer"])}' maxlength="40" >
 						</div>
 				  	</div>
 					

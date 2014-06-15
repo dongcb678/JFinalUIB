@@ -3,6 +3,7 @@ package little.ant.pingtai.run;
 import java.util.HashMap;
 import java.util.Map;
 
+import little.ant.pingtai.beetl.EscapeXml;
 import little.ant.pingtai.beetl.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.MyBeetlRenderFactory;
 import little.ant.pingtai.beetl.OrderBy;
@@ -104,6 +105,7 @@ public class JfinalConfig extends JFinalConfig {
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
 		groupTemplate.registerFunction("orderBy", new OrderBy());
+		groupTemplate.registerFunction("escapeXml", new EscapeXml());
 		
 		me.setError401View("/common/401.html");
 		me.setError403View("/common/403.html");

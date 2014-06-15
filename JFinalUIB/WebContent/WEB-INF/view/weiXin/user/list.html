@@ -27,14 +27,14 @@
 				  	<div class="control-group">
 						<label class="control-label">用户的标识</label>
 						<div class="controls">
-					  		<input class="input-xlarge" type="text" name="_query.openid" value='${paramMap["_query.openid"]!}' maxlength="40" >
+					  		<input class="input-xlarge" type="text" name="_query.openid" value='${escapeXml(paramMap["_query.openid"])}' maxlength="40" >
 						</div>
 				  	</div>
 				
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">昵称</label>
 						<div class="controls">
-					  		<input class="input-xlarge focused" type="text" name="_query.nickname" value='${paramMap["_query.nickname"]!}' maxlength="20" >
+					  		<input class="input-xlarge focused" type="text" name="_query.nickname" value='${escapeXml(paramMap["_query.nickname"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  

@@ -46,6 +46,9 @@ public class SplitPage implements Serializable {
 		this.orderMode = orderMode;
 	}
 	public int getPageNumber() {
+		if(pageNumber == 0){
+			pageNumber = 1;
+		}
 		return pageNumber;
 	}
 	public void setPageNumber(int pageNumber) {
