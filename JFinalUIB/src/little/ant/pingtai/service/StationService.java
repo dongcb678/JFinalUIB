@@ -2,9 +2,9 @@ package little.ant.pingtai.service;
 
 import java.util.List;
 
-import little.ant.pingtai.common.EhcacheFactory;
-import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.model.Station;
+import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
 
@@ -83,8 +83,8 @@ public class StationService extends BaseService {
 		station.save();
 		
 		// 缓存
-		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
-		cacheFactory.add(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + station.getStr("ids"), station);
+		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + station.getStr("ids"), station);
 		
 		return station.getStr("ids");
 	}
@@ -107,8 +107,8 @@ public class StationService extends BaseService {
 		}
 
 		// 缓存
-		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
-		cacheFactory.add(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + station.getStr("ids"), station);
+		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + station.getStr("ids"), station);
 	}
 	
 	/**
@@ -124,8 +124,8 @@ public class StationService extends BaseService {
 	    }
 	    
 		// 缓存
-		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
-		cacheFactory.delete(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
+		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
 		
 		// 删除
 	    Station.dao.deleteById(ids);
@@ -143,7 +143,7 @@ public class StationService extends BaseService {
 		station.set("moduleids", moduleIds).set("operatorids", operatorIds).update();
 		
 		// 缓存
-		EhcacheFactory.getInstance().update(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + stationIds, station);
+		ToolEhcacheFactory.getInstance().update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + stationIds, station);
 	}
 	
 	

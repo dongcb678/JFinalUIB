@@ -1,7 +1,7 @@
 package little.ant.weixin.controller;
 
-import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.controller.BaseController;
+import little.ant.pingtai.tools.ToolContext;
 import little.ant.weixin.service.MessageService;
 import little.ant.weixin.tools.ToolOAuth2;
 import little.ant.weixin.tools.ToolSignature;
@@ -46,7 +46,7 @@ public class MessageController extends BaseController {
 		}else{
 			if(flag){
 				String accountId = getPara("accountId");// 公众账号标识
-				String recverMsg = ContextBase.requestStream(getRequest());
+				String recverMsg = ToolContext.requestStream(getRequest());
 				log.info("接收微信发送过来的消息" + recverMsg);
 				String responseMsg = messageService.messageProcess(accountId, recverMsg);
 				log.info("返回消息" + responseMsg);

@@ -2,11 +2,11 @@ package little.ant.pingtai.controller;
 
 import java.util.List;
 
-import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.service.IndexService;
+import little.ant.pingtai.tools.ToolContext;
 
 import org.apache.log4j.Logger;
 
@@ -27,7 +27,7 @@ public class IndexController extends BaseController {
 	 * 首页
 	 */
 	public void index() {
-		User user = ContextBase.getCurrentUser(getRequest()); // cookie认证自动登陆处理
+		User user = ToolContext.getCurrentUser(getRequest()); // cookie认证自动登陆处理
 		if(null != user){//后台
 			systemsList = Systems.dao.find(" select ids, names from pt_systems order by orderids asc ");
 			if(null == ids || ids.isEmpty()){ // 默认系统

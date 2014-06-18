@@ -2,9 +2,9 @@ package little.ant.pingtai.service;
 
 import java.util.List;
 
-import little.ant.pingtai.common.EhcacheFactory;
-import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.model.Dict;
+import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
 
@@ -39,8 +39,8 @@ public class DictService extends BaseService {
 		dict.set("paths", parent.get("paths") + "/" + dict.getStr("ids")).update();
 		
 		// 缓存
-		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
-		cacheFactory.add(EhcacheFactory.cache_name_system, ParamInit.cacheStart_dict + dict.getStr("ids"), dict);
+		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_dict + dict.getStr("ids"), dict);
 	}
 
 	/**
@@ -58,8 +58,8 @@ public class DictService extends BaseService {
 		dict.update();
 		
 		// 缓存
-		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
-		cacheFactory.update(EhcacheFactory.cache_name_system, ParamInit.cacheStart_dict + dict.getStr("ids"), dict);
+		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_dict + dict.getStr("ids"), dict);
 	}
 
 	/**
@@ -68,8 +68,8 @@ public class DictService extends BaseService {
 	 */
 	public void delete(String ids){
 		// 缓存
-		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
-		cacheFactory.delete(EhcacheFactory.cache_name_system, ParamInit.cacheStart_dict + ids);
+		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_dict + ids);
 		
 		// 删除
 		Dict.dao.deleteById(ids);

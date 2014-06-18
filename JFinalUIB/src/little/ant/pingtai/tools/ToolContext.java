@@ -1,4 +1,4 @@
-package little.ant.pingtai.common;
+package little.ant.pingtai.tools;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,16 +12,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.run.JfinalConfig;
-import little.ant.pingtai.tools.ToolDateTime;
-import little.ant.pingtai.tools.ToolSecurityIDEA;
-import little.ant.pingtai.tools.ToolString;
-import little.ant.pingtai.tools.ToolWeb;
+import little.ant.pingtai.thread.ParamInit;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
@@ -31,14 +29,14 @@ import org.apache.log4j.Logger;
  * 
  * @author 董华健 2012-9-7 下午1:51:04
  */
-public class ContextBase {
+public class ToolContext {
 
-	private static Logger log = Logger.getLogger(ContextBase.class);
+	private static Logger log = Logger.getLogger(ToolContext.class);
 
 	public static boolean hasPrivilegeUrl(String url, String userIds) {
 		// 基于缓存查询operator
-		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
-		Object operatorObj = cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + url);
+		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+		Object operatorObj = cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + url);
 		if (null == operatorObj) {
 			log.error("URL缓存不存在：" + url);
 			return false;
@@ -46,7 +44,7 @@ public class ContextBase {
 		Operator operator = (Operator) operatorObj;
 
 		// 基于缓存查询user
-		Object userObj = cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userIds);
+		Object userObj = cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userIds);
 		if (null == userObj) {
 			log.error("用户缓存不存在：" + userIds);
 			return false;
@@ -62,14 +60,14 @@ public class ContextBase {
 		if (null != groupIds) {
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				Group group = (Group) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_group + groupIdsTemp);
+				Group group = (Group) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				if(null == roleIdsStr || roleIdsStr.equals("")){
 					continue;
 				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					Role role = (Role) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIdsTemp);
+					Role role = (Role) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					if (operatorIdsStr.indexOf(operatorIds) != -1) {
 						return true;
@@ -82,7 +80,7 @@ public class ContextBase {
 		if (null != stationIds) {
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				Station station = (Station) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
+				Station station = (Station) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				if(null == operatorIdsStr || operatorIdsStr.equals("")){
 					continue;
@@ -105,7 +103,7 @@ public class ContextBase {
 	 */
 	public static boolean hasPrivilegeOperator(Operator operator, User user) {
 		// 基于缓存查询
-		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
+		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		String operatorIds = operator.getStr("ids") + ",";
 
 		// 根据分组查询权限
@@ -113,14 +111,14 @@ public class ContextBase {
 		if (null != groupIds) {
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				Group group = (Group) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_group + groupIdsTemp);
+				Group group = (Group) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				if(null == roleIdsStr || roleIdsStr.equals("")){
 					continue;
 				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					Role role = (Role) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIdsTemp);
+					Role role = (Role) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					if (operatorIdsStr.indexOf(operatorIds) != -1) {
 						return true;
@@ -134,7 +132,7 @@ public class ContextBase {
 		if (null != stationIds) {
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				Station station = (Station) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
+				Station station = (Station) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				if(null == operatorIdsStr || operatorIdsStr.equals("")){
 					continue;
@@ -161,10 +159,7 @@ public class ContextBase {
 		// PrintWriter out = response.getWriter();
 		// out.print(content);
 		try {
-			response.getOutputStream().write(content.getBytes(ToolString.encoding));// char
-																		// to
-																		// byte
-																		// 性能提升
+			response.getOutputStream().write(content.getBytes(ToolString.encoding));// char to byte 性能提升
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -175,8 +170,7 @@ public class ContextBase {
 	 * 
 	 * @author 董华健 2012-9-14 下午8:02:33
 	 * @param response
-	 * @param content
-	 *            CSV内容
+	 * @param content CSV内容
 	 */
 	public static void outDownCsv(HttpServletResponse response, String content) {
 		response.setContentType("application/download; charset=gb18030");
@@ -295,7 +289,7 @@ public class ContextBase {
 	public static User getCurrentUser(HttpServletRequest request) {
 		String loginCookie = ToolWeb.getCookieValueByName(request, "authmark");
 		if (null != loginCookie && !loginCookie.equals("")) {
-			String[] datas = ContextBase.decodeCookieAuthToken(loginCookie);
+			String[] datas = ToolContext.decodeCookieAuthToken(loginCookie);
 
 			long loginDateTimes = Long.parseLong(datas[0]);// 时间戳
 			String userIds = datas[1];// 用户id
@@ -310,8 +304,8 @@ public class ContextBase {
 			int day = ToolDateTime.getDateDaySpace(start, new Date());
 
 			if (ips.equals(newIp) && userAgent.equals(newUserAgent) && day <= 365) {
-				EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
-				Object userObj = cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userIds);
+				ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+				Object userObj = cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userIds);
 				if (null != userObj) {
 					User user = (User) userObj;
 					return user;
@@ -340,7 +334,7 @@ public class ContextBase {
 		response.addCookie(userName);
 
 		// 登陆认证cookie
-		String authToken = ContextBase.getCookieAuthToken(request, user);
+		String authToken = ToolContext.getCookieAuthToken(request, user);
 		ToolWeb.addCookie(response, "authmark", authToken, maxAgeTemp);
 	}
 

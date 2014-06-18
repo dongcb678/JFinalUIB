@@ -1,4 +1,4 @@
-package little.ant.pingtai.common;
+package little.ant.pingtai.tools;
 
 import java.util.List;
 
@@ -12,23 +12,23 @@ import org.apache.log4j.Logger;
  * Ehcache缓存操作工厂类
  * @author 董华健
  */
-public class EhcacheFactory {
+public class ToolEhcacheFactory {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(EhcacheFactory.class);
+	private static Logger log = Logger.getLogger(ToolEhcacheFactory.class);
 	
 	public static final String cache_name_page = "SimplePageCachingFilter";//URL缓存
 	public static final String cache_name_system = "system";//系统缓存，主要是权限和数据字典等
 	
-	private static EhcacheFactory ehcacheImpl = new EhcacheFactory();
+	private static ToolEhcacheFactory ehcacheImpl = new ToolEhcacheFactory();
 	
 	private static CacheManager cacheManager = CacheManager.getInstance();
 	
-	private EhcacheFactory() {
+	private ToolEhcacheFactory() {
 		
 	}
 	
-	public static EhcacheFactory getInstance() {
+	public static ToolEhcacheFactory getInstance() {
 		return ehcacheImpl;
 	}
 	

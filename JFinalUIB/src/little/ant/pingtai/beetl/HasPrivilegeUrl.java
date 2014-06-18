@@ -1,6 +1,6 @@
 package little.ant.pingtai.beetl;
 
-import little.ant.pingtai.common.ContextBase;
+import little.ant.pingtai.tools.ToolContext;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.Context;
@@ -28,7 +28,7 @@ public class HasPrivilegeUrl implements Function {
 			return false;
 		}
 		
-		boolean bool = ContextBase.hasPrivilegeUrl(url, userIds);
+		boolean bool = ToolContext.hasPrivilegeUrl(url, userIds);
 		
 		log.debug("beetl HasPrivilegeUrl 验证：" + bool);
 		

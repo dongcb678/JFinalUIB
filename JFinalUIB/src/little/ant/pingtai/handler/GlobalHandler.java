@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import little.ant.pingtai.beetl.MyBeetlRender;
-import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.thread.ThreadSysLog;
+import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolWeb;
 
 import org.apache.log4j.Logger;
@@ -37,7 +37,7 @@ public class GlobalHandler extends Handler {
 		request.setAttribute(reqSysLogKey, reqSysLog);
 		
 		log.info("设置 web 路径");
-		String cxt = ContextBase.getContextAllPath(request);
+		String cxt = ToolContext.getContextAllPath(request);
 		request.setAttribute("cxt", cxt);
 		
 		log.debug("beetl cookie处理");

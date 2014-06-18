@@ -2,13 +2,13 @@ package little.ant.pingtai.service;
 
 import java.util.List;
 
-import little.ant.pingtai.common.EhcacheFactory;
-import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
+import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
 
@@ -25,7 +25,7 @@ public class IndexService extends BaseService {
 	 */
 	public List<Menu> menu(String systemsIds, User user){
 		//基于缓存查询
-		EhcacheFactory cacheFactory = EhcacheFactory.getInstance();
+		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		StringBuffer operatorIdsSb = new StringBuffer();
 		
 		//根据分组查询权限
@@ -33,11 +33,11 @@ public class IndexService extends BaseService {
 		if(null != groupIds){
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				Group group = (Group) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_group + groupIdsTemp);
+				Group group = (Group) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					Role role = (Role) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIdsTemp);
+					Role role = (Role) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					operatorIdsSb.append(operatorIdsStr);
 				}
@@ -49,7 +49,7 @@ public class IndexService extends BaseService {
 		if(null != stationIds){
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				Station station = (Station) cacheFactory.get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
+				Station station = (Station) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				operatorIdsSb.append(operatorIdsStr);
 			}

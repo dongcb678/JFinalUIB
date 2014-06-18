@@ -5,14 +5,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.pingtai.common.ContextBase;
-import little.ant.pingtai.common.EhcacheFactory;
-import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.pingtai.handler.GlobalHandler;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.model.User;
+import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.tools.ToolContext;
+import little.ant.pingtai.tools.ToolEhcacheFactory;
 import little.ant.pingtai.tools.ToolWeb;
 
 import org.apache.log4j.Logger;
@@ -39,7 +39,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		contro.setReqSysLog(reqSysLog);
 		
 		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");
-		String uri = ContextBase.getParam(request, "toUrl");
+		String uri = ToolContext.getParam(request, "toUrl");
 		if (null == uri || uri.equals("")) {
 			uri = request.getServletPath();
 			
@@ -58,7 +58,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		}
 		
 		log.info("获取URI对象!");
-		Object operatorObj = EhcacheFactory.getInstance().get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + uri);
+		Object operatorObj = ToolEhcacheFactory.getInstance().get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + uri);
 
 		log.info("判断URI是否存在!");
 		if(null != operatorObj){
@@ -69,7 +69,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			
 			if(operator.get("privilege").equals("1")){// 是否需要权限验证
 				log.info("需要权限验证!");
-				User user = ContextBase.getCurrentUser(request);// 当前登录用户
+				User user = ToolContext.getCurrentUser(request);// 当前登录用户
 				if (user == null) {
 					log.info("权限认证过滤器检测:未登录!");
 					
@@ -83,7 +83,7 @@ public class AuthenticationInterceptor implements Interceptor {
 				}
 				
 				reqSysLog.set("userids", user.getPrimaryKeyValue());
-				if(!ContextBase.hasPrivilegeOperator(operator, user)){// 权限验证
+				if(!ToolContext.hasPrivilegeOperator(operator, user)){// 权限验证
 					log.info("权限验证失败，没有权限!");
 					
 					log.info("访问失败时保存日志!");
@@ -101,7 +101,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			
 			log.info("是否需要表单重复提交验证!");
 			if(operator.getStr("formtoken").equals("1")){
-				String tokenRequest = ContextBase.getParam(request, "formToken");
+				String tokenRequest = ToolContext.getParam(request, "formToken");
 				String tokenCookie = ToolWeb.getCookieValueByName(request, "token");
 				if(null == tokenRequest || tokenRequest.equals("")){
 					log.info("tokenRequest为空，无需表单验证!");

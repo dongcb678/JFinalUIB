@@ -8,13 +8,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.pingtai.common.ContextBase;
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.common.EhcacheFactory;
-import little.ant.pingtai.common.ParamInit;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.run.JfinalConfig;
+import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
+import little.ant.pingtai.tools.ToolEhcacheFactory;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
 
 import org.apache.log4j.Logger;
@@ -61,11 +61,11 @@ public class LoginService extends BaseService {
 	public int login(HttpServletRequest request, HttpServletResponse response, String userName, String passWord, boolean autoLogin) {
 		// 1.取用户
 		User user = null;
-		Object userObj = EhcacheFactory.getInstance().get(EhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userName);
+		Object userObj = ToolEhcacheFactory.getInstance().get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userName);
 		if (null != userObj) {
 			user = (User) userObj;
 		} else {
-			List<User> userList = User.dao.findByCache(EhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userName, "select * from pt_user where username=?", userName);
+			List<User> userList = User.dao.findByCache(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userName, "select * from pt_user where username=?", userName);
 			if (userList.size() != 1) {
 				return DictKeys.login_info_0;// 用户不存在
 			}
@@ -105,7 +105,7 @@ public class LoginService extends BaseService {
 		}
 		if (bool) {
 			// 密码验证成功
-			ContextBase.setCurrentUser(request, response, user, autoLogin);// 设置登录账户
+			ToolContext.setCurrentUser(request, response, user, autoLogin);// 设置登录账户
 			return DictKeys.login_info_3;
 		} else {
 			// 密码验证失败

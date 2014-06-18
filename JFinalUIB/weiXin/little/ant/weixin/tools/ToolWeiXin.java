@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import little.ant.pingtai.common.EhcacheFactory;
+import little.ant.pingtai.tools.ToolEhcacheFactory;
 import little.ant.pingtai.tools.ToolHttp;
 import little.ant.weixin.vo.message.RecevieToken;
 
@@ -50,8 +50,8 @@ public class ToolWeiXin {
 	public static RecevieToken getAccessToken() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(weixin_token_url).append("?").append("grant_type=client_credential");
-		sb.append("&appid=").append(EhcacheFactory.getInstance().get("system", weixin_appID_key));
-		sb.append("&secret=").append(EhcacheFactory.getInstance().get("system", weixin_appSecret_key));
+		sb.append("&appid=").append(ToolEhcacheFactory.getInstance().get("system", weixin_appID_key));
+		sb.append("&secret=").append(ToolEhcacheFactory.getInstance().get("system", weixin_appSecret_key));
 		try {
 			String jsonStr = ToolHttp.get(true, sb.toString());
 			RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);
