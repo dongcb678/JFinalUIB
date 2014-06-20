@@ -175,7 +175,7 @@ public class ToolContext {
 	public static void outDownCsv(HttpServletResponse response, String content) {
 		response.setContentType("application/download; charset=gb18030");
 		try {
-			response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(ToolDateTime.getCurrentDateTimeMillisecond() + ".csv", ToolString.encoding));
+			response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(ToolDateTime.format(new Date(), ToolDateTime.pattern_datetimeMillisecond) + ".csv", ToolString.encoding));
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}

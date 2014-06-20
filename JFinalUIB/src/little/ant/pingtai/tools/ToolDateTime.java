@@ -16,8 +16,39 @@ import org.apache.log4j.Logger;
  */
 public class ToolDateTime {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolDateTime.class);
+	
+	public static final String pattern_date = "yyyy-MM-dd";
+	public static final String pattern_datetime = "yyyy-MM-dd HH:mm:ss";
+	public static final String pattern_datetimeMillisecond = "yyyy-MM-dd HH:mm:ss:SSS";
+	
+	/**
+	 * 格式化
+	 * @param date
+	 * @param pattern
+	 * @return
+	 */
+	public static String format(Date date, String pattern) {
+		DateFormat format = new SimpleDateFormat(pattern);
+		return format.format(date);
+	}
+	
+	/**
+	 * 解析
+	 * @param date
+	 * @param pattern
+	 * @return
+	 * @throws ParseException
+	 */
+	public static Date parse(String date, String pattern) {
+		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		try {
+			return format.parse(date);
+		} catch (ParseException e) {
+			log.error("ToolDateTime.parse异常：date值" + date + "，pattern值" + pattern);
+			return null;
+		}
+	}
 	
 	/**
 	 * 两个日期的时间差，返回"X天X小时X分X秒"
@@ -46,87 +77,6 @@ public class ToolDateTime {
 		return sb.toString();
 	}
 	
-	/**
-	 * 格式化
-	 * @param date
-	 * @return	yyyy-MM-dd HH:mm:ss
-	 */
-	public static String getFormat(Date date) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return format.format(date);
-	}
-	
-	/**
-	 * 格式化,带毫秒
-	 * @param date
-	 * @return	yyyy-MM-dd HH:mm:ss:SSS
-	 */
-	public static String getFormatMillisecond(Date date) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
-		return format.format(date);
-	}
-	
-	/**
-	 * 解析
-	 * @param date
-	 * @return	yyyy-MM-dd HH:mm:ss
-	 * @throws ParseException 
-	 */
-	public static Date getParseFormat(String date) throws ParseException {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return format.parse(date);
-	}
-	
-	/**
-	 * 当前时间
-	 * 
-	 * @return
-	 */
-	public static String getCurrentDateTime() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return formatter.format(new Date());
-	}
-
-	/**
-	 * 当前时间，带毫秒
-	 * 
-	 * @return
-	 */
-	public static String getCurrentDateTimeMillisecond() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
-		return formatter.format(new Date());
-	}
-
-	/**
-	 * 当前日期
-	 * 
-	 * @return
-	 */
-	public static String getDate() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		return formatter.format(new Date());
-	}
-
-	/**
-	 * 当前时间，不带分隔符
-	 * 
-	 * @return
-	 */
-	public static String getDateTimeSimple() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-		return formatter.format(new Date());
-	}
-
-	/**
-	 * 当前日期，不带分隔符
-	 * 
-	 * @return
-	 */
-	public static String getDateSimple() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-		return formatter.format(new Date());
-	}
-
 	/**
 	 * 返回两个日期之间隔了多少小时
 	 * 

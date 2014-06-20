@@ -2,8 +2,6 @@ package little.ant.pingtai.interceptor;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +11,7 @@ import little.ant.pingtai.controller.BaseController;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
@@ -145,8 +144,7 @@ public class ParamPkgInterceptor implements Interceptor {
 				field.set(controller, Integer.parseInt(value));
 				
 			}else if(fieldType.equals("Date")){
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
-				field.set(controller, format.parse(value));
+				field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_datetimeMillisecond));
 			
 			}else if(fieldType.equals("BigDecimal")){
 				BigDecimal bdValue = new BigDecimal(value);
@@ -162,8 +160,6 @@ public class ParamPkgInterceptor implements Interceptor {
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
 			e1.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
 	}
 

@@ -44,7 +44,7 @@ public class GlobalHandler extends Handler {
 		Map<String, Cookie> cookieMap = ToolWeb.readCookieMap(request);
 		request.setAttribute("cookieMap", cookieMap);
 
-		log.debug("beetl cookie处理");
+		log.debug("beetl 请求参数处理");
 		request.setAttribute("paramMap", ToolWeb.getParamMap(request));
 
 		log.info("设置Header");
