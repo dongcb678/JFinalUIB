@@ -1,5 +1,7 @@
 package little.ant.pingtai.tools;
 
+import static org.junit.Assert.assertEquals;
+
 import java.security.Key;
 
 import javax.crypto.Cipher;
@@ -7,12 +9,18 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
+import org.junit.Test;
 
 /**
  * AES安全编码组件
+ * 说明：
+ * 对于java.security.InvalidKeyException: Illegal key size or default parameters异常，
+ * 去掉这种限制需要下载Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files，
+ * 下载包的readme.txt 有安装说明。就是替换${java_home}/jre/lib/security/ 下面的local_policy.jar和US_export_policy.jar
  */
-public abstract class ToolSecurityAES {
+public class ToolSecurityAES {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolSecurityAES.class);
@@ -116,5 +124,33 @@ public abstract class ToolSecurityAES {
 
 		// 获得密钥的二进制编码形式
 		return secretKey.getEncoded();
+	}
+	
+	/**
+	 * 测试
+	 * @throws Exception
+	 */
+	@Test
+	public final void test() throws Exception {
+		String inputStr = "AES";
+		byte[] inputData = inputStr.getBytes();
+		System.err.println("原文:\t" + inputStr);
+
+		// 初始化密钥
+		byte[] key = initKey();
+		System.err.println("密钥:\t" + Base64.encodeBase64String(key));
+
+		// 加密
+		inputData = encrypt(inputData, key);
+		System.err.println("加密后:\t" + Base64.encodeBase64String(inputData));
+
+		// 解密
+		byte[] outputData = decrypt(inputData, key);
+
+		String outputStr = new String(outputData);
+		System.err.println("解密后:\t" + outputStr);
+
+		// 校验
+		assertEquals(inputStr, outputStr);
 	}
 }

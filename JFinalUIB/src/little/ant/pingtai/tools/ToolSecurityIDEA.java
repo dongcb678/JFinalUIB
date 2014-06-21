@@ -1,5 +1,7 @@
 package little.ant.pingtai.tools;
 
+import static org.junit.Assert.*;
+
 import java.security.Key;
 import java.security.Security;
 
@@ -8,13 +10,15 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.junit.Test;
 
 /**
  * IDEA安全编码组件
  */
-public abstract class ToolSecurityIDEA {
+public class ToolSecurityIDEA {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolSecurityIDEA.class);
@@ -115,5 +119,35 @@ public abstract class ToolSecurityIDEA {
 
 		// 获得密钥的二进制编码形式
 		return secretKey.getEncoded();
+	}
+	
+	/**
+	 * 测试
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public final void test() throws Exception {
+		
+		String inputStr = "IDEA";
+		byte[] inputData = inputStr.getBytes();
+		System.err.println("原文:\t" + inputStr);
+
+		// 初始化密钥
+		byte[] key = initKey();
+		System.err.println("密钥:\t" + Base64.encodeBase64String(key));
+
+		// 加密
+		inputData = encrypt(inputData, key);
+		System.err.println("加密后:\t" + Base64.encodeBase64String(inputData));
+
+		// 解密
+		byte[] outputData = decrypt(inputData, key);
+
+		String outputStr = new String(outputData);
+		System.err.println("解密后:\t" + outputStr);
+
+		// 校验
+		assertEquals(inputStr, outputStr);
 	}
 }
