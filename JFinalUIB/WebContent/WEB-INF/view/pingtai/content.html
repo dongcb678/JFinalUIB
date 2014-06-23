@@ -34,26 +34,51 @@
 			</div>
 		</div>
 		<div class="box-content">
-			<h1>
-				JfinalUIB <small>Jfinal   +   charisma  +  beetl +  postgresql 实现的用户权限管理和日志记录.</small>
-			</h1>
-			<p>
-				<b>
-				A.权限设计流程：两条线<br/>
-				一是用户--》分组--》角色--》功能<br/>
-				二是用户--》岗位--》功能
-				 </b>
-			</p>
-			<p>
-				<b>B.在beetl方面主要重写了BeetlRender和BeetlRenderFactory实现视图耗时的计算功能，通过handle得到总耗时减去视图耗时，得到action耗时.</b>
-			</p>
-			<p>
-				<b>
-					C.所有的基础数据都在ehcache做了缓存，比如用户、分组、角色、功能、岗位等等，
-					主要是在ParamInit类，项目启动进行缓存，其它只要涉及到缓存数据的操作会同步更新缓存.
-				</b>
-			</p>
-			<div class="clearfix"></div>
+
+			<div id="content_echarts_main" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+			
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+    var content_echarts_main = echarts.init(document.getElementById('content_echarts_main'));
+    content_echarts_main.setOption({
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['访问量']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                data : ${adates}
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                splitArea : {show : true}
+            }
+        ],
+        series : [
+            {
+                name:'访问量',
+                type:'bar',
+                data: ${acounts}
+            }
+        ]
+    });
+</script>

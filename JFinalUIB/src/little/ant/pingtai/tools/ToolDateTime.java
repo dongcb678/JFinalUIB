@@ -4,7 +4,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -31,6 +33,17 @@ public class ToolDateTime {
 	public static String format(Date date, String pattern) {
 		DateFormat format = new SimpleDateFormat(pattern);
 		return format.format(date);
+	}
+
+	/**
+	 * 格式化
+	 * @param date
+	 * @param parsePattern
+	 * @param returnPattern
+	 * @return
+	 */
+	public static String format(String date, String parsePattern, String returnPattern) {
+		return format(parse(date, parsePattern), returnPattern);
 	}
 	
 	/**
@@ -164,15 +177,105 @@ public class ToolDateTime {
 		return list;
 	}
 	
-	public static void main(String[] args) throws ParseException{
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date start = formatter.parse("2013-07-01 01:00:00");
-		Date end = formatter.parse("2013-07-01 12:00:00");
-		long splitCount = 12l;
-		List<Date> list = getDateSplit(start, end, splitCount);
-		for (Date date : list) {
-			System.out.println(formatter.format(date));
+	/**
+	 * 返回两个日期之间隔了多少天，包含开始、结束时间
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static List<String> getDaySpaceDate(Date start, Date end) {
+		Calendar fromCalendar = Calendar.getInstance();
+		fromCalendar.setTime(start);
+		fromCalendar.set(Calendar.HOUR_OF_DAY, 0);
+		fromCalendar.set(Calendar.MINUTE, 0);
+		fromCalendar.set(Calendar.SECOND, 0);
+		fromCalendar.set(Calendar.MILLISECOND, 0);
+
+		Calendar toCalendar = Calendar.getInstance();
+		toCalendar.setTime(end);
+		toCalendar.set(Calendar.HOUR_OF_DAY, 0);
+		toCalendar.set(Calendar.MINUTE, 0);
+		toCalendar.set(Calendar.SECOND, 0);
+		toCalendar.set(Calendar.MILLISECOND, 0);
+
+		List<String> dateList = new LinkedList<String>();
+
+		long dayCount = (toCalendar.getTime().getTime() - fromCalendar.getTime().getTime()) / (1000 * 60 * 60 * 24);
+		if(dayCount < 0){
+			return dateList;
 		}
+
+		dateList.add(format(fromCalendar.getTime(), pattern_date));
+		
+		for (int i = 0; i < dayCount; i++) {
+			fromCalendar.add(Calendar.DATE, 1);// 增加一天
+			dateList.add(format(fromCalendar.getTime(), pattern_date));
+		}
+
+		return dateList;
+	}
+	
+	/**
+	 * 获取结束时间
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static Date startDate(Date start, int end){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(start);
+		calendar.add(Calendar.DATE, end);// 明天1，昨天-1
+		calendar.set(Calendar.HOUR_OF_DAY, 0);   
+		calendar.set(Calendar.MINUTE, 0);   
+		calendar.set(Calendar.SECOND, 0);   
+		calendar.set(Calendar.MILLISECOND, 0);   
+		Date date = calendar.getTime();
+		return date;
+	}
+	
+	/**
+	 * 获取开始时间
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static Date endDate(Date start){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(start);
+		calendar.set(Calendar.HOUR_OF_DAY, 23);   
+		calendar.set(Calendar.MINUTE, 59);   
+		calendar.set(Calendar.SECOND, 59);   
+		calendar.set(Calendar.MILLISECOND, 999);   
+		Date date = calendar.getTime();
+		return date;
+	}
+	
+	public static void main(String[] args) throws ParseException{
+		System.out.println(format("2013-07-01", pattern_date, "MM-dd"));
+		
+//		Date start = parse("2013-07-01 01:00:00", pattern_datetime);
+//		Date end = parse("2013-07-01 12:00:00", pattern_datetime);
+//		long splitCount = 12l;
+//		List<Date> list = getDateSplit(start, end, splitCount);
+//		for (Date date : list) {
+//			System.out.println(format(date, pattern_datetime));
+//		}
+		
+//		Date start = parse("2013-07-01 01:00:00", pattern_datetime);
+//		Date end = parse("2013-07-05 12:00:00", pattern_datetime);
+//		List<String> list = getDaySpaceDate(start, end);
+//		for (String str : list) {
+//			System.out.println(str);
+//		}
+		
+//		Date start = parse("2013-07-01 01:00:00", pattern_datetime);
+//		Date end = endDate(start, 7);
+//		System.out.println(format(end, pattern_datetime));
+
+//		Date endDate = ToolDateTime.endDate(new Date());
+//		Date startDate = ToolDateTime.startDate(endDate, -14);
+//		System.out.println(format(startDate, pattern_datetimeMillisecond));
+//		System.out.println(format(endDate, pattern_datetimeMillisecond));
 	}
 
 }

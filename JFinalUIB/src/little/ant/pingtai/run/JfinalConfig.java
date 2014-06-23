@@ -93,6 +93,7 @@ public class JfinalConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		loadPropertyFile("init.properties");
 
+		paramMap.put(DictKeys.db_type_key, getProperty(DictKeys.db_type_key).trim());
 		paramMap.put(DictKeys.config_securityKey_key, getProperty(DictKeys.config_securityKey_key).trim());
 		paramMap.put(DictKeys.config_passErrorCount_key, getPropertyToInt(DictKeys.config_passErrorCount_key, 3));
 		paramMap.put(DictKeys.config_passErrorHour_key, getPropertyToInt(DictKeys.config_passErrorHour_key, 3));
@@ -148,7 +149,7 @@ public class JfinalConfig extends JFinalConfig {
 	public void configPlugin(Plugins me) {
 		ActiveRecordPlugin arp = null;
 		// 1.数据库类型判断
-		String db_type = getProperty("db.type").trim();
+		String db_type = (String) getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
 			// 1.1 配置Druid数据库连接池插件
 			String postgresql_driverClass = getProperty("postgresql.driverClass").trim();

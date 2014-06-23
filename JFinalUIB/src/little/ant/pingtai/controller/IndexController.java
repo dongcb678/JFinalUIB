@@ -1,6 +1,7 @@
 package little.ant.pingtai.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Systems;
@@ -44,6 +45,7 @@ public class IndexController extends BaseController {
 	 * 首页content
 	 */
 	public void content(){
+		setAttrs(indexService.pv());
 		render("/pingtai/content.html");
 	}
 	
