@@ -13,6 +13,7 @@ import little.ant.pingtai.model.Department;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
 
@@ -279,9 +280,9 @@ public class UserService extends BaseService {
 		}
 		if(null!=birthday && !birthday.equals("")){
 			try {
-				Date date = DateFormat.getDateTimeInstance().parse(birthday);
 				formSqlSb.append(" and ui.birthday=? ");
-				paramValue.add(date);
+				Date date = DateFormat.getDateTimeInstance().parse(birthday);
+				paramValue.add(ToolDateTime.getSqlTimestamp(date));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}

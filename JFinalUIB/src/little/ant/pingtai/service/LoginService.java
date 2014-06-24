@@ -83,7 +83,7 @@ public class LoginService extends BaseService {
 		int passErrorCount = (int) JfinalConfig.getParamMapValue(DictKeys.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate("stopDate");
-			int hourSpace = ToolDateTime.getDateHourSpace(new Date(), stopDate);
+			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
 			int passErrorHour = (int) JfinalConfig.getParamMapValue(DictKeys.config_passErrorHour_key);
 			if(hourSpace < passErrorHour){
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
@@ -109,7 +109,7 @@ public class LoginService extends BaseService {
 			return DictKeys.login_info_3;
 		} else {
 			// 密码验证失败
-			Db.update(" update pt_user u set u.stopDate = ? , u.errorCount = ? where u.ids = ? ", new Date(), errorCount+1, user.getStr("ids"));
+			Db.update(" update pt_user u set u.stopDate = ? , u.errorCount = ? where u.ids = ? ", ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
 			return DictKeys.login_info_4;
 		}
 	}

@@ -2,6 +2,8 @@ package little.ant.pingtai.validator;
 
 import java.util.Date;
 
+import little.ant.pingtai.tools.ToolDateTime;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
@@ -23,9 +25,9 @@ public class UserValidator extends Validator {
 			validateLong("userInfo.mobile", 10000000000l, 99999999999l, "mobileMsg", "手机号码不正确!");
 			validateLong("userInfo.telephone", 1, 99999999999l, "telephoneMsg", "电话号码不正确!");
 			validateLong("userInfo.qq", 1, 999999999999999l, "qqMsg", "QQ号码不正确!");
-			Date start = new Date();
+			Date start = ToolDateTime.getDate();
 			start.setYear(1900);
-			validateDate("userInfo.birthday", start, new Date(), "birthdayMsg", "生日不正确!");
+			validateDate("userInfo.birthday", start, ToolDateTime.getDate(), "birthdayMsg", "生日不正确!");
 		}
 	}
 	

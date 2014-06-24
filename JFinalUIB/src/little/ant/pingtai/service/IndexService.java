@@ -85,7 +85,7 @@ public class IndexService extends BaseService {
 	}
 	
 	public Map<String, Object> pv(){
-		Date endDate = ToolDateTime.endDate(new Date());
+		Date endDate = ToolDateTime.endDate(ToolDateTime.getDate());
 		Date startDate = ToolDateTime.startDate(endDate, -14);
 		
 		List<Record> list = null;
@@ -95,14 +95,14 @@ public class IndexService extends BaseService {
 			sql.append(" select to_char(startdate, 'yyyy-MM-DD') adates, count(*) acounts from pt_syslog ");
 			sql.append(" where startdate>=? and startdate<=? ");
 			sql.append(" group by adates order by adates asc ");
-			list = Db.find(sql.toString(), new java.sql.Timestamp(startDate.getTime()), new java.sql.Timestamp(endDate.getTime()));
+			list = Db.find(sql.toString(), ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
 			StringBuffer sql = new StringBuffer();
 			sql.append(" select date_format(startdate,'%Y-%m-%d') adates, count(*) acounts from pt_syslog ");
 			sql.append(" where startdate>=? and startdate<=? ");
 			sql.append(" group by adates order by adates asc ");
-			list = Db.find(sql.toString(), new java.sql.Timestamp(startDate.getTime()), new java.sql.Timestamp(endDate.getTime()));
+			list = Db.find(sql.toString(), ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		}
 		
 		List<String> adates = new LinkedList<String>();

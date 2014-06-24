@@ -1,5 +1,6 @@
 package little.ant.pingtai.tools;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,43 @@ public class ToolDateTime {
 	public static final String pattern_date = "yyyy-MM-dd";
 	public static final String pattern_datetime = "yyyy-MM-dd HH:mm:ss";
 	public static final String pattern_datetimeMillisecond = "yyyy-MM-dd HH:mm:ss:SSS";
+	
+	/**
+	 * 主要是给jfinal使用，数据库只认java.sql.*
+	 * @param date
+	 * @return
+	 */
+	public static Timestamp getSqlTimestamp(Date date){
+		if(null == date){
+			date = new Date();
+		}
+		return getSqlTimestamp(date.getTime());
+	}
+
+	/**
+	 * 主要是给jfinal使用，数据库只认java.sql.*
+	 * @param time
+	 * @return
+	 */
+	public static Timestamp getSqlTimestamp(long time){
+		return new java.sql.Timestamp(time);
+	}
+	
+	/**
+	 * 获取当前时间
+	 * @return
+	 */
+	public static Date getDate(){
+		return new Date();
+	}
+
+	/**
+	 * 获取当前时间的时间戳
+	 * @return
+	 */
+	public static long getDateByTime(){
+		return new Date().getTime();
+	}
 	
 	/**
 	 * 格式化

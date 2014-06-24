@@ -1,10 +1,10 @@
 package little.ant.weixin.tools;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolXml;
 import little.ant.weixin.model.Location;
 import little.ant.weixin.model.Message;
@@ -75,7 +75,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", subscribe.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", subscribe.getFromUserName());// 发送方帐号（一个OpenID）
@@ -94,7 +94,7 @@ public class ToolMessage {
 		ResponseMsgText text = new ResponseMsgText();
 		text.setToUserName(subscribe.getFromUserName());
 		text.setFromUserName(subscribe.getToUserName());
-		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(text);
@@ -104,7 +104,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
@@ -131,7 +131,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", qrCode.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", qrCode.getFromUserName());// 发送方帐号（一个OpenID）
@@ -152,7 +152,7 @@ public class ToolMessage {
 		ResponseMsgText text = new ResponseMsgText();
 		text.setToUserName(qrCode.getFromUserName());
 		text.setFromUserName(qrCode.getToUserName());
-		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(text);
@@ -162,7 +162,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
@@ -189,7 +189,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", subscribe.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", subscribe.getFromUserName());// 发送方帐号（一个OpenID）
@@ -206,7 +206,7 @@ public class ToolMessage {
 		ResponseMsgText text = new ResponseMsgText();
 		text.setToUserName(subscribe.getFromUserName());
 		text.setFromUserName(subscribe.getToUserName());
-		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(text);
@@ -216,7 +216,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
@@ -243,7 +243,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", qrCode.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", qrCode.getFromUserName());// 发送方帐号（一个OpenID）
@@ -263,7 +263,7 @@ public class ToolMessage {
 		ResponseMsgText text = new ResponseMsgText();
 		text.setToUserName(qrCode.getFromUserName());
 		text.setFromUserName(qrCode.getToUserName());
-		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(text);
@@ -273,7 +273,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
@@ -300,7 +300,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", location.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", location.getFromUserName());// 发送方帐号（一个OpenID）
@@ -321,7 +321,7 @@ public class ToolMessage {
 		ResponseMsgText text = new ResponseMsgText();
 		text.setToUserName(location.getFromUserName());
 		text.setFromUserName(location.getToUserName());
-		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(text);
@@ -331,7 +331,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
@@ -358,7 +358,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", menu.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", menu.getFromUserName());// 发送方帐号（一个OpenID）
@@ -377,7 +377,7 @@ public class ToolMessage {
 		ResponseMsgText text = new ResponseMsgText();
 		text.setToUserName(menu.getFromUserName());
 		text.setFromUserName(menu.getToUserName());
-		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(text);
@@ -387,7 +387,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
@@ -414,7 +414,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", menu.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", menu.getFromUserName());// 发送方帐号（一个OpenID）
@@ -433,7 +433,7 @@ public class ToolMessage {
 		ResponseMsgText text = new ResponseMsgText();
 		text.setToUserName(menu.getFromUserName());
 		text.setFromUserName(menu.getToUserName());
-		text.setCreateTime(String.valueOf(new Date().getTime()));
+		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(text);
@@ -443,7 +443,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", text.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", text.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",text.getCreateTime());// 消息创建时间 （整型）
@@ -470,7 +470,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", recevieText.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", recevieText.getFromUserName());// 发送方帐号（一个OpenID）
@@ -503,7 +503,7 @@ public class ToolMessage {
 					ResponseMsgNews newsMessage = new ResponseMsgNews();
 					newsMessage.setToUserName(recevieText.getFromUserName());
 					newsMessage.setFromUserName(recevieText.getToUserName());
-					newsMessage.setCreateTime(String.valueOf(new Date().getTime()));
+					newsMessage.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 					newsMessage.setMsgType("news");
 					newsMessage.setArticles(articleList);
 					newsMessage.setArticleCount(String.valueOf(articleList.size()));
@@ -514,7 +514,7 @@ public class ToolMessage {
 					messageOut.set("inouts", message_inouts_out);
 					messageOut.set("datatype", message_datatype_xml);
 					messageOut.set("datacontent", responseXml);//返回数据
-					messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+					messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 					messageOut.set("ToUserName", newsMessage.getToUserName());	// 开发者微信号
 					messageOut.set("FromUserName", newsMessage.getFromUserName());// 发送方帐号（一个OpenID）
 					messageOut.set("CreateTime",newsMessage.getCreateTime());// 消息创建时间 （整型）
@@ -529,7 +529,7 @@ public class ToolMessage {
 			ResponseMsgText responseText = new ResponseMsgText();
 			responseText.setToUserName(recevieText.getFromUserName());
 			responseText.setFromUserName(recevieText.getToUserName());
-			responseText.setCreateTime(String.valueOf(new Date().getTime()));
+			responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 			responseText.setMsgType("text");
 			responseText.setContent(responseContent);
 			responseXml = ToolXml.beanToXml(responseText);
@@ -539,7 +539,7 @@ public class ToolMessage {
 			messageOut.set("inouts", message_inouts_out);
 			messageOut.set("datatype", message_datatype_xml);
 			messageOut.set("datacontent", responseXml);//返回数据
-			messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+			messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 			messageOut.set("ToUserName", responseText.getToUserName());	// 开发者微信号
 			messageOut.set("FromUserName", responseText.getFromUserName());// 发送方帐号（一个OpenID）
 			messageOut.set("CreateTime",responseText.getCreateTime());// 消息创建时间 （整型）
@@ -567,7 +567,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", image.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", image.getFromUserName());// 发送方帐号（一个OpenID）
@@ -586,7 +586,7 @@ public class ToolMessage {
 		ResponseMsgText responseText = new ResponseMsgText();
 		responseText.setToUserName(image.getFromUserName());
 		responseText.setFromUserName(image.getToUserName());
-		responseText.setCreateTime(String.valueOf(new Date().getTime()));
+		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(responseText);
@@ -596,7 +596,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", responseText.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", responseText.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",responseText.getCreateTime());// 消息创建时间 （整型）
@@ -623,7 +623,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", voice.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", voice.getFromUserName());// 发送方帐号（一个OpenID）
@@ -649,7 +649,7 @@ public class ToolMessage {
 		ResponseMsgText responseText = new ResponseMsgText();
 		responseText.setToUserName(voice.getFromUserName());
 		responseText.setFromUserName(voice.getToUserName());
-		responseText.setCreateTime(String.valueOf(new Date().getTime()));
+		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(responseText);
@@ -659,7 +659,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", responseText.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", responseText.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",responseText.getCreateTime());// 消息创建时间 （整型）
@@ -686,7 +686,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", video.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", video.getFromUserName());// 发送方帐号（一个OpenID）
@@ -706,7 +706,7 @@ public class ToolMessage {
 		ResponseMsgText responseText = new ResponseMsgText();
 		responseText.setToUserName(video.getFromUserName());
 		responseText.setFromUserName(video.getToUserName());
-		responseText.setCreateTime(String.valueOf(new Date().getTime()));
+		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(responseText);
@@ -716,7 +716,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", responseText.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", responseText.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",responseText.getCreateTime());// 消息创建时间 （整型）
@@ -745,7 +745,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", location.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", location.getFromUserName());// 发送方帐号（一个OpenID）
@@ -776,8 +776,8 @@ public class ToolMessage {
 		uLocation.set("lat", lat);
 		uLocation.set("bd09_lng", bd09Lng);
 		uLocation.set("bd09_lat", bd09Lat);
-		long starttime = new Date().getTime();
-		uLocation.set("createdate", new java.sql.Timestamp(starttime));//创建时间
+		long starttime = ToolDateTime.getDateByTime();
+		uLocation.set("createdate", ToolDateTime.getSqlTimestamp(starttime));//创建时间
 		uLocation.save();
 		
 		//回显信息
@@ -793,7 +793,7 @@ public class ToolMessage {
 		ResponseMsgText responseText = new ResponseMsgText();
 		responseText.setToUserName(location.getFromUserName());
 		responseText.setFromUserName(location.getToUserName());
-		responseText.setCreateTime(String.valueOf(new Date().getTime()));
+		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(responseText);
@@ -803,7 +803,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", responseText.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", responseText.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",responseText.getCreateTime());// 消息创建时间 （整型）
@@ -830,7 +830,7 @@ public class ToolMessage {
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
-		messageIn.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
 		messageIn.set("ToUserName", link.getToUserName());	// 开发者微信号
 		messageIn.set("FromUserName", link.getFromUserName());// 发送方帐号（一个OpenID）
@@ -850,7 +850,7 @@ public class ToolMessage {
 		ResponseMsgText responseText = new ResponseMsgText();
 		responseText.setToUserName(link.getFromUserName());
 		responseText.setFromUserName(link.getToUserName());
-		responseText.setCreateTime(String.valueOf(new Date().getTime()));
+		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
 		String responseXml = ToolXml.beanToXml(responseText);
@@ -860,7 +860,7 @@ public class ToolMessage {
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
-		messageOut.set("createdate", new java.sql.Timestamp(new Date().getTime()));//数据创建时间
+		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", responseText.getToUserName());	// 开发者微信号
 		messageOut.set("FromUserName", responseText.getFromUserName());// 发送方帐号（一个OpenID）
 		messageOut.set("CreateTime",responseText.getCreateTime());// 消息创建时间 （整型）

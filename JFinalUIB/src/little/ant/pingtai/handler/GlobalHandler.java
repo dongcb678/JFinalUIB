@@ -1,6 +1,5 @@
 package little.ant.pingtai.handler;
 
-import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -11,6 +10,7 @@ import little.ant.pingtai.beetl.MyBeetlRender;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.thread.ThreadSysLog;
 import little.ant.pingtai.tools.ToolContext;
+import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolWeb;
 
 import org.apache.log4j.Logger;
@@ -32,8 +32,8 @@ public class GlobalHandler extends Handler {
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
 		log.info("初始化访问系统功能日志");
 		Syslog reqSysLog = getSysLog(request);
-		long starttime = new Date().getTime();
-		reqSysLog.set("startdate", new java.sql.Timestamp(starttime));//开始时间
+		long starttime = ToolDateTime.getDateByTime();
+		reqSysLog.set("startdate", ToolDateTime.getSqlTimestamp(starttime));//开始时间
 		request.setAttribute(reqSysLogKey, reqSysLog);
 		
 		log.info("设置 web 路径");
@@ -58,8 +58,8 @@ public class GlobalHandler extends Handler {
 		log.info("请求处理完毕，计算耗时");
 		
 		// 结束时间
-		long endtime = new Date().getTime();
-		reqSysLog.set("enddate", new java.sql.Timestamp(endtime));
+		long endtime = ToolDateTime.getDateByTime();
+		reqSysLog.set("enddate", ToolDateTime.getSqlTimestamp(endtime));
 		
 		// 总耗时
 		Long haoshi = endtime - starttime;

@@ -175,7 +175,7 @@ public class ToolContext {
 	public static void outDownCsv(HttpServletResponse response, String content) {
 		response.setContentType("application/download; charset=gb18030");
 		try {
-			response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(ToolDateTime.format(new Date(), ToolDateTime.pattern_datetimeMillisecond) + ".csv", ToolString.encoding));
+			response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(ToolDateTime.format(ToolDateTime.getDate(), ToolDateTime.pattern_datetimeMillisecond) + ".csv", ToolString.encoding));
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
@@ -215,7 +215,7 @@ public class ToolContext {
 		String userIds = user.getStr("ids");
 		String ips = ToolWeb.getIpAddr(request);
 		String userAgent = request.getHeader("User-Agent");
-		long date = new Date().getTime();
+		long date = ToolDateTime.getDateByTime();
 
 		StringBuffer token = new StringBuffer();// 时间戳#USERID#USER_IP#USER_AGENT
 		token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent);
@@ -299,9 +299,9 @@ public class ToolContext {
 			String newIp = ToolWeb.getIpAddr(request);
 			String newUserAgent = request.getHeader("User-Agent");
 
-			Date start = new Date();
+			Date start = ToolDateTime.getDate();
 			start.setTime(loginDateTimes);
-			int day = ToolDateTime.getDateDaySpace(start, new Date());
+			int day = ToolDateTime.getDateDaySpace(start, ToolDateTime.getDate());
 
 			if (ips.equals(newIp) && userAgent.equals(newUserAgent) && day <= 365) {
 				ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();

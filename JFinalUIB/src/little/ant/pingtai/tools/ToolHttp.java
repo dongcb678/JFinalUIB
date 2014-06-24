@@ -242,7 +242,7 @@ public class ToolHttp {
 		/*String returnMsg = "<xml>";
 		returnMsg += "<ToUserName><![CDATA[dongcb678]]></ToUserName>";
 		returnMsg += "<FromUserName><![CDATA[jiu_guang]]></FromUserName>";
-		returnMsg += "<CreateTime>"+new Date().getTime()+"</CreateTime>";
+		returnMsg += "<CreateTime>"+ToolDateTime.getDateByTime()+"</CreateTime>";
 		returnMsg += "<MsgType><![CDATA[text]]></MsgType>";
 		returnMsg += "<Content><![CDATA[你好]]></Content>";
 		returnMsg += "</xml>";*/

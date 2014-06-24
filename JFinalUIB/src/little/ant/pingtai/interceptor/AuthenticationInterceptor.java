@@ -12,6 +12,7 @@ import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.thread.ParamInit;
 import little.ant.pingtai.tools.ToolContext;
+import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
 import little.ant.pingtai.tools.ToolWeb;
 
@@ -122,8 +123,8 @@ public class AuthenticationInterceptor implements Interceptor {
 			
 			log.info("权限认真成功更新日志对象属性!");
 			reqSysLog.set("status", "1");//成功
-			Date actionStartDate = new Date();//action开始时间
-			reqSysLog.set("actionstartdate", new java.sql.Timestamp(actionStartDate.getTime()));
+			Date actionStartDate = ToolDateTime.getDate();//action开始时间
+			reqSysLog.set("actionstartdate", ToolDateTime.getSqlTimestamp(actionStartDate));
 			reqSysLog.set("actionstarttime", actionStartDate.getTime());
 
 			try {
