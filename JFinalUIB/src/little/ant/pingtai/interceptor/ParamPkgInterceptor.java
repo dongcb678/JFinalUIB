@@ -133,6 +133,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			String name = field.getName();
 			String value = controller.getPara(name);
 			if(null == value || value.isEmpty()){// 参数值为空直接结束
+				field.setAccessible(false);
 				log.debug("参数值为空");
 				return;
 			}
@@ -151,7 +152,6 @@ public class ParamPkgInterceptor implements Interceptor {
 				field.set(controller, bdValue);
 				
 			}else{
-				field.setAccessible(false);
 				log.debug("没有解析到有效字段类型");
 			}
 			

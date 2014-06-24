@@ -55,7 +55,7 @@
             feature : {
                 mark : {show: true},
                 dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar']},
+                magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
                 restore : {show: true},
                 saveAsImage : {show: true}
             }
@@ -64,20 +64,24 @@
         xAxis : [
             {
                 type : 'category',
+                boundaryGap : false,
                 data : ${adates}
             }
         ],
         yAxis : [
             {
-                type : 'value',
-                splitArea : {show : true}
+                type : 'value'
             }
         ],
         series : [
             {
                 name:'访问量',
-                type:'bar',
-                data: ${acounts}
+                type:'line',
+                stack: '总量',
+                itemStyle: {normal: {areaStyle: {
+                    color: 'rgba(34, 139, 34, 0.4)'
+                }}},
+                data:${acounts}
             }
         ]
     });
