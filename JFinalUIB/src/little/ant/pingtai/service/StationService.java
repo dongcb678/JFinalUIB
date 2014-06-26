@@ -3,7 +3,7 @@ package little.ant.pingtai.service;
 import java.util.List;
 
 import little.ant.pingtai.model.Station;
-import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
@@ -84,7 +84,7 @@ public class StationService extends BaseService {
 		
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + station.getStr("ids"), station);
+		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_station + station.getStr("ids"), station);
 		
 		return station.getStr("ids");
 	}
@@ -108,7 +108,7 @@ public class StationService extends BaseService {
 
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + station.getStr("ids"), station);
+		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_station + station.getStr("ids"), station);
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class StationService extends BaseService {
 	    
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_station + ids);
 		
 		// 删除
 	    Station.dao.deleteById(ids);
@@ -143,7 +143,7 @@ public class StationService extends BaseService {
 		station.set("moduleids", moduleIds).set("operatorids", operatorIds).update();
 		
 		// 缓存
-		ToolEhcacheFactory.getInstance().update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + stationIds, station);
+		ToolEhcacheFactory.getInstance().update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_station + stationIds, station);
 	}
 	
 	

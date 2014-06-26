@@ -10,7 +10,7 @@ import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.model.Syslog;
-import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
 
@@ -42,7 +42,7 @@ public class ParamPkgInterceptor implements Interceptor {
 		// 是否需要分页
 		Syslog reqSysLog = controller.getReqSysLog();
 		String operatorids = reqSysLog.getStr("operatorids");
-		Operator operator = (Operator) ToolEhcacheFactory.getInstance().get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + operatorids);
+		Operator operator = (Operator) ToolEhcacheFactory.getInstance().get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operatorids);
 		String splitpage = operator.getStr("splitpage");
 		if(splitpage.equals("1")){
 			splitPage(controller, superControllerClass);

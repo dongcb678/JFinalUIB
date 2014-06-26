@@ -17,9 +17,9 @@ import org.apache.log4j.Logger;
  * 系统初始化缓存操作类
  * @author 董华健  2012-10-16 下午1:16:56
  */
-public class ParamInit extends Thread {
+public class ThreadParamInit extends Thread {
 	
-	private static Logger log = Logger.getLogger(ParamInit.class);
+	private static Logger log = Logger.getLogger(ThreadParamInit.class);
 	
 	public static String cacheStart_user = "user_";
 	public static String cacheStart_group = "group_";
@@ -63,10 +63,10 @@ public class ParamInit extends Thread {
 		for (User user : userList) {
 			String userInfoIds = user.getStr("userinfoids");
 			UserInfo userInfo = UserInfo.dao.findById(userInfoIds);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + user.getStr("ids"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("username"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("email"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"), user);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
 			user = null;
 		}
 		userList = null;
@@ -80,7 +80,7 @@ public class ParamInit extends Thread {
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Group> groupList = Group.dao.find("select * from pt_group");
 		for (Group group : groupList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_group + group.getStr("ids"), group);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
 		}
 		groupList = null;
 	}
@@ -93,7 +93,7 @@ public class ParamInit extends Thread {
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Role> roleList = Role.dao.find("select * from pt_role");
 		for (Role role : roleList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_role + role.getStr("ids"), role);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
 		}
 		roleList = null;
 	}
@@ -106,7 +106,7 @@ public class ParamInit extends Thread {
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Station> stationList = Station.dao.find("select * from pt_station");
 		for (Station station : stationList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + station.getStr("ids"), station);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_station + station.getStr("ids"), station);
 		}
 		stationList = null;
 	}
@@ -119,8 +119,8 @@ public class ParamInit extends Thread {
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Operator> operatorList = Operator.dao.find("select * from pt_operator");
 		for (Operator operator : operatorList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + operator.getStr("ids"), operator);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + operator.getStr("url"), operator);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
 			operator = null;
 		}
 		operatorList = null;
@@ -134,7 +134,7 @@ public class ParamInit extends Thread {
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Dict> dictList = Dict.dao.find("select * from pt_dict");
 		for (Dict dict : dictList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_dict + dict.getStr("ids"), dict);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
 			dict = null;
 		}
 		dictList = null;

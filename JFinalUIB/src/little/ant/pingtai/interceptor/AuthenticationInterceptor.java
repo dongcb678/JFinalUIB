@@ -10,7 +10,7 @@ import little.ant.pingtai.handler.GlobalHandler;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.model.User;
-import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
@@ -59,7 +59,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		}
 		
 		log.info("获取URI对象!");
-		Object operatorObj = ToolEhcacheFactory.getInstance().get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_operator + uri);
+		Object operatorObj = ToolEhcacheFactory.getInstance().get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + uri);
 
 		log.info("判断URI是否存在!");
 		if(null != operatorObj){

@@ -7,7 +7,7 @@ import java.util.Map;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Role;
-import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
@@ -26,7 +26,7 @@ public class RoleService extends BaseService {
 		role.save();
 		
 		// 缓存
-		ToolEhcacheFactory.getInstance().add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_role + role.getStr("ids"), role);
+		ToolEhcacheFactory.getInstance().add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
 		
 		return role.getPrimaryKeyValue();
 	}
@@ -39,7 +39,7 @@ public class RoleService extends BaseService {
 		role.update();
 		
 		// 缓存
-		ToolEhcacheFactory.getInstance().update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_role + role.getStr("ids"), role);
+		ToolEhcacheFactory.getInstance().update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class RoleService extends BaseService {
 	 */
 	public void delete(String roleIds){
 		// 缓存
-		ToolEhcacheFactory.getInstance().delete(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIds);
+		ToolEhcacheFactory.getInstance().delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_role + roleIds);
 		
 		// 删除
 		Role.dao.deleteById(roleIds);
@@ -65,7 +65,7 @@ public class RoleService extends BaseService {
 		role.set("moduleids", moduleIds).set("operatorids", operatorIds).update();
 		
 		// 缓存
-		ToolEhcacheFactory.getInstance().update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIds, role);
+		ToolEhcacheFactory.getInstance().update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_role + roleIds, role);
 	}
 	
 	/**

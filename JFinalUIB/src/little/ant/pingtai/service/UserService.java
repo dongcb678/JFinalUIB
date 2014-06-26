@@ -12,7 +12,7 @@ import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Department;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
-import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
@@ -51,10 +51,10 @@ public class UserService extends BaseService {
 
 			// 缓存
 			ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + user.getStr("username"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("username"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("email"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"), user);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException("保存用户密码加密操作异常");
 		} catch (InvalidKeySpecException e) {
@@ -87,10 +87,10 @@ public class UserService extends BaseService {
 
 			// 缓存
 			ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + user.getStr("username"), user);
-			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("username"), user);
-			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("email"), user);
-			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
+			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"), user);
+			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
+			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
 		} catch (Exception e) {
 			throw new RuntimeException("更新用户异常");
 		}
@@ -108,10 +108,10 @@ public class UserService extends BaseService {
 
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + user.getStr("username"));
-		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("username"));
-		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("email"));
-		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("mobile"));
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"));
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"));
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"));
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"));
 		
 		// 删除
 		user.delete();
@@ -132,10 +132,10 @@ public class UserService extends BaseService {
 		
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + user.getStr("username"), user);
-		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("username"), user);
-		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("email"), user);
-		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
+		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"), user);
+		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
+		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
 	}
 
 	/**

@@ -36,8 +36,9 @@ import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
-import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.thread.ThreadSysLog;
+import little.ant.pingtai.thread.TimerSystemInfo;
 import little.ant.pingtai.tools.ToolString;
 import little.ant.weixin.controller.KeywordController;
 import little.ant.weixin.controller.LocationController;
@@ -224,20 +225,24 @@ public class JfinalConfig extends JFinalConfig {
 	 * 系统启动完成后执行
 	 */
 	public void afterJFinalStart() {
-		new ParamInit().start(); // 缓存参数
+		new ThreadParamInit().start(); // 缓存参数
+		
 		ThreadSysLog.startSaveDBThread(); // 启动操作日志入库线程
+		
 		new DocKeyword().run(); // 创建自动回复lucene索引
+		
+		TimerSystemInfo.start(); // 系统负载
 	}
 	
 	/**
 	 * 系统关闭前调用
 	 */
 	public void beforeJFinalStop() {
-		// 释放lucene索引资源
-		new DocKeyword().close();
+		new DocKeyword().close();// 释放lucene索引资源
 		
-		// 释放日志入库线程
-		ThreadSysLog.setThreadRun(false);
+		ThreadSysLog.setThreadRun(false);// 释放日志入库线程
+		
+		TimerSystemInfo.stop(); // 系统负载
 	}
 	
 	/**

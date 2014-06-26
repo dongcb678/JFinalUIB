@@ -19,17 +19,56 @@ public class ToolOS {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolOS.class);
-	
-	//系统bean
-	public static final OperatingSystemMXBean osmxb;
-	public static final List<GarbageCollectorMXBean> list;
-	
-	//K转换M
+
+	public static final String java_version = "java.version"; // Java的运行环境版本
+	public static final String java_vendo = "java.vendor"; // Java的运行环境供应商
+	public static final String java_vendo_url = "java.vendor.url"; // Java供应商的URL
+	public static final String java_home = "java.home"; // Java的安装路径
+	public static final String java_vm_specification_version = "java.vm.specification.version"; // Java的虚拟机规范版本
+	public static final String java_vm_specification_vendor = "java.vm.specification.vendor"; // Java的虚拟机规范供应商
+	public static final String java_vm_specification_name = "java.vm.specification.name"; // Java的虚拟机规范名称
+	public static final String java_vm_version = "java.vm.version"; // Java的虚拟机实现版本
+	public static final String java_vm_vendor = "java.vm.vendor"; // Java的虚拟机实现供应商
+	public static final String java_vm_name = "java.vm.name"; // Java的虚拟机实现名称
+	public static final String java_specification_version = "java.specification.version"; // Java运行时环境规范版本
+	public static final String java_specification_vender = "java.specification.vender"; // Java运行时环境规范供应商
+	public static final String java_specification_name = "java.specification.name"; // Java运行时环境规范名称
+	public static final String java_class_version = "java.class.version"; // Java的类格式版本号
+	public static final String java_class_path = "java.class.path"; // Java的类路径
+	public static final String java_library_path = "java.library.path"; // 加载库时搜索的路径列表
+	public static final String java_io_tmpdir = "java.io.tmpdir"; // 默认的临时文件路径
+	public static final String java_ext_dirs = "java.ext.dirs"; // 一个或多个扩展目录的路径
+	public static final String os_name = "os.name"; // 操作系统的名称
+	public static final String os_arch = "os.arch"; // 操作系统的构架
+	public static final String os_version = "os.version"; // 操作系统的版本
+	public static final String file_separator = "file.separator"; // 文件分隔符
+	public static final String path_separator = "path.separator"; // 路径分隔符
+	public static final String line_separator = "line.separator"; // 行分隔符
+	public static final String user_name = "user.name"; // 用户的账户名称
+    public static final String user_home = "user.home"; // 用户的主目录
+    public static final String user_dir = "user.dir"; //  用户的当前工作目录
+
+	// 系统bean
+	private static final OperatingSystemMXBean osmxb;
+	private static final List<GarbageCollectorMXBean> list;
+
+	// K转换M
 	private static final long K2M = 1024l * 1024l;
 
 	static {
 		osmxb = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		list = ManagementFactory.getGarbageCollectorMXBeans();
+	}
+	
+	/**
+	 * 获取java系统环境变量
+	 * 
+	 * @author 董华健 2012-9-7 下午2:18:07
+	 * @param key
+	 * @return
+	 */
+	public static String getOsSystemProperty(String key) {
+		return System.getProperty(key);
 	}
 
 	/**
@@ -42,7 +81,7 @@ public class ToolOS {
 		String ip = null;
 		try {
 			addr = InetAddress.getLocalHost();
-			ip = addr.getHostAddress().toString();// 获得本机IP
+			ip = addr.getHostAddress();// 获得本机IP
 		} catch (UnknownHostException e) {
 			ip = "未知";
 		}
@@ -59,7 +98,7 @@ public class ToolOS {
 		String name = null;
 		try {
 			addr = InetAddress.getLocalHost();
-			name = addr.getHostName().toString();// 获得本机名称
+			name = addr.getHostName();// 获得本机名称
 		} catch (UnknownHostException e) {
 			name = "未知";
 		}
@@ -90,25 +129,7 @@ public class ToolOS {
 	 * @return
 	 */
 	public static String getOsName() {
-		return osmxb.getName();//System.getProperty("os.name");
-	}
-
-	/**
-	 * 获取系统临时目录
-	 * 
-	 * @author 董华健 2012-9-7 下午2:17:51
-	 * @return
-	 */
-	public static String getOsTempDir() {
-		return System.getProperty("java.io.tmpdir");
-	}
-	
-	/**
-	 * 当前用户文件夹路径
-	 * @return
-	 */
-	public static String getOsUserHome(){
-		return System.getProperty("user.home");
+		return osmxb.getName();// System.getProperty("os.name");
 	}
 
 	/**
@@ -118,18 +139,7 @@ public class ToolOS {
 	 * @return
 	 */
 	public static String getOsArch() {
-		return osmxb.getArch();//System.getProperty("os.arch");
-	}
-
-	/**
-	 * 获取java系统环境变量
-	 * 
-	 * @author 董华健 2012-9-7 下午2:18:07
-	 * @param key
-	 * @return
-	 */
-	public static String getOsSystemProperty(String key) {
-		return System.getProperty(key);
+		return osmxb.getArch();// System.getProperty("os.arch");
 	}
 
 	/**
@@ -139,31 +149,37 @@ public class ToolOS {
 	 * @return
 	 */
 	public static int getOsCpuNumber() {
-		return osmxb.getAvailableProcessors();//Runtime.getRuntime().availableProcessors();// 获取当前电脑CPU数量
+		return osmxb.getAvailableProcessors();// Runtime.getRuntime().availableProcessors();// 获取当前电脑CPU数量
+	}
+	
+	/**
+	 * cpu使用率
+	 * @return
+	 */
+	public static double getOscpuRatio(){
+		return osmxb.getSystemCpuLoad();
 	}
 
 	/**
-	 * 总的物理内存
-	 * 
+	 * 物理内存，总的可使用的，单位：M
 	 * @return
 	 */
-	public static long getOsTotalMemory() {
+	public static long getOsPhysicalMemory() {
 		long totalMemorySize = osmxb.getTotalPhysicalMemorySize() / K2M; // M
 		return totalMemorySize;
 	}
 
 	/**
-	 * 剩余的物理内存
-	 * 
+	 * 物理内存，剩余，单位：M
 	 * @return
 	 */
-	public static long getOsFreePhysicalMemory() {
+	public static long getOsPhysicalFreeMemory() {
 		long freePhysicalMemorySize = osmxb.getFreePhysicalMemorySize() / K2M; // M
 		return freePhysicalMemorySize;
 	}
 
 	/**
-	 * 获取java虚拟机中的内存总量 单位：M
+	 * JVM内存，内存总量，单位：M
 	 * 
 	 * @author 董华健 2012-10-9 上午11:24:02
 	 * @return
@@ -173,7 +189,7 @@ public class ToolOS {
 	}
 
 	/**
-	 * 获取java虚拟机中的空闲内存量 单位：M
+	 * JVM内存，空闲内存量，单位：M
 	 * 
 	 * @author 董华健 2012-10-9 上午11:24:35
 	 * @return
@@ -183,7 +199,7 @@ public class ToolOS {
 	}
 
 	/**
-	 * 获取java虚拟机试图使用的最大内存量 单位：M
+	 * JVM内存，最大内存量，单位：M
 	 * 
 	 * @author 董华健 2012-10-9 上午11:24:50
 	 * @return
@@ -191,12 +207,13 @@ public class ToolOS {
 	public static long getJvmMaxMemory() {
 		return Runtime.getRuntime().maxMemory() / K2M;
 	}
-	
+
 	/**
 	 * 获取JVM GC次数
+	 * 
 	 * @return
 	 */
-	public static long getJvmGcCount(){
+	public static long getJvmGcCount() {
 		long count = 0;
 		for (final GarbageCollectorMXBean garbageCollectorMXBean : list) {
 			count += garbageCollectorMXBean.getCollectionCount();
@@ -216,9 +233,9 @@ public class ToolOS {
 		Thread.enumerate(threads);
 		return java.util.Arrays.asList(threads);
 	}
-	
-	public static void main(String[] args){
-		System.out.println(getOsPathType());
+
+	public static void main(String[] args) {
+		System.out.println(getOsLocalHostIp());
 	}
 
 }

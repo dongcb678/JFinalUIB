@@ -13,7 +13,7 @@ import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.run.JfinalConfig;
-import little.ant.pingtai.thread.ParamInit;
+import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
 
@@ -44,11 +44,11 @@ public class IndexService extends BaseService {
 		if(null != groupIds){
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				Group group = (Group) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_group + groupIdsTemp);
+				Group group = (Group) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					Role role = (Role) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_role + roleIdsTemp);
+					Role role = (Role) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					operatorIdsSb.append(operatorIdsStr);
 				}
@@ -60,7 +60,7 @@ public class IndexService extends BaseService {
 		if(null != stationIds){
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				Station station = (Station) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ParamInit.cacheStart_station + ids);
+				Station station = (Station) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				operatorIdsSb.append(operatorIdsStr);
 			}
