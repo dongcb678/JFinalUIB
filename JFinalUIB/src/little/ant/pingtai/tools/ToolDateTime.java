@@ -154,21 +154,23 @@ public class ToolDateTime {
 	
 	/**
 	 * 得到某一天是星期几
-	 * 
-	 * @param strDate
-	 *            日期字符串
-	 * @return int 星期几（-1异常）
+	 * @param strDate 日期字符串
+	 * @return String 星期几
 	 */
 	@SuppressWarnings("static-access")
-	public static int getDateInWeek(String date) {
+	public static String getDateInWeek(String date) {
+		String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
 		DateFormat format = DateFormat.getDateInstance();
 		try {
 			format.parse(date);
 			java.util.Calendar c = format.getCalendar();
-			int day = c.get(c.DAY_OF_WEEK) - c.SUNDAY;
-			return day;
+			int dayIndex = c.get(c.DAY_OF_WEEK) - c.SUNDAY;
+			if (dayIndex < 0){
+				dayIndex = 0;
+			}
+			return weekDays[dayIndex];
 		} catch (ParseException e) {
-			return -1;
+			return weekDays[0];
 		}
 	}
 	
