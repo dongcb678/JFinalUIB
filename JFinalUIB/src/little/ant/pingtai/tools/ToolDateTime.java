@@ -256,12 +256,12 @@ public class ToolDateTime {
 	}
 	
 	/**
-	 * 获取结束时间
+	 * 获取开始时间
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	public static Date startDate(Date start, int end){
+	public static Date startDateByDay(Date start, int end){
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(start);
 		calendar.add(Calendar.DATE, end);// 明天1，昨天-1
@@ -274,12 +274,12 @@ public class ToolDateTime {
 	}
 	
 	/**
-	 * 获取开始时间
+	 * 获取结束时间
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	public static Date endDate(Date start){
+	public static Date endDateByDay(Date start){
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(start);
 		calendar.set(Calendar.HOUR_OF_DAY, 23);   
@@ -289,9 +289,38 @@ public class ToolDateTime {
 		Date date = calendar.getTime();
 		return date;
 	}
+
+	/**
+	 * 获取开始时间
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static Date startDateByHour(Date start, int end){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(start); 
+		calendar.set(Calendar.MINUTE, end);   
+		Date date = calendar.getTime();
+		return date;
+	}
+	
+	/**
+	 * 获取结束时间
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static Date endDateByHour(Date end){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(end); 
+		calendar.set(Calendar.SECOND, 59);   
+		calendar.set(Calendar.MILLISECOND, 999);   
+		Date date = calendar.getTime();
+		return date;
+	}
 	
 	public static void main(String[] args) throws ParseException{
-		System.out.println(format("2013-07-01", pattern_date, "MM-dd"));
+//		System.out.println(format("2013-07-01", pattern_date, "MM-dd"));
 		
 //		Date start = parse("2013-07-01 01:00:00", pattern_datetime);
 //		Date end = parse("2013-07-01 12:00:00", pattern_datetime);
@@ -316,6 +345,12 @@ public class ToolDateTime {
 //		Date startDate = ToolDateTime.startDate(endDate, -14);
 //		System.out.println(format(startDate, pattern_datetimeMillisecond));
 //		System.out.println(format(endDate, pattern_datetimeMillisecond));
+		
+		Date endDate = ToolDateTime.endDateByHour(new Date());
+		Date startDate = ToolDateTime.startDateByHour(endDate, -24);
+		
+		System.out.println(format(startDate, pattern_datetimeMillisecond));
+		System.out.println(format(endDate, pattern_datetimeMillisecond));
 	}
 
 }

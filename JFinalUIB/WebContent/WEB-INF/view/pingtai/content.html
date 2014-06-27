@@ -27,7 +27,7 @@
 	<div class="box span12">
 		<div class="box-header well">
 			<h2>
-				<i class="icon-info-sign"></i> 介绍
+				<i class="icon-info-sign"></i> 系统负载
 			</h2>
 			<div class="box-icon">
 				 <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -35,15 +35,21 @@
 		</div>
 		<div class="box-content">
 
-			<div id="content_echarts_main" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+			<div id="content_pv" style="height:200px;border:1px solid #ccc;padding:10px;"></div> <br/>
+			
+			<div id="content_cpu" style="height:200px;border:1px solid #ccc;padding:10px;"></div> <br/>
+			
+			<div id="content_phymemory" style="height:200px;border:1px solid #ccc;padding:10px;"></div> <br/>
+			
+			<div id="content_jvmmemory" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
 			
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
-    var content_echarts_main = echarts.init(document.getElementById('content_echarts_main'));
-    content_echarts_main.setOption({
+    var content_pv = echarts.init(document.getElementById('content_pv'));
+    content_pv.setOption({
         tooltip : {
             trigger: 'axis'
         },
@@ -55,7 +61,7 @@
             feature : {
                 mark : {show: true},
                 dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                magicType : {show: true, type: ['line']},
                 restore : {show: true},
                 saveAsImage : {show: true}
             }
@@ -82,6 +88,143 @@
                     color: 'rgba(34, 139, 34, 0.4)'
                 }}},
                 data:${acounts}
+            }
+        ]
+    });
+    
+    var content_cpu = echarts.init(document.getElementById('content_cpu'));
+    content_cpu.setOption({
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['CPU负载']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                itemStyle: {normal: {areaStyle: {
+                    color: 'rgba(34, 139, 34, 0.4)'
+                }}},
+                data : ${dates}
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'CPU负载',   
+                type:'line',
+                stack: '总量',
+                itemStyle: {normal: {areaStyle: {
+                    color: 'rgba(34, 139, 34, 0.4)'
+                }}},
+                data:${cpu}
+            }
+        ]
+    });
+
+    var content_phymemory = echarts.init(document.getElementById('content_phymemory'));
+    content_phymemory.setOption({
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['物理内存']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : ${dates}
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                max : ${phymemorymax}
+            }
+        ],
+        series : [
+            {
+            	name:'物理内存',
+                type:'line',
+                stack: '总量',
+                itemStyle: {normal: {areaStyle: {
+                    color: 'rgba(34, 139, 34, 0.4)'
+                }}},
+                data:${phymemoryval}
+            }
+        ]
+    });
+
+    var content_jvmmemory = echarts.init(document.getElementById('content_jvmmemory'));
+    content_jvmmemory.setOption({
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['JVM内存']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : ${dates}
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                max : ${jvmmemorymax}
+            }
+        ],
+        series : [
+            {
+            	name:'JVM内存',
+                type:'line',
+                stack: '总量',
+                itemStyle: {normal: {areaStyle: {
+                    color: 'rgba(34, 139, 34, 0.4)'
+                }}},
+                data:${jvmmemoryval}
             }
         ]
     });

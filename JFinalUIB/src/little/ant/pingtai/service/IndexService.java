@@ -1,27 +1,16 @@
 package little.ant.pingtai.service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
-import little.ant.pingtai.run.JfinalConfig;
 import little.ant.pingtai.thread.ThreadParamInit;
-import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
-
-import com.alibaba.fastjson.JSON;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Record;
 
 public class IndexService extends BaseService {
 
@@ -82,40 +71,6 @@ public class IndexService extends BaseService {
 			oneMenu.put("subList", twoList);
 		}
 		return oneList;
-	}
-	
-	public Map<String, Object> pv(){
-		Date endDate = ToolDateTime.endDate(ToolDateTime.getDate());
-		Date startDate = ToolDateTime.startDate(endDate, -14);
-		
-		List<Record> list = null;
-		String db_type = (String) JfinalConfig.getParamMapValue(DictKeys.db_type_key);
-		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
-			StringBuffer sql = new StringBuffer();
-			sql.append(" select to_char(startdate, 'yyyy-MM-DD') adates, count(*) acounts from pt_syslog ");
-			sql.append(" where startdate>=? and startdate<=? ");
-			sql.append(" group by adates order by adates asc ");
-			list = Db.find(sql.toString(), ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
-		
-		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
-			StringBuffer sql = new StringBuffer();
-			sql.append(" select date_format(startdate,'%Y-%m-%d') adates, count(*) acounts from pt_syslog ");
-			sql.append(" where startdate>=? and startdate<=? ");
-			sql.append(" group by adates order by adates asc ");
-			list = Db.find(sql.toString(), ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
-		}
-		
-		List<String> adates = new LinkedList<String>();
-		List<Long> acounts = new LinkedList<Long>();
-		for (Record record : list) {
-			adates.add(ToolDateTime.format(record.getStr("adates"), ToolDateTime.pattern_date, "MM-dd"));
-			acounts.add(record.getLong("acounts"));
-		}
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("adates", JSON.toJSON(adates).toString());
-		map.put("acounts", JSON.toJSON(acounts).toString());
-		return map;
 	}
 	
 }

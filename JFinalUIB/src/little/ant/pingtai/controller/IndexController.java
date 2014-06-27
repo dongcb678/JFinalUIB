@@ -7,6 +7,7 @@ import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.service.IndexService;
+import little.ant.pingtai.service.ResourcesService;
 import little.ant.pingtai.tools.ToolContext;
 
 import org.apache.log4j.Logger;
@@ -20,6 +21,7 @@ public class IndexController extends BaseController {
 	private static Logger log = Logger.getLogger(IndexController.class);
 	
 	private IndexService indexService = new IndexService();
+	private ResourcesService resourcesService = new ResourcesService();
 
 	private List<Systems> systemsList;
 	private List<Menu> menuList;
@@ -44,8 +46,9 @@ public class IndexController extends BaseController {
 	/**
 	 * 首页content
 	 */
-	public void content(){
-		setAttrs(indexService.pv());
+	public void content(){;
+		setAttrs(resourcesService.pv());
+		setAttrs(resourcesService.getResources());
 		render("/pingtai/content.html");
 	}
 	

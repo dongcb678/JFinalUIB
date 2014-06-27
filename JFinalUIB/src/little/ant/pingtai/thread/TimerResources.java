@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import little.ant.pingtai.model.Resources;
+import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolOS;
 
 import org.apache.log4j.Logger;
@@ -49,18 +50,6 @@ public class TimerResources extends Timer {
 				long jvmMaxMemory = ToolOS.getJvmMaxMemory(); // JVM内存，最大内存量
 				long gcCount = ToolOS.getJvmGcCount(); // 获取JVM GC次数
 				
-				System.out.println("osName：" + osName);
-				System.out.println("ip：" + ip);
-				System.out.println("hostName：" + hostName);
-				System.out.println("cpuNumber：" + cpuNumber);
-				System.out.println("cpuRatio：" + cpuRatio);
-				System.out.println("phyMemory：" + phyMemory);
-				System.out.println("phyFreeMemory：" + phyFreeMemory);
-				System.out.println("jvmTotalMemory：" + jvmTotalMemory);
-				System.out.println("jvmFreeMemory：" + jvmFreeMemory);
-				System.out.println("jvmMaxMemory：" + jvmMaxMemory);
-				System.out.println("gcCount：" + gcCount);
-				
 				Resources resources = new Resources();
 				resources.set("osname", osName);
 				resources.set("ips", ip);
@@ -73,6 +62,7 @@ public class TimerResources extends Timer {
 				resources.set("jvmfreememory", jvmFreeMemory);
 				resources.set("jvmmaxmemory", jvmMaxMemory);
 				resources.set("gccount", gcCount);
+				resources.set("createdate", ToolDateTime.getSqlTimestamp(null));
 				resources.save();
 				
 				log.info("任务执行结束");
