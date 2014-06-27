@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2014-06-11 13:34:42
+Date: 2014-06-27 14:47:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -333,6 +333,32 @@ INSERT INTO `pt_operator` VALUES ('f771691134c34174a819b5990310da56', null, null
 INSERT INTO `pt_operator` VALUES ('f82c021dc443419fb2469032af73bf3e', null, null, '删除', null, null, null, '0', '/jf/dept/delete', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
 INSERT INTO `pt_operator` VALUES ('fb6a0c1e618041bcbbf8cfd41311b1fa', null, null, '准备登陆', null, null, null, '0', '/jf/login', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '0', null, null, '登陆');
 INSERT INTO `pt_operator` VALUES ('fd9978df5c5a47f298e2d28e21e70b15', null, null, '删除', null, null, null, '0', '/jf/sysLog/delete', '8a40c0353fa828a6013fa898d4ac0029', '0', '0', '0', '1', null, null, '日志');
+
+-- ----------------------------
+-- Table structure for `pt_resources`
+-- ----------------------------
+DROP TABLE IF EXISTS `pt_resources`;
+CREATE TABLE `pt_resources` (
+  `ids` varchar(32) COLLATE utf8_bin NOT NULL,
+  `version` bigint(20) DEFAULT NULL,
+  `osname` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `ips` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `hostname` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `cpunumber` bigint(20) DEFAULT NULL,
+  `cpuratio` decimal(20,10) DEFAULT NULL,
+  `phymemory` bigint(20) DEFAULT NULL,
+  `phyfreememory` bigint(20) DEFAULT NULL,
+  `jvmtotalmemory` bigint(20) DEFAULT NULL,
+  `jvmfreememory` bigint(20) DEFAULT NULL,
+  `jvmmaxmemory` bigint(20) DEFAULT NULL,
+  `gccount` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ids`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of pt_resources
+-- ----------------------------
+INSERT INTO `pt_resources` VALUES ('15f9cca570be4fa78f800b5c7eae9785', '0', 'Windows 7', '10.192.66.8', 'PC-DONGHUAJIAN', '4', '1.0000000000', '3993', '965', '480', '416', '939', '1');
 
 -- ----------------------------
 -- Table structure for `pt_role`

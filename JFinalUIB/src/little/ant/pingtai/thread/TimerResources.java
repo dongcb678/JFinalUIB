@@ -3,18 +3,23 @@ package little.ant.pingtai.thread;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import little.ant.pingtai.model.Resources;
 import little.ant.pingtai.tools.ToolOS;
 
 import org.apache.log4j.Logger;
 
-public class TimerSystemInfo extends Timer {
+/**
+ * 定时记录系统资源负载情况
+ * @author 董华健
+ */
+public class TimerResources extends Timer {
 
-	private static Logger log = Logger.getLogger(TimerSystemInfo.class);
+	private static Logger log = Logger.getLogger(TimerResources.class);
 	
 	/**
 	 * 定时任务对象
 	 */
-	private static TimerSystemInfo timer = null;
+	private static TimerResources timer = null;
 	
 	/**
 	 * 启动任务
@@ -25,7 +30,7 @@ public class TimerSystemInfo extends Timer {
 			return;
 		}
 		log.info("开始启动任务");
-		timer = new TimerSystemInfo();
+		timer = new TimerResources();
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -33,7 +38,7 @@ public class TimerSystemInfo extends Timer {
 				String osName = ToolOS.getOsName(); // 获取操作系统类型名称
 				String ip = ToolOS.getOsLocalHostIp(); // 获取本机IP
 				String hostName = ToolOS.getOsLocalHostName(); // 获取本机名称
-				int cpuCount = ToolOS.getOsCpuNumber(); // 获取CPU数量
+				int cpuNumber = ToolOS.getOsCpuNumber(); // 获取CPU数量
 				double cpuRatio = ToolOS.getOscpuRatio(); // cpu使用率
 				
 				long phyMemory = ToolOS.getOsPhysicalMemory(); // 物理内存，总的可使用的
@@ -47,7 +52,7 @@ public class TimerSystemInfo extends Timer {
 				System.out.println("osName：" + osName);
 				System.out.println("ip：" + ip);
 				System.out.println("hostName：" + hostName);
-				System.out.println("cpuCount：" + cpuCount);
+				System.out.println("cpuNumber：" + cpuNumber);
 				System.out.println("cpuRatio：" + cpuRatio);
 				System.out.println("phyMemory：" + phyMemory);
 				System.out.println("phyFreeMemory：" + phyFreeMemory);
@@ -55,6 +60,20 @@ public class TimerSystemInfo extends Timer {
 				System.out.println("jvmFreeMemory：" + jvmFreeMemory);
 				System.out.println("jvmMaxMemory：" + jvmMaxMemory);
 				System.out.println("gcCount：" + gcCount);
+				
+				Resources resources = new Resources();
+				resources.set("osname", osName);
+				resources.set("ips", ip);
+				resources.set("hostname", hostName);
+				resources.set("cpunumber", cpuNumber);
+				resources.set("cpuratio", cpuRatio);
+				resources.set("phymemory", phyMemory);
+				resources.set("phyfreememory", phyFreeMemory);
+				resources.set("jvmtotalmemory", jvmTotalMemory);
+				resources.set("jvmfreememory", jvmFreeMemory);
+				resources.set("jvmmaxmemory", jvmMaxMemory);
+				resources.set("gccount", gcCount);
+				resources.save();
 				
 				log.info("任务执行结束");
 			}

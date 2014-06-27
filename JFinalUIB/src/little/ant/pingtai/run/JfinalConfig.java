@@ -30,6 +30,7 @@ import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.model.Operator;
+import little.ant.pingtai.model.Resources;
 import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.Syslog;
@@ -38,7 +39,7 @@ import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.thread.ThreadSysLog;
-import little.ant.pingtai.thread.TimerSystemInfo;
+import little.ant.pingtai.thread.TimerResources;
 import little.ant.pingtai.tools.ToolString;
 import little.ant.weixin.controller.KeywordController;
 import little.ant.weixin.controller.LocationController;
@@ -194,6 +195,7 @@ public class JfinalConfig extends JFinalConfig {
 		arp.addMapping("pt_systems", "ids", Systems.class); // 系统表
 		arp.addMapping("pt_user", "ids", User.class); // 用户表
 		arp.addMapping("pt_userinfo", "ids", UserInfo.class); // 用户明细表
+		arp.addMapping("pt_resources", "ids", Resources.class); // 资源信息
 		
 		// 3.2 微信表
 		arp.addMapping("wx_message", "ids", Message.class); // 消息表
@@ -231,7 +233,7 @@ public class JfinalConfig extends JFinalConfig {
 		
 		new DocKeyword().run(); // 创建自动回复lucene索引
 		
-		TimerSystemInfo.start(); // 系统负载
+		TimerResources.start(); // 系统负载
 	}
 	
 	/**
@@ -242,7 +244,7 @@ public class JfinalConfig extends JFinalConfig {
 		
 		ThreadSysLog.setThreadRun(false);// 释放日志入库线程
 		
-		TimerSystemInfo.stop(); // 系统负载
+		TimerResources.stop(); // 系统负载
 	}
 	
 	/**
