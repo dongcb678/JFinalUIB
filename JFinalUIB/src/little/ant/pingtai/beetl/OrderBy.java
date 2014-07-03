@@ -1,5 +1,7 @@
 package little.ant.pingtai.beetl;
 
+import little.ant.pingtai.common.SplitPage;
+
 import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
@@ -14,23 +16,28 @@ public class OrderBy implements Function {
 			
 	@Override
 	public Object call(Object[] arg, Context context) {
-		if(arg.length != 3 || null == arg[0] || null == arg[1] || null == arg[2]){
+		if(arg.length != 2 || null == arg[0] || null == arg[1]){
 			return "";
 		}
-		String orderLaber = null;// 排序表示
+		String orderLaber = null;// 排序列
+		SplitPage splitPage = null;
+		
 		String orderColunm = null;// 排序条件
 		String orderMode = null;// 排序方式
+		
 		try {
 			orderLaber = (String) arg[0];
-			orderColunm = (String) arg[1];
-			orderMode = (String) arg[2];
+			splitPage = (SplitPage) arg[1];
+			
+			orderColunm = splitPage.getOrderColunm();
+			orderMode = splitPage.getOrderMode();
 		} catch (Exception e) {
 			return "";
 		}
 
 		log.debug("排序图标显示处理");
 		
-		if(orderLaber.equals(orderColunm)){
+		if(null != orderMode && orderLaber.equals(orderColunm)){
 			if(orderMode.equals("asc")){
 				return "<img src='/files/images/pingtai/order/asc.gif' />";
 			}else if(orderMode.equals("desc")){
