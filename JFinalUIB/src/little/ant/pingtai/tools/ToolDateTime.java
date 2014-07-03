@@ -7,8 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -317,6 +320,49 @@ public class ToolDateTime {
 		calendar.set(Calendar.MILLISECOND, 999);   
 		Date date = calendar.getTime();
 		return date;
+	}
+	
+	/**
+	 * 根据周得到开始和结束时间
+	 * @param year
+	 * @param week
+	 * @return
+	 */
+	public static Map<String, Date> getStartEndDateByWeek(int year, int week){
+		Calendar weekCalendar = new GregorianCalendar();
+		weekCalendar.set(Calendar.YEAR, year);
+		weekCalendar.set(Calendar.WEEK_OF_YEAR, week);
+		weekCalendar.set(Calendar.DAY_OF_WEEK, weekCalendar.getFirstDayOfWeek());
+		
+		Date startDate = weekCalendar.getTime(); // 得到周的开始日期
+
+		weekCalendar.roll(Calendar.DAY_OF_WEEK, 6);
+		Date endDate = weekCalendar.getTime(); // 得到周的结束日期
+		
+		// 开始日期往前推一天
+		Calendar startCalendar = Calendar.getInstance();
+		startCalendar.setTime(startDate);
+		startCalendar.add(Calendar.DATE, 1);// 明天1，昨天-1
+		startCalendar.set(Calendar.HOUR_OF_DAY, 0);   
+		startCalendar.set(Calendar.MINUTE, 0);   
+		startCalendar.set(Calendar.SECOND, 0);   
+		startCalendar.set(Calendar.MILLISECOND, 0);   
+		startDate = startCalendar.getTime();
+
+		// 结束日期往前推一天
+		Calendar endCalendar = Calendar.getInstance();
+		endCalendar.setTime(endDate);
+		endCalendar.add(Calendar.DATE, 1);// 明天1，昨天-1
+		endCalendar.set(Calendar.HOUR_OF_DAY, 23);   
+		endCalendar.set(Calendar.MINUTE, 59);   
+		endCalendar.set(Calendar.SECOND, 59);   
+		endCalendar.set(Calendar.MILLISECOND, 999);   
+		endDate = endCalendar.getTime();
+		
+		Map<String, Date> map = new HashMap<String, Date>();
+		map.put("start", startDate);
+		map.put("end", endDate);
+		return map;
 	}
 	
 	public static void main(String[] args) throws ParseException{
