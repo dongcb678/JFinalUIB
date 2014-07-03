@@ -16,18 +16,17 @@ public class OrderBy implements Function {
 			
 	@Override
 	public Object call(Object[] arg, Context context) {
-		if(arg.length != 2 || null == arg[0] || null == arg[1]){
+		if(arg.length != 1 || null == arg[0]){
 			return "";
 		}
-		String orderLaber = null;// 排序列
-		SplitPage splitPage = null;
 		
+		String orderLaber = null;// 排序列
 		String orderColunm = null;// 排序条件
 		String orderMode = null;// 排序方式
 		
 		try {
 			orderLaber = (String) arg[0];
-			splitPage = (SplitPage) arg[1];
+			SplitPage splitPage = (SplitPage) context.getGlobal("splitPage");
 			
 			orderColunm = splitPage.getOrderColunm();
 			orderMode = splitPage.getOrderMode();
