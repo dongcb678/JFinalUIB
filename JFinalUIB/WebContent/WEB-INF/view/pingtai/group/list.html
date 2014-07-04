@@ -16,7 +16,7 @@
 			<div class="box-header well" data-original-title>
 				<h2><i class="icon-edit"></i> 分组查询</h2>
 				<div class="box-icon">
-					<% if(hasPrivilegeUrl("/pingtai/group/add.html", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/pingtai/group/add.html")){ %>
 						<a href="#" class="btn btn-round" title="添加分组" onclick="ajaxContent('/jf/group/toUrl?toUrl=/pingtai/group/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
@@ -64,9 +64,9 @@
 					</thead>
 					<tbody>
 						<%
-							var edit = hasPrivilegeUrl("/jf/group/edit", reqSysLog.userids);
-							var delete = hasPrivilegeUrl("/jf/group/delete", reqSysLog.userids);
-							var role = hasPrivilegeUrl("/jf/role/select", reqSysLog.userids);
+							var edit = hasPrivilegeUrl("/jf/group/edit");
+							var delete = hasPrivilegeUrl("/jf/group/delete");
+							var role = hasPrivilegeUrl("/jf/role/select");
 						%>
 						<% for(group in splitPage.page.list){ %>
 							<tr>

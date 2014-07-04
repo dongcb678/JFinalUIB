@@ -18,7 +18,7 @@
 			<div class="box-header well" data-original-title>
 				<h2><i class="icon-edit"></i> 自动回复关键字查询</h2>
 				<div class="box-icon">
-					<% if(hasPrivilegeUrl("/weiXin/keyword/add.html", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/weiXin/keyword/add.html")){ %>
 						<a href="#" class="btn btn-round" title="添加回复" onclick="ajaxContent('/jf/wx/keyword/toUrl?toUrl=/weiXin/keyword/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
@@ -86,9 +86,9 @@
 					</thead>
 					<tbody>
 						<%
-							var view = hasPrivilegeUrl("/jf/wx/keyword/view", reqSysLog.userids);
-							var edit = hasPrivilegeUrl("/jf/wx/keyword/edit", reqSysLog.userids);
-							var delete = hasPrivilegeUrl("/jf/wx/keyword/delete", reqSysLog.userids);
+							var view = hasPrivilegeUrl("/jf/wx/keyword/view");
+							var edit = hasPrivilegeUrl("/jf/wx/keyword/edit");
+							var delete = hasPrivilegeUrl("/jf/wx/keyword/delete");
 						%>
 						<% for(keyword in splitPage.page.list){ %>
 							<tr>

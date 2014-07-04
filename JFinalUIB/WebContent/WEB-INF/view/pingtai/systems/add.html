@@ -22,7 +22,7 @@
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/systems/save" method="POST">
 				<% include("/pingtai/systems/form.html"){} %>
 				<div class="form-actions">
-					<% if(hasPrivilegeUrl("/jf/systems/save", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/jf/systems/save")){ %>
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
 					<% } %>
 					<button class="btn" onclick="ajaxContent('/jf/systems');">退出</button>

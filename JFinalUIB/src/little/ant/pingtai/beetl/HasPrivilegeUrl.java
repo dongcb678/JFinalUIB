@@ -1,5 +1,6 @@
 package little.ant.pingtai.beetl;
 
+import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.tools.ToolContext;
 
 import org.apache.log4j.Logger;
@@ -16,14 +17,15 @@ public class HasPrivilegeUrl implements Function {
 			
 	@Override
 	public Object call(Object[] arg, Context context) {
-		if(arg.length != 2 || null == arg[0] || null == arg[1]){
+		if(arg.length != 1 || null == arg[0]){
 			return false;
 		}
 		String url = null;
 		String userIds = null;
 		try {
 			url = (String) arg[0]; 
-			userIds = (String) arg[1]; 
+			Syslog reqSysLog = (Syslog) context.getGlobal("reqSysLog");
+			userIds = reqSysLog.getStr("userids");
 		} catch (Exception e) {
 			return false;
 		}

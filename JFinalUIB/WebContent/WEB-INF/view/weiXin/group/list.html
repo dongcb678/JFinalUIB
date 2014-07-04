@@ -69,7 +69,7 @@
 					</thead>
 					<tbody>
 						<%
-							var userMessage = hasPrivilegeUrl("/jf/wx/message/userMessage", reqSysLog.userids);
+							var userMessage = hasPrivilegeUrl("/jf/wx/message/userMessage");
 						%>
 						<% for(group in splitPage.page.list){ %>
 							<tr>

@@ -12,7 +12,7 @@
 		<div class="box-header well" data-original-title>
 			<h2><i class="icon-edit"></i> 字典树</h2>
 			<div class="box-icon">
-				<% if(hasPrivilegeUrl("/pingtai/dict/add.html", reqSysLog.userids)){ %>
+				<% if(hasPrivilegeUrl("/pingtai/dict/add.html")){ %>
 					<a href="#" class="btn btn-round" title="添加字典" 
 						onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/add.html');"><i class="icon-plus-sign"></i></a>
 				<% } %>

@@ -16,7 +16,7 @@
 			<div class="box-header well" data-original-title>
 				<h2><i class="icon-edit"></i> 角色查询</h2>
 				<div class="box-icon">
-					<% if(hasPrivilegeUrl("/pingtai/role/add.html", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/pingtai/role/add.html")){ %>
 						<a href="#" class="btn btn-round" title="添加角色" onclick="ajaxContent('/jf/role/toUrl?toUrl=/pingtai/role/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
@@ -64,9 +64,9 @@
 					</thead>
 					<tbody>
 						<%
-							var edit = hasPrivilegeUrl("/jf/role/edit", reqSysLog.userids);
-							var delete = hasPrivilegeUrl("/jf/role/delete", reqSysLog.userids);
-							var operator = hasPrivilegeUrl("/pingtai/role/operatorTree.html", reqSysLog.userids);
+							var edit = hasPrivilegeUrl("/jf/role/edit");
+							var delete = hasPrivilegeUrl("/jf/role/delete");
+							var operator = hasPrivilegeUrl("/pingtai/role/operatorTree.html");
 						%>
 						<% for(role in splitPage.page.list){ %>
 							<tr>

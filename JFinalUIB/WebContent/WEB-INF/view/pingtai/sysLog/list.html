@@ -107,8 +107,8 @@
 					</thead>
 					<tbody>
 						<%
-							var view = hasPrivilegeUrl("/jf/sysLog/view", reqSysLog.userids);
-							var delete = hasPrivilegeUrl("/jf/sysLog/delete", reqSysLog.userids);
+							var view = hasPrivilegeUrl("/jf/sysLog/view");
+							var delete = hasPrivilegeUrl("/jf/sysLog/delete");
 						%>
 						<% for(sysLog in splitPage.page.list){ %>
 							<tr>

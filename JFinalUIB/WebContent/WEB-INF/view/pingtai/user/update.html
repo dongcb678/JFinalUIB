@@ -28,7 +28,7 @@
 				
 				<% include("/pingtai/user/form.html", {"operatorType" : "update"}){}%>
 				<div class="form-actions">
-					<% if(hasPrivilegeUrl("/jf/user/update", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/jf/user/update")){ %>
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
 					<% } %>
 					<button class="btn" onclick="ajaxContent('/jf/user');">退出</button>

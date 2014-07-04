@@ -18,7 +18,7 @@
 			<div class="box-header well" data-original-title>
 				<h2><i class="icon-edit"></i> 用户查询</h2>
 				<div class="box-icon">
-					<% if(hasPrivilegeUrl("/pingtai/user/add.html", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/pingtai/user/add.html")){ %>
 						<a href="#" class="btn btn-round" title="添加用户" onclick="ajaxContent('/jf/user/toUrl?toUrl=/pingtai/user/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
@@ -85,10 +85,10 @@
 					</thead>
 					<tbody>
 						<%
-							var view = hasPrivilegeUrl("/jf/user/view", reqSysLog.userids);
-							var edit = hasPrivilegeUrl("/jf/user/edit", reqSysLog.userids);
-							var delete = hasPrivilegeUrl("/jf/user/delete", reqSysLog.userids);
-							var group = hasPrivilegeUrl("/jf/group/select", reqSysLog.userids);
+							var view = hasPrivilegeUrl("/jf/user/view");
+							var edit = hasPrivilegeUrl("/jf/user/edit");
+							var delete = hasPrivilegeUrl("/jf/user/delete");
+							var group = hasPrivilegeUrl("/jf/group/select");
 						%>
 						<% for(user in splitPage.page.list){ %>
 							<tr>

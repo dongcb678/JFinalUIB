@@ -24,7 +24,7 @@
 				<input type="hidden" name="systems.version" value="${systems.version! + 1}">
 				<% include("/pingtai/systems/form.html"){} %>
 				<div class="form-actions">
-					<% if(hasPrivilegeUrl("/jf/systems/update", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/jf/systems/update")){ %>
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
 					<% } %>
 					<button class="btn" onclick="ajaxContent('/jf/systems');">退出</button>

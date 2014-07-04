@@ -16,7 +16,7 @@
 			<div class="box-header well" data-original-title>
 				<h2><i class="icon-edit"></i> 系统查询</h2>
 				<div class="box-icon">
-					<% if(hasPrivilegeUrl("/pingtai/systems/add.html", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/pingtai/systems/add.html")){ %>
 						<a href="#" class="btn btn-round" title="添加系统" onclick="ajaxContent('/jf/systems/toUrl?toUrl=/pingtai/systems/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
@@ -70,10 +70,10 @@
 					</thead>
 					<tbody>
 						<%
-							var edit = hasPrivilegeUrl("/jf/systems/edit", reqSysLog.userids);
-							var delete = hasPrivilegeUrl("/jf/systems/delete", reqSysLog.userids);
-							var module = hasPrivilegeUrl("/jf/module", reqSysLog.userids);
-							var menu = hasPrivilegeUrl("/jf/menu", reqSysLog.userids);
+							var edit = hasPrivilegeUrl("/jf/systems/edit");
+							var delete = hasPrivilegeUrl("/jf/systems/delete");
+							var module = hasPrivilegeUrl("/jf/module");
+							var menu = hasPrivilegeUrl("/jf/menu");
 						%>
 						<% for(systems in splitPage.page.list){ %>
 							<tr>

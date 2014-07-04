@@ -46,7 +46,7 @@
 	    });	
 		
 		function update(ids){
-			var has = ${hasPrivilegeUrl("/jf/dict/edit", reqSysLog.userids)};
+			var has = ${hasPrivilegeUrl("/jf/dict/edit")};
 			if(has){
 				parent.window.ajaxContent('/jf/dict/edit/' + ids);
 			}else{
@@ -55,7 +55,7 @@
 		}
 	
 		function deleteFunc(ids){
-			var has = ${hasPrivilegeUrl("/jf/dict/delete", reqSysLog.userids)};
+			var has = ${hasPrivilegeUrl("/jf/dict/delete")};
 			if(has){
 				parent.window.ajaxContent('/jf/dict/delete/' + ids);
 			}else{

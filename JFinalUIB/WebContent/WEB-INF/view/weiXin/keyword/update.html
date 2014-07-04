@@ -24,7 +24,7 @@
 				<input type="hidden" name="userInfo.ids" value="${userInfo.ids!}" >
 				<% include("/weiXin/keyword/form.html"){}%>
 				<div class="form-actions">
-					<% if(hasPrivilegeUrl("/jf/wx/keyword/update", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/jf/wx/keyword/update")){ %>
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
 					<% } %>
 					<button class="btn" onclick="ajaxContent('/jf/wx/keyword');">退出</button>

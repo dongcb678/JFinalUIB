@@ -22,7 +22,7 @@
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/dict/save" method="POST">
 				<% include("/pingtai/dict/form.html"){} %>
 				<div class="form-actions">
-					<% if(hasPrivilegeUrl("/jf/dict/save", reqSysLog.userids)){ %>
+					<% if(hasPrivilegeUrl("/jf/dict/save")){ %>
 						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
 					<% } %>
 					<button class="btn" onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html');">退出</button>
