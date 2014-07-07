@@ -85,7 +85,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">输入密码</label>
 		<div class="controls">
-			<input type="password" id="pass1Id" name="password" class="input-xlarge" 
+			<input type="password" id="pass1Id" name="password" class="input-xlarge" autocomplete="off"
 				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
 			<span class="help-inline">6-18位字母数字</span>
 		</div>
@@ -93,7 +93,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">确认密码</label>
 		<div class="controls">
-			<input type="password" id="pass2Id" class="input-xlarge" 
+			<input type="password" id="pass2Id" class="input-xlarge" autocomplete="off"
 				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
 			<span class="help-inline">6-18位字母数字</span>
 		</div>
