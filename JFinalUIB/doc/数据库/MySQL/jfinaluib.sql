@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50530
 File Encoding         : 65001
 
-Date: 2014-07-07 20:59:31
+Date: 2014-07-08 22:42:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -352,13 +352,14 @@ CREATE TABLE `pt_resources` (
   `jvmfreememory` bigint(20) DEFAULT NULL,
   `jvmmaxmemory` bigint(20) DEFAULT NULL,
   `gccount` bigint(20) DEFAULT NULL,
+  `createdate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ids`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of pt_resources
 -- ----------------------------
-INSERT INTO `pt_resources` VALUES ('15f9cca570be4fa78f800b5c7eae9785', '0', 'Windows 7', '10.192.66.8', 'PC-DONGHUAJIAN', '4', '1.0000000000', '3993', '965', '480', '416', '939', '1');
+INSERT INTO `pt_resources` VALUES ('15f9cca570be4fa78f800b5c7eae9785', '0', 'Windows 7', '10.192.66.8', 'PC-DONGHUAJIAN', '4', '1.0000000000', '3993', '965', '480', '416', '939', '1', null);
 
 -- ----------------------------
 -- Table structure for `pt_role`
