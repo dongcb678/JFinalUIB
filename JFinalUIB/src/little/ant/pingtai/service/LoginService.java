@@ -65,7 +65,7 @@ public class LoginService extends BaseService {
 		if (null != userObj) {
 			user = (User) userObj;
 		} else {
-			List<User> userList = User.dao.findByCache(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userName, "select * from pt_user where username=?", userName);
+			List<User> userList = User.dao.find("select * from pt_user where username=?", userName);
 			if (userList.size() != 1) {
 				return DictKeys.login_info_0;// 用户不存在
 			}
