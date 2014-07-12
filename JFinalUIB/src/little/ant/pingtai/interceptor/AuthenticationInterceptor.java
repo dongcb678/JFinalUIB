@@ -167,7 +167,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			return ;
 		}
 
-		String referer = contro.getRequest().getHeader("Referer"); 
+		String referer = contro.getRequest().getHeader("X-Requested-With"); 
 		String toPage = "/common/msgAjax.html";
 		if(null == referer || referer.isEmpty()){
 			toPage = "/common/msg.html";
