@@ -1,7 +1,5 @@
 package little.ant.pingtai.tools;
 
-import static org.junit.Assert.assertEquals;
-
 import java.security.Key;
 
 import javax.crypto.Cipher;
@@ -11,7 +9,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
-import org.junit.Test;
 
 /**
  * AES安全编码组件
@@ -130,8 +127,7 @@ public class ToolSecurityAES {
 	 * 测试
 	 * @throws Exception
 	 */
-	@Test
-	public final void test() throws Exception {
+	public static void main() throws Exception {
 		String inputStr = "AES";
 		byte[] inputData = inputStr.getBytes();
 		System.err.println("原文:\t" + inputStr);
@@ -149,8 +145,5 @@ public class ToolSecurityAES {
 
 		String outputStr = new String(outputData);
 		System.err.println("解密后:\t" + outputStr);
-
-		// 校验
-		assertEquals(inputStr, outputStr);
 	}
 }

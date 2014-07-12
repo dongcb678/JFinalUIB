@@ -1,7 +1,5 @@
 package little.ant.pingtai.tools;
 
-import static org.junit.Assert.*;
-
 import java.security.Key;
 import java.security.Security;
 
@@ -13,7 +11,6 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.junit.Test;
 
 /**
  * IDEA安全编码组件
@@ -126,9 +123,7 @@ public class ToolSecurityIDEA {
 	 * 
 	 * @throws Exception
 	 */
-	@Test
-	public final void test() throws Exception {
-		
+	public static void main() throws Exception {
 		String inputStr = "IDEA";
 		byte[] inputData = inputStr.getBytes();
 		System.err.println("原文:\t" + inputStr);
@@ -146,8 +141,5 @@ public class ToolSecurityIDEA {
 
 		String outputStr = new String(outputData);
 		System.err.println("解密后:\t" + outputStr);
-
-		// 校验
-		assertEquals(inputStr, outputStr);
 	}
 }
