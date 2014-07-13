@@ -120,7 +120,7 @@ public class ModuleService extends BaseService {
 	 */
 	public boolean delete(String ids) {
 		Record record = Db.findFirst("select count(*) as counts from pt_module where parentmoduleids=?", ids);
-		Long counts = record.getLong("counts");
+		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){
 	    	return false;
 	    }

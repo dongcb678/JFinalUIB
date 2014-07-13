@@ -56,7 +56,7 @@ public class ResourcesService extends BaseService {
 		List<Long> acounts = new LinkedList<Long>();
 		for (Record record : list) {
 			adates.add(ToolDateTime.format(record.getStr("adates"), ToolDateTime.pattern_date, "MM-dd"));
-			acounts.add(record.getLong("acounts"));
+			acounts.add(record.getNumber("acounts").longValue());
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -87,19 +87,19 @@ public class ResourcesService extends BaseService {
 		Long jvmmaxmemory = 0l;
 		
 		for (Resources resources : list) {
-			phymemory = resources.getLong("phymemory");
-			jvmmaxmemory = resources.getLong("jvmmaxmemory");
+			phymemory = resources.getNumber("phymemory").longValue();
+			jvmmaxmemory = resources.getNumber("jvmmaxmemory").longValue();
 			
 			datesList.add(ToolDateTime.format(resources.getDate("createdate"), "HH:mm"));
 			
 			int cpuratio = (int)(resources.getBigDecimal("cpuratio").doubleValue() * 100);
 			cpuList.add(Integer.valueOf(cpuratio));
 			
-			phymemoryList.add(resources.getLong("phymemory") - resources.getLong("phyfreememory"));
+			phymemoryList.add(resources.getNumber("phymemory").longValue() - resources.getNumber("phyfreememory").longValue());
 			
-			jvmmemoryList.add(resources.getLong("jvmtotalmemory") - resources.getLong("jvmfreememory"));
+			jvmmemoryList.add(resources.getNumber("jvmtotalmemory").longValue() - resources.getNumber("jvmfreememory").longValue());
 			
-			gccountList.add(resources.getLong("gccount"));
+			gccountList.add(resources.getNumber("gccount").longValue());
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();

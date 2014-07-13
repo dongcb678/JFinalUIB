@@ -26,14 +26,14 @@ public class DictService extends BaseService {
 		Dict parent = Dict.dao.findById(pIds);
 		parent.set("isparent", "true").update();
 
-		Long orderIds = dict.getLong("orderids");
+		Long orderIds = dict.getNumber("orderids").longValue();
 		if (orderIds < 2 || orderIds > 9) {
 			dict.set("images", "2.png");
 		} else {
 			dict.set("images", orderIds + ".png");
 		}
 
-		dict.set("isparent", "false").set("levels", parent.getLong("levels") + 1);
+		dict.set("isparent", "false").set("levels", parent.getNumber("levels").longValue() + 1);
 		dict.save();
 		
 		dict.set("paths", parent.get("paths") + "/" + dict.getStr("ids")).update();
@@ -53,7 +53,7 @@ public class DictService extends BaseService {
 		Dict parent = Dict.dao.findById(pIds);
 		parent.set("isparent", "true").update();
 		
-		dict.set("parentids", pIds).set("levels", parent.getLong("levels") + 1);
+		dict.set("parentids", pIds).set("levels", parent.getNumber("levels").longValue() + 1);
 		dict.set("paths", parent.get("paths") + "/" + dict.getPrimaryKeyValue());
 		dict.update();
 		

@@ -79,7 +79,7 @@ public class LoginService extends BaseService {
 		}
 
 		// 3.密码错误次数超限
-		int errorCount = user.getLong("errorcount").intValue();
+		int errorCount = user.getNumber("errorcount").intValue();
 		int passErrorCount = (int) JfinalConfig.getParamMapValue(DictKeys.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate("stopDate");
