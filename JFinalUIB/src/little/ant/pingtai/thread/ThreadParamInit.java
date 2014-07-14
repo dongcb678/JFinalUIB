@@ -61,10 +61,9 @@ public class ThreadParamInit extends Thread {
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<User> userList = User.dao.find("select * from pt_user");
 		for (User user : userList) {
-			String userInfoIds = user.getStr("userinfoids");
-			UserInfo userInfo = UserInfo.dao.findById(userInfoIds);
+			UserInfo userInfo = user.getUserInfo();
 			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"), user);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
 			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
 			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
 			user = null;

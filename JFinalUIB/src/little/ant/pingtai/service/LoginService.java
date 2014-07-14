@@ -65,7 +65,7 @@ public class LoginService extends BaseService {
 		if (null != userObj) {
 			user = (User) userObj;
 		} else {
-			List<User> userList = User.dao.findByCache(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userName, "select * from pt_user where username=?", userName);
+			List<User> userList = User.dao.find("select * from pt_user where username=?", userName);
 			if (userList.size() != 1) {
 				return DictKeys.login_info_0;// 用户不存在
 			}
@@ -79,7 +79,7 @@ public class LoginService extends BaseService {
 		}
 
 		// 3.密码错误次数超限
-		int errorCount = user.getLong("errorcount").intValue();
+		int errorCount = user.getNumber("errorcount").intValue();
 		int passErrorCount = (int) JfinalConfig.getParamMapValue(DictKeys.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate("stopDate");
