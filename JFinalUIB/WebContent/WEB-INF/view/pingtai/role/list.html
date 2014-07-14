@@ -70,16 +70,16 @@
 						%>
 						<% for(role in splitPage.page.list){ %>
 							<tr>
-								<td>${role["names"]}</td>
+								<td>${escapeXml(role["names"]!)}</td>
 								<td class="center">
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/role/edit/${role.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/role/edit/${escapeXml(role.ids!)}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/role/delete/${role.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>	
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/role/delete/${escapeXml(role.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>	
 									<% } %>
 									<% if(operator  == true){ %>
-										<a class="btn btn-success" href="#" onclick="setRoleOperatorDiaLog('${role.ids!}');"> <i class="icon-zoom-in icon-white"></i> 功能</a> 
+										<a class="btn btn-success" href="#" onclick="setRoleOperatorDiaLog('${escapeXml(role.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 功能</a> 
 									<% } %>
 								</td>
 							</tr>

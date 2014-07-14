@@ -40,7 +40,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<% for(systems in systemsList){ %>
-						<li><a href="${cxt!}/jf/index?ids=${systems.ids!}">${systems.names!}</a></li>
+						<li><a href="${cxt!}/jf/index?ids=${systems.ids!}">${escapeXml(systems.names!)}</a></li>
 						<li class="divider"></li>
 					<% } %>
 				</ul>
@@ -50,7 +50,7 @@
 			<!-- user dropdown starts -->
 			<div class="btn-group pull-right" >
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-user"></i><span class="hidden-phone"> ${cookieMap.userName.value!}</span>
+					<i class="icon-user"></i><span class="hidden-phone"> ${escapeXml(cookieMap.userName.value!)}</span>
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">

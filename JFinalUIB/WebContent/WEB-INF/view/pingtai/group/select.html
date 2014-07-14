@@ -24,7 +24,7 @@
 			groupIds += checkedGroup.options[i].value + ",";
 	    }
 		
-		var userIds = "${ids!}";
+		var userIds = "${escapeXml(ids!)}";
 		$.ajax({
 			type : "post",
 			url : cxt + "/user/setGroup",
@@ -58,7 +58,7 @@
 			<div class="box-content">
 				<select id="allGroup" multiple size="18" ondblclick="addChecked(this);" >
 					<% for(group in noCheckedList){ %>
-						<option value='${group.ids!}'>${group.names!}</option>
+						<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
 					<% } %>
 			  	</select>
 			</div>
@@ -76,7 +76,7 @@
 			<div class="box-content">
 				<select id="checkedGroup" multiple size="18" ondblclick="delChecked(this);" >
 					<% for(group in checkedList){ %>
-						<option value='${group.ids!}'>${group.names!}</option>
+						<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
 					<% } %>
 			  	</select>
 			</div>

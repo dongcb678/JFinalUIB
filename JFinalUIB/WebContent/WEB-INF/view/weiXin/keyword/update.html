@@ -20,8 +20,8 @@
 		
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/wx/keyword/update" method="POST">
-				<input type="hidden" name="user.ids" value="${user.ids!}" >
-				<input type="hidden" name="userInfo.ids" value="${userInfo.ids!}" >
+				<input type="hidden" name="user.ids" value="${escapeXml(user.ids!)}" >
+				<input type="hidden" name="userInfo.ids" value="${escapeXml(userInfo.ids!)}" >
 				<% include("/weiXin/keyword/form.html"){}%>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/wx/keyword/update")){ %>

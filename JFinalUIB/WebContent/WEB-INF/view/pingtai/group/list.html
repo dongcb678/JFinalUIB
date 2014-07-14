@@ -70,16 +70,16 @@
 						%>
 						<% for(group in splitPage.page.list){ %>
 							<tr>
-								<td>${group["names"]!}</td>
+								<td>${escapeXml(group["names"]!)}</td>
 								<td class="center">
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/group/edit/${group.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/group/edit/${escapeXml(group.ids!)}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/group/delete/${group.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/group/delete/${escapeXml(group.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 									<% if(role == true){ %>
-										<a class="btn btn-danger" href="#" onclick="roleSelectDialog('${group.ids!}');"> <i class="icon-trash icon-white"></i> 角色</a>	
+										<a class="btn btn-danger" href="#" onclick="roleSelectDialog('${escapeXml(group.ids!)}');"> <i class="icon-trash icon-white"></i> 角色</a>	
 									<% } %>
 								</td>
 							</tr>

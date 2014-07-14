@@ -25,19 +25,19 @@
 					<div class="control-group">
 						<label class="control-label">操作名称</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.onames!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.onames!)}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">操作url</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.ourl!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.ourl!)}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">客户端IP</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.ips!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.ips!)}">
 						</div>
 					</div>
 					<div class="control-group">
@@ -80,7 +80,7 @@
 					<div class="control-group">
 						<label class="control-label">创建者</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.username!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.username!)}">
 						</div>
 					</div>
 					<div class="control-group">
@@ -116,73 +116,73 @@
 					<div class="control-group">
 						<label class="control-label">描述</label>
 						<div class="controls">
-							<textarea class="cleditor" rows="3">${sysLog.description }</textarea>
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.description!)}</textarea>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">method</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.method!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.method!)}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">X-Requested-With</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.xrequestedwith!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.xrequestedwith!)}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Host</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.host!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.host!)}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Accept-Language</label>
 						<div class="controls">
-							<textarea class="cleditor" rows="3">${sysLog.acceptlanguage }</textarea>
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.acceptlanguage!)}</textarea>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Accept-Encoding</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.acceptencoding!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.acceptencoding!)}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Accept</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.accept!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.accept!)}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Connection</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value="${sysLog.connection!}">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.connection!)}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">完整请求路径</label>
 						<div class="controls">
-							<textarea class="cleditor" rows="3">${sysLog.requestpath }</textarea>
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.requestpath!) }</textarea>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">User-Agent</label>
 						<div class="controls">
-							<textarea class="cleditor" rows="3">${sysLog.useragent }</textarea>
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.useragent!) }</textarea>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">referer</label>
 						<div class="controls">
-							<textarea class="cleditor" rows="3">${sysLog.referer }</textarea>
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.referer!) }</textarea>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">cookie</label>
 						<div class="controls">
-							<textarea class="cleditor" rows="3">${sysLog.cookie }</textarea>
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.cookie!) }</textarea>
 						</div>
 					</div>
 					<div class="form-actions">

@@ -15,7 +15,7 @@ public class EscapeXml implements Function {
 			
 	@Override
 	public Object call(Object[] arg, Context context) {
-		if(arg.length != 1 || null == arg[0]){
+		if(arg.length != 1 || null == arg[0] || !(arg[0] instanceof String)){
 			return "";
 		}
 		String content = null;// 

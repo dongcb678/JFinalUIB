@@ -92,18 +92,18 @@
 						%>
 						<% for(keyword in splitPage.page.list){ %>
 							<tr>
-								<td>${keyword.question }</td>
-								<td class="center"><span class="label label-success">${keyword["questionkey"] }</span></td>
-								<td>${keyword["answer"] }</td>
+								<td>${escapeXml(keyword.question!) }</td>
+								<td class="center"><span class="label label-success">${escapeXml(keyword["questionkey"]!) }</span></td>
+								<td>${escapeXml(keyword["answer"]!) }</td>
 								<td class="center">
 									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/keyword/view/${keyword.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/keyword/view/${escapeXml(keyword.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
 									<% } %>
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/wx/keyword/edit/${keyword.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a>
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/wx/keyword/edit/${escapeXml(keyword.ids!)}');"> <i class="icon-edit icon-white"></i> 编辑</a>
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/wx/keyword/delete/${keyword.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/wx/keyword/delete/${escapeXml(keyword.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 								</td>
 							</tr>

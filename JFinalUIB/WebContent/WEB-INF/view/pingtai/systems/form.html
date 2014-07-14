@@ -18,7 +18,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">名称</label>
 		<div class="controls">
-			<input type="text" name="systems.names" value="${systems.names!}" 
+			<input type="text" name="systems.names" value="${escapeXml(systems.names!)}" 
 				class="input-xlarge" maxlength="25" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
 			<span class="help-inline">2-10位中文字母数字</span>
 		</div>
@@ -26,7 +26,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">编号</label>
 		<div class="controls">
-			<input type="text" name="systems.numbers" value="${systems.numbers!}" 
+			<input type="text" name="systems.numbers" value="${escapeXml(systems.numbers!)}" 
 				class="input-xlarge" maxlength="25" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
 			<span class="help-inline">5-16位字母数字</span>
 		</div>

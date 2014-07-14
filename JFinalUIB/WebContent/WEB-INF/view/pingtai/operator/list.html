@@ -98,10 +98,10 @@
 						%>
 						<% for(operator in splitPage.page.list){ %>
 							<tr>
-								<td>${operator.systemsnames}</td>
-								<td>${operator.modulenames}</td>
-								<td>${operator["names"]}</td>
-								<td>${operator["url"] }</td>
+								<td>${escapeXml(operator.systemsnames!)}</td>
+								<td>${escapeXml(operator.modulenames!)}</td>
+								<td>${escapeXml(operator["names"]!)}</td>
+								<td>${escapeXml(operator["url"]!)}</td>
 								<td class="center">
 									<% if(operator["rowFilter"] == "0"){print("否");}else{print("是");} %>
 								</td>
@@ -117,9 +117,9 @@
 									<% if(operator["privilege"] == "0"){print("否");}else{print("是");} %>
 								</td>
 								<td class="center">
-									<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/operator/view/${operator.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
-									<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/operator/edit/${operator.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
-									<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/operator/delete/${operator.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
+									<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/operator/view/${escapeXml(operator.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
+									<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/operator/edit/${escapeXml(operator.ids!)}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+									<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/operator/delete/${escapeXml(operator.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>
 								</td>
 							</tr>
 						<% } %>

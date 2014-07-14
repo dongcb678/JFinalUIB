@@ -20,7 +20,7 @@
 		
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/group/update" method="POST">
-				<input type="hidden" name="group.ids" value="${group.ids!}" >
+				<input type="hidden" name="group.ids" value="${escapeXml(group.ids!)}" >
 				<input type="hidden" name="group.version" value="${group.version! + 1}">
 				
 				<% include("/pingtai/group/form.html"){} %>

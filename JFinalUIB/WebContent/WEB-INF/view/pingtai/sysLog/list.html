@@ -112,8 +112,8 @@
 						%>
 						<% for(sysLog in splitPage.page.list){ %>
 							<tr>
-								<td align="center">${sysLog["onames"] }：${sysLog.ourl }</td>
-								<td align="center">${sysLog["username"] }</td>
+								<td align="center">${escapeXml(sysLog["onames"]!)}：${sysLog.ourl }</td>
+								<td align="center">${escapeXml(sysLog["username"]!)}</td>
 								<td align="center">
 									<% if(sysLog["status"] == "1"){%>
 										<span class="label label-success">成功</span>
@@ -121,7 +121,7 @@
 										<span class="label label-warning">失败</span>
 									<% } %>
 								</td>
-								<td align="center">${sysLog["ips"] }</td>
+								<td align="center">${escapeXml(sysLog["ips"]!)}</td>
 								<td align="center">
 									${sysLog.startdate !, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}
 								</td>
@@ -136,10 +136,10 @@
 								</td>
 								<td class="center">
 									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/sysLog/view/${sysLog.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/sysLog/view/${escapeXml(sysLog.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/sysLog/delete/${sysLog.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/sysLog/delete/${escapeXml(sysLog.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 								</td>
 							</tr>

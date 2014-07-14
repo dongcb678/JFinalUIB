@@ -92,23 +92,23 @@
 						%>
 						<% for(user in splitPage.page.list){ %>
 							<tr>
-								<td>${user.deptnames }</td>
-								<td>${user["username"] }</td>
-								<td class="center">${user["names"] }</td>
-								<td class="center">${user["email"] }</td>
-								<td class="center"><span class="label label-success">${user["mobile"] }</span></td>
+								<td>${escapeXml(user.deptnames!) }</td>
+								<td>${escapeXml(user["username"]!) }</td>
+								<td class="center">${escapeXml(user["names"]!) }</td>
+								<td class="center">${escapeXml(user["email"]!) }</td>
+								<td class="center"><span class="label label-success">${escapeXml(user["mobile"]!) }</span></td>
 								<td class="center">
 									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/user/view/${user.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/user/view/${escapeXml(user.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
 									<% } %>
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/user/edit/${user.ids!}');"> <i class="icon-edit icon-white"></i> 编辑</a>
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/user/edit/${escapeXml(user.ids!)}');"> <i class="icon-edit icon-white"></i> 编辑</a>
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/user/delete/${user.ids!}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/user/delete/${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>
 									<% } %>
 									<% if(group == true){ %>
-										<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${user.ids!}');"> <i class="icon-trash icon-white"></i> 分组</a>
+										<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> 分组</a>
 									<% } %>
 								</td>
 							</tr>

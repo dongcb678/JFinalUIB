@@ -20,7 +20,7 @@
 		
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/operator/update" method="POST">
-				<input type="hidden" name="operator.ids" value="${operator.ids!}" >
+				<input type="hidden" name="operator.ids" value="${escapeXml(operator.ids!)}" >
 				<input type="hidden" name="operator.version" value="${operator.version! + 1}">
 				
 				<% include("/pingtai/operator/form.html"){} %>

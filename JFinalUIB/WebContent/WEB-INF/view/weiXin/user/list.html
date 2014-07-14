@@ -101,10 +101,10 @@
 						%>
 						<% for(user in splitPage.page.list){ %>
 							<tr>
-								<td>${user.openid }</td>
+								<td>${escapeXml(user.openid!) }</td>
 								<td>${user["subscribe"] == "1" ? "关注" : "未关注" }</td>
-								<td class="center">${user["subscribetime"] }</td>
-								<td class="center">${user["nickname"] }</td>
+								<td class="center">${escapeXml(user["subscribetime"]!) }</td>
+								<td class="center">${escapeXml(user["nickname"]!) }</td>
 								<td class="center">
 									<%if(user["sex"] == "0"){%>
 										<span class="label label-success">未知</span>
@@ -114,14 +114,14 @@
 										<span class="label label-success">女</span>
 									<%}%>
 								</td>
-								<td class="center">${user["country"] }</td>
-								<td class="center">${user["province"] }</td>
-								<td class="center">${user["city"] }</td>
-								<td class="center">${user["language"] }</td>
-								<td class="center">${user["headimgurl"] }</td>
+								<td class="center">${escapeXml(user["country"]!) }</td>
+								<td class="center">${escapeXml(user["province"]!) }</td>
+								<td class="center">${escapeXml(user["city"]!) }</td>
+								<td class="center">${escapeXml(user["language"]!) }</td>
+								<td class="center">${escapeXml(user["headimgurl"]!) }</td>
 								<td class="center">
 									<% if(userMessage == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/message/userMessage/${user.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/message/userMessage/${escapeXml(user.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
 									<% } %>
 								</td>
 							</tr>

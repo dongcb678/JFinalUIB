@@ -4,25 +4,25 @@
 		<p>
 			<label>上级分类：</label>
 			<span class="info">
-				${dictTree.parent.names }
+				${escapeXml(dictTree.parent.names!) }
 			</span>
 		</p>
 		<p>
 			<label>名称：</label>
 			<span class="info">
-				${dictTree.names }
+				${escapeXml(dictTree.names!) }
 			</span>
 		</p>
 		<p>
 			<label>排序：</label>
 			<span class="info">
-				${dictTree.orderIds }
+				${escapeXml(dictTree.orderIds!) }
 			</span>
 		</p>
 		<p>
 			<label>描述：</label>
 			<span class="info">
-			${dictTree.description }
+			${escapeXml(dictTree.description!) }
 			</span>
 		</p>
 	</div>

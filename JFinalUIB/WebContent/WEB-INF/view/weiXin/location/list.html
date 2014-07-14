@@ -82,15 +82,15 @@
 						%>
 						<% for(location in splitPage.page.list){ %>
 							<tr>
-								<td>${location.open_id }</td>
-								<td>${location["lng"] }</td>
-								<td class="center"><span class="label label-success">${location["lat"] }</span></td>
-								<td>${location["bd09_lng"] }</td>
-								<td>${location["bd09_lat"] }</td>
+								<td>${escapeXml(location.open_id!) }</td>
+								<td>${escapeXml(location["lng"!)] }</td>
+								<td class="center"><span class="label label-success">${escapeXml(location["lat"]!) }</span></td>
+								<td>${escapeXml(location["bd09_lng"]!) }</td>
+								<td>${escapeXml(location["bd09_lat"]!) }</td>
 								<td>${location.createdate !, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}</td>
 								<td class="center">
 									<% if(delete == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/location/delete/${location.ids!}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/location/delete/${escapeXml(location.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
 									<% } %>
 								</td>
 							</tr>
