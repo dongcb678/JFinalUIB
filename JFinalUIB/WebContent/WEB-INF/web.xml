@@ -24,6 +24,7 @@
 	<servlet>  
     	<servlet-name>log4j</servlet-name>  
     	<servlet-class>little.ant.pingtai.servlet.Log4j</servlet-class>
+    	<async-supported>true</async-supported>
  	</servlet>
 	<servlet-mapping>
 		<servlet-name>log4j</servlet-name>
