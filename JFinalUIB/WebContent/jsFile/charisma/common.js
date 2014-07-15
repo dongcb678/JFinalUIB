@@ -1,40 +1,3 @@
-
-/**
- * 获取分页参数
- * @returns {Array}
- */
-function getSplitPageParam(){
-	var totalRow = $("#_totalRow").val();
-	var pageSize = $("#_pageSize").val();
-	var pageNumber = $("#_pageNumber").val();
-	var totalPages = $("#_totalPage").val();
-	
-	var isSelectPage = $("#_isSelectPage").val();
-	var isSelectSize = $("#_isSelectSize").val();
-
-	var orderColunm = $("#_orderColunm").val();
-	var orderMode = $("#_orderMode").val();
-	
-	totalRow = parseInt(totalRow, 10);
-	pageSize = parseInt(pageSize, 10);
-	pageNumber = parseInt(pageNumber, 10);
-	totalPages = parseInt(totalPages, 10);
-
-	if(isSelectPage == "true"){
-		isSelectPage = true;
-	}else{
-		isSelectPage = false;
-	}
-
-	if(isSelectSize == "true"){
-		isSelectSize = true;
-	}else{
-		isSelectSize = false;
-	}
-	
-	return [totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode];
-}
-
 /**
  * 分页输出
  * @param totalRow
@@ -47,7 +10,6 @@ function getSplitPageParam(){
  * @param orderMode
  */
 function splitPageOut(totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode){
-	//alert(totalRow+"--"+pageSize+"--"+pageNumber+"--"+totalPages);
 	var splitStr = '<ul>';
 	
 	if (pageNumber == 1 || totalPages == 0) {
@@ -133,7 +95,7 @@ function splitPageOut(totalRow, pageSize, pageNumber, totalPages, isSelectPage, 
 	splitStr += '<input type="hidden" id="orderColunmId" name="orderColunm" value="'+orderColunm+'"/>';
 	splitStr += '<input type="hidden" id="orderModeId" name="orderMode" value="'+orderMode+'"/>';
 	
-	$("#splitPageDiv").html(splitStr);
+	return splitStr;
 }
 
 /**

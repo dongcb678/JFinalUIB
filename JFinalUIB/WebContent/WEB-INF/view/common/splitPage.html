@@ -1,17 +1,16 @@
-<input type="hidden" id="_totalRow" value="${splitPage.page.totalRow!}"><!-- 总行数 -->
-<input type="hidden" id="_pageSize" value="${splitPage.page.pageSize!}"><!-- 每页显示多少航 -->
-<input type="hidden" id="_pageNumber" value="${splitPage.page.pageNumber!}"><!-- 当前第几页 -->
-<input type="hidden" id="_totalPage" value="${splitPage.page.totalPage!}"><!-- 总页数 -->
-
-<input type="hidden" id="_isSelectPage" value="true">
-<input type="hidden" id="_isSelectSize" value="true">
-
-<input type="hidden" id="_orderColunm" value="${splitPage.orderColunm!}">
-<input type="hidden" id="_orderMode" value="${splitPage.orderMode!}">
-
 <script type="text/javascript">
 	$(document).ready(function() {
-		var splitParam = getSplitPageParam();
-		splitPageOut(splitParam[0], splitParam[1], splitParam[2], splitParam[3], splitParam[4], splitParam[5], splitParam[6], splitParam[7], splitParam[8]);
+		var totalRow = ${splitPage.page.totalRow!};			//总行数
+		var pageSize = ${splitPage.page.pageSize!};			//每页显示多少航 
+		var pageNumber = ${splitPage.page.pageNumber!};		//当前第几页 
+		var totalPages = ${splitPage.page.totalPage!};		//总页数 
+		var isSelectPage = true;							// 是否显示第几页
+		var isSelectSize = true;							// 是否显示每页显示多少条
+		var orderColunm = "${splitPage.orderColunm!}"; 		//表格排序的列
+		var orderMode = "${splitPage.orderMode!}";			//排序的方式
+		// 获取分页HTML信息
+		var splitStr = splitPageOut(totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode);
+		// 显示分页信息
+		$("#splitPageDiv").html(splitStr);
 	});
 </script>
