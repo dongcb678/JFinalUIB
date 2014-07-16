@@ -27,7 +27,7 @@
 		var userIds = "${escapeXml(ids!)}";
 		$.ajax({
 			type : "post",
-			url : cxt + "/group/setRole",
+			url : cxt + "/jf/group/setRole",
 			data : { "ids" : userIds, "roleIds" : roleIds },
 			dataType : "html",
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
