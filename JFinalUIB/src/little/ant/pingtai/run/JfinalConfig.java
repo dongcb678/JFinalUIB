@@ -96,6 +96,19 @@ public class JfinalConfig extends JFinalConfig {
 		loadPropertyFile("init.properties");
 
 		paramMap.put(DictKeys.db_type_key, getProperty(DictKeys.db_type_key).trim());
+		
+		String db_type = (String) getParamMapValue(DictKeys.db_type_key);
+		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg 数据库连接信息
+			paramMap.put(DictKeys.db_connection_jdbcUrl, getProperty("postgresql.jdbcUrl").trim());
+			paramMap.put(DictKeys.db_connection_userName, getProperty("postgresql.userName").trim());
+			paramMap.put(DictKeys.db_connection_passWord, getProperty("postgresql.passWord").trim());
+		
+		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql 数据库连接信息
+			paramMap.put(DictKeys.db_connection_jdbcUrl, getProperty("mysql.jdbcUrl").trim());
+			paramMap.put(DictKeys.db_connection_userName, getProperty("mysql.userName").trim());
+			paramMap.put(DictKeys.db_connection_passWord, getProperty("mysql.passWord").trim());
+		}
+		
 		paramMap.put(DictKeys.config_securityKey_key, getProperty(DictKeys.config_securityKey_key).trim());
 		paramMap.put(DictKeys.config_passErrorCount_key, getPropertyToInt(DictKeys.config_passErrorCount_key, 3));
 		paramMap.put(DictKeys.config_passErrorHour_key, getPropertyToInt(DictKeys.config_passErrorHour_key, 3));

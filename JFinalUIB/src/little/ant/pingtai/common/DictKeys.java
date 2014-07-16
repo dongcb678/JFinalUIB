@@ -30,9 +30,14 @@ public abstract class DictKeys {
 	 * 当前数据库类型
 	 */
 	public static final String db_type_key = "db.type";
+	
 	public static final String db_type_postgresql = "postgresql";
 	public static final String db_type_mysql = "mysql";
-
+	
+	public static final String db_connection_jdbcUrl = "jdbcUrl";
+	public static final String db_connection_userName = "userName";
+	public static final String db_connection_passWord = "passWord";
+	
 	/**
 	 * 用户登录状态码
 	 */
