@@ -1,5 +1,6 @@
 package little.ant.pingtai.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,15 +74,16 @@ public class RoleService extends BaseService {
 	 * @param ids 用户ids
 	 */
 	public Map<String,Object> select(String ids){
+		List<Role> noCheckedList = new ArrayList<Role>();
+		List<Role> checkedList = new ArrayList<Role>();
 		String roleIds = Group.dao.findById(ids).getStr("roleids");
-		if(null == roleIds){
-			roleIds = "";
+		if(null != roleIds && !roleIds.equals("")){
+			String fitler = toSql(roleIds);
+			noCheckedList = Role.dao.find("select ids, names from pt_role where ids not in (" + fitler + ") order by names asc");
+			checkedList = Role.dao.find("select ids, names from pt_role where ids in (" + fitler + ") order by names asc");
+		}else{
+			noCheckedList = Role.dao.find("select ids, names from pt_role order by names asc");
 		}
-
-		String fitler = toSql(roleIds);
-		
-		List<Role> noCheckedList = Role.dao.find("select ids, names from pt_role where ids not in (" + fitler + ") order by names asc");
-		List<Role> checkedList = Role.dao.find("select ids, names from pt_role where ids in (" + fitler + ") order by names asc");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("noCheckedList", noCheckedList);

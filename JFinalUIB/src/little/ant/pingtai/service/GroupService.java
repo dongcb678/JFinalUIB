@@ -1,5 +1,6 @@
 package little.ant.pingtai.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,15 +61,16 @@ public class GroupService extends BaseService {
 	 * @param ids 用户ids
 	 */
 	public Map<String,Object> select(String ids){
+		List<Group> noCheckedList = new ArrayList<Group>();
+		List<Group> checkedList = new ArrayList<Group>();
 		String groupIds = User.dao.findById(ids).getStr("groupids");
-		if(null == groupIds){
-			groupIds = "";
+		if(null != groupIds && !groupIds.equals("")){
+			String fitler = toSql(groupIds);
+			noCheckedList = Group.dao.find("select ids, names from pt_group where ids not in (" + fitler + ") order by names asc");
+			checkedList = Group.dao.find("select ids, names from pt_group where ids in (" + fitler + ") order by names asc");
+		}else{
+			noCheckedList = Group.dao.find("select ids, names from pt_group order by names asc");
 		}
-		
-		String fitler = toSql(groupIds);
-		
-		List<Group> noCheckedList = Group.dao.find("select ids, names from pt_group where ids not in (" + fitler + ") order by names asc");
-		List<Group> checkedList = Group.dao.find("select ids, names from pt_group where ids in (" + fitler + ") order by names asc");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("noCheckedList", noCheckedList);
