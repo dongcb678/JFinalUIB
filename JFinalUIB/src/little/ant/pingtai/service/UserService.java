@@ -50,6 +50,7 @@ public class UserService extends BaseService {
 			user.save();
 
 			// 缓存
+			user = User.dao.findById(user.getStr("ids"));
 			ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
@@ -86,6 +87,7 @@ public class UserService extends BaseService {
 			userInfo.update();
 
 			// 缓存
+			user = User.dao.findById(user.getStr("ids"));
 			ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
@@ -131,6 +133,7 @@ public class UserService extends BaseService {
 		user.set("groupids", groupIds).update();
 		
 		// 缓存
+		user = User.dao.findById(user.getStr("ids"));
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
