@@ -34,9 +34,14 @@ public abstract class DictKeys {
 	public static final String db_type_postgresql = "postgresql";
 	public static final String db_type_mysql = "mysql";
 	
+	public static final String db_connection_driverClass = "driverClass";
 	public static final String db_connection_jdbcUrl = "jdbcUrl";
 	public static final String db_connection_userName = "userName";
 	public static final String db_connection_passWord = "passWord";
+	
+	public static final String db_connection_ip = "db_ip";
+	public static final String db_connection_port = "db_port";
+	public static final String db_connection_dbName = "db_name";
 	
 	/**
 	 * 用户登录状态码

@@ -97,18 +97,50 @@ public class JfinalConfig extends JFinalConfig {
 
 		paramMap.put(DictKeys.db_type_key, getProperty(DictKeys.db_type_key).trim());
 		
+		String jdbcUrl = null;
+		String database = null;
+		
+		// 判断数据库类型
 		String db_type = (String) getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg 数据库连接信息
+			// 读取当前配置数据库连接信息
+			paramMap.put(DictKeys.db_connection_driverClass, getProperty("postgresql.driverClass").trim());
 			paramMap.put(DictKeys.db_connection_jdbcUrl, getProperty("postgresql.jdbcUrl").trim());
 			paramMap.put(DictKeys.db_connection_userName, getProperty("postgresql.userName").trim());
 			paramMap.put(DictKeys.db_connection_passWord, getProperty("postgresql.passWord").trim());
-		
+			
+			// 解析数据库连接URL，获取数据库名称
+			jdbcUrl = (String) getParamMapValue(DictKeys.db_connection_jdbcUrl);
+			database = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			database = database.substring(database.indexOf("/") + 1);
+			
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql 数据库连接信息
+			// 读取当前配置数据库连接信息
+			paramMap.put(DictKeys.db_connection_driverClass, "com.mysql.jdbc.Driver");
 			paramMap.put(DictKeys.db_connection_jdbcUrl, getProperty("mysql.jdbcUrl").trim());
 			paramMap.put(DictKeys.db_connection_userName, getProperty("mysql.userName").trim());
 			paramMap.put(DictKeys.db_connection_passWord, getProperty("mysql.passWord").trim());
+
+			// 解析数据库连接URL，获取数据库名称
+			jdbcUrl = (String) getParamMapValue(DictKeys.db_connection_jdbcUrl);
+			database = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			database = database.substring(database.indexOf("/") + 1, database.indexOf("?"));
 		}
 		
+		// 解析数据库连接URL，获取数据库地址IP
+		String ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+		ip = ip.substring(0, ip.indexOf(":"));
+
+		// 解析数据库连接URL，获取数据库地址端口
+		String port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+		port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
+		
+		// 把数据库连接信息写入常用map
+		paramMap.put(DictKeys.db_connection_ip, ip);
+		paramMap.put(DictKeys.db_connection_port, port);
+		paramMap.put(DictKeys.db_connection_dbName, database);
+		
+		// 把常用配置信息写入map
 		paramMap.put(DictKeys.config_securityKey_key, getProperty(DictKeys.config_securityKey_key).trim());
 		paramMap.put(DictKeys.config_passErrorCount_key, getPropertyToInt(DictKeys.config_passErrorCount_key, 3));
 		paramMap.put(DictKeys.config_passErrorHour_key, getPropertyToInt(DictKeys.config_passErrorHour_key, 3));
@@ -162,40 +194,29 @@ public class JfinalConfig extends JFinalConfig {
 	 * 配置插件
 	 */
 	public void configPlugin(Plugins me) {
-		ActiveRecordPlugin arp = null;
-		// 1.数据库类型判断
+		// 1. 配置Druid数据库连接池插件
+		DruidPlugin druidPlugin = new DruidPlugin(
+				(String)getParamMapValue(DictKeys.db_connection_jdbcUrl), (String)getParamMapValue(DictKeys.db_connection_userName), 
+				(String)getParamMapValue(DictKeys.db_connection_passWord), (String)getParamMapValue(DictKeys.db_connection_driverClass));
+		me.add(druidPlugin);
+
+		// 2. 配置ActiveRecord插件
+		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+		
+		// 3. 数据库类型判断
 		String db_type = (String) getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
-			// 1.1 配置Druid数据库连接池插件
-			String postgresql_driverClass = getProperty("postgresql.driverClass").trim();
-			String postgresql_jdbcUrl = getProperty("postgresql.jdbcUrl").trim();
-			String postgresql_userName = getProperty("postgresql.userName").trim();
-			String postgresql_passWord = getProperty("postgresql.passWord").trim();
-			DruidPlugin druidPlugin = new DruidPlugin(postgresql_jdbcUrl, postgresql_userName, postgresql_passWord, postgresql_driverClass);
-			me.add(druidPlugin);
-
-			// 1.2 配置ActiveRecord插件
-			arp = new ActiveRecordPlugin(druidPlugin);
 			arp.setDialect(new PostgreSqlDialect()); // 数据库方言
 			
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
-			// 1.1 配置Druid数据库连接池插件
-			String mysql_jdbcUrl = getProperty("mysql.jdbcUrl").trim();
-			String mysql_userName = getProperty("mysql.userName").trim();
-			String mysql_passWord = getProperty("mysql.passWord").trim();
-			DruidPlugin druidPlugin = new DruidPlugin(mysql_jdbcUrl, mysql_userName, mysql_passWord);
-			me.add(druidPlugin);
-
-			// 1.2 配置ActiveRecord插件
-			arp = new ActiveRecordPlugin(druidPlugin);
-			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 小写
 			arp.setDialect(new MysqlDialect()); // 数据库方言
+			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 小写
 		}
-
-		// 2. 缓存
+		
+		// 4. 缓存
 		me.add(new EhCachePlugin()); // EhCache缓存
 		
-		// 3.1 系统表
+		// 5.1 系统表
 		arp.addMapping("pt_department", "ids", Department.class); // 部门表
 		arp.addMapping("pt_dict", "ids", Dict.class); // 字典表
 		arp.addMapping("pt_group", "ids", Group.class); // 用户分组表
@@ -210,7 +231,7 @@ public class JfinalConfig extends JFinalConfig {
 		arp.addMapping("pt_userinfo", "ids", UserInfo.class); // 用户明细表
 		arp.addMapping("pt_resources", "ids", Resources.class); // 资源信息
 		
-		// 3.2 微信表
+		// 5.2 微信表
 		arp.addMapping("wx_message", "ids", Message.class); // 消息表
 		arp.addMapping("wx_article", "ids", Article.class); // 消息图文表
 		arp.addMapping("wx_user", "ids", little.ant.weixin.model.User.class); // 用户表

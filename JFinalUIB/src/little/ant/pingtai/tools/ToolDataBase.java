@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.run.JfinalConfig;
@@ -22,12 +20,11 @@ public class ToolDataBase {
 	 * @throws IOException
 	 */
 	public static void exportSql(String exportPath) throws IOException {
-		Map<String, String> map = getProp();
-		String username = map.get("username");
-		String password = map.get("password");
-		String ip = map.get("ip");
-		String port = map.get("port");
-		String database = map.get("database");
+		String username = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_userName);
+		String password = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_passWord);
+		String ip = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_ip);
+		String port = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_port);
+		String database = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_dbName);
 		
 		String db_type = (String) JfinalConfig.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
@@ -55,12 +52,11 @@ public class ToolDataBase {
 	 * @throws IOException
 	 */
 	public static void importSql(String filePath) throws IOException {
-		Map<String, String> map = getProp();
-		String username = map.get("username");
-		String password = map.get("password");
-		String ip = map.get("ip");
-		String port = map.get("port");
-		String database = map.get("database");
+		String username = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_userName);
+		String password = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_passWord);
+		String ip = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_ip);
+		String port = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_port);
+		String database = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_dbName);
 		
 		String db_type = (String) JfinalConfig.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
@@ -89,41 +85,6 @@ public class ToolDataBase {
 			writer.close();
 			os.close();
 		}
-	}
-	
-	/**
-	 * 获取数据库连接属性信息
-	 * @return
-	 */
-	public static Map<String, String> getProp(){
-		String jdbcUrl = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_jdbcUrl);
-		String userName = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_userName);
-		String passWord = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_passWord);
-
-		String ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-		ip = ip.substring(0, ip.indexOf(":"));
-
-		String port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-		port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
-
-		String database = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-		
-		String db_type = (String) JfinalConfig.getParamMapValue(DictKeys.db_type_key);
-		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
-			database = database.substring(database.indexOf("/") + 1);
-			
-		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
-			database = database.substring(database.indexOf("/") + 1, database.indexOf("?"));
-		}
-
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("username", userName);
-		map.put("password", passWord);
-		map.put("ip", ip);
-		map.put("port", port);
-		map.put("database", database);
-		
-		return map;
 	}
 	
 }
