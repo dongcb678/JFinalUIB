@@ -51,8 +51,8 @@ public class UserService extends BaseService {
 
 			// 缓存
 			ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"), user);
 			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
 			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
 		} catch (NoSuchAlgorithmException e) {
@@ -87,8 +87,8 @@ public class UserService extends BaseService {
 
 			// 缓存
 			ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
-			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"), user);
 			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
 			cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
 		} catch (Exception e) {
@@ -108,8 +108,8 @@ public class UserService extends BaseService {
 
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"));
 		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"));
-		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"));
 		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"));
 		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"));
 		
@@ -132,8 +132,8 @@ public class UserService extends BaseService {
 		
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
-		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("username"), user);
 		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
 		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
 	}
