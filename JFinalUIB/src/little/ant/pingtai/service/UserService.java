@@ -165,7 +165,7 @@ public class UserService extends BaseService {
 			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 
 		// 封装用户数据
@@ -224,7 +224,7 @@ public class UserService extends BaseService {
 		splitPageBase(splitPage, select);
 	}
 	
-	protected void makeFilter(Map<String, String> queryParam, StringBuffer formSqlSb, List<Object> paramValue) {
+	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
 		formSqlSb.append(" from pt_user u  ");
 		formSqlSb.append(" left join pt_userinfo ui on u.userinfoids = ui.ids ");
 		formSqlSb.append(" left join pt_department d on u.departmentids = d.ids ");

@@ -35,7 +35,7 @@ public class ToolRandoms {
 	 * @return
 	 */
 	public static String getAuthCode(int length) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < length; i++) {
 			sb.append(authCode[number(0, length)]);
 		}

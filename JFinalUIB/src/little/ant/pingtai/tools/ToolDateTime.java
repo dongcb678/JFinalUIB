@@ -118,7 +118,7 @@ public class ToolDateTime {
 		long minute = between % 3600 / 60;
 		long second = between % 60 / 60;
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(day);
 		sb.append("天");
 		sb.append(hour);

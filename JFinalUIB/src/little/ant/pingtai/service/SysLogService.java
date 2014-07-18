@@ -14,7 +14,7 @@ public class SysLogService extends BaseService {
 	private static Logger log = Logger.getLogger(SysLogService.class);
 	
 	public Syslog view(String ids){
-		StringBuffer sql = new StringBuffer();
+		StringBuilder sql = new StringBuilder();
 		sql.append(" select s.*, o.names onames, o.url ourl, u.username ");
 		sql.append(" from pt_syslog s ");
 		sql.append(" left join pt_user u on s.userids = u.ids ");
@@ -32,7 +32,7 @@ public class SysLogService extends BaseService {
 		splitPageBase(splitPage, select);
 	}
 	
-	protected void makeFilter(Map<String, String> queryParam, StringBuffer formSqlSb, List<Object> paramValue) {
+	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
 		formSqlSb.append(" from pt_syslog s ");
 		formSqlSb.append(" left join pt_user u on s.userids = u.ids ");
 		formSqlSb.append(" left join pt_operator o on s.operatorids = o.ids ");

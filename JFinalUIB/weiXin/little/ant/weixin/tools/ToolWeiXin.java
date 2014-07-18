@@ -48,7 +48,7 @@ public class ToolWeiXin {
 	 * @return
 	 */
 	public static RecevieToken getAccessToken() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(weixin_token_url).append("?").append("grant_type=client_credential");
 		sb.append("&appid=").append(ToolEhcacheFactory.getInstance().get("system", weixin_appID_key));
 		sb.append("&secret=").append(ToolEhcacheFactory.getInstance().get("system", weixin_appSecret_key));

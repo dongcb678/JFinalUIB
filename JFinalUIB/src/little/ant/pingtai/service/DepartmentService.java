@@ -33,7 +33,7 @@ public class DepartmentService extends BaseService {
 			list = Department.dao.find(sql);
 		}
 		
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		
 		int size = list.size() - 1;

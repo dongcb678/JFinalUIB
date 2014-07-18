@@ -55,7 +55,7 @@ public class KeywordService extends BaseService {
 		splitPageBase(splitPage, select);
 	}
 	
-	protected void makeFilter(Map<String, String> queryParam, StringBuffer formSqlSb, List<Object> paramValue) {
+	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
 		formSqlSb.append(" from wx_keyword where 1=1 ");
 		
 		if(null == queryParam){

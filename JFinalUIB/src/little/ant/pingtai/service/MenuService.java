@@ -34,7 +34,7 @@ public class MenuService extends BaseService {
 			list = Menu.dao.find(sql, systemsIds);
 		}
 		
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		
 		int size = list.size() - 1;

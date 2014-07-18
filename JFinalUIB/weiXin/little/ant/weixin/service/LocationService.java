@@ -22,7 +22,7 @@ public class LocationService extends BaseService {
 		splitPageBase(splitPage, select);
 	}
 	
-	protected void makeFilter(Map<String, String> queryParam, StringBuffer formSqlSb, List<Object> paramValue) {
+	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
 		formSqlSb.append(" from wx_location where 1=1 ");
 		
 		if(null == queryParam){

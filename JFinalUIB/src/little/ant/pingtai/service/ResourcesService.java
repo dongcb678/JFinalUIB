@@ -38,14 +38,14 @@ public class ResourcesService extends BaseService {
 		List<Record> list = null;
 		String db_type = (String) JfinalConfig.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
-			StringBuffer sql = new StringBuffer();
+			StringBuilder sql = new StringBuilder();
 			sql.append(" select to_char(startdate, 'yyyy-MM-DD') adates, count(*) acounts from pt_syslog ");
 			sql.append(" where startdate>=? and startdate<=? ");
 			sql.append(" group by adates order by adates asc ");
 			list = Db.find(sql.toString(), ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
-			StringBuffer sql = new StringBuffer();
+			StringBuilder sql = new StringBuilder();
 			sql.append(" select date_format(startdate,'%Y-%m-%d') adates, count(*) acounts from pt_syslog ");
 			sql.append(" where startdate>=? and startdate<=? ");
 			sql.append(" group by adates order by adates asc ");

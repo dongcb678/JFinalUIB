@@ -82,7 +82,7 @@ public class ToolComment {
     @SuppressWarnings("resource")
 	public static void clearComment(String filePathAndName)  
             throws FileNotFoundException, UnsupportedEncodingException {  
-        StringBuffer buffer = new StringBuffer();  
+        StringBuilder buffer = new StringBuilder();  
         String line = null; // 用来保存每行读取的内容  
         InputStream is = new FileInputStream(filePathAndName);  
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, ToolString.encoding));  

@@ -56,7 +56,7 @@ public class ToolBaiduMap {
 	 * @return String
 	 */
 	public static String httpRequest(String requestUrl) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		try {
 			URL url = new URL(requestUrl);
 			HttpURLConnection httpUrlConn = (HttpURLConnection) url.openConnection();

@@ -26,7 +26,7 @@ public class IndexService extends BaseService {
 	public List<Menu> menu(String systemsIds, User user){
 		//基于缓存查询
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		StringBuffer operatorIdsSb = new StringBuffer();
+		StringBuilder operatorIdsSb = new StringBuilder();
 		
 		//根据分组查询权限
 		String groupIds = user.getStr("groupids");

@@ -212,7 +212,7 @@ public class ToolHttp {
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			String str = null;
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			while ((str = bufferedReader.readLine()) != null) {
 				buffer.append(str);
 			}

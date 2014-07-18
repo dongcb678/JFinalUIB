@@ -32,7 +32,7 @@ public class ToolDataBase {
 			
 			
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
-			StringBuffer command = new StringBuffer();
+			StringBuilder command = new StringBuilder();
 			command.append("cmd /c mysqldump -u").append(username).append(" -p").append(password)//密码是用的小p，而端口是用的大P。  
 					.append(" -h").append(ip).append(" -P").append(port).append(" ").append(database).append(" -r \"").append(exportPath+"\"");
 			try {
@@ -65,11 +65,11 @@ public class ToolDataBase {
 			
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
 			//第一步，获取登录命令语句  
-			String loginCommand = new StringBuffer().append("mysql -u").append(username).append(" -p").append(password).append(" -h").append(ip).append(" -P").append(port).toString();
+			String loginCommand = new StringBuilder().append("mysql -u").append(username).append(" -p").append(password).append(" -h").append(ip).append(" -P").append(port).toString();
 			//第二步，获取切换数据库到目标数据库的命令语句  
-			String switchCommand = new StringBuffer("use ").append(database).toString();
+			String switchCommand = new StringBuilder("use ").append(database).toString();
 			//第三步，获取导入的命令语句  
-			String importCommand = new StringBuffer("source ").append(filePath).toString();
+			String importCommand = new StringBuilder("source ").append(filePath).toString();
 			//需要返回的命令语句数组  
 			String[] commands = new String[] { loginCommand, switchCommand, importCommand };
 			

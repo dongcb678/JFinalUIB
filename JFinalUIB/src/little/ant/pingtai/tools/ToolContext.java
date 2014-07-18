@@ -197,7 +197,7 @@ public class ToolContext {
 	 * @return
 	 */
 	public static String getContextAllPath(HttpServletRequest request) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(request.getScheme()).append("://").append(request.getServerName()).append(":").append(request.getServerPort()).append(request.getContextPath());
 		String path = sb.toString();
 		sb = null;
@@ -217,7 +217,7 @@ public class ToolContext {
 		String userAgent = request.getHeader("User-Agent");
 		long date = ToolDateTime.getDateByTime();
 
-		StringBuffer token = new StringBuffer();// 时间戳#USERID#USER_IP#USER_AGENT
+		StringBuilder token = new StringBuilder();// 时间戳#USERID#USER_IP#USER_AGENT
 		token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent);
 		String authToken = token.toString();
 		byte[] authTokenByte = null;

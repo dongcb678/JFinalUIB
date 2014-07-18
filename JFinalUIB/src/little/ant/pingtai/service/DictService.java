@@ -93,7 +93,7 @@ public class DictService extends BaseService {
 			list = Dict.dao.find(sql);
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		int size = list.size() - 1;
 		for (Dict dict : list) {

@@ -27,7 +27,7 @@ public abstract class BaseService {
 		}
 		
 		String[] idsArr = ids.split(",");
-		StringBuffer sqlSb = new StringBuffer();
+		StringBuilder sqlSb = new StringBuilder();
 		int length = idsArr.length;
 		for (int i = 0, size = length -1; i < size; i++) {
 			sqlSb.append(" '").append(idsArr[i]).append("', ");
@@ -47,7 +47,7 @@ public abstract class BaseService {
 	 */
 	protected void splitPageBase(SplitPage splitPage, String select){
 		// 接收返回值对象
-		StringBuffer formSqlSb = new StringBuffer();
+		StringBuilder formSqlSb = new StringBuilder();
 		List<Object> paramValue = new LinkedList<Object>();
 		
 		// 调用生成from sql，并构造paramValue
@@ -73,7 +73,7 @@ public abstract class BaseService {
 	 * 行级：过滤
 	 * @return
 	 */
-	protected void rowFilter(StringBuffer formSqlSb){
+	protected void rowFilter(StringBuilder formSqlSb){
 		
 	}
 
@@ -81,7 +81,7 @@ public abstract class BaseService {
 	 * 查询条件过滤
 	 * @return
 	 */
-	protected void makeFilter(Map<String, String> queryParam, StringBuffer formSqlSb, List<Object> paramValue){
+	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue){
 		
 	}
 }

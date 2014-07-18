@@ -85,7 +85,7 @@ public class ToolMessage {
 		messageIn.save();
 
 		//关注提示语
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("您是否有过出门在外四处找ATM或厕所的经历？").append("\n\n");
 		contentBuffer.append("您是否有过出差在外搜寻美食或娱乐场所的经历？").append("\n\n");
 		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
@@ -143,7 +143,7 @@ public class ToolMessage {
 		messageIn.save();
 		
 		//关注提示语
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("您是否有过出门在外四处找ATM或厕所的经历？").append("\n\n");
 		contentBuffer.append("您是否有过出差在外搜寻美食或娱乐场所的经历？").append("\n\n");
 		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
@@ -199,7 +199,7 @@ public class ToolMessage {
 		messageIn.save();
 		
 		//关注提示语
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("谢谢！欢迎下次光临！:）").append("\n\n");
 		
 		//返回xml
@@ -255,7 +255,7 @@ public class ToolMessage {
 		messageIn.save();
 		
 		//关注提示语
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("您已经关注了哦！").append("\n\n");
 		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
 		
@@ -313,7 +313,7 @@ public class ToolMessage {
 		messageIn.save();
 		
 		//关注提示语
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("您的位置已经收录！").append("\n\n");
 		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
 		
@@ -369,7 +369,7 @@ public class ToolMessage {
 		messageIn.save();
 		
 		//关注提示语
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("您的位置已经收录！").append("\n\n");
 		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
 		
@@ -425,7 +425,7 @@ public class ToolMessage {
 		messageIn.save();
 		
 		//关注提示语
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("您的位置已经收录！").append("\n\n");
 		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
 		
@@ -578,7 +578,7 @@ public class ToolMessage {
 		messageIn.save();
 
 		//关注提示语
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("图片已经收到！").append("\n\n");
 		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
 		
@@ -637,7 +637,7 @@ public class ToolMessage {
 		messageIn.save();
 
 		// 返回xml
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		String recognition = voice.getRecognition();// 语音识别结果
 		if(null != recognition){//接收语音识别结果
 			
@@ -698,7 +698,7 @@ public class ToolMessage {
 		messageIn.save();
 
 		//关注提示语
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("图片已经收到！").append("\n\n");
 		contentBuffer.append("周边搜索为您的出行保驾护航，为您提供专业的周边生活指南，回复“附近”开始体验吧！");
 		
@@ -781,7 +781,7 @@ public class ToolMessage {
 		uLocation.save();
 		
 		//回显信息
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("[愉快]").append("成功接收您的位置！").append("\n\n");
 		contentBuffer.append("您可以输入搜索关键词获取周边信息了，例如：").append("\n");
 		contentBuffer.append("        附近ATM").append("\n");
@@ -843,7 +843,7 @@ public class ToolMessage {
 		messageIn.save();
 
 		//回显信息
-		StringBuffer contentBuffer = new StringBuffer();
+		StringBuilder contentBuffer = new StringBuilder();
 		contentBuffer.append("您点击的啥链接呢？");
 		
 		//返回xml
@@ -876,7 +876,7 @@ public class ToolMessage {
 	 * @return
 	 */
 	private static String getUsage() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("周边搜索使用说明").append("\n\n");
 		buffer.append("1）发送地理位置").append("\n");
 		buffer.append("点击窗口底部的“+”按钮，选择“位置”，点“发送”").append("\n\n");

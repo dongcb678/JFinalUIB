@@ -158,7 +158,7 @@ public class DocKeyword extends DocBase {
 	protected String getIndexPath(){
 		if(null == indexPath){
 			String path = ToolOS.getOsPathType();
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			sb.append(PathKit.getWebRootPath()).append(path);
 			sb.append("WEB-INF").append(path).append("lucene").append(path);
 			sb.append("weiXin").append(path).append("keyword");//索引目录

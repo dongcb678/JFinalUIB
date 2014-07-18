@@ -86,7 +86,7 @@ public class OperatorService extends BaseService {
 			operatorList = Operator.dao.find(sqlOperator, moduleIds);
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 
 		int operatorSize = operatorList.size();
@@ -140,7 +140,7 @@ public class OperatorService extends BaseService {
 		splitPageBase(splitPage, select);
 	}
 	
-	protected void makeFilter(Map<String, String> queryParam, StringBuffer formSqlSb, List<Object> paramValue) {
+	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
 		formSqlSb.append(" from pt_operator o ");
 		formSqlSb.append(" left join pt_module m on o.moduleids=m.ids ");
 		formSqlSb.append(" left join pt_systems s on s.ids=m.systemsids ");

@@ -79,7 +79,7 @@ public class ToolMedia {
 			InputStream inputStream = uploadConn.getInputStream();
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			String str = null;
 			while ((str = bufferedReader.readLine()) != null) {
 				buffer.append(str);

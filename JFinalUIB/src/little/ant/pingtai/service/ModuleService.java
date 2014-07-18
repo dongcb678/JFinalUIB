@@ -40,7 +40,7 @@ public class ModuleService extends BaseService {
 			list = Module.dao.find(sql, parentIds);
 		}
 		
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		
 		int size = list.size() - 1;

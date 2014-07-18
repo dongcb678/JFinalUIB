@@ -33,7 +33,7 @@ public class StationService extends BaseService {
 			list = Station.dao.find(sql);
 		}
 		
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		
 		int size = list.size() - 1;
