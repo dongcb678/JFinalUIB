@@ -117,6 +117,7 @@ public class OperatorService extends BaseService {
 			sb.append(" id : '").append("module_").append(module.getStr("ids")).append("', ");
 			sb.append(" name : '").append(module.getStr("names")).append("', ");
 			sb.append(" isParent : ").append(module.getStr("isparent")).append(", ");
+			sb.append(" nocheck : true, ");
 			sb.append(" font : {'font-weight':'bold'}, ");
 			sb.append(" icon : '/jsFile/zTree/css/zTreeStyle/img/diy/").append(module.getStr("images")).append("' ");
 			sb.append(" }");
