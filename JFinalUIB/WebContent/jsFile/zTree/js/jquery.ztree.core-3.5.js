@@ -1,5 +1,5 @@
 /*
- * JQuery zTree core 3.5.14
+ * JQuery zTree core v3.5.17-beta.2
  * http://zTree.me/
  *
  * Copyright (c) 2010 Hunter.z
@@ -8,7 +8,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  *
  * email: hunter.z@263.net
- * Date: 2013-06-28
+ * Date: 2014-05-08
  */
 (function($){
 	var settings = {}, roots = {}, caches = {},
@@ -26,7 +26,8 @@
 			EXPAND: "ztree_expand",
 			COLLAPSE: "ztree_collapse",
 			ASYNC_SUCCESS: "ztree_async_success",
-			ASYNC_ERROR: "ztree_async_error"
+			ASYNC_ERROR: "ztree_async_error",
+			REMOVE: "ztree_remove"
 		},
 		id: {
 			A: "_a",
@@ -66,7 +67,8 @@
 			selectedMulti: true,
 			showIcon: true,
 			showLine: true,
-			showTitle: true
+			showTitle: true,
+			txtSelectedEnable: false
 		},
 		data: {
 			key: {
@@ -173,6 +175,10 @@
 		o.bind(c.ASYNC_ERROR, function (event, treeId, node, XMLHttpRequest, textStatus, errorThrown) {
 			tools.apply(setting.callback.onAsyncError, [event, treeId, node, XMLHttpRequest, textStatus, errorThrown]);
 		});
+
+		o.bind(c.REMOVE, function (event, treeId, treeNode) {
+			tools.apply(setting.callback.onRemove, [event, treeId, treeNode]);
+		});
 	},
 	_unbindEvent = function(setting) {
 		var o = setting.treeObj,
@@ -182,7 +188,8 @@
 		.unbind(c.EXPAND)
 		.unbind(c.COLLAPSE)
 		.unbind(c.ASYNC_SUCCESS)
-		.unbind(c.ASYNC_ERROR);
+		.unbind(c.ASYNC_ERROR)
+		.unbind(c.REMOVE);
 	},
 	//default event proxy of core
 	_eventProxy = function(event) {
@@ -274,15 +281,13 @@
 		n.level = level;
 		n.tId = setting.treeId + "_" + (++r.zId);
 		n.parentTId = parentNode ? parentNode.tId : null;
+		n.open = (typeof n.open == "string") ? tools.eqs(n.open, "true") : !!n.open;
 		if (n[childKey] && n[childKey].length > 0) {
-			if (typeof n.open == "string") n.open = tools.eqs(n.open, "true");
-			n.open = !!n.open;
 			n.isParent = true;
 			n.zAsync = true;
 		} else {
-			n.open = false;
-			if (typeof n.isParent == "string") n.isParent = tools.eqs(n.isParent, "true");
-			n.isParent = !!n.isParent;
+			n.isParent = (typeof n.isParent == "string") ? tools.eqs(n.isParent, "true") : !!n.isParent;
+			n.open = (n.isParent && !setting.async.enable) ? n.open : false;
 			n.zAsync = !n.isParent;
 		}
 		n.isFirstNode = isFirstNode;
@@ -623,13 +628,16 @@
 				treeId: setting.treeId
 			},
 			o = setting.treeObj;
-			// for can't select text
-			o.bind('selectstart', function(e){
+			if (!setting.view.txtSelectedEnable) {
+				// for can't select text
+				o.bind('selectstart', function(e){
+					var node
 					var n = e.originalEvent.srcElement.nodeName.toLowerCase();
 					return (n === "input" || n === "textarea" );
-			}).css({
-				"-moz-user-select":"-moz-none"
-			});
+				}).css({
+					"-moz-user-select":"-moz-none"
+				});
+			}
 			o.bind('click', eventParam, event.proxy);
 			o.bind('dblclick', eventParam, event.proxy);
 			o.bind('mouseover', eventParam, event.proxy);
@@ -695,7 +703,7 @@
 		},
 		onClickNode: function (event, node) {
 			var setting = data.getSetting(event.data.treeId),
-			clickFlag = ( (setting.view.autoCancelSelected && event.ctrlKey) && data.isSelectedNode(setting, node)) ? 0 : (setting.view.autoCancelSelected && event.ctrlKey && setting.view.selectedMulti) ? 2 : 1;
+			clickFlag = ( (setting.view.autoCancelSelected && (event.ctrlKey || event.metaKey)) && data.isSelectedNode(setting, node)) ? 0 : (setting.view.autoCancelSelected && (event.ctrlKey || event.metaKey) && setting.view.selectedMulti) ? 2 : 1;
 			if (tools.apply(setting.callback.beforeClick, [setting.treeId, node, clickFlag], true) == false) return true;
 			if (clickFlag === 0) {
 				view.cancelPreSelectedNode(setting, node);
@@ -785,6 +793,9 @@
 		},
 		getNodeMainDom:function(target) {
 			return ($(target).parent("li").get(0) || $(target).parentsUntil("li").parent().get(0));
+		},
+		isChildOrSelf: function(dom, parentId) {
+			return ( $(dom).closest("#" + parentId).length> 0 );
 		},
 		uCanDo: function(setting, e) {
 			return true;
@@ -1016,6 +1027,7 @@
 			event.unbindTree(setting);
 			event.unbindEvent(setting);
 			setting.treeObj.empty();
+			delete settings[setting.treeId];
 		},
 		expandCollapseNode: function(setting, node, expandFlag, animateFlag, callback) {
 			var root = data.getRoot(setting),

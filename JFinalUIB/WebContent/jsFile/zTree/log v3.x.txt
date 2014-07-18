@@ -5,17 +5,37 @@
 
 具体修改内容可参考：
 
-   * [http://www.ztree.me/v3/api.php zTree v3.0 API 文档]
+   * [http://www.ztree.me/v3/api.php zTree v3.x API 文档]
 
-   * [http://www.ztree.me/v3/demo.php#_101 zTree v3.0 Demo 演示]
+   * [http://www.ztree.me/v3/demo.php#_101 zTree v3.x Demo 演示]
 
-   * [http://www.ztree.me/v3/faq.php#_101 zTree v3.0 常见问题]
+   * [http://www.ztree.me/v3/faq.php#_101 zTree v3.x 常见问题]
 
 </font>
 
-<font color=#041594>
-遗留问题 iframe-shim：http://tieba.baidu.com/p/2335038886
+*2014.05.08* v3.5.17-beta.2
+   * 【修改】excheck 扩展中 removeClass 与 jQueryUI 1.9 冲突的问题，目前放弃 removeClass 方法
+   * 【修改】优化 exhide 扩展包初始化效率，避免数据多时 ie8 假死的 bug（感谢：https://github.com/sarxos）
 
+*2014.03.09* v3.5.16
+   * 【增加】onDragMove 回调，便于控制 zTree 节点与其他 DOM 的拖拽操作。（感谢 yumi301）
+   * 【增加】针对 Mac 系统 Cmd 键的支持， Cmd 键 + 左键 也可以多选节点
+
+   * 【修改】使用 destory 方法销毁树以后，依然可以从 getZTreeObj 方法中获取到 zTree 对象的 bug。
+   * 【修改】onCheck 回调的 event，恢复为 zTree 自身的 event 事件，同时利用 srcEvent 传递原始 event 对象。（感谢 yumi301）
+   * 【修改】拖拽多个节点时，超出 maxShowNodeNum 设置个数的节点会失去 被选择状态的 bug
+   * 【修改】excheck & exedit 扩展包的 zTree 方法中 setting 数据错误导致 checkNode、updateNode 等方法操作 radio 失效的 bug
+   * 【修改】不加载 exedit 扩展包时，使用 removeNode 方法无法触发 beforeRemove 和 onRemove 回调的 bug
+
+*2013.10.19* v3.5.15
+   * 【增加】setting.view.txtSelectedEnable 属性，满足部分项目中客户对于可以选择节点文本信息的强烈欲望。
+
+   * 【修改】 exhide 扩展包导致操作子节点后 isLastNode 属性异常 的bug
+   * 【修改】 使用 cancelEditName 方法时，beforeRename & onRename 的 isCancel 始终为 false 的bug
+   * 【修改】 编辑状态， beforeRename 回调 return false 时，提示信息导致 input 失去焦点后， 当树再次得到焦点时，让 input 自动获取焦点
+   * 【修改】 判断拖拽到节点的 <a> 标签中自定义的无 id 组件判断错误的bug
+   * 【修改】 async_edit.html demo 中 添加按钮 显示的 bug
+   * 【修改】 当没有开启异步加载模式下，对于没有子节点的父节点，即使设置 open=true 在初始化时也不会设置为展开状态的bug （对于异步加载模式下依然会强行设置为折叠状态）
 
 *2013.06.28* v3.5.14
    * 【修改】 拖拽节点时 iframe 遮罩异常的bug
