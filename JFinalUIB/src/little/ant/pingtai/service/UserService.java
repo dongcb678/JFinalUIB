@@ -47,6 +47,8 @@ public class UserService extends BaseService {
 			
 			// 保存用户
 			user.set("userinfoids", userInfo.getStr("ids"));
+			user.set("errorcount", 0);
+			user.set("status", "1");
 			user.save();
 
 			// 缓存
