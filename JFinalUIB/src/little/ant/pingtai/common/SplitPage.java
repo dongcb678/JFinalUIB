@@ -13,16 +13,13 @@ public class SplitPage implements Serializable {
 
 	private static final long serialVersionUID = -7914983945613661637L;
 	
-	public static final int default_pageNumber = 1;// 第几页
-	public static final int default_pageSize = 20;// 每页显示几多
-	
 	// 分页相关
 	protected Page<?> page;
 	protected Map<String, String> queryParam;// 查询条件
 	protected String orderColunm;// 排序条件
 	protected String orderMode;// 排序方式
-	protected int pageNumber = default_pageNumber;// 第几页
-	protected int pageSize = default_pageSize;// 每页显示几多
+	protected int pageNumber = DictKeys.default_pageNumber;// 第几页
+	protected int pageSize = DictKeys.default_pageSize;// 每页显示几多
 	
 	public Page<?> getPage() {
 		return page;
@@ -50,7 +47,7 @@ public class SplitPage implements Serializable {
 	}
 	public int getPageNumber() {
 		if(pageNumber <= 0){
-			pageNumber = default_pageNumber;
+			pageNumber = DictKeys.default_pageNumber;
 		}
 		return pageNumber;
 	}
@@ -59,7 +56,10 @@ public class SplitPage implements Serializable {
 	}
 	public int getPageSize() {
 		if(pageSize <= 0){
-			pageSize = default_pageSize;
+			pageSize = DictKeys.default_pageSize;
+		}
+		if(pageSize > 200){
+			pageSize = DictKeys.default_pageSize;
 		}
 		return pageSize;
 	}

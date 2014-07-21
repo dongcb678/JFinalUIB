@@ -44,6 +44,12 @@ public abstract class DictKeys {
 	public static final String db_connection_dbName = "db_name";
 	
 	/**
+	 * 分页参数初始化值
+	 */
+	public static final int default_pageNumber = 1;// 第几页
+	public static final int default_pageSize = 20;// 每页显示几多
+	
+	/**
 	 * 用户登录状态码
 	 */
 	public static final int login_info_0 = 0;// 用户不存在

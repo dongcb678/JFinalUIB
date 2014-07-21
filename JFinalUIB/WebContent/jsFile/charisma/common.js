@@ -62,27 +62,17 @@ function splitPageOut(totalRow, pageSize, pageNumber, totalPages, isSelectPage, 
 	
 	if(isSelectSize == true){
 		splitStr += '<li><select id="pageSizeId" name="pageSize" onChange="splitPage(1);" style="width: 90px; height:35px;">';
-		if(pageSize == 10){
-			splitStr += '<option value="10" selected="selected">每页10条</option>';
-			splitStr += '<option value="20">每页20条</option>';
-			splitStr += '<option value="40">每页40条</option>';
-			splitStr += '<option value="80">每页80条</option>';
-		}else if(pageSize == 20){
-			splitStr += '<option value="10">每页10条</option>';
-			splitStr += '<option value="20" selected="selected">每页20条</option>';
-			splitStr += '<option value="40">每页40条</option>';
-			splitStr += '<option value="80">每页80条</option>';
-		}else if(pageSize == 40){
-			splitStr += '<option value="10">每页10条</option>';
-			splitStr += '<option value="20">每页20条</option>';
-			splitStr += '<option value="40" selected="selected">每页40条</option>';
-			splitStr += '<option value="80">每页80条</option>';
-		}else if(pageSize == 80){
-			splitStr += '<option value="10">每页10条</option>';
-			splitStr += '<option value="20">每页20条</option>';
-			splitStr += '<option value="40">每页40条</option>';
-			splitStr += '<option value="80" selected="selected">每页80条</option>';
-		}
+		
+		var optionStr = '<option value="10">每页10条</option>';
+		optionStr += '<option value="20">每页20条</option>';
+		optionStr += '<option value="40">每页40条</option>';
+		optionStr += '<option value="80">每页80条</option>';
+		optionStr += '<option value="100">每页100条</option>';
+		optionStr += '<option value="200">每页200条</option>';
+		optionStr = optionStr.replace('"' + pageSize + '"', '"' + pageSize + '" selected="selected"');
+		
+		splitStr += optionStr;
+		
 		splitStr += '</select></li>';
 	}else{
 		splitStr += '<input type="hidden" id="pageSizeId" name="pageSize">';
