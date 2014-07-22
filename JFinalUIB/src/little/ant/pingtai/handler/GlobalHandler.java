@@ -1,6 +1,10 @@
 package little.ant.pingtai.handler;
 
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +29,27 @@ import com.jfinal.handler.Handler;
 public class GlobalHandler extends Handler {
 	
 	private static Logger log = Logger.getLogger(GlobalHandler.class);
+
+	public static final String reqSysLogKey = "reqSysLog";
 	
-	public static String reqSysLogKey = "reqSysLog";
+	private static final Map<String, Map<String, String>> resourceBundleMap = new HashMap<String, Map<String, String>>();
+
+	private static final String[] languages = {"zh_CN", "en_US"};
+	
+	static{
+		for (String language : languages) {
+			Locale zh_CN_Locale = new Locale(language);
+			ResourceBundle zh_CN_RB = ResourceBundle.getBundle("message", zh_CN_Locale);
+			Enumeration<String> zh_CN_Keys = zh_CN_RB.getKeys();
+			Map<String, String> zh_CN_Map = new HashMap<String, String>();
+			while (zh_CN_Keys.hasMoreElements()) {
+				String key = (String) zh_CN_Keys.nextElement();
+				String value = zh_CN_RB.getString(key);
+				zh_CN_Map.put(key, value);
+			}
+			resourceBundleMap.put(language, zh_CN_Map);
+		}
+	}
 	
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
@@ -40,13 +63,21 @@ public class GlobalHandler extends Handler {
 		String cxt = ToolContext.getContextAllPath(request);
 		request.setAttribute("cxt", cxt);
 		
-		log.debug("beetl cookie处理");
+		log.debug("request cookie 处理");
 		Map<String, Cookie> cookieMap = ToolWeb.readCookieMap(request);
 		request.setAttribute("cookieMap", cookieMap);
 
-		log.debug("beetl 请求参数处理");
+		log.debug("request param 请求参数处理");
 		request.setAttribute("paramMap", ToolWeb.getParamMap(request));
 
+		log.debug("request 国际化");
+		String language = request.getParameter("locale");
+		if(null == language || language.isEmpty()){
+			language = String.valueOf(request.getLocale());
+		}
+		Map<String, String> i18nMap = resourceBundleMap.get(language);
+		request.setAttribute("i18nMap", i18nMap);
+		
 		log.info("设置Header");
 		request.setAttribute("decorator", "none");
 		response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
