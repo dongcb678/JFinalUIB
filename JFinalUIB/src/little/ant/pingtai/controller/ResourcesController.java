@@ -1,11 +1,11 @@
 package little.ant.pingtai.controller;
 
-import little.ant.pingtai.annotation.ControllerBind;
+import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.service.ResourcesService;
 
 import org.apache.log4j.Logger;
 
-@ControllerBind(controllerKey = "/jf/resources")
+@Controller(controllerKey = "/jf/resources")
 public class ResourcesController extends BaseController {
 
 	@SuppressWarnings("unused")

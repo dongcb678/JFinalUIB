@@ -1,6 +1,6 @@
 package little.ant.pingtai.controller;
 
-import little.ant.pingtai.annotation.ControllerBind;
+import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.service.UserService;
@@ -13,7 +13,7 @@ import com.jfinal.aop.Before;
 /**
  * 用户管理
  */
-@ControllerBind(controllerKey = "/jf/user")
+@Controller(controllerKey = "/jf/user")
 public class UserController extends BaseController {
 
 	@SuppressWarnings("unused")

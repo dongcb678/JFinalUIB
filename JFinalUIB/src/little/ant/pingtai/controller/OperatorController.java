@@ -1,6 +1,6 @@
 package little.ant.pingtai.controller;
 
-import little.ant.pingtai.annotation.ControllerBind;
+import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.service.OperatorService;
 import little.ant.pingtai.validator.OperatorValidator;
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@ControllerBind(controllerKey = "/jf/operator")
+@Controller(controllerKey = "/jf/operator")
 public class OperatorController extends BaseController {
 
 	@SuppressWarnings("unused")

@@ -1,6 +1,6 @@
 package little.ant.pingtai.controller;
 
-import little.ant.pingtai.annotation.ControllerBind;
+import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.model.Department;
 import little.ant.pingtai.service.DepartmentService;
 import little.ant.pingtai.validator.DepartmentValidator;
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@ControllerBind(controllerKey = "/jf/dept")
+@Controller(controllerKey = "/jf/dept")
 public class DepartmentController extends BaseController {
 
 	@SuppressWarnings("unused")

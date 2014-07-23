@@ -3,7 +3,7 @@ package little.ant.pingtai.controller;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.annotation.ControllerBind;
+import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Role;
 import little.ant.pingtai.service.RoleService;
@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@ControllerBind(controllerKey = "/jf/role")
+@Controller(controllerKey = "/jf/role")
 public class RoleController extends BaseController {
 
 	@SuppressWarnings("unused")

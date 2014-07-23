@@ -1,11 +1,11 @@
 package little.ant.weixin.model;
 
-import little.ant.pingtai.annotation.TableBind;
+import little.ant.pingtai.annotation.Table;
 import little.ant.pingtai.model.BaseModel;
 
 import org.apache.log4j.Logger;
 
-@TableBind(tableName="wx_group")
+@Table(tableName="wx_group")
 public class Group extends BaseModel<Group> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;

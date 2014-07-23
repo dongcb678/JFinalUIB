@@ -1,10 +1,10 @@
 package little.ant.pingtai.model;
 
-import little.ant.pingtai.annotation.TableBind;
+import little.ant.pingtai.annotation.Table;
 
 import org.apache.log4j.Logger;
 
-@TableBind(tableName="pt_resources")
+@Table(tableName="pt_resources")
 public class Resources extends BaseModel<Resources> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;

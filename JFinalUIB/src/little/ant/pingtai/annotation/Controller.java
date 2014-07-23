@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface ControllerBind {
+public @interface Controller {
 	
     String[] controllerKey();
 

@@ -1,6 +1,6 @@
 package little.ant.pingtai.controller;
 
-import little.ant.pingtai.annotation.ControllerBind;
+import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.service.LoginService;
@@ -15,7 +15,7 @@ import com.jfinal.aop.Before;
 /**
  * 登陆处理
  */
-@ControllerBind(controllerKey = "/jf/login")
+@Controller(controllerKey = "/jf/login")
 public class LoginController extends BaseController {
 
 	@SuppressWarnings("unused")

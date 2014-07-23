@@ -1,6 +1,6 @@
 package little.ant.pingtai.controller;
 
-import little.ant.pingtai.annotation.ControllerBind;
+import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.model.Dict;
 import little.ant.pingtai.service.DictService;
 import little.ant.pingtai.validator.DictValidator;
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@ControllerBind(controllerKey = "/jf/dict")
+@Controller(controllerKey = "/jf/dict")
 public class DictController extends BaseController {
 
 	@SuppressWarnings("unused")

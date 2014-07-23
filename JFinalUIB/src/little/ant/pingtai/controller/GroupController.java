@@ -3,7 +3,7 @@ package little.ant.pingtai.controller;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.annotation.ControllerBind;
+import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.service.GroupService;
 import little.ant.pingtai.validator.GroupValidator;
@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@ControllerBind(controllerKey = "/jf/group")
+@Controller(controllerKey = "/jf/group")
 public class GroupController extends BaseController {
 
 	@SuppressWarnings("unused")

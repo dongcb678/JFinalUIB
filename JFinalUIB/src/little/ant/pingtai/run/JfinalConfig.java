@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.annotation.ControllerBind;
-import little.ant.pingtai.annotation.TableBind;
+import little.ant.pingtai.annotation.Controller;
+import little.ant.pingtai.annotation.Table;
 import little.ant.pingtai.beetl.EscapeXml;
 import little.ant.pingtai.beetl.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.MyBeetlRenderFactory;
@@ -138,14 +138,19 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void configRoute(Routes me) { 
+		// 查询所有继承BaseController的类
 		List<Class<? extends BaseController>> controllerClasses = ToolClassSearcher.of(BaseController.class).search();
+		
+		// 循环处理自动注册映射
 		for (Class controller : controllerClasses) {
-			ControllerBind controllerBind = (ControllerBind) controller.getAnnotation(ControllerBind.class);
+			// 获取注解对象
+			Controller controllerBind = (Controller) controller.getAnnotation(Controller.class);
 			if (controllerBind == null) {
 				log.error(controller.getName() + "继承了BaseController，但是没有注解绑定映射路径");
 				continue;
 			}
 			
+			// 获取映射路径数组
 			String[] controllerKeys = controllerBind.controllerKey();
 			for (String controllerKey : controllerKeys) {
 				controllerKey = controllerKey.trim();
@@ -153,6 +158,7 @@ public class JfinalConfig extends JFinalConfig {
 					log.error(controller.getName() + "注解错误，映射路径为空");
 					continue;
 				}
+				// 注册映射
 				me.add(controllerKey, controller);
 			}
 		}
@@ -183,14 +189,17 @@ public class JfinalConfig extends JFinalConfig {
 		}
 		
 		// 2.2. 表扫描注册
-		List<Class<? extends BaseModel>> modelClasses = ToolClassSearcher.of(BaseModel.class).search();
+		List<Class<? extends BaseModel>> modelClasses = ToolClassSearcher.of(BaseModel.class).search();// 查询所有继承BaseModel的类
+		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
-			TableBind tableBind = (TableBind) model.getAnnotation(TableBind.class);
+			// 获取注解对象
+			Table tableBind = (Table) model.getAnnotation(Table.class);
 			if (tableBind == null) {
 				log.error(model.getName() + "继承了BaseModel，但是没有注解绑定表名");
 				continue;
 			}
-			
+
+			// 获取映射表
 			String tableName = tableBind.tableName().trim();
 			String pkName = tableBind.pkName().trim();
 			if(tableName.equals("") || pkName.equals("")){
@@ -198,6 +207,7 @@ public class JfinalConfig extends JFinalConfig {
 				continue;
 			}
 			
+			// 映射注册
 			arp.addMapping(tableName, pkName, model);
 		}
 
@@ -206,7 +216,6 @@ public class JfinalConfig extends JFinalConfig {
 		
 		// 4. 缓存
 		me.add(new EhCachePlugin()); // EhCache缓存
-		
 	}
 
 	/**
