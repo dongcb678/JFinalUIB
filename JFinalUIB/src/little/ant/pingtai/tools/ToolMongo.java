@@ -1,4 +1,4 @@
-package little.ant.pingtai.plugin;
+package little.ant.pingtai.tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,29 +17,29 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
-public class MongoKit {
+public class ToolMongo {
 
-    protected static Logger logger = Logger.getLogger(MongoKit.class);
+    protected static Logger logger = Logger.getLogger(ToolMongo.class);
 
     private static MongoClient client;
     private static DB defaultDb;
 
     public static void init(MongoClient client, String database) {
-        MongoKit.client = client;
-        MongoKit.defaultDb = client.getDB(database);
+        ToolMongo.client = client;
+        ToolMongo.defaultDb = client.getDB(database);
 
     }
 
     public static void updateFirst(String collectionName, Map<String, Object> q, Map<String, Object> o) {
-        MongoKit.getCollection(collectionName).findAndModify(toDBObject(q), toDBObject(o));
+        ToolMongo.getCollection(collectionName).findAndModify(toDBObject(q), toDBObject(o));
     }
 
     public static int removeAll(String collectionName) {
-        return MongoKit.getCollection(collectionName).remove(new BasicDBObject()).getN();
+        return ToolMongo.getCollection(collectionName).remove(new BasicDBObject()).getN();
     }
 
     public static int remove(String collectionName, Map<String, Object> filter) {
-        return MongoKit.getCollection(collectionName).remove(toDBObject(filter)).getN();
+        return ToolMongo.getCollection(collectionName).remove(toDBObject(filter)).getN();
     }
 
     public static int save(String collectionName, List<Record> records) {
@@ -47,16 +47,16 @@ public class MongoKit {
         for (Record record : records) {
             objs.add(toDbObject(record));
         }
-        return MongoKit.getCollection(collectionName).insert(objs).getN();
+        return ToolMongo.getCollection(collectionName).insert(objs).getN();
 
     }
 
     public static int save(String collectionName, Record record) {
-        return MongoKit.getCollection(collectionName).save(toDbObject(record)).getN();
+        return ToolMongo.getCollection(collectionName).save(toDbObject(record)).getN();
     }
 
     public static Record findFirst(String collectionName) {
-        return toRecord(MongoKit.getCollection(collectionName).findOne());
+        return toRecord(ToolMongo.getCollection(collectionName).findOne());
     }
 
     public static Page<Record> paginate(String collection, int pageNumber, int pageSize) {
@@ -74,7 +74,7 @@ public class MongoKit {
 
     public static Page<Record> paginate(String collection, int pageNumber, int pageSize, Map<String, Object> filter,
             Map<String, Object> like, Map<String, Object> sort) {
-        DBCollection logs = MongoKit.getCollection(collection);
+        DBCollection logs = ToolMongo.getCollection(collection);
         BasicDBObject conditons = new BasicDBObject();
         buildFilter(filter, conditons);
         buildLike(like, conditons);
@@ -120,7 +120,7 @@ public class MongoKit {
             for (Entry<String, Object> entry : entrySet) {
                 String key = entry.getKey();
                 Object val = entry.getValue();
-                conditons.put(key, MongoKit.getLikeStr(val));
+                conditons.put(key, ToolMongo.getLikeStr(val));
             }
         }
     }
@@ -170,7 +170,7 @@ public class MongoKit {
     }
 
     public static void setMongoClient(MongoClient client) {
-        MongoKit.client = client;
+        ToolMongo.client = client;
     }
 
     private static BasicDBObject toDBObject(Map<String, Object> map) {

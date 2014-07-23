@@ -2,6 +2,8 @@ package little.ant.pingtai.plugin;
 
 import java.net.UnknownHostException;
 
+import little.ant.pingtai.tools.ToolMongo;
+
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 import com.mongodb.MongoClient;
@@ -29,7 +31,7 @@ public class MongodbPlugin implements IPlugin {
             throw new RuntimeException("can't connect mongodb, please check the host and port:" + host + "," + port, e);
         }
 
-        MongoKit.init(client, database);
+        ToolMongo.init(client, database);
         return true;
     }
 
