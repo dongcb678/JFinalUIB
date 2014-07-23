@@ -1,7 +1,10 @@
 package little.ant.pingtai.model;
 
+import little.ant.pingtai.annotation.TableBind;
+
 import org.apache.log4j.Logger;
 
+@TableBind(tableName="pt_user")
 public class User extends BaseModel<User> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

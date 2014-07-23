@@ -2,6 +2,7 @@ package little.ant.pingtai.controller;
 
 import java.util.List;
 
+import little.ant.pingtai.annotation.ControllerBind;
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.model.User;
@@ -14,6 +15,7 @@ import org.apache.log4j.Logger;
 /**
  * 首页处理
  */
+@ControllerBind(controllerKey = {"/jf/", "/jf/index"})
 public class IndexController extends BaseController {
 
 	@SuppressWarnings("unused")

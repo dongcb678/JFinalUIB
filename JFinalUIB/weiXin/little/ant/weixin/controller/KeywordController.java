@@ -1,5 +1,6 @@
 package little.ant.weixin.controller;
 
+import little.ant.pingtai.annotation.ControllerBind;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.weixin.model.Keyword;
 import little.ant.weixin.service.KeywordService;
@@ -13,6 +14,7 @@ import com.jfinal.aop.Before;
  * 自动回复管理
  * @author 董华健
  */
+@ControllerBind(controllerKey = "/jf/wx/keyword")
 public class KeywordController extends BaseController {
 
 	private static Logger log = Logger.getLogger(KeywordController.class);

@@ -1,5 +1,6 @@
 package little.ant.pingtai.controller;
 
+import little.ant.pingtai.annotation.ControllerBind;
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.service.MenuService;
 import little.ant.pingtai.validator.MenuValidator;
@@ -8,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
+@ControllerBind(controllerKey = "/jf/menu")
 public class MenuController extends BaseController {
 
 	@SuppressWarnings("unused")

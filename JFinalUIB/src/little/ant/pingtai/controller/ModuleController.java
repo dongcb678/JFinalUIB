@@ -1,5 +1,6 @@
 package little.ant.pingtai.controller;
 
+import little.ant.pingtai.annotation.ControllerBind;
 import little.ant.pingtai.service.ModuleService;
 import little.ant.pingtai.validator.ModuleValidator;
 
@@ -7,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
+@ControllerBind(controllerKey = "/jf/module")
 public class ModuleController extends BaseController {
 
 	@SuppressWarnings("unused")

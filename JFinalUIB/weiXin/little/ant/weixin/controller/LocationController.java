@@ -1,5 +1,6 @@
 package little.ant.weixin.controller;
 
+import little.ant.pingtai.annotation.ControllerBind;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.weixin.model.Location;
 import little.ant.weixin.service.LocationService;
@@ -10,6 +11,7 @@ import org.apache.log4j.Logger;
  * 位置管理
  * @author 董华健
  */
+@ControllerBind(controllerKey = "/jf/wx/location")
 public class LocationController extends BaseController {
 
 	private static Logger log = Logger.getLogger(LocationController.class);

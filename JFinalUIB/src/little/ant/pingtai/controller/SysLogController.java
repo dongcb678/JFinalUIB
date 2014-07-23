@@ -1,10 +1,12 @@
 package little.ant.pingtai.controller;
 
+import little.ant.pingtai.annotation.ControllerBind;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.service.SysLogService;
 
 import org.apache.log4j.Logger;
 
+@ControllerBind(controllerKey = "/jf/sysLog")
 public class SysLogController extends BaseController {
 
 	@SuppressWarnings("unused")

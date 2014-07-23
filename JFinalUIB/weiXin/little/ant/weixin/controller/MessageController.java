@@ -1,5 +1,6 @@
 package little.ant.weixin.controller;
 
+import little.ant.pingtai.annotation.ControllerBind;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.weixin.service.MessageService;
@@ -17,6 +18,7 @@ import com.jfinal.aop.Before;
  * 接收微信消息
  * @author 董华健
  */
+@ControllerBind(controllerKey = "/jf/wx/message")
 public class MessageController extends BaseController {
 
 	private static Logger log = Logger.getLogger(MessageController.class);

@@ -1,54 +1,27 @@
 package little.ant.pingtai.run;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import little.ant.pingtai.annotation.ControllerBind;
+import little.ant.pingtai.annotation.TableBind;
 import little.ant.pingtai.beetl.EscapeXml;
 import little.ant.pingtai.beetl.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.MyBeetlRenderFactory;
 import little.ant.pingtai.beetl.OrderBy;
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.controller.DepartmentController;
-import little.ant.pingtai.controller.DictController;
-import little.ant.pingtai.controller.GroupController;
-import little.ant.pingtai.controller.IndexController;
-import little.ant.pingtai.controller.LoginController;
-import little.ant.pingtai.controller.MenuController;
-import little.ant.pingtai.controller.ModuleController;
-import little.ant.pingtai.controller.OperatorController;
-import little.ant.pingtai.controller.RoleController;
-import little.ant.pingtai.controller.StationController;
-import little.ant.pingtai.controller.SysLogController;
-import little.ant.pingtai.controller.SystemsController;
-import little.ant.pingtai.controller.UserController;
+import little.ant.pingtai.controller.BaseController;
 import little.ant.pingtai.handler.GlobalHandler;
 import little.ant.pingtai.interceptor.AuthenticationInterceptor;
 import little.ant.pingtai.interceptor.ParamPkgInterceptor;
-import little.ant.pingtai.model.Department;
-import little.ant.pingtai.model.Dict;
-import little.ant.pingtai.model.Group;
-import little.ant.pingtai.model.Menu;
-import little.ant.pingtai.model.Module;
-import little.ant.pingtai.model.Operator;
-import little.ant.pingtai.model.Resources;
-import little.ant.pingtai.model.Role;
-import little.ant.pingtai.model.Station;
-import little.ant.pingtai.model.Syslog;
-import little.ant.pingtai.model.Systems;
-import little.ant.pingtai.model.User;
-import little.ant.pingtai.model.UserInfo;
+import little.ant.pingtai.model.BaseModel;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.thread.ThreadSysLog;
 import little.ant.pingtai.thread.TimerResources;
+import little.ant.pingtai.tools.ToolClassSearcher;
 import little.ant.pingtai.tools.ToolString;
-import little.ant.weixin.controller.KeywordController;
-import little.ant.weixin.controller.LocationController;
-import little.ant.weixin.controller.MessageController;
 import little.ant.weixin.lucene.DocKeyword;
-import little.ant.weixin.model.Article;
-import little.ant.weixin.model.Keyword;
-import little.ant.weixin.model.Location;
-import little.ant.weixin.model.Message;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
@@ -71,8 +44,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
  * Jfinal API 引导式配置
  */
 public class JfinalConfig extends JFinalConfig {
-
-	@SuppressWarnings("unused")
+	
 	private static Logger log = Logger.getLogger(JfinalConfig.class);
 
 	/**
@@ -164,35 +136,32 @@ public class JfinalConfig extends JFinalConfig {
 	/**
 	 * 配置路由
 	 */
-	public void configRoute(Routes me) {
-		// 系统路由
-		me.add("/jf/", IndexController.class); // 系统管理主页
-		me.add("/jf/index", IndexController.class); // 系统管理主页
-		me.add("/jf/login", LoginController.class); // 登陆管理
-		me.add("/jf/dept", DepartmentController.class); // 部门管理
-		me.add("/jf/dict", DictController.class); // 字典管理
-		me.add("/jf/group", GroupController.class); // 分组管理
-		me.add("/jf/menu", MenuController.class); // 菜单管理
-		me.add("/jf/module", ModuleController.class); // 模块管理
-		me.add("/jf/operator", OperatorController.class); // 功能管理
-		me.add("/jf/role", RoleController.class); // 角色管理
-		me.add("/jf/station", StationController.class); // 岗位管理
-		me.add("/jf/sysLog", SysLogController.class); // 日志管理
-		me.add("/jf/systems", SystemsController.class); // 系统管理
-		me.add("/jf/user", UserController.class); // 用户管理
-		
-		// 微信路由
-		me.add("/jf/wx/index", little.ant.weixin.controller.IndexController.class); // 微信管理首页
-		me.add("/jf/wx/message", MessageController.class); // 接收消息处理和管理
-		me.add("/jf/wx/user", little.ant.weixin.controller.UserController.class); // 微信用户管理
-		me.add("/jf/wx/group", little.ant.weixin.controller.GroupController.class); // 微信用户分组管理
-		me.add("/jf/wx/location", LocationController.class); // 微信用户位置
-		me.add("/jf/wx/keyword", KeywordController.class); // 自动回复关键字维护
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void configRoute(Routes me) { 
+		List<Class<? extends BaseController>> controllerClasses = ToolClassSearcher.of(BaseController.class).search();
+		for (Class controller : controllerClasses) {
+			ControllerBind controllerBind = (ControllerBind) controller.getAnnotation(ControllerBind.class);
+			if (controllerBind == null) {
+				log.error(controller.getName() + "继承了BaseController，但是没有注解绑定映射路径");
+				continue;
+			}
+			
+			String[] controllerKeys = controllerBind.controllerKey();
+			for (String controllerKey : controllerKeys) {
+				controllerKey = controllerKey.trim();
+				if(controllerKey.equals("")){
+					log.error(controller.getName() + "注解错误，映射路径为空");
+					continue;
+				}
+				me.add(controllerKey, controller);
+			}
+		}
 	}
 	
 	/**
 	 * 配置插件
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void configPlugin(Plugins me) {
 		// 1. 配置Druid数据库连接池插件
 		DruidPlugin druidPlugin = new DruidPlugin(
@@ -203,7 +172,7 @@ public class JfinalConfig extends JFinalConfig {
 		// 2. 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 		
-		// 3. 数据库类型判断
+		// 2.1. 数据库类型判断
 		String db_type = (String) getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
 			arp.setDialect(new PostgreSqlDialect()); // 数据库方言
@@ -213,32 +182,31 @@ public class JfinalConfig extends JFinalConfig {
 			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 小写
 		}
 		
+		// 2.2. 表扫描注册
+		List<Class<? extends BaseModel>> modelClasses = ToolClassSearcher.of(BaseModel.class).search();
+		for (Class model : modelClasses) {
+			TableBind tableBind = (TableBind) model.getAnnotation(TableBind.class);
+			if (tableBind == null) {
+				log.error(model.getName() + "继承了BaseModel，但是没有注解绑定表名");
+				continue;
+			}
+			
+			String tableName = tableBind.tableName().trim();
+			String pkName = tableBind.pkName().trim();
+			if(tableName.equals("") || pkName.equals("")){
+				log.error(model.getName() + "注解错误，表名或者主键名为空");
+				continue;
+			}
+			
+			arp.addMapping(tableName, pkName, model);
+		}
+
+		// 2.3. 注册数据集插件
+		me.add(arp);
+		
 		// 4. 缓存
 		me.add(new EhCachePlugin()); // EhCache缓存
 		
-		// 5.1 系统表
-		arp.addMapping("pt_department", "ids", Department.class); // 部门表
-		arp.addMapping("pt_dict", "ids", Dict.class); // 字典表
-		arp.addMapping("pt_group", "ids", Group.class); // 用户分组表
-		arp.addMapping("pt_menu", "ids", Menu.class); // 菜单表
-		arp.addMapping("pt_module", "ids", Module.class); // 模块表
-		arp.addMapping("pt_operator", "ids", Operator.class); // 功能表
-		arp.addMapping("pt_role", "ids", Role.class); // 角色表
-		arp.addMapping("pt_station", "ids", Station.class); // 岗位表
-		arp.addMapping("pt_syslog", "ids", Syslog.class); // 系统日志表
-		arp.addMapping("pt_systems", "ids", Systems.class); // 系统表
-		arp.addMapping("pt_user", "ids", User.class); // 用户表
-		arp.addMapping("pt_userinfo", "ids", UserInfo.class); // 用户明细表
-		arp.addMapping("pt_resources", "ids", Resources.class); // 资源信息
-		
-		// 5.2 微信表
-		arp.addMapping("wx_message", "ids", Message.class); // 消息表
-		arp.addMapping("wx_article", "ids", Article.class); // 消息图文表
-		arp.addMapping("wx_user", "ids", little.ant.weixin.model.User.class); // 用户表
-		arp.addMapping("wx_group", "ids", little.ant.weixin.model.Group.class); // 用户分组表
-		arp.addMapping("wx_location", "ids", Location.class); // 用户地理位置表
-		arp.addMapping("wx_keyword", "ids", Keyword.class); // 自动回复配置
-		me.add(arp);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package little.ant.pingtai.controller;
 
+import little.ant.pingtai.annotation.ControllerBind;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.service.StationService;
 import little.ant.pingtai.validator.StationValidator;
@@ -8,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
+@ControllerBind(controllerKey = "/jf/station")
 public class StationController extends BaseController {
 
 	@SuppressWarnings("unused")
