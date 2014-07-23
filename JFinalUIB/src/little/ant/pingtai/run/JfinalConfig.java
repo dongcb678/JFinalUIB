@@ -140,7 +140,9 @@ public class JfinalConfig extends JFinalConfig {
 	public void configRoute(Routes me) { 
 		// 查询所有继承BaseController的类
 		List<Class<? extends BaseController>> controllerClasses = ToolClassSearcher.of(BaseController.class).search();
-		
+//		List<String> jars = new ArrayList<>();
+//		jars.add("littleant.jar");
+//		ToolClassSearcher.of(BaseController.class).includeAllJarsInLib(true).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件
 		// 循环处理自动注册映射
 		for (Class controller : controllerClasses) {
 			// 获取注解对象
