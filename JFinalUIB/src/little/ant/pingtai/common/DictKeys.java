@@ -42,7 +42,10 @@ public abstract class DictKeys {
 	public static final String db_connection_ip = "db_ip";
 	public static final String db_connection_port = "db_port";
 	public static final String db_connection_dbName = "db_name";
-	
+
+	public static final String db_initialSize = "db.initialSize";
+	public static final String db_minIdle = "db.minIdle";
+	public static final String db_maxActive = "db.maxActive";
 	/**
 	 * 分页参数初始化值
 	 */

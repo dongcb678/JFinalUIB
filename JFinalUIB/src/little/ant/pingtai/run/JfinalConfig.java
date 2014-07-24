@@ -1,8 +1,5 @@
 package little.ant.pingtai.run;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import little.ant.pingtai.beetl.EscapeXml;
 import little.ant.pingtai.beetl.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.MyBeetlRenderFactory;
@@ -11,7 +8,8 @@ import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.handler.GlobalHandler;
 import little.ant.pingtai.interceptor.AuthenticationInterceptor;
 import little.ant.pingtai.interceptor.ParamPkgInterceptor;
-import little.ant.pingtai.plugin.RouterPlugin;
+import little.ant.pingtai.plugin.ControllerPlugin;
+import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.plugin.TablePlugin;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.thread.ThreadSysLog;
@@ -42,87 +40,29 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 public class JfinalConfig extends JFinalConfig {
 	
 	private static Logger log = Logger.getLogger(JfinalConfig.class);
-
-	/**
-	 * 保存系统配置参数值
-	 */
-	private static Map<String, Object> paramMap = new HashMap<String, Object>();
-	
-	/**
-	 * 获取系统配置参数值
-	 * @param key
-	 * @return
-	 */
-	public static Object getParamMapValue(String key){
-		return paramMap.get(key);
-	}
 	
 	/**
 	 * 配置常量
 	 */
 	public void configConstant(Constants me) {
-		loadPropertyFile("init.properties");
+		log.info("configConstant 缓存 properties");
+		new PropertiesPlugin(loadPropertyFile("init.properties")).start();
 
-		paramMap.put(DictKeys.db_type_key, getProperty(DictKeys.db_type_key).trim());
-		
-		String jdbcUrl = null;
-		String database = null;
-		
-		// 判断数据库类型
-		String db_type = (String) getParamMapValue(DictKeys.db_type_key);
-		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg 数据库连接信息
-			// 读取当前配置数据库连接信息
-			paramMap.put(DictKeys.db_connection_driverClass, getProperty("postgresql.driverClass").trim());
-			paramMap.put(DictKeys.db_connection_jdbcUrl, getProperty("postgresql.jdbcUrl").trim());
-			paramMap.put(DictKeys.db_connection_userName, getProperty("postgresql.userName").trim());
-			paramMap.put(DictKeys.db_connection_passWord, getProperty("postgresql.passWord").trim());
-			
-			// 解析数据库连接URL，获取数据库名称
-			jdbcUrl = (String) getParamMapValue(DictKeys.db_connection_jdbcUrl);
-			database = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-			database = database.substring(database.indexOf("/") + 1);
-			
-		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql 数据库连接信息
-			// 读取当前配置数据库连接信息
-			paramMap.put(DictKeys.db_connection_driverClass, "com.mysql.jdbc.Driver");
-			paramMap.put(DictKeys.db_connection_jdbcUrl, getProperty("mysql.jdbcUrl").trim());
-			paramMap.put(DictKeys.db_connection_userName, getProperty("mysql.userName").trim());
-			paramMap.put(DictKeys.db_connection_passWord, getProperty("mysql.passWord").trim());
-
-			// 解析数据库连接URL，获取数据库名称
-			jdbcUrl = (String) getParamMapValue(DictKeys.db_connection_jdbcUrl);
-			database = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-			database = database.substring(database.indexOf("/") + 1, database.indexOf("?"));
-		}
-		
-		// 解析数据库连接URL，获取数据库地址IP
-		String ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-		ip = ip.substring(0, ip.indexOf(":"));
-
-		// 解析数据库连接URL，获取数据库地址端口
-		String port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-		port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
-		
-		// 把数据库连接信息写入常用map
-		paramMap.put(DictKeys.db_connection_ip, ip);
-		paramMap.put(DictKeys.db_connection_port, port);
-		paramMap.put(DictKeys.db_connection_dbName, database);
-		
-		// 把常用配置信息写入map
-		paramMap.put(DictKeys.config_securityKey_key, getProperty(DictKeys.config_securityKey_key).trim());
-		paramMap.put(DictKeys.config_passErrorCount_key, getPropertyToInt(DictKeys.config_passErrorCount_key, 3));
-		paramMap.put(DictKeys.config_passErrorHour_key, getPropertyToInt(DictKeys.config_passErrorHour_key, 3));
-		
+		log.info("configConstant 设置字符集");
 		me.setEncoding(ToolString.encoding); 
+
+		log.info("configConstant 设置是否开发模式");
 		me.setDevMode(getPropertyToBoolean("config.devMode", false));
 		//me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
-		
+
+		log.info("configConstant 视图Beetl设置");
 		me.setMainRenderFactory(new MyBeetlRenderFactory());
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
 		groupTemplate.registerFunction("orderBy", new OrderBy());
 		groupTemplate.registerFunction("escapeXml", new EscapeXml());
 		
+		log.info("configConstant 视图error page设置");
 		me.setError401View("/common/401.html");
 		me.setError403View("/common/403.html");
 		me.setError404View("/common/404.html");
@@ -133,82 +73,102 @@ public class JfinalConfig extends JFinalConfig {
 	 * 配置路由
 	 */
 	public void configRoute(Routes me) { 
-		log.debug("configRoute表扫描注册开始");
-		new RouterPlugin(me).start();
-		log.debug("configRoute表扫描注册结束");
+		log.info("configRoute 表扫描注册开始");
+		new ControllerPlugin(me).start();
+		log.info("configRoute 表扫描注册结束");
 	}
 	
 	/**
 	 * 配置插件
 	 */
 	public void configPlugin(Plugins me) {
-		// 1. 配置Druid数据库连接池插件
+		log.info("configPlugin 配置Druid数据库连接池插件");
 		DruidPlugin druidPlugin = new DruidPlugin(
-				(String)getParamMapValue(DictKeys.db_connection_jdbcUrl), (String)getParamMapValue(DictKeys.db_connection_userName), 
-				(String)getParamMapValue(DictKeys.db_connection_passWord), (String)getParamMapValue(DictKeys.db_connection_driverClass));
+				(String)PropertiesPlugin.getParamMapValue(DictKeys.db_connection_jdbcUrl), 
+				(String)PropertiesPlugin.getParamMapValue(DictKeys.db_connection_userName), 
+				(String)PropertiesPlugin.getParamMapValue(DictKeys.db_connection_passWord), 
+				(String)PropertiesPlugin.getParamMapValue(DictKeys.db_connection_driverClass));
+		druidPlugin.set(
+				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_initialSize), 
+				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_minIdle), 
+				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_maxActive));
 		me.add(druidPlugin);
-
-		// 2. 配置ActiveRecord插件
+		
+		log.info("configPlugin 配置ActiveRecord插件");
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 		
-		// 2.1. 数据库类型判断
-		String db_type = (String) getParamMapValue(DictKeys.db_type_key);
-		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
-			arp.setDialect(new PostgreSqlDialect()); // 数据库方言
+		log.info("configPlugin 数据库类型判断");
+		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
+		if(db_type.equals(DictKeys.db_type_postgresql)){
+			log.info("configPlugin 使用数据库类型是 postgresql");
+			arp.setDialect(new PostgreSqlDialect());
 			
-		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
-			arp.setDialect(new MysqlDialect()); // 数据库方言
+		}else if(db_type.equals(DictKeys.db_type_mysql)){
+			log.info("configPlugin 使用数据库类型是 mysql");
+			arp.setDialect(new MysqlDialect());
 			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 小写
 		}
 		
-		// 2.2. 注册数据集插件
-		log.debug("configPlugin表扫描注册");
+		log.info("configPlugin 表扫描注册");
 		new TablePlugin(arp).start();
-		log.debug("configPlugin表扫描注册");
+		log.info("configPlugin 表扫描注册");
 		me.add(arp);
 		
-		// 4. 缓存
-		me.add(new EhCachePlugin()); // EhCache缓存
+		log.info("configPlugin EhCache缓存");
+		me.add(new EhCachePlugin());
 	}
 
 	/**
 	 * 配置全局拦截器
 	 */
 	public void configInterceptor(Interceptors me) {
-		//me.add(new SessionInViewInterceptor()); // 支持在使用session
-		me.add(new AuthenticationInterceptor()); // 权限认证拦截器
-		me.add(new ParamPkgInterceptor()); // 参数封装拦截器
+		//log.info("configInterceptor 支持使用session");
+		//me.add(new SessionInViewInterceptor());
+		
+		log.info("configInterceptor 权限认证拦截器");
+		me.add(new AuthenticationInterceptor());
+		
+		log.info("configInterceptor 参数封装拦截器");
+		me.add(new ParamPkgInterceptor());
 	}
 	
 	/**
 	 * 配置处理器
 	 */
 	public void configHandler(Handlers me) {
-		me.add(new GlobalHandler()); // 全局配置处理器，主要是记录日志
+		log.info("configHandler 全局配置处理器，主要是记录日志和request域值处理");
+		me.add(new GlobalHandler());
 	}
 	
 	/**
 	 * 系统启动完成后执行
 	 */
 	public void afterJFinalStart() {
-		new ThreadParamInit().start(); // 缓存参数
-		
-		ThreadSysLog.startSaveDBThread(); // 启动操作日志入库线程
-		
-		new DocKeyword().run(); // 创建自动回复lucene索引
-		
-		TimerResources.start(); // 系统负载
+		log.info("afterJFinalStart 缓存参数");
+		new ThreadParamInit().start();
+
+		log.info("afterJFinalStart 启动操作日志入库线程");
+		ThreadSysLog.startSaveDBThread();
+
+		log.info("afterJFinalStart 创建自动回复lucene索引");
+		new DocKeyword().run(); 
+
+		log.info("afterJFinalStart 系统负载");
+		TimerResources.start();
 	}
 	
 	/**
 	 * 系统关闭前调用
 	 */
 	public void beforeJFinalStop() {
-		new DocKeyword().close();// 释放lucene索引资源
-		
-		ThreadSysLog.setThreadRun(false);// 释放日志入库线程
-		
-		TimerResources.stop(); // 系统负载
+		log.info("beforeJFinalStop 释放lucene索引资源");
+		new DocKeyword().close();
+
+		log.info("beforeJFinalStop 释放日志入库线程");
+		ThreadSysLog.setThreadRun(false);
+
+		log.info("beforeJFinalStop 释放系统负载抓取线程");
+		TimerResources.stop();
 	}
 	
 	/**

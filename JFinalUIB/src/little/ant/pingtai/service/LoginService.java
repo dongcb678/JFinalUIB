@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.User;
-import little.ant.pingtai.run.JfinalConfig;
+import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
@@ -80,11 +80,11 @@ public class LoginService extends BaseService {
 
 		// 3.密码错误次数超限
 		int errorCount = user.getNumber("errorcount").intValue();
-		int passErrorCount = (int) JfinalConfig.getParamMapValue(DictKeys.config_passErrorCount_key);
+		int passErrorCount = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate("stopDate");
 			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
-			int passErrorHour = (int) JfinalConfig.getParamMapValue(DictKeys.config_passErrorHour_key);
+			int passErrorHour = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorHour_key);
 			if(hourSpace < passErrorHour){
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{

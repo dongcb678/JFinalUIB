@@ -6,7 +6,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.run.JfinalConfig;
+import little.ant.pingtai.plugin.PropertiesPlugin;
 
 /**
  * 数据库导入导出处理
@@ -20,13 +20,13 @@ public class ToolDataBase {
 	 * @throws IOException
 	 */
 	public static void exportSql(String exportPath) throws IOException {
-		String username = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_userName);
-		String password = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_passWord);
-		String ip = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_ip);
-		String port = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_port);
-		String database = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_dbName);
+		String username = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_userName);
+		String password = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_passWord);
+		String ip = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_ip);
+		String port = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_port);
+		String database = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_dbName);
 		
-		String db_type = (String) JfinalConfig.getParamMapValue(DictKeys.db_type_key);
+		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
 			
 			
@@ -52,13 +52,13 @@ public class ToolDataBase {
 	 * @throws IOException
 	 */
 	public static void importSql(String filePath) throws IOException {
-		String username = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_userName);
-		String password = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_passWord);
-		String ip = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_ip);
-		String port = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_port);
-		String database = (String) JfinalConfig.getParamMapValue(DictKeys.db_connection_dbName);
+		String username = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_userName);
+		String password = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_passWord);
+		String ip = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_ip);
+		String port = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_port);
+		String database = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_dbName);
 		
-		String db_type = (String) JfinalConfig.getParamMapValue(DictKeys.db_type_key);
+		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
 			
 			

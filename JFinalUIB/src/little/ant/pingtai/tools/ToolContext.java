@@ -18,7 +18,7 @@ import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
-import little.ant.pingtai.run.JfinalConfig;
+import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.thread.ThreadParamInit;
 
 import org.apache.commons.codec.binary.Base64;
@@ -226,7 +226,7 @@ public class ToolContext {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		String securityKey = (String) JfinalConfig.getParamMapValue(DictKeys.config_securityKey_key);
+		String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		// 加密
@@ -265,7 +265,7 @@ public class ToolContext {
 		// 解密
 		byte[] securityByte = Base64.decodeBase64(encodeCookie);
 
-		String securityKey = (String) JfinalConfig.getParamMapValue(DictKeys.config_securityKey_key);
+		String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		byte[] dataByte = null;

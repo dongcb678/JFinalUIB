@@ -10,13 +10,13 @@ import com.jfinal.config.Routes;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 
-public class RouterPlugin implements IPlugin {
+public class ControllerPlugin implements IPlugin {
 
     protected final Logger log = Logger.getLogger(getClass());
     
     private Routes me;
 
-	public RouterPlugin(Routes me){
+	public ControllerPlugin(Routes me){
 		this.me = me;
 	}
 

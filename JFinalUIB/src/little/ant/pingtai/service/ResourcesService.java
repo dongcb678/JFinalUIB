@@ -8,7 +8,7 @@ import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Resources;
-import little.ant.pingtai.run.JfinalConfig;
+import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolOS;
 
@@ -36,7 +36,7 @@ public class ResourcesService extends BaseService {
 		Date startDate = ToolDateTime.startDateByDay(endDate, -14);
 		
 		List<Record> list = null;
-		String db_type = (String) JfinalConfig.getParamMapValue(DictKeys.db_type_key);
+		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
 			StringBuilder sql = new StringBuilder();
 			sql.append(" select to_char(startdate, 'yyyy-MM-DD') adates, count(*) acounts from pt_syslog ");
