@@ -12,10 +12,10 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
+@SuppressWarnings("unused")
 @Controller(controllerKey = "/jf/group")
 public class GroupController extends BaseController {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(GroupController.class);
 	
 	private GroupService groupService = new GroupService();

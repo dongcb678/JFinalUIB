@@ -4,6 +4,7 @@ import little.ant.pingtai.annotation.Table;
 
 import org.apache.log4j.Logger;
 
+@SuppressWarnings("unused")
 @Table(tableName="pt_module")
 public class Module extends BaseModel<Module> {
 

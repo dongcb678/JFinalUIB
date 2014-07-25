@@ -5,6 +5,7 @@ import little.ant.pingtai.model.BaseModel;
 
 import org.apache.log4j.Logger;
 
+@SuppressWarnings("unused")
 @Table(tableName="wx_keyword")
 public class Keyword extends BaseModel<Keyword> {
 	

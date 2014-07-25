@@ -15,10 +15,10 @@ import org.apache.log4j.Logger;
 /**
  * 首页处理
  */
+@SuppressWarnings("unused")
 @Controller(controllerKey = {"/jf/", "/jf/index"})
 public class IndexController extends BaseController {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(IndexController.class);
 	
 	private IndexService indexService = new IndexService();

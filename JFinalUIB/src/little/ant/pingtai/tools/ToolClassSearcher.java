@@ -29,7 +29,8 @@ public class ToolClassSearcher {
         return classList;
     }
 
-    public static ToolClassSearcher of(Class target) {
+    @SuppressWarnings("rawtypes")
+	public static ToolClassSearcher of(Class target) {
         return new ToolClassSearcher(target);
     }
 
@@ -121,9 +122,11 @@ public class ToolClassSearcher {
 
     private String libDir = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "lib";
 
-    private Class target;
+    @SuppressWarnings("rawtypes")
+	private Class target;
 
-    public ToolClassSearcher(Class target) {
+    @SuppressWarnings("rawtypes")
+	public ToolClassSearcher(Class target) {
         this.target = target;
     }
 
@@ -148,7 +151,8 @@ public class ToolClassSearcher {
         return this;
     }
 
-    public <T> List<Class<? extends T>> search() {
+    @SuppressWarnings("unchecked")
+	public <T> List<Class<? extends T>> search() {
         List<String> classFileList = findFiles(classpath, "*.class");
         classFileList.addAll(findjarFiles(libDir, includeJars));
         return extraction(target, classFileList);

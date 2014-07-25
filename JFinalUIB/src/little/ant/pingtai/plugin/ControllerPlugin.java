@@ -10,6 +10,10 @@ import com.jfinal.config.Routes;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 
+/**
+ * 扫描Controller上的注解，绑定Controller和controllerKey
+ * @author 董华健
+ */
 public class ControllerPlugin implements IPlugin {
 
     protected final Logger log = Logger.getLogger(getClass());

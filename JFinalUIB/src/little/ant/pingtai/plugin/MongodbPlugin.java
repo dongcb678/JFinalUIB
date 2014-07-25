@@ -8,6 +8,10 @@ import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 import com.mongodb.MongoClient;
 
+/**
+ * 初始化Mongodb连接信息
+ * @author 董华健
+ */
 public class MongodbPlugin implements IPlugin {
     
     protected final Logger logger = Logger.getLogger(getClass());

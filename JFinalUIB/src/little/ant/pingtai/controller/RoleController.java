@@ -13,10 +13,10 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
+@SuppressWarnings("unused")
 @Controller(controllerKey = "/jf/role")
 public class RoleController extends BaseController {
-
-	@SuppressWarnings("unused")
+	
 	private static Logger log = Logger.getLogger(RoleController.class);
 	
 	private RoleService roleService = new RoleService();

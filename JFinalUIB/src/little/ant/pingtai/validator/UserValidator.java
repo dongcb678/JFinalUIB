@@ -9,9 +9,9 @@ import org.apache.log4j.Logger;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 
+@SuppressWarnings({"unused", "deprecation"})
 public class UserValidator extends Validator {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UserValidator.class);
 	
 	protected void validate(Controller controller) {

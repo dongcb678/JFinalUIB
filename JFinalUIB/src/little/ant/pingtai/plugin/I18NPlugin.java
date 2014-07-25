@@ -9,6 +9,10 @@ import java.util.ResourceBundle;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 
+/**
+ * 初始化I18N数据信息的加载
+ * @author 董华健
+ */
 public class I18NPlugin implements IPlugin {
 
     protected final Logger log = Logger.getLogger(getClass());
@@ -56,6 +60,7 @@ public class I18NPlugin implements IPlugin {
 
 	@Override
 	public boolean stop() {
+		resourceBundleMap.clear();
 		return true;
 	}
 

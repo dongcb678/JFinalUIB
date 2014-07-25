@@ -9,6 +9,10 @@ import little.ant.pingtai.common.DictKeys;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 
+/**
+ * 读取Properties配置文件数据放入缓存
+ * @author 董华健
+ */
 public class PropertiesPlugin implements IPlugin {
 
     protected final Logger log = Logger.getLogger(getClass());
@@ -35,7 +39,6 @@ public class PropertiesPlugin implements IPlugin {
 	
 	@Override
 	public boolean start() {
-
 		paramMap.put(DictKeys.db_type_key, properties.getProperty(DictKeys.db_type_key).trim());
 		
 		String jdbcUrl = null;

@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import little.ant.pingtai.annotation.Table;
 import little.ant.pingtai.model.BaseModel;
 
+@SuppressWarnings("unused")
 @Table(tableName="wx_message")
 public class Message extends BaseModel<Message> {
 	

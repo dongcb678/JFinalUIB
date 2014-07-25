@@ -10,6 +10,10 @@ import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 
+/**
+ * 扫描model上的注解，绑定model和table
+ * @author 董华健
+ */
 public class TablePlugin implements IPlugin {
 
     protected final Logger log = Logger.getLogger(getClass());

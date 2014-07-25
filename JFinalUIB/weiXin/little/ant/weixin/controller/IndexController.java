@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
  * 微信控制台主页
  * @author 董华健
  */
+@SuppressWarnings("unused")
 @Controller(controllerKey = "/jf/wx/index")
 public class IndexController extends BaseController {
 
