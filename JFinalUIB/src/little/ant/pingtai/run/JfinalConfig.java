@@ -9,6 +9,7 @@ import little.ant.pingtai.handler.GlobalHandler;
 import little.ant.pingtai.interceptor.AuthenticationInterceptor;
 import little.ant.pingtai.interceptor.ParamPkgInterceptor;
 import little.ant.pingtai.plugin.ControllerPlugin;
+import little.ant.pingtai.plugin.I18NPlugin;
 import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.plugin.TablePlugin;
 import little.ant.pingtai.thread.ThreadParamInit;
@@ -111,8 +112,10 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("configPlugin 表扫描注册");
 		new TablePlugin(arp).start();
-		log.info("configPlugin 表扫描注册");
 		me.add(arp);
+
+		log.info("I18NPlugin 国际化键值对加载");
+		new I18NPlugin().start();
 		
 		log.info("configPlugin EhCache缓存");
 		me.add(new EhCachePlugin());

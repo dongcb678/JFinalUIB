@@ -1,10 +1,7 @@
 package little.ant.pingtai.handler;
 
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import little.ant.pingtai.beetl.MyBeetlRender;
 import little.ant.pingtai.model.Syslog;
+import little.ant.pingtai.plugin.I18NPlugin;
 import little.ant.pingtai.thread.ThreadSysLog;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
@@ -31,25 +29,6 @@ public class GlobalHandler extends Handler {
 	private static Logger log = Logger.getLogger(GlobalHandler.class);
 
 	public static final String reqSysLogKey = "reqSysLog";
-	
-	private static final Map<String, Map<String, String>> resourceBundleMap = new HashMap<String, Map<String, String>>();
-
-	private static final String[] languages = {"zh_CN", "en_US"};
-	
-	static{
-		for (String language : languages) {
-			Locale zh_CN_Locale = new Locale(language);
-			ResourceBundle zh_CN_RB = ResourceBundle.getBundle("message", zh_CN_Locale);
-			Enumeration<String> zh_CN_Keys = zh_CN_RB.getKeys();
-			Map<String, String> zh_CN_Map = new HashMap<String, String>();
-			while (zh_CN_Keys.hasMoreElements()) {
-				String key = (String) zh_CN_Keys.nextElement();
-				String value = zh_CN_RB.getString(key);
-				zh_CN_Map.put(key, value);
-			}
-			resourceBundleMap.put(language, zh_CN_Map);
-		}
-	}
 	
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
@@ -71,11 +50,18 @@ public class GlobalHandler extends Handler {
 		request.setAttribute("paramMap", ToolWeb.getParamMap(request));
 
 		log.debug("request 国际化");
-		String language = request.getParameter("locale");
-		if(null == language || language.isEmpty()){
-			language = String.valueOf(request.getLocale());
+		String localePram = request.getParameter("localePram");
+		if(null == localePram || localePram.isEmpty()){
+			Locale locale = request.getLocale();
+			String language = locale.getLanguage();
+			localePram = language;
+			
+			String country = locale.getCountry();
+			if(null != country && !country.isEmpty()){
+				localePram += "_" + country;
+			}
 		}
-		Map<String, String> i18nMap = resourceBundleMap.get(language);
+		Map<String, String> i18nMap = I18NPlugin.get(localePram);
 		request.setAttribute("i18nMap", i18nMap);
 		
 		log.info("设置Header");
