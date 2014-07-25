@@ -55,24 +55,24 @@
 
 			<div class="row-fluid">
 				<div class="span12 center login-header">
-					<h2>欢迎登陆</h2>
+					<h2>${i18nMap["admin.login.welcomme"]}</h2>
 				</div><!--/span-->
 			</div><!--/row-->
 			
 			<div class="row-fluid">
 				<div class="well span5 center login-box">
 					<div class="alert alert-info">
-						请填写您的用户名和密码.${usernameMsg! }${passwordMsg! }
+						${i18nMap["admin.login.message"]}.${usernameMsg! }${passwordMsg! }
 					</div>
 					<form class="form-horizontal" action="${cxt!}/jf/login/vali" method="post">
 						<fieldset>
-							<div class="input-prepend" title='${i18nMap["login.name"]}' data-rel="tooltip">
+							<div class="input-prepend" title='${i18nMap["admin.login.name"]}' data-rel="tooltip">
 								<span class="add-on"><i class="icon-user"></i></span>
 								<input autofocus class="input-large span10" id="username" name="username" type="text" value="${cookieMap.userName.value!}" />
 							</div>
 							<div class="clearfix"></div>
 
-							<div class="input-prepend" title="密码" data-rel="tooltip">
+							<div class="input-prepend" title='${i18nMap["admin.login.password"]}' data-rel="tooltip">
 								<span class="add-on"><i class="icon-lock"></i></span>
 								<input class="input-large span10" id="password" name="password" type="password" value="" />
 							</div>
@@ -80,12 +80,14 @@
 
 							<div class="input-prepend">
 								<label class="remember" for="remember">
-								<input type="checkbox" id="remember" name="remember" value="1"/>记住我</label>
+									<input type="checkbox" id="remember" name="remember" value="1"/>
+									${i18nMap["admin.login.rememberMe"]}
+								</label>
 							</div>
 							<div class="clearfix"></div>
 
 							<p class="center span5">
-							<button type="submit" class="btn btn-primary">登陆</button>
+								<button type="submit" class="btn btn-primary">${i18nMap["admin.login.submit"]}</button>
 							</p>
 						</fieldset>
 					</form>
