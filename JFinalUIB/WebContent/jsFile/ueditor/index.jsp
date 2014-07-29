@@ -1,4 +1,3 @@
-<%@page import="little.ant.pingtai.tools.ToolContext"%>
 <%@ page language="java" isELIgnored="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -9,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     
     <script type="text/javascript">
-    	var cxt = "<%=ToolContext.getContextAllPath(request)%>";
+    	var cxt = "<%=little.ant.pingtai.tools.ToolContext.getContextAllPath(request)%>";
     </script>
     
     <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
