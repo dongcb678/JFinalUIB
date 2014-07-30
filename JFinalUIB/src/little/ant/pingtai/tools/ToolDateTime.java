@@ -323,7 +323,7 @@ public class ToolDateTime {
 	}
 	
 	/**
-	 * 根据周得到开始和结束时间
+	 * 根据年份和周得到周的开始和结束日期
 	 * @param year
 	 * @param week
 	 * @return
@@ -362,6 +362,33 @@ public class ToolDateTime {
 		Map<String, Date> map = new HashMap<String, Date>();
 		map.put("start", startDate);
 		map.put("end", endDate);
+		return map;
+	}
+	
+	/**
+	 * 根据日期月份，获取月份的开始和结束日期
+	 * @param date
+	 * @return
+	 */
+	public static Map<String, Date> getMonthDate(Date date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);   
+		calendar.set(Calendar.MINUTE, 0);   
+		calendar.set(Calendar.SECOND, 0);   
+		calendar.set(Calendar.MILLISECOND, 0);
+		
+		// 得到前一个月的第一天
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+		Date start = calendar.getTime();
+		
+		// 得到前一个月的最后一天
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		Date end = calendar.getTime();
+		
+		Map<String, Date> map = new HashMap<String, Date>();
+		map.put("start", start);
+		map.put("end", end);
 		return map;
 	}
 	
