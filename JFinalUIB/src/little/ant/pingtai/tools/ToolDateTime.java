@@ -24,9 +24,9 @@ public class ToolDateTime {
 
 	private static Logger log = Logger.getLogger(ToolDateTime.class);
 	
-	public static final String pattern_date = "yyyy-MM-dd";
-	public static final String pattern_datetime = "yyyy-MM-dd HH:mm:ss";
-	public static final String pattern_datetimeMillisecond = "yyyy-MM-dd HH:mm:ss:SSS";
+	public static final String pattern_ymd = "yyyy-MM-dd"; // pattern_ymd
+	public static final String pattern_ymd_hms = "yyyy-MM-dd HH:mm:ss"; // pattern_ymdtime
+	public static final String pattern_ymd_hms_s = "yyyy-MM-dd HH:mm:ss:SSS"; // pattern_ymdtimeMillisecond
 	
 	/**
 	 * 主要是给jfinal使用，数据库只认java.sql.*
@@ -161,20 +161,15 @@ public class ToolDateTime {
 	 * @return String 星期几
 	 */
 	@SuppressWarnings("static-access")
-	public static String getDateInWeek(String date) {
+	public static String getDateInWeek(Date date) {
 		String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
-		DateFormat format = DateFormat.getDateInstance();
-		try {
-			format.parse(date);
-			java.util.Calendar c = format.getCalendar();
-			int dayIndex = c.get(c.DAY_OF_WEEK) - c.SUNDAY;
-			if (dayIndex < 0){
-				dayIndex = 0;
-			}
-			return weekDays[dayIndex];
-		} catch (ParseException e) {
-			return weekDays[0];
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int dayIndex = calendar.get(calendar.DAY_OF_WEEK) - calendar.SUNDAY;
+		if (dayIndex < 0){
+			dayIndex = 0;
 		}
+		return weekDays[dayIndex];
 	}
 	
 	/**
@@ -248,11 +243,11 @@ public class ToolDateTime {
 			return dateList;
 		}
 
-		dateList.add(format(fromCalendar.getTime(), pattern_date));
+		dateList.add(format(fromCalendar.getTime(), pattern_ymd));
 		
 		for (int i = 0; i < dayCount; i++) {
 			fromCalendar.add(Calendar.DATE, 1);// 增加一天
-			dateList.add(format(fromCalendar.getTime(), pattern_date));
+			dateList.add(format(fromCalendar.getTime(), pattern_ymd));
 		}
 
 		return dateList;
@@ -393,37 +388,38 @@ public class ToolDateTime {
 	}
 	
 	public static void main(String[] args) throws ParseException{
-//		System.out.println(format("2013-07-01", pattern_date, "MM-dd"));
+//		System.out.println(format("2013-07-01", pattern_ymd, "MM-dd"));
 		
-//		Date start = parse("2013-07-01 01:00:00", pattern_datetime);
-//		Date end = parse("2013-07-01 12:00:00", pattern_datetime);
+//		Date start = parse("2013-07-01 01:00:00", pattern_ymdtime);
+//		Date end = parse("2013-07-01 12:00:00", pattern_ymdtime);
 //		long splitCount = 12l;
 //		List<Date> list = getDateSplit(start, end, splitCount);
 //		for (Date date : list) {
-//			System.out.println(format(date, pattern_datetime));
+//			System.out.println(format(date, pattern_ymdtime));
 //		}
 		
-//		Date start = parse("2013-07-01 01:00:00", pattern_datetime);
-//		Date end = parse("2013-07-05 12:00:00", pattern_datetime);
+//		Date start = parse("2013-07-01 01:00:00", pattern_ymdtime);
+//		Date end = parse("2013-07-05 12:00:00", pattern_ymdtime);
 //		List<String> list = getDaySpaceDate(start, end);
 //		for (String str : list) {
 //			System.out.println(str);
 //		}
 		
-//		Date start = parse("2013-07-01 01:00:00", pattern_datetime);
+//		Date start = parse("2013-07-01 01:00:00", pattern_ymdtime);
 //		Date end = endDate(start, 7);
-//		System.out.println(format(end, pattern_datetime));
+//		System.out.println(format(end, pattern_ymdtime));
 
 //		Date endDate = ToolDateTime.endDate(new Date());
 //		Date startDate = ToolDateTime.startDate(endDate, -14);
-//		System.out.println(format(startDate, pattern_datetimeMillisecond));
-//		System.out.println(format(endDate, pattern_datetimeMillisecond));
+//		System.out.println(format(startDate, pattern_ymdtimeMillisecond));
+//		System.out.println(format(endDate, pattern_ymdtimeMillisecond));
 		
-		Date endDate = ToolDateTime.endDateByHour(new Date());
-		Date startDate = ToolDateTime.startDateByHour(endDate, -24);
+//		Date endDate = ToolDateTime.endDateByHour(new Date());
+//		Date startDate = ToolDateTime.startDateByHour(endDate, -24);
+//		
+//		System.out.println(format(startDate, pattern_ymdtimeMillisecond));
+//		System.out.println(format(endDate, pattern_ymdtimeMillisecond));
 		
-		System.out.println(format(startDate, pattern_datetimeMillisecond));
-		System.out.println(format(endDate, pattern_datetimeMillisecond));
 	}
 
 }

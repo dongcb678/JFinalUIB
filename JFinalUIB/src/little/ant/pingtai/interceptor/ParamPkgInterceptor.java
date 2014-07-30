@@ -145,8 +145,16 @@ public class ParamPkgInterceptor implements Interceptor {
 				field.set(controller, Integer.parseInt(value));
 				
 			}else if(fieldType.equals("Date")){
-				field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_datetimeMillisecond));
-			
+				if(value.length() == ToolDateTime.pattern_ymd.length()){
+					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd));
+				
+				}else if(value.length() == ToolDateTime.pattern_ymd_hms.length()){
+					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms));
+				
+				}else if(value.length() == ToolDateTime.pattern_ymd_hms_s.length()){
+					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms_s));
+				}
+				
 			}else if(fieldType.equals("BigDecimal")){
 				BigDecimal bdValue = new BigDecimal(value);
 				field.set(controller, bdValue);

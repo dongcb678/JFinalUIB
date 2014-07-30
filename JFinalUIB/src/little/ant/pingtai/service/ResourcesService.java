@@ -55,7 +55,7 @@ public class ResourcesService extends BaseService {
 		List<String> adates = new LinkedList<String>();
 		List<Long> acounts = new LinkedList<Long>();
 		for (Record record : list) {
-			adates.add(ToolDateTime.format(record.getStr("adates"), ToolDateTime.pattern_date, "MM-dd"));
+			adates.add(ToolDateTime.format(record.getStr("adates"), ToolDateTime.pattern_ymd, "MM-dd"));
 			acounts.add(record.getNumber("acounts").longValue());
 		}
 		
