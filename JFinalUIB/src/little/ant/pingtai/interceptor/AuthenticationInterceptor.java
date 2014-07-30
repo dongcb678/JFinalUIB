@@ -71,7 +71,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			if(operator.get("privilege").equals("1")){// 是否需要权限验证
 				log.info("需要权限验证!");
 				boolean userAgentVali = true;
-				if(uri.equals("/jf/ueditor")){ // 针对ueditor特殊处理
+				if(uri.equals("/jf/ueditor") || uri.equals("/jf/upload")){ // 针对ueditor特殊处理
 					userAgentVali = false;
 				}
 				User user = ToolContext.getCurrentUser(request, userAgentVali);// 当前登录用户

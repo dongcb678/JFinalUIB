@@ -25,6 +25,11 @@ public abstract class DictKeys {
 	 * 密码错误最大次数后间隔登陆时间（小时）
 	 */
 	public static final String config_passErrorHour_key = "config.passErrorHour";
+
+	/**
+	 * #文件上传大小限制 10 * 1024 * 1024 = 10M
+	 */
+	public static final String config_maxPostSize_key = "config.maxPostSize";
 	
 	/**
 	 * 当前数据库类型
@@ -46,6 +51,7 @@ public abstract class DictKeys {
 	public static final String db_initialSize = "db.initialSize";
 	public static final String db_minIdle = "db.minIdle";
 	public static final String db_maxActive = "db.maxActive";
+	
 	/**
 	 * 分页参数初始化值
 	 */
