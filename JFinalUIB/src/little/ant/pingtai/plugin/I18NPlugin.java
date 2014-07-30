@@ -26,7 +26,12 @@ public class I18NPlugin implements IPlugin {
 	};
 	
 	public static Map<String, String> get(String localePramKey){
-		return resourceBundleMap.get(localePramKey);
+		Map<String, String> map = resourceBundleMap.get(localePramKey);
+		if(map != null){
+			return map;
+		}else{
+			return resourceBundleMap.get("en");
+		}
 	}
 	
 	@Override
