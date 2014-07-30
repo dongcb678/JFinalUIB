@@ -1,5 +1,11 @@
 <%@ page language="java" isELIgnored="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<% 
+StringBuilder sb = new StringBuilder();
+sb.append(request.getScheme()).append("://").append(request.getServerName()).append(":").append(request.getServerPort()).append(request.getContextPath());
+String path = sb.toString();
+%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,7 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     
     <script type="text/javascript">
-    	var cxt = "<%=little.ant.pingtai.tools.ToolContext.getContextAllPath(request)%>";
+    	var cxt = "<%=path%>";
     </script>
     
     <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>

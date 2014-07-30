@@ -70,7 +70,11 @@ public class AuthenticationInterceptor implements Interceptor {
 			
 			if(operator.get("privilege").equals("1")){// 是否需要权限验证
 				log.info("需要权限验证!");
-				User user = ToolContext.getCurrentUser(request);// 当前登录用户
+				boolean userAgentVali = true;
+				if(uri.equals("/jf/ueditor")){ // 针对ueditor特殊处理
+					userAgentVali = false;
+				}
+				User user = ToolContext.getCurrentUser(request, userAgentVali);// 当前登录用户
 				if (user == null) {
 					log.info("权限认证过滤器检测:未登录!");
 					

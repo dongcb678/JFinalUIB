@@ -27,7 +27,7 @@ public class LoginController extends BaseController {
 	 * 准备登陆
 	 */
 	public void index() {
-		User user = ToolContext.getCurrentUser(getRequest()); // cookie认证自动登陆处理
+		User user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
 		if(null != user){//后台
 			redirect("/jf/");
 		}else{

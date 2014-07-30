@@ -31,7 +31,7 @@ public class IndexController extends BaseController {
 	 * 首页
 	 */
 	public void index() {
-		User user = ToolContext.getCurrentUser(getRequest()); // cookie认证自动登陆处理
+		User user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
 		if(null != user){//后台
 			systemsList = Systems.dao.find(" select ids, names from pt_systems order by orderids asc ");
 			if(null == ids || ids.isEmpty()){ // 默认系统

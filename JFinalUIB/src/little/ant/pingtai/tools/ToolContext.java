@@ -283,10 +283,11 @@ public class ToolContext {
 
 	/**
 	 * 获取当前登录用户
-	 * 
+	 * @param request
+	 * @param userAgentVali 是否验证 User-Agent
 	 * @return
 	 */
-	public static User getCurrentUser(HttpServletRequest request) {
+	public static User getCurrentUser(HttpServletRequest request, boolean userAgentVali) {
 		String loginCookie = ToolWeb.getCookieValueByName(request, "authmark");
 		if (null != loginCookie && !loginCookie.equals("")) {
 			String[] datas = ToolContext.decodeCookieAuthToken(loginCookie);
@@ -302,8 +303,8 @@ public class ToolContext {
 			Date start = ToolDateTime.getDate();
 			start.setTime(loginDateTimes);
 			int day = ToolDateTime.getDateDaySpace(start, ToolDateTime.getDate());
-
-			if (ips.equals(newIp) && userAgent.equals(newUserAgent) && day <= 365) {
+			
+			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= 365) {
 				ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 				Object userObj = cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
 				if (null != userObj) {

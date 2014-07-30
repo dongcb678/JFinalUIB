@@ -1,5 +1,7 @@
 package little.ant.pingtai.controller;
 
+import java.io.File;
+
 import little.ant.pingtai.annotation.Controller;
 
 import org.apache.log4j.Logger;
@@ -17,7 +19,7 @@ public class UeditorController extends BaseController {
 	private static Logger log = Logger.getLogger(UeditorController.class);
 	
 	public void index() {
-		String htmlText = new ActionEnter( getRequest(), PathKit.getWebRootPath() ).exec();
+		String htmlText = new ActionEnter( getRequest(), PathKit.getWebRootPath() + File.separator ).exec();
 		renderHtml(htmlText);
 	}
 	
