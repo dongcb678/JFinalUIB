@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost-mysql
-Source Server Version : 50612
+Source Server Version : 50530
 Source Host           : localhost:3306
 Source Database       : jfinaluib
 
 Target Server Type    : MYSQL
-Target Server Version : 50612
+Target Server Version : 50530
 File Encoding         : 65001
 
-Date: 2014-07-31 15:35:40
+Date: 2014-08-01 00:14:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -479,6 +479,25 @@ CREATE TABLE `pt_systems` (
 INSERT INTO `pt_systems` VALUES ('0c1230c98ef34e58947903fab5a4fa85', '0', null, '易信平台', 'yiXin', '3');
 INSERT INTO `pt_systems` VALUES ('8a40c0353fa828a6013fa898d4ac0020', '0', '基础平台', '基础平台', 'platform', '1');
 INSERT INTO `pt_systems` VALUES ('d3a5c976c4c24751b6b00ec775692683', '0', null, '微信平台', 'weiXin', '2');
+
+-- ----------------------------
+-- Table structure for `pt_upload`
+-- ----------------------------
+DROP TABLE IF EXISTS `pt_upload`;
+CREATE TABLE `pt_upload` (
+  `ids` varchar(32) COLLATE utf8_bin NOT NULL,
+  `version` bigint(20) DEFAULT NULL,
+  `parametername` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `fileName` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `contenttype` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `originalfilename` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `path` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ids`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of pt_upload
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `pt_user`

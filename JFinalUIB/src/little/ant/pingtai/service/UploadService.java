@@ -14,7 +14,7 @@ public class UploadService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UploadService.class);
 	
-	public List<String> upload(List<UploadFile> files){
+	public List<String> upload(String pathType, List<UploadFile> files){
 		List<String> list = new ArrayList<String>();
 		for (UploadFile uploadFile : files) {
 			String parameterName = uploadFile.getParameterName();
@@ -27,6 +27,7 @@ public class UploadService extends BaseService {
 			upload.set("fileName", fileName);
 			upload.set("contentType", contentType);
 			upload.set("originalFileName", originalFileName);
+			upload.set("path", pathType);
 			upload.save();
 			
 			list.add(upload.getStr("ids"));
