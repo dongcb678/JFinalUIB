@@ -40,19 +40,23 @@ public class LoginController extends BaseController {
 	 */
 	@Before(LoginValidator.class)
 	public void vali() {
-		String username = getPara("username");
-		String password = getPara("password");
-		String remember = getPara("remember");
-		boolean autoLogin = false;
-		if(null != remember && remember.equals("1")){
-			autoLogin = true;
+		boolean authCode = authCode();
+		if(authCode){
+			String username = getPara("username");
+			String password = getPara("password");
+			String remember = getPara("remember");
+			boolean autoLogin = false;
+			if(null != remember && remember.equals("1")){
+				autoLogin = true;
+			}
+			int result = loginService.login(getRequest(), getResponse(), username, password, autoLogin);
+			if(result == DictKeys.login_info_3){
+				redirect("/jf/index");
+				return;
+			}
 		}
-		int result = loginService.login(getRequest(), getResponse(), username, password, autoLogin);
-		if(result == DictKeys.login_info_3){
-			redirect("/jf/index");
-		}else{
-			redirect("/jf/login");
-		}
+		
+		redirect("/jf/login");
 	}
 
 	/**

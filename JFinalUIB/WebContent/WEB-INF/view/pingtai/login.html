@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>${i18nMap["admin.login.title"]}</title>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
 	<meta name="author" content="Muhammad Usman">
@@ -41,7 +42,8 @@
 	<![endif]-->
 
 	<!-- The fav icon -->
-	<link rel="shortcut icon" href="${cxt!}/ui/charisma/img/favicon.ico">
+	<link rel="icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
 	
 	<script type="text/javascript">
 		var cxt = "${cxt!}";
@@ -64,7 +66,7 @@
 					<div class="alert alert-info">
 						${i18nMap["admin.login.message"]}.${usernameMsg! }${passwordMsg! }
 					</div>
-					<form class="form-horizontal" action="${cxt!}/jf/login/vali" method="post">
+					<form name="loginForm" class="form-horizontal" action="${cxt!}/jf/login/vali" method="post">
 						<fieldset>
 							<div class="input-prepend" title='${i18nMap["admin.login.name"]}' data-rel="tooltip">
 								<span class="add-on"><i class="icon-user"></i></span>
@@ -78,6 +80,12 @@
 							</div>
 							<div class="clearfix"></div>
 
+							<div class="input-prepend" title='输入验证码' data-rel="tooltip">
+								<span class="add-on"><i class="icon-bell"></i></span>
+								<input class="input-large span10" id="authCode" name="authCode" type="text" value="" />
+							</div>
+							<div class="clearfix"><a href="#" onclick="showImage(this);" style="background-color: #87adbf; font-size: 12px; color: #283439;">点击显示验证码</a></div>
+							
 							<div class="input-prepend">
 								<label class="remember" for="remember">
 									<input type="checkbox" id="remember" name="remember" value="1"/>
@@ -172,5 +180,37 @@
 	<!-- application script for Charisma demo -->
 	<script src="${cxt!}/ui/charisma/js/charisma.js"></script>
 	
+	<script type="text/javascript">
+		
+		function validata(){
+			document.loginForm.submit();
+		}
+		
+		function showImage(node){
+			var imageHtml = '<img id="yanZhengMa" src="${cxt!}/jf/authImg?rand=' + Math.random() + '" onclick="showImage(this);" width="100" height="18"/>';
+			$(node).replaceWith(imageHtml);
+		}
+		
+		$(document).ready(function() {
+			// 初始化页面焦点
+			var userName = $("#username");
+			if(userName.value == ""){
+				userName.focus();
+			}else{
+				$("#password").focus();
+			}
+			
+			// 键盘回车事件
+			var tds = $("html"); 
+			tds.keydown(function(event){
+				var myEvent = event || window.event; //解决不同浏览器获取事件对象的差异
+					switch(myEvent.keyCode) {
+						case 13://回车事件
+							validata(); break;
+					}
+			});
+		});
+		
+	</script>
 </body>
 </html>

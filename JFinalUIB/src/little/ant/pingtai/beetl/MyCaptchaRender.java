@@ -1,4 +1,4 @@
-package little.ant.pingtai.servlet;
+package little.ant.pingtai.beetl;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,25 +12,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletOutputStream;
 
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolRandoms;
 
+import org.apache.log4j.Logger;
+
+import com.jfinal.render.Render;
+
 /**
  * 验证码
- * @author 董华健 2012-9-3 下午8:11:41
+ * 
+ * @author 董华健
  */
-//@WebServlet(name="authImg", urlPatterns="/se/auth")
-public class AuthImg extends HttpServlet {
+public class MyCaptchaRender extends Render {
 
-	private static final long serialVersionUID = 2670686116012848021L;
+	private static final long serialVersionUID = -6181699749237635937L;
+
+	private static Logger log = Logger.getLogger(MyCaptchaRender.class);
 
 	// 定义图形验证码中绘制字符的字体
-	//private final Font mFont = new Font("Arial Black", Font.PLAIN, 16);
+	// private final Font mFont = new Font("Arial Black", Font.PLAIN, 16);
 	private final static List<Font> fontList;
 
 	static {
@@ -70,38 +73,53 @@ public class AuthImg extends HttpServlet {
 	// 定义图形验证码的大小
 	private final int IMG_WIDTH = 100;
 	private final int IMG_HEIGTH = 18;
-	
-	// 定义一个获取随机颜色的方法
-	private Color getRandColor(int fc, int bc) {
-		if (fc > 255){
-			fc = 255;
+
+	@Override
+	public void render() {
+		log.debug("自定义验证码");
+		BufferedImage bufferedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGTH, BufferedImage.TYPE_INT_RGB);
+
+		String sRand = graphics(bufferedImage);
+
+		// 设置验证码值到cookie
+		ToolContext.setAuthCode(response, sRand.toLowerCase());
+
+		response.setHeader("Pragma", "no-cache");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0);
+		response.setContentType("image/jpeg");
+
+		ServletOutputStream sos = null;
+		try {
+			sos = response.getOutputStream();
+			ImageIO.write(bufferedImage, "jpeg", sos);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (sos != null) {
+				try {
+					sos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		if (bc > 255){
-			bc = 255;
-		}
-		int r = fc + ToolRandoms.number(bc - fc);
-		int g = fc + ToolRandoms.number(bc - fc);
-		int b = fc + ToolRandoms.number(bc - fc);
-		// 得到随机颜色
-		return new Color(r, g, b);
 	}
 
-	// 重写service方法，生成对客户端的响应
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BufferedImage bufferedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGTH, BufferedImage.TYPE_INT_RGB);
-		//Graphics graphics = bufferedImage.getGraphics();
+	private String graphics(BufferedImage bufferedImage) {
+		// Graphics graphics = bufferedImage.getGraphics();
 		Graphics2D graphics = bufferedImage.createGraphics();
-		
+
 		// 设置背景色
 		graphics.setColor(getRandColor(200, 250));
-		
+
 		// 填充背景色
 		graphics.fillRect(1, 1, IMG_WIDTH - 1, IMG_HEIGTH - 1);
-		
+
 		// 为图形验证码绘制边框
 		graphics.setColor(new Color(102, 102, 102));
 		graphics.drawRect(0, 0, IMG_WIDTH - 1, IMG_HEIGTH - 1);
-		
+
 		// 画一道粗线
 		this.drawThickLine(graphics, 0, ToolRandoms.number(IMG_HEIGTH) + 1, IMG_WIDTH, ToolRandoms.number(IMG_HEIGTH) + 1, 4, getRandColor(100, 200));// 加一道线
 
@@ -130,8 +148,8 @@ public class AuthImg extends HttpServlet {
 
 		// 设置绘制字符的字体
 		int fontIndex = ToolRandoms.number(9);
-		graphics.setFont(fontList.get(fontIndex));//mFont
-		
+		graphics.setFont(fontList.get(fontIndex));// mFont
+
 		// 生成随机字符串
 		String sRand = "";
 		for (int i = 0; i < 4; i++) {
@@ -156,20 +174,27 @@ public class AuthImg extends HttpServlet {
 			bufferedImage.setRGB(x, y, rgb);
 		}
 
-		// 设置验证码值到cookie
-		ToolContext.setAuthCode(response, sRand.toLowerCase());
-
-		// 设置禁止缓存
-		response.setHeader("Pragma", "No-cache");
-		response.setHeader("Cache-Control", "no-cache");
-		response.setDateHeader("Expires", 0);
-		response.setContentType("image/jpeg");
-
+		// 图象生效
 		graphics.dispose();
-		// 向输出流中输出图片
-		ImageIO.write(bufferedImage, "JPEG", response.getOutputStream());
+
+		return sRand;
 	}
-	
+
+	// 定义一个获取随机颜色的方法
+	private Color getRandColor(int fc, int bc) {
+		if (fc > 255) {
+			fc = 255;
+		}
+		if (bc > 255) {
+			bc = 255;
+		}
+		int r = fc + ToolRandoms.number(bc - fc);
+		int g = fc + ToolRandoms.number(bc - fc);
+		int b = fc + ToolRandoms.number(bc - fc);
+		// 得到随机颜色
+		return new Color(r, g, b);
+	}
+
 	// 画一道粗线的方法
 	private void drawThickLine(Graphics graphics, int x1, int y1, int x2, int y2, int thickness, Color c) {
 		// The thick line is in fact a filled polygon
@@ -243,7 +268,7 @@ public class AuthImg extends HttpServlet {
 			}
 		}
 	}
-	
+
 	// 添加噪点的方法
 	private int getRandomIntColor() {
 		int[] rgb = ToolRandoms.getRandomRgb();
@@ -254,5 +279,5 @@ public class AuthImg extends HttpServlet {
 		}
 		return color;
 	}
-	
+
 }
