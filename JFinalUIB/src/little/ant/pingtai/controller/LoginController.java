@@ -60,7 +60,7 @@ public class LoginController extends BaseController {
 	 */
 	public void logout() {
 		ToolWeb.addCookie(getResponse(), "authmark", null, 0);
-		render("/pingtai/login.html");
+		redirect("/jf/login");
 	}
 
 }

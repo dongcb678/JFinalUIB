@@ -97,6 +97,8 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("configPlugin 配置ActiveRecord插件");
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+		arp.setDevMode(getPropertyToBoolean("config.devMode", false)); // 设置开发模式
+		arp.setShowSql(getPropertyToBoolean("config.devMode", false)); // 是否显示SQL
 		
 		log.info("configPlugin 数据库类型判断");
 		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);

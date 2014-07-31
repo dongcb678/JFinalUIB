@@ -20,7 +20,7 @@
 		<listener-class>little.ant.pingtai.listener.InitListener</listener-class>
 	</listener>
 	
-	<!-- log4j -->
+	<!-- Log4j在线查看 -->
 	<servlet>  
     	<servlet-name>log4j</servlet-name>  
     	<servlet-class>little.ant.pingtai.servlet.Log4j</servlet-class>
@@ -29,6 +29,16 @@
 	<servlet-mapping>
 		<servlet-name>log4j</servlet-name>
 		<url-pattern>/se/log4j</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 验证码 -->
+	<servlet>  
+    	<servlet-name>authImg</servlet-name>  
+    	<servlet-class>little.ant.pingtai.servlet.AuthImg</servlet-class>
+ 	</servlet>
+	<servlet-mapping>
+		<servlet-name>authImg</servlet-name>
+		<url-pattern>/se/authImg</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Druid 数据源查看 -->

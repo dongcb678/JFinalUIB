@@ -8,7 +8,6 @@ import java.net.URLDecoder;
 import java.util.Date;
 
 import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -205,13 +204,81 @@ public class ToolContext {
 	}
 
 	/**
-	 * 生成cookie令牌
-	 * 
+	 * 获取当前登录用户
 	 * @param request
-	 * @param user
+	 * @param userAgentVali 是否验证 User-Agent
 	 * @return
 	 */
-	public static String getCookieAuthToken(HttpServletRequest request, User user) {
+	public static User getCurrentUser(HttpServletRequest request, boolean userAgentVali) {
+		String loginCookie = ToolWeb.getCookieValueByName(request, "authmark");
+		if (null != loginCookie && !loginCookie.equals("")) {
+			// 1. Base64解码cookie令牌
+			try {
+				loginCookie = ToolString.decode(loginCookie);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// 2. 解密cookie令牌
+			byte[] securityByte = Base64.decodeBase64(loginCookie);
+
+			String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
+			byte[] keyByte = Base64.decodeBase64(securityKey);
+
+			byte[] dataByte = null;
+			try {
+				dataByte = ToolSecurityIDEA.decrypt(securityByte, keyByte);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			String data = new String(dataByte);
+			String[] datas = data.split(".#.");	//arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
+			
+			// 3. 获取数据
+			long loginDateTimes = Long.parseLong(datas[0]);// 时间戳
+			String userIds = datas[1];// 用户id
+			String ips = datas[2];// ip地址
+			String userAgent = datas[3];// USER_AGENT
+
+			String newIp = ToolWeb.getIpAddr(request);
+			String newUserAgent = request.getHeader("User-Agent");
+
+			Date start = ToolDateTime.getDate();
+			start.setTime(loginDateTimes);
+			int day = ToolDateTime.getDateDaySpace(start, ToolDateTime.getDate());
+			
+			// 4. 验证数据有效性
+			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= 365) {
+				ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
+				Object userObj = cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
+				if (null != userObj) {
+					User user = (User) userObj;
+					return user;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * 设置当前登录用户
+	 * @param request
+	 * @param response
+	 * @param user
+	 * @param autoLogin
+	 */
+	public static void setCurrentUser(HttpServletRequest request, HttpServletResponse response, User user, boolean autoLogin) {
+		// 1.设置cookie有效时间
+		int maxAgeTemp = -1;
+		if (autoLogin) {
+			maxAgeTemp = 3600 * 24 * 365;// 365天
+		}
+
+		// 2.设置用户名到cookie
+		ToolWeb.addCookie(response, "userName", user.getStr("username"), maxAgeTemp);
+
+		// 3.生成登陆认证cookie
 		String userIds = user.getStr("ids");
 		String ips = ToolWeb.getIpAddr(request);
 		String userAgent = request.getHeader("User-Agent");
@@ -223,6 +290,41 @@ public class ToolContext {
 		byte[] authTokenByte = null;
 		try {
 			authTokenByte = authToken.getBytes(ToolString.encoding);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
+		byte[] keyByte = Base64.decodeBase64(securityKey);
+
+		// 4. 认证cookie加密
+		byte[] securityByte = null;
+		try {
+			securityByte = ToolSecurityIDEA.encrypt(authTokenByte, keyByte);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String securityCookie = Base64.encodeBase64String(securityByte);
+
+		// 5. 认证cookie Base64编码
+		try {
+			securityCookie = ToolString.encode(securityCookie);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// 6. 添加到Cookie
+		ToolWeb.addCookie(response, "authmark", securityCookie, maxAgeTemp);
+	}
+	
+	/**
+	 * 设置验证码
+	 * @param response
+	 * @param authCode
+	 */
+	public static void setAuthCode(HttpServletResponse response, String authCode){
+		byte[] authTokenByte = null;
+		try {
+			authTokenByte = authCode.getBytes(ToolString.encoding);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -244,99 +346,42 @@ public class ToolContext {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return securityCookie;
-	}
-
-	/**
-	 * 解密cookie令牌
-	 * 
-	 * @param encodeCookie
-	 * @return //arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
-	 */
-	public static String[] decodeCookieAuthToken(String encodeCookie) {
-		// Base64解码
-		try {
-			encodeCookie = ToolString.decode(encodeCookie);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		// 解密
-		byte[] securityByte = Base64.decodeBase64(encodeCookie);
-
-		String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
-		byte[] keyByte = Base64.decodeBase64(securityKey);
-
-		byte[] dataByte = null;
-		try {
-			dataByte = ToolSecurityIDEA.decrypt(securityByte, keyByte);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String data = new String(dataByte);
-
-		String[] dataArr = data.split(".#.");
-
-		return dataArr;
-	}
-
-	/**
-	 * 获取当前登录用户
-	 * @param request
-	 * @param userAgentVali 是否验证 User-Agent
-	 * @return
-	 */
-	public static User getCurrentUser(HttpServletRequest request, boolean userAgentVali) {
-		String loginCookie = ToolWeb.getCookieValueByName(request, "authmark");
-		if (null != loginCookie && !loginCookie.equals("")) {
-			String[] datas = ToolContext.decodeCookieAuthToken(loginCookie);
-
-			long loginDateTimes = Long.parseLong(datas[0]);// 时间戳
-			String userIds = datas[1];// 用户id
-			String ips = datas[2];// ip地址
-			String userAgent = datas[3];// USER_AGENT
-
-			String newIp = ToolWeb.getIpAddr(request);
-			String newUserAgent = request.getHeader("User-Agent");
-
-			Date start = ToolDateTime.getDate();
-			start.setTime(loginDateTimes);
-			int day = ToolDateTime.getDateDaySpace(start, ToolDateTime.getDate());
-			
-			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= 365) {
-				ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-				Object userObj = cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
-				if (null != userObj) {
-					User user = (User) userObj;
-					return user;
-				}
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * 设置当前登录用户
-	 * 
-	 * @return
-	 */
-	public static void setCurrentUser(HttpServletRequest request, HttpServletResponse response, User user, boolean autoLogin) {
-		int maxAgeTemp = -1;
-		if (autoLogin) {
-			maxAgeTemp = 3600 * 24 * 365;// 365天
-		}
-
-		// 用户名cookie
-		Cookie userName = new Cookie("userName", user.getStr("username"));
-		userName.setMaxAge(maxAgeTemp);
-		userName.setPath("/");
-		response.addCookie(userName);
-
+		
 		// 登陆认证cookie
-		String authToken = ToolContext.getCookieAuthToken(request, user);
-		ToolWeb.addCookie(response, "authmark", authToken, maxAgeTemp);
+		int maxAgeTemp = 3600 * 24 * 365;// 365天
+		ToolWeb.addCookie(response, "authCode", securityCookie, maxAgeTemp);
+	}
+
+	/**
+	 * 获取验证码
+	 * @param request
+	 * @return
+	 */
+	public static String getAuthCode(HttpServletRequest request){
+		String authCode = ToolWeb.getCookieValueByName(request, "authCode");
+		if (null != authCode && !authCode.equals("")) {
+			// Base64解码
+			try {
+				authCode = ToolString.decode(authCode);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// 解密
+			byte[] securityByte = Base64.decodeBase64(authCode);
+
+			String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
+			byte[] keyByte = Base64.decodeBase64(securityKey);
+
+			byte[] dataByte = null;
+			try {
+				dataByte = ToolSecurityIDEA.decrypt(securityByte, keyByte);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			authCode = new String(dataByte);
+		}
+		return authCode;
 	}
 
 	/**

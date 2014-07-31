@@ -133,7 +133,6 @@ public class ParamPkgInterceptor implements Interceptor {
 			String name = field.getName();
 			String value = controller.getPara(name);
 			if(null == value || value.isEmpty()){// 参数值为空直接结束
-				field.setAccessible(false);
 				log.debug("参数值为空");
 				return;
 			}
@@ -145,13 +144,14 @@ public class ParamPkgInterceptor implements Interceptor {
 				field.set(controller, Integer.parseInt(value));
 				
 			}else if(fieldType.equals("Date")){
-				if(value.length() == ToolDateTime.pattern_ymd.length()){
+				int dateLength = value.length();
+				if(dateLength == ToolDateTime.pattern_ymd.length()){
 					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd));
 				
-				}else if(value.length() == ToolDateTime.pattern_ymd_hms.length()){
+				}else if(dateLength == ToolDateTime.pattern_ymd_hms.length()){
 					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms));
 				
-				}else if(value.length() == ToolDateTime.pattern_ymd_hms_s.length()){
+				}else if(dateLength == ToolDateTime.pattern_ymd_hms_s.length()){
 					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms_s));
 				}
 				
@@ -162,12 +162,12 @@ public class ParamPkgInterceptor implements Interceptor {
 			}else{
 				log.debug("没有解析到有效字段类型");
 			}
-			
-			field.setAccessible(false);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
 			e1.printStackTrace();
+		} finally {
+			field.setAccessible(false);
 		}
 	}
 
@@ -181,17 +181,17 @@ public class ParamPkgInterceptor implements Interceptor {
 			field.setAccessible(true);
 			Object value = field.get(controller);
 			if(null == value){// 参数值为空直接结束
-				field.setAccessible(false);
 				log.debug("参数值为空");
 				return;
 			}
 			String name = field.getName();
-			field.setAccessible(false);
 			controller.setAttr(name, value);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
 			e1.printStackTrace();
+		} finally {
+			field.setAccessible(false);
 		}
 	}
 }
