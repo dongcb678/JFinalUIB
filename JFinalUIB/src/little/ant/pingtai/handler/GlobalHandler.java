@@ -62,6 +62,7 @@ public class GlobalHandler extends Handler {
 			}
 		}
 		Map<String, String> i18nMap = I18NPlugin.get(localePram);
+		request.setAttribute("localePram", localePram);
 		request.setAttribute("i18nMap", i18nMap);
 		
 		log.info("设置Header");
