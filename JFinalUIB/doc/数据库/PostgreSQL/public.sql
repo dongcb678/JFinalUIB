@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 90303
 File Encoding         : 65001
 
-Date: 2014-07-28 19:49:37
+Date: 2014-08-01 19:39:06
 */
 
 
@@ -65,7 +65,13 @@ CREATE TABLE "public"."pt_dict" (
 "isparent" varchar(5),
 "levels" int8,
 "numbers" varchar(50),
-"values" varchar(500)
+"values" varchar(500),
+"i18n" char(1),
+"values_zhcn" varchar(500),
+"values_zhhk" varchar(500),
+"values_zhtw" varchar(500),
+"values_jp" varchar(500),
+"values_enus" varchar(500)
 )
 WITH (OIDS=FALSE)
 
@@ -74,11 +80,11 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of pt_dict
 -- ----------------------------
-INSERT INTO "public"."pt_dict" VALUES ('0c78f87750a745bbb59005a6ca0f744a', '0', null, '3.png', 'weixinToken', '3', '100103root/83f4b0ee56904cbeb5f91696ad804c29/0c78f87750a745bbb59005a6ca0f744a', null, '83f4b0ee56904cbeb5f91696ad804c29', 'false', '2', 'weixinToken', '123');
-INSERT INTO "public"."pt_dict" VALUES ('7381008292054bccba20224bc33774d7', '0', null, '2.png', 'weixinAppID', '1', '100103root/83f4b0ee56904cbeb5f91696ad804c29/7381008292054bccba20224bc33774d7', null, '83f4b0ee56904cbeb5f91696ad804c29', 'false', '2', 'weixinAppID', '123');
-INSERT INTO "public"."pt_dict" VALUES ('8094c60d7a594b36bb0187cbce9c4188', '0', null, '2.png', 'weixinAppSecret', '2', '100103root/83f4b0ee56904cbeb5f91696ad804c29/8094c60d7a594b36bb0187cbce9c4188', null, '83f4b0ee56904cbeb5f91696ad804c29', 'false', '2', 'weixinAppSecret', '123');
-INSERT INTO "public"."pt_dict" VALUES ('83f4b0ee56904cbeb5f91696ad804c29', '0', null, '2.png', '微信配置', '1', '100103root/83f4b0ee56904cbeb5f91696ad804c29', null, '8a40c0353fa828a6013fa898d4ac0020', 'true', '1', null, null);
-INSERT INTO "public"."pt_dict" VALUES ('8a40c0353fa828a6013fa898d4ac0020', '0', '字典树', '1_open.png', '字典树', '1', '100103root', '1', null, 'true', '0', null, null);
+INSERT INTO "public"."pt_dict" VALUES ('0c78f87750a745bbb59005a6ca0f744a', '0', null, '3.png', 'weixinToken', '3', '100103root/83f4b0ee56904cbeb5f91696ad804c29/0c78f87750a745bbb59005a6ca0f744a', null, '83f4b0ee56904cbeb5f91696ad804c29', 'false', '2', 'weixinToken', '123', null, null, null, null, null, null);
+INSERT INTO "public"."pt_dict" VALUES ('7381008292054bccba20224bc33774d7', '0', null, '2.png', 'weixinAppID', '1', '100103root/83f4b0ee56904cbeb5f91696ad804c29/7381008292054bccba20224bc33774d7', null, '83f4b0ee56904cbeb5f91696ad804c29', 'false', '2', 'weixinAppID', '123', null, null, null, null, null, null);
+INSERT INTO "public"."pt_dict" VALUES ('8094c60d7a594b36bb0187cbce9c4188', '0', null, '2.png', 'weixinAppSecret', '2', '100103root/83f4b0ee56904cbeb5f91696ad804c29/8094c60d7a594b36bb0187cbce9c4188', null, '83f4b0ee56904cbeb5f91696ad804c29', 'false', '2', 'weixinAppSecret', '123', null, null, null, null, null, null);
+INSERT INTO "public"."pt_dict" VALUES ('83f4b0ee56904cbeb5f91696ad804c29', '0', null, '2.png', '微信配置', '1', '100103root/83f4b0ee56904cbeb5f91696ad804c29', null, '8a40c0353fa828a6013fa898d4ac0020', 'true', '1', null, null, null, null, null, null, null, null);
+INSERT INTO "public"."pt_dict" VALUES ('8a40c0353fa828a6013fa898d4ac0020', '0', '字典树', '1_open.png', '字典树', '1', '100103root', '1', null, 'true', '0', null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for "public"."pt_group"
@@ -450,7 +456,7 @@ CREATE TABLE "public"."pt_syslog" (
 "startdate" timestamp(6),
 "starttime" int8,
 "status" char(1),
-"useragent" varchar(200),
+"useragent" varchar(1000),
 "viewhaoshi" int8,
 "operatorids" varchar(32),
 "accept" varchar(200),
@@ -492,6 +498,27 @@ WITH (OIDS=FALSE)
 INSERT INTO "public"."pt_systems" VALUES ('0c1230c98ef34e58947903fab5a4fa85', '0', null, '易信平台', 'yiXin', '3');
 INSERT INTO "public"."pt_systems" VALUES ('8a40c0353fa828a6013fa898d4ac0020', '0', '基础平台', '基础平台', 'platform', '1');
 INSERT INTO "public"."pt_systems" VALUES ('d3a5c976c4c24751b6b00ec775692683', '0', null, '微信平台', 'weiXin', '2');
+
+-- ----------------------------
+-- Table structure for "public"."pt_upload"
+-- ----------------------------
+DROP TABLE "public"."pt_upload";
+CREATE TABLE "public"."pt_upload" (
+"ids" varchar(32) NOT NULL,
+"version" int8,
+"parametername" varchar(50),
+"filename" varchar(50),
+"contenttype" varchar(100),
+"originalfilename" varchar(500),
+"path" varchar(500)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of pt_upload
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for "public"."pt_user"
@@ -861,6 +888,11 @@ ALTER TABLE "public"."pt_syslog" ADD PRIMARY KEY ("ids");
 -- Primary Key structure for table "public"."pt_systems"
 -- ----------------------------
 ALTER TABLE "public"."pt_systems" ADD PRIMARY KEY ("ids");
+
+-- ----------------------------
+-- Primary Key structure for table "public"."pt_upload"
+-- ----------------------------
+ALTER TABLE "public"."pt_upload" ADD PRIMARY KEY ("ids");
 
 -- ----------------------------
 -- Indexes structure for table pt_user
