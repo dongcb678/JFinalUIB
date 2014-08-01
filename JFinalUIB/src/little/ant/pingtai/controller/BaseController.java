@@ -40,6 +40,22 @@ public abstract class BaseController extends Controller {
 		String toUrl = getPara("toUrl");
 		render(toUrl);
 	}
+
+	/**
+	 * 获取当前请求国际化参数
+	 * @return
+	 */
+	protected String getI18nPram() {
+		return getAttr("localePram");
+	}
+
+	/**
+	 * 获取项目请求根路径
+	 * @return
+	 */
+	protected String getCxt() {
+		return getAttr("cxt");
+	}
 	
 	/**
 	 * 重写getPara，进行二次decode解码
