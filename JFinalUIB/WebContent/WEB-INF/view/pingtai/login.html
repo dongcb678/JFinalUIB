@@ -194,7 +194,7 @@
 		$(document).ready(function() {
 			// 初始化页面焦点
 			var userName = $("#username");
-			if(userName.value == ""){
+			if(userName.val() == ""){
 				userName.focus();
 			}else{
 				$("#password").focus();
