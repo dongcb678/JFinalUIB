@@ -110,7 +110,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2014-05-29 14:34:07</creation_date>
-			<updated_date>2014-08-01 19:38:05</updated_date>
+			<updated_date>2014-08-01 21:54:36</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -2688,8 +2688,8 @@
 			<binary>false</binary>
 			<args></args>
 			<description></description>
-			<logical_name>values</logical_name>
-			<physical_name>values</physical_name>
+			<logical_name>val</logical_name>
+			<physical_name>val</physical_name>
 			<type>varchar(n)</type>
 		</word>
 		<word>
@@ -2702,8 +2702,8 @@
 			<binary>false</binary>
 			<args></args>
 			<description></description>
-			<logical_name>values_enus</logical_name>
-			<physical_name>values_enus</physical_name>
+			<logical_name>val_enus</logical_name>
+			<physical_name>val_enus</physical_name>
 			<type>varchar(n)</type>
 		</word>
 		<word>
@@ -2716,8 +2716,8 @@
 			<binary>false</binary>
 			<args></args>
 			<description></description>
-			<logical_name>values_jp</logical_name>
-			<physical_name>values_jp</physical_name>
+			<logical_name>val_jp</logical_name>
+			<physical_name>val_jp</physical_name>
 			<type>varchar(n)</type>
 		</word>
 		<word>
@@ -2730,8 +2730,8 @@
 			<binary>false</binary>
 			<args></args>
 			<description></description>
-			<logical_name>values_zhcn</logical_name>
-			<physical_name>values_zhcn</physical_name>
+			<logical_name>val_zhcn</logical_name>
+			<physical_name>val_zhcn</physical_name>
 			<type>varchar(n)</type>
 		</word>
 		<word>
@@ -2744,8 +2744,8 @@
 			<binary>false</binary>
 			<args></args>
 			<description></description>
-			<logical_name>values_zhhk</logical_name>
-			<physical_name>values_zhhk</physical_name>
+			<logical_name>val_zhhk</logical_name>
+			<physical_name>val_zhhk</physical_name>
 			<type>varchar(n)</type>
 		</word>
 		<word>
@@ -2758,8 +2758,8 @@
 			<binary>false</binary>
 			<args></args>
 			<description></description>
-			<logical_name>values_zhtw</logical_name>
-			<physical_name>values_zhtw</physical_name>
+			<logical_name>val_zhtw</logical_name>
+			<physical_name>val_zhtw</physical_name>
 			<type>varchar(n)</type>
 		</word>
 		<word>
