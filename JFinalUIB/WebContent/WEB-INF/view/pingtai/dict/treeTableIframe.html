@@ -13,8 +13,11 @@
 			<h2><i class="icon-edit"></i> 字典树</h2>
 			<div class="box-icon">
 				<% if(hasPrivilegeUrl("/pingtai/dict/add.html")){ %>
-					<a href="#" class="btn btn-round" title="添加字典" 
-						onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/add.html');"><i class="icon-plus-sign"></i></a>
+					<a href="#" class="btn btn-round" title="添加国际化字典" 
+						onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/add.html&i18n=1');"><i class="icon-plus-sign"></i></a>
+					
+					<a href="#" class="btn btn-round" title="添加非国际化字典" 
+						onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/add.html&i18n=0');"><i class="icon-plus-sign"></i></a>
 				<% } %>
 				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
 				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>

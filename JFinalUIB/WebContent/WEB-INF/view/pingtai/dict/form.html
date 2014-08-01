@@ -41,6 +41,11 @@ function dataVali(form){
 			<span class="help-inline">5-50位字母数字</span>
 		</div>
 	</div>
+	
+	<input type="hidden" name="dict.i18n" value='${paramMap["i18n"]}' >
+				
+	<% if(paramMap["i18n"] == "0"){ %>
+	
 	<div class="control-group">
 		<label class="control-label">值</label>
 		<div class="controls">
@@ -49,10 +54,56 @@ function dataVali(form){
 			<span class="help-inline">1-500位任意字符</span>
 		</div>
 	</div>
+	
+	<% } else { %>
+	
+	<div class="control-group">
+		<label class="control-label">值(en-US)</label>
+		<div class="controls">
+			<input type="text" name="dict.values_enus" value="${escapeXml(dict.values_enus!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">值(jp)</label>
+		<div class="controls">
+			<input type="text" name="dict.values_jp" value="${escapeXml(dict.values_jp!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">值(zh-CN)</label>
+		<div class="controls">
+			<input type="text" name="dict.values_zhcn" value="${escapeXml(dict.values_zhcn!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">值(zh-HK)</label>
+		<div class="controls">
+			<input type="text" name="dict.values_zhhk" value="${escapeXml(dict.values_zhhk!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">值(zh-TW)</label>
+		<div class="controls">
+			<input type="text" name="dict.values_zhtw" value="${escapeXml(dict.values_zhtw!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	
+	<% } %>
+	
 	<div class="control-group">
 		<label class="control-label">排序</label>
 		<div class="controls">
-			<input type="text" name="dict.orderids" value="${escapeXml(dict.orderids!)}" 
+			<input type="text" name="dict.orderids" value="${dict.orderids!}" 
 				class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">
 			<span class="help-inline">2-10位中文字母数字</span>
 		</div>
