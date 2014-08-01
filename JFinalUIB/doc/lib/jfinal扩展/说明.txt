@@ -1,0 +1,4 @@
+
+1.修改文件上传的名称策略：FileRenamePolicyPlugin
+
+2.表单数组上传：ToolModel
