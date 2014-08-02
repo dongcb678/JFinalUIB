@@ -97,6 +97,7 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("configPlugin 配置ActiveRecord插件");
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+		//arp.setTransactionLevel(4);//事务隔离级别
 		arp.setDevMode(getPropertyToBoolean("config.devMode", false)); // 设置开发模式
 		arp.setShowSql(getPropertyToBoolean("config.devMode", false)); // 是否显示SQL
 		
