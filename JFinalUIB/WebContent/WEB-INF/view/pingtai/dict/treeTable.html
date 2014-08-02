@@ -44,7 +44,16 @@
 	        option.theme = 'default';
 	        $('#treeTable').treeTable(option);
 	    });	
-		
+
+		function view(ids){
+			var has = ${hasPrivilegeUrl("/jf/dict/view")};
+			if(has){
+				parent.window.ajaxContent('/jf/dict/view/' + ids);
+			}else{
+				alertMsg.error('没有操作权限！');
+			}
+		}
+	
 		function update(ids){
 			var has = ${hasPrivilegeUrl("/jf/dict/edit")};
 			if(has){

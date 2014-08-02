@@ -58,15 +58,7 @@ function dataVali(form){
 	<% } else { %>
 	
 	<div class="control-group">
-		<label class="control-label">值(en-US)</label>
-		<div class="controls">
-			<input type="text" name="dict.val_enus" value="${escapeXml(dict.val_enus!)}" 
-				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
-			<span class="help-inline">1-500位任意字符</span>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">值(jp)</label>
+		<label class="control-label">值(jp)<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
 		<div class="controls">
 			<input type="text" name="dict.val_jp" value="${escapeXml(dict.val_jp!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -74,7 +66,15 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">值(zh-CN)</label>
+		<label class="control-label">值(en-US)<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="dict.val_enus" value="${escapeXml(dict.val_enus!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">值(zh-CN)<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
 		<div class="controls">
 			<input type="text" name="dict.val_zhcn" value="${escapeXml(dict.val_zhcn!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -82,7 +82,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">值(zh-HK)</label>
+		<label class="control-label">值(zh-HK)<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
 		<div class="controls">
 			<input type="text" name="dict.val_zhhk" value="${escapeXml(dict.val_zhhk!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -90,7 +90,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">值(zh-TW)</label>
+		<label class="control-label">值(zh-TW)<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
 		<div class="controls">
 			<input type="text" name="dict.val_zhtw" value="${escapeXml(dict.val_zhtw!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">

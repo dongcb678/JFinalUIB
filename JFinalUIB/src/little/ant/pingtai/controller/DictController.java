@@ -57,6 +57,14 @@ public class DictController extends BaseController {
 		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html");
 	}
 
+	public void view() {
+		Dict dict = Dict.dao.findById(getPara());
+		String pIds = dict.getStr("parentids");
+		Dict parent = Dict.dao.findById(pIds);
+		setAttr("dict", dict.put("parentnames", parent.getStr("names")));
+		render("/pingtai/dict/view.html");
+	}
+
 }
 
 

@@ -1,4 +1,5 @@
 <%
+	var view = hasPrivilegeUrl("/jf/dict/view");
 	var edit = hasPrivilegeUrl("/jf/dict/edit");
 	var delete = hasPrivilegeUrl("/jf/dict/delete");
 %>
@@ -18,6 +19,9 @@
 		<td>${dict.names }</td>
 		<td>
 			<% if(dict.levels != 0){ %>
+				<% if(view == true){ %>
+					<a href='#' onclick='view("${dict.ids!}")'>查看</a>&nbsp;&nbsp;
+				<% } %>
 				<% if(edit == true){ %>
 					<a href='#' onclick='update("${dict.ids!}")'>修改</a>&nbsp;&nbsp;
 				<% } %>
