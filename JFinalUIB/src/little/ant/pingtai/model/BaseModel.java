@@ -24,11 +24,37 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	private static Logger log = Logger.getLogger(BaseModel.class);
 	
 	/**
+	 * 根据i18n参数查询获取哪个字段的值
+	 * @param i18n
+	 * @return
+	 */
+	protected String i18n(String i18n){
+		String val = null;
+		if(i18n.equals("zh") || i18n.equals("zh_CN")){
+			val = "_zhcn";
+			
+		} else if(i18n.equals("en") || i18n.equals("en_US")){
+			val = "_enus";
+			
+		} else if(i18n.equals("jp")){
+			val = "_jp";
+			
+		} else if(i18n.equals("zh_HK")){
+			val = "_zhhk";
+			
+		} else if(i18n.equals("zh_TW")){
+			val = "_zhtw";
+			
+		}
+		return val;
+	}
+	
+	/**
 	 * 获取表映射对象
 	 * 
 	 * @return
 	 */
-	public Table getTable() {
+	protected Table getTable() {
 		return TableMapping.me().getTable(getClass());
 	}
 

@@ -23,8 +23,8 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public Dict getByIds(String ids, String i18n){
-		String val = i18n(i18n);
-		Dict dict = dao.findFirst(" select ids, numbers, " + val + " as val from pt_dict where ids = ? ", ids);
+		String val = "val" + i18n(i18n);
+		Dict dict = dao.findFirst(" select ids, numbers, parentids, " + val + " as val from pt_dict where ids = ? ", ids);
 		return dict;
 	}
 	
@@ -34,7 +34,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public Dict getByNumber(String number){
-		Dict dict = dao.findFirst(" select ids, numbers, val from pt_dict where numbers = ? ", number);
+		Dict dict = dao.findFirst(" select ids, numbers, parentids, val from pt_dict where numbers = ? ", number);
 		return dict;
 	}
 	
@@ -45,8 +45,8 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public Dict getByNumber(String number, String i18n){
-		String val = i18n(i18n);
-		Dict dict = dao.findFirst(" select ids, numbers, " + val + " as val from pt_dict where numbers = ? ", number);
+		String val = "val" + i18n(i18n);
+		Dict dict = dao.findFirst(" select ids, numbers, parentids, " + val + " as val from pt_dict where numbers = ? ", number);
 		return dict;
 	}
 	
@@ -56,7 +56,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(String prentIds){
-		return dao.find(" select ids, numbers, val from pt_dict where parentids = ? ", prentIds);
+		return dao.find(" select ids, numbers, parentids, val from pt_dict where parentids = ? ", prentIds);
 	}
 
 	/**
@@ -65,34 +65,8 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(String prentIds, String i18n){
-		String val = i18n(i18n);
-		return dao.find(" select ids, numbers, " + val + " as val from pt_dict where parentids = ? ", prentIds);
-	}
-	
-	/**
-	 * 根据i18n参数查询获取哪个字段的值
-	 * @param i18n
-	 * @return
-	 */
-	public String i18n(String i18n){
-		String val = "val";
-		if(i18n.equals("zh") || i18n.equals("zh_CN")){
-			val = "val_zhcn";
-			
-		} else if(i18n.equals("en") || i18n.equals("en_US")){
-			val = "val_enus";
-			
-		} else if(i18n.equals("jp")){
-			val = "val_jp";
-			
-		} else if(i18n.equals("zh_HK")){
-			val = "val_zhhk";
-			
-		} else if(i18n.equals("zh_TW")){
-			val = "val_zhtw";
-			
-		}
-		return val;
+		String val = "val" + i18n(i18n);
+		return dao.find(" select ids, numbers, parentids, " + val + " as val from pt_dict where parentids = ? ", prentIds);
 	}
 	
 }
