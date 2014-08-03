@@ -9,6 +9,7 @@ import java.util.List;
 import little.ant.pingtai.tools.ToolString;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.ja.JapaneseAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.DoubleField;
 import org.apache.lucene.document.Field;
@@ -29,6 +30,7 @@ import org.apache.lucene.search.highlight.Scorer;
 import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.store.Directory;
+import org.apache.lucene.util.Version;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import com.jfinal.plugin.activerecord.Db;
@@ -49,7 +51,8 @@ public abstract class DocBase implements Runnable {
 	
 	protected static final int splitDataSize = 10000;//初始化索引，每批次处理一万行
 	
-	protected static final Analyzer analyzer = new IKAnalyzer();//分词器
+	protected static final Analyzer analyzer_zh = new IKAnalyzer();//分词器，中文简体，中文繁体，英文
+	protected static final Analyzer analyzer_jp = new JapaneseAnalyzer(Version.LUCENE_4_9);//分词器，日文
 	
 	/**
 	 * 获取索引路径
@@ -113,12 +116,12 @@ public abstract class DocBase implements Runnable {
 
     /**
      * 高亮处理
+     * @param analyzer
      * @param highlighter
      * @param doc
-     * @throws IOException
-     * @throws InvalidTokenOffsetsException
+     * @param fieldNames
      */
-	protected void highlighter(Highlighter highlighter, Document doc, String[] fieldNames){
+	protected void highlighter(Analyzer analyzer, Highlighter highlighter, Document doc, String[] fieldNames){
     	for (String fieldName : fieldNames) {
     		String fieldNameHig = null;
     		try {
