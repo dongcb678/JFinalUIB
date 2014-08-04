@@ -147,13 +147,22 @@
 			
 			return false;
 		});
-		
-		//2.处理查看按钮
+
+		//2.菜单功能设置
 		var accessControlStr = "<span class='button accessControl' id='accessControlBtn_" + treeNode.tId + "' title='菜单功能设置' onfocus='this.blur();'></span>";
 		sObj.after(accessControlStr);
-		var btn = $("#accessControlBtn_"+treeNode.tId);
-		if (btn) btn.bind("click", function(){
+		var accessBtn = $("#accessControlBtn_"+treeNode.tId);
+		if (accessBtn) accessBtn.bind("click", function(){
 			setMenuOperatorDiaLog(treeNode.id);
+			return false;
+		});
+		
+		//3.菜单国际化名称设置
+		var editControlStr = "<span class='button accessControl' id='editControlBtn_" + treeNode.tId + "' title='菜单国际化设置' onfocus='this.blur();'></span>";
+		sObj.after(editControlStr);
+		var editBtn = $("#editControlBtn_"+treeNode.tId);
+		if (editBtn) editBtn.bind("click", function(){
+			setMenuEditDiaLog(treeNode.id);
 			return false;
 		});
 	};
@@ -161,8 +170,12 @@
 	function removeHoverDom(treeId, treeNode) {
 		//1.处理添加按钮
 		$("#addBtn_"+treeNode.tId).unbind().remove();
-		//2.处理查看按钮
+		
+		//2.菜单功能设置
 		$("#accessControlBtn_"+treeNode.tId).unbind().remove();
+		
+		//3.菜单国际化名称设置
+		$("#editControlBtn_"+treeNode.tId).unbind().remove();
 	};
 
 	////////////////////下面是处理展开//////////////////

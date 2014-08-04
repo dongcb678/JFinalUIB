@@ -21,9 +21,12 @@ public class IndexService extends BaseService {
 	 * 查询用户可操作的菜单
 	 * @param systemsIds
 	 * @param user
+	 * @param i18n
 	 * @return
 	 */
-	public List<Menu> menu(String systemsIds, User user){
+	public List<Menu> menu(String systemsIds, User user, String i18n){
+		String names = "names" + i18n(i18n) + " names";
+		
 		//基于缓存查询
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		StringBuilder operatorIdsSb = new StringBuilder();
@@ -63,9 +66,9 @@ public class IndexService extends BaseService {
 		String parentmenuids = menu.getStr("ids");
 		
 		// 一级菜单
-		List<Menu> oneList = Menu.dao.find(" select ids, names from pt_menu where parentmenuids = ? order by orderids asc ", parentmenuids);
+		List<Menu> oneList = Menu.dao.find(" select ids, " + names + " from pt_menu where parentmenuids = ? order by orderids asc ", parentmenuids);
 		for (Menu oneMenu : oneList) {
-			String sql = " select m.names, o.url  from pt_menu m left join pt_operator o on m.operatorids=o.ids where parentmenuids = ? and m.operatorids in (" + fitler + ") order by orderids asc ";
+			String sql = " select m." + names + ", o.url  from pt_menu m left join pt_operator o on m.operatorids=o.ids where parentmenuids = ? and m.operatorids in (" + fitler + ") order by orderids asc ";
 			// 二级菜单
 			List<Menu> twoList = Menu.dao.find(sql, oneMenu.getPrimaryKeyValue());
 			oneMenu.put("subList", twoList);

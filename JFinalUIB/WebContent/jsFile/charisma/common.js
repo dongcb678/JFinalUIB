@@ -411,6 +411,25 @@ function setMenuOperatorDiaLog(menuIds){
 }
 
 /**
+ * 菜单国际化名称设置
+ * @param menuIds
+ */
+function setMenuEditDiaLog(menuIds){
+	$.ajax({
+		type : "post",
+		url : cxt + "/jf/menu/toEdit",
+		data : { "ids" : menuIds },
+		dataType : "html",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		async: false,
+		success:function(data){
+			$('#myModal').html(data);
+			$('#myModal').modal('show');
+		}
+	});
+}
+
+/**
  * 角色功能设置
  * @param roleIds
  */

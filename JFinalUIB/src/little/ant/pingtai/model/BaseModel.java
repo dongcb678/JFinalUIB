@@ -28,7 +28,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * @param i18n
 	 * @return
 	 */
-	protected String i18n(String i18n){
+	public String i18n(String i18n){
 		String val = null;
 		if(i18n.equals("zh") || i18n.equals("zh_CN")){
 			val = "_zhcn";
@@ -54,7 +54,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * 
 	 * @return
 	 */
-	protected Table getTable() {
+	public Table getTable() {
 		return TableMapping.me().getTable(getClass());
 	}
 

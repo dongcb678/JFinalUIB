@@ -49,7 +49,16 @@ public class Dict extends BaseModel<Dict> {
 		Dict dict = dao.findFirst(" select ids, numbers, parentids, " + val + " as val from pt_dict where numbers = ? ", number);
 		return dict;
 	}
-	
+
+	/**
+	 * 查询子节点字典
+	 * @param prentIds
+	 * @return
+	 */
+	public List<Dict> getChild(){
+		return dao.find(" select ids, numbers, parentids, val from pt_dict where parentids = ? ", get("ids"));
+	}
+
 	/**
 	 * 查询子节点字典
 	 * @param prentIds

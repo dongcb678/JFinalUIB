@@ -27,6 +27,7 @@ public class ThreadParamInit extends Thread {
 	public static String cacheStart_station = "station_";
 	public static String cacheStart_operator = "operator_";
 	public static String cacheStart_dict = "dict_";
+	public static String cacheStart_dict_child =  "dict_child_";
 	
 	@Override
 	public void run() {
@@ -134,6 +135,8 @@ public class ThreadParamInit extends Thread {
 		List<Dict> dictList = Dict.dao.find("select * from pt_dict");
 		for (Dict dict : dictList) {
 			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
+			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("ids"), dict.getChild());
 			dict = null;
 		}
 		dictList = null;

@@ -16,21 +16,24 @@ public class MenuService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(MenuService.class);
 	
-
 	/**
 	 * 获取子节点数据
+	 * @param systemsIds
 	 * @param parentIds
+	 * @param i18n
 	 * @return
 	 */
-	public String childNodeData(String systemsIds, String parentIds){
+	public String childNodeData(String systemsIds, String parentIds, String i18n){
+		String names = "names" + i18n(i18n) + " names";
+		
 		String sql = null;
 		List<Menu> list = null;
 		if(null != parentIds){
-			sql = " select ids, names, isparent, images from pt_menu where parentMenuIds = ? order by orderIds asc ";
+			sql = " select ids, " + names + ", isparent, images from pt_menu where parentMenuIds = ? order by orderIds asc ";
 			list = Menu.dao.find(sql, parentIds);
 			
 		}else{
-			sql = " select ids, names, isparent, images from pt_menu where parentMenuIds is null and systemsIds=? order by orderIds asc ";
+			sql = " select ids, " + names + ", isparent, images from pt_menu where parentMenuIds is null and systemsIds=? order by orderIds asc ";
 			list = Menu.dao.find(sql, systemsIds);
 		}
 		
@@ -61,10 +64,13 @@ public class MenuService extends BaseService {
 	 * @param pIds
 	 * @param names
 	 * @param orderIds
+	 * @param i18n
 	 * @return
 	 */
 	@Before(Tx.class)
-	public String save(String pIds, String names, int orderIds) {
+	public String save(String pIds, String names, int orderIds, String i18n){
+		String namesColunm = "names" + i18n(i18n);
+		
 		Menu pDept = Menu.dao.findById(pIds);
 		pDept.set("isparent", "true").update();
 		
@@ -80,7 +86,7 @@ public class MenuService extends BaseService {
 		menu.set("isparent", "false");
 		menu.set("parentmenuids", pIds);
 		menu.set("orderids", orderIds);
-		menu.set("names", names);
+		menu.set(namesColunm, names);
 		menu.set("images", images);
 		menu.save();
 		
@@ -94,11 +100,13 @@ public class MenuService extends BaseService {
 	 * @param names
 	 * @param principalIds
 	 */
-	public void update(String ids, String pIds, String names) {
+	public void update(String ids, String pIds, String names, String i18n){
+		String namesColunm = "names" + i18n(i18n);
+		
 		Menu menu = Menu.dao.findById(ids);
 		if(null != names && !names.isEmpty()){
 			//更新模块名称
-			menu.set("names", names).update();
+			menu.set(namesColunm, names).update();
 			
 		}else if(null != pIds && !pIds.isEmpty()){
 			//更新上级模块

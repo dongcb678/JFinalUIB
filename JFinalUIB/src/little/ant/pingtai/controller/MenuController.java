@@ -28,19 +28,19 @@ public class MenuController extends BaseController {
 	}
 
 	public void treeData()  {
-		String jsonText = menuService.childNodeData(systemsIds, ids);
+		String jsonText = menuService.childNodeData(systemsIds, ids, getI18nPram());
 		renderJson(jsonText);
 	}
 	
 	@Before(MenuValidator.class)
 	public void save() {
-		ids = menuService.save(pIds, names, orderIds);
+		ids = menuService.save(pIds, names, orderIds, getI18nPram());
 		renderText(ids);
 	}
 	
 	@Before(MenuValidator.class)
 	public void update() {
-		menuService.update(ids, pIds, names);
+		menuService.update(ids, pIds, names, getI18nPram());
 		renderText(ids);
 	}
 	
@@ -59,6 +59,23 @@ public class MenuController extends BaseController {
 		renderJson(ids);
 	}
 	
+	/**
+	 * 准备更新
+	 */
+	public void toEdit() {
+		Menu menu = Menu.dao.findById(ids);
+		setAttr("menu", menu);
+		render("/pingtai/menu/edit.html");
+	}
+	
+	/**
+	 * 更新
+	 */
+	public void edit() {
+		Menu menu = getModel(Menu.class);
+		menu.update();
+		renderJson(menu.getPrimaryKeyValue());
+	}
 }
 
 

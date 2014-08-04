@@ -37,7 +37,7 @@ public class IndexController extends BaseController {
 			if(null == ids || ids.isEmpty()){ // 默认系统
 				ids = "8a40c0353fa828a6013fa898d4ac0020";
 			}
-			menuList = indexService.menu(ids, user);
+			menuList = indexService.menu(ids, user, getI18nPram());
 			render("/pingtai/index.html");
 		}else{
 			render("/pingtai/login.html");

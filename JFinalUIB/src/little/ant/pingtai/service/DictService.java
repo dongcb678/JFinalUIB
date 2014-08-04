@@ -41,6 +41,8 @@ public class DictService extends BaseService {
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
+		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
+		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("ids"), dict.getChild());
 	}
 
 	/**
@@ -60,27 +62,32 @@ public class DictService extends BaseService {
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
+		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
+		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("ids"), dict.getChild());
 	}
 
 	/**
-	 * 更新
+	 * 删除
 	 * @param ids
 	 */
 	public void delete(String ids){
+		// 查询
+		Dict dict = Dict.dao.findById(ids);
+		
 		// 缓存
 		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + ids);
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"));
+		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict_child + ids);
 		
 		// 删除
-		Dict.dao.deleteById(ids);
+		dict.delete();
 	}
 
 	/**
 	 * 获取子节点数据
-	 * 
 	 * @param parentIds
 	 * @return
-	 * @throws Exception
 	 */
 	public String childNodeData(String parentIds){
 		String sql = null;
