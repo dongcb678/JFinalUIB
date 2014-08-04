@@ -24,7 +24,7 @@ public class MenuService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String systemsIds, String parentIds, String i18n){
-		String names = "names" + i18n(i18n) + " names";
+		String names = "names" + i18n(i18n) + " as names";
 		
 		String sql = null;
 		List<Menu> list = null;

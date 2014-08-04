@@ -27,7 +27,7 @@ public class IndexService extends BaseService {
 	 * @return
 	 */
 	public List<Menu> menu(String systemsIds, User user, String i18n){
-		String names = "names" + i18n(i18n) + " names";
+		String names = "names" + i18n(i18n) + " as names";
 		
 		//基于缓存查询
 		StringBuilder operatorIdsSb = new StringBuilder();

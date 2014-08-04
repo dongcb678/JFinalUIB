@@ -1,5 +1,1 @@
 
-PG未添加的功能URL：
-
-/jf/menu/toEdit
-/jf/menu/edit

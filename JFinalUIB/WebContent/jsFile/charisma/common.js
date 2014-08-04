@@ -146,6 +146,12 @@ function ajaxForm(formId){
  * @param data
  */
 function ajaxContent(url, data){
+//	if($('.btn-navbar').is(':visible')){
+//		$('.btn-navbar').click();
+//	}
+//	$('#loading').remove();
+//	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	
 	$.ajax({
 		type : "post",
 		url : encodeURI(encodeURI(cxt + url)),

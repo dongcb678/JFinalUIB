@@ -27,7 +27,7 @@ public class SysLogController extends BaseController {
 	
 	public void delete() {
 		Syslog.dao.deleteById(getPara());
-		redirect("/jf/syslog");
+		redirect("/jf/sysLog");
 	}
 
 }
