@@ -14,13 +14,13 @@ import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
-import little.ant.pingtai.tools.ToolEhcacheFactory;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
 
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.ehcache.CacheKit;
 
 public class LoginService extends BaseService {
 
@@ -61,7 +61,7 @@ public class LoginService extends BaseService {
 	public int login(HttpServletRequest request, HttpServletResponse response, String userName, String passWord, boolean autoLogin) {
 		// 1.取用户
 		User user = null;
-		Object userObj = ToolEhcacheFactory.getInstance().get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userName);
+		Object userObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userName);
 		if (null != userObj) {
 			user = (User) userObj;
 		} else {

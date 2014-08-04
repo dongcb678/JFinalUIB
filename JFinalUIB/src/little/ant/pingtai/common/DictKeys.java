@@ -10,7 +10,17 @@ public abstract class DictKeys {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DictKeys.class);
-		
+	
+	/**
+	 * URL缓存Key
+	 */
+	public static final String cache_name_page = "SimplePageCachingFilter";
+	
+	/**
+	 * 系统缓存，主要是权限和数据字典等
+	 */
+	public static final String cache_name_system = "system";
+	
 	/**
 	 * 加密
 	 */

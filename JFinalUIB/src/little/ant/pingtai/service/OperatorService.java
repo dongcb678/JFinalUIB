@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.thread.ThreadParamInit;
-import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
+
+import com.jfinal.plugin.ehcache.CacheKit;
 
 public class OperatorService extends BaseService {
 
@@ -26,9 +28,8 @@ public class OperatorService extends BaseService {
 		operator.save();
 		
 		// 缓存
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
-		cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
 		
 		return operator.getStr("ids");
 	}
@@ -41,9 +42,8 @@ public class OperatorService extends BaseService {
 		operator.update();
 		
 		// 缓存
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
-		cacheFactory.update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
 	}
 
 	/**
@@ -53,9 +53,8 @@ public class OperatorService extends BaseService {
 	public void delete(String ids){
 		Operator operator = Operator.dao.findById(ids);;
 		// 缓存
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"));
-		cacheFactory.delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"));
 		
 		// 删除
 		operator.delete();

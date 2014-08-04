@@ -5,13 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.thread.ThreadParamInit;
-import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
+
+import com.jfinal.plugin.ehcache.CacheKit;
 
 public class GroupService extends BaseService {
 
@@ -27,7 +29,7 @@ public class GroupService extends BaseService {
 		group.save();
 		
 		// 缓存
-		ToolEhcacheFactory.getInstance().add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
 		
 		return group.getStr("ids");
 	}
@@ -41,7 +43,7 @@ public class GroupService extends BaseService {
 		group.update();
 
 		// 缓存
-		ToolEhcacheFactory.getInstance().update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
 	}
 
 	/**
@@ -50,7 +52,7 @@ public class GroupService extends BaseService {
 	 */
 	public void delete(String groupIds){
 		// 缓存
-		ToolEhcacheFactory.getInstance().delete(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_group + groupIds);
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIds);
 		
 		// 删除
 		Group.dao.deleteById(groupIds);
@@ -88,7 +90,7 @@ public class GroupService extends BaseService {
 		group.set("roleids", roleIds).update();
 		
 		// 缓存
-		ToolEhcacheFactory.getInstance().update(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
 	}
 	
 	/**

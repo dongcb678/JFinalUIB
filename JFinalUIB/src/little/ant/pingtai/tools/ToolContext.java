@@ -23,6 +23,8 @@ import little.ant.pingtai.thread.ThreadParamInit;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
+import com.jfinal.plugin.ehcache.CacheKit;
+
 /**
  * WEB上下文工具类
  * 
@@ -34,8 +36,7 @@ public class ToolContext {
 
 	public static boolean hasPrivilegeUrl(String url, String userIds) {
 		// 基于缓存查询operator
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-		Object operatorObj = cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + url);
+		Object operatorObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + url);
 		if (null == operatorObj) {
 			log.error("URL缓存不存在：" + url);
 			return false;
@@ -43,7 +44,7 @@ public class ToolContext {
 		Operator operator = (Operator) operatorObj;
 
 		// 基于缓存查询user
-		Object userObj = cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
+		Object userObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
 		if (null == userObj) {
 			log.error("用户缓存不存在：" + userIds);
 			return false;
@@ -59,14 +60,14 @@ public class ToolContext {
 		if (null != groupIds) {
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				Group group = (Group) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
+				Group group = (Group) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				if(null == roleIdsStr || roleIdsStr.equals("")){
 					continue;
 				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					Role role = (Role) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
+					Role role = (Role) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					if (operatorIdsStr.indexOf(operatorIds) != -1) {
 						return true;
@@ -79,7 +80,7 @@ public class ToolContext {
 		if (null != stationIds) {
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				Station station = (Station) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_station + ids);
+				Station station = (Station) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				if(null == operatorIdsStr || operatorIdsStr.equals("")){
 					continue;
@@ -102,7 +103,6 @@ public class ToolContext {
 	 */
 	public static boolean hasPrivilegeOperator(Operator operator, User user) {
 		// 基于缓存查询
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		String operatorIds = operator.getStr("ids") + ",";
 
 		// 根据分组查询权限
@@ -110,14 +110,14 @@ public class ToolContext {
 		if (null != groupIds) {
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				Group group = (Group) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
+				Group group = (Group) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				if(null == roleIdsStr || roleIdsStr.equals("")){
 					continue;
 				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					Role role = (Role) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
+					Role role = (Role) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					if (operatorIdsStr.indexOf(operatorIds) != -1) {
 						return true;
@@ -131,7 +131,7 @@ public class ToolContext {
 		if (null != stationIds) {
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				Station station = (Station) cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_station + ids);
+				Station station = (Station) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				if(null == operatorIdsStr || operatorIdsStr.equals("")){
 					continue;
@@ -249,8 +249,7 @@ public class ToolContext {
 			
 			// 4. 验证数据有效性
 			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= 365) {
-				ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
-				Object userObj = cacheFactory.get(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
+				Object userObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
 				if (null != userObj) {
 					User user = (User) userObj;
 					return user;

@@ -3,13 +3,13 @@ package little.ant.weixin.tools;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
-import little.ant.pingtai.tools.ToolEhcacheFactory;
 import little.ant.pingtai.tools.ToolHttp;
 import little.ant.weixin.vo.message.RecevieToken;
 
+import org.apache.log4j.Logger;
+
 import com.alibaba.fastjson.JSON;
+import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
  * 微信工具类
@@ -50,8 +50,8 @@ public class ToolWeiXin {
 	public static RecevieToken getAccessToken() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(weixin_token_url).append("?").append("grant_type=client_credential");
-		sb.append("&appid=").append(ToolEhcacheFactory.getInstance().get("system", weixin_appID_key));
-		sb.append("&secret=").append(ToolEhcacheFactory.getInstance().get("system", weixin_appSecret_key));
+		sb.append("&appid=").append(CacheKit.get("system", weixin_appID_key));
+		sb.append("&secret=").append(CacheKit.get("system", weixin_appSecret_key));
 		try {
 			String jsonStr = ToolHttp.get(true, sb.toString());
 			RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);

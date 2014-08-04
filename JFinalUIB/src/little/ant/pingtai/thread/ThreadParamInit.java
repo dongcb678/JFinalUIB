@@ -2,6 +2,7 @@ package little.ant.pingtai.thread;
 
 import java.util.List;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Dict;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Operator;
@@ -9,9 +10,10 @@ import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
-import little.ant.pingtai.tools.ToolEhcacheFactory;
 
 import org.apache.log4j.Logger;
+
+import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
  * 系统初始化缓存操作类
@@ -59,14 +61,13 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:16:48
 	 */
 	public static void pingtai_cacheUser() {
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<User> userList = User.dao.find("select * from pt_user");
 		for (User user : userList) {
 			UserInfo userInfo = user.getUserInfo();
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
 			user = null;
 		}
 		userList = null;
@@ -77,10 +78,9 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:17:20
 	 */
 	public static void pingtai_cacheGroup() {
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Group> groupList = Group.dao.find("select * from pt_group");
 		for (Group group : groupList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
 		}
 		groupList = null;
 	}
@@ -90,10 +90,9 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:17:20
 	 */
 	public static void pingtai_cacheRole() {
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Role> roleList = Role.dao.find("select * from pt_role");
 		for (Role role : roleList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
 		}
 		roleList = null;
 	}
@@ -103,10 +102,9 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2013-07-16 下午1:17:20
 	 */
 	public static void pingtai_cacheStation() {
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Station> stationList = Station.dao.find("select * from pt_station");
 		for (Station station : stationList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_station + station.getStr("ids"), station);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + station.getStr("ids"), station);
 		}
 		stationList = null;
 	}
@@ -116,11 +114,10 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:17:12
 	 */
 	public static void pingtai_cacheOperator() {
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Operator> operatorList = Operator.dao.find("select * from pt_operator");
 		for (Operator operator : operatorList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
 			operator = null;
 		}
 		operatorList = null;
@@ -131,12 +128,11 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:17:04
 	 */
 	public static void pingtai_cacheDict() {
-		ToolEhcacheFactory cacheFactory = ToolEhcacheFactory.getInstance();
 		List<Dict> dictList = Dict.dao.find("select * from pt_dict");
 		for (Dict dict : dictList) {
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
-			cacheFactory.add(ToolEhcacheFactory.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("ids"), dict.getChild());
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("ids"), dict.getChild());
 			dict = null;
 		}
 		dictList = null;
