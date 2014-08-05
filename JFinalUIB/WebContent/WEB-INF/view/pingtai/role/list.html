@@ -1,5 +1,3 @@
-<% include("/common/splitPage.html"){} %>
-
 <form id="splitPage" class="form-horizontal" action="${cxt!}/jf/role" method="POST">
 	
 	<div>
@@ -86,7 +84,9 @@
 						<% } %>
 					</tbody>
 				</table>
-				<div id="splitPageDiv" class="pagination pagination-centered"></div>
+				<div id="splitPageDiv" class="pagination pagination-centered">
+					<% include("/common/splitPage.html"){} %>
+				</div>
 			</div>
 			
 		</div>
