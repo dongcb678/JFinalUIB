@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
+import little.ant.pingtai.model.BaseModel;
 import little.ant.pingtai.model.Dict;
 import little.ant.pingtai.thread.ThreadParamInit;
 
@@ -56,7 +57,7 @@ public class DictSelect extends Tag {
 			String val = "val";
 			if(null != parentI18n && parentI18n.equals("1")){
 				String localePram = (String) ctx.getGlobal("localePram");
-				val += parentDict.i18n(localePram);
+				val += BaseModel.i18n(localePram);
 			}
 			List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
 
