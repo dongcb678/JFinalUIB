@@ -2,11 +2,10 @@ package little.ant.pingtai.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
@@ -27,15 +26,16 @@ public class UserService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UserService.class);
-	
+
 	/**
 	 * 保存
+	 * 
 	 * @param user
 	 * @param passWord
 	 * @param userInfo
 	 */
 	@Before(Tx.class)
-	public void save(User user, String password, UserInfo userInfo){
+	public void save(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
 			byte[] salt = ToolSecurityPbkdf2.generateSalt();// 密码盐
@@ -45,7 +45,7 @@ public class UserService extends BaseService {
 
 			// 保存用户信息
 			userInfo.save();
-			
+
 			// 保存用户
 			user.set("userinfoids", userInfo.getStr("ids"));
 			user.set("errorcount", 0);
@@ -69,12 +69,13 @@ public class UserService extends BaseService {
 
 	/**
 	 * 更新
+	 * 
 	 * @param user
 	 * @param passWord
 	 * @param userInfo
 	 */
 	@Before(Tx.class)
-	public void update(User user, String password, UserInfo userInfo){
+	public void update(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
 			if (null != password && !password.trim().equals("")) {
@@ -82,7 +83,7 @@ public class UserService extends BaseService {
 				byte[] salt = oldUser.getBytes("salt");// 密码盐
 				byte[] encryptedPassword = ToolSecurityPbkdf2.getEncryptedPassword(password, salt);
 				user.set("password", encryptedPassword);
-			} 
+			}
 
 			// 更新用户
 			user.update();
@@ -101,10 +102,11 @@ public class UserService extends BaseService {
 
 	/**
 	 * 删除
+	 * 
 	 * @param userIds
 	 */
 	@Before(Tx.class)
-	public void delete(String userIds){
+	public void delete(String userIds) {
 		User user = User.dao.findById(userIds);
 		String userInfoIds = user.getStr("userinfoids");
 		UserInfo userInfo = UserInfo.dao.findById(userInfoIds);
@@ -114,7 +116,7 @@ public class UserService extends BaseService {
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"));
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"));
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"));
-		
+
 		// 删除
 		user.delete();
 		UserInfo.dao.deleteById(userInfoIds);
@@ -122,16 +124,17 @@ public class UserService extends BaseService {
 
 	/**
 	 * 设置用户所在的组
+	 * 
 	 * @param userIds
 	 * @param groupIds
 	 */
-	public void setGroup(String userIds, String groupIds){
+	public void setGroup(String userIds, String groupIds) {
 		User user = User.dao.findById(userIds);
 		String userInfoIds = user.getStr("userinfoids");
 		UserInfo userInfo = UserInfo.dao.findById(userInfoIds);
-		
+
 		user.set("groupids", groupIds).update();
-		
+
 		// 缓存
 		user = User.dao.findById(user.getStr("ids"));
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
@@ -142,11 +145,13 @@ public class UserService extends BaseService {
 
 	/**
 	 * 获取子节点数据
-	 * @param String deptIds
+	 * 
+	 * @param String
+	 *            deptIds
 	 * @return
 	 * @throws Exception
 	 */
-	public String childNodeData(String deptIds){
+	public String childNodeData(String deptIds) {
 		// 查询部门数据
 		List<Department> deptList = null;
 		if (null != deptIds) {
@@ -213,80 +218,80 @@ public class UserService extends BaseService {
 
 		return sb.toString();
 	}
-	
+
 	/**
 	 * 分页
+	 * 
 	 * @param splitPage
 	 */
-	public void list(SplitPage splitPage){
+	public void list(SplitPage splitPage) {
 		String select = " select u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames ";
 		splitPageBase(splitPage, select);
 	}
-	
+
 	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
 		formSqlSb.append(" from pt_user u  ");
 		formSqlSb.append(" left join pt_userinfo ui on u.userinfoids = ui.ids ");
 		formSqlSb.append(" left join pt_department d on u.departmentids = d.ids ");
 		formSqlSb.append(" where 1=1 ");
-		
-		if(null == queryParam){
-			return;
-		}
-		
-		String userClass = queryParam.get("userClass");//用户分类
-		String userName = queryParam.get("userName");//用户名
-		String names = queryParam.get("names");//姓名
-		String sex = queryParam.get("sex");//性别
-		String email = queryParam.get("email");//邮箱
-		String mobile = queryParam.get("mobile");//手机
-		String telephone = queryParam.get("telephone");//电话
-		String idCard = queryParam.get("idCard");//省份证
-		String qq = queryParam.get("qq");//QQ
-		String birthday = queryParam.get("birthday");//生日
-		
-		if(null!=userClass && !userClass.equals("")){
-			formSqlSb.append(" and u.userClass=? ");
-			paramValue.add(userClass.trim());
-		}
-		if(null!=userName && !userName.equals("")){
-			formSqlSb.append(" and u.userName like ? ");
-			paramValue.add("%" + userName.trim() + "%");
-		}
-		if(null!=names && !names.equals("")){
-			formSqlSb.append(" and ui.names like ? ");
-			paramValue.add("%" + names.trim() + "%");
-		}
-		if(null!=sex && !sex.equals("")){
-			formSqlSb.append(" and ui.sex like ? ");
-			paramValue.add("%" + sex.trim() + "%");
-		}
-		if(null!=email && !email.equals("")){
-			formSqlSb.append(" and ui.email like ? ");
-			paramValue.add("%" + email.trim() + "%");
-		}
-		if(null!=mobile && !mobile.equals("")){
-			formSqlSb.append(" and ui.mobile like ? ");
-			paramValue.add("%" + mobile.trim() + "%");
-		}
-		if(null!=telephone && !telephone.equals("")){
-			formSqlSb.append(" and ui.telephone like ? ");
-			paramValue.add("%" + telephone.trim() + "%");
-		}
-		if(null!=idCard && !idCard.equals("")){
-			formSqlSb.append(" and ui.idCard like ? ");
-			paramValue.add("%" + idCard.trim() + "%");
-		}
-		if(null!=qq && !qq.equals("")){
-			formSqlSb.append(" and ui.qq like ? ");
-			paramValue.add("%" + qq.trim() + "%");
-		}
-		if(null!=birthday && !birthday.equals("")){
-			try {
+
+		Set<String> paramKeySet = queryParam.keySet();
+		for (String paramKey : paramKeySet) {
+			String value = queryParam.get(paramKey);
+			switch (paramKey) {
+			case "userClass":// 用户分类
+				formSqlSb.append(" and u.userClass = ? ");
+				paramValue.add(value);
+				break;
+
+			case "userName":// 用户名
+				formSqlSb.append(" and u.userName like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "names":// 姓名
+				formSqlSb.append(" and ui.names like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "sex":// 性别
+				formSqlSb.append(" and ui.sex like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "email":// 邮箱
+				formSqlSb.append(" and ui.email like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "mobile":// 手机
+				formSqlSb.append(" and ui.mobile like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "telephone":// 电话
+				formSqlSb.append(" and ui.telephone like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "idCard":// 身份证
+				formSqlSb.append(" and ui.idCard like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "qq":// QQ
+				formSqlSb.append(" and ui.qq like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "birthday":// 生日
 				formSqlSb.append(" and ui.birthday=? ");
-				Date date = DateFormat.getDateTimeInstance().parse(birthday);
+				Date date = ToolDateTime.parse(value);
 				paramValue.add(ToolDateTime.getSqlTimestamp(date));
-			} catch (ParseException e) {
-				e.printStackTrace();
+				break;
+				
+			default:
+				break;
 			}
 		}
 	}

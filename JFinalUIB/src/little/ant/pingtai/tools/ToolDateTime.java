@@ -92,7 +92,6 @@ public class ToolDateTime {
 	 * @param date
 	 * @param pattern
 	 * @return
-	 * @throws ParseException
 	 */
 	public static Date parse(String date, String pattern) {
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
@@ -102,6 +101,22 @@ public class ToolDateTime {
 			log.error("ToolDateTime.parse异常：date值" + date + "，pattern值" + pattern);
 			return null;
 		}
+	}
+
+	/**
+	 * 解析
+	 * @param dateStr
+	 * @return
+	 */
+	public static Date parse(String dateStr) {
+		Date date = null;
+		try {
+			date = DateFormat.getDateTimeInstance().parse(dateStr);
+		} catch (ParseException e) {
+			log.error("ToolDateTime.parse异常：date值" + date);
+			return null;
+		}
+		return date;
 	}
 	
 	/**
