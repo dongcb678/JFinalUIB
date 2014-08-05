@@ -91,11 +91,9 @@ public class ParamPkgInterceptor implements Interceptor {
 		while (paramNames.hasMoreElements()) {
 			String name = paramNames.nextElement();
 			String value = controller.getPara(name);
-			if (name.startsWith("_query") && !value.isEmpty()) {
+			if (name.startsWith("_query") && null != value && !value.trim().isEmpty()) {
 				String key = name.substring(7);
-				if(null != value && !value.trim().equals("")){
-					queryParam.put(key, value.trim());
-				}
+				queryParam.put(key, value.trim());
 			}
 		}
 		splitPage.setQueryParam(queryParam);

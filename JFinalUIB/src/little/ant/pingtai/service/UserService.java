@@ -261,15 +261,15 @@ public class UserService extends BaseService {
 			paramValue.add("%" + sex.trim() + "%");
 		}
 		if(null!=email && !email.equals("")){
-			formSqlSb.append(" and ui.email ? ");
+			formSqlSb.append(" and ui.email like ? ");
 			paramValue.add("%" + email.trim() + "%");
 		}
 		if(null!=mobile && !mobile.equals("")){
-			formSqlSb.append(" and ui.mobile ? ");
+			formSqlSb.append(" and ui.mobile like ? ");
 			paramValue.add("%" + mobile.trim() + "%");
 		}
 		if(null!=telephone && !telephone.equals("")){
-			formSqlSb.append(" and ui.telephone ? ");
+			formSqlSb.append(" and ui.telephone like ? ");
 			paramValue.add("%" + telephone.trim() + "%");
 		}
 		if(null!=idCard && !idCard.equals("")){
