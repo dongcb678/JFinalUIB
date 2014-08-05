@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2014-08-04 17:17:18
+Date: 2014-08-05 14:49:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,7 +68,7 @@ CREATE TABLE `pt_dict` (
   `val_zhcn` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `val_zhhk` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `val_zhtw` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  `val_jp` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `val_ja` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `val_enus` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ids`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -79,7 +79,7 @@ CREATE TABLE `pt_dict` (
 INSERT INTO `pt_dict` VALUES ('0c78f87750a745bbb59005a6ca0f744a', '0', null, '3.png', 'weixinToken', '3', '100103root/83f4b0ee56904cbeb5f91696ad804c29/0c78f87750a745bbb59005a6ca0f744a', null, '83f4b0ee56904cbeb5f91696ad804c29', 'false', '2', 'weixinToken', '123', '1', null, null, null, null, null);
 INSERT INTO `pt_dict` VALUES ('7381008292054bccba20224bc33774d7', '6', null, '2.png', 'weixinAppID', '1', '100103root/83f4b0ee56904cbeb5f91696ad804c29/7381008292054bccba20224bc33774d7', null, '83f4b0ee56904cbeb5f91696ad804c29', 'false', '2', 'weixinAppID', '123', '1', '1234', '1234', '1234', '1234', '1234');
 INSERT INTO `pt_dict` VALUES ('8094c60d7a594b36bb0187cbce9c4188', '0', null, '2.png', 'weixinAppSecret', '2', '100103root/83f4b0ee56904cbeb5f91696ad804c29/8094c60d7a594b36bb0187cbce9c4188', null, '83f4b0ee56904cbeb5f91696ad804c29', 'false', '2', 'weixinAppSecret', '123', '1', null, null, null, null, null);
-INSERT INTO `pt_dict` VALUES ('83f4b0ee56904cbeb5f91696ad804c29', '0', null, '2.png', '微信配置', '1', '100103root/83f4b0ee56904cbeb5f91696ad804c29', null, '8a40c0353fa828a6013fa898d4ac0020', 'true', '1', null, null, '1', null, null, null, null, null);
+INSERT INTO `pt_dict` VALUES ('83f4b0ee56904cbeb5f91696ad804c29', '0', null, '2.png', '微信配置', '1', '100103root/83f4b0ee56904cbeb5f91696ad804c29', null, '8a40c0353fa828a6013fa898d4ac0020', 'true', '1', 'weixinConfig', null, '1', null, null, null, null, null);
 INSERT INTO `pt_dict` VALUES ('8a40c0353fa828a6013fa898d4ac0020', '0', '字典树', '1_open.png', '字典树', '1', '100103root', '1', null, 'true', '0', null, null, '0', null, null, null, null, null);
 
 -- ----------------------------
@@ -118,7 +118,7 @@ CREATE TABLE `pt_menu` (
   `names_zhhk` varchar(25) COLLATE utf8_bin DEFAULT NULL,
   `names_zhtw` varchar(25) COLLATE utf8_bin DEFAULT NULL,
   `names_enus` varchar(25) COLLATE utf8_bin DEFAULT NULL,
-  `names_jp` varchar(25) COLLATE utf8_bin DEFAULT NULL,
+  `names_ja` varchar(25) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ids`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

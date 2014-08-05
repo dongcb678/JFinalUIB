@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.pingtai.common.SplitPage;
+import little.ant.pingtai.model.BaseModel;
 
 import org.apache.log4j.Logger;
 
@@ -22,24 +23,7 @@ public abstract class BaseService {
 	 * @return
 	 */
 	protected String i18n(String i18n){
-		String val = null;
-		if(i18n.equals("zh") || i18n.equals("zh_CN")){
-			val = "_zhcn";
-			
-		} else if(i18n.equals("en") || i18n.equals("en_US")){
-			val = "_enus";
-			
-		} else if(i18n.equals("jp")){
-			val = "_jp";
-			
-		} else if(i18n.equals("zh_HK")){
-			val = "_zhhk";
-			
-		} else if(i18n.equals("zh_TW")){
-			val = "_zhtw";
-			
-		}
-		return val;
+		return BaseModel.i18n(i18n);
 	}
 	
 	/**

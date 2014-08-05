@@ -28,21 +28,21 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * @param i18n
 	 * @return
 	 */
-	public String i18n(String i18n){
+	public static String i18n(String i18n){
 		String val = null;
-		if(i18n.equals("zh") || i18n.equals("zh_CN")){
+		if(i18n.equals("zh") || i18n.equals("zh_cn")){
 			val = "_zhcn";
 			
-		} else if(i18n.equals("en") || i18n.equals("en_US")){
+		} else if(i18n.equals("en") || i18n.equals("en_us")){
 			val = "_enus";
 			
-		} else if(i18n.equals("jp")){
-			val = "_jp";
+		} else if(i18n.equals("ja") || i18n.equals("ja_jp")){
+			val = "_ja";
 			
-		} else if(i18n.equals("zh_HK")){
+		} else if(i18n.equals("zh_hk")){
 			val = "_zhhk";
 			
-		} else if(i18n.equals("zh_TW")){
+		} else if(i18n.equals("zh_tw")){
 			val = "_zhtw";
 			
 		}

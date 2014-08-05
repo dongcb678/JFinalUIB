@@ -70,7 +70,7 @@ CREATE TABLE "public"."pt_dict" (
 "val_zhcn" varchar(500),
 "val_zhhk" varchar(500),
 "val_zhtw" varchar(500),
-"val_jp" varchar(500),
+"val_ja" varchar(500),
 "val_enus" varchar(500)
 )
 WITH (OIDS=FALSE)
@@ -123,7 +123,7 @@ CREATE TABLE "public"."pt_menu" (
 "isparent" varchar(5),
 "names_zhtw" varchar(25),
 "names_zhhk" varchar(25),
-"names_jp" varchar(25),
+"names_ja" varchar(25),
 "names_enus" varchar(25)
 )
 WITH (OIDS=FALSE)

@@ -20,8 +20,8 @@ public class I18NPlugin implements IPlugin {
 	private static final Map<String, Map<String, String>> resourceBundleMap = new HashMap<String, Map<String, String>>();
 
 	private static final String[] languages = {
-		"zh", "zh_CN", "zh_HK", "zh_TW",
-		"en", "en_US",
+		"zh", "zh_cn", "zh_hk", "zh_tw",
+		"en", "en_us",
 		"ja"
 	};
 	
