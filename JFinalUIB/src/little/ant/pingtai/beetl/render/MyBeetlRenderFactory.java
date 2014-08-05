@@ -1,4 +1,4 @@
-package little.ant.pingtai.beetl;
+package little.ant.pingtai.beetl.render;
 
 import org.apache.log4j.Logger;
 import org.beetl.ext.jfinal.BeetlRender;

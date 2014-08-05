@@ -1,4 +1,4 @@
-package little.ant.pingtai.beetl;
+package little.ant.pingtai.beetl.func;
 
 import little.ant.pingtai.common.SplitPage;
 

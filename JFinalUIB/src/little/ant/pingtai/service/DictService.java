@@ -42,7 +42,9 @@ public class DictService extends BaseService {
 		// 缓存
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("ids"), dict.getChild());
+		
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("parentids"), parent.getChild());
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parent.getChild());
 	}
 
 	/**
@@ -62,7 +64,9 @@ public class DictService extends BaseService {
 		// 缓存
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("ids"), dict.getChild());
+		
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("parentids"), parent.getChild());
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parent.getChild());
 	}
 
 	/**
@@ -72,14 +76,19 @@ public class DictService extends BaseService {
 	public void delete(String ids){
 		// 查询
 		Dict dict = Dict.dao.findById(ids);
+		String pIds = dict.getStr("parentids");
+		Dict parent = Dict.dao.findById(pIds);
+
+		// 删除
+		dict.delete();
 		
 		// 缓存
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + ids);
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"));
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + ids);
 		
-		// 删除
-		dict.delete();
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("parentids"), parent.getChild());
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parent.getChild());
 	}
 
 	/**

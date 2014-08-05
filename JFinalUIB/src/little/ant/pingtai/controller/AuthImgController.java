@@ -1,7 +1,7 @@
 package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.beetl.MyCaptchaRender;
+import little.ant.pingtai.beetl.render.MyCaptchaRender;
 
 import org.apache.log4j.Logger;
 

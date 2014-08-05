@@ -7,7 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.pingtai.beetl.MyBeetlRender;
+import little.ant.pingtai.beetl.render.MyBeetlRender;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.plugin.I18NPlugin;
 import little.ant.pingtai.thread.ThreadSysLog;

@@ -34,7 +34,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public Dict getByNumber(String number){
-		Dict dict = dao.findFirst(" select ids, numbers, parentids, val from pt_dict where numbers = ? ", number);
+		Dict dict = dao.findFirst(" select * from pt_dict where numbers = ? ", number);
 		return dict;
 	}
 	
@@ -52,11 +52,10 @@ public class Dict extends BaseModel<Dict> {
 
 	/**
 	 * 查询子节点字典
-	 * @param prentIds
 	 * @return
 	 */
 	public List<Dict> getChild(){
-		return dao.find(" select ids, numbers, parentids, val from pt_dict where parentids = ? ", get("ids"));
+		return dao.find(" select * from pt_dict where parentids = ? order by orderids ", get("ids"));
 	}
 
 	/**
@@ -65,17 +64,36 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(String prentIds){
-		return dao.find(" select ids, numbers, parentids, val from pt_dict where parentids = ? ", prentIds);
+		return dao.find(" select * from pt_dict where parentids = ? order by orderids ", prentIds);
 	}
 
 	/**
 	 * 查询子节点字典，国际化
 	 * @param prentIds
+	 * @param i18n
 	 * @return
 	 */
 	public List<Dict> getChild(String prentIds, String i18n){
 		String val = "val" + i18n(i18n);
-		return dao.find(" select ids, numbers, parentids, " + val + " as val from pt_dict where parentids = ? ", prentIds);
+		return dao.find(" select ids, numbers, parentids, " + val + " as val from pt_dict where parentids = ? order by orderids ", prentIds);
 	}
-	
+
+	/**
+	 * 查询父节点字典
+	 * @return
+	 */
+	public List<Dict> getParent(){
+		return dao.find(" select * from pt_dict where ids = ? ", get("parentids"));
+	}
+
+	/**
+	 * 查询父节点字典，国际化
+	 * @param i18n
+	 * @return
+	 */
+	public List<Dict> getParent(String i18n){
+		String val = "val" + i18n(i18n);
+		return dao.find(" select ids, numbers, parentids, " + val + " as val from pt_dict where ids = ? ", get("parentids"));
+	}
+
 }
