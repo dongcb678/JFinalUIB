@@ -6,6 +6,7 @@ import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Dict;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Operator;
+import little.ant.pingtai.model.Param;
 import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
@@ -30,6 +31,8 @@ public class ThreadParamInit extends Thread {
 	public static String cacheStart_operator = "operator_";
 	public static String cacheStart_dict = "dict_";
 	public static String cacheStart_dict_child =  "dict_child_";
+	public static String cacheStart_param = "param_";
+	public static String cacheStart_param_child =  "param_child_";
 	
 	@Override
 	public void run() {
@@ -52,6 +55,9 @@ public class ThreadParamInit extends Thread {
 
 		// 6.缓存字典
 		pingtai_cacheDict();
+
+		// 6.缓存参数
+		pingtai_cacheParam();
 
 		log.info("缓存参数初始化 end ...");
 	}
@@ -137,6 +143,22 @@ public class ThreadParamInit extends Thread {
 			dict = null;
 		}
 		dictList = null;
+	}
+
+	/**
+	 * 缓存业务参数
+	 * @author 董华健    2012-10-16 下午1:17:04
+	 */
+	public static void pingtai_cacheParam() {
+		List<Param> paramList = Param.dao.find("select * from pt_param");
+		for (Param param : paramList) {
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("ids"), param);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"), param);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr("ids"), param.getChild());
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr("numbers"), param.getChild());
+			param = null;
+		}
+		paramList = null;
 	}
 
 }
