@@ -3,10 +3,10 @@
 	<div>
 		<ul class="breadcrumb">
 			<li>
-				<a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span>
+				<a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span>
 			</li>
 			<li>
-				<a href="#">用户管理</a>
+				<a href="#">${i18nMap["admin.user.common.name"]}</a>
 			</li>
 		</ul>
 	</div>
@@ -14,10 +14,10 @@
 	<div class="row-fluid sortable">
 		<div class="box span12">
 			<div class="box-header well" data-original-title>
-				<h2><i class="icon-edit"></i> 用户查询</h2>
+				<h2><i class="icon-edit"></i> ${i18nMap["admin.user.list.select"]}</h2>
 				<div class="box-icon">
 					<% if(hasPrivilegeUrl("/pingtai/user/add.html")){ %>
-						<a href="#" class="btn btn-round" title="添加用户" onclick="ajaxContent('/jf/user/toUrl?toUrl=/pingtai/user/add.html');"><i class="icon-plus-sign"></i></a>
+						<a href="#" class="btn btn-round" title='${i18nMap["admin.user.add"]}' onclick="ajaxContent('/jf/user/toUrl?toUrl=/pingtai/user/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -26,22 +26,22 @@
 			<div class="box-content" style="display: none;">
 				<fieldset>
 				  	<div class="control-group">
-						<label class="control-label" for="focusedInput">账号</label>
+						<label class="control-label" for="focusedInput">${i18nMap["admin.user.property.userName"]}</label>
 						<div class="controls">
 					  		<input class="input-xlarge focused" type="text" name="_query.userName" value='${escapeXml(paramMap["_query.userName"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  
 				  	<div class="control-group">
-						<label class="control-label">邮箱</label>
+						<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
 						<div class="controls">
 					  		<input class="input-xlarge" type="text" name="_query.email" value='${escapeXml(paramMap["_query.email"])}' maxlength="40" >
 						</div>
 				  	</div>
 				
 				  	<div class="form-actions">
-						<button type="button" class="btn btn-primary" onclick='ajaxForm("splitPage");'>查询</button>
-						<button type="reset" class="btn">清除</button>
+						<button type="button" class="btn btn-primary" onclick='ajaxForm("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
 				  	</div>
 				</fieldset>
 			</div>
@@ -52,7 +52,7 @@
 		<div class="box span12">
 			
 			<div class="box-header well" data-original-title>
-				<h2><i class="icon-user"></i> 用户列表</h2>
+				<h2><i class="icon-user"></i> ${i18nMap["admin.user.list.table"]}</h2>
 				<div class="box-icon">
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -64,21 +64,21 @@
 					<thead>
 						<tr>
 							<th onclick="orderbyFun('d.names')">
-								部门${orderBy("d.names")}
+								${i18nMap["admin.user.property.department"]}	${orderBy("d.names")}
 	      					</th>
 							<th onclick="orderbyFun('userName')">
-								登陆账号${orderBy("userName")}
+								${i18nMap["admin.user.property.userName"]}	${orderBy("userName")}
 	      					</th>
 							<th onclick="orderbyFun('names')">
-								昵称${orderBy("names")}
+								${i18nMap["admin.user.property.nickname"]}	${orderBy("names")}
 							</th>
 							<th onclick="orderbyFun('email')">
-								邮箱${orderBy("email")}
+								${i18nMap["admin.user.property.email"]}	${orderBy("email")}
 							</th>
 							<th onclick="orderbyFun('mobile')">
-								手机${orderBy("mobile")}
+								${i18nMap["admin.user.property.mobilePhone"]}	${orderBy("mobile")}
 							</th>
-							<th width="280">操作</th>
+							<th width="280">${i18nMap["admin.common.operation"]}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -97,16 +97,16 @@
 								<td class="center"><span class="label label-success">${escapeXml(user["mobile"]!) }</span></td>
 								<td class="center">
 									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/user/view/${escapeXml(user.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/user/view/${escapeXml(user.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a>
 									<% } %>
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/user/edit/${escapeXml(user.ids!)}');"> <i class="icon-edit icon-white"></i> 编辑</a>
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/user/edit/${escapeXml(user.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a>
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/user/delete/${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/user/delete/${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
 									<% } %>
 									<% if(group == true){ %>
-										<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> 分组</a>
+										<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.user.list.table.group"]}</a>
 									<% } %>
 								</td>
 							</tr>

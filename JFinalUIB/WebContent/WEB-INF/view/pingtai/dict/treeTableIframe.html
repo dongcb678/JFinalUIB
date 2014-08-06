@@ -1,8 +1,8 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 		<li>
-			<a href="#">字典树</a>
+			<a href="#">${i18nMap["admin.dict.common.name"]}</a>
 		</li>
 	</ul>
 </div>
@@ -10,13 +10,15 @@
 <div class="row-fluid sortable">
 	<div class="box span12">
 		<div class="box-header well" data-original-title>
-			<h2><i class="icon-edit"></i> 字典树</h2>
+			<h2>
+				<i class="icon-edit"></i> ${i18nMap["admin.dict.common.name"]}
+			</h2>
 			<div class="box-icon">
 				<% if(hasPrivilegeUrl("/pingtai/dict/add.html")){ %>
-					<a href="#" class="btn btn-round" title="添加国际化字典" 
+					<a href="#" class="btn btn-round" title='${i18nMap["admin.dict.treeTable.addI18n"]}'
 						onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/add.html&i18n=1');"><i class="icon-plus-sign"></i></a>
 					
-					<a href="#" class="btn btn-round" title="添加非国际化字典" 
+					<a href="#" class="btn btn-round" title='${i18nMap["admin.dict.treeTable.addNoI18n"]}'
 						onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/add.html&i18n=0');"><i class="icon-plus-sign"></i></a>
 				<% } %>
 				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>

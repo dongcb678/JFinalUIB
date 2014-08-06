@@ -25,27 +25,27 @@ function dataVali(form){
 
 <fieldset>
 	<div class="control-group">
-		<label class="control-label">所在部门</label>
+		<label class="control-label">${i18nMap["admin.user.property.department"]}</label>
 		<div class="controls">
 			<input type="hidden" id="deptId" name="user.departmentids" value="${escapeXml(user.departmentids!)}"/>
 			<input type="text" id="deptName" name="user.departmentnames" value="${escapeXml(user.departmentnames!)}" 
 				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="deptRadioDiaLog('deptId', 'deptName', '${escapeXml(user.departmentids!)}');">选择</button>
+			<button class="btn" type="button" onclick="deptRadioDiaLog('deptId', 'deptName', '${escapeXml(user.departmentids!)}');">${i18nMap["admin.common.choice"]}</button>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">所在岗位</label>
+		<label class="control-label">${i18nMap["admin.user.property.station"]}</label>
 		<div class="controls">
 			<input type="hidden" id="stationId" name="user.stationids" value="${escapeXml(user.stationids!)}"/>
 			<input type="text" id="stationName" name="user.stationnames" value="${escapeXml(user.stationnames!)}" 
 				class="input-xlarge" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="stationRadioDiaLog('stationId', 'stationName', '${escapeXml(user.stationids!)}');">选择</button>
+			<button class="btn" type="button" onclick="stationRadioDiaLog('stationId', 'stationName', '${escapeXml(user.stationids!)}');">${i18nMap["admin.common.choice"]}</button>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">数据权限</label>
+		<label class="control-label">${i18nMap["admin.user.property.dataAccess"]}</label>
 		<div class="controls">
 			<input type="hidden" id="deptId2" name="user.deptids" value="${escapeXml(user.deptids!)}" />
 			<input type="hidden" id="deptName2" name="user.deptnames" value="${escapeXml(user.deptnames!)}" />
@@ -54,12 +54,12 @@ function dataVali(form){
 			<input type="text" id="userName" name="user.usernames" value="${escapeXml(user.usernames!)}" 
 				class="input-xlarge" readonly="readonly" maxlength="10000" vMin="1" vType="length" onblur="onblurVali(this);">
 			
-			<button class="btn" type="button" onclick="userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${escapeXml(user.deptids!)}', '${escapeXml(user.userids!)}');">选择</button>
+			<button class="btn" type="button" onclick="userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${escapeXml(user.deptids!)}', '${escapeXml(user.userids!)}');">${i18nMap["admin.common.choice"]}</button>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">身份证号码</label>
+		<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>
 		<div class="controls">
 			<input type="text" name="userInfo.idcard" value="${escapeXml(userInfo.idcard!)}" 
 				class="input-xlarge" maxlength="18" vMin="15" vType="idCard" onblur="onblurVali(this);">
@@ -67,7 +67,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">真实姓名</label>
+		<label class="control-label">${i18nMap["admin.user.property.nickname"]}</label>
 		<div class="controls">
 			<input type="text" name="userInfo.names" value="${escapeXml(userInfo.names!)}" 
 				class="input-xlarge" maxlength="10" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
@@ -75,7 +75,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">登录名</label>
+		<label class="control-label">${i18nMap["admin.user.property.userName"]}</label>
 		<div class="controls">
 			<input type="text" name="user.username" value="${escapeXml(user.username!)}" 
 				class="input-xlarge" maxlength="16" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
@@ -83,7 +83,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">输入密码</label>
+		<label class="control-label">${i18nMap["admin.user.property.password"]}</label>
 		<div class="controls">
 			<input type="password" id="pass1Id" name="password" class="input-xlarge" autocomplete="off"
 				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
@@ -91,7 +91,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">确认密码</label>
+		<label class="control-label">${i18nMap["admin.user.property.password"]}</label>
 		<div class="controls">
 			<input type="password" id="pass2Id" class="input-xlarge" autocomplete="off"
 				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
@@ -99,7 +99,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">邮箱</label>
+		<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
 		<div class="controls">
 			<input type="text" name="userInfo.email" value="${escapeXml(userInfo.email!)}" 
 				class="input-xlarge" maxlength="30" vMin="6" vType="email" onblur="onblurVali(this);">
@@ -107,7 +107,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">手机号</label>
+		<label class="control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
 		<div class="controls">
 			<input type="text" name="userInfo.mobile" value="${escapeXml(userInfo.mobile!)}" 
 				class="input-xlarge" maxlength="11" vMin="11" vType="phone" onblur="onblurVali(this);">
@@ -115,7 +115,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">电话</label>
+		<label class="control-label">${i18nMap["admin.user.property.telephone"]}</label>
 		<div class="controls">
 			<input type="text" name="userInfo.telephone" value="${escapeXml(userInfo.telephone!)}" 
 				class="input-xlarge" maxlength="20" vMin="0" vType="tell" onblur="onblurVali(this);">
@@ -123,7 +123,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">QQ</label>
+		<label class="control-label">${i18nMap["admin.user.property.qq"]}</label>
 		<div class="controls">
 			<input type="text" name="userInfo.qq" value="${escapeXml(userInfo.qq!)}" 
 				class="input-xlarge" maxlength="20" vMin="0" vType="qq" onblur="onblurVali(this);">
@@ -131,7 +131,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">生日</label>
+		<label class="control-label">${i18nMap["admin.user.property.birthday"]}</label>
 		<div class="controls">
 			<input type="text" name="userInfo.birthday" readonly="readonly"
 				value='${userInfo.birthday!, dateFormat="yyyy-MM-dd"}' 

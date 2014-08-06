@@ -1,8 +1,8 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
-		<li><a href="#" onclick="ajaxContent('/jf/dict');">字典管理</a> <span class="divider">/</span></li>
-		<li><a href="#">添加字典</a></li>
+		<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/dict');">${i18nMap["admin.dict.common.name"]}</a> <span class="divider">/</span></li>
+		<li><a href="#">${i18nMap["admin.dict.add"]}</a></li>
 	</ul>
 </div>
 
@@ -10,7 +10,7 @@
 	<div class="box span12">
 		<div class="box-header well" data-original-title>
 			<h2>
-				<i class="icon-edit"></i> 添加字典
+				<i class="icon-edit"></i> ${i18nMap["admin.dict.add"]}
 			</h2>
 			<div class="box-icon">
 				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
@@ -23,9 +23,8 @@
 				<% include("/pingtai/dict/form.html"){} %>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/dict/save")){ %>
-						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
+						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">${i18nMap["admin.common.submit"]}</button>
 					<% } %>
-					<button class="btn" onclick="ajaxContent('/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html');">退出</button>
 				</div>
 			</form>
 		</div>

@@ -25,7 +25,7 @@
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">X</button>
-	<h3>密码设置</h3>
+	<h3>${i18nMap["admin.user.passChange"]}</h3>
 </div>
 
 <form id="passChangeForm" action="${cxt!}/jf/user/passChange" method="POST">
@@ -34,7 +34,7 @@
 			<div class="form-actions">
 				<fieldset>
 					<div class="control-group">
-						<label class="control-label">旧密码</label>
+						<label class="control-label">${i18nMap["admin.user.passChange.oldPass"]}</label>
 						<div class="controls">
 							<input type="password" id="oldPass" name="password" class="input-xlarge" autocomplete="off" 
 								maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
@@ -42,7 +42,7 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">新密码</label>
+						<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
 						<div class="controls">
 							<input type="password" id="newPass1" name="password" class="input-xlarge" autocomplete="off" 
 								maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
@@ -50,7 +50,7 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">确认新密码</label>
+						<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
 						<div class="controls">
 							<input type="password" id="newPass2" class="input-xlarge" 
 								maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
@@ -62,8 +62,8 @@
 	</div>
 	
 	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">关闭</a>
-		<a href="#" class="btn btn-primary" data-dismiss="modal" onclick="passChange(this.form);">确定</a>
+		<a href="#" class="btn" data-dismiss="modal">${i18nMap["admin.common.close"]}</a>
+		<a href="#" class="btn btn-primary" data-dismiss="modal" onclick="passChange(this.form);">${i18nMap["admin.common.submit"]}</a>
 	</div>	
 	
 </form>

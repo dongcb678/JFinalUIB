@@ -1,8 +1,8 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
-		<li><a href="#" onclick="ajaxContent('/jf/user');">用户管理</a> <span class="divider">/</span></li>
-		<li><a href="#">查看用户</a></li>
+		<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/user');">${i18nMap["admin.user.common.name"]}</a> <span class="divider">/</span></li>
+		<li><a href="#">${i18nMap["admin.user.view"]}</a></li>
 	</ul>
 </div>
 
@@ -11,7 +11,7 @@
 		
 		<div class="box-header well" data-original-title>
 			<h2>
-				<i class="icon-edit"></i> 查看用户
+				<i class="icon-edit"></i> ${i18nMap["admin.user.view"]}
 			</h2>
 			<div class="box-icon">
 				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
@@ -23,73 +23,70 @@
 			<form class="form-horizontal" method="POST">
 				<fieldset>
 					<div class="control-group">
-						<label class="control-label">所在部门</label>
+						<label class="control-label">${i18nMap["admin.user.property.department"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(user.departmentnames!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">所在岗位</label>
+						<label class="control-label">${i18nMap["admin.user.property.station"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(user.stationnames!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">数据权限</label>
+						<label class="control-label">${i18nMap["admin.user.property.dataAccess"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(user.usernames!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">身份证号码</label>
+						<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(userInfo.idcard!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">真实姓名</label>
+						<label class="control-label">${i18nMap["admin.user.property.nickname"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(userInfo.names!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">登录名</label>
+						<label class="control-label">${i18nMap["admin.user.property.userName"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(user.username!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">邮箱</label>
+						<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(userInfo.email!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">手机号</label>
+						<label class="control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(userInfo.mobile!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">电话</label>
+						<label class="control-label">${i18nMap["admin.user.property.telephone"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(userInfo.telephone!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">QQ</label>
+						<label class="control-label">${i18nMap["admin.user.property.qq"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(userInfo.qq!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">生日</label>
+						<label class="control-label">${i18nMap["admin.user.property.birthday"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value='${userInfo.birthday!, dateFormat="yyyy-MM-dd"}'>
 						</div>
-					</div>
-					<div class="form-actions">
-						<button class="btn" onclick="ajaxContent('/jf/user');">退出</button>
 					</div>
 				</fieldset>
 			</form>

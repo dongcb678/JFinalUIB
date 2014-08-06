@@ -79,15 +79,15 @@
 	<div id="page">
 	    <table id="treeTable" style="width:100%">
             <tr>
-                <td style="width:200px;"><span controller="true">层级</span></td>
-                <td>名称</td>
-           		<td>操作</td>
+                <td style="width:200px;"><span controller="true">${i18nMap["admin.dict.treeTable.hierarchy"]}</span></td>
+                <td>${i18nMap["admin.dict.property.name"]}</td>
+           		<td>${i18nMap["admin.common.operation"]}</td>
 			</tr>
 	        <% for(dict in list){ %>
 	        	<tr id="${dict.ids!}" pId="${dict.parentids!}" hasChild='${dict.levels! != 4 ? "true" : "false"}'>
 					<td>
 						<img alt="" src="${cxt!}/jsFile/zTree/css/zTreeStyle/img/diy/1_close.png">
-						<span controller='true'>${dict.levels }级</span>
+						<span controller='true'>${dict.levels } ${i18nMap["admin.dict.common.level"]}</span>
 					</td>
 					<td>${dict.names }</td>
 					<td>

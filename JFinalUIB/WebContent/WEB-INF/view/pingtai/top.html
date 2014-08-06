@@ -54,17 +54,17 @@
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">用户信息</a></li>
-					<li><a href="#" onclick="ajaxDiaLog('/jf/index/toUrl?toUrl=/pingtai/user/passChange.html');">密码设置</a></li>
+					<li><a href="#">${i18nMap["admin.top.userInfo"]}</a></li>
+					<li><a href="#" onclick="ajaxDiaLog('/jf/index/toUrl?toUrl=/pingtai/user/passChange.html');">${i18nMap["admin.top.passChange"]}</a></li>
 					<li class="divider"></li>
-					<li><a href="${cxt!}/jf/login/logout">退出系统</a></li>
+					<li><a href="${cxt!}/jf/login/logout">${i18nMap["admin.top.exitSystem"]}</a></li>
 				</ul>
 			</div>
 			<!-- user dropdown ends -->
 			
 			<div class="top-nav nav-collapse">
 				<ul class="nav">
-					<li><a href="#">站内搜索</a></li>
+					<li><a href="#">${i18nMap["admin.top.search"]}</a></li>
 					<li>
 						<form class="navbar-search pull-left">
 							<input placeholder="Search" class="search-query span2" name="query" type="text">
