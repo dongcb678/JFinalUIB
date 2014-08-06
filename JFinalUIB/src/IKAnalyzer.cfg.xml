@@ -4,16 +4,17 @@
 	
 	<comment>IK Analyzer 扩展配置, 主要是添加了IK词库的繁体版本</comment>
 	
-	<!--用户可以在这里配置自己的扩展字典
-	<entry key="ext_dict">/mydict.dic; /mypack/mydict2.dic ; /com/mycompany/dic/mydict3.dic ;</entry> 
-	-->
+	<!--用户可以在这里配置自己的扩展字典-->
+	<entry key="ext_dict">
+		/little/ant/pingtai/lucene/ext.dic; 
+		/little/ant/pingtai/lucene/ft_main2012.dic; 
+		/little/ant/pingtai/lucene/ft_quantifier.dic; 
+		/little/ant/pingtai/lucene/ja.dic;
+	</entry>
 	
-	<!--用户可以在这里配置自己的扩展停止词字典
-	<entry key="ext_stopwords">/ext_stopword.dic</entry> 
-	-->
-	
-	<entry key="ext_dict">/little/ant/pingtai/lucene/ft_main2012.dic; /little/ant/pingtai/lucene/ft_quantifier.dic; /little/ant/pingtai/ext.dic</entry>
-	
-	<entry key="ext_stopwords">/little/ant/pingtai/stop.dic</entry> 
+	<!--用户可以在这里配置自己的扩展停止词字典-->
+	<entry key="ext_stopwords">
+		/little/ant/pingtai/lucene/stop.dic
+	</entry>
 	
 </properties>

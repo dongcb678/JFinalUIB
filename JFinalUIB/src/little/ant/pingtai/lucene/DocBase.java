@@ -9,7 +9,6 @@ import java.util.List;
 import little.ant.pingtai.tools.ToolString;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.ja.JapaneseAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.DoubleField;
 import org.apache.lucene.document.Field;
@@ -30,7 +29,6 @@ import org.apache.lucene.search.highlight.Scorer;
 import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.util.Version;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import com.jfinal.plugin.activerecord.Db;
@@ -51,8 +49,7 @@ public abstract class DocBase implements Runnable {
 	
 	protected static final int splitDataSize = 10000;//初始化索引，每批次处理一万行
 	
-	protected static final Analyzer analyzer_zh = new IKAnalyzer();//分词器，中文简体，中文繁体，英文
-	protected static final Analyzer analyzer_jp = new JapaneseAnalyzer(Version.LUCENE_4_9);//分词器，日文
+	protected static final Analyzer analyzer = new IKAnalyzer();//分词器
 	
 	/**
 	 * 获取索引路径
@@ -248,35 +245,22 @@ public abstract class DocBase implements Runnable {
 		for (Field field : fields) {
 			String fieldName = field.name();
 			Object fieldValue = model.get(fieldName);
-			String fieldType = ToolString.beanName(fieldValue);
+			if(null == fieldValue){
+				continue;
+			}
 			
+			String fieldType = ToolString.beanName(fieldValue);
 			if(fieldType.equals("long")){
-				if(null != fieldValue){
-					field.setLongValue((Long) fieldValue);
-				}else{
-					field.setLongValue(0l);
-				}
+				field.setLongValue((Long) fieldValue);
 			
 			}else if(fieldType.equals("String")){
-				if(null != fieldValue){
-					field.setStringValue((String) fieldValue);
-				}else{
-					field.setStringValue("");
-				}
+				field.setStringValue((String) fieldValue);
 			
 			}else if(fieldType.equals("Date")){
-				if(null != fieldValue){
-					field.setLongValue(((Date) fieldValue).getTime());
-				}else{
-					field.setLongValue(0l);
-				}
+				field.setLongValue(((Date) fieldValue).getTime());
 			
 			}else if(fieldType.equals("BigDecimal")){
-				if(null != fieldValue){
-					field.setDoubleValue(((BigDecimal) fieldValue).doubleValue());
-				}else{
-					field.setDoubleValue(0);
-				}
+				field.setDoubleValue(((BigDecimal) fieldValue).doubleValue());
 			
 			} else {
 				throw new RuntimeException("DocBase->fieldsSetValue没有解析到有效字段类型");
