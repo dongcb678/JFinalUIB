@@ -266,6 +266,26 @@ function dictRadioDiaLog(dictId, dictName, checkedIds){
 }
 
 /**
+ * 参数单选
+ * @param dictId
+ * @param dictName
+ * @param checkedIds
+ */
+function paramRadioDiaLog(dictId, dictName, checkedIds){
+	$.ajax({
+		type : "post",
+		url : cxt + "/jf/param/toUrl",
+		data : { "toUrl" : "/pingtai/param/radio.html", "ids" : checkedIds, "paramId" : dictId, "paramName" : dictName },
+		dataType : "html",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		async: false,
+		success:function(data){
+			$('#myModal').html(data);
+			$('#myModal').modal('show');
+		}
+	});
+}
+/**
  * 模块单选
  * @param moduleId
  * @param moduleName
