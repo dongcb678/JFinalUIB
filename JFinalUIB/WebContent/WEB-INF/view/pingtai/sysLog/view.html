@@ -1,8 +1,8 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
-		<li><a href="#" onclick="ajaxContent('/jf/sysLog');">日志管理</a> <span class="divider">/</span></li>
-		<li><a href="#">查看日志</a></li>
+		<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/sysLog');">${i18nMap["admin.sysLog.common.name"]}</a> <span class="divider">/</span></li>
+		<li><a href="#">${i18nMap["admin.sysLog.view"]}</a></li>
 	</ul>
 </div>
 
@@ -11,7 +11,7 @@
 		
 		<div class="box-header well" data-original-title>
 			<h2>
-				<i class="icon-edit"></i> 查看日志
+				<i class="icon-edit"></i> ${i18nMap["admin.sysLog.view"]}
 			</h2>
 			<div class="box-icon">
 				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
@@ -23,170 +23,167 @@
 			<form class="form-horizontal" method="POST">
 				<fieldset>
 					<div class="control-group">
-						<label class="control-label">操作名称</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.oname"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.onames!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">操作url</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.ourl"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.ourl!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">客户端IP</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.ips"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.ips!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">权限认证状态</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.status"]}</label>
 						<div class="controls">
-							<input type="text" disabled="disabled" value='${sysLog.status! == "0" ? "失败" : "成功"}'>
+							<input type="text" disabled="disabled" value='<%if(sysLog.status == "0"){%>${i18nMap["admin.sysLog.property.status.error"]}<%}else{%>${i18nMap["admin.sysLog.property.status.success"]}<%}%>'>
 						</div>
 					</div>
 					<% if(isEmpty(sysLog.cause)){ %>
 						
 					<% }else if(sysLog.cause == "0"){ %>
 						<div class="control-group">
-							<label class="control-label">失败原因</label>
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
 							<div class="controls">
-								<input type="text" disabled="disabled" value='没有权限'>
+								<input type="text" disabled="disabled" value='${i18nMap["admin.sysLog.property.cause.0"]}'>
 							</div>
 						</div>
 					<% }else if(sysLog.cause == "1"){ %>
 						<div class="control-group">
-							<label class="control-label">失败原因</label>
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
 							<div class="controls">
-								<input type="text" disabled="disabled" value='URL不存在'>
+								<input type="text" disabled="disabled" value='${i18nMap["admin.sysLog.property.cause.1"]}'>
 							</div>
 						</div>
 					<% }else if(sysLog.cause == "2"){ %>
 						<div class="control-group">
-							<label class="control-label">失败原因</label>
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
 							<div class="controls">
-								<input type="text" disabled="disabled" value='未登陆'>
+								<input type="text" disabled="disabled" value='${i18nMap["admin.sysLog.property.cause.2"]}'>
 							</div>
 						</div>
 					<% }else if(sysLog.cause == "3"){ %>
 						<div class="control-group">
-							<label class="control-label">失败原因</label>
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
 							<div class="controls">
-								<input type="text" disabled="disabled" value='业务代码异常'>
+								<input type="text" disabled="disabled" value='${i18nMap["admin.sysLog.property.cause.3"]}'>
 							</div>
 						</div>
 					<% } %>
 					<div class="control-group">
-						<label class="control-label">创建者</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.username"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.username!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">开始时间</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.startdate"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value='${sysLog.startdate!, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}'>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">结束时间</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.enddate"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value='${sysLog.enddate!, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}'>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">总耗时</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.haoshi"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${sysLog.haoshi!}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">action耗时</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.actionhaoshi"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${sysLog.actionhaoshi!}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">视图耗时</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.viewhaoshi"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${sysLog.viewhaoshi!}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">描述</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.description"]}</label>
 						<div class="controls">
 							<textarea class="cleditor" rows="3">${escapeXml(sysLog.description!)}</textarea>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">method</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.method"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.method!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">X-Requested-With</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.xrequestedwith"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.xrequestedwith!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">Host</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.host"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.host!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">Accept-Language</label>
+						<label class="control-label">${i18nMap["Accept-Language"]}</label>
 						<div class="controls">
 							<textarea class="cleditor" rows="3">${escapeXml(sysLog.acceptlanguage!)}</textarea>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">Accept-Encoding</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.acceptencoding"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.acceptencoding!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">Accept</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.accept"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.accept!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">Connection</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.connection"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(sysLog.connection!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">完整请求路径</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.requestpath"]}</label>
 						<div class="controls">
 							<textarea class="cleditor" rows="3">${escapeXml(sysLog.requestpath!) }</textarea>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">User-Agent</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.useragent"]}</label>
 						<div class="controls">
 							<textarea class="cleditor" rows="3">${escapeXml(sysLog.useragent!) }</textarea>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">referer</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.referer"]}</label>
 						<div class="controls">
 							<textarea class="cleditor" rows="3">${escapeXml(sysLog.referer!) }</textarea>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">cookie</label>
+						<label class="control-label">${i18nMap["admin.sysLog.property.cookie"]}</label>
 						<div class="controls">
 							<textarea class="cleditor" rows="3">${escapeXml(sysLog.cookie!) }</textarea>
 						</div>
-					</div>
-					<div class="form-actions">
-						<button class="btn" onclick="ajaxContent('/jf/sysLog');">退出</button>
 					</div>
 				</fieldset>
 			</form>

@@ -41,7 +41,7 @@
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">×</button>
-	<h3>组拥有的角色选择</h3>
+	<h3>${i18nMap["admin.role.select"]}</h3>
 </div>
 
 <div class="modal-body">
@@ -49,7 +49,7 @@
 		<div class="box span6">
 			<div class="box-header well" data-original-title>
 				<h2>
-					<i class="icon-user"></i> 未选择
+					<i class="icon-user"></i> ${i18nMap["admin.role.select.noChecked"]}
 				</h2>
 				<div class="box-icon">
 					
@@ -67,7 +67,7 @@
 		<div class="box span6">
 			<div class="box-header well" data-original-title>
 				<h2>
-					<i class="icon-user"></i> 已选择
+					<i class="icon-user"></i> ${i18nMap["admin.role.select.checked"]}
 				</h2>
 				<div class="box-icon">
 					
@@ -85,5 +85,5 @@
 </div>
 
 <div class="modal-footer">
-	<a href="#" class="btn" data-dismiss="modal">关闭</a>
+	<a href="#" class="btn" data-dismiss="modal">${i18nMap["admin.common.close"]}</a>
 </div>

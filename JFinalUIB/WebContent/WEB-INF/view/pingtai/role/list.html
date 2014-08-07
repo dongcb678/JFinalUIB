@@ -2,9 +2,9 @@
 	
 	<div>
 		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+			<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 			<li>
-				<a href="#">角色管理</a>
+				<a href="#">${i18nMap["admin.role.common.name"]}</a>
 			</li>
 		</ul>
 	</div>
@@ -12,10 +12,10 @@
 	<div class="row-fluid sortable">
 		<div class="box span12">
 			<div class="box-header well" data-original-title>
-				<h2><i class="icon-edit"></i> 角色查询</h2>
+				<h2><i class="icon-edit"></i> ${i18nMap["admin.role.list.select"]}</h2>
 				<div class="box-icon">
 					<% if(hasPrivilegeUrl("/pingtai/role/add.html")){ %>
-						<a href="#" class="btn btn-round" title="添加角色" onclick="ajaxContent('/jf/role/toUrl?toUrl=/pingtai/role/add.html');"><i class="icon-plus-sign"></i></a>
+						<a href="#" class="btn btn-round" title='${i18nMap["admin.role.add"]}' onclick="ajaxContent('/jf/role/toUrl?toUrl=/pingtai/role/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -24,15 +24,15 @@
 			<div class="box-content" style="display: none;">
 				<fieldset>
 				  	<div class="control-group">
-						<label class="control-label" for="focusedInput">名称</label>
+						<label class="control-label" for="focusedInput">${i18nMap["admin.role.property.name"]}</label>
 						<div class="controls">
 					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${escapeXml(paramMap["_query.names"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
 				  	<div class="form-actions">
-						<button type="button" class="btn btn-primary" onclick='ajaxForm("splitPage");'>查询</button>
-						<button type="reset" class="btn">清除</button>
+						<button type="button" class="btn btn-primary" onclick='ajaxForm("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
 				  	</div>
 				</fieldset>
 			</div>
@@ -43,7 +43,7 @@
 		<div class="box span12">
 			
 			<div class="box-header well" data-original-title>
-				<h2><i class="icon-user"></i> 角色列表</h2>
+				<h2><i class="icon-user"></i> ${i18nMap["admin.role.list.table"]}</h2>
 				<div class="box-icon">
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -55,9 +55,9 @@
 					<thead>
 						<tr>
 							<th onclick="orderbyFun('names')">
-								名称${orderBy("names")}
+								${i18nMap["admin.role.property.name"]}	${orderBy("names")}
 							</th>
-							<th width="210">操作</th>
+							<th width="210">${i18nMap["admin.common.operation"]}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -71,13 +71,13 @@
 								<td>${escapeXml(role["names"]!)}</td>
 								<td class="center">
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/role/edit/${escapeXml(role.ids!)}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/role/edit/${escapeXml(role.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/role/delete/${escapeXml(role.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>	
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/role/delete/${escapeXml(role.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>	
 									<% } %>
 									<% if(operator  == true){ %>
-										<a class="btn btn-success" href="#" onclick="setRoleOperatorDiaLog('${escapeXml(role.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 功能</a> 
+										<a class="btn btn-success" href="#" onclick="setRoleOperatorDiaLog('${escapeXml(role.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.role.list.table.operator"]}</a> 
 									<% } %>
 								</td>
 							</tr>

@@ -18,7 +18,7 @@ function dataVali(form){
 
 <fieldset>
 	<div class="control-group">
-		<label class="control-label">名称</label>
+		<label class="control-label">${i18nMap["admin.role.property.name"]}</label>
 		<div class="controls">
 			<input type="text" name="role.names" value="${escapeXml(role.names!)}" 
 				class="input-xlarge" maxlength="25" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
