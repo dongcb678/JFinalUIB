@@ -1,8 +1,8 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
-		<li><a href="#" onclick="ajaxContent('/jf/operator');">功能管理</a> <span class="divider">/</span></li>
-		<li><a href="#">查看功能</a></li>
+		<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/operator');">${i18nMap["admin.operator.common.name"]}</a> <span class="divider">/</span></li>
+		<li><a href="#">${i18nMap["admin.operator.view"]}</a></li>
 	</ul>
 </div>
 
@@ -11,7 +11,7 @@
 		
 		<div class="box-header well" data-original-title>
 			<h2>
-				<i class="icon-edit"></i> 查看功能
+				<i class="icon-edit"></i> ${i18nMap["admin.operator.view"]}
 			</h2>
 			<div class="box-icon">
 				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
@@ -23,67 +23,64 @@
 			<form class="form-horizontal">
 				<fieldset>
 					<div class="control-group">
-						<label class="control-label">所属模块</label>
+						<label class="control-label">${i18nMap["admin.operator.property.mname"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(operator.modulenames!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">名称</label>
+						<label class="control-label">${i18nMap["admin.operator.property.name"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(operator.names!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">是否权限验证</label>
+						<label class="control-label">${i18nMap["admin.operator.property.privilege"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value='${operator.privilege == "1" ? "是":"否"}'>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">操作URL</label>
+						<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value='${escapeXml(operator.url!)}'>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">是否分页</label>
+						<label class="control-label">${i18nMap["admin.operator.property.splitPage"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value='${operator.splitpage == "1" ? "是":"否"}'>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">是否需要行级过滤</label>
+						<label class="control-label">${i18nMap["admin.operator.property.rowFilter"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value='${operator.rowfilter == "1" ? "是":"否"}'>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">表单重复提交验证</label>
+						<label class="control-label">${i18nMap["admin.operator.property.formToken"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value='${operator.formtoken == "1" ? "是":"否"}'>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">IP黑名单验证</label>
+						<label class="control-label">${i18nMap["admin.operator.property.ip"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value='${operator.ipblack == "1" ? "是":"否"}'>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">操作完成返回url</label>
+						<label class="control-label">${i18nMap["admin.operator.property.returnUrl"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(operator.returnurl!)}">
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">返回参数keys</label>
+						<label class="control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
 						<div class="controls">
 							<input type="text" disabled="disabled" value="${escapeXml(operator.returnparamkeys!)}">
 						</div>
-					</div>
-					<div class="form-actions">
-						<button class="btn" onclick="ajaxContent('/jf/operator');">退出</button>
 					</div>
 				</fieldset>
 			</form>

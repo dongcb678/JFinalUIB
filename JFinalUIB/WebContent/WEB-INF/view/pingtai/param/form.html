@@ -16,17 +16,17 @@ function dataVali(form){
 
 <fieldset>
 	<div class="control-group">
-		<label class="control-label">上级分类</label>
+		<label class="control-label">${i18nMap["admin.param.property.parent"]}</label>
 		<div class="controls">
 			<input type="hidden" id="parentId" name="param.parentids" value="${escapeXml(param.parentids!)}"/>
 			<input type="text" id="parentName" value="${escapeXml(param.parentnames!)}" 
 				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="paramRadioDiaLog('parentId', 'parentName', '${escapeXml(param.parentids!)}');">选择</button>
+			<button class="btn" type="button" onclick="paramRadioDiaLog('parentId', 'parentName', '${escapeXml(param.parentids!)}');">${i18nMap["admin.common.choice"]}</button>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">名称</label>
+		<label class="control-label">${i18nMap["admin.param.property.name"]}</label>
 		<div class="controls">
 			<input type="text" name="param.names" value="${escapeXml(param.names!)}" 
 				class="input-xlarge" maxlength="25" vMin="1" vType="chinaLetterNumber" onblur="onblurVali(this);">
@@ -34,7 +34,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">编号</label>
+		<label class="control-label">${i18nMap["admin.param.property.number"]}</label>
 		<div class="controls">
 			<input type="text" name="param.numbers" value="${escapeXml(param.numbers!)}" 
 				class="input-xlarge" maxlength="50" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
@@ -47,7 +47,7 @@ function dataVali(form){
 	<% if(paramMap["i18n"] == "0"){ %>
 	
 	<div class="control-group">
-		<label class="control-label">值</label>
+		<label class="control-label">${i18nMap["admin.param.property.value"]}</label>
 		<div class="controls">
 			<input type="text" name="param.val" value="${escapeXml(param.val!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -58,7 +58,7 @@ function dataVali(form){
 	<% } else { %>
 	
 	<div class="control-group">
-		<label class="control-label">值(jp)<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+		<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
 		<div class="controls">
 			<input type="text" name="param.val_jp" value="${escapeXml(param.val_jp!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -66,7 +66,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">值(en-US)<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+		<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
 		<div class="controls">
 			<input type="text" name="param.val_enus" value="${escapeXml(param.val_enus!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -74,7 +74,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">值(zh-CN)<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+		<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
 		<div class="controls">
 			<input type="text" name="param.val_zhcn" value="${escapeXml(param.val_zhcn!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -82,7 +82,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">值(zh-HK)<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+		<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
 		<div class="controls">
 			<input type="text" name="param.val_zhhk" value="${escapeXml(param.val_zhhk!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -90,7 +90,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">值(zh-TW)<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+		<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
 		<div class="controls">
 			<input type="text" name="param.val_zhtw" value="${escapeXml(param.val_zhtw!)}" 
 				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -101,7 +101,7 @@ function dataVali(form){
 	<% } %>
 	
 	<div class="control-group">
-		<label class="control-label">排序</label>
+		<label class="control-label">${i18nMap["admin.common.order"]}</label>
 		<div class="controls">
 			<input type="text" name="param.orderids" value="${param.orderids!}" 
 				class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">

@@ -2,9 +2,9 @@
 	
 	<div>
 		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+			<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 			<li>
-				<a href="#">功能管理</a>
+				<a href="#">${i18nMap["admin.operator.common.name"]}</a>
 			</li>
 		</ul>
 	</div>
@@ -12,10 +12,10 @@
 	<div class="row-fluid sortable">
 		<div class="box span12">
 			<div class="box-header well" data-original-title>
-				<h2><i class="icon-edit"></i> 功能查询</h2>
+				<h2><i class="icon-edit"></i> ${i18nMap["admin.operator.list.select"]}</h2>
 				<div class="box-icon">
 					<% if(hasPrivilegeUrl("/pingtai/operator/add.html")){ %>
-						<a href="#" class="btn btn-round" title="添加功能" onclick="ajaxContent('/jf/operator/toUrl?toUrl=/pingtai/operator/add.html');"><i class="icon-plus-sign"></i></a>
+						<a href="#" class="btn btn-round" title='${i18nMap["admin.operator.add"]}' onclick="ajaxContent('/jf/operator/toUrl?toUrl=/pingtai/operator/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -24,22 +24,22 @@
 			<div class="box-content" style="display: none;">
 				<fieldset>
 				  	<div class="control-group">
-						<label class="control-label" for="focusedInput">名称</label>
+						<label class="control-label" for="focusedInput">${i18nMap["admin.operator.property.name"]}</label>
 						<div class="controls">
 					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${escapeXml(paramMap["_query.names"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  
 				  	<div class="control-group">
-						<label class="control-label">URL</label>
+						<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
 						<div class="controls">
 					  		<input class="input-xlarge" type="text" name="_query.url" value='${escapeXml(paramMap["_query.url"])}' maxlength="40" >
 						</div>
 				  	</div>
 				
 				  	<div class="form-actions">
-						<button type="button" class="btn btn-primary" onclick='ajaxForm("splitPage");'>查询</button>
-						<button type="reset" class="btn">清除</button>
+						<button type="button" class="btn btn-primary" onclick='ajaxForm("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
 				  	</div>
 				</fieldset>
 			</div>
@@ -50,7 +50,7 @@
 		<div class="box span12">
 			
 			<div class="box-header well" data-original-title>
-				<h2><i class="icon-user"></i> 功能列表</h2>
+				<h2><i class="icon-user"></i> ${i18nMap["admin.operator.list.table"]}</h2>
 				<div class="box-icon">
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -62,30 +62,30 @@
 					<thead>
 						<tr>
 							<th onclick="orderbyFun('s.names')">
-								系统${orderBy("s.names")}
+								${i18nMap["admin.operator.property.sname"]}	${orderBy("s.names")}
 							</th>
 							<th onclick="orderbyFun('m.names')">
-								模块${orderBy("m.names")}
+								${i18nMap["admin.operator.property.mname"]}	${orderBy("m.names")}
 							</th>
 							<th onclick="orderbyFun('names')">
-								操作名${orderBy("names")}
+								${i18nMap["admin.operator.property.name"]}	${orderBy("names")}
 							</th>
 							<th onclick="orderbyFun('url')">
-								URL${orderBy("url")}
+								${i18nMap["admin.operator.property.url"]}	${orderBy("url")}
 	      					</th>
 							<th onclick="orderbyFun('rowFilter')">
-								行级过滤${orderBy("rowFilter")}
+								${i18nMap["admin.operator.property.rowFilter"]}	${orderBy("rowFilter")}
 							</th>
 							<th onclick="orderbyFun('splitPage')">
-								是否分页${orderBy("splitPage")}
+								${i18nMap["admin.operator.property.splitPage"]}	${orderBy("splitPage")}
 							</th>
 							<th onclick="orderbyFun('formToken')">
-								重复验证${orderBy("formToken")}
+								${i18nMap["admin.operator.property.formToken"]}	${orderBy("formToken")}
 							</th>
 							<th onclick="orderbyFun('privilege')">
-								权限验证${orderBy("privilege")}
+								${i18nMap["admin.operator.property.privilege"]}	${orderBy("privilege")}
 							</th>
-							<th>操作</th>
+							<th>${i18nMap["admin.common.operation"]}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -101,23 +101,39 @@
 								<td>${escapeXml(operator["names"]!)}</td>
 								<td>${escapeXml(operator["url"]!)}</td>
 								<td class="center">
-									<% if(operator["rowFilter"] == "0"){print("否");}else{print("是");} %>
+									<% if(operator["rowFilter"] == "0"){ %>
+											${i18nMap["admin.common.no"]}
+									<% }else{ %>
+											${i18nMap["admin.common.yes"]}
+									<% } %>
 								</td>
 								<td class="center">
-									<% if(operator["splitPage"] == "0"){print("否");}else{print("是");} %>
+									<% if(operator["splitPage"] == "0"){ %>
+											${i18nMap["admin.common.no"]}
+									<% }else{ %>
+											${i18nMap["admin.common.yes"]}
+									<% } %>
 								</td>
 								<td class="center">
 									<span class="label label-success">
-										<% if(operator["formToken"] == "0"){print("否");}else{print("是");} %>
+										<% if(operator["formToken"] == "0"){ %>
+												${i18nMap["admin.common.no"]}
+										<% }else{ %>
+												${i18nMap["admin.common.yes"]}
+										<% } %>
 									</span>
 								</td>
 								<td class="center">
-									<% if(operator["privilege"] == "0"){print("否");}else{print("是");} %>
+									<% if(operator["privilege"] == "0"){ %>
+											${i18nMap["admin.common.no"]}
+									<% }else{ %>
+											${i18nMap["admin.common.yes"]}
+									<% } %>
 								</td>
 								<td class="center">
-									<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/operator/view/${escapeXml(operator.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a> 
-									<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/operator/edit/${escapeXml(operator.ids!)}');"> <i class="icon-edit icon-white"></i> 编辑</a> 
-									<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/operator/delete/${escapeXml(operator.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>
+									<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/operator/view/${escapeXml(operator.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a> 
+									<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/operator/edit/${escapeXml(operator.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a> 
+									<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/operator/delete/${escapeXml(operator.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
 								</td>
 							</tr>
 						<% } %>

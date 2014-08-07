@@ -18,7 +18,7 @@ function dataVali(form){
 
 <fieldset>
 	<div class="control-group">
-		<label class="control-label">模块</label>
+		<label class="control-label">${i18nMap["admin.operator.property.mname"]}</label>
 		<div class="controls">
 			<input type="hidden" id="moduleId" name="operator.moduleids" value="${escapeXml(operator.moduleids!)}"/>
 			<input type="text" id="moduleName" name="operator.modulenames" value="${escapeXml(operator.modulenames!)}" 
@@ -28,7 +28,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">名称</label>
+		<label class="control-label">${i18nMap["admin.operator.property.name"]}</label>
 		<div class="controls">
 			<input type="text" name="operator.names" value="${escapeXml(operator.names!)}" 
 				class="input-xlarge" maxlength="25" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
@@ -36,17 +36,17 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">是否权限验证</label>
+		<label class="control-label">${i18nMap["admin.operator.property.privilege"]}</label>
 		<div class="controls">
 			<select name="operator.privilege" class="combox">
-				<option value="1" ${operator.privilege! == "1" ? "selected='selected'":"" }>是</option>
-				<option value="0" ${operator.privilege! == "0" ? "selected='selected'":"" }>否</option>
+				<option value="1" ${operator.privilege! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+				<option value="0" ${operator.privilege! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">操作URL</label>
+		<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
 		<div class="controls">
 			<input type="text" name="operator.url" value="${escapeXml(operator.url!)}" 
 				class="input-xlarge" maxlength="200" vMin="1" vType="length" onblur="onblurVali(this);">
@@ -54,47 +54,47 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">是否分页</label>
+		<label class="control-label">${i18nMap["admin.operator.property.splitPage"]}</label>
 		<div class="controls">
 			<select name="operator.splitpage" class="combox">
-				<option value="0" ${operator.splitpage! == "0" ? "selected='selected'":"" }>否</option>
-				<option value="1" ${operator.splitpage! == "1" ? "selected='selected'":"" }>是</option>
+				<option value="0" ${operator.splitpage! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+				<option value="1" ${operator.splitpage! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">是否需要行级过滤</label>
+		<label class="control-label">${i18nMap["admin.operator.property.rowFilter"]}</label>
 		<div class="controls">
 			<select name="operator.rowfilter" class="combox">
-				<option value="0" ${operator.rowfilter! == "0" ? "selected='selected'":"" }>否</option>
-				<option value="1" ${operator.rowfilter! == "1" ? "selected='selected'":"" }>是</option>
+				<option value="0" ${operator.rowfilter! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+				<option value="1" ${operator.rowfilter! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">表单重复提交验证</label>
+		<label class="control-label">${i18nMap["admin.operator.property.formToken"]}</label>
 		<div class="controls">
 			<select name="operator.formtoken" class="combox">
-				<option value="0" ${operator.formtoken! == "0" ? "selected='selected'":"" }>否</option>
-				<option value="1" ${operator.formtoken! == "1" ? "selected='selected'":"" }>是</option>
+				<option value="0" ${operator.formtoken! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+				<option value="1" ${operator.formtoken! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">IP黑名单验证</label>
+		<label class="control-label">${i18nMap["admin.operator.property.ip"]}</label>
 		<div class="controls">
 			<select name="operator.ipblack" class="combox">
-				<option value="0" ${operator.ipblack! == "0" ? "selected='selected'":"" }>否</option>
-				<option value="1" ${operator.ipblack! == "1" ? "selected='selected'":"" }>是</option>
+				<option value="0" ${operator.ipblack! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+				<option value="1" ${operator.ipblack! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
 			</select>
 			<span class="help-inline"></span>
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">操作完成返回url</label>
+		<label class="control-label">${i18nMap["admin.operator.property.returnUrl"]}</label>
 		<div class="controls">
 			<input type="text" name="operator.returnurl" value="${escapeXml(operator.returnurl!)}" 
 				class="input-xlarge" maxlength="200" vMin="0" vType="length" onblur="onblurVali(this);">
@@ -102,7 +102,7 @@ function dataVali(form){
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">返回参数keys</label>
+		<label class="control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
 		<div class="controls">
 			<input type="text" name="operator.returnparamkeys" value="${escapeXml(operator.returnparamkeys!)}" 
 				class="input-xlarge" maxlength="100" vMin="0" vType="length" onblur="onblurVali(this);">
