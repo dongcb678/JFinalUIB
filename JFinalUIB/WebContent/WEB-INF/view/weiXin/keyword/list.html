@@ -70,13 +70,13 @@
 				<table class="table table-striped table-bordered bootstrap-datatable ">
 					<thead>
 						<tr>
-							<th onclick="orderbyFun('question')">
+							<th onclick="orderbyFun('splitPage', 'question')">
 								问题${orderBy("question")}
 	      					</th>
-							<th onclick="orderbyFun('questionkey')">
+							<th onclick="orderbyFun('splitPage', 'questionkey')">
 								问题关键字${orderBy("questionkey")}
 	      					</th>
-							<th onclick="orderbyFun('answer')">
+							<th onclick="orderbyFun('splitPage', 'answer')">
 								答案${orderBy("answer")}
 							</th>
 							<th width="210">操作</th>
@@ -109,7 +109,7 @@
 					</tbody>
 				</table>
 				<div id="splitPageDiv" class="pagination pagination-centered">
-					<% include("/common/splitPage.html"){} %>
+					<% include("/common/splitPage.html", {"formId" : "splitPage"}){} %>
 				</div>
 			</div>
 			

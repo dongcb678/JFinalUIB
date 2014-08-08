@@ -63,19 +63,19 @@
 				<table class="table table-striped table-bordered bootstrap-datatable ">
 					<thead>
 						<tr>
-							<th onclick="orderbyFun('d.names')">
+							<th onclick="orderbyFun('splitPage', 'd.names')">
 								${i18nMap["admin.user.property.department"]}	${orderBy("d.names")}
 	      					</th>
-							<th onclick="orderbyFun('userName')">
+							<th onclick="orderbyFun('splitPage', 'userName')">
 								${i18nMap["admin.user.property.userName"]}	${orderBy("userName")}
 	      					</th>
-							<th onclick="orderbyFun('names')">
+							<th onclick="orderbyFun('splitPage', 'names')">
 								${i18nMap["admin.user.property.nickname"]}	${orderBy("names")}
 							</th>
-							<th onclick="orderbyFun('email')">
+							<th onclick="orderbyFun('splitPage', 'email')">
 								${i18nMap["admin.user.property.email"]}	${orderBy("email")}
 							</th>
-							<th onclick="orderbyFun('mobile')">
+							<th onclick="orderbyFun('splitPage', 'mobile')">
 								${i18nMap["admin.user.property.mobilePhone"]}	${orderBy("mobile")}
 							</th>
 							<th width="280">${i18nMap["admin.common.operation"]}</th>
@@ -114,7 +114,7 @@
 					</tbody>
 				</table>
 				<div id="splitPageDiv" class="pagination pagination-centered">
-					<% include("/common/splitPage.html"){} %>
+					<% include("/common/splitPage.html", {"formId" : "splitPage"}){} %>
 				</div>
 			</div>
 			

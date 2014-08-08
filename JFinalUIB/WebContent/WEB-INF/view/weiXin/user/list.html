@@ -60,34 +60,34 @@
 				<table class="table table-striped table-bordered bootstrap-datatable ">
 					<thead>
 						<tr>
-							<th onclick="orderbyFun('openid')">
+							<th onclick="orderbyFun('splitPage', 'openid')">
 								用户标识${orderBy("openid")}
 	      					</th>
-							<th onclick="orderbyFun('subscribe')">
+							<th onclick="orderbyFun('splitPage', 'subscribe')">
 								关注状态${orderBy("subscribe")}
 	      					</th>
-							<th onclick="orderbyFun('subscribetime')">
+							<th onclick="orderbyFun('splitPage', 'subscribetime')">
 								关注时间${orderBy("subscribetime")}
 							</th>
-							<th onclick="orderbyFun('nickname')">
+							<th onclick="orderbyFun('splitPage', 'nickname')">
 								昵称${orderBy("nickname")}
 							</th>
-							<th onclick="orderbyFun('sex')">
+							<th onclick="orderbyFun('splitPage', 'sex')">
 								性别${orderBy("sex")}
 							</th>
-							<th onclick="orderbyFun('country')">
+							<th onclick="orderbyFun('splitPage', 'country')">
 								国家${orderBy("country")}
 							</th>
-							<th onclick="orderbyFun('province')">
+							<th onclick="orderbyFun('splitPage', 'province')">
 								省份${orderBy("province")}
 							</th>
-							<th onclick="orderbyFun('city')">
+							<th onclick="orderbyFun('splitPage', 'city')">
 								城市${orderBy("city")}
 							</th>
-							<th onclick="orderbyFun('language')">
+							<th onclick="orderbyFun('splitPage', 'language')">
 								语言${orderBy("language")}
 							</th>
-							<th onclick="orderbyFun('headimgurl')">
+							<th onclick="orderbyFun('splitPage', 'headimgurl')">
 								头像url${orderBy("headimgurl")}
 							</th>
 							<th width="160">操作</th>
@@ -127,7 +127,7 @@
 					</tbody>
 				</table>
 				<div id="splitPageDiv" class="pagination pagination-centered">
-					<% include("/common/splitPage.html"){} %>
+					<% include("/common/splitPage.html", {"formId" : "splitPage"}){} %>
 				</div>
 			</div>
 			
