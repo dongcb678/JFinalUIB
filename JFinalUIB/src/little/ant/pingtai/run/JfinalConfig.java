@@ -12,6 +12,7 @@ import little.ant.pingtai.interceptor.ParamPkgInterceptor;
 import little.ant.pingtai.plugin.ControllerPlugin;
 import little.ant.pingtai.plugin.I18NPlugin;
 import little.ant.pingtai.plugin.PropertiesPlugin;
+import little.ant.pingtai.plugin.SqlXmlPlugin;
 import little.ant.pingtai.plugin.TablePlugin;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.thread.ThreadSysLog;
@@ -122,8 +123,11 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("I18NPlugin 国际化键值对加载");
 		new I18NPlugin().start();
 		
-		log.info("configPlugin EhCache缓存");
+		log.info("EhCachePlugin EhCache缓存");
 		me.add(new EhCachePlugin());
+
+		log.info("SqlXmlPlugin 解析并缓存 xml sql");
+		me.add(new SqlXmlPlugin());
 	}
 
 	/**

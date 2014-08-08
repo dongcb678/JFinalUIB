@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	namespace + sql id 必须全局唯一
+	所以最好是namespace全局唯一，sql id在本namespace唯一即可
+	调用处理工具类是ToolSqlXml中的两个getSql方法
+-->
+<sql-statement namespace="pingtai.user">
+	
+	<!-- 静态SQL -->
+	<sql id="get">
+		<![CDATA[ 
+        	select * form pt_user where ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 
+		动态SQL处理，依赖beetl来解析，所以要使用beetle语法写逻辑。
+		问题是，还没能解决预处理，存在sql注入问题，暂时笨拙的处理方法是去除所有值中的单引号和分号
+	 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from pt_user u 
+			left join pt_userinfo ui on u.userinfoids = ui.ids 
+			left join pt_department d on u.departmentids = d.ids 
+			where 1=1 
+			<% if(!isEmpty(userClass)){ %>
+					and u.userClass = '#userClass#'
+			<% } %>
+			
+			<% if(!isEmpty(userName)){ %>
+					and u.userName like '%#userName#%'
+			<% } %>
+			
+			<% if(!isEmpty(names)){ %>
+					and ui.names like '%#names#%'
+			<% } %>
+    	]]>
+	</sql>
+
+</sql-statement>
