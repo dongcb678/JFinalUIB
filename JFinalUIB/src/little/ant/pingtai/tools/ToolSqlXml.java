@@ -2,6 +2,7 @@ package little.ant.pingtai.tools;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,12 +17,52 @@ import org.dom4j.io.SAXReader;
 
 import com.jfinal.log.Logger;
 
+/**
+ * 处理Sql Map
+ * @author 董华健
+ * 说明：加载sql map中的sql到map中，并提供动态长度sql处理
+ */
 public class ToolSqlXml {
 
     protected static final Logger log = Logger.getLogger(ToolSqlXml.class);
 
-    private static Map<String, String> sqlMap = new HashMap<String, String>();
-
+    /**
+     * xml中所有的sql语句
+     */
+    private static final Map<String, String> sqlMap = new HashMap<String, String>();
+    
+    /**
+     * 过滤掉的sql关键字
+     */
+    private static final List<String> badKeyWordList = new ArrayList<String>();
+    
+    /**
+     * 加载关键字到List
+     */
+    static {
+    	String badStr = "'|and|exec|execute|insert|select|delete|update|count|drop|*|%|chr|mid|master|truncate|" +
+                "char|declare|sitename|net user|xp_cmdshell|;|or|-|+|,|like'|and|exec|execute|insert|create|drop|" +
+                "table|from|grant|use|group_concat|column_name|" +
+                "information_schema.columns|table_schema|union|where|select|delete|update|order|by|count|*|" +
+                "chr|mid|master|truncate|char|declare|or|;|-|--|+|,|like|//|/|%|#";
+    	badKeyWordList.addAll(Arrays.asList(badStr.split("\\|")));
+    }
+    
+    /**
+     * sql查询关键字过滤效验
+     * @param queryStr
+     * @return
+     */
+    public static boolean sqlValidate(String queryStr) {
+    	queryStr = queryStr.toLowerCase();//统一转为小写
+        for (String badKeyWord : badKeyWordList) {
+        	if (queryStr.indexOf(badKeyWord) >= 0) {
+                return true;
+            }
+		}
+        return false;
+    }
+    
     /**
      * 获取SQL，固定SQL
      * @param sqlId
@@ -52,17 +93,23 @@ public class ToolSqlXml {
 		Set<String> keySet = param.keySet();
 		for (String key : keySet) {
 			String value = (String) param.get(key);
-			value = value.replace("'", "").replace(";", "");
+			value = value.replace("'", "").replace(";", "").replace("--", "");
 			sql = sql.replace("#" + key + "#", value);
 		}
 		
         return sql;
     }
-
+    
+    /**
+     * 清楚加载的sql
+     */
     public static void destory() {
         sqlMap.clear();
     }
 
+    /**
+     * 初始化加载sql语句到map
+     */
     @SuppressWarnings("rawtypes")
 	public static void init() {
         File file = new File(ToolSqlXml.class.getClassLoader().getResource("").getFile());
