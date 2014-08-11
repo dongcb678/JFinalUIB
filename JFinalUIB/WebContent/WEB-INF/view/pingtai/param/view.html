@@ -41,6 +41,13 @@
 							<input type="text" name="param.numbers" value="${escapeXml(param.numbers!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.param.property.status"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value='${param.status == "1" ? i18nMap["admin.param.property.status.start"] : i18nMap["admin.param.property.status.stop"]}'>
+							<span class="help-inline"></span>
+						</div>
+					</div>
 					
 					<input type="hidden" name="param.i18n" value='${paramMap["i18n"]}' >
 								

@@ -17,6 +17,7 @@
 			<span controller='true'>${dict.levels }${i18nMap["admin.dict.common.level"]}</span>
 		</td>
 		<td>${dict.names }</td>
+		<td>${dict.status == "1" ? i18nMap["admin.dict.property.status.start"] : i18nMap["admin.dict.property.status.stop"]}</td>
 		<td>
 			<% if(dict.levels != 0){ %>
 				<% if(view == true){ %>

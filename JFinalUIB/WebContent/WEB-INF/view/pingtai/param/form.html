@@ -41,6 +41,16 @@ function dataVali(form){
 			<span class="help-inline">5-50位字母数字</span>
 		</div>
 	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.param.property.status"]}</label>
+		<div class="controls">
+			<select name="dict.status" class="combox">
+				<option value="1" ${param.status! == "1" ? "selected='selected'":"" }>${i18nMap["admin.param.property.status.start"]}</option>
+				<option value="0" ${param.status! == "0" ? "selected='selected'":"" }>${i18nMap["admin.param.property.status.stop"]}</option>
+			</select>
+			<span class="help-inline"></span>
+		</div>
+	</div>
 	
 	<input type="hidden" name="param.i18n" value='${paramMap["i18n"]}' >
 				

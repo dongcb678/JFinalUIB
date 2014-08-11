@@ -17,6 +17,7 @@
 			<span controller='true'>${param.levels }${i18nMap["admin.param.common.level"]}</span>
 		</td>
 		<td>${param.names }</td>
+		<td>${param.status == "1" ? i18nMap["admin.param.property.status.start"] : i18nMap["admin.param.property.status.stop"]}</td>
 		<td>
 			<% if(param.levels != 0){ %>
 				<% if(view == true){ %>

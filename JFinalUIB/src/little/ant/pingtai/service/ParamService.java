@@ -100,10 +100,10 @@ public class ParamService extends BaseService {
 		String sql = null;
 		List<Param> list = null;
 		if (null != parentIds) {
-			sql = " select ids, names, isparent, images from pt_param where parentIds = ? order by orderids asc ";
+			sql = " select ids, names, isparent, images, status from pt_param where parentIds = ? order by orderids asc ";
 			list = Param.dao.find(sql, parentIds);
 		} else {
-			sql = " select ids, names, isparent, images from pt_param where parentIds is null order by orderIds asc ";
+			sql = " select ids, names, isparent, images, status from pt_param where parentIds is null order by orderIds asc ";
 			list = Param.dao.find(sql);
 		}
 

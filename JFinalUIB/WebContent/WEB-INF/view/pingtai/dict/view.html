@@ -41,6 +41,13 @@
 							<input type="text" name="dict.numbers" value="${escapeXml(dict.numbers!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.dict.property.status"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value='${dict.status == "1" ? i18nMap["admin.dict.property.status.start"] : i18nMap["admin.dict.property.status.stop"]}'>
+							<span class="help-inline"></span>
+						</div>
+					</div>
 					
 					<input type="hidden" name="dict.i18n" value='${paramMap["i18n"]}' >
 								

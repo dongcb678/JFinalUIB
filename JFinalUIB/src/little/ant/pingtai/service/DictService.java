@@ -100,10 +100,10 @@ public class DictService extends BaseService {
 		String sql = null;
 		List<Dict> list = null;
 		if (null != parentIds) {
-			sql = " select ids, names, isparent, images from pt_dict where parentIds = ? order by orderids asc ";
+			sql = " select ids, names, isparent, images, status from pt_dict where parentIds = ? order by orderids asc ";
 			list = Dict.dao.find(sql, parentIds);
 		} else {
-			sql = " select ids, names, isparent, images from pt_dict where parentIds is null order by orderIds asc ";
+			sql = " select ids, names, isparent, images, status from pt_dict where parentIds is null order by orderIds asc ";
 			list = Dict.dao.find(sql);
 		}
 

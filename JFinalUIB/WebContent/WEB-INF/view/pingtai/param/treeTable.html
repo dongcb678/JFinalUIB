@@ -81,6 +81,7 @@
             <tr>
                 <td style="width:200px;"><span controller="true">${i18nMap["admin.param.treeTable.hierarchy"]}</span></td>
                 <td>${i18nMap["admin.param.property.name"]}</td>
+           		<td>${i18nMap["admin.param.property.status"]}</td>
            		<td>${i18nMap["admin.common.operation"]}</td>
 			</tr>
 	        <% for(param in list){ %>
@@ -90,6 +91,7 @@
 						<span controller='true'>${param.levels }${i18nMap["admin.param.common.level"]}</span>
 					</td>
 					<td>${param.names }</td>
+					<td>${param.status == "1" ? i18nMap["admin.param.property.status.start"] : i18nMap["admin.param.property.status.stop"]}</td>
 					<td>
 						<!-- 
 						<a href='#' onclick='view("${param.ids!}")'>查看</a>&nbsp;&nbsp;
