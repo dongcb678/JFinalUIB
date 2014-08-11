@@ -5,6 +5,7 @@ import little.ant.pingtai.beetl.func.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.func.OrderBy;
 import little.ant.pingtai.beetl.render.MyBeetlRenderFactory;
 import little.ant.pingtai.beetl.tag.DictTag;
+import little.ant.pingtai.beetl.tag.ParamTag;
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.handler.GlobalHandler;
 import little.ant.pingtai.interceptor.AuthenticationInterceptor;
@@ -65,6 +66,7 @@ public class JfinalConfig extends JFinalConfig {
 		groupTemplate.registerFunction("orderBy", new OrderBy());
 		groupTemplate.registerFunction("escapeXml", new EscapeXml());
 		groupTemplate.registerTag("dict", DictTag.class);
+		groupTemplate.registerTag("param", ParamTag.class);
 		
 		log.info("configConstant 视图error page设置");
 		me.setError401View("/common/401.html");

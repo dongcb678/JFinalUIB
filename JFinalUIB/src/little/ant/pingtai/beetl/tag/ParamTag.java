@@ -6,7 +6,7 @@ import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.BaseModel;
-import little.ant.pingtai.model.Dict;
+import little.ant.pingtai.model.Param;
 import little.ant.pingtai.thread.ThreadParamInit;
 
 import org.apache.log4j.Logger;
@@ -15,13 +15,13 @@ import org.beetl.core.Tag;
 import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
- * 字典select
+ * 参数select
  * 
  * @author 董华健
  */
-public class DictTag extends Tag {
+public class ParamTag extends Tag {
 
-	private static Logger log = Logger.getLogger(DictTag.class);
+	private static Logger log = Logger.getLogger(ParamTag.class);
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -42,7 +42,7 @@ public class DictTag extends Tag {
 			String number = param.get("number") == null ? "" : param.get("number");
 			String defaultnumber = param.get("defaultnumber") == null ? "" : param.get("defaultnumber");
 
-			log.debug("字典标签");
+			log.debug("参数标签");
 			
 			if(type.equals("")){
 				ctx.byteWriter.writeString(select(id, name, classs, style, number, defaultnumber));
@@ -85,27 +85,25 @@ public class DictTag extends Tag {
 			sb.append("\" style=\"").append(style).append("\" >");
 		}
 
-		Dict parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
-		String parentI18n = parentDict.getStr("i18n");
+		Param parentParam = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
+		String parentI18n = parentParam.getStr("i18n");
 		
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
+		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
 
-		for (Dict dict : dictList) {
-			String status = dict.getStr("status");
-			String numbersTemp = dict.getStr("numbers");
-			String namesTemp = dict.getStr("names");
-			String valueTemp = dict.getStr(val);
-			
+		for (Param param : paramList) {
+			String status = param.getStr("status");
+			String numbersTemp = param.getStr("numbers");
+			String namesTemp = param.getStr("names");
+			String valueTemp = param.getStr(val);
 			if(null == status || status.equals("0")){
-				log.debug("字典" + numbersTemp + "已经停用");
+				log.debug("参数" + numbersTemp + "已经停用");
 				continue;
 			}
-			
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中
 				sb.append("<option value=\"").append(valueTemp).append("\" selected=\"selected\">");
 				sb.append(namesTemp);
@@ -135,31 +133,31 @@ public class DictTag extends Tag {
 	private String radio(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		Dict parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
-		String parentI18n = parentDict.getStr("i18n");
+		Param parentParam = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
+		String parentI18n = parentParam.getStr("i18n");
 		
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
+		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
 
-		for (Dict dict : dictList) {
-			String status = dict.getStr("status");
-			String numbersTemp = dict.getStr("numbers");
-			String namesTemp = dict.getStr("names");
-			String valueTemp = dict.getStr(val);
+		for (Param param : paramList) {
+			String status = param.getStr("status");
+			String numbersTemp = param.getStr("numbers");
+			String namesTemp = param.getStr("names");
+			String valueTemp = param.getStr(val);
 			if(null == status || status.equals("0")){
-				log.debug("字典" + numbersTemp + "已经停用");
+				log.debug("参数" + numbersTemp + "已经停用");
 				continue;
 			}
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中
-				sb.append(namesTemp).append("<input type=\"radio\" id=\"").append(id).append(dictList.indexOf(dict)).append("\" name=\"").append(name)
+				sb.append(namesTemp).append("<input type=\"radio\" id=\"").append(id).append(paramList.indexOf(param)).append("\" name=\"").append(name)
 				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(classs).append("\" style=\"").append(style).append("\" checked=\"checked\" >");
 				
 			} else {
-				sb.append(namesTemp).append("<input type=\"radio\" id=\"").append(id).append(dictList.indexOf(dict)).append("\" name=\"").append(name)
+				sb.append(namesTemp).append("<input type=\"radio\" id=\"").append(id).append(paramList.indexOf(param)).append("\" name=\"").append(name)
 				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(classs).append("\" style=\"").append(style).append("\" >");
 			}
 		}
@@ -181,7 +179,7 @@ public class DictTag extends Tag {
 	private String checkbox(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		Dict parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
+		Param parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
 		String parentI18n = parentDict.getStr("i18n");
 		
 		String val = "val";
@@ -189,23 +187,23 @@ public class DictTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
+		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
 
-		for (Dict dict : dictList) {
-			String status = dict.getStr("status");
-			String numbersTemp = dict.getStr("numbers");
-			String namesTemp = dict.getStr("names");
-			String valueTemp = dict.getStr(val);
+		for (Param param : paramList) {
+			String status = param.getStr("status");
+			String numbersTemp = param.getStr("numbers");
+			String namesTemp = param.getStr("names");
+			String valueTemp = param.getStr(val);
 			if(null == status || status.equals("0")){
-				log.debug("字典" + numbersTemp + "已经停用");
+				log.debug("参数" + numbersTemp + "已经停用");
 				continue;
 			}
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中
-				sb.append(namesTemp).append("<input type=\"checkbox\" id=\"").append(id).append(dictList.indexOf(dict)).append("\" name=\"").append(name)
+				sb.append(namesTemp).append("<input type=\"checkbox\" id=\"").append(id).append(paramList.indexOf(param)).append("\" name=\"").append(name)
 				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(classs).append("\" style=\"").append(style).append("\" checked=\"checked\" >");
 				
 			} else {
-				sb.append(namesTemp).append("<input type=\"checkbox\" id=\"").append(id).append(dictList.indexOf(dict)).append("\" name=\"").append(name)
+				sb.append(namesTemp).append("<input type=\"checkbox\" id=\"").append(id).append(paramList.indexOf(param)).append("\" name=\"").append(name)
 				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(classs).append("\" style=\"").append(style).append("\" >");
 			}
 		}
