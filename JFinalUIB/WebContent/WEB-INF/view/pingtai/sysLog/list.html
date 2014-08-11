@@ -21,6 +21,13 @@
 			<div class="box-content" style="display: none;">
 				<fieldset>
 				  	<div class="control-group">
+						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ourl"]}</label>
+						<div class="controls">
+					  		<input class="input-xlarge focused" type="text" name="_query.url" value='${escapeXml(paramMap["_query.url"])}' maxlength="20" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.oname"]}</label>
 						<div class="controls">
 					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${escapeXml(paramMap["_query.names"])}' maxlength="20" >

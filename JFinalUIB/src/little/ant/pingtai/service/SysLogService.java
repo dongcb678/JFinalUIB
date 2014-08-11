@@ -2,6 +2,7 @@ package little.ant.pingtai.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Syslog;
@@ -34,32 +35,38 @@ public class SysLogService extends BaseService {
 		formSqlSb.append(" left join pt_operator o on s.operatorids = o.ids ");
 		formSqlSb.append(" where 1=1 ");
 		
-		if(null == queryParam){
-			return;
-		}
+		Set<String> paramKeySet = queryParam.keySet();
+		for (String paramKey : paramKeySet) {
+			String value = queryParam.get(paramKey);
+			switch (paramKey) {
+			case "url":	//操作url
+				formSqlSb.append(" and o.url like ? ");
+				paramValue.add("%" + value + "%");
+				break;
 
-		String names = queryParam.get("names");//操作名称
-		if(null!=names && !names.equals("")){
-			formSqlSb.append(" and o.names like ? ");
-			paramValue.add("%" + names.trim() + "%");
-		}
-		
-		String username = queryParam.get("username");//用户名称
-		if(null!=username && !username.equals("")){
-			formSqlSb.append(" and u.username like ? ");
-			paramValue.add("%" + username.trim() + "%");
-		}
+			case "names":	//操作名称
+				formSqlSb.append(" and o.names like ? ");
+				paramValue.add("%" + value + "%");
+				break;
 
-		String ips = queryParam.get("ips");//ip
-		if(null!=ips && !ips.equals("")){
-			formSqlSb.append(" and s.ips like ? ");
-			paramValue.add("%" + ips.trim() + "%");
-		}
+			case "username":	//用户名称
+				formSqlSb.append(" and u.username like ? ");
+				paramValue.add("%" + value + "%");
+				break;
 
-		String status = queryParam.get("status");//状态
-		if(null!=status && !status.equals("")){
-			formSqlSb.append(" and s.status = ? ");
-			paramValue.add(status);
+			case "ips":	//ip
+				formSqlSb.append(" and s.ips like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "status":	//状态
+				formSqlSb.append(" and s.status = ? ");
+				paramValue.add(value);
+				break;
+
+			default:
+				break;
+			}
 		}
 	}
 	

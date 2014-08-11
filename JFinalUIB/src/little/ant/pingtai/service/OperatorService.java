@@ -3,6 +3,7 @@ package little.ant.pingtai.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
@@ -144,22 +145,24 @@ public class OperatorService extends BaseService {
 		formSqlSb.append(" left join pt_module m on o.moduleids=m.ids ");
 		formSqlSb.append(" left join pt_systems s on s.ids=m.systemsids ");
 		formSqlSb.append(" where 1=1 ");
-		
-		if(null == queryParam){
-			return;
-		}
-		
-		String names = queryParam.get("names");//功能名称
-		String url = queryParam.get("url");//功能名称
-		
-		if(null!=names && !names.equals("")){
-			formSqlSb.append(" and o.names like ? ");
-			paramValue.add("%" + names.trim() + "%");
-		}
 
-		if(null!=url && !url.equals("")){
-			formSqlSb.append(" and o.url like ? ");
-			paramValue.add("%" + url.trim() + "%");
+		Set<String> paramKeySet = queryParam.keySet();
+		for (String paramKey : paramKeySet) {
+			String value = queryParam.get(paramKey);
+			switch (paramKey) {
+			case "names":	//功能名称
+				formSqlSb.append(" and o.names like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			case "url":	//功能url
+				formSqlSb.append(" and o.url like ? ");
+				paramValue.add("%" + value + "%");
+				break;
+
+			default:
+				break;
+			}
 		}
 	}
 	
