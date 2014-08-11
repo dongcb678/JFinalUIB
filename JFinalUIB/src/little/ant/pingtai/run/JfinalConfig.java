@@ -123,7 +123,7 @@ public class JfinalConfig extends JFinalConfig {
 		me.add(arp);
 
 		log.info("I18NPlugin 国际化键值对加载");
-		new I18NPlugin().start();
+		me.add(new I18NPlugin());
 		
 		log.info("EhCachePlugin EhCache缓存");
 		me.add(new EhCachePlugin());
