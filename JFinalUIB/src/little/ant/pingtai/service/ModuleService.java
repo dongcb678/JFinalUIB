@@ -3,6 +3,7 @@ package little.ant.pingtai.service;
 import java.util.List;
 
 import little.ant.pingtai.model.Module;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -22,21 +23,20 @@ public class ModuleService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String systemsIds, String parentIds){
-		String sql = null;
 		List<Module> list = null;
 		if (null != systemsIds && null == parentIds) {
 			// 1.根据系统ID查询模块树
-			sql = " select ids, names, isparent, images from pt_module where parentModuleIds is null and systemsIds=? order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.module.rootBySystemIds");
 			list = Module.dao.find(sql, systemsIds);
 			
 		}else if(null == systemsIds && null == parentIds){
 			// 2.模块单选初始化调用
-			sql = " select pm.ids, (select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, pm.isParent, pm.images from pt_module pm where pm.parentModuleIds is null order by pm.orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.module.root");
 			list = Module.dao.find(sql);
 			
 		}else if(null != parentIds){
 			// 3.通用子节点查询
-			sql = " select ids, names, isparent, images from pt_module where parentModuleIds = ? order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.module.child");
 			list = Module.dao.find(sql, parentIds);
 		}
 		
@@ -119,7 +119,8 @@ public class ModuleService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
-		Record record = Db.findFirst("select count(*) as counts from pt_module where parentmoduleids=?", ids);
+		String sql = ToolSqlXml.getSql("pingtai.module.childCount");
+		Record record = Db.findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){
 	    	return false;

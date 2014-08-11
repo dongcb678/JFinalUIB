@@ -3,6 +3,7 @@ package little.ant.pingtai.controller;
 import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.model.Dict;
 import little.ant.pingtai.service.DictService;
+import little.ant.pingtai.tools.ToolSqlXml;
 import little.ant.pingtai.validator.DictValidator;
 
 import org.apache.log4j.Logger;
@@ -18,12 +19,14 @@ public class DictController extends BaseController {
 	private DictService dictService = new DictService();
 	
 	public void index() {
-		list = Dict.dao.find("select * from pt_dict where parentids is null order by orderIds asc");
+		String sql = ToolSqlXml.getSql("pingtai.dict.treeTableNodeRoot");
+		list = Dict.dao.find(sql);
 		render("/pingtai/dict/treeTable.html");
 	}
 	
 	public void treeTable() {
-		list = Dict.dao.find("select * from pt_dict where parentids=? order by orderIds asc", ids);
+		String sql = ToolSqlXml.getSql("pingtai.dict.treeTableChildNode");
+		list = Dict.dao.find(sql, ids);
 		render("/pingtai/dict/treeTableSub.html");
 	}
 

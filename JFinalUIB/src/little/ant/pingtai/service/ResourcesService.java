@@ -11,6 +11,7 @@ import little.ant.pingtai.model.Resources;
 import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolOS;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -38,18 +39,12 @@ public class ResourcesService extends BaseService {
 		List<Record> list = null;
 		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
-			StringBuilder sql = new StringBuilder();
-			sql.append(" select to_char(startdate, 'yyyy-MM-DD') adates, count(*) acounts from pt_syslog ");
-			sql.append(" where startdate>=? and startdate<=? ");
-			sql.append(" group by adates order by adates asc ");
-			list = Db.find(sql.toString(), ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+			String sql = ToolSqlXml.getSql("pingtai.resources.pv_pg");
+			list = Db.find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
-			StringBuilder sql = new StringBuilder();
-			sql.append(" select date_format(startdate,'%Y-%m-%d') adates, count(*) acounts from pt_syslog ");
-			sql.append(" where startdate>=? and startdate<=? ");
-			sql.append(" group by adates order by adates asc ");
-			list = Db.find(sql.toString(), ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+			String sql = ToolSqlXml.getSql("pingtai.resources.pv_mysql");
+			list = Db.find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		}
 		
 		List<String> adates = new LinkedList<String>();
@@ -74,8 +69,9 @@ public class ResourcesService extends BaseService {
 		Date startDate = ToolDateTime.startDateByHour(endDate, -24);
 		
 		String hostName = ToolOS.getOsLocalHostName(); // 获取本机名称
-		
-		List<Resources> list = Resources.dao.find(" select * from pt_resources where hostname=? and createdate>=? and createdate<=? order by createdate asc", hostName, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+
+		String sql = ToolSqlXml.getSql("pingtai.resources.24hour");
+		List<Resources> list = Resources.dao.find(sql, hostName, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		List<String> datesList = new LinkedList<String>();
 		List<Integer> cpuList = new LinkedList<Integer>();

@@ -1,8 +1,11 @@
 package little.ant.pingtai.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import little.ant.pingtai.annotation.Table;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -24,7 +27,14 @@ public class Dict extends BaseModel<Dict> {
 	 */
 	public Dict getByIds(String ids, String i18n){
 		String val = "val" + i18n(i18n);
-		Dict dict = dao.findFirst(" select ids, numbers, parentids, " + val + " as val from pt_dict where ids = ? ", ids);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("val", val);
+		
+		String sql = ToolSqlXml.getSql("pingtai.dict.idAndI18n", param);
+		
+		Dict dict = dao.findFirst(sql, ids);
+		
 		return dict;
 	}
 	
@@ -34,7 +44,8 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public Dict getByNumber(String number){
-		Dict dict = dao.findFirst(" select * from pt_dict where numbers = ? ", number);
+		String sql = ToolSqlXml.getSql("pingtai.dict.numbers");
+		Dict dict = dao.findFirst(sql, number);
 		return dict;
 	}
 	
@@ -46,7 +57,14 @@ public class Dict extends BaseModel<Dict> {
 	 */
 	public Dict getByNumber(String number, String i18n){
 		String val = "val" + i18n(i18n);
-		Dict dict = dao.findFirst(" select ids, numbers, parentids, " + val + " as val from pt_dict where numbers = ? ", number);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("val", val);
+		
+		String sql = ToolSqlXml.getSql("pingtai.dict.numbersAndI18n", param);
+		
+		Dict dict = dao.findFirst(sql, number);
+		
 		return dict;
 	}
 
@@ -55,7 +73,8 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(){
-		return dao.find(" select * from pt_dict where parentids = ? order by orderids ", get("ids"));
+		String sql = ToolSqlXml.getSql("pingtai.dict.child");
+		return dao.find(sql, get("ids"));
 	}
 
 	/**
@@ -64,7 +83,8 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(String prentIds){
-		return dao.find(" select * from pt_dict where parentids = ? order by orderids ", prentIds);
+		String sql = ToolSqlXml.getSql("pingtai.dict.child");
+		return dao.find(sql, prentIds);
 	}
 
 	/**
@@ -75,7 +95,13 @@ public class Dict extends BaseModel<Dict> {
 	 */
 	public List<Dict> getChild(String prentIds, String i18n){
 		String val = "val" + i18n(i18n);
-		return dao.find(" select ids, numbers, parentids, " + val + " as val from pt_dict where parentids = ? order by orderids ", prentIds);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("val", val);
+		
+		String sql = ToolSqlXml.getSql("pingtai.dict.childAndI8n", param);
+		
+		return dao.find(sql, prentIds);
 	}
 
 	/**
@@ -83,7 +109,8 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getParent(){
-		return dao.find(" select * from pt_dict where ids = ? ", get("parentids"));
+		String sql = ToolSqlXml.getSql("pingtai.dict.parent");
+		return dao.find(sql, get("parentids"));
 	}
 
 	/**
@@ -93,7 +120,13 @@ public class Dict extends BaseModel<Dict> {
 	 */
 	public List<Dict> getParent(String i18n){
 		String val = "val" + i18n(i18n);
-		return dao.find(" select ids, numbers, parentids, " + val + " as val from pt_dict where ids = ? ", get("parentids"));
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("val", val);
+		
+		String sql = ToolSqlXml.getSql("pingtai.dict.parentAndI18n", param);
+		
+		return dao.find(sql, get("parentids"));
 	}
 
 }

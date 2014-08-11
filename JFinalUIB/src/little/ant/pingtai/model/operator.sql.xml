@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="pingtai.operator">
+	
+	<!-- 获取模块根节点 -->
+	<sql id="rootModule">
+		<![CDATA[ 
+        	select pm.ids as ids, (select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, pm.isParent, pm.images 
+        	from pt_module pm where pm.parentModuleIds is null order by pm.orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 获取模块子节点 -->
+	<sql id="childModule">
+		<![CDATA[ 
+        	select ids, names, isParent , images from pt_module where parentModuleIds = ? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 获取模块下面的功能 -->
+	<sql id="byModuleIds">
+		<![CDATA[ 
+        	select ids, names from pt_operator where moduleIds = ? order by url asc
+    	]]>
+	</sql>
+	
+</sql-statement>

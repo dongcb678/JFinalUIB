@@ -1,8 +1,11 @@
 package little.ant.pingtai.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import little.ant.pingtai.annotation.Table;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -24,8 +27,14 @@ public class Param extends BaseModel<Param> {
 	 */
 	public Param getByIds(String ids, String i18n){
 		String val = "val" + i18n(i18n);
-		Param dict = dao.findFirst(" select ids, numbers, parentids, " + val + " as val from pt_param where ids = ? ", ids);
-		return dict;
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("val", val);
+		
+		String sql = ToolSqlXml.getSql("pingtai.param.idAndI18n", paramMap);
+		
+		Param param = dao.findFirst(sql, ids);
+		return param;
 	}
 	
 	/**
@@ -34,8 +43,9 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public Param getByNumber(String number){
-		Param dict = dao.findFirst(" select * from pt_param where numbers = ? ", number);
-		return dict;
+		String sql = ToolSqlXml.getSql("pingtai.param.numbers");
+		Param param = dao.findFirst(sql, number);
+		return param;
 	}
 	
 	/**
@@ -46,8 +56,14 @@ public class Param extends BaseModel<Param> {
 	 */
 	public Param getByNumber(String number, String i18n){
 		String val = "val" + i18n(i18n);
-		Param dict = dao.findFirst(" select ids, numbers, parentids, " + val + " as val from pt_param where numbers = ? ", number);
-		return dict;
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("val", val);
+		
+		String sql = ToolSqlXml.getSql("pingtai.param.numbersAndI18n", paramMap);
+		
+		Param param = dao.findFirst(sql, number);
+		return param;
 	}
 
 	/**
@@ -55,7 +71,8 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public List<Param> getChild(){
-		return dao.find(" select * from pt_param where parentids = ? order by orderids ", get("ids"));
+		String sql = ToolSqlXml.getSql("pingtai.param.child");
+		return dao.find(sql, get("ids"));
 	}
 
 	/**
@@ -64,7 +81,8 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public List<Param> getChild(String prentIds){
-		return dao.find(" select * from pt_param where parentids = ? order by orderids ", prentIds);
+		String sql = ToolSqlXml.getSql("pingtai.param.child");
+		return dao.find(sql, prentIds);
 	}
 
 	/**
@@ -75,7 +93,13 @@ public class Param extends BaseModel<Param> {
 	 */
 	public List<Param> getChild(String prentIds, String i18n){
 		String val = "val" + i18n(i18n);
-		return dao.find(" select ids, numbers, parentids, " + val + " as val from pt_param where parentids = ? order by orderids ", prentIds);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("val", val);
+		
+		String sql = ToolSqlXml.getSql("pingtai.param.childAndI8n", param);
+		
+		return dao.find(sql, prentIds);
 	}
 
 	/**
@@ -83,7 +107,8 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public List<Param> getParent(){
-		return dao.find(" select * from pt_param where ids = ? ", get("parentids"));
+		String sql = ToolSqlXml.getSql("pingtai.param.parent");
+		return dao.find(sql, get("parentids"));
 	}
 
 	/**
@@ -93,7 +118,13 @@ public class Param extends BaseModel<Param> {
 	 */
 	public List<Param> getParent(String i18n){
 		String val = "val" + i18n(i18n);
-		return dao.find(" select ids, numbers, parentids, " + val + " as val from pt_param where ids = ? ", get("parentids"));
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("val", val);
+		
+		String sql = ToolSqlXml.getSql("pingtai..parentAndI18n", param);
+		
+		return dao.find(sql, get("parentids"));
 	}
 
 }

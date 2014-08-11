@@ -74,7 +74,7 @@ public class ToolSqlXml {
 			log.error("sql语句不存在：sql id是" + sqlId);
     	}
     	
-        return sql;
+        return sql.trim();
     }
 
     /**
@@ -97,7 +97,7 @@ public class ToolSqlXml {
 			sql = sql.replace("#" + key + "#", value);
 		}
 		
-        return sql;
+        return sql.trim();
     }
     
     /**

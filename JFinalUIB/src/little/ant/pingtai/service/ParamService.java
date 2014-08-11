@@ -5,6 +5,7 @@ import java.util.List;
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Param;
 import little.ant.pingtai.thread.ThreadParamInit;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -97,13 +98,12 @@ public class ParamService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String parentIds){
-		String sql = null;
 		List<Param> list = null;
 		if (null != parentIds) {
-			sql = " select ids, names, isparent, images, status from pt_param where parentIds = ? order by orderids asc ";
+			String sql = ToolSqlXml.getSql("pingtai.param.treeChildNode");
 			list = Param.dao.find(sql, parentIds);
 		} else {
-			sql = " select ids, names, isparent, images, status from pt_param where parentIds is null order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.param.treeNodeRoot");
 			list = Param.dao.find(sql);
 		}
 

@@ -10,6 +10,7 @@ import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Role;
 import little.ant.pingtai.thread.ThreadParamInit;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -81,10 +82,14 @@ public class RoleService extends BaseService {
 		String roleIds = Group.dao.findById(ids).getStr("roleids");
 		if(null != roleIds && !roleIds.equals("")){
 			String fitler = toSql(roleIds);
-			noCheckedList = Role.dao.find("select ids, names from pt_role where ids not in (" + fitler + ") order by names asc");
-			checkedList = Role.dao.find("select ids, names from pt_role where ids in (" + fitler + ") order by names asc");
+
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("fitler", fitler);
+			
+			noCheckedList = Role.dao.find(ToolSqlXml.getSql("pingtai.role.noCheckedFilter", param));
+			checkedList = Role.dao.find(ToolSqlXml.getSql("pingtai.role.checkedFilter", param));
 		}else{
-			noCheckedList = Role.dao.find("select ids, names from pt_role order by names asc");
+			noCheckedList = Role.dao.find(ToolSqlXml.getSql("pingtai.role.noChecked"));
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -5,6 +5,7 @@ import java.util.List;
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.thread.ThreadParamInit;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -23,14 +24,13 @@ public class StationService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String parentIds){
-		String sql = null;
 		List<Station> list = null;
 		if(null != parentIds){
-			sql = " select ids, names, isparent, images from pt_station where parentStationIds = ? order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.station.child");
 			list = Station.dao.find(sql, parentIds);
 			
 		}else{
-			sql = " select ids, names, isparent, images from pt_station where parentStationIds is null order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.station.root");
 			list = Station.dao.find(sql);
 		}
 		
@@ -116,7 +116,8 @@ public class StationService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
-		Record record = Db.findFirst("select count(*) as counts from pt_station where parentstationids=?", ids);
+		String sql = ToolSqlXml.getSql("pingtai.station.childCount");
+		Record record = Db.findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){
 	    	return false;

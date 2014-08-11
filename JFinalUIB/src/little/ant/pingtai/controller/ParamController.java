@@ -3,6 +3,7 @@ package little.ant.pingtai.controller;
 import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.model.Param;
 import little.ant.pingtai.service.ParamService;
+import little.ant.pingtai.tools.ToolSqlXml;
 import little.ant.pingtai.validator.ParamValidator;
 
 import org.apache.log4j.Logger;
@@ -18,12 +19,14 @@ public class ParamController extends BaseController {
 	private ParamService paramService = new ParamService();
 	
 	public void index() {
-		list = Param.dao.find("select * from pt_param where parentids is null order by orderIds asc");
+		String sql = ToolSqlXml.getSql("pingtai.param.treeTableNodeRoot");
+		list = Param.dao.find(sql);
 		render("/pingtai/param/treeTable.html");
 	}
 	
 	public void treeTable() {
-		list = Param.dao.find("select * from pt_param where parentids=? order by orderIds asc", ids);
+		String sql = ToolSqlXml.getSql("pingtai.param.treeTableChildNode");
+		list = Param.dao.find(sql, ids);
 		render("/pingtai/param/treeTableSub.html");
 	}
 

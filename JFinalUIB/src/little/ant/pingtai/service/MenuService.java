@@ -1,8 +1,11 @@
 package little.ant.pingtai.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import little.ant.pingtai.model.Menu;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -25,15 +28,17 @@ public class MenuService extends BaseService {
 	 */
 	public String childNodeData(String systemsIds, String parentIds, String i18n){
 		String names = "names" + i18n(i18n) + " as names";
+
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("names", names);
 		
-		String sql = null;
 		List<Menu> list = null;
 		if(null != parentIds){
-			sql = " select ids, " + names + ", isparent, images from pt_menu where parentMenuIds = ? order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.menu.child", param);
 			list = Menu.dao.find(sql, parentIds);
 			
 		}else{
-			sql = " select ids, " + names + ", isparent, images from pt_menu where parentMenuIds is null and systemsIds=? order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.menu.root", param);
 			list = Menu.dao.find(sql, systemsIds);
 		}
 		
@@ -120,7 +125,8 @@ public class MenuService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
-		Record record = Db.findFirst("select count(*) as counts from pt_menu where parentmenuids=?", ids);
+		String sql = ToolSqlXml.getSql("pingtai.menu.childCount");
+		Record record = Db.findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){
 	    	return false;

@@ -5,6 +5,7 @@ import java.util.List;
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Dict;
 import little.ant.pingtai.thread.ThreadParamInit;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -97,13 +98,12 @@ public class DictService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String parentIds){
-		String sql = null;
 		List<Dict> list = null;
 		if (null != parentIds) {
-			sql = " select ids, names, isparent, images, status from pt_dict where parentIds = ? order by orderids asc ";
+			String sql = ToolSqlXml.getSql("pingtai.dict.treeChildNode");
 			list = Dict.dao.find(sql, parentIds);
 		} else {
-			sql = " select ids, names, isparent, images, status from pt_dict where parentIds is null order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.dict.treeNodeRoot");
 			list = Dict.dao.find(sql);
 		}
 

@@ -15,6 +15,7 @@ import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -145,27 +146,24 @@ public class UserService extends BaseService {
 
 	/**
 	 * 获取子节点数据
-	 * 
-	 * @param String
-	 *            deptIds
+	 * @param deptIds
 	 * @return
-	 * @throws Exception
 	 */
 	public String childNodeData(String deptIds) {
 		// 查询部门数据
 		List<Department> deptList = null;
 		if (null != deptIds) {
-			String sql = " select ids, names, isParent, images from pt_department where parentDepartmentIds = ? order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.department.childNode");
 			deptList = Department.dao.find(sql, deptIds.replace("dept_", ""));
 		} else {
-			String sql = " select ids, names, isParent, images from pt_department where parentDepartmentIds is null order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.department.rootNode");
 			deptList = Department.dao.find(sql);
 		}
 
 		// 查询用户数据
 		List<User> userList = null;
 		if (null != deptIds) {
-			String sql = " select ids, userName as names from pt_user where departmentIds = ? order by userName asc ";
+			String sql = ToolSqlXml.getSql("pingtai.user.treeUserNode");
 			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
 		}
 

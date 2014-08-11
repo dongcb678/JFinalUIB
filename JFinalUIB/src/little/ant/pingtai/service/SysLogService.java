@@ -5,6 +5,7 @@ import java.util.Map;
 
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Syslog;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -14,13 +15,8 @@ public class SysLogService extends BaseService {
 	private static Logger log = Logger.getLogger(SysLogService.class);
 	
 	public Syslog view(String ids){
-		StringBuilder sql = new StringBuilder();
-		sql.append(" select s.*, o.names onames, o.url ourl, u.username ");
-		sql.append(" from pt_syslog s ");
-		sql.append(" left join pt_user u on s.userids = u.ids ");
-		sql.append(" left join pt_operator o on s.operatorids = o.ids ");
-		sql.append(" where s.ids = ? ");
-		return Syslog.dao.findFirst(sql.toString(), ids);
+		String sql = ToolSqlXml.getSql("pingtai.sysLog.view");
+		return Syslog.dao.findFirst(sql, ids);
 	}
 
 	/**

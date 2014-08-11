@@ -10,6 +10,7 @@ import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.thread.ThreadParamInit;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -68,10 +69,14 @@ public class GroupService extends BaseService {
 		String groupIds = User.dao.findById(ids).getStr("groupids");
 		if(null != groupIds && !groupIds.equals("")){
 			String fitler = toSql(groupIds);
-			noCheckedList = Group.dao.find("select ids, names from pt_group where ids not in (" + fitler + ") order by names asc");
-			checkedList = Group.dao.find("select ids, names from pt_group where ids in (" + fitler + ") order by names asc");
+
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("fitler", fitler);
+			
+			noCheckedList = Group.dao.find(ToolSqlXml.getSql("pingtai.group.noCheckedFilter", param));
+			checkedList = Group.dao.find(ToolSqlXml.getSql("pingtai.group.checkedFilter", param));
 		}else{
-			noCheckedList = Group.dao.find("select ids, names from pt_group order by names asc");
+			noCheckedList = Group.dao.find(ToolSqlXml.getSql("pingtai.group.noChecked"));
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();

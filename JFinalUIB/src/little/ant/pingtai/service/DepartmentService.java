@@ -3,6 +3,7 @@ package little.ant.pingtai.service;
 import java.util.List;
 
 import little.ant.pingtai.model.Department;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -22,14 +23,13 @@ public class DepartmentService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String parentIds){
-		String sql = null;
 		List<Department> list = null;
 		if(null != parentIds){
-			sql = " select ids, names, isparent, images from pt_department where parentDepartmentIds = ? order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.department.childNode");
 			list = Department.dao.find(sql, parentIds);
 			
 		}else{
-			sql = " select ids, names, isparent, images from pt_department where parentDepartmentIds is null order by orderIds asc ";
+			String sql = ToolSqlXml.getSql("pingtai.department.rootNode");
 			list = Department.dao.find(sql);
 		}
 		
@@ -115,7 +115,8 @@ public class DepartmentService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
-		Record record = Db.findFirst("select count(*) as counts from pt_department where parentdepartmentids=?", ids);
+		String sql = ToolSqlXml.getSql("pingtai.department.childCount");
+		Record record = Db.findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){
 	    	return false;

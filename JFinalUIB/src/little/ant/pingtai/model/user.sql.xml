@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
-	namespace + sql id 必须全局唯一
-	所以最好是namespace全局唯一，sql id在本namespace唯一即可
-	调用处理工具类是ToolSqlXml中的两个getSql方法
--->
 <sql-statement namespace="pingtai.user">
 	
-	<!-- 静态SQL -->
-	<sql id="get">
+	<!-- 根据部门Id查询，人员树节点数据 -->
+	<sql id="treeUserNode">
 		<![CDATA[ 
-        	select * form pt_user where ids = ?
+        	select ids, userName as names from pt_user where departmentIds = ? order by userName asc
     	]]>
 	</sql>
 	
-	<!-- 
-		动态SQL处理，依赖beetl来解析，所以要使用beetl语法写逻辑。
-		问题是，还没能解决预处理，存在sql注入问题，暂时笨拙的处理方法是去除所有值中的单引号和分号
-	 -->
+	<!-- 动态SQL处理 -->
 	<sql id="splitPage">
 		<![CDATA[ 
         	from pt_user u 

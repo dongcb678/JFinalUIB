@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="pingtai.sysLog">
+	
+	<!--  -->
+	<sql id="view">
+		<![CDATA[ 
+        	select s.*, o.names onames, o.url ourl, u.username 
+        	from pt_syslog s
+        	left join pt_user u on s.userids = u.ids
+        	left join pt_operator o on s.operatorids = o.ids
+        	where s.ids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

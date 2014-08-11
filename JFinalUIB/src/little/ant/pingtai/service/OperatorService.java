@@ -9,6 +9,7 @@ import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.thread.ThreadParamInit;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -71,17 +72,16 @@ public class OperatorService extends BaseService {
 		
 		if (null == moduleIds) {
 			// 1.模块功能初始化调用
-			String sqlModule = " select pm.ids as ids, (select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, ";
-			sqlModule += " pm.isParent, pm.images from pt_module pm where pm.parentModuleIds is null order by pm.orderIds asc ";
-			listModule = Module.dao.find(sqlModule);
+			String sql = ToolSqlXml.getSql("pingtai.operator.rootModule");
+			listModule = Module.dao.find(sql);
 			
 		} else if (null != moduleIds) {
 			moduleIds = moduleIds.replace("module_", "");
 			// 2.通用子节点查询
-			String sqlModule = " select ids, names, isParent , images from pt_module where parentModuleIds = ? order by orderIds asc ";
+			String sqlModule = ToolSqlXml.getSql("pingtai.operator.childModule");
 			listModule = Module.dao.find(sqlModule, moduleIds);
-
-			String sqlOperator = " select ids, names from pt_operator where moduleIds = ? order by url asc ";
+			
+			String sqlOperator = ToolSqlXml.getSql("pingtai.operator.byModuleIds");
 			operatorList = Operator.dao.find(sqlOperator, moduleIds);
 		}
 
