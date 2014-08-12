@@ -3,7 +3,9 @@ package little.ant.pingtai.service;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -65,7 +68,10 @@ public class LoginService extends BaseService {
 		if (null != userObj) {
 			user = (User) userObj;
 		} else {
-			List<User> userList = User.dao.find("select * from pt_user where username=?", userName);
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", "username");
+			String sql = ToolSqlXml.getSql("pingtai.user.column", param);
+			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
 				return DictKeys.login_info_0;// 用户不存在
 			}
@@ -88,7 +94,8 @@ public class LoginService extends BaseService {
 			if(hourSpace < passErrorHour){
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
-				Db.update(" update pt_user u set u.stopdate=null, u.errorcount=0 where u.ids = ? ", user.getStr("ids"));
+				String sql = ToolSqlXml.getSql("pingtai.user.start");
+				Db.update(sql, user.getStr("ids"));
 			}
 		}
 
@@ -109,7 +116,8 @@ public class LoginService extends BaseService {
 			return DictKeys.login_info_3;
 		} else {
 			// 密码验证失败
-			Db.update(" update pt_user u set u.stopDate = ? , u.errorCount = ? where u.ids = ? ", ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
+			String sql = ToolSqlXml.getSql("pingtai.user.stop");
+			Db.update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
 			return DictKeys.login_info_4;
 		}
 	}

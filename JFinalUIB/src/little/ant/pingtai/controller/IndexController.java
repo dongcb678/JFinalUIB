@@ -9,6 +9,7 @@ import little.ant.pingtai.model.User;
 import little.ant.pingtai.service.IndexService;
 import little.ant.pingtai.service.ResourcesService;
 import little.ant.pingtai.tools.ToolContext;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -33,7 +34,8 @@ public class IndexController extends BaseController {
 	public void index() {
 		User user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
 		if(null != user){//后台
-			systemsList = Systems.dao.find(" select ids, names from pt_systems order by orderids asc ");
+			String sql = ToolSqlXml.getSql("pingtai.systems.all");
+			systemsList = Systems.dao.find(sql);
 			if(null == ids || ids.isEmpty()){ // 默认系统
 				ids = "8a40c0353fa828a6013fa898d4ac0020";
 			}

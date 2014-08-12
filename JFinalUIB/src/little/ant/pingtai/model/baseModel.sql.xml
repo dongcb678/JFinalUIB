@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="pingtai.baseModel">
+	
+	<!--  -->
+	<sql id="version">
+		<![CDATA[ 
+        	select version from ${table} where ${pk} = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

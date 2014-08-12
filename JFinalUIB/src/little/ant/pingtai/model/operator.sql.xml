@@ -2,6 +2,13 @@
 
 <sql-statement namespace="pingtai.operator">
 	
+	<!-- 查询所有功能 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select * from pt_operator
+    	]]>
+	</sql>
+	
 	<!-- 获取模块根节点 -->
 	<sql id="rootModule">
 		<![CDATA[ 

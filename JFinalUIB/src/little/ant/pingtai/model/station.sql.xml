@@ -2,6 +2,13 @@
 
 <sql-statement namespace="pingtai.station">
 	
+	<!-- 查询所有岗位 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select * from pt_station
+    	]]>
+	</sql>
+	
 	<!-- 根节点 -->
 	<sql id="root">
 		<![CDATA[ 

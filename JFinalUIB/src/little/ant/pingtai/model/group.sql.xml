@@ -2,6 +2,13 @@
 
 <sql-statement namespace="pingtai.group">
 	
+	<!-- 查询所有分组 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select * from pt_group
+    	]]>
+	</sql>
+	
 	<!-- 用户分组选择：未选择 -->
 	<sql id="noCheckedFilter">
 		<![CDATA[ 

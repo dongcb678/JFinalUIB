@@ -2,6 +2,13 @@
 
 <sql-statement namespace="pingtai.role">
 	
+	<!-- 查询所有角色 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select * from pt_role
+    	]]>
+	</sql>
+	
 	<!-- -->
 	<sql id="noCheckedFilter">
 		<![CDATA[ 

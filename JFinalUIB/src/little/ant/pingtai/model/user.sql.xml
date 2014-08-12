@@ -2,10 +2,38 @@
 
 <sql-statement namespace="pingtai.user">
 	
+	<!-- 查询所有用户 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select * from pt_user
+    	]]>
+	</sql>
+	
 	<!-- 根据部门Id查询，人员树节点数据 -->
 	<sql id="treeUserNode">
 		<![CDATA[ 
         	select ids, userName as names from pt_user where departmentIds = ? order by userName asc
+    	]]>
+	</sql>
+	
+	<!-- 查询用户，自定义字段和值 -->
+	<sql id="column">
+		<![CDATA[ 
+        	select * from pt_user where ${column} = ?
+    	]]>
+	</sql>
+	
+	<!-- 停用账户 -->
+	<sql id="stop">
+		<![CDATA[ 
+        	update pt_user u set u.stopDate = ? , u.errorCount = ? where u.ids = ? 
+    	]]>
+	</sql>
+	
+	<!-- 启用停用账户 -->
+	<sql id="start">
+		<![CDATA[ 
+        	update pt_user u set u.stopdate = null, u.errorcount = 0 where u.ids = ?
     	]]>
 	</sql>
 	

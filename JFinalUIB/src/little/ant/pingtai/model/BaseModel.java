@@ -1,8 +1,11 @@
 package little.ant.pingtai.model;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
+import little.ant.pingtai.tools.ToolSqlXml;
 import little.ant.pingtai.tools.ToolUtils;
 
 import org.apache.log4j.Logger;
@@ -87,7 +90,10 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		String pk = table.getPrimaryKey();
 		
 		// 1.数据是否还存在
-		String sql = new StringBuilder("select version from ").append(name).append(" where ").append(pk).append(" = ? ").toString();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("table", name);
+		param.put("pk", pk);
+		String sql = ToolSqlXml.getSql("pingtai.baseModel.version", param); 
 		Model<M> modelOld = findFirst(sql , getStr("ids"));
 		if(null == modelOld){ // 数据已经被删除
 			throw new RuntimeException("数据库中此数据不存在，可能数据已经被删除，请刷新数据后在操作");

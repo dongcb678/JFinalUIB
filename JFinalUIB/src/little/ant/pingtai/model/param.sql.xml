@@ -2,6 +2,13 @@
 
 <sql-statement namespace="pingtai.param">
 	
+	<!-- 查询所有参数 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select * from pt_param
+    	]]>
+	</sql>
+	
 	<!-- 查询字典树根节点 -->
 	<sql id="treeTableNodeRoot">
 		<![CDATA[ 

@@ -1,6 +1,8 @@
 package little.ant.pingtai.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Group;
@@ -9,6 +11,7 @@ import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.thread.ThreadParamInit;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -63,14 +66,17 @@ public class IndexService extends BaseService {
 		String fitler = toSql(operatorIdsSb.toString()).replace("operator_", "");
 		
 		// 查询根菜单节点
-		Menu menu = Menu.dao.findFirst(" select ids from pt_menu where parentmenuids is null and systemsIds = ? ", systemsIds);
+		Menu menu = Menu.dao.findFirst(ToolSqlXml.getSql("pingtai.menu.rootId"), systemsIds);
 		String parentmenuids = menu.getStr("ids");
 		
 		// 一级菜单
-		List<Menu> oneList = Menu.dao.find(" select ids, " + names + " from pt_menu where parentmenuids = ? order by orderids asc ", parentmenuids);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("names", names);
+		List<Menu> oneList = Menu.dao.find(ToolSqlXml.getSql("pingtai.menu.child", param), parentmenuids);
+		param.put("fitler", fitler);
 		for (Menu oneMenu : oneList) {
-			String sql = " select m." + names + ", o.url  from pt_menu m left join pt_operator o on m.operatorids=o.ids where parentmenuids = ? and m.operatorids in (" + fitler + ") order by orderids asc ";
 			// 二级菜单
+			String sql = ToolSqlXml.getSql("pingtai.menu.operator", param);
 			List<Menu> twoList = Menu.dao.find(sql, oneMenu.getPrimaryKeyValue());
 			oneMenu.put("subList", twoList);
 		}

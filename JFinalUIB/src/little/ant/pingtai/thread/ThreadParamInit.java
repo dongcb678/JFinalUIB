@@ -11,6 +11,7 @@ import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -67,7 +68,8 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:16:48
 	 */
 	public static void pingtai_cacheUser() {
-		List<User> userList = User.dao.find("select * from pt_user");
+		String sql = ToolSqlXml.getSql("pingtai.user.all");
+		List<User> userList = User.dao.find(sql);
 		for (User user : userList) {
 			UserInfo userInfo = user.getUserInfo();
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
@@ -84,7 +86,8 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:17:20
 	 */
 	public static void pingtai_cacheGroup() {
-		List<Group> groupList = Group.dao.find("select * from pt_group");
+		String sql = ToolSqlXml.getSql("pingtai.group.all");
+		List<Group> groupList = Group.dao.find(sql);
 		for (Group group : groupList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
 		}
@@ -96,7 +99,8 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:17:20
 	 */
 	public static void pingtai_cacheRole() {
-		List<Role> roleList = Role.dao.find("select * from pt_role");
+		String sql = ToolSqlXml.getSql("pingtai.role.all");
+		List<Role> roleList = Role.dao.find(sql);
 		for (Role role : roleList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
 		}
@@ -108,7 +112,8 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2013-07-16 下午1:17:20
 	 */
 	public static void pingtai_cacheStation() {
-		List<Station> stationList = Station.dao.find("select * from pt_station");
+		String sql = ToolSqlXml.getSql("pingtai.station.all");
+		List<Station> stationList = Station.dao.find(sql);
 		for (Station station : stationList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + station.getStr("ids"), station);
 		}
@@ -120,7 +125,8 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:17:12
 	 */
 	public static void pingtai_cacheOperator() {
-		List<Operator> operatorList = Operator.dao.find("select * from pt_operator");
+		String sql = ToolSqlXml.getSql("pingtai.operator.all");
+		List<Operator> operatorList = Operator.dao.find(sql);
 		for (Operator operator : operatorList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
@@ -134,7 +140,8 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:17:04
 	 */
 	public static void pingtai_cacheDict() {
-		List<Dict> dictList = Dict.dao.find("select * from pt_dict");
+		String sql = ToolSqlXml.getSql("pingtai.dict.all");
+		List<Dict> dictList = Dict.dao.find(sql);
 		for (Dict dict : dictList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
@@ -150,7 +157,8 @@ public class ThreadParamInit extends Thread {
 	 * @author 董华健    2012-10-16 下午1:17:04
 	 */
 	public static void pingtai_cacheParam() {
-		List<Param> paramList = Param.dao.find("select * from pt_param");
+		String sql = ToolSqlXml.getSql("pingtai.param.all");
+		List<Param> paramList = Param.dao.find(sql);
 		for (Param param : paramList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("ids"), param);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"), param);

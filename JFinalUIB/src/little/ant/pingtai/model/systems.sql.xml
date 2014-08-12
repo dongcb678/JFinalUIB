@@ -2,4 +2,11 @@
 
 <sql-statement namespace="pingtai.systems">
 	
+	<!-- 查询所有系统 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select ids, names from pt_systems order by orderids asc
+    	]]>
+	</sql>
+	
 </sql-statement>
