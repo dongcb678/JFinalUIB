@@ -1,11 +1,10 @@
 package little.ant.pingtai.service;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.BaseModel;
+import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -53,16 +52,17 @@ public abstract class BaseService {
 	 * 分页
 	 * @param splitPage
 	 * @param select
-	 * @return
+	 * @param sqlId
 	 */
-	protected void splitPageBase(SplitPage splitPage, String select){
+	protected void splitPageBase(SplitPage splitPage, String select, String sqlId){
 		// 接收返回值对象
 		StringBuilder formSqlSb = new StringBuilder();
-		List<Object> paramValue = new LinkedList<Object>();
+		LinkedList<Object> paramValue = new LinkedList<Object>();
 		
 		// 调用生成from sql，并构造paramValue
-		makeFilter(splitPage.getQueryParam(), formSqlSb, paramValue);
-
+		String sql = ToolSqlXml.getSql(sqlId, splitPage.getQueryParam(), paramValue);
+		formSqlSb.append(sql);
+		
 		// 行级：过滤
 		rowFilter(formSqlSb);
 		
@@ -86,12 +86,5 @@ public abstract class BaseService {
 	protected void rowFilter(StringBuilder formSqlSb){
 		
 	}
-
-	/**
-	 * 查询条件过滤
-	 * @return
-	 */
-	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue){
-		
-	}
+	
 }

@@ -45,15 +45,43 @@
 			left join pt_department d on u.departmentids = d.ids 
 			where 1=1 
 			<% if(!isEmpty(userClass)){ %>
-					and u.userClass = '#userClass#'
+					and u.userClass = #'$userClass$'#
 			<% } %>
 			
 			<% if(!isEmpty(userName)){ %>
-					and u.userName like '%#userName#%'
+					and u.userName like #'%$userName$%'#
 			<% } %>
 			
 			<% if(!isEmpty(names)){ %>
-					and ui.names like '%#names#%'
+					and ui.names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(sex)){ %>
+					and ui.sex like #'%$sex$%'#
+			<% } %>
+			
+			<% if(!isEmpty(email)){ %>
+					and ui.email like #'%$email$%'#
+			<% } %>
+			
+			<% if(!isEmpty(mobile)){ %>
+					and ui.mobile like #'%$mobile$%'#
+			<% } %>
+			
+			<% if(!isEmpty(telephone)){ %>
+					and ui.telephone like #'%$telephone$%'#
+			<% } %>
+			
+			<% if(!isEmpty(idCard)){ %>
+					and ui.idCard like #'%$idCard$%'#
+			<% } %>
+			
+			<% if(!isEmpty(qq)){ %>
+					and ui.qq like #'%$qq$%'#
+			<% } %>
+			
+			<% if(!isEmpty(birthday)){ %>
+					and ui.birthday = #'$birthday$'#
 			<% } %>
     	]]>
 	</sql>

@@ -2,10 +2,7 @@ package little.ant.pingtai.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
@@ -13,7 +10,6 @@ import little.ant.pingtai.model.Department;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadParamInit;
-import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
 import little.ant.pingtai.tools.ToolSqlXml;
 
@@ -224,74 +220,7 @@ public class UserService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames ";
-		splitPageBase(splitPage, select);
+		splitPageBase(splitPage, select, "pingtai.user.splitPage");
 	}
-
-	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
-		formSqlSb.append(" from pt_user u  ");
-		formSqlSb.append(" left join pt_userinfo ui on u.userinfoids = ui.ids ");
-		formSqlSb.append(" left join pt_department d on u.departmentids = d.ids ");
-		formSqlSb.append(" where 1=1 ");
-
-		Set<String> paramKeySet = queryParam.keySet();
-		for (String paramKey : paramKeySet) {
-			String value = queryParam.get(paramKey);
-			switch (paramKey) {
-			case "userClass":// 用户分类
-				formSqlSb.append(" and u.userClass = ? ");
-				paramValue.add(value);
-				break;
-
-			case "userName":// 用户名
-				formSqlSb.append(" and u.userName like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			case "names":// 姓名
-				formSqlSb.append(" and ui.names like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			case "sex":// 性别
-				formSqlSb.append(" and ui.sex like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			case "email":// 邮箱
-				formSqlSb.append(" and ui.email like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			case "mobile":// 手机
-				formSqlSb.append(" and ui.mobile like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			case "telephone":// 电话
-				formSqlSb.append(" and ui.telephone like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			case "idCard":// 身份证
-				formSqlSb.append(" and ui.idCard like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			case "qq":// QQ
-				formSqlSb.append(" and ui.qq like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			case "birthday":// 生日
-				formSqlSb.append(" and ui.birthday=? ");
-				Date date = ToolDateTime.parse(value);
-				paramValue.add(ToolDateTime.getSqlTimestamp(date));
-				break;
-				
-			default:
-				break;
-			}
-		}
-	}
-
+	
 }

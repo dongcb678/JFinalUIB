@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
@@ -105,25 +104,7 @@ public class GroupService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select ids, names ";
-		splitPageBase(splitPage, select);
-	}
-	
-	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
-		formSqlSb.append(" from pt_group where 1=1 ");
-
-		Set<String> paramKeySet = queryParam.keySet();
-		for (String paramKey : paramKeySet) {
-			String value = queryParam.get(paramKey);
-			switch (paramKey) {
-			case "names":// 分组名称
-				formSqlSb.append(" and names like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			default:
-				break;
-			}
-		}
+		splitPageBase(splitPage, select, "pingtai.group.splitPage");
 	}
 	
 }

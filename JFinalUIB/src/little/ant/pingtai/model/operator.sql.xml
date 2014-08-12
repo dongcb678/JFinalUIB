@@ -31,4 +31,22 @@
     	]]>
 	</sql>
 	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from pt_operator o
+        	left join pt_module m on o.moduleids = m.ids
+        	left join pt_systems s on s.ids = m.systemsids
+        	where 1=1
+			
+			<% if(!isEmpty(names)){ %>
+					and o.names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(url)){ %>
+					and o.url like #'%$url$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
 </sql-statement>

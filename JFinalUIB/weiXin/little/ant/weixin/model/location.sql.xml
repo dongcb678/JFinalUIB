@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="weixin.location">
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from wx_location where 1=1
+			
+			<% if(!isEmpty(open_id)){ %>
+					and open_id like #'%$open_id$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
+</sql-statement>

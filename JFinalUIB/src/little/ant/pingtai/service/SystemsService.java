@@ -1,9 +1,5 @@
 package little.ant.pingtai.service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Module;
@@ -68,25 +64,7 @@ public class SystemsService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select * ";
-		splitPageBase(splitPage, select);
-	}
-	
-	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
-		formSqlSb.append(" from pt_systems where 1=1 ");
-
-		Set<String> paramKeySet = queryParam.keySet();
-		for (String paramKey : paramKeySet) {
-			String value = queryParam.get(paramKey);
-			switch (paramKey) {
-			case "names":// 系统名称
-				formSqlSb.append(" and names like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			default:
-				break;
-			}
-		}
+		splitPageBase(splitPage, select, "pingtai.systems.splitPage");
 	}
 	
 }

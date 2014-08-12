@@ -2,8 +2,6 @@ package little.ant.pingtai.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
@@ -137,33 +135,7 @@ public class OperatorService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select o.*, m.names as modulenames, s.names as systemsnames ";
-		splitPageBase(splitPage, select);
-	}
-	
-	protected void makeFilter(Map<String, String> queryParam, StringBuilder formSqlSb, List<Object> paramValue) {
-		formSqlSb.append(" from pt_operator o ");
-		formSqlSb.append(" left join pt_module m on o.moduleids=m.ids ");
-		formSqlSb.append(" left join pt_systems s on s.ids=m.systemsids ");
-		formSqlSb.append(" where 1=1 ");
-
-		Set<String> paramKeySet = queryParam.keySet();
-		for (String paramKey : paramKeySet) {
-			String value = queryParam.get(paramKey);
-			switch (paramKey) {
-			case "names":	//功能名称
-				formSqlSb.append(" and o.names like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			case "url":	//功能url
-				formSqlSb.append(" and o.url like ? ");
-				paramValue.add("%" + value + "%");
-				break;
-
-			default:
-				break;
-			}
-		}
+		splitPageBase(splitPage, select, "pingtai.operator.splitPage");
 	}
 	
 }

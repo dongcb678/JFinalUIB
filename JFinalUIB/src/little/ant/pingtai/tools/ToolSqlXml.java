@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.beetl.core.BeetlKit;
 import org.dom4j.Document;
@@ -53,7 +56,7 @@ public class ToolSqlXml {
      * @param queryStr
      * @return
      */
-    public static boolean sqlValidate(String queryStr) {
+    public static boolean keywordVali(String queryStr) {
     	queryStr = queryStr.toLowerCase();//统一转为小写
         for (String badKeyWord : badKeyWordList) {
         	if (queryStr.indexOf(badKeyWord) >= 0) {
@@ -95,6 +98,63 @@ public class ToolSqlXml {
 			String value = (String) param.get(key);
 			value = value.replace("'", "").replace(";", "").replace("--", "");
 			sql = sql.replace("#" + key + "#", value);
+		}
+		
+        return sql.trim();
+    }
+
+    /**
+     * 获取SQL，动态SQL
+     * @param sqlId 
+     * @param param 查询参数
+     * @param list 用于接收预处理的值
+     * @return
+     */
+    public static String getSql(String sqlId, Map<String, String> param, LinkedList<Object> list) {
+    	String sqlTemplete = sqlMap.get(sqlId);
+    	if(null == sqlTemplete || sqlTemplete.isEmpty()){
+			log.error("sql语句不存在：sql id是" + sqlId);
+    	}
+    	
+    	Map<String, Object> paramMap = new HashMap<String, Object>();
+    	Set<String> paramKeySet = param.keySet();
+    	for (String paramKey : paramKeySet) {
+    		paramMap.put(paramKey, (Object)param.get(paramKey));
+		}
+    	String sql = BeetlKit.render(sqlTemplete, paramMap);
+		
+    	Pattern pattern = Pattern.compile("#[\\w\\d\\$\\'\\%\\_]+#");	//#[\\w\\d]+#    \\$
+		Pattern pattern2 = Pattern.compile("\\$[\\w\\d\\_]+\\$");
+		
+		Matcher matcher = pattern.matcher(sql);
+		
+		while (matcher.find()) {
+			String clounm = matcher.group(0); // 得到的结果形式：#'%$names$%'#
+			
+			Matcher matcher2 = pattern2.matcher(clounm);
+			matcher2.find();
+			String clounm2 = matcher2.group(0); // 得到的结果形式：$names$
+			
+			String clounm3 = clounm2.replace("$", "");
+			
+			if(clounm.equals("#" + clounm2 + "#")){ // 数值型，可以对应处理int、long、bigdecimal、double等等
+				String val = (String) param.get(clounm3);
+				try {
+					Integer.parseInt(val);
+					sql = sql.replace(clounm, val);
+				} catch (NumberFormatException e) {
+					log.error("查询参数值错误，整型值传入了字符串，非法字符串是：" + val);
+					return null;
+				}
+				
+			}else{ // 字符串，主要是字符串模糊查询、日期比较的查询
+				String val = (String) param.get(clounm3);
+				
+				String clounm4 = clounm.replace("#", "").replace("'", "").replace(clounm2, val);
+				list.add(clounm4);
+				
+				sql = sql.replace(clounm, "?");
+			}
 		}
 		
         return sql.trim();

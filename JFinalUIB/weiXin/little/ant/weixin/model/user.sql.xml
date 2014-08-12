@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="weixin.user">
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from wx_user where 1=1
+			
+			<% if(!isEmpty(openid)){ %>
+					and openid like #'%$openid$%'#
+			<% } %>
+			
+			<% if(!isEmpty(nickname)){ %>
+					and nickname like #'%$nickname$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
+</sql-statement>
