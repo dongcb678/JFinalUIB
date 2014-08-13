@@ -38,7 +38,14 @@
 					  		<input class="input-xlarge" type="text" name="_query.email" value='${escapeXml(paramMap["_query.email"])}' maxlength="40" >
 						</div>
 				  	</div>
-				
+					
+				  	<div class="control-group">
+						<label class="control-label">${i18nMap["admin.user.property.birthday"]}</label>
+						<div class="controls">
+					  		<input class="input-xlarge datepicker" type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}' readonly="readonly" >
+						</div>
+				  	</div>
+					
 				  	<div class="form-actions">
 						<button type="button" class="btn btn-primary" onclick='ajaxForm("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>

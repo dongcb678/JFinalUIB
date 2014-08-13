@@ -77,7 +77,7 @@ public class ToolSqlXml {
 			log.error("sql语句不存在：sql id是" + sqlId);
     	}
     	
-        return sql.trim();
+        return sql.replaceAll("[\\s]{2,}", " ");
     }
 
     /**
@@ -100,7 +100,7 @@ public class ToolSqlXml {
 			sql = sql.replace("#" + key + "#", value);
 		}
 		
-        return sql.trim();
+        return sql.replaceAll("[\\s]{2,}", " ");
     }
 
     /**
@@ -157,7 +157,7 @@ public class ToolSqlXml {
 			}
 		}
 		
-        return sql.trim();
+        return sql.replaceAll("[\\s]{2,}", " ");
     }
     
     /**
@@ -210,6 +210,7 @@ public class ToolSqlXml {
 							continue;
 						}
 						
+						sql = sql.replaceAll("[\\s]{2,}", " ");
 						sqlMap.put(key, sql);
 						log.debug("sql文件名：" + fileName + " sql key: " + key + " sql内容：" + sql);
 					}
