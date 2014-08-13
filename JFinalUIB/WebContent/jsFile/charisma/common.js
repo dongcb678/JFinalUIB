@@ -134,6 +134,7 @@ function orderbyFun(formId, colunmName){
  * @param formId
  */
 function ajaxForm(formId){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$("#" + formId).ajaxSubmit({
 		cache: false,
 	    success:  function (data) {
@@ -155,7 +156,7 @@ function ajaxContent(url, data){
 //		$('.btn-navbar').click();
 //	}
 //	$('#loading').remove();
-//	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	
 	$.ajax({
 		type : "post",
@@ -192,6 +193,7 @@ function ajaxContent(url, data){
  * @param data
  */
 function ajaxDiaLog(url, data){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : encodeURI(encodeURI(cxt + url)),
@@ -203,6 +205,8 @@ function ajaxDiaLog(url, data){
 		success:function(returnData){
 			$('#myModal').html(returnData);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -214,6 +218,7 @@ function ajaxDiaLog(url, data){
  * @param checkedIds 默认选中的部门
  */
 function deptRadioDiaLog(deptId, deptName, checkedIds){//ids默认选中：4
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/dept/toUrl",
@@ -224,6 +229,8 @@ function deptRadioDiaLog(deptId, deptName, checkedIds){//ids默认选中：4
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -235,6 +242,7 @@ function deptRadioDiaLog(deptId, deptName, checkedIds){//ids默认选中：4
  * @param checkedIds 默认选中的部门
  */
 function deptCheckboxDiaLog(deptId, deptName, checkedIds){//ids默认选中：4,或者4,5,
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/dept/toUrl",
@@ -245,6 +253,8 @@ function deptCheckboxDiaLog(deptId, deptName, checkedIds){//ids默认选中：4,
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -256,6 +266,7 @@ function deptCheckboxDiaLog(deptId, deptName, checkedIds){//ids默认选中：4,
  * @param checkedIds
  */
 function dictRadioDiaLog(dictId, dictName, checkedIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/dict/toUrl",
@@ -266,6 +277,8 @@ function dictRadioDiaLog(dictId, dictName, checkedIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -277,6 +290,7 @@ function dictRadioDiaLog(dictId, dictName, checkedIds){
  * @param checkedIds
  */
 function paramRadioDiaLog(dictId, dictName, checkedIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/param/toUrl",
@@ -287,6 +301,8 @@ function paramRadioDiaLog(dictId, dictName, checkedIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -297,6 +313,7 @@ function paramRadioDiaLog(dictId, dictName, checkedIds){
  * @param checkedIds
  */
 function moduleRadioDiaLog(moduleId, moduleName, checkedIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/module/toUrl",
@@ -307,6 +324,8 @@ function moduleRadioDiaLog(moduleId, moduleName, checkedIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -318,6 +337,7 @@ function moduleRadioDiaLog(moduleId, moduleName, checkedIds){
  * @param checkedIds
  */
 function stationRadioDiaLog(stationId, stationName, checkedIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/station/toUrl",
@@ -328,6 +348,8 @@ function stationRadioDiaLog(stationId, stationName, checkedIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -339,6 +361,7 @@ function stationRadioDiaLog(stationId, stationName, checkedIds){
  * @param checkedIds
  */
 function stationCheckboxDiaLog(stationId, stationName, checkedIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/station/toUrl",
@@ -349,6 +372,8 @@ function stationCheckboxDiaLog(stationId, stationName, checkedIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -360,6 +385,7 @@ function stationCheckboxDiaLog(stationId, stationName, checkedIds){
  * @param checkedIds
  */
 function userRadioDiaLog(userId, userName, checkedIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/user/toUrl",
@@ -370,6 +396,8 @@ function userRadioDiaLog(userId, userName, checkedIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -384,6 +412,7 @@ function userRadioDiaLog(userId, userName, checkedIds){
  * @param checkedUserIds
  */
 function userCheckboxDiaLog(userId, userName, deptIds, deptNames, checkedDeptIds, checkedUserIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/user/toUrl",
@@ -397,6 +426,8 @@ function userCheckboxDiaLog(userId, userName, deptIds, deptNames, checkedDeptIds
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -408,6 +439,7 @@ function userCheckboxDiaLog(userId, userName, deptIds, deptNames, checkedDeptIds
  * @param deptId
  */
 function setDeptPrincipalDiaLog(deptId){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/dept/toUrl",
@@ -418,6 +450,8 @@ function setDeptPrincipalDiaLog(deptId){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -427,6 +461,7 @@ function setDeptPrincipalDiaLog(deptId){
  * @param menuIds
  */
 function setMenuOperatorDiaLog(menuIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/operator/toUrl",
@@ -437,6 +472,8 @@ function setMenuOperatorDiaLog(menuIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -446,6 +483,7 @@ function setMenuOperatorDiaLog(menuIds){
  * @param menuIds
  */
 function setMenuEditDiaLog(menuIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/menu/toEdit",
@@ -456,6 +494,8 @@ function setMenuEditDiaLog(menuIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -465,6 +505,7 @@ function setMenuEditDiaLog(menuIds){
  * @param roleIds
  */
 function setRoleOperatorDiaLog(roleIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/operator/toUrl",
@@ -475,6 +516,8 @@ function setRoleOperatorDiaLog(roleIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -484,6 +527,7 @@ function setRoleOperatorDiaLog(roleIds){
  * @param stationIds
  */
 function setStationOperatorDiaLog(stationIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/operator/toUrl",
@@ -494,6 +538,8 @@ function setStationOperatorDiaLog(stationIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -503,6 +549,7 @@ function setStationOperatorDiaLog(stationIds){
  * @param userIds
  */
 function groupSelectDialog(userIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/group/select",
@@ -513,6 +560,8 @@ function groupSelectDialog(userIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
@@ -522,6 +571,7 @@ function groupSelectDialog(userIds){
  * @param groupIds
  */
 function roleSelectDialog(groupIds){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/role/select",
@@ -532,6 +582,8 @@ function roleSelectDialog(groupIds){
 		success:function(data){
 			$('#myModal').html(data);
 			$('#myModal').modal('show');
+	    	$('#loading').remove();
+			$('#content').fadeIn();
 		}
 	});
 }
