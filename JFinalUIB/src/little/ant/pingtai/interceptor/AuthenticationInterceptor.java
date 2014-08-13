@@ -69,7 +69,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			Operator operator = (Operator) operatorObj;
 			reqSysLog.set("operatorids", operator.getPrimaryKeyValue());
 			
-			if(operator.get("privilege").equals("1")){// 是否需要权限验证
+			if(operator.get("privilegess").equals("1")){// 是否需要权限验证
 				log.info("需要权限验证!");
 				boolean userAgentVali = true;
 				if(uri.equals("/jf/ueditor") || uri.equals("/jf/upload")){ // 针对ueditor特殊处理

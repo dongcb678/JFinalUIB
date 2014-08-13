@@ -1,5 +1,6 @@
 package little.ant.pingtai.run;
 
+import little.ant.pingtai.beetl.func.DateFormat;
 import little.ant.pingtai.beetl.func.EscapeXml;
 import little.ant.pingtai.beetl.func.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.func.OrderBy;
@@ -34,6 +35,7 @@ import com.jfinal.core.JFinal;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
+import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
@@ -62,11 +64,15 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("configConstant 视图Beetl设置");
 		me.setMainRenderFactory(new MyBeetlRenderFactory());
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
+		
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
 		groupTemplate.registerFunction("orderBy", new OrderBy());
 		groupTemplate.registerFunction("escapeXml", new EscapeXml());
+		
 		groupTemplate.registerTag("dict", DictTag.class);
 		groupTemplate.registerTag("param", ParamTag.class);
+
+		groupTemplate.registerFormat("dateFormat", new DateFormat());
 		
 		log.info("configConstant 视图error page设置");
 		me.setError401View("/common/401.html");
@@ -116,6 +122,11 @@ public class JfinalConfig extends JFinalConfig {
 			log.info("configPlugin 使用数据库类型是 mysql");
 			arp.setDialect(new MysqlDialect());
 			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 小写
+		
+		}else if(db_type.equals(DictKeys.db_type_oracle)){
+			log.info("configPlugin 使用数据库类型是 oracle");
+			arp.setDialect(new OracleDialect());
+			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 配置属性名(字段名)大小写不敏感容器工厂
 		}
 		
 		log.info("configPlugin 表扫描注册");

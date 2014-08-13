@@ -48,6 +48,7 @@ public abstract class DictKeys {
 	
 	public static final String db_type_postgresql = "postgresql";
 	public static final String db_type_mysql = "mysql";
+	public static final String db_type_oracle = "oracle";
 	
 	public static final String db_connection_driverClass = "driverClass";
 	public static final String db_connection_jdbcUrl = "jdbcUrl";

@@ -1,0 +1,9 @@
+
+移植测试Oracle的时候我把表建在了scott用户下面
+
+jfinaluib.dmp 是用命了导出的，命令是 exp scott/678789@orcl file=d:\jfinaluib.dmp full=y
+
+SCOTT.sql 是用Navicat Premium导出的
+
+exp scott/678789@orcl file=d:\jfinaluib.dmp full=y
+imp scott/678789@orcl  file=d:\jfinaluib.dmp ignore=y

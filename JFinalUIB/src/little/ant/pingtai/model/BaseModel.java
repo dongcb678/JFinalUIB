@@ -1,12 +1,15 @@
 package little.ant.pingtai.model;
 
 import java.lang.reflect.Field;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import little.ant.pingtai.tools.ToolSqlXml;
 import little.ant.pingtai.tools.ToolUtils;
+import oracle.sql.TIMESTAMP;
 
 import org.apache.log4j.Logger;
 
@@ -130,5 +133,30 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		return super.update();
 	}
 	
-	
+	/**
+	 * 针对Oracle做特殊处理
+	 * @param attr
+	 * @return
+	 */
+	public Date getMyDate(String attr){
+		Object obj = this.get(attr);
+		if(null == obj){
+			return null;
+		}
+		
+		if (TIMESTAMP.class.isAssignableFrom(obj.getClass())){
+			TIMESTAMP ts = (TIMESTAMP) obj;
+			
+			Date date = null;
+			try {
+				date = ts.timestampValue();
+			} catch (SQLException e) {
+				return null;
+			}
+			
+			return date;
+		}
+		
+		return (Date) obj;
+	}
 }

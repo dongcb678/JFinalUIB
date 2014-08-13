@@ -82,8 +82,8 @@
 							<th onclick="orderbyFun('splitPage', 'formToken')">
 								${i18nMap["admin.operator.property.formToken"]}	${orderBy("formToken")}
 							</th>
-							<th onclick="orderbyFun('splitPage', 'privilege')">
-								${i18nMap["admin.operator.property.privilege"]}	${orderBy("privilege")}
+							<th onclick="orderbyFun('splitPage', 'privilegess')">
+								${i18nMap["admin.operator.property.privilegess"]}	${orderBy("privilegess")}
 							</th>
 							<th>${i18nMap["admin.common.operation"]}</th>
 						</tr>
@@ -124,7 +124,7 @@
 									</span>
 								</td>
 								<td class="center">
-									<% if(operator["privilege"] == "0"){ %>
+									<% if(operator["privilegess"] == "0"){ %>
 											${i18nMap["admin.common.no"]}
 									<% }else{ %>
 											${i18nMap["admin.common.yes"]}

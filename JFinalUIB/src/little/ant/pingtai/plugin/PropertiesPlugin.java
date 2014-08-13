@@ -41,9 +41,6 @@ public class PropertiesPlugin implements IPlugin {
 	public boolean start() {
 		paramMap.put(DictKeys.db_type_key, properties.getProperty(DictKeys.db_type_key).trim());
 		
-		String jdbcUrl = null;
-		String database = null;
-		
 		// 判断数据库类型
 		String db_type = (String) getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg 数据库连接信息
@@ -54,9 +51,22 @@ public class PropertiesPlugin implements IPlugin {
 			paramMap.put(DictKeys.db_connection_passWord, properties.getProperty("postgresql.passWord").trim());
 			
 			// 解析数据库连接URL，获取数据库名称
-			jdbcUrl = (String) getParamMapValue(DictKeys.db_connection_jdbcUrl);
-			database = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			String jdbcUrl = (String) getParamMapValue(DictKeys.db_connection_jdbcUrl);
+			String database = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
 			database = database.substring(database.indexOf("/") + 1);
+
+			// 解析数据库连接URL，获取数据库地址IP
+			String ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			ip = ip.substring(0, ip.indexOf(":"));
+
+			// 解析数据库连接URL，获取数据库地址端口
+			String port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
+			
+			// 把数据库连接信息写入常用map
+			paramMap.put(DictKeys.db_connection_ip, ip);
+			paramMap.put(DictKeys.db_connection_port, port);
+			paramMap.put(DictKeys.db_connection_dbName, database);
 			
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql 数据库连接信息
 			// 读取当前配置数据库连接信息
@@ -66,23 +76,45 @@ public class PropertiesPlugin implements IPlugin {
 			paramMap.put(DictKeys.db_connection_passWord, properties.getProperty("mysql.passWord").trim());
 
 			// 解析数据库连接URL，获取数据库名称
-			jdbcUrl = (String) getParamMapValue(DictKeys.db_connection_jdbcUrl);
-			database = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			String jdbcUrl = (String) getParamMapValue(DictKeys.db_connection_jdbcUrl);
+			String database = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
 			database = database.substring(database.indexOf("/") + 1, database.indexOf("?"));
-		}
-		
-		// 解析数据库连接URL，获取数据库地址IP
-		String ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-		ip = ip.substring(0, ip.indexOf(":"));
 
-		// 解析数据库连接URL，获取数据库地址端口
-		String port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-		port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
-		
-		// 把数据库连接信息写入常用map
-		paramMap.put(DictKeys.db_connection_ip, ip);
-		paramMap.put(DictKeys.db_connection_port, port);
-		paramMap.put(DictKeys.db_connection_dbName, database);
+			// 解析数据库连接URL，获取数据库地址IP
+			String ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			ip = ip.substring(0, ip.indexOf(":"));
+
+			// 解析数据库连接URL，获取数据库地址端口
+			String port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
+			
+			// 把数据库连接信息写入常用map
+			paramMap.put(DictKeys.db_connection_ip, ip);
+			paramMap.put(DictKeys.db_connection_port, port);
+			paramMap.put(DictKeys.db_connection_dbName, database);
+			
+		}else if(db_type.equals(DictKeys.db_type_oracle)){ // oracle 数据库连接信息
+			paramMap.put(DictKeys.db_connection_driverClass, properties.getProperty("oracle.driverClass").trim());
+			paramMap.put(DictKeys.db_connection_jdbcUrl, properties.getProperty("oracle.jdbcUrl").trim());
+			paramMap.put(DictKeys.db_connection_userName, properties.getProperty("oracle.userName").trim());
+			paramMap.put(DictKeys.db_connection_passWord, properties.getProperty("oracle.passWord").trim());
+
+			// 解析数据库连接URL，获取数据库名称
+			String jdbcUrl = (String) getParamMapValue(DictKeys.db_connection_jdbcUrl);
+			String[] prop = jdbcUrl.substring(jdbcUrl.indexOf("@") + 1).split(":");
+			String database = prop[2];
+
+			// 解析数据库连接URL，获取数据库地址IP
+			String ip = prop[0];
+
+			// 解析数据库连接URL，获取数据库地址端口
+			String port = prop[1];
+			
+			// 把数据库连接信息写入常用map
+			paramMap.put(DictKeys.db_connection_ip, ip);
+			paramMap.put(DictKeys.db_connection_port, port);
+			paramMap.put(DictKeys.db_connection_dbName, database);
+		}
 		
 		// 数据库连接池信息
 		paramMap.put(DictKeys.db_initialSize, Integer.parseInt(properties.getProperty(DictKeys.db_initialSize).trim()));

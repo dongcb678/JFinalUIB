@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import little.ant.pingtai.common.DictKeys;
+import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.tools.ToolString;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -282,7 +284,18 @@ public abstract class DocBase implements Runnable {
 	 * @return
 	 */
 	protected int getBatchCount(String sql, int batchSize){
-		int count = Db.queryLong(" select count(*) " + sql).intValue();
+		int count = 0;
+		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
+		if(db_type.equals(DictKeys.db_type_postgresql)){
+			count = Db.queryLong(" select count(*) " + sql).intValue();
+			
+		}else if(db_type.equals(DictKeys.db_type_mysql)){
+			count = Db.queryLong(" select count(*) " + sql).intValue();
+		
+		}else if(db_type.equals(DictKeys.db_type_oracle)){
+			count = Db.queryBigDecimal(" select count(*) " + sql).intValue();
+		}
+		
 		int batchCount = 0;
 		if(count % batchSize == 0){
 			batchCount = count / batchSize;

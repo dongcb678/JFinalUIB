@@ -43,6 +43,10 @@ public class ToolDataBase {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		} else if(db_type.equals(DictKeys.db_type_oracle)){ // oracle
+			
+			
+			
 		}
 	}
 	

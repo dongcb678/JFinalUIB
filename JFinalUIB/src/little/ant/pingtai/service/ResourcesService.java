@@ -45,6 +45,10 @@ public class ResourcesService extends BaseService {
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
 			String sql = ToolSqlXml.getSql("pingtai.resources.pv_mysql");
 			list = Db.find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+		
+		}else if(db_type.equals(DictKeys.db_type_oracle)){ // oracle
+			String sql = ToolSqlXml.getSql("pingtai.resources.pv_oracle");
+			list = Db.find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		}
 		
 		List<String> adates = new LinkedList<String>();
@@ -86,7 +90,7 @@ public class ResourcesService extends BaseService {
 			phymemory = resources.getNumber("phymemory").longValue();
 			jvmmaxmemory = resources.getNumber("jvmmaxmemory").longValue();
 			
-			datesList.add(ToolDateTime.format(resources.getDate("createdate"), "HH:mm"));
+			datesList.add(ToolDateTime.format(resources.getMyDate("createdate"), "HH:mm"));
 			
 			int cpuratio = (int)(resources.getBigDecimal("cpuratio").doubleValue() * 100);
 			cpuList.add(Integer.valueOf(cpuratio));

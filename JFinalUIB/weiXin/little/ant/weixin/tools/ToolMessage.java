@@ -755,7 +755,7 @@ public class ToolMessage {
 		messageIn.set("Location_X", location.getLocation_X());//地理位置维度
 		messageIn.set("Location_Y", location.getLocation_Y());//地理位置经度
 		messageIn.set("Scale", location.getScale());//地图缩放大小
-		messageIn.set("Label", location.getLabel());//地理位置信息 
+		messageIn.set("Labels", location.getLabel());//地理位置信息 
 		messageIn.save();
 		
 		// 坐标转换后的经纬度

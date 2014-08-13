@@ -134,7 +134,7 @@ public class OperatorService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		String select = " select o.*, m.names as modulenames, s.names as systemsnames ";
+		String select = " select o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, m.names as modulenames, s.names as systemsnames ";
 		splitPageBase(splitPage, select, "pingtai.operator.splitPage");
 	}
 	

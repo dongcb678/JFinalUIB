@@ -21,6 +21,15 @@
 	</sql>
 	
 	<!--  -->
+	<sql id="pv_oracle">
+		<![CDATA[ 
+        	select to_char(startdate,'YYYY-MM-DD') adates, count(*) acounts from pt_syslog 
+        	where startdate>=? and startdate<=? 
+        	group by to_char(startdate,'YYYY-MM-DD') order by adates asc 
+    	]]>
+	</sql>
+	
+	<!--  -->
 	<sql id="24hour">
 		<![CDATA[ 
         	select * from pt_resources where hostname=? and createdate>=? and createdate<=? order by createdate asc 
