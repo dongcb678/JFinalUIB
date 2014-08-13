@@ -202,5 +202,6 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public static void main(String[] args) {
 		JFinal.start("WebContent", 89, "/", 5);
+		// JFinal.start("JfinalUIB/WebContent", 89, "/", 5); // idea 中运行记得加上当前的module名称
 	}
 }
