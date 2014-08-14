@@ -254,13 +254,13 @@ var utils_valiFunc = {
 			return {"result" : true, "message" : ""};
 		}
 		if(objectLength==0){
-			return {"result" : false, "message" : "不能为空！"};
+			return {"result" : false, "message" : i18n_utils_msg_notNull};
 		}
 		if(null != minLength && null != maxLength && minLength==maxLength && objectLength < minLength){
-			return {"result" : false, "message" : "长度必须" + minLength + "位！"};
+			return {"result" : false, "message" : i18n_utils_msg_lengthMustBe + minLength + i18n_utils_msg_bit};
 		}
 		if((null != minLength && objectLength < minLength) || (null != maxLength && objectLength > maxLength)){
-			return {"result" : false, "message" : "长度至少" + minLength + "位！"};
+			return {"result" : false, "message" : i18n_utils_msg_atLeast + minLength + i18n_utils_msg_bit};
 		}else{
 			return {"result" : true, "message" : ""};
 		}
@@ -274,7 +274,7 @@ var utils_valiFunc = {
 	"number" : function(str){
 		var result = str.match(/^(-|\+)?\d+$/);
 	    if(result == null){
-	    	return {"result" : false, "message" : "只能为整数！"};
+	    	return {"result" : false, "message" : i18n_utils_msg_integer};
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
@@ -288,7 +288,7 @@ var utils_valiFunc = {
 	"numberZ" : function(str){
 		var result = str.match(/^[0-9]*[1-9][0-9]*$/);
 	    if(result == null){
-	    	return {"result" : false, "message" : "只能为正整数！"};
+	    	return {"result" : false, "message" : i18n_utils_msg_positiveInteger};
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
@@ -298,7 +298,6 @@ var utils_valiFunc = {
 	 * 中文_字母_数字
 	 * @param str
 	 * @returns
-	 */
 	"chinaLetterNumber" : function(str){
 		var pattern = /^[0-9a-zA-Z\u4e00-\u9fa5]+$/i; 
 		if (pattern.test(str)){ 
@@ -307,6 +306,7 @@ var utils_valiFunc = {
 			return {"result" : false, "message" : "只能包含中文、字母、数字！"};
 		} 
 	},
+	 */
 	
 	/**
 	 * 字母_数字
@@ -319,7 +319,7 @@ var utils_valiFunc = {
 			return {"result" : true, "message" : ""};
 		}else {
 			showMessage = "";
-			return {"result" : false, "message" : "只能包含字母、数字！"};
+			return {"result" : false, "message" : i18n_utils_msg_lettersNumbers};
 		}
 	},
 
@@ -333,7 +333,7 @@ var utils_valiFunc = {
 		if(email.test(str)){
 			return {"result" : true, "message" : ""};
 		}else {
-			return {"result" : false, "message" : "格式不正确！"};
+			return {"result" : false, "message" : i18n_utils_msg_format};
 		}
 	},
 
@@ -347,7 +347,7 @@ var utils_valiFunc = {
 		if(partten.test(str)){
 			return {"result" : true, "message" : ""};
 		}else{
-			return {"result" : false, "message" : "格式不正确！"};
+			return {"result" : false, "message" : i18n_utils_msg_format};
 		}
 	},
 
@@ -361,7 +361,7 @@ var utils_valiFunc = {
 		if(partten.test(str)){
 			return {"result" : true, "message" : ""};
 		}else{
-			return {"result" : false, "message" : "格式不正确！"};
+			return {"result" : false, "message" : i18n_utils_msg_format};
 		}
 	},
 
@@ -375,7 +375,7 @@ var utils_valiFunc = {
 		if(partten.test(str)){
 			return {"result" : true, "message" : ""};
 		}else{
-			return {"result" : false, "message" : "格式不正确！"};
+			return {"result" : false, "message" : i18n_utils_msg_format};
 		}
 	},
 
@@ -387,7 +387,7 @@ var utils_valiFunc = {
 	"idCard" : function(str){
 		var result=str.match(/\d{15}|\d{18}/);
 	    if(result == null){
-			return {"result" : false, "message" : "格式不正确！"};
+			return {"result" : false, "message" : i18n_utils_msg_format};
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
@@ -401,7 +401,7 @@ var utils_valiFunc = {
 	"qq" : function(str){
 		var result = str.match(/^(-|\+)?\d+$/);
 	    if(result == null){
-			return {"result" : false, "message" : "格式不正确！"};
+			return {"result" : false, "message" : i18n_utils_msg_format};
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
@@ -415,7 +415,7 @@ var utils_valiFunc = {
 	"url" : function(str){
 		var result = null;//str.match(/^[0-9a-zA-Z_-.:?&=\/%@]+$/);
 	    if(result == null){
-	    	return {"result" : false, "message" : "格式不正确！"};
+	    	return {"result" : false, "message" : i18n_utils_msg_format};
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
@@ -430,11 +430,11 @@ var utils_valiFunc = {
 		var val = /([0-9]{1,3}\.{1}){3}[0-9]{1,3}/;
 	    var vald = val.exec(str);
 	    if (vald == null) {
-	    	return {"result" : false, "message" : "格式不正确！"};
+	    	return {"result" : false, "message" : i18n_utils_msg_format};
 	    }
 	    if (vald != '') {
 	        if (vald[0] != str) {
-	        	return {"result" : false, "message" : "格式不正确！"};
+	        	return {"result" : false, "message" : i18n_utils_msg_format};
 	        }
 	    }
 	    return {"result" : true, "message" : ""};
@@ -448,10 +448,10 @@ var utils_valiFunc = {
 	"stature" : function(str){
 		var result = str.match(/^(-|\+)?\d+$/);
 	    if(result == null){
-	    	return {"result" : false, "message" : "格式不正确！"};
+	    	return {"result" : false, "message" : i18n_utils_msg_format};
 	    }else{
 	    	if(parseInt(str) < 25 || parseInt(str) > 250){
-	    		return {"result" : false, "message" : "应该在" + 25 + "-" + 250 + "cm之间！"};
+	    		return {"result" : false, "message" : i18n_utils_msg_start + 25 + "-" + 250 + "cm" + i18n_utils_msg_end};
 			}
 	    	return {"result" : true, "message" : ""};
 	    }
@@ -465,10 +465,10 @@ var utils_valiFunc = {
 	"avoirdupoi" : function(str){
 		var result = str.match(/^(-|\+)?\d+$/);
 	    if(result == null){
-	    	return {"result" : false, "message" : "格式不正确！"};
+	    	return {"result" : false, "message" : i18n_utils_msg_format};
 	    }else{
 	    	if(parseInt(str) < 2 || parseInt(str) > 500){
-	    		return {"result" : false, "message" : "应该在" + 2 + "-" + 500 + "kg之间！"};
+	    		return {"result" : false, "message" : "应该在" + 2 + "-" + 500 + "kg" + i18n_utils_msg_end};
 			}
 	    	return {"result" : true, "message" : ""};
 	    }
@@ -489,7 +489,7 @@ var utils_valiFunc = {
 			}
 		}
 		if(imageResult == false){
-			return {"result" : false, "message" : "文件格式不正确！"};
+			return {"result" : false, "message" : i18n_utils_msg_format};
 		}else{
 			return {"result" : true, "message" : ""};
 		}

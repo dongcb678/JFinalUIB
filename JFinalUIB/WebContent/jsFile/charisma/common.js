@@ -15,9 +15,9 @@ function splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSel
 	var splitStr = '<ul>';
 	
 	if (pageNumber == 1 || totalPages == 0) {
-		splitStr += '<li><a href="javascript:void(0)">上一页</a></li>';
+		splitStr += '<li><a href="javascript:void(0)">' + i18n_common_splitPage_previous + '</a></li>';
 	} else {
-		splitStr += '<li><a href="javascript:splitPageLink(\''+formId+'\', ' + (pageNumber - 1) + ');">上一页</a></li>';
+		splitStr += '<li><a href="javascript:splitPageLink(\''+formId+'\', ' + (pageNumber - 1) + ');">' + i18n_common_splitPage_previous + '</a></li>';
 	}
 	
 	for (var i = 1; i <= totalPages; i++) {
@@ -39,22 +39,22 @@ function splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSel
     }
 	
 	if (pageNumber == totalPages || totalPages == 0) {
-		splitStr += '<li><a href="javascript:void(0)">下一页</a></li>';
+		splitStr += '<li><a href="javascript:void(0)">' + i18n_common_splitPage_next + '</a></li>';
 	} else {
-		splitStr += '<li><a href="javascript:splitPageLink(\''+formId+'\', ' + (pageNumber + 1) + ');">下一页</a></li>';
+		splitStr += '<li><a href="javascript:splitPageLink(\''+formId+'\', ' + (pageNumber + 1) + ');">' + i18n_common_splitPage_next + '</a></li>';
 	}
 	
 	if(isSelectPage == true){
 		splitStr += '&nbsp;&nbsp;<li><select name="pageNumber" onChange="splitPageLink(\''+formId+'\', this.value);" style="width: 110px; height:35px;">';
 		for (var i = 1; i <= totalPages; i++) {
 			if (i == pageNumber) {
-				splitStr += '<option selected value="' + i + '">跳转到第' + i + '页</option>';
+				splitStr += '<option selected value="' + i + '">' + i18n_common_splitPage_jump + i + i18n_common_splitPage_jumpPage + '</option>';
 			} else {
-				splitStr += '<option value="' + i + '">跳转到第' + i + '页</option>';
+				splitStr += '<option value="' + i + '">' + i18n_common_splitPage_jump + i + i18n_common_splitPage_jumpPage + '</option>';
 			}
 		}
 		if(totalPages == 0){
-			splitStr += '<option value="0">无跳转数据</option>';
+			splitStr += '<option value="0">' + i18n_common_splitPage_noJump + '</option>';
 		}
 		splitStr += '</select>';
 		splitStr += '<li>&nbsp;&nbsp;';
@@ -65,12 +65,12 @@ function splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSel
 	if(isSelectSize == true){
 		splitStr += '<li><select name="pageSize" onChange="splitPageLink(\''+formId+'\', 1);" style="width: 90px; height:35px;">';
 		
-		var optionStr = '<option value="10">每页10条</option>';
-		optionStr += '<option value="20">每页20条</option>';
-		optionStr += '<option value="40">每页40条</option>';
-		optionStr += '<option value="80">每页80条</option>';
-		optionStr += '<option value="100">每页100条</option>';
-		optionStr += '<option value="200">每页200条</option>';
+		var optionStr = '<option value="10">' + i18n_common_splitPage_perPage + '10' + i18n_common_splitPage_strip + '</option>';
+		optionStr += '<option value="20">' + i18n_common_splitPage_perPage + '20' + i18n_common_splitPage_strip + '</option>';
+		optionStr += '<option value="40">' + i18n_common_splitPage_perPage + '40' + i18n_common_splitPage_strip + '</option>';
+		optionStr += '<option value="80">' + i18n_common_splitPage_perPage + '80' + i18n_common_splitPage_strip + '</option>';
+		optionStr += '<option value="100">' + i18n_common_splitPage_perPage + '100' + i18n_common_splitPage_strip + '</option>';
+		optionStr += '<option value="200">' + i18n_common_splitPage_perPage + '200' + i18n_common_splitPage_strip + '</option>';
 		optionStr = optionStr.replace('"' + pageSize + '"', '"' + pageSize + '" selected="selected"');
 		
 		splitStr += optionStr;
@@ -80,7 +80,7 @@ function splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSel
 		splitStr += '<input type="hidden" name="pageSize">';
 	}
 	
-	splitStr += '&nbsp;&nbsp;<li>共<strong>' + totalRow + '</strong>条记录</li>';
+	splitStr += '&nbsp;&nbsp;<li>共<strong>' + totalRow + '</strong>' + i18n_common_splitPage_records + '</li>';
 	
 	splitStr += '</ul>';
 
@@ -152,10 +152,6 @@ function ajaxForm(formId){
  * @param data
  */
 function ajaxContent(url, data){
-//	if($('.btn-navbar').is(':visible')){
-//		$('.btn-navbar').click();
-//	}
-//	$('#loading').remove();
 	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	
 	$.ajax({

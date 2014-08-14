@@ -19,8 +19,8 @@ function dataVali(form){
 		<label class="control-label">${i18nMap["admin.group.property.name"]}</label>
 		<div class="controls">
 			<input type="text" name="group.names" value="${escapeXml(group.names!)}" 
-				class="input-xlarge" maxlength="25" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
-			<span class="help-inline">2-10位中文字母数字</span>
+				class="input-xlarge" maxlength="25" vMin="2" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">2-10位任意字符</span>
 		</div>
 	</div>
 </fieldset>

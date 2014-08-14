@@ -31,8 +31,8 @@ function dataVali(form){
 		<label class="control-label">${i18nMap["admin.operator.property.name"]}</label>
 		<div class="controls">
 			<input type="text" name="operator.names" value="${escapeXml(operator.names!)}" 
-				class="input-xlarge" maxlength="25" vMin="2" vType="chinaLetterNumber" onblur="onblurVali(this);">
-			<span class="help-inline">2-25位中文字母数字</span>
+				class="input-xlarge" maxlength="25" vMin="2" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">2-25位任意字符</span>
 		</div>
 	</div>
 	<div class="control-group">

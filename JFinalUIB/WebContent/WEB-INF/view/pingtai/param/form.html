@@ -29,8 +29,8 @@ function dataVali(form){
 		<label class="control-label">${i18nMap["admin.param.property.name"]}</label>
 		<div class="controls">
 			<input type="text" name="param.names" value="${escapeXml(param.names!)}" 
-				class="input-xlarge" maxlength="25" vMin="1" vType="chinaLetterNumber" onblur="onblurVali(this);">
-			<span class="help-inline">1-10位中文字母数字</span>
+				class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-10位任意字符</span>
 		</div>
 	</div>
 	<div class="control-group">
@@ -115,7 +115,7 @@ function dataVali(form){
 		<div class="controls">
 			<input type="text" name="param.orderids" value="${param.orderids!}" 
 				class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">
-			<span class="help-inline">2-10位中文字母数字</span>
+			<span class="help-inline">2-10位任意字符</span>
 		</div>
 	</div>
 </fieldset>
