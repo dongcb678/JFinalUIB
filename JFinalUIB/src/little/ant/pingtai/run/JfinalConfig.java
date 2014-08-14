@@ -1,6 +1,6 @@
 package little.ant.pingtai.run;
 
-import little.ant.pingtai.beetl.func.DateFormat;
+import little.ant.pingtai.beetl.format.DateFormat;
 import little.ant.pingtai.beetl.func.EscapeXml;
 import little.ant.pingtai.beetl.func.HasPrivilegeUrl;
 import little.ant.pingtai.beetl.func.OrderBy;

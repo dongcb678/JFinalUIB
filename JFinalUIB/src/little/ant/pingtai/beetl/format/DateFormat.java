@@ -1,4 +1,4 @@
-package little.ant.pingtai.beetl.func;
+package little.ant.pingtai.beetl.format;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -9,10 +9,8 @@ import oracle.sql.TIMESTAMP;
 import org.beetl.core.Format;
 
 /**
- * 日期格式化函数，如 ${date,dateFormat='yyyy-Mm-dd'}，如果没有patten，则使用local
- * 
- * @author joelli
- * 
+ * 页面日期格式化
+ * @author 董华健
  */
 public class DateFormat implements Format {
 
