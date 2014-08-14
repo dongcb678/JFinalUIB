@@ -94,24 +94,25 @@ public class JfinalConfig extends JFinalConfig {
 	 * 配置插件
 	 */
 	public void configPlugin(Plugins me) {
-		log.info("configPlugin 配置Druid数据库连接池插件");
+		log.info("configPlugin 配置Druid数据库连接池连接属性");
 		DruidPlugin druidPlugin = new DruidPlugin(
 				(String)PropertiesPlugin.getParamMapValue(DictKeys.db_connection_jdbcUrl), 
 				(String)PropertiesPlugin.getParamMapValue(DictKeys.db_connection_userName), 
 				(String)PropertiesPlugin.getParamMapValue(DictKeys.db_connection_passWord), 
 				(String)PropertiesPlugin.getParamMapValue(DictKeys.db_connection_driverClass));
+
+		log.info("configPlugin 配置Druid数据库连接池大小");
 		druidPlugin.set(
 				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_initialSize), 
 				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_minIdle), 
 				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_maxActive));
-		me.add(druidPlugin);
 		
 		log.info("configPlugin 配置ActiveRecord插件");
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 		//arp.setTransactionLevel(4);//事务隔离级别
 		arp.setDevMode(getPropertyToBoolean("config.devMode", false)); // 设置开发模式
 		arp.setShowSql(getPropertyToBoolean("config.devMode", false)); // 是否显示SQL
-		
+
 		log.info("configPlugin 数据库类型判断");
 		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){
@@ -125,9 +126,13 @@ public class JfinalConfig extends JFinalConfig {
 		
 		}else if(db_type.equals(DictKeys.db_type_oracle)){
 			log.info("configPlugin 使用数据库类型是 oracle");
+			druidPlugin.setValidationQuery("select 1 FROM DUAL"); //指定连接验证语句(用于保存数据库连接池), 这里不加会报错误:invalid oracle validationQuery. select 1, may should be : select 1 FROM DUAL 
 			arp.setDialect(new OracleDialect());
 			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 配置属性名(字段名)大小写不敏感容器工厂
 		}
+
+		log.info("configPlugin 添加druidPlugin插件");
+		me.add(druidPlugin);
 		
 		log.info("configPlugin 表扫描注册");
 		new TablePlugin(arp).start();
