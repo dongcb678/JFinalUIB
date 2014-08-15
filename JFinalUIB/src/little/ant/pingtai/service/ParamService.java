@@ -63,6 +63,7 @@ public class ParamService extends BaseService {
 		param.update();
 		
 		// 缓存
+		param = Param.dao.findById(param.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("ids"), param);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"), param);
 		

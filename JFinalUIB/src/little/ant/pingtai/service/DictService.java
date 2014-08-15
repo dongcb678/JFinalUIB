@@ -63,6 +63,7 @@ public class DictService extends BaseService {
 		dict.update();
 		
 		// 缓存
+		dict = Dict.dao.findById(dict.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
 		
