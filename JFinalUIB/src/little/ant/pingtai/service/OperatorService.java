@@ -42,12 +42,13 @@ public class OperatorService extends BaseService {
 		operator.update();
 		
 		// 缓存
+		operator = Operator.dao.findById(operator.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
 	}
 
 	/**
-	 * 更新
+	 * 删除
 	 * @param ids
 	 */
 	public void delete(String ids){
