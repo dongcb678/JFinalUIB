@@ -12,14 +12,14 @@
 	<!-- -->
 	<sql id="noCheckedFilter">
 		<![CDATA[ 
-        	select ids, names from pt_role where ids not in ${fitler} order by names asc
+        	select ids, names from pt_role where ids not in ( ${fitler} ) order by names asc
     	]]>
 	</sql>
 	
 	<!--   -->
 	<sql id="checkedFilter">
 		<![CDATA[ 
-        	select ids, names from pt_role where ids in ${fitler} order by names asc
+        	select ids, names from pt_role where ids in ( ${fitler} ) order by names asc
     	]]>
 	</sql>
 	
