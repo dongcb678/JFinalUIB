@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
+		var divId = "${divId!}"; 							//分页显示div
 		var formId = "${formId!}"; 							//分页formId
 		var totalRow = ${splitPage.page.totalRow!};			//总行数
 		var pageSize = ${splitPage.page.pageSize!};			//每页显示多少航 
@@ -11,7 +12,7 @@
 		var orderMode = "${splitPage.orderMode!}";			//排序的方式
 		
 		// 获取分页HTML信息
-		var splitStr = splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode);
+		var splitStr = splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode);
 		
 		// 显示分页信息
 		$("#splitPageDiv").html(splitStr);

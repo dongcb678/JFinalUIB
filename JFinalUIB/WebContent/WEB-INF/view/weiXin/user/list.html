@@ -37,7 +37,7 @@
 				  	</div>
 				  
 				  	<div class="form-actions">
-						<button type="button" class="btn btn-primary" onclick='ajaxForm("splitPage");'>查询</button>
+						<button type="button" class="btn btn-primary" onclick='ajaxForm("content", "splitPage");'>查询</button>
 						<button type="reset" class="btn">清除</button>
 				  	</div>
 				</fieldset>
@@ -127,7 +127,7 @@
 					</tbody>
 				</table>
 				<div id="splitPageDiv" class="pagination pagination-centered">
-					<% include("/common/splitPage.html", {"formId" : "splitPage"}){} %>
+					<% include("/common/splitPage.html", {"divId" : "content", "formId" : "splitPage"}){} %>
 				</div>
 			</div>
 			

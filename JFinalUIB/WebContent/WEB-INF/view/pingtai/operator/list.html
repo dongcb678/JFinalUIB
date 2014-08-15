@@ -38,7 +38,7 @@
 				  	</div>
 				
 				  	<div class="form-actions">
-						<button type="button" class="btn btn-primary" onclick='ajaxForm("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="button" class="btn btn-primary" onclick='ajaxForm("content", "splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
 				  	</div>
 				</fieldset>
@@ -140,7 +140,7 @@
 					</tbody>
 				</table>
 				<div id="splitPageDiv" class="pagination pagination-centered">
-					<% include("/common/splitPage.html", {"formId" : "splitPage"}){} %>
+					<% include("/common/splitPage.html", {"divId" : "content", "formId" : "splitPage"}){} %>
 				</div>
 			</div>
 			

@@ -1,5 +1,6 @@
 /**
  * 分页链接HTML
+ * @param divId
  * @param formId
  * @param totalRow
  * @param pageSize
@@ -11,13 +12,13 @@
  * @param orderMode
  * @returns {String}
  */
-function splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode){
+function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode){
 	var splitStr = '<ul>';
 	
 	if (pageNumber == 1 || totalPages == 0) {
 		splitStr += '<li><a href="javascript:void(0)">' + i18n_common_splitPage_previous + '</a></li>';
 	} else {
-		splitStr += '<li><a href="javascript:splitPageLink(\''+formId+'\', ' + (pageNumber - 1) + ');">' + i18n_common_splitPage_previous + '</a></li>';
+		splitStr += '<li><a href="javascript:splitPageLink(\''+divId+'\', \''+formId+'\', ' + (pageNumber - 1) + ');">' + i18n_common_splitPage_previous + '</a></li>';
 	}
 	
 	for (var i = 1; i <= totalPages; i++) {
@@ -31,7 +32,7 @@ function splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSel
             if (pageNumber == i) {
             	splitStr += '<li class="active"><a href="javascript:void(0)" style="color: #272727; font-size: 14px; text-decoration: none;">' + pageNumber + '</a></li>';
             } else {
-            	splitStr += '<li><a href="javascript:splitPageLink(\''+formId+'\', ' + i + ');" style="color: #898989; font-size: 14px;">';
+            	splitStr += '<li><a href="javascript:splitPageLink(\''+divId+'\', \''+formId+'\', ' + i + ');" style="color: #898989; font-size: 14px;">';
             	splitStr += i;
             	splitStr += '</a></li>';
             }
@@ -41,11 +42,11 @@ function splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSel
 	if (pageNumber == totalPages || totalPages == 0) {
 		splitStr += '<li><a href="javascript:void(0)">' + i18n_common_splitPage_next + '</a></li>';
 	} else {
-		splitStr += '<li><a href="javascript:splitPageLink(\''+formId+'\', ' + (pageNumber + 1) + ');">' + i18n_common_splitPage_next + '</a></li>';
+		splitStr += '<li><a href="javascript:splitPageLink(\''+divId+'\', \''+formId+'\', ' + (pageNumber + 1) + ');">' + i18n_common_splitPage_next + '</a></li>';
 	}
 	
 	if(isSelectPage == true){
-		splitStr += '&nbsp;&nbsp;<li><select name="pageNumber" onChange="splitPageLink(\''+formId+'\', this.value);" style="width: 110px; height:35px;">';
+		splitStr += '&nbsp;&nbsp;<li><select name="pageNumber" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', this.value);" style="width: 110px; height:35px;">';
 		for (var i = 1; i <= totalPages; i++) {
 			if (i == pageNumber) {
 				splitStr += '<option selected value="' + i + '">' + i18n_common_splitPage_jump + i + i18n_common_splitPage_jumpPage + '</option>';
@@ -63,7 +64,7 @@ function splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSel
 	}
 	
 	if(isSelectSize == true){
-		splitStr += '<li><select name="pageSize" onChange="splitPageLink(\''+formId+'\', 1);" style="width: 90px; height:35px;">';
+		splitStr += '<li><select name="pageSize" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', 1);" style="width: 90px; height:35px;">';
 		
 		var optionStr = '<option value="10">' + i18n_common_splitPage_perPage + '10' + i18n_common_splitPage_strip + '</option>';
 		optionStr += '<option value="20">' + i18n_common_splitPage_perPage + '20' + i18n_common_splitPage_strip + '</option>';
@@ -92,21 +93,23 @@ function splitPageHtml(formId, totalRow, pageSize, pageNumber, totalPages, isSel
 
 /**
  * 分页链接处理
+ * @param divId
  * @param formId
  * @param toPage
  */
-function splitPageLink(formId, toPage){
+function splitPageLink(divId, formId, toPage){
 	//alert($("#" + formId + " select[name=pageNumber]").attr("name"));//input[name=pageNumber]
 	$("#" + formId + " select[name=pageNumber],input[name=pageNumber] ").val(toPage);
-	ajaxForm("splitPage");
+	ajaxForm(divId, formId);
 }
 
 /**
  * 分页列排序点击事件处理
+ * @param divId
  * @param formId
  * @param colunmName
  */
-function orderbyFun(formId, colunmName){
+function orderbyFun(divId, formId, colunmName){
 	var orderColunmNode = $("#" + formId + " input[name=orderColunm]");
 	var orderColunm = orderColunmNode.val();
 	
@@ -126,19 +129,19 @@ function orderbyFun(formId, colunmName){
 		orderModeNode.val("asc");
 	}
 	//alert(orderColunmNode.val()+"--"+orderModeNode.val());
-	ajaxForm("splitPage");
+	ajaxForm(divId, formId);
 }
 
 /**
  * ajax提交form替换content
  * @param formId
  */
-function ajaxForm(formId){
+function ajaxForm(divId, formId){
 	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$("#" + formId).ajaxSubmit({
 		cache: false,
 	    success:  function (data) {
-	    	$("#content").html(data);
+	    	$("#" + divId).html(data);
 	    	$('#loading').remove();
 			$('#content').fadeIn();
 			docReady();
@@ -147,7 +150,37 @@ function ajaxForm(formId){
 }
 
 /**
- * ajax请求url替换content
+ * ajax请求url替换指定div
+ * @param url
+ * @param data
+ */
+function ajaxDiv(divId, url, data){
+	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	
+	$.ajax({
+		type : "post",
+		url : encodeURI(encodeURI(cxt + url)),
+		data : data,
+		dataType : "html",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		async: false,
+		cache: false,
+		success:function(returnData){
+			$("#" + divId).html(returnData);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) { 
+			alert("请求出现错误！");
+        },
+        complete: function(XMLHttpRequest, textStatus) { 
+	    	$('#loading').remove();
+			$('#content').fadeIn();
+			docReady();
+        }
+	});
+}
+
+/**
+ * ajax请求url替换div content
  * @param url
  * @param data
  */
