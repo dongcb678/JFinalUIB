@@ -43,6 +43,7 @@ public class RoleService extends BaseService {
 		role.update();
 		
 		// 缓存
+		role = Role.dao.findById(role.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
 	}
 

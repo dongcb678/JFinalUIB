@@ -44,6 +44,7 @@ public class GroupService extends BaseService {
 		group.update();
 
 		// 缓存
+		group = Group.dao.findById(group.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
 	}
 
