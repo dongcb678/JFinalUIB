@@ -76,8 +76,8 @@ public class MenuService extends BaseService {
 	public String save(String pIds, String names, int orderIds, String i18n){
 		String namesColunm = "names" + i18n(i18n);
 		
-		Menu pDept = Menu.dao.findById(pIds);
-		pDept.set("isparent", "true").update();
+		Menu pMenu = Menu.dao.findById(pIds);
+		pMenu.set("isparent", "true").update();
 		
 		String images = "";
 		if(orderIds < 2 || orderIds > 9){
@@ -93,6 +93,7 @@ public class MenuService extends BaseService {
 		menu.set("orderids", orderIds);
 		menu.set(namesColunm, names);
 		menu.set("images", images);
+		menu.set("systemsids", pMenu.getStr("systemsids"));
 		menu.save();
 		
 		return menu.getStr("ids");

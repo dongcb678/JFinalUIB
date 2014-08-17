@@ -32,6 +32,23 @@
 			</div>
 			<!-- theme selector ends -->
 			
+			<!-- language select starts -->
+			<div class="btn-group pull-right" >
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-th-large"></i><span class="hidden-phone">${i18nMap["admin.top.language"]}</span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="${cxt!}/jf/index?localePram=ja">${i18nMap["admin.top.language.ja"]}</a></li>
+					<li><a href="${cxt!}/jf/index?localePram=en_us">${i18nMap["admin.top.language.enus"]}</a></li>
+					<li><a href="${cxt!}/jf/index?localePram=zh_cn">${i18nMap["admin.top.language.zhcn"]}</a></li>
+					<li><a href="${cxt!}/jf/index?localePram=zh_tw">${i18nMap["admin.top.language.zhhk"]}</a></li>
+					<li><a href="${cxt!}/jf/index?localePram=zh_hk">${i18nMap["admin.top.language.zhtw"]}</a></li>
+					<li class="divider"></li>
+				</ul>
+			</div>
+			<!-- language select ends -->
+			
 			<!-- user dropdown starts -->
 			<div class="btn-group pull-right" >
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
