@@ -271,7 +271,7 @@ public class ToolContext {
 		// 1.设置cookie有效时间
 		int maxAgeTemp = -1;
 		if (autoLogin) {
-			maxAgeTemp = 3600 * 24 * 365;// 365天
+			maxAgeTemp = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_maxAge_key);
 		}
 
 		// 2.设置用户名到cookie
@@ -347,7 +347,7 @@ public class ToolContext {
 		}
 		
 		// 登陆认证cookie
-		int maxAgeTemp = 3600 * 24 * 365;// 365天
+		int maxAgeTemp = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_maxAge_key);
 		ToolWeb.addCookie(response, "authCode", securityCookie, maxAgeTemp);
 	}
 

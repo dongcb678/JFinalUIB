@@ -126,6 +126,7 @@ public class PropertiesPlugin implements IPlugin {
 		paramMap.put(DictKeys.config_passErrorCount_key, Integer.parseInt(properties.getProperty(DictKeys.config_passErrorCount_key)));
 		paramMap.put(DictKeys.config_passErrorHour_key, Integer.parseInt(properties.getProperty(DictKeys.config_passErrorHour_key)));
 		paramMap.put(DictKeys.config_maxPostSize_key, Integer.valueOf(properties.getProperty(DictKeys.config_maxPostSize_key)));
+		paramMap.put(DictKeys.config_maxAge_key, Integer.parseInt(properties.getProperty(DictKeys.config_maxAge_key)));
 		
 		return true;
 	}

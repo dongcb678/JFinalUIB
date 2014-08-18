@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import little.ant.pingtai.beetl.render.MyBeetlRender;
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.plugin.I18NPlugin;
+import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.thread.ThreadSysLog;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
@@ -52,7 +54,8 @@ public class GlobalHandler extends Handler {
 		log.debug("request 国际化");
 		String localePram = request.getParameter("localePram");
 		if(null != localePram && !localePram.isEmpty()){
-			ToolWeb.addCookie(response, "language", localePram, 3600 * 24 * 365);
+			int maxAge = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_maxAge_key);
+			ToolWeb.addCookie(response, "language", localePram, maxAge);
 		}else {
 			localePram = ToolWeb.getCookieValueByName(request, "language");
 			if(null == localePram || localePram.isEmpty()){

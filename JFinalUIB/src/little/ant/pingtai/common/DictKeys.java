@@ -40,6 +40,11 @@ public abstract class DictKeys {
 	 * #文件上传大小限制 10 * 1024 * 1024 = 10M
 	 */
 	public static final String config_maxPostSize_key = "config.maxPostSize";
+
+	/**
+	 * # cookie 值的时间
+	 */
+	public static final String config_maxAge_key = "config.maxAge";
 	
 	/**
 	 * 当前数据库类型
