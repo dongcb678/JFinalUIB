@@ -51,14 +51,18 @@ public class GlobalHandler extends Handler {
 
 		log.debug("request 国际化");
 		String localePram = request.getParameter("localePram");
-		if(null == localePram || localePram.isEmpty()){
-			Locale locale = request.getLocale();
-			String language = locale.getLanguage();
-			localePram = language;
-			
-			String country = locale.getCountry();
-			if(null != country && !country.isEmpty()){
-				localePram += "_" + country;
+		if(null != localePram && !localePram.isEmpty()){
+			ToolWeb.addCookie(response, "language", localePram, 3600 * 24 * 365);
+		}else {
+			localePram = ToolWeb.getCookieValueByName(request, "language");
+			if(null == localePram || localePram.isEmpty()){
+				Locale locale = request.getLocale();
+				String language = locale.getLanguage();
+				localePram = language;
+				String country = locale.getCountry();
+				if(null != country && !country.isEmpty()){
+					localePram += "_" + country;
+				}
 			}
 		}
 		localePram = localePram.toLowerCase();
