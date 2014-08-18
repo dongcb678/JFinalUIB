@@ -6,6 +6,10 @@
 	
 	<display-name>JFinalUIB</display-name>
 	
+	<welcome-file-list>
+		<welcome-file>/jf/login</welcome-file>
+	</welcome-file-list>
+	
 	<context-param>
         <param-name>log4j_init_path</param-name>
         <param-value>\WEB-INF\classes\log4j.properties</param-value>
