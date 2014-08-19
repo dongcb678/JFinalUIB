@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.pingtai.handler.GlobalHandler;
-import little.ant.pingtai.model.Operator;
-import little.ant.pingtai.model.Syslog;
-import little.ant.pingtai.model.User;
+import little.ant.pingtai.model.OperatorModel;
+import little.ant.pingtai.model.SyslogModel;
+import little.ant.pingtai.model.UserModel;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
@@ -37,7 +37,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		HttpServletResponse response = contro.getResponse();
 		
 		log.info("获取reqSysLog!");
-		Syslog reqSysLog = contro.getAttr(GlobalHandler.reqSysLogKey);
+		SyslogModel reqSysLog = contro.getAttr(GlobalHandler.reqSysLogKey);
 		contro.setReqSysLog(reqSysLog);
 		
 		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");
@@ -66,7 +66,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		if(null != operatorObj){
 			log.info("URI存在!");
 			
-			Operator operator = (Operator) operatorObj;
+			OperatorModel operator = (OperatorModel) operatorObj;
 			reqSysLog.set("operatorids", operator.getPrimaryKeyValue());
 			
 			if(operator.get("privilegess").equals("1")){// 是否需要权限验证
@@ -75,7 +75,7 @@ public class AuthenticationInterceptor implements Interceptor {
 				if(uri.equals("/jf/ueditor") || uri.equals("/jf/upload")){ // 针对ueditor特殊处理
 					userAgentVali = false;
 				}
-				User user = ToolContext.getCurrentUser(request, userAgentVali);// 当前登录用户
+				UserModel user = ToolContext.getCurrentUser(request, userAgentVali);// 当前登录用户
 				if (user == null) {
 					log.info("权限认证过滤器检测:未登录!");
 					

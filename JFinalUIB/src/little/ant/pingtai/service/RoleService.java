@@ -7,8 +7,8 @@ import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
-import little.ant.pingtai.model.Group;
-import little.ant.pingtai.model.Role;
+import little.ant.pingtai.model.GroupModel;
+import little.ant.pingtai.model.RoleModel;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
@@ -26,7 +26,7 @@ public class RoleService extends BaseService {
 	 * @param role
 	 * @return
 	 */
-	public String save(Role role){
+	public String save(RoleModel role){
 		role.save();
 		
 		// 缓存
@@ -39,11 +39,11 @@ public class RoleService extends BaseService {
 	 * 更新
 	 * @param role
 	 */
-	public void update(Role role){
+	public void update(RoleModel role){
 		role.update();
 		
 		// 缓存
-		role = Role.dao.findById(role.getPrimaryKeyValue());
+		role = RoleModel.dao.findById(role.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
 	}
 
@@ -56,7 +56,7 @@ public class RoleService extends BaseService {
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIds);
 		
 		// 删除
-		Role.dao.deleteById(roleIds);
+		RoleModel.dao.deleteById(roleIds);
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class RoleService extends BaseService {
 	 * @param operatorIds
 	 */
 	public void setOperator(String roleIds, String moduleIds, String operatorIds){
-		Role role = Role.dao.findById(roleIds);
+		RoleModel role = RoleModel.dao.findById(roleIds);
 		role.set("moduleids", moduleIds).set("operatorids", operatorIds).update();
 		
 		// 缓存
@@ -78,19 +78,19 @@ public class RoleService extends BaseService {
 	 * @param ids 用户ids
 	 */
 	public Map<String,Object> select(String ids){
-		List<Role> noCheckedList = new ArrayList<Role>();
-		List<Role> checkedList = new ArrayList<Role>();
-		String roleIds = Group.dao.findById(ids).getStr("roleids");
+		List<RoleModel> noCheckedList = new ArrayList<RoleModel>();
+		List<RoleModel> checkedList = new ArrayList<RoleModel>();
+		String roleIds = GroupModel.dao.findById(ids).getStr("roleids");
 		if(null != roleIds && !roleIds.equals("")){
 			String fitler = toSql(roleIds);
 
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);
 			
-			noCheckedList = Role.dao.find(ToolSqlXml.getSql("pingtai.role.noCheckedFilter", param));
-			checkedList = Role.dao.find(ToolSqlXml.getSql("pingtai.role.checkedFilter", param));
+			noCheckedList = RoleModel.dao.find(ToolSqlXml.getSql("pingtai.role.noCheckedFilter", param));
+			checkedList = RoleModel.dao.find(ToolSqlXml.getSql("pingtai.role.checkedFilter", param));
 		}else{
-			noCheckedList = Role.dao.find(ToolSqlXml.getSql("pingtai.role.noChecked"));
+			noCheckedList = RoleModel.dao.find(ToolSqlXml.getSql("pingtai.role.noChecked"));
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();

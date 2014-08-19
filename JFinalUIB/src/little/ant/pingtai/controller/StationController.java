@@ -1,7 +1,7 @@
 package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.Station;
+import little.ant.pingtai.model.StationModel;
 import little.ant.pingtai.service.StationService;
 import little.ant.pingtai.validator.StationValidator;
 
@@ -51,7 +51,7 @@ public class StationController extends BaseController {
 	}
 
 	public void getOperator(){
-		Station station = Station.dao.findById(ids);
+		StationModel station = StationModel.dao.findById(ids);
 		renderJson(station);
 	}
 

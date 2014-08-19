@@ -3,7 +3,7 @@ package little.ant.pingtai.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.pingtai.model.Upload;
+import little.ant.pingtai.model.UploadModel;
 
 import org.apache.log4j.Logger;
 
@@ -22,7 +22,7 @@ public class UploadService extends BaseService {
 			String contentType = uploadFile.getContentType();
 			String originalFileName = uploadFile.getOriginalFileName();
 			
-			Upload upload = new Upload();
+			UploadModel upload = new UploadModel();
 			upload.set("parameterName", parameterName);
 			upload.set("fileName", fileName);
 			upload.set("contentType", contentType);

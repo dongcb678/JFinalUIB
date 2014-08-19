@@ -2,7 +2,7 @@ package little.ant.weixin.controller;
 
 import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.controller.BaseController;
-import little.ant.weixin.model.Keyword;
+import little.ant.weixin.model.KeywordModel;
 import little.ant.weixin.service.KeywordService;
 import little.ant.weixin.validator.KeywordValidator;
 
@@ -29,18 +29,18 @@ public class KeywordController extends BaseController {
 	
 	@Before(KeywordValidator.class)
 	public void save() {
-		ids = keywordService.save(getModel(Keyword.class));
+		ids = keywordService.save(getModel(KeywordModel.class));
 		redirect("/jf/wx/keyword");
 	}
 	
 	public void edit() {
-		setAttr("group", Keyword.dao.findById(getPara()));
+		setAttr("group", KeywordModel.dao.findById(getPara()));
 		render("/weiXin/keyword/update.html");
 	}
 	
 	@Before(KeywordValidator.class)
 	public void update() {
-		keywordService.update(getModel(Keyword.class));
+		keywordService.update(getModel(KeywordModel.class));
 		redirect("/jf/wx/keyword");
 	}
 	

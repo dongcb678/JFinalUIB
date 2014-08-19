@@ -7,12 +7,12 @@ import little.ant.pingtai.model.BaseModel;
 
 @SuppressWarnings("unused")
 @Table(tableName="wx_location")
-public class Location extends BaseModel<Location> {
+public class LocationModel extends BaseModel<LocationModel> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 
-	private static Logger log = Logger.getLogger(Location.class);
+	private static Logger log = Logger.getLogger(LocationModel.class);
 	
-	public static final Location dao = new Location();
+	public static final LocationModel dao = new LocationModel();
 	
 }

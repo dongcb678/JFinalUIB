@@ -3,7 +3,7 @@ package little.ant.pingtai.thread;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import little.ant.pingtai.model.Syslog;
+import little.ant.pingtai.model.SyslogModel;
 
 import org.apache.log4j.Logger;
 
@@ -21,7 +21,7 @@ public class ThreadSysLog {
 	 * 队列
 	 */
 	//private static final BlockingQueue<Syslog> queue = new LinkedBlockingQueue<Syslog>(queueSize); 
-	private static Queue<Syslog> queue = new ConcurrentLinkedQueue<Syslog>(); //	此队列按照 FIFO（先进先出）原则对元素进行排序
+	private static Queue<SyslogModel> queue = new ConcurrentLinkedQueue<SyslogModel>(); //	此队列按照 FIFO（先进先出）原则对元素进行排序
 	
 	/**
 	 * 向队列中增加Syslog对象，基于LinkedBlockingQueue
@@ -45,7 +45,7 @@ public class ThreadSysLog {
 	 * 向队列中增加Syslog对象，基于ConcurrentLinkedQueue
 	 * @param syslog
 	 */
-	public static void add(Syslog syslog){
+	public static void add(SyslogModel syslog){
 		if(null != syslog){	// 此队列不允许使用 null 元素
 			synchronized(queue) {
 				if(queue.size() <= queueSize){
@@ -63,7 +63,7 @@ public class ThreadSysLog {
 	 * 获取Syslog对象，基于ConcurrentLinkedQueue
 	 * @return
 	 */
-	public static Syslog getSyslog(){
+	public static SyslogModel getSyslog(){
 		synchronized(queue) {
 			if(queue.isEmpty()){
 				return null;
@@ -85,7 +85,7 @@ public class ThreadSysLog {
 							try {
 								// 取队列数据
 								//Syslog sysLog = queue.take(); // 基于LinkedBlockingQueue
-								Syslog sysLog = getSyslog();
+								SyslogModel sysLog = getSyslog();
 								if(null == sysLog){
 									Thread.sleep(200);
 								} else {

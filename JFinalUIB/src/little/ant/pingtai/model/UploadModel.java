@@ -6,12 +6,12 @@ import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
 @Table(tableName="pt_upload")
-public class Upload extends BaseModel<Upload> {
+public class UploadModel extends BaseModel<UploadModel> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 
-	private static Logger log = Logger.getLogger(Upload.class);
+	private static Logger log = Logger.getLogger(UploadModel.class);
 	
-	public static final Upload dao = new Upload();
+	public static final UploadModel dao = new UploadModel();
 	
 }

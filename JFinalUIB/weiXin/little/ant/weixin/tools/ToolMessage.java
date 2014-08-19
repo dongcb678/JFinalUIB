@@ -6,8 +6,8 @@ import java.util.Map;
 
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolXml;
-import little.ant.weixin.model.Location;
-import little.ant.weixin.model.Message;
+import little.ant.weixin.model.LocationModel;
+import little.ant.weixin.model.MessageModel;
 import little.ant.weixin.vo.map.RecevieBaiduPlace;
 import little.ant.weixin.vo.map.RecevieUserLocation;
 import little.ant.weixin.vo.message.RecevieEventLocation;
@@ -71,7 +71,7 @@ public class ToolMessage {
 		RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, map);
 		
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -100,7 +100,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(text);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -127,7 +127,7 @@ public class ToolMessage {
 		RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, map);
 
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -158,7 +158,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(text);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -185,7 +185,7 @@ public class ToolMessage {
 		RecevieEventSubscribe subscribe = (RecevieEventSubscribe) ToolXml.xmlToBean(recverMsg, map);
 		
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -212,7 +212,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(text);
 
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -239,7 +239,7 @@ public class ToolMessage {
 		RecevieEventQRCode qrCode = (RecevieEventQRCode) ToolXml.xmlToBean(recverMsg, map);
 
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -269,7 +269,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(text);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -296,7 +296,7 @@ public class ToolMessage {
 		RecevieEventLocation location = (RecevieEventLocation) ToolXml.xmlToBean(recverMsg, map);
 		
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -327,7 +327,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(text);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -354,7 +354,7 @@ public class ToolMessage {
 		RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, map);
 		
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -383,7 +383,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(text);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -410,7 +410,7 @@ public class ToolMessage {
 		RecevieEventMenu menu = (RecevieEventMenu) ToolXml.xmlToBean(recverMsg, map);
 
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -439,7 +439,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(text);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -466,7 +466,7 @@ public class ToolMessage {
 		RecevieMsgText recevieText = (RecevieMsgText) ToolXml.xmlToBean(recverMsg, map);
 
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -485,7 +485,7 @@ public class ToolMessage {
 		if (content.startsWith("附近")) {// 周边搜索
 			String keyWord = content.replaceAll("附近", "").trim();
 			// 获取用户最后一次发送的地理位置
-			Location location = Location.dao.findFirst("select * form wx_userlocation where open_id=? order by createdate desc ", recevieText.getFromUserName());
+			LocationModel location = LocationModel.dao.findFirst("select * form wx_userlocation where open_id=? order by createdate desc ", recevieText.getFromUserName());
 			// 未获取到
 			if (null == location) {
 				responseContent = getUsage();
@@ -510,7 +510,7 @@ public class ToolMessage {
 					responseXml = ToolXml.beanToXml(newsMessage);
 
 					//返回数据入库
-					Message messageOut = new Message();
+					MessageModel messageOut = new MessageModel();
 					messageOut.set("inouts", message_inouts_out);
 					messageOut.set("datatype", message_datatype_xml);
 					messageOut.set("datacontent", responseXml);//返回数据
@@ -535,7 +535,7 @@ public class ToolMessage {
 			responseXml = ToolXml.beanToXml(responseText);
 			
 			//返回数据入库
-			Message messageOut = new Message();
+			MessageModel messageOut = new MessageModel();
 			messageOut.set("inouts", message_inouts_out);
 			messageOut.set("datatype", message_datatype_xml);
 			messageOut.set("datacontent", responseXml);//返回数据
@@ -563,7 +563,7 @@ public class ToolMessage {
 		RecevieMsgImage image = (RecevieMsgImage) ToolXml.xmlToBean(recverMsg, map);
 
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -592,7 +592,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(responseText);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -619,7 +619,7 @@ public class ToolMessage {
 		RecevieMsgVoice voice = (RecevieMsgVoice) ToolXml.xmlToBean(recverMsg, map);
 
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -655,7 +655,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(responseText);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -682,7 +682,7 @@ public class ToolMessage {
 		RecevieMsgVideo video = (RecevieMsgVideo) ToolXml.xmlToBean(recverMsg, map);
 
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -712,7 +712,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(responseText);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -741,7 +741,7 @@ public class ToolMessage {
 		String lat = location.getLocation_X();// 用户发送的经纬度
 		
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -770,7 +770,7 @@ public class ToolMessage {
 		}
 		
 		// 保存用户地理位置
-		little.ant.weixin.model.Location uLocation = new little.ant.weixin.model.Location();
+		little.ant.weixin.model.LocationModel uLocation = new little.ant.weixin.model.LocationModel();
 		uLocation.set("open_id", location.getFromUserName());
 		uLocation.set("lng", lng);
 		uLocation.set("lat", lat);
@@ -799,7 +799,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(responseText);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
@@ -826,7 +826,7 @@ public class ToolMessage {
 		RecevieMsgLink link = (RecevieMsgLink) ToolXml.xmlToBean(recverMsg, map);
 
 		//请求数据入库
-		Message messageIn = new Message();
+		MessageModel messageIn = new MessageModel();
 		messageIn.set("inouts", message_inouts_in);
 		messageIn.set("datatype", message_datatype_xml);
 		messageIn.set("datacontent", recverMsg);//请求数据
@@ -856,7 +856,7 @@ public class ToolMessage {
 		String responseXml = ToolXml.beanToXml(responseText);
 		
 		//返回数据入库
-		Message messageOut = new Message();
+		MessageModel messageOut = new MessageModel();
 		messageOut.set("inouts", message_inouts_out);
 		messageOut.set("datatype", message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据

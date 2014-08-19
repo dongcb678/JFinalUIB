@@ -1,7 +1,7 @@
 package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.Syslog;
+import little.ant.pingtai.model.SyslogModel;
 import little.ant.pingtai.service.SysLogService;
 
 import org.apache.log4j.Logger;
@@ -26,7 +26,7 @@ public class SysLogController extends BaseController {
 	}
 	
 	public void delete() {
-		Syslog.dao.deleteById(getPara());
+		SyslogModel.dao.deleteById(getPara());
 		redirect("/jf/sysLog");
 	}
 

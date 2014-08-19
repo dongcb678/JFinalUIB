@@ -9,7 +9,7 @@ import java.util.Map;
 
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.BaseModel;
-import little.ant.pingtai.model.Syslog;
+import little.ant.pingtai.model.SyslogModel;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolString;
 
@@ -31,7 +31,7 @@ public abstract class BaseController extends Controller {
 	protected String ids;			// 主键
 	protected SplitPage splitPage;	// 分页封装
 	protected List<?> list;			// 公共list
-	protected Syslog reqSysLog;		// 访问日志
+	protected SyslogModel reqSysLog;		// 访问日志
 	
 	/**
 	 * 请求/WEB-INF/下的视图文件
@@ -165,11 +165,11 @@ public abstract class BaseController extends Controller {
 	
 	/************************************		get 	set 	方法		************************************************/
 
-	public Syslog getReqSysLog() {
+	public SyslogModel getReqSysLog() {
 		return reqSysLog;
 	}
 
-	public void setReqSysLog(Syslog reqSysLog) {
+	public void setReqSysLog(SyslogModel reqSysLog) {
 		this.reqSysLog = reqSysLog;
 	}
 

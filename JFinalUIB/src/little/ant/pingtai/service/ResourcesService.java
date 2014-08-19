@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.Resources;
+import little.ant.pingtai.model.ResourcesModel;
 import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolOS;
@@ -75,7 +75,7 @@ public class ResourcesService extends BaseService {
 		String hostName = ToolOS.getOsLocalHostName(); // 获取本机名称
 
 		String sql = ToolSqlXml.getSql("pingtai.resources.24hour");
-		List<Resources> list = Resources.dao.find(sql, hostName, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+		List<ResourcesModel> list = ResourcesModel.dao.find(sql, hostName, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		List<String> datesList = new LinkedList<String>();
 		List<Integer> cpuList = new LinkedList<Integer>();
@@ -86,7 +86,7 @@ public class ResourcesService extends BaseService {
 		Long phymemory = 0l;
 		Long jvmmaxmemory = 0l;
 		
-		for (Resources resources : list) {
+		for (ResourcesModel resources : list) {
 			phymemory = resources.getNumber("phymemory").longValue();
 			jvmmaxmemory = resources.getNumber("jvmmaxmemory").longValue();
 			

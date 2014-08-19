@@ -6,7 +6,7 @@ import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.BaseModel;
-import little.ant.pingtai.model.Dict;
+import little.ant.pingtai.model.DictModel;
 import little.ant.pingtai.thread.ThreadParamInit;
 
 import org.apache.log4j.Logger;
@@ -85,7 +85,7 @@ public class DictTag extends Tag {
 			sb.append("\" style=\"").append(style).append("\" >");
 		}
 
-		Dict parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
+		DictModel parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
 		String parentI18n = parentDict.getStr("i18n");
 		
 		String val = "val";
@@ -93,9 +93,9 @@ public class DictTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
+		List<DictModel> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
 
-		for (Dict dict : dictList) {
+		for (DictModel dict : dictList) {
 			String status = dict.getStr("status");
 			String numbersTemp = dict.getStr("numbers");
 			String namesTemp = dict.getStr("names");
@@ -135,7 +135,7 @@ public class DictTag extends Tag {
 	private String radio(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		Dict parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
+		DictModel parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
 		String parentI18n = parentDict.getStr("i18n");
 		
 		String val = "val";
@@ -143,9 +143,9 @@ public class DictTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
+		List<DictModel> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
 
-		for (Dict dict : dictList) {
+		for (DictModel dict : dictList) {
 			String status = dict.getStr("status");
 			String numbersTemp = dict.getStr("numbers");
 			String namesTemp = dict.getStr("names");
@@ -181,7 +181,7 @@ public class DictTag extends Tag {
 	private String checkbox(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		Dict parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
+		DictModel parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
 		String parentI18n = parentDict.getStr("i18n");
 		
 		String val = "val";
@@ -189,9 +189,9 @@ public class DictTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
+		List<DictModel> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
 
-		for (Dict dict : dictList) {
+		for (DictModel dict : dictList) {
 			String status = dict.getStr("status");
 			String numbersTemp = dict.getStr("numbers");
 			String namesTemp = dict.getStr("names");

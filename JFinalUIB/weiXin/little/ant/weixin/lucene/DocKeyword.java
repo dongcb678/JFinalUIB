@@ -9,7 +9,7 @@ import java.util.Map;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.lucene.DocBase;
 import little.ant.pingtai.tools.ToolOS;
-import little.ant.weixin.model.Keyword;
+import little.ant.weixin.model.KeywordModel;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -70,7 +70,7 @@ public class DocKeyword extends DocBase {
 	 * @author 董华健 
 	 */
 	private void indexAllKeyword() {
-		List<Field> fields = getFields(fieldNames, Keyword.class);
+		List<Field> fields = getFields(fieldNames, KeywordModel.class);
 		IndexWriter ramIndexWriter = getRamIndexWriter();//调用RAM写
 		Document document = new Document();
 		
@@ -78,8 +78,8 @@ public class DocKeyword extends DocBase {
 		String sql = " select * from wx_keyword limit ? offset ? ";
 
 		for (int i = 0; i < batchCount; i++) {
-			List<Keyword> list = Keyword.dao.find(sql, DocBase.splitDataSize, i * DocBase.splitDataSize);
-			for (Keyword keyword : list) {
+			List<KeywordModel> list = KeywordModel.dao.find(sql, DocBase.splitDataSize, i * DocBase.splitDataSize);
+			for (KeywordModel keyword : list) {
 				addDoc(ramIndexWriter, keyword, document, fields);
 			}
 			ramToDisk();//把RAM写同步更新到DISK
@@ -90,10 +90,10 @@ public class DocKeyword extends DocBase {
 	 * 添加
 	 * @param keyword
 	 */
-	public void add(Keyword keyword) {
+	public void add(KeywordModel keyword) {
 		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		Document document = new Document();
-		List<Field> fields = getFields(fieldNames, Keyword.class);
+		List<Field> fields = getFields(fieldNames, KeywordModel.class);
 		addDoc(diskIndexWriter, keyword, document, fields);
 		try {
 			diskIndexWriter.forceMerge(1);
@@ -109,10 +109,10 @@ public class DocKeyword extends DocBase {
 	 * 更新
 	 * @param keyword
 	 */
-	public void update(Keyword keyword){
+	public void update(KeywordModel keyword){
 		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		Document document = new Document();
-		List<Field> fields = getFields(fieldNames, Keyword.class);
+		List<Field> fields = getFields(fieldNames, KeywordModel.class);
 		updateDoc(diskIndexWriter, keyword, document, fields);
 		try {
 			diskIndexWriter.forceMerge(1);
@@ -136,8 +136,8 @@ public class DocKeyword extends DocBase {
 	 * @param searchKeyWords 查询关键字
 	 * @return
 	 */
-	public Keyword search(String searchKeyWords){
-		Keyword keyword = new Keyword();
+	public KeywordModel search(String searchKeyWords){
+		KeywordModel keyword = new KeywordModel();
         try {
     		String[] queryFields = new String[]{"question", "questionkey"};
     		
@@ -198,14 +198,14 @@ public class DocKeyword extends DocBase {
             int length = scoreDocs.length;//当前页有多少条记录
 
             Highlighter highlighter = getHighlighter(query);//高亮处理器
-        	List<Keyword> keywordList = new ArrayList<Keyword>();
+        	List<KeywordModel> keywordList = new ArrayList<KeywordModel>();
         	
-        	Keyword keyword = null;
+        	KeywordModel keyword = null;
             for (int i = 0; i < length; i++) {
             	Document doc = searcher.doc(scoreDocs[i].doc);
             	highlighter(analyzer, highlighter, doc, queryFields);
             	
-            	keyword = new Keyword();
+            	keyword = new KeywordModel();
             	keyword.set("ids", doc.get("ids"));
             	keyword.set("question", doc.get("question"));
             	keyword.set("questionkey", doc.get("questionkey"));

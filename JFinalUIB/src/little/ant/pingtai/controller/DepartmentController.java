@@ -1,7 +1,7 @@
 package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.Department;
+import little.ant.pingtai.model.DepartmentModel;
 import little.ant.pingtai.service.DepartmentService;
 import little.ant.pingtai.validator.DepartmentValidator;
 
@@ -67,7 +67,7 @@ public class DepartmentController extends BaseController {
 	 * 获取部门负责人
 	 */
 	public void getPrincipal(){
-		Department dept = Department.dao.findById(ids);
+		DepartmentModel dept = DepartmentModel.dao.findById(ids);
 		renderJson(dept);
 	}
 }

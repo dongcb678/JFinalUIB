@@ -1,7 +1,7 @@
 package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.Operator;
+import little.ant.pingtai.model.OperatorModel;
 import little.ant.pingtai.service.OperatorService;
 import little.ant.pingtai.validator.OperatorValidator;
 
@@ -26,23 +26,23 @@ public class OperatorController extends BaseController {
 	
 	@Before(OperatorValidator.class)
 	public void save() {
-		ids = operatorService.save(getModel(Operator.class));
+		ids = operatorService.save(getModel(OperatorModel.class));
 		redirect("/jf/operator");
 	}
 	
 	public void edit() {
-		setAttr("operator", Operator.dao.findById(getPara()));
+		setAttr("operator", OperatorModel.dao.findById(getPara()));
 		render("/pingtai/operator/update.html");
 	}
 	
 	@Before(OperatorValidator.class)
 	public void update() {
-		operatorService.update(getModel(Operator.class));
+		operatorService.update(getModel(OperatorModel.class));
 		redirect("/jf/operator");
 	}
 
 	public void view() {
-		setAttr("operator", Operator.dao.findById(getPara()));
+		setAttr("operator", OperatorModel.dao.findById(getPara()));
 		render("/pingtai/operator/view.html");
 	}
 	

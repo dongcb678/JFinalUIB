@@ -6,12 +6,12 @@ import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
 @Table(tableName="pt_department")
-public class Department extends BaseModel<Department> {
+public class DepartmentModel extends BaseModel<DepartmentModel> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(Department.class);
+	private static Logger log = Logger.getLogger(DepartmentModel.class);
 	
-	public static final Department dao = new Department();
+	public static final DepartmentModel dao = new DepartmentModel();
 
 }

@@ -7,12 +7,12 @@ import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
 @Table(tableName="wx_keyword")
-public class Keyword extends BaseModel<Keyword> {
+public class KeywordModel extends BaseModel<KeywordModel> {
 	
 	private static final long serialVersionUID = 7513950057125407026L;
 
-	private static Logger log = Logger.getLogger(Keyword.class);
+	private static Logger log = Logger.getLogger(KeywordModel.class);
 	
-	public static final Keyword dao = new Keyword();
+	public static final KeywordModel dao = new KeywordModel();
 	
 }

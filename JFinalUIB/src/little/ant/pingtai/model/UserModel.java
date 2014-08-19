@@ -6,36 +6,36 @@ import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
 @Table(tableName="pt_user")
-public class User extends BaseModel<User> {
+public class UserModel extends BaseModel<UserModel> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(User.class);
+	private static Logger log = Logger.getLogger(UserModel.class);
 	
-	public static final User dao = new User();
+	public static final UserModel dao = new UserModel();
 	
 	/**
 	 * 关联查询，获取用户详细信息
 	 * @return
 	 */
-	public UserInfo getUserInfo(){
-		return UserInfo.dao.findById(get("userinfoids"));
+	public UserInfoModel getUserInfo(){
+		return UserInfoModel.dao.findById(get("userinfoids"));
 	}
 
 	/**
 	 * 关联查询，获取用户部门信息
 	 * @return
 	 */
-	public Department getDepartment(){
-		return Department.dao.findById(get("departmentids"));
+	public DepartmentModel getDepartment(){
+		return DepartmentModel.dao.findById(get("departmentids"));
 	}
 
 	/**
 	 * 关联查询，获取用户岗位信息
 	 * @return
 	 */
-	public Station getStation(){
-		return Station.dao.findById(get("stationids"));
+	public StationModel getStation(){
+		return StationModel.dao.findById(get("stationids"));
 	}
 	
 }

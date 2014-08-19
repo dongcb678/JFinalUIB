@@ -5,8 +5,8 @@ import java.util.List;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
-import little.ant.pingtai.model.Module;
-import little.ant.pingtai.model.Operator;
+import little.ant.pingtai.model.ModuleModel;
+import little.ant.pingtai.model.OperatorModel;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
@@ -24,7 +24,7 @@ public class OperatorService extends BaseService {
 	 * @param operator
 	 * @return
 	 */
-	public String save(Operator operator){
+	public String save(OperatorModel operator){
 		operator.save();
 		
 		// 缓存
@@ -38,11 +38,11 @@ public class OperatorService extends BaseService {
 	 * 更新
 	 * @param operator
 	 */
-	public void update(Operator operator){
+	public void update(OperatorModel operator){
 		operator.update();
 		
 		// 缓存
-		operator = Operator.dao.findById(operator.getPrimaryKeyValue());
+		operator = OperatorModel.dao.findById(operator.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
 	}
@@ -52,7 +52,7 @@ public class OperatorService extends BaseService {
 	 * @param ids
 	 */
 	public void delete(String ids){
-		Operator operator = Operator.dao.findById(ids);;
+		OperatorModel operator = OperatorModel.dao.findById(ids);;
 		// 缓存
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"));
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"));
@@ -67,22 +67,22 @@ public class OperatorService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String moduleIds){
-		List<Module> listModule = new ArrayList<Module>();
-		List<Operator> operatorList = new ArrayList<Operator>();
+		List<ModuleModel> listModule = new ArrayList<ModuleModel>();
+		List<OperatorModel> operatorList = new ArrayList<OperatorModel>();
 		
 		if (null == moduleIds) {
 			// 1.模块功能初始化调用
 			String sql = ToolSqlXml.getSql("pingtai.operator.rootModule");
-			listModule = Module.dao.find(sql);
+			listModule = ModuleModel.dao.find(sql);
 			
 		} else if (null != moduleIds) {
 			moduleIds = moduleIds.replace("module_", "");
 			// 2.通用子节点查询
 			String sqlModule = ToolSqlXml.getSql("pingtai.operator.childModule");
-			listModule = Module.dao.find(sqlModule, moduleIds);
+			listModule = ModuleModel.dao.find(sqlModule, moduleIds);
 			
 			String sqlOperator = ToolSqlXml.getSql("pingtai.operator.byModuleIds");
-			operatorList = Operator.dao.find(sqlOperator, moduleIds);
+			operatorList = OperatorModel.dao.find(sqlOperator, moduleIds);
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -90,7 +90,7 @@ public class OperatorService extends BaseService {
 
 		int operatorSize = operatorList.size();
 		int operatorIndexSize = operatorSize - 1;
-		for (Operator operator : operatorList) {
+		for (OperatorModel operator : operatorList) {
 			sb.append(" { ");
 			sb.append(" id : '").append("operator_").append(operator.getStr("ids")).append("', ");
 			sb.append(" name : '").append(operator.getStr("names")).append("', ");
@@ -111,7 +111,7 @@ public class OperatorService extends BaseService {
 		if (operatorSize > 0 && moduleSize > 0) {
 			sb.append(", ");
 		}
-		for (Module module : listModule) {
+		for (ModuleModel module : listModule) {
 			sb.append(" { ");
 			sb.append(" id : '").append("module_").append(module.getStr("ids")).append("', ");
 			sb.append(" name : '").append(module.getStr("names")).append("', ");

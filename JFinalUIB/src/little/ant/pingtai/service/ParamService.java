@@ -3,7 +3,7 @@ package little.ant.pingtai.service;
 import java.util.List;
 
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.Param;
+import little.ant.pingtai.model.ParamModel;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
@@ -23,9 +23,9 @@ public class ParamService extends BaseService {
 	 * @param param
 	 */
 	@Before(Tx.class)
-	public void save(Param param) {
+	public void save(ParamModel param) {
 		String pIds = param.getStr("parentids");
-		Param parent = Param.dao.findById(pIds);
+		ParamModel parent = ParamModel.dao.findById(pIds);
 		parent.set("isparent", "true").update();
 
 		Long orderIds = param.getNumber("orderids").longValue();
@@ -53,9 +53,9 @@ public class ParamService extends BaseService {
 	 * @param param
 	 */
 	@Before(Tx.class)
-	public void update(Param param) {
+	public void update(ParamModel param) {
 		String pIds = param.getStr("parentids");
-		Param parent = Param.dao.findById(pIds);
+		ParamModel parent = ParamModel.dao.findById(pIds);
 		parent.set("isparent", "true").update();
 		
 		param.set("parentids", pIds).set("levels", parent.getNumber("levels").longValue() + 1);
@@ -63,7 +63,7 @@ public class ParamService extends BaseService {
 		param.update();
 		
 		// 缓存
-		param = Param.dao.findById(param.getPrimaryKeyValue());
+		param = ParamModel.dao.findById(param.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("ids"), param);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"), param);
 		
@@ -77,9 +77,9 @@ public class ParamService extends BaseService {
 	 */
 	public void delete(String ids){
 		// 查询
-		Param param = Param.dao.findById(ids);
+		ParamModel param = ParamModel.dao.findById(ids);
 		String pIds = param.getStr("parentids");
-		Param parent = Param.dao.findById(pIds);
+		ParamModel parent = ParamModel.dao.findById(pIds);
 
 		// 删除
 		param.delete();
@@ -99,19 +99,19 @@ public class ParamService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String parentIds){
-		List<Param> list = null;
+		List<ParamModel> list = null;
 		if (null != parentIds) {
 			String sql = ToolSqlXml.getSql("pingtai.param.treeChildNode");
-			list = Param.dao.find(sql, parentIds);
+			list = ParamModel.dao.find(sql, parentIds);
 		} else {
 			String sql = ToolSqlXml.getSql("pingtai.param.treeNodeRoot");
-			list = Param.dao.find(sql);
+			list = ParamModel.dao.find(sql);
 		}
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		int size = list.size() - 1;
-		for (Param param : list) {
+		for (ParamModel param : list) {
 			sb.append(" { ");
 			sb.append(" id : '").append(param.getStr("ids")).append("', ");
 			sb.append(" name : '").append(param.getStr("names")).append("', ");

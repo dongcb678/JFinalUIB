@@ -3,7 +3,7 @@ package little.ant.pingtai.service;
 import java.util.List;
 
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.Station;
+import little.ant.pingtai.model.StationModel;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
@@ -24,21 +24,21 @@ public class StationService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String parentIds){
-		List<Station> list = null;
+		List<StationModel> list = null;
 		if(null != parentIds){
 			String sql = ToolSqlXml.getSql("pingtai.station.child");
-			list = Station.dao.find(sql, parentIds);
+			list = StationModel.dao.find(sql, parentIds);
 			
 		}else{
 			String sql = ToolSqlXml.getSql("pingtai.station.root");
-			list = Station.dao.find(sql);
+			list = StationModel.dao.find(sql);
 		}
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		
 		int size = list.size() - 1;
-		for (Station station : list) {
+		for (StationModel station : list) {
 			sb.append(" { ");
 			sb.append(" id : '").append(station.getStr("ids")).append("', ");
 			sb.append(" name : '").append(station.getStr("names")).append("', ");
@@ -64,7 +64,7 @@ public class StationService extends BaseService {
 	 * @return
 	 */
 	public String save(String pIds, String names, int orderIds) {
-		Station pStation = Station.dao.findById(pIds);
+		StationModel pStation = StationModel.dao.findById(pIds);
 		pStation.set("isparent", "true").update();
 		
 		String images = "";
@@ -75,7 +75,7 @@ public class StationService extends BaseService {
 			images = orderIds + ".png";
 		}
 		
-		Station station = new Station();
+		StationModel station = new StationModel();
 		station.set("isparent", "false");
 		station.set("parentstationids", pIds);
 		station.set("orderids", orderIds);
@@ -96,7 +96,7 @@ public class StationService extends BaseService {
 	 * @param names
 	 */
 	public void update(String ids, String pIds, String names) {
-		Station station = Station.dao.findById(ids);
+		StationModel station = StationModel.dao.findById(ids);
 		if(null != names && !names.isEmpty()){
 			//更新模块名称
 			station.set("names", names).update();
@@ -127,7 +127,7 @@ public class StationService extends BaseService {
 	    CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
 		
 		// 删除
-	    Station.dao.deleteById(ids);
+	    StationModel.dao.deleteById(ids);
 	    return true;
 	}
 	
@@ -138,7 +138,7 @@ public class StationService extends BaseService {
 	 * @param operatorIds
 	 */
 	public void setOperator(String stationIds, String moduleIds, String operatorIds){
-		Station station = Station.dao.findById(stationIds);
+		StationModel station = StationModel.dao.findById(stationIds);
 		station.set("moduleids", moduleIds).set("operatorids", operatorIds).update();
 		
 		// 缓存

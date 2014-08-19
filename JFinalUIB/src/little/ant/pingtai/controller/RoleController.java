@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.Group;
-import little.ant.pingtai.model.Role;
+import little.ant.pingtai.model.GroupModel;
+import little.ant.pingtai.model.RoleModel;
 import little.ant.pingtai.service.RoleService;
 import little.ant.pingtai.validator.RoleValidator;
 
@@ -21,8 +21,8 @@ public class RoleController extends BaseController {
 	
 	private RoleService roleService = new RoleService();
 
-	private List<Group> noCheckedList;
-	private List<Group> checkedList;
+	private List<GroupModel> noCheckedList;
+	private List<GroupModel> checkedList;
 	
 	private String moduleIds;
 	private String operatorIds;
@@ -34,18 +34,18 @@ public class RoleController extends BaseController {
 	
 	@Before(RoleValidator.class)
 	public void save() {
-		ids = roleService.save(getModel(Role.class));
+		ids = roleService.save(getModel(RoleModel.class));
 		redirect("/jf/role");
 	}
 	
 	public void edit() {
-		setAttr("role", Role.dao.findById(getPara()));
+		setAttr("role", RoleModel.dao.findById(getPara()));
 		render("/pingtai/role/update.html");
 	}
 	
 	@Before(RoleValidator.class)
 	public void update() {
-		roleService.update(getModel(Role.class));
+		roleService.update(getModel(RoleModel.class));
 		redirect("/jf/role");
 	}
 	
@@ -57,13 +57,13 @@ public class RoleController extends BaseController {
 	@SuppressWarnings("unchecked")
 	public void select(){
 		Map<String,Object> map = roleService.select(ids);
-		noCheckedList = (List<Group>) map.get("noCheckedList");
-		checkedList = (List<Group>) map.get("checkedList");
+		noCheckedList = (List<GroupModel>) map.get("noCheckedList");
+		checkedList = (List<GroupModel>) map.get("checkedList");
 		render("/pingtai/role/select.html");
 	}
 	
 	public void getOperator(){
-		Role role = Role.dao.findById(ids);
+		RoleModel role = RoleModel.dao.findById(ids);
 		renderJson(role);
 	}
 

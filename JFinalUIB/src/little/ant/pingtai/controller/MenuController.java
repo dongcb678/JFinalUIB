@@ -1,7 +1,7 @@
 package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.Menu;
+import little.ant.pingtai.model.MenuModel;
 import little.ant.pingtai.service.MenuService;
 import little.ant.pingtai.validator.MenuValidator;
 
@@ -50,7 +50,7 @@ public class MenuController extends BaseController {
 	}
 
 	public void getOperator(){
-		Menu menu = Menu.dao.findById(ids);
+		MenuModel menu = MenuModel.dao.findById(ids);
 		renderJson(menu);
 	}
 
@@ -63,7 +63,7 @@ public class MenuController extends BaseController {
 	 * 准备更新
 	 */
 	public void toEdit() {
-		Menu menu = Menu.dao.findById(ids);
+		MenuModel menu = MenuModel.dao.findById(ids);
 		setAttr("menu", menu);
 		render("/pingtai/menu/edit.html");
 	}
@@ -72,9 +72,9 @@ public class MenuController extends BaseController {
 	 * 更新
 	 */
 	public void edit() {
-		Menu menu = getModel(Menu.class);
+		MenuModel menu = getModel(MenuModel.class);
 		menu.update();
-		menu = Menu.dao.findById(menu.getStr("ids"));
+		menu = MenuModel.dao.findById(menu.getStr("ids"));
 		redirect("/jf/menu?systemsIds=" + menu.getStr("systemsids"));
 	}
 }

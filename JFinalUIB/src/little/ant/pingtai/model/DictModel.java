@@ -11,13 +11,13 @@ import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
 @Table(tableName="pt_dict")
-public class Dict extends BaseModel<Dict> {
+public class DictModel extends BaseModel<DictModel> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 
-	private static Logger log = Logger.getLogger(Dict.class);
+	private static Logger log = Logger.getLogger(DictModel.class);
 	
-	public static final Dict dao = new Dict();
+	public static final DictModel dao = new DictModel();
 
 	/**
 	 * 根据主键查询字典，带国际化
@@ -25,7 +25,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @param i18n 国际化参数
 	 * @return
 	 */
-	public Dict getByIds(String ids, String i18n){
+	public DictModel getByIds(String ids, String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -33,7 +33,7 @@ public class Dict extends BaseModel<Dict> {
 		
 		String sql = ToolSqlXml.getSql("pingtai.dict.idAndI18n", param);
 		
-		Dict dict = dao.findFirst(sql, ids);
+		DictModel dict = dao.findFirst(sql, ids);
 		
 		return dict;
 	}
@@ -43,9 +43,9 @@ public class Dict extends BaseModel<Dict> {
 	 * @param number
 	 * @return
 	 */
-	public Dict getByNumber(String number){
+	public DictModel getByNumber(String number){
 		String sql = ToolSqlXml.getSql("pingtai.dict.numbers");
-		Dict dict = dao.findFirst(sql, number);
+		DictModel dict = dao.findFirst(sql, number);
 		return dict;
 	}
 	
@@ -55,7 +55,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @param i18n 国际化参数
 	 * @return
 	 */
-	public Dict getByNumber(String number, String i18n){
+	public DictModel getByNumber(String number, String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -63,7 +63,7 @@ public class Dict extends BaseModel<Dict> {
 		
 		String sql = ToolSqlXml.getSql("pingtai.dict.numbersAndI18n", param);
 		
-		Dict dict = dao.findFirst(sql, number);
+		DictModel dict = dao.findFirst(sql, number);
 		
 		return dict;
 	}
@@ -72,7 +72,7 @@ public class Dict extends BaseModel<Dict> {
 	 * 查询子节点字典
 	 * @return
 	 */
-	public List<Dict> getChild(){
+	public List<DictModel> getChild(){
 		String sql = ToolSqlXml.getSql("pingtai.dict.child");
 		return dao.find(sql, get("ids"));
 	}
@@ -82,7 +82,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @param prentIds
 	 * @return
 	 */
-	public List<Dict> getChild(String prentIds){
+	public List<DictModel> getChild(String prentIds){
 		String sql = ToolSqlXml.getSql("pingtai.dict.child");
 		return dao.find(sql, prentIds);
 	}
@@ -93,7 +93,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @param i18n
 	 * @return
 	 */
-	public List<Dict> getChild(String prentIds, String i18n){
+	public List<DictModel> getChild(String prentIds, String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -108,7 +108,7 @@ public class Dict extends BaseModel<Dict> {
 	 * 查询父节点字典
 	 * @return
 	 */
-	public List<Dict> getParent(){
+	public List<DictModel> getParent(){
 		String sql = ToolSqlXml.getSql("pingtai.dict.parent");
 		return dao.find(sql, get("parentids"));
 	}
@@ -118,7 +118,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @param i18n
 	 * @return
 	 */
-	public List<Dict> getParent(String i18n){
+	public List<DictModel> getParent(String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
