@@ -1,7 +1,7 @@
 package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.DictModel;
+import little.ant.pingtai.model.Dict;
 import little.ant.pingtai.service.DictService;
 import little.ant.pingtai.tools.ToolSqlXml;
 import little.ant.pingtai.validator.DictValidator;
@@ -20,13 +20,13 @@ public class DictController extends BaseController {
 	
 	public void index() {
 		String sql = ToolSqlXml.getSql("pingtai.dict.treeTableNodeRoot");
-		list = DictModel.dao.find(sql);
+		list = Dict.dao.find(sql);
 		render("/pingtai/dict/treeTable.html");
 	}
 	
 	public void treeTable() {
 		String sql = ToolSqlXml.getSql("pingtai.dict.treeTableChildNode");
-		list = DictModel.dao.find(sql, ids);
+		list = Dict.dao.find(sql, ids);
 		render("/pingtai/dict/treeTableSub.html");
 	}
 
@@ -37,21 +37,21 @@ public class DictController extends BaseController {
 	
 	@Before(DictValidator.class)
 	public void save() {
-		dictService.save(getModel(DictModel.class));
+		dictService.save(getModel(Dict.class));
 		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html");
 	}
 	
 	public void edit() {
-		DictModel dict = DictModel.dao.findById(getPara());
+		Dict dict = Dict.dao.findById(getPara());
 		String pIds = dict.getStr("parentids");
-		DictModel parent = DictModel.dao.findById(pIds);
+		Dict parent = Dict.dao.findById(pIds);
 		setAttr("dict", dict.put("parentnames", parent.getStr("names")));
 		render("/pingtai/dict/update.html");
 	}
 	
 	@Before(DictValidator.class)
 	public void update() {
-		dictService.update(getModel(DictModel.class));
+		dictService.update(getModel(Dict.class));
 		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html", true);
 	}
 	
@@ -61,9 +61,9 @@ public class DictController extends BaseController {
 	}
 
 	public void view() {
-		DictModel dict = DictModel.dao.findById(getPara());
+		Dict dict = Dict.dao.findById(getPara());
 		String pIds = dict.getStr("parentids");
-		DictModel parent = DictModel.dao.findById(pIds);
+		Dict parent = Dict.dao.findById(pIds);
 		setAttr("dict", dict.put("parentnames", parent.getStr("names")));
 		render("/pingtai/dict/view.html");
 	}

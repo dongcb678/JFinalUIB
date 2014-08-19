@@ -3,7 +3,7 @@ package little.ant.pingtai.thread;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import little.ant.pingtai.model.ResourcesModel;
+import little.ant.pingtai.model.Resources;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolOS;
 
@@ -50,7 +50,7 @@ public class TimerResources extends Timer {
 				long jvmMaxMemory = ToolOS.getJvmMaxMemory(); // JVM内存，最大内存量
 				long gcCount = ToolOS.getJvmGcCount(); // 获取JVM GC次数
 				
-				ResourcesModel resources = new ResourcesModel();
+				Resources resources = new Resources();
 				resources.set("osname", osName);
 				resources.set("ips", ip);
 				resources.set("hostname", hostName);

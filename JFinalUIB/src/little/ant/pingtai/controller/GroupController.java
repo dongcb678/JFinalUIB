@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.GroupModel;
+import little.ant.pingtai.model.Group;
 import little.ant.pingtai.service.GroupService;
 import little.ant.pingtai.validator.GroupValidator;
 
@@ -20,8 +20,8 @@ public class GroupController extends BaseController {
 	
 	private GroupService groupService = new GroupService();
 	
-	private List<GroupModel> noCheckedList;
-	private List<GroupModel> checkedList;
+	private List<Group> noCheckedList;
+	private List<Group> checkedList;
 	private String roleIds;
 	
 	public void index() {
@@ -31,18 +31,18 @@ public class GroupController extends BaseController {
 	
 	@Before(GroupValidator.class)
 	public void save() {
-		ids = groupService.save(getModel(GroupModel.class));
+		ids = groupService.save(getModel(Group.class));
 		redirect("/jf/group");
 	}
 	
 	public void edit() {
-		setAttr("group", GroupModel.dao.findById(getPara()));
+		setAttr("group", Group.dao.findById(getPara()));
 		render("/pingtai/group/update.html");
 	}
 	
 	@Before(GroupValidator.class)
 	public void update() {
-		groupService.update(getModel(GroupModel.class));
+		groupService.update(getModel(Group.class));
 		redirect("/jf/group");
 	}
 	
@@ -54,8 +54,8 @@ public class GroupController extends BaseController {
 	@SuppressWarnings("unchecked")
 	public void select(){
 		Map<String,Object> map = groupService.select(ids);
-		noCheckedList = (List<GroupModel>) map.get("noCheckedList");
-		checkedList = (List<GroupModel>) map.get("checkedList");
+		noCheckedList = (List<Group>) map.get("noCheckedList");
+		checkedList = (List<Group>) map.get("checkedList");
 		render("/pingtai/group/select.html");
 	}
 

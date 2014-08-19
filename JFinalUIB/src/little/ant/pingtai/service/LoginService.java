@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.UserModel;
+import little.ant.pingtai.model.User;
 import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolContext;
@@ -63,15 +63,15 @@ public class LoginService extends BaseService {
 	 */
 	public int login(HttpServletRequest request, HttpServletResponse response, String userName, String passWord, boolean autoLogin) {
 		// 1.取用户
-		UserModel user = null;
+		User user = null;
 		Object userObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userName);
 		if (null != userObj) {
-			user = (UserModel) userObj;
+			user = (User) userObj;
 		} else {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "username");
 			String sql = ToolSqlXml.getSql("pingtai.user.column", param);
-			List<UserModel> userList = UserModel.dao.find(sql, userName);
+			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
 				return DictKeys.login_info_0;// 用户不存在
 			}

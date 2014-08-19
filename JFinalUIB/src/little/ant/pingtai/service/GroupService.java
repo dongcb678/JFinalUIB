@@ -7,8 +7,8 @@ import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
-import little.ant.pingtai.model.GroupModel;
-import little.ant.pingtai.model.UserModel;
+import little.ant.pingtai.model.Group;
+import little.ant.pingtai.model.User;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
@@ -26,7 +26,7 @@ public class GroupService extends BaseService {
 	 * @param group
 	 * @return
 	 */
-	public String save(GroupModel group){
+	public String save(Group group){
 		group.save();
 		
 		// 缓存
@@ -39,12 +39,12 @@ public class GroupService extends BaseService {
 	 * 更新
 	 * @param group
 	 */
-	public void update(GroupModel group){
+	public void update(Group group){
 		// 更新
 		group.update();
 
 		// 缓存
-		group = GroupModel.dao.findById(group.getPrimaryKeyValue());
+		group = Group.dao.findById(group.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
 	}
 
@@ -57,7 +57,7 @@ public class GroupService extends BaseService {
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIds);
 		
 		// 删除
-		GroupModel.dao.deleteById(groupIds);
+		Group.dao.deleteById(groupIds);
 	}
 	
 	/**
@@ -65,19 +65,19 @@ public class GroupService extends BaseService {
 	 * @param ids 用户ids
 	 */
 	public Map<String,Object> select(String ids){
-		List<GroupModel> noCheckedList = new ArrayList<GroupModel>();
-		List<GroupModel> checkedList = new ArrayList<GroupModel>();
-		String groupIds = UserModel.dao.findById(ids).getStr("groupids");
+		List<Group> noCheckedList = new ArrayList<Group>();
+		List<Group> checkedList = new ArrayList<Group>();
+		String groupIds = User.dao.findById(ids).getStr("groupids");
 		if(null != groupIds && !groupIds.equals("")){
 			String fitler = toSql(groupIds);
 
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);
 			
-			noCheckedList = GroupModel.dao.find(ToolSqlXml.getSql("pingtai.group.noCheckedFilter", param));
-			checkedList = GroupModel.dao.find(ToolSqlXml.getSql("pingtai.group.checkedFilter", param));
+			noCheckedList = Group.dao.find(ToolSqlXml.getSql("pingtai.group.noCheckedFilter", param));
+			checkedList = Group.dao.find(ToolSqlXml.getSql("pingtai.group.checkedFilter", param));
 		}else{
-			noCheckedList = GroupModel.dao.find(ToolSqlXml.getSql("pingtai.group.noChecked"));
+			noCheckedList = Group.dao.find(ToolSqlXml.getSql("pingtai.group.noChecked"));
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -92,7 +92,7 @@ public class GroupService extends BaseService {
 	 * @param groupIds
 	 */
 	public void setRole(String groupIds, String roleIds){
-		GroupModel group = GroupModel.dao.findById(groupIds);
+		Group group = Group.dao.findById(groupIds);
 		group.set("roleids", roleIds).update();
 		
 		// 缓存

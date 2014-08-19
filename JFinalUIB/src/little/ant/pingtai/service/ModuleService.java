@@ -2,7 +2,7 @@ package little.ant.pingtai.service;
 
 import java.util.List;
 
-import little.ant.pingtai.model.ModuleModel;
+import little.ant.pingtai.model.Module;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
@@ -23,28 +23,28 @@ public class ModuleService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String systemsIds, String parentIds){
-		List<ModuleModel> list = null;
+		List<Module> list = null;
 		if (null != systemsIds && null == parentIds) {
 			// 1.根据系统ID查询模块树
 			String sql = ToolSqlXml.getSql("pingtai.module.rootBySystemIds");
-			list = ModuleModel.dao.find(sql, systemsIds);
+			list = Module.dao.find(sql, systemsIds);
 			
 		}else if(null == systemsIds && null == parentIds){
 			// 2.模块单选初始化调用
 			String sql = ToolSqlXml.getSql("pingtai.module.root");
-			list = ModuleModel.dao.find(sql);
+			list = Module.dao.find(sql);
 			
 		}else if(null != parentIds){
 			// 3.通用子节点查询
 			String sql = ToolSqlXml.getSql("pingtai.module.child");
-			list = ModuleModel.dao.find(sql, parentIds);
+			list = Module.dao.find(sql, parentIds);
 		}
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		
 		int size = list.size() - 1;
-		for (ModuleModel module : list) {
+		for (Module module : list) {
 			sb.append(" { ");
 			sb.append(" id : '").append(module.getStr("ids")).append("', ");
 			sb.append(" name : '").append(module.getStr("names")).append("', ");
@@ -71,7 +71,7 @@ public class ModuleService extends BaseService {
 	 */
 	@Before(Tx.class)
 	public String save(String pIds, String names, int orderIds) {
-		ModuleModel pDept = ModuleModel.dao.findById(pIds);
+		Module pDept = Module.dao.findById(pIds);
 		pDept.set("isparent", "true").update();
 		
 		String images = "";
@@ -82,7 +82,7 @@ public class ModuleService extends BaseService {
 			images = orderIds + ".png";
 		}
 
-		ModuleModel module = new ModuleModel();
+		Module module = new Module();
 		module.set("isparent", "true");
 		module.set("parentmoduleids", pIds);
 		module.set("systemsids", pDept.getStr("systemsids"));//冗余系统ids
@@ -102,7 +102,7 @@ public class ModuleService extends BaseService {
 	 * @param principalIds
 	 */
 	public void update(String ids, String pIds, String names) {
-		ModuleModel module = ModuleModel.dao.findById(ids);
+		Module module = Module.dao.findById(ids);
 		if(null != names && !names.isEmpty()){
 			//更新模块名称
 			module.set("names", names).update();
@@ -125,7 +125,7 @@ public class ModuleService extends BaseService {
 	    if(counts > 1){
 	    	return false;
 	    }
-	    ModuleModel.dao.deleteById(ids);
+	    Module.dao.deleteById(ids);
 	    return true;
 	}
 	

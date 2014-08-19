@@ -2,7 +2,7 @@ package little.ant.pingtai.service;
 
 import java.util.List;
 
-import little.ant.pingtai.model.DepartmentModel;
+import little.ant.pingtai.model.Department;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
@@ -23,21 +23,21 @@ public class DepartmentService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String parentIds){
-		List<DepartmentModel> list = null;
+		List<Department> list = null;
 		if(null != parentIds){
 			String sql = ToolSqlXml.getSql("pingtai.department.childNode");
-			list = DepartmentModel.dao.find(sql, parentIds);
+			list = Department.dao.find(sql, parentIds);
 			
 		}else{
 			String sql = ToolSqlXml.getSql("pingtai.department.rootNode");
-			list = DepartmentModel.dao.find(sql);
+			list = Department.dao.find(sql);
 		}
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		
 		int size = list.size() - 1;
-		for (DepartmentModel dept : list) {
+		for (Department dept : list) {
 			sb.append(" { ");
 			sb.append(" id : '").append(dept.getStr("ids")).append("', ");
 			sb.append(" name : '").append(dept.getStr("names")).append("', ");
@@ -64,7 +64,7 @@ public class DepartmentService extends BaseService {
 	 */
 	@Before(Tx.class)
 	public String save(String pIds, String names, int orderIds) {
-		DepartmentModel pDept = DepartmentModel.dao.findById(pIds);
+		Department pDept = Department.dao.findById(pIds);
 		pDept.set("isparent", "true").update();
 		
 		String images = "";
@@ -75,7 +75,7 @@ public class DepartmentService extends BaseService {
 			images = orderIds + ".png";
 		}
 
-		DepartmentModel dept = new DepartmentModel();
+		Department dept = new Department();
 		dept.set("isparent", "false");
 		dept.set("parentdepartmentids", pIds);
 		dept.set("orderids", orderIds);
@@ -94,7 +94,7 @@ public class DepartmentService extends BaseService {
 	 * @param principalIds
 	 */
 	public void update(String ids, String pIds, String names, String principalIds) {
-		DepartmentModel dept = DepartmentModel.dao.findById(ids);
+		Department dept = Department.dao.findById(ids);
 		if(null != names && !names.isEmpty()){
 			//更新模块名称
 			dept.set("names", names).update();
@@ -121,7 +121,7 @@ public class DepartmentService extends BaseService {
 	    if(counts > 1){
 	    	return false;
 	    }
-	    DepartmentModel.dao.deleteById(ids);
+	    Department.dao.deleteById(ids);
 	    return true;
 	}
 	

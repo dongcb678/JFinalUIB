@@ -2,7 +2,7 @@ package little.ant.weixin.controller;
 
 import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.controller.BaseController;
-import little.ant.weixin.model.LocationModel;
+import little.ant.weixin.model.Location;
 import little.ant.weixin.service.LocationService;
 
 import org.apache.log4j.Logger;
@@ -25,7 +25,7 @@ public class LocationController extends BaseController {
 	}
 	
 	public void delete() {
-		LocationModel.dao.deleteById(getPara());
+		Location.dao.deleteById(getPara());
 		redirect("/jf/wx/location");
 	}
 	

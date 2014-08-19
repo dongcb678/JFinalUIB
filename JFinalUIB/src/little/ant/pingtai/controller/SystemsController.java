@@ -1,7 +1,7 @@
 package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.SystemsModel;
+import little.ant.pingtai.model.Systems;
 import little.ant.pingtai.service.SystemsService;
 import little.ant.pingtai.validator.SystemsValidator;
 
@@ -24,18 +24,18 @@ public class SystemsController extends BaseController {
 	
 	@Before(SystemsValidator.class)
 	public void save() {
-		systemsService.save(getModel(SystemsModel.class));
+		systemsService.save(getModel(Systems.class));
 		redirect("/jf/systems");
 	}
 	
 	public void edit() {
-		setAttr("systems", SystemsModel.dao.findById(getPara()));
+		setAttr("systems", Systems.dao.findById(getPara()));
 		render("/pingtai/systems/update.html");
 	}
 	
 	@Before(SystemsValidator.class)
 	public void update() {
-		getModel(SystemsModel.class).update();
+		getModel(Systems.class).update();
 		redirect("/jf/systems");
 	}
 	

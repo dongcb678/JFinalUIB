@@ -1,9 +1,9 @@
 package little.ant.pingtai.service;
 
 import little.ant.pingtai.common.SplitPage;
-import little.ant.pingtai.model.MenuModel;
-import little.ant.pingtai.model.ModuleModel;
-import little.ant.pingtai.model.SystemsModel;
+import little.ant.pingtai.model.Menu;
+import little.ant.pingtai.model.Module;
+import little.ant.pingtai.model.Systems;
 
 import org.apache.log4j.Logger;
 
@@ -20,12 +20,12 @@ public class SystemsService extends BaseService {
 	 * @param systems
 	 */
 	@Before(Tx.class)
-	public void save(SystemsModel systems){
+	public void save(Systems systems){
 		// 保存系统
 		systems.save();
 		
 		// 初始化模块根节点
-		ModuleModel module = new ModuleModel();
+		Module module = new Module();
 		module.set("systemsids", systems.getStr("ids"));
 		module.set("isparent", "true");
 		module.set("images", "3.png");
@@ -34,7 +34,7 @@ public class SystemsService extends BaseService {
 		module.save();
 		
 		// 初始化菜单根节点
-		MenuModel menu = new MenuModel();
+		Menu menu = new Menu();
 		menu.set("systemsids", systems.getStr("ids"));
 		menu.set("isparent", "true");
 		menu.set("images", "3.png");
@@ -50,7 +50,7 @@ public class SystemsService extends BaseService {
 	@Before(Tx.class)
 	public void delete(String systemsIds){
 		//删除系统
-		SystemsModel.dao.deleteById(systemsIds);
+		Systems.dao.deleteById(systemsIds);
 		//删除关联模块
 		
 		//删除关联菜单

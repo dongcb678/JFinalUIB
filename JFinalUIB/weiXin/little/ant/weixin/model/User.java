@@ -6,13 +6,13 @@ import little.ant.pingtai.model.BaseModel;
 import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
-@Table(tableName="wx_group")
-public class GroupModel extends BaseModel<GroupModel> {
+@Table(tableName="wx_user")
+public class User extends BaseModel<User> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 
-	private static Logger log = Logger.getLogger(GroupModel.class);
+	private static Logger log = Logger.getLogger(User.class);
 	
-	public static final GroupModel dao = new GroupModel();
+	public static final User dao = new User();
 	
 }

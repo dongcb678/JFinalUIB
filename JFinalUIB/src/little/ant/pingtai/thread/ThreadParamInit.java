@@ -3,14 +3,14 @@ package little.ant.pingtai.thread;
 import java.util.List;
 
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.DictModel;
-import little.ant.pingtai.model.GroupModel;
-import little.ant.pingtai.model.OperatorModel;
-import little.ant.pingtai.model.ParamModel;
-import little.ant.pingtai.model.RoleModel;
-import little.ant.pingtai.model.StationModel;
-import little.ant.pingtai.model.UserModel;
-import little.ant.pingtai.model.UserInfoModel;
+import little.ant.pingtai.model.Dict;
+import little.ant.pingtai.model.Group;
+import little.ant.pingtai.model.Operator;
+import little.ant.pingtai.model.Param;
+import little.ant.pingtai.model.Role;
+import little.ant.pingtai.model.Station;
+import little.ant.pingtai.model.User;
+import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
@@ -69,9 +69,9 @@ public class ThreadParamInit extends Thread {
 	 */
 	public static void pingtai_cacheUser() {
 		String sql = ToolSqlXml.getSql("pingtai.user.all");
-		List<UserModel> userList = UserModel.dao.find(sql);
-		for (UserModel user : userList) {
-			UserInfoModel userInfo = user.getUserInfo();
+		List<User> userList = User.dao.find(sql);
+		for (User user : userList) {
+			UserInfo userInfo = user.getUserInfo();
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
@@ -87,8 +87,8 @@ public class ThreadParamInit extends Thread {
 	 */
 	public static void pingtai_cacheGroup() {
 		String sql = ToolSqlXml.getSql("pingtai.group.all");
-		List<GroupModel> groupList = GroupModel.dao.find(sql);
-		for (GroupModel group : groupList) {
+		List<Group> groupList = Group.dao.find(sql);
+		for (Group group : groupList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + group.getStr("ids"), group);
 		}
 		groupList = null;
@@ -100,8 +100,8 @@ public class ThreadParamInit extends Thread {
 	 */
 	public static void pingtai_cacheRole() {
 		String sql = ToolSqlXml.getSql("pingtai.role.all");
-		List<RoleModel> roleList = RoleModel.dao.find(sql);
-		for (RoleModel role : roleList) {
+		List<Role> roleList = Role.dao.find(sql);
+		for (Role role : roleList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
 		}
 		roleList = null;
@@ -113,8 +113,8 @@ public class ThreadParamInit extends Thread {
 	 */
 	public static void pingtai_cacheStation() {
 		String sql = ToolSqlXml.getSql("pingtai.station.all");
-		List<StationModel> stationList = StationModel.dao.find(sql);
-		for (StationModel station : stationList) {
+		List<Station> stationList = Station.dao.find(sql);
+		for (Station station : stationList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + station.getStr("ids"), station);
 		}
 		stationList = null;
@@ -126,8 +126,8 @@ public class ThreadParamInit extends Thread {
 	 */
 	public static void pingtai_cacheOperator() {
 		String sql = ToolSqlXml.getSql("pingtai.operator.all");
-		List<OperatorModel> operatorList = OperatorModel.dao.find(sql);
-		for (OperatorModel operator : operatorList) {
+		List<Operator> operatorList = Operator.dao.find(sql);
+		for (Operator operator : operatorList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
 			operator = null;
@@ -141,8 +141,8 @@ public class ThreadParamInit extends Thread {
 	 */
 	public static void pingtai_cacheDict() {
 		String sql = ToolSqlXml.getSql("pingtai.dict.all");
-		List<DictModel> dictList = DictModel.dao.find(sql);
-		for (DictModel dict : dictList) {
+		List<Dict> dictList = Dict.dao.find(sql);
+		for (Dict dict : dictList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("ids"), dict.getChild());
@@ -158,8 +158,8 @@ public class ThreadParamInit extends Thread {
 	 */
 	public static void pingtai_cacheParam() {
 		String sql = ToolSqlXml.getSql("pingtai.param.all");
-		List<ParamModel> paramList = ParamModel.dao.find(sql);
-		for (ParamModel param : paramList) {
+		List<Param> paramList = Param.dao.find(sql);
+		for (Param param : paramList) {
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("ids"), param);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"), param);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr("ids"), param.getChild());

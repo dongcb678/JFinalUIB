@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.GroupModel;
-import little.ant.pingtai.model.OperatorModel;
-import little.ant.pingtai.model.RoleModel;
-import little.ant.pingtai.model.StationModel;
-import little.ant.pingtai.model.UserModel;
+import little.ant.pingtai.model.Group;
+import little.ant.pingtai.model.Operator;
+import little.ant.pingtai.model.Role;
+import little.ant.pingtai.model.Station;
+import little.ant.pingtai.model.User;
 import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.thread.ThreadParamInit;
 
@@ -41,7 +41,7 @@ public class ToolContext {
 			log.error("URL缓存不存在：" + url);
 			return false;
 		}
-		OperatorModel operator = (OperatorModel) operatorObj;
+		Operator operator = (Operator) operatorObj;
 
 		// 基于缓存查询user
 		Object userObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
@@ -49,7 +49,7 @@ public class ToolContext {
 			log.error("用户缓存不存在：" + userIds);
 			return false;
 		}
-		UserModel user = (UserModel) userObj;
+		User user = (User) userObj;
 
 		// 权限验证对象
 		String operatorIds = operator.getStr("ids") + ",";
@@ -60,14 +60,14 @@ public class ToolContext {
 		if (null != groupIds) {
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				GroupModel group = (GroupModel) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
+				Group group = (Group) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				if(null == roleIdsStr || roleIdsStr.equals("")){
 					continue;
 				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					RoleModel role = (RoleModel) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
+					Role role = (Role) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					if (operatorIdsStr.indexOf(operatorIds) != -1) {
 						return true;
@@ -80,7 +80,7 @@ public class ToolContext {
 		if (null != stationIds) {
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				StationModel station = (StationModel) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
+				Station station = (Station) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				if(null == operatorIdsStr || operatorIdsStr.equals("")){
 					continue;
@@ -101,7 +101,7 @@ public class ToolContext {
 	 * @param user
 	 * @return
 	 */
-	public static boolean hasPrivilegeOperator(OperatorModel operator, UserModel user) {
+	public static boolean hasPrivilegeOperator(Operator operator, User user) {
 		// 基于缓存查询
 		String operatorIds = operator.getStr("ids") + ",";
 
@@ -110,14 +110,14 @@ public class ToolContext {
 		if (null != groupIds) {
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				GroupModel group = (GroupModel) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
+				Group group = (Group) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				if(null == roleIdsStr || roleIdsStr.equals("")){
 					continue;
 				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					RoleModel role = (RoleModel) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
+					Role role = (Role) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					if (operatorIdsStr.indexOf(operatorIds) != -1) {
 						return true;
@@ -131,7 +131,7 @@ public class ToolContext {
 		if (null != stationIds) {
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				StationModel station = (StationModel) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
+				Station station = (Station) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				if(null == operatorIdsStr || operatorIdsStr.equals("")){
 					continue;
@@ -209,7 +209,7 @@ public class ToolContext {
 	 * @param userAgentVali 是否验证 User-Agent
 	 * @return
 	 */
-	public static UserModel getCurrentUser(HttpServletRequest request, boolean userAgentVali) {
+	public static User getCurrentUser(HttpServletRequest request, boolean userAgentVali) {
 		String loginCookie = ToolWeb.getCookieValueByName(request, "authmark");
 		if (null != loginCookie && !loginCookie.equals("")) {
 			// 1. Base64解码cookie令牌
@@ -251,7 +251,7 @@ public class ToolContext {
 			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= 365) {
 				Object userObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
 				if (null != userObj) {
-					UserModel user = (UserModel) userObj;
+					User user = (User) userObj;
 					return user;
 				}
 			}
@@ -267,7 +267,7 @@ public class ToolContext {
 	 * @param user
 	 * @param autoLogin
 	 */
-	public static void setCurrentUser(HttpServletRequest request, HttpServletResponse response, UserModel user, boolean autoLogin) {
+	public static void setCurrentUser(HttpServletRequest request, HttpServletResponse response, User user, boolean autoLogin) {
 		// 1.设置cookie有效时间
 		int maxAgeTemp = -1;
 		if (autoLogin) {

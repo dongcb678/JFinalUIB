@@ -6,9 +6,9 @@ import java.util.List;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
-import little.ant.pingtai.model.DepartmentModel;
-import little.ant.pingtai.model.UserModel;
-import little.ant.pingtai.model.UserInfoModel;
+import little.ant.pingtai.model.Department;
+import little.ant.pingtai.model.User;
+import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
 import little.ant.pingtai.tools.ToolSqlXml;
@@ -32,7 +32,7 @@ public class UserService extends BaseService {
 	 * @param userInfo
 	 */
 	@Before(Tx.class)
-	public void save(UserModel user, String password, UserInfoModel userInfo) {
+	public void save(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
 			byte[] salt = ToolSecurityPbkdf2.generateSalt();// 密码盐
@@ -50,7 +50,7 @@ public class UserService extends BaseService {
 			user.save();
 
 			// 缓存
-			user = UserModel.dao.findById(user.getStr("ids"));
+			user = User.dao.findById(user.getStr("ids"));
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
@@ -72,11 +72,11 @@ public class UserService extends BaseService {
 	 * @param userInfo
 	 */
 	@Before(Tx.class)
-	public void update(UserModel user, String password, UserInfoModel userInfo) {
+	public void update(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
 			if (null != password && !password.trim().equals("")) {
-				UserModel oldUser = UserModel.dao.findById(user.getStr("ids"));
+				User oldUser = User.dao.findById(user.getStr("ids"));
 				byte[] salt = oldUser.getBytes("salt");// 密码盐
 				byte[] encryptedPassword = ToolSecurityPbkdf2.getEncryptedPassword(password, salt);
 				user.set("password", encryptedPassword);
@@ -87,7 +87,7 @@ public class UserService extends BaseService {
 			userInfo.update();
 
 			// 缓存
-			user = UserModel.dao.findById(user.getStr("ids"));
+			user = User.dao.findById(user.getStr("ids"));
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
 			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
@@ -104,9 +104,9 @@ public class UserService extends BaseService {
 	 */
 	@Before(Tx.class)
 	public void delete(String userIds) {
-		UserModel user = UserModel.dao.findById(userIds);
+		User user = User.dao.findById(userIds);
 		String userInfoIds = user.getStr("userinfoids");
-		UserInfoModel userInfo = UserInfoModel.dao.findById(userInfoIds);
+		UserInfo userInfo = UserInfo.dao.findById(userInfoIds);
 
 		// 缓存
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"));
@@ -116,7 +116,7 @@ public class UserService extends BaseService {
 
 		// 删除
 		user.delete();
-		UserInfoModel.dao.deleteById(userInfoIds);
+		UserInfo.dao.deleteById(userInfoIds);
 	}
 
 	/**
@@ -126,14 +126,14 @@ public class UserService extends BaseService {
 	 * @param groupIds
 	 */
 	public void setGroup(String userIds, String groupIds) {
-		UserModel user = UserModel.dao.findById(userIds);
+		User user = User.dao.findById(userIds);
 		String userInfoIds = user.getStr("userinfoids");
-		UserInfoModel userInfo = UserInfoModel.dao.findById(userInfoIds);
+		UserInfo userInfo = UserInfo.dao.findById(userInfoIds);
 
 		user.set("groupids", groupIds).update();
 
 		// 缓存
-		user = UserModel.dao.findById(user.getStr("ids"));
+		user = User.dao.findById(user.getStr("ids"));
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
@@ -147,20 +147,20 @@ public class UserService extends BaseService {
 	 */
 	public String childNodeData(String deptIds) {
 		// 查询部门数据
-		List<DepartmentModel> deptList = null;
+		List<Department> deptList = null;
 		if (null != deptIds) {
 			String sql = ToolSqlXml.getSql("pingtai.department.childNode");
-			deptList = DepartmentModel.dao.find(sql, deptIds.replace("dept_", ""));
+			deptList = Department.dao.find(sql, deptIds.replace("dept_", ""));
 		} else {
 			String sql = ToolSqlXml.getSql("pingtai.department.rootNode");
-			deptList = DepartmentModel.dao.find(sql);
+			deptList = Department.dao.find(sql);
 		}
 
 		// 查询用户数据
-		List<UserModel> userList = null;
+		List<User> userList = null;
 		if (null != deptIds) {
 			String sql = ToolSqlXml.getSql("pingtai.user.treeUserNode");
-			userList = UserModel.dao.find(sql, deptIds.replace("dept_", ""));
+			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -169,7 +169,7 @@ public class UserService extends BaseService {
 		// 封装用户数据
 		if (null != userList) {
 			int userSize = userList.size() - 1;
-			for (UserModel user : userList) {
+			for (User user : userList) {
 				sb.append(" { ");
 				sb.append(" id : '").append("user_").append(user.getStr("ids")).append("', ");
 				sb.append(" name : '").append(user.getStr("names")).append("', ");
@@ -189,7 +189,7 @@ public class UserService extends BaseService {
 		}
 
 		// 封装部门数据
-		for (DepartmentModel dept : deptList) {
+		for (Department dept : deptList) {
 			sb.append(" { ");
 			sb.append(" id : '").append("dept_").append(dept.getPrimaryKeyValue()).append("', ");
 			sb.append(" name : '").append(dept.get("names")).append("', ");

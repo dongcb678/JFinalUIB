@@ -3,7 +3,7 @@ package little.ant.weixin.service;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.service.BaseService;
 import little.ant.weixin.lucene.DocKeyword;
-import little.ant.weixin.model.KeywordModel;
+import little.ant.weixin.model.Keyword;
 
 import org.apache.log4j.Logger;
 
@@ -16,7 +16,7 @@ public class KeywordService extends BaseService {
 	 * @param keyword
 	 * @return
 	 */
-	public String save(KeywordModel keyword){
+	public String save(Keyword keyword){
 		keyword.save();
 		
 		new DocKeyword().add(keyword); // 索引
@@ -28,7 +28,7 @@ public class KeywordService extends BaseService {
 	 * 更新
 	 * @param keyword
 	 */
-	public void update(KeywordModel keyword){
+	public void update(Keyword keyword){
 		keyword.update();
 		new DocKeyword().update(keyword); // 索引
 	}
@@ -38,7 +38,7 @@ public class KeywordService extends BaseService {
 	 * @param keyword
 	 */
 	public void delete(String ids){
-		KeywordModel.dao.deleteById(ids);
+		Keyword.dao.deleteById(ids);
 		new DocKeyword().delete(ids); // 索引
 	}
 	

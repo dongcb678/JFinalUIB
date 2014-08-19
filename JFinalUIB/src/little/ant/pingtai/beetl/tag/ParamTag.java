@@ -6,7 +6,7 @@ import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.BaseModel;
-import little.ant.pingtai.model.ParamModel;
+import little.ant.pingtai.model.Param;
 import little.ant.pingtai.thread.ThreadParamInit;
 
 import org.apache.log4j.Logger;
@@ -85,7 +85,7 @@ public class ParamTag extends Tag {
 			sb.append("\" style=\"").append(style).append("\" >");
 		}
 
-		ParamModel parentParam = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
+		Param parentParam = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
 		String parentI18n = parentParam.getStr("i18n");
 		
 		String val = "val";
@@ -93,9 +93,9 @@ public class ParamTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<ParamModel> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
+		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
 
-		for (ParamModel param : paramList) {
+		for (Param param : paramList) {
 			String status = param.getStr("status");
 			String numbersTemp = param.getStr("numbers");
 			String namesTemp = param.getStr("names");
@@ -133,7 +133,7 @@ public class ParamTag extends Tag {
 	private String radio(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		ParamModel parentParam = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
+		Param parentParam = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
 		String parentI18n = parentParam.getStr("i18n");
 		
 		String val = "val";
@@ -141,9 +141,9 @@ public class ParamTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<ParamModel> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
+		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
 
-		for (ParamModel param : paramList) {
+		for (Param param : paramList) {
 			String status = param.getStr("status");
 			String numbersTemp = param.getStr("numbers");
 			String namesTemp = param.getStr("names");
@@ -179,7 +179,7 @@ public class ParamTag extends Tag {
 	private String checkbox(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		ParamModel parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
+		Param parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
 		String parentI18n = parentDict.getStr("i18n");
 		
 		String val = "val";
@@ -187,9 +187,9 @@ public class ParamTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<ParamModel> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
+		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
 
-		for (ParamModel param : paramList) {
+		for (Param param : paramList) {
 			String status = param.getStr("status");
 			String numbersTemp = param.getStr("numbers");
 			String namesTemp = param.getStr("names");

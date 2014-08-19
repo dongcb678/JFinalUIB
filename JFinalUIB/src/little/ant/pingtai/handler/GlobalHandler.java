@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import little.ant.pingtai.beetl.render.MyBeetlRender;
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.SyslogModel;
+import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.plugin.I18NPlugin;
 import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.thread.ThreadSysLog;
@@ -35,7 +35,7 @@ public class GlobalHandler extends Handler {
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
 		log.info("初始化访问系统功能日志");
-		SyslogModel reqSysLog = getSysLog(request);
+		Syslog reqSysLog = getSysLog(request);
 		long starttime = ToolDateTime.getDateByTime();
 		reqSysLog.set("startdate", ToolDateTime.getSqlTimestamp(starttime));//开始时间
 		request.setAttribute(reqSysLogKey, reqSysLog);
@@ -110,7 +110,7 @@ public class GlobalHandler extends Handler {
 	 * @param request
 	 * @return
 	 */
-	public SyslogModel getSysLog(HttpServletRequest request){
+	public Syslog getSysLog(HttpServletRequest request){
 		String requestPath = ToolWeb.getRequestURIWithParam(request); 
 		String ip = ToolWeb.getIpAddr(request);
 		String referer = request.getHeader("Referer"); 
@@ -124,7 +124,7 @@ public class GlobalHandler extends Handler {
 		String accept = request.getHeader("Accept");
 		String connection = request.getHeader("Connection");
 
-		SyslogModel reqSysLog = new SyslogModel();
+		Syslog reqSysLog = new Syslog();
 		
 		reqSysLog.set("ips", ip);
 		reqSysLog.set("requestpath", requestPath);

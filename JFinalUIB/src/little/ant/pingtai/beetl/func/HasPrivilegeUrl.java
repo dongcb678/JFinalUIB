@@ -1,6 +1,6 @@
 package little.ant.pingtai.beetl.func;
 
-import little.ant.pingtai.model.SyslogModel;
+import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.tools.ToolContext;
 
 import org.apache.log4j.Logger;
@@ -24,7 +24,7 @@ public class HasPrivilegeUrl implements Function {
 		String userIds = null;
 		try {
 			url = (String) arg[0]; 
-			SyslogModel reqSysLog = (SyslogModel) context.getGlobal("reqSysLog");
+			Syslog reqSysLog = (Syslog) context.getGlobal("reqSysLog");
 			userIds = reqSysLog.getStr("userids");
 		} catch (Exception e) {
 			return false;

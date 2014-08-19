@@ -11,13 +11,13 @@ import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
 @Table(tableName="pt_param")
-public class ParamModel extends BaseModel<ParamModel> {
+public class Param extends BaseModel<Param> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 
-	private static Logger log = Logger.getLogger(ParamModel.class);
+	private static Logger log = Logger.getLogger(Param.class);
 	
-	public static final ParamModel dao = new ParamModel();
+	public static final Param dao = new Param();
 
 	/**
 	 * 根据主键查询参数，带国际化
@@ -25,7 +25,7 @@ public class ParamModel extends BaseModel<ParamModel> {
 	 * @param i18n 国际化参数
 	 * @return
 	 */
-	public ParamModel getByIds(String ids, String i18n){
+	public Param getByIds(String ids, String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -33,7 +33,7 @@ public class ParamModel extends BaseModel<ParamModel> {
 		
 		String sql = ToolSqlXml.getSql("pingtai.param.idAndI18n", paramMap);
 		
-		ParamModel param = dao.findFirst(sql, ids);
+		Param param = dao.findFirst(sql, ids);
 		return param;
 	}
 	
@@ -42,9 +42,9 @@ public class ParamModel extends BaseModel<ParamModel> {
 	 * @param number
 	 * @return
 	 */
-	public ParamModel getByNumber(String number){
+	public Param getByNumber(String number){
 		String sql = ToolSqlXml.getSql("pingtai.param.numbers");
-		ParamModel param = dao.findFirst(sql, number);
+		Param param = dao.findFirst(sql, number);
 		return param;
 	}
 	
@@ -54,7 +54,7 @@ public class ParamModel extends BaseModel<ParamModel> {
 	 * @param i18n 国际化参数
 	 * @return
 	 */
-	public ParamModel getByNumber(String number, String i18n){
+	public Param getByNumber(String number, String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -62,7 +62,7 @@ public class ParamModel extends BaseModel<ParamModel> {
 		
 		String sql = ToolSqlXml.getSql("pingtai.param.numbersAndI18n", paramMap);
 		
-		ParamModel param = dao.findFirst(sql, number);
+		Param param = dao.findFirst(sql, number);
 		return param;
 	}
 
@@ -70,7 +70,7 @@ public class ParamModel extends BaseModel<ParamModel> {
 	 * 查询子节点参数
 	 * @return
 	 */
-	public List<ParamModel> getChild(){
+	public List<Param> getChild(){
 		String sql = ToolSqlXml.getSql("pingtai.param.child");
 		return dao.find(sql, get("ids"));
 	}
@@ -80,7 +80,7 @@ public class ParamModel extends BaseModel<ParamModel> {
 	 * @param prentIds
 	 * @return
 	 */
-	public List<ParamModel> getChild(String prentIds){
+	public List<Param> getChild(String prentIds){
 		String sql = ToolSqlXml.getSql("pingtai.param.child");
 		return dao.find(sql, prentIds);
 	}
@@ -91,7 +91,7 @@ public class ParamModel extends BaseModel<ParamModel> {
 	 * @param i18n
 	 * @return
 	 */
-	public List<ParamModel> getChild(String prentIds, String i18n){
+	public List<Param> getChild(String prentIds, String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -106,7 +106,7 @@ public class ParamModel extends BaseModel<ParamModel> {
 	 * 查询父节点参数
 	 * @return
 	 */
-	public List<ParamModel> getParent(){
+	public List<Param> getParent(){
 		String sql = ToolSqlXml.getSql("pingtai.param.parent");
 		return dao.find(sql, get("parentids"));
 	}
@@ -116,7 +116,7 @@ public class ParamModel extends BaseModel<ParamModel> {
 	 * @param i18n
 	 * @return
 	 */
-	public List<ParamModel> getParent(String i18n){
+	public List<Param> getParent(String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> param = new HashMap<String, Object>();

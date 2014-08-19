@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.model.MenuModel;
+import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
@@ -32,21 +32,21 @@ public class MenuService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("names", names);
 		
-		List<MenuModel> list = null;
+		List<Menu> list = null;
 		if(null != parentIds){
 			String sql = ToolSqlXml.getSql("pingtai.menu.child", param);
-			list = MenuModel.dao.find(sql, parentIds);
+			list = Menu.dao.find(sql, parentIds);
 			
 		}else{
 			String sql = ToolSqlXml.getSql("pingtai.menu.root", param);
-			list = MenuModel.dao.find(sql, systemsIds);
+			list = Menu.dao.find(sql, systemsIds);
 		}
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		
 		int size = list.size() - 1;
-		for (MenuModel menu : list) {
+		for (Menu menu : list) {
 			sb.append(" { ");
 			sb.append(" id : '").append(menu.getStr("ids")).append("', ");
 			sb.append(" name : '").append(menu.getStr("names")).append("', ");
@@ -76,7 +76,7 @@ public class MenuService extends BaseService {
 	public String save(String pIds, String names, int orderIds, String i18n){
 		String namesColunm = "names" + i18n(i18n);
 		
-		MenuModel pMenu = MenuModel.dao.findById(pIds);
+		Menu pMenu = Menu.dao.findById(pIds);
 		pMenu.set("isparent", "true").update();
 		
 		String images = "";
@@ -87,7 +87,7 @@ public class MenuService extends BaseService {
 			images = orderIds + ".png";
 		}
 
-		MenuModel menu = new MenuModel();
+		Menu menu = new Menu();
 		menu.set("isparent", "false");
 		menu.set("parentmenuids", pIds);
 		menu.set("orderids", orderIds);
@@ -109,7 +109,7 @@ public class MenuService extends BaseService {
 	public void update(String ids, String pIds, String names, String i18n){
 		String namesColunm = "names" + i18n(i18n);
 		
-		MenuModel menu = MenuModel.dao.findById(ids);
+		Menu menu = Menu.dao.findById(ids);
 		if(null != names && !names.isEmpty()){
 			//更新模块名称
 			menu.set(namesColunm, names).update();
@@ -132,7 +132,7 @@ public class MenuService extends BaseService {
 	    if(counts > 1){
 	    	return false;
 	    }
-	    MenuModel.dao.deleteById(ids);
+	    Menu.dao.deleteById(ids);
 	    return true;
 	}
 	
@@ -143,7 +143,7 @@ public class MenuService extends BaseService {
 	 * @param operatorIds
 	 */
 	public void setOperator(String menuIds, String operatorIds){
-		MenuModel menu = MenuModel.dao.findById(menuIds);
+		Menu menu = Menu.dao.findById(menuIds);
 		menu.set("operatorids", operatorIds).update();
 	}
 	

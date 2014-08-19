@@ -2,7 +2,7 @@ package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.UserModel;
+import little.ant.pingtai.model.User;
 import little.ant.pingtai.service.LoginService;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolWeb;
@@ -27,7 +27,7 @@ public class LoginController extends BaseController {
 	 * 准备登陆
 	 */
 	public void index() {
-		UserModel user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
+		User user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
 		if(null != user){//后台
 			redirect("/jf/");
 		}else{

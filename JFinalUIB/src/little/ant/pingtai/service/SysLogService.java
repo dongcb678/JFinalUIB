@@ -1,7 +1,7 @@
 package little.ant.pingtai.service;
 
 import little.ant.pingtai.common.SplitPage;
-import little.ant.pingtai.model.SyslogModel;
+import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
@@ -11,9 +11,9 @@ public class SysLogService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SysLogService.class);
 	
-	public SyslogModel view(String ids){
+	public Syslog view(String ids){
 		String sql = ToolSqlXml.getSql("pingtai.sysLog.view");
-		return SyslogModel.dao.findFirst(sql, ids);
+		return Syslog.dao.findFirst(sql, ids);
 	}
 
 	/**

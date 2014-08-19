@@ -9,8 +9,8 @@ import java.util.Map;
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.controller.BaseController;
-import little.ant.pingtai.model.OperatorModel;
-import little.ant.pingtai.model.SyslogModel;
+import little.ant.pingtai.model.Operator;
+import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolDateTime;
 
@@ -41,9 +41,9 @@ public class ParamPkgInterceptor implements Interceptor {
 		log.debug("*********************** 封装参数值到 controller 全局变量  start ***********************");
 		
 		// 是否需要分页
-		SyslogModel reqSysLog = controller.getReqSysLog();
+		Syslog reqSysLog = controller.getReqSysLog();
 		String operatorids = reqSysLog.getStr("operatorids");
-		OperatorModel operator = (OperatorModel) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operatorids);
+		Operator operator = (Operator) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operatorids);
 		String splitpage = operator.getStr("splitpage");
 		if(splitpage.equals("1")){
 			splitPage(controller, superControllerClass);

@@ -5,13 +5,13 @@ import little.ant.pingtai.annotation.Table;
 import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
-@Table(tableName="pt_role")
-public class RoleModel extends BaseModel<RoleModel> {
+@Table(tableName="pt_module")
+public class Module extends BaseModel<Module> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(RoleModel.class);
+	private static Logger log = Logger.getLogger(Module.class);
 	
-	public static final RoleModel dao = new RoleModel();
+	public static final Module dao = new Module();
 	
 }

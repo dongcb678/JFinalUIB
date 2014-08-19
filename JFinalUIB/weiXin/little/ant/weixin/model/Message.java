@@ -7,12 +7,12 @@ import little.ant.pingtai.model.BaseModel;
 
 @SuppressWarnings("unused")
 @Table(tableName="wx_message")
-public class MessageModel extends BaseModel<MessageModel> {
+public class Message extends BaseModel<Message> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 
-	private static Logger log = Logger.getLogger(MessageModel.class);
+	private static Logger log = Logger.getLogger(Message.class);
 	
-	public static final MessageModel dao = new MessageModel();
+	public static final Message dao = new Message();
 	
 }

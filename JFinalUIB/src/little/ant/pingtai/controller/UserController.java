@@ -1,8 +1,8 @@
 package little.ant.pingtai.controller;
 
 import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.model.UserModel;
-import little.ant.pingtai.model.UserInfoModel;
+import little.ant.pingtai.model.User;
+import little.ant.pingtai.model.UserInfo;
 import little.ant.pingtai.service.UserService;
 import little.ant.pingtai.validator.UserValidator;
 
@@ -38,8 +38,8 @@ public class UserController extends BaseController {
 	@Before(UserValidator.class)
 	public void save() {
 		String password = getPara("password");
-		UserModel user = getModel(UserModel.class);
-		UserInfoModel userInfo = getModel(UserInfoModel.class);
+		User user = getModel(User.class);
+		UserInfo userInfo = getModel(UserInfo.class);
 		userService.save(user, password, userInfo);
 		render("/pingtai/user/add.html");
 	}
@@ -48,9 +48,9 @@ public class UserController extends BaseController {
 	 * 准备更新
 	 */
 	public void edit() {
-		UserModel user = UserModel.dao.findById(getPara());
+		User user = User.dao.findById(getPara());
 		setAttr("user", user);
-		setAttr("userInfo", UserInfoModel.dao.findById(user.getStr("userinfoids")));
+		setAttr("userInfo", UserInfo.dao.findById(user.getStr("userinfoids")));
 		render("/pingtai/user/update.html");
 	}
 	
@@ -60,8 +60,8 @@ public class UserController extends BaseController {
 	@Before(UserValidator.class)
 	public void update() {
 		String password = getPara("password");
-		UserModel user = getModel(UserModel.class);
-		UserInfoModel userInfo = getModel(UserInfoModel.class);
+		User user = getModel(User.class);
+		UserInfo userInfo = getModel(UserInfo.class);
 		userService.update(user, password, userInfo);
 		redirect("/jf/user");
 	}
@@ -70,9 +70,9 @@ public class UserController extends BaseController {
 	 * 查看
 	 */
 	public void view() {
-		UserModel user = UserModel.dao.findById(getPara());
+		User user = User.dao.findById(getPara());
 		setAttr("user", user);
-		setAttr("userInfo", UserInfoModel.dao.findById(user.getStr("userinfoids")));
+		setAttr("userInfo", UserInfo.dao.findById(user.getStr("userinfoids")));
 		render("/pingtai/user/view.html");
 	}
 	

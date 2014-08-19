@@ -3,7 +3,7 @@ package little.ant.pingtai.service;
 import java.util.List;
 
 import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.DictModel;
+import little.ant.pingtai.model.Dict;
 import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
@@ -23,9 +23,9 @@ public class DictService extends BaseService {
 	 * @param dict
 	 */
 	@Before(Tx.class)
-	public void save(DictModel dict) {
+	public void save(Dict dict) {
 		String pIds = dict.getStr("parentids");
-		DictModel parent = DictModel.dao.findById(pIds);
+		Dict parent = Dict.dao.findById(pIds);
 		parent.set("isparent", "true").update();
 
 		Long orderIds = dict.getNumber("orderids").longValue();
@@ -53,9 +53,9 @@ public class DictService extends BaseService {
 	 * @param dict
 	 */
 	@Before(Tx.class)
-	public void update(DictModel dict) {
+	public void update(Dict dict) {
 		String pIds = dict.getStr("parentids");
-		DictModel parent = DictModel.dao.findById(pIds);
+		Dict parent = Dict.dao.findById(pIds);
 		parent.set("isparent", "true").update();
 		
 		dict.set("parentids", pIds).set("levels", parent.getNumber("levels").longValue() + 1);
@@ -63,7 +63,7 @@ public class DictService extends BaseService {
 		dict.update();
 		
 		// 缓存
-		dict = DictModel.dao.findById(dict.getPrimaryKeyValue());
+		dict = Dict.dao.findById(dict.getPrimaryKeyValue());
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
 		
@@ -77,9 +77,9 @@ public class DictService extends BaseService {
 	 */
 	public void delete(String ids){
 		// 查询
-		DictModel dict = DictModel.dao.findById(ids);
+		Dict dict = Dict.dao.findById(ids);
 		String pIds = dict.getStr("parentids");
-		DictModel parent = DictModel.dao.findById(pIds);
+		Dict parent = Dict.dao.findById(pIds);
 
 		// 删除
 		dict.delete();
@@ -99,19 +99,19 @@ public class DictService extends BaseService {
 	 * @return
 	 */
 	public String childNodeData(String parentIds){
-		List<DictModel> list = null;
+		List<Dict> list = null;
 		if (null != parentIds) {
 			String sql = ToolSqlXml.getSql("pingtai.dict.treeChildNode");
-			list = DictModel.dao.find(sql, parentIds);
+			list = Dict.dao.find(sql, parentIds);
 		} else {
 			String sql = ToolSqlXml.getSql("pingtai.dict.treeNodeRoot");
-			list = DictModel.dao.find(sql);
+			list = Dict.dao.find(sql);
 		}
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		int size = list.size() - 1;
-		for (DictModel dict : list) {
+		for (Dict dict : list) {
 			sb.append(" { ");
 			sb.append(" id : '").append(dict.getStr("ids")).append("', ");
 			sb.append(" name : '").append(dict.getStr("names")).append("', ");
