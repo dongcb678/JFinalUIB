@@ -1,0 +1,28 @@
+package ${package};
+
+import org.apache.log4j.Logger;
+
+import com.jfinal.core.Controller;
+import com.jfinal.validate.Validator;
+
+public class ${className}Validator extends Validator {
+
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(${className}Validator.class);
+	
+	protected void validate(Controller controller) {
+		
+	}
+	
+	protected void handleError(Controller controller) {
+		controller.keepModel(${className}Validator.class);
+		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/jf/${classNameSmall}/save")){
+			
+		} else if (actionKey.equals("/jf/${classNameSmall}/update")){
+			
+		}
+			
+	}
+}
