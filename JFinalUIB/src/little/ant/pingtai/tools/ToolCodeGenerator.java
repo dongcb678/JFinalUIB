@@ -37,9 +37,25 @@ public class ToolCodeGenerator {
 			model(srcFolder, packageBase, className, classNameSmall, tableName);
 			service(srcFolder, packageBase, className, classNameSmall);
 			controller(srcFolder, packageBase, className, classNameSmall);
+			sql(srcFolder, packageBase, classNameSmall);
 		}
 	}
-	
+
+	/**
+	 * xxx.sql.xml
+	 * @param srcFolder
+	 * @param packageBase
+	 * @param classNameSmall
+	 */
+	public static void sql(String srcFolder, String packageBase, String classNameSmall){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		String packages = packageBase + ".model";
+		paraMap.put("namespace", srcFolder + "." + classNameSmall);
+		
+		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + classNameSmall + ".sql.xml";
+		readFile("sql.html", paraMap, filePath);
+	}
+
 	/**
 	 * 生成Controller
 	 * @param packageBase
