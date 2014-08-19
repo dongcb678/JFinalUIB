@@ -56,6 +56,14 @@ public abstract class BaseController extends Controller {
 	protected String getCxt() {
 		return getAttr("cxt");
 	}
+
+	/**
+	 * 获取当前用户id
+	 * @return
+	 */
+	protected String getUserIds(){
+		return reqSysLog.getStr("userids");
+	}
 	
 	/**
 	 * 重写getPara，进行二次decode解码
