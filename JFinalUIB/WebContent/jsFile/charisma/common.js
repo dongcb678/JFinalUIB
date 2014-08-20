@@ -141,7 +141,9 @@ function ajaxForm(divId, formId){
 	$("#" + formId).ajaxSubmit({
 		cache: false,
 	    success:  function (data) {
-	    	$("#" + divId).html(data);
+	    	if(data != ""){
+	    		$("#" + divId).html(data);
+	    	}
 	    	$('#loading').remove();
 			$('#content').fadeIn();
 			docReady();
