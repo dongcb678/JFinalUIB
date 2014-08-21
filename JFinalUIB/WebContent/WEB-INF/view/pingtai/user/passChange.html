@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	
-	function passChange(form){
+	function passChange(){
 		var messageButton = $('#messageButtonId');
 		
 		var newPass1 = $("#newPass1").val();
@@ -11,6 +11,7 @@
 	 		return false;
 		}
 		
+		var form = document.getElementById("passChangeForm");
 		var errorCount = formVali(form);
 		if(errorCount != 0){
 			messageButton.attr("data-noty-options", '{"text":"有'+errorCount+'错误，请修正！","layout":"bottom","type":"information","closeButton":"true"}');
@@ -29,41 +30,43 @@
 </div>
 
 <form id="passChangeForm" action="${cxt!}/jf/user/passChange" method="POST">
-
+	
+	<input type="hidden" name="userName" value="${cookieMap.userName.value!}">
+	
 	<div class="modal-body">
-			<div class="form-actions">
-				<fieldset>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.user.passChange.oldPass"]}</label>
-						<div class="controls">
-							<input type="password" id="oldPass" name="password" class="input-xlarge" autocomplete="off" 
-								maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
-							<span class="help-inline">6-18位字母数字</span>
-						</div>
+		<div class="form-actions">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label">${i18nMap["admin.user.passChange.oldPass"]}</label>
+					<div class="controls">
+						<input type="password" id="oldPass" name="passOld" class="input-xlarge" autocomplete="off" 
+							maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
+						<span class="help-inline">6-18位字母数字</span>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
-						<div class="controls">
-							<input type="password" id="newPass1" name="password" class="input-xlarge" autocomplete="off" 
-								maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
-							<span class="help-inline">6-18位字母数字</span>
-						</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
+					<div class="controls">
+						<input type="password" id="newPass1" name="passNew" class="input-xlarge" autocomplete="off" 
+							maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
+						<span class="help-inline">6-18位字母数字</span>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
-						<div class="controls">
-							<input type="password" id="newPass2" class="input-xlarge" 
-								maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
-							<span class="help-inline">6-18位字母数字</span>
-						</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
+					<div class="controls">
+						<input type="password" id="newPass2" class="input-xlarge" 
+							maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
+						<span class="help-inline">6-18位字母数字</span>
 					</div>
-				</fieldset>
-			</div>
+				</div>
+			</fieldset>
+		</div>
 	</div>
 	
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">${i18nMap["admin.common.close"]}</a>
-		<a href="#" class="btn btn-primary" data-dismiss="modal" onclick="passChange(this.form);">${i18nMap["admin.common.submit"]}</a>
+		<a href="#" class="btn btn-primary" data-dismiss="modal" onclick="passChange();">${i18nMap["admin.common.submit"]}</a>
 	</div>	
 	
 </form>

@@ -101,10 +101,23 @@ public class UserController extends BaseController {
 	}
 	
 	/**
+	 * 验证旧密码是否正确
+	 */
+	public void valiPassWord(){
+		String passWord = getPara("passWord");
+		boolean bool = userService.valiPassWord(ids, passWord);
+		renderText(String.valueOf(bool));
+	}
+	
+	/**
 	 * 密码变更
 	 */
 	public void passChange(){
-		
+		String userName = getPara("userName");
+		String passOld = getPara("passOld");
+		String passNew = getPara("passNew");
+		userService.passChange(userName, passOld, passNew);
+		renderText("");
 	}
 	
 }

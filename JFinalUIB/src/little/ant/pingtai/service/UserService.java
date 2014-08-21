@@ -2,7 +2,9 @@ package little.ant.pingtai.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
@@ -21,7 +23,6 @@ import com.jfinal.plugin.ehcache.CacheKit;
 
 public class UserService extends BaseService {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UserService.class);
 
 	/**
@@ -221,6 +222,75 @@ public class UserService extends BaseService {
 	public void list(SplitPage splitPage) {
 		String select = " select u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames ";
 		splitPageBase(splitPage, select, "pingtai.user.splitPage");
+	}
+
+	/**
+	 * 验证密码是否正确
+	 * @param userName
+	 * @param passWord
+	 * @return
+	 */
+	public boolean valiPassWord(String userName, String passWord) {
+		try {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", "userName");
+			String sql = ToolSqlXml.getSql("pingtai.user.column", param);
+			User user = User.dao.findFirst(sql, userName);
+			byte[] salt = user.getBytes("salt");// 密码盐
+			byte[] encryptedPassword = user.getBytes("password");
+			boolean bool = ToolSecurityPbkdf2.authenticate(passWord, encryptedPassword, salt);
+			if (bool) {
+				return true;
+			}
+		} catch (Exception e) {
+			log.error("验证密码是否正确异常，userName:" + userName + "，密码：" + passWord);
+			return false;
+		}
+		return false;
+	}
+	
+	/**
+	 * 密码变更
+	 * @param userName
+	 * @param passOld
+	 * @param passNew
+	 */
+	public void passChange(String userName, String passOld, String passNew){
+		try {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", "userName");
+			String sql = ToolSqlXml.getSql("pingtai.user.column", param);
+			User user = User.dao.findFirst(sql, userName);
+			
+			// 验证密码
+			byte[] salt = user.getBytes("salt");// 密码盐
+			byte[] encryptedPassword = user.getBytes("password");
+			boolean bool = false;
+			try {
+				bool = ToolSecurityPbkdf2.authenticate(passOld, encryptedPassword, salt);
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			} catch (InvalidKeySpecException e) {
+				e.printStackTrace();
+			}
+			if (bool) {
+				byte[] saltNew = ToolSecurityPbkdf2.generateSalt();// 密码盐
+				byte[] encryptedPasswordNew = ToolSecurityPbkdf2.getEncryptedPassword(passNew, saltNew);
+				user.set("salt", saltNew);
+				user.set("password", encryptedPasswordNew);
+				// 更新用户
+				user.update();
+				// 缓存
+				user = User.dao.findById(user.getStr("ids"));
+				UserInfo userInfo = user.getUserInfo();
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+			}
+		} catch (Exception e) {
+			log.error("更新用户密码异常，userName:" + userName + "，旧密码：" + passOld + "，新密码：" + passNew);
+		}
 	}
 	
 }

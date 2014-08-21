@@ -22,7 +22,6 @@ import little.ant.pingtai.tools.ToolSqlXml;
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.ehcache.CacheKit;
 
 public class LoginService extends BaseService {
@@ -30,28 +29,6 @@ public class LoginService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginService.class);
 	
-	/**
-	 * 验证密码是否正确
-	 * @param ids
-	 * @param passWord
-	 * @return
-	 */
-	public String valiPassWord(String ids, String passWord) {
-		try {
-			Record user =  Db.findById("pt_user", "ids", ids, " salt, password ");
-			byte[] salt = user.getBytes("salt");// 密码盐
-			byte[] encryptedPassword = user.getBytes("password");
-			boolean bool = ToolSecurityPbkdf2.authenticate(passWord, encryptedPassword, salt);
-			if (bool) {
-				return "success";
-			} else {
-				return "error";
-			}
-		} catch (Exception e) {
-			return "runError";
-		}
-	}
-
 	/**
 	 * 用户登录后台验证
 	 * @param request
