@@ -73,6 +73,10 @@ public class LoginService extends BaseService {
 			}else{
 				String sql = ToolSqlXml.getSql("pingtai.user.start");
 				Db.update(sql, user.getStr("ids"));
+				// 更新缓存
+				user = User.dao.findById(user.getStr("ids"));
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("mailbox"), user);
 			}
 		}
 
@@ -95,6 +99,10 @@ public class LoginService extends BaseService {
 			// 密码验证失败
 			String sql = ToolSqlXml.getSql("pingtai.user.stop");
 			Db.update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
+			// 更新缓存
+			user = User.dao.findById(user.getStr("ids"));
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("mailbox"), user);
 			return DictKeys.login_info_4;
 		}
 	}
