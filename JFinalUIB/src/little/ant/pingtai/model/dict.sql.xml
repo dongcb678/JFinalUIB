@@ -5,7 +5,7 @@
 	<!-- 查询所有字典 -->
 	<sql id="all">
 		<![CDATA[ 
-        	select * from pt_dict
+        	select ids from pt_dict
     	]]>
 	</sql>
 	

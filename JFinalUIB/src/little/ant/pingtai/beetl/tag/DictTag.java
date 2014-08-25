@@ -4,15 +4,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.BaseModel;
 import little.ant.pingtai.model.Dict;
-import little.ant.pingtai.thread.ThreadParamInit;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.Tag;
-
-import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
  * 字典select
@@ -85,7 +81,7 @@ public class DictTag extends Tag {
 			sb.append("\" style=\"").append(style).append("\" >");
 		}
 
-		Dict parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
+		Dict parentDict = Dict.dao.cacheGet(number);
 		String parentI18n = parentDict.getStr("i18n");
 		
 		String val = "val";
@@ -93,7 +89,7 @@ public class DictTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
+		List<Dict> dictList = Dict.dao.cacheGetChild(number);
 
 		for (Dict dict : dictList) {
 			String status = dict.getStr("status");
@@ -135,7 +131,7 @@ public class DictTag extends Tag {
 	private String radio(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		Dict parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
+		Dict parentDict = Dict.dao.cacheGet(number);
 		String parentI18n = parentDict.getStr("i18n");
 		
 		String val = "val";
@@ -143,7 +139,7 @@ public class DictTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
+		List<Dict> dictList = Dict.dao.cacheGetChild(number);
 
 		for (Dict dict : dictList) {
 			String status = dict.getStr("status");
@@ -181,7 +177,7 @@ public class DictTag extends Tag {
 	private String checkbox(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		Dict parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + number);
+		Dict parentDict = Dict.dao.cacheGet(number);
 		String parentI18n = parentDict.getStr("i18n");
 		
 		String val = "val";
@@ -189,7 +185,7 @@ public class DictTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + number);
+		List<Dict> dictList = Dict.dao.cacheGetChild(number);
 
 		for (Dict dict : dictList) {
 			String status = dict.getStr("status");

@@ -5,7 +5,7 @@
 	<!-- 查询所有分组 -->
 	<sql id="all">
 		<![CDATA[ 
-        	select * from pt_group
+        	select ids from pt_group
     	]]>
 	</sql>
 	

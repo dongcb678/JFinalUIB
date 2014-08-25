@@ -6,12 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Department;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.model.UserInfo;
-import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
 import little.ant.pingtai.tools.ToolSqlXml;
 
@@ -19,7 +17,6 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.jfinal.plugin.ehcache.CacheKit;
 
 public class UserService extends BaseService {
 
@@ -51,11 +48,7 @@ public class UserService extends BaseService {
 			user.save();
 
 			// 缓存
-			user = User.dao.findById(user.getStr("ids"));
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+			User.dao.cacheAdd(user.getStr("ids"));
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException("保存用户密码加密操作异常");
 		} catch (InvalidKeySpecException e) {
@@ -88,11 +81,7 @@ public class UserService extends BaseService {
 			userInfo.update();
 
 			// 缓存
-			user = User.dao.findById(user.getStr("ids"));
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+			User.dao.cacheAdd(user.getStr("ids"));
 		} catch (Exception e) {
 			throw new RuntimeException("更新用户异常");
 		}
@@ -107,16 +96,12 @@ public class UserService extends BaseService {
 	public void delete(String userIds) {
 		User user = User.dao.findById(userIds);
 		String userInfoIds = user.getStr("userinfoids");
-		UserInfo userInfo = UserInfo.dao.findById(userInfoIds);
 
 		// 缓存
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"));
+		User.dao.cacheRemove(userIds);
 
 		// 删除
-		user.delete();
+		User.dao.deleteById(userIds);
 		UserInfo.dao.deleteById(userInfoIds);
 	}
 
@@ -128,17 +113,10 @@ public class UserService extends BaseService {
 	 */
 	public void setGroup(String userIds, String groupIds) {
 		User user = User.dao.findById(userIds);
-		String userInfoIds = user.getStr("userinfoids");
-		UserInfo userInfo = UserInfo.dao.findById(userInfoIds);
-
 		user.set("groupids", groupIds).update();
 
 		// 缓存
-		user = User.dao.findById(user.getStr("ids"));
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+		User.dao.cacheAdd(userIds);
 	}
 
 	/**
@@ -281,12 +259,7 @@ public class UserService extends BaseService {
 				// 更新用户
 				user.update();
 				// 缓存
-				user = User.dao.findById(user.getStr("ids"));
-				UserInfo userInfo = user.getUserInfo();
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+				User.dao.cacheAdd(user.getStr("ids"));
 			}
 		} catch (Exception e) {
 			log.error("更新用户密码异常，userName:" + userName + "，旧密码：" + passOld + "，新密码：" + passNew);

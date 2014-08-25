@@ -2,16 +2,13 @@ package little.ant.pingtai.service;
 
 import java.util.List;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Station;
-import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.ehcache.CacheKit;
 
 public class StationService extends BaseService {
 
@@ -82,11 +79,12 @@ public class StationService extends BaseService {
 		station.set("names", names);
 		station.set("images", images);
 		station.save();
+		String ids = station.getStr("ids");
 		
 		// 缓存
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + station.getStr("ids"), station);
+		Station.dao.cacheAdd(ids);
 		
-		return station.getStr("ids");
+		return ids;
 	}
 	
 	/**
@@ -107,7 +105,7 @@ public class StationService extends BaseService {
 		}
 
 		// 缓存
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + station.getStr("ids"), station);
+		Station.dao.cacheAdd(ids);
 	}
 	
 	/**
@@ -124,7 +122,7 @@ public class StationService extends BaseService {
 	    }
 	    
 		// 缓存
-	    CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
+		Station.dao.cacheRemove(ids);
 		
 		// 删除
 	    Station.dao.deleteById(ids);
@@ -142,7 +140,7 @@ public class StationService extends BaseService {
 		station.set("moduleids", moduleIds).set("operatorids", operatorIds).update();
 		
 		// 缓存
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + stationIds, station);
+		Station.dao.cacheAdd(stationIds);
 	}
 	
 	

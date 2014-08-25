@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.plugin.PropertiesPlugin;
-import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolSecurityPbkdf2;
@@ -22,7 +21,6 @@ import little.ant.pingtai.tools.ToolSqlXml;
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.ehcache.CacheKit;
 
 public class LoginService extends BaseService {
 
@@ -41,7 +39,7 @@ public class LoginService extends BaseService {
 	public int login(HttpServletRequest request, HttpServletResponse response, String userName, String passWord, boolean autoLogin) {
 		// 1.取用户
 		User user = null;
-		Object userObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userName);
+		Object userObj = User.dao.cacheGet(userName);
 		if (null != userObj) {
 			user = (User) userObj;
 		} else {
@@ -74,9 +72,7 @@ public class LoginService extends BaseService {
 				String sql = ToolSqlXml.getSql("pingtai.user.start");
 				Db.update(sql, user.getStr("ids"));
 				// 更新缓存
-				user = User.dao.findById(user.getStr("ids"));
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("mailbox"), user);
+				User.dao.cacheAdd(user.getStr("ids"));
 			}
 		}
 
@@ -100,9 +96,7 @@ public class LoginService extends BaseService {
 			String sql = ToolSqlXml.getSql("pingtai.user.stop");
 			Db.update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
 			// 更新缓存
-			user = User.dao.findById(user.getStr("ids"));
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("ids"), user);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("mailbox"), user);
+			User.dao.cacheAdd(user.getStr("ids"));
 			return DictKeys.login_info_4;
 		}
 	}

@@ -5,7 +5,7 @@
 	<!-- 查询所有参数 -->
 	<sql id="all">
 		<![CDATA[ 
-        	select * from pt_param
+        	select ids from pt_param
     	]]>
 	</sql>
 	

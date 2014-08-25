@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.pingtai.annotation.Table;
+import little.ant.pingtai.common.DictKeys;
+import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
+
+import com.jfinal.plugin.ehcache.CacheKit;
 
 @SuppressWarnings("unused")
 @Table(tableName="pt_dict")
@@ -129,4 +133,63 @@ public class Dict extends BaseModel<Dict> {
 		return dao.find(sql, get("parentids"));
 	}
 
+	/**
+	 * 添加或者更新缓存
+	 */
+	public void cacheAdd(String ids){
+		Dict dict = Dict.dao.findById(ids);
+		List<Dict> dictList = dict.getChild();
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + ids, dict);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + ids, dictList);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("numbers"), dictList);
+
+		Dict parent = Dict.dao.findById(dict.getStr("parentids"));
+		if(null != parent){
+			List<Dict> parentList = parent.getChild();
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("ids"), parentList);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
+		}
+	}
+
+	/**
+	 * 删除缓存
+	 * @param ids
+	 */
+	public void cacheRemove(String ids){
+		Dict dict = Dict.dao.findById(ids);
+		
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + ids);
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + ids);
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("numbers"));
+
+		Dict parent = Dict.dao.findById(dict.getStr("parentids"));
+		if(null != parent){
+			List<Dict> parentList = parent.getChild();
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("ids"), parentList);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
+		}
+	}
+
+	/**
+	 * 获取缓存
+	 * @param key
+	 * @return
+	 */
+	public Dict cacheGet(String key){
+		Dict dict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + key);
+		return dict;
+	}
+	
+	/**
+	 * 获取缓存
+	 * @param key
+	 * @return
+	 */
+	public List<Dict> cacheGetChild(String key){
+		List<Dict> dictList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + key);
+		return dictList;
+	}
+	
 }

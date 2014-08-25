@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.pingtai.annotation.Table;
+import little.ant.pingtai.common.DictKeys;
+import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
+
+import com.jfinal.plugin.ehcache.CacheKit;
 
 @SuppressWarnings("unused")
 @Table(tableName="pt_param")
@@ -127,4 +131,62 @@ public class Param extends BaseModel<Param> {
 		return dao.find(sql, get("parentids"));
 	}
 
+	/**
+	 * 添加或者更新缓存
+	 */
+	public void cacheAdd(String ids){
+		Param param = Param.dao.findById(ids);
+		List<Param> paramList = param.getChild();
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + ids, param);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"), param);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + ids, paramList);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr("numbers"), paramList);
+
+		Param parent = Param.dao.findById(param.getStr("parentids"));
+		if(null != parent){
+			List<Param> parentList = parent.getChild();
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("ids"), parentList);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
+		}
+	}
+
+	/**
+	 * 删除缓存
+	 * @param ids
+	 */
+	public void cacheRemove(String ids){
+		Param param = Param.dao.findById(ids);
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + ids);
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + ids);
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr("numbers"));
+
+		Param parent = Param.dao.findById(param.getStr("parentids"));
+		if(null != parent){
+			List<Param> parentList = parent.getChild();
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("ids"), parentList);
+			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
+		}
+	}
+
+	/**
+	 * 获取缓存
+	 * @param key
+	 * @return
+	 */
+	public Param cacheGet(String key){
+		Param param = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + key);
+		return param;
+	}
+	
+	/**
+	 * 获取缓存
+	 * @param key
+	 * @return
+	 */
+	public List<Param> cacheGetChild(String key){
+		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + key);
+		return paramList;
+	}
+	
 }

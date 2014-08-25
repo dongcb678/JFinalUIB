@@ -5,7 +5,7 @@
 	<!-- 查询所有用户 -->
 	<sql id="all">
 		<![CDATA[ 
-        	select * from pt_user
+        	select ids from pt_user
     	]]>
 	</sql>
 	

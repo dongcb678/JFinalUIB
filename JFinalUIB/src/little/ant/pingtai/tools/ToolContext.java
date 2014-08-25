@@ -18,12 +18,9 @@ import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
 import little.ant.pingtai.plugin.PropertiesPlugin;
-import little.ant.pingtai.thread.ThreadParamInit;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
-
-import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
  * WEB上下文工具类
@@ -36,15 +33,14 @@ public class ToolContext {
 
 	public static boolean hasPrivilegeUrl(String url, String userIds) {
 		// 基于缓存查询operator
-		Object operatorObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + url);
-		if (null == operatorObj) {
+		Operator operator = Operator.dao.cacheGet(url);
+		if (null == operator) {
 			log.error("URL缓存不存在：" + url);
 			return false;
 		}
-		Operator operator = (Operator) operatorObj;
 
 		// 基于缓存查询user
-		Object userObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
+		Object userObj = User.dao.cacheGet(userIds);
 		if (null == userObj) {
 			log.error("用户缓存不存在：" + userIds);
 			return false;
@@ -60,14 +56,14 @@ public class ToolContext {
 		if (null != groupIds) {
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				Group group = (Group) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
+				Group group = Group.dao.cacheGet(groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				if(null == roleIdsStr || roleIdsStr.equals("")){
 					continue;
 				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					Role role = (Role) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
+					Role role = Role.dao.cacheGet(roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					if (operatorIdsStr.indexOf(operatorIds) != -1) {
 						return true;
@@ -80,7 +76,7 @@ public class ToolContext {
 		if (null != stationIds) {
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				Station station = (Station) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
+				Station station = Station.dao.cacheGet(ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				if(null == operatorIdsStr || operatorIdsStr.equals("")){
 					continue;
@@ -110,14 +106,14 @@ public class ToolContext {
 		if (null != groupIds) {
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				Group group = (Group) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
+				Group group = Group.dao.cacheGet(groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				if(null == roleIdsStr || roleIdsStr.equals("")){
 					continue;
 				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					Role role = (Role) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
+					Role role = Role.dao.cacheGet(roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					if (operatorIdsStr.indexOf(operatorIds) != -1) {
 						return true;
@@ -131,7 +127,7 @@ public class ToolContext {
 		if (null != stationIds) {
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				Station station = (Station) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
+				Station station = Station.dao.cacheGet(ids);;
 				String operatorIdsStr = station.getStr("operatorids");
 				if(null == operatorIdsStr || operatorIdsStr.equals("")){
 					continue;
@@ -249,7 +245,7 @@ public class ToolContext {
 			
 			// 4. 验证数据有效性
 			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= 365) {
-				Object userObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userIds);
+				Object userObj = User.dao.cacheGet(userIds);
 				if (null != userObj) {
 					User user = (User) userObj;
 					return user;

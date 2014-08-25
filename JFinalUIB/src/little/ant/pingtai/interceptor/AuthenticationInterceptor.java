@@ -5,13 +5,11 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.controller.BaseController;
 import little.ant.pingtai.handler.GlobalHandler;
 import little.ant.pingtai.model.Operator;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.model.User;
-import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolWeb;
@@ -20,7 +18,6 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
-import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
  * 权限认证拦截器
@@ -60,7 +57,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		}
 		
 		log.info("获取URI对象!");
-		Object operatorObj = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + uri);
+		Object operatorObj = Operator.dao.cacheGet(uri);
 
 		log.info("判断URI是否存在!");
 		if(null != operatorObj){

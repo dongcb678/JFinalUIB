@@ -1,8 +1,12 @@
 package little.ant.pingtai.model;
 
 import little.ant.pingtai.annotation.Table;
+import little.ant.pingtai.common.DictKeys;
+import little.ant.pingtai.thread.ThreadParamInit;
 
 import org.apache.log4j.Logger;
+
+import com.jfinal.plugin.ehcache.CacheKit;
 
 @SuppressWarnings("unused")
 @Table(tableName="pt_user")
@@ -36,6 +40,40 @@ public class User extends BaseModel<User> {
 	 */
 	public Station getStation(){
 		return Station.dao.findById(get("stationids"));
+	}
+	
+	/**
+	 * 添加或者更新缓存
+	 */
+	public void cacheAdd(String ids){
+		User user = User.dao.findById(ids);
+		UserInfo userInfo = user.getUserInfo();
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + ids, user);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+	}
+
+	/**
+	 * 删除缓存
+	 */
+	public void cacheRemove(String ids){
+		User user = User.dao.findById(ids);
+		UserInfo userInfo = user.getUserInfo();
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + ids);
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"));
+	}
+
+	/**
+	 * 获取缓存
+	 * @param ids
+	 * @return
+	 */
+	public User cacheGet(String ids){
+		User user = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + ids);
+		return user;
 	}
 	
 }

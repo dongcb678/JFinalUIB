@@ -4,18 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Menu;
 import little.ant.pingtai.model.Role;
 import little.ant.pingtai.model.Station;
 import little.ant.pingtai.model.User;
-import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
-
-import com.jfinal.plugin.ehcache.CacheKit;
 
 public class IndexService extends BaseService {
 
@@ -40,11 +36,11 @@ public class IndexService extends BaseService {
 		if(null != groupIds){
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
-				Group group = (Group) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_group + groupIdsTemp);
+				Group group = Group.dao.cacheGet(groupIdsTemp);
 				String roleIdsStr = group.getStr("roleids");
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
-					Role role = (Role) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIdsTemp);
+					Role role = Role.dao.cacheGet(roleIdsTemp);
 					String operatorIdsStr = role.getStr("operatorids");
 					operatorIdsSb.append(operatorIdsStr);
 				}
@@ -56,7 +52,7 @@ public class IndexService extends BaseService {
 		if(null != stationIds){
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
-				Station station = (Station) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_station + ids);
+				Station station = Station.dao.cacheGet(ids);
 				String operatorIdsStr = station.getStr("operatorids");
 				operatorIdsSb.append(operatorIdsStr);
 			}

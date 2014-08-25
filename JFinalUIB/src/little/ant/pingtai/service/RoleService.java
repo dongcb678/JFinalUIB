@@ -5,16 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Role;
-import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
-
-import com.jfinal.plugin.ehcache.CacheKit;
 
 public class RoleService extends BaseService {
 
@@ -27,12 +23,14 @@ public class RoleService extends BaseService {
 	 * @return
 	 */
 	public String save(Role role){
+		// 保存
 		role.save();
+		String ids = role.getStr("ids");
 		
 		// 缓存
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
+		Role.dao.cacheAdd(ids);
 		
-		return role.getPrimaryKeyValue();
+		return ids;
 	}
 
 	/**
@@ -40,11 +38,11 @@ public class RoleService extends BaseService {
 	 * @param role
 	 */
 	public void update(Role role){
+		// 更新
 		role.update();
 		
 		// 缓存
-		role = Role.dao.findById(role.getPrimaryKeyValue());
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + role.getStr("ids"), role);
+		Role.dao.cacheAdd(role.getStr("ids"));
 	}
 
 	/**
@@ -53,7 +51,7 @@ public class RoleService extends BaseService {
 	 */
 	public void delete(String roleIds){
 		// 缓存
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIds);
+		Role.dao.cacheRemove(roleIds);
 		
 		// 删除
 		Role.dao.deleteById(roleIds);
@@ -70,7 +68,7 @@ public class RoleService extends BaseService {
 		role.set("moduleids", moduleIds).set("operatorids", operatorIds).update();
 		
 		// 缓存
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_role + roleIds, role);
+		Role.dao.cacheAdd(roleIds);
 	}
 	
 	/**

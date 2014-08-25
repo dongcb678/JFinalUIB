@@ -1,6 +1,13 @@
 package little.ant.pingtai.tools;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import little.ant.pingtai.model.User;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
@@ -143,5 +150,63 @@ public abstract class ToolString {
 		String classNameTemp = fullClassName.substring(fullClassName.lastIndexOf(".") + 1, fullClassName.length());
 		return classNameTemp.substring(0, 1) + classNameTemp.substring(1);
 	}
-
+	
+	public final static Pattern referer_pattern = Pattern.compile("@([^@^\\s^:]{1,})([\\s\\:\\,\\;]{0,1})");//@.+?[\\s:]
+	 
+	/**
+	 * 处理提到某人 @xxxx
+	 * @param msg  传入的文本内容
+	 * @param referers 传出被引用到的会员名单
+	 * @return 返回带有链接的文本内容
+	 */
+	public static String userLinks(String contents, List<String> userReferers) {
+	    StringBuilder html = new StringBuilder();
+	    int lastIdx = 0;
+	    Matcher matchr = referer_pattern.matcher(contents);
+	    while (matchr.find()) {
+	        String origion_str = matchr.group();
+	        //System.out.println("-->"+origion_str);
+	        String userName = origion_str.substring(1, origion_str.length()).trim();
+	        //char ch = str.charAt(str.length()-1);
+	        //if(ch == ':' || ch == ',' || ch == ';')
+	        //  str = str.substring(0, str.length()-1);
+	        //System.out.println(str);
+	        html.append(contents.substring(lastIdx, matchr.start()));
+	         
+	        User user = null;
+			Object userObj = User.dao.cacheGet(userName);
+			if (null != userObj) {
+				user = (User) userObj;
+			} else {
+				Map<String, Object> param = new HashMap<String, Object>();
+				param.put("column", "username");
+				String sql = ToolSqlXml.getSql("pingtai.user.column", param);
+				List<User> userList = User.dao.find(sql, userName);
+				if (userList.size() == 1) {
+					user = userList.get(0);
+				}
+			}
+	        
+	        if(user != null){
+	            html.append("<a href='http://www.xx.com/"+user.getStr("username")+"' class='referer' target='_blank'>@");
+	            html.append(userName.trim());
+	            html.append("</a> ");
+	            if(userReferers != null && !userReferers.contains(user.getPrimaryKeyValue())){
+	            	userReferers.add(user.getPrimaryKeyValue());
+	            }
+	        } else {
+	            html.append(origion_str);
+	        }
+	        lastIdx = matchr.end();
+	        //if(ch == ':' || ch == ',' || ch == ';')
+	        //  html.append(ch);
+	    }
+	    html.append(contents.substring(lastIdx));
+	    return html.toString();
+	}
+	
+	public static void main(String[] args){
+		
+	}
+	
 }

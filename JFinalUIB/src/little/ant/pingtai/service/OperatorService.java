@@ -3,16 +3,12 @@ package little.ant.pingtai.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.model.Operator;
-import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
-
-import com.jfinal.plugin.ehcache.CacheKit;
 
 public class OperatorService extends BaseService {
 
@@ -25,13 +21,14 @@ public class OperatorService extends BaseService {
 	 * @return
 	 */
 	public String save(Operator operator){
+		// 保存
 		operator.save();
+		String ids = operator.getStr("ids");
 		
 		// 缓存
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
+		Operator.dao.cacheAdd(ids);
 		
-		return operator.getStr("ids");
+		return ids;
 	}
 
 	/**
@@ -39,12 +36,12 @@ public class OperatorService extends BaseService {
 	 * @param operator
 	 */
 	public void update(Operator operator){
+		// 更新
 		operator.update();
+		String ids = operator.getStr("ids");
 		
 		// 缓存
-		operator = Operator.dao.findById(operator.getPrimaryKeyValue());
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"), operator);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
+		Operator.dao.cacheAdd(ids);
 	}
 
 	/**
@@ -52,13 +49,11 @@ public class OperatorService extends BaseService {
 	 * @param ids
 	 */
 	public void delete(String ids){
-		Operator operator = Operator.dao.findById(ids);;
 		// 缓存
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("ids"));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"));
+		Operator.dao.cacheRemove(ids);
 		
 		// 删除
-		operator.delete();
+		Operator.dao.deleteById(ids);
 	}
 	
 	/**

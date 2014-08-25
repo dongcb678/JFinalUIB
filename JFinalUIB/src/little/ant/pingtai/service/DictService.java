@@ -2,16 +2,13 @@ package little.ant.pingtai.service;
 
 import java.util.List;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Dict;
-import little.ant.pingtai.thread.ThreadParamInit;
 import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.jfinal.plugin.ehcache.CacheKit;
 
 public class DictService extends BaseService {
 
@@ -41,11 +38,7 @@ public class DictService extends BaseService {
 		dict.set("paths", parent.get("paths") + "/" + dict.getStr("ids")).update();
 		
 		// 缓存
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
-		
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("parentids"), parent.getChild());
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parent.getChild());
+		Dict.dao.cacheAdd(dict.getStr("ids"));
 	}
 
 	/**
@@ -63,12 +56,7 @@ public class DictService extends BaseService {
 		dict.update();
 		
 		// 缓存
-		dict = Dict.dao.findById(dict.getPrimaryKeyValue());
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("ids"), dict);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
-		
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("parentids"), parent.getChild());
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parent.getChild());
+		Dict.dao.cacheAdd(dict.getStr("ids"));
 	}
 
 	/**
@@ -76,21 +64,11 @@ public class DictService extends BaseService {
 	 * @param ids
 	 */
 	public void delete(String ids){
-		// 查询
-		Dict dict = Dict.dao.findById(ids);
-		String pIds = dict.getStr("parentids");
-		Dict parent = Dict.dao.findById(pIds);
-
-		// 删除
-		dict.delete();
-		
 		// 缓存
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + ids);
+		Dict.dao.cacheRemove(ids);
 		
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("parentids"), parent.getChild());
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parent.getChild());
+		// 删除
+		Dict.dao.deleteById(ids);
 	}
 
 	/**

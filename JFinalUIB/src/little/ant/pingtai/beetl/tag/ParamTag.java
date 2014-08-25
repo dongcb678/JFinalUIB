@@ -4,15 +4,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.BaseModel;
 import little.ant.pingtai.model.Param;
-import little.ant.pingtai.thread.ThreadParamInit;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.Tag;
-
-import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
  * 参数select
@@ -85,7 +81,7 @@ public class ParamTag extends Tag {
 			sb.append("\" style=\"").append(style).append("\" >");
 		}
 
-		Param parentParam = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
+		Param parentParam = Param.dao.cacheGet(number);
 		String parentI18n = parentParam.getStr("i18n");
 		
 		String val = "val";
@@ -93,7 +89,7 @@ public class ParamTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
+		List<Param> paramList = Param.dao.cacheGetChild(number);
 
 		for (Param param : paramList) {
 			String status = param.getStr("status");
@@ -133,7 +129,7 @@ public class ParamTag extends Tag {
 	private String radio(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		Param parentParam = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
+		Param parentParam = Param.dao.cacheGet(number);
 		String parentI18n = parentParam.getStr("i18n");
 		
 		String val = "val";
@@ -141,7 +137,7 @@ public class ParamTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
+		List<Param> paramList = Param.dao.cacheGetChild(number);
 
 		for (Param param : paramList) {
 			String status = param.getStr("status");
@@ -179,7 +175,7 @@ public class ParamTag extends Tag {
 	private String checkbox(String id, String name, String classs, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
-		Param parentDict = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + number);
+		Param parentDict = Param.dao.cacheGet(number);
 		String parentI18n = parentDict.getStr("i18n");
 		
 		String val = "val";
@@ -187,7 +183,7 @@ public class ParamTag extends Tag {
 			String localePram = (String) ctx.getGlobal("localePram");
 			val += BaseModel.i18n(localePram);
 		}
-		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + number);
+		List<Param> paramList = Param.dao.cacheGetChild(number);
 
 		for (Param param : paramList) {
 			String status = param.getStr("status");
