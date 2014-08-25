@@ -17,6 +17,8 @@ public class DepartmentService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DepartmentService.class);
 	
+	public static final DepartmentService service = new DepartmentService();
+	
 	/**
 	 * 获取子节点数据
 	 * @param parentIds

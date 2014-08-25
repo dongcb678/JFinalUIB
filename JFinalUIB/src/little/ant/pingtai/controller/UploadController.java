@@ -24,8 +24,6 @@ public class UploadController extends BaseController {
 
 	private static Logger log = Logger.getLogger(UploadController.class);
 	
-	private UploadService uploadService = new UploadService();
-	
 	/**
 	 * 默认是保存到	/WebContent/files/upload
 	 * 否则保存到	/WebContent/WEB-INF/files/upload
@@ -44,7 +42,7 @@ public class UploadController extends BaseController {
 		
 		List<UploadFile> files = getFiles(sb.toString(), (Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_maxPostSize_key), ToolString.encoding);
 		
-		List<String> list = uploadService.upload(pathType, files);
+		List<String> list = UploadService.service.upload(pathType, files);
 		renderJson(list);
 	}
 	

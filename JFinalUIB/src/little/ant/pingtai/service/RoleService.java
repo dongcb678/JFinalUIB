@@ -16,6 +16,8 @@ public class RoleService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(RoleService.class);
+
+	public static final RoleService service = new RoleService();
 	
 	/**
 	 * 保存

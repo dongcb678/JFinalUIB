@@ -14,6 +14,8 @@ public class ParamService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ParamService.class);
+
+	public static final ParamService service = new ParamService();
 	
 	/**
 	 * 保存

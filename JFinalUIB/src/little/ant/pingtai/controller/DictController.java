@@ -16,8 +16,6 @@ public class DictController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DictController.class);
 	
-	private DictService dictService = new DictService();
-	
 	public void index() {
 		String sql = ToolSqlXml.getSql("pingtai.dict.treeTableNodeRoot");
 		list = Dict.dao.find(sql);
@@ -31,13 +29,13 @@ public class DictController extends BaseController {
 	}
 
 	public void treeData()  {
-		String jsonText = dictService.childNodeData(ids);
+		String jsonText = DictService.service.childNodeData(ids);
 		renderJson(jsonText);
 	}
 	
 	@Before(DictValidator.class)
 	public void save() {
-		dictService.save(getModel(Dict.class));
+		DictService.service.save(getModel(Dict.class));
 		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html");
 	}
 	
@@ -51,12 +49,12 @@ public class DictController extends BaseController {
 	
 	@Before(DictValidator.class)
 	public void update() {
-		dictService.update(getModel(Dict.class));
+		DictService.service.update(getModel(Dict.class));
 		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html", true);
 	}
 	
 	public void delete() {
-		dictService.delete(getPara());
+		DictService.service.delete(getPara());
 		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html");
 	}
 

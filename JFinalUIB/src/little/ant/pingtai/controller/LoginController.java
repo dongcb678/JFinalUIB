@@ -20,8 +20,6 @@ public class LoginController extends BaseController {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginController.class);
-			
-	private LoginService loginService = new LoginService();
 	
 	/**
 	 * 准备登陆
@@ -49,7 +47,7 @@ public class LoginController extends BaseController {
 			if(null != remember && remember.equals("1")){
 				autoLogin = true;
 			}
-			int result = loginService.login(getRequest(), getResponse(), username, password, autoLogin);
+			int result = LoginService.service.login(getRequest(), getResponse(), username, password, autoLogin);
 			if(result == DictKeys.login_info_3){
 				redirect("/jf/index");
 				return;

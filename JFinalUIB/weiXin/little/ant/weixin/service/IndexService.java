@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 public class IndexService extends BaseService {
 
 	private static Logger log = Logger.getLogger(IndexService.class);
+
+	public static final IndexService service = new IndexService();
 	
 	
 

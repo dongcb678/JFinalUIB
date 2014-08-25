@@ -11,8 +11,6 @@ public class ResourcesController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(ResourcesController.class);
 	
-	private ResourcesService resourcesService = new ResourcesService();
-	
 	
 	
 }

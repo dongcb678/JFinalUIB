@@ -15,8 +15,6 @@ public class StationController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(StationController.class);
 	
-	private StationService stationService = new StationService();
-	
 	private String pIds;
 	private String names;
 	private int orderIds;
@@ -29,24 +27,24 @@ public class StationController extends BaseController {
 	}
 	
 	public void treeData()  {
-		String jsonText = stationService.childNodeData(ids);
+		String jsonText = StationService.service.childNodeData(ids);
 		renderJson(jsonText);
 	}
 	
 	@Before(StationValidator.class)
 	public void save() {
-		ids = stationService.save(pIds, names, orderIds);
+		ids = StationService.service.save(pIds, names, orderIds);
 		renderText(ids);
 	}
 	
 	@Before(StationValidator.class)
 	public void update() {
-		stationService.update(ids, pIds, names);
+		StationService.service.update(ids, pIds, names);
 		renderText(ids);
 	}
 	
 	public void delete() {
-		stationService.delete(ids);
+		StationService.service.delete(ids);
 		renderText(ids);
 	}
 
@@ -56,7 +54,7 @@ public class StationController extends BaseController {
 	}
 
 	public void setOperator(){
-		stationService.setOperator(ids, moduleIds, operatorIds);
+		StationService.service.setOperator(ids, moduleIds, operatorIds);
 		renderJson(ids);
 	}
 	

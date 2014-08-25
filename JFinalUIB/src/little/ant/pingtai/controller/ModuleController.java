@@ -14,8 +14,6 @@ public class ModuleController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ModuleController.class);
 	
-	private ModuleService moduleService = new ModuleService();
-
 	private String systemsIds;
 	private String pIds;
 	private String names;
@@ -26,24 +24,24 @@ public class ModuleController extends BaseController {
 	}
 	
 	public void treeData()  {
-		String jsonText = moduleService.childNodeData(systemsIds, ids);
+		String jsonText = ModuleService.service.childNodeData(systemsIds, ids);
 		renderJson(jsonText);
 	}
 	
 	@Before(ModuleValidator.class)
 	public void save() {
-		ids = moduleService.save(pIds, names, orderIds);
+		ids = ModuleService.service.save(pIds, names, orderIds);
 		renderText(ids);
 	}
 	
 	@Before(ModuleValidator.class)
 	public void update() {
-		moduleService.update(ids, pIds, names);
+		ModuleService.service.update(ids, pIds, names);
 		renderText(ids);
 	}
 	
 	public void delete() {
-		moduleService.delete(ids);
+		ModuleService.service.delete(ids);
 		renderText(ids);
 	}
 

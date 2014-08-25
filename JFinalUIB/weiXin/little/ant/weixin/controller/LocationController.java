@@ -16,11 +16,9 @@ public class LocationController extends BaseController {
 
 	private static Logger log = Logger.getLogger(LocationController.class);
 	
-	private LocationService locationService = new LocationService();
-	
 	public void index(){
 		log.debug("微信用户位置管理：分页");
-		locationService.list(splitPage);
+		LocationService.service.list(splitPage);
 		render("/weiXin/location/list.html");
 	}
 	

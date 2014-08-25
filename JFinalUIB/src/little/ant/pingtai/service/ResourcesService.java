@@ -28,6 +28,8 @@ public class ResourcesService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ResourcesService.class);
 
+	public static final ResourcesService service = new ResourcesService();
+	
 	/**
 	 * 最近15天PV
 	 * @return

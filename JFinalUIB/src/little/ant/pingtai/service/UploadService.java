@@ -13,6 +13,8 @@ public class UploadService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UploadService.class);
+
+	public static final UploadService service = new UploadService();
 	
 	public List<String> upload(String pathType, List<UploadFile> files){
 		List<String> list = new ArrayList<String>();

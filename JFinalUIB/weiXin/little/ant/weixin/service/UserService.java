@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 public class UserService extends BaseService {
 
 	private static Logger log = Logger.getLogger(UserService.class);
+
+	public static final UserService service = new UserService();
 	
 	/**
 	 * 分页

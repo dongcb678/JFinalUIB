@@ -15,11 +15,9 @@ public class GroupController extends BaseController {
 
 	private static Logger log = Logger.getLogger(GroupController.class);
 	
-	private GroupService groupService = new GroupService();
-	
 	public void index(){
 		log.debug("微信用户分组管理：分页");
-		groupService.list(splitPage);
+		GroupService.service.list(splitPage);
 		render("/weiXin/group/list.html");
 	}
 	

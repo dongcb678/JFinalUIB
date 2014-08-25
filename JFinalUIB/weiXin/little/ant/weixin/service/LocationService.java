@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 public class LocationService extends BaseService {
 
 	private static Logger log = Logger.getLogger(LocationService.class);
+
+	public static final LocationService service = new LocationService();
 	
 	/**
 	 * 分页

@@ -15,8 +15,6 @@ public class MenuController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(MenuController.class);
 	
-	private MenuService menuService = new MenuService();
-
 	private String systemsIds;
 	private String pIds;
 	private String names;
@@ -28,24 +26,24 @@ public class MenuController extends BaseController {
 	}
 
 	public void treeData()  {
-		String jsonText = menuService.childNodeData(systemsIds, ids, getI18nPram());
+		String jsonText = MenuService.service.childNodeData(systemsIds, ids, getI18nPram());
 		renderJson(jsonText);
 	}
 	
 	@Before(MenuValidator.class)
 	public void save() {
-		ids = menuService.save(pIds, names, orderIds, getI18nPram());
+		ids = MenuService.service.save(pIds, names, orderIds, getI18nPram());
 		renderText(ids);
 	}
 	
 	@Before(MenuValidator.class)
 	public void update() {
-		menuService.update(ids, pIds, names, getI18nPram());
+		MenuService.service.update(ids, pIds, names, getI18nPram());
 		renderText(ids);
 	}
 	
 	public void delete() {
-		menuService.delete(ids);
+		MenuService.service.delete(ids);
 		renderText(ids);
 	}
 
@@ -55,7 +53,7 @@ public class MenuController extends BaseController {
 	}
 
 	public void setOperator(){
-		menuService.setOperator(ids, operatorIds);
+		MenuService.service.setOperator(ids, operatorIds);
 		renderJson(ids);
 	}
 	

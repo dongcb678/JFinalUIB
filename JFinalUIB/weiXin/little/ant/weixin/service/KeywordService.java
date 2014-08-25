@@ -10,6 +10,8 @@ import org.apache.log4j.Logger;
 public class KeywordService extends BaseService {
 
 	private static Logger log = Logger.getLogger(KeywordService.class);
+
+	public static final KeywordService service = new KeywordService();
 	
 	/**
 	 * 保存

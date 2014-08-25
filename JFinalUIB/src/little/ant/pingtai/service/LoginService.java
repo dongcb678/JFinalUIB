@@ -26,6 +26,8 @@ public class LoginService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginService.class);
+
+	public static final LoginService service = new LoginService();
 	
 	/**
 	 * 用户登录后台验证

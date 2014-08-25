@@ -14,6 +14,8 @@ public class DictService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DictService.class);
+
+	public static final DictService service = new DictService();
 	
 	/**
 	 * 保存

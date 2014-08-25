@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 public class GroupService extends BaseService {
 
 	private static Logger log = Logger.getLogger(GroupService.class);
+
+	public static final GroupService service = new GroupService();
 	
 	/**
 	 * 分页

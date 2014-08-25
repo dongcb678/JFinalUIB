@@ -12,16 +12,14 @@ public class SysLogController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SysLogController.class);
 	
-	private SysLogService syslogService = new SysLogService();
-	
 	public void index() {
 		defaultOrder("startdate", "desc");
-		syslogService.list(splitPage);
+		SysLogService.service.list(splitPage);
 		render("/pingtai/sysLog/list.html");
 	}
 	
 	public void view() {
-		setAttr("sysLog", syslogService.view(getPara()));
+		setAttr("sysLog", SysLogService.service.view(getPara()));
 		render("/pingtai/sysLog/view.html");
 	}
 	

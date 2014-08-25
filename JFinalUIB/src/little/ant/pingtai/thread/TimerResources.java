@@ -41,6 +41,9 @@ public class TimerResources extends Timer {
 				String hostName = ToolOS.getOsLocalHostName(); // 获取本机名称
 				int cpuNumber = ToolOS.getOsCpuNumber(); // 获取CPU数量
 				double cpuRatio = ToolOS.getOscpuRatio(); // cpu使用率
+				if(cpuRatio < 0){
+					cpuRatio = 0;
+				}
 				
 				long phyMemory = ToolOS.getOsPhysicalMemory(); // 物理内存，总的可使用的
 				long phyFreeMemory = ToolOS.getOsPhysicalFreeMemory(); // 物理内存，剩余

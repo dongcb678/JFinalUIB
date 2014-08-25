@@ -18,6 +18,8 @@ public class MenuService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(MenuService.class);
+
+	public static final MenuService service = new MenuService();
 	
 	/**
 	 * 获取子节点数据

@@ -23,8 +23,6 @@ public class MessageController extends BaseController {
 
 	private static Logger log = Logger.getLogger(MessageController.class);
 	
-	private MessageService messageService = new MessageService();
-	
 	/**
 	 * 1.在开发者首次提交验证申请时，微信服务器将发送GET请求到填写的URL上，并且带上四个参数（signature、timestamp、nonce、echostr），
 	 * 开发者通过对签名（即signature）的效验，来判断此条消息的真实性。
@@ -50,7 +48,7 @@ public class MessageController extends BaseController {
 				String accountId = getPara("accountId");// 公众账号标识
 				String recverMsg = ToolContext.requestStream(getRequest());
 				log.info("接收微信发送过来的消息" + recverMsg);
-				String responseMsg = messageService.messageProcess(accountId, recverMsg);
+				String responseMsg = MessageService.service.messageProcess(accountId, recverMsg);
 				log.info("返回消息" + responseMsg);
 				renderText(responseMsg);
 				return;

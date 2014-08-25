@@ -19,8 +19,6 @@ public class RoleController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(RoleController.class);
 	
-	private RoleService roleService = new RoleService();
-
 	private List<Group> noCheckedList;
 	private List<Group> checkedList;
 	
@@ -28,13 +26,13 @@ public class RoleController extends BaseController {
 	private String operatorIds;
 	
 	public void index() {
-		roleService.list(splitPage);
+		RoleService.service.list(splitPage);
 		render("/pingtai/role/list.html");
 	}
 	
 	@Before(RoleValidator.class)
 	public void save() {
-		ids = roleService.save(getModel(Role.class));
+		ids = RoleService.service.save(getModel(Role.class));
 		redirect("/jf/role");
 	}
 	
@@ -45,18 +43,18 @@ public class RoleController extends BaseController {
 	
 	@Before(RoleValidator.class)
 	public void update() {
-		roleService.update(getModel(Role.class));
+		RoleService.service.update(getModel(Role.class));
 		redirect("/jf/role");
 	}
 	
 	public void delete() {
-		roleService.delete(getPara());
+		RoleService.service.delete(getPara());
 		redirect("/jf/role");
 	}
 
 	@SuppressWarnings("unchecked")
 	public void select(){
-		Map<String,Object> map = roleService.select(ids);
+		Map<String,Object> map = RoleService.service.select(ids);
 		noCheckedList = (List<Group>) map.get("noCheckedList");
 		checkedList = (List<Group>) map.get("checkedList");
 		render("/pingtai/role/select.html");
@@ -68,7 +66,7 @@ public class RoleController extends BaseController {
 	}
 
 	public void setOperator(){
-		roleService.setOperator(ids, moduleIds, operatorIds);
+		RoleService.service.setOperator(ids, moduleIds, operatorIds);
 		renderJson(ids);
 	}
 	

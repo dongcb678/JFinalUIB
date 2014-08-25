@@ -19,8 +19,6 @@ public class UserController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UserController.class);
 	
-	private UserService userService = new UserService();
-	
 	private String deptIds;
 	private String groupIds;
 	
@@ -28,7 +26,7 @@ public class UserController extends BaseController {
 	 * 默认列表
 	 */
 	public void index() {
-		userService.list(splitPage);
+		UserService.service.list(splitPage);
 		render("/pingtai/user/list.html");
 	}
 	
@@ -40,7 +38,7 @@ public class UserController extends BaseController {
 		String password = getPara("password");
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
-		userService.save(user, password, userInfo);
+		UserService.service.save(user, password, userInfo);
 		render("/pingtai/user/add.html");
 	}
 	
@@ -62,7 +60,7 @@ public class UserController extends BaseController {
 		String password = getPara("password");
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
-		userService.update(user, password, userInfo);
+		UserService.service.update(user, password, userInfo);
 		redirect("/jf/user");
 	}
 
@@ -80,7 +78,7 @@ public class UserController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		userService.delete(getPara());
+		UserService.service.delete(getPara());
 		redirect("/jf/user");
 	}
 
@@ -88,7 +86,7 @@ public class UserController extends BaseController {
 	 * 用户树ztree节点数据
 	 */
 	public void treeData() {
-		String json = userService.childNodeData(deptIds);
+		String json = UserService.service.childNodeData(deptIds);
 		renderJson(json);
 	}
 	
@@ -96,7 +94,7 @@ public class UserController extends BaseController {
 	 * 设置用户拥有的组
 	 */
 	public void setGroup(){
-		userService.setGroup(ids, groupIds);
+		UserService.service.setGroup(ids, groupIds);
 		renderText(ids);
 	}
 	
@@ -105,7 +103,7 @@ public class UserController extends BaseController {
 	 */
 	public void valiPassWord(){
 		String passWord = getPara("passWord");
-		boolean bool = userService.valiPassWord(ids, passWord);
+		boolean bool = UserService.service.valiPassWord(ids, passWord);
 		renderText(String.valueOf(bool));
 	}
 	
@@ -116,7 +114,7 @@ public class UserController extends BaseController {
 		String userName = getPara("userName");
 		String passOld = getPara("passOld");
 		String passNew = getPara("passNew");
-		userService.passChange(userName, passOld, passNew);
+		UserService.service.passChange(userName, passOld, passNew);
 		renderText("");
 	}
 	

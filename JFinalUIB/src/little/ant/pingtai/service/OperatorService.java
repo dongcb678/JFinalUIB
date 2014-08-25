@@ -14,6 +14,8 @@ public class OperatorService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(OperatorService.class);
+
+	public static final OperatorService service = new OperatorService();
 	
 	/**
 	 * 保存

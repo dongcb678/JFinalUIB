@@ -10,6 +10,8 @@ public class SysLogService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SysLogService.class);
+
+	public static final SysLogService service = new SysLogService();
 	
 	public Syslog view(String ids){
 		String sql = ToolSqlXml.getSql("pingtai.sysLog.view");

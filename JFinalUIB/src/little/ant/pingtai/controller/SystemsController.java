@@ -15,16 +15,14 @@ public class SystemsController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SystemsController.class);
 	
-	private SystemsService systemsService = new SystemsService();
-	
 	public void index() {
-		systemsService.list(splitPage);
+		SystemsService.service.list(splitPage);
 		render("/pingtai/systems/list.html");
 	}
 	
 	@Before(SystemsValidator.class)
 	public void save() {
-		systemsService.save(getModel(Systems.class));
+		SystemsService.service.save(getModel(Systems.class));
 		redirect("/jf/systems");
 	}
 	
@@ -40,7 +38,7 @@ public class SystemsController extends BaseController {
 	}
 	
 	public void delete() {
-		systemsService.delete(getPara());
+		SystemsService.service.delete(getPara());
 		redirect("/jf/systems");
 	}
 

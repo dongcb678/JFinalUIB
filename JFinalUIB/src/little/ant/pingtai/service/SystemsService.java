@@ -14,6 +14,8 @@ public class SystemsService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SystemsService.class);
+
+	public static final SystemsService service = new SystemsService();
 	
 	/**
 	 * 保存

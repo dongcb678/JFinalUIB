@@ -17,6 +17,8 @@ public class IndexService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(IndexService.class);
+
+	public static final IndexService service = new IndexService();
 	
 	/**
 	 * 查询用户可操作的菜单

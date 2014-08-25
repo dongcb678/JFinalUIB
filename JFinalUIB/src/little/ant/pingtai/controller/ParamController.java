@@ -16,8 +16,6 @@ public class ParamController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ParamController.class);
 	
-	private ParamService paramService = new ParamService();
-	
 	public void index() {
 		String sql = ToolSqlXml.getSql("pingtai.param.treeTableNodeRoot");
 		list = Param.dao.find(sql);
@@ -31,13 +29,13 @@ public class ParamController extends BaseController {
 	}
 
 	public void treeData()  {
-		String jsonText = paramService.childNodeData(ids);
+		String jsonText = ParamService.service.childNodeData(ids);
 		renderJson(jsonText);
 	}
 	
 	@Before(ParamValidator.class)
 	public void save() {
-		paramService.save(getModel(Param.class));
+		ParamService.service.save(getModel(Param.class));
 		redirect("/jf/param/toUrl?toUrl=/pingtai/param/treeTableIframe.html");
 	}
 	
@@ -51,12 +49,12 @@ public class ParamController extends BaseController {
 	
 	@Before(ParamValidator.class)
 	public void update() {
-		paramService.update(getModel(Param.class));
+		ParamService.service.update(getModel(Param.class));
 		redirect("/jf/param/toUrl?toUrl=/pingtai/param/treeTableIframe.html", true);
 	}
 	
 	public void delete() {
-		paramService.delete(getPara());
+		ParamService.service.delete(getPara());
 		redirect("/jf/param/toUrl?toUrl=/pingtai/param/treeTableIframe.html");
 	}
 

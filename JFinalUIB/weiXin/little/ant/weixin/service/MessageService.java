@@ -13,6 +13,8 @@ public class MessageService extends BaseService {
 
 	private static Logger log = Logger.getLogger(MessageService.class);
 
+	public static final MessageService service = new MessageService();
+	
 	/**
 	 * 消息处理
 	 * @param accountId 公众账号标识

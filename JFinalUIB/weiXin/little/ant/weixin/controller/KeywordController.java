@@ -19,17 +19,15 @@ public class KeywordController extends BaseController {
 
 	private static Logger log = Logger.getLogger(KeywordController.class);
 	
-	private KeywordService keywordService = new KeywordService();
-	
 	public void index(){
 		log.debug("微信自动回复管理：分页");
-		keywordService.list(splitPage);
+		KeywordService.service.list(splitPage);
 		render("/weiXin/keyword/list.html");
 	}
 	
 	@Before(KeywordValidator.class)
 	public void save() {
-		ids = keywordService.save(getModel(Keyword.class));
+		ids = KeywordService.service.save(getModel(Keyword.class));
 		redirect("/jf/wx/keyword");
 	}
 	
@@ -40,12 +38,12 @@ public class KeywordController extends BaseController {
 	
 	@Before(KeywordValidator.class)
 	public void update() {
-		keywordService.update(getModel(Keyword.class));
+		KeywordService.service.update(getModel(Keyword.class));
 		redirect("/jf/wx/keyword");
 	}
 	
 	public void delete() {
-		keywordService.delete(getPara());
+		KeywordService.service.delete(getPara());
 		redirect("/jf/wx/keyword");
 	}
 }

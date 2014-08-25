@@ -16,6 +16,8 @@ public class ModuleService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ModuleService.class);
+
+	public static final ModuleService service = new ModuleService();
 	
 	/**
 	 * 获取子节点数据

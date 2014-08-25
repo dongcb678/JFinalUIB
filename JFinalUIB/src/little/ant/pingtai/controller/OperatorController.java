@@ -15,18 +15,16 @@ public class OperatorController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(OperatorController.class);
 	
-	private OperatorService operatorService = new OperatorService();
-	
 	private String moduleIds;
 	
 	public void index() {
-		operatorService.list(splitPage);
+		OperatorService.service.list(splitPage);
 		render("/pingtai/operator/list.html");
 	}
 	
 	@Before(OperatorValidator.class)
 	public void save() {
-		ids = operatorService.save(getModel(Operator.class));
+		ids = OperatorService.service.save(getModel(Operator.class));
 		redirect("/jf/operator");
 	}
 	
@@ -37,7 +35,7 @@ public class OperatorController extends BaseController {
 	
 	@Before(OperatorValidator.class)
 	public void update() {
-		operatorService.update(getModel(Operator.class));
+		OperatorService.service.update(getModel(Operator.class));
 		redirect("/jf/operator");
 	}
 
@@ -47,12 +45,12 @@ public class OperatorController extends BaseController {
 	}
 	
 	public void delete() {
-		operatorService.delete(getPara());
+		OperatorService.service.delete(getPara());
 		redirect("/jf/operator");
 	}
 	
 	public void treeData() {
-		String json = operatorService.childNodeData(moduleIds);
+		String json = OperatorService.service.childNodeData(moduleIds);
 		renderJson(json);
 	}
 }

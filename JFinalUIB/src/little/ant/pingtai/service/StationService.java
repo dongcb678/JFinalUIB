@@ -15,6 +15,8 @@ public class StationService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(StationService.class);
 
+	public static final StationService service = new StationService();
+	
 	/**
 	 * 获取子节点数据
 	 * @param parentIds

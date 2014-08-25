@@ -16,6 +16,8 @@ public class GroupService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(GroupService.class);
+
+	public static final GroupService service = new GroupService();
 	
 	/**
 	 * 保存

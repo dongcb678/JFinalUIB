@@ -16,8 +16,6 @@ public class IndexController extends BaseController {
 
 	private static Logger log = Logger.getLogger(IndexController.class);
 	
-	private IndexService indexService = new IndexService();
-	
 	public void index(){
 		
 	}
