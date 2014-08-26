@@ -139,7 +139,8 @@ public class StationService extends BaseService {
 	 */
 	public void setOperator(String stationIds, String moduleIds, String operatorIds){
 		Station station = Station.dao.findById(stationIds);
-		station.set("moduleids", moduleIds).set("operatorids", operatorIds).update();
+		//station.set("moduleids", moduleIds);
+		station.set("operatorids", operatorIds).update();
 		
 		// 缓存
 		Station.dao.cacheAdd(stationIds);

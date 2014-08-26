@@ -67,7 +67,8 @@ public class RoleService extends BaseService {
 	 */
 	public void setOperator(String roleIds, String moduleIds, String operatorIds){
 		Role role = Role.dao.findById(roleIds);
-		role.set("moduleids", moduleIds).set("operatorids", operatorIds).update();
+		//role.set("moduleids", moduleIds);
+		role.set("operatorids", operatorIds).update();
 		
 		// 缓存
 		Role.dao.cacheAdd(roleIds);
