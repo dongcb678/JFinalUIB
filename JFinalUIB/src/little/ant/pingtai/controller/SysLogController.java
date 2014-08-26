@@ -18,12 +18,6 @@ public class SysLogController extends BaseController {
 		render("/pingtai/sysLog/list.html");
 	}
 
-	public void test() {
-		defaultOrder("startdate", "desc");
-		SysLogService.service.list(splitPage);
-		render("/pingtai/sysLog/test.html");
-	}
-	
 	public void view() {
 		setAttr("sysLog", SysLogService.service.view(getPara()));
 		render("/pingtai/sysLog/view.html");

@@ -22,11 +22,6 @@ public class OperatorController extends BaseController {
 		render("/pingtai/operator/list.html");
 	}
 
-	public void test() {
-		OperatorService.service.list(splitPage);
-		render("/pingtai/operator/test.html");
-	}
-	
 	@Before(OperatorValidator.class)
 	public void save() {
 		ids = OperatorService.service.save(getModel(Operator.class));
