@@ -61,20 +61,31 @@
 					<a href="${ctx!}/jsFile/ueditor/index.jsp" target="_blank">打开测试页面</a>
 					<hr>
 					
-					单content多个分页测试：<br>
-					<div id="aaaaa">
+					lucene查询分页测试：测试关键字（早餐、歌手、刘德华等等）<br>
+					<div id="lucene">
 						<script type="text/javascript">
-							ajaxDiv("aaaaa", "/jf/test/operator?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "aaaaa", "formId" : "splitPage1"}
+							ajaxDiv("lucene", "/jf/test/lucene?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "aaaaa", "formId" : "splitPage1"}
 						</script>
 					</div>
 					
 					<hr>
 					
-					<div id="bbbbb">
+					单content多个分页测试：<br>
+					
+					<div id="operator">
 						<script type="text/javascript">
-							ajaxDiv("bbbbb", "/jf/test/sysLog?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "bbbbb", "formId" : "splitPage2"}
+							ajaxDiv("operator", "/jf/test/operator?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "aaaaa", "formId" : "splitPage1"}
 						</script>
 					</div>
+					
+					<hr>
+					
+					<div id="sysLog">
+						<script type="text/javascript">
+							ajaxDiv("sysLog", "/jf/test/sysLog?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "bbbbb", "formId" : "splitPage2"}
+						</script>
+					</div>
+					
 				</div>
 				<div class="tab-pane" id="pv">
 					<div id="content_pv" style="height:200px;border:1px solid #ccc;padding:10px;"></div>

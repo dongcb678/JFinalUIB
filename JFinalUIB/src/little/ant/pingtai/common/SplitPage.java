@@ -39,8 +39,8 @@ public class SplitPage implements Serializable {
 	 */
 	public void compute() {
 		getTotalPage();
-
-		this.currentPageCount = this.list.size();// 当前页记录数
+		
+		this.currentPageCount = (null != this.list ? this.list.size() : 0);// 当前页记录数
 
 		if (pageNumber == 1) {
 			this.isFirst = true;

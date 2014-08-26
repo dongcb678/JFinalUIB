@@ -3,6 +3,7 @@ package little.ant.pingtai.controller;
 import little.ant.pingtai.annotation.Controller;
 import little.ant.pingtai.service.OperatorService;
 import little.ant.pingtai.service.SysLogService;
+import little.ant.weixin.lucene.DocKeyword;
 
 import org.apache.log4j.Logger;
 
@@ -21,6 +22,11 @@ public class TestController extends BaseController {
 		defaultOrder("startdate", "desc");
 		SysLogService.service.list(splitPage);
 		render("/pingtai/test/sysLog.html");
+	}
+	
+	public void lucene() {
+		new DocKeyword().search(splitPage);
+		render("/pingtai/test/lucene.html");
 	}
 	
 }

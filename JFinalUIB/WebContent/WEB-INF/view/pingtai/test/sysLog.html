@@ -1,4 +1,4 @@
-<form id="splitPage2" class="form-horizontal" action="${cxt!}/jf/test/sysLog" method="POST">
+<form id="splitPageSysLog" class="form-horizontal" action="${cxt!}/jf/test/sysLog" method="POST">
 	
 	<div class="row-fluid sortable">
 		<div class="box span12">
@@ -9,7 +9,7 @@
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
 				</div>
 			</div>
-			<div class="box-content" style="display: none;">
+			<div class="box-content">
 				<fieldset>
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ourl"]}</label>
@@ -51,7 +51,7 @@
 				  	</div>
 				  	
 				  	<div class="form-actions">
-						<button type="button" class="btn btn-primary" onclick='ajaxForm("content", "splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="button" class="btn btn-primary" onclick='ajaxForm("sysLog", "splitPageSysLog");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
 				  	</div>
 				</fieldset>
@@ -129,8 +129,8 @@
 						<% } %>
 					</tbody>
 				</table>
-				<div id="splitPageDiv2" class="pagination pagination-centered">
-					<% include("/common/splitPage.html", {"divId" : "bbbbb", "formId" : "splitPage2", "splitPageDiv" : "splitPageDiv2"}){} %>
+				<div id="splitPageDivSysLog" class="pagination pagination-centered">
+					<% include("/common/splitPage.html", {"divId" : "sysLog", "formId" : "splitPageSysLog", "splitPageDiv" : "splitPageDivSysLog"}){} %>
 				</div>
 			</div>
 			

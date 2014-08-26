@@ -174,51 +174,52 @@ public class DocKeyword extends DocBase {
         try {
         	Map<String, String> queryParam = splitPage.getQueryParam(); 
     		String searchKeyWords = queryParam.get("searchKeyWords");//查询关键字
-    		
-    		String[] queryFields = new String[]{"question", "questionkey"};
-    		
-    		QueryParser queryParser = new MultiFieldQueryParser(Version.LUCENE_4_9, queryFields, analyzer);
-            queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
-            
-        	org.apache.lucene.search.Query query = queryParser.parse(searchKeyWords);
-        	
-        	Sort sort = new Sort(new SortField("createdDate", Type.LONG, true));//true为降序排列
-        	TopFieldCollector results = TopFieldCollector.create(sort, 1000, false, false, false, false);
-            //TopScoreDocCollector results = TopScoreDocCollector.create(1000, true);//收集1000条数据，限制查询结果的条目
-        	
-        	getSearcher().search(query, results);
-            //TopDocs topDocs = getSearcher().search(query, 10000, sort);
-			
-        	int maxResult = splitPage.getPageSize();// 抓取数
-        	int currentPage = splitPage.getPageNumber();// 当前页数
-        	int firstResult = (currentPage - 1) == 0 ? 0 : (currentPage - 1) * maxResult;// 开始处
-    		
-            TopDocs topDocs = results.topDocs(Integer.parseInt(String.valueOf(firstResult)), Integer.parseInt(String.valueOf(maxResult)));//从第几条开始，加载多少条数据
-            ScoreDoc[] scoreDocs = topDocs.scoreDocs;//当前页数据 
-            int length = scoreDocs.length;//当前页有多少条记录
-
-            Highlighter highlighter = getHighlighter(query);//高亮处理器
-        	List<Keyword> keywordList = new ArrayList<Keyword>();
-        	
-        	Keyword keyword = null;
-            for (int i = 0; i < length; i++) {
-            	Document doc = searcher.doc(scoreDocs[i].doc);
-            	highlighter(analyzer, highlighter, doc, queryFields);
+    		if(searchKeyWords != null && !searchKeyWords.isEmpty()){
+    			String[] queryFields = new String[]{"question", "questionkey"};
+        		
+        		QueryParser queryParser = new MultiFieldQueryParser(Version.LUCENE_4_9, queryFields, analyzer);
+                queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
+                
+            	org.apache.lucene.search.Query query = queryParser.parse(searchKeyWords);
             	
-            	keyword = new Keyword();
-            	keyword.set("ids", doc.get("ids"));
-            	keyword.set("question", doc.get("question"));
-            	keyword.set("questionkey", doc.get("questionkey"));
-            	keyword.set("answer", doc.get("answer"));
+            	Sort sort = new Sort(new SortField("createdDate", Type.LONG, true));//true为降序排列
+            	TopFieldCollector results = TopFieldCollector.create(sort, 1000, false, false, false, false);
+                //TopScoreDocCollector results = TopScoreDocCollector.create(1000, true);//收集1000条数据，限制查询结果的条目
             	
-            	keywordList.add(keyword);
-            	keyword = null;
-            }
-            splitPage.setList(keywordList);// 记录集
-            
-            TopDocs tsCount= searcher.search(query, Integer.MAX_VALUE);
-            splitPage.setTotalRow(tsCount.totalHits);// 记录总数
+            	getSearcher().search(query, results);
+                //TopDocs topDocs = getSearcher().search(query, 10000, sort);
+    			
+            	int maxResult = splitPage.getPageSize();// 抓取数
+            	int currentPage = splitPage.getPageNumber();// 当前页数
+            	int firstResult = (currentPage - 1) == 0 ? 0 : (currentPage - 1) * maxResult;// 开始处
+        		
+                TopDocs topDocs = results.topDocs(Integer.parseInt(String.valueOf(firstResult)), Integer.parseInt(String.valueOf(maxResult)));//从第几条开始，加载多少条数据
+                ScoreDoc[] scoreDocs = topDocs.scoreDocs;//当前页数据 
+                int length = scoreDocs.length;//当前页有多少条记录
 
+                Highlighter highlighter = getHighlighter(query);//高亮处理器
+            	List<Keyword> keywordList = new ArrayList<Keyword>();
+            	
+            	Keyword keyword = null;
+                for (int i = 0; i < length; i++) {
+                	Document doc = searcher.doc(scoreDocs[i].doc);
+                	highlighter(analyzer, highlighter, doc, queryFields);
+                	
+                	keyword = new Keyword();
+                	keyword.set("ids", doc.get("ids"));
+                	keyword.set("question", doc.get("question"));
+                	keyword.set("questionkey", doc.get("questionkey"));
+                	keyword.set("answer", doc.get("answer"));
+                	
+                	keywordList.add(keyword);
+                	keyword = null;
+                }
+                splitPage.setList(keywordList);// 记录集
+                
+                TopDocs tsCount= searcher.search(query, Integer.MAX_VALUE);
+                splitPage.setTotalRow(tsCount.totalHits);// 记录总数
+    		}
+    		
             splitPage.compute();// 计算
 		} catch (IOException e) {
 			e.printStackTrace();
