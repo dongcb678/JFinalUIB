@@ -132,13 +132,14 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		
 		return super.update();
 	}
-	
+
 	/**
 	 * 针对Oracle做特殊处理
 	 * @param attr
 	 * @return
 	 */
-	public Date getMyDate(String attr){
+	@Override
+	public Date getDate(String attr) {
 		Object obj = this.get(attr);
 		if(null == obj){
 			return null;
@@ -159,4 +160,5 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		
 		return (Date) obj;
 	}
+	
 }

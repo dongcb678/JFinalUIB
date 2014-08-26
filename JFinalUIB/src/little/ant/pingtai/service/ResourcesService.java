@@ -92,7 +92,7 @@ public class ResourcesService extends BaseService {
 			phymemory = resources.getNumber("phymemory").longValue();
 			jvmmaxmemory = resources.getNumber("jvmmaxmemory").longValue();
 			
-			datesList.add(ToolDateTime.format(resources.getMyDate("createdate"), "HH:mm"));
+			datesList.add(ToolDateTime.format(resources.getDate("createdate"), "HH:mm"));
 			
 			int cpuratio = (int)(resources.getBigDecimal("cpuratio").doubleValue() * 100);
 			cpuList.add(Integer.valueOf(cpuratio));

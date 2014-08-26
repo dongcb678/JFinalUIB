@@ -1,22 +1,10 @@
-<form id="splitPage" class="form-horizontal" action="${cxt!}/jf/operator" method="POST">
-	
-	<div>
-		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
-			<li>
-				<a href="#">${i18nMap["admin.operator.common.name"]}</a>
-			</li>
-		</ul>
-	</div>
+<form id="splitPage1" class="form-horizontal" action="${cxt!}/jf/operator/test" method="POST">
 	
 	<div class="row-fluid sortable">
 		<div class="box span12">
 			<div class="box-header well" data-original-title>
 				<h2><i class="icon-edit"></i> ${i18nMap["admin.operator.list.select"]}</h2>
 				<div class="box-icon">
-					<% if(hasPrivilegeUrl("/pingtai/operator/add.html")){ %>
-						<a href="#" class="btn btn-round" title='${i18nMap["admin.operator.add"]}' onclick="ajaxContent('/jf/operator/toUrl?toUrl=/pingtai/operator/add.html');"><i class="icon-plus-sign"></i></a>
-					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
 				</div>
@@ -85,15 +73,9 @@
 							<th onclick="orderbyFun('content', 'splitPage', 'privilegess')">
 								${i18nMap["admin.operator.property.privilegess"]}	${orderBy("privilegess")}
 							</th>
-							<th>${i18nMap["admin.common.operation"]}</th>
 						</tr>
 					</thead>
 					<tbody>
-						<%
-							var view = hasPrivilegeUrl("/jf/operator/view");
-							var edit = hasPrivilegeUrl("/jf/operator/edit");
-							var delete = hasPrivilegeUrl("/jf/operator/delete");
-						%>
 						<% for(operator in splitPage.page.list){ %>
 							<tr>
 								<td>${escapeXml(operator.systemsnames!)}</td>
@@ -130,17 +112,12 @@
 											${i18nMap["admin.common.yes"]}
 									<% } %>
 								</td>
-								<td class="center">
-									<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/operator/view/${escapeXml(operator.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a> 
-									<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/operator/edit/${escapeXml(operator.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a> 
-									<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/operator/delete/${escapeXml(operator.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
-								</td>
 							</tr>
 						<% } %>
 					</tbody>
 				</table>
-				<div id="splitPageDiv" class="pagination pagination-centered">
-					<% include("/common/splitPage.html", {"divId" : "content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+				<div id="splitPageDiv1" class="pagination pagination-centered">
+					<% include("/common/splitPage.html", {"divId" : "aaaaa", "formId" : "splitPage1", "splitPageDiv" : "splitPageDiv1"}){} %>
 				</div>
 			</div>
 			

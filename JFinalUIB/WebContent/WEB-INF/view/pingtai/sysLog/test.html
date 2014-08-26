@@ -1,13 +1,4 @@
-<form id="splitPage" class="form-horizontal" action="${cxt!}/jf/sysLog" method="POST">
-	
-	<div>
-		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
-			<li>
-				<a href="#">${i18nMap["admin.sysLog.common.name"]}</a>
-			</li>
-		</ul>
-	</div>
+<form id="splitPage2" class="form-horizontal" action="${cxt!}/jf/sysLog/test" method="POST">
 	
 	<div class="row-fluid sortable">
 		<div class="box span12">
@@ -107,14 +98,9 @@
 							<th onclick="orderbyFun('content', 'splitPage', 'haoShi')">
 								${i18nMap["admin.sysLog.property.haoshi"]}	${orderBy("haoShi")}
 							</th>
-							<th>${i18nMap["admin.common.operation"]}</th>
 						</tr>
 					</thead>
 					<tbody>
-						<%
-							var view = hasPrivilegeUrl("/jf/sysLog/view");
-							var delete = hasPrivilegeUrl("/jf/sysLog/delete");
-						%>
 						<% for(sysLog in splitPage.page.list){ %>
 							<tr>
 								<td align="center">${escapeXml(sysLog["onames"]!)}：${sysLog.ourl }</td>
@@ -139,20 +125,12 @@
 										<span class="label label-success">${sysLog["haoshi"] }</span>
 									<% } %>	
 								</td>
-								<td class="center">
-									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/sysLog/view/${escapeXml(sysLog.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a> 
-									<% } %>
-									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/sysLog/delete/${escapeXml(sysLog.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
-									<% } %>
-								</td>
 							</tr>
 						<% } %>
 					</tbody>
 				</table>
-				<div id="splitPageDiv" class="pagination pagination-centered">
-					<% include("/common/splitPage.html", {"divId" : "content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+				<div id="splitPageDiv2" class="pagination pagination-centered">
+					<% include("/common/splitPage.html", {"divId" : "bbbbb", "formId" : "splitPage2", "splitPageDiv" : "splitPageDiv2"}){} %>
 				</div>
 			</div>
 			

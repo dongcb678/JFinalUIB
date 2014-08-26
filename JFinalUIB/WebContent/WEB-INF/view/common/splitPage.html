@@ -2,6 +2,8 @@
 	$(document).ready(function() {
 		var divId = "${divId!}"; 							//分页显示div
 		var formId = "${formId!}"; 							//分页formId
+		var splitPageDiv = "${splitPageDiv!}"; 				//分页输出显示的div
+		
 		var totalRow = ${splitPage.page.totalRow!};			//总行数
 		var pageSize = ${splitPage.page.pageSize!};			//每页显示多少航 
 		var pageNumber = ${splitPage.page.pageNumber!};		//当前第几页 
@@ -15,6 +17,6 @@
 		var splitStr = splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode);
 		
 		// 显示分页信息
-		$("#splitPageDiv").html(splitStr);
+		$("#" + splitPageDiv).html(splitStr);
 	});
 </script>

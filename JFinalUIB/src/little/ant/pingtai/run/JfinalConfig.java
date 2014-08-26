@@ -85,9 +85,8 @@ public class JfinalConfig extends JFinalConfig {
 	 * 配置路由
 	 */
 	public void configRoute(Routes me) { 
-		log.info("configRoute 表扫描注册开始");
+		log.info("configRoute 路由扫描注册");
 		new ControllerPlugin(me).start();
-		log.info("configRoute 表扫描注册结束");
 	}
 	
 	/**

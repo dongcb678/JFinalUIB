@@ -21,6 +21,11 @@ public class OperatorController extends BaseController {
 		OperatorService.service.list(splitPage);
 		render("/pingtai/operator/list.html");
 	}
+
+	public void test() {
+		OperatorService.service.list(splitPage);
+		render("/pingtai/operator/test.html");
+	}
 	
 	@Before(OperatorValidator.class)
 	public void save() {
