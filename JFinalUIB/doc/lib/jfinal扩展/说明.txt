@@ -3,5 +3,10 @@
 
 2.表单数组上传：ToolModel
 
-3.增加sql打印格式化，SqlReporter的55行
-String info = "Sql: " + ToolSqlFormatter.format(String.valueOf(args[0]));
+3.增加sql打印格式化
+
+	SqlReporter的55行，String info = "Sql: " + ToolSqlFormatter.format(String.valueOf(args[0]));
+
+4.增加sql打印参数
+
+	修改Dialect类
