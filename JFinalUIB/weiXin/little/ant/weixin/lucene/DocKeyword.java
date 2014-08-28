@@ -101,8 +101,6 @@ public class DocKeyword extends DocBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		ramToDisk();//把RAM写同步更新到DISK
 	}
 	
 	/**
