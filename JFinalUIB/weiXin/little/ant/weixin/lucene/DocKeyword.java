@@ -175,7 +175,7 @@ public class DocKeyword extends DocBase {
         	Map<String, String> queryParam = splitPage.getQueryParam(); 
     		String searchKeyWords = queryParam.get("searchKeyWords");//查询关键字
     		if(searchKeyWords != null && !searchKeyWords.isEmpty()){
-    			String[] queryFields = new String[]{"question", "questionkey"};
+    			String[] queryFields = new String[]{"question", "questionkey", "answer"};
         		
         		QueryParser queryParser = new MultiFieldQueryParser(Version.LUCENE_4_9, queryFields, analyzer);
                 queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
