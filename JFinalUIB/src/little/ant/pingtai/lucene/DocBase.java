@@ -49,7 +49,7 @@ import com.jfinal.plugin.activerecord.TableMapping;
  */
 public abstract class DocBase implements Runnable {
 	
-	protected static final int splitDataSize = 10000;//初始化索引，每批次处理一万行
+	protected static final int splitDataSize = 200;//初始化索引，每批次处理一万行
 	
 	protected static final Analyzer analyzer = new IKAnalyzer();//分词器
 	

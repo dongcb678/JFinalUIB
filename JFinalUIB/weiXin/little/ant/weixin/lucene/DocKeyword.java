@@ -71,13 +71,13 @@ public class DocKeyword extends DocBase {
 	 */
 	private void indexAllKeyword() {
 		List<Field> fields = getFields(fieldNames, Keyword.class);
-		IndexWriter ramIndexWriter = getRamIndexWriter();//调用RAM写
 		Document document = new Document();
 		
 		int batchCount = getBatchCount(" from wx_keyword ", splitDataSize);
 		String sql = " select * from wx_keyword limit ? offset ? ";
 
 		for (int i = 0; i < batchCount; i++) {
+			IndexWriter ramIndexWriter = getRamIndexWriter();//调用RAM写
 			List<Keyword> list = Keyword.dao.find(sql, DocBase.splitDataSize, i * DocBase.splitDataSize);
 			for (Keyword keyword : list) {
 				addDoc(ramIndexWriter, keyword, document, fields);
@@ -304,11 +304,11 @@ public class DocKeyword extends DocBase {
 	@Override
 	protected IndexReader getReader() {
 		try {
-			if(null == ramDir){
-				getRamDir();
+			if(null == diskDir){
+				getDiskDir();
 			}
 			if(null == reader){
-				reader = DirectoryReader.open(ramDir);// 查询目标DISK：diskDir，RAM：ramDir
+				reader = DirectoryReader.open(diskDir);// 查询目标DISK：diskDir，RAM：ramDir
 			}
 			return reader;
 		} catch (Exception e) {
@@ -342,6 +342,7 @@ public class DocKeyword extends DocBase {
 		try {
 			// 1.先关闭内存读写
 			ramIndexWriter.close();
+			ramIndexWriter = null;
 			// 2.添加内存目录内容到磁盘读写
 			diskIndexWriter.addIndexes(ramDir);
 			// 3.保存提交
@@ -366,6 +367,7 @@ public class DocKeyword extends DocBase {
 		if(null != reader){
 			try {
 				reader.close();
+				reader = null;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -373,6 +375,7 @@ public class DocKeyword extends DocBase {
 		if(null != ramIndexWriter){
 			try {
 				ramIndexWriter.close();
+				ramIndexWriter = null;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -380,6 +383,7 @@ public class DocKeyword extends DocBase {
 		if(null != ramDir){
 			try {
 				ramDir.close();
+				ramDir = null;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -387,6 +391,7 @@ public class DocKeyword extends DocBase {
 		if (null != diskIndexWriter) {
 			try {
 				diskIndexWriter.close();
+				diskIndexWriter = null;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -394,6 +399,7 @@ public class DocKeyword extends DocBase {
 		if (null != diskDir) {
 			try {
 				diskDir.close();
+				diskDir = null;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
