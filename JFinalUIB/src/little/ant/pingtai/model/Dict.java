@@ -144,11 +144,14 @@ public class Dict extends BaseModel<Dict> {
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + ids, dictList);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("numbers"), dictList);
 
-		Dict parent = Dict.dao.findById(dict.getStr("parentids"));
-		if(null != parent){
-			List<Dict> parentList = parent.getChild();
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("ids"), parentList);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
+		String parentIds = dict.getStr("parentids");
+		if(null != parentIds){
+			Dict parent = Dict.dao.findById(parentIds);
+			if(null != parent){
+				List<Dict> parentList = parent.getChild();
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("ids"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
+			}
 		}
 	}
 
@@ -164,11 +167,14 @@ public class Dict extends BaseModel<Dict> {
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + ids);
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("numbers"));
 
-		Dict parent = Dict.dao.findById(dict.getStr("parentids"));
-		if(null != parent){
-			List<Dict> parentList = parent.getChild();
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("ids"), parentList);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
+		String parentIds = dict.getStr("parentids");
+		if(null != parentIds){
+			Dict parent = Dict.dao.findById(parentIds);
+			if(null != parent){
+				List<Dict> parentList = parent.getChild();
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("ids"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
+			}
 		}
 	}
 

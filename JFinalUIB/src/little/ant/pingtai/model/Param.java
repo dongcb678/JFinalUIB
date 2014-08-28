@@ -141,12 +141,15 @@ public class Param extends BaseModel<Param> {
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"), param);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + ids, paramList);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr("numbers"), paramList);
-
-		Param parent = Param.dao.findById(param.getStr("parentids"));
-		if(null != parent){
-			List<Param> parentList = parent.getChild();
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("ids"), parentList);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
+		
+		String paramIds = param.getStr("parentids");
+		if(null != paramIds){
+			Param parent = Param.dao.findById(param.getStr("parentids"));
+			if(null != parent){
+				List<Param> parentList = parent.getChild();
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("ids"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
+			}
 		}
 	}
 
@@ -161,11 +164,14 @@ public class Param extends BaseModel<Param> {
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + ids);
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr("numbers"));
 
-		Param parent = Param.dao.findById(param.getStr("parentids"));
-		if(null != parent){
-			List<Param> parentList = parent.getChild();
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("ids"), parentList);
-			CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
+		String paramIds = param.getStr("parentids");
+		if(null != paramIds){
+			Param parent = Param.dao.findById(param.getStr("parentids"));
+			if(null != parent){
+				List<Param> parentList = parent.getChild();
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("ids"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
+			}
 		}
 	}
 
