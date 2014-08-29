@@ -58,7 +58,7 @@ public class JfinalConfig extends JFinalConfig {
 		me.setEncoding(ToolString.encoding); 
 
 		log.info("configConstant 设置是否开发模式");
-		me.setDevMode(getPropertyToBoolean("config.devMode", false));
+		me.setDevMode(getPropertyToBoolean(DictKeys.config_devMode, false));
 		//me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
 
 		log.info("configConstant 视图Beetl设置");
@@ -109,8 +109,8 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("configPlugin 配置ActiveRecord插件");
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 		//arp.setTransactionLevel(4);//事务隔离级别
-		arp.setDevMode(getPropertyToBoolean("config.devMode", false)); // 设置开发模式
-		arp.setShowSql(getPropertyToBoolean("config.devMode", false)); // 是否显示SQL
+		arp.setDevMode(getPropertyToBoolean(DictKeys.config_devMode, false)); // 设置开发模式
+		arp.setShowSql(getPropertyToBoolean(DictKeys.config_devMode, false)); // 是否显示SQL
 
 		log.info("configPlugin 数据库类型判断");
 		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
@@ -179,9 +179,12 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
 
-		log.info("afterJFinalStart 创建自动回复lucene索引");
-		new DocKeyword().run(); 
-
+		boolean luceneIndex = getPropertyToBoolean(DictKeys.config_luceneIndex, false);
+		if(luceneIndex){
+			log.info("afterJFinalStart 创建自动回复lucene索引");
+			new DocKeyword().run(); 
+		}
+		
 		log.info("afterJFinalStart 系统负载");
 		TimerResources.start();
 	}

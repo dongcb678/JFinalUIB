@@ -22,6 +22,16 @@ public abstract class DictKeys {
 	public static final String cache_name_system = "system";
 	
 	/**
+	 * 开发模式
+	 */
+	public static final String config_devMode = "config.devMode";
+	
+	/**
+	 * 是否重新构建Lucene索引（构建索引实在是慢）
+	 */
+	public static final String config_luceneIndex = "config.luceneIndex";
+	
+	/**
 	 * 加密
 	 */
 	public static final String config_securityKey_key = "config.securityKey";
