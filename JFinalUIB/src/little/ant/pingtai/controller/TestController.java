@@ -29,6 +29,11 @@ public class TestController extends BaseController {
 		render("/pingtai/test/lucene.html");
 	}
 	
+	public void autoComplete(){
+		String jsArray = "['aa', 'bb', 'cc', 'dd', 'aa2', 'bb2', 'cc2', 'dd2']";
+		renderText(jsArray);
+	}
+	
 }
 
 

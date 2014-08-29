@@ -274,12 +274,39 @@
   * ================== */
 
   $(function () {
-    $('body').on('focus.typeahead.data-api', '[data-provide="typeahead"]', function (e) {
-      var $this = $(this)
-      if ($this.data('typeahead')) return
-      e.preventDefault()
-      $this.typeahead($this.data())
-    })
-  })
+	  //$(".typeahead input[data-provide=typeahead]")
+	  $('body').on('focus.typeahead.data-api', 'input[data-provide="typeahead"]', function (e) {
+		  var $this = $(this);
+//	      if ($this.data('typeahead')){
+//		      alert(111);
+//	    	  return;
+//	      }
+	      e.preventDefault();
+	      
+	      var data = $this.data();
+	      //alert(JSON.stringify(data) );
+	      
+	      var dataUrl = $this.attr("data-url");
+	      $.ajax({
+	    	  type : "post",
+	    	  url : encodeURI(encodeURI(cxt + dataUrl)),
+	    	  data : data,
+	    	  dataType : "html",
+	    	  contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	    	  async: false,
+	    	  cache: false,
+	    	  success: function(returnData){
+	    		  data["source"] = eval('(' + returnData + ')');//['aa', 'bb', 'cc'];//
+	    	      $this.typeahead(data);
+	    	  },
+	    	  error: function(XMLHttpRequest, textStatus, errorThrown) { 
+	    		  alert("请求出现错误！");
+	    	  },
+	    	  complete: function(XMLHttpRequest, textStatus) { 
+	    		  
+	    	  }
+		  });
+	  })
+  });
 
 }(window.jQuery);

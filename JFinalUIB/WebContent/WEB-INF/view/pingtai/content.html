@@ -53,6 +53,11 @@
 					<#dict type="checkbox" id="11" name="22" class="" style="" number="weixinConfig" defaultnumber="weixinAppID"/><br>
 					<hr>
 					
+					自动补全：<br>
+					<input type="text" class="span6 typeahead" data-provide="typeahead" data-items="4" data-source='' data-url='/jf/test/autoComplete'>
+					<hr>
+					<!--  
+					-->
 					文件异步上传测试：<br>
 					<a href="${ctx!}/jsFile/ueditor/third-party/webuploader/index.jsp" target="_blank">打开测试页面</a>
 					<hr>
@@ -85,7 +90,6 @@
 							ajaxDiv("sysLog", "/jf/test/sysLog?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "bbbbb", "formId" : "splitPage2"}
 						</script>
 					</div>
-					
 				</div>
 				<div class="tab-pane" id="pv">
 					<div id="content_pv" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
