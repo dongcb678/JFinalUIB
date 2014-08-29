@@ -230,7 +230,7 @@
 
   , blur: function (e) {
       var that = this
-      setTimeout(function () { that.hide() }, 150)
+      setTimeout(function () { that.hide() }, 250)
     }
 
   , click: function (e) {
@@ -290,8 +290,7 @@
 	      $.ajax({
 	    	  type : "post",
 	    	  url : encodeURI(encodeURI(cxt + dataUrl)),
-	    	  data : data,
-	    	  dataType : "html",
+	    	  dataType : "text",
 	    	  contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	    	  async: false,
 	    	  cache: false,
