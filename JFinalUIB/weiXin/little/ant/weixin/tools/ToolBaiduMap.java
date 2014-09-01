@@ -66,7 +66,7 @@ public class ToolBaiduMap {
 
 			// 将返回的输入流转换成字符串
 			InputStream inputStream = httpUrlConn.getInputStream();
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, ToolString.encoding);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			String str = null;
 			while ((str = bufferedReader.readLine()) != null) {

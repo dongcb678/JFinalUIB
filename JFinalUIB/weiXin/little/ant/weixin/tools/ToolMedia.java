@@ -77,7 +77,7 @@ public class ToolMedia {
 
 			// 获取媒体文件上传的输入流（从微信服务器读数据）
 			InputStream inputStream = uploadConn.getInputStream();
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, ToolString.encoding);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			StringBuilder buffer = new StringBuilder();
 			String str = null;

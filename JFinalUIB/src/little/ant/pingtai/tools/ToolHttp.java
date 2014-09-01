@@ -183,7 +183,23 @@ public class ToolHttp {
 		JSONObject jsonObject = null;
 		try {
 			// 创建SSLContext对象，并使用我们指定的信任管理器初始化
-			TrustManager[] tm = { new MyX509TrustManager() };
+			TrustManager[] tm = { new X509TrustManager() {
+				// 检查客户端证书
+				@Override
+				public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+				}
+
+				// 检查服务器端证书
+				@Override
+				public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+				}
+
+				// 返回受信任的X509证书数组
+				@Override
+				public X509Certificate[] getAcceptedIssuers() {
+					return null;
+				}
+			} };
 			SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
 			sslContext.init(null, tm, new java.security.SecureRandom());
 			// 从上述SSLContext对象中得到SSLSocketFactory对象
@@ -209,7 +225,7 @@ public class ToolHttp {
 
 			// 从输入流读取返回内容
 			InputStream inputStream = conn.getInputStream();
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, ToolString.encoding);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			String str = null;
 			StringBuilder buffer = new StringBuilder();
@@ -231,7 +247,6 @@ public class ToolHttp {
 		}
 		return jsonObject;
 	}
-
 	
 	public static void main(String[] args){
 		//System.out.println(get("http://127.0.0.1:89/jf/login"));
@@ -263,18 +278,3 @@ public class ToolHttp {
 	}
 }
 
-class MyX509TrustManager implements X509TrustManager {
-
-	// 检查客户端证书
-	public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-	}
-
-	// 检查服务器端证书
-	public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-	}
-
-	// 返回受信任的X509证书数组
-	public X509Certificate[] getAcceptedIssuers() {
-		return null;
-	}
-}

@@ -198,7 +198,7 @@ class MatrixToImageWriterEx {
 	public static BitMatrix createQRCode(String content, int width, int height) {
 		Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
 		// 设置字符编码
-		hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+		hints.put(EncodeHintType.CHARACTER_SET, ToolString.encoding);
 		// 指定纠错等级
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
 		BitMatrix matrix = null;
