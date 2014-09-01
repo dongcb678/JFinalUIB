@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<div class="box-content">
-			<ul class="nav nav-tabs" id="myTab">
+			<ul class="nav nav-tabs myTabs">
 				<li class="active"><a href="#info">Info</a></li>
 				<li><a href="#pv" onclick="content_pv();">PV</a></li>
 				<li><a href="#cpu" onclick="content_cpu();">CPU</a></li>
@@ -43,7 +43,7 @@
 				<li><a href="#jvmmemory" onclick="content_jvmmemory();">JVM内存</a></li>
 			</ul>
 			 
-			<div id="myTabContent" class="tab-content">
+			<div class="tab-content">
 				<div class="tab-pane active" id="info">
 					参数和字典的beetl标签测试：<br>
 					<#dict type="select" id="11" name="22" class="" style="" number="weixinConfig" defaultnumber="weixinAppID"/><br>
@@ -53,11 +53,12 @@
 					<#dict type="checkbox" id="11" name="22" class="" style="" number="weixinConfig" defaultnumber="weixinAppID"/><br>
 					<hr>
 					
+					<!-- 
 					自动补全：<br>
-					<input type="text" class="span6 typeahead" data-provide="typeahead" data-items="4" data-source='' data-url='/jf/test/autoComplete'>
-					<hr>
-					<!--  
+					<input type="text" class="span6 typeahead" data-provide="typeahead" data-items="10" data-source='' data-url='/jf/test/autoComplete'>
+					<hr> 
 					-->
+					
 					文件异步上传测试：<br>
 					<a href="${ctx!}/jsFile/ueditor/third-party/webuploader/index.jsp" target="_blank">打开测试页面</a>
 					<hr>

@@ -132,10 +132,19 @@ function docReady(){
 	$('[data-rel="chosen"],[rel="chosen"]').chosen();
 
 	//tabs
-	$('#myTab a:first').tab('show');
-	$('#myTab a').click(function (e) {
-	  e.preventDefault();
-	  $(this).tab('show');
+//	$('#myTab a:first').tab('show');
+//	$('#myTab a').click(function (e) {
+//	  e.preventDefault();
+//	  $(this).tab('show');
+//	});
+	$('.myTabs a').each(function(i){
+		$(this).click(function (e) {
+			 e.preventDefault();
+			 $(this).tab('show');
+		});
+	});
+	$('.myTabShow').each(function(i){
+		$(this).tab('show');
 	});
 
 	//makes elements soratble, elements that sort need to have id attribute to save the result

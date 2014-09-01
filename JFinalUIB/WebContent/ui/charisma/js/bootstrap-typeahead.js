@@ -230,7 +230,7 @@
 
   , blur: function (e) {
       var that = this
-      setTimeout(function () { that.hide() }, 250)
+      setTimeout(function () { that.hide() }, 150)
     }
 
   , click: function (e) {
@@ -275,6 +275,7 @@
 
   $(function () {
 	  //$(".typeahead input[data-provide=typeahead]")
+	  // focus change
 	  $('body').on('focus.typeahead.data-api', 'input[data-provide="typeahead"]', function (e) {
 		  var $this = $(this);
 //	      if ($this.data('typeahead')){
@@ -284,27 +285,34 @@
 	      e.preventDefault();
 	      
 	      var data = $this.data();
-	      //alert(JSON.stringify(data) );
-	      
+	      var keyword = $this.val();
+	      var items = $this.attr("data-items");
 	      var dataUrl = $this.attr("data-url");
-	      $.ajax({
-	    	  type : "post",
-	    	  url : encodeURI(encodeURI(cxt + dataUrl)),
-	    	  dataType : "text",
-	    	  contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-	    	  async: false,
-	    	  cache: false,
-	    	  success: function(returnData){
-	    		  data["source"] = eval('(' + returnData + ')');//['aa', 'bb', 'cc'];//
-	    	      $this.typeahead(data);
-	    	  },
-	    	  error: function(XMLHttpRequest, textStatus, errorThrown) { 
-	    		  alert("请求出现错误！");
-	    	  },
-	    	  complete: function(XMLHttpRequest, textStatus) { 
-	    		  
-	    	  }
-		  });
+	      //JSON.stringify(data)
+	      
+	      if(keyword != ""){
+	       		//alert($this.val());
+	       		/*
+	    	  $.ajax({
+		    	  type : "post",
+		    	  url : encodeURI(encodeURI(cxt + dataUrl)),
+		    	  data : {keyword : keyword}, //, size : items
+		    	  dataType : "text",
+		    	  contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		    	  async: false,
+		    	  cache: false,
+		    	  success: function(returnData){
+		    		  data["source"] = eval('(' + returnData + ')');//['aa', 'bb', 'cc'];//
+		    	      $this.typeahead(data);
+		    	  },
+		    	  error: function(XMLHttpRequest, textStatus, errorThrown) { 
+		    		  alert("请求出现错误！");
+		    	  },
+		    	  complete: function(XMLHttpRequest, textStatus) { 
+		    		  
+		    	  }
+			  });*/
+	      }
 	  })
   });
 

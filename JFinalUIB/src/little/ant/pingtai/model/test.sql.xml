@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="pingtai.test">
+	
+	<!--  -->
+	<sql id="autoComplete">
+		<![CDATA[ 
+        	select url from pt_operator where url like #'$url$%'# limit #$size$# offset 0
+    	]]>
+	</sql>
+	
+</sql-statement>
