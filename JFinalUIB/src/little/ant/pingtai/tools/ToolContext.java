@@ -406,7 +406,8 @@ public class ToolContext {
 	 */
 	public static String requestStream(HttpServletRequest request) {
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream) request.getInputStream()));
+			request.setCharacterEncoding(ToolString.encoding);
+			BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream) request.getInputStream(), ToolString.encoding));
 			String line = null;
 			StringBuilder sb = new StringBuilder();
 			while ((line = br.readLine()) != null) {

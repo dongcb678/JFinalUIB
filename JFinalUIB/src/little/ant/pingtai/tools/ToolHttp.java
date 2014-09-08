@@ -105,9 +105,11 @@ public class ToolHttp {
 				httpClient = createSSLInsecureClient();
 			}
 			HttpPost httpPost = new HttpPost(url);
+			//(name, value);.addRequestHeader("Content-Type","text/html;charset=UTF-8");
+			//httpPost.getParams().setParameter(HttpMethod.HTTP_CONTENT_CHARSET, "UTF-8");
 			
 			if(null != data){
-				StringEntity stringEntity = new StringEntity(data);
+				StringEntity stringEntity = new StringEntity(data, ToolString.encoding);
 				stringEntity.setContentEncoding(ToolString.encoding);
 				if (null != contentType) {
 					stringEntity.setContentType(contentType);
