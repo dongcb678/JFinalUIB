@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -36,8 +39,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
-
-import com.alibaba.fastjson.JSONObject;
 
 public class ToolHttp {
 
@@ -174,80 +175,159 @@ public class ToolHttp {
 	}
 	
 	/**
-	 * 发送https请求
-	 * 
+	 * 原生方式请求
+	 * @param isHttps 是否https
 	 * @param requestUrl 请求地址
 	 * @param requestMethod 请求方式（GET、POST）
 	 * @param outputStr 提交的数据
-	 * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)
+	 * @return
 	 */
-	public static JSONObject httpsRequest(String requestUrl, String requestMethod, String outputStr) {
-		JSONObject jsonObject = null;
+	public static String httpRequest(boolean isHttps, String requestUrl, String requestMethod, String outputStr) {
+		HttpURLConnection conn = null;
+		
+		OutputStream outputStream = null;
+		OutputStreamWriter outputStreamWriter = null;
+		PrintWriter printWriter = null;
+		
+		InputStream inputStream = null;
+		InputStreamReader inputStreamReader = null;
+		BufferedReader bufferedReader = null;
+		
 		try {
-			// 创建SSLContext对象，并使用我们指定的信任管理器初始化
-			TrustManager[] tm = { new X509TrustManager() {
-				// 检查客户端证书
-				@Override
-				public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-				}
-
-				// 检查服务器端证书
-				@Override
-				public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-				}
-
-				// 返回受信任的X509证书数组
-				@Override
-				public X509Certificate[] getAcceptedIssuers() {
-					return null;
-				}
-			} };
-			SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
-			sslContext.init(null, tm, new java.security.SecureRandom());
-			// 从上述SSLContext对象中得到SSLSocketFactory对象
-			SSLSocketFactory ssf = sslContext.getSocketFactory();
-
 			URL url = new URL(requestUrl);
-			HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-			conn.setSSLSocketFactory(ssf);
+			conn = (HttpURLConnection) url.openConnection();
+			if(isHttps){
+				HttpsURLConnection httpsConn = (HttpsURLConnection) conn;
+				// 创建SSLContext对象，并使用我们指定的信任管理器初始化
+				TrustManager[] tm = { new X509TrustManager() {
+					@Override
+					public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+						// 检查客户端证书
+					}
+					public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+						// 检查服务器端证书
+					}
+					public X509Certificate[] getAcceptedIssuers() {
+						// 返回受信任的X509证书数组
+						return null;
+					}
+				} };
+				SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
+				sslContext.init(null, tm, new java.security.SecureRandom());
+				SSLSocketFactory ssf = sslContext.getSocketFactory();// 从上述SSLContext对象中得到SSLSocketFactory对象
+				httpsConn.setSSLSocketFactory(ssf);
+				conn = httpsConn;
+			}
 			
+			// 超时设置，防止 网络异常的情况下，可能会导致程序僵死而不继续往下执行
+			conn.setConnectTimeout(30000);
+			conn.setReadTimeout(30000);
+			
+			// 设置是否向httpUrlConnection输出，因为这个是post请求，参数要放在
+			// http正文内，因此需要设为true, 默认情况下是false;
 			conn.setDoOutput(true);
+			
+			// 设置是否从httpUrlConnection读入，默认情况下是true;
 			conn.setDoInput(true);
+			
+			// Post 请求不能使用缓存
 			conn.setUseCaches(false);
-			// 设置请求方式（GET/POST）
+			
+			// 设定传送的内容类型是可序列化的java对象
+			// (如果不设此项,在传送序列化对象时,当WEB服务默认的不是这种类型时可能抛java.io.EOFException)
+			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
+			
+			// 设置请求方式（GET/POST），默认是GET
 			conn.setRequestMethod(requestMethod);
-
+			
+			// 连接，上面对urlConn的所有配置必须要在connect之前完成，
+			conn.connect();
+			
 			// 当outputStr不为null时向输出流写数据
 			if (null != outputStr) {
-				OutputStream outputStream = conn.getOutputStream();
-				// 注意编码格式
-				outputStream.write(outputStr.getBytes(ToolString.encoding));
-				outputStream.close();
+				outputStream = conn.getOutputStream();
+				outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
+				printWriter = new PrintWriter(outputStreamWriter);
+				printWriter.write(outputStr);
+				printWriter.flush();
+				printWriter.close();
 			}
 
 			// 从输入流读取返回内容
-			InputStream inputStream = conn.getInputStream();
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, ToolString.encoding);
-			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+			inputStream = conn.getInputStream();
+			inputStreamReader = new InputStreamReader(inputStream, ToolString.encoding);
+			bufferedReader = new BufferedReader(inputStreamReader);
 			String str = null;
 			StringBuilder buffer = new StringBuilder();
 			while ((str = bufferedReader.readLine()) != null) {
-				buffer.append(str);
+				buffer.append(str).append("\n");
 			}
-
-			// 释放资源
-			bufferedReader.close();
-			inputStreamReader.close();
-			inputStream.close();
-			inputStream = null;
-			conn.disconnect();
-			jsonObject = JSONObject.parseObject(buffer.toString());
+			
+			return buffer.toString();
 		} catch (ConnectException ce) {
 			log.error("连接超时：{}", ce);
+			return null;
+			
 		} catch (Exception e) {
 			log.error("https请求异常：{}", e);
+			return null;
+			
+		} finally { // 释放资源
+			if(null != outputStream){
+				try {
+					outputStream.close();
+				} catch (IOException e) {
+					log.error("outputStream.close()异常", e);
+				}
+				outputStream = null;
+			}
+			
+			if(null != outputStreamWriter){
+				try {
+					outputStreamWriter.close();
+				} catch (IOException e) {
+					log.error("outputStreamWriter.close()异常", e);
+				}
+				outputStreamWriter = null;
+			}
+			
+			if(null != printWriter){
+				printWriter.close();
+				printWriter = null;
+			}
+			
+			if(null != bufferedReader){
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					log.error("bufferedReader.close()异常", e);
+				}
+				bufferedReader = null;
+			}
+			
+			if(null != inputStreamReader){
+				try {
+					inputStreamReader.close();
+				} catch (IOException e) {
+					log.error("inputStreamReader.close()异常", e);
+				}
+				inputStreamReader = null;
+			}
+			
+			if(null != inputStream){
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					log.error("inputStream.close()异常", e);
+				}
+				inputStream = null;
+			}
+			
+			if(null != conn){
+				conn.disconnect();
+				conn = null;
+			}
 		}
-		return jsonObject;
 	}
 	
 	public static void main(String[] args){
@@ -276,7 +356,8 @@ public class ToolHttp {
 		//System.out.println(post("http://127.0.0.1:88/msg", returnMsg, "application/xml"));
 		//System.out.println(post("http://littleant.duapp.com/msg", returnMsg, "application/xml"));
 		
-		System.out.println(post(true, "https://www.oschina.net/home/login?goto_page=http%3A%2F%2Fwww.oschina.net%2F", null, "application/text"));
+		//System.out.println(post(true, "https://www.oschina.net/home/login?goto_page=http%3A%2F%2Fwww.oschina.net%2F", null, "application/text"));
+		System.out.println(httpRequest(false, "https://passport.csdn.net/account/login", "GET", null));
 	}
 }
 

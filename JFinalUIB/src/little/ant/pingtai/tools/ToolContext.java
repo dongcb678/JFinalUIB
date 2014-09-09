@@ -2,6 +2,7 @@ package little.ant.pingtai.tools;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -405,19 +406,50 @@ public class ToolContext {
 	 * @return
 	 */
 	public static String requestStream(HttpServletRequest request) {
+		InputStream inputStream = null;
+		InputStreamReader inputStreamReader = null;
+		BufferedReader bufferedReader = null;
 		try {
 			request.setCharacterEncoding(ToolString.encoding);
-			BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream) request.getInputStream(), ToolString.encoding));
+			inputStream = (ServletInputStream) request.getInputStream();
+			inputStreamReader = new InputStreamReader(inputStream, ToolString.encoding);
+			bufferedReader = new BufferedReader(inputStreamReader);
 			String line = null;
 			StringBuilder sb = new StringBuilder();
-			while ((line = br.readLine()) != null) {
+			while ((line = bufferedReader.readLine()) != null) {
 				sb.append(line);
 			}
 			return sb.toString();
 		} catch (IOException e) {
-			e.printStackTrace();
-			log.error("request.getInputStream() to String 异常");
+			log.error("request.getInputStream() to String 异常", e);
+			return null;
+		} finally { // 释放资源
+			if(null != bufferedReader){
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					log.error("bufferedReader.close()异常", e);
+				}
+				bufferedReader = null;
+			}
+			
+			if(null != inputStreamReader){
+				try {
+					inputStreamReader.close();
+				} catch (IOException e) {
+					log.error("inputStreamReader.close()异常", e);
+				}
+				inputStreamReader = null;
+			}
+			
+			if(null != inputStream){
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					log.error("inputStream.close()异常", e);
+				}
+				inputStream = null;
+			}
 		}
-		return null;
 	}
 }
