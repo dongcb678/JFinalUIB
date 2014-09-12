@@ -7,10 +7,8 @@ import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 public class DepartmentService extends BaseService {
 
@@ -64,7 +62,6 @@ public class DepartmentService extends BaseService {
 	 * @param orderIds
 	 * @return
 	 */
-	@Before(Tx.class)
 	public String save(String pIds, String names, int orderIds) {
 		Department pDept = Department.dao.findById(pIds);
 		pDept.set("isparent", "true").update();

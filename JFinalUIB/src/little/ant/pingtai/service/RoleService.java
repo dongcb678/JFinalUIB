@@ -24,14 +24,10 @@ public class RoleService extends BaseService {
 	 * @param role
 	 * @return
 	 */
-	public String save(Role role){
+	public String save(Role role) {
 		// 保存
 		role.save();
 		String ids = role.getStr("ids");
-		
-		// 缓存
-		Role.dao.cacheAdd(ids);
-		
 		return ids;
 	}
 

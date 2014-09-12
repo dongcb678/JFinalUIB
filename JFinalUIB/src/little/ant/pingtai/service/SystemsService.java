@@ -7,9 +7,6 @@ import little.ant.pingtai.model.Systems;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Before;
-import com.jfinal.plugin.activerecord.tx.Tx;
-
 public class SystemsService extends BaseService {
 
 	@SuppressWarnings("unused")
@@ -21,7 +18,6 @@ public class SystemsService extends BaseService {
 	 * 保存
 	 * @param systems
 	 */
-	@Before(Tx.class)
 	public void save(Systems systems){
 		// 保存系统
 		systems.save();
@@ -49,7 +45,6 @@ public class SystemsService extends BaseService {
 	 * 删除
 	 * @param systemsIds
 	 */
-	@Before(Tx.class)
 	public void delete(String systemsIds){
 		//删除系统
 		Systems.dao.deleteById(systemsIds);

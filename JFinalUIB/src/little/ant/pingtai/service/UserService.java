@@ -15,9 +15,6 @@ import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Before;
-import com.jfinal.plugin.activerecord.tx.Tx;
-
 public class UserService extends BaseService {
 
 	private static Logger log = Logger.getLogger(UserService.class);
@@ -31,7 +28,6 @@ public class UserService extends BaseService {
 	 * @param passWord
 	 * @param userInfo
 	 */
-	@Before(Tx.class)
 	public void save(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
@@ -67,7 +63,6 @@ public class UserService extends BaseService {
 	 * @param passWord
 	 * @param userInfo
 	 */
-	@Before(Tx.class)
 	public void update(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
@@ -94,7 +89,6 @@ public class UserService extends BaseService {
 	 * 
 	 * @param userIds
 	 */
-	@Before(Tx.class)
 	public void delete(String userIds) {
 		User user = User.dao.findById(userIds);
 		String userInfoIds = user.getStr("userinfoids");

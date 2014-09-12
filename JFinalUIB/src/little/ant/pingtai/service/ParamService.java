@@ -7,9 +7,6 @@ import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Before;
-import com.jfinal.plugin.activerecord.tx.Tx;
-
 public class ParamService extends BaseService {
 
 	@SuppressWarnings("unused")
@@ -21,7 +18,6 @@ public class ParamService extends BaseService {
 	 * 保存
 	 * @param param
 	 */
-	@Before(Tx.class)
 	public void save(Param param) {
 		String pIds = param.getStr("parentids");
 		Param parent = Param.dao.findById(pIds);
@@ -47,7 +43,6 @@ public class ParamService extends BaseService {
 	 * 更新
 	 * @param param
 	 */
-	@Before(Tx.class)
 	public void update(Param param) {
 		String pIds = param.getStr("parentids");
 		Param parent = Param.dao.findById(pIds);

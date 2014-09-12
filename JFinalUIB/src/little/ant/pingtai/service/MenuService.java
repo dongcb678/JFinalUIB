@@ -9,10 +9,8 @@ import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 public class MenuService extends BaseService {
 
@@ -74,7 +72,6 @@ public class MenuService extends BaseService {
 	 * @param i18n
 	 * @return
 	 */
-	@Before(Tx.class)
 	public String save(String pIds, String names, int orderIds, String i18n){
 		String namesColunm = "names" + i18n(i18n);
 		

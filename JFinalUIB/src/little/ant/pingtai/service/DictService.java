@@ -7,9 +7,6 @@ import little.ant.pingtai.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Before;
-import com.jfinal.plugin.activerecord.tx.Tx;
-
 public class DictService extends BaseService {
 
 	@SuppressWarnings("unused")
@@ -21,7 +18,6 @@ public class DictService extends BaseService {
 	 * 保存
 	 * @param dict
 	 */
-	@Before(Tx.class)
 	public void save(Dict dict) {
 		String pIds = dict.getStr("parentids");
 		Dict parent = Dict.dao.findById(pIds);
@@ -47,7 +43,6 @@ public class DictService extends BaseService {
 	 * 更新
 	 * @param dict
 	 */
-	@Before(Tx.class)
 	public void update(Dict dict) {
 		String pIds = dict.getStr("parentids");
 		Dict parent = Dict.dao.findById(pIds);

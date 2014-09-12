@@ -37,6 +37,9 @@ import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
+import com.jfinal.plugin.activerecord.tx.TxByActionKeys;
+import com.jfinal.plugin.activerecord.tx.TxByActionMethods;
+import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 
@@ -159,6 +162,13 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("configInterceptor 参数封装拦截器");
 		me.add(new ParamPkgInterceptor());
+		
+		// 配置开启事物规则
+		me.add(new TxByActionMethods("save", "update", "delete"));
+		me.add(new TxByRegex(".*save.*"));
+		me.add(new TxByRegex(".*update.*"));
+		me.add(new TxByRegex(".*delete.*"));
+		me.add(new TxByActionKeys("/jf/wx/message", "/jf/wx/message/index"));
 	}
 	
 	/**

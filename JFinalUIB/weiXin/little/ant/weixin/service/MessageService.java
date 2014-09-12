@@ -6,9 +6,6 @@ import little.ant.weixin.tools.ToolMessage;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Before;
-import com.jfinal.plugin.activerecord.tx.Tx;
-
 public class MessageService extends BaseService {
 
 	private static Logger log = Logger.getLogger(MessageService.class);
@@ -21,7 +18,6 @@ public class MessageService extends BaseService {
 	 * @param recverMsg 接收的消息xml
 	 * @return
 	 */
-	@Before(Tx.class)
 	public String messageProcess(String accountId, String recverMsg) {
 		// 消息类型
 		String msgType = ToolXml.getStairText(recverMsg, "msgType");
