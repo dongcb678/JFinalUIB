@@ -139,7 +139,7 @@ public class DocKeyword extends DocBase {
         try {
     		String[] queryFields = new String[]{"question", "questionkey"};
     		
-    		QueryParser queryParser = new MultiFieldQueryParser(Version.LUCENE_4_9, queryFields, analyzer);
+    		QueryParser queryParser = new MultiFieldQueryParser(queryFields, analyzer);
             queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
             
         	Query query = queryParser.parse(searchKeyWords);
@@ -175,7 +175,7 @@ public class DocKeyword extends DocBase {
     		if(searchKeyWords != null && !searchKeyWords.isEmpty()){
     			String[] queryFields = new String[]{"question", "questionkey", "answer"};
         		
-        		QueryParser queryParser = new MultiFieldQueryParser(Version.LUCENE_4_9, queryFields, analyzer);
+        		QueryParser queryParser = new MultiFieldQueryParser(queryFields, analyzer);
                 queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
                 
             	org.apache.lucene.search.Query query = queryParser.parse(searchKeyWords);
@@ -257,7 +257,7 @@ public class DocKeyword extends DocBase {
 				getDiskDir();
 			}
 			if (null == diskIndexWriter) {
-				IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_4_9, analyzer);// 索引分词配置
+				IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_4_10_0, analyzer);// 索引分词配置
 				indexWriterConfig.setOpenMode(OpenMode.CREATE);//
 				diskIndexWriter = new IndexWriter(diskDir, indexWriterConfig);
 			}
@@ -289,7 +289,7 @@ public class DocKeyword extends DocBase {
 				getRamDir();
 			}
 			if(null == ramIndexWriter){
-				IndexWriterConfig ramConfig = new IndexWriterConfig(Version.LUCENE_4_9, analyzer);
+				IndexWriterConfig ramConfig = new IndexWriterConfig(Version.LUCENE_4_10_0, analyzer);
 				ramConfig.setOpenMode(OpenMode.CREATE);//
 				ramIndexWriter = new IndexWriter(ramDir, ramConfig);
 			}
