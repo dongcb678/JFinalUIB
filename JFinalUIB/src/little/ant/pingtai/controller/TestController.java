@@ -55,7 +55,7 @@ public class TestController extends BaseController {
 			StringBuilder sb = new StringBuilder();
 			sb.append("[");
 			for (Record record : list) {
-				sb.append("'").append(record.getStr("url")).append("'");
+				sb.append("\"").append(record.getStr("url")).append("\"");
 				if(list.indexOf(record) != (list.size() - 1)){
 					sb.append(", ");
 				}

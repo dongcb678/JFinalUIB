@@ -54,10 +54,16 @@
 					<hr>
 					
 					<!-- 
-					自动补全：<br>
-					<input type="text" class="span6 typeahead" data-provide="typeahead" data-items="10" data-source='' data-url='/jf/test/autoComplete'>
-					<hr> 
 					-->
+					自动补全：<br>
+					<input type="text" class="span6" id="autoCompleteInput" data-url="/jf/test/autoComplete">
+					
+					<div id="autoCompleteShowDiv" style="display: none;"></div>
+					
+					<script type="text/javascript">
+						autoComplete("autoCompleteInput", "autoCompleteShowDiv");
+					</script>
+					<hr> 
 					
 					文件异步上传测试：<br>
 					<a href="${ctx!}/jsFile/ueditor/third-party/webuploader/index.jsp" target="_blank">打开测试页面</a>
@@ -67,6 +73,8 @@
 					<a href="${ctx!}/jsFile/ueditor/index.jsp" target="_blank">打开测试页面</a>
 					<hr>
 					
+					<!--  
+					-->
 					lucene查询分页测试：测试关键字（早餐、歌手、刘德华等等）<br>
 					<div id="lucene">
 						<script type="text/javascript">
