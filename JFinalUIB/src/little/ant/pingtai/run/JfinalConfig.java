@@ -24,6 +24,8 @@ import little.ant.weixin.lucene.DocKeyword;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
+import org.beetl.core.Configuration;
+import org.beetl.core.resource.WebAppResourceLoader;
 
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -42,6 +44,8 @@ import com.jfinal.plugin.activerecord.tx.TxByActionMethods;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import java.io.IOException;
+import com.jfinal.kit.PathKit;
 
 /**
  * Jfinal API 引导式配置
@@ -66,6 +70,14 @@ public class JfinalConfig extends JFinalConfig {
 
 		log.info("configConstant 视图Beetl设置");
 		me.setMainRenderFactory(new MyBeetlRenderFactory());
+		
+		// 修正Weblogic 11g下beetl web路径获取不正确的bug，Configuration.defaultConfiguration() 会抛出IO异常
+		try {
+			MyBeetlRenderFactory.groupTemplate.setConf(Configuration.defaultConfiguration());
+			MyBeetlRenderFactory.groupTemplate.setResourceLoader(new WebAppResourceLoader(PathKit.getWebRootPath()+"/WEB-INF/view/"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
 		
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());

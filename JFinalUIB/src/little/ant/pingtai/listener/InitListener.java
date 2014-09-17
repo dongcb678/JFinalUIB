@@ -10,6 +10,7 @@ import javax.servlet.ServletContextListener;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import com.jfinal.kit.PathKit;
 /**
  * 系统启动初始化数据
  * @author 董华健 2012-9-7 下午1:55:35
@@ -27,6 +28,11 @@ public class InitListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 		ServletContext context = event.getServletContext();
 		String path = context.getRealPath("/");
+		// 解决Weblogic 11g下pathkit路径获取不正确的bug，把Servlet的path赋值给pathkit
+		System.out.println("################ServletContext--"+path);
+		PathKit.setWebRootPath(path);
+		System.out.println("################PathKit.getWebRootPath--"+PathKit.getWebRootPath());
+		
 		String file = context.getInitParameter("log4j_init_path");   
    		String logFile = context.getInitParameter("log4j_file_path");   
    		if(file != null){   

@@ -20,6 +20,11 @@ public class ToolClassSearcher {
     private static <T> List<Class<? extends T>> extraction(Class<T> clazz, List<String> classFileList) {
         List<Class<? extends T>> classList = new ArrayList<Class<? extends T>>();
         for (String classFile : classFileList) {
+			//System.out.println("################extraction--"+classFile);
+			// 解决Weblogic 11g下扫描到无关class文件的bug
+        	if(!classFile.startsWith("little.ant")){
+        		continue;
+        	}
             Class<?> classInFile = ToolReflect.on(classFile).get();
             if (clazz.isAssignableFrom(classInFile) && clazz != classInFile) {
                 classList.add((Class<? extends T>) classInFile);
