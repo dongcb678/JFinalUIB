@@ -8,6 +8,7 @@ import java.util.List;
 
 import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.plugin.PropertiesPlugin;
+import little.ant.pingtai.tools.ToolHtml;
 import little.ant.pingtai.tools.ToolString;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -256,7 +257,7 @@ public abstract class DocBase implements Runnable {
 				field.setLongValue((Long) fieldValue);
 			
 			}else if(fieldType.equals("String")){
-				field.setStringValue((String) fieldValue);
+				field.setStringValue(ToolHtml.cleanHtml((String) fieldValue)); // 清除HTML标签
 			
 			}else if(fieldType.equals("Date")){
 				field.setLongValue(((Date) fieldValue).getTime());
