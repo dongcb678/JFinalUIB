@@ -1,7 +1,9 @@
 package little.ant.pingtai.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import little.ant.pingtai.model.Upload;
 
@@ -16,8 +18,8 @@ public class UploadService extends BaseService {
 
 	public static final UploadService service = new UploadService();
 	
-	public List<String> upload(String pathType, List<UploadFile> files){
-		List<String> list = new ArrayList<String>();
+	public List<Map<String, String>> upload(String pathType, List<UploadFile> files){
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		for (UploadFile uploadFile : files) {
 			String parameterName = uploadFile.getParameterName();
 			String fileName = uploadFile.getFileName();
@@ -32,7 +34,11 @@ public class UploadService extends BaseService {
 			upload.set("path", pathType);
 			upload.save();
 			
-			list.add(upload.getStr("ids"));
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("ids", upload.getStr("ids"));
+			map.put("fileName", fileName);
+			map.put("pathType", pathType);
+			list.add(map);
 		}
 		return list;
 	}
