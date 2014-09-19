@@ -187,20 +187,6 @@ public class ToolContext {
 	}
 
 	/**
-	 * 获取上下文URL全路径
-	 * 
-	 * @param request
-	 * @return
-	 */
-	public static String getContextAllPath(HttpServletRequest request) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(request.getScheme()).append("://").append(request.getServerName()).append(":").append(request.getServerPort()).append(request.getContextPath());
-		String path = sb.toString();
-		sb = null;
-		return path;
-	}
-
-	/**
 	 * 获取当前登录用户
 	 * @param request
 	 * @param userAgentVali 是否验证 User-Agent
@@ -272,7 +258,7 @@ public class ToolContext {
 		}
 
 		// 2.设置用户名到cookie
-		ToolWeb.addCookie(response, "userName", user.getStr("username"), maxAgeTemp);
+		ToolWeb.addCookie(response, "", "/", true, "userName", user.getStr("username"), maxAgeTemp);
 
 		// 3.生成登陆认证cookie
 		String userIds = user.getStr("ids");
@@ -309,7 +295,7 @@ public class ToolContext {
 		}
 		
 		// 6. 添加到Cookie
-		ToolWeb.addCookie(response, "authmark", securityCookie, maxAgeTemp);
+		ToolWeb.addCookie(response,  "", "/", true, "authmark", securityCookie, maxAgeTemp);
 	}
 	
 	/**
@@ -345,7 +331,7 @@ public class ToolContext {
 		
 		// 登陆认证cookie
 		int maxAgeTemp = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_maxAge_key);
-		ToolWeb.addCookie(response, "authCode", securityCookie, maxAgeTemp);
+		ToolWeb.addCookie(response,  "", "/", true, "authCode", securityCookie, maxAgeTemp);
 	}
 
 	/**

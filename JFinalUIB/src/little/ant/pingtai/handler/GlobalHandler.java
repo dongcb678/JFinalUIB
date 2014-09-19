@@ -13,7 +13,6 @@ import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.plugin.I18NPlugin;
 import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.thread.ThreadSysLog;
-import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolDateTime;
 import little.ant.pingtai.tools.ToolWeb;
 
@@ -41,7 +40,7 @@ public class GlobalHandler extends Handler {
 		request.setAttribute(reqSysLogKey, reqSysLog);
 		
 		log.info("设置 web 路径");
-		String cxt = ToolContext.getContextAllPath(request);
+		String cxt = ToolWeb.getContextPath(request);
 		request.setAttribute("cxt", cxt);
 		
 		log.debug("request cookie 处理");
@@ -55,7 +54,7 @@ public class GlobalHandler extends Handler {
 		String localePram = request.getParameter("localePram");
 		if(null != localePram && !localePram.isEmpty()){
 			int maxAge = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_maxAge_key);
-			ToolWeb.addCookie(response, "language", localePram, maxAge);
+			ToolWeb.addCookie(response,  "", "/", true, "language", localePram, maxAge);
 		}else {
 			localePram = ToolWeb.getCookieValueByName(request, "language");
 			if(null == localePram || localePram.isEmpty()){

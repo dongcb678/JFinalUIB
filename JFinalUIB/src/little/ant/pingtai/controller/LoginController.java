@@ -61,7 +61,7 @@ public class LoginController extends BaseController {
 	 * 注销
 	 */
 	public void logout() {
-		ToolWeb.addCookie(getResponse(), "authmark", null, 0);
+		ToolWeb.addCookie(getResponse(), "", "/", true, "authmark", null, 0);
 		redirect("/jf/login");
 	}
 

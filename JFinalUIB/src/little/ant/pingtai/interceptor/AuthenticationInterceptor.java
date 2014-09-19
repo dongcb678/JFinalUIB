@@ -111,7 +111,7 @@ public class AuthenticationInterceptor implements Interceptor {
 				
 				}else if(null == tokenCookie || tokenCookie.equals("") || !tokenCookie.equals(tokenRequest)){
 					log.info("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
-					ToolWeb.addCookie(response, "token", tokenRequest, 0);
+					ToolWeb.addCookie(response,  "", "/", true, "token", tokenRequest, 0);
 					
 				}else if(tokenCookie.equals(tokenRequest)){
 					log.info("表单重复提交!");

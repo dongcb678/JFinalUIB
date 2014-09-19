@@ -40,12 +40,17 @@ public class ToolWeb {
 	}
 
 	/**
-	 * 获取请求路径
+	 * 获取上下文URL全路径
 	 * 
+	 * @param request
 	 * @return
 	 */
-	public static String getRealURL(HttpServletRequest request) {
-		return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+	public static String getContextPath(HttpServletRequest request) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(request.getScheme()).append("://").append(request.getServerName()).append(":").append(request.getServerPort()).append(request.getContextPath());
+		String path = sb.toString();
+		sb = null;
+		return path;
 	}
 
 	/**
@@ -74,24 +79,39 @@ public class ToolWeb {
 	}
 
 	/**
-	 * 添加cookie
 	 * 
 	 * @param response
-	 * @param name
-	 *            cookie的名称
-	 * @param value
-	 *            cookie的值
-	 * @param maxAge
-	 *            cookie存放的时间(以秒为单位,假如存放三天,即3*24*60*60; 如果值为0,cookie将随浏览器关闭而清除)
+	 * @param domain		设置cookie所在域
+	 * @param path			设置cookie所在路径
+	 * @param isHttpOnly	是否只读
+	 * @param name			cookie的名称
+	 * @param value			cookie的值
+	 * @param maxAge		cookie存放的时间(以秒为单位,假如存放三天,即3*24*60*60; 如果值为0,cookie将随浏览器关闭而清除)
 	 */
-	public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
+	public static void addCookie(HttpServletResponse response, 
+			String domain, String path, boolean isHttpOnly, 
+			String name, String value, int maxAge) {
 		Cookie cookie = new Cookie(name, value);
-		// 设置cookie在根目录下所有的路径都启作用
+
+		// 所在域：比如a1.4bu4.com 和 a2.4bu4.com 共享cookie
+		if(null != domain && !domain.isEmpty()){
+			cookie.setDomain(domain);			
+		}
+		
+		// 设置cookie所在路径
 		cookie.setPath("/");
+		if(null != path && !path.isEmpty()){
+			cookie.setPath(path);				
+		}
+		
+		// 是否只读
+		cookie.setHttpOnly(isHttpOnly);
+		
 		// 设置cookie的过期时间
 		if (maxAge > 0){
 			cookie.setMaxAge(maxAge);
 		}
+		
 		// 添加cookie
 		response.addCookie(cookie);
 	}
