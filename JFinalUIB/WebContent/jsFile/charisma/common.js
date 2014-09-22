@@ -134,9 +134,11 @@ function orderbyFun(divId, formId, colunmName){
 
 /**
  * ajax提交form替换content
- * @param formId
+ * @param divId 返回替换div
+ * @param formId 提交formid
+ * @param callback 回调
  */
-function ajaxForm(divId, formId){
+function ajaxForm(divId, formId, callback){
 	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$("#" + formId).ajaxSubmit({
 		cache: false,
@@ -144,6 +146,10 @@ function ajaxForm(divId, formId){
 	    	if(data != ""){
 	    		$("#" + divId).html(data);
 	    	}
+			//扩展回调函数
+			if( callback != null ){
+				callback();
+			}
 	    	$('#loading').remove();
 			$('#content').fadeIn();
 			docReady();
@@ -153,10 +159,12 @@ function ajaxForm(divId, formId){
 
 /**
  * ajax请求url替换指定div
- * @param url
- * @param data
+ * @param divId 返回替换div
+ * @param url 请求地址
+ * @param data 参数
+ * @param callback 回调
  */
-function ajaxDiv(divId, url, data){
+function ajaxDiv(divId, url, data, callback){
 	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	
 	$.ajax({
@@ -169,6 +177,10 @@ function ajaxDiv(divId, url, data){
 		cache: false,
 		success:function(returnData){
 			$("#" + divId).html(returnData);
+			//扩展回调函数
+			if( callback != null ){
+				callback();
+			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) { 
 			alert("请求出现错误！");
@@ -183,10 +195,11 @@ function ajaxDiv(divId, url, data){
 
 /**
  * ajax请求url替换div content
- * @param url
- * @param data
+ * @param url 请求地址
+ * @param data 参数
+ * @param callback 回调
  */
-function ajaxContent(url, data){
+function ajaxContent(url, data, callback){
 	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	
 	$.ajax({
@@ -199,6 +212,10 @@ function ajaxContent(url, data){
 		cache: false,
 		success:function(returnData){
 			$("#content").html(returnData);
+			//扩展回调函数
+			if( callback != null ){
+				callback();
+			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) { 
 			// 这个方法有三个参数：XMLHttpRequest 对象，错误信息，（可能）捕获的错误对象。
@@ -220,10 +237,11 @@ function ajaxContent(url, data){
 
 /**
  * ajax请求url替换DiaLog
- * @param url
- * @param data
+ * @param url 请求地址
+ * @param data 参数
+ * @param callback 回调
  */
-function ajaxDiaLog(url, data){
+function ajaxDiaLog(url, data, callback){
 	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
@@ -235,6 +253,10 @@ function ajaxDiaLog(url, data){
 		cache: false,
 		success:function(returnData){
 			$('#myModal').html(returnData);
+			//扩展回调函数
+			if( callback != null ){
+				callback();
+			}
 			$('#myModal').modal('show');
 	    	$('#loading').remove();
 			$('#content').fadeIn();
@@ -292,11 +314,13 @@ function deptCheckboxDiaLog(deptId, deptName, checkedIds){//ids默认选中：4,
 	
 /**
  * 字典单选
- * @param dictId
- * @param dictName
- * @param checkedIds
+ * @param dictId 数据回填
+ * @param dictName 数据回填
+ * @param checkedIds 默认选中
+ * @param rootNumbers 根节点编号
+ * @param callback 回调
  */
-function dictRadioDiaLog(dictId, dictName, checkedIds){
+function dictRadioDiaLog(dictId, dictName, checkedIds, rootNumbers, callback){
 	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
@@ -307,6 +331,10 @@ function dictRadioDiaLog(dictId, dictName, checkedIds){
 		async: false,
 		success:function(data){
 			$('#myModal').html(data);
+			//扩展回调函数
+			if( callback != null ){
+				callback();
+			}
 			$('#myModal').modal('show');
 	    	$('#loading').remove();
 			$('#content').fadeIn();
@@ -316,11 +344,13 @@ function dictRadioDiaLog(dictId, dictName, checkedIds){
 
 /**
  * 参数单选
- * @param dictId
- * @param dictName
- * @param checkedIds
+ * @param dictId 数据回填
+ * @param dictName 数据回填
+ * @param checkedIds 默认选中
+ * @param rootNumbers 根节点编号
+ * @param callback 回调
  */
-function paramRadioDiaLog(dictId, dictName, checkedIds){
+function paramRadioDiaLog(dictId, dictName, checkedIds, rootNumbers, callback){
 	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
@@ -331,12 +361,17 @@ function paramRadioDiaLog(dictId, dictName, checkedIds){
 		async: false,
 		success:function(data){
 			$('#myModal').html(data);
+			//扩展回调函数
+			if( callback != null ){
+				callback();
+			}
 			$('#myModal').modal('show');
 	    	$('#loading').remove();
 			$('#content').fadeIn();
 		}
 	});
 }
+
 /**
  * 模块单选
  * @param moduleId

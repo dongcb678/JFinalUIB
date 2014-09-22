@@ -32,7 +32,7 @@ public class ParamTag extends Tag {
 			String id = param.get("id") == null ? "" : param.get("id");
 			String name = param.get("name") == null ? "" : param.get("name");
 			
-			String classs = param.get("classs") == null ? "" : param.get("classs");
+			String class_ = param.get("class") == null ? "" : param.get("class");
 			String style = param.get("style") == null ? "" : param.get("style");
 
 			String number = param.get("number") == null ? "" : param.get("number");
@@ -41,19 +41,19 @@ public class ParamTag extends Tag {
 			log.debug("参数标签");
 			
 			if(type.equals("")){
-				ctx.byteWriter.writeString(select(id, name, classs, style, number, defaultnumber));
+				ctx.byteWriter.writeString(select(id, name, class_, style, number, defaultnumber));
 				
 			}else if(type.equals("select")){
-				ctx.byteWriter.writeString(select(id, name, classs, style, number, defaultnumber));
+				ctx.byteWriter.writeString(select(id, name, class_, style, number, defaultnumber));
 				
 			}else if(type.equals("radio")){
-				ctx.byteWriter.writeString(radio(id, name, classs, style, number, defaultnumber));
+				ctx.byteWriter.writeString(radio(id, name, class_, style, number, defaultnumber));
 				
 			}else if(type.equals("checkbox")){
-				ctx.byteWriter.writeString(checkbox(id, name, classs, style, number, defaultnumber));
+				ctx.byteWriter.writeString(checkbox(id, name, class_, style, number, defaultnumber));
 				
 			} else {
-				ctx.byteWriter.writeString(select(id, name, classs, style, number, defaultnumber));
+				ctx.byteWriter.writeString(select(id, name, class_, style, number, defaultnumber));
 			}
 			
 		} catch (IOException e) {
@@ -65,19 +65,19 @@ public class ParamTag extends Tag {
 	 * 下拉标签
 	 * @param id
 	 * @param name
-	 * @param classs
+	 * @param class_
 	 * @param style
 	 * @param number
 	 * @param defaultnumber
 	 * @return
 	 */
-	private String select(String id, String name, String classs, String style, String number, String defaultnumber){
+	private String select(String id, String name, String class_, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		if (null != id && !id.isEmpty()) {
 			sb.append("<select id=\"").append(id).append("\" name=\"").append(name);
-			sb.append("\" class=\"").append(classs).append("\" style=\"").append(style).append("\" >");
+			sb.append("\" class=\"").append(class_).append("\" style=\"").append(style).append("\" >");
 		} else {
-			sb.append("<select name=\"").append(name).append("\" class=\"").append(classs);
+			sb.append("<select name=\"").append(name).append("\" class=\"").append(class_);
 			sb.append("\" style=\"").append(style).append("\" >");
 		}
 
@@ -120,13 +120,13 @@ public class ParamTag extends Tag {
 	 * 单选
 	 * @param id
 	 * @param name
-	 * @param classs
+	 * @param class_
 	 * @param style
 	 * @param number
 	 * @param defaultnumber
 	 * @return
 	 */
-	private String radio(String id, String name, String classs, String style, String number, String defaultnumber){
+	private String radio(String id, String name, String class_, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
 		Param parentParam = Param.dao.cacheGet(number);
@@ -150,11 +150,11 @@ public class ParamTag extends Tag {
 			}
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中
 				sb.append(namesTemp).append("<input type=\"radio\" id=\"").append(id).append(paramList.indexOf(param)).append("\" name=\"").append(name)
-				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(classs).append("\" style=\"").append(style).append("\" checked=\"checked\" >");
+				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(class_).append("\" style=\"").append(style).append("\" checked=\"checked\" >");
 				
 			} else {
 				sb.append(namesTemp).append("<input type=\"radio\" id=\"").append(id).append(paramList.indexOf(param)).append("\" name=\"").append(name)
-				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(classs).append("\" style=\"").append(style).append("\" >");
+				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(class_).append("\" style=\"").append(style).append("\" >");
 			}
 		}
 		sb.append("</select>");
@@ -166,13 +166,13 @@ public class ParamTag extends Tag {
 	 * 多选
 	 * @param id
 	 * @param name
-	 * @param classs
+	 * @param class_
 	 * @param style
 	 * @param number
 	 * @param defaultnumber
 	 * @return
 	 */
-	private String checkbox(String id, String name, String classs, String style, String number, String defaultnumber){
+	private String checkbox(String id, String name, String class_, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
 		
 		Param parentDict = Param.dao.cacheGet(number);
@@ -196,11 +196,11 @@ public class ParamTag extends Tag {
 			}
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中
 				sb.append(namesTemp).append("<input type=\"checkbox\" id=\"").append(id).append(paramList.indexOf(param)).append("\" name=\"").append(name)
-				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(classs).append("\" style=\"").append(style).append("\" checked=\"checked\" >");
+				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(class_).append("\" style=\"").append(style).append("\" checked=\"checked\" >");
 				
 			} else {
 				sb.append(namesTemp).append("<input type=\"checkbox\" id=\"").append(id).append(paramList.indexOf(param)).append("\" name=\"").append(name)
-				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(classs).append("\" style=\"").append(style).append("\" >");
+				.append("\" value=\"").append(valueTemp).append("\" class=\"").append(class_).append("\" style=\"").append(style).append("\" >");
 			}
 		}
 		sb.append("</select>");
