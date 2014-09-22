@@ -15,7 +15,7 @@ import com.jfinal.plugin.activerecord.Model;
  * 
  * 表单：	<input type="hidden" name="beans[${x_index}].ID" value="${(x.ID)!}"/>
  * 
- * 调用方法：  List<Const> beanList = ModelUtils.batchInjectModel(getRequest(), Const.class, "beans");
+ * 调用方法：  List<Const> beanList = ToolModel.batchInjectModel(getRequest(), Const.class, "beans");
  */
 public class ToolModel {
 
