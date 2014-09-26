@@ -12,11 +12,11 @@
 	
 	<context-param>
         <param-name>log4j_init_path</param-name>
-        <param-value>\WEB-INF\classes\log4j.properties</param-value>
+        <param-value>/WEB-INF/classes/log4j.properties</param-value>
     </context-param>
 	<context-param>
         <param-name>log4j_file_path</param-name>
-        <param-value>\WEB-INF\log\</param-value>
+        <param-value>/WEB-INF/log/</param-value>
     </context-param>
     
    	<!-- 平台初始化 -->
