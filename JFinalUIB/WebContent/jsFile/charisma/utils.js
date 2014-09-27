@@ -150,8 +150,11 @@ function inputDataVali(inputNode, nodeType){
 			}else if(vType == "number"){//整数
 				resultArr = utils_valiFunc.number(value);
 				
-			}else if(vType == "numberZ"){//正整数
+			}else if(vType == "numberZ"){//正整数floatZ
 				resultArr = utils_valiFunc.numberZ(value);
+				
+			}else if(vType == "floatZ"){//正浮点数：金额
+				resultArr = utils_valiFunc.floatZ(value);
 				
 			}else if(vType == "chinaLetterNumber"){//中文字母数字
 				resultArr = utils_valiFunc.chinaLetterNumber(value);
@@ -291,6 +294,20 @@ var utils_valiFunc = {
 	    	return {"result" : false, "message" : i18n_utils_msg_positiveInteger};
 	    }else{
 	    	return {"result" : true, "message" : ""};
+	    }
+	},
+
+	/**
+	 * 正浮点数，可验证>=0 && <=99999999.99 的数字
+	 * @param str
+	 * @returns
+	 */
+	"floatZ" : function(str){
+		var exp = /^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/;
+	    if(exp.test(num)){
+	    	return {"result" : true, "message" : ""};
+	    }else{
+	    	return {"result" : false, "message" : i18n_utils_msg_positiveInteger};
 	    }
 	},
 
