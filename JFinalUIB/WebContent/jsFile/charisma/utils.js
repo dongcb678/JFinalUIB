@@ -127,10 +127,10 @@ function inputDataVali(inputNode, nodeType){
 		if(result != true){
 			hiddenInputColor(inputNode);
 			showInputColor(inputNode, "error");
-			if(nodeType == "input"){
-				messageDiv.attr("data-noty-options", '{"text":"' + message + '","layout":"bottom","type":"information","closeButton":"true"}');
-				messageDiv.click();
-			}
+//			if(nodeType == "input"){
+//				messageDiv.attr("data-noty-options", '{"text":"' + message + '","layout":"bottom","type":"information","closeButton":"true"}');
+//				messageDiv.click();
+//			}
 			return false;
 		}else if(vType == "length"){//如果只验证长度
 			hiddenInputColor(inputNode);
@@ -200,10 +200,10 @@ function inputDataVali(inputNode, nodeType){
 			if(result != true){
 				hiddenInputColor(inputNode);
 				showInputColor(inputNode, "error");
-				if(nodeType == "input"){
-					messageDiv.attr("data-noty-options", '{"text":"' + message + '","layout":"bottom","type":"alert","closeButton":"true"}');
-					messageDiv.click();
-				}
+//				if(nodeType == "input"){
+//					messageDiv.attr("data-noty-options", '{"text":"' + message + '","layout":"bottom","type":"alert","closeButton":"true"}');
+//					messageDiv.click();
+//				}
 				return false;
 			}else{
 				hiddenInputColor(inputNode);
