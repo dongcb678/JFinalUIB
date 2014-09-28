@@ -80,7 +80,7 @@
 					lucene查询分页测试：测试关键字（早餐、歌手、刘德华等等）<br>
 					<div id="lucene">
 						<script type="text/javascript">
-							ajaxDiv("lucene", "/jf/test/lucene?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "aaaaa", "formId" : "splitPage1"}
+							ajaxDiv(false, "lucene", "/jf/test/lucene?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "aaaaa", "formId" : "splitPage1"}
 						</script>
 					</div>
 					
@@ -90,7 +90,7 @@
 					
 					<div id="operator">
 						<script type="text/javascript">
-							ajaxDiv("operator", "/jf/test/operator?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "aaaaa", "formId" : "splitPage1"}
+							ajaxDiv(false, "operator", "/jf/test/operator?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "aaaaa", "formId" : "splitPage1"}
 						</script>
 					</div>
 					
@@ -98,7 +98,7 @@
 					
 					<div id="sysLog">
 						<script type="text/javascript">
-							ajaxDiv("sysLog", "/jf/test/sysLog?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "bbbbb", "formId" : "splitPage2"}
+							ajaxDiv(false, "sysLog", "/jf/test/sysLog?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "bbbbb", "formId" : "splitPage2"}
 						</script>
 					</div>
 				</div>

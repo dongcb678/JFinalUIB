@@ -159,13 +159,16 @@ function ajaxForm(divId, formId, callback){
 
 /**
  * ajax请求url替换指定div
+ * @param shade 是否开启遮罩层
  * @param divId 返回替换div
  * @param url 请求地址
  * @param data 参数
  * @param callback 回调
  */
-function ajaxDiv(divId, url, data, callback){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+function ajaxDiv(shade, divId, url, data, callback){
+	if(shade){
+		$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	}
 	
 	$.ajax({
 		type : "post",
@@ -186,9 +189,11 @@ function ajaxDiv(divId, url, data, callback){
 			alert("请求出现错误！");
         },
         complete: function(XMLHttpRequest, textStatus) { 
-	    	$('#loading').remove();
-			$('#content').fadeIn();
-			docReady();
+        	if(shade){
+        		$('#loading').remove();
+    			$('#content').fadeIn();
+    			docReady();
+        	}
         }
 	});
 }
