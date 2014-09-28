@@ -110,9 +110,9 @@ public class Param extends BaseModel<Param> {
 	 * 查询父节点参数
 	 * @return
 	 */
-	public List<Param> getParent(){
+	public Param getParent(){
 		String sql = ToolSqlXml.getSql("pingtai.param.parent");
-		return dao.find(sql, get("parentids"));
+		return dao.findFirst(sql, get("parentids"));
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class Param extends BaseModel<Param> {
 	 * @param i18n
 	 * @return
 	 */
-	public List<Param> getParent(String i18n){
+	public Param getParent(String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -128,7 +128,7 @@ public class Param extends BaseModel<Param> {
 		
 		String sql = ToolSqlXml.getSql("pingtai..parentAndI18n", param);
 		
-		return dao.find(sql, get("parentids"));
+		return dao.findFirst(sql, get("parentids"));
 	}
 
 	/**

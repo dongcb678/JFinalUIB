@@ -112,9 +112,9 @@ public class Dict extends BaseModel<Dict> {
 	 * 查询父节点字典
 	 * @return
 	 */
-	public List<Dict> getParent(){
+	public Dict getParent(){
 		String sql = ToolSqlXml.getSql("pingtai.dict.parent");
-		return dao.find(sql, get("parentids"));
+		return dao.findFirst(sql, get("parentids"));
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @param i18n
 	 * @return
 	 */
-	public List<Dict> getParent(String i18n){
+	public Dict getParent(String i18n){
 		String val = "val" + i18n(i18n);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -130,7 +130,7 @@ public class Dict extends BaseModel<Dict> {
 		
 		String sql = ToolSqlXml.getSql("pingtai.dict.parentAndI18n", param);
 		
-		return dao.find(sql, get("parentids"));
+		return dao.findFirst(sql, get("parentids"));
 	}
 
 	/**
