@@ -1,5 +1,7 @@
 package little.ant.pingtai.validator;
 
+import little.ant.pingtai.model.Menu;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
@@ -11,11 +13,16 @@ public class MenuValidator extends Validator {
 	private static Logger log = Logger.getLogger(MenuValidator.class);
 	
 	protected void validate(Controller controller) {
-		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/menu/save")){
+			
+		} else if (actionKey.equals("/menu/update")){
+			
+		}
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(MenuValidator.class);
+		controller.keepModel(Menu.class);
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/menu/save")){
@@ -23,6 +30,5 @@ public class MenuValidator extends Validator {
 		} else if (actionKey.equals("/menu/update")){
 			
 		}
-			
 	}
 }

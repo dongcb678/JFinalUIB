@@ -1,5 +1,7 @@
 package little.ant.weixin.validator;
 
+import little.ant.weixin.model.Keyword;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
@@ -11,11 +13,16 @@ public class KeywordValidator extends Validator {
 	private static Logger log = Logger.getLogger(KeywordValidator.class);
 	
 	protected void validate(Controller controller) {
-		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/jf/wx/keyword/save")){
+			
+		} else if (actionKey.equals("/jf/wx/keyword/update")){
+			
+		}
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(KeywordValidator.class);
+		controller.keepModel(Keyword.class);
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/jf/wx/keyword/save")){
@@ -23,6 +30,5 @@ public class KeywordValidator extends Validator {
 		} else if (actionKey.equals("/jf/wx/keyword/update")){
 			
 		}
-			
 	}
 }

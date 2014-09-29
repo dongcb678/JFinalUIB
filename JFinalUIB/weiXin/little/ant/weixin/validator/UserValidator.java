@@ -1,5 +1,7 @@
 package little.ant.weixin.validator;
 
+import little.ant.weixin.model.User;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
@@ -11,16 +13,18 @@ public class UserValidator extends Validator {
 	private static Logger log = Logger.getLogger(UserValidator.class);
 	
 	protected void validate(Controller controller) {
-		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/jf/wx/user")){
+			
+		}
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(UserValidator.class);
+		controller.keepModel(User.class);
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/jf/wx/user")){
 			
 		}
-			
 	}
 }

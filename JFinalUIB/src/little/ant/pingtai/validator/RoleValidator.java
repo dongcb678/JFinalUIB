@@ -1,5 +1,7 @@
 package little.ant.pingtai.validator;
 
+import little.ant.pingtai.model.Role;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
@@ -11,11 +13,16 @@ public class RoleValidator extends Validator {
 	private static Logger log = Logger.getLogger(RoleValidator.class);
 	
 	protected void validate(Controller controller) {
-		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/role/save")){
+			
+		} else if (actionKey.equals("/role/update")){
+			
+		}
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(RoleValidator.class);
+		controller.keepModel(Role.class);
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/role/save")){
@@ -23,6 +30,5 @@ public class RoleValidator extends Validator {
 		} else if (actionKey.equals("/role/update")){
 			
 		}
-			
 	}
 }

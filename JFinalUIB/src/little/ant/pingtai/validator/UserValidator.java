@@ -2,6 +2,7 @@ package little.ant.pingtai.validator;
 
 import java.util.Date;
 
+import little.ant.pingtai.model.User;
 import little.ant.pingtai.tools.ToolDateTime;
 
 import org.apache.log4j.Logger;
@@ -32,7 +33,7 @@ public class UserValidator extends Validator {
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(UserValidator.class);
+		controller.keepModel(User.class);
 
 		String actionKey = getActionKey();
 		if (actionKey.equals("/user/save")){

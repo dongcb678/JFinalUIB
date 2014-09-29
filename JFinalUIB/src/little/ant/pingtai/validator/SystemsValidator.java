@@ -1,5 +1,7 @@
 package little.ant.pingtai.validator;
 
+import little.ant.pingtai.model.Systems;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
@@ -11,11 +13,16 @@ public class SystemsValidator extends Validator {
 	private static Logger log = Logger.getLogger(SystemsValidator.class);
 	
 	protected void validate(Controller controller) {
-		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/systems/save")){
+			
+		} else if (actionKey.equals("/systems/update")){
+			
+		}
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(SystemsValidator.class);
+		controller.keepModel(Systems.class);
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/systems/save")){

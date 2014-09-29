@@ -1,5 +1,7 @@
 package little.ant.pingtai.validator;
 
+import little.ant.pingtai.model.Station;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
@@ -11,11 +13,16 @@ public class StationValidator extends Validator {
 	private static Logger log = Logger.getLogger(StationValidator.class);
 	
 	protected void validate(Controller controller) {
-		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/station/save")){
+			
+		} else if (actionKey.equals("/station/update")){
+			
+		}
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(StationValidator.class);
+		controller.keepModel(Station.class);
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/station/save")){
@@ -23,6 +30,5 @@ public class StationValidator extends Validator {
 		} else if (actionKey.equals("/station/update")){
 			
 		}
-			
 	}
 }

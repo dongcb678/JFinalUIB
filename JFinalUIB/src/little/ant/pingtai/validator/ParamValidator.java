@@ -1,5 +1,7 @@
 package little.ant.pingtai.validator;
 
+import little.ant.pingtai.model.Param;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
@@ -11,11 +13,16 @@ public class ParamValidator extends Validator {
 	private static Logger log = Logger.getLogger(ParamValidator.class);
 	
 	protected void validate(Controller controller) {
-		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/param/save")){
+			
+		} else if (actionKey.equals("/param/update")){
+			
+		}
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(ParamValidator.class);
+		controller.keepModel(Param.class);
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/param/save")){
@@ -23,6 +30,5 @@ public class ParamValidator extends Validator {
 		} else if (actionKey.equals("/param/update")){
 			
 		}
-			
 	}
 }

@@ -11,7 +11,10 @@ public class IndexValidator extends Validator {
 	private static Logger log = Logger.getLogger(IndexValidator.class);
 	
 	protected void validate(Controller controller) {
-		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/jf/wx/index")){
+			
+		}
 	}
 	
 	protected void handleError(Controller controller) {
@@ -21,6 +24,5 @@ public class IndexValidator extends Validator {
 		if (actionKey.equals("/jf/wx/index")){
 			
 		}
-			
 	}
 }

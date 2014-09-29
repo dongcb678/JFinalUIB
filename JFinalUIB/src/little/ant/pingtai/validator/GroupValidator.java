@@ -1,5 +1,7 @@
 package little.ant.pingtai.validator;
 
+import little.ant.pingtai.model.Group;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
@@ -11,11 +13,16 @@ public class GroupValidator extends Validator {
 	private static Logger log = Logger.getLogger(GroupValidator.class);
 	
 	protected void validate(Controller controller) {
-		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/group/save")){
+			
+		} else if (actionKey.equals("/group/update")){
+			
+		}
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(GroupValidator.class);
+		controller.keepModel(Group.class);
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/group/save")){
@@ -23,6 +30,5 @@ public class GroupValidator extends Validator {
 		} else if (actionKey.equals("/group/update")){
 			
 		}
-			
 	}
 }
