@@ -148,20 +148,29 @@
 			return false;
 		});
 
-		//2.菜单功能设置
-		var accessControlStr = "<span class='button accessControl' id='accessControlBtn_" + treeNode.tId + "' title='菜单功能设置' onfocus='this.blur();'></span>";
-		sObj.after(accessControlStr);
-		var accessBtn = $("#accessControlBtn_"+treeNode.tId);
-		if (accessBtn) accessBtn.bind("click", function(){
+		//2.菜单参数设置
+// 		var paramControlStr = "<span class='button param' id='paramControlBtn_" + treeNode.tId + "' title='菜单参数设置' onfocus='this.blur();'></span>";
+// 		sObj.after(paramControlStr);
+// 		var paramBtn = $("#paramControlBtn_"+treeNode.tId);
+// 		if (paramBtn) paramBtn.bind("click", function(){
+// 			alert(treeNode.id);
+// 			return false;
+// 		});
+		
+		//3.菜单功能设置
+		var operatorControlStr = "<span class='button operator' id='operatorControlBtn_" + treeNode.tId + "' title='菜单功能设置' onfocus='this.blur();'></span>";
+		sObj.after(operatorControlStr);
+		var operatorBtn = $("#operatorControlBtn_"+treeNode.tId);
+		if (operatorBtn) operatorBtn.bind("click", function(){
 			setMenuOperatorDiaLog(treeNode.id);
 			return false;
 		});
-		
-		//3.菜单国际化名称设置
-		var editControlStr = "<span class='button accessControl' id='editControlBtn_" + treeNode.tId + "' title='菜单国际化设置' onfocus='this.blur();'></span>";
-		sObj.after(editControlStr);
-		var editBtn = $("#editControlBtn_"+treeNode.tId);
-		if (editBtn) editBtn.bind("click", function(){
+
+		//4.菜单国际化名称设置
+		var nameControlStr = "<span class='button name' id='nameControlBtn_" + treeNode.tId + "' title='菜单国际化设置' onfocus='this.blur();'></span>";
+		sObj.after(nameControlStr);
+		var nameBtn = $("#nameControlBtn_"+treeNode.tId);
+		if (nameBtn) nameBtn.bind("click", function(){
 			setMenuEditDiaLog(treeNode.id);
 			return false;
 		});
@@ -170,12 +179,15 @@
 	function removeHoverDom(treeId, treeNode) {
 		//1.处理添加按钮
 		$("#addBtn_"+treeNode.tId).unbind().remove();
+
+		//2.菜单参数设置
+// 		$("#paramControlBtn_"+treeNode.tId).unbind().remove();
 		
-		//2.菜单功能设置
-		$("#accessControlBtn_"+treeNode.tId).unbind().remove();
-		
-		//3.菜单国际化名称设置
-		$("#editControlBtn_"+treeNode.tId).unbind().remove();
+		//3.菜单功能设置
+		$("#operatorControlBtn_"+treeNode.tId).unbind().remove();
+
+		//4.菜单国际化名称设置
+		$("#nameControlBtn_"+treeNode.tId).unbind().remove();
 	};
 
 	////////////////////下面是处理展开//////////////////
