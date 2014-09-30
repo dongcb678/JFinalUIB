@@ -226,11 +226,13 @@ public class JfinalConfig extends JFinalConfig {
 	}
 	
 	/**
-	 * 建议使用 JFinal 手册推荐的方式启动项目
-	 * 运行此 main 方法可以启动项目，此main方法可以放置在任意的Class类定义中，不一定要放于此
+	 * 运行此 main 方法可以启动项目
+	 * 说明：
+	 * 1. linux 下非root账户运行端口要>1024
+	 * 2. idea 中运行记得加上当前的module名称
 	 */
 	public static void main(String[] args) {
-		JFinal.start("WebContent", 89, "/", 5);
+		JFinal.start("WebContent", 89, "/", 5); // 
 		// JFinal.start("JfinalUIB/WebContent", 89, "/", 5); // idea 中运行记得加上当前的module名称
 	}
 }

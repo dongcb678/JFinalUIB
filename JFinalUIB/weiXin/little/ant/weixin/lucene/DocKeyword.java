@@ -266,7 +266,7 @@ public class DocKeyword extends DocBase {
 				getDiskDir();
 			}
 			if (null == diskIndexWriter) {
-				IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_4_10_0, analyzer);// 索引分词配置
+				IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_4_10_1, analyzer);// 索引分词配置
 				indexWriterConfig.setOpenMode(OpenMode.CREATE);//
 				diskIndexWriter = new IndexWriter(diskDir, indexWriterConfig);
 			}
@@ -298,7 +298,7 @@ public class DocKeyword extends DocBase {
 				getRamDir();
 			}
 			if(null == ramIndexWriter){
-				IndexWriterConfig ramConfig = new IndexWriterConfig(Version.LUCENE_4_10_0, analyzer);
+				IndexWriterConfig ramConfig = new IndexWriterConfig(Version.LUCENE_4_10_1, analyzer);
 				ramConfig.setOpenMode(OpenMode.CREATE);//
 				ramIndexWriter = new IndexWriter(ramDir, ramConfig);
 			}
