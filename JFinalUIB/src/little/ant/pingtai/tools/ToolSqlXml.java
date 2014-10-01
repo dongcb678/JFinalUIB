@@ -95,6 +95,9 @@ public class ToolSqlXml {
 		
 		Set<String> keySet = param.keySet();
 		for (String key : keySet) {
+			if(param.get(key) == null){
+				break;
+			}
 			String value = (String) param.get(key);
 			value = value.replace("'", "").replace(";", "").replace("--", "");
 			sql = sql.replace("#" + key + "#", value);
