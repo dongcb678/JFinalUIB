@@ -55,6 +55,11 @@ public abstract class DictKeys {
 	 * # cookie 值的时间
 	 */
 	public static final String config_maxAge_key = "config.maxAge";
+
+	/**
+	 * # 域名或者服务器IP，多个逗号隔开，验证Referer时使用
+	 */
+	public static final String config_domain_key = "config.domain";
 	
 	/**
 	 * 当前数据库类型

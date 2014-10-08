@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.BaseModel;
 import little.ant.pingtai.model.Syslog;
+import little.ant.pingtai.plugin.PropertiesPlugin;
 import little.ant.pingtai.tools.ToolContext;
 import little.ant.pingtai.tools.ToolString;
 
@@ -80,7 +82,14 @@ public abstract class BaseController extends Controller {
 		}
 		return value;
 	}
-
+	
+	/**
+	 * 获取checkbox值，数组
+	 */
+	public String[] getParas(String name) {
+		return getRequest().getParameterValues(name);
+	}
+	
 	/**
 	 * 判断验证码是否正确
 	 * 
@@ -95,6 +104,27 @@ public abstract class BaseController extends Controller {
 			authCodeCookie = authCodeCookie.toLowerCase();// 统一小写
 			if (authCodePram.equals(authCodeCookie)) {
 				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 效验Referer有效性
+	 * 
+	 * @author 董华健 2012-10-30 上午10:26:04
+	 * @return
+	 */
+	protected boolean authReferer() {
+		String referer = getRequest().getHeader("Referer");
+		if (null != referer && !referer.trim().equals("")) {
+			referer = referer.toLowerCase();
+			String domainStr = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_domain_key);
+			String[] domainArr = domainStr.split(",");
+			for (String domain : domainArr) {
+				if (referer.indexOf(domain.trim()) != -1) {
+					return true;
+				}
 			}
 		}
 		return false;

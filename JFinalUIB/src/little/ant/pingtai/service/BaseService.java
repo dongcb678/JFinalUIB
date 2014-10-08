@@ -31,11 +31,33 @@ public abstract class BaseService {
 	 * @return
 	 */
 	protected String toSql(String ids){
-		if(null == ids || ids.isEmpty()){
-			return "";
+		if(null == ids || ids.trim().isEmpty()){
+			return null;
 		}
 		
 		String[] idsArr = ids.split(",");
+		StringBuilder sqlSb = new StringBuilder();
+		int length = idsArr.length;
+		for (int i = 0, size = length -1; i < size; i++) {
+			sqlSb.append(" '").append(idsArr[i]).append("', ");
+		}
+		if(length != 0){
+			sqlSb.append(" '").append(idsArr[length-1]).append("' ");
+		}
+		
+		return sqlSb.toString();
+	}
+
+	/**
+	 * 把数组转成'11','22','33'...
+	 * @param ids
+	 * @return
+	 */
+	protected String toSql(String[] idsArr){
+		if(idsArr == null || idsArr.length == 0){
+			return null;
+		}
+		
 		StringBuilder sqlSb = new StringBuilder();
 		int length = idsArr.length;
 		for (int i = 0, size = length -1; i < size; i++) {
