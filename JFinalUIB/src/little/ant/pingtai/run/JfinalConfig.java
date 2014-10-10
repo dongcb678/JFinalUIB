@@ -72,12 +72,12 @@ public class JfinalConfig extends JFinalConfig {
 		me.setMainRenderFactory(new MyBeetlRenderFactory());
 		
 		// 修正Weblogic 11g下beetl web路径获取不正确的bug，Configuration.defaultConfiguration() 会抛出IO异常
-		try {
-			MyBeetlRenderFactory.groupTemplate.setConf(Configuration.defaultConfiguration());
-			MyBeetlRenderFactory.groupTemplate.setResourceLoader(new WebAppResourceLoader(PathKit.getWebRootPath()+"/WEB-INF/view/"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			MyBeetlRenderFactory.groupTemplate.setConf(Configuration.defaultConfiguration());
+//			MyBeetlRenderFactory.groupTemplate.setResourceLoader(new WebAppResourceLoader(PathKit.getWebRootPath()+"/WEB-INF/view/"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
 		
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
