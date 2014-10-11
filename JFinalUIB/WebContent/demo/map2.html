@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Street View service</title>
+	<style>
+		html,body,#map-canvas {
+			height: 100%;
+			margin: 0px;
+			padding: 0px
+		}
+	</style>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script>
+		function initialize() {
+			var fenway = new google.maps.LatLng(35.69299, 139.77);//35.69299, 139.77
+			var mapOptions = {
+				center : fenway,
+				zoom : 14
+			};
+			
+			// 街景
+			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+			var panoramaOptions = {
+				position : fenway,
+				pov : {
+					heading : 34,
+					pitch : 10
+				}
+			};
+			var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+			map.setStreetView(panorama);
+
+		  	// 标记展示
+		  	var contentString = '<div id="content">这块内容是自定义的</div>';
+
+		    var infowindow = new google.maps.InfoWindow({
+		        content: contentString
+		    });
+
+		    var marker = new google.maps.Marker({
+		        position: fenway,
+		        map: map,
+		        title:"Uluru (Ayers Rock)"
+		    });
+
+		    google.maps.event.addListener(marker, 'click', function() {
+		       	infowindow.open(map,marker);
+		    });
+		}
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+</head>
+<body>
+	<div id="map-canvas" style="width: 400px; height: 300px"></div>
+	<div id="pano" style="position: absolute; left: 410px; top: 8px; width: 400px; height: 300px;"></div>
+</body>
+</html>
