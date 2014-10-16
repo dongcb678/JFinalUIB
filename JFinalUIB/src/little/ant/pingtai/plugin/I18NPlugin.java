@@ -28,13 +28,16 @@ public class I18NPlugin implements IPlugin {
 			
 		}else if(localePramKey.equals("en")){
 			localePramKey = "en_us";
+		
+		}else{
+			localePramKey = "zh_cn";
 		}
 		
 		Map<String, String> map = resourceBundleMap.get(localePramKey);
 		if(map != null){
 			return map;
 		}else{
-			return resourceBundleMap.get("en");
+			return resourceBundleMap.get("zh_cn");
 		}
 	}
 	

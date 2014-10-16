@@ -51,6 +51,8 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		} else if(i18n.equals("zh_tw")){
 			val = "_zhtw";
 			
+		} else {
+			val = "_zhcn";
 		}
 		return val;
 	}

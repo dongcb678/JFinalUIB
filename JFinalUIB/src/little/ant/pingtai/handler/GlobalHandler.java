@@ -67,6 +67,7 @@ public class GlobalHandler extends Handler {
 				}
 			}
 		}
+		localePram = localePram.toLowerCase();
 		Map<String, String> i18nMap = I18NPlugin.get(localePram);
 		request.setAttribute("localePram", localePram);
 		request.setAttribute("i18nMap", i18nMap);
