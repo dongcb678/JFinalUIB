@@ -74,6 +74,8 @@
 	<filter-mapping>
 		<filter-name>JFinal</filter-name>
 		<url-pattern>/jf/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	
 </web-app>
