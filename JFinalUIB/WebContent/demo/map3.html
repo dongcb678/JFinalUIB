@@ -30,6 +30,13 @@
 
 			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+			// map事件
+// 			google.maps.event.addListener(map, 'dblclick', function(event){    
+// 				var lat = event.latLng.lat();//纬度    
+// 				var lng = event.latLng.lng();//经度			
+// 				alert("纬度 ：" + lat + "\n经度 ：" + lng);
+// 			});
+			
 			marker = new google.maps.Marker({
 				map:map,
 				draggable:true,
@@ -38,12 +45,11 @@
 				title: "移动我选取位置"
 			});
 			
-			// 鼠标移开地图时获取经纬度数据，写入表单
-			google.maps.event.addListener(map, 'mouseout', function(event){    
+			google.maps.event.addListener(marker, 'click', function(event) { 
 				var lat = event.latLng.lat();//纬度    
-				var lng =event.latLng.lng();//经度			
+				var lng = event.latLng.lng();//经度			
 				alert("纬度 ：" + lat + "\n经度 ：" + lng);
-			});
+			}); 
 		}
 
 		google.maps.event.addDomListener(window, 'load', initialize);
