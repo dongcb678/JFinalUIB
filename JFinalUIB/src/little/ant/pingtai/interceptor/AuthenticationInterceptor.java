@@ -132,6 +132,8 @@ public class AuthenticationInterceptor implements Interceptor {
 			try {
 				ai.invoke();
 			} catch (Exception e) {
+				e.printStackTrace();
+				
 				log.info("业务逻辑代码遇到异常时保存日志!");
 				reqSysLog.set("status", "0");//失败
 				reqSysLog.set("description", e.getMessage());
