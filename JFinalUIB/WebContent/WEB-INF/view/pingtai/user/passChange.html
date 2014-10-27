@@ -1,21 +1,25 @@
 <script type="text/javascript">
 	
 	function passChange(){
-		var messageButton = $('#messageButtonId');
-		
 		var newPass1 = $("#newPass1").val();
 		var newPass2 = $("#newPass2").val();
 		if(newPass1 != newPass2){
-			messageButton.attr("data-noty-options", '{"text":"两次输入密码不一致，请从新输入！","layout":"bottom","type":"information","closeButton":"true"}');
-			messageButton.click();
+			var d = dialog({
+			    title: '验证提示',
+			    content: '两次输入密码不一致，请从新输入！'
+			});
+			d.showModal();
 	 		return false;
 		}
 		
 		var form = document.getElementById("passChangeForm");
 		var errorCount = formVali(form);
 		if(errorCount != 0){
-			messageButton.attr("data-noty-options", '{"text":"有'+errorCount+'错误，请修正！","layout":"bottom","type":"information","closeButton":"true"}');
-			messageButton.click();
+			var d = dialog({
+			    title: '验证提示',
+			    content: '有'+errorCount+'错误，请修正！'
+			});
+			d.showModal();
 	 		return false;
 		}
 		

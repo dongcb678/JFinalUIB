@@ -1,12 +1,13 @@
 <script type="text/javascript">
 
 function dataVali(form){
-	var messageButton = $('#messageButtonId');
-	
 	var errorCount = formVali(form);
 	if(errorCount != 0){
-		messageButton.attr("data-noty-options", '{"text":"有'+errorCount+'错误，请修正！","layout":"bottom","type":"information","closeButton":"true"}');
-		messageButton.click();
+		var d = dialog({
+		    title: '验证提示',
+		    content: '有'+errorCount+'错误，请修正！'
+		});
+		d.showModal();
  		return false;
 	}
 	
