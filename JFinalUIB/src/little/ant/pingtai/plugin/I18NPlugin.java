@@ -21,8 +21,6 @@ public class I18NPlugin implements IPlugin {
 	private static final Map<String, Map<String, String>> resourceBundleMap = new HashMap<String, Map<String, String>>();
 	
 	public static Map<String, String> get(String localePramKey){
-		localePramKey = localePramKey.toLowerCase();
-		
 		if(localePramKey.equals("zh")){
 			localePramKey = "zh_cn";
 			

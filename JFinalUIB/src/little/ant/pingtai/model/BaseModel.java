@@ -35,7 +35,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * @return
 	 */
 	public static String i18n(String i18n){
-		String val = null;
+		String val = "_zhcn";
 		if(i18n.equals("zh") || i18n.equals("zh_cn")){
 			val = "_zhcn";
 			
@@ -50,9 +50,6 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			
 		} else if(i18n.equals("zh_tw")){
 			val = "_zhtw";
-			
-		} else {
-			val = "_zhcn";
 		}
 		return val;
 	}
