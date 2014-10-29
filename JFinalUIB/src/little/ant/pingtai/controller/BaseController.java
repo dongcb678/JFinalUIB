@@ -63,8 +63,33 @@ public abstract class BaseController extends Controller {
 	 * 获取当前用户id
 	 * @return
 	 */
-	protected String getUserIds(){
-		return reqSysLog.getStr("userids");
+	protected String getCUserIds(){
+		return getAttr("cUserIds");
+	}
+
+	/**
+	 * 获取当前用户
+	 * @return
+	 */
+	protected String getCUser(){
+		return getAttr("cUser");
+	}
+
+	/**
+	 * 获取ParamMap
+	 * @return
+	 */
+	protected Map<String, String> getParamMap(){
+		return getAttr("paramMap");
+	}
+
+	/**
+	 * 添加值到ParamMap
+	 * @return
+	 */
+	protected void addToParamMap(String key, String value){
+		Map<String, String> map = getAttr("paramMap");
+		map.put(key, value);
 	}
 	
 	/**

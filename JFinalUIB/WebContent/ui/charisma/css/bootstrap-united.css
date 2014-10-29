@@ -4324,3 +4324,37 @@ a.badge:hover {
 .invisible {
   visibility: hidden;
 }
+
+.control-group{
+	width:50%;
+	float:left;
+}
+.control-group input[type=text],.control-group select{
+	width:280px;
+}
+.control-group .help-inline{
+	color:#bbb;
+}
+.control-group1,.upload-state-done{
+	width:100%;
+	clear:both;
+	float:none!important;
+}
+.form-actions{
+	clear:both;
+	height:50px;
+}
+.formPanel label{
+	width:70px!important;
+}
+.formPanel .controls{
+	margin-left:80px;
+}
+#splitPage{
+	margin-bottom:0;
+}
+
+.modal-body .box-content{
+	height:200px;
+	overflow:auto;
+}

@@ -55,6 +55,18 @@ public class AuthenticationInterceptor implements Interceptor {
 		if(uri.startsWith("/druid/")){
 			uri = "/pingtai/druid/iframe.html";
 		}
+
+		log.info("获取当前用户!");
+		boolean userAgentVali = true;
+		if(uri.equals("/jf/ueditor") || uri.equals("/jf/upload")){ // 针对ueditor特殊处理
+			userAgentVali = false;
+		}
+		User user = ToolContext.getCurrentUser(request, userAgentVali);// 当前登录用户
+		if(null != user){
+			reqSysLog.set("userids", user.getPrimaryKeyValue());
+			contro.setAttr("cUser", user);
+			contro.setAttr("cUserIds", user.getPrimaryKeyValue());
+		}
 		
 		log.info("获取URI对象!");
 		Object operatorObj = Operator.dao.cacheGet(uri);
@@ -68,15 +80,9 @@ public class AuthenticationInterceptor implements Interceptor {
 			
 			if(operator.get("privilegess").equals("1")){// 是否需要权限验证
 				log.info("需要权限验证!");
-				boolean userAgentVali = true;
-				if(uri.equals("/jf/ueditor") || uri.equals("/jf/upload")){ // 针对ueditor特殊处理
-					userAgentVali = false;
-				}
-				User user = ToolContext.getCurrentUser(request, userAgentVali);// 当前登录用户
 				if (user == null) {
 					log.info("权限认证过滤器检测:未登录!");
 					
-					log.info("访问失败时保存日志!");
 					reqSysLog.set("status", "0");//失败
 					reqSysLog.set("description", "未登录");
 					reqSysLog.set("cause", "2");//2 未登录
@@ -85,11 +91,9 @@ public class AuthenticationInterceptor implements Interceptor {
 					return;
 				}
 				
-				reqSysLog.set("userids", user.getPrimaryKeyValue());
 				if(!ToolContext.hasPrivilegeOperator(operator, user)){// 权限验证
 					log.info("权限验证失败，没有权限!");
 					
-					log.info("访问失败时保存日志!");
 					reqSysLog.set("status", "0");//失败
 					reqSysLog.set("description", "没有权限!");
 					reqSysLog.set("cause", "0");//没有权限

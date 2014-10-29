@@ -20,6 +20,11 @@ public class I18NPlugin implements IPlugin {
 
 	private static final Map<String, Map<String, String>> resourceBundleMap = new HashMap<String, Map<String, String>>();
 	
+	/**
+	 * 获取国际化Map
+	 * @param localePramKey
+	 * @return
+	 */
 	public static Map<String, String> get(String localePramKey){
 		if(localePramKey.equals("zh")){
 			localePramKey = "zh_cn";
@@ -37,6 +42,17 @@ public class I18NPlugin implements IPlugin {
 		}else{
 			return resourceBundleMap.get("zh_cn");
 		}
+	}
+
+	/**
+	 * 获取国际化值
+	 * @param i18n 国家语言标示
+	 * @param key
+	 * @return
+	 */
+	public static String get(String i18n, String key){
+		Map<String, String> map = get(i18n);
+		return map.get(key);
 	}
 	
 	@Override

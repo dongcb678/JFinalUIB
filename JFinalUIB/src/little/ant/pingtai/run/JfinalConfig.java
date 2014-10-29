@@ -150,11 +150,11 @@ public class JfinalConfig extends JFinalConfig {
 		}
 
 		log.info("configPlugin 添加druidPlugin插件");
-		me.add(druidPlugin);
+		me.add(druidPlugin); // 多数据源继续添加
 		
 		log.info("configPlugin 表扫描注册");
 		Map<String, ActiveRecordPlugin> arpMap = new HashMap<String, ActiveRecordPlugin>();
-		arpMap.put(DictKeys.db_dataSource_main, arpMain);
+		arpMap.put(DictKeys.db_dataSource_main, arpMain); // 多数据源继续添加
 		new TablePlugin(arpMap).start();
 		me.add(arpMain); // 多数据源继续添加
 
