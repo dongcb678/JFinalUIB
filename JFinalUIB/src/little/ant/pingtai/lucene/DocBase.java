@@ -280,21 +280,22 @@ public abstract class DocBase implements Runnable {
 
 	/**
 	 * 根据数据量计算分多少次批处理
+	 * @param dataSource
 	 * @param sql
-	 * @param batchSize	每次数据多少条
+	 * @param batchSize 每次数据多少条
 	 * @return
 	 */
-	protected int getBatchCount(String sql, int batchSize){
+	protected int getBatchCount(String dataSource, String sql, int batchSize){
 		int count = 0;
 		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){
-			count = Db.queryLong(" select count(*) " + sql).intValue();
+			count = Db.use(dataSource).queryLong(" select count(*) " + sql).intValue();
 			
 		}else if(db_type.equals(DictKeys.db_type_mysql)){
-			count = Db.queryLong(" select count(*) " + sql).intValue();
+			count = Db.use(dataSource).queryLong(" select count(*) " + sql).intValue();
 		
 		}else if(db_type.equals(DictKeys.db_type_oracle)){
-			count = Db.queryBigDecimal(" select count(*) " + sql).intValue();
+			count = Db.use(dataSource).queryBigDecimal(" select count(*) " + sql).intValue();
 		}
 		
 		int batchCount = 0;

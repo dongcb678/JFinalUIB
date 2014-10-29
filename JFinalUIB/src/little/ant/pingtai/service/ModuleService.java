@@ -2,6 +2,7 @@ package little.ant.pingtai.service;
 
 import java.util.List;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.tools.ToolSqlXml;
 
@@ -119,7 +120,7 @@ public class ModuleService extends BaseService {
 	 */
 	public boolean delete(String ids) {
 		String sql = ToolSqlXml.getSql("pingtai.module.childCount");
-		Record record = Db.findFirst(sql, ids);
+		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){
 	    	return false;

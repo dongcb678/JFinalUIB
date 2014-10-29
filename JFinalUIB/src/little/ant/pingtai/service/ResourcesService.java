@@ -42,15 +42,15 @@ public class ResourcesService extends BaseService {
 		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
 			String sql = ToolSqlXml.getSql("pingtai.resources.pv_pg");
-			list = Db.find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+			list = Db.use(DictKeys.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
 			String sql = ToolSqlXml.getSql("pingtai.resources.pv_mysql");
-			list = Db.find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+			list = Db.use(DictKeys.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		}else if(db_type.equals(DictKeys.db_type_oracle)){ // oracle
 			String sql = ToolSqlXml.getSql("pingtai.resources.pv_oracle");
-			list = Db.find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+			list = Db.use(DictKeys.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		}
 		
 		List<String> adates = new LinkedList<String>();

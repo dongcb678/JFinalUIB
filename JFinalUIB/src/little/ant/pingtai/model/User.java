@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import com.jfinal.plugin.ehcache.CacheKit;
 
 @SuppressWarnings("unused")
-@Table(tableName="pt_user")
+@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_user")
 public class User extends BaseModel<User> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

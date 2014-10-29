@@ -72,11 +72,12 @@ public abstract class BaseService {
 
 	/**
 	 * 分页
+	 * @param dataSource 数据源
 	 * @param splitPage
 	 * @param select
 	 * @param sqlId
 	 */
-	protected void splitPageBase(SplitPage splitPage, String select, String sqlId){
+	protected void splitPageBase(String dataSource, SplitPage splitPage, String select, String sqlId){
 		// 接收返回值对象
 		StringBuilder formSqlSb = new StringBuilder();
 		LinkedList<Object> paramValue = new LinkedList<Object>();
@@ -97,7 +98,7 @@ public abstract class BaseService {
 		
 		String formSql = formSqlSb.toString();
 
-		Page<?> page = Db.paginate(splitPage.getPageNumber(), splitPage.getPageSize(), select, formSql, paramValue.toArray());
+		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), select, formSql, paramValue.toArray());
 		splitPage.setPage(page);
 	}
 	

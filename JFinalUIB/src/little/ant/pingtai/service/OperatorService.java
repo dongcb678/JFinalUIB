@@ -3,6 +3,7 @@ package little.ant.pingtai.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Module;
 import little.ant.pingtai.model.Operator;
@@ -133,7 +134,7 @@ public class OperatorService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, m.names as modulenames, s.names as systemsnames ";
-		splitPageBase(splitPage, select, "pingtai.operator.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.operator.splitPage");
 	}
 	
 }

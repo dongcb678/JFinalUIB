@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.pingtai.beetl.tag.DictTag;
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.lucene.DocBase;
 import little.ant.pingtai.tools.ToolOS;
@@ -79,7 +80,7 @@ public class DocKeyword extends DocBase {
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		Document document = new Document();
 		
-		int batchCount = getBatchCount(" from wx_keyword ", splitDataSize);
+		int batchCount = getBatchCount(DictKeys.db_dataSource_main, " from wx_keyword ", splitDataSize);
 		String sql = " select * from wx_keyword limit ? offset ? ";
 
 		for (int i = 0; i < batchCount; i++) {

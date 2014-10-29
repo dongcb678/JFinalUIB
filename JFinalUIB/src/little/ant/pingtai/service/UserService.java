@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Department;
 import little.ant.pingtai.model.User;
@@ -195,7 +196,7 @@ public class UserService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames ";
-		splitPageBase(splitPage, select, "pingtai.user.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.user.splitPage");
 	}
 
 	/**

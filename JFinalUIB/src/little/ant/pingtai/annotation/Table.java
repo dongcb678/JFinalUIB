@@ -10,7 +10,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
 public @interface Table {
-	
+
+    String dataSourceName();
+
     String tableName();
 
     String pkName() default "ids";

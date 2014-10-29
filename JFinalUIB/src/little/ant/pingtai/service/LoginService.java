@@ -72,7 +72,7 @@ public class LoginService extends BaseService {
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
 				String sql = ToolSqlXml.getSql("pingtai.user.start");
-				Db.update(sql, user.getStr("ids"));
+				Db.use(DictKeys.db_dataSource_main).update(sql, user.getStr("ids"));
 				// 更新缓存
 				User.dao.cacheAdd(user.getStr("ids"));
 			}
@@ -96,7 +96,7 @@ public class LoginService extends BaseService {
 		} else {
 			// 密码验证失败
 			String sql = ToolSqlXml.getSql("pingtai.user.stop");
-			Db.update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
+			Db.use(DictKeys.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
 			// 更新缓存
 			User.dao.cacheAdd(user.getStr("ids"));
 			return DictKeys.login_info_4;

@@ -1,5 +1,6 @@
 package little.ant.weixin.service;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.service.BaseService;
 
@@ -18,7 +19,7 @@ public class LocationService extends BaseService {
 	public void list(SplitPage splitPage){
 		log.debug("微信用户位置管理：分页处理");
 		String select = " select * ";
-		splitPageBase(splitPage, select, "weixin.location.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "weixin.location.splitPage");
 	}
 	
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.pingtai.annotation.Controller;
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.service.OperatorService;
 import little.ant.pingtai.service.SysLogService;
 import little.ant.pingtai.tools.ToolSqlXml;
@@ -51,7 +52,7 @@ public class TestController extends BaseController {
 			
 			LinkedList<Object> paramValue = new LinkedList<Object>();
 			String sql = ToolSqlXml.getSql("pingtai.test.autoComplete", param, paramValue);
-			List<Record> list = Db.find(sql, paramValue.toArray());
+			List<Record> list = Db.use(DictKeys.db_dataSource_main).find(sql, paramValue.toArray());
 			StringBuilder sb = new StringBuilder();
 			sb.append("[");
 			for (Record record : list) {

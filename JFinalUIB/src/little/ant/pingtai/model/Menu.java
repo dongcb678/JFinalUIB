@@ -1,11 +1,12 @@
 package little.ant.pingtai.model;
 
 import little.ant.pingtai.annotation.Table;
+import little.ant.pingtai.common.DictKeys;
 
 import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
-@Table(tableName="pt_menu")
+@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_menu")
 public class Menu extends BaseModel<Menu> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

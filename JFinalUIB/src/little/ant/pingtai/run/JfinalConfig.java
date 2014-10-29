@@ -44,7 +44,11 @@ import com.jfinal.plugin.activerecord.tx.TxByActionMethods;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.jfinal.kit.PathKit;
 
 /**
@@ -122,35 +126,37 @@ public class JfinalConfig extends JFinalConfig {
 				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_maxActive));
 		
 		log.info("configPlugin 配置ActiveRecord插件");
-		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+		ActiveRecordPlugin arpMain = new ActiveRecordPlugin(DictKeys.db_dataSource_main, druidPlugin);
 		//arp.setTransactionLevel(4);//事务隔离级别
-		arp.setDevMode(getPropertyToBoolean(DictKeys.config_devMode, false)); // 设置开发模式
-		arp.setShowSql(getPropertyToBoolean(DictKeys.config_devMode, false)); // 是否显示SQL
+		arpMain.setDevMode(getPropertyToBoolean(DictKeys.config_devMode, false)); // 设置开发模式
+		arpMain.setShowSql(getPropertyToBoolean(DictKeys.config_devMode, false)); // 是否显示SQL
 
 		log.info("configPlugin 数据库类型判断");
 		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){
 			log.info("configPlugin 使用数据库类型是 postgresql");
-			arp.setDialect(new PostgreSqlDialect());
+			arpMain.setDialect(new PostgreSqlDialect());
 			
 		}else if(db_type.equals(DictKeys.db_type_mysql)){
 			log.info("configPlugin 使用数据库类型是 mysql");
-			arp.setDialect(new MysqlDialect());
-			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 小写
+			arpMain.setDialect(new MysqlDialect());
+			arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 小写
 		
 		}else if(db_type.equals(DictKeys.db_type_oracle)){
 			log.info("configPlugin 使用数据库类型是 oracle");
 			druidPlugin.setValidationQuery("select 1 FROM DUAL"); //指定连接验证语句(用于保存数据库连接池), 这里不加会报错误:invalid oracle validationQuery. select 1, may should be : select 1 FROM DUAL 
-			arp.setDialect(new OracleDialect());
-			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 配置属性名(字段名)大小写不敏感容器工厂
+			arpMain.setDialect(new OracleDialect());
+			arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 配置属性名(字段名)大小写不敏感容器工厂
 		}
 
 		log.info("configPlugin 添加druidPlugin插件");
 		me.add(druidPlugin);
 		
 		log.info("configPlugin 表扫描注册");
-		new TablePlugin(arp).start();
-		me.add(arp);
+		Map<String, ActiveRecordPlugin> arpMap = new HashMap<String, ActiveRecordPlugin>();
+		arpMap.put(DictKeys.db_dataSource_main, arpMain);
+		new TablePlugin(arpMap).start();
+		me.add(arpMain); // 多数据源继续添加
 
 		log.info("I18NPlugin 国际化键值对加载");
 		me.add(new I18NPlugin());

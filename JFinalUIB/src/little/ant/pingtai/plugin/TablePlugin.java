@@ -1,6 +1,7 @@
 package little.ant.pingtai.plugin;
 
 import java.util.List;
+import java.util.Map;
 
 import little.ant.pingtai.annotation.Table;
 import little.ant.pingtai.model.BaseModel;
@@ -18,10 +19,10 @@ public class TablePlugin implements IPlugin {
 
     protected final Logger log = Logger.getLogger(getClass());
     
-    private ActiveRecordPlugin arp;
+    private Map<String, ActiveRecordPlugin> arpMap;
 
-	public TablePlugin(ActiveRecordPlugin arp){
-		this.arp = arp;
+	public TablePlugin(Map<String, ActiveRecordPlugin> arpMap){
+		this.arpMap = arpMap;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -33,19 +34,25 @@ public class TablePlugin implements IPlugin {
 			// 获取注解对象
 			Table tableBind = (Table) model.getAnnotation(Table.class);
 			if (tableBind == null) {
-				log.error(model.getName() + "继承了BaseModel，但是没有注解绑定表名");
-				continue;
+				log.error(model.getName() + "继承了BaseModel，但是没有注解绑定表名 ！！！");
+				break;
 			}
 
-			// 获取映射表
+			// 获取映射属性
+			String dataSourceName = tableBind.dataSourceName().trim();
 			String tableName = tableBind.tableName().trim();
 			String pkName = tableBind.pkName().trim();
-			if(tableName.equals("") || pkName.equals("")){
-				log.error(model.getName() + "注解错误，表名或者主键名为空");
-				continue;
+			if(dataSourceName.equals("") || tableName.equals("") || pkName.equals("")){
+				log.error(model.getName() + "注解错误，数据源、表名、主键名为空 ！！！");
+				break;
 			}
 			
 			// 映射注册
+			ActiveRecordPlugin arp = arpMap.get(dataSourceName);
+			if(arp == null){
+				log.error(model.getName() + "ActiveRecordPlugin不能为null ！！！");
+				break;
+			}
 			arp.addMapping(tableName, pkName, model);
 		}
 		return true;

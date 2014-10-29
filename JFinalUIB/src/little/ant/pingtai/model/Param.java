@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 import com.jfinal.plugin.ehcache.CacheKit;
 
 @SuppressWarnings("unused")
-@Table(tableName="pt_param")
+@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_param")
 public class Param extends BaseModel<Param> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;

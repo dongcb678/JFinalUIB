@@ -83,6 +83,8 @@ public abstract class DictKeys {
 	public static final String db_minIdle = "db.minIdle";
 	public static final String db_maxActive = "db.maxActive";
 	
+	public static final String db_dataSource_main = "db.dataSource.main"; // 主数据源名称
+	
 	/**
 	 * 分页参数初始化值
 	 */

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Group;
 import little.ant.pingtai.model.Role;
@@ -102,7 +103,7 @@ public class RoleService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select * ";
-		splitPageBase(splitPage, select, "pingtai.role.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.role.splitPage");
 	}
 	
 }

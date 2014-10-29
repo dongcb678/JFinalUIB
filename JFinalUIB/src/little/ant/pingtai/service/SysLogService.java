@@ -1,5 +1,6 @@
 package little.ant.pingtai.service;
 
+import little.ant.pingtai.common.DictKeys;
 import little.ant.pingtai.common.SplitPage;
 import little.ant.pingtai.model.Syslog;
 import little.ant.pingtai.tools.ToolSqlXml;
@@ -24,7 +25,7 @@ public class SysLogService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select o.names onames, o.url ourl, u.username, s.* ";
-		splitPageBase(splitPage, select, "pingtai.sysLog.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.sysLog.splitPage");
 	}
 	
 }
