@@ -1,8 +1,8 @@
 package little.ant.weixin.service;
 
-import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.common.SplitPage;
-import little.ant.pingtai.service.BaseService;
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.SplitPage;
+import little.ant.platform.service.BaseService;
 import little.ant.weixin.lucene.DocKeyword;
 import little.ant.weixin.model.Keyword;
 

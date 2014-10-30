@@ -3,7 +3,7 @@ package little.ant.weixin.tools;
 import java.util.HashMap;
 import java.util.Map;
 
-import little.ant.pingtai.tools.ToolHttp;
+import little.ant.platform.tools.ToolHttp;
 import little.ant.weixin.vo.message.RecevieToken;
 
 import org.apache.log4j.Logger;

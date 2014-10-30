@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import little.ant.pingtai.tools.ToolString;
+import little.ant.platform.tools.ToolString;
 import little.ant.weixin.vo.map.RecevieBaiduPlace;
 import little.ant.weixin.vo.map.RecevieUserLocation;
 import little.ant.weixin.vo.message.ResponseMsgArticle;

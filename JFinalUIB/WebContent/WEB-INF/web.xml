@@ -21,13 +21,13 @@
     
    	<!-- 平台初始化 -->
 	<listener>
-		<listener-class>little.ant.pingtai.listener.InitListener</listener-class>
+		<listener-class>little.ant.platform.listener.InitListener</listener-class>
 	</listener>
 	
 	<!-- Log4j在线查看 -->
 	<servlet>  
     	<servlet-name>log4j</servlet-name>  
-    	<servlet-class>little.ant.pingtai.servlet.Log4j</servlet-class>
+    	<servlet-class>little.ant.platform.servlet.Log4j</servlet-class>
     	<async-supported>true</async-supported>
  	</servlet>
 	<servlet-mapping>
@@ -68,7 +68,7 @@
 		<filter-class>com.jfinal.core.JFinalFilter</filter-class>
 		<init-param>
 			<param-name>configClass</param-name>
-			<param-value>little.ant.pingtai.run.JfinalConfig</param-value>
+			<param-value>little.ant.platform.run.JfinalConfig</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

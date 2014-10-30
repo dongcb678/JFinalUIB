@@ -1,0 +1,23 @@
+package ${package};
+
+import little.ant.platform.annotation.Controller;
+import little.ant.platform.controller.BaseController;
+import ${basePackage}.service.${className}Service;
+
+import org.apache.log4j.Logger;
+
+@Controller(controllerKey = "/jf/re/${classNameSmall}")
+public class ${className}Controller extends BaseController {
+
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(${className}Controller.class);
+	
+	private ${className}Service ${classNameSmall}Service = new ${className}Service();
+	
+	public void index() {
+		render("/realEstate/${classNameSmall}/xxx.html");
+	}
+	
+}
+
+

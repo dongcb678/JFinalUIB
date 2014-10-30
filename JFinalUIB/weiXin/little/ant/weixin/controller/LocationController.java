@@ -1,7 +1,7 @@
 package little.ant.weixin.controller;
 
-import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.controller.BaseController;
+import little.ant.platform.annotation.Controller;
+import little.ant.platform.controller.BaseController;
 import little.ant.weixin.model.Location;
 import little.ant.weixin.service.LocationService;
 

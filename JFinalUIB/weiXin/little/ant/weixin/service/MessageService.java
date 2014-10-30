@@ -1,7 +1,7 @@
 package little.ant.weixin.service;
 
-import little.ant.pingtai.service.BaseService;
-import little.ant.pingtai.tools.ToolXml;
+import little.ant.platform.service.BaseService;
+import little.ant.platform.tools.ToolXml;
 import little.ant.weixin.tools.ToolMessage;
 
 import org.apache.log4j.Logger;

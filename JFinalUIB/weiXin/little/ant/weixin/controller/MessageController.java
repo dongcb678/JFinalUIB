@@ -1,8 +1,8 @@
 package little.ant.weixin.controller;
 
-import little.ant.pingtai.annotation.Controller;
-import little.ant.pingtai.controller.BaseController;
-import little.ant.pingtai.tools.ToolContext;
+import little.ant.platform.annotation.Controller;
+import little.ant.platform.controller.BaseController;
+import little.ant.platform.tools.ToolContext;
 import little.ant.weixin.service.MessageService;
 import little.ant.weixin.tools.ToolOAuth2;
 import little.ant.weixin.tools.ToolSignature;

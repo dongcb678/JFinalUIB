@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import little.ant.pingtai.tools.ToolString;
+import little.ant.platform.tools.ToolString;
 import little.ant.weixin.vo.media.RecevieMedia;
 
 import org.apache.log4j.Logger;

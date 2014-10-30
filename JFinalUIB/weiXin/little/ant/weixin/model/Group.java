@@ -1,8 +1,8 @@
 package little.ant.weixin.model;
 
-import little.ant.pingtai.annotation.Table;
-import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.model.BaseModel;
+import little.ant.platform.annotation.Table;
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.model.BaseModel;
 
 import org.apache.log4j.Logger;
 

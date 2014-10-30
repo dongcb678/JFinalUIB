@@ -7,8 +7,8 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import little.ant.pingtai.tools.ToolHttp;
-import little.ant.pingtai.tools.ToolString;
+import little.ant.platform.tools.ToolHttp;
+import little.ant.platform.tools.ToolString;
 import little.ant.weixin.vo.qrcode.RecevieQRCode;
 
 import org.apache.log4j.Logger;

@@ -1,6 +1,6 @@
 package little.ant.weixin.tools;
 
-import little.ant.pingtai.tools.ToolHttp;
+import little.ant.platform.tools.ToolHttp;
 import little.ant.weixin.vo.menu.RecevieMenuCreate;
 import little.ant.weixin.vo.menu.RecevieMenuDelete;
 import little.ant.weixin.vo.menu.ResponseMenu;

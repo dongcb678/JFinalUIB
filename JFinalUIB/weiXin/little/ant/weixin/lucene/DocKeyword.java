@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.pingtai.beetl.tag.DictTag;
-import little.ant.pingtai.common.DictKeys;
-import little.ant.pingtai.common.SplitPage;
-import little.ant.pingtai.lucene.DocBase;
-import little.ant.pingtai.tools.ToolOS;
+import little.ant.platform.beetl.tag.DictTag;
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.SplitPage;
+import little.ant.platform.lucene.DocBase;
+import little.ant.platform.tools.ToolOS;
 import little.ant.weixin.model.Keyword;
 
 import org.apache.log4j.Logger;
