@@ -989,8 +989,8 @@ select:focus:required:invalid:focus {
 }
 .form-actions {
   padding: 17px 20px 18px;
-  margin-top: 18px;
-  margin-bottom: 18px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   background-color: transparent;
   border-top: 1px solid #e5e5e5;
   *zoom: 1;
@@ -4342,7 +4342,7 @@ a.badge:hover {
 }
 .form-actions{
 	clear:both;
-	height:50px;
+	height:10px;
 }
 .formPanel label{
 	width:70px!important;

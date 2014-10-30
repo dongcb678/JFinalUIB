@@ -4,22 +4,14 @@
 		var newPass1 = $("#newPass1").val();
 		var newPass2 = $("#newPass2").val();
 		if(newPass1 != newPass2){
-			var d = dialog({
-			    title: '验证提示',
-			    content: '两次输入密码不一致，请从新输入！'
-			});
-			d.showModal();
+			simpleDialog('验证提示', '两次输入密码不一致，请从新输入！');
 	 		return false;
 		}
 		
 		var form = document.getElementById("passChangeForm");
 		var errorCount = formVali(form);
 		if(errorCount != 0){
-			var d = dialog({
-			    title: '验证提示',
-			    content: '有'+errorCount+'错误，请修正！'
-			});
-			d.showModal();
+			simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
 	 		return false;
 		}
 		

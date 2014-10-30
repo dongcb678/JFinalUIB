@@ -1,4 +1,17 @@
 /**
+ * 提示弹出框
+ * @param title
+ * @param content
+ */
+function simpleDialog(title, content){
+	var d = dialog({
+	    title: title,
+	    content: content
+	});
+	d.showModal();
+}
+
+/**
  * 分页链接HTML
  * @param divId
  * @param formId
@@ -265,6 +278,7 @@ function ajaxDiaLog(url, data, callback){
 			$('#myModal').modal('show');
 	    	$('#loading').remove();
 			$('#content').fadeIn();
+			docReady();
 		}
 	});
 }

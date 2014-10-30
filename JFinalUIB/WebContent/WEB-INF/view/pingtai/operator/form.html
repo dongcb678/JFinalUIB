@@ -5,11 +5,7 @@
 function dataVali(form){
 	var errorCount = formVali(form);
 	if(errorCount != 0){
-		var d = dialog({
-		    title: '验证提示',
-		    content: '有'+errorCount+'错误，请修正！'
-		});
-		d.showModal();
+		simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
  		return false;
 	}
 	
