@@ -110,7 +110,7 @@
 										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/user/edit/${escapeXml(user.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a>
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/user/delete/${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContentConfirm('/jf/user/delete/${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
 									<% } %>
 									<% if(group == true){ %>
 										<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.user.list.table.group"]}</a>

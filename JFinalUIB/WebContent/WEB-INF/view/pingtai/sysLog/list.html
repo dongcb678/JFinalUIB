@@ -144,7 +144,7 @@
 										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/sysLog/view/${escapeXml(sysLog.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a> 
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/sysLog/delete/${escapeXml(sysLog.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContentConfirm('/jf/sysLog/delete/${escapeXml(sysLog.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
 									<% } %>
 								</td>
 							</tr>

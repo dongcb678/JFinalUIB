@@ -95,13 +95,13 @@
 								<td>${escapeXml(keyword["answer"]!) }</td>
 								<td class="center">
 									<% if(view == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/keyword/view/${escapeXml(keyword.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/keyword/view/${escapeXml(keyword.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a>
 									<% } %>
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/wx/keyword/edit/${escapeXml(keyword.ids!)}');"> <i class="icon-edit icon-white"></i> 编辑</a>
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/wx/keyword/edit/${escapeXml(keyword.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a>
 									<% } %>
 									<% if(delete == true){ %>
-										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/wx/keyword/delete/${escapeXml(keyword.ids!)}');"> <i class="icon-trash icon-white"></i> 删除</a>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/wx/keyword/delete/${escapeXml(keyword.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
 									<% } %>
 								</td>
 							</tr>

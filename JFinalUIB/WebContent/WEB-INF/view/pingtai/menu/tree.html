@@ -67,18 +67,28 @@
 	function beforeRemove(treeId, treeNode) {
 		var zTree = $.fn.zTree.getZTreeObj("zTreeMenuContent");
 		zTree.selectNode(treeNode);
+		
+
+		var result = false;
 		if(confirm("确认删除<" + treeNode.name + ">菜单吗？")){
-			$.post(
-				"${cxt!}/jf/menu/delete",
-				{ "ids" : treeNode.id },
-				function(data){//返回数据库标示
+			$.ajax({
+				type : "post",
+				url : cxt + "/jf/menu/delete",
+				data : { "ids" : treeNode.id },
+				dataType : "html",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				async: false,
+				success:function(data){
 					if(data != treeNode.id){
-						alert("删除<" + treeNode.name + ">菜单失败！");
-			     	}
+						simpleDialog('操作提示', "删除<" + treeNode.name + ">菜单失败！")
+					}else{
+						result = true;
+					}
 				}
-			);
+			});
 		}
-		return true;
+		
+        return result;
 	}		
 	
 	//用于捕获节点编辑名称

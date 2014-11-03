@@ -50,7 +50,7 @@
 			if(has){
 				parent.window.ajaxContent('/jf/param/view/' + ids);
 			}else{
-				alertMsg.error('没有操作权限！');
+				parent.window.simpleDialog('操作提示', '没有操作权限！');
 			}
 		}
 	
@@ -59,16 +59,30 @@
 			if(has){
 				parent.window.ajaxContent('/jf/param/edit/' + ids);
 			}else{
-				alertMsg.error('没有操作权限！');
+				parent.window.simpleDialog('操作提示', '没有操作权限！');
 			}
 		}
 	
 		function deleteFunc(ids){
 			var has = ${hasPrivilegeUrl("/jf/param/delete")};
 			if(has){
-				parent.window.ajaxContent('/jf/param/delete/' + ids);
+				var d = dialog({
+				    title: '操作提示',
+				    content: "确定要这样操作吗？",
+				    okValue: '确定',
+				    ok: function () {
+				        //this.title('提交中…');
+				        parent.window.ajaxContent('/jf/param/delete/' + ids);
+				        return true;
+				    },
+				    cancelValue: '取消',
+				    cancel: function () {
+				    	return true ; //false
+				    }
+				});
+				d.show();
 			}else{
-				alertMsg.error('没有操作权限！');
+				parent.window.simpleDialog('操作提示', '没有操作权限！');
 			}
 		}
 		
@@ -94,9 +108,9 @@
 					<td>${param.status == "1" ? i18nMap["admin.param.property.status.start"] : i18nMap["admin.param.property.status.stop"]}</td>
 					<td>
 						<!-- 
-						<a href='#' onclick='view("${param.ids!}")'>查看</a>&nbsp;&nbsp;
-						<a href='#' onclick='update("${param.ids!}")'>修改</a>&nbsp;&nbsp;
-						<a href='#' onclick='deleteFunc("${param.ids!}")'>删除</a>&nbsp;&nbsp;
+						<a href='#' onclick='view("${param.ids!}")'>${i18nMap["admin.common.see"]}</a>&nbsp;&nbsp;
+						<a href='#' onclick='update("${param.ids!}")'>${i18nMap["admin.common.edit"]}</a>&nbsp;&nbsp;
+						<a href='#' onclick='deleteFunc("${param.ids!}")'>${i18nMap["admin.common.delete"]}</a>&nbsp;&nbsp;
 						-->
 					</td>
 				</tr>

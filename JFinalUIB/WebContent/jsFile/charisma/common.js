@@ -254,6 +254,30 @@ function ajaxContent(url, data, callback){
 }
 
 /**
+ * ajax请求url替换div content
+ * @param url 请求URL
+ * @param data 请求参数数据
+ * @param callback 回调
+ */
+function ajaxContentConfirm(url, data, callback){
+	var d = dialog({
+	    title: '操作提示',
+	    content: "确定要这样操作吗？",
+	    okValue: '确定',
+	    ok: function () {
+	        //this.title('提交中…');
+	        ajaxContent(url, data, callback);
+	        return true;
+	    },
+	    cancelValue: '取消',
+	    cancel: function () {
+	    	return true ; //false
+	    }
+	});
+	d.show();
+}
+
+/**
  * ajax请求url替换DiaLog
  * @param url 请求地址
  * @param data 参数
