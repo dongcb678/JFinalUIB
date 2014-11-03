@@ -151,9 +151,9 @@
 		});
 		
 		//2.部门负责人设置按钮
-		var accessControlStr = "<span class='button accessControl' id='accessControlBtn_" + treeNode.tId + "' title='设置部门负责人' onfocus='this.blur();'></span>";
-		sObj.after(accessControlStr);
-		var btn = $("#accessControlBtn_"+treeNode.tId);
+		var operatorStr = "<span class='button operator' id='operatorBtn_" + treeNode.tId + "' title='设置部门负责人' onfocus='this.blur();'></span>";
+		sObj.after(operatorStr);
+		var btn = $("#operatorBtn_"+treeNode.tId);
 		if (btn) btn.bind("click", function(){
 			setDeptPrincipalDiaLog(treeNode.id);
 			return false;
@@ -164,7 +164,7 @@
 		//1.处理添加按钮
 		$("#addBtn_"+treeNode.tId).unbind().remove();
 		//2.处理查看按钮
-		$("#accessControlBtn_"+treeNode.tId).unbind().remove();
+		$("#operatorBtn_"+treeNode.tId).unbind().remove();
 	};
 
 	////////////////////下面是处理展开//////////////////
