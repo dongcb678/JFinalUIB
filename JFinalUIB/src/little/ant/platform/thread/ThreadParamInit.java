@@ -36,25 +36,25 @@ public class ThreadParamInit extends Thread {
 		log.info("缓存参数初始化 start ...");
 
 		// 1.缓存用户
-		pingtai_cacheUser();
+		platform_cacheUser();
 
 		// 2.缓存组
-		pingtai_cacheGroup();
+		platform_cacheGroup();
 
 		// 3.缓存角色
-		pingtai_cacheRole();
+		platform_cacheRole();
 
 		// 4.缓存岗位
-		pingtai_cacheStation();
+		platform_cacheStation();
 
 		// 5.缓存功能
-		pingtai_cacheOperator();
+		platform_cacheOperator();
 
 		// 6.缓存字典
-		pingtai_cacheDict();
+		platform_cacheDict();
 
 		// 6.缓存参数
-		pingtai_cacheParam();
+		platform_cacheParam();
 
 		log.info("缓存参数初始化 end ...");
 	}
@@ -63,8 +63,8 @@ public class ThreadParamInit extends Thread {
 	 * 缓存所有用户
 	 * @author 董华健    2012-10-16 下午1:16:48
 	 */
-	public static void pingtai_cacheUser() {
-		String sql = ToolSqlXml.getSql("pingtai.user.all");
+	public static void platform_cacheUser() {
+		String sql = ToolSqlXml.getSql("platform.user.all");
 		List<User> userList = User.dao.find(sql);
 		for (User user : userList) {
 			User.dao.cacheAdd(user.getStr("ids"));
@@ -77,8 +77,8 @@ public class ThreadParamInit extends Thread {
 	 * 缓存所有组
 	 * @author 董华健    2012-10-16 下午1:17:20
 	 */
-	public static void pingtai_cacheGroup() {
-		String sql = ToolSqlXml.getSql("pingtai.group.all");
+	public static void platform_cacheGroup() {
+		String sql = ToolSqlXml.getSql("platform.group.all");
 		List<Group> groupList = Group.dao.find(sql);
 		for (Group group : groupList) {
 			Group.dao.cacheAdd(group.getStr("ids"));
@@ -90,8 +90,8 @@ public class ThreadParamInit extends Thread {
 	 * 缓存所有角色
 	 * @author 董华健    2012-10-16 下午1:17:20
 	 */
-	public static void pingtai_cacheRole() {
-		String sql = ToolSqlXml.getSql("pingtai.role.all");
+	public static void platform_cacheRole() {
+		String sql = ToolSqlXml.getSql("platform.role.all");
 		List<Role> roleList = Role.dao.find(sql);
 		for (Role role : roleList) {
 			Role.dao.cacheAdd(role.getStr("ids"));
@@ -103,8 +103,8 @@ public class ThreadParamInit extends Thread {
 	 * 缓存所有的岗位
 	 * @author 董华健    2013-07-16 下午1:17:20
 	 */
-	public static void pingtai_cacheStation() {
-		String sql = ToolSqlXml.getSql("pingtai.station.all");
+	public static void platform_cacheStation() {
+		String sql = ToolSqlXml.getSql("platform.station.all");
 		List<Station> stationList = Station.dao.find(sql);
 		for (Station station : stationList) {
 			Station.dao.cacheAdd(station.getStr("ids"));
@@ -116,8 +116,8 @@ public class ThreadParamInit extends Thread {
 	 * 缓存操作
 	 * @author 董华健    2012-10-16 下午1:17:12
 	 */
-	public static void pingtai_cacheOperator() {
-		String sql = ToolSqlXml.getSql("pingtai.operator.all");
+	public static void platform_cacheOperator() {
+		String sql = ToolSqlXml.getSql("platform.operator.all");
 		List<Operator> operatorList = Operator.dao.find(sql);
 		for (Operator operator : operatorList) {
 			Operator.dao.cacheAdd(operator.getStr("ids"));
@@ -130,8 +130,8 @@ public class ThreadParamInit extends Thread {
 	 * 缓存业务字典
 	 * @author 董华健    2012-10-16 下午1:17:04
 	 */
-	public static void pingtai_cacheDict() {
-		String sql = ToolSqlXml.getSql("pingtai.dict.all");
+	public static void platform_cacheDict() {
+		String sql = ToolSqlXml.getSql("platform.dict.all");
 		List<Dict> dictList = Dict.dao.find(sql);
 		for (Dict dict : dictList) {
 			Dict.dao.cacheAdd(dict.getStr("ids"));
@@ -144,8 +144,8 @@ public class ThreadParamInit extends Thread {
 	 * 缓存业务参数
 	 * @author 董华健    2012-10-16 下午1:17:04
 	 */
-	public static void pingtai_cacheParam() {
-		String sql = ToolSqlXml.getSql("pingtai.param.all");
+	public static void platform_cacheParam() {
+		String sql = ToolSqlXml.getSql("platform.param.all");
 		List<Param> paramList = Param.dao.find(sql);
 		for (Param param : paramList) {
 			Param.dao.cacheAdd(param.getStr("ids"));

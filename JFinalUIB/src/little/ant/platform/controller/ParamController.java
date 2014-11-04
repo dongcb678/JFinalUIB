@@ -17,13 +17,13 @@ public class ParamController extends BaseController {
 	private static Logger log = Logger.getLogger(ParamController.class);
 	
 	public void index() {
-		String sql = ToolSqlXml.getSql("pingtai.param.treeTableNodeRoot");
+		String sql = ToolSqlXml.getSql("platform.param.treeTableNodeRoot");
 		list = Param.dao.find(sql);
 		render("/platform/param/treeTable.html");
 	}
 	
 	public void treeTable() {
-		String sql = ToolSqlXml.getSql("pingtai.param.treeTableChildNode");
+		String sql = ToolSqlXml.getSql("platform.param.treeTableChildNode");
 		list = Param.dao.find(sql, ids);
 		render("/platform/param/treeTableSub.html");
 	}

@@ -35,11 +35,11 @@ public class MenuService extends BaseService {
 		
 		List<Menu> list = null;
 		if(null != parentIds){
-			String sql = ToolSqlXml.getSql("pingtai.menu.child", param);
+			String sql = ToolSqlXml.getSql("platform.menu.child", param);
 			list = Menu.dao.find(sql, parentIds);
 			
 		}else{
-			String sql = ToolSqlXml.getSql("pingtai.menu.root", param);
+			String sql = ToolSqlXml.getSql("platform.menu.root", param);
 			list = Menu.dao.find(sql, systemsIds);
 		}
 		
@@ -126,7 +126,7 @@ public class MenuService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
-		String sql = ToolSqlXml.getSql("pingtai.menu.childCount");
+		String sql = ToolSqlXml.getSql("platform.menu.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){

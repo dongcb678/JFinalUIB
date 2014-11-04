@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<sql-statement namespace="pingtai.user">
+<sql-statement namespace="platform.user">
 	
 	<!-- 查询所有用户 -->
 	<sql id="all">

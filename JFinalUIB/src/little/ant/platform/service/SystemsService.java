@@ -62,7 +62,7 @@ public class SystemsService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.systems.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.systems.splitPage");
 	}
 	
 }

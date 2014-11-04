@@ -76,10 +76,10 @@ public class DictService extends BaseService {
 	public String childNodeData(String parentIds){
 		List<Dict> list = null;
 		if (null != parentIds) {
-			String sql = ToolSqlXml.getSql("pingtai.dict.treeChildNode");
+			String sql = ToolSqlXml.getSql("platform.dict.treeChildNode");
 			list = Dict.dao.find(sql, parentIds);
 		} else {
-			String sql = ToolSqlXml.getSql("pingtai.dict.treeNodeRoot");
+			String sql = ToolSqlXml.getSql("platform.dict.treeNodeRoot");
 			list = Dict.dao.find(sql);
 		}
 

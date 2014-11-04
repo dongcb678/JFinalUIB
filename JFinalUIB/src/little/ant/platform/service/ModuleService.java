@@ -27,17 +27,17 @@ public class ModuleService extends BaseService {
 		List<Module> list = null;
 		if (null != systemsIds && null == parentIds) {
 			// 1.根据系统ID查询模块树
-			String sql = ToolSqlXml.getSql("pingtai.module.rootBySystemIds");
+			String sql = ToolSqlXml.getSql("platform.module.rootBySystemIds");
 			list = Module.dao.find(sql, systemsIds);
 			
 		}else if(null == systemsIds && null == parentIds){
 			// 2.模块单选初始化调用
-			String sql = ToolSqlXml.getSql("pingtai.module.root");
+			String sql = ToolSqlXml.getSql("platform.module.root");
 			list = Module.dao.find(sql);
 			
 		}else if(null != parentIds){
 			// 3.通用子节点查询
-			String sql = ToolSqlXml.getSql("pingtai.module.child");
+			String sql = ToolSqlXml.getSql("platform.module.child");
 			list = Module.dao.find(sql, parentIds);
 		}
 		
@@ -119,7 +119,7 @@ public class ModuleService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
-		String sql = ToolSqlXml.getSql("pingtai.module.childCount");
+		String sql = ToolSqlXml.getSql("platform.module.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){

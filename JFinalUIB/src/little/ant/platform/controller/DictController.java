@@ -17,13 +17,13 @@ public class DictController extends BaseController {
 	private static Logger log = Logger.getLogger(DictController.class);
 	
 	public void index() {
-		String sql = ToolSqlXml.getSql("pingtai.dict.treeTableNodeRoot");
+		String sql = ToolSqlXml.getSql("platform.dict.treeTableNodeRoot");
 		list = Dict.dao.find(sql);
 		render("/platform/dict/treeTable.html");
 	}
 	
 	public void treeTable() {
-		String sql = ToolSqlXml.getSql("pingtai.dict.treeTableChildNode");
+		String sql = ToolSqlXml.getSql("platform.dict.treeTableChildNode");
 		list = Dict.dao.find(sql, ids);
 		render("/platform/dict/treeTableSub.html");
 	}

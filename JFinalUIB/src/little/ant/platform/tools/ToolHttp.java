@@ -331,8 +331,8 @@ public class ToolHttp {
 	}
 	
 	public static void main(String[] args){
-		//System.out.println(get("http://127.0.0.1:89/jf/login"));
-		//System.out.println(post("http://127.0.0.1:89/jf/login", null, null));
+		//System.out.println(get("http://127.0.0.1:89/jf/platform/login"));
+		//System.out.println(post("http://127.0.0.1:89/jf/platform/login", null, null));
 		
 		//System.out.println(get("http://littleant.duapp.com/msg"));
 

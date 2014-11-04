@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<sql-statement namespace="pingtai.role">
+<sql-statement namespace="platform.role">
 	
 	<!-- 查询所有角色 -->
 	<sql id="all">

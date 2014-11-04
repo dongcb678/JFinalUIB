@@ -76,10 +76,10 @@ public class ParamService extends BaseService {
 	public String childNodeData(String parentIds){
 		List<Param> list = null;
 		if (null != parentIds) {
-			String sql = ToolSqlXml.getSql("pingtai.param.treeChildNode");
+			String sql = ToolSqlXml.getSql("platform.param.treeChildNode");
 			list = Param.dao.find(sql, parentIds);
 		} else {
-			String sql = ToolSqlXml.getSql("pingtai.param.treeNodeRoot");
+			String sql = ToolSqlXml.getSql("platform.param.treeNodeRoot");
 			list = Param.dao.find(sql);
 		}
 

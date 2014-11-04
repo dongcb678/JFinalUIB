@@ -1,6 +1,6 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxContent('/jf/index/content');">主页</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/platform/index/content');">主页</a> <span class="divider">/</span></li>
 		<li><a href="#">操作提示</a></li>
 	</ul>
 </div>
@@ -36,7 +36,7 @@
  	function time(){
     	clearTimeout(t);
 	 	if(wait == 0){
-	 		ajaxContent('/jf/index/content');
+	 		ajaxContent('/jf/platform/index/content');
 	 		return false;
 	 	}
     	$("#errorId").html("系统将于" + wait + "秒后自动返回主页");

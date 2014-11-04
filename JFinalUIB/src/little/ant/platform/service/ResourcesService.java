@@ -41,15 +41,15 @@ public class ResourcesService extends BaseService {
 		List<Record> list = null;
 		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
 		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
-			String sql = ToolSqlXml.getSql("pingtai.resources.pv_pg");
+			String sql = ToolSqlXml.getSql("platform.resources.pv_pg");
 			list = Db.use(DictKeys.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
-			String sql = ToolSqlXml.getSql("pingtai.resources.pv_mysql");
+			String sql = ToolSqlXml.getSql("platform.resources.pv_mysql");
 			list = Db.use(DictKeys.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		}else if(db_type.equals(DictKeys.db_type_oracle)){ // oracle
-			String sql = ToolSqlXml.getSql("pingtai.resources.pv_oracle");
+			String sql = ToolSqlXml.getSql("platform.resources.pv_oracle");
 			list = Db.use(DictKeys.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		}
 		
@@ -76,7 +76,7 @@ public class ResourcesService extends BaseService {
 		
 		String hostName = ToolOS.getOsLocalHostName(); // 获取本机名称
 
-		String sql = ToolSqlXml.getSql("pingtai.resources.24hour");
+		String sql = ToolSqlXml.getSql("platform.resources.24hour");
 		List<Resources> list = Resources.dao.find(sql, hostName, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		List<String> datesList = new LinkedList<String>();

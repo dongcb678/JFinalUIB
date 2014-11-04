@@ -31,7 +31,7 @@ public class IndexController extends BaseController {
 	public void index() {
 		User user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
 		if(null != user){//后台
-			String sql = ToolSqlXml.getSql("pingtai.systems.all");
+			String sql = ToolSqlXml.getSql("platform.systems.all");
 			systemsList = Systems.dao.find(sql);
 			if(null == ids || ids.isEmpty()){ // 默认系统
 				ids = "8a40c0353fa828a6013fa898d4ac0020";

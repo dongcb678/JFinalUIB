@@ -125,17 +125,17 @@ public class UserService extends BaseService {
 		// 查询部门数据
 		List<Department> deptList = null;
 		if (null != deptIds) {
-			String sql = ToolSqlXml.getSql("pingtai.department.childNode");
+			String sql = ToolSqlXml.getSql("platform.department.childNode");
 			deptList = Department.dao.find(sql, deptIds.replace("dept_", ""));
 		} else {
-			String sql = ToolSqlXml.getSql("pingtai.department.rootNode");
+			String sql = ToolSqlXml.getSql("platform.department.rootNode");
 			deptList = Department.dao.find(sql);
 		}
 
 		// 查询用户数据
 		List<User> userList = null;
 		if (null != deptIds) {
-			String sql = ToolSqlXml.getSql("pingtai.user.treeUserNode");
+			String sql = ToolSqlXml.getSql("platform.user.treeUserNode");
 			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
 		}
 
@@ -196,7 +196,7 @@ public class UserService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.user.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.user.splitPage");
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class UserService extends BaseService {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "userName");
-			String sql = ToolSqlXml.getSql("pingtai.user.column", param);
+			String sql = ToolSqlXml.getSql("platform.user.column", param);
 			User user = User.dao.findFirst(sql, userName);
 			byte[] salt = user.getBytes("salt");// 密码盐
 			byte[] encryptedPassword = user.getBytes("password");
@@ -234,7 +234,7 @@ public class UserService extends BaseService {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "userName");
-			String sql = ToolSqlXml.getSql("pingtai.user.column", param);
+			String sql = ToolSqlXml.getSql("platform.user.column", param);
 			User user = User.dao.findFirst(sql, userName);
 			
 			// 验证密码

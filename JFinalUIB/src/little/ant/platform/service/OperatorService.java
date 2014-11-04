@@ -70,16 +70,16 @@ public class OperatorService extends BaseService {
 		
 		if (null == moduleIds) {
 			// 1.模块功能初始化调用
-			String sql = ToolSqlXml.getSql("pingtai.operator.rootModule");
+			String sql = ToolSqlXml.getSql("platform.operator.rootModule");
 			listModule = Module.dao.find(sql);
 			
 		} else if (null != moduleIds) {
 			moduleIds = moduleIds.replace("module_", "");
 			// 2.通用子节点查询
-			String sqlModule = ToolSqlXml.getSql("pingtai.operator.childModule");
+			String sqlModule = ToolSqlXml.getSql("platform.operator.childModule");
 			listModule = Module.dao.find(sqlModule, moduleIds);
 			
-			String sqlOperator = ToolSqlXml.getSql("pingtai.operator.byModuleIds");
+			String sqlOperator = ToolSqlXml.getSql("platform.operator.byModuleIds");
 			operatorList = Operator.dao.find(sqlOperator, moduleIds);
 		}
 
@@ -134,7 +134,7 @@ public class OperatorService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, m.names as modulenames, s.names as systemsnames ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.operator.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.operator.splitPage");
 	}
 	
 }

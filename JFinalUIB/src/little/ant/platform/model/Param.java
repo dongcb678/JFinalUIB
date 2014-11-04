@@ -35,7 +35,7 @@ public class Param extends BaseModel<Param> {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("val", val);
 		
-		String sql = ToolSqlXml.getSql("pingtai.param.idAndI18n", paramMap);
+		String sql = ToolSqlXml.getSql("platform.param.idAndI18n", paramMap);
 		
 		Param param = dao.findFirst(sql, ids);
 		return param;
@@ -47,7 +47,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public Param getByNumber(String number){
-		String sql = ToolSqlXml.getSql("pingtai.param.numbers");
+		String sql = ToolSqlXml.getSql("platform.param.numbers");
 		Param param = dao.findFirst(sql, number);
 		return param;
 	}
@@ -64,7 +64,7 @@ public class Param extends BaseModel<Param> {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("val", val);
 		
-		String sql = ToolSqlXml.getSql("pingtai.param.numbersAndI18n", paramMap);
+		String sql = ToolSqlXml.getSql("platform.param.numbersAndI18n", paramMap);
 		
 		Param param = dao.findFirst(sql, number);
 		return param;
@@ -75,7 +75,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public List<Param> getChild(){
-		String sql = ToolSqlXml.getSql("pingtai.param.child");
+		String sql = ToolSqlXml.getSql("platform.param.child");
 		return dao.find(sql, get("ids"));
 	}
 
@@ -85,7 +85,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public List<Param> getChild(String prentIds){
-		String sql = ToolSqlXml.getSql("pingtai.param.child");
+		String sql = ToolSqlXml.getSql("platform.param.child");
 		return dao.find(sql, prentIds);
 	}
 
@@ -101,7 +101,7 @@ public class Param extends BaseModel<Param> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = ToolSqlXml.getSql("pingtai.param.childAndI8n", param);
+		String sql = ToolSqlXml.getSql("platform.param.childAndI8n", param);
 		
 		return dao.find(sql, prentIds);
 	}
@@ -111,7 +111,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public Param getParent(){
-		String sql = ToolSqlXml.getSql("pingtai.param.parent");
+		String sql = ToolSqlXml.getSql("platform.param.parent");
 		return dao.findFirst(sql, get("parentids"));
 	}
 
@@ -126,7 +126,7 @@ public class Param extends BaseModel<Param> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = ToolSqlXml.getSql("pingtai..parentAndI18n", param);
+		String sql = ToolSqlXml.getSql("platform..parentAndI18n", param);
 		
 		return dao.findFirst(sql, get("parentids"));
 	}

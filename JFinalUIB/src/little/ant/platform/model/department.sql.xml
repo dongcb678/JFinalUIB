@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<sql-statement namespace="pingtai.department">
+<sql-statement namespace="platform.department">
 	
 	<!-- 查询根节点 -->
 	<sql id="rootNode">

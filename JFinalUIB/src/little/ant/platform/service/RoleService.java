@@ -85,10 +85,10 @@ public class RoleService extends BaseService {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);
 			
-			noCheckedList = Role.dao.find(ToolSqlXml.getSql("pingtai.role.noCheckedFilter", param));
-			checkedList = Role.dao.find(ToolSqlXml.getSql("pingtai.role.checkedFilter", param));
+			noCheckedList = Role.dao.find(ToolSqlXml.getSql("platform.role.noCheckedFilter", param));
+			checkedList = Role.dao.find(ToolSqlXml.getSql("platform.role.checkedFilter", param));
 		}else{
-			noCheckedList = Role.dao.find(ToolSqlXml.getSql("pingtai.role.noChecked"));
+			noCheckedList = Role.dao.find(ToolSqlXml.getSql("platform.role.noChecked"));
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -103,7 +103,7 @@ public class RoleService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.role.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.role.splitPage");
 	}
 	
 }

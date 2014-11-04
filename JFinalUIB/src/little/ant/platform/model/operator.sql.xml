@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<sql-statement namespace="pingtai.operator">
+<sql-statement namespace="platform.operator">
 	
 	<!-- 查询所有功能 -->
 	<sql id="all">

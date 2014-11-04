@@ -47,7 +47,7 @@ public class LoginService extends BaseService {
 		} else {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "username");
-			String sql = ToolSqlXml.getSql("pingtai.user.column", param);
+			String sql = ToolSqlXml.getSql("platform.user.column", param);
 			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
 				return DictKeys.login_info_0;// 用户不存在
@@ -71,7 +71,7 @@ public class LoginService extends BaseService {
 			if(hourSpace < passErrorHour){
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
-				String sql = ToolSqlXml.getSql("pingtai.user.start");
+				String sql = ToolSqlXml.getSql("platform.user.start");
 				Db.use(DictKeys.db_dataSource_main).update(sql, user.getStr("ids"));
 				// 更新缓存
 				User.dao.cacheAdd(user.getStr("ids"));
@@ -95,7 +95,7 @@ public class LoginService extends BaseService {
 			return DictKeys.login_info_3;
 		} else {
 			// 密码验证失败
-			String sql = ToolSqlXml.getSql("pingtai.user.stop");
+			String sql = ToolSqlXml.getSql("platform.user.stop");
 			Db.use(DictKeys.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
 			// 更新缓存
 			User.dao.cacheAdd(user.getStr("ids"));

@@ -64,17 +64,17 @@ public class IndexService extends BaseService {
 		String fitler = toSql(operatorIdsSb.toString()).replace("operator_", "");
 		
 		// 查询根菜单节点
-		Menu menu = Menu.dao.findFirst(ToolSqlXml.getSql("pingtai.menu.rootId"), systemsIds);
+		Menu menu = Menu.dao.findFirst(ToolSqlXml.getSql("platform.menu.rootId"), systemsIds);
 		String parentmenuids = menu.getStr("ids");
 		
 		// 一级菜单
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("names", names);
-		List<Menu> oneList = Menu.dao.find(ToolSqlXml.getSql("pingtai.menu.child", param), parentmenuids);
+		List<Menu> oneList = Menu.dao.find(ToolSqlXml.getSql("platform.menu.child", param), parentmenuids);
 		param.put("fitler", fitler);
 		for (Menu oneMenu : oneList) {
 			// 二级菜单
-			String sql = ToolSqlXml.getSql("pingtai.menu.operator", param);
+			String sql = ToolSqlXml.getSql("platform.menu.operator", param);
 			List<Menu> twoList = Menu.dao.find(sql, oneMenu.getPrimaryKeyValue());
 			oneMenu.put("subList", twoList);
 		}

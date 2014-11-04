@@ -15,7 +15,7 @@ public class SysLogService extends BaseService {
 	public static final SysLogService service = new SysLogService();
 	
 	public Syslog view(String ids){
-		String sql = ToolSqlXml.getSql("pingtai.sysLog.view");
+		String sql = ToolSqlXml.getSql("platform.sysLog.view");
 		return Syslog.dao.findFirst(sql, ids);
 	}
 
@@ -25,7 +25,7 @@ public class SysLogService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select o.names onames, o.url ourl, u.username, s.* ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.sysLog.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.sysLog.splitPage");
 	}
 	
 }

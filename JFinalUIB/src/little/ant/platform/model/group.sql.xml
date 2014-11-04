@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<sql-statement namespace="pingtai.group">
+<sql-statement namespace="platform.group">
 	
 	<!-- 查询所有分组 -->
 	<sql id="all">

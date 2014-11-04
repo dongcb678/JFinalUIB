@@ -75,10 +75,10 @@ public class GroupService extends BaseService {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);
 			
-			noCheckedList = Group.dao.find(ToolSqlXml.getSql("pingtai.group.noCheckedFilter", param));
-			checkedList = Group.dao.find(ToolSqlXml.getSql("pingtai.group.checkedFilter", param));
+			noCheckedList = Group.dao.find(ToolSqlXml.getSql("platform.group.noCheckedFilter", param));
+			checkedList = Group.dao.find(ToolSqlXml.getSql("platform.group.checkedFilter", param));
 		}else{
-			noCheckedList = Group.dao.find(ToolSqlXml.getSql("pingtai.group.noChecked"));
+			noCheckedList = Group.dao.find(ToolSqlXml.getSql("platform.group.noChecked"));
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -106,7 +106,7 @@ public class GroupService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select ids, names ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "pingtai.group.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.group.splitPage");
 	}
 	
 }
