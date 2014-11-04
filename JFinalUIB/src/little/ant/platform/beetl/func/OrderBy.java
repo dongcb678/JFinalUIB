@@ -38,9 +38,9 @@ public class OrderBy implements Function {
 		
 		if(null != orderMode && orderLaber.equals(orderColunm)){
 			if(orderMode.equals("asc")){
-				return "<img src='/files/images/pingtai/order/asc.gif' />";
+				return "<img src='/files/images/platform/order/asc.gif' />";
 			}else if(orderMode.equals("desc")){
-				return "<img src='/files/images/pingtai/order/desc.gif' />";
+				return "<img src='/files/images/platform/order/desc.gif' />";
 			}
 		}
 		

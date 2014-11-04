@@ -53,12 +53,12 @@ public class AuthenticationInterceptor implements Interceptor {
 
 		log.info("druid特殊处理");
 		if(uri.startsWith("/druid/")){
-			uri = "/pingtai/druid/iframe.html";
+			uri = "/platform/druid/iframe.html";
 		}
 
 		log.info("获取当前用户!");
 		boolean userAgentVali = true;
-		if(uri.equals("/jf/ueditor") || uri.equals("/jf/upload")){ // 针对ueditor特殊处理
+		if(uri.equals("/jf/platform/ueditor") || uri.equals("/jf/platform/upload")){ // 针对ueditor特殊处理
 			userAgentVali = false;
 		}
 		User user = ToolContext.getCurrentUser(request, userAgentVali);// 当前登录用户

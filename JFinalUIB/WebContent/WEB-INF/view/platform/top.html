@@ -1,0 +1,95 @@
+<!-- topbar starts -->
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="#" onclick="ajaxContent('/jf/platform/index/content');"> 
+				<img alt="Charisma Logo" src="${cxt!}/ui/charisma/img/logo20.png" /> 
+				<span>JFinalUIB</span>
+			</a>
+			
+			<!-- theme selector starts -->
+			<div class="btn-group pull-right theme-container" >
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-tint"></i><span class="hidden-phone"> 切换皮肤</span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu" id="themes">
+					<li><a data-value="classic" href="#"><i class="icon-blank"></i> Classic</a></li>
+					<li><a data-value="cerulean" href="#"><i class="icon-blank"></i> Cerulean</a></li>
+					<li><a data-value="cyborg" href="#"><i class="icon-blank"></i> Cyborg</a></li>
+					<li><a data-value="redy" href="#"><i class="icon-blank"></i> Redy</a></li>
+					<li><a data-value="journal" href="#"><i class="icon-blank"></i> Journal</a></li>
+					<li><a data-value="simplex" href="#"><i class="icon-blank"></i> Simplex</a></li>
+					<li><a data-value="slate" href="#"><i class="icon-blank"></i> Slate</a></li>
+					<li><a data-value="spacelab" href="#"><i class="icon-blank"></i> Spacelab</a></li>
+					<li><a data-value="united" href="#"><i class="icon-blank"></i> United</a></li>
+				</ul>
+			</div>
+			<!-- theme selector ends -->
+			
+			<!-- language select starts -->
+			<div class="btn-group pull-right" >
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-th-large"></i><span class="hidden-phone">${i18nMap["admin.top.language"]}</span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="${cxt!}/jf/platform/index?localePram=ja">${i18nMap["admin.top.language.ja"]}</a></li>
+					<li><a href="${cxt!}/jf/platform/index?localePram=en_us">${i18nMap["admin.top.language.enus"]}</a></li>
+					<li><a href="${cxt!}/jf/platform/index?localePram=zh_cn">${i18nMap["admin.top.language.zhcn"]}</a></li>
+					<li><a href="${cxt!}/jf/platform/index?localePram=zh_tw">${i18nMap["admin.top.language.zhtw"]}</a></li>
+					<li><a href="${cxt!}/jf/platform/index?localePram=zh_hk">${i18nMap["admin.top.language.zhhk"]}</a></li>
+					<li class="divider"></li>
+				</ul>
+			</div>
+			<!-- language select ends -->
+			
+			<!-- user dropdown starts -->
+			<div class="btn-group pull-right" >
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-th-large"></i><span class="hidden-phone"> 系统切换</span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<% for(systems in systemsList){ %>
+						<li><a href="${cxt!}/jf/platform/index?ids=${systems.ids!}">${escapeXml(systems.names!)}</a></li>
+						<li class="divider"></li>
+					<% } %>
+				</ul>
+			</div>
+			<!-- user dropdown ends -->
+			
+			<!-- user dropdown starts -->
+			<div class="btn-group pull-right" >
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-user"></i><span class="hidden-phone"> ${escapeXml(cookieMap.userName.value!)}</span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">${i18nMap["admin.top.userInfo"]}</a></li>
+					<li><a href="#" onclick="ajaxDiaLog('/jf/platform/index/toUrl?toUrl=/platform/user/passChange.html');">${i18nMap["admin.top.passChange"]}</a></li>
+					<li class="divider"></li>
+					<li><a href="${cxt!}/jf/platform/login/logout">${i18nMap["admin.top.exitSystem"]}</a></li>
+				</ul>
+			</div>
+			<!-- user dropdown ends -->
+			
+			<div class="top-nav nav-collapse">
+				<ul class="nav">
+					<li><a href="#">${i18nMap["admin.top.search"]}</a></li>
+					<li>
+						<form class="navbar-search pull-left">
+							<input placeholder="Search" class="search-query span2" name="query" type="text">
+						</form>
+					</li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+</div>
+<!-- topbar ends -->

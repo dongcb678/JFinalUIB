@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 
 @SuppressWarnings("unused")
-@Controller(controllerKey = "/jf/group")
+@Controller(controllerKey = "/jf/platform/group")
 public class GroupController extends BaseController {
 
 	private static Logger log = Logger.getLogger(GroupController.class);
@@ -24,29 +24,29 @@ public class GroupController extends BaseController {
 	
 	public void index() {
 		GroupService.service.list(splitPage);
-		render("/pingtai/group/list.html");
+		render("/platform/group/list.html");
 	}
 	
 	@Before(GroupValidator.class)
 	public void save() {
 		ids = GroupService.service.save(getModel(Group.class));
-		redirect("/jf/group");
+		redirect("/jf/platform/group");
 	}
 	
 	public void edit() {
 		setAttr("group", Group.dao.findById(getPara()));
-		render("/pingtai/group/update.html");
+		render("/platform/group/update.html");
 	}
 	
 	@Before(GroupValidator.class)
 	public void update() {
 		GroupService.service.update(getModel(Group.class));
-		redirect("/jf/group");
+		redirect("/jf/platform/group");
 	}
 	
 	public void delete() {
 		GroupService.service.delete(getPara());
-		redirect("/jf/group");
+		redirect("/jf/platform/group");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -54,7 +54,7 @@ public class GroupController extends BaseController {
 		Map<String,Object> map = GroupService.service.select(ids);
 		noCheckedList = (List<Group>) map.get("noCheckedList");
 		checkedList = (List<Group>) map.get("checkedList");
-		render("/pingtai/group/select.html");
+		render("/platform/group/select.html");
 	}
 
 	public void setRole(){

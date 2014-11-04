@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@Controller(controllerKey = "/jf/dict")
+@Controller(controllerKey = "/jf/platform/dict")
 public class DictController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -19,13 +19,13 @@ public class DictController extends BaseController {
 	public void index() {
 		String sql = ToolSqlXml.getSql("pingtai.dict.treeTableNodeRoot");
 		list = Dict.dao.find(sql);
-		render("/pingtai/dict/treeTable.html");
+		render("/platform/dict/treeTable.html");
 	}
 	
 	public void treeTable() {
 		String sql = ToolSqlXml.getSql("pingtai.dict.treeTableChildNode");
 		list = Dict.dao.find(sql, ids);
-		render("/pingtai/dict/treeTableSub.html");
+		render("/platform/dict/treeTableSub.html");
 	}
 
 	public void treeData()  {
@@ -36,7 +36,7 @@ public class DictController extends BaseController {
 	@Before(DictValidator.class)
 	public void save() {
 		DictService.service.save(getModel(Dict.class));
-		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html");
+		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html");
 	}
 	
 	public void edit() {
@@ -44,18 +44,18 @@ public class DictController extends BaseController {
 		String pIds = dict.getStr("parentids");
 		Dict parent = Dict.dao.findById(pIds);
 		setAttr("dict", dict.put("parentnames", parent.getStr("names")));
-		render("/pingtai/dict/update.html");
+		render("/platform/dict/update.html");
 	}
 	
 	@Before(DictValidator.class)
 	public void update() {
 		DictService.service.update(getModel(Dict.class));
-		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html", true);
+		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html", true);
 	}
 	
 	public void delete() {
 		DictService.service.delete(getPara());
-		redirect("/jf/dict/toUrl?toUrl=/pingtai/dict/treeTableIframe.html");
+		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html");
 	}
 
 	public void view() {
@@ -63,7 +63,7 @@ public class DictController extends BaseController {
 		String pIds = dict.getStr("parentids");
 		Dict parent = Dict.dao.findById(pIds);
 		setAttr("dict", dict.put("parentnames", parent.getStr("names")));
-		render("/pingtai/dict/view.html");
+		render("/platform/dict/view.html");
 	}
 
 }

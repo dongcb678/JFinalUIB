@@ -15,7 +15,7 @@ import com.jfinal.aop.Before;
 /**
  * 登陆处理
  */
-@Controller(controllerKey = "/jf/login")
+@Controller(controllerKey = "/jf/platform/login")
 public class LoginController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -27,9 +27,9 @@ public class LoginController extends BaseController {
 	public void index() {
 		User user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
 		if(null != user){//后台
-			redirect("/jf/");
+			redirect("/jf/platform/");
 		}else{
-			render("/pingtai/login.html");
+			render("/platform/login.html");
 		}
 	}
 	
@@ -49,12 +49,12 @@ public class LoginController extends BaseController {
 			}
 			int result = LoginService.service.login(getRequest(), getResponse(), username, password, autoLogin);
 			if(result == DictKeys.login_info_3){
-				redirect("/jf/index");
+				redirect("/jf/platform/index");
 				return;
 			}
 		}
 		
-		redirect("/jf/login");
+		redirect("/jf/platform/login");
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class LoginController extends BaseController {
 	 */
 	public void logout() {
 		ToolWeb.addCookie(getResponse(), "", "/", true, "authmark", null, 0);
-		redirect("/jf/login");
+		redirect("/jf/platform/login");
 	}
 
 }

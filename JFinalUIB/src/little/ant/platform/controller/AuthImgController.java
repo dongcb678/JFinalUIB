@@ -11,7 +11,7 @@ import com.jfinal.render.Render;
  * 验证码
  * @author 董华健
  */
-@Controller(controllerKey = "/jf/authImg")
+@Controller(controllerKey = "/jf/platform/authImg")
 public class AuthImgController extends BaseController {
 
 	@SuppressWarnings("unused")

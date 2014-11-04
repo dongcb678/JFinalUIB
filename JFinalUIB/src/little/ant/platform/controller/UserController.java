@@ -13,7 +13,7 @@ import com.jfinal.aop.Before;
 /**
  * 用户管理
  */
-@Controller(controllerKey = "/jf/user")
+@Controller(controllerKey = "/jf/platform/user")
 public class UserController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -27,7 +27,7 @@ public class UserController extends BaseController {
 	 */
 	public void index() {
 		UserService.service.list(splitPage);
-		render("/pingtai/user/list.html");
+		render("/platform/user/list.html");
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class UserController extends BaseController {
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
 		UserService.service.save(user, password, userInfo);
-		render("/pingtai/user/add.html");
+		render("/platform/user/add.html");
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class UserController extends BaseController {
 		User user = User.dao.findById(getPara());
 		setAttr("user", user);
 		setAttr("userInfo", UserInfo.dao.findById(user.getStr("userinfoids")));
-		render("/pingtai/user/update.html");
+		render("/platform/user/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class UserController extends BaseController {
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
 		UserService.service.update(user, password, userInfo);
-		redirect("/jf/user");
+		redirect("/jf/platform/user");
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class UserController extends BaseController {
 		User user = User.dao.findById(getPara());
 		setAttr("user", user);
 		setAttr("userInfo", UserInfo.dao.findById(user.getStr("userinfoids")));
-		render("/pingtai/user/view.html");
+		render("/platform/user/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class UserController extends BaseController {
 	 */
 	public void delete() {
 		UserService.service.delete(getPara());
-		redirect("/jf/user");
+		redirect("/jf/platform/user");
 	}
 
 	/**

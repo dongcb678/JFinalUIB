@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@Controller(controllerKey = "/jf/menu")
+@Controller(controllerKey = "/jf/platform/menu")
 public class MenuController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -22,7 +22,7 @@ public class MenuController extends BaseController {
 	private String operatorIds;
 	
 	public void index() {
-		render("/pingtai/menu/tree.html");
+		render("/platform/menu/tree.html");
 	}
 
 	public void treeData()  {
@@ -63,7 +63,7 @@ public class MenuController extends BaseController {
 	public void toEdit() {
 		Menu menu = Menu.dao.findById(ids);
 		setAttr("menu", menu);
-		render("/pingtai/menu/edit.html");
+		render("/platform/menu/edit.html");
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class MenuController extends BaseController {
 		Menu menu = getModel(Menu.class);
 		menu.update();
 		menu = Menu.dao.findById(menu.getStr("ids"));
-		redirect("/jf/menu?systemsIds=" + menu.getStr("systemsids"));
+		redirect("/jf/platform/menu?systemsIds=" + menu.getStr("systemsids"));
 	}
 }
 

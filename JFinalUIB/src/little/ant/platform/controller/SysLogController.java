@@ -6,7 +6,7 @@ import little.ant.platform.service.SysLogService;
 
 import org.apache.log4j.Logger;
 
-@Controller(controllerKey = "/jf/sysLog")
+@Controller(controllerKey = "/jf/platform/sysLog")
 public class SysLogController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -15,17 +15,17 @@ public class SysLogController extends BaseController {
 	public void index() {
 		defaultOrder("startdate", "desc");
 		SysLogService.service.list(splitPage);
-		render("/pingtai/sysLog/list.html");
+		render("/platform/sysLog/list.html");
 	}
 
 	public void view() {
 		setAttr("sysLog", SysLogService.service.view(getPara()));
-		render("/pingtai/sysLog/view.html");
+		render("/platform/sysLog/view.html");
 	}
 	
 	public void delete() {
 		Syslog.dao.deleteById(getPara());
-		redirect("/jf/sysLog");
+		redirect("/jf/platform/sysLog");
 	}
 
 }

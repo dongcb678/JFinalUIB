@@ -1,0 +1,89 @@
+<script type="text/javascript">
+	
+	function addChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("checkedGroup").add(option);
+		setGroup();
+	}
+
+	function delChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("allGroup").add(option);
+		setGroup();
+	}
+	
+	function setGroup(){
+		var checkedGroup = document.getElementById("checkedGroup");
+		var length = checkedGroup.length;
+		var groupIds = "";
+		for (var i=0; i<length; i++){
+			groupIds += checkedGroup.options[i].value + ",";
+	    }
+		
+		var userIds = "${escapeXml(ids!)}";
+		$.ajax({
+			type : "post",
+			url : cxt + "/jf/platform/user/setGroup",
+			data : { "ids" : userIds, "groupIds" : groupIds },
+			dataType : "html",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			async: false,
+			success:function(data){
+				
+			}
+		});
+	}
+</script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h3>${i18nMap["admin.group.select"]}</h3>
+</div>
+
+<div class="modal-body">
+	<div class="row-fluid sortable">
+		<div class="box span6">
+			<div class="box-header well" data-original-title>
+				<h2>
+					<i class="icon-user"></i> ${i18nMap["admin.group.select.noChecked"]}
+				</h2>
+				<div class="box-icon">
+					
+				</div>
+			</div>
+			<div class="box-content">
+				<select id="allGroup" multiple size="18" ondblclick="addChecked(this);" >
+					<% for(group in noCheckedList){ %>
+						<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
+					<% } %>
+			  	</select>
+			</div>
+		</div>
+		
+		<div class="box span6">
+			<div class="box-header well" data-original-title>
+				<h2>
+					<i class="icon-user"></i> ${i18nMap["admin.group.select.checked"]}
+				</h2>
+				<div class="box-icon">
+					
+				</div>
+			</div>
+			<div class="box-content">
+				<select id="checkedGroup" multiple size="18" ondblclick="delChecked(this);" >
+					<% for(group in checkedList){ %>
+						<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
+					<% } %>
+			  	</select>
+			</div>
+		</div>
+	</div>  
+</div>
+
+<div class="modal-footer">
+	<a href="#" class="btn" data-dismiss="modal">${i18nMap["admin.common.close"]}</a>
+</div>

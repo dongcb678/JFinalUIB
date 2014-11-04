@@ -81,7 +81,7 @@
 						<% for(location in splitPage.page.list){ %>
 							<tr>
 								<td>${escapeXml(location.open_id!) }</td>
-								<td>${escapeXml(location["lng"!)] }</td>
+								<td>${escapeXml(location["lng"]!) }</td>
 								<td class="center"><span class="label label-success">${escapeXml(location["lat"]!) }</span></td>
 								<td>${escapeXml(location["bd09_lng"]!) }</td>
 								<td>${escapeXml(location["bd09_lat"]!) }</td>

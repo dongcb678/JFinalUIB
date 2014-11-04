@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@Controller(controllerKey = "/jf/dept")
+@Controller(controllerKey = "/jf/platform/dept")
 public class DepartmentController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -24,7 +24,7 @@ public class DepartmentController extends BaseController {
 	 * tree首页
 	 */
 	public void index() {
-		render("/pingtai/department/tree.html");
+		render("/platform/department/tree.html");
 	}
 	
 	/**

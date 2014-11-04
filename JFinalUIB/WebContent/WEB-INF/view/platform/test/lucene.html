@@ -1,0 +1,73 @@
+<form id="splitPageLucene" class="form-horizontal" action="${cxt!}/jf/platform/test/lucene" method="POST">
+	
+	<div class="row-fluid sortable">
+		<div class="box span12">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-edit"></i> lucene test select</h2>
+				<div class="box-icon">
+					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
+					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+				</div>
+			</div>
+			<div class="box-content">
+				<fieldset>
+				  	<div class="control-group">
+						<label class="control-label" for="focusedInput">searchKeyWords</label>
+						<div class="controls">
+					  		<input class="input-xlarge focused" type="text" name="_query.searchKeyWords" value='${escapeXml(paramMap["_query.searchKeyWords"])}' maxlength="20" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="form-actions">
+						<button type="button" class="btn btn-primary" onclick='ajaxForm("lucene", "splitPageLucene");'>${i18nMap["admin.common.select"]}</button>
+						<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
+				  	</div>
+				</fieldset>
+			</div>
+		</div><!--/span-->
+	</div><!--/row-->
+	
+	<div class="row-fluid sortable">
+		<div class="box span12">
+			
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-user"></i> lucene test list</h2>
+				<div class="box-icon">
+					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
+					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+				</div>
+			</div>
+			
+			<div class="box-content">
+				<table class="table table-striped table-bordered bootstrap-datatable ">
+					<thead>
+						<tr>
+							<th>ids</th>
+							<th>question</th>
+							<th>questionkey</th>
+							<th>answer</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% for(keyword in splitPage.list!){ %>
+							<tr>
+								<td>${escapeXml(keyword.ids!)}</td>
+								<td>${keyword.question!}</td>
+								<td>${keyword["questionkey"]!}</td>
+								<td>${keyword["answer"]!}</td>
+							</tr>
+						<% } %>
+					</tbody>
+				</table>
+				<div id="splitPageDivLucene" class="pagination pagination-centered">
+					<% include("/common/splitPage.html", {"divId" : "lucene", "formId" : "splitPageLucene", "splitPageDiv" : "splitPageDivLucene"}){} %>
+				</div>
+			</div>
+			
+		</div>
+		<!--/span-->
+	
+	</div>
+	<!--/row-->
+
+</form>

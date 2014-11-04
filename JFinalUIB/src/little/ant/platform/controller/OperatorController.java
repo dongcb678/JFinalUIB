@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@Controller(controllerKey = "/jf/operator")
+@Controller(controllerKey = "/jf/platform/operator")
 public class OperatorController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -19,34 +19,34 @@ public class OperatorController extends BaseController {
 	
 	public void index() {
 		OperatorService.service.list(splitPage);
-		render("/pingtai/operator/list.html");
+		render("/platform/operator/list.html");
 	}
 
 	@Before(OperatorValidator.class)
 	public void save() {
 		ids = OperatorService.service.save(getModel(Operator.class));
-		redirect("/jf/operator");
+		redirect("/jf/platform/operator");
 	}
 	
 	public void edit() {
 		setAttr("operator", Operator.dao.findById(getPara()));
-		render("/pingtai/operator/update.html");
+		render("/platform/operator/update.html");
 	}
 	
 	@Before(OperatorValidator.class)
 	public void update() {
 		OperatorService.service.update(getModel(Operator.class));
-		redirect("/jf/operator");
+		redirect("/jf/platform/operator");
 	}
 
 	public void view() {
 		setAttr("operator", Operator.dao.findById(getPara()));
-		render("/pingtai/operator/view.html");
+		render("/platform/operator/view.html");
 	}
 	
 	public void delete() {
 		OperatorService.service.delete(getPara());
-		redirect("/jf/operator");
+		redirect("/jf/platform/operator");
 	}
 	
 	public void treeData() {

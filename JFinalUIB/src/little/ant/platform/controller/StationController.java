@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@Controller(controllerKey = "/jf/station")
+@Controller(controllerKey = "/jf/platform/station")
 public class StationController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -23,7 +23,7 @@ public class StationController extends BaseController {
 	private String operatorIds;
 	
 	public void index() {
-		render("/pingtai/station/tree.html");
+		render("/platform/station/tree.html");
 	}
 	
 	public void treeData()  {

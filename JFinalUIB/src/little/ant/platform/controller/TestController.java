@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
-@Controller(controllerKey = "/jf/test")
+@Controller(controllerKey = "/jf/platform/test")
 public class TestController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -25,18 +25,18 @@ public class TestController extends BaseController {
 
 	public void operator() {
 		OperatorService.service.list(splitPage);
-		render("/pingtai/test/operator.html");
+		render("/platform/test/operator.html");
 	}
 
 	public void sysLog() {
 		defaultOrder("startdate", "desc");
 		SysLogService.service.list(splitPage);
-		render("/pingtai/test/sysLog.html");
+		render("/platform/test/sysLog.html");
 	}
 	
 	public void lucene() {
 		new DocKeyword().search(splitPage);
-		render("/pingtai/test/lucene.html");
+		render("/platform/test/lucene.html");
 	}
 	
 	public void autoComplete(){

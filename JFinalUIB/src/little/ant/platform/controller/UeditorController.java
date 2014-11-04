@@ -13,7 +13,7 @@ import com.jfinal.kit.PathKit;
  * Ueditor
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = {"/jf/ueditor"})
+@Controller(controllerKey = {"/jf/platform/ueditor"})
 public class UeditorController extends BaseController {
 
 	private static Logger log = Logger.getLogger(UeditorController.class);

@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
  * 首页处理
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = {"/jf/", "/jf/index"})
+@Controller(controllerKey = {"/jf/platform/", "/jf/platform/index"})
 public class IndexController extends BaseController {
 
 	private static Logger log = Logger.getLogger(IndexController.class);
@@ -37,9 +37,9 @@ public class IndexController extends BaseController {
 				ids = "8a40c0353fa828a6013fa898d4ac0020";
 			}
 			menuList = IndexService.service.menu(ids, user, getI18nPram());
-			render("/pingtai/index.html");
+			render("/platform/index.html");
 		}else{
-			render("/pingtai/login.html");
+			render("/platform/login.html");
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class IndexController extends BaseController {
 	public void content(){;
 		setAttrs(ResourcesService.service.pv());
 		setAttrs(ResourcesService.service.getResources());
-		render("/pingtai/content.html");
+		render("/platform/content.html");
 	}
 	
 }

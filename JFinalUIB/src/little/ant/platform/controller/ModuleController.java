@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@Controller(controllerKey = "/jf/module")
+@Controller(controllerKey = "/jf/platform/module")
 public class ModuleController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -20,7 +20,7 @@ public class ModuleController extends BaseController {
 	private int orderIds;
 	
 	public void index() {
-		render("/pingtai/module/tree.html");
+		render("/platform/module/tree.html");
 	}
 	
 	public void treeData()  {

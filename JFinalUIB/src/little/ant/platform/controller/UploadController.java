@@ -19,7 +19,7 @@ import com.jfinal.upload.UploadFile;
  * 文件上传
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = {"/jf/upload"})
+@Controller(controllerKey = {"/jf/platform/upload"})
 public class UploadController extends BaseController {
 
 	private static Logger log = Logger.getLogger(UploadController.class);

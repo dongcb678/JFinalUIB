@@ -1,0 +1,196 @@
+<div>
+	<ul class="breadcrumb">
+		<li><a href="#" onclick="ajaxContent('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/platform/sysLog');">${i18nMap["admin.sysLog.common.name"]}</a> <span class="divider">/</span></li>
+		<li><a href="#">${i18nMap["admin.sysLog.view"]}</a></li>
+	</ul>
+</div>
+
+<div class="row-fluid sortable">
+	<div class="box span12">
+		
+		<div class="box-header well" data-original-title>
+			<h2>
+				<i class="icon-edit"></i> ${i18nMap["admin.sysLog.view"]}
+			</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		
+		<div class="box-content">
+			<form class="form-horizontal" method="POST">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.oname"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.onames!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.ourl"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.ourl!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.ips"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.ips!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.status"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value='<%if(sysLog.status == "0"){%>${i18nMap["admin.sysLog.property.status.error"]}<%}else{%>${i18nMap["admin.sysLog.property.status.success"]}<%}%>'>
+						</div>
+					</div>
+					<% if(isEmpty(sysLog.cause)){ %>
+						
+					<% }else if(sysLog.cause == "0"){ %>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
+							<div class="controls">
+								<input type="text" disabled="disabled" value='${i18nMap["admin.sysLog.property.cause.0"]}'>
+							</div>
+						</div>
+					<% }else if(sysLog.cause == "1"){ %>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
+							<div class="controls">
+								<input type="text" disabled="disabled" value='${i18nMap["admin.sysLog.property.cause.1"]}'>
+							</div>
+						</div>
+					<% }else if(sysLog.cause == "2"){ %>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
+							<div class="controls">
+								<input type="text" disabled="disabled" value='${i18nMap["admin.sysLog.property.cause.2"]}'>
+							</div>
+						</div>
+					<% }else if(sysLog.cause == "3"){ %>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
+							<div class="controls">
+								<input type="text" disabled="disabled" value='${i18nMap["admin.sysLog.property.cause.3"]}'>
+							</div>
+						</div>
+					<% } %>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.username"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.username!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.startdate"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value='${sysLog.startdate!, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}'>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.enddate"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value='${sysLog.enddate!, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}'>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.haoshi"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.haoshi!}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.actionhaoshi"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.actionhaoshi!}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.viewhaoshi"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${sysLog.viewhaoshi!}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.description"]}</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.description!)}</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.method"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.method!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.xrequestedwith"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.xrequestedwith!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.host"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.host!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["Accept-Language"]}</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.acceptlanguage!)}</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.acceptencoding"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.acceptencoding!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.accept"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.accept!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.connection"]}</label>
+						<div class="controls">
+							<input type="text" disabled="disabled" value="${escapeXml(sysLog.connection!)}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.requestpath"]}</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.requestpath!) }</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.useragent"]}</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.useragent!) }</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.referer"]}</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.referer!) }</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.cookie"]}</label>
+						<div class="controls">
+							<textarea class="cleditor" rows="3">${escapeXml(sysLog.cookie!) }</textarea>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+
+		</div>
+	
+	</div>
+	<!--/span-->
+</div>
+<!--/row-->

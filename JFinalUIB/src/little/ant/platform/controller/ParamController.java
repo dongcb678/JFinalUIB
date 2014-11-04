@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
-@Controller(controllerKey = "/jf/param")
+@Controller(controllerKey = "/jf/platform/param")
 public class ParamController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -19,13 +19,13 @@ public class ParamController extends BaseController {
 	public void index() {
 		String sql = ToolSqlXml.getSql("pingtai.param.treeTableNodeRoot");
 		list = Param.dao.find(sql);
-		render("/pingtai/param/treeTable.html");
+		render("/platform/param/treeTable.html");
 	}
 	
 	public void treeTable() {
 		String sql = ToolSqlXml.getSql("pingtai.param.treeTableChildNode");
 		list = Param.dao.find(sql, ids);
-		render("/pingtai/param/treeTableSub.html");
+		render("/platform/param/treeTableSub.html");
 	}
 
 	public void treeData()  {
@@ -36,7 +36,7 @@ public class ParamController extends BaseController {
 	@Before(ParamValidator.class)
 	public void save() {
 		ParamService.service.save(getModel(Param.class));
-		redirect("/jf/param/toUrl?toUrl=/pingtai/param/treeTableIframe.html");
+		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html");
 	}
 	
 	public void edit() {
@@ -44,18 +44,18 @@ public class ParamController extends BaseController {
 		String pIds = param.getStr("parentids");
 		Param parent = Param.dao.findById(pIds);
 		setAttr("param", param.put("parentnames", parent.getStr("names")));
-		render("/pingtai/param/update.html");
+		render("/platform/param/update.html");
 	}
 	
 	@Before(ParamValidator.class)
 	public void update() {
 		ParamService.service.update(getModel(Param.class));
-		redirect("/jf/param/toUrl?toUrl=/pingtai/param/treeTableIframe.html", true);
+		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html", true);
 	}
 	
 	public void delete() {
 		ParamService.service.delete(getPara());
-		redirect("/jf/param/toUrl?toUrl=/pingtai/param/treeTableIframe.html");
+		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html");
 	}
 
 	public void view() {
@@ -63,7 +63,7 @@ public class ParamController extends BaseController {
 		String pIds = param.getStr("parentids");
 		Param parent = Param.dao.findById(pIds);
 		setAttr("param", param.put("parentnames", parent.getStr("names")));
-		render("/pingtai/param/view.html");
+		render("/platform/param/view.html");
 	}
 
 }
