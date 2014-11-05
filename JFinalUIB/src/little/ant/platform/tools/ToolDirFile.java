@@ -2,10 +2,12 @@ package little.ant.platform.tools;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -245,6 +247,22 @@ public class ToolDirFile {
 				fis.close();
 				fis = null;
 			}
+		}
+	}
+	
+	/**
+	 * 创建文件
+	 * @param savePath 保存路径
+	 * @param content 文件内容
+	 */
+	public static void createFile(String savePath, String content){
+		try {
+			File file = new File(savePath);
+			BufferedWriter output = new BufferedWriter(new FileWriter(file));   
+			output.write(content);   
+			output.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
