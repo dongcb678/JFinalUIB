@@ -171,7 +171,7 @@ public class AuthenticationInterceptor implements Interceptor {
 	 */
 	private void toInfoJsp(BaseController contro, int type) {
 		if(type == 1){// 未登录处理
-			contro.render("/login/logout");
+			contro.redirect("/jf/platform/login");
 			return ;
 		}
 
