@@ -23,7 +23,11 @@ public class User extends BaseModel<User> {
 	 * @return
 	 */
 	public UserInfo getUserInfo(){
-		return UserInfo.dao.findById(get("userinfoids"));
+		String userinfoIds = get("userinfoids");
+		if(null != userinfoIds && !userinfoIds.isEmpty()){
+			return UserInfo.dao.findById(userinfoIds);
+		}
+		return null;
 	}
 
 	/**
@@ -31,7 +35,11 @@ public class User extends BaseModel<User> {
 	 * @return
 	 */
 	public Department getDepartment(){
-		return Department.dao.findById(get("departmentids"));
+		String departmentids = get("departmentids");
+		if(null != departmentids && !departmentids.isEmpty()){
+			return Department.dao.findById(departmentids);
+		}
+		return null;
 	}
 
 	/**
@@ -39,7 +47,11 @@ public class User extends BaseModel<User> {
 	 * @return
 	 */
 	public Station getStation(){
-		return Station.dao.findById(get("stationids"));
+		String stationids = get("stationids");
+		if(null != stationids && !stationids.isEmpty()){
+			return Station.dao.findById(stationids);
+		}
+		return null;
 	}
 	
 	/**

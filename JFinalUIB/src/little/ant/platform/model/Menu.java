@@ -20,7 +20,11 @@ public class Menu extends BaseModel<Menu> {
 	 * @return
 	 */
 	public Operator getOperator(){
-		return Operator.dao.findById(get("operatorids"));
+		String operatorIds = get("operatorids");
+		if(null != operatorIds && !operatorIds.isEmpty()){
+			return Operator.dao.findById(operatorIds);
+		}
+		return null;
 	}
 	
 }
