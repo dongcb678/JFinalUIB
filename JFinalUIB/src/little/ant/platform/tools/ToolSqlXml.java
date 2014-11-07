@@ -229,9 +229,8 @@ public class ToolSqlXml {
      * 递归查找文件
      * @param baseFile
      * @param sqlXmlFiles
-     * @return
      */
-    private static List<File> findFiles(File baseFile, List<File> sqlXmlFiles) {
+    private static void findFiles(File baseFile, List<File> sqlXmlFiles) {
         if (!baseFile.isDirectory()) {
         	if (baseFile.getName().endsWith(".sql.xml")) {
         		sqlXmlFiles.add(baseFile);
@@ -249,7 +248,6 @@ public class ToolSqlXml {
                 }
 			}
         }
-        return sqlXmlFiles;
     }
     
 }

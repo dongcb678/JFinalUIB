@@ -198,6 +198,23 @@ public class ToolDirFile {
 	}
 	
 	/**
+	 * 删除文件或者目录
+	 * @param file
+	 */
+	public static void delete(File file) {
+		if (file != null && file.exists()) {
+			if (file.isDirectory()) {
+				File files[] = file.listFiles();
+				for (int i=0, length = files.length; i<length; i++) {
+					delete(files[i]);
+				}
+			}else{
+				file.delete();
+			}
+		}
+	}
+	
+	/**
 	 * 文件下载
 	 * @param response
 	 * @param fileName
