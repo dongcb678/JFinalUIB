@@ -401,6 +401,25 @@ public class ToolDateTime {
 		map.put("end", end);
 		return map;
 	}
+
+	/**
+	 * 获取指定日期
+	 * @param date
+	 * @param hour
+	 * @param minute
+	 * @param second
+	 * @param millisecond
+	 * @return
+	 */
+	public static Date getDate(int date, int hour, int minute, int second, int millisecond) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, date); 
+		calendar.set(Calendar.HOUR_OF_DAY, hour);   
+		calendar.set(Calendar.MINUTE, minute);   
+		calendar.set(Calendar.SECOND, second);   
+		calendar.set(Calendar.MILLISECOND, millisecond);  
+		return calendar.getTime();
+	}
 	
 	public static void main(String[] args) throws ParseException{
 //		System.out.println(format("2013-07-01", pattern_ymd, "MM-dd"));
