@@ -3,6 +3,9 @@ package little.ant.weixin.tools;
 import java.util.HashMap;
 import java.util.Map;
 
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.model.Param;
+import little.ant.platform.thread.ThreadParamInit;
 import little.ant.platform.tools.ToolHttp;
 import little.ant.weixin.bo.message.RecevieToken;
 
@@ -48,10 +51,16 @@ public class ToolWeiXin {
 	 * @return
 	 */
 	public static RecevieToken getAccessToken() {
+		Param paramAppId = (Param) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + weixin_appID_key);
+		String weixin_appID = paramAppId.getStr("val");
+
+		Param paramAppSecret = (Param) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + weixin_appSecret_key);
+		String weixin_appSecret = paramAppSecret.getStr("val");
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append(weixin_token_url).append("?").append("grant_type=client_credential");
-		sb.append("&appid=").append(CacheKit.get("system", weixin_appID_key));
-		sb.append("&secret=").append(CacheKit.get("system", weixin_appSecret_key));
+		sb.append("&appid=").append(weixin_appID);
+		sb.append("&secret=").append(weixin_appSecret);
 		try {
 			String jsonStr = ToolHttp.get(true, sb.toString());
 			RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);
