@@ -61,14 +61,14 @@
 	<!-- 查询子节点字典值 -->
 	<sql id="child">
 		<![CDATA[ 
-        	select * from pt_dict where parentids = ? order by orderids asc
+        	select * from pt_dict where parentids = ? and status = '1' order by orderids asc
     	]]>
 	</sql>
 	
 	<!-- 查询子节点国际化字典值 -->
 	<sql id="childAndI8n">
 		<![CDATA[ 
-        	select ids, numbers, parentids, ${val} as val from pt_dict where parentids = ? order by orderids asc
+        	select ids, numbers, parentids, ${val} as val from pt_dict where parentids = ? and status = '1' order by orderids asc
     	]]>
 	</sql>
 	
