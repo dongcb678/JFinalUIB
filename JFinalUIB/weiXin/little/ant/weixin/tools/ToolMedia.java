@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import little.ant.platform.tools.ToolString;
-import little.ant.weixin.vo.media.RecevieMedia;
+import little.ant.weixin.bo.media.RecevieMedia;
 
 import org.apache.log4j.Logger;
 

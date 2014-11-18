@@ -7,8 +7,8 @@ import little.ant.weixin.service.MessageService;
 import little.ant.weixin.tools.ToolOAuth2;
 import little.ant.weixin.tools.ToolSignature;
 import little.ant.weixin.validator.KeywordValidator;
-import little.ant.weixin.vo.oauth.RecevieOauth2Token;
-import little.ant.weixin.vo.oauth.RecevieSNSUserInfo;
+import little.ant.weixin.bo.oauth.RecevieOauth2Token;
+import little.ant.weixin.bo.oauth.RecevieSNSUserInfo;
 
 import org.apache.log4j.Logger;
 

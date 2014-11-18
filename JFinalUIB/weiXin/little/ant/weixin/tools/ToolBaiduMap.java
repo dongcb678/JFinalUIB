@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.List;
 
 import little.ant.platform.tools.ToolString;
-import little.ant.weixin.vo.map.RecevieBaiduPlace;
-import little.ant.weixin.vo.map.RecevieUserLocation;
-import little.ant.weixin.vo.message.ResponseMsgArticle;
+import little.ant.weixin.bo.map.RecevieBaiduPlace;
+import little.ant.weixin.bo.map.RecevieUserLocation;
+import little.ant.weixin.bo.message.ResponseMsgArticle;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;

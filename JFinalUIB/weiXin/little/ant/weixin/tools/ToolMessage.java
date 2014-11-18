@@ -8,21 +8,21 @@ import little.ant.platform.tools.ToolDateTime;
 import little.ant.platform.tools.ToolXml;
 import little.ant.weixin.model.Location;
 import little.ant.weixin.model.Message;
-import little.ant.weixin.vo.map.RecevieBaiduPlace;
-import little.ant.weixin.vo.map.RecevieUserLocation;
-import little.ant.weixin.vo.message.RecevieEventLocation;
-import little.ant.weixin.vo.message.RecevieEventMenu;
-import little.ant.weixin.vo.message.RecevieEventQRCode;
-import little.ant.weixin.vo.message.RecevieEventSubscribe;
-import little.ant.weixin.vo.message.RecevieMsgImage;
-import little.ant.weixin.vo.message.RecevieMsgLink;
-import little.ant.weixin.vo.message.RecevieMsgLocation;
-import little.ant.weixin.vo.message.RecevieMsgText;
-import little.ant.weixin.vo.message.RecevieMsgVideo;
-import little.ant.weixin.vo.message.RecevieMsgVoice;
-import little.ant.weixin.vo.message.ResponseMsgArticle;
-import little.ant.weixin.vo.message.ResponseMsgNews;
-import little.ant.weixin.vo.message.ResponseMsgText;
+import little.ant.weixin.bo.map.RecevieBaiduPlace;
+import little.ant.weixin.bo.map.RecevieUserLocation;
+import little.ant.weixin.bo.message.RecevieEventLocation;
+import little.ant.weixin.bo.message.RecevieEventMenu;
+import little.ant.weixin.bo.message.RecevieEventQRCode;
+import little.ant.weixin.bo.message.RecevieEventSubscribe;
+import little.ant.weixin.bo.message.RecevieMsgImage;
+import little.ant.weixin.bo.message.RecevieMsgLink;
+import little.ant.weixin.bo.message.RecevieMsgLocation;
+import little.ant.weixin.bo.message.RecevieMsgText;
+import little.ant.weixin.bo.message.RecevieMsgVideo;
+import little.ant.weixin.bo.message.RecevieMsgVoice;
+import little.ant.weixin.bo.message.ResponseMsgArticle;
+import little.ant.weixin.bo.message.ResponseMsgNews;
+import little.ant.weixin.bo.message.ResponseMsgText;
 
 /**
  * 接收消息处理

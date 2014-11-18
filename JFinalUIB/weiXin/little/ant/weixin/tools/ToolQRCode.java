@@ -9,7 +9,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 import little.ant.platform.tools.ToolHttp;
 import little.ant.platform.tools.ToolString;
-import little.ant.weixin.vo.qrcode.RecevieQRCode;
+import little.ant.weixin.bo.qrcode.RecevieQRCode;
 
 import org.apache.log4j.Logger;
 

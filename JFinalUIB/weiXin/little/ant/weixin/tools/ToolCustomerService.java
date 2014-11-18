@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.tools.ToolHttp;
-import little.ant.weixin.vo.message.ResponseMsgArticle;
-import little.ant.weixin.vo.music.ResponseMusic;
+import little.ant.weixin.bo.message.ResponseMsgArticle;
+import little.ant.weixin.bo.music.ResponseMusic;
 
 import org.apache.log4j.Logger;
 

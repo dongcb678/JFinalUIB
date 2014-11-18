@@ -1,8 +1,8 @@
 package little.ant.weixin.tools;
 
 import little.ant.platform.tools.ToolHttp;
-import little.ant.weixin.vo.user.RecevieUserInfo;
-import little.ant.weixin.vo.user.RecevieUserList;
+import little.ant.weixin.bo.user.RecevieUserInfo;
+import little.ant.weixin.bo.user.RecevieUserList;
 
 import org.apache.log4j.Logger;
 

@@ -3,8 +3,8 @@ package little.ant.weixin.tools;
 import org.apache.log4j.Logger;
 
 import little.ant.platform.tools.ToolHttp;
-import little.ant.weixin.vo.oauth.RecevieOauth2Token;
-import little.ant.weixin.vo.oauth.RecevieSNSUserInfo;
+import little.ant.weixin.bo.oauth.RecevieOauth2Token;
+import little.ant.weixin.bo.oauth.RecevieSNSUserInfo;
 
 import com.alibaba.fastjson.JSON;
 

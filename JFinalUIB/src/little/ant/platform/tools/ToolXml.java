@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import little.ant.weixin.vo.message.RecevieMsgText;
+import little.ant.weixin.bo.message.RecevieMsgText;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

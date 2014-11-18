@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import little.ant.platform.tools.ToolHttp;
-import little.ant.weixin.vo.message.RecevieToken;
+import little.ant.weixin.bo.message.RecevieToken;
 
 import org.apache.log4j.Logger;
 
