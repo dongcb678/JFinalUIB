@@ -109,11 +109,12 @@ public class ToolXml {
 	/**
 	 * bean对象转xml
 	 * @param bean
+	 * @param rootClass 根节点名称转换
 	 * @return
 	 */
-	public static String beanToXml(Object bean){
+	public static String beanToXml(Object bean, Class<?> rootClass){
 		XStream xStream = getXStream();
-		xStream.alias("xml", RecevieMsgText.class);
+		xStream.alias("xml", rootClass);
 		String content = xStream.toXML(bean);
 		content = content.replaceAll("&lt;", "<");// <
 		content = content.replaceAll("&gt;", ">");// >
@@ -133,12 +134,10 @@ public class ToolXml {
 
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
 		map.put("xml", RecevieMsgText.class);
-		RecevieMsgText recevie = (RecevieMsgText) xmlToBean(xml, map);
-		System.out.println(recevie.getToUserName());
-		System.out.println(recevie.getFromUserName());
-		System.out.println(recevie.getMsgType());
 		
-		System.out.println(beanToXml(recevie));
+		RecevieMsgText recevie = (RecevieMsgText) xmlToBean(xml, map);
+
+		System.out.println(beanToXml(recevie, RecevieMsgText.class));
 	}
 	
 

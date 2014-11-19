@@ -97,7 +97,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -155,7 +155,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -209,7 +209,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text, ResponseMsgText.class);
 
 		//返回数据入库
 		Message messageOut = new Message();
@@ -266,7 +266,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -324,7 +324,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -380,7 +380,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -436,7 +436,7 @@ public class ToolMessage {
 		text.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		text.setMsgType("text");
 		text.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(text);
+		String responseXml = ToolXml.beanToXml(text, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -507,7 +507,7 @@ public class ToolMessage {
 					newsMessage.setMsgType("news");
 					newsMessage.setArticles(articleList);
 					newsMessage.setArticleCount(String.valueOf(articleList.size()));
-					responseXml = ToolXml.beanToXml(newsMessage);
+					responseXml = ToolXml.beanToXml(newsMessage, ResponseMsgNews.class);
 
 					//返回数据入库
 					Message messageOut = new Message();
@@ -532,7 +532,7 @@ public class ToolMessage {
 			responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 			responseText.setMsgType("text");
 			responseText.setContent(responseContent);
-			responseXml = ToolXml.beanToXml(responseText);
+			responseXml = ToolXml.beanToXml(responseText, ResponseMsgText.class);
 			
 			//返回数据入库
 			Message messageOut = new Message();
@@ -589,7 +589,7 @@ public class ToolMessage {
 		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(responseText);
+		String responseXml = ToolXml.beanToXml(responseText, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -652,7 +652,7 @@ public class ToolMessage {
 		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(responseText);
+		String responseXml = ToolXml.beanToXml(responseText, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -709,7 +709,7 @@ public class ToolMessage {
 		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(responseText);
+		String responseXml = ToolXml.beanToXml(responseText, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -796,7 +796,7 @@ public class ToolMessage {
 		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(responseText);
+		String responseXml = ToolXml.beanToXml(responseText, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
@@ -853,7 +853,7 @@ public class ToolMessage {
 		responseText.setCreateTime(String.valueOf(ToolDateTime.getDateByTime()));
 		responseText.setMsgType("text");
 		responseText.setContent(contentBuffer.toString());
-		String responseXml = ToolXml.beanToXml(responseText);
+		String responseXml = ToolXml.beanToXml(responseText, ResponseMsgText.class);
 		
 		//返回数据入库
 		Message messageOut = new Message();
