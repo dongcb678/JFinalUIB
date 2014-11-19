@@ -1,5 +1,6 @@
 package little.ant.weixin.tools;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,11 +26,14 @@ public class ToolWeiXin {
 	/**
 	 * 通讯常量
 	 */
-	public static String weixin_appID_key = "weixinAppID";
-	public static String weixin_appSecret_key = "weixinAppSecret";
 	public static String weixin_token_key = "weixinToken";//开发者的Token，必须和开发者配置保持一致weixinchat
 	
-	// 获取token
+	public static String weixin_appID_key = "weixinAppID";
+	public static String weixin_appSecret_key = "weixinAppSecret";
+	
+	public static String weixin_access_token = "weixin_access_token";//access_token缓存key
+	
+	// 获取token地址
 	public static String weixin_token_url = "https://api.weixin.qq.com/cgi-bin/token";
 	
 	/**
@@ -51,21 +55,53 @@ public class ToolWeiXin {
 	 * @return
 	 */
 	public static RecevieToken getAccessToken() {
+		// 取缓存
+		RecevieToken recevieToken = (RecevieToken) CacheKit.get(DictKeys.cache_name_system, weixin_access_token);
+		if(null != recevieToken){
+			// 判断是否有效
+			long interval = (new Date().getTime() - recevieToken.getDate().getTime()) / 1000; // 存在时间，秒
+			long expires_in = Long.parseLong(recevieToken.getExpires_in()) - 200; //凭证有效时间，单位：秒 ，默认有效期为7200秒
+			if(interval > expires_in){
+				recevieToken = getAccessTokenCommon();
+			}
+		}else{
+			recevieToken = getAccessTokenCommon();
+		}
+		
+		return recevieToken;
+	}
+	
+	/**
+	 * 从微信得到accessToken的凭证公共代码块
+	 * @return
+	 */
+	private static RecevieToken getAccessTokenCommon(){
+		// 参数配置的 appID
 		Param paramAppId = (Param) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + weixin_appID_key);
 		String weixin_appID = paramAppId.getStr("val");
-
+		
+		// 参数配置的 appSecret
 		Param paramAppSecret = (Param) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + weixin_appSecret_key);
 		String weixin_appSecret = paramAppSecret.getStr("val");
 		
+		// 获取地址和参数
 		StringBuilder sb = new StringBuilder();
 		sb.append(weixin_token_url).append("?").append("grant_type=client_credential");
 		sb.append("&appid=").append(weixin_appID);
 		sb.append("&secret=").append(weixin_appSecret);
+		
 		try {
+			// 获取
 			String jsonStr = ToolHttp.get(true, sb.toString());
-			RecevieToken weiXinVo = JSON.parseObject(jsonStr, RecevieToken.class);
-			log.info("获取AccessToken：" + jsonStr);
-			return weiXinVo;
+			RecevieToken recevieToken = JSON.parseObject(jsonStr, RecevieToken.class);
+			if(recevieToken.getAccess_token() != null && !recevieToken.getAccess_token().isEmpty()){
+				recevieToken.setDate(new Date());// 设置获取时间
+				// 放入缓存
+				CacheKit.put(DictKeys.cache_name_system, weixin_access_token, recevieToken);
+				log.info("获取AccessToken：" + jsonStr);
+				return recevieToken;
+			}
+			return null;
 		} catch (Exception e) {
 			log.error("ToolWeiXin.getAccessToken从微信得到accessToken的凭证异常");
 			return null;

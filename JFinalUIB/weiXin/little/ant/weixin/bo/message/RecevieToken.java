@@ -1,5 +1,7 @@
 package little.ant.weixin.bo.message;
 
+import java.util.Date;
+
 /**
  * 接收获取access token消息
  * @author 董华健
@@ -10,6 +12,16 @@ public class RecevieToken  {
 	private String expires_in;	//凭证有效时间，单位：秒 
 	private String errcode;		//错误码
 	private String errmsg;		//错误提示
+	
+	private Date date; // 获取token时的时间
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public String getAccess_token() {
 		return access_token;
