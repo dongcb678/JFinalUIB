@@ -2,6 +2,7 @@ package little.ant.platform.controller;
 
 import little.ant.platform.annotation.Controller;
 import little.ant.platform.service.ResourcesService;
+import little.ant.platform.thread.ThreadParamInit;
 
 import org.apache.log4j.Logger;
 
@@ -18,6 +19,13 @@ public class ResourcesController extends BaseController {
 		setAttrs(ResourcesService.service.pv());
 		setAttrs(ResourcesService.service.getResources());
 		render("/platform/resources/index.html");
+	}
+	
+	/**
+	 * 刷新参数缓存
+	 */
+	public void refreshParamCache(){
+		new ThreadParamInit().start();
 	}
 	
 }

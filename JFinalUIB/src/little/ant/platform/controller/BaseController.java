@@ -102,7 +102,8 @@ public abstract class BaseController extends Controller {
 			try {
 				value = URLDecoder.decode(value, ToolString.encoding);
 			} catch (UnsupportedEncodingException e) {
-				log.error("decode异常："+value);
+				log.error("decode异常：" + value + e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		return value;
