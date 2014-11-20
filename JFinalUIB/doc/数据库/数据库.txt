@@ -1,0 +1,12 @@
+
+pg和Oracle未录入的资源
+
+/jf/platform/resources
+
+/jf/platform/login/valiUserName
+
+/jf/platform/login/valiMailBox
+
+/jf/platform/login/valiIdcard
+
+/jf/platform/login/valiMobile

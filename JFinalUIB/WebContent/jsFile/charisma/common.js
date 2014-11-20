@@ -146,6 +146,34 @@ function orderbyFun(divId, formId, colunmName){
 }
 
 /**
+ * 公共ajax函数
+ * @param url
+ * @param data
+ * @param callback
+ * @returns {String}
+ */
+function ajaxFunc(url, data, callback){
+	var result = "";
+	$.ajax({
+		type : "post",
+		url : encodeURI(encodeURI(cxt + url)),
+		data : data,
+		dataType : "html",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		async: false,
+		cache: false,
+		success:function(response){
+			result = response;
+			//扩展回调函数
+			if( callback != null ){
+				callback();
+			}
+		}
+	});
+	return result;
+}
+
+/**
  * ajax提交form替换content
  * @param divId 返回替换div
  * @param formId 提交formid

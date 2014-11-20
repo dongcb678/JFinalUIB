@@ -10,7 +10,14 @@ import org.apache.log4j.Logger;
 public class ResourcesController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(ResourcesController.class);
-	
-	
+
+	/**
+	 * 首页
+	 */
+	public void index(){;
+		setAttrs(ResourcesService.service.pv());
+		setAttrs(ResourcesService.service.getResources());
+		render("/platform/resources/index.html");
+	}
 	
 }

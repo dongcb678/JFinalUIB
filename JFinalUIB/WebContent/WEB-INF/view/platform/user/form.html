@@ -1,6 +1,91 @@
 <script type="text/javascript">
 
+/**
+ * 验证用户名是否存在
+ * @param userName
+ */
+function valiUserName(userName){
+	var result = ajaxFunc("/jf/platform/login/valiUserName", {"userName" : userName});
+	return result;
+}
+
+/**
+ * 验证邮箱是否存在
+ * @param mailBox
+ */
+function valiMailBox(mailBox){
+	var result = ajaxFunc("/jf/platform/login/valiMailBox", {"mailBox" : mailBox});
+	return result;
+}
+
+/**
+ * 验证身份证是否存在
+ * @param idcard
+ */
+function valiIdcard(idcard){
+	var result = ajaxFunc("/jf/platform/login/valiIdcard", {"idcard" : idcard});
+	return result;
+}
+
+/**
+ *验证手机号是否存在
+ * @param mailBox
+ */
+function valiMobile(mobile){
+	var result = ajaxFunc("/jf/platform/login/valiMobile", {"mobile" : mobile});
+	return result;
+}
+
 function dataVali(form){
+	var usernameId = $("#usernameId").val();
+	var mailboxId = $("#mailboxId").val();
+	var idcardId = $("#idcardId").val();
+	var mobileId = $("#mobileId").val();
+	
+	var isAdd = ${operatorType == "add" ? "true" : "false"};
+	if(isAdd){ // 添加
+		if(valiUserName(usernameId) != "0"){
+			simpleDialog('验证提示', '账号重复！');
+	 		return false;
+		}
+	
+		if(valiMailBox(mailboxId) != "0"){
+			simpleDialog('验证提示', '邮箱重复！');
+	 		return false;
+		}
+
+		if(valiIdcard(idcardId) != "0"){
+			simpleDialog('验证提示', '身份证号码重复！');
+	 		return false;
+		}
+
+		if(valiMobile(mobileId) != "0"){
+			simpleDialog('验证提示', '手机号码重复！');
+	 		return false;
+		}
+	
+	}else{ // 更新
+		if(valiUserName(usernameId) != "0" && valiUserName(usernameId) != "1"){
+			simpleDialog('验证提示', '账号重复！');
+	 		return false;
+		}
+	
+		if(valiMailBox(mailboxId) != "0" && valiMailBox(mailboxId) != "1"){
+			simpleDialog('验证提示', '邮箱重复！');
+	 		return false;
+		}
+
+		if(valiIdcard(idcardId) != "0" && valiIdcard(idcardId) != "1"){
+			simpleDialog('验证提示', '身份证号码重复！');
+	 		return false;
+		}
+
+		if(valiMobile(mobileId) != "0" && valiMobile(mobileId) != "1"){
+			simpleDialog('验证提示', '手机号码重复！');
+	 		return false;
+		}
+	}
+	
 	var pass1Id = $("#pass1Id").val();
 	var pass2Id = $("#pass2Id").val();
 	if(pass1Id != pass2Id){
@@ -57,7 +142,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>
 		<div class="controls">
-			<input type="text" name="userInfo.idcard" value="${escapeXml(userInfo.idcard!)}" 
+			<input type="text" id="idcardId" name="userInfo.idcard" value="${escapeXml(userInfo.idcard!)}" 
 				class="input-xlarge" maxlength="18" vMin="15" vType="idCard" onblur="onblurVali(this);">
 			<span class="help-inline">15-18位字母数字</span>
 		</div>
@@ -73,7 +158,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">${i18nMap["admin.user.property.userName"]}</label>
 		<div class="controls">
-			<input type="text" name="user.username" value="${escapeXml(user.username!)}" 
+			<input type="text" id="usernameId" name="user.username" value="${escapeXml(user.username!)}" 
 				class="input-xlarge" maxlength="16" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
 			<span class="help-inline">5-16位字母数字</span>
 		</div>
@@ -97,7 +182,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
 		<div class="controls">
-			<input type="text" name="userInfo.email" value="${escapeXml(userInfo.email!)}" 
+			<input type="text" id="mailboxId" name="userInfo.email" value="${escapeXml(userInfo.email!)}" 
 				class="input-xlarge" maxlength="30" vMin="6" vType="email" onblur="onblurVali(this);">
 			<span class="help-inline">6-30位邮箱规则</span>
 		</div>
@@ -105,7 +190,7 @@ function dataVali(form){
 	<div class="control-group">
 		<label class="control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
 		<div class="controls">
-			<input type="text" name="userInfo.mobile" value="${escapeXml(userInfo.mobile!)}" 
+			<input type="text" id="mobileId" name="userInfo.mobile" value="${escapeXml(userInfo.mobile!)}" 
 				class="input-xlarge" maxlength="11" vMin="11" vType="phone" onblur="onblurVali(this);">
 			<span class="help-inline">11位数字</span>
 		</div>

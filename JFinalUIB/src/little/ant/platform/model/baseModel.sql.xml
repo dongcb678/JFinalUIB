@@ -16,6 +16,13 @@
     	]]>
 	</sql>
 	
+	<!-- 通用查询 -->
+	<sql id="selectCount">
+		<![CDATA[ 
+        	select count(*) from ${table} where ${column} = ?
+    	]]>
+	</sql>
+	
 	<!-- 通用更新 -->
 	<sql id="update">
 		<![CDATA[ 

@@ -32,7 +32,43 @@ public class LoginController extends BaseController {
 			render("/platform/login.html");
 		}
 	}
+
+	/**
+	 * 验证账号是否存在
+	 */
+	public void valiUserName(){
+		String userName = getPara("userName");
+		int count = LoginService.service.valiUserName(userName);
+		renderText(String.valueOf(count));
+	}
 	
+	/**
+	 * 验证邮箱是否存在
+	 */
+	public void valiMailBox(){
+		String mailBox = getPara("mailBox");
+		int count = LoginService.service.valiMailBox(mailBox);
+		renderText(String.valueOf(count));
+	}
+
+	/**
+	 * 验证身份证是否存在
+	 */
+	public void valiIdcard(){
+		String idcard = getPara("idcard");
+		int count = LoginService.service.valiIdcard(idcard);
+		renderText(String.valueOf(count));
+	}
+
+	/**
+	 * 验证手机号是否存在
+	 */
+	public void valiMobile(){
+		String mobile = getPara("mobile");
+		int count = LoginService.service.valiMobile(mobile);
+		renderText(String.valueOf(count));
+	}
+
 	/**
 	 * 登陆验证
 	 */
