@@ -44,43 +44,43 @@ function dataVali(form){
 	
 	var isAdd = ${operatorType == "add" ? "true" : "false"};
 	if(isAdd){ // 添加
-		if(valiUserName(usernameId) != "0"){
+		if(idcardId != "" && valiIdcard(idcardId) != "0"){
+			simpleDialog('验证提示', '身份证号码重复！');
+	 		return false;
+		}
+	
+		if(usernameId != "" && valiUserName(usernameId) != "0"){
 			simpleDialog('验证提示', '账号重复！');
 	 		return false;
 		}
 	
-		if(valiMailBox(mailboxId) != "0"){
+		if(mailboxId != "" && valiMailBox(mailboxId) != "0"){
 			simpleDialog('验证提示', '邮箱重复！');
 	 		return false;
 		}
 
-		if(valiIdcard(idcardId) != "0"){
-			simpleDialog('验证提示', '身份证号码重复！');
-	 		return false;
-		}
-
-		if(valiMobile(mobileId) != "0"){
+		if(mobileId != "" && valiMobile(mobileId) != "0"){
 			simpleDialog('验证提示', '手机号码重复！');
 	 		return false;
 		}
 	
 	}else{ // 更新
-		if(valiUserName(usernameId) != "0" && valiUserName(usernameId) != "1"){
+		if(idcardId != "" && valiIdcard(idcardId) != "0" && valiIdcard(idcardId) != "1"){
+			simpleDialog('验证提示', '身份证号码重复！');
+	 		return false;
+		}
+	
+		if(usernameId != "" && valiUserName(usernameId) != "0" && valiUserName(usernameId) != "1"){
 			simpleDialog('验证提示', '账号重复！');
 	 		return false;
 		}
 	
-		if(valiMailBox(mailboxId) != "0" && valiMailBox(mailboxId) != "1"){
+		if(mailboxId != "" && valiMailBox(mailboxId) != "0" && valiMailBox(mailboxId) != "1"){
 			simpleDialog('验证提示', '邮箱重复！');
 	 		return false;
 		}
 
-		if(valiIdcard(idcardId) != "0" && valiIdcard(idcardId) != "1"){
-			simpleDialog('验证提示', '身份证号码重复！');
-	 		return false;
-		}
-
-		if(valiMobile(mobileId) != "0" && valiMobile(mobileId) != "1"){
+		if(mobileId != "" && valiMobile(mobileId) != "0" && valiMobile(mobileId) != "1"){
 			simpleDialog('验证提示', '手机号码重复！');
 	 		return false;
 		}
