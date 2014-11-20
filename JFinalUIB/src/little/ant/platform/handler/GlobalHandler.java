@@ -53,7 +53,7 @@ public class GlobalHandler extends Handler {
 		log.debug("request 国际化");
 		String localePram = request.getParameter("localePram");
 		if(null != localePram && !localePram.isEmpty()){
-			int maxAge = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_maxAge_key);
+			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_maxAge_key)).intValue();
 			ToolWeb.addCookie(response,  "", "/", true, "language", localePram, maxAge);
 		}else {
 			localePram = ToolWeb.getCookieValueByName(request, "language");

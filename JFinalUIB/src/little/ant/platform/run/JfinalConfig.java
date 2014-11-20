@@ -116,9 +116,9 @@ public class JfinalConfig extends JFinalConfig {
 
 		log.info("configPlugin 配置Druid数据库连接池大小");
 		druidPlugin.set(
-				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_initialSize), 
-				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_minIdle), 
-				(int)PropertiesPlugin.getParamMapValue(DictKeys.db_maxActive));
+				(Integer)PropertiesPlugin.getParamMapValue(DictKeys.db_initialSize), 
+				(Integer)PropertiesPlugin.getParamMapValue(DictKeys.db_minIdle), 
+				(Integer)PropertiesPlugin.getParamMapValue(DictKeys.db_maxActive));
 		
 		log.info("configPlugin 配置ActiveRecord插件");
 		ActiveRecordPlugin arpMain = new ActiveRecordPlugin(DictKeys.db_dataSource_main, druidPlugin);

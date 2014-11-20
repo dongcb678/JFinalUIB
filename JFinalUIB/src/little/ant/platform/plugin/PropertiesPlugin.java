@@ -117,18 +117,18 @@ public class PropertiesPlugin implements IPlugin {
 		}
 		
 		// 数据库连接池信息
-		paramMap.put(DictKeys.db_initialSize, Integer.parseInt(properties.getProperty(DictKeys.db_initialSize).trim()));
-		paramMap.put(DictKeys.db_minIdle, Integer.parseInt(properties.getProperty(DictKeys.db_minIdle).trim()));
-		paramMap.put(DictKeys.db_maxActive, Integer.parseInt(properties.getProperty(DictKeys.db_maxActive).trim()));
+		paramMap.put(DictKeys.db_initialSize, Integer.valueOf(properties.getProperty(DictKeys.db_initialSize).trim()));
+		paramMap.put(DictKeys.db_minIdle, Integer.valueOf(properties.getProperty(DictKeys.db_minIdle).trim()));
+		paramMap.put(DictKeys.db_maxActive, Integer.valueOf(properties.getProperty(DictKeys.db_maxActive).trim()));
 		
 		// 把常用配置信息写入map
 		paramMap.put(DictKeys.config_devMode, properties.getProperty(DictKeys.config_devMode).trim());
 		paramMap.put(DictKeys.config_luceneIndex, properties.getProperty(DictKeys.config_luceneIndex).trim());
 		paramMap.put(DictKeys.config_securityKey_key, properties.getProperty(DictKeys.config_securityKey_key).trim());
-		paramMap.put(DictKeys.config_passErrorCount_key, Integer.parseInt(properties.getProperty(DictKeys.config_passErrorCount_key)));
-		paramMap.put(DictKeys.config_passErrorHour_key, Integer.parseInt(properties.getProperty(DictKeys.config_passErrorHour_key)));
+		paramMap.put(DictKeys.config_passErrorCount_key, Integer.valueOf(properties.getProperty(DictKeys.config_passErrorCount_key)));
+		paramMap.put(DictKeys.config_passErrorHour_key, Integer.valueOf(properties.getProperty(DictKeys.config_passErrorHour_key)));
 		paramMap.put(DictKeys.config_maxPostSize_key, Integer.valueOf(properties.getProperty(DictKeys.config_maxPostSize_key)));
-		paramMap.put(DictKeys.config_maxAge_key, Integer.parseInt(properties.getProperty(DictKeys.config_maxAge_key)));
+		paramMap.put(DictKeys.config_maxAge_key, Integer.valueOf(properties.getProperty(DictKeys.config_maxAge_key)));
 		paramMap.put(DictKeys.config_domain_key, properties.getProperty(DictKeys.config_domain_key));
 		
 		return true;

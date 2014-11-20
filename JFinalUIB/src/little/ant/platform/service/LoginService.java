@@ -119,11 +119,11 @@ public class LoginService extends BaseService {
 
 		// 3.密码错误次数超限
 		int errorCount = user.getNumber("errorcount").intValue();
-		int passErrorCount = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorCount_key);
+		int passErrorCount = ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorCount_key)).intValue();
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate("stopDate");
 			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
-			int passErrorHour = (int) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorHour_key);
+			int passErrorHour = ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorHour_key)).intValue();
 			if(hourSpace < passErrorHour){
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{

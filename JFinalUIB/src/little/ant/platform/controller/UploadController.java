@@ -40,7 +40,7 @@ public class UploadController extends BaseController {
 			sb.append(PathKit.getWebRootPath()).append(File.separator).append("WEB-INF").append(File.separator).append("files").append(File.separator).append("upload");
 		}
 		
-		List<UploadFile> files = getFiles(sb.toString(), (Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_maxPostSize_key), ToolString.encoding);
+		List<UploadFile> files = getFiles(sb.toString(), ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_maxPostSize_key)).intValue(), ToolString.encoding);
 		
 		List<Map<String, String>> list = UploadService.service.upload(pathType, files);
 		renderJson(list);
