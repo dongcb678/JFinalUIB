@@ -16,6 +16,14 @@ function dataVali(form){
 
 <fieldset>
 	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.role.property.numbers"]}</label>
+		<div class="controls">
+			<input type="text" name="role.numbers" value="${escapeXml(role.numbers!)}" 
+				class="input-xlarge" maxlength="50" vMin="1" vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">1-50位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
 		<label class="control-label">${i18nMap["admin.role.property.name"]}</label>
 		<div class="controls">
 			<input type="text" name="role.names" value="${escapeXml(role.names!)}" 

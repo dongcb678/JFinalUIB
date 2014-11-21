@@ -105,7 +105,7 @@ public class GroupService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		String select = " select ids, names ";
+		String select = " select ids, names, numbers ";
 		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.group.splitPage");
 	}
 	

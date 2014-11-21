@@ -38,6 +38,10 @@
 			<% if(!isEmpty(names)){ %>
 					and names like #'%$names$%'#
 			<% } %>
+			
+			<% if(!isEmpty(numbers)){ %>
+					and numbers like #'%$numbers$%'#
+			<% } %>
     	]]>
 	</sql>
 	
