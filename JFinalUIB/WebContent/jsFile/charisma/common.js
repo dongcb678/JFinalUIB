@@ -342,7 +342,7 @@ function ajaxDiaLog(url, data, callback){
  * @param checkedIds 默认选中的部门
  */
 function deptRadioDiaLog(deptId, deptName, checkedIds){//ids默认选中：4
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/dept/toUrl",
@@ -366,7 +366,7 @@ function deptRadioDiaLog(deptId, deptName, checkedIds){//ids默认选中：4
  * @param checkedIds 默认选中的部门
  */
 function deptCheckboxDiaLog(deptId, deptName, checkedIds){//ids默认选中：4,或者4,5,
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/dept/toUrl",
@@ -392,7 +392,7 @@ function deptCheckboxDiaLog(deptId, deptName, checkedIds){//ids默认选中：4,
  * @param callback 回调
  */
 function dictRadioDiaLog(dictId, dictName, checkedIds, rootNumbers, callback){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/dict/toUrl",
@@ -422,7 +422,7 @@ function dictRadioDiaLog(dictId, dictName, checkedIds, rootNumbers, callback){
  * @param callback 回调
  */
 function paramRadioDiaLog(dictId, dictName, checkedIds, rootNumbers, callback){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/param/toUrl",
@@ -450,7 +450,7 @@ function paramRadioDiaLog(dictId, dictName, checkedIds, rootNumbers, callback){
  * @param checkedIds
  */
 function moduleRadioDiaLog(moduleId, moduleName, checkedIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/module/toUrl",
@@ -474,7 +474,7 @@ function moduleRadioDiaLog(moduleId, moduleName, checkedIds){
  * @param checkedIds
  */
 function stationRadioDiaLog(stationId, stationName, checkedIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/station/toUrl",
@@ -498,7 +498,7 @@ function stationRadioDiaLog(stationId, stationName, checkedIds){
  * @param checkedIds
  */
 function stationCheckboxDiaLog(stationId, stationName, checkedIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/station/toUrl",
@@ -522,7 +522,7 @@ function stationCheckboxDiaLog(stationId, stationName, checkedIds){
  * @param checkedIds
  */
 function userRadioDiaLog(userId, userName, checkedIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/user/toUrl",
@@ -549,7 +549,7 @@ function userRadioDiaLog(userId, userName, checkedIds){
  * @param checkedUserIds
  */
 function userCheckboxDiaLog(userId, userName, deptIds, deptNames, checkedDeptIds, checkedUserIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/user/toUrl",
@@ -576,7 +576,7 @@ function userCheckboxDiaLog(userId, userName, deptIds, deptNames, checkedDeptIds
  * @param deptId
  */
 function setDeptPrincipalDiaLog(deptId){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/dept/toUrl",
@@ -598,7 +598,7 @@ function setDeptPrincipalDiaLog(deptId){
  * @param menuIds
  */
 function setMenuOperatorDiaLog(menuIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/operator/toUrl",
@@ -620,7 +620,7 @@ function setMenuOperatorDiaLog(menuIds){
  * @param menuIds
  */
 function setMenuEditDiaLog(menuIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/menu/toEdit",
@@ -642,7 +642,7 @@ function setMenuEditDiaLog(menuIds){
  * @param roleIds
  */
 function setRoleOperatorDiaLog(roleIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/operator/toUrl",
@@ -664,7 +664,7 @@ function setRoleOperatorDiaLog(roleIds){
  * @param stationIds
  */
 function setStationOperatorDiaLog(stationIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/operator/toUrl",
@@ -686,7 +686,7 @@ function setStationOperatorDiaLog(stationIds){
  * @param userIds
  */
 function groupSelectDialog(userIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/group/select",
@@ -708,7 +708,7 @@ function groupSelectDialog(userIds){
  * @param groupIds
  */
 function roleSelectDialog(groupIds){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	$('#content').parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : cxt + "/jf/platform/role/select",

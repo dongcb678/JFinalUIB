@@ -78,7 +78,7 @@
 						<%
 							var delete = hasPrivilegeUrl("/jf/wx/location/delete");
 						%>
-						<% for(location in splitPage.page.list){ %>
+						<% for(location in splitPage.list){ %>
 							<tr>
 								<td>${escapeXml(location.open_id!) }</td>
 								<td>${escapeXml(location["lng"]!) }</td>

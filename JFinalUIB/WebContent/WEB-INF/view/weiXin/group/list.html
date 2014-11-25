@@ -69,7 +69,7 @@
 						<%
 							var userMessage = hasPrivilegeUrl("/jf/wx/message/userMessage");
 						%>
-						<% for(group in splitPage.page.list){ %>
+						<% for(group in splitPage.list){ %>
 							<tr>
 								<td>${escapeXml(group.id!) }</td>
 								<td>${escapeXml(group["name"]!) }</td>

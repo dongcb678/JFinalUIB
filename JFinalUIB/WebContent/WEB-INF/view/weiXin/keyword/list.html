@@ -88,7 +88,7 @@
 							var edit = hasPrivilegeUrl("/jf/wx/keyword/edit");
 							var delete = hasPrivilegeUrl("/jf/wx/keyword/delete");
 						%>
-						<% for(keyword in splitPage.page.list){ %>
+						<% for(keyword in splitPage.list){ %>
 							<tr>
 								<td>${escapeXml(keyword.question!) }</td>
 								<td class="center"><span class="label label-success">${escapeXml(keyword["questionkey"]!) }</span></td>

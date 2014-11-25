@@ -94,7 +94,7 @@
 							var edit = hasPrivilegeUrl("/jf/platform/operator/edit");
 							var delete = hasPrivilegeUrl("/jf/platform/operator/delete");
 						%>
-						<% for(operator in splitPage.page.list){ %>
+						<% for(operator in splitPage.list){ %>
 							<tr>
 								<td>${escapeXml(operator.systemsnames!)}</td>
 								<td>${escapeXml(operator.modulenames!)}</td>

@@ -95,7 +95,7 @@
 							var delete = hasPrivilegeUrl("/jf/platform/user/delete");
 							var group = hasPrivilegeUrl("/jf/platform/group/select");
 						%>
-						<% for(user in splitPage.page.list){ %>
+						<% for(user in splitPage.list){ %>
 							<tr>
 								<td>${escapeXml(user.deptnames!) }</td>
 								<td>${escapeXml(user["username"]!) }</td>

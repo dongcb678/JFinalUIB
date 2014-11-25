@@ -102,7 +102,10 @@ public abstract class BaseService {
 		String formSql = formSqlSb.toString();
 
 		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), select, formSql, paramValue.toArray());
-		splitPage.setPage(page);
+		splitPage.setTotalPage(page.getTotalPage());
+		splitPage.setTotalRow(page.getTotalRow());
+		splitPage.setList(page.getList());
+		splitPage.compute();
 	}
 	
 	/**

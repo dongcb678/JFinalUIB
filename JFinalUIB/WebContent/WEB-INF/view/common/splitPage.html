@@ -4,22 +4,11 @@
 		var formId = "${formId!}"; 							//分页formId
 		var splitPageDiv = "${splitPageDiv!}"; 				//分页输出显示的div
 		
-		<% if(splitPage.page != null){%>
-		
-		var totalRow = ${splitPage.page.totalRow!};			//总行数
-		var pageSize = ${splitPage.page.pageSize!};			//每页显示多少条 
-		var pageNumber = ${splitPage.page.pageNumber!};		//当前第几页 
-		var totalPages = ${splitPage.page.totalPage!};		//总页数 
-
-		<% }else {%>
-
 		var totalRow = ${splitPage.totalRow!};			//总行数
 		var pageSize = ${splitPage.pageSize!};			//每页显示多少条
 		var pageNumber = ${splitPage.pageNumber!};		//当前第几页 
 		var totalPages = ${splitPage.totalPage!};		//总页数 
 
-		<% }%>
-		
 		var isSelectPage = true;							// 是否显示第几页
 		var isSelectSize = true;							// 是否显示每页显示多少条
 		

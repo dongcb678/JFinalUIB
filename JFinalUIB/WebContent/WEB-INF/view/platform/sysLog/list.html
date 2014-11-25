@@ -115,7 +115,7 @@
 							var view = hasPrivilegeUrl("/jf/platform/sysLog/view");
 							var delete = hasPrivilegeUrl("/jf/platform/sysLog/delete");
 						%>
-						<% for(sysLog in splitPage.page.list){ %>
+						<% for(sysLog in splitPage.list){ %>
 							<tr>
 								<td align="center">${escapeXml(sysLog["onames"]!)}：${sysLog.ourl }</td>
 								<td align="center">${escapeXml(sysLog["username"]!)}</td>

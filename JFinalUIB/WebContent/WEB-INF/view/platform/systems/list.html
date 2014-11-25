@@ -73,7 +73,7 @@
 							var module = hasPrivilegeUrl("/jf/platform/module");
 							var menu = hasPrivilegeUrl("/jf/platform/menu");
 						%>
-						<% for(systems in splitPage.page.list){ %>
+						<% for(systems in splitPage.list){ %>
 							<tr>
 								<td>${escapeXml(systems["names"]!)}</td>
 								<td>${escapeXml(systems["numbers"]!)}</td>

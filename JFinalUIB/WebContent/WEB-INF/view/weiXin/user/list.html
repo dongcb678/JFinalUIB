@@ -97,7 +97,7 @@
 						<%
 							var userMessage = hasPrivilegeUrl("/jf/wx/message/userMessage");
 						%>
-						<% for(user in splitPage.page.list){ %>
+						<% for(user in splitPage.list){ %>
 							<tr>
 								<td>${escapeXml(user.openid!) }</td>
 								<td>${user["subscribe"] == "1" ? "关注" : "未关注" }</td>

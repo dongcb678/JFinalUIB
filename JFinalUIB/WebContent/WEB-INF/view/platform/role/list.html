@@ -76,7 +76,7 @@
 							var delete = hasPrivilegeUrl("/jf/platform/role/delete");
 							var operator = hasPrivilegeUrl("/platform/role/operatorTree.html");
 						%>
-						<% for(role in splitPage.page.list){ %>
+						<% for(role in splitPage.list){ %>
 							<tr>
 								<td>${escapeXml(role["numbers"]!)}</td>
 								<td>${escapeXml(role["names"]!)}</td>
