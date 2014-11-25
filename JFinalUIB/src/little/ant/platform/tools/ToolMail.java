@@ -27,21 +27,6 @@ public class ToolMail {
 	
 	private static Logger log = Logger.getLogger(ToolMail.class);
 
-	public static void main(String[] args) throws MessagingException {
-		ToolMail mailInfo = new ToolMail();
-		mailInfo.setHost("smtp.163.com");
-		mailInfo.setPort("25");
-		mailInfo.setValidate(true);
-		mailInfo.setUserName("dongcb678@163.com");
-		mailInfo.setPassword("123456");// 您的邮箱密码
-		mailInfo.setFrom("dongcb678@163.com");
-		mailInfo.setTo("150584428@qq.com");
-		mailInfo.setSubject("标题test111");
-		mailInfo.setContent("内容test111");
-		mailInfo.sendTextMail();// 发送html格式
-		mailInfo.sendHtmlMail();// 发送html格式
-	}
-
 	private String host;		// 发送邮件的服务器的IP
 	private String port = "25";	// 发送邮件的服务器的端口
 	
@@ -167,7 +152,22 @@ public class ToolMail {
 			throw ex;
 		}
 	}
-	
+
+	public static void main(String[] args) throws MessagingException {
+		ToolMail mailInfo = new ToolMail();
+		mailInfo.setHost("smtp.163.com");
+		mailInfo.setPort("25");
+		mailInfo.setValidate(true);
+		mailInfo.setUserName("dongcb678@163.com");
+		mailInfo.setPassword("123456");// 您的邮箱密码
+		mailInfo.setFrom("dongcb678@163.com");
+		mailInfo.setTo("150584428@qq.com");
+		mailInfo.setSubject("标题test111");
+		mailInfo.setContent("内容test111");
+		mailInfo.sendTextMail();// 发送html格式
+		mailInfo.sendHtmlMail();// 发送html格式
+	}
+
 	public String getHost() {
 		return host;
 	}

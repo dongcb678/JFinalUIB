@@ -2,8 +2,11 @@ package little.ant.platform.service;
 
 import java.util.LinkedList;
 
+import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.BaseModel;
+import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.tools.ToolMail;
 import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
@@ -110,4 +113,17 @@ public abstract class BaseService {
 		
 	}
 	
+	/**
+	 * 发送邮件对象
+	 */
+	protected ToolMail sendTextMail(){
+		ToolMail mail = new ToolMail();
+		mail.setHost((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_host));
+		mail.setPort((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_port));
+		mail.setValidate(true);
+		mail.setUserName((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_userName));
+		mail.setPassword((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_password));
+		mail.setFrom((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_from));
+		return mail;
+	}
 }
