@@ -67,7 +67,7 @@ public class ToolGroup {
 	 * @param groupName 修改后的分组名
 	 * @return true | false
 	 */
-	public static boolean updateGroup(String accessToken, int groupId, String groupName) {
+	public static boolean updateGroup(String accessToken, String groupId, String groupName) {
 		boolean result = false;
 		// 拼接请求地址
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/groups/update?access_token=ACCESS_TOKEN";
@@ -96,7 +96,7 @@ public class ToolGroup {
 	 * @param groupId 分组id
 	 * @return true | false
 	 */
-	public static boolean updateMemberGroup(String accessToken, String openId, int groupId) {
+	public static boolean updateMemberGroup(String accessToken, String openId, String groupId) {
 		boolean result = false;
 		// 拼接请求地址
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/groups/members/update?access_token=ACCESS_TOKEN";
@@ -139,12 +139,12 @@ public class ToolGroup {
 		/**
 		 * 修改分组名
 		 */
-		updateGroup(accessToken, 100, "同事");
+		updateGroup(accessToken, "100", "同事");
 
 		/**
 		 * 移动用户分组
 		 */
-		updateMemberGroup(accessToken, "oEdzejiHCDqafJbz4WNJtWTMbDcE", 100);
+		updateMemberGroup(accessToken, "oEdzejiHCDqafJbz4WNJtWTMbDcE", "100");
 	}
 	
 }
