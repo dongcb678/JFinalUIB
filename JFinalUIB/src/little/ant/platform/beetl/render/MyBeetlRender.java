@@ -10,8 +10,6 @@ import org.beetl.ext.jfinal.BeetlRender;
  */
 public class MyBeetlRender extends BeetlRender {
 
-	private static final long serialVersionUID = 508975754500775679L;
-
 	private static Logger log = Logger.getLogger(MyBeetlRender.class);
 	
 	public static final String renderTimeKey = "renderTime";

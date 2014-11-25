@@ -28,8 +28,6 @@ import com.jfinal.render.Render;
  */
 public class MyCaptchaRender extends Render {
 
-	private static final long serialVersionUID = -6181699749237635937L;
-
 	private static Logger log = Logger.getLogger(MyCaptchaRender.class);
 
 	// 定义图形验证码中绘制字符的字体

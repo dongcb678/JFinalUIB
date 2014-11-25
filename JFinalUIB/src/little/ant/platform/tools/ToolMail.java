@@ -42,24 +42,20 @@ public class ToolMail {
 		mailInfo.sendHtmlMail();// 发送html格式
 	}
 
-	// 发送邮件的服务器的IP和端口
-	private String host;
-	private String port = "25";
-	// 邮件发送者的地址
-	private String from;
-	// 邮件接收者的地址
-	private String to;
-	// 登陆邮件发送服务器的用户名和密码
-	private String userName;
-	private String password;
-	// 是否需要身份验证
-	private boolean validate = false;
-	// 邮件主题
-	private String subject;
-	// 邮件的文本内容
-	private String content;
-	// 邮件附件的文件名
-	private String[] attachFileNames;
+	private String host;		// 发送邮件的服务器的IP
+	private String port = "25";	// 发送邮件的服务器的端口
+	
+	private String from;		// 邮件发送者的地址
+	private String userName;	// 登陆邮件发送服务器的用户名
+	private String password;	// 登陆邮件发送服务器的密码
+	
+	private String to;			// 邮件接收者的地址
+	
+	private boolean validate = false;	// 是否需要身份验证
+	
+	private String subject;		// 邮件标题
+	private String content;		// 邮件的文本内容
+	private String[] attachFileNames;	// 邮件附件的文件名
 
 	/**
 	 * 获得邮件会话属性

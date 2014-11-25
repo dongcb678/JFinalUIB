@@ -32,7 +32,7 @@ public abstract class DictKeys {
 	public static final String config_luceneIndex = "config.luceneIndex";
 	
 	/**
-	 * 加密
+	 * 加密密钥
 	 */
 	public static final String config_securityKey_key = "config.securityKey";
 	
@@ -60,6 +60,16 @@ public abstract class DictKeys {
 	 * # 域名或者服务器IP，多个逗号隔开，验证Referer时使用
 	 */
 	public static final String config_domain_key = "config.domain";
+
+	/**
+	 * mail 配置
+	 */
+	public static final String config_mail_host = "config.mail.host";
+	public static final String config_mail_port = "config.mail.port";
+	public static final String config_mail_from = "config.mail.from";
+	public static final String config_mail_userName = "config.mail.userName";
+	public static final String config_mail_password = "config.mail.password";
+	public static final String config_mail_to = "config.mail.to"; // 接收邮件地址
 	
 	/**
 	 * 当前数据库类型

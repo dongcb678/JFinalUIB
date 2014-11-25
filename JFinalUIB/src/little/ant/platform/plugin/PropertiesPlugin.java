@@ -123,13 +123,28 @@ public class PropertiesPlugin implements IPlugin {
 		
 		// 把常用配置信息写入map
 		paramMap.put(DictKeys.config_devMode, properties.getProperty(DictKeys.config_devMode).trim());
+		
 		paramMap.put(DictKeys.config_luceneIndex, properties.getProperty(DictKeys.config_luceneIndex).trim());
+		
 		paramMap.put(DictKeys.config_securityKey_key, properties.getProperty(DictKeys.config_securityKey_key).trim());
+		
 		paramMap.put(DictKeys.config_passErrorCount_key, Integer.valueOf(properties.getProperty(DictKeys.config_passErrorCount_key)));
+		
 		paramMap.put(DictKeys.config_passErrorHour_key, Integer.valueOf(properties.getProperty(DictKeys.config_passErrorHour_key)));
+		
 		paramMap.put(DictKeys.config_maxPostSize_key, Integer.valueOf(properties.getProperty(DictKeys.config_maxPostSize_key)));
+		
 		paramMap.put(DictKeys.config_maxAge_key, Integer.valueOf(properties.getProperty(DictKeys.config_maxAge_key)));
+		
 		paramMap.put(DictKeys.config_domain_key, properties.getProperty(DictKeys.config_domain_key));
+		
+		// mail配置
+		paramMap.put(DictKeys.config_mail_host, properties.getProperty(DictKeys.config_mail_host).trim());
+		paramMap.put(DictKeys.config_mail_port, properties.getProperty(DictKeys.config_mail_port).trim());
+		paramMap.put(DictKeys.config_mail_from, properties.getProperty(DictKeys.config_mail_from).trim());
+		paramMap.put(DictKeys.config_mail_userName, properties.getProperty(DictKeys.config_mail_userName).trim());
+		paramMap.put(DictKeys.config_mail_password, properties.getProperty(DictKeys.config_mail_password).trim());
+		paramMap.put(DictKeys.config_mail_to, properties.getProperty(DictKeys.config_mail_to).trim());
 		
 		return true;
 	}
