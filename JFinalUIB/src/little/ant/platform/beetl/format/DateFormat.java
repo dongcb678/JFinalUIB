@@ -9,11 +9,11 @@ import oracle.sql.TIMESTAMP;
 import org.beetl.core.Format;
 
 /**
- * 页面日期格式化
+ * beetl页面日期格式化，重写是为了处理Oracle的TIMESTAMP
  * @author 董华健
  */
 public class DateFormat implements Format {
-
+	
 	public Object format(Object data, String pattern) {
 		if (data == null)
 			return null;

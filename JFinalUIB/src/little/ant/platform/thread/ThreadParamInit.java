@@ -33,6 +33,13 @@ public class ThreadParamInit extends Thread {
 	
 	@Override
 	public void run() {
+		cacheAll();
+	}
+	
+	/**
+	 * 缓存所有参数
+	 */
+	public static synchronized void cacheAll(){
 		log.info("缓存参数初始化 start ...");
 
 		// 1.缓存用户

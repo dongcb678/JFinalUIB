@@ -11,7 +11,7 @@ public class SqlXmlPlugin implements IPlugin {
 
     @Override
     public boolean start() {
-        ToolSqlXml.init();
+        ToolSqlXml.init(true);
         return true;
     }
 

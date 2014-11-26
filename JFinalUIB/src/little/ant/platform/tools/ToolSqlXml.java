@@ -173,8 +173,7 @@ public class ToolSqlXml {
     /**
      * 初始化加载sql语句到map
      */
-    @SuppressWarnings("rawtypes")
-	public static void init() {
+	public static synchronized void init(boolean isInit) {
         File file = new File(ToolSqlXml.class.getClassLoader().getResource("").getFile());
     	List<File> files = new ArrayList<File>();
         findFiles(file, files);
@@ -192,7 +191,7 @@ public class ToolSqlXml {
 					continue;
 				}
 				
-				for(Iterator iterTemp = root.elementIterator(); iterTemp.hasNext();) {	
+				for(Iterator<?> iterTemp = root.elementIterator(); iterTemp.hasNext();) {	
 					Element element = (Element) iterTemp.next();	
 					if(element.getName().toLowerCase().equals("sql")){
 						String id = element.attributeValue("id");
@@ -208,9 +207,11 @@ public class ToolSqlXml {
 						}
 						
 						String key = namespace + "." + id;
-						if(sqlMap.containsKey(key)){
+						if(isInit && sqlMap.containsKey(key)){
 							log.error("sql xml文件" + fileName + "的sql语句" + key + "的存在重复命名空间和ID");
 							continue;
+						} else if(sqlMap.containsKey(key)){
+							log.error("sql xml文件" + fileName + "的sql语句" + key + "的存在重复命名空间和ID");
 						}
 						
 						sql = sql.replaceAll("[\\s]{2,}", " ");

@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import org.beetl.core.Tag;
 
 /**
- * 字典select
+ * 字典输出标签：支持select、radio、checkbox
  * 
  * @author 董华健
  */

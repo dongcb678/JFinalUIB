@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.jfinal.kit.PathKit;
+
 /**
  * 系统启动初始化数据
  * @author 董华健 2012-9-7 下午1:55:35

@@ -1,7 +1,7 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxContent('/jf/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
-		<li><a href="#" onclick="ajaxContent('/jf/role');">系统负载</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/platform/resources');">系统负载</a> <span class="divider">/</span></li>
 	</ul>
 </div>
 
@@ -16,6 +16,11 @@
 			</div>
 		</div>
 		<div class="box-content">
+			<div style="height:200px;border:1px solid #ccc;padding:10px;">
+				<a class="btn btn-success" href="#" onclick="ajaxContentConfirm('/jf/platform/resources/refreshParamCache');"> <i class="icon-zoom-in icon-white"></i> 刷新缓存</a>
+				<a class="btn btn-danger" href="#" onclick="ajaxContentConfirm('/jf/platform/resources/refreshSqlCache');"> <i class="icon-trash icon-white"></i> 刷新SQL</a>
+			</div><br/>
+			
 			<div id="content_pv" style="height:200px;border:1px solid #ccc;padding:10px;"></div><br/>
 			<div id="content_cpu" style="height:200px;border:1px solid #ccc;padding:10px;"></div><br/>
 			<div id="content_phymemory" style="height:200px;border:1px solid #ccc;padding:10px;"></div><br/>

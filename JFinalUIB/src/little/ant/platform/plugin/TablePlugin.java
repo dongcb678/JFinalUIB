@@ -29,6 +29,9 @@ public class TablePlugin implements IPlugin {
 	@Override
 	public boolean start() {
 		List<Class<? extends BaseModel>> modelClasses = ToolClassSearcher.of(BaseModel.class).search();// 查询所有继承BaseModel的类
+//		List<String> jars = new ArrayList<>();
+//		jars.add("littleant.jar");
+//		ToolClassSearcher.of(BaseController.class).includeAllJarsInLib(true).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
 			// 获取注解对象
