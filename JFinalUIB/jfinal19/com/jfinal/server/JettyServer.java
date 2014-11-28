@@ -20,12 +20,16 @@ import java.io.File;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
+
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SessionManager;
-import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.server.session.HashSessionManager;
 import org.eclipse.jetty.server.session.SessionHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
+
 import com.jfinal.core.Const;
 import com.jfinal.kit.FileKit;
 import com.jfinal.kit.PathKit;
@@ -73,7 +77,7 @@ class JettyServer implements IServer {
 		}
 	}
 	
-	private void doStart() {
+	private void doStart() throws IOException {
 		if (!available(port))
 			throw new IllegalStateException("port: " + port + " already in use!");
 		
@@ -81,7 +85,18 @@ class JettyServer implements IServer {
 		
 		System.out.println("Starting JFinal " + Const.JFINAL_VERSION);
 		server = new Server();
-		SelectChannelConnector connector = new SelectChannelConnector();
+
+		// jetty 8 start
+		//SelectChannelConnector connector = new SelectChannelConnector();
+		// jetty 8 end
+		
+		// jetty 9 start
+		HttpConfiguration config = new HttpConfiguration();
+		ServerConnector connector = new ServerConnector(server,new HttpConnectionFactory(config));
+		connector.setReuseAddress(true);
+		connector.setIdleTimeout(30000);
+		// jetty 9 end
+		
 		connector.setPort(port);
 		server.addConnector(connector);
 		webApp = new WebAppContext();
@@ -157,7 +172,7 @@ class JettyServer implements IServer {
 		return storeDir;
 	}
 	
-	private void persistSession(WebAppContext webApp) {
+	private void persistSession(WebAppContext webApp) throws IOException {
 		String storeDir = getStoreDir();
 		
 		SessionManager sm = webApp.getSessionHandler().getSessionManager();
