@@ -1,6 +1,7 @@
 package little.ant.platform.tools;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -174,7 +175,14 @@ public class ToolSqlXml {
      * 初始化加载sql语句到map
      */
 	public static synchronized void init(boolean isInit) {
-        File file = new File(ToolSqlXml.class.getClassLoader().getResource("").getFile());
+		String classRootPath = ToolSqlXml.class.getClassLoader().getResource("").getFile();
+		try {
+			classRootPath = java.net.URLDecoder.decode(classRootPath, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			log.error("初始化加载sql：获取classRootPath异常");
+		}
+        File file = new File(classRootPath);
     	List<File> files = new ArrayList<File>();
         findFiles(file, files);
         

@@ -52,7 +52,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		}
 
 		log.info("druid特殊处理");
-		if(uri.startsWith("/druid/")){
+		if(uri.startsWith("/platform/druid")){
 			uri = "/platform/druid/iframe.html";
 		}
 
