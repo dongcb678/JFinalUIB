@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.Table;
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.controller.BaseController;
 import little.ant.platform.model.BaseModel;
 import little.ant.platform.tools.ToolClassSearcher;
 
@@ -28,10 +30,14 @@ public class TablePlugin implements IPlugin {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public boolean start() {
-		List<Class<? extends BaseModel>> modelClasses = ToolClassSearcher.of(BaseModel.class).search();// 查询所有继承BaseModel的类
-//		List<String> jars = new ArrayList<>();
-//		jars.add("littleant.jar");
-//		ToolClassSearcher.of(BaseController.class).includeAllJarsInLib(true).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件
+		List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(DictKeys.config_scan_jar);
+		List<Class<? extends BaseController>> modelClasses = null;// 查询所有继承BaseModel的类
+		if(jars.size() > 0){
+			modelClasses = ToolClassSearcher.of(BaseModel.class).includeAllJarsInLib(ToolClassSearcher.isValiJar()).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件
+		}else{
+			modelClasses = ToolClassSearcher.of(BaseModel.class).search();
+		}
+		
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
 			// 获取注解对象

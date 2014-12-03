@@ -15,6 +15,16 @@ public abstract class DictKeys {
 	 * 系统缓存，主要是权限和数据字典等
 	 */
 	public static final String cache_name_system = "system";
+
+	/**
+	 * 扫描的包
+	 */
+	public static final String config_scan_package = "config.scan.package";
+
+	/**
+	 * 扫描的jar
+	 */
+	public static final String config_scan_jar = "config.scan.jar";
 	
 	/**
 	 * 开发模式

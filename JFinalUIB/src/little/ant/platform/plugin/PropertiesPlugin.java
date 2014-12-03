@@ -1,6 +1,8 @@
 package little.ant.platform.plugin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -122,6 +124,30 @@ public class PropertiesPlugin implements IPlugin {
 		paramMap.put(DictKeys.db_maxActive, Integer.valueOf(properties.getProperty(DictKeys.db_maxActive).trim()));
 		
 		// 把常用配置信息写入map
+		String scan_package = properties.getProperty(DictKeys.config_scan_package).trim();
+		if(null != scan_package && !scan_package.isEmpty()){
+			List<String> list = new ArrayList<String>();
+			String[] pkgs = scan_package.split(",");
+			for (String pkg : pkgs) {
+				list.add(pkg.trim());
+			}
+			paramMap.put(DictKeys.config_scan_package, list);
+		}else{
+			paramMap.put(DictKeys.config_scan_package, new ArrayList<String>());
+		}
+		
+		String scan_jar = properties.getProperty(DictKeys.config_scan_jar).trim();
+		if(null != scan_jar && !scan_jar.isEmpty()){
+			List<String> list = new ArrayList<String>();
+			String[] jars = scan_jar.split(",");
+			for (String jar : jars) {
+				list.add(jar.trim());
+			}
+			paramMap.put(DictKeys.config_scan_jar, list);
+		}else{
+			paramMap.put(DictKeys.config_scan_jar, new ArrayList<String>());
+		}
+
 		paramMap.put(DictKeys.config_devMode, properties.getProperty(DictKeys.config_devMode).trim());
 		
 		paramMap.put(DictKeys.config_luceneIndex, properties.getProperty(DictKeys.config_luceneIndex).trim());

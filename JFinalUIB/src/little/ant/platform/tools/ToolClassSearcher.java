@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.plugin.PropertiesPlugin;
+
 import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;
 
@@ -20,11 +23,10 @@ public class ToolClassSearcher {
     private static <T> List<Class<? extends T>> extraction(Class<T> clazz, List<String> classFileList) {
         List<Class<? extends T>> classList = new ArrayList<Class<? extends T>>();
         for (String classFile : classFileList) {
-			//System.out.println("################extraction--"+classFile);
-			// 解决Weblogic 11g下扫描到无关class文件的bug
-//        	if(!classFile.startsWith("little.ant")){
-//        		continue;
-//        	}
+        	if(!valiPkg(classFile)){
+        		continue;
+        	}
+        	
             Class<?> classInFile = ToolReflect.on(classFile).get();
             if (clazz.isAssignableFrom(classInFile) && clazz != classInFile) {
                 classList.add((Class<? extends T>) classInFile);
@@ -32,6 +34,64 @@ public class ToolClassSearcher {
         }
 
         return classList;
+    }
+    
+    /**
+     * 是否需要验证类路径
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static boolean isValiPkg(){
+    	List<String> pkgs = (List<String>) PropertiesPlugin.getParamMapValue(DictKeys.config_scan_package);
+    	if(pkgs.size() > 0){
+    		return true;
+    	}
+        return false;
+    }
+    
+    /**
+     * 验证类路径是否需要扫描
+     * @param classFile
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static boolean valiPkg(String classFile){
+        List<String> pkgs = (List<String>) PropertiesPlugin.getParamMapValue(DictKeys.config_scan_package);
+        for (String pkg : pkgs) {
+        	if(classFile.startsWith(pkg)){
+        		return true;
+        	}
+        }
+        return false;
+    }
+
+    /**
+     * 是否需要验证jar
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static boolean isValiJar(){
+    	List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(DictKeys.config_scan_jar);
+    	if(jars.size() > 0){
+    		return true;
+    	}
+        return false;
+    }
+    
+    /**
+     * 验证jar是否需要扫描
+     * @param classFile
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static boolean valiJar(String jarName){
+        List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(DictKeys.config_scan_jar);
+        for (String jar : jars) {
+        	if(jarName.equals(jar)){
+        		return true;
+        	}
+        }
+        return false;
     }
 
     @SuppressWarnings("rawtypes")

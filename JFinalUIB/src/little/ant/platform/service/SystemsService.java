@@ -38,7 +38,7 @@ public class SystemsService extends BaseService {
 		menu.set("isparent", "true");
 		menu.set("images", "3.png");
 		menu.set("orderids", 1);
-		menu.set("names", "根节点");
+		menu.set("names_zhcn", "根节点");
 		menu.save();
 	}
 
