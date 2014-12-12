@@ -5,7 +5,6 @@
 	<classpathentry kind="src" path="jfinal19"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/jetty-all-9.2.5.v20141112.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jfinal/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jfinal/freemarker-2.3.20.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.asm-3.1.1.RELEASE.jar"/>
@@ -21,5 +20,6 @@
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/servlet-api-3.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-2.3.2.jar"/>
+	<classpathentry kind="lib" path="doc/buildJar/jetty9/jetty-all-9.2.6.v20141205.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
