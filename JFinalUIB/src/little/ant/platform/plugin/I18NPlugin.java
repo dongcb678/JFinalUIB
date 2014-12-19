@@ -19,6 +19,31 @@ public class I18NPlugin implements IPlugin {
     protected final Logger log = Logger.getLogger(getClass());
 
 	private static final Map<String, Map<String, String>> resourceBundleMap = new HashMap<String, Map<String, String>>();
+
+	/**
+	 * 根据i18n参数查询获取哪个字段的值
+	 * @param i18n
+	 * @return
+	 */
+	public static String i18n(String i18n){
+		String val = "_zhcn";
+		if(i18n.equals("zh") || i18n.equals("zh_cn")){
+			val = "_zhcn";
+			
+		} else if(i18n.equals("en") || i18n.equals("en_us")){
+			val = "_enus";
+			
+		} else if(i18n.equals("ja") || i18n.equals("ja_jp")){
+			val = "_ja";
+			
+		} else if(i18n.equals("zh_hk")){
+			val = "_zhhk";
+			
+		} else if(i18n.equals("zh_tw")){
+			val = "_zhtw";
+		}
+		return val;
+	}
 	
 	/**
 	 * 获取国际化Map

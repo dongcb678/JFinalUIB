@@ -12,7 +12,6 @@ import little.ant.platform.model.Department;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
 import little.ant.platform.tools.ToolSecurityPbkdf2;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -125,17 +124,17 @@ public class UserService extends BaseService {
 		// 查询部门数据
 		List<Department> deptList = null;
 		if (null != deptIds) {
-			String sql = ToolSqlXml.getSql("platform.department.childNode");
+			String sql = getSql("platform.department.childNode");
 			deptList = Department.dao.find(sql, deptIds.replace("dept_", ""));
 		} else {
-			String sql = ToolSqlXml.getSql("platform.department.rootNode");
+			String sql = getSql("platform.department.rootNode");
 			deptList = Department.dao.find(sql);
 		}
 
 		// 查询用户数据
 		List<User> userList = null;
 		if (null != deptIds) {
-			String sql = ToolSqlXml.getSql("platform.user.treeUserNode");
+			String sql = getSql("platform.user.treeUserNode");
 			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
 		}
 
@@ -209,7 +208,7 @@ public class UserService extends BaseService {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "userName");
-			String sql = ToolSqlXml.getSql("platform.user.column", param);
+			String sql = getSql("platform.user.column", param);
 			User user = User.dao.findFirst(sql, userName);
 			byte[] salt = user.getBytes("salt");// 密码盐
 			byte[] encryptedPassword = user.getBytes("password");
@@ -234,7 +233,7 @@ public class UserService extends BaseService {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "userName");
-			String sql = ToolSqlXml.getSql("platform.user.column", param);
+			String sql = getSql("platform.user.column", param);
 			User user = User.dao.findFirst(sql, userName);
 			
 			// 验证密码

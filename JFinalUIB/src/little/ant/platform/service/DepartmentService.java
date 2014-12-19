@@ -4,7 +4,6 @@ import java.util.List;
 
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.model.Department;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -26,11 +25,11 @@ public class DepartmentService extends BaseService {
 	public String childNodeData(String parentIds){
 		List<Department> list = null;
 		if(null != parentIds){
-			String sql = ToolSqlXml.getSql("platform.department.childNode");
+			String sql = getSql("platform.department.childNode");
 			list = Department.dao.find(sql, parentIds);
 			
 		}else{
-			String sql = ToolSqlXml.getSql("platform.department.rootNode");
+			String sql = getSql("platform.department.rootNode");
 			list = Department.dao.find(sql);
 		}
 		
@@ -115,7 +114,7 @@ public class DepartmentService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
-		String sql = ToolSqlXml.getSql("platform.department.childCount");
+		String sql = getSql("platform.department.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){

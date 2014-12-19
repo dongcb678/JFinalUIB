@@ -7,7 +7,6 @@ import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Module;
 import little.ant.platform.model.Operator;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -70,16 +69,16 @@ public class OperatorService extends BaseService {
 		
 		if (null == moduleIds) {
 			// 1.模块功能初始化调用
-			String sql = ToolSqlXml.getSql("platform.operator.rootModule");
+			String sql = getSql("platform.operator.rootModule");
 			listModule = Module.dao.find(sql);
 			
 		} else if (null != moduleIds) {
 			moduleIds = moduleIds.replace("module_", "");
 			// 2.通用子节点查询
-			String sqlModule = ToolSqlXml.getSql("platform.operator.childModule");
+			String sqlModule = getSql("platform.operator.childModule");
 			listModule = Module.dao.find(sqlModule, moduleIds);
 			
-			String sqlOperator = ToolSqlXml.getSql("platform.operator.byModuleIds");
+			String sqlOperator = getSql("platform.operator.byModuleIds");
 			operatorList = Operator.dao.find(sqlOperator, moduleIds);
 		}
 

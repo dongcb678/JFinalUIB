@@ -6,7 +6,6 @@ import java.util.Map;
 
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.model.Menu;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -35,11 +34,11 @@ public class MenuService extends BaseService {
 		
 		List<Menu> list = null;
 		if(null != parentIds){
-			String sql = ToolSqlXml.getSql("platform.menu.child", param);
+			String sql = getSql("platform.menu.child", param);
 			list = Menu.dao.find(sql, parentIds);
 			
 		}else{
-			String sql = ToolSqlXml.getSql("platform.menu.root", param);
+			String sql = getSql("platform.menu.root", param);
 			list = Menu.dao.find(sql, systemsIds);
 		}
 		
@@ -126,7 +125,7 @@ public class MenuService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
-		String sql = ToolSqlXml.getSql("platform.menu.childCount");
+		String sql = getSql("platform.menu.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){

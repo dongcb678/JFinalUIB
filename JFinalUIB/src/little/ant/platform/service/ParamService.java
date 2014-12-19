@@ -3,7 +3,6 @@ package little.ant.platform.service;
 import java.util.List;
 
 import little.ant.platform.model.Param;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -76,10 +75,10 @@ public class ParamService extends BaseService {
 	public String childNodeData(String parentIds){
 		List<Param> list = null;
 		if (null != parentIds) {
-			String sql = ToolSqlXml.getSql("platform.param.treeChildNode");
+			String sql = getSql("platform.param.treeChildNode");
 			list = Param.dao.find(sql, parentIds);
 		} else {
-			String sql = ToolSqlXml.getSql("platform.param.treeNodeRoot");
+			String sql = getSql("platform.param.treeNodeRoot");
 			list = Param.dao.find(sql);
 		}
 

@@ -4,9 +4,11 @@ import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.tools.ToolSqlXml;
 import little.ant.platform.tools.ToolUtils;
 import oracle.sql.TIMESTAMP;
@@ -30,28 +32,42 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	private static Logger log = Logger.getLogger(BaseModel.class);
 	
 	/**
+     * 获取SQL，固定SQL
+     * @param sqlId
+     * @return
+     */
+	protected String getSql(String sqlId){
+		return ToolSqlXml.getSql(sqlId);
+	}
+	
+    /**
+     * 获取SQL，动态SQL
+     * @param sqlId
+     * @param param
+     * @return
+     */
+	protected String getSql(String sqlId, Map<String, Object> param){
+    	return ToolSqlXml.getSql(sqlId, param);
+    }
+    
+    /**
+     * 获取SQL，动态SQL
+     * @param sqlId 
+     * @param param 查询参数
+     * @param list 用于接收预处理的值
+     * @return
+     */
+	protected String getSql(String sqlId, Map<String, String> param, LinkedList<Object> list){
+    	return ToolSqlXml.getSql(sqlId, param, list);
+    }
+	
+	/**
 	 * 根据i18n参数查询获取哪个字段的值
 	 * @param i18n
 	 * @return
 	 */
-	public static String i18n(String i18n){
-		String val = "_zhcn";
-		if(i18n.equals("zh") || i18n.equals("zh_cn")){
-			val = "_zhcn";
-			
-		} else if(i18n.equals("en") || i18n.equals("en_us")){
-			val = "_enus";
-			
-		} else if(i18n.equals("ja") || i18n.equals("ja_jp")){
-			val = "_ja";
-			
-		} else if(i18n.equals("zh_hk")){
-			val = "_zhhk";
-			
-		} else if(i18n.equals("zh_tw")){
-			val = "_zhtw";
-		}
-		return val;
+	protected String i18n(String i18n){
+		return I18NPlugin.i18n(i18n);
 	}
 	
 	/**
@@ -59,7 +75,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * 
 	 * @return
 	 */
-	public Table getTable() {
+	protected Table getTable() {
 		return TableMapping.me().getTable(getClass());
 	}
 

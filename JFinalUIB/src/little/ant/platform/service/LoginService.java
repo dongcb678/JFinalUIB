@@ -16,7 +16,6 @@ import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolContext;
 import little.ant.platform.tools.ToolDateTime;
 import little.ant.platform.tools.ToolSecurityPbkdf2;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -38,7 +37,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_user");
 		param.put("column", "username");
-		String sql = ToolSqlXml.getSql("platform.baseModel.selectCount", param);
+		String sql = getSql("platform.baseModel.selectCount", param);
 		int count = Db.queryLong(sql, userName).intValue();
 		return count;
 	}
@@ -52,7 +51,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
 		param.put("column", "email");
-		String sql = ToolSqlXml.getSql("platform.baseModel.selectCount", param);
+		String sql = getSql("platform.baseModel.selectCount", param);
 		int count = Db.queryLong(sql, mailBox).intValue();
 		return count;
 	}
@@ -66,7 +65,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
 		param.put("column", "idcard");
-		String sql = ToolSqlXml.getSql("platform.baseModel.selectCount", param);
+		String sql = getSql("platform.baseModel.selectCount", param);
 		int count = Db.queryLong(sql, idcard).intValue();
 		return count;
 	}
@@ -80,7 +79,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
 		param.put("column", "mobile");
-		String sql = ToolSqlXml.getSql("platform.baseModel.selectCount", param);
+		String sql = getSql("platform.baseModel.selectCount", param);
 		int count = Db.queryLong(sql, mobile).intValue();
 		return count;
 	}
@@ -103,7 +102,7 @@ public class LoginService extends BaseService {
 		} else {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "username");
-			String sql = ToolSqlXml.getSql("platform.user.column", param);
+			String sql = getSql("platform.user.column", param);
 			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
 				return DictKeys.login_info_0;// 用户不存在
@@ -127,7 +126,7 @@ public class LoginService extends BaseService {
 			if(hourSpace < passErrorHour){
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
-				String sql = ToolSqlXml.getSql("platform.user.start");
+				String sql = getSql("platform.user.start");
 				Db.use(DictKeys.db_dataSource_main).update(sql, user.getStr("ids"));
 				// 更新缓存
 				User.dao.cacheAdd(user.getStr("ids"));
@@ -151,7 +150,7 @@ public class LoginService extends BaseService {
 			return DictKeys.login_info_3;
 		} else {
 			// 密码验证失败
-			String sql = ToolSqlXml.getSql("platform.user.stop");
+			String sql = getSql("platform.user.stop");
 			Db.use(DictKeys.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
 			// 更新缓存
 			User.dao.cacheAdd(user.getStr("ids"));

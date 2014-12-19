@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.Dict;
+import little.ant.platform.plugin.I18NPlugin;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.Tag;
@@ -87,7 +87,7 @@ public class DictTag extends Tag {
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
 			String localePram = (String) ctx.getGlobal("localePram");
-			val += BaseModel.i18n(localePram);
+			val += I18NPlugin.i18n(localePram);
 		}
 		List<Dict> dictList = Dict.dao.cacheGetChild(number);
 
@@ -137,7 +137,7 @@ public class DictTag extends Tag {
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
 			String localePram = (String) ctx.getGlobal("localePram");
-			val += BaseModel.i18n(localePram);
+			val += I18NPlugin.i18n(localePram);
 		}
 		List<Dict> dictList = Dict.dao.cacheGetChild(number);
 
@@ -183,7 +183,7 @@ public class DictTag extends Tag {
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
 			String localePram = (String) ctx.getGlobal("localePram");
-			val += BaseModel.i18n(localePram);
+			val += I18NPlugin.i18n(localePram);
 		}
 		List<Dict> dictList = Dict.dao.cacheGetChild(number);
 

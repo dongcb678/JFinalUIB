@@ -4,7 +4,6 @@ import java.util.List;
 
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.model.Station;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -26,11 +25,11 @@ public class StationService extends BaseService {
 	public String childNodeData(String parentIds){
 		List<Station> list = null;
 		if(null != parentIds){
-			String sql = ToolSqlXml.getSql("platform.station.child");
+			String sql = getSql("platform.station.child");
 			list = Station.dao.find(sql, parentIds);
 			
 		}else{
-			String sql = ToolSqlXml.getSql("platform.station.root");
+			String sql = getSql("platform.station.root");
 			list = Station.dao.find(sql);
 		}
 		
@@ -117,7 +116,7 @@ public class StationService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
-		String sql = ToolSqlXml.getSql("platform.station.childCount");
+		String sql = getSql("platform.station.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts > 1){

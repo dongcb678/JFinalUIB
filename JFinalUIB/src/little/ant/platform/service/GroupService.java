@@ -9,7 +9,6 @@ import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Group;
 import little.ant.platform.model.User;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -75,10 +74,10 @@ public class GroupService extends BaseService {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);
 			
-			noCheckedList = Group.dao.find(ToolSqlXml.getSql("platform.group.noCheckedFilter", param));
-			checkedList = Group.dao.find(ToolSqlXml.getSql("platform.group.checkedFilter", param));
+			noCheckedList = Group.dao.find(getSql("platform.group.noCheckedFilter", param));
+			checkedList = Group.dao.find(getSql("platform.group.checkedFilter", param));
 		}else{
-			noCheckedList = Group.dao.find(ToolSqlXml.getSql("platform.group.noChecked"));
+			noCheckedList = Group.dao.find(getSql("platform.group.noChecked"));
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();

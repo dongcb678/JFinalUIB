@@ -35,7 +35,7 @@ public class Dict extends BaseModel<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = ToolSqlXml.getSql("platform.dict.idAndI18n", param);
+		String sql = getSql("platform.dict.idAndI18n", param);
 		
 		Dict dict = dao.findFirst(sql, ids);
 		
@@ -48,7 +48,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public Dict getByNumber(String number){
-		String sql = ToolSqlXml.getSql("platform.dict.numbers");
+		String sql = getSql("platform.dict.numbers");
 		Dict dict = dao.findFirst(sql, number);
 		return dict;
 	}
@@ -65,7 +65,7 @@ public class Dict extends BaseModel<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = ToolSqlXml.getSql("platform.dict.numbersAndI18n", param);
+		String sql = getSql("platform.dict.numbersAndI18n", param);
 		
 		Dict dict = dao.findFirst(sql, number);
 		
@@ -77,7 +77,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(){
-		String sql = ToolSqlXml.getSql("platform.dict.child");
+		String sql = getSql("platform.dict.child");
 		return dao.find(sql, get("ids"));
 	}
 
@@ -87,7 +87,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(String prentIds){
-		String sql = ToolSqlXml.getSql("platform.dict.child");
+		String sql = getSql("platform.dict.child");
 		return dao.find(sql, prentIds);
 	}
 
@@ -103,7 +103,7 @@ public class Dict extends BaseModel<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = ToolSqlXml.getSql("platform.dict.childAndI8n", param);
+		String sql = getSql("platform.dict.childAndI8n", param);
 		
 		return dao.find(sql, prentIds);
 	}
@@ -113,7 +113,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public Dict getParent(){
-		String sql = ToolSqlXml.getSql("platform.dict.parent");
+		String sql = getSql("platform.dict.parent");
 		return dao.findFirst(sql, get("parentids"));
 	}
 
@@ -128,7 +128,7 @@ public class Dict extends BaseModel<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = ToolSqlXml.getSql("platform.dict.parentAndI18n", param);
+		String sql = getSql("platform.dict.parentAndI18n", param);
 		
 		return dao.findFirst(sql, get("parentids"));
 	}

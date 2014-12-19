@@ -38,7 +38,7 @@ public abstract class BaseController extends Controller {
 	/**
 	 * 请求/WEB-INF/下的视图文件
 	 */
-	public void toUrl() {
+	protected void toUrl() {
 		String toUrl = getPara("toUrl");
 		render(toUrl);
 	}
@@ -111,8 +111,10 @@ public abstract class BaseController extends Controller {
 	
 	/**
 	 * 获取checkbox值，数组
+	 * @param name
+	 * @return
 	 */
-	public String[] getParas(String name) {
+	protected String[] getParas(String name) {
 		return getRequest().getParameterValues(name);
 	}
 	
@@ -178,7 +180,7 @@ public abstract class BaseController extends Controller {
 	 * 说明：和分页分拣一样，但是应用场景不一样，主要是给查询导出的之类的功能使用
 	 * @return
 	 */
-	public Map<String, String> getQueryParam(){
+	protected Map<String, String> getQueryParam(){
 		Map<String, String> queryParam = new HashMap<String, String>();
 		Enumeration<String> paramNames = getParaNames();
 		while (paramNames.hasMoreElements()) {
@@ -200,7 +202,7 @@ public abstract class BaseController extends Controller {
 	 * @param colunm
 	 * @param mode
 	 */
-	public void defaultOrder(String colunm, String mode){
+	protected void defaultOrder(String colunm, String mode){
 		if(null == splitPage.getOrderColunm() || splitPage.getOrderColunm().isEmpty()){
 			splitPage.setOrderColunm(colunm);
 			splitPage.setOrderMode(mode);
@@ -212,7 +214,7 @@ public abstract class BaseController extends Controller {
 	 * 说明：和分页分拣一样，但是应用场景不一样，主要是给查询导出的之类的功能使用
 	 * @return
 	 */
-	public String getOrderColunm(){
+	protected String getOrderColunm(){
 		String orderColunm = getPara("orderColunm");
 		return orderColunm;
 	}
@@ -222,7 +224,7 @@ public abstract class BaseController extends Controller {
 	 * 说明：和分页分拣一样，但是应用场景不一样，主要是给查询导出的之类的功能使用
 	 * @return
 	 */
-	public String getOrderMode(){
+	protected String getOrderMode(){
 		String orderMode = getPara("orderMode");
 		return orderMode;
 	}

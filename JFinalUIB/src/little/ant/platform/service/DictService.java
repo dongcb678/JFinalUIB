@@ -3,7 +3,6 @@ package little.ant.platform.service;
 import java.util.List;
 
 import little.ant.platform.model.Dict;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -76,10 +75,10 @@ public class DictService extends BaseService {
 	public String childNodeData(String parentIds){
 		List<Dict> list = null;
 		if (null != parentIds) {
-			String sql = ToolSqlXml.getSql("platform.dict.treeChildNode");
+			String sql = getSql("platform.dict.treeChildNode");
 			list = Dict.dao.find(sql, parentIds);
 		} else {
-			String sql = ToolSqlXml.getSql("platform.dict.treeNodeRoot");
+			String sql = getSql("platform.dict.treeNodeRoot");
 			list = Dict.dao.find(sql);
 		}
 

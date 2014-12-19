@@ -1,10 +1,11 @@
 package little.ant.platform.service;
 
 import java.util.LinkedList;
+import java.util.Map;
 
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
-import little.ant.platform.model.BaseModel;
+import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolMail;
 import little.ant.platform.tools.ToolSqlXml;
@@ -20,12 +21,42 @@ public abstract class BaseService {
 	private static Logger log = Logger.getLogger(BaseService.class);
 
 	/**
+     * 获取SQL，固定SQL
+     * @param sqlId
+     * @return
+     */
+	protected String getSql(String sqlId){
+		return ToolSqlXml.getSql(sqlId);
+	}
+	
+    /**
+     * 获取SQL，动态SQL
+     * @param sqlId
+     * @param param
+     * @return
+     */
+	protected String getSql(String sqlId, Map<String, Object> param){
+    	return ToolSqlXml.getSql(sqlId, param);
+    }
+    
+    /**
+     * 获取SQL，动态SQL
+     * @param sqlId 
+     * @param param 查询参数
+     * @param list 用于接收预处理的值
+     * @return
+     */
+	protected String getSql(String sqlId, Map<String, String> param, LinkedList<Object> list){
+    	return ToolSqlXml.getSql(sqlId, param, list);
+    }
+	
+	/**
 	 * 根据i18n参数查询获取哪个字段的值
 	 * @param i18n
 	 * @return
 	 */
 	protected String i18n(String i18n){
-		return BaseModel.i18n(i18n);
+		return I18NPlugin.i18n(i18n);
 	}
 	
 	/**
