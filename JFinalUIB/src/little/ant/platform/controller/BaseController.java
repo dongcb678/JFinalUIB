@@ -38,7 +38,7 @@ public abstract class BaseController extends Controller {
 	/**
 	 * 请求/WEB-INF/下的视图文件
 	 */
-	protected void toUrl() {
+	public void toUrl() {
 		String toUrl = getPara("toUrl");
 		render(toUrl);
 	}
