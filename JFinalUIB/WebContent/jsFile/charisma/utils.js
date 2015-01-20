@@ -46,6 +46,15 @@ Date.prototype.format = function(format){
 };
 
 /**
+ * 关闭窗口
+ */
+function closeWindow(){
+	top.window.opener = null;
+	top.window.open('', '_self');
+	top.window.close();
+}
+
+/**
  * 批量去空格
  * @param formId
  */
