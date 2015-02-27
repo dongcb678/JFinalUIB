@@ -89,6 +89,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			String name = paramNames.nextElement();
 			if (name.startsWith("_query.")) {
 				String value = controller.getPara(name);
+				log.debug("分页，查询参数：name = " + name + " value = " + value);
 				if(null != value){
 					value = value.trim();
 					if(!value.isEmpty()){
@@ -102,21 +103,25 @@ public class ParamPkgInterceptor implements Interceptor {
 		
 		String orderColunm = controller.getPara("orderColunm");// 排序条件
 		if(null != orderColunm && !orderColunm.isEmpty()){
+			log.debug("分页，排序条件：orderColunm = " + orderColunm);
 			splitPage.setOrderColunm(orderColunm);
 		}
 
 		String orderMode = controller.getPara("orderMode");// 排序方式
 		if(null != orderMode && !orderMode.isEmpty()){
+			log.debug("分页，排序方式：orderMode = " + orderMode);
 			splitPage.setOrderMode(orderMode);
 		}
 
 		String pageNumber = controller.getPara("pageNumber");// 第几页
 		if(null != pageNumber && !pageNumber.isEmpty()){
+			log.debug("分页，第几页：pageNumber = " + pageNumber);
 			splitPage.setPageNumber(Integer.parseInt(pageNumber));
 		}
 		
 		String pageSize = controller.getPara("pageSize");// 每页显示几多
 		if(null != pageSize && !pageSize.isEmpty()){
+			log.debug("分页，每页显示几多：pageSize = " + pageSize);
 			splitPage.setPageSize(Integer.parseInt(pageSize));
 		}
 		
@@ -133,10 +138,12 @@ public class ParamPkgInterceptor implements Interceptor {
 			field.setAccessible(true);
 			String name = field.getName();
 			String value = controller.getPara(name);
-			if(null == value || value.isEmpty()){// 参数值为空直接结束
-				log.debug("参数值为空");
+			if(null == value || value.trim().isEmpty()){// 参数值为空直接结束
+				log.debug("封装参数值到全局变量：field name = " + name + " value = 空");
 				return;
 			}
+			log.debug("封装参数值到全局变量：field name = " + name + " value = " + value);
+			
 			String fieldType = field.getType().getSimpleName();
 			if(fieldType.equals("String")){
 				field.set(controller, value);
@@ -180,12 +187,15 @@ public class ParamPkgInterceptor implements Interceptor {
 	public void setRequestValue(BaseController controller, Field field){
 		try {
 			field.setAccessible(true);
+			String name = field.getName();
 			Object value = field.get(controller);
-			if(null == value){// 参数值为空直接结束
-				log.debug("参数值为空");
+			if(null == value || 
+					(value instanceof String && ((String)value).isEmpty())
+					){// 参数值为空直接结束
+				log.debug("设置全局变量到request：field name = " + name + " value = 空");
 				return;
 			}
-			String name = field.getName();
+			log.debug("设置全局变量到request：field name = " + name + " value = " + value);
 			controller.setAttr(name, value);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
