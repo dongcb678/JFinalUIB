@@ -11,53 +11,102 @@ import org.beetl.core.BeetlKit;
 
 /**
  * 简易辅助开发代码生成器
- * @author 董华健
+ * 
  * 描述：根据表，生成对应的.sql.xml文件、Model类、Service类、validator类、Controller类，
  * 不包含业务处理逻辑，考虑到开发的业务个性化，通用的生成意义不是太大，只做辅助开发
+ * 
+ * @author 董华健
  */
 public class ToolCodeGenerator {
 
-	public static void main(String[] args) {
-		/**
-		 * 表名集合
-		 */
-		String[] tableArr = {"wx_aa",
-		"wx_bb",
-		"wx_cc"};
-		
-		/**
-		 * 表名对应的类名
-		 */
-		String[] classNameArr = {"Aa",
-				"Bb",
-				"Cc"};
-		
-		/**
-		 * 生成的包和类所在的源码根目录，比如src或者是weiXin
-		 */
-		String srcFolder = "weiXin";
+	/**
+	 * 二维数组说明：表名、数据源、是否生成Controller相关、类名（不包含.java）
+	 */
+	public static String[][] tableArr = {
+			{"wx_aa", "DictKeys.db_dataSource_main", "0", "Aa"}, // 生成.sql.xml文件、Model类、Service类、validator类、Controller类
+			{"wx_bb", "DictKeys.db_dataSource_main", "0", "Bb"},
+			{"wx_cc", "DictKeys.db_dataSource_main", "1", "Cc"} // 生成.sql.xml文件、Model类
+		};
+	
+	/**
+	 * 生成的包和类所在的源码根目录，比如src或者是weiXin
+	 */
+	public static String srcFolder = "weiXin";
 
-		/**
-		 * 生成的文件存放的包，公共基础包
-		 * 描述：比如controller所在的包就是little.ant.weixin.controller
-		 */
-		String packageBase = "little.ant.weixin";
-		
-		/**
-		 * 循环生成文件
-		 */
+	/**
+	 * 生成的文件存放的包，公共基础包
+	 * 描述：比如
+	 * 	platform所在的包就是little.ant.platform
+	 * 	weixin所在的包就是little.ant.weixin
+	 */
+	public static String packageBase = "little.ant.weixin";
+	
+	/**
+	 * controller基础路径，例如
+	 * @Controller(controllerKey = "/jf/platform/authImg") 中的platform
+	 * @Controller(controllerKey = "/jf/wx/authImg") 中的wx
+	 */
+	public static String controllerBasePath = "wx";
+
+	/**
+	 * render基础路径，例如
+	 * /platform/user/add.jsp 中的platform
+	 * /weiXin/user/list.jsp 中的weiXin
+	 */
+	public static String renderBasePath = "weiXin";
+
+	/**
+	 * 循环生成文件
+	 */
+	public static void main(String[] args) {
 		for (int i = 0; i < tableArr.length; i++) {
-			String tableName = tableArr[i]; //表名称
-			String className = classNameArr[i]; //表对应的类名
-			String classNameSmall = ToolString.toLowerCaseFirstOne(className); //表对应的类名，首字母小写
+			// 表名
+			String tableName = tableArr[i][0]; 
+			// 数据源名称
+			String dataSource = tableArr[i][1]; 
+			// 是否生成Controller相关
+			String generController = tableArr[i][2]; 
+			// 类名
+			String className = tableArr[i][3]; 
+			// 类名首字母小写
+			String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
 			
-			sql(srcFolder, packageBase, classNameSmall); // 生成sql文件
-			model(srcFolder, packageBase, className, classNameSmall, tableName); // 生成model
+			// 1.生成sql文件
+			sql(classNameSmall); 
+			// 2.生成model
+			model(className, classNameSmall, dataSource, tableName); 
 			
-			validator(srcFolder, packageBase, className, classNameSmall); // 生成validator
-			controller(srcFolder, packageBase, className, classNameSmall); // 生成controller
-			service(srcFolder, packageBase, className, classNameSmall); // 生成service
+			// 是否生成Controller相关
+			if(generController.equals("0")){
+				// 3.生成validator
+				validator(className, classNameSmall); 
+				// 4.生成controller
+				controller(className, classNameSmall); 
+				// 5.生成service
+				service(className, classNameSmall); 
+			}
 		}
+		System.exit(0);
+	}
+
+	/**
+	 * 生成Model
+	 * @param srcFolder
+	 * @param packageBase
+	 * @param className
+	 * @param classNameSmall
+	 * @param tableName
+	 */
+	public static void model(String className, String classNameSmall, String dataSource, String tableName){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		String packages = packageBase + ".model";
+		paraMap.put("package", packages);
+		paraMap.put("className", className);
+		paraMap.put("dataSource", dataSource);
+		paraMap.put("tableName", tableName);
+		
+		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +".java";
+		createFileByTemplete("model.html", paraMap, filePath);
 	}
 
 	/**
@@ -66,7 +115,7 @@ public class ToolCodeGenerator {
 	 * @param packageBase
 	 * @param classNameSmall
 	 */
-	public static void sql(String srcFolder, String packageBase, String classNameSmall){
+	public static void sql(String classNameSmall){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		String packages = packageBase + ".model";
 		paraMap.put("namespace", srcFolder + "." + classNameSmall);
@@ -82,53 +131,18 @@ public class ToolCodeGenerator {
 	 * @param className
 	 * @param classNameSmall
 	 */
-	public static void controller(String srcFolder, String packageBase, String className, String classNameSmall){
+	public static void controller(String className, String classNameSmall){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		String packages = packageBase + ".controller";
 		paraMap.put("basePackage", packageBase);
 		paraMap.put("package", packages);
 		paraMap.put("className", className);
 		paraMap.put("classNameSmall", classNameSmall);
+		paraMap.put("controllerBasePath", controllerBasePath);
+		paraMap.put("renderBasePath", renderBasePath);
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className + "Controller.java";
 		createFileByTemplete("controller.html", paraMap, filePath);
-	}
-
-	/**
-	 * 生成Model
-	 * @param srcFolder
-	 * @param packageBase
-	 * @param className
-	 * @param classNameSmall
-	 * @param tableName
-	 */
-	public static void model(String srcFolder, String packageBase, String className, String classNameSmall, String tableName){
-		Map<String, Object> paraMap = new HashMap<String, Object>();
-		String packages = packageBase + ".model";
-		paraMap.put("package", packages);
-		paraMap.put("className", className);
-		paraMap.put("tableName", tableName);
-		
-		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +"Model.java";
-		createFileByTemplete("model.html", paraMap, filePath);
-	}
-
-	/**
-	 * 生成Service
-	 * @param srcFolder
-	 * @param packageBase
-	 * @param className
-	 * @param classNameSmall
-	 */
-	public static void service(String srcFolder, String packageBase, String className, String classNameSmall){
-		Map<String, Object> paraMap = new HashMap<String, Object>();
-		String packages = packageBase + ".service";
-		paraMap.put("package", packages);
-		paraMap.put("className", className);
-		paraMap.put("classNameSmall", classNameSmall);
-		
-		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className + "Service.java";
-		createFileByTemplete("service.html", paraMap, filePath);
 	}
 
 	/**
@@ -138,17 +152,39 @@ public class ToolCodeGenerator {
 	 * @param className
 	 * @param classNameSmall
 	 */
-	public static void validator(String srcFolder, String packageBase, String className, String classNameSmall){
+	public static void validator(String className, String classNameSmall){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		String packages = packageBase + ".validator";
+		paraMap.put("basePackage", packageBase);
 		paraMap.put("package", packages);
 		paraMap.put("className", className);
 		paraMap.put("classNameSmall", classNameSmall);
+		paraMap.put("controllerBasePath", controllerBasePath);
+		paraMap.put("renderBasePath", renderBasePath);
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className + "Validator.java";
 		createFileByTemplete("validator.html", paraMap, filePath);
 	}
 	
+	/**
+	 * 生成Service
+	 * @param srcFolder
+	 * @param packageBase
+	 * @param className
+	 * @param classNameSmall
+	 */
+	public static void service(String className, String classNameSmall){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		String packages = packageBase + ".service";
+		paraMap.put("package", packages);
+		paraMap.put("className", className);
+		paraMap.put("classNameSmall", classNameSmall);
+		paraMap.put("namespace", srcFolder + "." + classNameSmall);
+		
+		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className + "Service.java";
+		createFileByTemplete("service.html", paraMap, filePath);
+	}
+
 	/**
 	 * 根据具体模板生成文件
 	 * @param templateFileName
