@@ -13,7 +13,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
 /**
- * Url组件
+ * 字符串处理常用方法
  */
 public abstract class ToolString {
 
@@ -204,7 +204,31 @@ public abstract class ToolString {
 	    html.append(contents.substring(lastIdx));
 	    return html.toString();
 	}
+
+	/**
+	 * 首字母转小写
+	 * @param s
+	 * @return
+	 */
+	public static String toLowerCaseFirstOne(String s) {
+        if(Character.isLowerCase(s.charAt(0)))
+            return s;
+        else
+            return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+    }
 	
+	/**
+	 * 首字母转大写
+	 * @param s
+	 * @return
+	 */
+    public static String toUpperCaseFirstOne(String s) {
+        if(Character.isUpperCase(s.charAt(0)))
+            return s;
+        else
+            return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
+    }
+    
 	public static void main(String[] args){
 		
 	}

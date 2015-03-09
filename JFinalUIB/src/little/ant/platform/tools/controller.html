@@ -6,7 +6,7 @@ import ${basePackage}.service.${className}Service;
 
 import org.apache.log4j.Logger;
 
-@Controller(controllerKey = "/jf/re/${classNameSmall}")
+@Controller(controllerKey = "/jf/wx/${classNameSmall}")
 public class ${className}Controller extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -15,7 +15,7 @@ public class ${className}Controller extends BaseController {
 	private ${className}Service ${classNameSmall}Service = new ${className}Service();
 	
 	public void index() {
-		render("/realEstate/${classNameSmall}/xxx.html");
+		render("/weiXin/${classNameSmall}/xxx.html");
 	}
 	
 }
