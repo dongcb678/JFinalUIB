@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * 控制器注解
+ * 说明：标注Controller和访问路径
  * @author 董华健
  */
 @Inherited

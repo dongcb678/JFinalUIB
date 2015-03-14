@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * Model注解
+ * 说明：标注Model对应的数据源、表、主键
  * @author 董华健
  */
 @Inherited

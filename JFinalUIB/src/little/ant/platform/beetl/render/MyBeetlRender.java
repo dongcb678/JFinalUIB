@@ -12,6 +12,9 @@ public class MyBeetlRender extends BeetlRender {
 
 	private static Logger log = Logger.getLogger(MyBeetlRender.class);
 	
+	/**
+	 * render耗时计算key
+	 */
 	public static final String renderTimeKey = "renderTime";
 	
 	public MyBeetlRender(GroupTemplate gt, String view) {
