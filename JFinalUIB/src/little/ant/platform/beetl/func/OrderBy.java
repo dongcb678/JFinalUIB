@@ -13,7 +13,10 @@ import org.beetl.core.Function;
 public class OrderBy implements Function {
 
 	private static Logger log = Logger.getLogger(OrderBy.class);
-			
+	
+	/**
+	 * 分页列表排序
+	 */
 	@Override
 	public Object call(Object[] arg, Context context) {
 		if(arg.length != 1 || null == arg[0]){

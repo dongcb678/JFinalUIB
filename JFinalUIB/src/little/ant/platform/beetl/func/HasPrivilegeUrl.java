@@ -14,7 +14,10 @@ import org.beetl.core.Function;
 public class HasPrivilegeUrl implements Function {
 
 	private static Logger log = Logger.getLogger(HasPrivilegeUrl.class);
-			
+	
+	/**
+	 * 页面按钮权限验证
+	 */
 	@Override
 	public Object call(Object[] arg, Context context) {
 		if(arg.length != 1 || null == arg[0]){

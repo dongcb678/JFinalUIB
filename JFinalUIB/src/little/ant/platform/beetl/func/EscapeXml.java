@@ -12,7 +12,10 @@ import org.beetl.core.Function;
 public class EscapeXml implements Function {
 
 	private static Logger log = Logger.getLogger(EscapeXml.class);
-			
+	
+	/**
+	 * 过滤xml文档函数实现
+	 */
 	@Override
 	public Object call(Object[] arg, Context context) {
 		if(arg.length != 1 || null == arg[0] || !(arg[0] instanceof String)){

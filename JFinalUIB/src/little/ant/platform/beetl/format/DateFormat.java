@@ -14,6 +14,9 @@ import org.beetl.core.Format;
  */
 public class DateFormat implements Format {
 	
+	/**
+	 * 实现格式化处理方法
+	 */
 	public Object format(Object data, String pattern) {
 		if (data == null)
 			return null;
@@ -56,7 +59,6 @@ public class DateFormat implements Format {
 		} else {
 			throw new RuntimeException("Arg Error:Type should be Date:" + data.getClass());
 		}
-
 	}
 
 }
