@@ -18,8 +18,8 @@
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.el-3.0.0.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-api-2.3.1.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/servlet-api-3.1.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/jetty-all-9.2.9.v20150224.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-2.3.2.jar"/>
+	<classpathentry kind="lib" path="doc/buildJar/jetty9/jetty-all-9.2.10.v20150310.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
