@@ -104,44 +104,48 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	@SuppressWarnings("unchecked")
 	public boolean update() {
 		Table table = getTable();
-		String name = table.getName();
-		String pk = table.getPrimaryKey();
+		boolean hasVersion = table.hasColumnLabel("version");
 		
-		// 1.数据是否还存在
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("table", name);
-		param.put("pk", pk);
-		String sql = ToolSqlXml.getSql("platform.baseModel.version", param); 
-		Model<M> modelOld = findFirst(sql , getStr("ids"));
-		if(null == modelOld){ // 数据已经被删除
-			throw new RuntimeException("数据库中此数据不存在，可能数据已经被删除，请刷新数据后在操作");
-		}
-		
-		// 2.乐观锁控制
-		Set<String> modifyFlag = null;
-		try {
-			Field field = this.getClass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
-			field.setAccessible(true);
-			Object object = field.get(this);
-			if(null != object){
-				modifyFlag = (Set<String>) object;
+		if(hasVersion){// 是否需要乐观锁控制，表是否有version字段
+			String name = table.getName();
+			String pk = table.getPrimaryKey();
+			
+			// 1.数据是否还存在
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("table", name);
+			param.put("pk", pk);
+			String sql = ToolSqlXml.getSql("platform.baseModel.version", param); 
+			Model<M> modelOld = findFirst(sql , getStr("ids"));
+			if(null == modelOld){ // 数据已经被删除
+				throw new RuntimeException("数据库中此数据不存在，可能数据已经被删除，请刷新数据后在操作");
 			}
-			field.setAccessible(false);
-		} catch (NoSuchFieldException | SecurityException e) {
-			log.error("业务Model类必须继承BaseModel");
-			e.printStackTrace();
-			throw new RuntimeException("业务Model类必须继承BaseModel");
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			log.error("BaseModel访问modifyFlag异常");
-			e.printStackTrace();
-			throw new RuntimeException("BaseModel访问modifyFlag异常");
-		}
-		boolean versionModify = modifyFlag.contains("version");
-		if(versionModify && getTable().hasColumnLabel("version")){ // 是否需要乐观锁控制
-			Long versionDB = modelOld.getNumber("version").longValue(); // 数据库中的版本号
-			Long versionForm = getNumber("version").longValue(); // 表单中的版本号
-			if(!(versionForm > versionDB)){
-				throw new RuntimeException("表单数据版本号和数据库数据版本号不一致，可能数据已经被其他人修改，请重新编辑");
+			
+			// 2.乐观锁控制
+			Set<String> modifyFlag = null;
+			try {
+				Field field = this.getClass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
+				field.setAccessible(true);
+				Object object = field.get(this);
+				if(null != object){
+					modifyFlag = (Set<String>) object;
+				}
+				field.setAccessible(false);
+			} catch (NoSuchFieldException | SecurityException e) {
+				log.error("业务Model类必须继承BaseModel");
+				e.printStackTrace();
+				throw new RuntimeException("业务Model类必须继承BaseModel");
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				log.error("BaseModel访问modifyFlag异常");
+				e.printStackTrace();
+				throw new RuntimeException("BaseModel访问modifyFlag异常");
+			}
+			boolean versionModify = modifyFlag.contains("version"); // 表单是否包含version字段
+			if(versionModify){
+				Long versionDB = modelOld.getNumber("version").longValue(); // 数据库中的版本号
+				Long versionForm = getNumber("version").longValue(); // 表单中的版本号
+				if(!(versionForm > versionDB)){
+					throw new RuntimeException("表单数据版本号和数据库数据版本号不一致，可能数据已经被其他人修改，请重新编辑");
+				}
 			}
 		}
 		
