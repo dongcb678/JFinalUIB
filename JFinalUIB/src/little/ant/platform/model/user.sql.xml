@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--  
+	用户sql
+-->
 <sql-statement namespace="platform.user">
 	
 	<!-- 查询所有用户 -->

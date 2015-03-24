@@ -5,6 +5,10 @@ import little.ant.platform.common.DictKeys;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 模块model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_module")
 public class Module extends BaseModel<Module> {

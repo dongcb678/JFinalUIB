@@ -8,6 +8,10 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.ehcache.CacheKit;
 
+/**
+ * 岗位model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_station")
 public class Station extends BaseModel<Station> {

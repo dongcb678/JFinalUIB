@@ -8,6 +8,10 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.ehcache.CacheKit;
 
+/**
+ * 角色model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_role")
 public class Role extends BaseModel<Role> {

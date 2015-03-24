@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--  
+	部门管理sql
+-->
 <sql-statement namespace="platform.department">
 	
 	<!-- 查询根节点 -->

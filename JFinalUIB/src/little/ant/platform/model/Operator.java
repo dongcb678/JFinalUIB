@@ -8,6 +8,10 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.ehcache.CacheKit;
 
+/**
+ * 系统功能model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_operator")
 public class Operator extends BaseModel<Operator> {

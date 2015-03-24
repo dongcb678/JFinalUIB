@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--  
+	分组sql
+-->
 <sql-statement namespace="platform.group">
 	
 	<!-- 查询所有分组 -->

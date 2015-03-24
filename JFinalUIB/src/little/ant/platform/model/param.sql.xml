@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--  
+	参数sql
+-->
 <sql-statement namespace="platform.param">
 	
 	<!-- 查询所有参数 -->

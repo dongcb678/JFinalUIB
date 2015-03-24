@@ -13,6 +13,10 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.ehcache.CacheKit;
 
+/**
+ * 参数model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_param")
 public class Param extends BaseModel<Param> {

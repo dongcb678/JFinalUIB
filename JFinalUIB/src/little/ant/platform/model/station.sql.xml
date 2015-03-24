@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--  
+	岗位sql
+-->
 <sql-statement namespace="platform.station">
 	
 	<!-- 查询所有岗位 -->

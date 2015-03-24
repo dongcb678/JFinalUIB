@@ -4,6 +4,10 @@ import little.ant.platform.tools.ToolSqlXml;
 
 import com.jfinal.plugin.IPlugin;
 
+/**
+ * 加载sql文件
+ * @author 董华健
+ */
 public class SqlXmlPlugin implements IPlugin {
 
     public SqlXmlPlugin() {

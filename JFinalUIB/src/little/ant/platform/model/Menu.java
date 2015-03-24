@@ -5,6 +5,10 @@ import little.ant.platform.common.DictKeys;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 菜单model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_menu")
 public class Menu extends BaseModel<Menu> {

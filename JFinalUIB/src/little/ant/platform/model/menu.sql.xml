@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--  
+	菜单sql
+-->
 <sql-statement namespace="platform.menu">
 	
 	<!-- 查询根菜单 -->
