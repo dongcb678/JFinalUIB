@@ -74,13 +74,13 @@ public class MyCaptchaRender extends Render {
 
 	@Override
 	public void render() {
-		log.debug("自定义验证码");
 		BufferedImage bufferedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGTH, BufferedImage.TYPE_INT_RGB);
 
-		String sRand = graphics(bufferedImage);
+		String sRand = graphics(bufferedImage).toLowerCase();
+		log.debug("验证码：" + sRand);
 
 		// 设置验证码值到cookie
-		ToolContext.setAuthCode(response, sRand.toLowerCase());
+		ToolContext.setAuthCode(response, sRand);
 
 		response.setHeader("Pragma", "no-cache");
 		response.setHeader("Cache-Control", "no-cache");

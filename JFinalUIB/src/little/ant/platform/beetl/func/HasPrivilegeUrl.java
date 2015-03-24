@@ -21,6 +21,7 @@ public class HasPrivilegeUrl implements Function {
 	@Override
 	public Object call(Object[] arg, Context context) {
 		if(arg.length != 1 || null == arg[0]){
+			log.error("权限标签验证，参数不正确");
 			return false;
 		}
 		String url = null;
@@ -30,12 +31,13 @@ public class HasPrivilegeUrl implements Function {
 			Syslog reqSysLog = (Syslog) context.getGlobal("reqSysLog");
 			userIds = reqSysLog.getStr("userids");
 		} catch (Exception e) {
+			log.error("权限标签验证，获取参数异常：" + e.getMessage());
 			return false;
 		}
 		
 		boolean bool = ToolContext.hasPrivilegeUrl(url, userIds);
 		
-		log.debug("beetl HasPrivilegeUrl 验证：" + bool);
+		log.debug("beetl HasPrivilegeUrl 权限标签验证：userIds=" + userIds + "，url=" + url + "，验证结果" + bool);
 		
 		return bool;
 	}

@@ -17,28 +17,45 @@ import org.apache.log4j.Logger;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
+/**
+ * 功能测试
+ * @author 董华健
+ * 描述：比如首页登陆进去显示的数据处理
+ */
 @Controller(controllerKey = "/jf/platform/test")
 public class TestController extends BaseController {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(TestController.class);
 
+	/**
+	 * 功能查询显示
+	 */
 	public void operator() {
 		OperatorService.service.list(splitPage);
 		render("/platform/test/operator.html");
 	}
 
+	/**
+	 * 日志查询显示
+	 */
 	public void sysLog() {
 		defaultOrder("startdate", "desc");
 		SysLogService.service.list(splitPage);
 		render("/platform/test/sysLog.html");
 	}
 	
+	/**
+	 * lucene查询显示
+	 */
 	public void lucene() {
 		new DocKeyword().search(splitPage);
 		render("/platform/test/lucene.html");
 	}
 	
+	/**
+	 * 自动补全后台返回数据
+	 */
 	public void autoComplete(){
 		String keyword = getPara("keyword");
 		String size = "10";//getPara("size");

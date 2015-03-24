@@ -22,8 +22,8 @@ public class IndexController extends BaseController {
 
 	private static Logger log = Logger.getLogger(IndexController.class);
 	
-	private List<Systems> systemsList;
-	private List<Menu> menuList;
+	private List<Systems> systemsList; // 系统列表
+	private List<Menu> menuList; // 菜单列表
 	
 	/**
 	 * 首页

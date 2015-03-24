@@ -59,6 +59,10 @@ public class SplitPage implements Serializable {
 		}
 	}
 
+	/**
+	 * 计算总页数
+	 * @return
+	 */
 	public int getTotalPage() {
 		if ((this.totalRow % this.pageSize) == 0) {
 			this.totalPage = this.totalRow / this.pageSize;// 计算多少页
@@ -112,6 +116,10 @@ public class SplitPage implements Serializable {
 		this.orderMode = orderMode;
 	}
 
+	/**
+	 * 需要查询显示第几页
+	 * @return
+	 */
 	public int getPageNumber() {
 		if (pageNumber <= 0) {
 			pageNumber = DictKeys.default_pageNumber;
@@ -123,6 +131,10 @@ public class SplitPage implements Serializable {
 		this.pageNumber = pageNumber;
 	}
 
+	/**
+	 * 每页显示多少条数据
+	 * @return
+	 */
 	public int getPageSize() {
 		if (pageSize <= 0) {
 			pageSize = DictKeys.default_pageSize;

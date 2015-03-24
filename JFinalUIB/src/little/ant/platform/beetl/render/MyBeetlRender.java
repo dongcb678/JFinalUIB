@@ -22,13 +22,16 @@ public class MyBeetlRender extends BeetlRender {
 	}
 
 	public void render() {
-		log.debug("MyBeetlRender render start");
 		long start = System.currentTimeMillis();
+		log.debug("MyBeetlRender render start time = " + start);
+		
 		super.render();
+		
 		long end = System.currentTimeMillis();
 		long renderTime = end - start;
+		log.debug("MyBeetlRender render end time = " + end + "，renderTime = " + renderTime);
+		
 		request.setAttribute(MyBeetlRender.renderTimeKey, renderTime);
-		log.debug("MyBeetlRender render end");
 	}
 
 }

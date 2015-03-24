@@ -9,16 +9,20 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 
+/**
+ * 部门管理
+ * @author 董华健
+ */
 @Controller(controllerKey = "/jf/platform/dept")
 public class DepartmentController extends BaseController {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DepartmentController.class);
 	
-	private String pIds;
-	private String names;
-	private int orderIds;
-	private String principalIds;
+	private String pIds; // 上级部门ids
+	private String names; // 部门名称
+	private int orderIds; // 部门排序号
+	private String principalIds; // 部门负责人
 	
 	/**
 	 * tree首页

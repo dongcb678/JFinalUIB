@@ -10,7 +10,7 @@ import com.baidu.ueditor.ActionEnter;
 import com.jfinal.kit.PathKit;
 
 /**
- * Ueditor
+ * Ueditor编辑器
  */
 @SuppressWarnings("unused")
 @Controller(controllerKey = {"/jf/platform/ueditor"})

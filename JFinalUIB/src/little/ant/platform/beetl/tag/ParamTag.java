@@ -38,7 +38,8 @@ public class ParamTag extends Tag {
 			String number = param.get("number") == null ? "" : param.get("number");
 			String defaultnumber = param.get("defaultnumber") == null ? "" : param.get("defaultnumber");
 
-			log.debug("参数标签");
+			log.debug("参数标签属性：type=" + type + "，id=" + id + "，name=" + name + "，class_=" + class_
+					+ "，style=" + style + "，number=" + number + "，defaultnumber=" + defaultnumber);
 			
 			if(type.equals("")){
 				ctx.byteWriter.writeString(select(id, name, class_, style, number, defaultnumber));

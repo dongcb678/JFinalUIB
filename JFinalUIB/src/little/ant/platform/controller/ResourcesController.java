@@ -7,6 +7,10 @@ import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 资源监控
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Controller(controllerKey = "/jf/platform/resources")
 public class ResourcesController extends BaseController {
