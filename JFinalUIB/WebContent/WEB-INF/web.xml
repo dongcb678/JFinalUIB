@@ -10,20 +10,6 @@
 		<welcome-file>/jf/platform/login</welcome-file>
 	</welcome-file-list>
 	
-	<context-param>
-        <param-name>log4j_init_path</param-name>
-        <param-value>/WEB-INF/classes/log4j.properties</param-value>
-    </context-param>
-	<context-param>
-        <param-name>log4j_file_path</param-name>
-        <param-value>/WEB-INF/log/</param-value>
-    </context-param>
-    
-   	<!-- 平台初始化 -->
-	<listener>
-		<listener-class>little.ant.platform.listener.InitListener</listener-class>
-	</listener>
-	
 	<!-- Log4j在线查看 -->
 	<servlet>  
     	<servlet-name>log4j</servlet-name>  
