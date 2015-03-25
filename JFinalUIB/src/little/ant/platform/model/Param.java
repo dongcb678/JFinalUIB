@@ -80,7 +80,7 @@ public class Param extends BaseModel<Param> {
 	 */
 	public List<Param> getChild(){
 		String sql = getSql("platform.param.child");
-		return dao.find(sql, get("ids"));
+		return dao.find(sql, getPKValue());
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class Param extends BaseModel<Param> {
 			Param parent = Param.dao.findById(param.getStr("parentids"));
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("ids"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getPKValue(), parentList);
 				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
 			}
 		}
@@ -173,7 +173,7 @@ public class Param extends BaseModel<Param> {
 			Param parent = Param.dao.findById(param.getStr("parentids"));
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("ids"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getPKValue(), parentList);
 				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
 			}
 		}

@@ -82,7 +82,7 @@ public class Dict extends BaseModel<Dict> {
 	 */
 	public List<Dict> getChild(){
 		String sql = getSql("platform.dict.child");
-		return dao.find(sql, get("ids"));
+		return dao.find(sql, getPKValue());
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class Dict extends BaseModel<Dict> {
 			Dict parent = Dict.dao.findById(parentIds);
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("ids"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getPKValue(), parentList);
 				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
 			}
 		}
@@ -176,7 +176,7 @@ public class Dict extends BaseModel<Dict> {
 			Dict parent = Dict.dao.findById(parentIds);
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("ids"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getPKValue(), parentList);
 				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
 			}
 		}

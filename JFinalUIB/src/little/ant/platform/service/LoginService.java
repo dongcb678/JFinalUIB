@@ -127,9 +127,9 @@ public class LoginService extends BaseService {
 				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
 				String sql = getSql("platform.user.start");
-				Db.use(DictKeys.db_dataSource_main).update(sql, user.getStr("ids"));
+				Db.use(DictKeys.db_dataSource_main).update(sql, user.getPKValue());
 				// 更新缓存
-				User.dao.cacheAdd(user.getStr("ids"));
+				User.dao.cacheAdd(user.getPKValue());
 			}
 		}
 
@@ -151,9 +151,9 @@ public class LoginService extends BaseService {
 		} else {
 			// 密码验证失败
 			String sql = getSql("platform.user.stop");
-			Db.use(DictKeys.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getStr("ids"));
+			Db.use(DictKeys.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
 			// 更新缓存
-			User.dao.cacheAdd(user.getStr("ids"));
+			User.dao.cacheAdd(user.getPKValue());
 			return DictKeys.login_info_4;
 		}
 	}

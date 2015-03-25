@@ -32,10 +32,10 @@ public class DictService extends BaseService {
 		dict.set("isparent", "false").set("levels", parent.getNumber("levels").longValue() + 1);
 		dict.save();
 		
-		dict.set("paths", parent.get("paths") + "/" + dict.getStr("ids")).update();
+		dict.set("paths", parent.get("paths") + "/" + dict.getPKValue()).update();
 		
 		// 缓存
-		Dict.dao.cacheAdd(dict.getStr("ids"));
+		Dict.dao.cacheAdd(dict.getPKValue());
 	}
 
 	/**
@@ -48,11 +48,11 @@ public class DictService extends BaseService {
 		parent.set("isparent", "true").update();
 		
 		dict.set("parentids", pIds).set("levels", parent.getNumber("levels").longValue() + 1);
-		dict.set("paths", parent.get("paths") + "/" + dict.getPrimaryKeyValue());
+		dict.set("paths", parent.get("paths") + "/" + dict.getPKValue());
 		dict.update();
 		
 		// 缓存
-		Dict.dao.cacheAdd(dict.getStr("ids"));
+		Dict.dao.cacheAdd(dict.getPKValue());
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class DictService extends BaseService {
 		int size = list.size() - 1;
 		for (Dict dict : list) {
 			sb.append(" { ");
-			sb.append(" id : '").append(dict.getStr("ids")).append("', ");
+			sb.append(" id : '").append(dict.getPKValue()).append("', ");
 			sb.append(" name : '").append(dict.getStr("names")).append("', ");
 			sb.append(" isParent : ").append(dict.getStr("isparent")).append(", ");
 			sb.append(" font : {'font-weight':'bold'}, ");

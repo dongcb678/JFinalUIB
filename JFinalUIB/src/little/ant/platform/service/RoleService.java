@@ -27,8 +27,7 @@ public class RoleService extends BaseService {
 	public String save(Role role) {
 		// 保存
 		role.save();
-		String ids = role.getStr("ids");
-		return ids;
+		return role.getPKValue();
 	}
 
 	/**
@@ -40,7 +39,7 @@ public class RoleService extends BaseService {
 		role.update();
 		
 		// 缓存
-		Role.dao.cacheAdd(role.getStr("ids"));
+		Role.dao.cacheAdd(role.getPKValue());
 	}
 
 	/**

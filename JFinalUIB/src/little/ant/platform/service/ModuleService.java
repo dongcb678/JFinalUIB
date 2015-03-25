@@ -46,7 +46,7 @@ public class ModuleService extends BaseService {
 		int size = list.size() - 1;
 		for (Module module : list) {
 			sb.append(" { ");
-			sb.append(" id : '").append(module.getStr("ids")).append("', ");
+			sb.append(" id : '").append(module.getPKValue()).append("', ");
 			sb.append(" name : '").append(module.getStr("names")).append("', ");
 			sb.append(" isParent : true, ");
 			sb.append(" font : {'font-weight':'bold'}, ");
@@ -90,7 +90,7 @@ public class ModuleService extends BaseService {
 		module.set("images", images);
 		module.save();
 		
-		return module.getStr("ids");
+		return module.getPKValue();
 	}
 	
 	/**

@@ -32,10 +32,10 @@ public class ParamService extends BaseService {
 		param.set("isparent", "false").set("levels", parent.getNumber("levels").longValue() + 1);
 		param.save();
 		
-		param.set("paths", parent.get("paths") + "/" + param.getStr("ids")).update();
+		param.set("paths", parent.get("paths") + "/" + param.getPKValue()).update();
 		
 		// 缓存
-		Param.dao.cacheAdd(param.getStr("ids"));
+		Param.dao.cacheAdd(param.getPKValue());
 	}
 
 	/**
@@ -48,11 +48,11 @@ public class ParamService extends BaseService {
 		parent.set("isparent", "true").update();
 		
 		param.set("parentids", pIds).set("levels", parent.getNumber("levels").longValue() + 1);
-		param.set("paths", parent.get("paths") + "/" + param.getPrimaryKeyValue());
+		param.set("paths", parent.get("paths") + "/" + param.getPKValue());
 		param.update();
 		
 		// 缓存
-		Param.dao.cacheAdd(param.getStr("ids"));
+		Param.dao.cacheAdd(param.getPKValue());
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class ParamService extends BaseService {
 		int size = list.size() - 1;
 		for (Param param : list) {
 			sb.append(" { ");
-			sb.append(" id : '").append(param.getStr("ids")).append("', ");
+			sb.append(" id : '").append(param.getPKValue()).append("', ");
 			sb.append(" name : '").append(param.getStr("names")).append("', ");
 			sb.append(" isParent : ").append(param.getStr("isparent")).append(", ");
 			sb.append(" font : {'font-weight':'bold'}, ");

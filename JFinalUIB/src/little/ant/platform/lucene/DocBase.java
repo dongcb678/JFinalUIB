@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import little.ant.platform.common.DictKeys;
+import little.ant.platform.model.BaseModel;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolHtml;
 import little.ant.platform.tools.ToolString;
@@ -35,7 +36,6 @@ import org.apache.lucene.store.Directory;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
 
@@ -147,7 +147,7 @@ public abstract class DocBase implements Runnable {
 	 * @throws NoSuchFieldException
 	 * @throws SecurityException
 	 */
-	protected <T extends Model<?>> List<Field> getFields(String[] fieldNames, Class<T> modelClass){
+	protected <T extends BaseModel<?>> List<Field> getFields(String[] fieldNames, Class<T> modelClass){
 		List<Field> fields = new LinkedList<Field>();
 		int fieldLength = fieldNames.length;
 		for (int i = 0; i < fieldLength; i++) {
@@ -183,7 +183,7 @@ public abstract class DocBase implements Runnable {
 	 * @param doc
 	 * @param fields
 	 */
-	protected <T extends Model<?>> void addDoc(IndexWriter indexWriter, T entity, Document doc, List<Field> fields) {
+	protected <T extends BaseModel<?>> void addDoc(IndexWriter indexWriter, T entity, Document doc, List<Field> fields) {
 		docProcess(entity, doc, fields);//封装Document
 		
 		try {
@@ -200,11 +200,11 @@ public abstract class DocBase implements Runnable {
 	 * @param doc
 	 * @param fields
 	 */
-	protected <T extends Model<?>> void updateDoc(IndexWriter indexWriter, T entity, Document doc, List<Field> fields){
+	protected <T extends BaseModel<?>> void updateDoc(IndexWriter indexWriter, T entity, Document doc, List<Field> fields){
 		docProcess(entity, doc, fields);//封装Document
 		
 		try {
-			indexWriter.updateDocument(new Term("ids", entity.getStr("ids")), doc);// Document更新
+			indexWriter.updateDocument(new Term("ids", entity.getPKValue()), doc);// Document更新
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -215,7 +215,7 @@ public abstract class DocBase implements Runnable {
 	 * @param indexWriter
 	 * @param ids
 	 */
-	protected <T extends Model<?>> void deleteDoc(IndexWriter indexWriter, String ids){
+	protected void deleteDoc(IndexWriter indexWriter, String ids){
 		try {
 			indexWriter.deleteDocuments(new Term("ids", ids));  // Document删除
 		} catch (IOException e) {
@@ -243,7 +243,7 @@ public abstract class DocBase implements Runnable {
 	 * @param fields
 	 * @return
 	 */
-	protected <T extends Model<?>> Document docProcess(T model, Document doc, List<Field> fields){
+	protected <T extends BaseModel<?>> Document docProcess(T model, Document doc, List<Field> fields){
 		// 1.通过反射往Field填充值
 		for (Field field : fields) {
 			String fieldName = field.name();

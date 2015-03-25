@@ -191,8 +191,8 @@ public abstract class ToolString {
 	            html.append("<a href='http://www.xx.com/"+user.getStr("username")+"' class='referer' target='_blank'>@");
 	            html.append(userName.trim());
 	            html.append("</a> ");
-	            if(userReferers != null && !userReferers.contains(user.getPrimaryKeyValue())){
-	            	userReferers.add(user.getPrimaryKeyValue());
+	            if(userReferers != null && !userReferers.contains(user.getPKValue())){
+	            	userReferers.add(user.getPKValue());
 	            }
 	        } else {
 	            html.append(origion_str);

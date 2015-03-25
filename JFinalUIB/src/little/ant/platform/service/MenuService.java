@@ -48,7 +48,7 @@ public class MenuService extends BaseService {
 		int size = list.size() - 1;
 		for (Menu menu : list) {
 			sb.append(" { ");
-			sb.append(" id : '").append(menu.getStr("ids")).append("', ");
+			sb.append(" id : '").append(menu.getPKValue()).append("', ");
 			sb.append(" name : '").append(menu.getStr("names")).append("', ");
 			sb.append(" isParent : true, ");
 			sb.append(" font : {'font-weight':'bold'}, ");
@@ -95,7 +95,7 @@ public class MenuService extends BaseService {
 		menu.set("systemsids", pMenu.getStr("systemsids"));
 		menu.save();
 		
-		return menu.getStr("ids");
+		return menu.getPKValue();
 	}
 	
 	/**

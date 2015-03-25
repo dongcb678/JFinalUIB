@@ -83,7 +83,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * 获取主键值
 	 * @return
 	 */
-	public String getPrimaryKeyValue(){
+	public String getPKValue(){
 		return this.getStr(getTable().getPrimaryKey());
 	}
 
@@ -115,7 +115,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			param.put("table", name);
 			param.put("pk", pk);
 			String sql = ToolSqlXml.getSql("platform.baseModel.version", param); 
-			Model<M> modelOld = findFirst(sql , getStr("ids"));
+			Model<M> modelOld = findFirst(sql , getPKValue());
 			if(null == modelOld){ // 数据已经被删除
 				throw new RuntimeException("数据库中此数据不存在，可能数据已经被删除，请刷新数据后在操作");
 			}

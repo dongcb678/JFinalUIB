@@ -40,13 +40,13 @@ public class UserService extends BaseService {
 			userInfo.save();
 
 			// 保存用户
-			user.set("userinfoids", userInfo.getStr("ids"));
+			user.set("userinfoids", userInfo.getPKValue());
 			user.set("errorcount", 0);
 			user.set("status", "1");
 			user.save();
 
 			// 缓存
-			User.dao.cacheAdd(user.getStr("ids"));
+			User.dao.cacheAdd(user.getPKValue());
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException("保存用户密码加密操作异常", e);
 		} catch (InvalidKeySpecException e) {
@@ -67,7 +67,7 @@ public class UserService extends BaseService {
 		try {
 			// 密码加密
 			if (null != password && !password.trim().equals("")) {
-				User oldUser = User.dao.findById(user.getStr("ids"));
+				User oldUser = User.dao.findById(user.getPKValue());
 				byte[] salt = oldUser.getBytes("salt");// 密码盐
 				byte[] encryptedPassword = ToolSecurityPbkdf2.getEncryptedPassword(password, salt);
 				user.set("password", encryptedPassword);
@@ -78,7 +78,7 @@ public class UserService extends BaseService {
 			userInfo.update();
 
 			// 缓存
-			User.dao.cacheAdd(user.getStr("ids"));
+			User.dao.cacheAdd(user.getPKValue());
 		} catch (Exception e) {
 			throw new RuntimeException("更新用户异常", e);
 		}
@@ -146,7 +146,7 @@ public class UserService extends BaseService {
 			int userSize = userList.size() - 1;
 			for (User user : userList) {
 				sb.append(" { ");
-				sb.append(" id : '").append("user_").append(user.getStr("ids")).append("', ");
+				sb.append(" id : '").append("user_").append(user.getPKValue()).append("', ");
 				sb.append(" name : '").append(user.getStr("names")).append("', ");
 				sb.append(" isParent : false, ");
 				sb.append(" font : {'font-weight':'bold'}, ");
@@ -166,7 +166,7 @@ public class UserService extends BaseService {
 		// 封装部门数据
 		for (Department dept : deptList) {
 			sb.append(" { ");
-			sb.append(" id : '").append("dept_").append(dept.getPrimaryKeyValue()).append("', ");
+			sb.append(" id : '").append("dept_").append(dept.getPKValue()).append("', ");
 			sb.append(" name : '").append(dept.get("names")).append("', ");
 
 			if (null != deptIds) {
@@ -255,7 +255,7 @@ public class UserService extends BaseService {
 				// 更新用户
 				user.update();
 				// 缓存
-				User.dao.cacheAdd(user.getStr("ids"));
+				User.dao.cacheAdd(user.getPKValue());
 			}
 		} catch (Exception e) {
 			log.error("更新用户密码异常，userName:" + userName + "，旧密码：" + passOld + "，新密码：" + passNew, e);

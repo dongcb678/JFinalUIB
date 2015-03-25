@@ -24,7 +24,7 @@ public class KeywordService extends BaseService {
 		
 		new DocKeyword().add(keyword); // 索引
 		
-		return keyword.getStr("ids");
+		return keyword.getPKValue();
 	}
 
 	/**

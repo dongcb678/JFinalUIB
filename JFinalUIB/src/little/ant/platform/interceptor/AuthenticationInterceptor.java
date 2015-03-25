@@ -63,9 +63,9 @@ public class AuthenticationInterceptor implements Interceptor {
 		}
 		User user = ToolContext.getCurrentUser(request, userAgentVali);// 当前登录用户
 		if(null != user){
-			reqSysLog.set("userids", user.getPrimaryKeyValue());
+			reqSysLog.set("userids", user.getPKValue());
 			contro.setAttr("cUser", user);
-			contro.setAttr("cUserIds", user.getPrimaryKeyValue());
+			contro.setAttr("cUserIds", user.getPKValue());
 		}
 		
 		log.info("获取URI对象!");
@@ -76,7 +76,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			log.info("URI存在!");
 			
 			Operator operator = (Operator) operatorObj;
-			reqSysLog.set("operatorids", operator.getPrimaryKeyValue());
+			reqSysLog.set("operatorids", operator.getPKValue());
 			
 			if(operator.get("privilegess").equals("1")){// 是否需要权限验证
 				log.info("需要权限验证!");

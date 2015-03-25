@@ -35,7 +35,7 @@ public class UploadService extends BaseService {
 			upload.save();
 			
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("ids", upload.getStr("ids"));
+			map.put("ids", upload.getPKValue());
 			map.put("fileName", fileName);
 			map.put("pathType", pathType);
 			list.add(map);

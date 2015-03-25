@@ -25,7 +25,7 @@ public class OperatorService extends BaseService {
 	public String save(Operator operator){
 		// 保存
 		operator.save();
-		String ids = operator.getStr("ids");
+		String ids = operator.getPKValue();
 		
 		// 缓存
 		Operator.dao.cacheAdd(ids);
@@ -40,7 +40,7 @@ public class OperatorService extends BaseService {
 	public void update(Operator operator){
 		// 更新
 		operator.update();
-		String ids = operator.getStr("ids");
+		String ids = operator.getPKValue();
 		
 		// 缓存
 		Operator.dao.cacheAdd(ids);
@@ -89,7 +89,7 @@ public class OperatorService extends BaseService {
 		int operatorIndexSize = operatorSize - 1;
 		for (Operator operator : operatorList) {
 			sb.append(" { ");
-			sb.append(" id : '").append("operator_").append(operator.getStr("ids")).append("', ");
+			sb.append(" id : '").append("operator_").append(operator.getPKValue()).append("', ");
 			sb.append(" name : '").append(operator.getStr("names")).append("', ");
 			sb.append(" isParent : false, ");
 
@@ -110,7 +110,7 @@ public class OperatorService extends BaseService {
 		}
 		for (Module module : listModule) {
 			sb.append(" { ");
-			sb.append(" id : '").append("module_").append(module.getStr("ids")).append("', ");
+			sb.append(" id : '").append("module_").append(module.getPKValue()).append("', ");
 			sb.append(" name : '").append(module.getStr("names")).append("', ");
 			sb.append(" isParent : ").append(module.getStr("isparent")).append(", ");
 			sb.append(" nocheck : true, ");

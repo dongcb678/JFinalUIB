@@ -27,12 +27,11 @@ public class GroupService extends BaseService {
 	public String save(Group group){
 		// 保存
 		group.save();
-		String ids = group.getStr("ids");
 		
 		// 缓存
-		Group.dao.cacheAdd(ids);
+		Group.dao.cacheAdd(group.getPKValue());
 		
-		return ids;
+		return group.getPKValue();
 	}
 
 	/**
@@ -42,10 +41,9 @@ public class GroupService extends BaseService {
 	public void update(Group group){
 		// 更新
 		group.update();
-		String ids = group.getStr("ids");
 
 		// 缓存
-		Group.dao.cacheAdd(ids);
+		Group.dao.cacheAdd(group.getPKValue());
 	}
 
 	/**

@@ -39,7 +39,7 @@ public class StationService extends BaseService {
 		int size = list.size() - 1;
 		for (Station station : list) {
 			sb.append(" { ");
-			sb.append(" id : '").append(station.getStr("ids")).append("', ");
+			sb.append(" id : '").append(station.getPKValue()).append("', ");
 			sb.append(" name : '").append(station.getStr("names")).append("', ");
 			sb.append(" isParent : true, ");
 			sb.append(" font : {'font-weight':'bold'}, ");
@@ -81,12 +81,11 @@ public class StationService extends BaseService {
 		station.set("names", names);
 		station.set("images", images);
 		station.save();
-		String ids = station.getStr("ids");
 		
 		// 缓存
-		Station.dao.cacheAdd(ids);
+		Station.dao.cacheAdd(station.getPKValue());
 		
-		return ids;
+		return station.getPKValue();
 	}
 	
 	/**

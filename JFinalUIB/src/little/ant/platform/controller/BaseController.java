@@ -167,7 +167,7 @@ public abstract class BaseController extends Controller {
 	protected <T extends BaseModel<?>>  boolean authCreate(T model){
 		String createids = model.getStr("createids");
 		if(null != createids && !createids.isEmpty()){
-			String createUserIds = ToolContext.getCurrentUser(getRequest(), false).getStr("ids");
+			String createUserIds = ToolContext.getCurrentUser(getRequest(), false).getPKValue();
 			if(createids.equals(createUserIds)){
 				return true;
 			}

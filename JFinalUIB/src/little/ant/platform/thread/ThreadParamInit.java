@@ -74,7 +74,7 @@ public class ThreadParamInit extends Thread {
 		String sql = ToolSqlXml.getSql("platform.user.all");
 		List<User> userList = User.dao.find(sql);
 		for (User user : userList) {
-			User.dao.cacheAdd(user.getStr("ids"));
+			User.dao.cacheAdd(user.getPKValue());
 			user = null;
 		}
 		userList = null;
@@ -88,7 +88,7 @@ public class ThreadParamInit extends Thread {
 		String sql = ToolSqlXml.getSql("platform.group.all");
 		List<Group> groupList = Group.dao.find(sql);
 		for (Group group : groupList) {
-			Group.dao.cacheAdd(group.getStr("ids"));
+			Group.dao.cacheAdd(group.getPKValue());
 		}
 		groupList = null;
 	}
@@ -101,7 +101,7 @@ public class ThreadParamInit extends Thread {
 		String sql = ToolSqlXml.getSql("platform.role.all");
 		List<Role> roleList = Role.dao.find(sql);
 		for (Role role : roleList) {
-			Role.dao.cacheAdd(role.getStr("ids"));
+			Role.dao.cacheAdd(role.getPKValue());
 		}
 		roleList = null;
 	}
@@ -114,7 +114,7 @@ public class ThreadParamInit extends Thread {
 		String sql = ToolSqlXml.getSql("platform.station.all");
 		List<Station> stationList = Station.dao.find(sql);
 		for (Station station : stationList) {
-			Station.dao.cacheAdd(station.getStr("ids"));
+			Station.dao.cacheAdd(station.getPKValue());
 		}
 		stationList = null;
 	}
@@ -127,7 +127,7 @@ public class ThreadParamInit extends Thread {
 		String sql = ToolSqlXml.getSql("platform.operator.all");
 		List<Operator> operatorList = Operator.dao.find(sql);
 		for (Operator operator : operatorList) {
-			Operator.dao.cacheAdd(operator.getStr("ids"));
+			Operator.dao.cacheAdd(operator.getPKValue());
 			operator = null;
 		}
 		operatorList = null;
@@ -141,7 +141,7 @@ public class ThreadParamInit extends Thread {
 		String sql = ToolSqlXml.getSql("platform.dict.all");
 		List<Dict> dictList = Dict.dao.find(sql);
 		for (Dict dict : dictList) {
-			Dict.dao.cacheAdd(dict.getStr("ids"));
+			Dict.dao.cacheAdd(dict.getPKValue());
 			dict = null;
 		}
 		dictList = null;
@@ -155,7 +155,7 @@ public class ThreadParamInit extends Thread {
 		String sql = ToolSqlXml.getSql("platform.param.all");
 		List<Param> paramList = Param.dao.find(sql);
 		for (Param param : paramList) {
-			Param.dao.cacheAdd(param.getStr("ids"));
+			Param.dao.cacheAdd(param.getPKValue());
 			param = null;
 		}
 		paramList = null;

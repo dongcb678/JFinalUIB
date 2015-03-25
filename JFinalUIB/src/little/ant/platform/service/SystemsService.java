@@ -25,7 +25,7 @@ public class SystemsService extends BaseService {
 		
 		// 初始化模块根节点
 		Module module = new Module();
-		module.set("systemsids", systems.getStr("ids"));
+		module.set("systemsids", systems.getPKValue());
 		module.set("isparent", "true");
 		module.set("images", "3.png");
 		module.set("orderids", 1);
@@ -34,7 +34,7 @@ public class SystemsService extends BaseService {
 		
 		// 初始化菜单根节点
 		Menu menu = new Menu();
-		menu.set("systemsids", systems.getStr("ids"));
+		menu.set("systemsids", systems.getPKValue());
 		menu.set("isparent", "true");
 		menu.set("images", "3.png");
 		menu.set("orderids", 1);

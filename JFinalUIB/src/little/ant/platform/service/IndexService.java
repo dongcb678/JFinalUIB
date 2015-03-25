@@ -64,7 +64,7 @@ public class IndexService extends BaseService {
 		
 		// 查询根菜单节点
 		Menu menu = Menu.dao.findFirst(getSql("platform.menu.rootId"), systemsIds);
-		String parentmenuids = menu.getStr("ids");
+		String parentmenuids = menu.getPKValue();
 		
 		// 一级菜单
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -74,7 +74,7 @@ public class IndexService extends BaseService {
 		for (Menu oneMenu : oneList) {
 			// 二级菜单
 			String sql = getSql("platform.menu.operator", param);
-			List<Menu> twoList = Menu.dao.find(sql, oneMenu.getPrimaryKeyValue());
+			List<Menu> twoList = Menu.dao.find(sql, oneMenu.getPKValue());
 			oneMenu.put("subList", twoList);
 		}
 		return oneList;

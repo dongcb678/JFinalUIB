@@ -49,7 +49,7 @@ public class ToolContext {
 		User user = (User) userObj;
 
 		// 权限验证对象
-		String operatorIds = operator.getStr("ids") + ",";
+		String operatorIds = operator.getPKValue() + ",";
 		String groupIds = user.getStr("groupids");
 		String stationIds = user.getStr("stationids");
 
@@ -100,7 +100,7 @@ public class ToolContext {
 	 */
 	public static boolean hasPrivilegeOperator(Operator operator, User user) {
 		// 基于缓存查询
-		String operatorIds = operator.getStr("ids") + ",";
+		String operatorIds = operator.getPKValue() + ",";
 
 		// 根据分组查询权限
 		String groupIds = user.getStr("groupids");
@@ -261,7 +261,7 @@ public class ToolContext {
 		ToolWeb.addCookie(response, "", "/", true, "userName", user.getStr("username"), maxAgeTemp);
 
 		// 3.生成登陆认证cookie
-		String userIds = user.getStr("ids");
+		String userIds = user.getPKValue();
 		String ips = ToolWeb.getIpAddr(request);
 		String userAgent = request.getHeader("User-Agent");
 		long date = ToolDateTime.getDateByTime();

@@ -39,7 +39,7 @@ public class DepartmentService extends BaseService {
 		int size = list.size() - 1;
 		for (Department dept : list) {
 			sb.append(" { ");
-			sb.append(" id : '").append(dept.getStr("ids")).append("', ");
+			sb.append(" id : '").append(dept.getPKValue()).append("', ");
 			sb.append(" name : '").append(dept.getStr("names")).append("', ");
 			sb.append(" isParent : true, ");
 			sb.append(" font : {'font-weight':'bold'}, ");
@@ -82,7 +82,7 @@ public class DepartmentService extends BaseService {
 		dept.set("images", images);
 		dept.save();
 		
-		return dept.getStr("ids");
+		return dept.getPKValue();
 	}
 	
 	/**
