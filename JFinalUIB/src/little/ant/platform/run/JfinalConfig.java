@@ -131,11 +131,12 @@ public class JfinalConfig extends JFinalConfig {
 		if(db_type.equals(DictKeys.db_type_postgresql)){
 			log.info("configPlugin 使用数据库类型是 postgresql");
 			arpMain.setDialect(new PostgreSqlDialect());
+			arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 配置属性名(字段名)大小写不敏感容器工厂
 			
 		}else if(db_type.equals(DictKeys.db_type_mysql)){
 			log.info("configPlugin 使用数据库类型是 mysql");
 			arpMain.setDialect(new MysqlDialect());
-			arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 小写
+			arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 配置属性名(字段名)大小写不敏感容器工厂
 		
 		}else if(db_type.equals(DictKeys.db_type_oracle)){
 			log.info("configPlugin 使用数据库类型是 oracle");
