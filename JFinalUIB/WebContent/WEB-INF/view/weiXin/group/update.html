@@ -21,7 +21,7 @@
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/wx/group/update" method="POST">
 				<input type="hidden" name="group.ids" value="${escapeXml(group.ids!)}" >
-				<input type="hidden" name="group.version" value="${group.version! + 1}">
+				<input type="hidden" name="group.version" value="${group.version!}">
 				
 				<input type="hidden" name="group.id" value="${escapeXml(group.id!)}" >
 				

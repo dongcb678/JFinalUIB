@@ -21,7 +21,7 @@
 		<div class="box-content">
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/platform/role/update" method="POST">
 				<input type="hidden" name="role.ids" value="${escapeXml(role.ids!)}" >
-				<input type="hidden" name="role.version" value="${role.version! + 1}">
+				<input type="hidden" name="role.version" value="${role.version!}">
 				
 				<% include("/platform/role/form.html"){} %>
 				<div class="form-actions">

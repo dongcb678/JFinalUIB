@@ -142,7 +142,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			boolean versionModify = modifyFlag.contains("version"); // 表单是否包含version字段
 			if(versionModify){
 				Long versionDB = modelOld.getNumber("version").longValue(); // 数据库中的版本号
-				Long versionForm = getNumber("version").longValue(); // 表单中的版本号
+				Long versionForm = getNumber("version").longValue() + 1; // 表单中的版本号
 				if(!(versionForm > versionDB)){
 					throw new RuntimeException("表单数据版本号和数据库数据版本号不一致，可能数据已经被其他人修改，请重新编辑");
 				}
