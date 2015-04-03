@@ -17,7 +17,10 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
   
-//清除注释 
+/**
+ * 代码注释处理：清除注释 
+ * @author 董华健
+ */
 public class ToolComment {  
 
 	@SuppressWarnings("unused")

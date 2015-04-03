@@ -20,6 +20,10 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
 
+/**
+ * XML工具类
+ * @author 董华健
+ */
 public class ToolXml {
 	
 	/**

@@ -16,7 +16,9 @@ import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
- * 图片水印文字
+ * 图片水印处理
+ * @author 董华健
+ *
  */
 public class ToolImagePressText {
 

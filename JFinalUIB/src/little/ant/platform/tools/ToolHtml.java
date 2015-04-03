@@ -3,6 +3,10 @@ package little.ant.platform.tools;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
+/**
+ * Html处理
+ * @author 董华健
+ */
 public class ToolHtml {
 	
 	/**

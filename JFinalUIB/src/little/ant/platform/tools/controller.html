@@ -34,7 +34,7 @@ public class ${className}Controller extends BaseController {
 	@Before(${className}Validator.class)
 	public void save() {
 		getModel(${className}.class).save();
-		render("${renderBasePath}/${classNameSmall}/add.html");
+		render("/${renderBasePath}/${classNameSmall}/add.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class ${className}Controller extends BaseController {
 	public void edit() {
 		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
 		setAttr("${classNameSmall}", ${classNameSmall});
-		render("${renderBasePath}/${classNameSmall}/update.html");
+		render("/${renderBasePath}/${classNameSmall}/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class ${className}Controller extends BaseController {
 	public void view() {
 		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
 		setAttr("${classNameSmall}", ${classNameSmall});
-		render("${renderBasePath}/${classNameSmall}/view.html");
+		render("/${renderBasePath}/${classNameSmall}/view.html");
 	}
 	
 	/**

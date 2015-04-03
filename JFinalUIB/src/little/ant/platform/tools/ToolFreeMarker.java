@@ -16,6 +16,10 @@ import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+/**
+ * FreeMarker工具类
+ * @author 董华健
+ */
 public class ToolFreeMarker {
 	
 	/**

@@ -40,6 +40,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
+/**
+ * HTTP请求相关
+ * @author 董华健
+ */
+@SuppressWarnings("deprecation")
 public class ToolHttp {
 
 	private static Logger log = Logger.getLogger(ToolHttp.class);

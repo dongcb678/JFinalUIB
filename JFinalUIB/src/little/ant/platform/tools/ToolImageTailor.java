@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 
 /**
  * 图片裁剪
+ * @author 董华健
  */
 public class ToolImageTailor {
 

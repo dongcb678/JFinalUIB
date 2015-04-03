@@ -10,6 +10,10 @@ import org.apache.velocity.app.VelocityEngine;
 
 import freemarker.template.TemplateException;
 
+/**
+ * Velocity工具类
+ * @author 董华健
+ */
 public class ToolVelocity {
 
 	/**

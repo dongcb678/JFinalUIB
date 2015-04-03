@@ -5,6 +5,10 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+/**
+ * SQL格式化处理
+ * @author 董华健
+ */
 @SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 public class ToolSqlFormatter {
 

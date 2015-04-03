@@ -15,6 +15,10 @@ import little.ant.platform.plugin.PropertiesPlugin;
 import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;
 
+/**
+ * 类文件检索
+ * @author 董华健
+ */
 public class ToolClassSearcher {
 
     protected static final Logger LOG = Logger.getLogger(ToolClassSearcher.class);
