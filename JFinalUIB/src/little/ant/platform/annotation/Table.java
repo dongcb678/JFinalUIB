@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * Model注解
- * 说明：标注Model对应的数据源、表、主键
+ * 说明：标注Model对应的数据源名称、表名称、主键列名称
  * @author 董华健
  */
 @Inherited
@@ -30,6 +30,7 @@ public @interface Table {
 
     /**
      * Model的主键列名称
+     * 描述：列明可以不是ids，但是在建立model的时候那就必须用pkName="xxx"注明
      * @return
      */
     String pkName() default "ids";

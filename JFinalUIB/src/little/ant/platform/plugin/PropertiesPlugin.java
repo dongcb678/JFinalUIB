@@ -172,6 +172,10 @@ public class PropertiesPlugin implements IPlugin {
 		paramMap.put(DictKeys.config_mail_password, properties.getProperty(DictKeys.config_mail_password).trim());
 		paramMap.put(DictKeys.config_mail_to, properties.getProperty(DictKeys.config_mail_to).trim());
 		
+		for (String key : paramMap.keySet()) {
+			log.debug("全局参数配置：" + key + " = " + paramMap.get(key));
+		}
+		
 		return true;
 	}
 

@@ -45,7 +45,7 @@ public class ControllerPlugin implements IPlugin {
 				log.error(controller.getName() + "继承了BaseController，但是没有注解绑定映射路径");
 				continue;
 			}
-			
+
 			// 获取映射路径数组
 			String[] controllerKeys = controllerBind.controllerKey();
 			for (String controllerKey : controllerKeys) {
@@ -56,6 +56,7 @@ public class ControllerPlugin implements IPlugin {
 				}
 				// 注册映射
 				me.add(controllerKey, controller);
+				log.debug("Controller注册： controller = " + controller + ", controllerKey = " + controllerKey);
 			}
 		}
 		return true;

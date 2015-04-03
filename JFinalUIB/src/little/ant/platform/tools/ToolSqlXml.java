@@ -224,7 +224,7 @@ public class ToolSqlXml {
 						
 						sql = sql.replaceAll("[\\s]{2,}", " ");
 						sqlMap.put(key, sql);
-						log.debug("sql文件名：" + fileName + " sql key: " + key + " sql内容：" + sql);
+						log.debug("sql加载, sql file = " + fileName + ", sql key = " + key + ", sql content = " + sql);
 					}
 				}
 	        }

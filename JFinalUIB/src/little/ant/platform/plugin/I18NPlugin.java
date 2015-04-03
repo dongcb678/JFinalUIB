@@ -90,13 +90,19 @@ public class I18NPlugin implements IPlugin {
 				"ja"
 			};
 		
+		String fileName = null;
+		
 		for (String language : languages) {
-			Properties properties = new Properties();
+			fileName = "/message_" + language + ".properties";
 			InputStream inputStream = null;
 			try {
 				//inputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
-				inputStream = I18NPlugin.class.getResourceAsStream("/message_" + language + ".properties");// "/init.properties"
+				inputStream = I18NPlugin.class.getResourceAsStream(fileName);// "/init.properties"
+				
+				Properties properties = new Properties();
 				properties.load(inputStream);
+
+				log.debug("加载国际化资源文件：" + fileName); 
 				
 				Map<String, String> i18nMap = new HashMap<String, String>();
 				Enumeration<Object> keys = properties.keys();

@@ -63,6 +63,7 @@ public class TablePlugin implements IPlugin {
 				break;
 			}
 			arp.addMapping(tableName, pkName, model);
+			log.debug("Model注册： model = " + model + ", tableName = " + tableName + ", pkName: " + pkName);
 		}
 		return true;
 	}
