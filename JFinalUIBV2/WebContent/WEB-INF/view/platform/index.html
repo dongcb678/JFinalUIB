@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>JFinalUIB</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link id="bs-css" href="${cxt!}/ui/charisma/css/bootstrap-united.css" rel="stylesheet">
+	<style type="text/css">
+	  body {
+		padding-bottom: 40px;
+	  }
+	  .sidebar-nav {
+		padding: 9px 0;
+	  }
+	</style>
+	<link href="${cxt!}/ui/charisma/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="${cxt!}/ui/charisma/css/charisma-app.css" rel="stylesheet">
+	<link href="${cxt!}/ui/charisma/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+	<link href='${cxt!}/ui/charisma/css/fullcalendar.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/fullcalendar.print.css' rel='stylesheet'  media='print'>
+	<link href='${cxt!}/ui/charisma/css/chosen.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/uniform.default.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/colorbox.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/jquery.cleditor.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/jquery.noty.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/noty_theme_default.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/elfinder.min.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/elfinder.theme.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/jquery.iphone.toggle.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/opa-icons.css' rel='stylesheet'>
+	<link href='${cxt!}/ui/charisma/css/uploadify.css' rel='stylesheet'>
+	
+	<link rel="stylesheet" href="${cxt!}/jsFile/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<style type="text/css">
+		.ztree li span.button.name {margin-right:2px; background-position:-126px 0; vertical-align:top; *vertical-align:middle}
+		.ztree li span.button.operator {margin-right:2px; background-position:-126px -64px; vertical-align:top; *vertical-align:middle}
+		.ztree li span.button.param {margin-right:2px; background-position:-126px 0; vertical-align:top; *vertical-align:middle}
+		.ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+		.ztree li span.button.icon {margin-right:2px; background-position:-126px -80px; vertical-align:top; *vertical-align:middle}
+	</style>
+	
+	<link rel="stylesheet" href="${cxt!}/jsFile/charisma/jquery-ui-timepicker-addon.css" type="text/css">
+	<link rel="stylesheet" href="${cxt!}/jsFile/ueditor/third-party/webuploader/webuploader.css" type="text/css">
+	<link rel="stylesheet" href="${cxt!}/jsFile/artDialog/css/ui-dialog.css" type="text/css"/>
+	
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- The fav icon -->
+	<link rel="icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
+	
+	<script type="text/javascript">
+		var cxt = "${cxt!}";
+	</script>	
+	
+	<% include("/platform/i18n.html"){} %>
+	
+</head>
+<body>
+	
+	<% include("/platform/top.html"){} %>
+	
+	<div class="container-fluid">
+		<div class="row-fluid">
+		
+			<% include("/platform/menu.html"){} %>
+			
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<div id="content" class="span10">
+			<!-- content starts -->
+				
+			<!-- content ends -->
+			</div><!--/#content.span10-->
+		
+		</div><!--/fluid-row-->
+		
+		<hr>
+
+		<div id="myModal" class="modal hide fade"></div>
+
+		<input type="hidden" id="messageButtonId" class="btn btn-primary noty" 
+	  			data-noty-options='{"text":"操作成功！","layout":"bottom","type":"information","closeButton":"true"}'/>
+					
+		<footer>
+			<p class="pull-left">&copy; ${i18nMap["admin.index.footer.left"]} </p>
+			<p class="pull-right">${i18nMap["admin.index.footer.right"]}</p>
+		</footer>
+
+	</div><!--/.fluid-container-->
+
+	<!-- external javascript ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<!-- jQuery -->
+	<script src="${cxt!}/ui/charisma/js/jquery-1.7.2.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="${cxt!}/ui/charisma/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<!-- transition / effect library -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-transition.js"></script>
+	<!-- alert enhancer library -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-alert.js"></script>
+	<!-- modal / dialog library -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-modal.js"></script>
+	<!-- custom dropdown library -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-dropdown.js"></script>
+	<!-- scrolspy library -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-scrollspy.js"></script>
+	<!-- library for creating tabs -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-tab.js"></script>
+	<!-- library for advanced tooltip -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-tooltip.js"></script>
+	<!-- popover effect library -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-popover.js"></script>
+	<!-- button enhancer library -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-button.js"></script>
+	<!-- accordion library (optional, not used in demo) -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-collapse.js"></script>
+	<!-- carousel slideshow library (optional, not used in demo) -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-carousel.js"></script>
+	<!-- autocomplete library -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-typeahead.js"></script>
+	<!-- tour library -->
+	<script src="${cxt!}/ui/charisma/js/bootstrap-tour.js"></script>
+	<!-- library for cookie management -->
+	<script src="${cxt!}/ui/charisma/js/jquery.cookie.js"></script>
+	<!-- calander plugin -->
+	<script src='${cxt!}/ui/charisma/js/fullcalendar.min.js'></script>
+	<!-- data table plugin -->
+	<script src='${cxt!}/ui/charisma/js/jquery.dataTables.min.js'></script>
+
+	<!-- chart libraries start -->
+	<script src="${cxt!}/ui/charisma/js/excanvas.js"></script>
+	<script src="${cxt!}/ui/charisma/js/jquery.flot.min.js"></script>
+	<script src="${cxt!}/ui/charisma/js/jquery.flot.pie.min.js"></script>
+	<script src="${cxt!}/ui/charisma/js/jquery.flot.stack.js"></script>
+	<script src="${cxt!}/ui/charisma/js/jquery.flot.resize.min.js"></script>
+	<!-- chart libraries end -->
+
+	<!-- select or dropdown enhancer -->
+	<script src="${cxt!}/ui/charisma/js/jquery.chosen.min.js"></script>
+	<!-- checkbox, radio, and file input styler -->
+	<script src="${cxt!}/ui/charisma/js/jquery.uniform.min.js"></script>
+	<!-- plugin for gallery image view -->
+	<script src="${cxt!}/ui/charisma/js/jquery.colorbox.min.js"></script>
+	<!-- rich text editor library -->
+	<script src="${cxt!}/ui/charisma/js/jquery.cleditor.min.js"></script>
+	<!-- notification plugin -->
+	<script src="${cxt!}/ui/charisma/js/jquery.noty.js"></script>
+	<!-- file manager library -->
+	<script src="${cxt!}/ui/charisma/js/jquery.elfinder.min.js"></script>
+	<!-- star rating plugin -->
+	<script src="${cxt!}/ui/charisma/js/jquery.raty.min.js"></script>
+	<!-- for iOS style toggle switch -->
+	<script src="${cxt!}/ui/charisma/js/jquery.iphone.toggle.js"></script>
+	<!-- autogrowing textarea plugin -->
+	<script src="${cxt!}/ui/charisma/js/jquery.autogrow-textarea.js"></script>
+	<!-- multiple file upload plugin -->
+	<script src="${cxt!}/ui/charisma/js/jquery.uploadify-3.1.min.js"></script>
+	<!-- history.js for cross-browser state change on ajax -->
+	<script src="${cxt!}/ui/charisma/js/jquery.history.js"></script>
+	<!-- application script for Charisma demo -->
+	<script src="${cxt!}/ui/charisma/js/charisma.js"></script>
+	
+	<script type="text/javascript" src="${cxt!}/jsFile/jquery/jquery.form.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/charisma/utils.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/charisma/common.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/charisma/jquery-ui-timepicker-addon.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/zTree/js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/zTree/js/jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/zTree/js/jquery.ztree.exedit-3.5.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/echarts/echarts-all.js"></script>
+	
+    <script type="text/javascript" charset="utf-8" src="${cxt!}/jsFile/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${cxt!}/jsFile/ueditor/ueditor.all.min.js"> </script>
+    <% if(strutil.startWith(localePram, "zh")){%>
+    <script type="text/javascript" charset="utf-8" src="${cxt!}/jsFile/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <% }else{ %>
+    <script type="text/javascript" charset="utf-8" src="${cxt!}/jsFile/ueditor/lang/en/en.js"></script>
+    <% }%>
+    <script type="text/javascript" charset="utf-8" src="${cxt!}/jsFile/ueditor/third-party/webuploader/webuploader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${cxt!}/jsFile/autoComplete.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/artDialog/dist/dialog-min.js"></script>
+	<script type="text/javascript">
+
+	 	jQuery(function($){
+	 		$.datepicker.regional['zh-CN'] = {
+		        closeText: '关闭',
+		        prevText: '&#x3c;上月',
+		        nextText: '下月&#x3e;',
+		        currentText: '今天',
+		        monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+		        monthNamesShort: ['一','二','三','四','五','六','七','八','九','十','十一','十二'],
+		        dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+		        dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+		        dayNamesMin: ['日','一','二','三','四','五','六'],
+		        weekHeader: '周',
+		        dateFormat: 'yy-mm-dd',
+		        firstDay: 1,
+		        isRTL: false,
+		        showMonthAfterYear: true,
+		        //yearSuffix: '年',
+		   		changeYear: true,
+		   		changeMonth: true,
+		   		hideIfNoPrevNext: true,
+		   		yearRange: "1900:2100"
+		    };
+	     	$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+	 	});
+	 	
+		/* 
+		$('#birthday').datetimepicker({
+	 	    dateFormat: 'yy-mm-dd',
+	 		timeFormat: 'HH:mm:ss',
+	 		stepHour: 1,
+	 		stepMinute: 5,
+	 		stepSecond: 5
+	 	});
+		 */
+		 
+		var currentSystemsIds = "${ids!}";
+		if(currentSystemsIds == "8a40c0353fa828a6013fa898d4ac0020"){ // 平台
+			ajaxContent("/jf/platform/index/content");
+		
+		}else if(currentSystemsIds == "0c1230c98ef34e58947903fab5a4fa85"){ // 易信
+			ajaxContent("/jf/yx/index/content");
+		
+		}else if(currentSystemsIds == "d3a5c976c4c24751b6b00ec775692683"){ // 微信
+			ajaxContent("/jf/wx/index/content");
+		}
+		
+	</script>
+	
+	
+</body>
+</html>

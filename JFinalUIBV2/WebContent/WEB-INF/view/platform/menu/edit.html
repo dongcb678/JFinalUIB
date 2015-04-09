@@ -1,0 +1,89 @@
+<script type="text/javascript">
+	
+	function menuChange(button, form){
+		//alert(form == null);
+		var form = document.getElementById("menuEditForm");
+		
+		var errorCount = formVali(form);
+		if(errorCount != 0){
+			simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
+	 		return false;
+		}
+		
+		ajaxForm("content", "menuEditForm");
+	}
+	
+</script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">X</button>
+	<h3>${i18nMap["admin.menu.edit"]}</h3>
+</div>
+
+<form id="menuEditForm" action="${cxt!}/jf/platform/menu/edit" method="POST">
+	<input type="hidden" name="menu.ids" value="${menu.ids!}" >
+	<input type="hidden" name="menu.version" value="${menu.version!}">
+	
+	<div class="modal-body">
+			<div class="form-actions">
+				<fieldset>
+					
+					<div class="control-group">
+						<label class="control-label"><img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+						<div class="controls">
+							<input type="text" name="menu.names_ja" value="${escapeXml(menu.names_ja!)}" 
+								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+							<span class="help-inline">1-25位任意字符</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.menu.property.name"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+						<div class="controls">
+							<input type="text" name="menu.names_enus" value="${escapeXml(menu.names_enus!)}" 
+								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+							<span class="help-inline">1-25位任意字符</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.menu.property.name"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+						<div class="controls">
+							<input type="text" name="menu.names_zhcn" value="${escapeXml(menu.names_zhcn!)}" 
+								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+							<span class="help-inline">1-25位任意字符</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.menu.property.name"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+						<div class="controls">
+							<input type="text" name="menu.names_zhhk" value="${escapeXml(menu.names_zhhk!)}" 
+								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+							<span class="help-inline">${i18nMap["admin.menu.property.name"]}</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.menu.property.name"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+						<div class="controls">
+							<input type="text" name="menu.names_zhtw" value="${escapeXml(menu.names_zhtw!)}" 
+								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+							<span class="help-inline">${i18nMap["admin.menu.property.name"]}</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.menu.property.name"]}</label>
+						<div class="controls">
+							<input type="text" name="dict.orderids" value="${menu.orderids!}" 
+								class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">
+							<span class="help-inline">1-10位数字</span>
+						</div>
+					</div>
+					
+				</fieldset>
+			</div>
+	</div>
+	
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">${i18nMap["admin.common.close"]}</a>
+		<a href="#" class="btn btn-primary" data-dismiss="modal" onclick="menuChange(this, this.form);">${i18nMap["admin.common.determine"]}</a>
+	</div>	
+	
+</form>

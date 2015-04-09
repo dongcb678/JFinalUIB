@@ -1,0 +1,110 @@
+
+
+<script type="text/javascript">
+
+function dataVali(form){
+	var errorCount = formVali(form);
+	if(errorCount != 0){
+		simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
+ 		return false;
+	}
+	
+	ajaxForm("content", "editForm");
+}
+
+</script>
+
+<fieldset>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.mname"]}</label>
+		<div class="controls">
+			<input type="hidden" id="moduleId" name="operator.moduleids" value="${escapeXml(operator.moduleids!)}"/>
+			<input type="text" id="moduleName" name="operator.modulenames" value="${escapeXml(operator.modulenames!)}" 
+				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
+			<button class="btn" type="button" onclick="moduleRadioDiaLog('moduleId', 'moduleName', '${escapeXml(operator.moduleids!)}');">选择</button>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.name"]}</label>
+		<div class="controls">
+			<input type="text" name="operator.names" value="${escapeXml(operator.names!)}" 
+				class="input-xlarge" maxlength="25" vMin="2" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">2-25位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.privilegess"]}</label>
+		<div class="controls">
+			<select name="operator.privilegess" class="combox">
+				<option value="1" ${operator.privilegess! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+				<option value="0" ${operator.privilegess! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+			</select>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
+		<div class="controls">
+			<input type="text" name="operator.url" value="${escapeXml(operator.url!)}" 
+				class="input-xlarge" maxlength="200" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-200位字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.splitPage"]}</label>
+		<div class="controls">
+			<select name="operator.splitpage" class="combox">
+				<option value="0" ${operator.splitpage! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+				<option value="1" ${operator.splitpage! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			</select>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.rowFilter"]}</label>
+		<div class="controls">
+			<select name="operator.rowfilter" class="combox">
+				<option value="0" ${operator.rowfilter! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+				<option value="1" ${operator.rowfilter! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			</select>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.formToken"]}</label>
+		<div class="controls">
+			<select name="operator.formtoken" class="combox">
+				<option value="0" ${operator.formtoken! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+				<option value="1" ${operator.formtoken! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			</select>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.ip"]}</label>
+		<div class="controls">
+			<select name="operator.ipblack" class="combox">
+				<option value="0" ${operator.ipblack! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+				<option value="1" ${operator.ipblack! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			</select>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.returnUrl"]}</label>
+		<div class="controls">
+			<input type="text" name="operator.returnurl" value="${escapeXml(operator.returnurl!)}" 
+				class="input-xlarge" maxlength="200" vMin="0" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
+		<div class="controls">
+			<input type="text" name="operator.returnparamkeys" value="${escapeXml(operator.returnparamkeys!)}" 
+				class="input-xlarge" maxlength="100" vMin="0" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline"></span>
+		</div>
+	</div>
+</fieldset>

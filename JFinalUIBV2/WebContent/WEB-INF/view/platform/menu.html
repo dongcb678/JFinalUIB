@@ -1,0 +1,32 @@
+<!-- left menu starts -->
+<div class="span2 main-menu-span">
+	<div class="well nav-collapse sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked main-menu">
+
+			<% for(one in menuList){ %>
+				<% if(isEmpty(one.subList) == false){ %>
+					<li class="nav-header hidden-tablet">${one.names }</li>
+					<% for(two in one.subList){ %>
+						<li title="${two.names!}">
+							<% if(strutil.contain(two.url, ".html") == false){ %>
+								<a class="ajax-link" href="${cxt!}${two.url!}">
+									<i class="icon-th"></i>
+									<span class="hidden-tablet"> ${two.names}</span>
+								</a>
+							<% }else{ %>
+								<a class="ajax-link" href="${cxt!}/jf/platform/index/toUrl?toUrl=${two.url!}">
+									<i class="icon-th"></i>
+									<span class="hidden-tablet"> ${two.names}</span>
+								</a>
+							<% } %>
+						</li>
+					<% } %>
+				<% } %>
+			<% } %>
+			
+		</ul>
+	</div>
+	<!--/.well -->
+</div>
+<!--/span-->
+<!-- left menu ends -->

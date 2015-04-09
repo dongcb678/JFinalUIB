@@ -1,0 +1,2 @@
+
+/jf/platform/resources/refreshParamCache

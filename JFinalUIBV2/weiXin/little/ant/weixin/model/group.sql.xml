@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="weixin.group">
+
+	<!-- 动态SQL处理 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from wx_group where 1=1
+			
+			<% if(!isEmpty(name)){ %>
+					and name like #'%$name$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
+</sql-statement>

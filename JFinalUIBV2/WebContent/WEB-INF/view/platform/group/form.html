@@ -1,0 +1,32 @@
+<script type="text/javascript">
+
+function dataVali(form){
+	var errorCount = formVali(form);
+	if(errorCount != 0){
+		simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
+ 		return false;
+	}
+	
+	ajaxForm("content", "editForm");
+}
+
+</script>
+
+<fieldset>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.group.property.numbers"]}</label>
+		<div class="controls">
+			<input type="text" name="group.numbers" value="${escapeXml(group.numbers!)}" 
+				class="input-xlarge" maxlength="50" vMin="1" vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">1-50位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.group.property.name"]}</label>
+		<div class="controls">
+			<input type="text" name="group.names" value="${escapeXml(group.names!)}" 
+				class="input-xlarge" maxlength="25" vMin="2" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">2-10位任意字符</span>
+		</div>
+	</div>
+</fieldset>

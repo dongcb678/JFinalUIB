@@ -1,0 +1,40 @@
+<script type="text/javascript">
+
+function dataVali(form){
+	var errorCount = formVali(form);
+	if(errorCount != 0){
+		simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
+ 		return false;
+	}
+	
+	ajaxForm("content", "editForm");
+}
+
+</script>
+
+<fieldset>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.systems.property.name"]}</label>
+		<div class="controls">
+			<input type="text" name="systems.names" value="${escapeXml(systems.names!)}" 
+				class="input-xlarge" maxlength="25" vMin="2" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">2-10位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.systems.property.numbers"]}</label>
+		<div class="controls">
+			<input type="text" name="systems.numbers" value="${escapeXml(systems.numbers!)}" 
+				class="input-xlarge" maxlength="25" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">5-16位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.systems.property.orderids"]}</label>
+		<div class="controls">
+			<input type="text" name="systems.orderids" value="${systems.orderids!}" 
+				class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">
+			<span class="help-inline">2-10位任意字符</span>
+		</div>
+	</div>
+</fieldset>

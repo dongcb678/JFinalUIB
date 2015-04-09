@@ -1,0 +1,140 @@
+<form id="splitPage" class="form-horizontal" action="${cxt!}/jf/wx/user" method="POST">
+	
+	<div>
+		<ul class="breadcrumb">
+			<li>
+				<a href="#" onclick="ajaxContent('/jf/wx/index/content');">主页</a> <span class="divider">/</span>
+			</li>
+			<li>
+				<a href="#">用户管理</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="row-fluid sortable">
+		<div class="box span12">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-edit"></i> 用户查询</h2>
+				<div class="box-icon">
+					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
+					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+				</div>
+			</div>
+			<div class="box-content">
+				<fieldset>
+				  	<div class="control-group">
+						<label class="control-label">用户的标识</label>
+						<div class="controls">
+					  		<input class="input-xlarge" type="text" name="_query.openid" value='${escapeXml(paramMap["_query.openid"])}' maxlength="40" >
+						</div>
+				  	</div>
+				
+				  	<div class="control-group">
+						<label class="control-label" for="focusedInput">昵称</label>
+						<div class="controls">
+					  		<input class="input-xlarge focused" type="text" name="_query.nickname" value='${escapeXml(paramMap["_query.nickname"])}' maxlength="20" >
+						</div>
+				  	</div>
+				  
+				  	<div class="form-actions">
+						<button type="button" class="btn btn-primary" onclick='ajaxForm("content", "splitPage");'>查询</button>
+						<button type="reset" class="btn">清除</button>
+				  	</div>
+				</fieldset>
+			</div>
+		</div><!--/span-->
+	</div><!--/row-->
+	
+	<div class="row-fluid sortable">
+		<div class="box span12">
+			
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-user"></i> 用户列表</h2>
+				<div class="box-icon">
+					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
+					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+				</div>
+			</div>
+			
+			<div class="box-content">
+				<table class="table table-striped table-bordered bootstrap-datatable ">
+					<thead>
+						<tr>
+							<th onclick="orderbyFun('content', 'splitPage', 'openid')">
+								用户标识${orderBy("openid")}
+	      					</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'subscribe')">
+								关注状态${orderBy("subscribe")}
+	      					</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'subscribetime')">
+								关注时间${orderBy("subscribetime")}
+							</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'nickname')">
+								昵称${orderBy("nickname")}
+							</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'sex')">
+								性别${orderBy("sex")}
+							</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'country')">
+								国家${orderBy("country")}
+							</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'province')">
+								省份${orderBy("province")}
+							</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'city')">
+								城市${orderBy("city")}
+							</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'language')">
+								语言${orderBy("language")}
+							</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'headimgurl')">
+								头像url${orderBy("headimgurl")}
+							</th>
+							<th width="160">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							var userMessage = hasPrivilegeUrl("/jf/wx/message/userMessage");
+						%>
+						<% for(user in splitPage.list){ %>
+							<tr>
+								<td>${escapeXml(user.openid!) }</td>
+								<td>${user["subscribe"] == "1" ? "关注" : "未关注" }</td>
+								<td class="center">${escapeXml(user["subscribetime"]!) }</td>
+								<td class="center">${escapeXml(user["nickname"]!) }</td>
+								<td class="center">
+									<%if(user["sex"] == "0"){%>
+										<span class="label label-success">未知</span>
+									<%}else if(user["sex"] == "1"){%>
+										<span class="label label-success">男</span>
+									<%}else if(user["sex"] == "2"){%>
+										<span class="label label-success">女</span>
+									<%}%>
+								</td>
+								<td class="center">${escapeXml(user["country"]!) }</td>
+								<td class="center">${escapeXml(user["province"]!) }</td>
+								<td class="center">${escapeXml(user["city"]!) }</td>
+								<td class="center">${escapeXml(user["language"]!) }</td>
+								<td class="center">${escapeXml(user["headimgurl"]!) }</td>
+								<td class="center">
+									<% if(userMessage == true){ %>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/message/userMessage/${escapeXml(user.ids!)}');"> <i class="icon-zoom-in icon-white"></i> 查看</a>
+									<% } %>
+								</td>
+							</tr>
+						<% } %>
+					</tbody>
+				</table>
+				<div id="splitPageDiv" class="pagination pagination-centered">
+					<% include("/common/splitPage.html", {"divId" : "content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+				</div>
+			</div>
+			
+		</div>
+		<!--/span-->
+	
+	</div>
+	<!--/row-->
+
+</form>

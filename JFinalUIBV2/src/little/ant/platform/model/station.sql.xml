@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	岗位sql
+-->
+<sql-statement namespace="platform.station">
+	
+	<!-- 查询所有岗位 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select ids from pt_station
+    	]]>
+	</sql>
+	
+	<!-- 根节点 -->
+	<sql id="root">
+		<![CDATA[ 
+        	select ids, names, isparent, images from pt_station where parentStationIds is null order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 子节点 -->
+	<sql id="child">
+		<![CDATA[ 
+        	select ids, names, isparent, images from pt_station where parentStationIds = ? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 子节点数量 -->
+	<sql id="childCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_station where parentstationids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

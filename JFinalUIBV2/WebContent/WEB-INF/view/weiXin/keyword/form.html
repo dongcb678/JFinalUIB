@@ -1,0 +1,40 @@
+<script type="text/javascript">
+
+function dataVali(form){
+	var errorCount = formVali(form);
+	if(errorCount != 0){
+		simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
+ 		return false;
+	}
+	
+	ajaxForm("content", "editForm");
+}
+
+</script>
+
+<fieldset>
+	<div class="control-group">
+		<label class="control-label">问题</label>
+		<div class="controls">
+			<input type="text" name="keyword.question" value="${escapeXml(keyword.question!)}" 
+				class="input-xlarge" maxlength="500" vMin="2" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">2-500任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">问题关键字</label>
+		<div class="controls">
+			<input type="text" name="keyword.questionkey" value="${escapeXml(keyword.questionkey!)}" 
+				class="input-xlarge" maxlength="500" vMin="0" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">0-500任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">答复</label>
+		<div class="controls">
+			<input type="text" name="keyword.answer" value="${escapeXml(keyword.answer!)}" 
+				class="input-xlarge" maxlength="2000" vMin="2" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">2-2000任意字符</span>
+		</div>
+	</div>
+</fieldset>

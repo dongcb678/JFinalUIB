@@ -1,0 +1,119 @@
+<script type="text/javascript">
+
+function dataVali(form){
+	var errorCount = formVali(form);
+	if(errorCount != 0){
+		simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
+ 		return false;
+	}
+	
+	ajaxForm("content", "editForm");
+}
+
+</script>
+
+<fieldset>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.parent"]}</label>
+		<div class="controls">
+			<input type="hidden" id="parentId" name="dict.parentids" value="${escapeXml(dict.parentids!)}"/>
+			<input type="text" id="parentName" value="${escapeXml(dict.parentnames!)}" 
+				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
+			<button class="btn" type="button" onclick="dictRadioDiaLog('parentId', 'parentName', '${escapeXml(dict.parentids!)}');">${i18nMap["admin.common.choice"]}</button>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.name"]}</label>
+		<div class="controls">
+			<input type="text" name="dict.names" value="${escapeXml(dict.names!)}" 
+				class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-10位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.number"]}</label>
+		<div class="controls">
+			<input type="text" name="dict.numbers" value="${escapeXml(dict.numbers!)}" 
+				class="input-xlarge" maxlength="50" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">5-50位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.status"]}</label>
+		<div class="controls">
+			<select name="dict.status" class="combox">
+				<option value="1" ${dict.status! == "1" ? "selected='selected'":"" }>${i18nMap["admin.dict.property.status.start"]}</option>
+				<option value="0" ${dict.status! == "0" ? "selected='selected'":"" }>${i18nMap["admin.dict.property.status.stop"]}</option>
+			</select>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	
+	<input type="hidden" name="dict.i18n" value='${paramMap["i18n"]}' >
+				
+	<% if(paramMap["i18n"] == "0" || dict["i18n"] == "0"){ %>
+	
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.value"]}</label>
+		<div class="controls">
+			<input type="text" name="dict.val" value="${escapeXml(dict.val!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	
+	<% } else { %>
+	
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="dict.val_ja" value="${escapeXml(dict.val_ja!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="dict.val_enus" value="${escapeXml(dict.val_enus!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="dict.val_zhcn" value="${escapeXml(dict.val_zhcn!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="dict.val_zhhk" value="${escapeXml(dict.val_zhhk!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="dict.val_zhtw" value="${escapeXml(dict.val_zhtw!)}" 
+				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">1-500位任意字符</span>
+		</div>
+	</div>
+	
+	<% } %>
+	
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.common.order"]}</label>
+		<div class="controls">
+			<input type="text" name="dict.orderids" value="${dict.orderids!}" 
+				class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">
+			<span class="help-inline">2-10位任意字符</span>
+		</div>
+	</div>
+</fieldset>

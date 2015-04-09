@@ -1,0 +1,37 @@
+<div>
+	<ul class="breadcrumb">
+		<li><a href="#" onclick="ajaxContent('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="ajaxContent('/jf/platform/dict');">${i18nMap["admin.dict.common.name"]}</a> <span class="divider">/</span></li>
+		<li><a href="#">${i18nMap["admin.dict.update"]}</a></li>
+	</ul>
+</div>
+
+<div class="row-fluid sortable">
+	<div class="box span12">
+		<div class="box-header well" data-original-title>
+			<h2>
+				<i class="icon-edit"></i> ${i18nMap["admin.dict.update"]}
+			</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		
+		<div class="box-content">
+			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/platform/dict/update" method="POST">
+				<input type="hidden" name="dict.ids" value="${dict.ids!}" >
+				<input type="hidden" name="dict.version" value="${dict.version!}">
+				
+				<% include("/platform/dict/form.html"){} %>
+				<div class="form-actions">
+					<% if(hasPrivilegeUrl("/jf/platform/dict/save")){ %>
+						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">${i18nMap["admin.common.submit"]}</button>
+					<% } %>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--/span-->
+</div>
+<!--/row-->

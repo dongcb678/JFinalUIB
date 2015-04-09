@@ -1,0 +1,89 @@
+<script type="text/javascript">
+	
+	function addChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("checkedRole").add(option);
+		setRole();
+	}
+
+	function delChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("allRole").add(option);
+		setRole();
+	}
+	
+	function setRole(){
+		var checkedRole = document.getElementById("checkedRole");
+		var length = checkedRole.length;
+		var roleIds = "";
+		for (var i=0; i<length; i++){
+			roleIds += checkedRole.options[i].value + ",";
+	    }
+		
+		var userIds = "${escapeXml(ids!)}";
+		$.ajax({
+			type : "post",
+			url : cxt + "/jf/platform/group/setRole",
+			data : { "ids" : userIds, "roleIds" : roleIds },
+			dataType : "html",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			async: false,
+			success:function(data){
+				
+			}
+		});
+	}
+</script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h3>${i18nMap["admin.role.select"]}</h3>
+</div>
+
+<div class="modal-body">
+	<div class="row-fluid sortable">
+		<div class="box span6">
+			<div class="box-header well" data-original-title>
+				<h2>
+					<i class="icon-user"></i> ${i18nMap["admin.role.select.noChecked"]}
+				</h2>
+				<div class="box-icon">
+					
+				</div>
+			</div>
+			<div class="box-content">
+				<select id="allRole" multiple size="18" ondblclick="addChecked(this);" >
+					<% for(role in noCheckedList){ %>
+						<option value='${escapeXml(role.ids!)}'>${escapeXml(role.names!)}</option>
+					<% } %>
+			  	</select>
+			</div>
+		</div>
+		
+		<div class="box span6">
+			<div class="box-header well" data-original-title>
+				<h2>
+					<i class="icon-user"></i> ${i18nMap["admin.role.select.checked"]}
+				</h2>
+				<div class="box-icon">
+					
+				</div>
+			</div>
+			<div class="box-content">
+				<select id="checkedRole" multiple size="18" ondblclick="delChecked(this);" >
+					<% for(role in checkedList){ %>
+						<option value='${escapeXml(role.ids!)}'>${escapeXml(role.names!)}</option>
+					<% } %>
+			  	</select>
+			</div>
+		</div>
+	</div>  
+</div>
+
+<div class="modal-footer">
+	<a href="#" class="btn" data-dismiss="modal">${i18nMap["admin.common.close"]}</a>
+</div>

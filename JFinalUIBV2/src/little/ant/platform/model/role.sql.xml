@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	角色sql
+-->
+<sql-statement namespace="platform.role">
+	
+	<!-- 查询所有角色 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select ids from pt_role
+    	]]>
+	</sql>
+	
+	<!-- -->
+	<sql id="noCheckedFilter">
+		<![CDATA[ 
+        	select ids, names from pt_role where ids not in ( ${fitler} ) order by names asc
+    	]]>
+	</sql>
+	
+	<!--   -->
+	<sql id="checkedFilter">
+		<![CDATA[ 
+        	select ids, names from pt_role where ids in ( ${fitler} ) order by names asc
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="noChecked">
+		<![CDATA[ 
+        	select ids, names from pt_role order by names asc
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from pt_role where 1=1
+			
+			<% if(!isEmpty(names)){ %>
+					and names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(numbers)){ %>
+					and numbers like #'%$numbers$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
+</sql-statement>

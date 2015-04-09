@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="${namespace}">
+	
+	<!-- 分页查询 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from table t 
+			where 1=1 
+			
+			<% if(!isEmpty(field1)){ %>
+					and t.field1 = #'$field1$'#
+			<% } %>
+			
+			<% if(!isEmpty(field2)){ %>
+					and t.field2 like #'%$field2$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
+</sql-statement>

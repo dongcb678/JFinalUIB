@@ -1,0 +1,77 @@
+package ${package};
+
+import little.ant.platform.annotation.Controller;
+import little.ant.platform.controller.BaseController;
+import ${basePackage}.service.${className}Service;
+import ${basePackage}.validator.${className}Validator;
+import ${basePackage}.model.${className};
+
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Before;
+
+/**
+ * XXX 管理	
+ * 描述：
+ */
+@Controller(controllerKey = "/jf/${controllerBasePath}/${classNameSmall}")
+public class ${className}Controller extends BaseController {
+
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(${className}Controller.class);
+	
+	/**
+	 * 列表
+	 */
+	public void index() {
+		${className}Service.service.list(splitPage);
+		render("/${renderBasePath}/${classNameSmall}/list.html");
+	}
+	
+	/**
+	 * 保存
+	 */
+	@Before(${className}Validator.class)
+	public void save() {
+		getModel(${className}.class).save();
+		render("/${renderBasePath}/${classNameSmall}/add.html");
+	}
+	
+	/**
+	 * 准备更新
+	 */
+	public void edit() {
+		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
+		setAttr("${classNameSmall}", ${classNameSmall});
+		render("/${renderBasePath}/${classNameSmall}/update.html");
+	}
+	
+	/**
+	 * 更新
+	 */
+	@Before(${className}Validator.class)
+	public void update() {
+		getModel(${className}.class).update();
+		redirect("/jf/${controllerBasePath}/${classNameSmall}");
+	}
+
+	/**
+	 * 查看
+	 */
+	public void view() {
+		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
+		setAttr("${classNameSmall}", ${classNameSmall});
+		render("/${renderBasePath}/${classNameSmall}/view.html");
+	}
+	
+	/**
+	 * 删除
+	 */
+	public void delete() {
+		${className}.dao.deleteById(getPara());
+		redirect("/jf/${controllerBasePath}/${classNameSmall}");
+	}
+	
+}
+
+

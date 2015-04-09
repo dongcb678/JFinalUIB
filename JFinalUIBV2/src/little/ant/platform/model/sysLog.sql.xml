@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	日志sql
+-->
+<sql-statement namespace="platform.sysLog">
+	
+	<!--  -->
+	<sql id="view">
+		<![CDATA[ 
+        	select s.*, o.names onames, o.url ourl, u.username 
+        	from pt_syslog s
+        	left join pt_user u on s.userids = u.ids
+        	left join pt_operator o on s.operatorids = o.ids
+        	where s.ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from pt_syslog s 
+        	left join pt_user u on s.userids = u.ids 
+        	left join pt_operator o on s.operatorids = o.ids 
+        	where 1=1 
+			
+			<% if(!isEmpty(url)){ %>
+					and o.url like #'%$url$%'#
+			<% } %>
+			
+			<% if(!isEmpty(names)){ %>
+					and o.names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(username)){ %>
+					and u.username like #'%$username$%'#
+			<% } %>
+			
+			<% if(!isEmpty(ips)){ %>
+					and s.ips like #'%$ips$%'#
+			<% } %>
+			
+			<% if(!isEmpty(status)){ %>
+					and s.status = #$status$#
+			<% } %>
+    	]]>
+	</sql>
+	
+</sql-statement>

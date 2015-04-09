@@ -1,0 +1,223 @@
+<script type="text/javascript">
+
+/**
+ * 验证用户名是否存在
+ * @param userName
+ */
+function valiUserName(userName){
+	var result = ajaxFunc("/jf/platform/login/valiUserName", {"userName" : userName});
+	return result;
+}
+
+/**
+ * 验证邮箱是否存在
+ * @param mailBox
+ */
+function valiMailBox(mailBox){
+	var result = ajaxFunc("/jf/platform/login/valiMailBox", {"mailBox" : mailBox});
+	return result;
+}
+
+/**
+ * 验证身份证是否存在
+ * @param idcard
+ */
+function valiIdcard(idcard){
+	var result = ajaxFunc("/jf/platform/login/valiIdcard", {"idcard" : idcard});
+	return result;
+}
+
+/**
+ *验证手机号是否存在
+ * @param mailBox
+ */
+function valiMobile(mobile){
+	var result = ajaxFunc("/jf/platform/login/valiMobile", {"mobile" : mobile});
+	return result;
+}
+
+function dataVali(form){
+	var usernameId = $("#usernameId").val();
+	var mailboxId = $("#mailboxId").val();
+	var idcardId = $("#idcardId").val();
+	var mobileId = $("#mobileId").val();
+	
+	var isAdd = ${operatorType == "add" ? "true" : "false"};
+	if(isAdd){ // 添加
+		if(idcardId != "" && valiIdcard(idcardId) != "0"){
+			simpleDialog('验证提示', '身份证号码重复！');
+	 		return false;
+		}
+	
+		if(usernameId != "" && valiUserName(usernameId) != "0"){
+			simpleDialog('验证提示', '账号重复！');
+	 		return false;
+		}
+	
+		if(mailboxId != "" && valiMailBox(mailboxId) != "0"){
+			simpleDialog('验证提示', '邮箱重复！');
+	 		return false;
+		}
+
+		if(mobileId != "" && valiMobile(mobileId) != "0"){
+			simpleDialog('验证提示', '手机号码重复！');
+	 		return false;
+		}
+	
+	}else{ // 更新
+		if(idcardId != "" && valiIdcard(idcardId) != "0" && valiIdcard(idcardId) != "1"){
+			simpleDialog('验证提示', '身份证号码重复！');
+	 		return false;
+		}
+	
+		if(usernameId != "" && valiUserName(usernameId) != "0" && valiUserName(usernameId) != "1"){
+			simpleDialog('验证提示', '账号重复！');
+	 		return false;
+		}
+	
+		if(mailboxId != "" && valiMailBox(mailboxId) != "0" && valiMailBox(mailboxId) != "1"){
+			simpleDialog('验证提示', '邮箱重复！');
+	 		return false;
+		}
+
+		if(mobileId != "" && valiMobile(mobileId) != "0" && valiMobile(mobileId) != "1"){
+			simpleDialog('验证提示', '手机号码重复！');
+	 		return false;
+		}
+	}
+	
+	var pass1Id = $("#pass1Id").val();
+	var pass2Id = $("#pass2Id").val();
+	if(pass1Id != pass2Id){
+		simpleDialog('验证提示', '两次输入密码不一致，请从新输入！');
+ 		return false;
+	}
+	
+	var errorCount = formVali(form);
+	if(errorCount != 0){
+		simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
+ 		return false;
+	}
+	
+	ajaxForm("content", "editForm");
+}
+
+</script>
+
+<fieldset>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.department"]}</label>
+		<div class="controls">
+			<input type="hidden" id="deptId" name="user.departmentids" value="${escapeXml(user.departmentids!)}"/>
+			<input type="text" id="deptName" name="user.departmentnames" value="${escapeXml(user.departmentnames!)}" 
+				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
+			<button class="btn" type="button" onclick="deptRadioDiaLog('deptId', 'deptName', '${escapeXml(user.departmentids!)}');">${i18nMap["admin.common.choice"]}</button>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.station"]}</label>
+		<div class="controls">
+			<input type="hidden" id="stationId" name="user.stationids" value="${escapeXml(user.stationids!)}"/>
+			<input type="text" id="stationName" name="user.stationnames" value="${escapeXml(user.stationnames!)}" 
+				class="input-xlarge" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
+			<button class="btn" type="button" onclick="stationRadioDiaLog('stationId', 'stationName', '${escapeXml(user.stationids!)}');">${i18nMap["admin.common.choice"]}</button>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.dataAccess"]}</label>
+		<div class="controls">
+			<input type="hidden" id="deptId2" name="user.deptids" value="${escapeXml(user.deptids!)}" />
+			<input type="hidden" id="deptName2" name="user.deptnames" value="${escapeXml(user.deptnames!)}" />
+			
+			<input type="hidden" id="userId" name="user.userids" value="${escapeXml(user.userids!)}" />
+			<input type="text" id="userName" name="user.usernames" value="${escapeXml(user.usernames!)}" 
+				class="input-xlarge" readonly="readonly" maxlength="10000" vMin="1" vType="length" onblur="onblurVali(this);">
+			
+			<button class="btn" type="button" onclick="userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${escapeXml(user.deptids!)}', '${escapeXml(user.userids!)}');">${i18nMap["admin.common.choice"]}</button>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>
+		<div class="controls">
+			<input type="text" id="idcardId" name="userInfo.idcard" value="${escapeXml(userInfo.idcard!)}" 
+				class="input-xlarge" maxlength="18" vMin="15" vType="idCard" onblur="onblurVali(this);">
+			<span class="help-inline">15-18位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.nickname"]}</label>
+		<div class="controls">
+			<input type="text" name="userInfo.names" value="${escapeXml(userInfo.names!)}" 
+				class="input-xlarge" maxlength="10" vMin="2" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">2-10位任意字符</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.userName"]}</label>
+		<div class="controls">
+			<input type="text" id="usernameId" name="user.username" value="${escapeXml(user.username!)}" 
+				class="input-xlarge" maxlength="16" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">5-16位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.password"]}</label>
+		<div class="controls">
+			<input type="password" id="pass1Id" name="password" class="input-xlarge" autocomplete="off"
+				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">6-18位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.password"]}</label>
+		<div class="controls">
+			<input type="password" id="pass2Id" class="input-xlarge" autocomplete="off"
+				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
+			<span class="help-inline">6-18位字母数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
+		<div class="controls">
+			<input type="text" id="mailboxId" name="userInfo.email" value="${escapeXml(userInfo.email!)}" 
+				class="input-xlarge" maxlength="30" vMin="6" vType="email" onblur="onblurVali(this);">
+			<span class="help-inline">6-30位邮箱规则</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
+		<div class="controls">
+			<input type="text" id="mobileId" name="userInfo.mobile" value="${escapeXml(userInfo.mobile!)}" 
+				class="input-xlarge" maxlength="11" vMin="11" vType="phone" onblur="onblurVali(this);">
+			<span class="help-inline">11位数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.telephone"]}</label>
+		<div class="controls">
+			<input type="text" name="userInfo.telephone" value="${escapeXml(userInfo.telephone!)}" 
+				class="input-xlarge" maxlength="20" vMin="0" vType="tell" onblur="onblurVali(this);">
+			<span class="help-inline">5-20位</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.qq"]}</label>
+		<div class="controls">
+			<input type="text" name="userInfo.qq" value="${escapeXml(userInfo.qq!)}" 
+				class="input-xlarge" maxlength="20" vMin="0" vType="qq" onblur="onblurVali(this);">
+			<span class="help-inline">5-20位数字</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.user.property.birthday"]}</label>
+		<div class="controls">
+			<input type="text" name="userInfo.birthday" readonly="readonly"
+				value='${userInfo.birthday!, dateFormat="yyyy-MM-dd"}' 
+				class="input-xlarge datepicker" maxlength="11" vMin="0" vType="length" onblur="onblurVali(this);">
+			<span class="help-inline">yyyy年mm月dd日</span>
+		</div>
+	</div>
+</fieldset>

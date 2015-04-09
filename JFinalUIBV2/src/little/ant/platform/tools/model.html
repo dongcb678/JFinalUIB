@@ -1,0 +1,19 @@
+package ${package};
+
+import little.ant.platform.annotation.Table;
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.model.BaseModel;
+
+import org.apache.log4j.Logger;
+
+@SuppressWarnings("unused")
+@Table(dataSourceName = ${dataSource}, tableName = "${tableName}")
+public class ${className} extends BaseModel<${className}> {
+
+	private static final long serialVersionUID = 6761767368352810428L;
+
+	private static Logger log = Logger.getLogger(${className}.class);
+	
+	public static final ${className} dao = new ${className}();
+
+}

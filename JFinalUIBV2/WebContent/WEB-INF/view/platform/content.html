@@ -1,0 +1,327 @@
+<div>
+	<ul class="breadcrumb">
+		<li><a href="#" onclick="ajaxContent('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+	</ul>
+</div>
+
+<div class="sortable row-fluid">
+	<a data-rel="tooltip" class="well span3 top-block" href="#"> <span class="icon32 icon-red icon-user"></span>
+		<div onclick="ajaxContent('/jf/platform/group');">会员总数</div>
+		<div>507名</div> <span class="notification">6名</span>
+	</a> 
+	<a data-rel="tooltip" class="well span3 top-block" href="#"> <span class="icon32 icon-color icon-star-on"></span>
+		<div>活跃会员</div>
+		<div>228名</div> <span class="notification green">4名</span>
+	</a> 
+	<a data-rel="tooltip" class="well span3 top-block" href="#"> <span class="icon32 icon-color icon-cart"></span>
+		<div>销售额</div>
+		<div>13320元</div> <span class="notification yellow">34元</span>
+	</a> 
+	<a data-rel="tooltip" class="well span3 top-block" href="#"> <span class="icon32 icon-color icon-envelope-closed"></span>
+		<div>消息</div>
+		<div>25未读消息</div> <span class="notification red">12条</span>
+	</a>
+</div>
+
+<div class="row-fluid">
+				
+	<div class="box span12">
+		<div class="box-header well">
+			<h2><i class="icon-th"></i>系统负载</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content">
+			<ul class="nav nav-tabs myTabs">
+				<li class="active"><a href="#info">Info</a></li>
+				<li><a href="#pv" onclick="content_pv();">PV</a></li>
+				<li><a href="#cpu" onclick="content_cpu();">CPU</a></li>
+				<li><a href="#phymemory" onclick="content_phymemory();">物理内存</a></li>
+				<li><a href="#jvmmemory" onclick="content_jvmmemory();">JVM内存</a></li>
+			</ul>
+			 
+			<div class="tab-content">
+				<div class="tab-pane active" id="info">
+					参数和字典的beetl标签测试：<br>
+					<!-- -->
+					<#dict type="select" id="11" name="11" class="" style="" number="weixinConfig" defaultnumber="weixinAppID"/><br>
+					
+					<#dict type="radio" id="22" name="22" class="" style="" number="weixinConfig" defaultnumber="weixinAppID"/><br>
+					
+					<#dict type="checkbox" id="33" name="33" class="" style="" number="weixinConfig" defaultnumber="weixinAppID"/><br>
+					
+					<hr>
+					
+					<!-- 
+					-->
+					自动补全：<br>
+					<input type="text" class="span6" id="autoCompleteInput" data-url="/jf/platform/test/autoComplete">
+					
+					<div id="autoCompleteShowDiv" style="display: none;"></div>
+					
+					<script type="text/javascript">
+						autoComplete("autoCompleteInput", "autoCompleteShowDiv");
+					</script>
+					<hr> 
+					
+					文件异步上传测试：<br>
+					<a href="${ctx!}/jsFile/ueditor/third-party/webuploader/index.jsp" target="_blank">打开测试页面</a>
+					<hr>
+					
+					ueditor测试：<br>
+					<a href="${ctx!}/jsFile/ueditor/index.jsp" target="_blank">打开测试页面</a>
+					<hr>
+					
+					<!--  
+					-->
+					lucene查询分页测试：测试关键字（早餐、歌手、刘德华等等）<br>
+					<div id="lucene">
+						<script type="text/javascript">
+							ajaxDiv(false, "lucene", "/jf/platform/test/lucene?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "aaaaa", "formId" : "splitPage1"}
+						</script>
+					</div>
+					
+					<hr>
+					
+					单content多个分页测试：<br>
+					
+					<div id="operator">
+						<script type="text/javascript">
+							ajaxDiv(false, "operator", "/jf/platform/test/operator?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "aaaaa", "formId" : "splitPage1"}
+						</script>
+					</div>
+					
+					<hr>
+					
+					<div id="sysLog">
+						<script type="text/javascript">
+							ajaxDiv(false, "sysLog", "/jf/platform/test/sysLog?pageSize=10"); // 处理在一个页显示多个分页，分页输出{"divId" : "bbbbb", "formId" : "splitPage2"}
+						</script>
+					</div>
+				</div>
+				<div class="tab-pane" id="pv">
+					<div id="content_pv" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
+				</div>
+				<div class="tab-pane" id="cpu">
+					<div id="content_cpu" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
+				</div>
+				<div class="tab-pane" id="phymemory">
+					<div id="content_phymemory" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
+				</div>
+				<div class="tab-pane" id="jvmmemory">
+					<div id="content_jvmmemory" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
+				</div>
+			</div>
+		</div>
+	</div><!--/span-->
+	
+</div>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+	});
+
+	function content_pv(){
+		setTimeout(function(){
+			var content_pv = echarts.init(document.getElementById('content_pv'));
+		    content_pv.setOption({
+		        tooltip : {
+		            trigger: 'axis'
+		        },
+		        legend: {
+		            data:['访问量']
+		        },
+		        toolbox: {
+		            show : true,
+		            feature : {
+		                mark : {show: true},
+		                dataView : {show: true, readOnly: false},
+		                magicType : {show: true, type: ['line']},
+		                restore : {show: true},
+		                saveAsImage : {show: true}
+		            }
+		        },
+		        calculable : true,
+		        xAxis : [
+		            {
+		                type : 'category',
+		                boundaryGap : false,
+		                data : ${adates}
+		            }
+		        ],
+		        yAxis : [
+		            {
+		                type : 'value'
+		            }
+		        ],
+		        series : [
+		            {
+		                name:'访问量',
+		                type:'line',
+		                stack: '总量',
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data:${acounts}
+		            }
+		        ]
+		    });
+		},200);
+	}
+
+	function content_cpu(){
+		setTimeout(function(){
+			var content_cpu = echarts.init(document.getElementById('content_cpu'));
+		    content_cpu.setOption({
+		        tooltip : {
+		            trigger: 'axis'
+		        },
+		        legend: {
+		            data:['CPU负载']
+		        },
+		        toolbox: {
+		            show : true,
+		            feature : {
+		                mark : {show: true},
+		                dataView : {show: true, readOnly: false},
+		                magicType : {show: true, type: ['line']},
+		                restore : {show: true},
+		                saveAsImage : {show: true}
+		            }
+		        },
+		        calculable : true,
+		        xAxis : [
+		            {
+		                type : 'category',
+		                boundaryGap : false,
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data : ${dates}
+		            }
+		        ],
+		        yAxis : [
+		            {
+		                type : 'value',
+		                max : 100
+		            }
+		        ],
+		        series : [
+		            {
+		                name:'CPU负载',   
+		                type:'line',
+		                stack: '总量',
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data:${cpu}
+		            }
+		        ]
+		    });
+		},200);
+	}
+
+	function content_phymemory(){
+		setTimeout(function(){
+			var content_phymemory = echarts.init(document.getElementById('content_phymemory'));
+		    content_phymemory.setOption({
+		        tooltip : {
+		            trigger: 'axis'
+		        },
+		        legend: {
+		            data:['物理内存']
+		        },
+		        toolbox: {
+		            show : true,
+		            feature : {
+		                mark : {show: true},
+		                dataView : {show: true, readOnly: false},
+		                magicType : {show: true, type: ['line']},
+		                restore : {show: true},
+		                saveAsImage : {show: true}
+		            }
+		        },
+		        calculable : true,
+		        xAxis : [
+		            {
+		                type : 'category',
+		                boundaryGap : false,
+		                data : ${dates}
+		            }
+		        ],
+		        yAxis : [
+		            {
+		                type : 'value',
+		                max : ${phymemorymax}
+		            }
+		        ],
+		        series : [
+		            {
+		            	name:'物理内存',
+		                type:'line',
+		                stack: '总量',
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data:${phymemoryval}
+		            }
+		        ]
+		    });
+		},200);
+	}
+    
+	function content_jvmmemory(){
+		setTimeout(function(){
+			var content_jvmmemory = echarts.init(document.getElementById('content_jvmmemory'));
+		    content_jvmmemory.setOption({
+		        tooltip : {
+		            trigger: 'axis'
+		        },
+		        legend: {
+		            data:['JVM内存']
+		        },
+		        toolbox: {
+		            show : true,
+		            feature : {
+		                mark : {show: true},
+		                dataView : {show: true, readOnly: false},
+		                magicType : {show: true, type: ['line']},
+		                restore : {show: true},
+		                saveAsImage : {show: true}
+		            }
+		        },
+		        calculable : true,
+		        xAxis : [
+		            {
+		                type : 'category',
+		                boundaryGap : false,
+		                data : ${dates}
+		            }
+		        ],
+		        yAxis : [
+		            {
+		                type : 'value',
+		                max : ${jvmmemorymax}
+		            }
+		        ],
+		        series : [
+		            {
+		            	name:'JVM内存',
+		                type:'line',
+		                stack: '总量',
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data:${jvmmemoryval}
+		            }
+		        ]
+		    });
+		},200);
+	}
+    
+</script>

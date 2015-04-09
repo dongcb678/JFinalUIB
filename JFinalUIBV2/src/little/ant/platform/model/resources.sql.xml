@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	资源sql
+-->
+<sql-statement namespace="platform.resources">
+	
+	<!--  -->
+	<sql id="pv_pg">
+		<![CDATA[ 
+        	select to_char(startdate, 'yyyy-MM-DD') adates, count(*) acounts from pt_syslog 
+        	where startdate>=? and startdate<=? 
+        	group by adates order by adates asc 
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="pv_mysql">
+		<![CDATA[ 
+        	select date_format(startdate,'%Y-%m-%d') adates, count(*) acounts from pt_syslog 
+        	where startdate>=? and startdate<=? 
+        	group by adates order by adates asc 
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="pv_oracle">
+		<![CDATA[ 
+        	select to_char(startdate,'YYYY-MM-DD') adates, count(*) acounts from pt_syslog 
+        	where startdate>=? and startdate<=? 
+        	group by to_char(startdate,'YYYY-MM-DD') order by adates asc 
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="24hour">
+		<![CDATA[ 
+        	select * from pt_resources where hostname=? and createdate>=? and createdate<=? order by createdate asc 
+    	]]>
+	</sql>
+	
+</sql-statement>

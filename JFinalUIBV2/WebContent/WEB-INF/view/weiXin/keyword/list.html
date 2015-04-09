@@ -1,0 +1,122 @@
+<form id="splitPage" class="form-horizontal" action="${cxt!}/jf/wx/keyword" method="POST">
+	
+	<div>
+		<ul class="breadcrumb">
+			<li>
+				<a href="#" onclick="ajaxContent('/jf/wx/index/content');">主页</a> <span class="divider">/</span>
+			</li>
+			<li>
+				<a href="#">自动回复关键字管理</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="row-fluid sortable">
+		<div class="box span12">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-edit"></i> 自动回复关键字查询</h2>
+				<div class="box-icon">
+					<% if(hasPrivilegeUrl("/weiXin/keyword/add.html")){ %>
+						<a href="#" class="btn btn-round" title="添加回复" onclick="ajaxContent('/jf/wx/keyword/toUrl?toUrl=/weiXin/keyword/add.html');"><i class="icon-plus-sign"></i></a>
+					<% } %>
+					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
+					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+				</div>
+			</div>
+			<div class="box-content">
+				<fieldset>
+				  	<div class="control-group">
+						<label class="control-label">问题</label>
+						<div class="controls">
+					  		<input class="input-xlarge" type="text" name="_query.question" value='${escapeXml(paramMap["_query.question"])}' maxlength="40" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="control-group">
+						<label class="control-label">问题关键字</label>
+						<div class="controls">
+					  		<input class="input-xlarge" type="text" name="_query.questionkey" value='${escapeXml(paramMap["_query.questionkey"])}' maxlength="40" >
+						</div>
+				  	</div>
+					
+				  	<div class="control-group">
+						<label class="control-label">答案</label>
+						<div class="controls">
+					  		<input class="input-xlarge" type="text" name="_query.answer" value='${escapeXml(paramMap["_query.answer"])}' maxlength="40" >
+						</div>
+				  	</div>
+					
+				  	<div class="form-actions">
+						<button type="button" class="btn btn-primary" onclick='ajaxForm("content", "splitPage");'>查询</button>
+						<button type="reset" class="btn">清除</button>
+				  	</div>
+				</fieldset>
+			</div>
+		</div><!--/span-->
+	</div><!--/row-->
+	
+	<div class="row-fluid sortable">
+		<div class="box span12">
+			
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-user"></i> 自动回复关键字列表</h2>
+				<div class="box-icon">
+					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
+					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+				</div>
+			</div>
+			
+			<div class="box-content">
+				<table class="table table-striped table-bordered bootstrap-datatable ">
+					<thead>
+						<tr>
+							<th onclick="orderbyFun('content', 'splitPage', 'question')">
+								问题${orderBy("question")}
+	      					</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'questionkey')">
+								问题关键字${orderBy("questionkey")}
+	      					</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'answer')">
+								答案${orderBy("answer")}
+							</th>
+							<th width="210">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							var view = hasPrivilegeUrl("/jf/wx/keyword/view");
+							var edit = hasPrivilegeUrl("/jf/wx/keyword/edit");
+							var delete = hasPrivilegeUrl("/jf/wx/keyword/delete");
+						%>
+						<% for(keyword in splitPage.list){ %>
+							<tr>
+								<td>${escapeXml(keyword.question!) }</td>
+								<td class="center"><span class="label label-success">${escapeXml(keyword["questionkey"]!) }</span></td>
+								<td>${escapeXml(keyword["answer"]!) }</td>
+								<td class="center">
+									<% if(view == true){ %>
+										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/wx/keyword/view/${escapeXml(keyword.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a>
+									<% } %>
+									<% if(edit == true){ %>
+										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/wx/keyword/edit/${escapeXml(keyword.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a>
+									<% } %>
+									<% if(delete == true){ %>
+										<a class="btn btn-danger" href="#" onclick="ajaxContent('/jf/wx/keyword/delete/${escapeXml(keyword.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
+									<% } %>
+								</td>
+							</tr>
+						<% } %>
+					</tbody>
+				</table>
+				<div id="splitPageDiv" class="pagination pagination-centered">
+					<% include("/common/splitPage.html", {"divId" : "content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+				</div>
+			</div>
+			
+		</div>
+		<!--/span-->
+	
+	</div>
+	<!--/row-->
+
+</form>

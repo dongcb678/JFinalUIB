@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	baseModel公共sql
+-->
+<sql-statement namespace="platform.baseModel">
+	
+	<!-- 查询版本号 -->
+	<sql id="version">
+		<![CDATA[ 
+        	select version from ${table} where ${pk} = ?
+    	]]>
+	</sql>
+	
+	<!-- 通用查询 -->
+	<sql id="select">
+		<![CDATA[ 
+        	select * from ${table} where ${column} = ?
+    	]]>
+	</sql>
+	
+	<!-- 通用查询 -->
+	<sql id="selectCount">
+		<![CDATA[ 
+        	select count(*) from ${table} where ${column} = ?
+    	]]>
+	</sql>
+	
+	<!-- 通用更新 -->
+	<sql id="update">
+		<![CDATA[ 
+        	update ${table} set ${column} = ? where ${condition} = ?
+    	]]>
+	</sql>
+	
+	<!-- 通用删除 -->
+	<sql id="delete">
+		<![CDATA[ 
+        	delete from ${table} where ${column} = ?
+    	]]>
+	</sql>
+	
+</sql-statement>
