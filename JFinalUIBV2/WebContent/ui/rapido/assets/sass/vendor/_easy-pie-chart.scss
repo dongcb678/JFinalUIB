@@ -1,0 +1,40 @@
+/* ---------------------------------------------------------------------- */
+/*  Easy Pie Chart
+/* ---------------------------------------------------------------------- */
+.easy-pie-chart {
+  position: relative;
+  text-align: center;
+  .number {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+  }
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+.percent {
+  display: inline-block;
+  line-height: 70px;
+  z-index: 2;
+  &:after {
+    content: '%';
+    margin-left: 0.1em;
+    font-size: .8em;
+  }
+}
+.label-chart {
+  color: #333333;
+  font-size: 16px;
+  font-weight: 300;
+  display: inline;
+  line-height: 1;
+  padding: 0.2em 0.6em 0.3em;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+}

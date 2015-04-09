@@ -1,0 +1,32 @@
+/* ---------------------------------------------------------------------- */
+/*  Sliding Bar
+/* ---------------------------------------------------------------------- */
+#slidingbar-area {
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
+  @include transition(all, .3s, ease-in-out); 
+}
+#slidingbar {
+  background: rgba(54, 56, 57, 0.9);
+  color: #8C8989;
+  display: none;
+  height: auto;
+  overflow: hidden;
+  padding: 35px 10px 10px 10px;
+  position: relative;
+  z-index: 3;
+  h2 {
+    color: #DDDDDD;
+    margin: 0 0 28px;
+    text-transform: uppercase;
+    font-size: $font-size-base !important;
+  }
+}
+.ie8 #slidingbar {
+  background: #363839;
+}

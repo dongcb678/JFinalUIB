@@ -1,0 +1,240 @@
+/* ---------------------------------------------------------------------- */
+/*  PageSlide Left
+/* ---------------------------------------------------------------------- */
+#pageslide-left {
+  width: $slideBar-width;
+  z-index: 1021;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: $header-height;
+  .right-sidebar-open & {
+    left: -$slideBar-width;
+  }
+  .sidebar-close & {
+    z-index: 0;
+  }
+  &.slide-default {
+    padding-top: 0 !important;
+    position: absolute !important;
+    bottom: 0;
+    .navbar-content, .main-navigation {
+      height: auto !important;
+    }
+   .horizontal-menu-fixed &{
+    padding-top: 0 !important;
+    top: - $header-height;    
+  }
+  .header-default.horizontal-menu-fixed &{
+    padding-top: $header-height !important;
+    top: 0;    
+    }
+  }
+
+  .navbar-content {
+    position: relative;
+    .left-wrapper {
+      padding: 0;
+      max-height: none !important;
+      overflow: hidden;
+      position: relative;
+      left: 0;
+      width: 100%;
+    }
+  }
+  .navigation-toggler {
+    cursor: pointer;
+    height: 30px;
+    margin-left: $slideBar-width - 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 16px;
+    line-height: 30px;
+    text-align: center;
+    .sb-toggle-left {
+      height: 30px;
+      position: relative;
+      z-index: 10;
+      background: url(../images/light_dots.png) no-repeat center center;
+      @include opacity(0.5);
+      width: 16px;
+      float: left;
+    }
+  }
+  .user-profile {
+    position: relative;
+    min-height: 78px;
+    line-height: 78px;
+    .user-options{
+      position: absolute;
+      right: 8px;
+      top: 18px;
+    }
+    img{
+      margin-right: 10px;
+      @include border-radius(10px);  
+    }
+  }
+  .slide-tools {
+    height: $footer-height;
+    line-height: $footer-height;
+    position: absolute;
+    width: 100%;
+    z-index: 14;
+    left: 0;
+    bottom: 0;
+  }
+}
+#pageslide-left.slide-default .navbar-content, #pageslide-left.slide-default .main-navigation {
+  height: auto !important;
+}
+.header-default #pageslide-left .navbar-content {
+  top: 0 !important;
+}
+ul.main-navigation-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+   li{
+    border: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    &.active {
+      > ul.sub-menu {
+        display: block;
+        padding: 0;
+      }
+    }
+    a {
+      border: 0 none;
+      display: block;
+      font-size: $font-size-base;
+      font-weight: 300;
+      margin: 0;
+      padding: 10px 15px;
+      position: relative;
+      text-decoration: none;
+      border-bottom: 1px solid #DDDDDD;
+      border-top: 1px solid #FFFFFF;
+      i {
+        font-size: $font-size-small;
+        margin-right: 5px;
+        display: inline-block;
+      }
+      .icon-arrow {
+        float: right;
+        margin-right: 6px !important;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        &:before {
+          content: "\f104";
+          font-family: FontAwesome;
+        }
+      }
+    }
+      &.open {
+      > a{
+        > .icon-arrow{
+          @include opacity(1);
+          &:before {
+            content: "\f107";
+          } 
+        }
+        
+      }
+    }
+    ul.sub-menu {
+      clear: both;
+      list-style: none;
+      margin: 8px 0;
+      display: none;
+      padding: 0;
+      li {
+        background: none;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 1px !important;
+        padding: 0;
+        a {
+          background: none;
+          display: block;
+          font-size: $font-size-base;
+          font-weight: 300;
+          border: none;
+          margin: 0;
+          padding-bottom: 5px;
+          padding-left: 40px !important;
+          padding-right: 15px;
+          padding-top: 5px;
+          text-decoration: none;
+          .icon-arrow {
+            margin-right: 22px;
+          }
+        }
+        &.dropdown-header{
+             padding-left: 40px !important;
+        }
+        &.divider {
+          height: 1px;
+          margin: 9px 0;
+          overflow: hidden;
+          margin-left: 40px !important;
+        }
+        ul.sub-menu {
+          margin: 0;
+          li{
+            a {
+              padding-left: 60px !important;
+            }
+            ul.sub-menu {
+              li {
+                a {
+                  padding-left: 80px !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }  
+}
+.btn.status {
+  i {
+    color: $green !important;
+  }
+  &.offline {
+    i {
+      color: rgba($white, 0.3) !important;
+    }  
+  }
+}
+.closedbar {
+  left: -20px;
+  position: fixed;
+  top: $header-height + 1;
+  bottom: 1px;
+  z-index: 1030;
+  display: none;
+  width: 20px;
+  @include border-radius(0 5px 5px 0); 
+  text-align: center;
+  background: url(../images/light_dots.png) no-repeat center 5px;
+  &.open {
+    display: block;
+  }
+  .sidebar-close & {
+    left: 0;
+  }
+  .right-sidebar-open & {
+    left: -$slideBar-width;
+  }
+  i {
+    padding-top: 10px;
+  }
+}

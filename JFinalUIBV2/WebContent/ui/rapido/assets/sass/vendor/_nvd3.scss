@@ -1,0 +1,51 @@
+/* ---------------------------------------------------------------------- */
+/*  NDV3 CHART
+/* ---------------------------------------------------------------------- */
+#chart1, #chart4  {
+  height: 100%;
+  margin: 0;
+  min-width: 100px;
+  min-height: 100px;
+}
+#chart4 .nvd3 .nv-axis line {
+    fill: none;
+    shape-rendering: crispedges;
+    stroke: darken($green,2%) !important;
+}
+#chart4 svg text {
+    fill: #ffffff !important;
+    font-size: 11px !important;
+}
+#chart1 svg text {
+    fill: #8B91A0 !important;
+    font-size: 11px !important;
+}
+.nvtooltip {
+  background-color: rgba(0,0,0,1.0) !important;
+  color: $white;
+  border: 1px solid rgba(0,0,0,.2);
+  font-size: 12px;
+  text-align: left;
+}
+.nvtooltip h3 {
+
+ font-size: 14px !important;
+  background-color: rgba(0,0,0,0.75) !important;
+  text-align: center;
+  border-bottom: 1px solid #333 !important;
+}
+#chart3 {
+  height: 200px;
+  width: 100%;
+  margin: 0;
+  min-width: 100px;
+  min-height: 100px;
+}
+#chart3 .nvd3.nv-pie path {
+    stroke: #894550 !important;
+    
+}
+#chart3 svg text {
+    font: 400 12px Arial;
+    fill: #ffffff !important;
+}

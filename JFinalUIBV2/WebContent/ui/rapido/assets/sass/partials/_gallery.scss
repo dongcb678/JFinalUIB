@@ -1,0 +1,156 @@
+/* ---------------------------------------------------------------------- */
+/*  Gallery
+/* ---------------------------------------------------------------------- */
+
+#Grid {
+  min-height: 575px;
+}
+#Grid .mix {
+  display: none;
+  margin-bottom: 20px;
+  text-align: center;
+  vertical-align: top;
+}
+div.portfolio-info {
+  margin: 2px 0 10px 0;
+}
+.portfolio-info ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.portfolio-info ul li {
+  border-right: 1px solid #E6E6E6;
+  color: #B1B1B1;
+  display: inline-block;
+  font-size: 0.9em;
+  margin-right: 8px;
+  padding-right: 8px;
+}
+.portfolio-info ul li i.fa {
+  margin-right: 4px;
+}
+.portfolio-item {
+  position: relative;
+}
+.portfolio-item a.thumb-info span.thumb-info-title {
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 4px;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  left: 4px;
+  padding: 10px;
+  position: absolute;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+}
+.portfolio-page ul.nav li a:hover, .portfolio-page ul.nav li.active a {
+  background: #357EBD;;
+  color: #FFFFFF;
+}
+.portfolio-page ul.nav li a {
+  background: #EEEEEE;
+  color: #555555;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 5px;
+  margin-right: 2px;
+  padding: 6px 15px;
+}
+.gallery-img {
+  margin-bottom: 20px;
+}
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  
+  .chkbox {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #ffffff;
+  text-align: center;
+  display: none;
+  cursor: pointer;
+  border: 1px solid #DDDDDD;
+    &:hover {
+      border-color: rgba(82, 168, 236, 0.8);
+      box-shadow: 0 0 12px rgba(82, 168, 236, 0.6);
+      outline: 0 none;
+    }
+  }
+  &:hover {
+    .chkbox {
+      display: block;
+    }
+  }
+}
+.portfolio-item.selected > .chkbox {
+  display: block;
+}
+.portfolio-item:hover > .chkbox {
+  display: block;
+}
+.portfolio-item.selected > .chkbox:before {
+  content: "\f00c";
+  font-family: FontAwesome;
+  height: 14px;
+  left: 1px;
+  position: absolute;
+  top: -2px;
+  width: 14px;
+}
+.portfolio-item > .tools {
+  background-color: rgba(0, 0, 0, 0.55);
+  bottom: 0;
+  left: -30px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  transition: all 0.2s ease 0s;
+  vertical-align: middle;
+  width: 24px;
+}
+.portfolio-item > .tools a:hover, .portfolio-item > .tools a:focus {
+  text-decoration: none;
+}
+.portfolio-item > .tools.tools-bottom {
+  bottom: -30px;
+  height: 28px;
+  left: 0;
+  right: 0;
+  top: auto;
+  width: auto;
+}
+.portfolio-item:hover > .tools {
+  left: 0;
+}
+.portfolio-item:hover > .tools.tools-bottom {
+  bottom: 0;
+  top: auto;
+}
+.portfolio-item:hover > .tools.tools-top {
+  bottom: auto;
+  top: 0;
+}
+.portfolio-item:hover > .tools.tools-right {
+  left: auto;
+  right: 0;
+}
+.portfolio-item > .tools > a, .portfolio-item > *:first-child .inner a {
+  color: #FFFFFF;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 4px;
+}
+.portfolio-item > .tools > a:hover, .portfolio-item > *:first-child .inner a:hover {
+  color: #C9E2EA;
+  text-decoration: none;
+}
+.portfolio-item .tools.tools-bottom > a, .portfolio-item .tools.tools-top > a {
+  display: inline-block;
+}

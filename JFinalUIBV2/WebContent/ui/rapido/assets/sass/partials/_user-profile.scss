@@ -1,0 +1,71 @@
+/* ---------------------------------------------------------------------- */
+/*  User profile
+/* ---------------------------------------------------------------------- */
+
+.user-left {
+  border-right: 1px solid #DDDDDD;
+  padding-right: 15px;
+}
+.user-left a:hover, .user-left a:focus {
+  text-decoration: none;
+}
+.user-left td .edit-user-info {
+  visibility: hidden;
+}
+.user-left tr:hover .edit-user-info {
+  visibility: visible;
+}
+.user-left .user-image {
+  position: relative;
+  display: inline-block;
+}
+.user-image .user-image-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+}
+.user-image:hover .user-image-buttons {
+  display: block;
+}
+.user-edit-image-buttons {
+  display: inline;
+}
+#projects .progress {
+  margin-bottom: 0;
+}
+.activities {
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+}
+.activities li a {
+  background: white;
+  border-bottom: 1px solid #E4E6EB;
+  font-size: 12px;
+  margin-left: 0 !important;
+  padding: 10px 100px 10px 10px !important;
+  position: relative;
+  display: block;
+  color: $text-color;
+}
+.activities li .activity:hover, .activities li .activity:focus {
+  text-decoration: none;
+  background-color: #F4F6F9 !important;
+}
+.activities li .activity .circle-icon {
+  font-size: 16px !important;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  margin-right: 10px;
+}
+.activities li .activity img {
+  margin-right: 10px;
+}
+.activities li .time {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  color: #CCCCCC;
+}

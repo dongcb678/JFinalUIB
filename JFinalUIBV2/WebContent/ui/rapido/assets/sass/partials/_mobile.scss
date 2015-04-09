@@ -1,0 +1,24 @@
+/* ---------------------------------------------------------------------- */
+/*  CSS FOR MOBILE
+/* ---------------------------------------------------------------------- */
+.isMobile .left-wrapper, .isMobile .right-wrapper {
+  overflow: auto !important;
+  -ms-overflow-style: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+.isMobile .panel-scroll {
+  overflow: auto !important;
+  -ms-overflow-style: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+.isMobile #slidingbar-area, .isMobile .subviews {
+   overflow: auto !important;
+  -ms-overflow-style: auto !important;
+  -webkit-overflow-scrolling: touch !important; 
+}
+.isMobile .panel-tools {
+  @include opacity(1);
+}
+.isMobile ul.main-navigation-menu li:not(.open) a:hover {
+  background: inherit !important;
+}

@@ -1,0 +1,424 @@
+/* ---------------------------------------------------------------------- */
+/*  Panels
+/* ---------------------------------------------------------------------- */
+.panel{
+  background-color: #FFFFFF;
+  @include box-shadow(0, 1px, 2px, #C3C3C3);
+  @include border-radius(3px); 
+  color: $text-color;
+  border: none;
+  position: relative;
+}
+.panel-heading {
+  position: relative;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  padding: 15px;
+  min-height: 50px;
+  .panel-heading-tabs {
+    list-style: none;
+    top: 0;
+    right: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    > li {
+      float: left;
+      padding: 0 15px;
+      border-left-width: 1px;
+      border-left-style: solid;
+      border-left-color: inherit;
+      height: 50px;
+      line-height: 50px;
+      &.panel-tools {
+        position: relative;
+        @include opacity(1);
+        right: auto;
+        top: auto;
+        .tmp-tool {
+          right: 20px;
+          top: auto;
+        }
+        .dropdown {
+          line-height: normal;
+        }
+        
+      }
+    }
+    
+  }
+}
+.core-box {
+  .heading {
+    margin-bottom: 15px;
+  } 
+  .core-icon {
+    width: 33.3333%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    .icon-big {
+        line-height: 80px;
+    }
+  }
+  .core-content {
+    margin-left: 33.3333%;
+    min-height: 120px;
+  }
+  .heading {
+    font-size: $font-size-small;
+  }
+  .title {
+      font-size: 20px;
+      line-height: 21px;
+      margin-bottom: 0;
+      font-weight: 400;
+  }
+  .subtitle {
+    font-size: $font-size-normal;
+    @include opacity(0.8);
+  }
+  .content {
+    line-height: 20px;
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 60px;
+    .fa {
+        font-size: 50px;
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 40px;
+    }
+  }
+  .view-more {
+    float: right;
+    i {
+      display: inline-block;
+    }
+    
+  }
+}
+.panel-tools {
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  @include opacity(0);
+  @include transition(opacity, .5s, ease-in-out); 
+    .panel:hover &{
+      @include opacity(1);
+    }
+    .dropdown {
+      display: inline-block;
+      .dropdown-menu {
+        a {
+          > i {
+            margin-right: 10px;
+          }
+        }
+      }     
+    }
+    a {
+      color: $text-color !important;
+      background: none;
+      &:hover{
+        color: darken($text-color, 20%) !important;
+      }
+    }
+}
+.panel-portfolio {
+  .portfolio-grid {
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    max-height: 200px;
+    position: relative;
+    .item {
+      overflow: hidden !important;
+    }
+  }
+  .navigator {
+      position: relative;
+      text-align: center;
+      margin-top: -40px;
+      margin-bottom: 10px;
+      z-index: 101;
+    }
+}
+.panel-grey, .partition-grey {
+  background-color: $grey;
+  position: relative;
+  @include background-gradient(lighten($grey,5%) 0px, $grey 100%); 
+  color: darken($grey,50%);
+  .panel-tools {
+    .btn, > a {
+      color: rgba(darken($grey,50%), 0.7) !important;
+      &:hover{
+        color: darken($grey,50%) !important;
+      }
+    }
+  }  
+}
+.panel-light-grey, .partition-light-grey {
+  background-color: lighten($grey,30%);
+  position: relative;
+  @include background-gradient(lighten(lighten($grey,30%),5%) 0px, lighten($grey,30%) 100%); 
+  color: $text-color;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($text-color, 0.7) !important;
+      &:hover{
+        color: $text-color !important;
+      }
+    }
+  }  
+}
+.panel-orange, .partition-orange {
+  background-color: $orange;
+  position: relative;
+  @include background-gradient(lighten($orange,5%) 0px, $orange 100%); 
+  color: $white;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($white, 0.7) !important;
+      &:hover{
+        color: $white !important;
+      }
+    }
+  }  
+}
+.panel-purple, .partition-purple {
+  background-color: $purple;
+  position: relative;
+  @include background-gradient(lighten($purple,5%) 0px, $purple 100%); 
+  color: $white;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($white, 0.7) !important;
+      &:hover{
+        color: $white !important;
+      }
+    }
+  }  
+}
+.panel-pink, .partition-pink {
+  background-color: $pink;
+  position: relative;
+  @include background-gradient(lighten($pink,5%) 0px, $pink 100%); 
+  color: $white;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($white, 0.7) !important;
+      &:hover{
+        color: $white !important;
+      }
+    }
+  }   
+}
+.panel-azure, .partition-azure {
+  background-color: $azure;
+  position: relative;
+  @include background-gradient(lighten($azure,5%) 0px, $azure 100%); 
+  color: $white;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($white, 0.7) !important;
+      &:hover{
+        color: $white !important;
+      }
+    }
+  }   
+}
+.panel-bricky, .partition-bricky {
+  background-color: $bricky;
+  position: relative;
+  @include background-gradient(lighten($bricky,5%) 0px, $bricky 100%); 
+  color: $white;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($white, 0.7) !important;
+      &:hover{
+        color: $white !important;
+      }
+    }
+  }   
+}
+.panel-green, .partition-green  {
+  background-color: $green;
+  position: relative;
+  @include background-gradient(lighten($green,5%) 0px, $green 100%); 
+  color: $white;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($white, 0.7) !important;
+      &:hover{
+        color: $white !important;
+      }
+    }
+  }  
+}
+.panel-red, .partition-red  {
+  background-color: $red;
+  position: relative;
+  @include background-gradient(lighten($red,5%) 0px, $red 100%); 
+  color: $white;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($white, 0.7) !important;
+      &:hover{
+        color: $white !important;
+      }
+    }
+  }  
+}
+.panel-blue, .partition-blue  {
+  background-color: $blue;
+  position: relative;
+  @include background-gradient(lighten($blue,5%) 0px, $blue 100%);
+  color: $white;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($white, 0.7) !important;
+      &:hover{
+        color: $white !important;
+      }
+    }
+  }  
+}
+.panel-yellow, .partition-yellow  {
+  background-color: $yellow;
+  position: relative;
+  @include background-gradient(lighten($yellow,5%) 0px, $yellow 100%);
+  color: $black;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($black, 0.7) !important;
+      &:hover{
+        color: $black !important;
+      }
+    }
+  }  
+}
+.panel-white, .partition-white  {
+  background-color: $white;
+  position: relative;
+  color: $text-color;
+}
+.panel-dark, .partition-dark  {
+  background-color: $black;
+  position: relative;
+  @include background-gradient(lighten($black,5%) 0px, $black 100%);
+  color: $white;
+  .panel-tools {
+    .btn, > a {
+      color: rgba($white, 0.7) !important;
+      &:hover{
+        color: $white !important;
+      }
+    }
+  }  
+}
+
+
+.panel-scroll {
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    width: auto;
+    padding-right: 10px !important;
+}
+
+.panel-note {
+  @include border-radius(0); 
+  border: none;
+  .panel-heading {
+    background: url("../images/note_dot.png") repeat-x;
+    border-bottom: 0 none;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    top: 0;
+    z-index: 3;
+    position: relative;
+    h3 {
+      margin: 0;
+    }
+  }
+  .panel-body {
+    background: url("../images/line.png") repeat;
+    padding: 0;
+    margin: 0 15px;
+    line-height: 18px;
+  }
+  .panel-footer {
+    background: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top: none;
+    padding: 10px 15px;
+    margin-bottom: 0;
+    .avatar-note {
+      width: 30px;
+      height: 30px;
+      float: left;
+      margin-right: 10px;
+      img {
+           @include border-radius(2px); 
+      }
+    }
+    .author-note {
+      display: block;
+      line-height: 14px;
+    }
+    .timestamp {
+      color: #999999;
+      display: inline-block;
+      font-size: $font-size-extra-small;
+    }
+  }
+  .note-options { 
+    a {
+      margin-left: 10px;
+      font-size: $font-size-small;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+[class^="partition-"]{
+  &:after{
+   content: " ";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+  }
+}
+/* ---------------------------------------------------------------------- */
+/*  Backdrop
+/* ---------------------------------------------------------------------- */
+.full-white-backdrop {
+  background-color: #FFFFFF;
+  display: none;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1049;
+}
+.panel.panel-full-screen {
+  bottom: 0;
+  left: 10px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1048;
+  background-color: #FFFFFF;
+}
+.tmp-tool {
+  position: fixed;
+  right: 40px;
+  top: 20px;
+}

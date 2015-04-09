@@ -1,0 +1,33 @@
+/* ---------------------------------------------------------------------- */
+/*  Perfect Scrollbar
+/* ---------------------------------------------------------------------- */
+.ps-container .ps-scrollbar-x-rail:hover,
+.ps-container .ps-scrollbar-x-rail.hover {
+    background-color: #eee !important;
+}
+.ps-container .ps-scrollbar-y-rail {
+    width: 6px;
+    @include transition(width .2s linear);
+
+}
+.ps-container .ps-scrollbar-y {
+    width: 6px;
+    @include transition(width .2s linear); 
+}
+.ps-container:hover .ps-scrollbar-y-rail,
+.ps-container.hover .ps-scrollbar-y-rail {
+    @include opacity(0.4);
+}
+.ps-container .ps-scrollbar-y-rail:hover,
+.ps-container .ps-scrollbar-y-rail.hover,
+.ps-container .ps-scrollbar-y-rail.in-scrolling {
+    background-color: #eee;
+    width: 10px;
+    @include opacity(0.6);
+}
+.ps-container .ps-scrollbar-y-rail:hover .ps-scrollbar-y,
+.ps-container .ps-scrollbar-y-rail.hover .ps-scrollbar-y,
+.ps-container .ps-scrollbar-y-rail.in-scrolling .ps-scrollbar-y {
+    background-color: #999;
+    width: 10px;
+}

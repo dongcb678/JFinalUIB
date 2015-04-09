@@ -1,0 +1,30 @@
+/* ---------------------------------------------------------------------- */
+/*  Summernote
+/* ---------------------------------------------------------------------- */
+.noteWrap {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+}
+.noteWrap .note-editor {
+  border: none;
+}
+.noteWrap .note-editor .note-toolbar {
+  background: none;
+  border-bottom: none;
+  padding: 0;
+}
+.noteWrap .note-editor .note-editable {
+  min-height: 240px;
+  background: url("../images/line_detail.png");
+  line-height: 20px;
+  padding: 0;
+  margin-top: 20px;
+  color: #858585;
+}
+.noteWrap .note-editor .note-statusbar {
+    background: none;
+}
+.noteWrap .note-editor .note-statusbar .note-resizebar {
+    border-top: none;
+}

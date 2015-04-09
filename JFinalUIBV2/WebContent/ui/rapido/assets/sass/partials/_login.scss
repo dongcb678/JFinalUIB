@@ -1,0 +1,78 @@
+/* ---------------------------------------------------------------------- */
+/*  Login
+/* ---------------------------------------------------------------------- */
+body.login {
+  overflow: visible; 
+}
+body.login {
+  background-image: url("../images/bg.png");
+  background-color: rgba(0, 0, 0, 0);
+}
+body.login .main-login {
+  margin-top: 60px;
+  position:relative
+}
+body.login .logo {
+  padding: 20px;
+  text-align: center;
+}
+body.login .box-login, body.login .box-forgot, body.login .box-register {
+  background: #FFFFFF;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 15px;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+}
+body.login .box-login, body.login .box-forgot, body.login .box-register {
+  display: none;
+}
+body.login .form fieldset {
+  border: none;
+  margin: 0;
+  padding: 10px 0 0;
+}
+body.login a.forgot {
+  color: #909090;
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  text-shadow: 1px 1px 1px #FFFFFF;
+  top: 9px;
+}
+body.login input.password {
+  padding-right: 130px;
+}
+body.login label {
+  color: #7F7F7F;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+body.login .copyright {
+  font-size: 11px;
+  margin: 0 auto;
+  padding: 10px 10px 0;
+  text-align: center;
+}
+body.login .form-actions:before, body.login .form-actions:after {
+  content: "";
+  display: table;
+  line-height: 0;
+}
+body.login .form-actions:after {
+  clear: both;
+}
+body.login .form-actions {
+  margin-top: 15px;
+  padding-top: 10px;
+  display: block;
+}
+body.login .new-account {
+  border-top: 1px dotted #EEEEEE;
+  margin-top: 15px;
+  padding-top: 10px;
+  display: block;
+}

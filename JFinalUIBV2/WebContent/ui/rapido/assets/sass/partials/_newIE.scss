@@ -1,0 +1,32 @@
+/* ---------------------------------------------------------------------- */
+/* Classes for new IE
+/* ---------------------------------------------------------------------- */
+
+.newton {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.newton .topbar {
+  position: absolute !important;
+}
+.newton #horizontal-menu{
+  position: absolute !important;
+}
+.newton footer{
+  position: relative !important;
+}
+.footer-fixed .newton footer{
+  position: absolute !important;
+}
+.sidebar-close #horizontal-menu{
+  margin-left: 0 !important;
+}
+
+.newton .pageslide{
+  position: absolute !important;
+}
+.newton .closedbar {
+  position: absolute !important;
+}

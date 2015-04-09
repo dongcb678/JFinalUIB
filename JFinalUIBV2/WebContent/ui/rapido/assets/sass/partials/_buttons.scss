@@ -1,0 +1,1002 @@
+/* ---------------------------------------------------------------------- */
+/*  Buttons
+/* ---------------------------------------------------------------------- */
+.btn {
+  transition: all 0.3s ease 0s !important;
+}
+.btn-azure {
+  background-color: $azure;
+  border-color: darken($azure,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($azure,5%);
+    border-color: darken($azure,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($azure,55%);
+    border-color: lighten($azure,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-light-azure {
+  background-color: $lightAzure;
+  border-color: darken($lightAzure,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($lightAzure,5%);
+    border-color: darken($lightAzure,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($lightAzure,55%);
+    border-color: lighten($lightAzure,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-dark-azure {
+  background-color: $darkAzure;
+  border-color: darken($darkAzure,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($darkAzure,5%);
+    border-color: darken($darkAzure,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($darkAzure,55%);
+    border-color: lighten($darkAzure,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-blue {
+  background-color: $blue;
+  border-color: darken($blue,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($blue,5%);
+    border-color: darken($blue,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($blue,55%);
+    border-color: lighten($blue,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-light-blue {
+  background-color: $lightBlue;
+  border-color: darken($lightBlue,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($lightBlue,5%);
+    border-color: darken($lightBlue,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($lightBlue,55%);
+    border-color: lighten($lightBlue,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-dark-blue {
+  background-color: $darkBlue;
+  border-color: darken($darkBlue,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($darkBlue,5%);
+    border-color: darken($darkBlue,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($darkBlue,55%);
+    border-color: lighten($darkBlue,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-green {
+  background-color: $green;
+  border-color: darken($green,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($green,5%);
+    border-color: darken($green,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($green,55%);
+    border-color: lighten($green,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-light-green {
+  background-color: $lightGreen;
+  border-color: darken($lightGreen,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($lightGreen,5%);
+    border-color: darken($lightGreen,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($lightGreen,55%);
+    border-color: lighten($lightGreen,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-dark-green {
+  background-color: $darkGreen;
+  border-color: darken($darkGreen,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($darkGreen,5%);
+    border-color: darken($darkGreen,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($darkGreen,55%);
+    border-color: lighten($darkGreen,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-orange {
+  background-color: $orange;
+  border-color: darken($orange,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($orange,5%);
+    border-color: darken($orange,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($orange,55%);
+    border-color: lighten($orange,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-light-orange {
+  background-color: $lightOrange;
+  border-color: darken($lightOrange,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($lightOrange,5%);
+    border-color: darken($lightOrange,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($lightOrange,55%);
+    border-color: lighten($lightOrange,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-dark-orange {
+  background-color: $darkOrange;
+  border-color: darken($darkOrange,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($darkOrange,5%);
+    border-color: darken($darkOrange,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($darkOrange,55%);
+    border-color: lighten($darkOrange,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-red {
+  background-color: $red;
+  border-color: darken($red,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($red,5%);
+    border-color: darken($red,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($red,55%);
+    border-color: lighten($red,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-light-red {
+  background-color: $lightRed;
+  border-color: darken($lightRed,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($lightRed,5%);
+    border-color: darken($lightRed,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($lightRed,55%);
+    border-color: lighten($lightRed,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-dark-red {
+  background-color: $darkRed;
+  border-color: darken($darkRed,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($darkRed,5%);
+    border-color: darken($darkRed,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($darkRed,55%);
+    border-color: lighten($darkRed,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-purple {
+  background-color: $purple;
+  border-color: darken($purple,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($purple,5%);
+    border-color: darken($purple,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($purple,55%);
+    border-color: lighten($purple,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-light-purple {
+  background-color: $lightPurple;
+  border-color: darken($lightPurple,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($lightPurple,5%);
+    border-color: darken($lightPurple,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($lightPurple,55%);
+    border-color: lighten($lightPurple,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-dark-purple {
+  background-color: $darkPurple;
+  border-color: darken($darkPurple,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($darkPurple,5%);
+    border-color: darken($darkPurple,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($darkPurple,55%);
+    border-color: lighten($darkPurple,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-beige {
+  background-color: $beige;
+  border-color: darken($beige,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($beige,5%);
+    border-color: darken($beige,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($beige,55%);
+    border-color: lighten($beige,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-light-beige {
+  background-color: $lightBeige;
+  border-color: darken($lightBeige,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($lightBeige,5%);
+    border-color: darken($lightBeige,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($lightBeige,55%);
+    border-color: lighten($lightBeige,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-dark-beige {
+  background-color: $darkBeige;
+  border-color: darken($darkBeige,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($darkBeige,5%);
+    border-color: darken($darkBeige,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($darkBeige,55%);
+    border-color: lighten($darkBeige,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-yellow {
+  background-color: $yellow;
+  border-color: darken($yellow,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($yellow,5%);
+    border-color: darken($yellow,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($yellow,55%);
+    border-color: lighten($yellow,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-light-yellow {
+  background-color: $lightYellow;
+  border-color: darken($lightYellow,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($lightYellow,5%);
+    border-color: darken($lightYellow,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($lightYellow,55%);
+    border-color: lighten($lightYellow,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-dark-yellow {
+  background-color: $darkYellow;
+  border-color: darken($darkYellow,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($darkYellow,5%);
+    border-color: darken($darkYellow,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($darkYellow,55%);
+    border-color: lighten($darkYellow,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-grey {
+  background-color: $grey;
+  border-color: darken($grey,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($grey,5%);
+    border-color: darken($grey,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($grey,55%);
+    border-color: lighten($grey,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-light-grey {
+  background-color: $lightGrey;
+  border-color: darken($lightGrey,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($lightGrey,5%);
+    border-color: darken($lightGrey,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($lightGrey,55%);
+    border-color: lighten($lightGrey,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-dark-grey {
+  background-color: $darkGrey;
+  border-color: darken($darkGrey,5%);
+  color: $white;
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($darkGrey,5%);
+    border-color: darken($darkGrey,10%);
+    color: $white;    
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+    background-color: lighten($darkGrey,55%);
+    border-color: lighten($darkGrey,50%);
+    color: $white;    
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+.btn-transparent-white {
+  background: none;
+  border-color: rgba($white, 0.6);
+  border-width: 1px;
+  color: $white !important;
+  &:hover, &:focus, &:active, &.active {
+    background-color: rgba($black, 0.1);
+    border-color: rgba($white, 0.8);   
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+      background: none;
+      border-color: rgba($white, 0.3);
+      color: $white;  
+  }
+  .caret {
+    border-top-color: rgba($black, 0.1);
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid rgba($black, 0.1);
+    }  
+  }
+}
+.btn-transparent-grey {
+  background: none;
+  border-color: rgba($grey, 0.3);
+  border-width: 1px;
+  color: $grey !important;
+  &:hover, &:focus, &:active, &.active {
+    background-color: rgba($grey, 0.1);
+    border-color: rgba($grey, 0.6);
+    box-shadow: none !important;
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+      background: none;
+      border-color: rgba($grey, 0.3);
+      color: $grey;  
+  }
+  .caret {
+    border-top-color: $grey;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $grey;
+    }  
+  }
+}
+.btn-transparent-red {
+  background: none;
+  border-color: rgba($red, 0.6);
+  border-width: 2px;
+  color: $red !important;
+  &:hover, &:focus, &:active, &.active {
+    background-color: rgba($red, 0.1);
+    border-color: rgba($red, 0.8);   
+  }
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+      background: none;
+      border-color: rgba($red, 0.3);
+      color: $red;  
+  }
+  .caret {
+    border-top-color: $white;
+  }
+  .dropup & {
+    .caret {
+      border-bottom: 4px solid $white;
+    }  
+  }
+}
+
+.btn-squared {
+  border-radius: 0 !important;
+}
+
+.btn-icon {
+  background-color: #EFEFEF;
+  background-image: -moz-linear-gradient(center top , #FAFAFA, #EFEFEF);
+  border: 1px solid #DDDDDD;
+  border-radius: 2px 2px 2px 2px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  height: 80px;
+  display: block;
+  font-size: 14px;
+  padding: 5px 0 0;
+  position: relative;
+  text-align: center;
+  transition: all 0.3s ease 0s;
+  color: #333333;
+}
+.btn-icon:hover {
+  border-color: #A5A5A5;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  color: #444444;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #FFFFFF;
+}
+.btn-icon .badge {
+  border-radius: 12px 12px 12px 12px !important;
+  border-style: solid;
+  border-width: 0;
+  box-shadow: none;
+  color: #FFFFFF !important;
+  font-size: 11px !important;
+  font-weight: 300;
+  padding: 3px 7px;
+  position: absolute;
+  right: -5px;
+  text-shadow: none;
+  top: -5px;
+}
+.btn-icon [class^="fa-"], .btn-icon [class*=" fa-"] {
+  clear: both;
+  display: block;
+}
+.buttons-widget .btn, .buttons-widget .bootstrap-switch, .buttons-widget button {
+  margin-bottom: 5px;
+}
+.buttons-widget .btn-group button, .buttons-widget .btn-group-vertical button, .buttons-widget .btn-group .btn, .buttons-widget .btn-group-vertical .btn{
+  margin-bottom: 0;
+}
+/***
+Dropdown checkboxes
+***/
+.dropdown-checkboxes {
+  padding: 5px;
+  label {
+    display: block;
+    font-weight: normal;
+    line-height: 20px;
+  }
+}
+/***
+Social Icons
+***/
+.social-icons {
+  ul {
+    list-style: none;
+    margin: 0 0 -1px 0;
+    padding: 0;
+    li {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      height: 40px;
+      overflow: hidden;
+      a {
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        display: block;
+        height: 80px;
+        opacity: 0.6;
+        text-indent: -9999px;
+        transition: all 0.2s ease 0s;
+        width: 40px;
+        top: 0;
+        font-size: 16px;
+        position: relative;
+        @include transition(all, .3s, ease); 
+        &:hover {
+          top: -40px;
+        }
+        &:before {
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          font-family: FontAwesome;
+          text-indent: 0;
+          line-height: 40px;
+          top: 0;
+          left: 0;
+          text-align: center;
+          color: #999999;
+        }
+        &:after {
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          font-family: FontAwesome;
+          text-indent: 0;
+          line-height: 40px;
+          top: 40px;
+          left: 0;
+          text-align: center;
+          color: #FFFFFF;
+        } 
+      }
+     &.social-twitter a {
+        &:before, &:after {
+          content: "\f099";
+        }
+        &:after {
+          background: #48C4D2;
+        }
+     }
+     &.social-dribbble a {
+        &:before, &:after {
+          content: "\f17d";
+        }
+        &:after {
+          background: #EF5B92;
+        }
+     }
+     &.social-facebook a {
+       &:before, &:after {
+          content: "\f09a";
+        }
+        &:after {
+          background: #3B5998;
+        }
+     }
+     &.social-google a {
+        &:before, &:after {
+          content: "\f0d5";
+        }
+        &:after {
+          background: #DD4B39;
+        }
+     }
+     &.social-linkedin a {
+        &:before, &:after {
+          content: "\f0e1";
+        }
+        &:after {
+          background: #71B2D0;
+        }
+     }
+    &.social-youtube a {
+        &:before, &:after {
+          content: "\f167";
+        }
+        &:after {
+          background: #F45750;
+        }
+     }
+    &.social-rss a {
+        &:before, &:after {
+          content: "\f09e";
+        }
+        &:after {
+          background: #FE9900;
+        }
+     }
+    &.social-behance a {
+        &:before, &:after {
+          content: "\f1b4";
+        }
+        &:after {
+          background: #5EB5FB;
+        }
+     }
+     &.social-dropbox a {
+        &:before, &:after {
+          content: "\f16b";
+        }
+        &:after {
+          background: #85BEEC;
+        }
+     }
+     &.social-github a {
+        &:before, &:after {
+          content: "\f09b";
+        }
+        &:after {
+          background: #94A5B0;
+        }
+     }
+     &.social-skype a {
+        &:before, &:after {
+          content: "\f17e";
+        }
+        &:after {
+          background: #70CCEF;
+        }
+     }
+     &.social-spotify a {
+        &:before, &:after {
+          content: "\f1bc";
+        }
+        &:after {
+          background: #8BD05A;
+        }
+     }
+     &.social-stumbleupon a {
+        &:before, &:after {
+          content: "\f1a4";
+        }
+        &:after {
+          background: #F08066;
+        }
+     }
+     &.social-tumblr a {
+        &:before, &:after {
+          content: "\f173";
+        }
+        &:after {
+          background: #85A5C3;
+        }
+     }
+     &.social-vimeo a {
+        &:before, &:after {
+          content: "\f194";
+        }
+        &:after {
+          background: #7C99A8;
+        }
+     }
+     &.social-wordpress a {
+        &:before, &:after {
+          content: "\f19a";
+        }
+        &:after {
+          background: #649EB9;
+        }
+     }
+     &.social-xing a {
+        &:before, &:after {
+          content: "\f168";
+        }
+        &:after {
+          background: #4F9394;
+        }
+     }
+     &.social-yahoo a {
+        &:before, &:after {
+          content: "\f19e";
+        }
+        &:after {
+          background: #C38DCF;
+        }
+     }
+     &.social-vk a {
+        &:before, &:after {
+          content: "\f189";
+        }
+        &:after {
+          background: #708FAC;
+        }
+     }
+     &.social-instagram a {
+        &:before, &:after {
+          content: "\f16d";
+        }
+        &:after {
+          background: #CBAA97;
+        }
+     }
+     &.social-reddit a {
+        &:before, &:after {
+          content: "\f1a1";
+        }
+        &:after {
+          background: #FF7A52;
+        }
+     }
+     &.social-flickr a {
+        &:before, &:after {
+          content: "\f16e";
+        }
+        &:after {
+          background: #FF4DA9;
+        }
+     }
+     &.social-foursquare a {
+        &:before, &:after {
+          content: "\f180";
+        }
+        &:after {
+          background: #6FCCF4;
+        }
+     }
+    }    
+  } 
+}

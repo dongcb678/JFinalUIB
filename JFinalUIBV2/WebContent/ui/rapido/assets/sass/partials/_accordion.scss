@@ -1,0 +1,84 @@
+/* ---------------------------------------------------------------------- */
+/*  Accordion
+/* ---------------------------------------------------------------------- */
+.accordion{
+  .panel {
+    background-color: #FFFFFF;
+    border: none;
+    @include border-radius(0);
+    @include box-shadow(0,0,0,rgba(0,0,0,0));
+  }  
+  .panel-heading {
+    padding: 0;
+    background-image: none;
+    height: auto;
+    min-height: 0;
+    @include box-shadow(0,0,0,rgba(0,0,0,0));
+    @include border-radius(0);
+    .accordion-toggle {
+      background-color:  #E6E8E8;
+      color: $grey;
+      display: block;
+      font-size: $font-size-base;
+      font-weight: 600;
+      line-height: 20px;
+      padding: 10px;
+      position: relative;
+      @include border-radius(5px);
+      &:hover, &:focus {
+        text-decoration: none;  
+      }
+      &.collapsed {
+        background-color: #F3F3F3;
+        border-color: #D9D9D9;
+        border-width: 0 0 0 1px;
+        color: $darkGrey;
+        font-weight: 300;
+         > .icon-arrow {        
+          @include opacity(0.75);
+          &:before {
+            content: "\f067" !important;
+          }
+        } 
+      }
+      > .icon-arrow {
+        font-family: FontAwesome;
+        font-size: 11px;
+        padding: 0 5px;
+        display: inline-block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: $lightGrey;
+        &:before {
+          content: "\f068";
+        }
+      }
+    }
+  }
+  .panel-body {
+    border: none !important;
+  }
+  &.panel-group .panel + .panel {
+    margin-top: 1px;
+  }
+  &.accordion-white {
+    .panel-heading {
+      .accordion-toggle {
+        background-color:  $white;
+        &.collapsed {
+          background-color: $white;
+        }
+      }
+    }
+    &.panel-group .panel + .panel {
+      margin-top: 0;
+      border-top: 1px solid lighten($text-color,10%);
+    }    
+  }
+}
+
+

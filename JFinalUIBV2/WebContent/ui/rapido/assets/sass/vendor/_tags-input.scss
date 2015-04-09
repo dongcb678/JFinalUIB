@@ -1,0 +1,39 @@
+/* ---------------------------------------------------------------------- */
+/*  jQuery Tags Input
+/* ---------------------------------------------------------------------- */
+div.tagsinput span.tag {
+    background: #e8edf1;
+    border-radius: 8px;
+    color: #555555;
+    font-family: $font-family-default;
+    font-size: 13px;
+    padding: 8px;
+    font-size: $font-size-normal;
+    line-height: $font-size-normal;
+    border: none;
+
+}
+div.tagsinput span.tag a {
+    color: #555555;
+    font-size: $font-size-normal;
+    font-weight: bold;
+    color: transparent;
+    position:relative;
+    
+}
+div.tagsinput span.tag a:before {
+    color: #94a1b2;
+    content: "\f00d";
+    font-family: 'FontAwesome';
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+div.tagsinput input {
+  font-size: $font-size-normal;
+  width: 90px;
+}
+.not_valid {
+  border-radius: 8px;
+}

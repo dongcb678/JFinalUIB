@@ -1,0 +1,53 @@
+/* ---------------------------------------------------------------------- */
+/*  Lock Screen
+/* ---------------------------------------------------------------------- */
+body.lock-screen {
+   background: #1f212f url("../images/bg.png");
+}
+.main-ls {
+  height: 250px;
+  left: 50%;
+  margin-left: -240px;
+  margin-top: -125px;
+  position: absolute;
+  top: 50%;
+  width: 480px;
+}
+body.lock-screen .box-ls {
+  background: #FFFFFF;
+  box-shadow: -30px 30px 50px rgba(0, 0, 0, 0.32);
+  overflow: hidden;
+  padding: 15px;
+}
+body.lock-screen .logo {
+  padding: 10px 0;
+}
+body.lock-screen .copyright {
+  font-size: 11px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+body.lock-screen .user-info {
+  float: right;
+  width: 285px;
+}
+body.lock-screen .user-info h1 {
+  color: #666666;
+  font-family: 'Raleway', sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 32px;
+  margin-top: 0;
+}
+body.lock-screen .user-info h1 i {
+  color: #cccccc;
+}
+body.lock-screen .user-info > span {
+  color: #666666;
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+body.lock-screen .user-info > span em {
+  color: #333333;
+}

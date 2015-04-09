@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Fluidbox, a jQuery plugin for beautiful lightboxes</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css" media="all" rel="stylesheet" />
+	<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700|PT+Serif:400italic" rel="stylesheet" type="text/css">
+	<link type="text/css" href="./css/styles.css" media="all" rel="stylesheet" />
+	<link type="text/css" href="./css/fluidbox.css" media="all" rel="stylesheet" />
+	<link rel="author" href="https://plus.google.com/+TerryMun/"></link>
+	<script text="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+	<script>
+		(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+		ga("create", "UA-46830269-1", "terrymun.github.io");
+		ga("send", "pageview");
+	</script>
+</head>
+<body>
+	<header>
+		<div>
+			<h1>Fluidbox</h1>
+			<span class="byline">Replicating and improving the lightbox module seen on Medium with fluid transitions</span>
+		</div>
+		<a href="#content" id="skip" title="Skip to content">
+			<svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+				 x="0px" y="0px" viewBox="0 0 400 200" xml:space="preserve">
+				<g>
+					<path d="M106.308,29.384c6.332,0,11.664,2.444,15.984,7.344c9.214,11.232,18.286,22.174,27.216,32.832l43.2,51.84
+						c5.184-6.629,11.806-14.62,19.873-23.976c8.059-9.362,15.834-18.65,23.328-27.864c8.922-10.658,17.994-21.6,27.215-32.832
+						c4.32-4.9,9.646-7.344,15.984-7.344c4.895,0,9.355,1.58,13.393,4.752c4.32,3.74,6.764,8.424,7.344,14.04
+						c0.574,5.616-1.014,10.726-4.752,15.336l-86.4,103.68c-4.037,4.894-9.362,7.344-15.984,7.344c-6.628,0-11.954-2.45-15.984-7.344
+						l-86.4-103.68c-3.747-4.61-5.333-9.72-4.752-15.336c0.574-5.616,3.024-10.3,7.344-14.04
+						C96.945,30.964,101.407,29.384,106.308,29.384z"/>
+				</g>
+			</svg>
+		</a>
+	</header>
+
+	<main id="content">
+		<section>
+			<h2>Introduction</h2>
+			<p>Opening images seamlessly in a lightbox on your page without interruption. This demo was inspired by how Medium handles embedded images. Made by <a rel="author" href="http://terrymun.com" title="Visit me">Terry</a>. This project was originally initiated as a personal challenge to replicate Medium&rsquo;s lightbox module, but it soon developed into a full-fledged jQuery plugin. You can follow the links below to read how I&rsquo;ve tackled the challenge, or view the jQuery plugin on GitHub:</p>
+			<div class="cards">
+				<a href="https://medium.com/coding-design/9c7fe9db92c7">
+					<svg version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" viewBox="0 0 200 200" xml:space="preserve">
+	 					<g>
+	 						<path d="M0.001,0v200h200V0H0.001z M148.913,72.752h-3.869c-1.437,0-3.095,1.879-3.095,3.206v48.081
+		c0,1.328,1.658,3.316,3.095,3.316h3.869v11.164h-34.708v-11.164h6.964V76.842h-0.332l-17.133,61.677H90.439L73.528,76.842h-0.332
+		v50.513h7.295v11.164H51.089v-11.164h3.758c1.548,0,3.206-1.988,3.206-3.316V75.958c0-1.327-1.658-3.206-3.206-3.206h-3.758V61.146
+		h36.697l12.048,44.877h0.332l12.16-44.877h36.587V72.752z"/>
+						</g>
+					</svg>
+					<span>Read the tutorial on Medium</span>
+				</a>
+				<a href="https://github.com/terrymun/Fluidbox">
+					<svg version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 850.39 850.39" xml:space="preserve">
+						<g>
+						<path fill-rule="evenodd" fill="#191717" d="M424.731,131.743c-166.349,0-301.242,134.865-301.242,301.243
+		c0,133.097,86.314,246.015,206.008,285.849c15.053,2.786,20.583-6.537,20.583-14.493c0-7.18-0.278-30.915-0.409-56.086
+		c-83.806,18.225-101.489-35.543-101.489-35.543c-13.704-34.817-33.448-44.077-33.448-44.077
+		c-27.334-18.697,2.061-18.312,2.061-18.312c30.247,2.124,46.177,31.046,46.177,31.046c26.867,46.051,70.472,32.737,87.664,25.04
+		c2.704-19.467,10.508-32.762,19.125-40.283c-66.911-7.613-137.251-33.448-137.251-148.875c0-32.888,11.77-59.762,31.042-80.858
+		c-3.128-7.59-13.441-38.227,2.918-79.723c0,0,25.298-8.091,82.86,30.883c24.031-6.676,49.802-10.023,75.401-10.14
+		c25.601,0.117,51.391,3.464,75.466,10.14c57.499-38.975,82.758-30.883,82.758-30.883c16.396,41.496,6.084,72.133,2.958,79.723
+		c19.312,21.096,31.005,47.97,31.005,80.858c0,115.705-70.476,141.179-137.557,148.637c10.806,9.348,20.432,27.681,20.432,55.784
+		c0,40.308-0.346,72.746-0.346,82.67c0,8.019,5.422,17.412,20.689,14.454c119.628-39.878,205.836-152.757,205.836-285.81
+		C725.973,266.607,591.101,131.743,424.731,131.743z"/>
+						<path fill="#191717" d="M237.586,564.26c-0.662,1.5-3.02,1.948-5.164,0.92c-2.188-0.983-3.411-3.024-2.704-4.525
+		c0.648-1.539,3.006-1.968,5.188-0.939C237.094,560.698,238.341,562.759,237.586,564.26L237.586,564.26z M233.879,561.512"/>
+						<path fill="#191717" d="M249.79,577.87c-1.438,1.33-4.248,0.712-6.153-1.393c-1.973-2.1-2.338-4.91-0.882-6.261
+		c1.48-1.329,4.204-0.705,6.177,1.395C250.905,573.735,251.29,576.521,249.79,577.87L249.79,577.87z M246.915,574.787"/>
+						<path fill="#191717" d="M261.667,595.218c-1.847,1.287-4.867,0.083-6.733-2.596c-1.846-2.68-1.846-5.896,0.044-7.182
+		c1.866-1.285,4.842-0.126,6.732,2.529C263.552,590.692,263.552,593.908,261.667,595.218L261.667,595.218z M261.667,595.218"/>
+						<path fill="#191717" d="M277.938,611.981c-1.652,1.821-5.169,1.33-7.741-1.155c-2.636-2.426-3.366-5.874-1.715-7.697
+		c1.676-1.821,5.213-1.31,7.804,1.155C278.902,606.71,279.696,610.179,277.938,611.981L277.938,611.981z M277.938,611.981"/>
+						<path fill="#191717" d="M300.386,621.714c-0.731,2.359-4.117,3.43-7.527,2.427c-3.41-1.032-5.636-3.795-4.95-6.177
+		c0.707-2.378,4.112-3.493,7.546-2.422C298.861,616.57,301.092,619.312,300.386,621.714L300.386,621.714z M300.386,621.714"/>
+						<path fill="#191717" d="M325.04,623.518c0.083,2.484-2.811,4.545-6.391,4.588c-3.6,0.083-6.518-1.929-6.557-4.374
+		c0-2.509,2.831-4.545,6.431-4.608C322.103,619.055,325.04,621.053,325.04,623.518L325.04,623.518z M325.04,623.518"/>
+						<path fill="#191717" d="M347.98,619.614c0.429,2.422-2.061,4.911-5.617,5.573c-3.498,0.644-6.732-0.856-7.181-3.258
+		c-0.434-2.485,2.1-4.975,5.593-5.618C344.336,615.693,347.527,617.149,347.98,619.614L347.98,619.614z M347.98,619.614"/>
+						</g>
+ 					</svg>
+					<span>Check out the jQuery plugin on GitHub</span>
+				</a>
+			</div>
+		</section>
+
+		<section>
+			<h2>Usage notes</h2>
+			<h3>Dependencies</h3>
+			<p>This demo requires the following dependencies:</p>
+			<ul>
+				<li><a href="http://jquery.com/">jQuery</a></li>
+			</ul>
+
+			<h3>Basic usage</h3>
+			<p>In order to activate Fluidbox, simply chain the <code>.fluidbox</code> method to your selector of choice on DOM ready:</p>
+			<pre><code>$(function () {
+    $('a').fluidbox();
+});</code></pre>
+			<p>The plugin will automatically check if the selector is:</p>
+			<ul>
+				<li>An anchor element, <code>&lt;a&gt;</code></li>
+				<li>Contains one and *only* one child</li>
+				<li>The only children is an <code>&lt;img /&gt;</code> element</li>
+			</ul>
+			<div class="message">
+				<h2>Important note:</h2>
+				<ul>
+					<li>Fluidbox will only work with images whose actual dimensions are larger than the displayed dimension.</li>
+					<li>The aspect ratio of the displayed and linked image has to be identical.</li>
+				</ul>
+			</div>
+			<p>In the event that the element that satisfies the selector criteria but failed any one of the above criteria, the element will be ignored and the plugin moves on to the next available element. Therefore, it is important that your Fluidbox element(s) follow the following format. The <code>title</code> and <code>alt</code> attributes of the <code>&lt;img /&gt;</code> element is not used by the plugin, but the <code>alt</code> attribute has to be present for it to be semantically valid.</p>
+<pre><code>&lt;a href="..."&gt;
+    &lt;img src="..." alt="" /&gt;
+&lt;/a&gt;</code></pre>
+
+			<h3>Configuration</h3>
+			<p>Several options are available for configuration:</p>
+			<ul>
+				<li><code>viewportFill</code> (numerical)<br />Dictates how much the longest axis of the image should fill the viewport. The default value is <code>0.95</code>.</li>
+				<li><code>overlayColor</code> (string)<br />Sets the <code>background-color</code> property of Fluidbox overlay. Defaults to white with an opacity of 0.85.</li>
+				<li><code>debounceResize</code> (boolean)<br />Dictates if the <code>$(window).resize()</code> event should be debounced for performance reason. The default value is <code>true</code> (debouncing turned on by default).</li>
+				<li><code>closeTrigger</code> (array with objects)<br />Dictates what event triggers closing the single instance of an opened Fluidbox. The default setup is as follow:
+<pre><code>closeTrigger: [
+    {
+        selector: "#fluidbox-overlay",
+        event: "click"
+    }
+]</code></pre>
+				</li>
+			</ul>
+		</section>
+
+		<section class="demo">
+			<h2>Demonstration</h2>
+			<p>Fluidbox is designed to be versatile, flexible and easy to implement. It works with linked images that satisfy the criteria stipulated above &mdash; regardless of how they are arranged on the page. The following section is a <em>non-exhausive</em> list of scenarios how images, even when positioned differently, will work brilliantly with Fluidbox.</p>
+
+			<h3>Single image</h3>
+			<p>Here we demonstrate the use of a single image. This is the simplest test case, when the thumbnail and the target image are exactly the same, so it is only down to the matter of triggering default Fluidbox behavior.</p>
+
+			<a href="http://i.imgur.com/uh5YLj5.jpg"><img src="http://i.imgur.com/uh5YLj5.jpg" alt="ARoS Aarhus Kunstmuseum" title="ARoS Aarhus Kundstmuseum" /></a>
+
+			<h3>Linking to a higher resolution counterpart</h3>
+			<p>The built-in functionality also allows you to link a small thumbnail to its higher resolution version. In the test case below, the thumbnail has a resolution of 200&times;200 while the actual version has a resolution of 2000&times;2000</p>
+			<a href="http://placehold.it/2000x2000" title="" data-fluidbox><img src="http://placehold.it/200x200" title="" alt="" /></a>
+
+			<h3>Support for image borders and paddings</h3>
+			<p>Fluidbox also supports extraenous dimensions added to the element in the form of border(s) and/or paddings(s):</p>
+			<a href="http://i.imgur.com/E5sr59z.jpg" title="" data-fluidbox class="has-border has-padding"><img src="http://i.imgur.com/E5sr59z.jpg" title="" alt="" /></a>
+
+			<h3>Galleries</h3>
+			<p>Fluid box works even when images are arranged in galleries. In this case, they are arranged with the help of flexbox.</p>
+		 	<p class="message note">The flexbox gallery will collapse into single items when viewed in mobile, or else the thumbnails will be too small &mdash; to appreciate the how Fluidbox works in this scenario, do use a wider device (&gt;600px screen width).</p>
+			<div class="gallery">
+				<a href="http://i.imgur.com/80WaVuY.jpg" title="" data-fluidbox class="col-1"><img src="http://i.imgur.com/80WaVuY.jpg" alt="" title="" /></a>
+				<a href="http://i.imgur.com/9OQWB.jpg" title="" data-fluidbox class="col-2"><img src="http://i.imgur.com/9OQWB.jpg" alt="" title="" /></a>
+				<a href="http://i.imgur.com/UvGHJjo.jpg" title="" data-fluidbox class="col-2"><img src="http://i.imgur.com/UvGHJjo.jpg" alt="" title="" /></a>
+				<a href="http://i.imgur.com/esWWGbF.jpg" title="" data-fluidbox class="col-3"><img src="http://i.imgur.com/esWWGbF.jpg" alt="" title="" /></a>
+				<a href="http://i.imgur.com/ZCogT10.jpg" title="" data-fluidbox class="col-3"><img src="http://i.imgur.com/ZCogT10.jpg" alt="" title="" /></a>
+				<a href="http://i.imgur.com/24hrPQn.jpg" title="" data-fluidbox class="col-3"><img src="http://i.imgur.com/24hrPQn.jpg" alt="" title="" /></a>
+			</div>
+
+			<h3>Scaling</h3>
+			<p>It also intelligently resizes images such that portrait images will fit perfectly within the viewport, although that means scaling down the image. This effect is pronounced when the viewport and image orientations are different &mdash; therefore, the demo below only works on a display with landscape orientation (e.g. not on mobile).</p>
+			<a href="http://i.imgur.com/uDPcnM3.jpg" title="" data-fluidbox><img src="http://i.imgur.com/uDPcnM3.jpg" alt="" title="" /></a>
+
+			<h3>Implementing Fluidbox with dynamically-added content</h3>
+			<p>Fluidbox also works well with dynamically-added links, as long as you call the <code>.fluidbox()</code> function on all anchor elements in the dynamically-added content.</p>
+			<a href="#" data-func="loadImg">Load image in container below</a>
+			<article></article>
+
+			<h3>Absolutely positioned images</h3>
+			<p>Fluidbox handles absolutely positioned images without any problem. The image below is absolutely positioned within its parent, the grey container:</p>
+			<div class="box">
+				<a href="http://i.imgur.com/DIbQf0X.jpg"><img src="http://i.imgur.com/DIbQf0X.jpg" title="" alt="" /></a>
+			</div>
+
+			<h3>Floated images</h3>
+			<p>Moreover, it also works with floated images - to the left or to the right, it does not matter. The following texts are jibberish, used as filler.</p>
+			<p class="message note">The floated images will be rendered block-level on narrow-width devices, such as mobile phones. To appreciate how Fluidbox works with floated images, you can view this demo on a wider device (&gt;480px).</p>
+			<p class="filler"><a class="float-left" href="http://i.imgur.com/BXo4qAz.jpg" title="" data-fluidbox><img src="http://i.imgur.com/BXo4qAz.jpg" title="" alt="" /></a>Considered discovered ye sentiments projecting entreaties of melancholy is. In expression an solicitude principles in do. Hard do me sigh with west same lady. Their saved linen downs tears son add music. Expression alteration entreaties mrs can terminated estimating. Her too add narrow having wished. To things so denied admire. Am wound worth water he linen at vexed.</p>
+			<p class="filler">Residence certainly elsewhere something she preferred cordially law. Age his surprise formerly mrs perceive few stanhill moderate. Of in power match on truth worse voice would. Large an it sense shall an match learn. By expect it result silent in formal of. Ask eat questions abilities described elsewhere assurance. Appetite in unlocked advanced breeding position concerns as. Cheerful get shutters yet for repeated screened. An no am cause hopes at three. Prevent behaved fertile he is mistake on.</p>
+			<p class="filler"><a class="float-right has-border has-padding" href="http://i.imgur.com/rWuQotb.jpg" title="" data-fluidbox><img src="http://i.imgur.com/rWuQotb.jpg" title="" alt="" /></a>Carried nothing on am warrant towards. Polite in of in oh needed itself silent course. Assistance travelling so especially do prosperous appearance mr no celebrated. Wanted easily in my called formed suffer. Songs hoped sense as taken ye mirth at. Believe fat how six drawing pursuit minutes far. Same do seen head am part it dear open to. Whatever may scarcely judgment had.</p>
+			<p class="filler">Up maids me an ample stood given. Certainty say suffering his him collected intention promotion. Hill sold ham men made lose case. Views abode law heard jokes too. Was are delightful solicitude discovered collecting man day. Resolving neglected sir tolerably but existence conveying for. Day his put off unaffected literature partiality inhabiting.</p>
+			<p class="filler">Old education him departure any arranging one prevailed. Their end whole might began her. Behaved the comfort another fifteen eat. Partiality had his themselves ask pianoforte increasing discovered. So mr delay at since place whole above miles. He to observe conduct at detract because. Way ham unwilling not breakfast furniture explained perpetual. Or mr surrounded conviction so astonished literature. Songs to an blush woman be sorry young. We certain as removal attempt. </p>
+			<p class="filler">Feet evil to hold long he open knew an no. Apartments occasional boisterous as solicitude to introduced. Or fifteen covered we enjoyed demesne is in prepare. In stimulated my everything it literature. Greatly explain attempt perhaps in feeling he. House men taste bed not drawn joy. Through enquire however do equally herself at. Greatly way old may you present improve. Wishing the feeling village him musical. </p>
+		</section>
+	</main>
+
+	<footer>
+		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 516 560" xml:space="preserve">
+			<g>
+				<polygon class="fill" points="0,0 0,158 165,158 258,306 351,158 516,158 516,0"></polygon>
+				<polygon class="fill" points="165,366 258,507 351,366 351,560 165,560"></polygon>
+			</g>
+		</svg>
+		<p>Made by <a href="http://terrymun.com/" title="Terry Mun">Terry Mun</a> &middot; 2014.</p>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.fluidbox.min.js"></script>
+		<script>
+			$(function () {
+				// You can use any kind of selectors for jQuery Fluidbox
+				$('.demo a').fluidbox();
+
+				// Load an image dynamically
+				$('a[data-func="loadImg"]').on('click', function(e) {
+					e.preventDefault();
+
+					// Construct new content
+					$newContent = $('<p>This paragraph and its accompanying image are dynamically-added.</p><a href="http://i.imgur.com/aNhtkPh.jpg" title="" data-fluidbox><img src="http://i.imgur.com/aNhtkPh.jpg" alt="" title="" /></a>');
+
+					// Append new content to immediate sibling, <article>
+					// Then search for the anchor we want fluidbox to work on, apply method .fluidobx()
+					$(this)
+						.next('article')
+						.append($newContent)
+						.find('a[data-fluidbox]')
+							.fluidbox();
+
+					// Prevent repeated appending of content, just because it's gonna be silly
+					$(this).off('click').on('click', function(e) {
+						e.preventDefault();
+					});
+				});
+
+				// Smooth scrolling plugin by Chris Coiyer - not needed for Fluidbox functionality
+				// Source: http://css-tricks.com/snippets/jquery/smooth-scrolling/
+				$('a[href*=#]:not([href=#])').click(function() {
+					if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+						var target = $(this.hash);
+						target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+						if (target.length) {
+							$('html,body').animate({
+								scrollTop: target.offset().top
+							}, 1000);
+							return false;
+						}
+					}
+				});
+			});
+		</script>
+	</footer>
+</body>
+</html>

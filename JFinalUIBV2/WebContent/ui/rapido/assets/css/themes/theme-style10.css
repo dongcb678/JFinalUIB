@@ -1,0 +1,206 @@
+/* ---------------------------------------------------------------------- */
+/*  Theme Default
+/* ---------------------------------------------------------------------- */
+body {
+  background-color: #050505;
+}
+body.layout-boxed {
+  background: url("../../images/bg.png") #050505;
+}
+
+#slidingbar {
+  background: rgba(5, 5, 5, 0.9);
+}
+
+.main-container, #pageslide-left, #pageslide-right {
+  background-color: #050505 !important;
+}
+
+.label-default, .badge-default {
+  background: #1abc9c !important;
+}
+
+.pace .pace-progress {
+  background: #804c75;
+}
+
+.topbar {
+  background: #804c75;
+  background-color: #a05f92 0px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#a05f92 0px), to(#804c75 100%));
+  background-image: -webkit-linear-gradient(top, #a05f92 0px, #804c75 100%);
+  background-image: -moz-linear-gradient(top, #a05f92 0px, #804c75 100%);
+  background-image: -ms-linear-gradient(top, #a05f92 0px, #804c75 100%);
+  background-image: -o-linear-gradient(top, #a05f92 0px, #804c75 100%);
+  background-image: linear-gradient(top, #a05f92 0px, #804c75 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#a05f92 0px', endColorStr='#804c75 100%');
+}
+.topbar > .container .navbar-brand, .topbar .logo {
+  color: white;
+}
+.topbar .topbar-tools > ul > li > a {
+  color: white;
+}
+.topbar .topbar-tools > ul > li.right-menu-toggle > a {
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-left-color: #804c75;
+}
+.topbar .nav li.dropdown.open > .dropdown-toggle, .topbar .nav li.dropdown.active > .dropdown-toggle, .topbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background: none;
+  color: white;
+}
+.topbar .nav > li:hover > a, .topbar .nav > li:active > a, .topbar .nav > li > a:focus {
+  color: white;
+  background: none;
+}
+
+ul.main-navigation-menu > li a {
+  border-bottom: none;
+  border-top-color: #121212;
+  color: #dedede;
+}
+ul.main-navigation-menu > li a i {
+  color: #454545;
+  font-weight: normal;
+}
+ul.main-navigation-menu > li.active > a {
+  background: #1f1f1f !important;
+  border-top: none !important;
+  color: white;
+}
+ul.main-navigation-menu > li.active > a i {
+  color: white;
+}
+
+ul.main-navigation-menu li > ul.sub-menu > li > a:hover {
+  background: #242424;
+  color: white !important;
+}
+
+ul.main-navigation-menu li > ul.sub-menu > li.open > a, ul.main-navigation-menu li > ul.sub-menu > li.active > a, ul.main-navigation-menu li > ul.sub-menu > li.open > a:hover, ul.main-navigation-menu li > ul.sub-menu > li.active > a:hover {
+  background: #2b2b2b;
+  color: white !important;
+}
+
+ul.main-navigation-menu > li.open > a, ul.main-navigation-menu > li > a:hover, ul.main-navigation-menu > li:hover > a {
+  background-color: black;
+}
+
+ul.main-navigation-menu li.divider {
+  background-color: #121212 !important;
+}
+
+ul.main-navigation-menu li.dropdown-header, ul.main-navigation-menu .mega-menu-sub-title {
+  color: #525252 !important;
+}
+
+ul.main-navigation-menu li.dropdown-header, ul.main-navigation-menu .mega-menu-sub-title {
+  color: #525252 !important;
+}
+
+ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu a {
+  color: #dedede !important;
+}
+ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu a:hover {
+  background: none !important;
+}
+
+ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu li.active a, ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu li.active a:hover, ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu li.active a:focus {
+  background-color: black !important;
+  text-decoration: none;
+}
+
+ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu li a:hover {
+  background-color: #141414 !important;
+  text-decoration: none;
+}
+
+#horizontal-menu .container {
+  background: #050505;
+}
+#horizontal-menu .navbar-collapse .navbar-nav > li > a {
+  color: #787878;
+}
+#horizontal-menu .navbar-collapse .navbar-nav > li > a:hover {
+  color: #dedede;
+  background: black;
+}
+#horizontal-menu .navbar-collapse .navbar-nav > li > a:active, #horizontal-menu .navbar-collapse .navbar-nav > li > a:focus {
+  background: black;
+}
+#horizontal-menu .navbar-collapse .navbar-nav > li.active > a {
+  color: #dedede;
+  background: #1abc9c;
+}
+#horizontal-menu .navbar-collapse .navbar-nav > li.active > a:after {
+  border-top-color: #1abc9c;
+}
+
+.main-content {
+  background: #DDDDDD;
+}
+
+.go-top {
+  color: white;
+}
+
+.footer-inner {
+  color: white;
+}
+
+#pageslide-left .slide-tools {
+  background-color: black;
+}
+#pageslide-left .btn {
+  color: rgba(255, 255, 255, 0.3);
+}
+#pageslide-left .btn:hover {
+  color: white;
+  background-color: rgba(5, 5, 5, 0.4);
+}
+#pageslide-left .user-profile {
+  border-color: #121212;
+  position: relative;
+}
+#pageslide-left .user-profile h5 {
+  color: #525252;
+}
+#pageslide-left .user-profile h4 {
+  color: white;
+}
+
+.closedbar {
+  background-color: black !important;
+}
+.closedbar:hover {
+  background-color: #050505 !important;
+}
+
+#pageslide-right .pageslide-title {
+  color: rgba(255, 255, 255, 0.4);
+}
+#pageslide-right .notifications a {
+  color: #EEEEEE;
+  background: black;
+}
+#pageslide-right .notifications a:hover {
+  background: black;
+}
+#pageslide-right .notifications a .time {
+  color: #525252;
+}
+
+#style_selector_container .box-title {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+#style_selector_container .images {
+  border-bottom: 1px solid #121212;
+}
+#style_selector_container .images img.active {
+  border: 2px solid #ababab;
+}
+
+footer {
+  background-color: #050505;
+}
