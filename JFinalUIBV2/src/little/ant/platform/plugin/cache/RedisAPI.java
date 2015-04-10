@@ -1,5 +1,7 @@
 package little.ant.platform.plugin.cache;
 
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.plugin.PropertiesPlugin;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -27,7 +29,10 @@ public class RedisAPI {
             config.setMaxWaitMillis(1000 * 100);
             //在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
             config.setTestOnBorrow(true);
-            pool = new JedisPool(config, "192.168.2.191", 8888);
+            
+            String ip = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_redis_ip);
+            Integer port = (Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_redis_port);
+            pool = new JedisPool(config, ip, port);
         }
         return pool;
     }
@@ -42,7 +47,31 @@ public class RedisAPI {
             pool.returnResourceObject(redis);
         }
     }
-    
+
+    /**
+     * 设置数据
+     * @param key
+     * @param value
+     * @return
+     */
+    public static String set(String key, String value){
+        Jedis jedis = null;
+        String ret = null;
+        try {
+            pool = getPool();
+            jedis = pool.getResource();
+            ret = jedis.set(key, value);
+        } catch (Exception e) {
+            //释放redis对象
+            pool.returnResourceObject(jedis);
+            e.printStackTrace();
+        } finally {
+            //返还到连接池
+            returnResource(pool, jedis);
+        }
+        return ret;
+    }
+
     /**
      * 获取数据
      * @param key
@@ -65,6 +94,26 @@ public class RedisAPI {
         }
         
         return value;
+    }
+
+    /**
+     * 删除数据
+     * @param key
+     */
+    public static void del(String key){
+        Jedis jedis = null;
+        try {
+            pool = getPool();
+            jedis = pool.getResource();
+            jedis.del(key);
+        } catch (Exception e) {
+            //释放redis对象
+            pool.returnResourceObject(jedis);
+            e.printStackTrace();
+        } finally {
+            //返还到连接池
+            returnResource(pool, jedis);
+        }
     }
     
 }

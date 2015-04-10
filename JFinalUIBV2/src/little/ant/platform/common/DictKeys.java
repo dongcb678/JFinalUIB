@@ -95,6 +95,16 @@ public abstract class DictKeys {
 	 * mail 配置：接收邮件地址
 	 */
 	public static final String config_mail_to = "config.mail.to";
+
+	/**
+	 *  redis 配置：ip
+	 */
+	public static final String config_redis_ip = "config.redis.ip";
+
+	/**
+	 *  redis 配置：port
+	 */
+	public static final String config_redis_port = "config.redis.port";
 	
 	/**
 	 * 当前数据库类型
@@ -170,7 +180,7 @@ public abstract class DictKeys {
 	 *  主数据源名称：系统主数据源
 	 */
 	public static final String db_dataSource_main = "db.dataSource.main";
-	
+
 	/**
 	 * 分页参数初始化值：默认显示第几页
 	 */

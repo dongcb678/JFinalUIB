@@ -164,13 +164,17 @@ public class PropertiesPlugin implements IPlugin {
 		
 		paramMap.put(DictKeys.config_domain_key, properties.getProperty(DictKeys.config_domain_key));
 		
-		// mail配置
+		// mail 配置
 		paramMap.put(DictKeys.config_mail_host, properties.getProperty(DictKeys.config_mail_host).trim());
 		paramMap.put(DictKeys.config_mail_port, properties.getProperty(DictKeys.config_mail_port).trim());
 		paramMap.put(DictKeys.config_mail_from, properties.getProperty(DictKeys.config_mail_from).trim());
 		paramMap.put(DictKeys.config_mail_userName, properties.getProperty(DictKeys.config_mail_userName).trim());
 		paramMap.put(DictKeys.config_mail_password, properties.getProperty(DictKeys.config_mail_password).trim());
 		paramMap.put(DictKeys.config_mail_to, properties.getProperty(DictKeys.config_mail_to).trim());
+		
+		// redis 配置
+		paramMap.put(DictKeys.config_redis_ip, properties.getProperty(DictKeys.config_redis_ip).trim());
+		paramMap.put(DictKeys.config_redis_port, Integer.valueOf(properties.getProperty(DictKeys.config_redis_port).trim()));
 		
 		for (String key : paramMap.keySet()) {
 			log.debug("全局参数配置：" + key + " = " + paramMap.get(key));
