@@ -37,7 +37,7 @@ public class IndexController extends BaseController {
 				ids = "8a40c0353fa828a6013fa898d4ac0020";
 			}
 			menuList = IndexService.service.menu(ids, user, getI18nPram());
-			render("/platform/index.html");
+			render("/platform/index/index.html");
 		}else{
 			render("/platform/login.html");
 		}
@@ -49,7 +49,7 @@ public class IndexController extends BaseController {
 	public void content(){;
 		setAttrs(ResourcesService.service.pv());
 		setAttrs(ResourcesService.service.getResources());
-		render("/platform/content.html");
+		render("/platform/index/content.html");
 	}
 	
 }
