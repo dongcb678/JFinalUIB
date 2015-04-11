@@ -953,7 +953,7 @@
 			} else {
 				return false;
 			}
-		}, '* This field is required.');
+		}, '* 不能为空.');
 		formNote.validate({
 			errorElement : "span", // contain the error msg in a span tag
 			errorClass : 'help-block',

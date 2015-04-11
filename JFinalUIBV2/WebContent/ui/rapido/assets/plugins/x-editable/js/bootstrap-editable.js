@@ -522,7 +522,7 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
         @example
         validate: function(value) {
             if($.trim(value) == '') {
-                return 'This field is required';
+                return '不能为空';
             }
         }
         **/         

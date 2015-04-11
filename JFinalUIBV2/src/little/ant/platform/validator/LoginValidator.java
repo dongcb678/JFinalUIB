@@ -22,7 +22,7 @@ public class LoginValidator extends Validator {
 		String actionKey = getActionKey();
 		if (actionKey.equals("/login/vali")){
 			controller.keepPara("username", "password");
-			controller.render("/platform/login.html");
+			controller.render("/platform/login/login.html");
 		}
 	}
 	

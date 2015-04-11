@@ -29,7 +29,7 @@ public class LoginController extends BaseController {
 		if(null != user){//后台
 			redirect("/jf/platform/");
 		}else{
-			render("/platform/login.html");
+			render("/platform/login/login.html");
 		}
 	}
 

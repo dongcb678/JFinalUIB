@@ -39,7 +39,7 @@ public class IndexController extends BaseController {
 			menuList = IndexService.service.menu(ids, user, getI18nPram());
 			render("/platform/index/index.html");
 		}else{
-			render("/platform/login.html");
+			render("/platform/login/login.html");
 		}
 	}
 	

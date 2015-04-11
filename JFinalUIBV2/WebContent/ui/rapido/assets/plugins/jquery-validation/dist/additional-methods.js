@@ -476,7 +476,7 @@ jQuery.validator.addMethod("creditcardtypes", function(value, element, param) {
 		return true;
 	}
 	return false;
-}, "Please enter a valid credit card number.");
+}, "请输入一个有效的信用卡号码.");
 
 jQuery.validator.addMethod("ipv4", function(value, element, param) {
 	return this.optional(element) || /^(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)$/i.test(value);

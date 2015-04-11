@@ -21,7 +21,7 @@ $(function(){
     
     $('#firstname').editable({
         validate: function(value) {
-           if($.trim(value) == '') return 'This field is required';
+           if($.trim(value) == '') return '不能为空';
         }
     });
     
