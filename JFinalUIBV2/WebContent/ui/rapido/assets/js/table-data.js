@@ -1,11 +1,12 @@
 var TableData = function() {
 	"use strict";
+	
 	//function to initiate DataTable
 	//DataTable is a highly flexible tool, based upon the foundations of progressive enhancement,
 	//which will add advanced interaction controls to any HTML table
 	//For more information, please visit https://datatables.net/
+	
 	var runDataTable_example1 = function() {
-
 		var oTable = $('#sample_1').dataTable({
 			"aoColumnDefs" : [{
 				"aTargets" : [0]
@@ -37,6 +38,7 @@ var TableData = function() {
 			oTable.fnSetColumnVis(iCol, ( bVis ? false : true));
 		});
 	};
+	
 	var runDataTable_example2 = function() {
 		var newRow = false;
 		var actualEditingRow = null;
@@ -89,6 +91,7 @@ var TableData = function() {
 				actualEditingRow = nRow;
 			}
 		});
+		
 		$('#sample_2').on('click', '.cancel-row', function(e) {
 
 			e.preventDefault();
@@ -103,6 +106,7 @@ var TableData = function() {
 				actualEditingRow = null;
 			}
 		});
+		
 		$('#sample_2').on('click', '.delete-row', function(e) {
 			e.preventDefault();
 			if (newRow && actualEditingRow) {
@@ -137,10 +141,8 @@ var TableData = function() {
 					
 				}
 			});
-			
-
-			
 		});
+		
 		$('#sample_2').on('click', '.save-row', function(e) {
 			e.preventDefault();
 
@@ -167,6 +169,7 @@ var TableData = function() {
 						}
 					});	
 		});
+		
 		$('#sample_2').on('click', '.edit-row', function(e) {
 			e.preventDefault();
 			if (actualEditingRow) {
@@ -181,8 +184,8 @@ var TableData = function() {
 			var nRow = $(this).parents('tr')[0];
 			editRow(oTable, nRow);
 			actualEditingRow = nRow;
-
 		});
+		
 		var oTable = $('#sample_2').dataTable({
 			"aoColumnDefs" : [{
 				"aTargets" : [0]
@@ -214,6 +217,7 @@ var TableData = function() {
 			oTable.fnSetColumnVis(iCol, ( bVis ? false : true));
 		});
 	};
+	
 	return {
 		//main function to initiate template pages
 		init : function() {
