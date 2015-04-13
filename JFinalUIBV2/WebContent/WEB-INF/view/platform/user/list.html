@@ -95,16 +95,27 @@
 									<td class="hidden-xs"><span class="label label-sm label-success">${escapeXml(user["mobile"]!) }</span></td>
 									<td class="hidden-xs">
 										<% if(view == true){ %>
-											<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/platform/user/view/${escapeXml(user.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a>
+											<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/platform/user/view/${escapeXml(user.ids!)}');"> 
+												<i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}
+											</a>
 										<% } %>
+										
 										<% if(edit == true){ %>
-											<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/platform/user/edit/${escapeXml(user.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a>
+											<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/platform/user/edit/${escapeXml(user.ids!)}');"> 
+												<i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}
+											</a>
 										<% } %>
+										
 										<% if(delete == true){ %>
-											<a class="btn btn-danger" href="#" onclick="ajaxContentConfirm('/jf/platform/user/delete/${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
+											<a class="btn btn-danger" href="#" onclick="ajaxContentConfirm('/jf/platform/user/delete/${escapeXml(user.ids!)}');"> 
+												<i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}
+											</a>
 										<% } %>
+										
 										<% if(group == true){ %>
-											<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${escapeXml(user.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.user.list.table.group"]}</a>
+											<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${escapeXml(user.ids!)}');"> 
+												<i class="icon-trash icon-white"></i> ${i18nMap["admin.user.list.table.group"]}
+											</a>
 										<% } %>
 									</td>
 								</tr>
@@ -112,21 +123,8 @@
 						</tbody>
 					</table>
 					
-					<div class="row">
-						<div class="col-md-6"><div class="dataTables_info" id="sample_1_info">显示1至10条，共45条</div></div>
-						<div class="col-md-6">
-							<div class="dataTables_paginate paging_bootstrap">
-								<ul class="pagination pagination-blue">
-									<li class="prev disabled"><a href="#"><i class="fa fa-chevron-left"></i> </a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li class="next"><a href="#"> <i class="fa fa-chevron-right"></i></a></li>
-								</ul>
-							</div>
-						</div>
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
 					</div>
 					
 				</div>

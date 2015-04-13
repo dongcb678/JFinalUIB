@@ -23,15 +23,28 @@ function simpleDialog(title, content){
  * @param isSelectSize
  * @param orderColunm
  * @param orderMode
+ * @param currentPageCount
  * @returns {String}
  */
-function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode){
-	var splitStr = '<ul>';
+function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode, currentPageCount){
+	var start = 1;
+	var end = currentPageCount;
+	
+	if(pageNumber != 1){
+		start = (pageNumber - 1) * pageSize + 1;
+		end = start + currentPageCount - 1;
+	}
+	
+	var splitStr = '<div class="col-md-6"><div class="dataTables_info">显示' + start + '至' + end + '条，共' + totalRow + '条</div></div>';
+	
+	splitStr += '<div class="col-md-6">';
+	splitStr += '<div class="dataTables_paginate paging_bootstrap">';
+	splitStr += '<ul class="pagination pagination-blue">';
 	
 	if (pageNumber == 1 || totalPages == 0) {
-		splitStr += '<li><a href="javascript:void(0)">' + i18n_common_splitPage_previous + '</a></li>';
+		splitStr += '<li class="prev disabled"><a href="javascript:void(0)">' + i18n_common_splitPage_previous + '</a></li>';
 	} else {
-		splitStr += '<li><a href="javascript:splitPageLink(\''+divId+'\', \''+formId+'\', ' + (pageNumber - 1) + ');">' + i18n_common_splitPage_previous + '</a></li>';
+		splitStr += '<li class="prev"><a href="javascript:splitPageLink(\''+divId+'\', \''+formId+'\', ' + (pageNumber - 1) + ');">' + i18n_common_splitPage_previous + '</a></li>';
 	}
 	
 	for (var i = 1; i <= totalPages; i++) {
@@ -53,9 +66,9 @@ function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages
     }
 	
 	if (pageNumber == totalPages || totalPages == 0) {
-		splitStr += '<li><a href="javascript:void(0)">' + i18n_common_splitPage_next + '</a></li>';
+		splitStr += '<li class="next disabled"><a href="javascript:void(0)">' + i18n_common_splitPage_next + '</a></li>';
 	} else {
-		splitStr += '<li><a href="javascript:splitPageLink(\''+divId+'\', \''+formId+'\', ' + (pageNumber + 1) + ');">' + i18n_common_splitPage_next + '</a></li>';
+		splitStr += '<li class="next"><a href="javascript:splitPageLink(\''+divId+'\', \''+formId+'\', ' + (pageNumber + 1) + ');">' + i18n_common_splitPage_next + '</a></li>';
 	}
 	
 	if(isSelectPage == true){
@@ -100,6 +113,9 @@ function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages
 
 	splitStr += '<input type="hidden" name="orderColunm" value="'+orderColunm+'"/>';
 	splitStr += '<input type="hidden" name="orderMode" value="'+orderMode+'"/>';
+	
+	splitStr += '</div>';
+	splitStr += '</div>';
 	
 	return splitStr;
 }
@@ -180,37 +196,31 @@ function ajaxFunc(url, data, callback){
  * @param callback 回调
  */
 function ajaxForm(divId, formId, callback){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$("#" + formId).ajaxSubmit({
 		cache: false,
 	    success:  function (data) {
 	    	if(data != ""){
-	    		$("#" + divId).html(data);
+	    		var toolbarDiv = $("#toolbarDiv");
+				toolbarDiv.nextAll().remove();
+				toolbarDiv.after(data);
 	    	}
+	    	
 			//扩展回调函数
 			if( callback != null ){
 				callback();
 			}
-	    	$('#loading').remove();
-			$('#content').fadeIn();
-			docReady();
 	    }
 	});
 }
 
 /**
  * ajax请求url替换指定div
- * @param shade 是否开启遮罩层
  * @param divId 返回替换div
  * @param url 请求地址
  * @param data 参数
  * @param callback 回调
  */
-function ajaxDiv(shade, divId, url, data, callback){
-	if(shade){
-		$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
-	}
-	
+function ajaxDiv(divId, url, data, callback){
 	$.ajax({
 		type : "post",
 		url : encodeURI(encodeURI(cxt + url)),
@@ -228,13 +238,6 @@ function ajaxDiv(shade, divId, url, data, callback){
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) { 
 			alert("请求出现错误！");
-        },
-        complete: function(XMLHttpRequest, textStatus) { 
-        	if(shade){
-        		$('#loading').remove();
-    			$('#content').fadeIn();
-    			docReady();
-        	}
         }
 	});
 }
@@ -246,8 +249,6 @@ function ajaxDiv(shade, divId, url, data, callback){
  * @param callback 回调
  */
 function ajaxContent(url, data, callback){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
-	
 	$.ajax({
 		type : "post",
 		url : encodeURI(encodeURI(cxt + url)),
@@ -257,7 +258,9 @@ function ajaxContent(url, data, callback){
 		async: false,
 		cache: false,
 		success:function(returnData){
-			$("#content").html(returnData);
+			var toolbarDiv = $("#toolbarDiv");
+			toolbarDiv.nextAll().remove();
+			toolbarDiv.after(returnData);
 			//扩展回调函数
 			if( callback != null ){
 				callback();
@@ -270,13 +273,6 @@ function ajaxContent(url, data, callback){
             // alert(XMLHttpRequest.readyState);
             // alert(textStatus);
 			alert("请求出现错误！");
-        },
-        complete: function(XMLHttpRequest, textStatus) { 
-        	// 请求完成后回调函数 (请求成功或失败时均调用)。参数： XMLHttpRequest 对象，成功信息字符串。
-            // 调用本次AJAX请求时传递的options参数
-	    	$('#loading').remove();
-			$('#content').fadeIn();
-			docReady();
         }
 	});
 }
@@ -312,7 +308,6 @@ function ajaxContentConfirm(url, data, callback){
  * @param callback 回调
  */
 function ajaxDiaLog(url, data, callback){
-	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
 	$.ajax({
 		type : "post",
 		url : encodeURI(encodeURI(cxt + url)),
