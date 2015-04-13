@@ -42,8 +42,8 @@
 					</div>
 				</div>
 				
-				<div class="panel-body">
-					<div class="control-group">
+				<div class="panel-body">			
+					<div class="form-group">
 						<label class="col-sm-2 control-label">${i18nMap["admin.user.property.userName"]}</label>
 						<div class="col-sm-4">
 					  		<input class="form-control focused" type="text" name="_query.userName" value='${escapeXml(paramMap["_query.userName"])}' maxlength="20" >
@@ -55,10 +55,10 @@
 						</div>
 				  	</div>
 					
-					<div class="control-group">
+					<div class="form-group">
 						<label class="col-sm-2 control-label">${i18nMap["admin.user.property.birthday"]}</label>
-						<div class="col-sm-10">
-					  		<input class="form-control datepicker" type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}' readonly="readonly" >
+						<div class="col-sm-4">
+					  		<input class="form-control" type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}'>
 						</div>
 				  	</div>
 				  	
