@@ -2,13 +2,16 @@ package little.ant.platform.service;
 
 import java.util.List;
 
+import little.ant.platform.common.DictKeys;
 import little.ant.platform.model.Param;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
+
 public class ParamService extends BaseService {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ParamService.class);
 
 	public static final ParamService service = new ParamService();
@@ -60,6 +63,24 @@ public class ParamService extends BaseService {
 	 * @param ids
 	 */
 	public void delete(String ids){
+		Param param = Param.dao.findById(ids);
+		
+		// 是否存在子节点
+		if(param.getStr("isparent").equals("true")){
+			log.error("存在子节点，不能直接删除");
+			return;
+		}
+		
+		// 修改上级节点的isparent
+		Param pParam = Param.dao.findById(param.getStr("parentmenuids"));
+		String sql = getSql("platform.param.childCount");
+		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pParam.getPKValue());
+		Long counts = record.getNumber("counts").longValue();
+	    if(counts == 1){
+	    	pParam.set("isparent", "false");
+	    	pParam.update();
+	    }
+	    
 		// 缓存
 		Param.dao.cacheRemove(ids);
 

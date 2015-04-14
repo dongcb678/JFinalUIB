@@ -89,4 +89,11 @@
     	]]>
 	</sql>
 	
+	<!-- 查询子节点数量 -->
+	<sql id="childCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_dict where parentids = ?
+    	]]>
+	</sql>
+	
 </sql-statement>

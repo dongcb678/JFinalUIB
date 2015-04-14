@@ -2,13 +2,16 @@ package little.ant.platform.service;
 
 import java.util.List;
 
+import little.ant.platform.common.DictKeys;
 import little.ant.platform.model.Dict;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
+
 public class DictService extends BaseService {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DictService.class);
 
 	public static final DictService service = new DictService();
@@ -60,6 +63,24 @@ public class DictService extends BaseService {
 	 * @param ids
 	 */
 	public void delete(String ids){
+		Dict dict = Dict.dao.findById(ids);
+		
+		// 是否存在子节点
+		if(dict.getStr("isparent").equals("true")){
+			log.error("存在子节点，不能直接删除");
+			return;
+		}
+		
+		// 修改上级节点的isparent
+		Dict pDict = Dict.dao.findById(dict.getStr("parentmenuids"));
+		String sql = getSql("platform.dict.childCount");
+		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pDict.getPKValue());
+		Long counts = record.getNumber("counts").longValue();
+	    if(counts == 1){
+	    	pDict.set("isparent", "false");
+	    	pDict.update();
+	    }
+	    
 		// 缓存
 		Dict.dao.cacheRemove(ids);
 		
