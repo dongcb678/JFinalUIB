@@ -12,6 +12,30 @@ function simpleDialog(title, content){
 }
 
 /**
+ * 全选、反选
+ * @param id
+ * @param checked
+ */
+function checkFunc(id, checked){
+	$("#" + id + " input[name='checkIds']").each(function(){
+		$(this).prop("checked", checked);
+    });
+}
+
+/**
+ * 全选、反选
+ * @param id
+ */
+function getCheckFunc(id){
+	var ids = "";
+	$("#" + id + " input[name='checkIds']").each(function(){
+		if($(this)[0].checked == true)
+		ids += $(this).val() + ",";
+    });
+	return ids;
+}
+
+/**
  * 分页链接HTML
  * @param divId
  * @param formId
@@ -72,7 +96,7 @@ function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages
 	}
 	
 	if(isSelectPage == true){
-		splitStr += '&nbsp;&nbsp;<li><select name="pageNumber" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', this.value);" style="width: 110px; height:35px;">';
+		splitStr += '&nbsp;&nbsp;<li><select name="pageNumber" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', this.value);" style="width: 120px; height:35px;">';
 		for (var i = 1; i <= totalPages; i++) {
 			if (i == pageNumber) {
 				splitStr += '<option selected value="' + i + '">' + i18n_common_splitPage_jump + i + i18n_common_splitPage_jumpPage + '</option>';
@@ -90,7 +114,7 @@ function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages
 	}
 	
 	if(isSelectSize == true){
-		splitStr += '<li><select name="pageSize" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', 1);" style="width: 90px; height:35px;">';
+		splitStr += '<li><select name="pageSize" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', 1);" style="width: 100px; height:35px;">';
 		
 		var optionStr = '<option value="10">' + i18n_common_splitPage_perPage + '10' + i18n_common_splitPage_strip + '</option>';
 		optionStr += '<option value="20">' + i18n_common_splitPage_perPage + '20' + i18n_common_splitPage_strip + '</option>';

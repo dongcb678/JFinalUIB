@@ -68,9 +68,6 @@
 						<div class="col-sm-5 col-sm-offset-5">
 							<button type="button" class="btn btn-primary" onclick='ajaxForm("content", "splitPage");'>${i18nMap["admin.common.select"]}</button>
 							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
-							<% if(hasPrivilegeUrl("/platform/user/add.html")){ %>
-								<button type="button" class="btn btn-primary" onclick="ajaxContent('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">${i18nMap["admin.user.add"]}</button>
-							<% } %>		
 						</div>
 				  	</div>
 				</div>
@@ -85,7 +82,9 @@
 			<div class="panel panel-white">
 				
 				<div class="panel-heading">
-					<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.user.list.table"]}</span></h4>
+					<h4 class="panel-title">
+						<span class="text-bold">${i18nMap["admin.user.list.table"]}</span>
+					</h4>
 					<div class="panel-tools">										
 						<div class="dropdown">
 							<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">
@@ -110,14 +109,38 @@
 					</div>
 				</div>
 				
+				<%
+					var view = hasPrivilegeUrl("/jf/platform/user/view");
+					var edit = hasPrivilegeUrl("/jf/platform/user/edit");
+					var delete = hasPrivilegeUrl("/jf/platform/user/delete");
+					var group = hasPrivilegeUrl("/jf/platform/group/select");
+				%>
+				
 				<div class="panel-body">
-					<table class="table table-bordered table-hover" id="sample-table-4">
+					<div class="row">
+						<div class="col-md-12 space20">
+							<% if(hasPrivilegeUrl("/platform/user/add.html")){ %>
+								<button class="btn btn-success add-row" onclick="ajaxContent('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
+									${i18nMap["admin.user.add"]} <i class="fa fa-plus"></i>
+								</button>
+							<% } %>	
+							<!-- getCheckFunc('dataTable') -->
+							
+							<% if(delete == true){ %>
+								<button class="btn btn-red delete-row" onclick="ajaxContentConfirm('/jf/platform/user/delete/${escapeXml(user.ids!)}');"> 
+									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+								</button>
+							<% } %>
+							
+						</div>
+					</div>
+					<table class="table table-bordered table-hover" id="dataTable">
 						<thead>
 							<tr>
 								<th class="center hidden-xs" width="50">
 									<div class="checkbox-table">
 										<label>
-											<input type="checkbox" class="flat-grey selectall"> 
+											<input type="checkbox" name="checkAll" onchange="checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
 										</label>
 									</div>
 								</th>
@@ -136,23 +159,18 @@
 								<th class="hidden-xs" onclick="orderbyFun('content', 'splitPage', 'mobile')">
 									${i18nMap["admin.user.property.mobilePhone"]}	${orderBy("mobile")}
 								</th>
-								<th>${i18nMap["admin.common.operation"]}</th>
-								
+								<th class="hidden-xs">
+									${i18nMap["admin.common.operation"]}
+								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<%
-								var view = hasPrivilegeUrl("/jf/platform/user/view");
-								var edit = hasPrivilegeUrl("/jf/platform/user/edit");
-								var delete = hasPrivilegeUrl("/jf/platform/user/delete");
-								var group = hasPrivilegeUrl("/jf/platform/group/select");
-							%>
 							<% for(user in splitPage.list){ %>
 								<tr>
 									<td class="center hidden-xs">
 										<div class="checkbox-table">
 											<label>
-												<input type="checkbox" class="flat-grey foocheck">
+												<input type="checkbox" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
 											</label>
 										</div>
 									</td>
@@ -163,27 +181,21 @@
 									<td class="hidden-xs"><span class="label label-sm label-success">${escapeXml(user["mobile"]!) }</span></td>
 									<td class="hidden-xs">
 										<% if(view == true){ %>
-											<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/platform/user/view/${escapeXml(user.ids!)}');"> 
-												<i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}
-											</a>
+											<button class="btn btn-dark-yellow add-row" onclick="ajaxContent('/jf/platform/user/view/${user.ids!}');">
+												${i18nMap["admin.common.see"]} <i class="fa fa-eye"></i>
+											</button>
 										<% } %>
 										
 										<% if(edit == true){ %>
-											<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/platform/user/edit/${escapeXml(user.ids!)}');"> 
-												<i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}
-											</a>
-										<% } %>
-										
-										<% if(delete == true){ %>
-											<a class="btn btn-danger" href="#" onclick="ajaxContentConfirm('/jf/platform/user/delete/${escapeXml(user.ids!)}');"> 
-												<i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}
-											</a>
+											<button class="btn btn-green edit-row" onclick="ajaxContent('/jf/platform/user/edit/${user.ids!}');"> 
+												${i18nMap["admin.common.edit"]} <i class="fa fa-edit"></i>
+											</button>
 										<% } %>
 										
 										<% if(group == true){ %>
-											<a class="btn btn-danger" href="#" onclick="groupSelectDialog('${escapeXml(user.ids!)}');"> 
-												<i class="icon-trash icon-white"></i> ${i18nMap["admin.user.list.table.group"]}
-											</a>
+											<button class="btn btn-purple add-row" onclick="groupSelectDialog('${user.ids!}');"> 
+												${i18nMap["admin.user.list.table.group"]} <i class="fa fa-leaf"></i>
+											</button>
 										<% } %>
 									</td>
 								</tr>
