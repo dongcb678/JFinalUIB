@@ -96,7 +96,7 @@ function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages
 	}
 	
 	if(isSelectPage == true){
-		splitStr += '&nbsp;&nbsp;<li><select name="pageNumber" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', this.value);" style="width: 120px; height:35px;">';
+		splitStr += '&nbsp;&nbsp;<li><select name="pageNumber" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', this.value);" style="width: 120px; height:30px;">';
 		for (var i = 1; i <= totalPages; i++) {
 			if (i == pageNumber) {
 				splitStr += '<option selected value="' + i + '">' + i18n_common_splitPage_jump + i + i18n_common_splitPage_jumpPage + '</option>';
@@ -114,7 +114,7 @@ function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages
 	}
 	
 	if(isSelectSize == true){
-		splitStr += '<li><select name="pageSize" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', 1);" style="width: 100px; height:35px;">';
+		splitStr += '<li><select name="pageSize" onChange="splitPageLink(\''+divId+'\', \''+formId+'\', 1);" style="width: 100px; height:30px;">';
 		
 		var optionStr = '<option value="10">' + i18n_common_splitPage_perPage + '10' + i18n_common_splitPage_strip + '</option>';
 		optionStr += '<option value="20">' + i18n_common_splitPage_perPage + '20' + i18n_common_splitPage_strip + '</option>';
