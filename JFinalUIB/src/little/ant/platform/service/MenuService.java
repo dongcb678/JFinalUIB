@@ -125,13 +125,26 @@ public class MenuService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
+		Menu menu = Menu.dao.findById(ids);
+		
+		// 是否存在子节点
+		if(menu.getStr("isparent").equals("true")){
+			return false; //存在子节点，不能直接删除
+		}
+		
+		// 修改上级节点的isparent
+    	Menu pMenu = Menu.dao.findById(menu.getStr("parentmenuids"));
 		String sql = getSql("platform.menu.childCount");
-		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
+		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pMenu.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
-	    if(counts > 1){
-	    	return false;
+	    if(counts == 1){
+	    	pMenu.set("isparent", "false");
+	    	pMenu.update();
 	    }
+	    
+		// 删除
 	    Menu.dao.deleteById(ids);
+	    
 	    return true;
 	}
 	

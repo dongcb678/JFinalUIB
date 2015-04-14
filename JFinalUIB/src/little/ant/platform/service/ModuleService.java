@@ -118,13 +118,26 @@ public class ModuleService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
+		Module module = Module.dao.findById(ids);
+		
+		// 是否存在子节点
+		if(module.getStr("isparent").equals("true")){
+			return false; //存在子节点，不能直接删除
+		}
+
+		// 修改上级节点的isparent
+		Module pModule = Module.dao.findById(module.getStr("parentmenuids"));
 		String sql = getSql("platform.module.childCount");
-		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
+		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pModule.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
-	    if(counts > 1){
-	    	return false;
-	    }
+		if(counts == 1){
+			pModule.set("isparent", "false");
+			pModule.update();
+		}
+
+		// 删除
 	    Module.dao.deleteById(ids);
+	    
 	    return true;
 	}
 	

@@ -115,18 +115,29 @@ public class StationService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
+		Station station = Station.dao.findById(ids);
+		
+		// 是否存在子节点
+		if(station.getStr("isparent").equals("true")){
+			return false; //存在子节点，不能直接删除
+		}
+
+		// 修改上级节点的isparent
+		Station pStation = Station.dao.findById(station.getStr("parentmenuids"));
 		String sql = getSql("platform.station.childCount");
-		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
+		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pStation.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
-	    if(counts > 1){
-	    	return false;
-	    }
+		if(counts == 1){
+			pStation.set("isparent", "false");
+			pStation.update();
+		}
 	    
 		// 缓存
 		Station.dao.cacheRemove(ids);
 		
 		// 删除
 	    Station.dao.deleteById(ids);
+	    
 	    return true;
 	}
 	
