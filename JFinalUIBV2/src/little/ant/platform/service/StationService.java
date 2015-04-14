@@ -123,7 +123,7 @@ public class StationService extends BaseService {
 		}
 
 		// 修改上级节点的isparent
-		Station pStation = Station.dao.findById(station.getStr("parentmenuids"));
+		Station pStation = Station.dao.findById(station.getStr("parentstationids"));
 		String sql = getSql("platform.station.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pStation.getPKValue());
 		Long counts = record.getNumber("counts").longValue();

@@ -122,7 +122,7 @@ public class DepartmentService extends BaseService {
 		}
 
 		// 修改上级节点的isparent
-		Department pDepartment = Department.dao.findById(department.getStr("parentmenuids"));
+		Department pDepartment = Department.dao.findById(department.getStr("parentdepartmentids"));
 		String sql = getSql("platform.department.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pDepartment.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
