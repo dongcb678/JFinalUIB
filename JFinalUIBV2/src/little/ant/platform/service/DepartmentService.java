@@ -114,13 +114,26 @@ public class DepartmentService extends BaseService {
 	 * @return
 	 */
 	public boolean delete(String ids) {
+		Department department = Department.dao.findById(ids);
+		
+		// 是否存在子节点
+		if(department.getStr("isparent").equals("true")){
+			return false; //存在子节点，不能直接删除
+		}
+
+		// 修改上级节点的isparent
+		Department pDepartment = Department.dao.findById(department.getStr("parentmenuids"));
 		String sql = getSql("platform.department.childCount");
-		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, ids);
+		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pDepartment.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
-	    if(counts > 1){
-	    	return false;
-	    }
+		if(counts == 1){
+			pDepartment.set("isparent", "false");
+			pDepartment.update();
+		}
+
+		// 删除
 	    Department.dao.deleteById(ids);
+	    
 	    return true;
 	}
 	
