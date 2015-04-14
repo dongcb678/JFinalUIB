@@ -126,7 +126,7 @@ public class ModuleService extends BaseService {
 		}
 
 		// 修改上级节点的isparent
-		Module pModule = Module.dao.findById(module.getStr("parentmenuids"));
+		Module pModule = Module.dao.findById(module.getStr("parentmoduleids"));
 		String sql = getSql("platform.module.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pModule.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
