@@ -57,8 +57,10 @@
 					
 					<div class="form-group">
 						<label class="col-sm-2 control-label">${i18nMap["admin.user.property.birthday"]}</label>
-						<div class="col-sm-4">
-					  		<input class="form-control" type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}'>
+						<div class="col-sm-4 input-group">
+					  		<input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}'
+					  			 data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
+							<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
 						</div>
 				  	</div>
 				  	
@@ -201,3 +203,9 @@
 	</div>
 	
 </form>				
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		FormElements.init();
+	});
+</script>
