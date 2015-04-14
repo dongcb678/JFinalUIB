@@ -59,9 +59,9 @@ function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages
 		end = start + currentPageCount - 1;
 	}
 	
-	var splitStr = '<div class="col-md-6"><div class="dataTables_info">显示' + start + '至' + end + '条，共' + totalRow + '条</div></div>';
+	var splitStr = '';
 	
-	splitStr += '<div class="col-md-6">';
+	splitStr += '<div class="col-md-12 space20">';
 	splitStr += '<div class="dataTables_paginate paging_bootstrap">';
 	splitStr += '<ul class="pagination pagination-blue">';
 	
@@ -131,7 +131,7 @@ function splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages
 		splitStr += '<input type="hidden" name="pageSize">';
 	}
 	
-	splitStr += '&nbsp;&nbsp;<li>共<strong>' + totalRow + '</strong>' + i18n_common_splitPage_records + '</li>';
+	splitStr += '&nbsp;&nbsp;<li>显示<strong>' + start + '至<strong>' + end + '</strong>条，共<strong>' + totalRow + '</strong>' + i18n_common_splitPage_records + '</li>';
 	
 	splitStr += '</ul>';
 
