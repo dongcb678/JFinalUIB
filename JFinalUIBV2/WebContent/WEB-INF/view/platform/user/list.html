@@ -124,10 +124,10 @@
 									${i18nMap["admin.user.add"]} <i class="fa fa-plus"></i>
 								</button>
 							<% } %>	
-							<!-- getCheckFunc('dataTable') -->
+							<!-- getCheckFunc('dataTable')  onclick="ajaxContentConfirm( '/jf/platform/user/delete', {'ids' : getCheckFunc('dataTable')} );" -->
 							
 							<% if(delete == true){ %>
-								<button class="btn btn-red delete-row" onclick="ajaxContentConfirm('/jf/platform/user/delete/${escapeXml(user.ids!)}');"> 
+								<button class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/platform/user/delete"> 
 									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
 								</button>
 							<% } %>
@@ -218,5 +218,6 @@
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		FormElements.init();
+		UIModals.init();
 	});
 </script>

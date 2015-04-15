@@ -307,22 +307,11 @@ function ajaxContent(url, data, callback){
  * @param data 请求参数数据
  * @param callback 回调
  */
-function ajaxContentConfirm(url, data, callback){
-	var d = dialog({
-	    title: '操作提示',
-	    content: "确定要这样操作吗？",
-	    okValue: '确定',
-	    ok: function () {
-	        //this.title('提交中…');
-	        ajaxContent(url, data, callback);
-	        return true;
-	    },
-	    cancelValue: '取消',
-	    cancel: function () {
-	    	return true ; //false
-	    }
+function ajaxContentConfirm(url, data, callback){alert(222);
+	bootbox.confirm("确定要这样操作吗？", function(result) {
+		toastr.success('Confirm result: ' + result);
+		//ajaxContent(url, data, callback);
 	});
-	d.show();
 }
 
 /**

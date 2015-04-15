@@ -1,5 +1,7 @@
 var UIModals = function() {
+	
 	"use strict";
+	
 	//function to initiate bootstrap extended modals
 	var initModals = function() {
 		$.fn.modalmanager.defaults.resize = true;
@@ -21,6 +23,7 @@ var UIModals = function() {
 			}, 1000);
 		});
 	};
+	
 	//function to initiate programmatic dialog boxes
 	var initDialogBoxes = function() {
 		var demos = {};
@@ -28,9 +31,11 @@ var UIModals = function() {
 		$(document).on("click", "button[data-bb]", function(e) {
 			e.preventDefault();
 			var type = $(this).data("bb");
-
+			
+			var url = $(this).attr("data-url");
+			
 			if ( typeof demos[type] === 'function') {
-				demos[type]();
+				demos[type](url);
 			}
 		});
 
@@ -95,7 +100,38 @@ var UIModals = function() {
 			some_html += '<h4>Just be sure to mind your quote marks</h4>';
 			bootbox.alert(some_html);
 		};
+		
+		// JfinalUIB扩展
+		
+		/**
+		 * 删除单行数据
+		 */
+		demos.deleteList = function(url) {
+			bootbox.confirm("确定要这样操作吗？", function(result) {
+				if(result){
+					var ids = getCheckFunc('dataTable');
+					if(ids != ""){
+						var data = {'ids' : getCheckFunc('dataTable')};
+						ajaxContent(url, data);
+					}else{
+						toastr.warning("请选择操作数据！");
+					}
+				}
+			});
+		};
+		
+		/**
+		 * 删除多行数据
+		 */
+		demos.deleteOne = function(url) {
+			bootbox.confirm("确定要这样操作吗？", function(result) {
+				if(result){
+					ajaxContent(url);
+				}
+			});
+		};
 	};
+	
 	return {
 		init : function() {
 			initModals();

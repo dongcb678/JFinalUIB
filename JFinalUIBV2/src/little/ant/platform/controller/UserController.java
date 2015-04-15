@@ -78,7 +78,7 @@ public class UserController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		UserService.service.delete(getPara());
+		UserService.service.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/user");
 	}
 

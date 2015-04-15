@@ -87,18 +87,21 @@ public class UserService extends BaseService {
 	/**
 	 * 删除
 	 * 
-	 * @param userIds
+	 * @param ids
 	 */
-	public void delete(String userIds) {
-		User user = User.dao.findById(userIds);
-		String userInfoIds = user.getStr("userinfoids");
+	public void delete(String ids) {
+		String[] idsArr = splitByComma(ids);
+		for (String userIds : idsArr) {
+			User user = User.dao.findById(userIds);
+			String userInfoIds = user.getStr("userinfoids");
 
-		// 缓存
-		User.dao.cacheRemove(userIds);
+			// 缓存
+			User.dao.cacheRemove(userIds);
 
-		// 删除
-		User.dao.deleteById(userIds);
-		UserInfo.dao.deleteById(userInfoIds);
+			// 删除
+			User.dao.deleteById(userIds);
+			UserInfo.dao.deleteById(userInfoIds);
+		}
 	}
 
 	/**

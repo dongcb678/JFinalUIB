@@ -138,7 +138,22 @@ public abstract class BaseService {
 		splitPage.setList(page.getList());
 		splitPage.compute();
 	}
-	
+
+	/**
+	 * 把11,22,33...转成['11','22','33'...]
+	 * @param ids
+	 * @return
+	 */
+	protected String[] splitByComma(String ids){
+		if(null == ids || ids.trim().isEmpty()){
+			return null;
+		}
+		
+		String[] idsArr = ids.split(",");
+		
+		return idsArr;
+	}
+
 	/**
 	 * 行级：过滤
 	 * @return
