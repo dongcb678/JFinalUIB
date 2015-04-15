@@ -44,16 +44,19 @@ public class SystemsService extends BaseService {
 
 	/**
 	 * 删除
-	 * @param systemsIds
+	 * @param ids
 	 */
-	public void delete(String systemsIds){
-		//删除系统
-		Systems.dao.deleteById(systemsIds);
-		//删除关联模块
-		
-		//删除关联菜单
-		
-		//删除关联日志
+	public void delete(String ids){
+		String[] idsArr = splitByComma(ids);
+		for (String systemsIds : idsArr) {
+			//删除系统
+			Systems.dao.deleteById(systemsIds);
+			//删除关联模块
+			
+			//删除关联菜单
+			
+			//删除关联日志
+		}
 	}
 	
 	/**

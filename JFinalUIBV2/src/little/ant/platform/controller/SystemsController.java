@@ -57,7 +57,7 @@ public class SystemsController extends BaseController {
 	 * 删除系统
 	 */
 	public void delete() {
-		SystemsService.service.delete(getPara());
+		SystemsService.service.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/systems");
 	}
 
