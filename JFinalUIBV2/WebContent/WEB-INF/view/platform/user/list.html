@@ -1,4 +1,4 @@
-<!-- start: BREADCRUMB -->
+
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb">
@@ -7,7 +7,6 @@
 		</ol>
 	</div>
 </div>
-<!-- end: BREADCRUMB -->
 						
 <form id="splitPage" class="form-horizontal" action="${cxt!}/jf/platform/user" method="POST">
 	
@@ -120,11 +119,10 @@
 					<div class="row">
 						<div class="col-md-12 space20">
 							<% if(hasPrivilegeUrl("/platform/user/add.html")){ %>
-								<button class="btn btn-success add-row" onclick="ajaxContent('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
+								<button class="btn btn-success add-row" onclick="ajaxPanel('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
 									${i18nMap["admin.user.add"]} <i class="fa fa-plus"></i>
 								</button>
 							<% } %>	
-							<!-- getCheckFunc('dataTable')  onclick="ajaxContentConfirm( '/jf/platform/user/delete', {'ids' : getCheckFunc('dataTable')} );" -->
 							
 							<% if(delete == true){ %>
 								<button class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/platform/user/delete"> 
@@ -137,11 +135,7 @@
 						<thead>
 							<tr>
 								<th class="center hidden-xs" width="50">
-									<div class="checkbox-table">
-										<label>
-											<input type="checkbox" name="checkAll" onchange="checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
-										</label>
-									</div>
+									<input type="checkbox" name="checkAll" onchange="checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
 								</th>
 								<th class="hidden-xs" onclick="orderbyFun('content', 'splitPage', 'd.names')">
 									${i18nMap["admin.user.property.department"]}	${orderBy("d.names")}
@@ -167,17 +161,15 @@
 							<% for(user in splitPage.list){ %>
 								<tr>
 									<td class="center hidden-xs">
-										<div class="checkbox-table">
-											<label>
-												<input type="checkbox" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
-											</label>
-										</div>
+										<input type="checkbox" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
 									</td>
 									<td class="hidden-xs">${escapeXml(user.deptnames!) }</td>
 									<td class="hidden-xs">${escapeXml(user["username"]!) }</td>
 									<td class="hidden-xs">${escapeXml(user["names"]!) }</td>
 									<td class="hidden-xs">${escapeXml(user["email"]!) }</td>
-									<td class="hidden-xs"><span class="label label-sm label-success">${escapeXml(user["mobile"]!) }</span></td>
+									<td class="hidden-xs">
+										<span class="label label-sm label-success">${escapeXml(user["mobile"]!) }</span>
+									</td>
 									<td class="hidden-xs">
 										<% if(view == true){ %>
 											<button class="btn btn-dark-yellow add-row" onclick="ajaxContent('/jf/platform/user/view/${user.ids!}');">
@@ -194,6 +186,12 @@
 										<% if(group == true){ %>
 											<button class="btn btn-purple add-row" onclick="groupSelectDialog('${user.ids!}');"> 
 												${i18nMap["admin.user.list.table.group"]} <i class="fa fa-leaf"></i>
+											</button>
+										<% } %>
+										
+										<% if(delete == true){ %>
+											<button class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/platform/user/delete/${user.ids!}"> 
+												${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
 											</button>
 										<% } %>
 									</td>

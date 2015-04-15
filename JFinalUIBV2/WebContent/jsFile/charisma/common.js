@@ -272,7 +272,7 @@ function ajaxDiv(divId, url, data, callback){
  * @param data 参数
  * @param callback 回调
  */
-function ajaxContent(url, data, callback){
+function ajaxPanel(url, data, callback){
 	$.ajax({
 		type : "post",
 		url : encodeURI(encodeURI(cxt + url)),
@@ -293,24 +293,11 @@ function ajaxContent(url, data, callback){
 		error: function(XMLHttpRequest, textStatus, errorThrown) { 
 			// 这个方法有三个参数：XMLHttpRequest 对象，错误信息，（可能）捕获的错误对象。
 			// 通常情况下textStatus和errorThown只有其中一个有值
-            // alert(XMLHttpRequest.status);
-            // alert(XMLHttpRequest.readyState);
-            // alert(textStatus);
+            alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);
 			alert("请求出现错误！");
         }
-	});
-}
-
-/**
- * ajax请求url替换div content
- * @param url 请求URL
- * @param data 请求参数数据
- * @param callback 回调
- */
-function ajaxContentConfirm(url, data, callback){alert(222);
-	bootbox.confirm("确定要这样操作吗？", function(result) {
-		toastr.success('Confirm result: ' + result);
-		//ajaxContent(url, data, callback);
 	});
 }
 

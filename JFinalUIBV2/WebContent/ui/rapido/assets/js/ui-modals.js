@@ -107,17 +107,17 @@ var UIModals = function() {
 		 * 删除单行数据
 		 */
 		demos.deleteList = function(url) {
-			bootbox.confirm("确定要这样操作吗？", function(result) {
-				if(result){
-					var ids = getCheckFunc('dataTable');
-					if(ids != ""){
+			var ids = getCheckFunc('dataTable');
+			if(ids != ""){
+				bootbox.confirm("确定要这样操作吗？", function(result) {
+					if(result){
 						var data = {'ids' : getCheckFunc('dataTable')};
 						ajaxContent(url, data);
-					}else{
-						toastr.warning("请选择操作数据！");
 					}
-				}
-			});
+				});
+			}else{
+				toastr.warning("请选择操作数据！");
+			}
 		};
 		
 		/**

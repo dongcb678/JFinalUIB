@@ -104,120 +104,139 @@ function dataVali(form){
 
 </script>
 
-<fieldset>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.department"]}</label>
-		<div class="controls">
-			<input type="hidden" id="deptId" name="user.departmentids" value="${escapeXml(user.departmentids!)}"/>
-			<input type="text" id="deptName" name="user.departmentnames" value="${escapeXml(user.departmentnames!)}" 
-				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="deptRadioDiaLog('deptId', 'deptName', '${escapeXml(user.departmentids!)}');">${i18nMap["admin.common.choice"]}</button>
-			<span class="help-inline"></span>
-		</div>
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.department"]}</label>
+	<div class="col-sm-7">
+		<input type="hidden" id="deptId" name="user.departmentids" value="${escapeXml(user.departmentids!)}"/>
+		<input type="text" id="deptName" name="user.departmentnames" value="${escapeXml(user.departmentnames!)}" 
+			class="form-control focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.station"]}</label>
-		<div class="controls">
-			<input type="hidden" id="stationId" name="user.stationids" value="${escapeXml(user.stationids!)}"/>
-			<input type="text" id="stationName" name="user.stationnames" value="${escapeXml(user.stationnames!)}" 
-				class="input-xlarge" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="stationRadioDiaLog('stationId', 'stationName', '${escapeXml(user.stationids!)}');">${i18nMap["admin.common.choice"]}</button>
-			<span class="help-inline"></span>
-		</div>
+	<span class="help-inline col-sm-2"> 
+		<button class="btn btn-red" type="button" onclick="deptRadioDiaLog('deptId', 'deptName', '${escapeXml(user.departmentids!)}');">${i18nMap["admin.common.choice"]}</button>
+	</span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.station"]}</label>
+	<div class="col-sm-7">
+		<input type="hidden" id="stationId" name="user.stationids" value="${escapeXml(user.stationids!)}"/>
+		<input type="text" id="stationName" name="user.stationnames" value="${escapeXml(user.stationnames!)}" 
+			class="form-control" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.dataAccess"]}</label>
-		<div class="controls">
-			<input type="hidden" id="deptId2" name="user.deptids" value="${escapeXml(user.deptids!)}" />
-			<input type="hidden" id="deptName2" name="user.deptnames" value="${escapeXml(user.deptnames!)}" />
-			
-			<input type="hidden" id="userId" name="user.userids" value="${escapeXml(user.userids!)}" />
-			<input type="text" id="userName" name="user.usernames" value="${escapeXml(user.usernames!)}" 
-				class="input-xlarge" readonly="readonly" maxlength="10000" vMin="1" vType="length" onblur="onblurVali(this);">
-			
-			<button class="btn" type="button" onclick="userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${escapeXml(user.deptids!)}', '${escapeXml(user.userids!)}');">${i18nMap["admin.common.choice"]}</button>
-			<span class="help-inline"></span>
-		</div>
+	<span class="help-inline col-sm-2"> 
+		<button class="btn btn-red" type="button" onclick="stationRadioDiaLog('stationId', 'stationName', '${escapeXml(user.stationids!)}');">${i18nMap["admin.common.choice"]}</button>
+	</span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.dataAccess"]}</label>
+	<div class="col-sm-7">
+		<input type="hidden" id="deptId2" name="user.deptids" value="${escapeXml(user.deptids!)}" />
+		<input type="hidden" id="deptName2" name="user.deptnames" value="${escapeXml(user.deptnames!)}" />
+		
+		<input type="hidden" id="userId" name="user.userids" value="${escapeXml(user.userids!)}" />
+		<input type="text" id="userName" name="user.usernames" value="${escapeXml(user.usernames!)}" 
+			class="form-control" readonly="readonly" maxlength="10000" vMin="1" vType="length" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>
-		<div class="controls">
-			<input type="text" id="idcardId" name="userInfo.idcard" value="${escapeXml(userInfo.idcard!)}" 
-				class="input-xlarge" maxlength="18" vMin="15" vType="idCard" onblur="onblurVali(this);">
-			<span class="help-inline">15-18位字母数字</span>
-		</div>
+	<span class="help-inline col-sm-2"> 
+		<button class="btn btn-red" type="button" onclick="userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${escapeXml(user.deptids!)}', '${escapeXml(user.userids!)}');">${i18nMap["admin.common.choice"]}</button>
+	</span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.idcard"]}</label>
+	<div class="col-sm-7">
+		<input type="text" id="idcardId" name="userInfo.idcard" value="${escapeXml(userInfo.idcard!)}" 
+			class="form-control" maxlength="18" vMin="15" vType="idCard" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.nickname"]}</label>
-		<div class="controls">
-			<input type="text" name="userInfo.names" value="${escapeXml(userInfo.names!)}" 
-				class="input-xlarge" maxlength="10" vMin="2" vType="length" onblur="onblurVali(this);">
-			<span class="help-inline">2-10位任意字符</span>
-		</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 15-18位字母数字 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.nickname"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="userInfo.names" value="${escapeXml(userInfo.names!)}" 
+			class="form-control" maxlength="10" vMin="2" vType="length" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.userName"]}</label>
-		<div class="controls">
-			<input type="text" id="usernameId" name="user.username" value="${escapeXml(user.username!)}" 
-				class="input-xlarge" maxlength="16" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
-			<span class="help-inline">5-16位字母数字</span>
-		</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 2-10位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.userName"]}</label>
+	<div class="col-sm-7">
+		<input type="text" id="usernameId" name="user.username" value="${escapeXml(user.username!)}" 
+			class="form-control" maxlength="16" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.password"]}</label>
-		<div class="controls">
-			<input type="password" id="pass1Id" name="password" class="input-xlarge" autocomplete="off"
-				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
-			<span class="help-inline">6-18位字母数字</span>
-		</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 5-16位字母数字 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.password"]}</label>
+	<div class="col-sm-7">
+		<input type="password" id="pass1Id" name="password" class="form-control" autocomplete="off"
+			maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.password"]}</label>
-		<div class="controls">
-			<input type="password" id="pass2Id" class="input-xlarge" autocomplete="off"
-				maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
-			<span class="help-inline">6-18位字母数字</span>
-		</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 6-18位字母数字 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.password"]}</label>
+	<div class="col-sm-7">
+		<input type="password" id="pass2Id" class="form-control" autocomplete="off"
+			maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' vType="letterNumber" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
-		<div class="controls">
-			<input type="text" id="mailboxId" name="userInfo.email" value="${escapeXml(userInfo.email!)}" 
-				class="input-xlarge" maxlength="30" vMin="6" vType="email" onblur="onblurVali(this);">
-			<span class="help-inline">6-30位邮箱规则</span>
-		</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 6-18位字母数字 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.email"]}</label>
+	<div class="col-sm-7">
+		<input type="text" id="mailboxId" name="userInfo.email" value="${escapeXml(userInfo.email!)}" 
+			class="form-control" maxlength="30" vMin="6" vType="email" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
-		<div class="controls">
-			<input type="text" id="mobileId" name="userInfo.mobile" value="${escapeXml(userInfo.mobile!)}" 
-				class="input-xlarge" maxlength="11" vMin="11" vType="phone" onblur="onblurVali(this);">
-			<span class="help-inline">11位数字</span>
-		</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 6-30位邮箱规则 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
+	<div class="col-sm-7">
+		<input type="text" id="mobileId" name="userInfo.mobile" value="${escapeXml(userInfo.mobile!)}" 
+			class="form-control" maxlength="11" vMin="11" vType="phone" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.telephone"]}</label>
-		<div class="controls">
-			<input type="text" name="userInfo.telephone" value="${escapeXml(userInfo.telephone!)}" 
-				class="input-xlarge" maxlength="20" vMin="0" vType="tell" onblur="onblurVali(this);">
-			<span class="help-inline">5-20位</span>
-		</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 11位数字 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.telephone"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="userInfo.telephone" value="${escapeXml(userInfo.telephone!)}" 
+			class="form-control" maxlength="20" vMin="0" vType="tell" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.qq"]}</label>
-		<div class="controls">
-			<input type="text" name="userInfo.qq" value="${escapeXml(userInfo.qq!)}" 
-				class="input-xlarge" maxlength="20" vMin="0" vType="qq" onblur="onblurVali(this);">
-			<span class="help-inline">5-20位数字</span>
-		</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 5-20位 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.qq"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="userInfo.qq" value="${escapeXml(userInfo.qq!)}" 
+			class="form-control" maxlength="20" vMin="0" vType="qq" onblur="onblurVali(this);">
 	</div>
-	<div class="control-group">
-		<label class="control-label">${i18nMap["admin.user.property.birthday"]}</label>
-		<div class="controls">
-			<input type="text" name="userInfo.birthday" readonly="readonly"
-				value='${userInfo.birthday!, dateFormat="yyyy-MM-dd"}' 
-				class="input-xlarge datepicker" maxlength="11" vMin="0" vType="length" onblur="onblurVali(this);">
-			<span class="help-inline">yyyy年mm月dd日</span>
-		</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 5-20位数字 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.birthday"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="userInfo.birthday" readonly="readonly" 
+			value='${userInfo.birthday!, dateFormat="yyyy-MM-dd"}' 
+  			data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
 	</div>
-</fieldset>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i></span>
+</div>
+	
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		FormElements.init();
+		UIModals.init();
+	});
+</script>
