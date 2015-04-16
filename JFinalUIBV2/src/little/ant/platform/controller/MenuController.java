@@ -1,6 +1,9 @@
 package little.ant.platform.controller;
 
+import java.util.List;
+
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Menu;
 import little.ant.platform.service.MenuService;
 import little.ant.platform.validator.MenuValidator;
@@ -36,8 +39,8 @@ public class MenuController extends BaseController {
 	 * ztree子节点数据
 	 */
 	public void treeData()  {
-		String jsonText = MenuService.service.childNodeData(systemsIds, ids, getI18nPram());
-		renderJson(jsonText);
+		List<ZtreeNode> nodeList = MenuService.service.childNodeData(systemsIds, ids, getI18nPram());
+		renderJson(nodeList);
 	}
 
 	/**

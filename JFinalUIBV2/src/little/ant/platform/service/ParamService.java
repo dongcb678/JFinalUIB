@@ -1,8 +1,10 @@
 package little.ant.platform.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Param;
 
 import org.apache.log4j.Logger;
@@ -96,7 +98,7 @@ public class ParamService extends BaseService {
 	 * @param parentIds
 	 * @return
 	 */
-	public String childNodeData(String parentIds){
+	public List<ZtreeNode> childNodeData(String parentIds){
 		List<Param> list = null;
 		if (null != parentIds) {
 			String sql = getSql("platform.param.treeChildNode");
@@ -106,24 +108,19 @@ public class ParamService extends BaseService {
 			list = Param.dao.find(sql);
 		}
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		int size = list.size() - 1;
+		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
+		ZtreeNode node = null;
+		
 		for (Param param : list) {
-			sb.append(" { ");
-			sb.append(" id : '").append(param.getPKValue()).append("', ");
-			sb.append(" name : '").append(param.getStr("names")).append("', ");
-			sb.append(" isParent : ").append(param.getStr("isparent")).append(", ");
-			sb.append(" font : {'font-weight':'bold'}, ");
-			sb.append(" icon : '/jsFile/zTree/css/zTreeStyle/img/diy/").append(param.getStr("images")).append("' ");
-			sb.append(" }");
-			if (list.indexOf(param) < size) {
-				sb.append(", ");
-			}
+			node = new ZtreeNode();
+			node.setId(param.getPKValue());
+			node.setName(param.getStr("names"));
+			node.setIsParent(true);
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + param.getStr("images"));
+			nodeList.add(node);
 		}
-		sb.append("]");
-
-		return sb.toString();
+		
+		return nodeList;
 	}
 
 }

@@ -1,6 +1,9 @@
 package little.ant.platform.controller;
 
+import java.util.List;
+
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Dict;
 import little.ant.platform.service.DictService;
 import little.ant.platform.tools.ToolSqlXml;
@@ -42,8 +45,8 @@ public class DictController extends BaseController {
 	 * ztree子节点数据获取
 	 */
 	public void treeData()  {
-		String jsonText = DictService.service.childNodeData(ids);
-		renderJson(jsonText);
+		List<ZtreeNode> nodeList = DictService.service.childNodeData(ids);
+		renderJson(nodeList);
 	}
 	
 	/**

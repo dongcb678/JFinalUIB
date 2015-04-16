@@ -1,6 +1,9 @@
 package little.ant.platform.controller;
 
+import java.util.List;
+
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Operator;
 import little.ant.platform.service.OperatorService;
 import little.ant.platform.validator.OperatorValidator;
@@ -75,8 +78,8 @@ public class OperatorController extends BaseController {
 	 * 功能treeData
 	 */
 	public void treeData() {
-		String json = OperatorService.service.childNodeData(moduleIds);
-		renderJson(json);
+		List<ZtreeNode> nodeList = OperatorService.service.childNodeData(moduleIds);
+		renderJson(nodeList);
 	}
 }
 

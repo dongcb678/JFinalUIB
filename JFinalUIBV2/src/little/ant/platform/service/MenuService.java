@@ -1,10 +1,12 @@
 package little.ant.platform.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Menu;
 
 import org.apache.log4j.Logger;
@@ -26,7 +28,7 @@ public class MenuService extends BaseService {
 	 * @param i18n
 	 * @return
 	 */
-	public String childNodeData(String systemsIds, String parentIds, String i18n){
+	public List<ZtreeNode> childNodeData(String systemsIds, String parentIds, String i18n){
 		String names = "names" + i18n(i18n) + " as names";
 
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -42,26 +44,19 @@ public class MenuService extends BaseService {
 			list = Menu.dao.find(sql, systemsIds);
 		}
 		
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
+		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
+		ZtreeNode node = null;
 		
-		int size = list.size() - 1;
 		for (Menu menu : list) {
-			sb.append(" { ");
-			sb.append(" id : '").append(menu.getPKValue()).append("', ");
-			sb.append(" name : '").append(menu.getStr("names")).append("', ");
-			sb.append(" isParent : true, ");
-			sb.append(" font : {'font-weight':'bold'}, ");
-			sb.append(" icon : '").append("/jsFile/zTree/css/zTreeStyle/img/diy/").append(menu.getStr("images")).append("' ");
-			sb.append(" }");
-			if(list.indexOf(menu) < size){
-				sb.append(", ");
-			}
+			node = new ZtreeNode();
+			node.setId(menu.getPKValue());
+			node.setName(menu.getStr("names"));
+			node.setIsParent(true);
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + menu.getStr("images"));
+			nodeList.add(node);
 		}
 		
-		sb.append("]");
-		
-		return sb.toString();
+		return nodeList;
 	}
 	
 	/**

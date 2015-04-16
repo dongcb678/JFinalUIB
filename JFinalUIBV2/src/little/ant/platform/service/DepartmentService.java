@@ -1,8 +1,10 @@
 package little.ant.platform.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Department;
 
 import org.apache.log4j.Logger;
@@ -22,7 +24,7 @@ public class DepartmentService extends BaseService {
 	 * @param parentIds
 	 * @return
 	 */
-	public String childNodeData(String parentIds){
+	public List<ZtreeNode> childNodeData(String parentIds){
 		List<Department> list = null;
 		if(null != parentIds){
 			String sql = getSql("platform.department.childNode");
@@ -33,26 +35,19 @@ public class DepartmentService extends BaseService {
 			list = Department.dao.find(sql);
 		}
 		
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
+		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
+		ZtreeNode node = null;
 		
-		int size = list.size() - 1;
 		for (Department dept : list) {
-			sb.append(" { ");
-			sb.append(" id : '").append(dept.getPKValue()).append("', ");
-			sb.append(" name : '").append(dept.getStr("names")).append("', ");
-			sb.append(" isParent : true, ");
-			sb.append(" font : {'font-weight':'bold'}, ");
-			sb.append(" icon : '").append("/jsFile/zTree/css/zTreeStyle/img/diy/").append(dept.getStr("images")).append("' ");
-			sb.append(" }");
-			if(list.indexOf(dept) < size){
-				sb.append(", ");
-			}
+			node = new ZtreeNode();
+			node.setId(dept.getPKValue());
+			node.setName(dept.getStr("names"));
+			node.setIsParent(true);
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + dept.getStr("images"));
+			nodeList.add(node);
 		}
 		
-		sb.append("]");
-		
-		return sb.toString();
+		return nodeList;
 	}
 	
 	/**

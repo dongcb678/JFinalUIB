@@ -1,8 +1,10 @@
 package little.ant.platform.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Module;
 
 import org.apache.log4j.Logger;
@@ -22,7 +24,7 @@ public class ModuleService extends BaseService {
 	 * @param parentIds
 	 * @return
 	 */
-	public String childNodeData(String systemsIds, String parentIds){
+	public List<ZtreeNode> childNodeData(String systemsIds, String parentIds){
 		List<Module> list = null;
 		if (null != systemsIds && null == parentIds) {
 			// 1.根据系统ID查询模块树
@@ -40,26 +42,19 @@ public class ModuleService extends BaseService {
 			list = Module.dao.find(sql, parentIds);
 		}
 		
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
+		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
+		ZtreeNode node = null;
 		
-		int size = list.size() - 1;
 		for (Module module : list) {
-			sb.append(" { ");
-			sb.append(" id : '").append(module.getPKValue()).append("', ");
-			sb.append(" name : '").append(module.getStr("names")).append("', ");
-			sb.append(" isParent : true, ");
-			sb.append(" font : {'font-weight':'bold'}, ");
-			sb.append(" icon : '").append("/jsFile/zTree/css/zTreeStyle/img/diy/").append(module.getStr("images")).append("' ");
-			sb.append(" }");
-			if(list.indexOf(module) < size){
-				sb.append(", ");
-			}
+			node = new ZtreeNode();
+			node.setId(module.getPKValue());
+			node.setName(module.getStr("names"));
+			node.setIsParent(true);
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr("images"));
+			nodeList.add(node);
 		}
 		
-		sb.append("]");
-		
-		return sb.toString();
+		return nodeList;
 	}
 	
 	/**

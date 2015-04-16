@@ -1,6 +1,9 @@
 package little.ant.platform.controller;
 
+import java.util.List;
+
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Department;
 import little.ant.platform.service.DepartmentService;
 import little.ant.platform.validator.DepartmentValidator;
@@ -35,8 +38,8 @@ public class DepartmentController extends BaseController {
 	 * tree节点数据
 	 */
 	public void treeData()  {
-		String jsonText = DepartmentService.service.childNodeData(ids);
-		renderJson(jsonText);
+		List<ZtreeNode> nodeList = DepartmentService.service.childNodeData(ids);
+		renderJson(nodeList);
 	}
 	
 	/**

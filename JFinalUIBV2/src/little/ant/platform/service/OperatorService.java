@@ -5,6 +5,7 @@ import java.util.List;
 
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Module;
 import little.ant.platform.model.Operator;
 
@@ -67,7 +68,7 @@ public class OperatorService extends BaseService {
 	 * @param moduleIds
 	 * @return
 	 */
-	public String childNodeData(String moduleIds){
+	public List<ZtreeNode> childNodeData(String moduleIds){
 		List<Module> listModule = new ArrayList<Module>();
 		List<Operator> operatorList = new ArrayList<Operator>();
 		
@@ -86,49 +87,30 @@ public class OperatorService extends BaseService {
 			operatorList = Operator.dao.find(sqlOperator, moduleIds);
 		}
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
+		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
+		ZtreeNode node = null;
 
-		int operatorSize = operatorList.size();
-		int operatorIndexSize = operatorSize - 1;
-		for (Operator operator : operatorList) {
-			sb.append(" { ");
-			sb.append(" id : '").append("operator_").append(operator.getPKValue()).append("', ");
-			sb.append(" name : '").append(operator.getStr("names")).append("', ");
-			sb.append(" isParent : false, ");
-
-			sb.append(" checked : false, ");
-
-			sb.append(" font : {'font-weight':'bold'}, ");
-			sb.append(" icon : '/jsFile/zTree/css/zTreeStyle/img/diy/5.png' ");
-			sb.append(" }");
-			if (operatorList.indexOf(operator) < operatorIndexSize) {
-				sb.append(", ");
-			}
-		}
-
-		int moduleSize = listModule.size();
-		int moduleIndexSize = moduleSize - 1;
-		if (operatorSize > 0 && moduleSize > 0) {
-			sb.append(", ");
-		}
 		for (Module module : listModule) {
-			sb.append(" { ");
-			sb.append(" id : '").append("module_").append(module.getPKValue()).append("', ");
-			sb.append(" name : '").append(module.getStr("names")).append("', ");
-			sb.append(" isParent : ").append(module.getStr("isparent")).append(", ");
-			sb.append(" nocheck : true, ");
-			sb.append(" font : {'font-weight':'bold'}, ");
-			sb.append(" icon : '/jsFile/zTree/css/zTreeStyle/img/diy/").append(module.getStr("images")).append("' ");
-			sb.append(" }");
-			if (listModule.indexOf(module) < moduleIndexSize) {
-				sb.append(", ");
-			}
+			node = new ZtreeNode();
+			node.setId(module.getPKValue());
+			node.setName(module.getStr("names"));
+			node.setIsParent(true);
+			node.setChecked(true);
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr("images"));
+			nodeList.add(node);
+		}
+		
+		for (Operator operator : operatorList) {
+			node = new ZtreeNode();
+			node.setId(operator.getPKValue());
+			node.setName(operator.getStr("names"));
+			node.setIsParent(false);
+			node.setChecked(false);
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
+			nodeList.add(node);
 		}
 
-		sb.append("]");
-
-		return sb.toString();
+		return nodeList;
 	}
 	
 	/**

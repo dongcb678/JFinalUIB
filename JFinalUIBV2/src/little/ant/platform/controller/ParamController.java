@@ -1,6 +1,9 @@
 package little.ant.platform.controller;
 
+import java.util.List;
+
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Param;
 import little.ant.platform.service.ParamService;
 import little.ant.platform.tools.ToolSqlXml;
@@ -42,8 +45,8 @@ public class ParamController extends BaseController {
 	 * 参数管理ztree数据
 	 */
 	public void treeData()  {
-		String jsonText = ParamService.service.childNodeData(ids);
-		renderJson(jsonText);
+		List<ZtreeNode> nodeList = ParamService.service.childNodeData(ids);
+		renderJson(nodeList);
 	}
 
 	/**

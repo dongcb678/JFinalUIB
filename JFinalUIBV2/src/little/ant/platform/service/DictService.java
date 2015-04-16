@@ -1,8 +1,10 @@
 package little.ant.platform.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Dict;
 
 import org.apache.log4j.Logger;
@@ -96,7 +98,7 @@ public class DictService extends BaseService {
 	 * @param parentIds
 	 * @return
 	 */
-	public String childNodeData(String parentIds){
+	public List<ZtreeNode> childNodeData(String parentIds){
 		List<Dict> list = null;
 		if (null != parentIds) {
 			String sql = getSql("platform.dict.treeChildNode");
@@ -106,24 +108,19 @@ public class DictService extends BaseService {
 			list = Dict.dao.find(sql);
 		}
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		int size = list.size() - 1;
+		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
+		ZtreeNode node = null;
+		
 		for (Dict dict : list) {
-			sb.append(" { ");
-			sb.append(" id : '").append(dict.getPKValue()).append("', ");
-			sb.append(" name : '").append(dict.getStr("names")).append("', ");
-			sb.append(" isParent : ").append(dict.getStr("isparent")).append(", ");
-			sb.append(" font : {'font-weight':'bold'}, ");
-			sb.append(" icon : '/jsFile/zTree/css/zTreeStyle/img/diy/").append(dict.getStr("images")).append("' ");
-			sb.append(" }");
-			if (list.indexOf(dict) < size) {
-				sb.append(", ");
-			}
+			node = new ZtreeNode();
+			node.setId(dict.getPKValue());
+			node.setName(dict.getStr("names"));
+			node.setIsParent(Boolean.parseBoolean(dict.getStr("isparent")));
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + dict.getStr("images"));
+			nodeList.add(node);
 		}
-		sb.append("]");
-
-		return sb.toString();
+		
+		return nodeList;
 	}
 
 }
