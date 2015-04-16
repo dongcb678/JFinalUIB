@@ -119,13 +119,13 @@
 					<div class="row">
 						<div class="col-md-12 space20">
 							<% if(hasPrivilegeUrl("/platform/user/add.html")){ %>
-								<button class="btn btn-success add-row" onclick="ajaxPanel('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
+								<button type="button" class="btn btn-success add-row" onclick="ajaxPanel('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
 									${i18nMap["admin.user.add"]} <i class="fa fa-plus"></i>
 								</button>
 							<% } %>	
 							
 							<% if(delete == true){ %>
-								<button class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/platform/user/delete"> 
+								<button type="button" class="btn btn-red delete-row"> 
 									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
 								</button>
 							<% } %>
@@ -211,11 +211,13 @@
 		</div>
 	</div>
 	
-</form>				
+</form>			
+	
+<script type="text/javascript" src="${cxt!}/jsFile/rapido/common/modals.js"></script>
+<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/user/list.js"></script>
 
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		FormElements.init();
-		UIModals.init();
+		Modals.init();
 	});
 </script>

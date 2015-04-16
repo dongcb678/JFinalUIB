@@ -174,6 +174,34 @@ function orderbyFun(divId, formId, colunmName){
 }
 
 /**
+ * 公共ajax函数
+ * @param url
+ * @param data
+ * @param callback
+ * @returns {String}
+ */
+function ajaxFunc(url, data, callback){
+	var result = "";
+	$.ajax({
+		type : "post",
+		url : encodeURI(encodeURI(cxt + url)),
+		data : data,
+		dataType : "html",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		async: false,
+		cache: false,
+		success:function(response){
+			result = response;
+			//扩展回调函数
+			if( callback != null ){
+				callback();
+			}
+		}
+	});
+	return result;
+}
+
+/**
  * ajax提交form替换content
  * @param divId 返回替换div
  * @param formId 提交formid
@@ -227,33 +255,40 @@ function ajaxDiv(divId, url, data, callback){
 }
 
 /**
- * 公共ajax函数
- * @param url
- * @param data
- * @param callback
- * @returns {String}
+ * ajax请求url替换div content
+ * @param url 请求地址
+ * @param data 参数
+ * @param callback 回调
  */
-function ajaxFunc(url, data, callback){
-	var result = "";
+function ajaxPanel(url, data, callback){
 	$.ajax({
 		type : "post",
 		url : encodeURI(encodeURI(cxt + url)),
 		data : data,
 		dataType : "html",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		async: false,
+		async: true,
 		cache: false,
-		success:function(response){
-			result = response;
+		success:function(content){
+			var toolbarDiv = $("#toolbarDiv");
+			toolbarDiv.nextAll().remove();
+			toolbarDiv.after(content);
 			//扩展回调函数
-			if( callback != null ){
+			if(callback != null){
 				callback();
 			}
-		}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) { 
+			// 这个方法有三个参数：XMLHttpRequest 对象，错误信息，（可能）捕获的错误对象。
+			// 通常情况下textStatus和errorThown只有其中一个有值
+            // alert(XMLHttpRequest.status);
+            // alert(XMLHttpRequest.readyState);
+            // alert(textStatus);
+			alert("请求出现错误！");
+        }
 	});
-	return result;
 }
-	
+			
 /**
  * ajax请求url替换DiaLog
  * @param url 请求地址
