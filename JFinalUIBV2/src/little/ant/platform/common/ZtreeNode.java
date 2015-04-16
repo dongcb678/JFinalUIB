@@ -3,18 +3,32 @@ package little.ant.platform.common;
 /**
  * Ztree节点数据封装
  * @author 董华健
- *
  */
 public class ZtreeNode {
 	
+	/**
+	 * 节点id
+	 */
 	private String id;
 
+	/**
+	 * 节点名称
+	 */
 	private String name;
 
+	/**
+	 * 是否上级节点
+	 */
 	private boolean isParent;
 
+	/**
+	 * 是否选中
+	 */
 	private boolean checked;
 
+	/**
+	 * 节点图标
+	 */
 	private String icon;
 	
 	public String getId() {
