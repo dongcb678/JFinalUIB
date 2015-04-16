@@ -63,29 +63,32 @@ public class ParamService extends BaseService {
 	 * @param ids
 	 */
 	public void delete(String ids){
-		Param param = Param.dao.findById(ids);
-		
-		// 是否存在子节点
-		if(param.getStr("isparent").equals("true")){
-			log.error("存在子节点，不能直接删除");
-			return;
+		String[] idsArr = splitByComma(ids);
+		for (String paramIds : idsArr) {
+			Param param = Param.dao.findById(paramIds);
+			
+			// 是否存在子节点
+			if(param.getStr("isparent").equals("true")){
+				log.error("存在子节点，不能直接删除");
+				return;
+			}
+			
+			// 修改上级节点的isparent
+			Param pParam = Param.dao.findById(param.getStr("parentmenuids"));
+			String sql = getSql("platform.param.childCount");
+			Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pParam.getPKValue());
+			Long counts = record.getNumber("counts").longValue();
+		    if(counts == 1){
+		    	pParam.set("isparent", "false");
+		    	pParam.update();
+		    }
+		    
+			// 缓存
+			Param.dao.cacheRemove(paramIds);
+			
+			// 删除
+			Param.dao.deleteById(paramIds);
 		}
-		
-		// 修改上级节点的isparent
-		Param pParam = Param.dao.findById(param.getStr("parentmenuids"));
-		String sql = getSql("platform.param.childCount");
-		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pParam.getPKValue());
-		Long counts = record.getNumber("counts").longValue();
-	    if(counts == 1){
-	    	pParam.set("isparent", "false");
-	    	pParam.update();
-	    }
-	    
-		// 缓存
-		Param.dao.cacheRemove(ids);
-		
-		// 删除
-		Param.dao.deleteById(ids);
 	}
 
 	/**

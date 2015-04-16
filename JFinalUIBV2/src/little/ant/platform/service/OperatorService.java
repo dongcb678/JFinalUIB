@@ -51,11 +51,15 @@ public class OperatorService extends BaseService {
 	 * @param ids
 	 */
 	public void delete(String ids){
-		// 缓存
-		Operator.dao.cacheRemove(ids);
+		String[] idsArr = splitByComma(ids);
+		for (String operatorIds : idsArr) {
+			// 缓存
+			Operator.dao.cacheRemove(operatorIds);
+			
+			// 删除
+			Operator.dao.deleteById(operatorIds);
+		}
 		
-		// 删除
-		Operator.dao.deleteById(ids);
 	}
 	
 	/**

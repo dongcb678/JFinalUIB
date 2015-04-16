@@ -67,7 +67,7 @@ public class RoleController extends BaseController {
 	 * 删除角色
 	 */
 	public void delete() {
-		RoleService.service.delete(getPara());
+		RoleService.service.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/role");
 	}
 	

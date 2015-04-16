@@ -46,12 +46,15 @@ public class RoleService extends BaseService {
 	 * 删除
 	 * @param role
 	 */
-	public void delete(String roleIds){
-		// 缓存
-		Role.dao.cacheRemove(roleIds);
-		
-		// 删除
-		Role.dao.deleteById(roleIds);
+	public void delete(String ids){
+		String[] idsArr = splitByComma(ids);
+		for (String roleIds : idsArr) {
+			// 缓存
+			Role.dao.cacheRemove(roleIds);
+			
+			// 删除
+			Role.dao.deleteById(roleIds);
+		}
 	}
 	
 	/**

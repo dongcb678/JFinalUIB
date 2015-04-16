@@ -79,7 +79,7 @@ public class ParamController extends BaseController {
 	 * 删除参数
 	 */
 	public void delete() {
-		ParamService.service.delete(getPara());
+		ParamService.service.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html");
 	}
 

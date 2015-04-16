@@ -67,7 +67,7 @@ public class OperatorController extends BaseController {
 	 * 删除功能
 	 */
 	public void delete() {
-		OperatorService.service.delete(getPara());
+		OperatorService.service.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/operator");
 	}
 

@@ -27,4 +27,15 @@ public class SysLogService extends BaseService {
 		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.sysLog.splitPage");
 	}
 	
+	/**
+	 * 删除
+	 * @param ids
+	 */
+	public void delete(String ids){
+		String[] idsArr = splitByComma(ids);
+		for (String logIds : idsArr) {
+			Syslog.dao.deleteById(logIds);
+		}
+	}
+	
 }

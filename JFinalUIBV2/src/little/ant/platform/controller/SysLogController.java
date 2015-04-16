@@ -1,7 +1,6 @@
 package little.ant.platform.controller;
 
 import little.ant.platform.annotation.Controller;
-import little.ant.platform.model.Syslog;
 import little.ant.platform.service.SysLogService;
 
 import org.apache.log4j.Logger;
@@ -37,7 +36,7 @@ public class SysLogController extends BaseController {
 	 * 删除日志
 	 */
 	public void delete() {
-		Syslog.dao.deleteById(getPara());
+		SysLogService.service.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/sysLog");
 	}
 

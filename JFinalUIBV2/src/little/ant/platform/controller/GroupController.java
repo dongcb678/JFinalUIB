@@ -64,7 +64,7 @@ public class GroupController extends BaseController {
 	 * 删除分组
 	 */
 	public void delete() {
-		GroupService.service.delete(getPara());
+		GroupService.service.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/group");
 	}
 

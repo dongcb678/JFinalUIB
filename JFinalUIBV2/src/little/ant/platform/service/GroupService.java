@@ -48,14 +48,17 @@ public class GroupService extends BaseService {
 
 	/**
 	 * 删除
-	 * @param group
+	 * @param ids
 	 */
-	public void delete(String groupIds){
-		// 缓存
-		Group.dao.cacheRemove(groupIds);
-		
-		// 删除
-		Group.dao.deleteById(groupIds);
+	public void delete(String ids){
+		String[] idsArr = splitByComma(ids);
+		for (String groupIds : idsArr) {
+			// 缓存
+			Group.dao.cacheRemove(groupIds);
+			
+			// 删除
+			Group.dao.deleteById(groupIds);
+		}
 	}
 	
 	/**

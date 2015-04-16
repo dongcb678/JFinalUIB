@@ -79,7 +79,7 @@ public class DictController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		DictService.service.delete(getPara());
+		DictService.service.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html");
 	}
 
