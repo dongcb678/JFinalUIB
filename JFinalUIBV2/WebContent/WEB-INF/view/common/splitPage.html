@@ -18,7 +18,7 @@
 		var orderMode = "${splitPage.orderMode!}";			// 排序的方式
 
 		// 获取分页HTML信息
-		var splitStr = splitPageHtml(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode, currentPageCount);
+		var splitStr = common_splitPage.splitPage(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode, currentPageCount);
 		
 		// 显示分页信息
 		$("#" + splitPageDiv).html(splitStr);
