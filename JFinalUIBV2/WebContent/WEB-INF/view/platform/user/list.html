@@ -119,7 +119,7 @@
 					<div class="row">
 						<div class="col-md-12 space20">
 							<% if(hasPrivilegeUrl("/platform/user/add.html")){ %>
-								<button type="button" class="btn btn-success add-row" onclick="ajaxMainPanel('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
+								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
 									${i18nMap["admin.user.add"]} <i class="fa fa-plus"></i>
 								</button>
 							<% } %>	

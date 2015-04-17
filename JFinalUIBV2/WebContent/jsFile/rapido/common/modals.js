@@ -45,7 +45,7 @@ var Modals = function() {
 				bootbox.confirm("确定要这样操作吗？", function(result) {
 					if(result){
 						var data = {'ids' : getCheckFunc('dataTable')};
-						ajaxMainPanel(url, data);
+						common_ajax.ajaxMainPanel(url, data);
 					}
 				});
 			}else{
@@ -59,7 +59,7 @@ var Modals = function() {
 		dialogBoxes.deleteOne = function(url) {
 			bootbox.confirm("确定要这样操作吗？", function(result) {
 				if(result){
-					ajaxMainPanel(url);
+					common_ajax.ajaxMainPanel(url);
 				}
 			});
 		};
