@@ -1,4 +1,4 @@
-var Modals = function() {
+var common_modals = function() {
 	"use strict";
 	
 	//function to initiate bootstrap extended modals

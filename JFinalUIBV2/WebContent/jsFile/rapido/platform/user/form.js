@@ -96,18 +96,17 @@ var platform_user_form = function() {
 	 		return false;
 		}
 		
-		var errorCount = formVali(form);
+		var errorCount = platform_verify.formVali(form);
 		if(errorCount != 0){
 			toastr.warning("有" + errorCount + "处错误，请修正！");
 	 		return false;
 		}
 		
-		ajaxForm("content", "editForm");
+		common_ajax.ajaxFormMainPanel("editForm");
 	}
 
 	return {
-		submitValiFunc: function(form, isAdd) {
-			dataVali(form, isAdd);
-		}
+		submitValiFunc: dataVali
 	};
+	
 }();
