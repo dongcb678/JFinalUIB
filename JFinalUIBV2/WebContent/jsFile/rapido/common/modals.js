@@ -1,5 +1,4 @@
 var Modals = function() {
-	
 	"use strict";
 	
 	//function to initiate bootstrap extended modals

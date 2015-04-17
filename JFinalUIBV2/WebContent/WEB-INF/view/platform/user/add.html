@@ -1,3 +1,4 @@
+<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/user/form.js"></script>
 
 <div class="row">
 	<div class="col-md-12">
@@ -45,7 +46,7 @@
 					<% include("/platform/user/form.html", {"operatorType" : "add"}){} %>
 					
 						<% if(hasPrivilegeUrl("/jf/platform/user/save")){ %>
-							<button type="button" class="btn btn-red" onclick="dataVali(this.form);">${i18nMap["admin.common.submit"]}</button>
+							<button type="button" class="btn btn-red" onclick="platform_user_form.submitValiFunc(this.form, 'true');">${i18nMap["admin.common.submit"]}</button>
 						<% } %>
 					
 				</form>
