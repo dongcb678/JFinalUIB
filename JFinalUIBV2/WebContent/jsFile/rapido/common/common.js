@@ -1,3 +1,6 @@
+/**
+ * 公共通用的js方法集合
+ */
 var common = function() {
 	
 	/**

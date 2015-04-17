@@ -1,3 +1,6 @@
+/**
+ * 分页处理方法集合
+ */
 var common_splitPage = function() {
 
 	/**

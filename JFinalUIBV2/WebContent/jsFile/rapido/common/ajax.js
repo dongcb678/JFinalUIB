@@ -1,3 +1,6 @@
+/**
+ * Ajax请求方法二次封装
+ */
 var common_ajax = function() {
 	
 	/**

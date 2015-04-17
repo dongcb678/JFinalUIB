@@ -1,3 +1,6 @@
+/**
+ * 用户添加和编辑页面js
+ */
 var platform_user_form = function() {
 	"use strict";
 	

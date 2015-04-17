@@ -1,3 +1,6 @@
+/**
+ * 系统常用弹出框集合
+ */
 var common_Dialog = function() {
 	
 	return {
