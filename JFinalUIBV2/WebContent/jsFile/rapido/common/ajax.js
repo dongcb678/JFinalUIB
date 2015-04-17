@@ -67,6 +67,19 @@ var common_ajax = function() {
 	}
 	
 	/**
+	 * ajax请求url替换主面板内容
+	 * @param url 请求地址
+	 * @param data 参数
+	 * @param callback 回调
+	 */
+	var ajaxMainPanel = function(url, data, callback){
+		var result = ajaxFunc(url, data, callback);
+		var toolbarDiv = $("#toolbarDiv");
+		toolbarDiv.nextAll().remove();
+		toolbarDiv.after(result);
+	}
+	
+	/**
 	 * ajax提交form替换指定div
 	 * @param divId 返回替换div
 	 * @param formId 提交formid
@@ -77,11 +90,25 @@ var common_ajax = function() {
 		$("#" + divId).html(result);
 	}
 	
+	/**
+	 * ajax提交form替换指定主面板
+	 * @param formId 提交formid
+	 * @param callback 回调
+	 */
+	var ajaxFormMainPanel = function(formId, callback){
+		var result = ajaxForm(formId, callback);
+		var toolbarDiv = $("#toolbarDiv");
+		toolbarDiv.nextAll().remove();
+		toolbarDiv.after(result);
+	}
+	
 	return {
 		ajaxFunc : ajaxFunc,
 		ajaxForm : ajaxForm,
 		ajaxDiv : ajaxDiv,
-		ajaxFormDiv : ajaxFormDiv
+		ajaxMainPanel : ajaxMainPanel,
+		ajaxFormDiv : ajaxFormDiv,
+		ajaxFormMainPanel : ajaxFormMainPanel
 	};
 	
 }();

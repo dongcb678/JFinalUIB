@@ -121,7 +121,11 @@ var common_splitPage = function() {
 	var splitPageLink = function(divId, formId, toPage){
 		//alert($("#" + formId + " select[name=pageNumber]").attr("name"));//input[name=pageNumber]
 		$("#" + formId + " select[name=pageNumber],input[name=pageNumber] ").val(toPage);
-		common_ajax.ajaxFormDiv(divId, formId);
+		if(divId == "mainPanel"){
+			common_ajax.ajaxFormMainPanel(formId);
+		}else{
+			common_ajax.ajaxFormDiv(divId, formId);
+		}
 	}
 	
 	/**
@@ -149,8 +153,14 @@ var common_splitPage = function() {
 			orderColunmNode.val(colunmName);
 			orderModeNode.val("asc");
 		}
+		
 		//alert(orderColunmNode.val()+"--"+orderModeNode.val());
-		common_ajax.ajaxFormDiv(divId, formId);
+		
+		if(divId == "mainPanel"){
+			common_ajax.ajaxFormMainPanel(formId);
+		}else{
+			common_ajax.ajaxFormDiv(divId, formId);
+		}
 	}
 	
 	return {
