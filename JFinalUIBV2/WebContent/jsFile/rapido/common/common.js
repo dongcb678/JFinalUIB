@@ -1,7 +1,7 @@
 /**
  * 公共通用的js方法集合
  */
-var common = function() {
+var common_common = function() {
 	
 	/**
 	 * 全选、反选

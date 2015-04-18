@@ -40,11 +40,11 @@ var common_modals = function() {
 		 * 删除单行数据
 		 */
 		dialogBoxes.deleteList = function(url) {
-			var ids = getCheckFunc('dataTable');
+			var ids = common_common.getCheckFunc('dataTable');
 			if(ids != ""){
 				bootbox.confirm("确定要这样操作吗？", function(result) {
 					if(result){
-						var data = {'ids' : getCheckFunc('dataTable')};
+						var data = {'ids' : ids};
 						common_ajax.ajaxMainPanel(url, data);
 					}
 				});
