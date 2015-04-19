@@ -215,13 +215,15 @@
 </script>
 
 <div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal">×</button>
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	<h3>${i18nMap["admin.dict.radio"]}</h3>
 </div>
+
 <div class="modal-body">
 	<ul id="zTreeContent" class="ztree"></ul>
 </div>
+
 <div class="modal-footer">
-	<a href="#" class="btn" data-dismiss="modal">${i18nMap["admin.common.close"]}</a>
-	<a href="#" class="btn btn-primary" data-dismiss="modal" onclick="setCheckValue();">${i18nMap["admin.common.determine"]}</a>
+	<button type="button" data-dismiss="modal" class="btn">${i18nMap["admin.common.close"]}</button>
+	<button type="button" data-dismiss="modal" class="btn btn-primary" onclick="setCheckValue();">${i18nMap["admin.common.determine"]}</button>
 </div>	

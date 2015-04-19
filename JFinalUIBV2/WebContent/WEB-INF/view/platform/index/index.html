@@ -17,7 +17,7 @@
 
 <!-- start: BODY -->
 <body>
-
+	
 	<% include("/platform/index/slidingbar.html"){} %>
 	
 	<div class="main-wrapper">
@@ -37,7 +37,6 @@
 		<div class="main-container inner">
 			<!-- start: PAGE -->
 			<div class="main-content">
-				
 				<!-- start: PANEL CONFIGURATION MODAL FORM -->
 				<div class="modal fade" id="panel-config" tabindex="-1" role="dialog" aria-hidden="true">
 					<div class="modal-dialog">
@@ -66,6 +65,10 @@
 				</div>
 				<!-- /.modal -->
 				<!-- end: SPANEL CONFIGURATION MODAL FORM -->
+				
+				<!-- start: ajax弹出框显示div -->
+				<div id="ajax-modal" class="modal extended-modal fade no-display" tabindex="-1"></div>
+				<!-- end: ajax弹出框显示div -->
 				
 				<div class="container">
 					<!-- start: PAGE HEADER -->

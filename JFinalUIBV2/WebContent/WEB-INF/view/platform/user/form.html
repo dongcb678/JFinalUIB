@@ -7,7 +7,11 @@
 			class="form-control focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 	</div>
 	<span class="help-inline col-sm-2"> 
-		<button class="btn btn-red" type="button" onclick="deptRadioDiaLog('deptId', 'deptName', '${escapeXml(user.departmentids!)}');">${i18nMap["admin.common.choice"]}</button>
+		<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
+			data-url="/jf/platform/dept/toUrl"
+			data-param='{ "toUrl" : "/platform/department/radio.html", "ids" : "${escapeXml(user.departmentids!)}", "deptId" : "deptId", "deptName" : "deptName" }'>
+			${i18nMap["admin.common.choice"]}
+		</a>
 	</span>
 </div>
 
@@ -19,7 +23,11 @@
 			class="form-control" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 	</div>
 	<span class="help-inline col-sm-2"> 
-		<button class="btn btn-red" type="button" onclick="stationRadioDiaLog('stationId', 'stationName', '${escapeXml(user.stationids!)}');">${i18nMap["admin.common.choice"]}</button>
+		<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
+			data-url="/jf/platform/station/toUrl"
+			data-param='{ "toUrl" : "/platform/station/radio.html", "ids" : "${escapeXml(user.stationids!)}", "stationId" : "stationId", "stationName" : "stationName" }'>
+			${i18nMap["admin.common.choice"]}
+		</a>
 	</span>
 </div>
 
@@ -34,7 +42,11 @@
 			class="form-control" readonly="readonly" maxlength="10000" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 	</div>
 	<span class="help-inline col-sm-2"> 
-		<button class="btn btn-red" type="button" onclick="userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${escapeXml(user.deptids!)}', '${escapeXml(user.userids!)}');">${i18nMap["admin.common.choice"]}</button>
+		<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
+			data-url="/jf/platform/user/toUrl"
+			data-param='{ "toUrl" : "/platform/user/checkbox.html", "checkedDeptIds" : "${escapeXml(user.deptids!)}", "checkedUserIds" : "", "userId" : "userId", "userName" : "userName", "deptIds" : "deptIds", "deptNames" : "deptNames" }'>
+			${i18nMap["admin.common.choice"]}
+		</a>
 	</span>
 </div>
 
