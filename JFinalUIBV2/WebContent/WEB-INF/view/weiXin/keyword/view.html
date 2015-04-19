@@ -1,7 +1,7 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxContent('/jf/wx/index/content');">主页</a> <span class="divider">/</span></li>
-		<li><a href="#" onclick="ajaxContent('/jf/wx/keyword');">关键字管理</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/wx/index/content');">主页</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/wx/keyword');">关键字管理</a> <span class="divider">/</span></li>
 		<li><a href="#">查看关键字</a></li>
 	</ul>
 </div>
@@ -41,7 +41,7 @@
 						</div>
 					</div>
 					<div class="form-actions">
-						<button class="btn" onclick="ajaxContent('/jf/wx/keyword');">退出</button>
+						<button class="btn" onclick="common_ajax.ajaxMainPanel('/jf/wx/keyword');">退出</button>
 					</div>
 				</fieldset>
 			</form>

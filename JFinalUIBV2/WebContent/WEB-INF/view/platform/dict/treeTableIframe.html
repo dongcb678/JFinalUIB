@@ -1,6 +1,6 @@
 <div>
 	<ul class="breadcrumb">
-		<li><a href="#" onclick="ajaxContent('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 		<li>
 			<a href="#">${i18nMap["admin.dict.common.name"]}</a>
 		</li>
@@ -16,10 +16,10 @@
 			<div class="box-icon">
 				<% if(hasPrivilegeUrl("/platform/dict/add.html")){ %>
 					<a href="#" class="btn btn-round" title='${i18nMap["admin.dict.treeTable.addI18n"]}'
-						onclick="ajaxContent('/jf/platform/dict/toUrl?toUrl=/platform/dict/add.html&i18n=1');"><i class="icon-plus-sign"></i></a>
+						onclick="common_ajax.ajaxMainPanel('/jf/platform/dict/toUrl?toUrl=/platform/dict/add.html&i18n=1');"><i class="icon-plus-sign"></i></a>
 					
 					<a href="#" class="btn btn-round" title='${i18nMap["admin.dict.treeTable.addNoI18n"]}'
-						onclick="ajaxContent('/jf/platform/dict/toUrl?toUrl=/platform/dict/add.html&i18n=0');"><i class="icon-plus-sign"></i></a>
+						onclick="common_ajax.ajaxMainPanel('/jf/platform/dict/toUrl?toUrl=/platform/dict/add.html&i18n=0');"><i class="icon-plus-sign"></i></a>
 				<% } %>
 				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
 				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>

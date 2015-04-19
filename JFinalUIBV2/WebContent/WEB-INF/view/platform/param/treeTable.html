@@ -48,7 +48,7 @@
 		function view(ids){
 			var has = ${hasPrivilegeUrl("/jf/platform/param/view")};
 			if(has){
-				parent.window.ajaxContent('/jf/platform/param/view/' + ids);
+				parent.window.common_ajax.ajaxMainPanel('/jf/platform/param/view/' + ids);
 			}else{
 				parent.window.simpleDialog('操作提示', '没有操作权限！');
 			}
@@ -57,7 +57,7 @@
 		function update(ids){
 			var has = ${hasPrivilegeUrl("/jf/platform/param/edit")};
 			if(has){
-				parent.window.ajaxContent('/jf/platform/param/edit/' + ids);
+				parent.window.common_ajax.ajaxMainPanel('/jf/platform/param/edit/' + ids);
 			}else{
 				parent.window.simpleDialog('操作提示', '没有操作权限！');
 			}
@@ -72,7 +72,7 @@
 				    okValue: '确定',
 				    ok: function () {
 				        //this.title('提交中…');
-				        parent.window.ajaxContent('/jf/platform/param/delete/' + ids);
+				        parent.window.common_ajax.ajaxMainPanel('/jf/platform/param/delete/' + ids);
 				        return true;
 				    },
 				    cancelValue: '取消',

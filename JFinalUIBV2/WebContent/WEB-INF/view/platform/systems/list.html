@@ -2,7 +2,7 @@
 	
 	<div>
 		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxContent('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 			<li>
 				<a href="#">${i18nMap["admin.systems.common.name"]}</a>
 			</li>
@@ -15,7 +15,7 @@
 				<h2><i class="icon-edit"></i> ${i18nMap["admin.systems.list.select"]}</h2>
 				<div class="box-icon">
 					<% if(hasPrivilegeUrl("/platform/systems/add.html")){ %>
-						<a href="#" class="btn btn-round" title='${i18nMap["admin.systems.add"]}' onclick="ajaxContent('/jf/platform/systems/toUrl?toUrl=/platform/systems/add.html');"><i class="icon-plus-sign"></i></a>
+						<a href="#" class="btn btn-round" title='${i18nMap["admin.systems.add"]}' onclick="common_ajax.ajaxMainPanel('/jf/platform/systems/toUrl?toUrl=/platform/systems/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -80,16 +80,16 @@
 								<td>${systems["orderids"]!}</td>
 								<td class="center">
 									<% if(edit == true){ %>
-										<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/platform/systems/edit/${escapeXml(systems.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a> 
+										<a class="btn btn-info" href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/systems/edit/${escapeXml(systems.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a> 
 									<% } %>
 									<% if(delete == true){ %>
 										<a class="btn btn-danger" href="#" onclick="ajaxContentConfirm('/jf/platform/systems/delete/${escapeXml(systems.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
 									<% } %>
 									<% if(module == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/platform/module?systemsIds=${escapeXml(systems.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.systems.list.table.module"]}</a>
+										<a class="btn btn-success" href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/module?systemsIds=${escapeXml(systems.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.systems.list.table.module"]}</a>
 									<% } %>
 									<% if(menu == true){ %>
-										<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/platform/menu?systemsIds=${escapeXml(systems.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.systems.list.table.menu"]}</a> 
+										<a class="btn btn-success" href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/menu?systemsIds=${escapeXml(systems.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.systems.list.table.menu"]}</a> 
 									<% } %>
 								</td>
 							</tr>

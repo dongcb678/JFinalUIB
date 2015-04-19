@@ -9,7 +9,7 @@ var platform_user_form = function() {
 	 * @param userName
 	 */
 	var valiUserName = function(userName){
-		var result = ajaxFunc("/jf/platform/login/valiUserName", {"userName" : userName});
+		var result = common_ajax.ajaxFunc("/jf/platform/login/valiUserName", {"userName" : userName});
 		return result;
 	}
 	
@@ -18,7 +18,7 @@ var platform_user_form = function() {
 	 * @param mailBox
 	 */
 	var valiMailBox = function(mailBox){
-		var result = ajaxFunc("/jf/platform/login/valiMailBox", {"mailBox" : mailBox});
+		var result = common_ajax.ajaxFunc("/jf/platform/login/valiMailBox", {"mailBox" : mailBox});
 		return result;
 	}
 	
@@ -27,7 +27,7 @@ var platform_user_form = function() {
 	 * @param idcard
 	 */
 	var valiIdcard = function(idcard){
-		var result = ajaxFunc("/jf/platform/login/valiIdcard", {"idcard" : idcard});
+		var result = common_ajax.ajaxFunc("/jf/platform/login/valiIdcard", {"idcard" : idcard});
 		return result;
 	}
 	
@@ -36,7 +36,7 @@ var platform_user_form = function() {
 	 * @param mailBox
 	 */
 	var valiMobile = function(mobile){
-		var result = ajaxFunc("/jf/platform/login/valiMobile", {"mobile" : mobile});
+		var result = common_ajax.ajaxFunc("/jf/platform/login/valiMobile", {"mobile" : mobile});
 		return result;
 	}
 	

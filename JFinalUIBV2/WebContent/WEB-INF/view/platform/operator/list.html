@@ -2,7 +2,7 @@
 	
 	<div>
 		<ul class="breadcrumb">
-			<li><a href="#" onclick="ajaxContent('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 			<li>
 				<a href="#">${i18nMap["admin.operator.common.name"]}</a>
 			</li>
@@ -15,7 +15,7 @@
 				<h2><i class="icon-edit"></i> ${i18nMap["admin.operator.list.select"]}</h2>
 				<div class="box-icon">
 					<% if(hasPrivilegeUrl("/platform/operator/add.html")){ %>
-						<a href="#" class="btn btn-round" title='${i18nMap["admin.operator.add"]}' onclick="ajaxContent('/jf/platform/operator/toUrl?toUrl=/platform/operator/add.html');"><i class="icon-plus-sign"></i></a>
+						<a href="#" class="btn btn-round" title='${i18nMap["admin.operator.add"]}' onclick="common_ajax.ajaxMainPanel('/jf/platform/operator/toUrl?toUrl=/platform/operator/add.html');"><i class="icon-plus-sign"></i></a>
 					<% } %>
 					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
 					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -131,8 +131,8 @@
 									<% } %>
 								</td>
 								<td class="center">
-									<a class="btn btn-success" href="#" onclick="ajaxContent('/jf/platform/operator/view/${escapeXml(operator.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a> 
-									<a class="btn btn-info" href="#" onclick="ajaxContent('/jf/platform/operator/edit/${escapeXml(operator.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a> 
+									<a class="btn btn-success" href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/operator/view/${escapeXml(operator.ids!)}');"> <i class="icon-zoom-in icon-white"></i> ${i18nMap["admin.common.see"]}</a> 
+									<a class="btn btn-info" href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/operator/edit/${escapeXml(operator.ids!)}');"> <i class="icon-edit icon-white"></i> ${i18nMap["admin.common.edit"]}</a> 
 									<a class="btn btn-danger" href="#" onclick="ajaxContentConfirm('/jf/platform/operator/delete/${escapeXml(operator.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
 								</td>
 							</tr>

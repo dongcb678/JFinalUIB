@@ -21,43 +21,43 @@
 </script>
 
 <div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal">X</button>
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	<h3>${i18nMap["admin.user.passChange"]}</h3>
 </div>
 
-<form id="passChangeForm" action="${cxt!}/jf/platform/user/passChange" method="POST">
-	
-	<input type="hidden" name="userName" value="${cookieMap.userName.value!}">
-	
 	<div class="modal-body">
-		<div class="form-actions">
-			<fieldset>
-				<div class="control-group">
-					<label class="control-label">${i18nMap["admin.user.passChange.oldPass"]}</label>
-					<div class="controls">
-						<input type="password" id="oldPass" name="passOld" class="input-xlarge" autocomplete="off" 
-							maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
-						<span class="help-inline">6-18位字母数字</span>
-					</div>
+		<form id="passChangeForm" action="${cxt!}/jf/platform/user/passChange" method="POST" role="form" class="form-horizontal">
+			<input type="hidden" name="userName" value="${cookieMap.userName.value!}">
+	
+			<div class="form-group">
+				<label class="col-sm-2 control-label">${i18nMap["admin.user.passChange.oldPass"]}</label>
+				<div class="col-sm-7">
+					<input type="password" id="oldPass" name="passOld" class="input-xlarge" autocomplete="off" 
+						maxlength="18" vMin='6' vType="letterNumber" onblur="platform_verify.onblurVali(this);">
 				</div>
-				<div class="control-group">
-					<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
-					<div class="controls">
-						<input type="password" id="newPass1" name="passNew" class="input-xlarge" autocomplete="off" 
-							maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
-						<span class="help-inline">6-18位字母数字</span>
-					</div>
+				<span class="help-inline col-sm-2">6-18位字母数字</span>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
+				<div class="col-sm-7">
+					<input type="password" id="newPass1" name="passNew" class="input-xlarge" autocomplete="off" 
+						maxlength="18" vMin='6' vType="letterNumber" onblur="platform_verify.onblurVali(this);">
 				</div>
-				<div class="control-group">
-					<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
-					<div class="controls">
-						<input type="password" id="newPass2" class="input-xlarge" 
-							maxlength="18" vMin='6' vType="letterNumber" onblur="onblurVali(this);">
-						<span class="help-inline">6-18位字母数字</span>
-					</div>
+				<span class="help-inline col-sm-2">6-18位字母数字</span>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
+				<div class="col-sm-7">
+					<input type="password" id="newPass2" class="input-xlarge" 
+						maxlength="18" vMin='6' vType="letterNumber" onblur="platform_verify.onblurVali(this);">
+					<span class="help-inline"></span>
 				</div>
-			</fieldset>
-		</div>
+				<span class="help-inline col-sm-2">6-18位字母数字</span>
+			</div>
+			
+		</form>
 	</div>
 	
 	<div class="modal-footer">
@@ -65,4 +65,3 @@
 		<button type="button" data-dismiss="modal" class="btn btn-primary" onclick="passChange();">${i18nMap["admin.common.determine"]}</button>
 	</div>	
 	
-</form>

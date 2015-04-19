@@ -172,13 +172,13 @@
 									</td>
 									<td class="hidden-xs">
 										<% if(view == true){ %>
-											<button type="button" class="btn btn-dark-yellow add-row" onclick="ajaxContent('/jf/platform/user/view/${user.ids!}');">
+											<button type="button" class="btn btn-dark-yellow add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/view/${user.ids!}');">
 												${i18nMap["admin.common.see"]} <i class="fa fa-eye"></i>
 											</button>
 										<% } %>
 										
 										<% if(edit == true){ %>
-											<button type="button" class="btn btn-green edit-row" onclick="ajaxContent('/jf/platform/user/edit/${user.ids!}');"> 
+											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/edit/${user.ids!}');"> 
 												${i18nMap["admin.common.edit"]} <i class="fa fa-edit"></i>
 											</button>
 										<% } %>
