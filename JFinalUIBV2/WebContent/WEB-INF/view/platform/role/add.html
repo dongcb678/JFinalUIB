@@ -19,7 +19,7 @@
 		</div>
 		
 		<div class="box-content">
-			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/platform/role/save" method="POST">
+			<form role="form" class="form-horizontal" id="editForm" action="${cxt!}/jf/platform/role/save" method="POST">
 				<% include("/platform/role/form.html"){} %>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/platform/role/save")){ %>

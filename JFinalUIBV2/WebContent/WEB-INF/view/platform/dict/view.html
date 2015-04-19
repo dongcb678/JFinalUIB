@@ -20,32 +20,32 @@
 		
 		<div class="box-content">
 			
-			<form class="form-horizontal" >
+			<form role="form" class="form-horizontal" >
 
-				<fieldset>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.parent"]}</label>
-						<div class="controls">
+				
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.parent"]}</label>
+						<div class="col-sm-7">
 							<input type="text" value="${escapeXml(dict.parentnames!)}" class="input-xlarge focused" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.name"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.name"]}</label>
+						<div class="col-sm-7">
 							<input type="text" name="dict.names" value="${escapeXml(dict.names!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.number"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.number"]}</label>
+						<div class="col-sm-7">
 							<input type="text" name="dict.numbers" value="${escapeXml(dict.numbers!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.status"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.status"]}</label>
+						<div class="col-sm-7">
 							<input type="text" disabled="disabled" value='${dict.status == "1" ? i18nMap["admin.dict.property.status.start"] : i18nMap["admin.dict.property.status.stop"]}'>
-							<span class="help-inline"></span>
+							<span class="help-inline col-sm-2"></span>
 						</div>
 					</div>
 					
@@ -53,55 +53,55 @@
 								
 					<% if(paramMap["i18n"] == "0"){ %>
 					
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.value"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}</label>
+						<div class="col-sm-7">
 							<input type="text" name="dict.val" value="${escapeXml(dict.val!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
 					
 					<% } else { %>
 					
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="dict.val_ja" value="${escapeXml(dict.val_ja!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="dict.val_enus" value="${escapeXml(dict.val_enus!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="dict.val_zhcn" value="${escapeXml(dict.val_zhcn!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="dict.val_zhhk" value="${escapeXml(dict.val_zhhk!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="dict.val_zhtw" value="${escapeXml(dict.val_zhtw!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
 					
 					<% } %>
 					
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.common.order"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.common.order"]}</label>
+						<div class="col-sm-7">
 							<input type="text" name="dict.orderids" value="${dict.orderids!}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-				</fieldset>
+				
 			</form>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-<form id="splitPage" class="form-horizontal" action="${cxt!}/jf/platform/sysLog" method="POST">
+<form id="splitPage" role="form" class="form-horizontal" action="${cxt!}/jf/platform/sysLog" method="POST">
 	
 	<div>
 		<ul class="breadcrumb">
@@ -19,38 +19,38 @@
 				</div>
 			</div>
 			<div class="box-content">
-				<fieldset>
-				  	<div class="control-group">
-						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ourl"]}</label>
-						<div class="controls">
+				
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ourl"]}</label>
+						<div class="col-sm-7">
 					  		<input class="input-xlarge focused" type="text" name="_query.url" value='${escapeXml(paramMap["_query.url"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
-				  	<div class="control-group">
-						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.oname"]}</label>
-						<div class="controls">
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.oname"]}</label>
+						<div class="col-sm-7">
 					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${escapeXml(paramMap["_query.names"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
-				  	<div class="control-group">
-						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.username"]}</label>
-						<div class="controls">
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.username"]}</label>
+						<div class="col-sm-7">
 					  		<input class="input-xlarge focused" type="text" name="_query.username" value='${escapeXml(paramMap["_query.username"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
-				  	<div class="control-group">
-						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ips"]}</label>
-						<div class="controls">
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ips"]}</label>
+						<div class="col-sm-7">
 					  		<input class="input-xlarge focused" type="text" name="_query.ips" value='${escapeXml(paramMap["_query.ips"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
-				  	<div class="control-group">
-						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.status"]}</label>
-						<div class="controls">
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.status"]}</label>
+						<div class="col-sm-7">
 					  		<select name="_query.status" class="combox">
 								<option></option>
 								<option value="1" ${paramMap["_query.status"]! == "1" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.success"]}</option>
@@ -63,7 +63,7 @@
 						<button type="button" class="btn btn-primary" onclick='ajaxForm("content", "splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
 				  	</div>
-				</fieldset>
+				
 			</div>
 		</div><!--/span-->
 	</div><!--/row-->

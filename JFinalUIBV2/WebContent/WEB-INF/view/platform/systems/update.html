@@ -19,7 +19,7 @@
 		</div>
 		
 		<div class="box-content">
-			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/platform/systems/update" method="POST">
+			<form role="form" class="form-horizontal" id="editForm" action="${cxt!}/jf/platform/systems/update" method="POST">
 				<input type="hidden" name="systems.ids" value="${escapeXml(systems.ids!)}" >
 				<input type="hidden" name="systems.version" value="${systems.version!}">
 				<% include("/platform/systems/form.html"){} %>

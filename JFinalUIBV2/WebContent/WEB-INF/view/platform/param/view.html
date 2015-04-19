@@ -20,32 +20,32 @@
 		
 		<div class="box-content">
 			
-			<form class="form-horizontal" >
+			<form role="form" class="form-horizontal" >
 
-				<fieldset>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.parent"]}</label>
-						<div class="controls">
+				
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.parent"]}</label>
+						<div class="col-sm-7">
 							<input type="text" value="${escapeXml(param.parentnames!)}" class="input-xlarge focused" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.name"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.name"]}</label>
+						<div class="col-sm-7">
 							<input type="text" name="param.names" value="${escapeXml(param.names!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.number"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.number"]}</label>
+						<div class="col-sm-7">
 							<input type="text" name="param.numbers" value="${escapeXml(param.numbers!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.status"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.status"]}</label>
+						<div class="col-sm-7">
 							<input type="text" disabled="disabled" value='${param.status == "1" ? i18nMap["admin.param.property.status.start"] : i18nMap["admin.param.property.status.stop"]}'>
-							<span class="help-inline"></span>
+							<span class="help-inline col-sm-2"></span>
 						</div>
 					</div>
 					
@@ -53,55 +53,55 @@
 								
 					<% if(paramMap["i18n"] == "0"){ %>
 					
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.value"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}</label>
+						<div class="col-sm-7">
 							<input type="text" name="param.val" value="${escapeXml(param.val!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
 					
 					<% } else { %>
 					
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="param.val_ja" value="${escapeXml(param.val_ja!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="param.val_enus" value="${escapeXml(param.val_enus!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="param.val_zhcn" value="${escapeXml(param.val_zhcn!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="param.val_zhhk" value="${escapeXml(param.val_zhhk!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
 							<input type="text" name="param.val_zhtw" value="${escapeXml(param.val_zhtw!)}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
 					
 					<% } %>
 					
-					<div class="control-group">
-						<label class="control-label">${i18nMap["admin.common.order"]}</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.common.order"]}</label>
+						<div class="col-sm-7">
 							<input type="text" name="param.orderids" value="${param.orderids!}" class="input-xlarge" readonly="readonly">
 						</div>
 					</div>
-				</fieldset>
+				
 			</form>
 		</div>
 	</div>
