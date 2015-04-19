@@ -19,9 +19,14 @@ function dataVali(form){
 			<input type="hidden" id="parentId" name="param.parentids" value="${escapeXml(param.parentids!)}"/>
 			<input type="text" id="parentName" value="${escapeXml(param.parentnames!)}" 
 				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="paramRadioDiaLog('parentId', 'parentName', '${escapeXml(param.parentids!)}');">${i18nMap["admin.common.choice"]}</button>
-			<span class="help-inline"></span>
 		</div>
+		<span class="help-inline col-sm-2"> 
+			<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
+				data-url="/jf/platform/param/toUrl"
+				data-param='{ "toUrl" : "/platform/param/radio.html", "ids" : "${escapeXml(param.parentids!)}", "paramId" : "parentId", "paramName" : "parentName" }'>
+				${i18nMap["admin.common.choice"]}
+			</a>
+		</span>
 	</div>
 	<div class="control-group">
 		<label class="control-label">${i18nMap["admin.param.property.name"]}</label>

@@ -21,9 +21,14 @@ function dataVali(form){
 			<input type="hidden" id="moduleId" name="operator.moduleids" value="${escapeXml(operator.moduleids!)}"/>
 			<input type="text" id="moduleName" name="operator.modulenames" value="${escapeXml(operator.modulenames!)}" 
 				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="moduleRadioDiaLog('moduleId', 'moduleName', '${escapeXml(operator.moduleids!)}');">选择</button>
-			<span class="help-inline"></span>
 		</div>
+		<span class="help-inline col-sm-2"> 
+			<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
+				data-url="/jf/platform/module/toUrl"
+				data-param='{ "toUrl" : "/platform/module/radio.html", "ids" : "${escapeXml(operator.moduleids!)}", "moduleId" : "moduleId", "moduleName" : "moduleName" }'>
+				${i18nMap["admin.common.choice"]}
+			</a>
+		</span>
 	</div>
 	<div class="control-group">
 		<label class="control-label">${i18nMap["admin.operator.property.name"]}</label>

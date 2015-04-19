@@ -88,7 +88,11 @@
 										<a class="btn btn-danger" href="#" onclick="ajaxContentConfirm('/jf/platform/group/delete/${escapeXml(group.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.common.delete"]}</a>
 									<% } %>
 									<% if(role == true){ %>
-										<a class="btn btn-danger" href="#" onclick="roleSelectDialog('${escapeXml(group.ids!)}');"> <i class="icon-trash icon-white"></i> ${i18nMap["admin.group.list.table.role"]}</a>	
+										<a href="#" data-toggle="modal" class="ajaxDialog btn btn-purple add-row" 
+											data-url="/jf/platform/role/select"
+											data-param='{ "ids" : "${group.ids!}" }'>
+											${i18nMap["admin.group.list.table.role"]} <i class="fa fa-leaf"></i>
+										</a>
 									<% } %>
 								</td>
 							</tr>

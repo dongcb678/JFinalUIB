@@ -164,7 +164,21 @@
 		sObj.after(operatorStr);
 		var btn = $("#operatorBtn_"+treeNode.tId);
 		if (btn) btn.bind("click", function(){
-			setStationOperatorDiaLog(treeNode.id);
+			//setStationOperatorDiaLog(treeNode.id);
+			$.fn.modalmanager.defaults.resize = true;
+			$.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner = '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' + '<div class="progress progress-striped active">' + '<div class="progress-bar" style="width: 100%;"></div>' + '</div>' + '</div>';
+			var $modal = $('#ajax-modal');
+			// create the backdrop and wait for next modal to be triggered
+			$('body').modalmanager('loading');
+			
+			var url = "/jf/platform/operator/toUrl";
+			url = encodeURI(encodeURI(cxt + url));
+			
+			var data = { "toUrl" : "/platform/station/operatorTree.html", "ids" : treeNode.id};
+			
+			$modal.load(url, data[0], function() {
+				$modal.modal();
+			});
 			return false;
 		});
 	};

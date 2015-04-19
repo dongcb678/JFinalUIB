@@ -19,9 +19,14 @@ function dataVali(form){
 			<input type="hidden" id="parentId" name="dict.parentids" value="${escapeXml(dict.parentids!)}"/>
 			<input type="text" id="parentName" value="${escapeXml(dict.parentnames!)}" 
 				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
-			<button class="btn" type="button" onclick="dictRadioDiaLog('parentId', 'parentName', '${escapeXml(dict.parentids!)}');">${i18nMap["admin.common.choice"]}</button>
-			<span class="help-inline"></span>
 		</div>
+		<span class="help-inline col-sm-2">
+			<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
+				data-url="/jf/platform/dict/toUrl"
+				data-param='{ "toUrl" : "/platform/dict/radio.html", "ids" : "${escapeXml(dict.parentids!)}", "dictId" : "parentId", "dictName" : "parentName" }'>
+				${i18nMap["admin.common.choice"]}
+			</a>
+		</span>
 	</div>
 	<div class="control-group">
 		<label class="control-label">${i18nMap["admin.dict.property.name"]}</label>
