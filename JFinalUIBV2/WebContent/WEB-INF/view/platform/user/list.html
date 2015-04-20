@@ -2,8 +2,8 @@
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">默认主页</a></li>
-			<li class="active">用户管理</li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">${i18nMap["admin.common.mainPage"]}</li>
 		</ol>
 	</div>
 </div>
@@ -18,26 +18,7 @@
 				<div class="panel-heading">
 					<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.user.list.select"]}</span></h4>
 					<div class="panel-tools">										
-						<div class="dropdown">
-							<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">
-								<i class="fa fa-cog"></i>
-							</a>
-							<ul class="dropdown-menu dropdown-light pull-right" role="menu">
-								<li>
-									<a class="panel-collapse collapses" href="#"><i class="fa fa-angle-up"></i> <span>折叠</span> </a>
-								</li>
-								<li>
-									<a class="panel-refresh" href="#"> <i class="fa fa-refresh"></i> <span>刷新</span> </a>
-								</li>
-								<li>
-									<a class="panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> <span>配置</span></a>
-								</li>
-								<li>
-									<a class="panel-expand" href="#"> <i class="fa fa-expand"></i> <span>全屏</span></a>
-								</li>										
-							</ul>
-						</div>
-						<a class="btn btn-xs btn-link panel-close" href="#"> <i class="fa fa-times"></i> </a>
+						<% include("/common/panel-tools.html"){} %>
 					</div>
 				</div>
 				
@@ -85,26 +66,7 @@
 						<span class="text-bold">${i18nMap["admin.user.list.table"]}</span>
 					</h4>
 					<div class="panel-tools">										
-						<div class="dropdown">
-							<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">
-								<i class="fa fa-cog"></i>
-							</a>
-							<ul class="dropdown-menu dropdown-light pull-right" role="menu">
-								<li>
-									<a class="panel-collapse collapses" href="#"><i class="fa fa-angle-up"></i> <span>折叠</span> </a>
-								</li>
-								<li>
-									<a class="panel-refresh" href="#"> <i class="fa fa-refresh"></i> <span>刷新</span> </a>
-								</li>
-								<li>
-									<a class="panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> <span>配置</span></a>
-								</li>
-								<li>
-									<a class="panel-expand" href="#"> <i class="fa fa-expand"></i> <span>全屏</span></a>
-								</li>										
-							</ul>
-						</div>
-						<a class="btn btn-xs btn-link panel-close" href="#"> <i class="fa fa-times"></i> </a>
+						<% include("/common/panel-tools.html"){} %>
 					</div>
 				</div>
 				
