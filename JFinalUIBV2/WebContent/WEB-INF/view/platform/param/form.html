@@ -18,7 +18,7 @@ function dataVali(form){
 		<div class="col-sm-7">
 			<input type="hidden" id="parentId" name="param.parentids" value="${escapeXml(param.parentids!)}"/>
 			<input type="text" id="parentName" value="${escapeXml(param.parentnames!)}" 
-				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 		</div>
 		<span class="help-inline col-sm-2"> 
 			<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
@@ -32,7 +32,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.param.property.name"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="param.names" value="${escapeXml(param.names!)}" 
-				class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">1-10位任意字符</span>
 		</div>
 	</div>
@@ -40,7 +40,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.param.property.number"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="param.numbers" value="${escapeXml(param.numbers!)}" 
-				class="input-xlarge" maxlength="50" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
+				class="form-control" maxlength="50" vMin="5" vType="letterNumber" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">5-50位字母数字</span>
 		</div>
 	</div>
@@ -63,7 +63,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="param.val" value="${escapeXml(param.val!)}" 
-				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">1-500位任意字符</span>
 		</div>
 	</div>
@@ -74,7 +74,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
 		<div class="col-sm-7">
 			<input type="text" name="param.val_ja" value="${escapeXml(param.val_ja!)}" 
-				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">1-500位任意字符</span>
 		</div>
 	</div>
@@ -82,7 +82,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
 		<div class="col-sm-7">
 			<input type="text" name="param.val_enus" value="${escapeXml(param.val_enus!)}" 
-				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">1-500位任意字符</span>
 		</div>
 	</div>
@@ -90,7 +90,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
 		<div class="col-sm-7">
 			<input type="text" name="param.val_zhcn" value="${escapeXml(param.val_zhcn!)}" 
-				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">1-500位任意字符</span>
 		</div>
 	</div>
@@ -98,7 +98,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
 		<div class="col-sm-7">
 			<input type="text" name="param.val_zhhk" value="${escapeXml(param.val_zhhk!)}" 
-				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">1-500位任意字符</span>
 		</div>
 	</div>
@@ -106,7 +106,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
 		<div class="col-sm-7">
 			<input type="text" name="param.val_zhtw" value="${escapeXml(param.val_zhtw!)}" 
-				class="input-xlarge" maxlength="500" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">1-500位任意字符</span>
 		</div>
 	</div>
@@ -117,7 +117,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.common.order"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="param.orderids" value="${param.orderids!}" 
-				class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">
+				class="form-control" maxlength="10" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">2-10位任意字符</span>
 		</div>
 	</div>

@@ -20,7 +20,7 @@ function dataVali(form){
 		<div class="col-sm-7">
 			<input type="hidden" id="moduleId" name="operator.moduleids" value="${escapeXml(operator.moduleids!)}"/>
 			<input type="text" id="moduleName" name="operator.modulenames" value="${escapeXml(operator.modulenames!)}" 
-				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="input-xlarge focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 		</div>
 		<span class="help-inline col-sm-2"> 
 			<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
@@ -34,7 +34,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.name"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="operator.names" value="${escapeXml(operator.names!)}" 
-				class="input-xlarge" maxlength="25" vMin="2" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">2-25位任意字符</span>
 		</div>
 	</div>
@@ -52,7 +52,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.url"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="operator.url" value="${escapeXml(operator.url!)}" 
-				class="input-xlarge" maxlength="200" vMin="1" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="200" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">1-200位字符</span>
 		</div>
 	</div>
@@ -100,7 +100,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.returnUrl"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="operator.returnurl" value="${escapeXml(operator.returnurl!)}" 
-				class="input-xlarge" maxlength="200" vMin="0" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="200" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2"></span>
 		</div>
 	</div>
@@ -108,7 +108,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="operator.returnparamkeys" value="${escapeXml(operator.returnparamkeys!)}" 
-				class="input-xlarge" maxlength="100" vMin="0" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="100" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2"></span>
 		</div>
 	</div>

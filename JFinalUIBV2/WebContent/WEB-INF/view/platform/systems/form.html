@@ -17,7 +17,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.systems.property.name"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="systems.names" value="${escapeXml(systems.names!)}" 
-				class="input-xlarge" maxlength="25" vMin="2" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">2-10位任意字符</span>
 		</div>
 	</div>
@@ -25,7 +25,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.systems.property.numbers"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="systems.numbers" value="${escapeXml(systems.numbers!)}" 
-				class="input-xlarge" maxlength="25" vMin="5" vType="letterNumber" onblur="onblurVali(this);">
+				class="form-control" maxlength="25" vMin="5" vType="letterNumber" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">5-16位字母数字</span>
 		</div>
 	</div>
@@ -33,7 +33,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.systems.property.orderids"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="systems.orderids" value="${systems.orderids!}" 
-				class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">
+				class="form-control" maxlength="10" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">2-10位任意字符</span>
 		</div>
 	</div>

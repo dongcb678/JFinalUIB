@@ -32,7 +32,7 @@
 						<label class="col-sm-2 control-label"><img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
 						<div class="col-sm-7">
 							<input type="text" name="menu.names_ja" value="${escapeXml(menu.names_ja!)}" 
-								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+								class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 							<span class="help-inline col-sm-2">1-25位任意字符</span>
 						</div>
 					</div>
@@ -40,7 +40,7 @@
 						<label class="col-sm-2 control-label">${i18nMap["admin.menu.property.name"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
 						<div class="col-sm-7">
 							<input type="text" name="menu.names_enus" value="${escapeXml(menu.names_enus!)}" 
-								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+								class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 							<span class="help-inline col-sm-2">1-25位任意字符</span>
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 						<label class="col-sm-2 control-label">${i18nMap["admin.menu.property.name"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
 						<div class="col-sm-7">
 							<input type="text" name="menu.names_zhcn" value="${escapeXml(menu.names_zhcn!)}" 
-								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+								class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 							<span class="help-inline col-sm-2">1-25位任意字符</span>
 						</div>
 					</div>
@@ -56,7 +56,7 @@
 						<label class="col-sm-2 control-label">${i18nMap["admin.menu.property.name"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
 						<div class="col-sm-7">
 							<input type="text" name="menu.names_zhhk" value="${escapeXml(menu.names_zhhk!)}" 
-								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+								class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 							<span class="help-inline col-sm-2">${i18nMap["admin.menu.property.name"]}</span>
 						</div>
 					</div>
@@ -64,7 +64,7 @@
 						<label class="col-sm-2 control-label">${i18nMap["admin.menu.property.name"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
 						<div class="col-sm-7">
 							<input type="text" name="menu.names_zhtw" value="${escapeXml(menu.names_zhtw!)}" 
-								class="input-xlarge" maxlength="25" vMin="1" vType="length" onblur="onblurVali(this);">
+								class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 							<span class="help-inline col-sm-2">${i18nMap["admin.menu.property.name"]}</span>
 						</div>
 					</div>
@@ -72,7 +72,7 @@
 						<label class="col-sm-2 control-label">${i18nMap["admin.menu.property.name"]}</label>
 						<div class="col-sm-7">
 							<input type="text" name="dict.orderids" value="${menu.orderids!}" 
-								class="input-xlarge" maxlength="10" vMin="1" vType="numberZ" onblur="onblurVali(this);">
+								class="form-control" maxlength="10" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);">
 							<span class="help-inline col-sm-2">1-10位数字</span>
 						</div>
 					</div>

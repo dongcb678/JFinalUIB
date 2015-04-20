@@ -19,7 +19,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.role.property.numbers"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="role.numbers" value="${escapeXml(role.numbers!)}" 
-				class="input-xlarge" maxlength="50" vMin="1" vType="letterNumber" onblur="onblurVali(this);">
+				class="form-control" maxlength="50" vMin="1" vType="letterNumber" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">1-50位字母数字</span>
 		</div>
 	</div>
@@ -27,7 +27,7 @@ function dataVali(form){
 		<label class="col-sm-2 control-label">${i18nMap["admin.role.property.name"]}</label>
 		<div class="col-sm-7">
 			<input type="text" name="role.names" value="${escapeXml(role.names!)}" 
-				class="input-xlarge" maxlength="25" vMin="2" vType="length" onblur="onblurVali(this);">
+				class="form-control" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);">
 			<span class="help-inline col-sm-2">2-10位任意字符</span>
 		</div>
 	</div>

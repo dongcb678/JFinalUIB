@@ -23,7 +23,7 @@
 				<% include("/weiXin/keyword/form.html"){} %>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/wx/keyword/save")){ %>
-						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">提交</button>
+						<button class="btn btn-primary" type="button" onclick="platform_verify.formValiSubmit(this.form);">提交</button>
 					<% } %>
 					<button class="btn" onclick="common_ajax.ajaxMainPanel('/jf/wx/keyword');">退出</button>
 				</div>

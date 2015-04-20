@@ -28,7 +28,7 @@
 				<% include("/platform/group/form.html"){} %>
 				<div class="form-actions">
 					<% if(hasPrivilegeUrl("/jf/wx/group/update")){ %>
-						<button class="btn btn-primary" type="button" onclick="dataVali(this.form);">${i18nMap["admin.common.submit"]}</button>
+						<button class="btn btn-primary" type="button" onclick="platform_verify.formValiSubmit(this.form);">${i18nMap["admin.common.submit"]}</button>
 					<% } %>
 				</div>
 			</form>

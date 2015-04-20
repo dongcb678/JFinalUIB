@@ -456,8 +456,23 @@ var platform_verify = function() {
 		return errorCount;
 	}
 	
+	/**
+	 * 整个form一次验证并提交
+	 * @param formNode
+	 * @returns {Number}
+	 */
+	var formValiSubmit = function(formNode){
+		var errorCount = formVali(formNode);
+		if(errorCount != 0){
+			toastr.warning('有'+errorCount+'处错误，请修正！');
+		}else{
+			common_ajax.ajaxFormMainPanel(formNode.id);
+		}
+	}
+	
 	return {
-		formVali: formVali,
+		formVali : formVali,
+		formValiSubmit : formValiSubmit,
 		onblurVali : onblurVali
 	};
 	
