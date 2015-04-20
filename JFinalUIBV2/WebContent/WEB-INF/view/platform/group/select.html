@@ -17,25 +17,19 @@
 	}
 	
 	function setGroup(){
+		var userIds = "${escapeXml(ids!)}";
+		var groupIds = "";
+		
 		var checkedGroup = document.getElementById("checkedGroup");
 		var length = checkedGroup.length;
-		var groupIds = "";
 		for (var i=0; i<length; i++){
 			groupIds += checkedGroup.options[i].value + ",";
 	    }
-		
-		var userIds = "${escapeXml(ids!)}";
-		$.ajax({
-			type : "post",
-			url : cxt + "/jf/platform/user/setGroup",
-			data : { "ids" : userIds, "groupIds" : groupIds },
-			dataType : "html",
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			async: false,
-			success:function(data){
-				
-			}
-		});
+
+		var url = "/jf/platform/user/setGroup";
+		var data = { "ids" : userIds, "groupIds" : groupIds };
+
+		var result = common_ajax.ajaxFunc(url, data);
 	}
 </script>
 
@@ -45,18 +39,16 @@
 </div>
 
 <div class="modal-body">
-	<div class="row-fluid sortable">
-		<div class="box span6">
-			<div class="box-header well" data-original-title>
-				<h2>
+	<div class="row">
+		
+		<div class="col-md-6">
+			<div class="panel-heading">
+				<h4 class="panel-title">
 					<i class="icon-user"></i> ${i18nMap["admin.group.select.noChecked"]}
-				</h2>
-				<div class="box-icon">
-					
-				</div>
+				</h4>
 			</div>
-			<div class="box-content">
-				<select id="allGroup" multiple size="18" ondblclick="addChecked(this);" >
+			<div class="panel-body">
+				<select id="allGroup" ondblclick="addChecked(this);" multiple="multiple" size="5" class="form-control">
 					<% for(group in noCheckedList){ %>
 						<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
 					<% } %>
@@ -64,23 +56,21 @@
 			</div>
 		</div>
 		
-		<div class="box span6">
-			<div class="box-header well" data-original-title>
-				<h2>
+		<div class="col-md-6">
+			<div class="panel-heading">
+				<h4 class="panel-title">
 					<i class="icon-user"></i> ${i18nMap["admin.group.select.checked"]}
-				</h2>
-				<div class="box-icon">
-					
-				</div>
+				</h4>
 			</div>
-			<div class="box-content">
-				<select id="checkedGroup" multiple size="18" ondblclick="delChecked(this);" >
+			<div class="panel-body">
+				<select id="checkedGroup" ondblclick="delChecked(this);" multiple="multiple" size="5" class="form-control">
 					<% for(group in checkedList){ %>
 						<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
 					<% } %>
 			  	</select>
 			</div>
 		</div>
+		
 	</div>  
 </div>
 

@@ -83,6 +83,12 @@
 				<table class="table table-striped table-bordered bootstrap-datatable ">
 					<thead>
 						<tr>
+							<th onclick="orderbyFun('content', 'splitPage', 'sy.names')">
+								${i18nMap["admin.sysLog.common.synames"]}	${orderBy("sy.names")}
+							</th>
+							<th onclick="orderbyFun('content', 'splitPage', 'm.names')">
+								${i18nMap["admin.sysLog.common.mnames"]}	${orderBy("m.names")}
+							</th>
 							<th onclick="orderbyFun('content', 'splitPage', 'onames')">
 								${i18nMap["admin.sysLog.property.oname"]}	${orderBy("onames")}
 							</th>
@@ -117,6 +123,8 @@
 						%>
 						<% for(sysLog in splitPage.list){ %>
 							<tr>
+								<td align="center">${escapeXml(sysLog["synames"]!)}</td>
+								<td align="center">${escapeXml(sysLog["mnames"]!)}</td>
 								<td align="center">${escapeXml(sysLog["onames"]!)}：${sysLog.ourl }</td>
 								<td align="center">${escapeXml(sysLog["username"]!)}</td>
 								<td align="center">

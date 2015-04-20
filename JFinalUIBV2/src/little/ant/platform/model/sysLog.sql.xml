@@ -22,6 +22,8 @@
         	from pt_syslog s 
         	left join pt_user u on s.userids = u.ids 
         	left join pt_operator o on s.operatorids = o.ids 
+        	left join pt_module m on o.moduleids = m.ids 
+        	left join pt_systems sy on m.systemsids = sy.ids 
         	where 1=1 
 			
 			<% if(!isEmpty(url)){ %>

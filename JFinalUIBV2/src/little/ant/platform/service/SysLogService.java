@@ -23,7 +23,7 @@ public class SysLogService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		String select = " select o.names onames, o.url ourl, u.username, s.* ";
+		String select = " select sy.names synames, m.names mnames, o.names onames, o.url ourl, u.username, s.* ";
 		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.sysLog.splitPage");
 	}
 	
