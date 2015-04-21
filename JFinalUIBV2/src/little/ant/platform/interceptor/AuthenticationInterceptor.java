@@ -38,23 +38,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		contro.setReqSysLog(reqSysLog);
 		
 		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");
-		String uri = ToolContext.getParam(request, "toUrl");
-		if (null == uri || uri.equals("")) {
-			uri = request.getServletPath();
-			
-			int index = uri.lastIndexOf("/");
-			String deleteUri = uri.substring(index);
-			if(deleteUri.length() == 33){
-				log.debug("例如：jf/user/view/8a40c0353fa828a6013fa898d4ac0020 需要去除 /8a40c0353fa828a6013fa898d4ac0020");
-				log.info("去除最后的/ids：" + uri);
-				uri = uri.substring(0, index);
-			}
-		}
-
-		log.info("druid特殊处理");
-		if(uri.startsWith("/platform/druid")){
-			uri = "/platform/druid/iframe.html";
-		}
+		String uri = getUri(request);
 
 		log.info("获取当前用户!");
 		boolean userAgentVali = true;
@@ -72,85 +56,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		Object operatorObj = Operator.dao.cacheGet(uri);
 
 		log.info("判断URI是否存在!");
-		if(null != operatorObj){
-			log.info("URI存在!");
-			
-			Operator operator = (Operator) operatorObj;
-			reqSysLog.set("operatorids", operator.getPKValue());
-			
-			if(operator.get("privilegess").equals("1")){// 是否需要权限验证
-				log.info("需要权限验证!");
-				if (user == null) {
-					log.info("权限认证过滤器检测:未登录!");
-					
-					reqSysLog.set("status", "0");//失败
-					reqSysLog.set("description", "未登录");
-					reqSysLog.set("cause", "2");//2 未登录
-					
-					toInfoJsp(contro, 1);
-					return;
-				}
-				
-				if(!ToolContext.hasPrivilegeOperator(operator, user)){// 权限验证
-					log.info("权限验证失败，没有权限!");
-					
-					reqSysLog.set("status", "0");//失败
-					reqSysLog.set("description", "没有权限!");
-					reqSysLog.set("cause", "0");//没有权限
-					
-					log.info("返回失败提示页面!");
-					toInfoJsp(contro, 2);
-					return;
-				}
-			}
-			
-			log.info("不需要权限验证、权限认证成功!!!继续处理请求...");
-			
-			log.info("是否需要表单重复提交验证!");
-			if(operator.getStr("formtoken").equals("1")){
-				String tokenRequest = ToolContext.getParam(request, "formToken");
-				String tokenCookie = ToolWeb.getCookieValueByName(request, "token");
-				if(null == tokenRequest || tokenRequest.equals("")){
-					log.info("tokenRequest为空，无需表单验证!");
-				
-				}else if(null == tokenCookie || tokenCookie.equals("") || !tokenCookie.equals(tokenRequest)){
-					log.info("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
-					ToolWeb.addCookie(response,  "", "/", true, "token", tokenRequest, 0);
-					
-				}else if(tokenCookie.equals(tokenRequest)){
-					log.info("表单重复提交!");
-					toInfoJsp(contro, 4);
-					return;
-					
-				}else{
-					log.error("表单重复提交验证异常!!!");
-				}
-			}
-			
-			log.info("权限认真成功更新日志对象属性!");
-			reqSysLog.set("status", "1");//成功
-			Date actionStartDate = ToolDateTime.getDate();//action开始时间
-			reqSysLog.set("actionstartdate", ToolDateTime.getSqlTimestamp(actionStartDate));
-			reqSysLog.set("actionstarttime", actionStartDate.getTime());
-
-			try {
-				ai.invoke();
-			} catch (Exception e) {
-				e.printStackTrace();
-				
-				log.info("业务逻辑代码遇到异常时保存日志!");
-				reqSysLog.set("status", "0");//失败
-				reqSysLog.set("description", e.getMessage());
-				reqSysLog.set("cause", "3");//业务代码异常
-				
-				log.info("返回失败提示页面!");
-				toInfoJsp(contro, 5);
-				
-			} finally {
-				
-			}
-			
-		}else{
+		if(null == operatorObj){
 			log.info("URI不存在!");
 			
 			log.info("访问失败时保存日志!");
@@ -162,6 +68,109 @@ public class AuthenticationInterceptor implements Interceptor {
 			toInfoJsp(contro, 2);
 			return;
 		}
+		
+		log.info("URI存在!");
+		Operator operator = (Operator) operatorObj;
+		reqSysLog.set("operatorids", operator.getPKValue());
+		
+		if(operator.get("privilegess").equals("1")){// 是否需要权限验证
+			log.info("需要权限验证!");
+			if (user == null) {
+				log.info("权限认证过滤器检测:未登录!");
+				
+				reqSysLog.set("status", "0");//失败
+				reqSysLog.set("description", "未登录");
+				reqSysLog.set("cause", "2");//2 未登录
+				
+				toInfoJsp(contro, 1);
+				return;
+			}
+			
+			if(!ToolContext.hasPrivilegeOperator(operator, user)){// 权限验证
+				log.info("权限验证失败，没有权限!");
+				
+				reqSysLog.set("status", "0");//失败
+				reqSysLog.set("description", "没有权限!");
+				reqSysLog.set("cause", "0");//没有权限
+				
+				log.info("返回失败提示页面!");
+				toInfoJsp(contro, 2);
+				return;
+			}
+		}
+		
+		log.info("不需要权限验证、权限认证成功!!!继续处理请求...");
+		
+		log.info("是否需要表单重复提交验证!");
+		if(operator.getStr("formtoken").equals("1")){
+			String tokenRequest = ToolContext.getParam(request, "formToken");
+			String tokenCookie = ToolWeb.getCookieValueByName(request, "token");
+			if(null == tokenRequest || tokenRequest.equals("")){
+				log.info("tokenRequest为空，无需表单验证!");
+			
+			}else if(null == tokenCookie || tokenCookie.equals("") || !tokenCookie.equals(tokenRequest)){
+				log.info("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
+				ToolWeb.addCookie(response,  "", "/", true, "token", tokenRequest, 0);
+				
+			}else if(tokenCookie.equals(tokenRequest)){
+				log.info("表单重复提交!");
+				toInfoJsp(contro, 4);
+				return;
+				
+			}else{
+				log.error("表单重复提交验证异常!!!");
+			}
+		}
+		
+		log.info("权限认真成功更新日志对象属性!");
+		reqSysLog.set("status", "1");//成功
+		Date actionStartDate = ToolDateTime.getDate();//action开始时间
+		reqSysLog.set("actionstartdate", ToolDateTime.getSqlTimestamp(actionStartDate));
+		reqSysLog.set("actionstarttime", actionStartDate.getTime());
+
+		try {
+			ai.invoke();
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			log.info("业务逻辑代码遇到异常时保存日志!");
+			reqSysLog.set("status", "0");//失败
+			reqSysLog.set("description", e.getMessage());
+			reqSysLog.set("cause", "3");//业务代码异常
+			
+			log.info("返回失败提示页面!");
+			toInfoJsp(contro, 5);
+			
+		} finally {
+			
+		}
+	}
+	
+	/**
+	 * 获取当前请求uri
+	 * @param request
+	 * @return
+	 */
+	private String getUri(HttpServletRequest request){
+		String uri = ToolContext.getParam(request, "toUrl");
+		if (null == uri || uri.equals("")) {
+			uri = request.getServletPath();
+			
+			int index = uri.lastIndexOf("/");
+			String deleteUri = uri.substring(index);
+			if(deleteUri.length() == 33){
+				log.debug("例如：jf/user/view/8a40c0353fa828a6013fa898d4ac0020 需要去除 /8a40c0353fa828a6013fa898d4ac0020");
+				log.info("去除最后的/ids：" + uri);
+				uri = uri.substring(0, index);
+			}
+		}
+
+		log.info("druid特殊处理");
+		if(uri.startsWith("/platform/druid")){
+			uri = "/platform/druid/iframe.html";
+		}
+		
+		return uri;
 	}
 	
 	/**
