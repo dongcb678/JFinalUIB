@@ -369,15 +369,14 @@
 		if( treeNodes.length > 0 && targetNode){
 			var dragId = treeNodes[0].id;//被拖拽模块
 			var targetId = targetNode.id;//拖拽到的目标模块
-			$.post(
-				"${cxt!}/jf/platform/module/update",
-				{ "ids" : dragId, "pIds" : targetId },
-				function(data){//返回数据库标示
-			     	if(data == "error"){
-			     		alert("移动模块失败！");
-			     	}
-				}
-			);
+			
+			var url = "/jf/platform/module/update";
+			var data = { "ids" : dragId, "pIds" : targetId };
+			
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData == "error"){
+	     		toastr.warning("移动模块失败！");
+	     	}
 		}
 	}
 	

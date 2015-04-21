@@ -224,7 +224,9 @@
 	function setCheckValue(){
 		checkedNodeIds = checkedNodeIds.replace(/user_/g, '');
 		if(userIds != checkedNodeIds){
-			$.post("${cxt!}/jf/platform/dept/update", { "ids" : '${paramMap.ids!}', "principalIds" : checkedNodeIds });
+			var url = "/jf/platform/dept/update";
+			var data =  { "ids" : '${paramMap.ids!}', "principalIds" : checkedNodeIds };
+			common_ajax.ajaxFunc(url, data);
 		}
 	}
 	

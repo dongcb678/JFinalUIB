@@ -68,27 +68,19 @@
 		var zTree = $.fn.zTree.getZTreeObj("zTreeMenuContent");
 		zTree.selectNode(treeNode);
 		
-
 		var result = false;
 		if(confirm("确认删除<" + treeNode.name + ">菜单吗？")){
-			$.ajax({
-				type : "post",
-				url : cxt + "/jf/platform/menu/delete",
-				data : { "ids" : treeNode.id },
-				dataType : "html",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				async: false,
-				success:function(data){
-					if(data != treeNode.id){
-						simpleDialog('操作提示', "删除<" + treeNode.name + ">菜单失败！")
-					}else{
-						result = true;
-					}
-				}
-			});
+			var url = "/jf/platform/menu/delete";
+			var data = { "ids" : treeNode.id };
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData != treeNode.id){
+				toastr.warning("删除<" + treeNode.name + ">菜单失败！");
+			}else{
+				result = true;
+			}
 		}
 		
-        return result;
+        return result; 
 	}		
 	
 	//用于捕获节点编辑名称
@@ -96,26 +88,18 @@
 		if (treeNode.name == newName) {
 			return true;
 		}else if (newName.length == 0) {
-			alert("菜单名称不能为空！");
+			toastr.warning("菜单名称不能为空！");
 			return false;
 		}else{
-			$.ajax({
-				type : "post",
-				url : "${cxt!}/jf/platform/menu/update",
-				data : { "ids" : treeNode.id, "names" : newName },
-				dataType : "html",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				async: false,
-				success:function(data){
-					if(data == treeNode.id){
-						return true;
-			     	}else{
-			     		alert("修改<" + treeNode.name + ">菜单名称失败！");
-						return false;
-			     	}
-				}
-			});
-			return true;
+			var url = "/jf/platform/menu/update";
+			var data = { "ids" : treeNode.id, "names" : newName };
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(data == treeNode.id){
+				return true;
+	     	}else{
+				toastr.warning("修改<" + treeNode.name + ">菜单名称失败！");
+				return false;
+	     	}
 		}
 	}
 	
@@ -135,25 +119,15 @@
 			var addName = "新增菜单" + (newCount++);//菜单初始化名称
 			var orderIds = (treeNode.children == undefined ? 1 : (treeNode.children.length + 1));
 			
-			$.ajax({
-				type : "post",
-				url : "${cxt!}/jf/platform/menu/save",
-				data : { "pIds" : treeNode.id, "names" : addName, "orderIds" : orderIds },
-				dataType : "html",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				async: false,
-				success:function(data){
-			     	if(data != ""){
-						var zTree = $.fn.zTree.getZTreeObj("zTreeMenuContent");
-			     		zTree.addNodes(treeNode, {id : data, pId : treeNode.id, name : addName});
-			     	}else{
-			     		alert("新增菜单失败！");
-			     	}
-				},
-				error:function(){
-					$("#showBatchIPAdress").html('程序出问题了');
-				}
-			});
+			var url = "/jf/platform/menu/save";
+			var data = { "pIds" : treeNode.id, "names" : addName, "orderIds" : orderIds };
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData != ""){
+				var zTree = $.fn.zTree.getZTreeObj("zTreeMenuContent");
+	     		zTree.addNodes(treeNode, {id : data, pId : treeNode.id, name : addName});
+	     	}else{
+	     		toastr.warning("新增菜单失败！");
+	     	}
 			
 			return false;
 		});
@@ -184,9 +158,10 @@
 			
 			var data = { "toUrl" : "/platform/menu/operatorTree.html", "ids" : treeNode.id };
 			
-			$modal.load(url, data[0], function() {
+			$modal.load(url, data, function() {
 				$modal.modal();
 			});
+			
 			return false;
 		});
 
@@ -207,7 +182,7 @@
 			
 			var data = { "ids" : treeNode.id };
 			
-			$modal.load(url, data[0], function() {
+			$modal.load(url, data, function() {
 				$modal.modal();
 			});
 			return false;
@@ -434,15 +409,14 @@
 		if( treeNodes.length > 0 && targetNode){
 			var dragId = treeNodes[0].id;//被拖拽菜单
 			var targetId = targetNode.id;//拖拽到的目标菜单
-			$.post(
-				"${cxt!}/jf/platform/menu/update",
-				{ "ids" : dragId, "pIds" : targetId },
-				function(data){//返回数据库标示
-			     	if(data != dragId){
-			     		alert("移动菜单失败！");
-			     	}
-				}
-			);
+			
+			var url = "/jf/platform/menu/update";
+			var data = { "ids" : dragId, "pIds" : targetId };
+			
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData != dragId){
+	     		toastr.warning("移动菜单失败！");
+	     	}
 		}
 	}
 	

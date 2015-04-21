@@ -176,7 +176,7 @@
 			
 			var data = { "toUrl" : "/platform/department/userTree.html", "ids" : treeNode.id };
 			
-			$modal.load(url, data[0], function() {
+			$modal.load(url, data, function() {
 				$modal.modal();
 			});
 			return false;
@@ -396,15 +396,14 @@
 		if( treeNodes.length > 0 && targetNode){
 			var dragId = treeNodes[0].id;//被拖拽部门
 			var targetId = targetNode.id;//拖拽到的目标部门
-			$.post(
-				"${cxt!}/jf/platform/dept/update",
-				{ "ids" : dragId, "pIds" : targetId },
-				function(data){//返回数据库标示
-			     	if(data == "error"){
-			     		alert("移动部门失败！");
-			     	}
-				}
-			);
+			
+			var url = "/jf/platform/dept/update";
+			var data = { "ids" : dragId, "pIds" : targetId };
+			
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData == "error"){
+	     		toastr.warning("移动部门失败！");
+	     	}
 		}
 	}
 	

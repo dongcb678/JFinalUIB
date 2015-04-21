@@ -67,23 +67,15 @@
 		var zTree = $.fn.zTree.getZTreeObj("zTreeStationContent");
 		zTree.selectNode(treeNode);
 
-		var result = false;
+		var result = true;
 		if(confirm("确认删除<" + treeNode.name + ">岗位吗？")){
-			$.ajax({
-				type : "post",
-				url : cxt + "/jf/platform/station/delete",
-				data : { "ids" : treeNode.id },
-				dataType : "html",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				async: false,
-				success:function(data){
-					if(data != treeNode.id){
-						simpleDialog('操作提示', "删除<" + treeNode.name + ">岗位失败！");
-					}else{
-						result = true;
-					}
-				}
-			});
+			var url = "/jf/platform/station/delete";
+			var data = { "ids" : treeNode.id };
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData != treeNode.id){
+				toastr.warning("删除<" + treeNode.name + ">岗位失败！");
+				result = false;
+			}
 		}
 		
         return result;
@@ -94,26 +86,18 @@
 		if (treeNode.name == newName) {
 			return true;
 		}else if (newName.length == 0) {
-			alert("岗位名称不能为空！");
+			toastr.warning("岗位名称不能为空！");
 			return false;
 		}else{
-			$.ajax({
-				type : "post",
-				url : "${cxt!}/jf/platform/station/update",
-				data : { "ids" : treeNode.id, "names" : newName },
-				dataType : "html",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				async: false,
-				success:function(data){
-					if(data == treeNode.id){
-						return true;
-			     	}else{
-			     		alert("修改<" + treeNode.name + ">岗位名称失败！");
-						return false;
-			     	}
-				}
-			});
-			
+			var url = "/jf/platform/station/update";
+			var data = { "ids" : treeNode.id, "names" : newName };
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(data == treeNode.id){
+				return true;
+	     	}else{
+				toastr.warning("修改<" + treeNode.name + ">岗位名称失败！");
+				return false;
+	     	}
 			return true;
 		}
 	}
@@ -134,26 +118,20 @@
 			var addName = "新增岗位" + (newCount++);//岗位初始化名称
 			var orderIds = (treeNode.children == undefined ? 1 : (treeNode.children.length + 1));
 			
-			$.ajax({
-				type : "post",
-				url : "${cxt!}/jf/platform/station/save",
-				data : { 
-					"pIds" : treeNode.id, 
-					"names" : addName, 
-					"orderIds" : orderIds
-				},
-				dataType : "html",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				async: false,
-				success:function(data){
-			     	if(data != ""){
-						var zTree = $.fn.zTree.getZTreeObj("zTreeStationContent");
-			     		zTree.addNodes(treeNode, {id : data, pId : treeNode.id, name : addName});
-			     	}else{
-			     		alert("新增岗位失败！");
-			     	}
-				}
-			});
+			var url = "${cxt!}/jf/platform/station/save";
+			var data = { 
+				"pIds" : treeNode.id, 
+				"names" : addName, 
+				"orderIds" : orderIds
+			};
+			
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData != ""){
+				var zTree = $.fn.zTree.getZTreeObj("zTreeStationContent");
+	     		zTree.addNodes(treeNode, {id : data, pId : treeNode.id, name : addName});
+	     	}else{
+	     		toastr.warning("新增岗位失败！");
+	     	}
 			
 			return false;
 		});
@@ -175,7 +153,7 @@
 			
 			var data = { "toUrl" : "/platform/station/operatorTree.html", "ids" : treeNode.id};
 			
-			$modal.load(url, data[0], function() {
+			$modal.load(url, data, function() {
 				$modal.modal();
 			});
 			return false;
@@ -395,15 +373,14 @@
 		if( treeNodes.length > 0 && targetNode){
 			var dragId = treeNodes[0].id;//被拖拽岗位
 			var targetId = targetNode.id;//拖拽到的目标岗位
-			$.post(
-				"${cxt!}/jf/platform/station/update",
-				{ "ids" : dragId, "pIds" : targetId },
-				function(data){//返回数据库标示
-			     	if(data == "error"){
-			     		alert("移动岗位失败！");
-			     	}
-				}
-			);
+			
+			var url = "/jf/platform/station/update";
+			var data = { "ids" : dragId, "pIds" : targetId };
+			
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData == "error"){
+	     		toastr.warning("移动岗位失败！");
+	     	}
 		}
 	}
 	

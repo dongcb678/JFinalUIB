@@ -11,6 +11,7 @@
 	
 	<script type="text/javascript" src="${cxt!}/jsFile/treeTable/script/jquery.js"></script>
     <script type="text/javascript" src="${cxt!}/jsFile/treeTable/script/treeTable/jquery.treeTable.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/rapido/common/ajax.js"></script>
 	
 	<style type="text/css">
 		table,td,th {  border: 1px solid #8DB9DB; padding:5px; border-collapse: collapse; font-size:14px; }
@@ -29,12 +30,12 @@
 	                }
 	                
 	                //这里的html可以是ajax请求
-	                $.post("${cxt!}/jf/platform/dict/treeTable", { ids: id }, function(data){ 
-	                	if(data.indexOf("tr") != -1){
-	                		$treeTable.addChilds(data);
-	                	}
-	                }, "text");
-	                
+	                var url = "/jf/platform/dict/treeTable";
+					var data = { ids: id };
+					var reData = common_ajax.ajaxFunc(url, data);
+					if(reData.indexOf("tr") != -1){
+                		$treeTable.addChilds(reData);
+                	}
 	            },
 	            onSelect : function($treeTable, id) {
 	                window.console && console.log('onSelect:' + id);
