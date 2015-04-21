@@ -35,7 +35,7 @@ var common_modals = function() {
 	//function to initiate programmatic dialog boxes
 	var initDialogBoxes = function() {
 		var dialogBoxes = {};
-
+		// obj.die("click").live(click",function(){})
 		$(document).on("click", "button[data-bb]", function(e) {
 			e.preventDefault();
 			var type = $(this).data("bb");
