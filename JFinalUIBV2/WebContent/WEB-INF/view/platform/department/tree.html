@@ -70,21 +70,15 @@
 		
 		var result = false;
 		if(confirm("确认删除<" + treeNode.name + ">部门吗？")){
-			$.ajax({
-				type : "post",
-				url : cxt + "/jf/platform/dept/delete",
-				data : { "ids" : treeNode.id },
-				dataType : "html",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				async: false,
-				success:function(data){
-					if(data == "error"){
-						simpleDialog('操作提示', "删除<" + treeNode.name + ">部门失败！");
-					}else{
-						result = true;
-					}
-				}
-			});
+			var url = "/jf/platform/dept/delete";
+			var data = { "ids" : treeNode.id };
+			
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(data == "error"){
+				toastr.warning("删除<" + treeNode.name + ">部门失败！");
+			}else{
+				result = true;
+			}
 		}
 		
         return result;
@@ -95,27 +89,19 @@
 		if (treeNode.name == newName) {
 			return true;
 		}else if (newName.length == 0) {
-			alert("部门名称不能为空！");
+			toastr.warning("部门名称不能为空！");
 			return false;
 		}else{
-			$.ajax({
-				type : "post",
-				url : "${cxt!}/jf/platform/dept/update",
-				data : { "ids" : treeNode.id, "names" : newName },
-				dataType : "html",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				async: false,
-				success:function(data){
-					if(data == treeNode.id){
-						return true;
-			     	}else{
-			     		alert("修改<" + treeNode.name + ">部门名称失败！");
-						return false;
-			     	}
-				}
-			});
+			var url = "/jf/platform/dept/update";
+			var data = { "ids" : treeNode.id, "names" : newName };
 			
-			return true;
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData == treeNode.id){
+				return true;
+	     	}else{
+	     		toastr.warning("修改<" + treeNode.name + ">部门名称失败！");
+				return false;
+	     	}
 		}
 	}
 	
@@ -135,26 +121,20 @@
 			var addName = "新增部门" + (newCount++);//部门初始化名称
 			var orderIds = (treeNode.children == undefined ? 1 : (treeNode.children.length + 1));
 			
-			$.ajax({
-				type : "post",
-				url : "${cxt!}/jf/platform/dept/save",
-				data : { 
+			var url = "/jf/platform/dept/save";
+			var data = { 
 					"pIds" : treeNode.id, 
 					"names" : addName, 
 					"orderIds" : orderIds
-				},
-				dataType : "html",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				async: false,
-				success:function(data){
-			     	if(data != ""){
-						var zTree = $.fn.zTree.getZTreeObj("zTreeDeptContent");
-			     		zTree.addNodes(treeNode, {id : data, pId : treeNode.id, name : addName});
-			     	}else{
-			     		alert("新增部门失败！");
-			     	}
-				}
-			});
+				};
+			
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData != ""){
+				var zTree = $.fn.zTree.getZTreeObj("zTreeDeptContent");
+	     		zTree.addNodes(treeNode, {id : reData, pId : treeNode.id, name : addName});
+	     	}else{
+	     		toastr.warning("新增部门失败！");
+	     	}
 			
 			return false;
 		});

@@ -128,7 +128,7 @@
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != ""){
 				var zTree = $.fn.zTree.getZTreeObj("zTreeStationContent");
-	     		zTree.addNodes(treeNode, {id : data, pId : treeNode.id, name : addName});
+	     		zTree.addNodes(treeNode, {id : reData, pId : treeNode.id, name : addName});
 	     	}else{
 	     		toastr.warning("新增岗位失败！");
 	     	}

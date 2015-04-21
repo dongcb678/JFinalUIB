@@ -204,20 +204,15 @@
 	
 	// 获取部门负责人
 	function getDeptPrincipal(){
-		$.ajax({
-		   	type: "POST",
-		   	url: "${cxt!}/jf/platform/dept/getPrincipal",
-		   	data: 'ids=${paramMap.ids!}',
-			async : false,
-		   	success: function(data){
-		   		if(data != "error"){
-		   			userIds = (data.principaluserids == null? '': data.principaluserids); 
-					checkedNodeIds = userIds;
-		     	}else{
-		     		alert("查询部门负责人失败！");
-		     	}
-		   	}
-		});
+		var url = "/jf/platform/dept/getPrincipal";
+		var data = { "ids" : "${paramMap.ids!}"};
+		var reData = common_ajax.ajaxFunc(url, data);
+		if(reData != "error"){
+   			userIds = (data.principaluserids == null? '' : reData.principaluserids); 
+			checkedNodeIds = userIds;
+     	}else{
+     		toastr.warning("查询部门负责人失败！");
+     	}
 	}
 	
 	// 设置部门负责人

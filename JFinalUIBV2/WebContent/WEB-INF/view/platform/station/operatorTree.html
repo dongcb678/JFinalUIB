@@ -274,42 +274,30 @@
 	}
 	
 	function getCheckedByStation(){
-		$.ajax({
-		   	type: "POST",
-		   	url: "${cxt!}/jf/platform/station/getOperator",
-		   	data: 'ids=${paramMap["ids"]}',
-			async : false,
-		   	success: function(data){
-		   		if(data != "error"){
-					moduleIds = (data.moduleids == null? '': data.moduleids); 
-					operatorIds = (data.operatorids == null? '': data.operatorids);
-					
-					checkedModuleNodeIds = moduleIds;
-					checkedOperatorNodeIds = operatorIds;
-		     	}else{
-		     		alert("获取岗位拥有的功能失败！");
-		     	}
-		   	}
-		});
+		var url = "/jf/platform/station/getOperator";
+		var data = { "ids" : '${paramMap["ids"]}' };
+		var reData = common_ajax.ajaxFunc(url, data);
+		if(data != "error"){
+			moduleIds = (reData.moduleids == null? '': reData.moduleids); 
+			operatorIds = (reData.operatorids == null? '': reData.operatorids);
+			
+			checkedModuleNodeIds = moduleIds;
+			checkedOperatorNodeIds = operatorIds;
+     	}else{
+     		toastr.warning("获取岗位拥有的功能失败！");
+     	}
 	}
 
 	function setCheckValue(){
 		//checkedModuleNodeIds = checkedModuleNodeIds.replace(/module_/g, '');
 		//checkedModuleNodeIds = checkedModuleNodeIds.substring(0, checkedModuleNodeIds.length-1);
 		if(moduleIds != checkedModuleNodeIds || operatorIds != checkedOperatorNodeIds){
-			$.ajax({
-			   	type: "POST",
-			   	url: "${cxt!}/jf/platform/station/setOperator",
-			   	data: { "ids" : "${paramMap.ids!}", "moduleIds" : checkedModuleNodeIds, "operatorIds" : checkedOperatorNodeIds},
-				async : false,
-			   	success: function(data){
-			   		if(data != "error"){
-						
-			     	}else{
-			     		alert("设置岗位拥有的功能失败！");
-			     	}
-			   	}
-			});
+			var url = "/jf/platform/station/setOperator";
+			var data = { "ids" : "${paramMap.ids!}", "moduleIds" : checkedModuleNodeIds, "operatorIds" : checkedOperatorNodeIds};
+			var reData = common_ajax.ajaxFunc(url, data);
+			if(reData == "error"){
+				toastr.warning("设置岗位拥有的功能失败！");
+	     	}
 		}
 	}
 

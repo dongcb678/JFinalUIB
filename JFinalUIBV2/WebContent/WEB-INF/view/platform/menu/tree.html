@@ -124,7 +124,7 @@
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != ""){
 				var zTree = $.fn.zTree.getZTreeObj("zTreeMenuContent");
-	     		zTree.addNodes(treeNode, {id : data, pId : treeNode.id, name : addName});
+	     		zTree.addNodes(treeNode, {id : reData, pId : treeNode.id, name : addName});
 	     	}else{
 	     		toastr.warning("新增菜单失败！");
 	     	}
