@@ -122,6 +122,7 @@ var common_form = function() {
 			});
 		});
 	};
+	
 	/*
 	//function to initiate ckeditor
 	var runCKEditor = function() {
@@ -129,6 +130,7 @@ var common_form = function() {
 		$('textarea.ckeditor').ckeditor();
 	};
 	*/
+	
 	return {
 		//main function to initiate template pages
 		init: function() {
@@ -147,4 +149,5 @@ var common_form = function() {
 			//runCKEditor();
 		}
 	};
+	
 }();
