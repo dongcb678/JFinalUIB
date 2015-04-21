@@ -70,7 +70,7 @@
 
   var defaults = {
     // default language
-    locale: "en",
+    locale: "zh_CN",
     // show backdrop or not
     backdrop: true,
     // animate the modal in/out
