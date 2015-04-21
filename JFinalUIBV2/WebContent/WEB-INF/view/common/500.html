@@ -1,93 +1,86 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>500-服务器内部错误</title>
-    
-	<link rel="icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
-	<link rel="shortcut icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
-	
-	<meta name="robots" content="nofollow">
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	
-	<style>
-		*{
-			margin:0;
-			padding:0;
-		}
-		body{
-			font-family: 'Audiowide', cursive, arial, helvetica, sans-serif;
-			background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUElEQVQYV2NkYGAwBuKzQAwDID4IoIgxIikAMZE1oRiArBDdZBSNMIXoJiFbDZYDKcSmCOYimDuNSVKIzRNYrUYOFuQgweoZbIoxgoeoAAcAEckW11HVTfcAAAAASUVORK5CYII=) repeat;
-			background-color:#212121;
-			color:white;
-			font-size: 18px;
-			padding-bottom:20px;
-		}
-		.error-code{
-			font-family: 'Creepster', cursive, arial, helvetica, sans-serif;
-			font-size: 200px;
-			color: white;
-			color: rgba(255, 255, 255, 0.98);
-			width: 50%;
-			text-align: right;
-			margin-top: 5%;
-			text-shadow: 5px 5px hsl(0, 0%, 25%);
-			float: left;
-		}
-		.not-found{
-			width: 47%;
-			float: right;
-			margin-top: 5%;
-			font-size: 50px;
-			color: white;
-			text-shadow: 2px 2px 5px hsl(0, 0%, 61%);
-			padding-top: 70px;
-		}
-		.clear{
-			float:none;
-			clear:both;
-		}
-		.content{
-			text-align:center;
-			line-height: 30px;
-		}
-		input[type=text]{
-			border: hsl(247, 89%, 72%) solid 1px;
-			outline: none;
-			padding: 5px 3px;
-			font-size: 16px;
-			border-radius: 8px;
-		}
-		a{
-			text-decoration: none;
-			color: #9ECDFF;
-			text-shadow: 0px 0px 2px white;
-		}
-		a:hover{
-			color:white;
-		}
-
-	</style>
-</head>
-<body>
-	
-	<p class="error-code">
-		500
-	</p>
-	<p class="not-found">Not<br/>Found</p>
-	<div class="clear"></div>
-	<div class="content">
-		500-服务器内部错误。
-		<br/><a href="${cxt!}/jf/platform/">回到主页</a> 或者<br/><form>搜索<br/><input autofocus type="text" name="search" /></form>
-	</div>
-	
-	<div style="display:none;">
-  		<p class="message"></p>
-    </div>
-    
-</body>
+<!DOCTYPE html>
+<!-- Template Name: Rapido - Responsive Admin Template build with Twitter Bootstrap 3.x Version: 1.3 Author: ClipTheme -->
+<!--[if IE 8]><html class="ie8 no-js" lang="zh-CN"><![endif]-->
+<!--[if IE 9]><html class="ie9 no-js" lang="zh-CN"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-CN" class="no-js">
+	<!--<![endif]-->
+	<!-- start: HEAD -->
+	<head>
+		<title>500-服务器内部错误</title>
+		<!-- start: META -->
+		<meta charset="utf-8" />
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta content="" name="description" />
+		<meta content="" name="author" />
+		<!-- end: META -->
+		<!-- start: MAIN CSS -->
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/plugins/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/css/styles.css">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/css/styles-responsive.css">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/plugins/animate.css/animate.min.css">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/css/theme_light.css" type="text/css" id="skin_color">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/css/print.css" type="text/css" media="print"/>
+		<!--[if IE 7]>
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/plugins/font-awesome/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!-- end: MAIN CSS -->
+		<!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
+		<!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
+		<link rel="shortcut icon" href="favicon.ico" />
+	</head>
+	<!-- end: HEAD -->
+	<!-- start: BODY -->
+	<body class="error-full-page">
+		<!-- start: PAGE -->
+		<div class="container">
+			<div class="row">
+				<!-- start: 500 -->
+				<div class="col-sm-12 page-error animated shake">
+					<div class="error-number text-red">
+						500
+					</div>
+					<div class="error-details col-sm-6 col-sm-offset-3">
+						<h3>500-服务器内部错误</h3>
+						<p>
+							Something's wrong!
+							<br>
+							It looks as though we've broken something on our system.
+							<br>
+							Don't panic, we are fixing it! Please come back in a while.
+						</p>
+					</div>
+				</div>
+				<!-- end: 500 -->
+			</div>
+		</div>
+		<!-- end: PAGE -->
+		<!-- start: MAIN JAVASCRIPTS -->
+		<!--[if lt IE 9]>
+		<script src="${cxt!}/ui/rapido/assets/plugins/respond.min.js"></script>
+		<script src="${cxt!}/ui/rapido/assets/plugins/excanvas.min.js"></script>
+		<script type="text/javascript" src="${cxt!}/ui/rapido/assets/plugins/jQuery/jquery-1.11.1.min.js"></script>
+		<![endif]-->
+		<!--[if gte IE 9]><!-->
+		<script src="${cxt!}/ui/rapido/assets/plugins/jQuery/jquery-2.1.1.min.js"></script>
+		<!--<![endif]-->
+		<script src="${cxt!}/ui/rapido/assets/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
+		<script src="${cxt!}/ui/rapido/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="${cxt!}/ui/rapido/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+		<script src="${cxt!}/ui/rapido/assets/plugins/TouchSwipe/jquery.touchSwipe.min.js"></script>
+		<script src="${cxt!}/ui/rapido/assets/js/main.js"></script>
+		<!-- end: MAIN JAVASCRIPTS -->
+		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		<script>
+			jQuery(document).ready(function() {
+				Main.init();
+			});
+		</script>
+	</body>
+	<!-- end: BODY -->
 </html>

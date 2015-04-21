@@ -89,8 +89,6 @@ public class JfinalConfig extends JFinalConfig {
 		groupTemplate.registerFormat("dateFormat", new DateFormat());
 		
 		log.info("configConstant 视图error page设置");
-		me.setError401View("/common/401.html");
-		me.setError403View("/common/403.html");
 		me.setError404View("/common/404.html");
 		me.setError500View("/common/500.html");
 	}
