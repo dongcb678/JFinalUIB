@@ -210,7 +210,7 @@
 	function getCheckedByMenu(){
 		var url = "/jf/platform/menu/getOperator";
 		var data = { "ids" : "${paramMap.ids!}" };
-		var reData = common_ajax.ajaxFunc(url, data);
+		var reData = common_ajax.ajaxFunc(url, data, "json");
 		
 		if(reData != "error"){
 			operatorIds = (data.operatorids == null? '' : reData.operatorids); 
@@ -227,7 +227,7 @@
 			var url = "/jf/platform/menu/setOperator";
 			var data = { "ids" : "${paramMap.ids!}", "operatorIds" : checkedOperatorIds};
 			var reData = common_ajax.ajaxFunc(url, data);
-			if(reData == "error"){
+			if(reData != "${paramMap.ids!}"){
 				toastr.warning("设置菜单对应功能失败！");
 	     	}
 		}

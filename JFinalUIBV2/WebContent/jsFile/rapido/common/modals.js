@@ -1,7 +1,9 @@
 var common_modals = function() {
 	"use strict";
 	
-	//function to initiate bootstrap extended modals
+	/**
+	 * 注册弹出框事件功能
+	 */
 	var initModals = function() {
 		$.fn.modalmanager.defaults.resize = true;
 		$.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner = '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' + '<div class="progress progress-striped active">' + '<div class="progress-bar" style="width: 100%;"></div>' + '</div>' + '</div>';
@@ -50,7 +52,9 @@ var common_modals = function() {
 		*/
 	};
 	
-	//function to initiate programmatic dialog boxes
+	/**
+	 * 注册单行和多行删除的弹出框确认和Ajax删除处理
+	 */
 	var initDialogBoxes = function() {
 		var dialogBoxes = {};
 		// obj.die("click").live(click",function(){})

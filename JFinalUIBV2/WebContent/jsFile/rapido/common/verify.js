@@ -321,7 +321,6 @@ var platform_verify = function() {
 		controlGroupDiv.removeClass("has-warning");
 	}
 
-	
 	/**
 	 * 输入框数据验证
 	 * @param nodeId
@@ -471,9 +470,9 @@ var platform_verify = function() {
 	}
 	
 	return {
+		onblurVali : onblurVali,
 		formVali : formVali,
-		formValiSubmit : formValiSubmit,
-		onblurVali : onblurVali
+		formValiSubmit : formValiSubmit
 	};
 	
 }();

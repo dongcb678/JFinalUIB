@@ -10,13 +10,17 @@ var common_ajax = function() {
 	 * @param callback
 	 * @returns {String}
 	 */
-	var ajaxFunc = function(url, data, callback){
+	var ajaxFunc = function(url, data, dataType, callback){
+		if(dataType == undefined || dataType == null){
+			dataType = "html";
+		}
+		
 		var result = "";
 		$.ajax({
 			type : "post",
 			url : encodeURI(encodeURI(cxt + url)),
 			data : data,
-			dataType : "html",
+			dataType : dataType,
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			async: false,
 			cache: false,
@@ -37,9 +41,14 @@ var common_ajax = function() {
 	 * @param formId 提交formid
 	 * @param callback 回调
 	 */
-	var ajaxForm = function(formId, callback){
+	var ajaxForm = function(formId, dataType, callback){
+		if(dataType == undefined || dataType == null){
+			dataType = "html";
+		}
+		
 		var result = "";
 		$("#" + formId).ajaxSubmit({
+			dataType : dataType,
 			async: false,
 			cache: false,
 		    success:  function (data) {

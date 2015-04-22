@@ -276,7 +276,7 @@
 	function getCheckedByRole(){
 		var url = "/jf/platform/role/getOperator";
 		var data = { "ids" : '${paramMap["ids"]!}' };
-		var reData = common_ajax.ajaxFunc(url, data);
+		var reData = common_ajax.ajaxFunc(url, data, "json");
 		if(reData != "error"){
 			//var json = eval(data);
 			moduleIds = (reData.moduleids == null? '' : reData.moduleids); 
@@ -297,7 +297,7 @@
 			var url = "/jf/platform/role/setOperator";
 			var data = { "ids" : "${paramMap.ids!}", "moduleIds" : checkedModuleNodeIds, "operatorIds" : checkedOperatorNodeIds};
 			var reData = common_ajax.ajaxFunc(url, data);
-			if(reData == "error"){
+			if(reData != "${paramMap.ids!}"){
 	     		toastr.warning("设置角色拥有的功能失败！");
 	     	}
 		}

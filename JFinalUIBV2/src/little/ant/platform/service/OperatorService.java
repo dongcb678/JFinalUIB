@@ -68,7 +68,7 @@ public class OperatorService extends BaseService {
 	 * @param moduleIds
 	 * @return
 	 */
-	public List<ZtreeNode> childNodeData(String moduleIds){
+	public List<ZtreeNode> treeData(String moduleIds){
 		List<Module> listModule = new ArrayList<Module>();
 		List<Operator> operatorList = new ArrayList<Operator>();
 		
@@ -92,17 +92,18 @@ public class OperatorService extends BaseService {
 
 		for (Module module : listModule) {
 			node = new ZtreeNode();
-			node.setId(module.getPKValue());
+			node.setId("module_" + module.getPKValue());
 			node.setName(module.getStr("names"));
 			node.setIsParent(true);
-			node.setChecked(true);
+			//node.setChecked(false);
+			node.setNocheck(true);
 			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr("images"));
 			nodeList.add(node);
 		}
 		
 		for (Operator operator : operatorList) {
 			node = new ZtreeNode();
-			node.setId(operator.getPKValue());
+			node.setId("operator_" + operator.getPKValue());
 			node.setName(operator.getStr("names"));
 			node.setIsParent(false);
 			node.setChecked(false);
@@ -111,6 +112,80 @@ public class OperatorService extends BaseService {
 		}
 
 		return nodeList;
+	}
+
+	/**
+	 * 获取子节点数据
+	 * @param moduleIds
+	 * @return
+	 */
+	public List<ZtreeNode> tree(){
+		// 1.根模块
+		String sql = getSql("platform.operator.rootModule");
+		List<Module> rootModuleList = Module.dao.find(sql);
+
+		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
+		
+		for (Module module : rootModuleList) {
+			ZtreeNode node = new ZtreeNode();
+			
+			node.setId(module.getPKValue());
+			node.setName(module.getStr("names"));
+			node.setIsParent(true);
+			//node.setChecked(false);
+			node.setNocheck(true);
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr("images"));
+			
+			recursion(node, module);
+			
+			nodeList.add(node);
+		}
+		
+		return nodeList;
+	}
+	
+	/**
+	 * 递归获取节点信息
+	 * @param treeNode
+	 * @param pModule
+	 */
+	private void recursion(ZtreeNode treeNode, Module pModule){
+		List<ZtreeNode> children = new ArrayList<ZtreeNode>();
+
+		// 功能
+		String sqlOperator = getSql("platform.operator.byModuleIds");
+		List<Operator> operatorList = Operator.dao.find(sqlOperator, pModule.getPKValue());
+		for (Operator operator : operatorList) {
+			ZtreeNode node = new ZtreeNode();
+			
+			node.setId(operator.getPKValue());
+			node.setName(operator.getStr("names"));
+			node.setIsParent(false);
+			node.setChecked(false);
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
+			
+			children.add(node);
+		}
+		
+		// 模块
+		String sqlModule = getSql("platform.operator.childModule");
+		List<Module> moduleList = Module.dao.find(sqlModule, pModule.getPKValue());
+		for (Module module : moduleList) {
+			ZtreeNode node = new ZtreeNode();
+			
+			node.setId(module.getPKValue());
+			node.setName(module.getStr("names"));
+			node.setIsParent(true);
+			//node.setChecked(false);
+			node.setNocheck(true);
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr("images"));
+			
+			recursion(node, module);
+			
+			children.add(node);
+		}
+		
+		treeNode.setChildren(children);
 	}
 	
 	/**

@@ -94,7 +94,7 @@
 			var url = "/jf/platform/menu/update";
 			var data = { "ids" : treeNode.id, "names" : newName };
 			var reData = common_ajax.ajaxFunc(url, data);
-			if(data == treeNode.id){
+			if(reData == treeNode.id){
 				return true;
 	     	}else{
 				toastr.warning("修改<" + treeNode.name + ">菜单名称失败！");

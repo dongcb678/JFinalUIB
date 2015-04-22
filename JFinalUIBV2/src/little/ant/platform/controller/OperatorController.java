@@ -78,7 +78,15 @@ public class OperatorController extends BaseController {
 	 * 功能treeData
 	 */
 	public void treeData() {
-		List<ZtreeNode> nodeList = OperatorService.service.childNodeData(moduleIds);
+		List<ZtreeNode> nodeList = OperatorService.service.treeData(moduleIds);
+		renderJson(nodeList);
+	}
+	
+	/**
+	 * 功能treeData，一次性加载
+	 */
+	public void tree() {
+		List<ZtreeNode> nodeList = OperatorService.service.tree();
 		renderJson(nodeList);
 	}
 }

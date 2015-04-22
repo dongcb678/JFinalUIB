@@ -206,7 +206,7 @@
 	function getDeptPrincipal(){
 		var url = "/jf/platform/dept/getPrincipal";
 		var data = { "ids" : "${paramMap.ids!}"};
-		var reData = common_ajax.ajaxFunc(url, data);
+		var reData = common_ajax.ajaxFunc(url, data, "json");
 		if(reData != "error"){
    			userIds = (data.principaluserids == null? '' : reData.principaluserids); 
 			checkedNodeIds = userIds;

@@ -71,7 +71,7 @@
 			var url = "/jf/platform/module/delete";
 			var data = { "ids" : treeNode.id };
 			var reData = common_ajax.ajaxFunc(url, data);
-			if(reData == "error"){
+			if(reData != treeNode.id){
 				toastr.warning("删除<" + treeNode.name + ">模块失败！");
 			}else{
 				result = true;
@@ -355,7 +355,7 @@
 			var data = { "ids" : dragId, "pIds" : targetId };
 			
 			var reData = common_ajax.ajaxFunc(url, data);
-			if(reData == "error"){
+			if(reData != dragId){
 	     		toastr.warning("移动模块失败！");
 	     	}
 		}

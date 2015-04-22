@@ -1,5 +1,7 @@
 package little.ant.platform.common;
 
+import java.util.List;
+
 /**
  * Ztree节点数据封装
  * @author 董华健
@@ -27,9 +29,19 @@ public class ZtreeNode {
 	private boolean checked;
 
 	/**
+	 * 是否选中
+	 */
+	private boolean nocheck;
+	
+	/**
 	 * 节点图标
 	 */
 	private String icon;
+	
+	/**
+	 * 子节点数据
+	 */
+	private List<ZtreeNode> children;
 	
 	public String getId() {
 		return id;
@@ -63,12 +75,28 @@ public class ZtreeNode {
 		this.checked = checked;
 	}
 
+	public boolean isNocheck() {
+		return nocheck;
+	}
+
+	public void setNocheck(boolean nocheck) {
+		this.nocheck = nocheck;
+	}
+
 	public String getIcon() {
 		return icon;
 	}
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public List<ZtreeNode> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<ZtreeNode> children) {
+		this.children = children;
 	}
 	
 }

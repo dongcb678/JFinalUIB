@@ -92,7 +92,7 @@
 			var url = "/jf/platform/station/update";
 			var data = { "ids" : treeNode.id, "names" : newName };
 			var reData = common_ajax.ajaxFunc(url, data);
-			if(data == treeNode.id){
+			if(reData == treeNode.id){
 				return true;
 	     	}else{
 				toastr.warning("修改<" + treeNode.name + ">岗位名称失败！");
@@ -378,7 +378,7 @@
 			var data = { "ids" : dragId, "pIds" : targetId };
 			
 			var reData = common_ajax.ajaxFunc(url, data);
-			if(reData == "error"){
+			if(reData != dragId){
 	     		toastr.warning("移动岗位失败！");
 	     	}
 		}

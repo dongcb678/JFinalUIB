@@ -64,8 +64,8 @@ public class DepartmentController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		DepartmentService.service.delete(ids);
-		renderText(ids);
+		boolean bool = DepartmentService.service.delete(ids);
+		renderText(String.valueOf(bool));
 	}
 	
 	/**

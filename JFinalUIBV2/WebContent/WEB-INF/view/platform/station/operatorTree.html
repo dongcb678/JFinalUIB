@@ -275,11 +275,11 @@
 	
 	function getCheckedByStation(){
 		var url = "/jf/platform/station/getOperator";
-		var data = { "ids" : '${paramMap["ids"]}' };
-		var reData = common_ajax.ajaxFunc(url, data);
-		if(data != "error"){
-			moduleIds = (reData.moduleids == null? '': reData.moduleids); 
-			operatorIds = (reData.operatorids == null? '': reData.operatorids);
+		var data = { "ids" : '${paramMap["ids"]!}' };
+		var reData = common_ajax.ajaxFunc(url, data, "json");
+		if(reData != "error"){
+			moduleIds = (reData.moduleids == null? '' : reData.moduleids); 
+			operatorIds = (reData.operatorids == null? '' : reData.operatorids);
 			
 			checkedModuleNodeIds = moduleIds;
 			checkedOperatorNodeIds = operatorIds;
@@ -295,7 +295,7 @@
 			var url = "/jf/platform/station/setOperator";
 			var data = { "ids" : "${paramMap.ids!}", "moduleIds" : checkedModuleNodeIds, "operatorIds" : checkedOperatorNodeIds};
 			var reData = common_ajax.ajaxFunc(url, data);
-			if(reData == "error"){
+			if(reData != "${paramMap.ids!}"){
 				toastr.warning("设置岗位拥有的功能失败！");
 	     	}
 		}
