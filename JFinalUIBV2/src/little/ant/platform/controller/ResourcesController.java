@@ -31,7 +31,7 @@ public class ResourcesController extends BaseController {
 	 */
 	public void refreshParamCache(){
 		ThreadParamInit.cacheAll();
-		render("/jf/platform/resources");
+		redirect("/jf/platform/resources");
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class ResourcesController extends BaseController {
 	 */
 	public void refreshSqlCache(){
 		ToolSqlXml.init(false);
-		render("/jf/platform/resources");
+		redirect("/jf/platform/resources");
 	}
 	
 }

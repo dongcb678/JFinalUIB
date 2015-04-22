@@ -177,10 +177,6 @@ var common_ajax = function() {
 		});
 	};
 	
-	
-	
-	
-		
 	return {
 		ajaxFunc : ajaxFunc,
 		ajaxFuncConfirm : ajaxFuncConfirm,
