@@ -6,7 +6,7 @@
 							<i class="fa fa-bars"></i>
 						</a>
 						<!-- start: LOGO -->
-						<a class="navbar-brand" href="index.html">
+						<a class="navbar-brand" href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">
 							<img src="${cxt!}/ui/rapido/assets/images/logo.png" alt="Rapido"/>
 						</a>
 						<!-- end: LOGO -->
@@ -18,7 +18,9 @@
 							<!-- start: USER DROPDOWN -->
 							<li class="dropdown current-user">
 								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-									<img src="${cxt!}/ui/rapido/assets/images/avatar-1-small.jpg" class="img-circle" alt=""> <span class="username hidden-xs">Peter Clark</span> <i class="fa fa-caret-down "></i>
+									<img src="${cxt!}/ui/rapido/assets/images/avatar-1-small.jpg" class="img-circle" alt=""> 
+									<span class="username hidden-xs">${escapeXml(cookieMap.userName.value!)}</span> 
+									<i class="fa fa-caret-down "></i>
 								</a>
 								<ul class="dropdown-menu dropdown-dark">
 									<li>
@@ -37,13 +39,13 @@
 										</a>
 									</li>
 									<li>
-										<a href="login_lock_screen.html">
-											Lock Screen
+										<a href="${cxt!}/jf/platform/index/toUrl?toUrl=/platform/login/lock_screen.html">
+											锁屏
 										</a>
 									</li>
 									<li>
-										<a href="login_login.html">
-											Log Out
+										<a href="${cxt!}/jf/platform/login/logout">
+											${i18nMap["admin.top.exitSystem"]}
 										</a>
 									</li>
 								</ul>
