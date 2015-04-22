@@ -94,6 +94,23 @@ public class LoginController extends BaseController {
 	}
 
 	/**
+	 * 锁屏验证密码
+	 */
+	@Before(LoginValidator.class)
+	public void pass() {
+		User user = getCUser();
+		String password = getPara("password");
+		
+		int result = LoginService.service.pass(getRequest(), getResponse(), user.getStr("username"), password);
+		if(result == DictKeys.login_info_3){
+			redirect("/jf/platform/index");
+			return;
+		}
+		
+		redirect("/jf/platform/login");
+	}
+
+	/**
 	 * 注销
 	 */
 	public void logout() {

@@ -11,6 +11,7 @@ import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.Syslog;
+import little.ant.platform.model.User;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolContext;
 import little.ant.platform.tools.ToolString;
@@ -71,7 +72,7 @@ public abstract class BaseController extends Controller {
 	 * 获取当前用户
 	 * @return
 	 */
-	protected String getCUser(){
+	protected User getCUser(){
 		return getAttr("cUser");
 	}
 
