@@ -69,11 +69,11 @@ public class IndexService extends BaseService {
 		// 一级菜单
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("names", names);
-		List<Menu> oneList = Menu.dao.find(getSql("platform.menu.child", param), parentmenuids);
+		List<Menu> oneList = Menu.dao.find(getSqlByBeetl("platform.menu.child", param), parentmenuids);
 		param.put("fitler", fitler);
 		for (Menu oneMenu : oneList) {
 			// 二级菜单
-			String sql = getSql("platform.menu.operator", param);
+			String sql = getSqlByBeetl("platform.menu.operator", param);
 			List<Menu> twoList = Menu.dao.find(sql, oneMenu.getPKValue());
 			oneMenu.put("subList", twoList);
 		}

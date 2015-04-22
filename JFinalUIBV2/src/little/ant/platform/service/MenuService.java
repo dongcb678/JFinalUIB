@@ -36,11 +36,11 @@ public class MenuService extends BaseService {
 		
 		List<Menu> list = null;
 		if(null != parentIds){
-			String sql = getSql("platform.menu.child", param);
+			String sql = getSqlByBeetl("platform.menu.child", param);
 			list = Menu.dao.find(sql, parentIds);
 			
 		}else{
-			String sql = getSql("platform.menu.root", param);
+			String sql = getSqlByBeetl("platform.menu.root", param);
 			list = Menu.dao.find(sql, systemsIds);
 		}
 		

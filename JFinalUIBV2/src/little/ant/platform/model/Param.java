@@ -39,7 +39,7 @@ public class Param extends BaseModel<Param> {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("val", val);
 		
-		String sql = getSql("platform.param.idAndI18n", paramMap);
+		String sql = getSqlByBeetl("platform.param.idAndI18n", paramMap);
 		
 		Param param = dao.findFirst(sql, ids);
 		return param;
@@ -68,7 +68,7 @@ public class Param extends BaseModel<Param> {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("val", val);
 		
-		String sql = getSql("platform.param.numbersAndI18n", paramMap);
+		String sql = getSqlByBeetl("platform.param.numbersAndI18n", paramMap);
 		
 		Param param = dao.findFirst(sql, number);
 		return param;
@@ -105,7 +105,7 @@ public class Param extends BaseModel<Param> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSql("platform.param.childAndI8n", param);
+		String sql = getSqlByBeetl("platform.param.childAndI8n", param);
 		
 		return dao.find(sql, prentIds);
 	}
@@ -130,7 +130,7 @@ public class Param extends BaseModel<Param> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSql("platform..parentAndI18n", param);
+		String sql = getSqlByBeetl("platform..parentAndI18n", param);
 		
 		return dao.findFirst(sql, get("parentids"));
 	}

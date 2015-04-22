@@ -211,7 +211,7 @@ public class UserService extends BaseService {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "userName");
-			String sql = getSql("platform.user.column", param);
+			String sql = getSqlByBeetl("platform.user.column", param);
 			User user = User.dao.findFirst(sql, userName);
 			byte[] salt = user.getBytes("salt");// 密码盐
 			byte[] encryptedPassword = user.getBytes("password");
@@ -236,7 +236,7 @@ public class UserService extends BaseService {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "userName");
-			String sql = getSql("platform.user.column", param);
+			String sql = getSqlByBeetl("platform.user.column", param);
 			User user = User.dao.findFirst(sql, userName);
 			
 			// 验证密码

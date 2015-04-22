@@ -39,7 +39,7 @@ public class Dict extends BaseModel<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSql("platform.dict.idAndI18n", param);
+		String sql = getSqlByBeetl("platform.dict.idAndI18n", param);
 		
 		Dict dict = dao.findFirst(sql, ids);
 		
@@ -69,7 +69,7 @@ public class Dict extends BaseModel<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSql("platform.dict.numbersAndI18n", param);
+		String sql = getSqlByBeetl("platform.dict.numbersAndI18n", param);
 		
 		Dict dict = dao.findFirst(sql, number);
 		
@@ -107,7 +107,7 @@ public class Dict extends BaseModel<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSql("platform.dict.childAndI8n", param);
+		String sql = getSqlByBeetl("platform.dict.childAndI8n", param);
 		
 		return dao.find(sql, prentIds);
 	}
@@ -132,7 +132,7 @@ public class Dict extends BaseModel<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSql("platform.dict.parentAndI18n", param);
+		String sql = getSqlByBeetl("platform.dict.parentAndI18n", param);
 		
 		return dao.findFirst(sql, get("parentids"));
 	}

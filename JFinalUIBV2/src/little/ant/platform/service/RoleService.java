@@ -86,8 +86,8 @@ public class RoleService extends BaseService {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);
 			
-			noCheckedList = Role.dao.find(getSql("platform.role.noCheckedFilter", param));
-			checkedList = Role.dao.find(getSql("platform.role.checkedFilter", param));
+			noCheckedList = Role.dao.find(getSqlByBeetl("platform.role.noCheckedFilter", param));
+			checkedList = Role.dao.find(getSqlByBeetl("platform.role.checkedFilter", param));
 		}else{
 			noCheckedList = Role.dao.find(getSql("platform.role.noChecked"));
 		}

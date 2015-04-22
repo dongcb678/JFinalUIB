@@ -37,7 +37,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_user");
 		param.put("column", "username");
-		String sql = getSql("platform.baseModel.selectCount", param);
+		String sql = getSqlByBeetl("platform.baseModel.selectCount", param);
 		int count = Db.queryLong(sql, userName).intValue();
 		return count;
 	}
@@ -51,7 +51,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
 		param.put("column", "email");
-		String sql = getSql("platform.baseModel.selectCount", param);
+		String sql = getSqlByBeetl("platform.baseModel.selectCount", param);
 		int count = Db.queryLong(sql, mailBox).intValue();
 		return count;
 	}
@@ -65,7 +65,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
 		param.put("column", "idcard");
-		String sql = getSql("platform.baseModel.selectCount", param);
+		String sql = getSqlByBeetl("platform.baseModel.selectCount", param);
 		int count = Db.queryLong(sql, idcard).intValue();
 		return count;
 	}
@@ -79,7 +79,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
 		param.put("column", "mobile");
-		String sql = getSql("platform.baseModel.selectCount", param);
+		String sql = getSqlByBeetl("platform.baseModel.selectCount", param);
 		int count = Db.queryLong(sql, mobile).intValue();
 		return count;
 	}
@@ -102,7 +102,7 @@ public class LoginService extends BaseService {
 		} else {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", "username");
-			String sql = getSql("platform.user.column", param);
+			String sql = getSqlByBeetl("platform.user.column", param);
 			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
 				return DictKeys.login_info_0;// 用户不存在

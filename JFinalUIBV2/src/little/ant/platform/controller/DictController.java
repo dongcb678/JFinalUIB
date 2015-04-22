@@ -6,7 +6,6 @@ import little.ant.platform.annotation.Controller;
 import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Dict;
 import little.ant.platform.service.DictService;
-import little.ant.platform.tools.ToolSqlXml;
 import little.ant.platform.validator.DictValidator;
 
 import org.apache.log4j.Logger;
@@ -27,7 +26,7 @@ public class DictController extends BaseController {
 	 * 首页
 	 */
 	public void index() {
-		String sql = ToolSqlXml.getSql("platform.dict.treeTableNodeRoot");
+		String sql = DictService.service.getSql("platform.dict.treeTableNodeRoot");
 		list = Dict.dao.find(sql);
 		render("/platform/dict/treeTable.html");
 	}
@@ -36,7 +35,7 @@ public class DictController extends BaseController {
 	 * treeTable子节点数据获取
 	 */
 	public void treeTable() {
-		String sql = ToolSqlXml.getSql("platform.dict.treeTableChildNode");
+		String sql = DictService.service.getSql("platform.dict.treeTableChildNode");
 		list = Dict.dao.find(sql, ids);
 		render("/platform/dict/treeTableSub.html");
 	}

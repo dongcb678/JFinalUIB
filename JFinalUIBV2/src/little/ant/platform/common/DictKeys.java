@@ -215,5 +215,20 @@ public abstract class DictKeys {
 	 * 用户登录状态码：密码验证失败
 	 */
 	public static final int login_info_4 = 4;
+	
+	/**
+	 * 解析sql和param的类型：beetl
+	 */
+	public static final String sql_renderType_beetl = "beetl";
 
+	/**
+	 * 解析sql和param的类型：velocity
+	 */
+	public static final String sql_renderType_velocity = "velocity";
+
+	/**
+	 * 解析sql和param的类型：freeMarker
+	 */
+	public static final String sql_renderType_freeMarker = "freeMarker";
+	
 }

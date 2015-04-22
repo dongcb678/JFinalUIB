@@ -13,6 +13,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import little.ant.platform.common.DictKeys;
+
 import org.beetl.core.BeetlKit;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -83,16 +85,27 @@ public class ToolSqlXml {
 
     /**
      * 获取SQL，动态SQL
-     * @param sqlId
-     * @param param
+     * @param sqlId	xml文件中的sql id
+     * @param param	xml sql中的变量map
+     * @param renderType 解析sql和param的类型，默认是beetl，还可以是Velocity、FreeMarker，还需其他请自行参考实现
      * @return
      */
-    public static String getSql(String sqlId, Map<String, Object> param) {
+    public static String getSql(String sqlId, Map<String, Object> param, String renderType) {
     	String sqlTemplete = sqlMap.get(sqlId);
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
     	}
-    	String sql = BeetlKit.render(sqlTemplete, param);
+    	
+    	String sql = null;
+    	if(null == renderType || renderType.equals(DictKeys.sql_renderType_beetl)){ // beetl
+    		sql = BeetlKit.render(sqlTemplete, param);
+    		
+    	} else if(renderType.equals(DictKeys.sql_renderType_freeMarker)){ // FreeMarker
+    		sql = ToolFreeMarker.render(sqlTemplete, param);
+    		
+    	} else if(renderType.equals(DictKeys.sql_renderType_velocity)){ // Velocity
+    		sql = ToolVelocity.render(sqlTemplete, param);
+    	} 
 		
 		Set<String> keySet = param.keySet();
 		for (String key : keySet) {
@@ -111,10 +124,11 @@ public class ToolSqlXml {
      * 获取SQL，动态SQL
      * @param sqlId 
      * @param param 查询参数
+     * @param renderType 解析sql和param的类型，默认是beetl，还可以是Velocity、FreeMarker，还需其他请自行参考实现
      * @param list 用于接收预处理的值
      * @return
      */
-    public static String getSql(String sqlId, Map<String, String> param, LinkedList<Object> list) {
+    public static String getSql(String sqlId, Map<String, String> param, String renderType, LinkedList<Object> list) {
     	String sqlTemplete = sqlMap.get(sqlId);
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
@@ -125,7 +139,18 @@ public class ToolSqlXml {
     	for (String paramKey : paramKeySet) {
     		paramMap.put(paramKey, (Object)param.get(paramKey));
 		}
-    	String sql = BeetlKit.render(sqlTemplete, paramMap);
+    	
+    	String sql = null;
+    	if(null == renderType || renderType.equals(DictKeys.sql_renderType_beetl)){ // beetl
+    		sql = BeetlKit.render(sqlTemplete, paramMap);
+    		
+    	} else if(renderType.equals(DictKeys.sql_renderType_freeMarker)){ // FreeMarker
+    		sql = ToolFreeMarker.render(sqlTemplete, paramMap);
+    		
+    	} else if(renderType.equals(DictKeys.sql_renderType_velocity)){ // Velocity
+    		sql = ToolVelocity.render(sqlTemplete, paramMap);
+    	} 
+		
 		
     	Pattern pattern = Pattern.compile("#[\\w\\d\\$\\'\\%\\_]+#");	//#[\\w\\d]+#    \\$
 		Pattern pattern2 = Pattern.compile("\\$[\\w\\d\\_]+\\$");
@@ -165,7 +190,7 @@ public class ToolSqlXml {
     }
     
     /**
-     * 清楚加载的sql
+     * 清除加载的sql
      */
     public static void destory() {
         sqlMap.clear();

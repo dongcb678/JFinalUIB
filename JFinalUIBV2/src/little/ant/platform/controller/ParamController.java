@@ -6,7 +6,6 @@ import little.ant.platform.annotation.Controller;
 import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Param;
 import little.ant.platform.service.ParamService;
-import little.ant.platform.tools.ToolSqlXml;
 import little.ant.platform.validator.ParamValidator;
 
 import org.apache.log4j.Logger;
@@ -27,7 +26,7 @@ public class ParamController extends BaseController {
 	 * 参数管理treeTable首页
 	 */
 	public void index() {
-		String sql = ToolSqlXml.getSql("platform.param.treeTableNodeRoot");
+		String sql = ParamService.service.getSql("platform.param.treeTableNodeRoot");
 		list = Param.dao.find(sql);
 		render("/platform/param/treeTable.html");
 	}
@@ -36,7 +35,7 @@ public class ParamController extends BaseController {
 	 * 参数管理treeTable数据
 	 */
 	public void treeTable() {
-		String sql = ToolSqlXml.getSql("platform.param.treeTableChildNode");
+		String sql = ParamService.service.getSql("platform.param.treeTableChildNode");
 		list = Param.dao.find(sql, ids);
 		render("/platform/param/treeTableSub.html");
 	}

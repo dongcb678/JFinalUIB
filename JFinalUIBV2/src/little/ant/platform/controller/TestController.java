@@ -68,7 +68,7 @@ public class TestController extends BaseController {
 			param.put("size", size);
 			
 			LinkedList<Object> paramValue = new LinkedList<Object>();
-			String sql = ToolSqlXml.getSql("platform.test.autoComplete", param, paramValue);
+			String sql = ToolSqlXml.getSql("platform.test.autoComplete", param, DictKeys.sql_renderType_beetl, paramValue);
 			List<Record> list = Db.use(DictKeys.db_dataSource_main).find(sql, paramValue.toArray());
 			StringBuilder sb = new StringBuilder();
 			sb.append("[");

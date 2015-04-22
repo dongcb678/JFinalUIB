@@ -25,7 +25,7 @@ public abstract class BaseService {
      * @param sqlId
      * @return
      */
-	protected String getSql(String sqlId){
+	public String getSql(String sqlId){
 		return ToolSqlXml.getSql(sqlId);
 	}
 	
@@ -35,8 +35,8 @@ public abstract class BaseService {
      * @param param
      * @return
      */
-	protected String getSql(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param);
+	public String getSqlByBeetl(String sqlId, Map<String, Object> param){
+    	return ToolSqlXml.getSql(sqlId, param, DictKeys.sql_renderType_beetl);
     }
     
     /**
@@ -46,8 +46,8 @@ public abstract class BaseService {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSql(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, list);
+	public String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
+    	return ToolSqlXml.getSql(sqlId, param, DictKeys.sql_renderType_beetl, list);
     }
 	
 	/**
@@ -55,7 +55,7 @@ public abstract class BaseService {
 	 * @param i18n
 	 * @return
 	 */
-	protected String i18n(String i18n){
+	public String i18n(String i18n){
 		return I18NPlugin.i18n(i18n);
 	}
 	
@@ -64,7 +64,7 @@ public abstract class BaseService {
 	 * @param ids
 	 * @return
 	 */
-	protected String toSql(String ids){
+	public String toSql(String ids){
 		if(null == ids || ids.trim().isEmpty()){
 			return null;
 		}
@@ -87,7 +87,7 @@ public abstract class BaseService {
 	 * @param ids
 	 * @return
 	 */
-	protected String toSql(String[] idsArr){
+	public String toSql(String[] idsArr){
 		if(idsArr == null || idsArr.length == 0){
 			return null;
 		}
@@ -111,13 +111,13 @@ public abstract class BaseService {
 	 * @param select
 	 * @param sqlId
 	 */
-	protected void splitPageBase(String dataSource, SplitPage splitPage, String select, String sqlId){
+	public void splitPageBase(String dataSource, SplitPage splitPage, String select, String sqlId){
 		// 接收返回值对象
 		StringBuilder formSqlSb = new StringBuilder();
 		LinkedList<Object> paramValue = new LinkedList<Object>();
 		
 		// 调用生成from sql，并构造paramValue
-		String sql = ToolSqlXml.getSql(sqlId, splitPage.getQueryParam(), paramValue);
+		String sql = ToolSqlXml.getSql(sqlId, splitPage.getQueryParam(), DictKeys.sql_renderType_beetl, paramValue);
 		formSqlSb.append(sql);
 		
 		// 行级：过滤
@@ -144,7 +144,7 @@ public abstract class BaseService {
 	 * @param ids
 	 * @return
 	 */
-	protected String[] splitByComma(String ids){
+	public String[] splitByComma(String ids){
 		if(null == ids || ids.trim().isEmpty()){
 			return null;
 		}
@@ -158,14 +158,14 @@ public abstract class BaseService {
 	 * 行级：过滤
 	 * @return
 	 */
-	protected void rowFilter(StringBuilder formSqlSb){
+	public void rowFilter(StringBuilder formSqlSb){
 		
 	}
 	
 	/**
 	 * 发送邮件对象
 	 */
-	protected ToolMail sendTextMail(){
+	public ToolMail sendTextMail(){
 		ToolMail mail = new ToolMail();
 		mail.setHost((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_host));
 		mail.setPort((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_port));
@@ -175,4 +175,5 @@ public abstract class BaseService {
 		mail.setFrom((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_from));
 		return mail;
 	}
+	
 }
