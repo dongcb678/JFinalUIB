@@ -41,12 +41,12 @@
 	outline: none;
 	position: absolute;
 	margin-top: 0;
-	top: 50%;
+	top: 10%;
 	overflow: visible; /* allow content to popup out (i.e tooltips) */
 }
 
 .extended-modal.fade {
-	top: -100%;
+	top: 10%;
 	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;	
 	   -moz-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
 	     -o-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
@@ -54,7 +54,7 @@
 }
 
 .extended-modal.fade.in {
-	top: 50%;
+	top: 10%;
 }
 
 .extended-modal .modal-body {
