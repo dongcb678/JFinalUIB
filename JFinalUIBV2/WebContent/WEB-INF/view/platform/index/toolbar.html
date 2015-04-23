@@ -16,6 +16,7 @@
 									<!-- start: TOP NAVIGATION MENU -->
 									<ul class="nav navbar-right">
 										<!-- start: TO-DO DROPDOWN -->
+										
 										<li class="dropdown">
 											<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
 												<i class="fa fa-plus"></i> 子视图
@@ -103,7 +104,8 @@
 										
 										<li class="dropdown">
 											<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-												<span class="messages-count badge badge-default hide">3</span> <i class="fa fa-envelope"></i> 消息
+												<span class="messages-count badge badge-default hide">3</span> 
+												<i class="fa fa-envelope"></i> 消息
 											</a>
 											<ul class="dropdown-menu dropdown-light dropdown-messages">
 												<li>
@@ -162,6 +164,32 @@
 														查看所有
 													</a>
 												</li>
+											</ul>
+										</li>
+										
+										<li class="dropdown">
+											<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+												<i class="fa fa-sliders"></i> 系统切换
+											</a>
+											
+											<ul class="dropdown-menu dropdown-light dropdown-subview">
+												<% for(systems in systemsList){ %>
+													<li class="dropdown-header"><a href="${cxt!}/jf/platform/index?ids=${systems.ids!}">${escapeXml(systems.names!)}</a></li>
+												<% } %>
+											</ul>
+										</li>
+										
+										<li class="dropdown">
+											<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+												<i class="fa fa-eye"></i> ${i18nMap["admin.top.language"]}
+											</a>
+											
+											<ul class="dropdown-menu dropdown-light dropdown-subview">
+												<li class="dropdown-header"><a href="${cxt!}/jf/platform/index?localePram=zh_cn">${i18nMap["admin.top.language.zhcn"]}</a></li>
+												<li class="dropdown-header"><a href="${cxt!}/jf/platform/index?localePram=en_us">${i18nMap["admin.top.language.enus"]}</a></li>
+												<li class="dropdown-header"><a href="${cxt!}/jf/platform/index?localePram=zh_tw">${i18nMap["admin.top.language.zhtw"]}</a></li>
+												<li class="dropdown-header"><a href="${cxt!}/jf/platform/index?localePram=zh_hk">${i18nMap["admin.top.language.zhhk"]}</a></li>
+												<li class="dropdown-header"><a href="${cxt!}/jf/platform/index?localePram=ja">${i18nMap["admin.top.language.ja"]}</a></li>
 											</ul>
 										</li>
 										
