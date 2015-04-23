@@ -27,6 +27,7 @@ public class I18NPlugin implements IPlugin {
 	 */
 	public static String i18n(String i18n){
 		String val = "_zhcn";
+		
 		if(i18n.equals("zh") || i18n.equals("zh_cn")){
 			val = "_zhcn";
 			
@@ -41,7 +42,9 @@ public class I18NPlugin implements IPlugin {
 			
 		} else if(i18n.equals("zh_tw")){
 			val = "_zhtw";
+			
 		}
+		
 		return val;
 	}
 	
@@ -64,8 +67,10 @@ public class I18NPlugin implements IPlugin {
 		Map<String, String> map = resourceBundleMap.get(localePramKey);
 		if(map != null){
 			return map;
+			
 		}else{
 			return resourceBundleMap.get("zh_cn");
+			
 		}
 	}
 
