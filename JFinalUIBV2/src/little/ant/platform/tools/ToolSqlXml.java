@@ -149,8 +149,10 @@ public class ToolSqlXml {
     		
     	} else if(renderType.equals(DictKeys.sql_renderType_velocity)){ // Velocity
     		sql = ToolVelocity.render(sqlTemplete, paramMap);
-    	} 
-		
+    	
+    	} else {
+    		sql = BeetlKit.render(sqlTemplete, paramMap); // beetl
+    	}
 		
     	Pattern pattern = Pattern.compile("#[\\w\\d\\$\\'\\%\\_]+#");	//#[\\w\\d]+#    \\$
 		Pattern pattern2 = Pattern.compile("\\$[\\w\\d\\_]+\\$");

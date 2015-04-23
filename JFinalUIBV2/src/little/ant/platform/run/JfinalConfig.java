@@ -6,6 +6,7 @@ import java.util.Map;
 import little.ant.platform.beetl.format.DateFormat;
 import little.ant.platform.beetl.func.EscapeXml;
 import little.ant.platform.beetl.func.HasPrivilegeUrl;
+import little.ant.platform.beetl.func.I18nFormat;
 import little.ant.platform.beetl.func.OrderBy;
 import little.ant.platform.beetl.render.MyBeetlRenderFactory;
 import little.ant.platform.beetl.tag.DictTag;
@@ -82,6 +83,7 @@ public class JfinalConfig extends JFinalConfig {
 		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
 		groupTemplate.registerFunction("orderBy", new OrderBy());
 		groupTemplate.registerFunction("escapeXml", new EscapeXml());
+		groupTemplate.registerFunction("i18nFormat", new I18nFormat());
 		
 		groupTemplate.registerTag("dict", DictTag.class);
 		groupTemplate.registerTag("param", ParamTag.class);
