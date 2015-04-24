@@ -69,7 +69,7 @@ public class JfinalConfig extends JFinalConfig {
 		//me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
 
 		log.info("configConstant 视图Beetl设置");
-		me.setMainRenderFactory(new MyBeetlRenderFactory());
+		me.setMainRenderFactory(new MyBeetlRenderFactory()); // BeetlRenderFactory( new WebAppResourceLoader(PathKit.getWebRootPath() + "") )
 		
 		// 修正Weblogic 11g下beetl web路径获取不正确的bug，Configuration.defaultConfiguration() 会抛出IO异常
 //		try {
