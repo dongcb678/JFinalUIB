@@ -19,6 +19,7 @@ import little.ant.platform.tools.ToolString;
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
+import com.jfinal.render.JsonRender;
 
 /**
  * 公共Controller
@@ -108,6 +109,19 @@ public abstract class BaseController extends Controller {
 			}
 		}
 		return value;
+	}
+	
+	/**
+	 * 重写renderJson，避免出现IE8下出现下载弹出框
+	 */
+	@Override
+	public void renderJson(Object object) {
+		String userAgent = getRequest().getHeader("User-Agent");
+		if(userAgent.toLowerCase().indexOf("msie") != -1){
+			render(new JsonRender(object).forIE());
+		}else{
+			super.renderJson(object);
+		}
 	}
 	
 	/**
