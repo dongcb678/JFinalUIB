@@ -192,10 +192,8 @@ var Main = function() {"use strict";
 	var runContainerHeight = function() {
 		if(subViews.is(':visible')) {
 			$('.main-container').css({
-
 				'max-height': $windowHeight - topBar.outerHeight(true),
-				'min-height': $windowHeight - topBar.outerHeight(true),
-
+				'min-height': $windowHeight - topBar.outerHeight(true)
 			});
 		}
 		if($("#slidingbar-area").is(':visible')) {
@@ -1051,13 +1049,13 @@ var Main = function() {"use strict";
 				$('#skin_color').attr("rel", "stylesheet");
 
 			}
-			$('#skin_color').attr("href", "assets/css/themes/theme-" + $(this).attr('id') + ".css");
+			$('#skin_color').attr("href", cxt + "/ui/rapido/assets/css/themes/theme-" + $(this).attr('id') + ".css");
 			switch ($(this).attr('id')) {
 				case "style3":
-					$(".navbar-brand img").attr("src", "assets/images/logo_dark.png");
+					$(".navbar-brand img").attr("src", cxt + "/ui/rapido/assets/images/logo_dark.png");
 					break;
 				default:
-					$(".navbar-brand img").attr("src", "assets/images/logo.png");
+					$(".navbar-brand img").attr("src", cxt + "/ui/rapido/assets/images/logo.png");
 					break;
 			};
 		});
