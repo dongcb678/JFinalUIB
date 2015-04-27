@@ -15,6 +15,7 @@
 					<div class="topbar-tools">
 						<!-- start: TOP NAVIGATION MENU -->
 						<ul class="nav navbar-right">
+							
 							<!-- start: USER DROPDOWN -->
 							<li class="dropdown current-user">
 								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
@@ -42,6 +43,39 @@
 								</ul>
 							</li>
 							<!-- end: USER DROPDOWN -->
+							
+							<!-- start: system change -->
+							<li class="dropdown current-user">
+								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+									<span class="username hidden-xs">系统切换</span> 
+									<i class="fa fa-caret-down "></i>
+								</a>
+								<ul class="dropdown-menu dropdown-dark">
+									<% for(systems in systemsList){ %>
+										<li>
+											<a href="${cxt!}/jf/platform/index?ids=${systems.ids!}">${escapeXml(systems.names!)}</a>
+										</li>
+									<% } %>
+								</ul>
+							</li>
+							<!-- end: system change -->
+							
+							<!-- start: language change -->
+							<li class="dropdown current-user">
+								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+									<span class="username hidden-xs">${i18nMap["admin.top.language"]}</span> 
+									<i class="fa fa-caret-down "></i>
+								</a>
+								<ul class="dropdown-menu dropdown-dark">
+									<li><a href="${cxt!}/jf/platform/index?localePram=zh_cn">${i18nMap["admin.top.language.zhcn"]}</a></li>
+									<li><a href="${cxt!}/jf/platform/index?localePram=en_us">${i18nMap["admin.top.language.enus"]}</a></li>
+									<li><a href="${cxt!}/jf/platform/index?localePram=zh_tw">${i18nMap["admin.top.language.zhtw"]}</a></li>
+									<li><a href="${cxt!}/jf/platform/index?localePram=zh_hk">${i18nMap["admin.top.language.zhhk"]}</a></li>
+									<li><a href="${cxt!}/jf/platform/index?localePram=ja">${i18nMap["admin.top.language.ja"]}</a></li>
+								</ul>
+							</li>
+							<!-- end: language change -->
+							
 							<li class="right-menu-toggle">
 								<a href="#" class="sb-toggle-right">
 									<i class="fa fa-globe toggle-icon"></i> <i class="fa fa-caret-right"></i> <span class="notifications-count badge badge-default hide"> 3</span>
