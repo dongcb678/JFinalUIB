@@ -52,6 +52,23 @@ public abstract class BaseController extends Controller {
 	}
 
 	/**
+	 * 获取当前国际化资源
+	 * @return
+	 */
+	protected Map<String, String> getI18nMap() {
+		return getAttr("i18nMap");
+	}
+
+	/**
+	 * 获取当前国际化资源值
+	 * @return
+	 */
+	protected String getI18nVal(String key) {
+		Map<String, String> i18nMap = getI18nMap();
+		return i18nMap.get(key);
+	}
+
+	/**
 	 * 获取项目请求根路径
 	 * @return
 	 */
