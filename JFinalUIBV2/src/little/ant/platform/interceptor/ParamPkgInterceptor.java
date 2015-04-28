@@ -189,8 +189,9 @@ public class ParamPkgInterceptor implements Interceptor {
 			field.setAccessible(true);
 			String name = field.getName();
 			Object value = field.get(controller);
-			if(null == value || 
-					(value instanceof String && ((String)value).isEmpty())
+			if(null == value 
+					|| (value instanceof String && ((String)value).isEmpty() 
+					|| value instanceof Logger)
 					){// 参数值为空直接结束
 				log.debug("设置全局变量到request：field name = " + name + " value = 空");
 				return;
