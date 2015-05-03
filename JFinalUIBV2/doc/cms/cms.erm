@@ -12,7 +12,7 @@
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
 	<x>-195</x>
-	<y>0</y>
+	<y>2419</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -221,7 +221,7 @@
 			</connections>
 			<display>true</display>
 			<creation_date>2015-04-28 21:19:42</creation_date>
-			<updated_date>2015-05-03 20:56:14</updated_date>
+			<updated_date>2015-05-03 22:21:32</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value>CMS</value>
@@ -8268,7 +8268,7 @@
 			</color>
 			<connections>
 			</connections>
-			<physical_name>blog_article</physical_name>
+			<physical_name>blog_praise</physical_name>
 			<logical_name>点赞记录</logical_name>
 			<description></description>
 			<constraint></constraint>
