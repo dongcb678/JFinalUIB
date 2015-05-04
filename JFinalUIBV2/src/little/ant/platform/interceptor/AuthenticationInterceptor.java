@@ -38,10 +38,18 @@ public class AuthenticationInterceptor implements Interceptor {
 		contro.setReqSysLog(reqSysLog);
 		
 		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");
-		String uri = getUri(request);
-
+		String uri = ai.getActionKey(); // 默认就是ActionKey
+		if(ai.getMethodName().equals("toUrl")){
+			uri = ToolContext.getParam(request, "toUrl"); // 否则就是toUrl的值
+		}
+		
+		log.info("druid特殊处理");
+		if(uri.startsWith("/platform/druid")){
+			uri = "/platform/druid/iframe.html"; // 所有的druid授权都绑定到一个iframe.html授权
+		}
+		
 		log.info("获取当前用户!");
-		boolean userAgentVali = true;
+		boolean userAgentVali = true; // 是否验证userAgent，默认是
 		if(uri.equals("/jf/platform/ueditor") || uri.equals("/jf/platform/upload")){ // 针对ueditor特殊处理
 			userAgentVali = false;
 		}
@@ -144,33 +152,6 @@ public class AuthenticationInterceptor implements Interceptor {
 		} finally {
 			
 		}
-	}
-	
-	/**
-	 * 获取当前请求uri
-	 * @param request
-	 * @return
-	 */
-	private String getUri(HttpServletRequest request){
-		String uri = ToolContext.getParam(request, "toUrl");
-		if (null == uri || uri.equals("")) {
-			uri = request.getServletPath();
-			
-			int index = uri.lastIndexOf("/");
-			String deleteUri = uri.substring(index);
-			if(deleteUri.length() == 33){
-				log.debug("例如：jf/user/view/8a40c0353fa828a6013fa898d4ac0020 需要去除 /8a40c0353fa828a6013fa898d4ac0020");
-				log.info("去除最后的/ids：" + uri);
-				uri = uri.substring(0, index);
-			}
-		}
-
-		log.info("druid特殊处理");
-		if(uri.startsWith("/platform/druid")){
-			uri = "/platform/druid/iframe.html";
-		}
-		
-		return uri;
 	}
 	
 	/**
