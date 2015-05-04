@@ -4,7 +4,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.beetl.core.BeetlKit;
@@ -104,6 +111,8 @@ public class ToolCodeGenerator {
 		paraMap.put("className", className);
 		paraMap.put("dataSource", dataSource);
 		paraMap.put("tableName", tableName);
+
+		paraMap.put("colunmList", getColunmByPg());
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +".java";
 		createFileByTemplete("model.html", paraMap, filePath);
@@ -220,4 +229,155 @@ public class ToolCodeGenerator {
 		}
 	}
 
+	private static List<String> getColunmByPg(){
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (java.lang.ClassNotFoundException e) {
+			System.out.print("Class not found exception occur. Message is:");
+			System.out.print(e.getMessage());
+		}
+		
+		String url = "jdbc:postgresql://127.0.0.1:5432/jfinaluibv2";
+		String user = "postgres";
+		String pass = "678789";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		List<String> list = new ArrayList<String>();
+		
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+			stmt = (Statement) conn.createStatement();
+
+			rs = (ResultSet) stmt.executeQuery("select column_name from information_schema.columns where table_name = ?");
+			while (rs.next()) {
+				String column_name = rs.getString("column_name");
+				list.add(column_name);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return list;
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+
+	private static List<String> getColunmByMysql(){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (java.lang.ClassNotFoundException e) {
+			System.out.print("Class not found exception occur. Message is:");
+			System.out.print(e.getMessage());
+		}
+		
+		String url = "jdbc:mysql://127.0.0.1:3306/jfinaluibv2?characterEncoding=UTF-8";
+		String user = "root";
+		String pass = "678789";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		List<String> list = new ArrayList<String>();
+		
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+			stmt = (Statement) conn.createStatement();
+
+			rs = (ResultSet) stmt.executeQuery("desc ?");
+			while (rs.next()) {
+				String column_name = rs.getString("Field");
+				list.add(column_name);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return list;
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+
+	private static List<String> getColunmByOracle(){
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (java.lang.ClassNotFoundException e) {
+			System.out.print("Class not found exception occur. Message is:");
+			System.out.print(e.getMessage());
+		}
+		
+		String url = "jdbc:oracle:thin:@127.0.0.1:1521:orcl";
+		String user = "scott";
+		String pass = "678789";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		List<String> list = new ArrayList<String>();
+		
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+			stmt = (Statement) conn.createStatement();
+
+			rs = (ResultSet) stmt.executeQuery("select * from user_col_comments where xxx = ?");
+			while (rs.next()) {
+				String column_name = rs.getString("Field");
+				list.add(column_name);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return list;
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	
 }
+
