@@ -1,7 +1,5 @@
 package little.ant.platform.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +12,6 @@ import little.ant.platform.model.Syslog;
 import little.ant.platform.model.User;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolContext;
-import little.ant.platform.tools.ToolString;
 
 import org.apache.log4j.Logger;
 
@@ -116,15 +113,7 @@ public abstract class BaseController extends Controller {
 	 */
 	@Override
 	public String getPara(String name) {
-		String value = getRequest().getParameter(name);
-		if(null != value && !value.isEmpty()){
-			try {
-				value = URLDecoder.decode(value, ToolString.encoding);
-			} catch (UnsupportedEncodingException e) {
-				log.error("decode异常：" + value + e.getMessage());
-				e.printStackTrace();
-			}
-		}
+		String value = ToolContext.getParam(getRequest(), name);
 		return value;
 	}
 	

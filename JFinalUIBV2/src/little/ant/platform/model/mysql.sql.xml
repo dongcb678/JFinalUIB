@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	mysql
+-->
+<sql-statement namespace="platform.mysql">
+	
+	<!-- 查询所有数据库名称 -->
+	<sql id="getDatabase">
+		<![CDATA[ 
+        	show databases
+    	]]>
+	</sql>
+	
+	<!-- 查询所有表名称 -->
+	<sql id="getTables">
+		<![CDATA[ 
+        	show tables
+    	]]>
+	</sql>
+	
+	<!-- 查询所有列名称 -->
+	<sql id="getColumns">
+		<![CDATA[ 
+        	desc ?
+    	]]>
+	</sql>
+	
+</sql-statement>

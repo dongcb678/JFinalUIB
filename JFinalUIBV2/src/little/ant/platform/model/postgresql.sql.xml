@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	postgresql
+-->
+<sql-statement namespace="platform.postgresql">
+	
+	<!-- 查询所有数据库名称 -->
+	<sql id="getDatabase">
+		<![CDATA[ 
+        	select datname from pg_database
+    	]]>
+	</sql>
+	
+	<!-- 查询所有表名称 -->
+	<sql id="getTables">
+		<![CDATA[ 
+        	select   
+        		tablename from  pg_tables   
+			where  
+				tablename not like 'pg%'
+				and tablename not like 'sql_%' 
+    	]]>
+	</sql>
+	
+	<!-- 查询所有列名称 -->
+	<sql id="getColumns">
+		<![CDATA[ 
+        	select 
+        		column_name, data_type
+			from 
+				information_schema.columns
+			where 
+				table_name = ?
+    	]]>
+	</sql>
+	
+</sql-statement>
