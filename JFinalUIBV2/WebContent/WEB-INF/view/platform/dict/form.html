@@ -48,7 +48,7 @@
 
 <input type="hidden" name="dict.i18n" value='${dictMap["i18n"]!}' >
 			
-<% if(paramMap["i18n"]! == "0"){ %>
+<% if(paramMap["i18n"]! == "0" || dict["i18n"]! == "0"){ %>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}</label>

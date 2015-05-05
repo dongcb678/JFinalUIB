@@ -48,7 +48,7 @@
 
 <input type="hidden" name="param.i18n" value='${paramMap["i18n"]!}' >
 			
-<% if(paramMap["i18n"]! == "0"){ %>
+<% if(paramMap["i18n"]! == "0" || param["i18n"]! == "0"){ %>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}</label>
