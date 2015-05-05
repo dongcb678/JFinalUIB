@@ -16,27 +16,24 @@ DROP TABLE IF EXISTS blog_trample;
 DROP TABLE IF EXISTS blog_type;
 DROP TABLE IF EXISTS cms_accessStatistics;
 DROP TABLE IF EXISTS cms_ad;
-DROP TABLE IF EXISTS cms_announcementComment;
 DROP TABLE IF EXISTS cms_announcement;
 DROP TABLE IF EXISTS cms_answers;
-DROP TABLE IF EXISTS cms_comment;
-DROP TABLE IF EXISTS cms_content;
-DROP TABLE IF EXISTS cms_column;
-DROP TABLE IF EXISTS cms_downloadComment;
-DROP TABLE IF EXISTS cms_download;
-DROP TABLE IF EXISTS cms_ipBlacklist;
-DROP TABLE IF EXISTS cms_job;
 DROP TABLE IF EXISTS cms_library;
-DROP TABLE IF EXISTS cms_link;
-DROP TABLE IF EXISTS cms_location;
-DROP TABLE IF EXISTS cms_module;
 DROP TABLE IF EXISTS cms_photoGalleryItem;
 DROP TABLE IF EXISTS cms_photoGallery;
+DROP TABLE IF EXISTS cms_download;
 DROP TABLE IF EXISTS cms_questions;
-DROP TABLE IF EXISTS cms_sensitiveWord;
+DROP TABLE IF EXISTS cms_comment;
+DROP TABLE IF EXISTS cms_job;
 DROP TABLE IF EXISTS cms_voteItem;
-DROP TABLE IF EXISTS cms_voteComment;
 DROP TABLE IF EXISTS cms_vote;
+DROP TABLE IF EXISTS cms_content;
+DROP TABLE IF EXISTS cms_template;
+DROP TABLE IF EXISTS cms_column;
+DROP TABLE IF EXISTS cms_ipBlacklist;
+DROP TABLE IF EXISTS cms_link;
+DROP TABLE IF EXISTS cms_location;
+DROP TABLE IF EXISTS cms_sensitiveWord;
 
 
 
@@ -539,77 +536,12 @@ CREATE TABLE cms_announcement
 (
 	-- 主键
 	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 标题
-	title varchar(200) NOT NULL,
-	-- 内容
-	content text NOT NULL,
 	-- 有效开始时间
 	startDate timestamp with time zone,
 	-- 有效结束时间
 	endDate timestamp with time zone,
-	-- 创建人
-	createUser varchar(32) NOT NULL,
-	-- 创建时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 评论范围
-	commentsRange char,
-	-- 浏览次数
-	viewCount bigint,
-	-- 评论次数
-	commentCount bigint,
-	-- 收藏次数
-	favoriteCount bigint,
-	-- 点赞次数
-	praiseCount bigint,
-	-- 踩次数
-	trampleCount bigint,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
--- 公告评论
-CREATE TABLE cms_announcementComment
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 评论内容
-	content text NOT NULL,
-	-- 评论人
-	createUser varchar(32) NOT NULL,
-	-- 评论时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 点赞次数
-	praiseCount bigint,
-	-- 踩次数
-	trampleCount bigint,
-	-- 上级评论
-	pIds varchar(32),
-	-- 主键
-	announcementIds varchar(32) NOT NULL,
+	-- 内容主键
+	contentIds varchar(32) NOT NULL,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -684,8 +616,6 @@ CREATE TABLE cms_column
 	level bigint NOT NULL,
 	-- 是否父节点
 	isParent char NOT NULL,
-	-- 模块主键
-	moduleIds varchar(32) NOT NULL,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -732,16 +662,6 @@ CREATE TABLE cms_content
 	ids varchar(32) NOT NULL,
 	-- 乐观锁
 	version bigint NOT NULL,
-	-- 标题
-	title varchar(200) NOT NULL,
-	-- 摘要
-	digest varchar(200),
-	-- 关键字
-	keyword varchar(100),
-	-- 内容
-	content text NOT NULL,
-	-- 评论范围 : 0游客和注册用户，1注册用户，2禁止评论
-	commentsRange char,
 	-- 创建人
 	createUser varchar(32) NOT NULL,
 	-- 创建时间
@@ -756,6 +676,20 @@ CREATE TABLE cms_content
 	deleteUser varchar(32),
 	-- 删除时间
 	deleteDate timestamp with time zone,
+	-- 标题
+	title varchar(200) NOT NULL,
+	-- 标题颜色
+	color varchar(10),
+	-- 标题加粗
+	overstriking char,
+	-- 摘要
+	digest varchar(200),
+	-- 关键字
+	keyword varchar(100),
+	-- 内容
+	content text NOT NULL,
+	-- 评论范围 : 0游客和注册用户，1注册用户，2禁止评论
+	commentsRange char,
 	-- 浏览次数
 	viewCount bigint NOT NULL,
 	-- 评论次数
@@ -777,14 +711,6 @@ CREATE TABLE cms_download
 (
 	-- 主键
 	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint,
-	-- 标题
-	title varchar(200),
-	-- 关键字
-	keyword varchar(200),
-	-- 描述内容
-	content text,
 	-- 链接地址
 	url varchar(500),
 	-- 是否外部链接 : 0否，1是
@@ -801,59 +727,8 @@ CREATE TABLE cms_download
 	softVersion varchar(20),
 	-- 文件大小
 	size bigint,
-	-- 查看次数
-	viewCount bigint,
-	-- 下载次数
-	downloadCount bigint,
-	-- 创建人
-	createUser varchar(32),
-	-- 创建时间
-	createDate timestamp with time zone,
-	-- 最后更新人
-	updateUser varchar(32),
-	-- 最后更新时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
--- 下载评论
-CREATE TABLE cms_downloadComment
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 评论内容
-	content text NOT NULL,
-	-- 评论人
-	createUser varchar(32) NOT NULL,
-	-- 评论时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 点赞次数
-	praiseCount bigint,
-	-- 踩次数
-	trampleCount bigint,
-	-- 上级评论
-	pIds varchar(32),
-	-- 主键
-	downloadIds varchar(32) NOT NULL,
+	-- 内容主键
+	contentIds varchar(32) NOT NULL,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -892,34 +767,12 @@ CREATE TABLE cms_job
 (
 	-- 主键
 	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 创建人
-	createUser varchar(32) NOT NULL,
-	-- 创建时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 名称
-	name varchar(200),
-	-- 描述
-	description text,
 	-- 发布开始时间
 	startDate timestamp with time zone,
 	-- 发布截止时间
 	endDate timestamp with time zone,
 	-- 职位类别 : 字典配置
 	type varchar(50),
-	-- Tag标签
-	tag varchar(200),
 	-- 工作年限 : 字典进行配置
 	year varchar(50),
 	-- 学历 : 字典配置
@@ -934,6 +787,8 @@ CREATE TABLE cms_job
 	manage char,
 	-- 招聘人数 : 字典配置
 	quantity varchar(50),
+	-- 内容主键
+	contentIds varchar(32) NOT NULL,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -943,32 +798,6 @@ CREATE TABLE cms_library
 (
 	-- 主键
 	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 创建人
-	createUser varchar(32) NOT NULL,
-	-- 创建时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 标题
-	title varchar(200),
-	-- 标题颜色
-	color varchar(50),
-	-- tag标签
-	tag varchar(200),
-	-- 加粗 : 0否，1是
-	overstriking char,
-	-- 摘要
-	digest varchar(200),
 	-- 作者
 	author varchar(100),
 	-- 来源
@@ -979,6 +808,8 @@ CREATE TABLE cms_library
 	uploadIds varchar(32),
 	-- 文档路径
 	path varchar(100),
+	-- 内容主键
+	contentIds varchar(32) NOT NULL,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -1055,72 +886,11 @@ CREATE TABLE cms_location
 ) WITHOUT OIDS;
 
 
--- 模块
-CREATE TABLE cms_module
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 创建人
-	createUser varchar(32) NOT NULL,
-	-- 创建时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 名称
-	name varchar(200),
-	-- 描述
-	description text,
-	-- 排序
-	sort bigint,
-	-- 状态（是否启用） : 0否，1是
-	status char,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
 -- 图片库
 CREATE TABLE cms_photoGallery
 (
 	-- 主键
 	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 创建人
-	createUser varchar(32) NOT NULL,
-	-- 创建时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 标题
-	title varchar(200),
-	-- 标题颜色
-	color varchar(50),
-	-- tag标签
-	tag varchar(200),
-	-- 内容
-	content text,
-	-- 加粗 : 0否，1是
-	overstriking char,
-	-- 摘要
-	digest varchar(200),
 	-- 作者
 	author varchar(100),
 	-- 来源
@@ -1131,6 +901,8 @@ CREATE TABLE cms_photoGallery
 	titlePicture varchar(32),
 	-- 标题图路径
 	titlePicturePath varchar(100),
+	-- 内容主键
+	contentIds varchar(32) NOT NULL,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -1171,40 +943,10 @@ CREATE TABLE cms_questions
 (
 	-- 主键
 	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 标题
-	title varchar(200) NOT NULL,
-	-- 内容
-	content text NOT NULL,
-	-- 创建人
-	createUser varchar(32) NOT NULL,
-	-- 创建时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 评论范围
-	commentsRange char,
-	-- 浏览次数
-	viewCount bigint,
-	-- 评论次数
-	commentCount bigint,
-	-- 收藏次数
-	favoriteCount bigint,
-	-- 点赞次数
-	praiseCount bigint,
-	-- 踩次数
-	trampleCount bigint,
 	-- 最佳回答ids
 	answersIds varchar(32),
+	-- 内容主键
+	contentIds varchar(32) NOT NULL,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -1242,80 +984,46 @@ CREATE TABLE cms_sensitiveWord
 ) WITHOUT OIDS;
 
 
+-- 模板
+CREATE TABLE cms_template
+(
+	-- 主键
+	ids varchar(32) NOT NULL,
+	-- 乐观锁
+	version bigint NOT NULL,
+	-- 创建人
+	createUser varchar(32),
+	-- 创建时间
+	createDate timestamp with time zone,
+	-- 最后修改人
+	updateUser varchar(32),
+	-- 最后修改时间
+	updateDate timestamp with time zone,
+	-- 是否删除
+	isDelete char,
+	-- 删除人
+	deleteUser varchar(32),
+	-- 删除时间
+	deleteDate timestamp with time zone,
+	-- 模板名称
+	name varchar(100),
+	-- 模板内容
+	content text,
+	-- 栏目主键
+	columnIds varchar(32) NOT NULL,
+	PRIMARY KEY (ids)
+) WITHOUT OIDS;
+
+
 -- 投票
 CREATE TABLE cms_vote
 (
 	-- 主键
 	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 标题
-	title varchar(200) NOT NULL,
-	-- 内容
-	content text NOT NULL,
-	-- 创建人
-	createUser varchar(32) NOT NULL,
-	-- 创建时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
 	-- 投票范围
 	voteRange char,
-	-- 评论范围
-	commentsRange char,
-	-- 浏览次数
-	viewCount bigint,
-	-- 评论次数
-	commentCount bigint,
-	-- 收藏次数
-	favoriteCount bigint,
-	-- 点赞次数
-	praiseCount bigint,
-	-- 踩次数
-	trampleCount bigint,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
--- 投票评论
-CREATE TABLE cms_voteComment
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 评论内容
-	content text NOT NULL,
-	-- 评论人
-	createUser varchar(32) NOT NULL,
-	-- 评论时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 点赞次数
-	praiseCount bigint,
-	-- 踩次数
-	trampleCount bigint,
-	-- 上级评论
-	pIds varchar(32),
-	-- 投票主键
-	voteIds varchar(32) NOT NULL,
+	-- 内容主键
+	contentIds varchar(32) NOT NULL,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -1386,17 +1094,57 @@ ALTER TABLE blog_article
 ;
 
 
-ALTER TABLE cms_announcementComment
-	ADD FOREIGN KEY (announcementIds)
-	REFERENCES cms_announcement (ids)
+ALTER TABLE cms_content
+	ADD FOREIGN KEY (colunmIds)
+	REFERENCES cms_column (ids)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
-ALTER TABLE cms_content
-	ADD FOREIGN KEY (colunmIds)
+ALTER TABLE cms_template
+	ADD FOREIGN KEY (columnIds)
 	REFERENCES cms_column (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cms_library
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cms_photoGallery
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cms_announcement
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cms_download
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cms_questions
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
@@ -1410,9 +1158,17 @@ ALTER TABLE cms_comment
 ;
 
 
-ALTER TABLE cms_downloadComment
-	ADD FOREIGN KEY (downloadIds)
-	REFERENCES cms_download (ids)
+ALTER TABLE cms_job
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cms_vote
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
@@ -1421,14 +1177,6 @@ ALTER TABLE cms_downloadComment
 ALTER TABLE cms_ad
 	ADD FOREIGN KEY (locationIds)
 	REFERENCES cms_location (ids)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE cms_column
-	ADD FOREIGN KEY (moduleIds)
-	REFERENCES cms_module (ids)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
@@ -1451,14 +1199,6 @@ ALTER TABLE cms_answers
 
 
 ALTER TABLE cms_voteItem
-	ADD FOREIGN KEY (voteIds)
-	REFERENCES cms_vote (ids)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE cms_voteComment
 	ADD FOREIGN KEY (voteIds)
 	REFERENCES cms_vote (ids)
 	ON UPDATE RESTRICT
@@ -1679,39 +1419,9 @@ COMMENT ON COLUMN cms_ad.status IS '状态（是否启用） : 0否，1是';
 COMMENT ON COLUMN cms_ad.locationIds IS '广告位主键';
 COMMENT ON TABLE cms_announcement IS '公告';
 COMMENT ON COLUMN cms_announcement.ids IS '主键';
-COMMENT ON COLUMN cms_announcement.version IS '乐观锁';
-COMMENT ON COLUMN cms_announcement.title IS '标题';
-COMMENT ON COLUMN cms_announcement.content IS '内容';
 COMMENT ON COLUMN cms_announcement.startDate IS '有效开始时间';
 COMMENT ON COLUMN cms_announcement.endDate IS '有效结束时间';
-COMMENT ON COLUMN cms_announcement.createUser IS '创建人';
-COMMENT ON COLUMN cms_announcement.createDate IS '创建时间';
-COMMENT ON COLUMN cms_announcement.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_announcement.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_announcement.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_announcement.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_announcement.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_announcement.commentsRange IS '评论范围';
-COMMENT ON COLUMN cms_announcement.viewCount IS '浏览次数';
-COMMENT ON COLUMN cms_announcement.commentCount IS '评论次数';
-COMMENT ON COLUMN cms_announcement.favoriteCount IS '收藏次数';
-COMMENT ON COLUMN cms_announcement.praiseCount IS '点赞次数';
-COMMENT ON COLUMN cms_announcement.trampleCount IS '踩次数';
-COMMENT ON TABLE cms_announcementComment IS '公告评论';
-COMMENT ON COLUMN cms_announcementComment.ids IS '主键';
-COMMENT ON COLUMN cms_announcementComment.version IS '乐观锁';
-COMMENT ON COLUMN cms_announcementComment.content IS '评论内容';
-COMMENT ON COLUMN cms_announcementComment.createUser IS '评论人';
-COMMENT ON COLUMN cms_announcementComment.createDate IS '评论时间';
-COMMENT ON COLUMN cms_announcementComment.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_announcementComment.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_announcementComment.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_announcementComment.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_announcementComment.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_announcementComment.praiseCount IS '点赞次数';
-COMMENT ON COLUMN cms_announcementComment.trampleCount IS '踩次数';
-COMMENT ON COLUMN cms_announcementComment.pIds IS '上级评论';
-COMMENT ON COLUMN cms_announcementComment.announcementIds IS '主键';
+COMMENT ON COLUMN cms_announcement.contentIds IS '内容主键';
 COMMENT ON TABLE cms_answers IS '回答';
 COMMENT ON COLUMN cms_answers.ids IS '主键';
 COMMENT ON COLUMN cms_answers.version IS '乐观锁';
@@ -1744,7 +1454,6 @@ COMMENT ON COLUMN cms_column.url IS '栏目地址';
 COMMENT ON COLUMN cms_column.pIds IS '上级栏目ids : 0否，1是';
 COMMENT ON COLUMN cms_column.level IS '栏目等级';
 COMMENT ON COLUMN cms_column.isParent IS '是否父节点';
-COMMENT ON COLUMN cms_column.moduleIds IS '模块主键';
 COMMENT ON TABLE cms_comment IS '内容评论';
 COMMENT ON COLUMN cms_comment.ids IS '主键';
 COMMENT ON COLUMN cms_comment.version IS '乐观锁';
@@ -1763,11 +1472,6 @@ COMMENT ON COLUMN cms_comment.contentIds IS '内容主键';
 COMMENT ON TABLE cms_content IS '内容';
 COMMENT ON COLUMN cms_content.ids IS '主键';
 COMMENT ON COLUMN cms_content.version IS '乐观锁';
-COMMENT ON COLUMN cms_content.title IS '标题';
-COMMENT ON COLUMN cms_content.digest IS '摘要';
-COMMENT ON COLUMN cms_content.keyword IS '关键字';
-COMMENT ON COLUMN cms_content.content IS '内容';
-COMMENT ON COLUMN cms_content.commentsRange IS '评论范围 : 0游客和注册用户，1注册用户，2禁止评论';
 COMMENT ON COLUMN cms_content.createUser IS '创建人';
 COMMENT ON COLUMN cms_content.createDate IS '创建时间';
 COMMENT ON COLUMN cms_content.updateUser IS '最后修改人';
@@ -1775,6 +1479,13 @@ COMMENT ON COLUMN cms_content.updateDate IS '最后修改时间';
 COMMENT ON COLUMN cms_content.isDelete IS '是否删除';
 COMMENT ON COLUMN cms_content.deleteUser IS '删除人';
 COMMENT ON COLUMN cms_content.deleteDate IS '删除时间';
+COMMENT ON COLUMN cms_content.title IS '标题';
+COMMENT ON COLUMN cms_content.color IS '标题颜色';
+COMMENT ON COLUMN cms_content.overstriking IS '标题加粗';
+COMMENT ON COLUMN cms_content.digest IS '摘要';
+COMMENT ON COLUMN cms_content.keyword IS '关键字';
+COMMENT ON COLUMN cms_content.content IS '内容';
+COMMENT ON COLUMN cms_content.commentsRange IS '评论范围 : 0游客和注册用户，1注册用户，2禁止评论';
 COMMENT ON COLUMN cms_content.viewCount IS '浏览次数';
 COMMENT ON COLUMN cms_content.commentCount IS '评论次数';
 COMMENT ON COLUMN cms_content.favoriteCount IS '收藏次数';
@@ -1783,10 +1494,6 @@ COMMENT ON COLUMN cms_content.trampleCount IS '踩次数';
 COMMENT ON COLUMN cms_content.colunmIds IS '栏目主键';
 COMMENT ON TABLE cms_download IS '下载';
 COMMENT ON COLUMN cms_download.ids IS '主键';
-COMMENT ON COLUMN cms_download.version IS '乐观锁';
-COMMENT ON COLUMN cms_download.title IS '标题';
-COMMENT ON COLUMN cms_download.keyword IS '关键字';
-COMMENT ON COLUMN cms_download.content IS '描述内容';
 COMMENT ON COLUMN cms_download.url IS '链接地址';
 COMMENT ON COLUMN cms_download.isLink IS '是否外部链接 : 0否，1是';
 COMMENT ON COLUMN cms_download.systems IS '系统平台 : windows xp，windows 2000，windows 2003等待';
@@ -1795,30 +1502,7 @@ COMMENT ON COLUMN cms_download.language IS '软件语言';
 COMMENT ON COLUMN cms_download.classtype IS '软件类型';
 COMMENT ON COLUMN cms_download.softVersion IS '软件版本';
 COMMENT ON COLUMN cms_download.size IS '文件大小';
-COMMENT ON COLUMN cms_download.viewCount IS '查看次数';
-COMMENT ON COLUMN cms_download.downloadCount IS '下载次数';
-COMMENT ON COLUMN cms_download.createUser IS '创建人';
-COMMENT ON COLUMN cms_download.createDate IS '创建时间';
-COMMENT ON COLUMN cms_download.updateUser IS '最后更新人';
-COMMENT ON COLUMN cms_download.updateDate IS '最后更新时间';
-COMMENT ON COLUMN cms_download.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_download.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_download.deleteDate IS '删除时间';
-COMMENT ON TABLE cms_downloadComment IS '下载评论';
-COMMENT ON COLUMN cms_downloadComment.ids IS '主键';
-COMMENT ON COLUMN cms_downloadComment.version IS '乐观锁';
-COMMENT ON COLUMN cms_downloadComment.content IS '评论内容';
-COMMENT ON COLUMN cms_downloadComment.createUser IS '评论人';
-COMMENT ON COLUMN cms_downloadComment.createDate IS '评论时间';
-COMMENT ON COLUMN cms_downloadComment.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_downloadComment.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_downloadComment.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_downloadComment.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_downloadComment.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_downloadComment.praiseCount IS '点赞次数';
-COMMENT ON COLUMN cms_downloadComment.trampleCount IS '踩次数';
-COMMENT ON COLUMN cms_downloadComment.pIds IS '上级评论';
-COMMENT ON COLUMN cms_downloadComment.downloadIds IS '主键';
+COMMENT ON COLUMN cms_download.contentIds IS '内容主键';
 COMMENT ON TABLE cms_ipBlacklist IS 'IP黑名单';
 COMMENT ON COLUMN cms_ipBlacklist.ids IS '主键';
 COMMENT ON COLUMN cms_ipBlacklist.version IS '乐观锁';
@@ -1833,20 +1517,9 @@ COMMENT ON COLUMN cms_ipBlacklist.deleteUser IS '删除人';
 COMMENT ON COLUMN cms_ipBlacklist.deleteDate IS '删除时间';
 COMMENT ON TABLE cms_job IS '招聘';
 COMMENT ON COLUMN cms_job.ids IS '主键';
-COMMENT ON COLUMN cms_job.version IS '乐观锁';
-COMMENT ON COLUMN cms_job.createUser IS '创建人';
-COMMENT ON COLUMN cms_job.createDate IS '创建时间';
-COMMENT ON COLUMN cms_job.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_job.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_job.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_job.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_job.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_job.name IS '名称';
-COMMENT ON COLUMN cms_job.description IS '描述';
 COMMENT ON COLUMN cms_job.startDate IS '发布开始时间';
 COMMENT ON COLUMN cms_job.endDate IS '发布截止时间';
 COMMENT ON COLUMN cms_job.type IS '职位类别 : 字典配置';
-COMMENT ON COLUMN cms_job.tag IS 'Tag标签';
 COMMENT ON COLUMN cms_job.year IS '工作年限 : 字典进行配置';
 COMMENT ON COLUMN cms_job.education IS '学历 : 字典配置';
 COMMENT ON COLUMN cms_job.salary IS '薪水 : 字典配置';
@@ -1854,26 +1527,15 @@ COMMENT ON COLUMN cms_job.address IS '工作地点 : 字典配置';
 COMMENT ON COLUMN cms_job.nature IS '工作性质 : 0全职， 1兼职';
 COMMENT ON COLUMN cms_job.manage IS '管理经验 : 0要求， 1不要求';
 COMMENT ON COLUMN cms_job.quantity IS '招聘人数 : 字典配置';
+COMMENT ON COLUMN cms_job.contentIds IS '内容主键';
 COMMENT ON TABLE cms_library IS '文库';
 COMMENT ON COLUMN cms_library.ids IS '主键';
-COMMENT ON COLUMN cms_library.version IS '乐观锁';
-COMMENT ON COLUMN cms_library.createUser IS '创建人';
-COMMENT ON COLUMN cms_library.createDate IS '创建时间';
-COMMENT ON COLUMN cms_library.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_library.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_library.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_library.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_library.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_library.title IS '标题';
-COMMENT ON COLUMN cms_library.color IS '标题颜色';
-COMMENT ON COLUMN cms_library.tag IS 'tag标签';
-COMMENT ON COLUMN cms_library.overstriking IS '加粗 : 0否，1是';
-COMMENT ON COLUMN cms_library.digest IS '摘要';
 COMMENT ON COLUMN cms_library.author IS '作者';
 COMMENT ON COLUMN cms_library.source IS '来源';
 COMMENT ON COLUMN cms_library.url IS '来源url';
 COMMENT ON COLUMN cms_library.uploadIds IS '上传文档ids';
 COMMENT ON COLUMN cms_library.path IS '文档路径';
+COMMENT ON COLUMN cms_library.contentIds IS '内容主键';
 COMMENT ON TABLE cms_link IS '友情链接';
 COMMENT ON COLUMN cms_link.ids IS '主键';
 COMMENT ON COLUMN cms_link.version IS '乐观锁';
@@ -1905,41 +1567,14 @@ COMMENT ON COLUMN cms_location.height IS '高度';
 COMMENT ON COLUMN cms_location.description IS '描述';
 COMMENT ON COLUMN cms_location.adCount IS '广告数量';
 COMMENT ON COLUMN cms_location.status IS '状态（是否启用） : 0否，1是';
-COMMENT ON TABLE cms_module IS '模块';
-COMMENT ON COLUMN cms_module.ids IS '主键';
-COMMENT ON COLUMN cms_module.version IS '乐观锁';
-COMMENT ON COLUMN cms_module.createUser IS '创建人';
-COMMENT ON COLUMN cms_module.createDate IS '创建时间';
-COMMENT ON COLUMN cms_module.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_module.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_module.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_module.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_module.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_module.name IS '名称';
-COMMENT ON COLUMN cms_module.description IS '描述';
-COMMENT ON COLUMN cms_module.sort IS '排序';
-COMMENT ON COLUMN cms_module.status IS '状态（是否启用） : 0否，1是';
 COMMENT ON TABLE cms_photoGallery IS '图片库';
 COMMENT ON COLUMN cms_photoGallery.ids IS '主键';
-COMMENT ON COLUMN cms_photoGallery.version IS '乐观锁';
-COMMENT ON COLUMN cms_photoGallery.createUser IS '创建人';
-COMMENT ON COLUMN cms_photoGallery.createDate IS '创建时间';
-COMMENT ON COLUMN cms_photoGallery.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_photoGallery.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_photoGallery.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_photoGallery.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_photoGallery.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_photoGallery.title IS '标题';
-COMMENT ON COLUMN cms_photoGallery.color IS '标题颜色';
-COMMENT ON COLUMN cms_photoGallery.tag IS 'tag标签';
-COMMENT ON COLUMN cms_photoGallery.content IS '内容';
-COMMENT ON COLUMN cms_photoGallery.overstriking IS '加粗 : 0否，1是';
-COMMENT ON COLUMN cms_photoGallery.digest IS '摘要';
 COMMENT ON COLUMN cms_photoGallery.author IS '作者';
 COMMENT ON COLUMN cms_photoGallery.source IS '来源';
 COMMENT ON COLUMN cms_photoGallery.url IS '来源url';
 COMMENT ON COLUMN cms_photoGallery.titlePicture IS '标题图';
 COMMENT ON COLUMN cms_photoGallery.titlePicturePath IS '标题图路径';
+COMMENT ON COLUMN cms_photoGallery.contentIds IS '内容主键';
 COMMENT ON TABLE cms_photoGalleryItem IS '图片库图片';
 COMMENT ON COLUMN cms_photoGalleryItem.ids IS '主键';
 COMMENT ON COLUMN cms_photoGalleryItem.version IS '乐观锁';
@@ -1955,23 +1590,8 @@ COMMENT ON COLUMN cms_photoGalleryItem.uploadPath IS '上传路径';
 COMMENT ON COLUMN cms_photoGalleryItem.photoGalleryIds IS '主键';
 COMMENT ON TABLE cms_questions IS '问题';
 COMMENT ON COLUMN cms_questions.ids IS '主键';
-COMMENT ON COLUMN cms_questions.version IS '乐观锁';
-COMMENT ON COLUMN cms_questions.title IS '标题';
-COMMENT ON COLUMN cms_questions.content IS '内容';
-COMMENT ON COLUMN cms_questions.createUser IS '创建人';
-COMMENT ON COLUMN cms_questions.createDate IS '创建时间';
-COMMENT ON COLUMN cms_questions.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_questions.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_questions.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_questions.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_questions.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_questions.commentsRange IS '评论范围';
-COMMENT ON COLUMN cms_questions.viewCount IS '浏览次数';
-COMMENT ON COLUMN cms_questions.commentCount IS '评论次数';
-COMMENT ON COLUMN cms_questions.favoriteCount IS '收藏次数';
-COMMENT ON COLUMN cms_questions.praiseCount IS '点赞次数';
-COMMENT ON COLUMN cms_questions.trampleCount IS '踩次数';
 COMMENT ON COLUMN cms_questions.answersIds IS '最佳回答ids';
+COMMENT ON COLUMN cms_questions.contentIds IS '内容主键';
 COMMENT ON TABLE cms_sensitiveWord IS '敏感词';
 COMMENT ON COLUMN cms_sensitiveWord.ids IS '主键';
 COMMENT ON COLUMN cms_sensitiveWord.version IS '乐观锁';
@@ -1986,40 +1606,23 @@ COMMENT ON COLUMN cms_sensitiveWord.updateDate IS '最后修改时间';
 COMMENT ON COLUMN cms_sensitiveWord.isDelete IS '是否删除';
 COMMENT ON COLUMN cms_sensitiveWord.deleteUser IS '删除人';
 COMMENT ON COLUMN cms_sensitiveWord.deleteDate IS '删除时间';
+COMMENT ON TABLE cms_template IS '模板';
+COMMENT ON COLUMN cms_template.ids IS '主键';
+COMMENT ON COLUMN cms_template.version IS '乐观锁';
+COMMENT ON COLUMN cms_template.createUser IS '创建人';
+COMMENT ON COLUMN cms_template.createDate IS '创建时间';
+COMMENT ON COLUMN cms_template.updateUser IS '最后修改人';
+COMMENT ON COLUMN cms_template.updateDate IS '最后修改时间';
+COMMENT ON COLUMN cms_template.isDelete IS '是否删除';
+COMMENT ON COLUMN cms_template.deleteUser IS '删除人';
+COMMENT ON COLUMN cms_template.deleteDate IS '删除时间';
+COMMENT ON COLUMN cms_template.name IS '模板名称';
+COMMENT ON COLUMN cms_template.content IS '模板内容';
+COMMENT ON COLUMN cms_template.columnIds IS '栏目主键';
 COMMENT ON TABLE cms_vote IS '投票';
 COMMENT ON COLUMN cms_vote.ids IS '主键';
-COMMENT ON COLUMN cms_vote.version IS '乐观锁';
-COMMENT ON COLUMN cms_vote.title IS '标题';
-COMMENT ON COLUMN cms_vote.content IS '内容';
-COMMENT ON COLUMN cms_vote.createUser IS '创建人';
-COMMENT ON COLUMN cms_vote.createDate IS '创建时间';
-COMMENT ON COLUMN cms_vote.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_vote.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_vote.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_vote.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_vote.deleteDate IS '删除时间';
 COMMENT ON COLUMN cms_vote.voteRange IS '投票范围';
-COMMENT ON COLUMN cms_vote.commentsRange IS '评论范围';
-COMMENT ON COLUMN cms_vote.viewCount IS '浏览次数';
-COMMENT ON COLUMN cms_vote.commentCount IS '评论次数';
-COMMENT ON COLUMN cms_vote.favoriteCount IS '收藏次数';
-COMMENT ON COLUMN cms_vote.praiseCount IS '点赞次数';
-COMMENT ON COLUMN cms_vote.trampleCount IS '踩次数';
-COMMENT ON TABLE cms_voteComment IS '投票评论';
-COMMENT ON COLUMN cms_voteComment.ids IS '主键';
-COMMENT ON COLUMN cms_voteComment.version IS '乐观锁';
-COMMENT ON COLUMN cms_voteComment.content IS '评论内容';
-COMMENT ON COLUMN cms_voteComment.createUser IS '评论人';
-COMMENT ON COLUMN cms_voteComment.createDate IS '评论时间';
-COMMENT ON COLUMN cms_voteComment.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_voteComment.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_voteComment.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_voteComment.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_voteComment.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_voteComment.praiseCount IS '点赞次数';
-COMMENT ON COLUMN cms_voteComment.trampleCount IS '踩次数';
-COMMENT ON COLUMN cms_voteComment.pIds IS '上级评论';
-COMMENT ON COLUMN cms_voteComment.voteIds IS '投票主键';
+COMMENT ON COLUMN cms_vote.contentIds IS '内容主键';
 COMMENT ON TABLE cms_voteItem IS '投票项';
 COMMENT ON COLUMN cms_voteItem.ids IS '主键';
 COMMENT ON COLUMN cms_voteItem.version IS '乐观锁';
