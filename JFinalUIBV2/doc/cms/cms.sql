@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS blog_article;
 DROP TABLE IF EXISTS blog_circleUser;
 DROP TABLE IF EXISTS blog_circle;
 DROP TABLE IF EXISTS blog_favorite;
+DROP TABLE IF EXISTS blog_inform;
 DROP TABLE IF EXISTS blog_link;
 DROP TABLE IF EXISTS blog_message;
 DROP TABLE IF EXISTS blog_moveComment;
@@ -18,22 +19,23 @@ DROP TABLE IF EXISTS cms_accessStatistics;
 DROP TABLE IF EXISTS cms_ad;
 DROP TABLE IF EXISTS cms_announcement;
 DROP TABLE IF EXISTS cms_answers;
-DROP TABLE IF EXISTS cms_library;
-DROP TABLE IF EXISTS cms_photoGalleryItem;
-DROP TABLE IF EXISTS cms_photoGallery;
-DROP TABLE IF EXISTS cms_download;
 DROP TABLE IF EXISTS cms_questions;
 DROP TABLE IF EXISTS cms_comment;
-DROP TABLE IF EXISTS cms_job;
+DROP TABLE IF EXISTS cms_yellowPage;
+DROP TABLE IF EXISTS cms_download;
+DROP TABLE IF EXISTS cms_library;
 DROP TABLE IF EXISTS cms_voteItem;
 DROP TABLE IF EXISTS cms_vote;
+DROP TABLE IF EXISTS cms_job;
+DROP TABLE IF EXISTS cms_photoGalleryItem;
+DROP TABLE IF EXISTS cms_photoGallery;
 DROP TABLE IF EXISTS cms_content;
-DROP TABLE IF EXISTS cms_template;
 DROP TABLE IF EXISTS cms_column;
 DROP TABLE IF EXISTS cms_ipBlacklist;
 DROP TABLE IF EXISTS cms_link;
 DROP TABLE IF EXISTS cms_location;
 DROP TABLE IF EXISTS cms_sensitiveWord;
+DROP TABLE IF EXISTS cms_template;
 
 
 
@@ -211,6 +213,37 @@ CREATE TABLE blog_favorite
 	deleteUser varchar(32),
 	-- 删除时间
 	deleteDate timestamp with time zone,
+	PRIMARY KEY (ids)
+) WITHOUT OIDS;
+
+
+-- 举报
+CREATE TABLE blog_inform
+(
+	-- 主键
+	ids varchar(32) NOT NULL,
+	-- 乐观锁
+	version bigint,
+	-- 创建人
+	createUser varchar(32),
+	-- 创建时间
+	createDate timestamp with time zone,
+	-- 是否删除
+	isDelete char,
+	-- 删除人
+	deleteUser varchar(32),
+	-- 删除时间
+	deleteDate timestamp with time zone,
+	-- 分类
+	type varchar(50),
+	-- 目标ids
+	targetIds varchar(32),
+	-- 举报说明
+	explain text,
+	-- 处理状态 : 0提交举报,1举报成功,2举报失败
+	status char,
+	-- 结果说明
+	result text,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -1009,8 +1042,10 @@ CREATE TABLE cms_template
 	name varchar(100),
 	-- 模板内容
 	content text,
-	-- 栏目主键
-	columnIds varchar(32) NOT NULL,
+	-- 模板类型
+	type varchar(32),
+	-- 应用目标Ids
+	targetIds varchar(32),
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -1059,6 +1094,29 @@ CREATE TABLE cms_voteItem
 ) WITHOUT OIDS;
 
 
+-- 黄页
+CREATE TABLE cms_yellowPage
+(
+	-- 主键
+	ids varchar(32) NOT NULL,
+	-- 地址
+	address varchar(200),
+	-- 联系人
+	contacts varchar(50),
+	-- 固话
+	fixPhone varchar(20),
+	-- 移动电话
+	mobile varchar(20),
+	-- 邮编
+	postcode varchar(10),
+	-- 在线qq : 多个逗号隔开，最多5个
+	qq varchar(100),
+	-- 内容主键
+	contentIds varchar(32) NOT NULL,
+	PRIMARY KEY (ids)
+) WITHOUT OIDS;
+
+
 
 /* Create Foreign Keys */
 
@@ -1102,23 +1160,7 @@ ALTER TABLE cms_content
 ;
 
 
-ALTER TABLE cms_template
-	ADD FOREIGN KEY (columnIds)
-	REFERENCES cms_column (ids)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE cms_library
-	ADD FOREIGN KEY (contentIds)
-	REFERENCES cms_content (ids)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE cms_photoGallery
+ALTER TABLE cms_questions
 	ADD FOREIGN KEY (contentIds)
 	REFERENCES cms_content (ids)
 	ON UPDATE RESTRICT
@@ -1134,6 +1176,22 @@ ALTER TABLE cms_announcement
 ;
 
 
+ALTER TABLE cms_comment
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cms_yellowPage
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
 ALTER TABLE cms_download
 	ADD FOREIGN KEY (contentIds)
 	REFERENCES cms_content (ids)
@@ -1142,7 +1200,7 @@ ALTER TABLE cms_download
 ;
 
 
-ALTER TABLE cms_questions
+ALTER TABLE cms_library
 	ADD FOREIGN KEY (contentIds)
 	REFERENCES cms_content (ids)
 	ON UPDATE RESTRICT
@@ -1150,7 +1208,7 @@ ALTER TABLE cms_questions
 ;
 
 
-ALTER TABLE cms_comment
+ALTER TABLE cms_vote
 	ADD FOREIGN KEY (contentIds)
 	REFERENCES cms_content (ids)
 	ON UPDATE RESTRICT
@@ -1166,7 +1224,7 @@ ALTER TABLE cms_job
 ;
 
 
-ALTER TABLE cms_vote
+ALTER TABLE cms_photoGallery
 	ADD FOREIGN KEY (contentIds)
 	REFERENCES cms_content (ids)
 	ON UPDATE RESTRICT
@@ -1284,6 +1342,19 @@ COMMENT ON COLUMN blog_favorite.createDate IS '收藏时间';
 COMMENT ON COLUMN blog_favorite.isDelete IS '是否删除';
 COMMENT ON COLUMN blog_favorite.deleteUser IS '删除人';
 COMMENT ON COLUMN blog_favorite.deleteDate IS '删除时间';
+COMMENT ON TABLE blog_inform IS '举报';
+COMMENT ON COLUMN blog_inform.ids IS '主键';
+COMMENT ON COLUMN blog_inform.version IS '乐观锁';
+COMMENT ON COLUMN blog_inform.createUser IS '创建人';
+COMMENT ON COLUMN blog_inform.createDate IS '创建时间';
+COMMENT ON COLUMN blog_inform.isDelete IS '是否删除';
+COMMENT ON COLUMN blog_inform.deleteUser IS '删除人';
+COMMENT ON COLUMN blog_inform.deleteDate IS '删除时间';
+COMMENT ON COLUMN blog_inform.type IS '分类';
+COMMENT ON COLUMN blog_inform.targetIds IS '目标ids';
+COMMENT ON COLUMN blog_inform.explain IS '举报说明';
+COMMENT ON COLUMN blog_inform.status IS '处理状态 : 0提交举报,1举报成功,2举报失败';
+COMMENT ON COLUMN blog_inform.result IS '结果说明';
 COMMENT ON TABLE blog_link IS '友情链接';
 COMMENT ON COLUMN blog_link.ids IS '主键';
 COMMENT ON COLUMN blog_link.version IS '乐观锁';
@@ -1618,7 +1689,8 @@ COMMENT ON COLUMN cms_template.deleteUser IS '删除人';
 COMMENT ON COLUMN cms_template.deleteDate IS '删除时间';
 COMMENT ON COLUMN cms_template.name IS '模板名称';
 COMMENT ON COLUMN cms_template.content IS '模板内容';
-COMMENT ON COLUMN cms_template.columnIds IS '栏目主键';
+COMMENT ON COLUMN cms_template.type IS '模板类型';
+COMMENT ON COLUMN cms_template.targetIds IS '应用目标Ids';
 COMMENT ON TABLE cms_vote IS '投票';
 COMMENT ON COLUMN cms_vote.ids IS '主键';
 COMMENT ON COLUMN cms_vote.voteRange IS '投票范围';
@@ -1636,6 +1708,15 @@ COMMENT ON COLUMN cms_voteItem.deleteDate IS '删除时间';
 COMMENT ON COLUMN cms_voteItem.name IS '项名称';
 COMMENT ON COLUMN cms_voteItem.voteCount IS '投票次数';
 COMMENT ON COLUMN cms_voteItem.voteIds IS '投票主键';
+COMMENT ON TABLE cms_yellowPage IS '黄页';
+COMMENT ON COLUMN cms_yellowPage.ids IS '主键';
+COMMENT ON COLUMN cms_yellowPage.address IS '地址';
+COMMENT ON COLUMN cms_yellowPage.contacts IS '联系人';
+COMMENT ON COLUMN cms_yellowPage.fixPhone IS '固话';
+COMMENT ON COLUMN cms_yellowPage.mobile IS '移动电话';
+COMMENT ON COLUMN cms_yellowPage.postcode IS '邮编';
+COMMENT ON COLUMN cms_yellowPage.qq IS '在线qq : 多个逗号隔开，最多5个';
+COMMENT ON COLUMN cms_yellowPage.contentIds IS '内容主键';
 
 
 
