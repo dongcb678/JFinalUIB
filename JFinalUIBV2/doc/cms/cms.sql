@@ -15,27 +15,27 @@ DROP TABLE IF EXISTS blog_newsDeliver;
 DROP TABLE IF EXISTS blog_praise;
 DROP TABLE IF EXISTS blog_trample;
 DROP TABLE IF EXISTS blog_type;
-DROP TABLE IF EXISTS cms_accessStatistics;
-DROP TABLE IF EXISTS cms_ad;
 DROP TABLE IF EXISTS cms_announcement;
 DROP TABLE IF EXISTS cms_answers;
-DROP TABLE IF EXISTS cms_questions;
-DROP TABLE IF EXISTS cms_comment;
-DROP TABLE IF EXISTS cms_yellowPage;
-DROP TABLE IF EXISTS cms_download;
 DROP TABLE IF EXISTS cms_library;
+DROP TABLE IF EXISTS cms_questions;
+DROP TABLE IF EXISTS cms_download;
 DROP TABLE IF EXISTS cms_voteItem;
 DROP TABLE IF EXISTS cms_vote;
-DROP TABLE IF EXISTS cms_job;
 DROP TABLE IF EXISTS cms_photoGalleryItem;
 DROP TABLE IF EXISTS cms_photoGallery;
+DROP TABLE IF EXISTS cms_yellowPage;
+DROP TABLE IF EXISTS cms_job;
+DROP TABLE IF EXISTS cms_comment;
 DROP TABLE IF EXISTS cms_content;
 DROP TABLE IF EXISTS cms_column;
-DROP TABLE IF EXISTS cms_ipBlacklist;
-DROP TABLE IF EXISTS cms_link;
-DROP TABLE IF EXISTS cms_location;
-DROP TABLE IF EXISTS cms_sensitiveWord;
 DROP TABLE IF EXISTS cms_template;
+DROP TABLE IF EXISTS common_accessStatistics;
+DROP TABLE IF EXISTS common_ad;
+DROP TABLE IF EXISTS common_ipBlacklist;
+DROP TABLE IF EXISTS common_link;
+DROP TABLE IF EXISTS common_location;
+DROP TABLE IF EXISTS common_sensitiveWord;
 
 
 
@@ -494,76 +494,6 @@ CREATE TABLE blog_type
 ) WITHOUT OIDS;
 
 
--- 访问统计
-CREATE TABLE cms_accessStatistics
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint,
-	-- 总数量
-	total bigint,
-	-- 昨日
-	yesterday bigint,
-	-- 今日
-	today bigint,
-	-- 本周
-	week bigint,
-	-- 本月
-	month bigint,
-	-- 最后更新时间
-	updateDate timestamp with time zone,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
--- 广告
-CREATE TABLE cms_ad
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 创建人
-	createUser varchar(32) NOT NULL,
-	-- 创建时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 浏览次数
-	viewCount bigint,
-	-- 点击次数
-	clickCount bigint,
-	-- 广告名称
-	name varchar(200),
-	-- 广告类型
-	type varchar(50),
-	-- 广告图片
-	imagePath varchar(200),
-	-- 图片上传Ids
-	imageIds varchar(32),
-	-- 启用时间
-	startDate timestamp with time zone,
-	-- 停用时间
-	endDate timestamp with time zone,
-	-- 排序
-	sort bigint,
-	-- 状态（是否启用） : 0否，1是
-	status char,
-	-- 广告位主键
-	locationIds varchar(32) NOT NULL,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
 -- 公告
 CREATE TABLE cms_announcement
 (
@@ -766,35 +696,6 @@ CREATE TABLE cms_download
 ) WITHOUT OIDS;
 
 
--- IP黑名单
-CREATE TABLE cms_ipBlacklist
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint,
-	-- ip地址
-	ip varchar(500),
-	-- 到期解除时间
-	expiresDate timestamp with time zone,
-	-- 创建人
-	createUser varchar(32),
-	-- 创建时间
-	createDate timestamp with time zone,
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 是否逻辑删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
 -- 招聘
 CREATE TABLE cms_job
 (
@@ -843,78 +744,6 @@ CREATE TABLE cms_library
 	path varchar(100),
 	-- 内容主键
 	contentIds varchar(32) NOT NULL,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
--- 友情链接
-CREATE TABLE cms_link
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint,
-	-- 名称
-	name varchar(50) NOT NULL UNIQUE,
-	-- 链接地址
-	url varchar(100) NOT NULL UNIQUE,
-	-- logo图片
-	logo varchar(100),
-	-- 上传文件ids
-	uploadIds varchar(32),
-	-- 创建人
-	createUser varchar(32),
-	-- 创建时间
-	createDate timestamp with time zone,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否逻辑删除 : 0否，1是
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
--- 广告位置
-CREATE TABLE cms_location
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint NOT NULL,
-	-- 创建人
-	createUser varchar(32) NOT NULL,
-	-- 创建时间
-	createDate timestamp with time zone NOT NULL,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
-	-- 名称
-	name varchar(200),
-	-- 类型
-	type varchar(50),
-	-- 宽度
-	width bigint,
-	-- 高度
-	height bigint,
-	-- 描述
-	description text,
-	-- 广告数量
-	adCount bigint,
-	-- 状态（是否启用） : 0否，1是
-	status char,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -980,39 +809,6 @@ CREATE TABLE cms_questions
 	answersIds varchar(32),
 	-- 内容主键
 	contentIds varchar(32) NOT NULL,
-	PRIMARY KEY (ids)
-) WITHOUT OIDS;
-
-
--- 敏感词
-CREATE TABLE cms_sensitiveWord
-(
-	-- 主键
-	ids varchar(32) NOT NULL,
-	-- 乐观锁
-	version bigint,
-	-- 敏感词
-	sensitiveWord varchar(100),
-	-- 敏感级别 : 1高，2中，3低
-	level char(1),
-	-- 替换词
-	replaceWord varchar(100),
-	-- 排序
-	sort bigint,
-	-- 创建人
-	createUser varchar(32),
-	-- 创建时间
-	createDate timestamp with time zone,
-	-- 最后修改人
-	updateUser varchar(32),
-	-- 最后修改时间
-	updateDate timestamp with time zone,
-	-- 是否删除
-	isDelete char,
-	-- 删除人
-	deleteUser varchar(32),
-	-- 删除时间
-	deleteDate timestamp with time zone,
 	PRIMARY KEY (ids)
 ) WITHOUT OIDS;
 
@@ -1117,6 +913,210 @@ CREATE TABLE cms_yellowPage
 ) WITHOUT OIDS;
 
 
+-- 访问统计
+CREATE TABLE common_accessStatistics
+(
+	-- 主键
+	ids varchar(32) NOT NULL,
+	-- 乐观锁
+	version bigint,
+	-- 总数量
+	total bigint,
+	-- 昨日
+	yesterday bigint,
+	-- 今日
+	today bigint,
+	-- 本周
+	week bigint,
+	-- 本月
+	month bigint,
+	-- 最后更新时间
+	updateDate timestamp with time zone,
+	PRIMARY KEY (ids)
+) WITHOUT OIDS;
+
+
+-- 广告
+CREATE TABLE common_ad
+(
+	-- 主键
+	ids varchar(32) NOT NULL,
+	-- 乐观锁
+	version bigint NOT NULL,
+	-- 创建人
+	createUser varchar(32) NOT NULL,
+	-- 创建时间
+	createDate timestamp with time zone NOT NULL,
+	-- 最后修改人
+	updateUser varchar(32),
+	-- 最后修改时间
+	updateDate timestamp with time zone,
+	-- 是否删除
+	isDelete char,
+	-- 删除人
+	deleteUser varchar(32),
+	-- 删除时间
+	deleteDate timestamp with time zone,
+	-- 浏览次数
+	viewCount bigint,
+	-- 点击次数
+	clickCount bigint,
+	-- 广告名称
+	name varchar(200),
+	-- 广告类型
+	type varchar(50),
+	-- 广告图片
+	imagePath varchar(200),
+	-- 图片上传Ids
+	imageIds varchar(32),
+	-- 启用时间
+	startDate timestamp with time zone,
+	-- 停用时间
+	endDate timestamp with time zone,
+	-- 排序
+	sort bigint,
+	-- 状态（是否启用） : 0否，1是
+	status char,
+	-- 广告位主键
+	locationIds varchar(32) NOT NULL,
+	PRIMARY KEY (ids)
+) WITHOUT OIDS;
+
+
+-- IP黑名单
+CREATE TABLE common_ipBlacklist
+(
+	-- 主键
+	ids varchar(32) NOT NULL,
+	-- 乐观锁
+	version bigint,
+	-- ip地址
+	ip varchar(500),
+	-- 到期解除时间
+	expiresDate timestamp with time zone,
+	-- 创建人
+	createUser varchar(32),
+	-- 创建时间
+	createDate timestamp with time zone,
+	-- 最后修改时间
+	updateDate timestamp with time zone,
+	-- 最后修改人
+	updateUser varchar(32),
+	-- 是否逻辑删除
+	isDelete char,
+	-- 删除人
+	deleteUser varchar(32),
+	-- 删除时间
+	deleteDate timestamp with time zone,
+	PRIMARY KEY (ids)
+) WITHOUT OIDS;
+
+
+-- 友情链接
+CREATE TABLE common_link
+(
+	-- 主键
+	ids varchar(32) NOT NULL,
+	-- 乐观锁
+	version bigint,
+	-- 名称
+	name varchar(50) NOT NULL UNIQUE,
+	-- 链接地址
+	url varchar(100) NOT NULL UNIQUE,
+	-- logo图片
+	logo varchar(100),
+	-- 上传文件ids
+	uploadIds varchar(32),
+	-- 创建人
+	createUser varchar(32),
+	-- 创建时间
+	createDate timestamp with time zone,
+	-- 最后修改人
+	updateUser varchar(32),
+	-- 最后修改时间
+	updateDate timestamp with time zone,
+	-- 是否逻辑删除 : 0否，1是
+	isDelete char,
+	-- 删除人
+	deleteUser varchar(32),
+	-- 删除时间
+	deleteDate timestamp with time zone,
+	PRIMARY KEY (ids)
+) WITHOUT OIDS;
+
+
+-- 广告位置
+CREATE TABLE common_location
+(
+	-- 主键
+	ids varchar(32) NOT NULL,
+	-- 乐观锁
+	version bigint NOT NULL,
+	-- 创建人
+	createUser varchar(32) NOT NULL,
+	-- 创建时间
+	createDate timestamp with time zone NOT NULL,
+	-- 最后修改人
+	updateUser varchar(32),
+	-- 最后修改时间
+	updateDate timestamp with time zone,
+	-- 是否删除
+	isDelete char,
+	-- 删除人
+	deleteUser varchar(32),
+	-- 删除时间
+	deleteDate timestamp with time zone,
+	-- 名称
+	name varchar(200),
+	-- 类型
+	type varchar(50),
+	-- 宽度
+	width bigint,
+	-- 高度
+	height bigint,
+	-- 描述
+	description text,
+	-- 广告数量
+	adCount bigint,
+	-- 状态（是否启用） : 0否，1是
+	status char,
+	PRIMARY KEY (ids)
+) WITHOUT OIDS;
+
+
+-- 敏感词
+CREATE TABLE common_sensitiveWord
+(
+	-- 主键
+	ids varchar(32) NOT NULL,
+	-- 乐观锁
+	version bigint,
+	-- 敏感词
+	sensitiveWord varchar(100),
+	-- 敏感级别 : 1高，2中，3低
+	level char(1),
+	-- 替换词
+	replaceWord varchar(100),
+	-- 排序
+	sort bigint,
+	-- 创建人
+	createUser varchar(32),
+	-- 创建时间
+	createDate timestamp with time zone,
+	-- 最后修改人
+	updateUser varchar(32),
+	-- 最后修改时间
+	updateDate timestamp with time zone,
+	-- 是否删除
+	isDelete char,
+	-- 删除人
+	deleteUser varchar(32),
+	-- 删除时间
+	deleteDate timestamp with time zone,
+	PRIMARY KEY (ids)
+) WITHOUT OIDS;
+
+
 
 /* Create Foreign Keys */
 
@@ -1160,31 +1160,15 @@ ALTER TABLE cms_content
 ;
 
 
+ALTER TABLE cms_library
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
 ALTER TABLE cms_questions
-	ADD FOREIGN KEY (contentIds)
-	REFERENCES cms_content (ids)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE cms_announcement
-	ADD FOREIGN KEY (contentIds)
-	REFERENCES cms_content (ids)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE cms_comment
-	ADD FOREIGN KEY (contentIds)
-	REFERENCES cms_content (ids)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE cms_yellowPage
 	ADD FOREIGN KEY (contentIds)
 	REFERENCES cms_content (ids)
 	ON UPDATE RESTRICT
@@ -1200,14 +1184,6 @@ ALTER TABLE cms_download
 ;
 
 
-ALTER TABLE cms_library
-	ADD FOREIGN KEY (contentIds)
-	REFERENCES cms_content (ids)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
 ALTER TABLE cms_vote
 	ADD FOREIGN KEY (contentIds)
 	REFERENCES cms_content (ids)
@@ -1216,7 +1192,7 @@ ALTER TABLE cms_vote
 ;
 
 
-ALTER TABLE cms_job
+ALTER TABLE cms_announcement
 	ADD FOREIGN KEY (contentIds)
 	REFERENCES cms_content (ids)
 	ON UPDATE RESTRICT
@@ -1232,9 +1208,25 @@ ALTER TABLE cms_photoGallery
 ;
 
 
-ALTER TABLE cms_ad
-	ADD FOREIGN KEY (locationIds)
-	REFERENCES cms_location (ids)
+ALTER TABLE cms_yellowPage
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cms_job
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cms_comment
+	ADD FOREIGN KEY (contentIds)
+	REFERENCES cms_content (ids)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
@@ -1259,6 +1251,14 @@ ALTER TABLE cms_answers
 ALTER TABLE cms_voteItem
 	ADD FOREIGN KEY (voteIds)
 	REFERENCES cms_vote (ids)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE common_ad
+	ADD FOREIGN KEY (locationIds)
+	REFERENCES common_location (ids)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
@@ -1458,36 +1458,6 @@ COMMENT ON COLUMN blog_type.updateDate IS '最后修改时间';
 COMMENT ON COLUMN blog_type.isDelete IS '是否删除';
 COMMENT ON COLUMN blog_type.deleteUser IS '删除人';
 COMMENT ON COLUMN blog_type.deleteDate IS '删除时间';
-COMMENT ON TABLE cms_accessStatistics IS '访问统计';
-COMMENT ON COLUMN cms_accessStatistics.ids IS '主键';
-COMMENT ON COLUMN cms_accessStatistics.version IS '乐观锁';
-COMMENT ON COLUMN cms_accessStatistics.total IS '总数量';
-COMMENT ON COLUMN cms_accessStatistics.yesterday IS '昨日';
-COMMENT ON COLUMN cms_accessStatistics.today IS '今日';
-COMMENT ON COLUMN cms_accessStatistics.week IS '本周';
-COMMENT ON COLUMN cms_accessStatistics.month IS '本月';
-COMMENT ON COLUMN cms_accessStatistics.updateDate IS '最后更新时间';
-COMMENT ON TABLE cms_ad IS '广告';
-COMMENT ON COLUMN cms_ad.ids IS '主键';
-COMMENT ON COLUMN cms_ad.version IS '乐观锁';
-COMMENT ON COLUMN cms_ad.createUser IS '创建人';
-COMMENT ON COLUMN cms_ad.createDate IS '创建时间';
-COMMENT ON COLUMN cms_ad.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_ad.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_ad.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_ad.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_ad.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_ad.viewCount IS '浏览次数';
-COMMENT ON COLUMN cms_ad.clickCount IS '点击次数';
-COMMENT ON COLUMN cms_ad.name IS '广告名称';
-COMMENT ON COLUMN cms_ad.type IS '广告类型';
-COMMENT ON COLUMN cms_ad.imagePath IS '广告图片';
-COMMENT ON COLUMN cms_ad.imageIds IS '图片上传Ids';
-COMMENT ON COLUMN cms_ad.startDate IS '启用时间';
-COMMENT ON COLUMN cms_ad.endDate IS '停用时间';
-COMMENT ON COLUMN cms_ad.sort IS '排序';
-COMMENT ON COLUMN cms_ad.status IS '状态（是否启用） : 0否，1是';
-COMMENT ON COLUMN cms_ad.locationIds IS '广告位主键';
 COMMENT ON TABLE cms_announcement IS '公告';
 COMMENT ON COLUMN cms_announcement.ids IS '主键';
 COMMENT ON COLUMN cms_announcement.startDate IS '有效开始时间';
@@ -1574,18 +1544,6 @@ COMMENT ON COLUMN cms_download.classtype IS '软件类型';
 COMMENT ON COLUMN cms_download.softVersion IS '软件版本';
 COMMENT ON COLUMN cms_download.size IS '文件大小';
 COMMENT ON COLUMN cms_download.contentIds IS '内容主键';
-COMMENT ON TABLE cms_ipBlacklist IS 'IP黑名单';
-COMMENT ON COLUMN cms_ipBlacklist.ids IS '主键';
-COMMENT ON COLUMN cms_ipBlacklist.version IS '乐观锁';
-COMMENT ON COLUMN cms_ipBlacklist.ip IS 'ip地址';
-COMMENT ON COLUMN cms_ipBlacklist.expiresDate IS '到期解除时间';
-COMMENT ON COLUMN cms_ipBlacklist.createUser IS '创建人';
-COMMENT ON COLUMN cms_ipBlacklist.createDate IS '创建时间';
-COMMENT ON COLUMN cms_ipBlacklist.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_ipBlacklist.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_ipBlacklist.isDelete IS '是否逻辑删除';
-COMMENT ON COLUMN cms_ipBlacklist.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_ipBlacklist.deleteDate IS '删除时间';
 COMMENT ON TABLE cms_job IS '招聘';
 COMMENT ON COLUMN cms_job.ids IS '主键';
 COMMENT ON COLUMN cms_job.startDate IS '发布开始时间';
@@ -1607,37 +1565,6 @@ COMMENT ON COLUMN cms_library.url IS '来源url';
 COMMENT ON COLUMN cms_library.uploadIds IS '上传文档ids';
 COMMENT ON COLUMN cms_library.path IS '文档路径';
 COMMENT ON COLUMN cms_library.contentIds IS '内容主键';
-COMMENT ON TABLE cms_link IS '友情链接';
-COMMENT ON COLUMN cms_link.ids IS '主键';
-COMMENT ON COLUMN cms_link.version IS '乐观锁';
-COMMENT ON COLUMN cms_link.name IS '名称';
-COMMENT ON COLUMN cms_link.url IS '链接地址';
-COMMENT ON COLUMN cms_link.logo IS 'logo图片';
-COMMENT ON COLUMN cms_link.uploadIds IS '上传文件ids';
-COMMENT ON COLUMN cms_link.createUser IS '创建人';
-COMMENT ON COLUMN cms_link.createDate IS '创建时间';
-COMMENT ON COLUMN cms_link.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_link.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_link.isDelete IS '是否逻辑删除 : 0否，1是';
-COMMENT ON COLUMN cms_link.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_link.deleteDate IS '删除时间';
-COMMENT ON TABLE cms_location IS '广告位置';
-COMMENT ON COLUMN cms_location.ids IS '主键';
-COMMENT ON COLUMN cms_location.version IS '乐观锁';
-COMMENT ON COLUMN cms_location.createUser IS '创建人';
-COMMENT ON COLUMN cms_location.createDate IS '创建时间';
-COMMENT ON COLUMN cms_location.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_location.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_location.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_location.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_location.deleteDate IS '删除时间';
-COMMENT ON COLUMN cms_location.name IS '名称';
-COMMENT ON COLUMN cms_location.type IS '类型';
-COMMENT ON COLUMN cms_location.width IS '宽度';
-COMMENT ON COLUMN cms_location.height IS '高度';
-COMMENT ON COLUMN cms_location.description IS '描述';
-COMMENT ON COLUMN cms_location.adCount IS '广告数量';
-COMMENT ON COLUMN cms_location.status IS '状态（是否启用） : 0否，1是';
 COMMENT ON TABLE cms_photoGallery IS '图片库';
 COMMENT ON COLUMN cms_photoGallery.ids IS '主键';
 COMMENT ON COLUMN cms_photoGallery.author IS '作者';
@@ -1663,20 +1590,6 @@ COMMENT ON TABLE cms_questions IS '问题';
 COMMENT ON COLUMN cms_questions.ids IS '主键';
 COMMENT ON COLUMN cms_questions.answersIds IS '最佳回答ids';
 COMMENT ON COLUMN cms_questions.contentIds IS '内容主键';
-COMMENT ON TABLE cms_sensitiveWord IS '敏感词';
-COMMENT ON COLUMN cms_sensitiveWord.ids IS '主键';
-COMMENT ON COLUMN cms_sensitiveWord.version IS '乐观锁';
-COMMENT ON COLUMN cms_sensitiveWord.sensitiveWord IS '敏感词';
-COMMENT ON COLUMN cms_sensitiveWord.level IS '敏感级别 : 1高，2中，3低';
-COMMENT ON COLUMN cms_sensitiveWord.replaceWord IS '替换词';
-COMMENT ON COLUMN cms_sensitiveWord.sort IS '排序';
-COMMENT ON COLUMN cms_sensitiveWord.createUser IS '创建人';
-COMMENT ON COLUMN cms_sensitiveWord.createDate IS '创建时间';
-COMMENT ON COLUMN cms_sensitiveWord.updateUser IS '最后修改人';
-COMMENT ON COLUMN cms_sensitiveWord.updateDate IS '最后修改时间';
-COMMENT ON COLUMN cms_sensitiveWord.isDelete IS '是否删除';
-COMMENT ON COLUMN cms_sensitiveWord.deleteUser IS '删除人';
-COMMENT ON COLUMN cms_sensitiveWord.deleteDate IS '删除时间';
 COMMENT ON TABLE cms_template IS '模板';
 COMMENT ON COLUMN cms_template.ids IS '主键';
 COMMENT ON COLUMN cms_template.version IS '乐观锁';
@@ -1717,6 +1630,93 @@ COMMENT ON COLUMN cms_yellowPage.mobile IS '移动电话';
 COMMENT ON COLUMN cms_yellowPage.postcode IS '邮编';
 COMMENT ON COLUMN cms_yellowPage.qq IS '在线qq : 多个逗号隔开，最多5个';
 COMMENT ON COLUMN cms_yellowPage.contentIds IS '内容主键';
+COMMENT ON TABLE common_accessStatistics IS '访问统计';
+COMMENT ON COLUMN common_accessStatistics.ids IS '主键';
+COMMENT ON COLUMN common_accessStatistics.version IS '乐观锁';
+COMMENT ON COLUMN common_accessStatistics.total IS '总数量';
+COMMENT ON COLUMN common_accessStatistics.yesterday IS '昨日';
+COMMENT ON COLUMN common_accessStatistics.today IS '今日';
+COMMENT ON COLUMN common_accessStatistics.week IS '本周';
+COMMENT ON COLUMN common_accessStatistics.month IS '本月';
+COMMENT ON COLUMN common_accessStatistics.updateDate IS '最后更新时间';
+COMMENT ON TABLE common_ad IS '广告';
+COMMENT ON COLUMN common_ad.ids IS '主键';
+COMMENT ON COLUMN common_ad.version IS '乐观锁';
+COMMENT ON COLUMN common_ad.createUser IS '创建人';
+COMMENT ON COLUMN common_ad.createDate IS '创建时间';
+COMMENT ON COLUMN common_ad.updateUser IS '最后修改人';
+COMMENT ON COLUMN common_ad.updateDate IS '最后修改时间';
+COMMENT ON COLUMN common_ad.isDelete IS '是否删除';
+COMMENT ON COLUMN common_ad.deleteUser IS '删除人';
+COMMENT ON COLUMN common_ad.deleteDate IS '删除时间';
+COMMENT ON COLUMN common_ad.viewCount IS '浏览次数';
+COMMENT ON COLUMN common_ad.clickCount IS '点击次数';
+COMMENT ON COLUMN common_ad.name IS '广告名称';
+COMMENT ON COLUMN common_ad.type IS '广告类型';
+COMMENT ON COLUMN common_ad.imagePath IS '广告图片';
+COMMENT ON COLUMN common_ad.imageIds IS '图片上传Ids';
+COMMENT ON COLUMN common_ad.startDate IS '启用时间';
+COMMENT ON COLUMN common_ad.endDate IS '停用时间';
+COMMENT ON COLUMN common_ad.sort IS '排序';
+COMMENT ON COLUMN common_ad.status IS '状态（是否启用） : 0否，1是';
+COMMENT ON COLUMN common_ad.locationIds IS '广告位主键';
+COMMENT ON TABLE common_ipBlacklist IS 'IP黑名单';
+COMMENT ON COLUMN common_ipBlacklist.ids IS '主键';
+COMMENT ON COLUMN common_ipBlacklist.version IS '乐观锁';
+COMMENT ON COLUMN common_ipBlacklist.ip IS 'ip地址';
+COMMENT ON COLUMN common_ipBlacklist.expiresDate IS '到期解除时间';
+COMMENT ON COLUMN common_ipBlacklist.createUser IS '创建人';
+COMMENT ON COLUMN common_ipBlacklist.createDate IS '创建时间';
+COMMENT ON COLUMN common_ipBlacklist.updateDate IS '最后修改时间';
+COMMENT ON COLUMN common_ipBlacklist.updateUser IS '最后修改人';
+COMMENT ON COLUMN common_ipBlacklist.isDelete IS '是否逻辑删除';
+COMMENT ON COLUMN common_ipBlacklist.deleteUser IS '删除人';
+COMMENT ON COLUMN common_ipBlacklist.deleteDate IS '删除时间';
+COMMENT ON TABLE common_link IS '友情链接';
+COMMENT ON COLUMN common_link.ids IS '主键';
+COMMENT ON COLUMN common_link.version IS '乐观锁';
+COMMENT ON COLUMN common_link.name IS '名称';
+COMMENT ON COLUMN common_link.url IS '链接地址';
+COMMENT ON COLUMN common_link.logo IS 'logo图片';
+COMMENT ON COLUMN common_link.uploadIds IS '上传文件ids';
+COMMENT ON COLUMN common_link.createUser IS '创建人';
+COMMENT ON COLUMN common_link.createDate IS '创建时间';
+COMMENT ON COLUMN common_link.updateUser IS '最后修改人';
+COMMENT ON COLUMN common_link.updateDate IS '最后修改时间';
+COMMENT ON COLUMN common_link.isDelete IS '是否逻辑删除 : 0否，1是';
+COMMENT ON COLUMN common_link.deleteUser IS '删除人';
+COMMENT ON COLUMN common_link.deleteDate IS '删除时间';
+COMMENT ON TABLE common_location IS '广告位置';
+COMMENT ON COLUMN common_location.ids IS '主键';
+COMMENT ON COLUMN common_location.version IS '乐观锁';
+COMMENT ON COLUMN common_location.createUser IS '创建人';
+COMMENT ON COLUMN common_location.createDate IS '创建时间';
+COMMENT ON COLUMN common_location.updateUser IS '最后修改人';
+COMMENT ON COLUMN common_location.updateDate IS '最后修改时间';
+COMMENT ON COLUMN common_location.isDelete IS '是否删除';
+COMMENT ON COLUMN common_location.deleteUser IS '删除人';
+COMMENT ON COLUMN common_location.deleteDate IS '删除时间';
+COMMENT ON COLUMN common_location.name IS '名称';
+COMMENT ON COLUMN common_location.type IS '类型';
+COMMENT ON COLUMN common_location.width IS '宽度';
+COMMENT ON COLUMN common_location.height IS '高度';
+COMMENT ON COLUMN common_location.description IS '描述';
+COMMENT ON COLUMN common_location.adCount IS '广告数量';
+COMMENT ON COLUMN common_location.status IS '状态（是否启用） : 0否，1是';
+COMMENT ON TABLE common_sensitiveWord IS '敏感词';
+COMMENT ON COLUMN common_sensitiveWord.ids IS '主键';
+COMMENT ON COLUMN common_sensitiveWord.version IS '乐观锁';
+COMMENT ON COLUMN common_sensitiveWord.sensitiveWord IS '敏感词';
+COMMENT ON COLUMN common_sensitiveWord.level IS '敏感级别 : 1高，2中，3低';
+COMMENT ON COLUMN common_sensitiveWord.replaceWord IS '替换词';
+COMMENT ON COLUMN common_sensitiveWord.sort IS '排序';
+COMMENT ON COLUMN common_sensitiveWord.createUser IS '创建人';
+COMMENT ON COLUMN common_sensitiveWord.createDate IS '创建时间';
+COMMENT ON COLUMN common_sensitiveWord.updateUser IS '最后修改人';
+COMMENT ON COLUMN common_sensitiveWord.updateDate IS '最后修改时间';
+COMMENT ON COLUMN common_sensitiveWord.isDelete IS '是否删除';
+COMMENT ON COLUMN common_sensitiveWord.deleteUser IS '删除人';
+COMMENT ON COLUMN common_sensitiveWord.deleteDate IS '删除时间';
 
 
 
