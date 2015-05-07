@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="cms.job">
+	
+	<!-- 分页查询 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from table cms_job
+			where 1=1 
+			
+    	]]>
+	</sql>
+	
+</sql-statement>

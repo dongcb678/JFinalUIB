@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="common.location">
+	
+	<!-- 分页查询 -->
+	<sql id="splitPage">
+		<![CDATA[ 
+        	from table common_location
+			where 1=1 
+			
+    	]]>
+	</sql>
+	
+</sql-statement>

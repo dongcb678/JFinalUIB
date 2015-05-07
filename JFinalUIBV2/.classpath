@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="platform"/>
 	<classpathentry kind="src" path="weiXin"/>
 	<classpathentry kind="src" path="jfinal19"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
