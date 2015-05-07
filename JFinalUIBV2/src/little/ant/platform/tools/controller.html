@@ -13,6 +13,15 @@ import com.jfinal.aop.Before;
 /**
  * XXX 管理	
  * 描述：
+ * 
+ * /jf/${controllerBasePath}/${classNameSmall}
+ * /jf/${controllerBasePath}/${classNameSmall}/save
+ * /jf/${controllerBasePath}/${classNameSmall}/edit
+ * /jf/${controllerBasePath}/${classNameSmall}/update
+ * /jf/${controllerBasePath}/${classNameSmall}/view
+ * /jf/${controllerBasePath}/${classNameSmall}/delete
+ * /common/${classNameSmall}/add.html
+ * 
  */
 @Controller(controllerKey = "/jf/${controllerBasePath}/${classNameSmall}")
 public class ${className}Controller extends BaseController {
@@ -68,7 +77,8 @@ public class ${className}Controller extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		${className}.dao.deleteById(getPara());
+		String ids = (getPara() == null ? ids : getPara());
+		${className}Service.service.delete(ids);
 		redirect("/jf/${controllerBasePath}/${classNameSmall}");
 	}
 	

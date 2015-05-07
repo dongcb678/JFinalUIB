@@ -22,4 +22,15 @@ public class ${className}Service extends BaseService {
 		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "${namespace}.splitPage");
 	}
 	
+	/**
+	 * 删除
+	 * @param ids
+	 */
+	public void delete(String ids){
+		String[] idsArr = splitByComma(ids);
+		for (String id : idsArr) {
+			${className}.dao.deleteById(id);
+		}
+	}
+	
 }
