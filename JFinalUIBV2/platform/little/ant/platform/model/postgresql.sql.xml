@@ -35,4 +35,23 @@
     	]]>
 	</sql>
 	
+	<!-- 查询表名注释和列注释 -->
+	<sql id="getColumns">
+		<![CDATA[ 
+        	select 
+				tbl.tablename, des.objsubid, des.description 
+			
+			from 
+				pg_tables as tbl 
+				inner join pg_class c ON tbl.tablename = c.relname
+				left join pg_description as des ON c.oid = des.objoid
+			
+			where 
+				tbl.schemaname != 'pg_catalog' AND tbl.schemaname != 'information_schema' and tbl.tablename = ?
+			
+			order by des.objsubid asc
+    	]]>
+	</sql>
+	
+	
 </sql-statement>
