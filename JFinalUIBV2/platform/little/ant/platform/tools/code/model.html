@@ -22,7 +22,7 @@ public class ${className} extends BaseModel<${className}> {
 	
 	<% for(colunm in colunmList){ %>
 	/**
-	* ${descList[colunmLP.index]}
+	* ${colunmLP.index >= descList.~size ? "" : descList[colunmLP.index]!}
 	*/
 	public static final String colunm_${colunm} = "${colunm}";
 	
