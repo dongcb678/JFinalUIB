@@ -28,20 +28,20 @@ public abstract class GeneratorCodeBase {
 //			{"wx_bb", "DictKeys.db_dataSource_main", "0", "Bb"},
 //			{"wx_cc", "DictKeys.db_dataSource_main", "1", "Cc"} // 生成.sql.xml文件、Model类
 			
-//			{"blog_article", "DictKeys.db_dataSource_main", "0", "Article"},
-//			{"blog_articlecomment", "DictKeys.db_dataSource_main", "0", "ArticleComment"},
-//			{"blog_circle", "DictKeys.db_dataSource_main", "0", "Circle"},
-//			{"blog_circleuser", "DictKeys.db_dataSource_main", "0", "Circleuser"},
-//			{"blog_favorite", "DictKeys.db_dataSource_main", "0", "Favorite"},
-//			{"blog_inform", "DictKeys.db_dataSource_main", "0", "Inform"},
-//			{"blog_link", "DictKeys.db_dataSource_main", "0", "Link"},
-//			{"blog_message", "DictKeys.db_dataSource_main", "0", "Message"},
-//			{"blog_move", "DictKeys.db_dataSource_main", "0", "Move"},
-//			{"blog_movecomment", "DictKeys.db_dataSource_main", "0", "MoveComment"},
-//			{"blog_newsdeliver", "DictKeys.db_dataSource_main", "0", "NewsDeliver"},
-//			{"blog_praise", "DictKeys.db_dataSource_main", "0", "Praise"},
-//			{"blog_trample", "DictKeys.db_dataSource_main", "0", "Trample"},
-//			{"blog_type", "DictKeys.db_dataSource_main", "0", "Type"},
+			{"blog_article", "DictKeys.db_dataSource_main", "0", "Article"},
+			{"blog_articlecomment", "DictKeys.db_dataSource_main", "0", "ArticleComment"},
+			{"blog_circle", "DictKeys.db_dataSource_main", "0", "Circle"},
+			{"blog_circleuser", "DictKeys.db_dataSource_main", "0", "Circleuser"},
+			{"blog_favorite", "DictKeys.db_dataSource_main", "0", "Favorite"},
+			{"blog_inform", "DictKeys.db_dataSource_main", "0", "Inform"},
+			{"blog_link", "DictKeys.db_dataSource_main", "0", "Link"},
+			{"blog_message", "DictKeys.db_dataSource_main", "0", "Message"},
+			{"blog_move", "DictKeys.db_dataSource_main", "0", "Move"},
+			{"blog_movecomment", "DictKeys.db_dataSource_main", "0", "MoveComment"},
+			{"blog_newsdeliver", "DictKeys.db_dataSource_main", "0", "NewsDeliver"},
+			{"blog_praise", "DictKeys.db_dataSource_main", "0", "Praise"},
+			{"blog_trample", "DictKeys.db_dataSource_main", "0", "Trample"},
+			{"blog_type", "DictKeys.db_dataSource_main", "0", "Type"},
 			
 //			{"cms_announcement", "DictKeys.db_dataSource_main", "0", "Announcement"},
 //			{"cms_answers", "DictKeys.db_dataSource_main", "0", "Answers"},
@@ -59,12 +59,12 @@ public abstract class GeneratorCodeBase {
 //			{"cms_voteitem", "DictKeys.db_dataSource_main", "0", "VoteItem"},
 //			{"cms_yellowpage", "DictKeys.db_dataSource_main", "0", "YellowPage"},
 			
-			{"common_accessstatistics", "DictKeys.db_dataSource_main", "0", "AccessStatistics"},
-			{"common_ad", "DictKeys.db_dataSource_main", "0", "Ad"},
-			{"common_ipblacklist", "DictKeys.db_dataSource_main", "0", "IpBlacklist"},
-			{"common_link", "DictKeys.db_dataSource_main", "0", "Link"},
-			{"common_location", "DictKeys.db_dataSource_main", "0", "Location"},
-			{"common_sensitiveword", "DictKeys.db_dataSource_main", "0", "SensitiveWord"}
+//			{"common_accessstatistics", "DictKeys.db_dataSource_main", "0", "AccessStatistics"},
+//			{"common_ad", "DictKeys.db_dataSource_main", "0", "Ad"},
+//			{"common_ipblacklist", "DictKeys.db_dataSource_main", "0", "IpBlacklist"},
+//			{"common_link", "DictKeys.db_dataSource_main", "0", "Link"},
+//			{"common_location", "DictKeys.db_dataSource_main", "0", "Location"},
+//			{"common_sensitiveword", "DictKeys.db_dataSource_main", "0", "SensitiveWord"}
 			
 		};
 	
@@ -79,31 +79,41 @@ public abstract class GeneratorCodeBase {
 	 * 	platform所在的包就是little.ant.platform
 	 * 	weixin所在的包就是little.ant.weixin
 	 */
-	public static String packageBase = "little.ant.common";
+	public static String packageBase = "little.ant.blog";
 	
 	/**
 	 * controller基础路径，例如
 	 * @Controller(controllerKey = "/jf/platform/authImg") 中的platform
 	 * @Controller(controllerKey = "/jf/wx/authImg") 中的wx
 	 */
-	public static String controllerBasePath = "common";
+	public static String controllerBasePath = "blog";
 
 	/**
 	 * render基础路径，例如
 	 * /platform/user/add.jsp 中的platform
 	 * /weiXin/user/list.jsp 中的weiXin
 	 */
-	public static String renderBasePath = "common";
+	public static String renderBasePath = "blog";
 	
+	/**
+	 * 获取表的所有字段名
+	 * @param tableName
+	 * @return
+	 */
 	public abstract List<String> getColunm(String tableName);
+	
+	/**
+	 * 获取表描述和字段的描述
+	 * @param tableName
+	 * @return
+	 */
 	public abstract List<String> getDesc(String tableName);
 
 	/**
 	 * 生成Model
-	 * @param srcFolder
-	 * @param packageBase
 	 * @param className
 	 * @param classNameSmall
+	 * @param dataSource
 	 * @param tableName
 	 */
 	public void model(String className, String classNameSmall, String dataSource, String tableName){
@@ -123,9 +133,8 @@ public abstract class GeneratorCodeBase {
 
 	/**
 	 * 生成.sql.xml
-	 * @param srcFolder
-	 * @param packageBase
 	 * @param classNameSmall
+	 * @param tableName
 	 */
 	public void sql(String classNameSmall, String tableName){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
@@ -139,8 +148,6 @@ public abstract class GeneratorCodeBase {
 
 	/**
 	 * 生成Controller
-	 * @param srcFolder
-	 * @param packageBase
 	 * @param className
 	 * @param classNameSmall
 	 */
@@ -160,8 +167,6 @@ public abstract class GeneratorCodeBase {
 
 	/**
 	 * 生成validator
-	 * @param srcFolder
-	 * @param packageBase
 	 * @param className
 	 * @param classNameSmall
 	 */
@@ -181,8 +186,6 @@ public abstract class GeneratorCodeBase {
 	
 	/**
 	 * 生成Service
-	 * @param srcFolder
-	 * @param packageBase
 	 * @param className
 	 * @param classNameSmall
 	 */
@@ -197,6 +200,75 @@ public abstract class GeneratorCodeBase {
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className + "Service.java";
 		createFileByTemplete("service.html", paraMap, filePath);
+	}
+	
+	/**
+	 * 生成add.html
+	 * @param classNameSmall
+	 */
+	public void add(String classNameSmall){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("classNameSmall", classNameSmall);
+		
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/add.html";
+		createFileByTemplete("add.html", paraMap, filePath);
+	}
+
+	/**
+	 * 生成form.html
+	 * @param classNameSmall
+	 * @param tableName
+	 */
+	public void form(String classNameSmall, String tableName){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("classNameSmall", classNameSmall);
+		paraMap.put("colunmList", getColunm(tableName));
+		paraMap.put("descList", getDesc(tableName));
+		
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/form.html";
+		createFileByTemplete("form.html", paraMap, filePath);
+	}
+
+	/**
+	 * 生成update.html
+	 * @param classNameSmall
+	 */
+	public void update(String classNameSmall){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("classNameSmall", classNameSmall);
+		
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/update.html";
+		createFileByTemplete("update.html", paraMap, filePath);
+	}
+
+	/**
+	 * 生成view.html
+	 * @param classNameSmall
+	 * @param tableName
+	 */
+	public void view(String classNameSmall, String tableName){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("classNameSmall", classNameSmall);
+		paraMap.put("colunmList", getColunm(tableName));
+		paraMap.put("descList", getDesc(tableName));
+		
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/view.html";
+		createFileByTemplete("view.html", paraMap, filePath);
+	}
+
+	/**
+	 * 生成list.html
+	 * @param classNameSmall
+	 * @param tableName
+	 */
+	public void list(String classNameSmall, String tableName){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("classNameSmall", classNameSmall);
+		paraMap.put("colunmList", getColunm(tableName));
+		paraMap.put("descList", getDesc(tableName));
+		
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/list.html";
+		createFileByTemplete("list.html", paraMap, filePath);
 	}
 
 	/**
@@ -226,6 +298,12 @@ public abstract class GeneratorCodeBase {
 			String javaSrc = BeetlKit.render(template, paraMap);
 			
 			File file = new File(filePath);
+			
+			File path = new File(file.getParent());
+			if (!path.exists()) {
+				path.mkdirs();
+			}
+			
 			BufferedWriter output = new BufferedWriter(new FileWriter(file));   
 			output.write(javaSrc);   
 			output.close();

@@ -29,7 +29,7 @@ public class GeneratorByPostgreSQL extends GeneratorCodeBase {
 				String className = tableArr[i][3]; 
 				// 类名首字母小写
 				String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
-				
+				/*
 				// 1.生成sql文件
 				base.sql(classNameSmall, tableName); 
 				// 2.生成model
@@ -44,6 +44,14 @@ public class GeneratorByPostgreSQL extends GeneratorCodeBase {
 					// 5.生成service
 					base.service(className, classNameSmall); 
 				}
+				*/
+				
+				// 生成视图文件
+				base.add(classNameSmall);
+				base.form(classNameSmall, tableName);
+				base.update(classNameSmall);
+				base.view(classNameSmall, tableName);
+				base.list(classNameSmall, tableName);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
