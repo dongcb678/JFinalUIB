@@ -6,6 +6,10 @@ import little.ant.platform.model.BaseModel;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 公告 model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "cms_announcement")
 public class Announcement extends BaseModel<Announcement> {
@@ -16,9 +20,25 @@ public class Announcement extends BaseModel<Announcement> {
 	
 	public static final Announcement dao = new Announcement();
 	
+	/**
+	* 主键
+	*/
 	public static final String colunm_ids = "ids";
+	
+	/**
+	* 有效开始时间
+	*/
 	public static final String colunm_startdate = "startdate";
+	
+	/**
+	* 有效结束时间
+	*/
 	public static final String colunm_enddate = "enddate";
+	
+	/**
+	* 内容主键
+	*/
 	public static final String colunm_contentids = "contentids";
+	
 	
 }

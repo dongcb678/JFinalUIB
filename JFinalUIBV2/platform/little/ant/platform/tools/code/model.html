@@ -6,6 +6,10 @@ import little.ant.platform.model.BaseModel;
 
 import org.apache.log4j.Logger;
 
+/**
+ * ${descList[0]} model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = ${dataSource}, tableName = "${tableName}")
 public class ${className} extends BaseModel<${className}> {
@@ -17,7 +21,11 @@ public class ${className} extends BaseModel<${className}> {
 	public static final ${className} dao = new ${className}();
 	
 	<% for(colunm in colunmList){ %>
+	/**
+	* ${descList[colunmLP.index]}
+	*/
 	public static final String colunm_${colunm} = "${colunm}";
+	
 	<% } %>
 	
 }

@@ -6,6 +6,10 @@ import little.ant.platform.model.BaseModel;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 投票 model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "cms_vote")
 public class Vote extends BaseModel<Vote> {
@@ -16,8 +20,20 @@ public class Vote extends BaseModel<Vote> {
 	
 	public static final Vote dao = new Vote();
 	
+	/**
+	* 主键
+	*/
 	public static final String colunm_ids = "ids";
+	
+	/**
+	* 投票范围
+	*/
 	public static final String colunm_voterange = "voterange";
+	
+	/**
+	* 内容主键
+	*/
 	public static final String colunm_contentids = "contentids";
+	
 	
 }

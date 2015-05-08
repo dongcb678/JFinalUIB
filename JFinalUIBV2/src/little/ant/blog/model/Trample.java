@@ -6,6 +6,10 @@ import little.ant.platform.model.BaseModel;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 点踩记录 model
+ * @author 董华健
+ */
 @SuppressWarnings("unused")
 @Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "blog_trample")
 public class Trample extends BaseModel<Trample> {
@@ -16,14 +20,50 @@ public class Trample extends BaseModel<Trample> {
 	
 	public static final Trample dao = new Trample();
 	
+	/**
+	* 主键
+	*/
 	public static final String colunm_ids = "ids";
+	
+	/**
+	* 乐观锁
+	*/
 	public static final String colunm_version = "version";
+	
+	/**
+	* 分类
+	*/
 	public static final String colunm_type = "type";
+	
+	/**
+	* 目标ids
+	*/
 	public static final String colunm_targetids = "targetids";
+	
+	/**
+	* 创建人
+	*/
 	public static final String colunm_createuser = "createuser";
+	
+	/**
+	* 创建时间
+	*/
 	public static final String colunm_createdate = "createdate";
+	
+	/**
+	* 是否删除
+	*/
 	public static final String colunm_isdelete = "isdelete";
+	
+	/**
+	* 删除人
+	*/
 	public static final String colunm_deleteuser = "deleteuser";
+	
+	/**
+	* 删除时间
+	*/
 	public static final String colunm_deletedate = "deletedate";
+	
 	
 }
