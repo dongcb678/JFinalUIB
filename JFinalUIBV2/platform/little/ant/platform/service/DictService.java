@@ -23,21 +23,21 @@ public class DictService extends BaseService {
 	 * @param dict
 	 */
 	public void save(Dict dict) {
-		String pIds = dict.getStr("parentids");
+		String pIds = dict.getStr(Dict.colunm_parentids);
 		Dict parent = Dict.dao.findById(pIds);
-		parent.set("isparent", "true").update();
+		parent.set(Dict.colunm_isparent, "true").update();
 
-		Long orderIds = dict.getNumber("orderids").longValue();
+		Long orderIds = dict.getNumber(Dict.colunm_orderids).longValue();
 		if (orderIds < 2 || orderIds > 9) {
-			dict.set("images", "2.png");
+			dict.set(Dict.colunm_images, "2.png");
 		} else {
-			dict.set("images", orderIds + ".png");
+			dict.set(Dict.colunm_images, orderIds + ".png");
 		}
 
-		dict.set("isparent", "false").set("levels", parent.getNumber("levels").longValue() + 1);
+		dict.set(Dict.colunm_isparent, "false").set("levels", parent.getNumber(Dict.colunm_levels).longValue() + 1);
 		dict.save();
 		
-		dict.set("paths", parent.get("paths") + "/" + dict.getPKValue()).update();
+		dict.set(Dict.colunm_paths, parent.get(Dict.colunm_paths) + "/" + dict.getPKValue()).update();
 		
 		// 缓存
 		Dict.dao.cacheAdd(dict.getPKValue());
@@ -48,12 +48,12 @@ public class DictService extends BaseService {
 	 * @param dict
 	 */
 	public void update(Dict dict) {
-		String pIds = dict.getStr("parentids");
+		String pIds = dict.getStr(Dict.colunm_parentids);
 		Dict parent = Dict.dao.findById(pIds);
-		parent.set("isparent", "true").update();
+		parent.set(Dict.colunm_isparent, "true").update();
 		
-		dict.set("parentids", pIds).set("levels", parent.getNumber("levels").longValue() + 1);
-		dict.set("paths", parent.get("paths") + "/" + dict.getPKValue());
+		dict.set(Dict.colunm_parentids, pIds).set(Dict.colunm_levels, parent.getNumber(Dict.colunm_levels).longValue() + 1);
+		dict.set(Dict.colunm_paths, parent.get(Dict.colunm_paths) + "/" + dict.getPKValue());
 		dict.update();
 		
 		// 缓存
@@ -70,18 +70,18 @@ public class DictService extends BaseService {
 			Dict dict = Dict.dao.findById(dictIds);
 			
 			// 是否存在子节点
-			if(dict.getStr("isparent").equals("true")){
+			if(dict.getStr(Dict.colunm_isparent).equals("true")){
 				log.error("存在子节点，不能直接删除");
 				return;
 			}
 			
 			// 修改上级节点的isparent
-			Dict pDict = Dict.dao.findById(dict.getStr("parentmenuids"));
+			Dict pDict = Dict.dao.findById(dict.getStr(Dict.colunm_parentids));
 			String sql = getSql("platform.dict.childCount");
 			Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pDict.getPKValue());
 			Long counts = record.getNumber("counts").longValue();
 		    if(counts == 1){
-		    	pDict.set("isparent", "false");
+		    	pDict.set(Dict.colunm_isparent, "false");
 		    	pDict.update();
 		    }
 		    
@@ -114,9 +114,9 @@ public class DictService extends BaseService {
 		for (Dict dict : list) {
 			node = new ZtreeNode();
 			node.setId(dict.getPKValue());
-			node.setName(dict.getStr("names"));
-			node.setIsParent(Boolean.parseBoolean(dict.getStr("isparent")));
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + dict.getStr("images"));
+			node.setName(dict.getStr(Dict.colunm_names));
+			node.setIsParent(Boolean.parseBoolean(dict.getStr(Dict.colunm_isparent)));
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + dict.getStr(Dict.colunm_images));
 			nodeList.add(node);
 		}
 		

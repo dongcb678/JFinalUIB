@@ -41,9 +41,9 @@ public class StationService extends BaseService {
 		for (Station station : list) {
 			node = new ZtreeNode();
 			node.setId(station.getPKValue());
-			node.setName(station.getStr("names"));
+			node.setName(station.getStr(Station.colunm_names));
 			node.setIsParent(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + station.getStr("images"));
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + station.getStr(Station.colunm_images));
 			nodeList.add(node);
 		}
 		
@@ -59,7 +59,7 @@ public class StationService extends BaseService {
 	 */
 	public String save(String pIds, String names, int orderIds) {
 		Station pStation = Station.dao.findById(pIds);
-		pStation.set("isparent", "true").update();
+		pStation.set(Station.colunm_isparent, "true").update();
 		
 		String images = "";
 		if(orderIds < 2 || orderIds > 9){
@@ -70,11 +70,11 @@ public class StationService extends BaseService {
 		}
 		
 		Station station = new Station();
-		station.set("isparent", "false");
-		station.set("parentstationids", pIds);
-		station.set("orderids", orderIds);
-		station.set("names", names);
-		station.set("images", images);
+		station.set(Station.colunm_isparent, "false");
+		station.set(Station.colunm_parentstationids, pIds);
+		station.set(Station.colunm_orderids, orderIds);
+		station.set(Station.colunm_names, names);
+		station.set(Station.colunm_images, images);
 		station.save();
 		
 		// 缓存
@@ -93,11 +93,11 @@ public class StationService extends BaseService {
 		Station station = Station.dao.findById(ids);
 		if(null != names && !names.isEmpty()){
 			//更新模块名称
-			station.set("names", names).update();
+			station.set(Station.colunm_names, names).update();
 			
 		}else if(null != pIds && !pIds.isEmpty()){
 			//更新上级模块
-			station.set("parentstationids", pIds).update();
+			station.set(Station.colunm_parentstationids, pIds).update();
 		}
 
 		// 缓存
@@ -113,17 +113,17 @@ public class StationService extends BaseService {
 		Station station = Station.dao.findById(ids);
 		
 		// 是否存在子节点
-		if(station.getStr("isparent").equals("true")){
+		if(station.getStr(Station.colunm_isparent).equals("true")){
 			return false; //存在子节点，不能直接删除
 		}
 
 		// 修改上级节点的isparent
-		Station pStation = Station.dao.findById(station.getStr("parentstationids"));
+		Station pStation = Station.dao.findById(station.getStr(Station.colunm_parentstationids));
 		String sql = getSql("platform.station.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pStation.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){
-			pStation.set("isparent", "false");
+			pStation.set(Station.colunm_isparent, "false");
 			pStation.update();
 		}
 	    
@@ -145,7 +145,7 @@ public class StationService extends BaseService {
 	public void setOperator(String stationIds, String moduleIds, String operatorIds){
 		Station station = Station.dao.findById(stationIds);
 		//station.set("moduleids", moduleIds);
-		station.set("operatorids", operatorIds).update();
+		station.set(Station.colunm_operatorids, operatorIds).update();
 		
 		// 缓存
 		Station.dao.cacheAdd(stationIds);

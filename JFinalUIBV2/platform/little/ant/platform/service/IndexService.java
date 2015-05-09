@@ -33,28 +33,28 @@ public class IndexService extends BaseService {
 		StringBuilder operatorIdsSb = new StringBuilder();
 		
 		//根据分组查询权限
-		String groupIds = user.getStr("groupids");
+		String groupIds = user.getStr(User.colunm_groupids);
 		if(null != groupIds){
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
 				Group group = Group.dao.cacheGet(groupIdsTemp);
-				String roleIdsStr = group.getStr("roleids");
+				String roleIdsStr = group.getStr(Group.colunm_roleids);
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
 					Role role = Role.dao.cacheGet(roleIdsTemp);
-					String operatorIdsStr = role.getStr("operatorids");
+					String operatorIdsStr = role.getStr(Role.colunm_operatorids);
 					operatorIdsSb.append(operatorIdsStr);
 				}
 			}
 		}
 		
 		//根据岗位查询权限
-		String stationIds = user.getStr("stationids");
+		String stationIds = user.getStr(User.colunm_stationids);
 		if(null != stationIds){
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
 				Station station = Station.dao.cacheGet(ids);
-				String operatorIdsStr = station.getStr("operatorids");
+				String operatorIdsStr = station.getStr(Station.colunm_operatorids);
 				operatorIdsSb.append(operatorIdsStr);
 			}
 		}

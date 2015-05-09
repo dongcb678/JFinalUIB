@@ -88,19 +88,19 @@ public class ResourcesService extends BaseService {
 		Long jvmmaxmemory = 0l;
 		
 		for (Resources resources : list) {
-			phymemory = resources.getNumber("phymemory").longValue();
-			jvmmaxmemory = resources.getNumber("jvmmaxmemory").longValue();
+			phymemory = resources.getNumber(Resources.colunm_phymemory).longValue();
+			jvmmaxmemory = resources.getNumber(Resources.colunm_jvmmaxmemory).longValue();
 			
-			datesList.add(ToolDateTime.format(resources.getDate("createdate"), "HH:mm"));
+			datesList.add(ToolDateTime.format(resources.getDate(Resources.colunm_createdate), "HH:mm"));
 			
-			int cpuratio = (int)(resources.getBigDecimal("cpuratio").doubleValue() * 100);
+			int cpuratio = (int)(resources.getBigDecimal(Resources.colunm_cpuratio).doubleValue() * 100);
 			cpuList.add(Integer.valueOf(cpuratio));
 			
-			phymemoryList.add(resources.getNumber("phymemory").longValue() - resources.getNumber("phyfreememory").longValue());
+			phymemoryList.add(resources.getNumber(Resources.colunm_phymemory).longValue() - resources.getNumber(Resources.colunm_phyfreememory).longValue());
 			
-			jvmmemoryList.add(resources.getNumber("jvmtotalmemory").longValue() - resources.getNumber("jvmfreememory").longValue());
+			jvmmemoryList.add(resources.getNumber(Resources.colunm_jvmtotalmemory).longValue() - resources.getNumber(Resources.colunm_jvmfreememory).longValue());
 			
-			gccountList.add(resources.getNumber("gccount").longValue());
+			gccountList.add(resources.getNumber(Resources.colunm_gccount).longValue());
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();

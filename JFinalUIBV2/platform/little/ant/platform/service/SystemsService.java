@@ -25,20 +25,20 @@ public class SystemsService extends BaseService {
 		
 		// 初始化模块根节点
 		Module module = new Module();
-		module.set("systemsids", systems.getPKValue());
-		module.set("isparent", "true");
-		module.set("images", "3.png");
-		module.set("orderids", 1);
-		module.set("names", "根节点");
+		module.set(Module.colunm_systemsids, systems.getPKValue());
+		module.set(Module.colunm_isparent, "true");
+		module.set(Module.colunm_images, "3.png");
+		module.set(Module.colunm_orderids, 1);
+		module.set(Module.colunm_names, "根节点");
 		module.save();
 		
 		// 初始化菜单根节点
 		Menu menu = new Menu();
-		menu.set("systemsids", systems.getPKValue());
-		menu.set("isparent", "true");
-		menu.set("images", "3.png");
-		menu.set("orderids", 1);
-		menu.set("names_zhcn", "根节点");
+		menu.set(Menu.colunm_systemsids, systems.getPKValue());
+		menu.set(Menu.colunm_isparent, "true");
+		menu.set(Menu.colunm_images, "3.png");
+		menu.set(Menu.colunm_orderids, 1);
+		menu.set(Menu.colunm_names_zhcn, "根节点");
 		menu.save();
 	}
 

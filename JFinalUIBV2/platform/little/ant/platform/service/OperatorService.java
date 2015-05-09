@@ -93,18 +93,18 @@ public class OperatorService extends BaseService {
 		for (Module module : listModule) {
 			node = new ZtreeNode();
 			node.setId("module_" + module.getPKValue());
-			node.setName(module.getStr("names"));
+			node.setName(module.getStr(Module.colunm_names));
 			node.setIsParent(true);
 			//node.setChecked(false);
 			node.setNocheck(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr("images"));
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.colunm_images));
 			nodeList.add(node);
 		}
 		
 		for (Operator operator : operatorList) {
 			node = new ZtreeNode();
 			node.setId("operator_" + operator.getPKValue());
-			node.setName(operator.getStr("names"));
+			node.setName(operator.getStr(Operator.colunm_names));
 			node.setIsParent(false);
 			node.setChecked(false);
 			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
@@ -130,11 +130,11 @@ public class OperatorService extends BaseService {
 			ZtreeNode node = new ZtreeNode();
 			
 			node.setId(module.getPKValue());
-			node.setName(module.getStr("names"));
+			node.setName(module.getStr(Module.colunm_names));
 			node.setIsParent(true);
 			//node.setChecked(false);
 			node.setNocheck(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr("images"));
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.colunm_images));
 			
 			recursion(node, module);
 			
@@ -159,7 +159,7 @@ public class OperatorService extends BaseService {
 			ZtreeNode node = new ZtreeNode();
 			
 			node.setId(operator.getPKValue());
-			node.setName(operator.getStr("names"));
+			node.setName(operator.getStr(Operator.colunm_names));
 			node.setIsParent(false);
 			node.setChecked(false);
 			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
@@ -174,11 +174,11 @@ public class OperatorService extends BaseService {
 			ZtreeNode node = new ZtreeNode();
 			
 			node.setId(module.getPKValue());
-			node.setName(module.getStr("names"));
+			node.setName(module.getStr(Module.colunm_names));
 			node.setIsParent(true);
 			//node.setChecked(false);
 			node.setNocheck(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr("images"));
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.colunm_images));
 			
 			recursion(node, module);
 			

@@ -50,7 +50,7 @@ public class ModuleService extends BaseService {
 			node.setId(module.getPKValue());
 			node.setName(module.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr("images"));
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.colunm_images));
 			nodeList.add(node);
 		}
 		
@@ -66,7 +66,7 @@ public class ModuleService extends BaseService {
 	 */
 	public String save(String pIds, String names, int orderIds) {
 		Module pDept = Module.dao.findById(pIds);
-		pDept.set("isparent", "true").update();
+		pDept.set(Module.colunm_isparent, "true").update();
 		
 		String images = "";
 		if(orderIds < 2 || orderIds > 9){
@@ -77,12 +77,12 @@ public class ModuleService extends BaseService {
 		}
 
 		Module module = new Module();
-		module.set("isparent", "true");
-		module.set("parentmoduleids", pIds);
-		module.set("systemsids", pDept.getStr("systemsids"));//冗余系统ids
-		module.set("orderids", orderIds);
-		module.set("names", names);
-		module.set("images", images);
+		module.set(Module.colunm_isparent, "true");
+		module.set(Module.colunm_parentmoduleids, pIds);
+		module.set(Module.colunm_systemsids, pDept.getStr(Module.colunm_systemsids));//冗余系统ids
+		module.set(Module.colunm_orderids, orderIds);
+		module.set(Module.colunm_names, names);
+		module.set(Module.colunm_images, images);
 		module.save();
 		
 		return module.getPKValue();
@@ -99,11 +99,11 @@ public class ModuleService extends BaseService {
 		Module module = Module.dao.findById(ids);
 		if(null != names && !names.isEmpty()){
 			//更新模块名称
-			module.set("names", names).update();
+			module.set(Module.colunm_names, names).update();
 			
 		}else if(null != pIds && !pIds.isEmpty()){
 			//更新上级模块
-			module.set("parentmoduleids", pIds).update();
+			module.set(Module.colunm_parentmoduleids, pIds).update();
 		}
 	}
 	
@@ -116,17 +116,17 @@ public class ModuleService extends BaseService {
 		Module module = Module.dao.findById(ids);
 		
 		// 是否存在子节点
-		if(module.getStr("isparent").equals("true")){
+		if(module.getStr(Module.colunm_isparent).equals("true")){
 			return false; //存在子节点，不能直接删除
 		}
 
 		// 修改上级节点的isparent
-		Module pModule = Module.dao.findById(module.getStr("parentmoduleids"));
+		Module pModule = Module.dao.findById(module.getStr(Module.colunm_parentmoduleids));
 		String sql = getSql("platform.module.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pModule.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){
-			pModule.set("isparent", "false");
+			pModule.set(Module.colunm_isparent, "false");
 			pModule.update();
 		}
 
