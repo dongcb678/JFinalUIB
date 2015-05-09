@@ -3,8 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="weiXin"/>
 	<classpathentry kind="src" path="jfinal19"/>
+	<classpathentry kind="src" path="junit"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="doc/buildJar/jfinal/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jfinal/freemarker-2.3.20.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.asm-3.1.1.RELEASE.jar"/>
