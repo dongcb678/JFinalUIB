@@ -4,6 +4,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/weiXin"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/jfinal19"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/junit"/>
         <property name="context-root" value="JFinal"/>
         <property name="java-output-path" value="/JFinal/build/classes"/>
     </wb-module>
