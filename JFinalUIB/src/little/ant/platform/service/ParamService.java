@@ -72,7 +72,7 @@ public class ParamService extends BaseService {
 		}
 		
 		// 修改上级节点的isparent
-		Param pParam = Param.dao.findById(param.getStr("parentmenuids"));
+		Param pParam = Param.dao.findById(param.getStr("parentids"));
 		String sql = getSql("platform.param.childCount");
 		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pParam.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
