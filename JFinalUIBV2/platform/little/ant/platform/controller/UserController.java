@@ -1,6 +1,9 @@
 package little.ant.platform.controller;
 
+import java.util.List;
+
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
 import little.ant.platform.service.UserService;
@@ -86,8 +89,8 @@ public class UserController extends BaseController {
 	 * 用户树ztree节点数据
 	 */
 	public void treeData() {
-		String json = UserService.service.childNodeData(deptIds);
-		renderJson(json);
+		List<ZtreeNode> list = UserService.service.childNodeData(deptIds);
+		renderJson(list);
 	}
 	
 	/**

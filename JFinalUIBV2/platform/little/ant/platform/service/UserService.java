@@ -2,12 +2,14 @@ package little.ant.platform.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
+import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Department;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
@@ -123,7 +125,7 @@ public class UserService extends BaseService {
 	 * @param deptIds
 	 * @return
 	 */
-	public String childNodeData(String deptIds) {
+	public List<ZtreeNode> childNodeData(String deptIds) {
 		// 查询部门数据
 		List<Department> deptList = null;
 		if (null != deptIds) {
@@ -141,54 +143,37 @@ public class UserService extends BaseService {
 			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
 		}
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
+		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
+		ZtreeNode node = null;
 
 		// 封装用户数据
 		if (null != userList) {
-			int userSize = userList.size() - 1;
 			for (User user : userList) {
-				sb.append(" { ");
-				sb.append(" id : '").append("user_").append(user.getPKValue()).append("', ");
-				sb.append(" name : '").append(user.getStr("names")).append("', ");
-				sb.append(" isParent : false, ");
-				sb.append(" font : {'font-weight':'bold'}, ");
-				sb.append(" icon : '/jsFile/zTree/css/zTreeStyle/img/diy/5.png' ");
-				sb.append(" }");
-				if (userList.indexOf(user) < userSize) {
-					sb.append(", ");
-				}
+				node = new ZtreeNode();
+				node.setId("user_" + user.getPKValue());
+				node.setName(user.getStr("names"));
+				node.setIsParent(false);
+				node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
+				nodeList.add(node);
 			}
-		}
-
-		int size = deptList.size() - 1;
-		if (null != userList && userList.size() != 0 && size >= 0) {
-			sb.append(", ");
 		}
 
 		// 封装部门数据
 		for (Department dept : deptList) {
-			sb.append(" { ");
-			sb.append(" id : '").append("dept_").append(dept.getPKValue()).append("', ");
-			sb.append(" name : '").append(dept.get("names")).append("', ");
-
+			node = new ZtreeNode();
+			node.setId("dept_" + dept.getPKValue());
+			node.setName(dept.getStr("names"));
+			
 			if (null != deptIds) {
-				sb.append(" isParent : true, ");
+				node.setIsParent(true);
 			} else {
-				sb.append(" isParent : ").append(dept.getStr(Department.colunm_isparent)).append(", ");
+				node.setIsParent(Boolean.parseBoolean(dept.getStr(Department.colunm_isparent)));
 			}
-
-			sb.append(" font : {'font-weight':'bold'}, ");
-			sb.append(" icon : '/jsFile/zTree/css/zTreeStyle/img/diy/").append(dept.getStr(Department.colunm_images)).append("' ");
-			sb.append(" }");
-			if (deptList.indexOf(dept) < size) {
-				sb.append(", ");
-			}
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + dept.getStr(Department.colunm_images));
+			nodeList.add(node);
 		}
 
-		sb.append("]");
-
-		return sb.toString();
+		return nodeList;
 	}
 
 	/**
