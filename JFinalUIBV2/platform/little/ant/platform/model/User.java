@@ -127,7 +127,7 @@ public class User extends BaseModel<User> {
 	 * @return
 	 */
 	public UserInfo getUserInfo(){
-		String userinfoIds = get("userinfoids");
+		String userinfoIds = get(colunm_userinfoids);
 		if(null != userinfoIds && !userinfoIds.isEmpty()){
 			return UserInfo.dao.findById(userinfoIds);
 		}
@@ -139,7 +139,7 @@ public class User extends BaseModel<User> {
 	 * @return
 	 */
 	public Department getDepartment(){
-		String departmentids = get("departmentids");
+		String departmentids = get(colunm_departmentids);
 		if(null != departmentids && !departmentids.isEmpty()){
 			return Department.dao.findById(departmentids);
 		}
@@ -151,7 +151,7 @@ public class User extends BaseModel<User> {
 	 * @return
 	 */
 	public Station getStation(){
-		String stationids = get("stationids");
+		String stationids = get(colunm_stationids);
 		if(null != stationids && !stationids.isEmpty()){
 			return Station.dao.findById(stationids);
 		}
@@ -165,9 +165,9 @@ public class User extends BaseModel<User> {
 		User user = User.dao.findById(ids);
 		UserInfo userInfo = user.getUserInfo();
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + ids, user);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"), user);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"), user);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"), user);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr(colunm_username), user);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_email), user);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile), user);
 	}
 
 	/**
@@ -177,9 +177,9 @@ public class User extends BaseModel<User> {
 		User user = User.dao.findById(ids);
 		UserInfo userInfo = user.getUserInfo();
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr("username"));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("email"));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr("mobile"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr(colunm_username));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_email));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile));
 	}
 
 	/**

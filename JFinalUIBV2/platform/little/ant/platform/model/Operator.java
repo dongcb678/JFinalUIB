@@ -113,7 +113,7 @@ public class Operator extends BaseModel<Operator> {
 	public void cacheAdd(String ids){
 		Operator operator = Operator.dao.findById(ids);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + ids, operator);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"), operator);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr(colunm_url), operator);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class Operator extends BaseModel<Operator> {
 	public void cacheRemove(String ids){
 		Operator operator = Operator.dao.findById(ids);
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr("url"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr(colunm_url));
 	}
 
 	/**

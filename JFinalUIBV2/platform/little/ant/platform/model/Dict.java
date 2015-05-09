@@ -218,7 +218,7 @@ public class Dict extends BaseModel<Dict> {
 	 */
 	public Dict getParent(){
 		String sql = getSql("platform.dict.parent");
-		return dao.findFirst(sql, get("parentids"));
+		return dao.findFirst(sql, get(colunm_parentids));
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class Dict extends BaseModel<Dict> {
 		
 		String sql = getSqlByBeetl("platform.dict.parentAndI18n", param);
 		
-		return dao.findFirst(sql, get("parentids"));
+		return dao.findFirst(sql, get(colunm_parentids));
 	}
 
 	/**
@@ -244,9 +244,9 @@ public class Dict extends BaseModel<Dict> {
 		Dict dict = Dict.dao.findById(ids);
 		List<Dict> dictList = dict.getChild();
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + ids, dict);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"), dict);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr(colunm_numbers), dict);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + ids, dictList);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("numbers"), dictList);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr(colunm_numbers), dictList);
 
 		String parentIds = dict.getStr("parentids");
 		if(null != parentIds){
@@ -254,7 +254,7 @@ public class Dict extends BaseModel<Dict> {
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
 				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getPKValue(), parentList);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr(colunm_numbers), parentList);
 			}
 		}
 	}
@@ -267,9 +267,9 @@ public class Dict extends BaseModel<Dict> {
 		Dict dict = Dict.dao.findById(ids);
 		
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr("numbers"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict + dict.getStr(colunm_numbers));
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr("numbers"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + dict.getStr(colunm_numbers));
 
 		String parentIds = dict.getStr("parentids");
 		if(null != parentIds){
@@ -277,7 +277,7 @@ public class Dict extends BaseModel<Dict> {
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
 				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getPKValue(), parentList);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr("numbers"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_dict_child + parent.getStr(colunm_numbers), parentList);
 			}
 		}
 	}

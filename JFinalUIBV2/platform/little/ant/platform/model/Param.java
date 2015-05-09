@@ -216,7 +216,7 @@ public class Param extends BaseModel<Param> {
 	 */
 	public Param getParent(){
 		String sql = getSql("platform.param.parent");
-		return dao.findFirst(sql, get("parentids"));
+		return dao.findFirst(sql, get(colunm_parentids));
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class Param extends BaseModel<Param> {
 		
 		String sql = getSqlByBeetl("platform..parentAndI18n", param);
 		
-		return dao.findFirst(sql, get("parentids"));
+		return dao.findFirst(sql, get(colunm_parentids));
 	}
 
 	/**
@@ -242,9 +242,9 @@ public class Param extends BaseModel<Param> {
 		Param param = Param.dao.findById(ids);
 		List<Param> paramList = param.getChild();
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + ids, param);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"), param);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr(colunm_numbers), param);
 		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + ids, paramList);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr("numbers"), paramList);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr(colunm_numbers), paramList);
 		
 		String paramIds = param.getStr("parentids");
 		if(null != paramIds){
@@ -252,7 +252,7 @@ public class Param extends BaseModel<Param> {
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
 				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getPKValue(), parentList);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr(colunm_numbers), parentList);
 			}
 		}
 	}
@@ -264,9 +264,9 @@ public class Param extends BaseModel<Param> {
 	public void cacheRemove(String ids){
 		Param param = Param.dao.findById(ids);
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr("numbers"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr(colunm_numbers));
 		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr("numbers"));
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr(colunm_numbers));
 
 		String paramIds = param.getStr("parentids");
 		if(null != paramIds){
@@ -274,7 +274,7 @@ public class Param extends BaseModel<Param> {
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
 				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getPKValue(), parentList);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr("numbers"), parentList);
+				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr(colunm_numbers), parentList);
 			}
 		}
 	}

@@ -94,7 +94,7 @@ public class Menu extends BaseModel<Menu> {
 	 * @return
 	 */
 	public Operator getOperator(){
-		String operatorIds = get("operatorids");
+		String operatorIds = get(colunm_operatorids);
 		if(null != operatorIds && !operatorIds.isEmpty()){
 			return Operator.dao.findById(operatorIds);
 		}
