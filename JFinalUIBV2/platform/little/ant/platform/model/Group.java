@@ -23,6 +23,36 @@ public class Group extends BaseModel<Group> {
 	public static final Group dao = new Group();
 
 	/**
+	 * 主键
+	 */
+	public static final String colunm_ids = "ids";
+	
+	/**
+	 * 版本号
+	 */
+	public static final String colunm_version = "version";
+	
+	/**
+	 * 描述
+	 */
+	public static final String colunm_description = "description";
+	
+	/**
+	 * 名称
+	 */
+	public static final String colunm_names = "names";
+	
+	/**
+	 * 拥有的角色ids
+	 */
+	public static final String colunm_roleids = "roleids";
+	
+	/**
+	 * 编号
+	 */
+	public static final String colunm_numbers = "numbers";
+	
+	/**
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){

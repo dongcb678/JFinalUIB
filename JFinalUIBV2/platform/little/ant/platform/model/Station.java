@@ -23,6 +23,56 @@ public class Station extends BaseModel<Station> {
 	public static final Station dao = new Station();
 
 	/**
+	 * 主键
+	 */
+	public static final String colunm_ids = "ids";
+	
+	/**
+	 * 版本号
+	 */
+	public static final String colunm_version = "version";
+	
+	/**
+	 * 描述
+	 */
+	public static final String colunm_description = "description";
+	
+	/**
+	 * 图标
+	 */
+	public static final String colunm_images = "images";
+	
+	/**
+	 * 是否上级节点
+	 */
+	public static final String colunm_isparent = "isparent";
+	
+	/**
+	 * 名称
+	 */
+	public static final String colunm_names = "names";
+	
+	/**
+	 * 排序号
+	 */
+	public static final String colunm_orderids = "orderids";
+	
+	/**
+	 * 上级岗位ids
+	 */
+	public static final String colunm_parentstationids = "parentstationids";
+	
+	/**
+	 * 拥有的功能ids
+	 */
+	public static final String colunm_operatorids = "operatorids";
+	
+	/**
+	 * 拥有的功能模块ids
+	 */
+	public static final String colunm_moduleids = "moduleids";
+	
+	/**
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){

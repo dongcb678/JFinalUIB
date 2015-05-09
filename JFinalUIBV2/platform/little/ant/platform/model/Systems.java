@@ -18,5 +18,35 @@ public class Systems extends BaseModel<Systems> {
 	private static Logger log = Logger.getLogger(Systems.class);
 	
 	public static final Systems dao = new Systems();
+
+	/**
+	 * 主键
+	 */
+	public static final String colunm_ids = "ids";
+	
+	/**
+	 * 版本号
+	 */
+	public static final String colunm_version = "version";
+	
+	/**
+	 * 描述
+	 */
+	public static final String colunm_description = "description";
+	
+	/**
+	 * 名称
+	 */
+	public static final String colunm_names = "names";
+	
+	/**
+	 * 编号
+	 */
+	public static final String colunm_numbers = "numbers";
+	
+	/**
+	 * 排序号
+	 */
+	public static final String colunm_orderids = "orderids";
 	
 }

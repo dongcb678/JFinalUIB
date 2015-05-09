@@ -28,6 +28,106 @@ public class Dict extends BaseModel<Dict> {
 	public static final Dict dao = new Dict();
 
 	/**
+	 * 主键
+	 */
+	public static final String colunm_ids = "ids";
+	
+	/**
+	 * 版本号
+	 */
+	public static final String colunm_version = "version";
+	
+	/**
+	 * 描述
+	 */
+	public static final String colunm_description = "description";
+	
+	/**
+	 * 图标
+	 */
+	public static final String colunm_images = "images";
+	
+	/**
+	 * 名称
+	 */
+	public static final String colunm_names = "names";
+	
+	/**
+	 * 排序号
+	 */
+	public static final String colunm_orderids = "orderids";
+	
+	/**
+	 * tree路径
+	 */
+	public static final String colunm_paths = "paths";
+	
+	/**
+	 * 状态
+	 */
+	public static final String colunm_zhuangtai = "zhuangtai";
+	
+	/**
+	 * 上级ids
+	 */
+	public static final String colunm_parentids = "parentids";
+	
+	/**
+	 * 是否上级节点
+	 */
+	public static final String colunm_isparent = "isparent";
+	
+	/**
+	 * 层级级别
+	 */
+	public static final String colunm_levels = "levels";
+	
+	/**
+	 * 编号
+	 */
+	public static final String colunm_numbers = "numbers";
+	
+	/**
+	 * 值
+	 */
+	public static final String colunm_val = "val";
+	
+	/**
+	 * 是否国际化 : 0否1是
+	 */
+	public static final String colunm_i18n = "i18n";
+	
+	/**
+	 * 中文简体值
+	 */
+	public static final String colunm_val_zhcn = "val_zhcn";
+	
+	/**
+	 * 中文香港值
+	 */
+	public static final String colunm_val_zhhk = "val_zhhk";
+	
+	/**
+	 * 中文台湾值
+	 */
+	public static final String colunm_val_zhtw = "val_zhtw";
+	
+	/**
+	 * 日文值
+	 */
+	public static final String colunm_val_ja = "val_ja";
+	
+	/**
+	 * 英文值
+	 */
+	public static final String colunm_val_enus = "val_enus";
+	
+	/**
+	 * 账号状态
+	 */
+	public static final String colunm_status = "status";
+	
+	/**
 	 * 根据主键查询字典，带国际化
 	 * @param ids 主键
 	 * @param i18n 国际化参数

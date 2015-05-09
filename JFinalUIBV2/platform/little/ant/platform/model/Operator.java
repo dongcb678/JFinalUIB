@@ -23,6 +23,91 @@ public class Operator extends BaseModel<Operator> {
 	public static final Operator dao = new Operator();
 
 	/**
+	 * 主键
+	 */
+	public static final String colunm_ids = "ids";
+	
+	/**
+	 * 版本号
+	 */
+	public static final String colunm_version = "version";
+	
+	/**
+	 * 描述
+	 */
+	public static final String colunm_description = "description";
+	
+	/**
+	 * 名称
+	 */
+	public static final String colunm_names = "names";
+	
+	/**
+	 * url数量 : 一个还是多个url，多个用逗号隔开
+	 */
+	public static final String colunm_onemany = "onemany";
+	
+	/**
+	 * 返回参数keys
+	 */
+	public static final String colunm_returnparamkeys = "returnparamkeys";
+	
+	/**
+	 * 返回url
+	 */
+	public static final String colunm_returnurl = "returnurl";
+	
+	/**
+	 * 是否行级过滤
+	 */
+	public static final String colunm_rowfilter = "rowfilter";
+	
+	/**
+	 * url
+	 */
+	public static final String colunm_url = "url";
+	
+	/**
+	 * 模块ids
+	 */
+	public static final String colunm_moduleids = "moduleids";
+	
+	/**
+	 * 是否分页
+	 */
+	public static final String colunm_splitpage = "splitpage";
+	
+	/**
+	 * 是否重复提交验证
+	 */
+	public static final String colunm_formtoken = "formtoken";
+	
+	/**
+	 * ip黑名单过滤
+	 */
+	public static final String colunm_ipblack = "ipblack";
+	
+	/**
+	 * 是否需要权限验证
+	 */
+	public static final String colunm_privilegess = "privilegess";
+	
+	/**
+	 * 是否记录PV
+	 */
+	public static final String colunm_ispv = "ispv";
+	
+	/**
+	 * pv类型
+	 */
+	public static final String colunm_pvtype = "pvtype";
+	
+	/**
+	 * 模块names
+	 */
+	public static final String colunm_modulenames = "modulenames";
+	
+	/**
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){

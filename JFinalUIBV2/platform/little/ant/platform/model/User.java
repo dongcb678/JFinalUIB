@@ -21,6 +21,106 @@ public class User extends BaseModel<User> {
 	private static Logger log = Logger.getLogger(User.class);
 	
 	public static final User dao = new User();
+
+	/**
+	 * 主键
+	 */
+	public static final String colunm_ids = "ids";
+	
+	/**
+	 * 版本号
+	 */
+	public static final String colunm_version = "version";
+	
+	/**
+	 * 密码连续错误次数
+	 */
+	public static final String colunm_errorcount = "errorcount";
+	
+	/**
+	 * 排序号
+	 */
+	public static final String colunm_orderids = "orderids";
+	
+	/**
+	 * 密码
+	 */
+	public static final String colunm_password = "password";
+	
+	/**
+	 * 密钥
+	 */
+	public static final String colunm_salt = "salt";
+	
+	/**
+	 * 账号状态
+	 */
+	public static final String colunm_status = "status";
+	
+	/**
+	 * 账号停用时间
+	 */
+	public static final String colunm_stopdate = "stopdate";
+	
+	/**
+	 * 账号
+	 */
+	public static final String colunm_username = "username";
+	
+	/**
+	 * 所在部门ids
+	 */
+	public static final String colunm_departmentids = "departmentids";
+	
+	/**
+	 * 用户扩展信息ids
+	 */
+	public static final String colunm_userinfoids = "userinfoids";
+	
+	/**
+	 * 所在岗位ids
+	 */
+	public static final String colunm_stationids = "stationids";
+	
+	/**
+	 * 行级部门ids
+	 */
+	public static final String colunm_deptids = "deptids";
+	
+	/**
+	 * 行级人员ids
+	 */
+	public static final String colunm_userids = "userids";
+	
+	/**
+	 * 所在分组ids
+	 */
+	public static final String colunm_groupids = "groupids";
+	
+	/**
+	 * 所在部门names
+	 */
+	public static final String colunm_departmentnames = "departmentnames";
+	
+	/**
+	 * 所在岗位names
+	 */
+	public static final String colunm_stationnames = "stationnames";
+	
+	/**
+	 * 行级部门names
+	 */
+	public static final String colunm_deptnames = "deptnames";
+	
+	/**
+	 * 行级人员names
+	 */
+	public static final String colunm_usernames = "usernames";
+	
+	/**
+	 * 所在分组names
+	 */
+	public static final String colunm_groupnames = "groupnames";
 	
 	/**
 	 * 关联查询，获取用户详细信息
