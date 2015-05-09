@@ -1,4 +1,4 @@
-package little.ant.platform.junit;
+package little.ant.junit.platform;
 
 import little.ant.platform.model.User;
 

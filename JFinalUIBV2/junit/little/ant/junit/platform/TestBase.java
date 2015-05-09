@@ -1,4 +1,4 @@
-package little.ant.platform.junit;
+package little.ant.junit.platform;
 
 import java.util.HashMap;
 import java.util.Map;
