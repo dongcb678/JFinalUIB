@@ -105,13 +105,15 @@ public class TestBase {
  
     @After
     public void tearDown() throws Exception {
-    	i18NPlugin.stop();
-    	ehCachePlugin.stop();
-    	sqlXmlPlugin.stop();
-    	threadParamInit.stop();
-    	
-    	druidPlugin.stop();
-    	arpMain.stop();
+//    	i18NPlugin.stop();
+//    	ehCachePlugin.stop();
+//    	sqlXmlPlugin.stop();
+//    	threadParamInit.stop();
+//    	
+//    	druidPlugin.stop();
+//    	arpMain.stop();
+//    	
+//    	System.exit(0);
     }
     
 }
