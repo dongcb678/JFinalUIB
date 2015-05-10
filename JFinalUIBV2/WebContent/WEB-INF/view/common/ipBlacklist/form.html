@@ -1,111 +1,28 @@
 
-<div class="form-group">
-	<label class="col-sm-2 control-label">主键</label>
-	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.ids" value="ipBlacklist.ids" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
-
-<div class="form-group">
-	<label class="col-sm-2 control-label">乐观锁</label>
-	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.version" value="ipBlacklist.version" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">ip地址</label>
 	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.ip" value="ipBlacklist.ip" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
+		<input type="text" name="ipBlacklist.ip" value="${ipBlacklist.ip!}" 
+			class="form-control" maxlength="200" vMin="10" vType="length" onblur="platform_verify.onblurVali(this);">
 		<span class="help-inline col-sm-2"></span>
 	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 10-200位任意字符 </span>
 </div>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">到期解除时间</label>
 	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.expiresdate" value="ipBlacklist.expiresdate" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
+		<input type="text" name="ipBlacklist.expiresdate" readonly="readonly" 
+			value='${ipBlacklist.expiresdate!, dateFormat="yyyy-MM-dd"}' 
+  			data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
 		<span class="help-inline col-sm-2"></span>
 	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>  </span>
 </div>
 
-<div class="form-group">
-	<label class="col-sm-2 control-label">创建人</label>
-	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.createuser" value="ipBlacklist.createuser" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
-
-<div class="form-group">
-	<label class="col-sm-2 control-label">创建时间</label>
-	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.createdate" value="ipBlacklist.createdate" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
-
-<div class="form-group">
-	<label class="col-sm-2 control-label">最后修改时间</label>
-	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.updatedate" value="ipBlacklist.updatedate" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
-
-<div class="form-group">
-	<label class="col-sm-2 control-label">最后修改人</label>
-	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.updateuser" value="ipBlacklist.updateuser" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
-
-<div class="form-group">
-	<label class="col-sm-2 control-label">是否逻辑删除</label>
-	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.isdelete" value="ipBlacklist.isdelete" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
-
-<div class="form-group">
-	<label class="col-sm-2 control-label">删除人</label>
-	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.deleteuser" value="ipBlacklist.deleteuser" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
-
-<div class="form-group">
-	<label class="col-sm-2 control-label">删除时间</label>
-	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.deletedate" value="ipBlacklist.deletedate" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
-
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

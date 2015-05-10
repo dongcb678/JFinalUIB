@@ -20,7 +20,7 @@ public class YellowPageService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.yellowPage.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "cms.yellowPage.splitPage");
 	}
 	
 	/**

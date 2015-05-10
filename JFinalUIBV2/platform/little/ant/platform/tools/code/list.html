@@ -26,12 +26,12 @@
 				  	<div class="form-group">
 						<label class="col-sm-2 control-label" for="focusedInput">ccc</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.ccc" value='${escapeXml(paramMap["_query.ccc"])}' maxlength="25" >
+					  		<input class="form-control focused" type="text" name="_query.ccc" value='{escapeXml(paramMap["_query.ccc"])}' maxlength="25" >
 						</div>
 						
 						<label class="col-sm-2 control-label" for="focusedInput">ddd</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.ddd" value='${escapeXml(paramMap["_query.ddd"])}' maxlength="50" >
+					  		<input class="form-control focused" type="text" name="_query.ddd" value='{escapeXml(paramMap["_query.ddd"])}' maxlength="50" >
 						</div>
 				  	</div>
 				  	
@@ -95,7 +95,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<% for(operator in splitPage.list){ %>
+							
 								<tr>
 									<td class="center hidden-xs">
 										<input type="checkbox" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
@@ -118,7 +118,7 @@
 										
 									</td>
 								</tr>
-							<% } %>
+							
 						</tbody>
 					</table>
 					

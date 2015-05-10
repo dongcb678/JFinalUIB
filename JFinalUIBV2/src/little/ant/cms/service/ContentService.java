@@ -20,7 +20,7 @@ public class ContentService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.content.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "cms.content.splitPage");
 	}
 	
 	/**

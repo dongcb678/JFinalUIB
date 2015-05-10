@@ -20,7 +20,7 @@ public class ColumnService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.column.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "cms.column.splitPage");
 	}
 	
 	/**

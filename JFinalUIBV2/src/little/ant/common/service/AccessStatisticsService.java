@@ -20,7 +20,7 @@ public class AccessStatisticsService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.accessStatistics.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "common.accessStatistics.splitPage");
 	}
 	
 	/**

@@ -5,7 +5,7 @@
 	<!-- 分页查询 -->
 	<sql id="splitPage">
 		<![CDATA[ 
-        	from table common_accessstatistics
+        	from common_accessstatistics
 			where 1=1 
 			
     	]]>

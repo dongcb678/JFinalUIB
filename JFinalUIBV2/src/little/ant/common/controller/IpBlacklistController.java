@@ -1,10 +1,10 @@
 package little.ant.common.controller;
 
-import little.ant.platform.annotation.Controller;
-import little.ant.platform.controller.BaseController;
+import little.ant.common.model.IpBlacklist;
 import little.ant.common.service.IpBlacklistService;
 import little.ant.common.validator.IpBlacklistValidator;
-import little.ant.common.model.IpBlacklist;
+import little.ant.platform.annotation.Controller;
+import little.ant.platform.controller.BaseController;
 
 import org.apache.log4j.Logger;
 
@@ -42,7 +42,8 @@ public class IpBlacklistController extends BaseController {
 	 */
 	@Before(IpBlacklistValidator.class)
 	public void save() {
-		getModel(IpBlacklist.class).save();
+		IpBlacklist ipBlacklist = getModel(IpBlacklist.class);
+		IpBlacklistService.service.save(ipBlacklist, getCUserIds());
 		render("/common/ipBlacklist/add.html");
 	}
 	

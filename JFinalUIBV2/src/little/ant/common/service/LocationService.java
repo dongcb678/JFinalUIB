@@ -20,7 +20,7 @@ public class LocationService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.location.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "common.location.splitPage");
 	}
 	
 	/**

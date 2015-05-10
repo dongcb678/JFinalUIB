@@ -20,7 +20,7 @@ public class FavoriteService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.favorite.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "blog.favorite.splitPage");
 	}
 	
 	/**

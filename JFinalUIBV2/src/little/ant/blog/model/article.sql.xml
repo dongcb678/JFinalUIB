@@ -5,7 +5,7 @@
 	<!-- 分页查询 -->
 	<sql id="splitPage">
 		<![CDATA[ 
-        	from table blog_article
+        	from blog_article
 			where 1=1 
 			
     	]]>

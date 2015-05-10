@@ -20,7 +20,7 @@ public class CircleuserService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.circleuser.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "blog.circleuser.splitPage");
 	}
 	
 	/**

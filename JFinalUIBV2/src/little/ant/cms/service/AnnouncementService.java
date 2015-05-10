@@ -20,7 +20,7 @@ public class AnnouncementService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.announcement.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "cms.announcement.splitPage");
 	}
 	
 	/**

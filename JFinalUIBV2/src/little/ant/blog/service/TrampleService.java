@@ -20,7 +20,7 @@ public class TrampleService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.trample.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "blog.trample.splitPage");
 	}
 	
 	/**

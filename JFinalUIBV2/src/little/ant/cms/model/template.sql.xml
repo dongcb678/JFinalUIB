@@ -5,7 +5,7 @@
 	<!-- 分页查询 -->
 	<sql id="splitPage">
 		<![CDATA[ 
-        	from table cms_template
+        	from cms_template
 			where 1=1 
 			
     	]]>

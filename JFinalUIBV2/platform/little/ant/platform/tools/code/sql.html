@@ -5,9 +5,21 @@
 	<!-- 分页查询 -->
 	<sql id="splitPage">
 		<![CDATA[ 
-        	from table ${tableName}
+        	from 
+        		${tableName}
 			where 1=1 
-			
+				
+			<% if(!isEmpty(xxx)){ %>
+					and xxx like #'%$xxx$%'#
+			<% } %>
+				
+			<% if(!isEmpty(yyy)){ %>
+					and yyy = #'$yyy$'#
+			<% } %>
+				
+			<% if(!isEmpty(zzz)){ %>
+					and zzz = #$zzz$#
+			<% } %>
     	]]>
 	</sql>
 	

@@ -5,9 +5,12 @@
 	<!-- 分页查询 -->
 	<sql id="splitPage">
 		<![CDATA[ 
-        	from table common_ipblacklist
+        	from common_ipblacklist
 			where 1=1 
 			
+			<% if(!isEmpty(ip)){ %>
+					and ip like #'%$ip$%'#
+			<% } %>
     	]]>
 	</sql>
 	

@@ -2,13 +2,13 @@
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">xxx</a></li>
-			<li class="active">xxx</li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li class="active">列表</li>
 		</ol>
 	</div>
 </div>
 						
-<form id="splitPage" role="form" class="form-horizontal" action="xxx" method="POST">
+<form id="splitPage" role="form" class="form-horizontal" action="${cxt!}/jf/common/ipBlacklist" method="POST">
 	
 	<div class="row">
 		<div class="col-md-12">
@@ -16,21 +16,132 @@
 			<div class="panel panel-white">
 				
 				<div class="panel-heading">
-					<h4 class="panel-title"><span class="text-bold">xxx</span></h4>
+					<h4 class="panel-title"><span class="text-bold">列表</span></h4>
 					<div class="panel-tools">										
-						xxx
+						<% include("/common/panel-tools.html"){} %>
 					</div>
 				</div>
 				
 				<div class="panel-body">		
 				  	<div class="form-group">
-						<label class="col-sm-2 control-label" for="focusedInput">ccc</label>
-						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.ccc" value='>>该方法未注册(FUNCTION_NOT_FOUND):escapeXml 位于29行 资源:
-<div clas...
-26|			  	<div class="form-group">
-27|						<label class="col-sm-2 control-label" for="focusedInput">ccc</label>
-28|						<div class="col-sm-4">
-29|					  		<input class="form-control focused" type="text" name="_query.ccc" value='${escapeXml(paramMap["_query.ccc"])}' maxlength="25" >
-30|						</div>
-31|						
+						<label class="col-sm-2 control-label" for="focusedInput">IP</label>
+						<div class="col-sm-9">
+					  		<input class="form-control focused" type="text" name="_query.ip" value='${escapeXml(paramMap["_query.ip"])}' maxlength="25" >
+						</div>
+				  	</div>
+				  	
+					<div class="form-group">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>查询</button>
+							<button type="reset" class="btn">清除</button>
+						</div>
+				  	</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">IP黑名单列表</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<%
+					var view = hasPrivilegeUrl("/jf/common/ipBlacklist/view");
+					var edit = hasPrivilegeUrl("/jf/common/ipBlacklist/edit");
+					var delete = hasPrivilegeUrl("/jf/common/ipBlacklist/delete");
+				%>
+				
+				<div class="panel-body">
+					
+					<div class="row">
+						<div class="col-md-12 space20">
+							<% if(hasPrivilegeUrl("/common/ipBlacklist/add.html")){ %>
+								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/common/ipBlacklist/toUrl?toUrl=/common/ipBlacklist/add.html');">
+									添加 <i class="fa fa-plus"></i>
+								</button>
+							<% } %>	
+							
+							<% if(delete == true){ %>
+								<button type="button" class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/common/ipBlacklist/delete"> 
+									删除 <i class="fa fa-trash-o"></i>
+								</button>
+							<% } %>
+						</div>
+					</div>
+					
+					<table class="table table-bordered table-hover" id="dataTable">
+						<thead>
+							<tr>
+								<th class="center hidden-xs" width="50">
+									<input type="checkbox" name="checkAll" onchange="checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'ip')">
+									IP地址
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'expiresdate')">
+									到期解除时间
+								</th>
+								<th class="hidden-xs">
+									操作
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(ipBlacklist in splitPage.list){ %>
+								<tr>
+									<td class="center hidden-xs">
+										<input type="checkbox" name="checkIds" value="" class="flat-grey foocheck">
+									</td>
+									<td>${ipBlacklist.ip}</td>
+									<td>${ipBlacklist.expiresdate !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}</td>
+									<td class="hidden-xs">
+										<% if(view == true){ %>
+											<button type="button" class="btn btn-dark-yellow add-row" onclick="common_ajax.ajaxMainPanel('/jf/common/ipBlacklist/view/${ipBlacklist.ids}');">
+												查看 <i class="fa fa-eye"></i>
+											</button>
+										<% } %>
+										<% if(edit == true){ %>
+											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/common/ipBlacklist/edit/${ipBlacklist.ids}');"> 
+												编辑 <i class="fa fa-edit"></i>
+											</button>
+										<% } %>
+										<% if(delete == true){ %>
+											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/common/ipBlacklist/delete/${ipBlacklist.ids}"> 
+												删除 <i class="fa fa-trash-o"></i>
+											</button>
+										<% } %>
+									</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

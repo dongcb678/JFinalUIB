@@ -5,7 +5,7 @@
 	<!-- 分页查询 -->
 	<sql id="splitPage">
 		<![CDATA[ 
-        	from table cms_job
+        	from cms_job
 			where 1=1 
 			
     	]]>

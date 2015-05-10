@@ -28,20 +28,20 @@ public abstract class GeneratorCodeBase {
 //			{"wx_bb", "DictKeys.db_dataSource_main", "0", "Bb"},
 //			{"wx_cc", "DictKeys.db_dataSource_main", "1", "Cc"} // 生成.sql.xml文件、Model类
 			
-			{"blog_article", "DictKeys.db_dataSource_main", "0", "Article"},
-			{"blog_articlecomment", "DictKeys.db_dataSource_main", "0", "ArticleComment"},
-			{"blog_circle", "DictKeys.db_dataSource_main", "0", "Circle"},
-			{"blog_circleuser", "DictKeys.db_dataSource_main", "0", "Circleuser"},
-			{"blog_favorite", "DictKeys.db_dataSource_main", "0", "Favorite"},
-			{"blog_inform", "DictKeys.db_dataSource_main", "0", "Inform"},
-			{"blog_link", "DictKeys.db_dataSource_main", "0", "Link"},
-			{"blog_message", "DictKeys.db_dataSource_main", "0", "Message"},
-			{"blog_move", "DictKeys.db_dataSource_main", "0", "Move"},
-			{"blog_movecomment", "DictKeys.db_dataSource_main", "0", "MoveComment"},
-			{"blog_newsdeliver", "DictKeys.db_dataSource_main", "0", "NewsDeliver"},
-			{"blog_praise", "DictKeys.db_dataSource_main", "0", "Praise"},
-			{"blog_trample", "DictKeys.db_dataSource_main", "0", "Trample"},
-			{"blog_type", "DictKeys.db_dataSource_main", "0", "Type"},
+//			{"blog_article", "DictKeys.db_dataSource_main", "0", "Article"},
+//			{"blog_articlecomment", "DictKeys.db_dataSource_main", "0", "ArticleComment"},
+//			{"blog_circle", "DictKeys.db_dataSource_main", "0", "Circle"},
+//			{"blog_circleuser", "DictKeys.db_dataSource_main", "0", "Circleuser"},
+//			{"blog_favorite", "DictKeys.db_dataSource_main", "0", "Favorite"},
+//			{"blog_inform", "DictKeys.db_dataSource_main", "0", "Inform"},
+//			{"blog_link", "DictKeys.db_dataSource_main", "0", "Link"},
+//			{"blog_message", "DictKeys.db_dataSource_main", "0", "Message"},
+//			{"blog_move", "DictKeys.db_dataSource_main", "0", "Move"},
+//			{"blog_movecomment", "DictKeys.db_dataSource_main", "0", "MoveComment"},
+//			{"blog_newsdeliver", "DictKeys.db_dataSource_main", "0", "NewsDeliver"},
+//			{"blog_praise", "DictKeys.db_dataSource_main", "0", "Praise"},
+//			{"blog_trample", "DictKeys.db_dataSource_main", "0", "Trample"},
+//			{"blog_type", "DictKeys.db_dataSource_main", "0", "Type"},
 			
 //			{"cms_announcement", "DictKeys.db_dataSource_main", "0", "Announcement"},
 //			{"cms_answers", "DictKeys.db_dataSource_main", "0", "Answers"},
@@ -59,12 +59,12 @@ public abstract class GeneratorCodeBase {
 //			{"cms_voteitem", "DictKeys.db_dataSource_main", "0", "VoteItem"},
 //			{"cms_yellowpage", "DictKeys.db_dataSource_main", "0", "YellowPage"},
 			
-//			{"common_accessstatistics", "DictKeys.db_dataSource_main", "0", "AccessStatistics"},
-//			{"common_ad", "DictKeys.db_dataSource_main", "0", "Ad"},
-//			{"common_ipblacklist", "DictKeys.db_dataSource_main", "0", "IpBlacklist"},
-//			{"common_link", "DictKeys.db_dataSource_main", "0", "Link"},
-//			{"common_location", "DictKeys.db_dataSource_main", "0", "Location"},
-//			{"common_sensitiveword", "DictKeys.db_dataSource_main", "0", "SensitiveWord"}
+			{"common_accessstatistics", "DictKeys.db_dataSource_main", "0", "AccessStatistics"},
+			{"common_ad", "DictKeys.db_dataSource_main", "0", "Ad"},
+			{"common_ipblacklist", "DictKeys.db_dataSource_main", "0", "IpBlacklist"},
+			{"common_link", "DictKeys.db_dataSource_main", "0", "Link"},
+			{"common_location", "DictKeys.db_dataSource_main", "0", "Location"},
+			{"common_sensitiveword", "DictKeys.db_dataSource_main", "0", "SensitiveWord"}
 			
 		};
 	
@@ -79,21 +79,21 @@ public abstract class GeneratorCodeBase {
 	 * 	platform所在的包就是little.ant.platform
 	 * 	weixin所在的包就是little.ant.weixin
 	 */
-	public static String packageBase = "little.ant.blog";
+	public static String packageBase = "little.ant.common";
 	
 	/**
 	 * controller基础路径，例如
 	 * @Controller(controllerKey = "/jf/platform/authImg") 中的platform
 	 * @Controller(controllerKey = "/jf/wx/authImg") 中的wx
 	 */
-	public static String controllerBasePath = "blog";
+	public static String controllerBasePath = "common";
 
 	/**
 	 * render基础路径，例如
 	 * /platform/user/add.jsp 中的platform
 	 * /weiXin/user/list.jsp 中的weiXin
 	 */
-	public static String renderBasePath = "blog";
+	public static String renderBasePath = "common";
 	
 	/**
 	 * 获取表的所有字段名

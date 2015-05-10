@@ -5,7 +5,7 @@
 	<!-- 分页查询 -->
 	<sql id="splitPage">
 		<![CDATA[ 
-        	from table common_sensitiveword
+        	from common_sensitiveword
 			where 1=1 
 			
     	]]>

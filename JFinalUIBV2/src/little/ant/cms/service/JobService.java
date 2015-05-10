@@ -20,7 +20,7 @@ public class JobService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "src.job.splitPage");
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "cms.job.splitPage");
 	}
 	
 	/**
