@@ -11,12 +11,12 @@
 </div>
 
 <div class="form-group">
-	<label class="col-sm-2 control-label">到期解除时间</label>
+	<label class="col-sm-2 control-label">状态</label>
 	<div class="col-sm-7">
-		<input type="text" name="ipBlacklist.expiresdate" readonly="readonly" 
-			value='${ipBlacklist.expiresdate!, dateFormat="yyyy-MM-dd"}' 
-  			data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
-		<span class="help-inline col-sm-2"></span>
+		<select name="ipBlacklist.status" class="combox">
+			<option value="1" ${ipBlacklist.status! == "1" ? "selected='selected'" : "" }>启用</option>
+			<option value="0" ${ipBlacklist.status! == "0" ? "selected='selected'" : "" }>停用</option>
+		</select>
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>  </span>
 </div>

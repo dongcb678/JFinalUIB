@@ -89,8 +89,8 @@
 								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'ip')">
 									IP地址
 								</th>
-								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'expiresdate')">
-									到期解除时间
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'status')">
+									状态
 								</th>
 								<th class="hidden-xs">
 									操作
@@ -104,7 +104,15 @@
 										<input type="checkbox" name="checkIds" value="" class="flat-grey foocheck">
 									</td>
 									<td>${ipBlacklist.ip}</td>
-									<td>${ipBlacklist.expiresdate !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}</td>
+									<td>
+										<% if(ipBlacklist["status"] == "0"){ %>
+												停用
+										<% }else if(ipBlacklist["status"] == "1"){ %>
+												启用
+										<% }else{ %>
+												未知
+										<% } %>
+									</td>
 									<td class="hidden-xs">
 										<% if(view == true){ %>
 											<button type="button" class="btn btn-dark-yellow add-row" onclick="common_ajax.ajaxMainPanel('/jf/common/ipBlacklist/view/${ipBlacklist.ids}');">
