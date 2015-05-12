@@ -2,13 +2,13 @@
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">xxx</a></li>
-			<li class="active">xxx</li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li class="active">访问统计列表</li>
 		</ol>
 	</div>
 </div>
 						
-<form id="splitPage" role="form" class="form-horizontal" action="xxx" method="POST">
+<form id="splitPage" role="form" class="form-horizontal" action="${cxt!}/jf/common/accessStatistics" method="POST">
 	
 	<div class="row">
 		<div class="col-md-12">
@@ -16,9 +16,9 @@
 			<div class="panel panel-white">
 				
 				<div class="panel-heading">
-					<h4 class="panel-title"><span class="text-bold">xxx</span></h4>
+					<h4 class="panel-title"><span class="text-bold">访问统计列表</span></h4>
 					<div class="panel-tools">										
-						xxx
+						<% include("/common/panel-tools.html"){} %>
 					</div>
 				</div>
 				
@@ -32,6 +32,15 @@
 						<label class="col-sm-2 control-label" for="focusedInput">ddd</label>
 						<div class="col-sm-4">
 					  		<input class="form-control focused" type="text" name="_query.ddd" value='{escapeXml(paramMap["_query.ddd"])}' maxlength="50" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label">日期</label>
+						<div class="col-sm-4 input-group">
+					  		<input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.updatedate"])}'
+					  			 data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
+							<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
 						</div>
 				  	</div>
 				  	
