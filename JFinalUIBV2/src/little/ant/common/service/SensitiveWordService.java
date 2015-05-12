@@ -1,6 +1,5 @@
 package little.ant.common.service;
 
-import little.ant.common.model.IpBlacklist;
 import little.ant.common.model.SensitiveWord;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
@@ -32,9 +31,9 @@ public class SensitiveWordService extends BaseService {
 	 * @return
 	 */
 	public String save(SensitiveWord sensitiveWord, String userIds){
-		sensitiveWord.set(IpBlacklist.colunm_createuser, userIds);
-		sensitiveWord.set(IpBlacklist.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
-		sensitiveWord.set(IpBlacklist.colunm_isdelete, "0");
+		sensitiveWord.set(SensitiveWord.colunm_createuser, userIds);
+		sensitiveWord.set(SensitiveWord.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
+		sensitiveWord.set(SensitiveWord.colunm_isdelete, "0");
 		sensitiveWord.save();
 		return sensitiveWord.getPKValue();
 	}

@@ -1,7 +1,6 @@
 package little.ant.common.service;
 
 import little.ant.common.model.Ad;
-import little.ant.common.model.IpBlacklist;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -32,9 +31,9 @@ public class AdService extends BaseService {
 	 * @return
 	 */
 	public String save(Ad ad, String userIds){
-		ad.set(IpBlacklist.colunm_createuser, userIds);
-		ad.set(IpBlacklist.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
-		ad.set(IpBlacklist.colunm_isdelete, "0");
+		ad.set(Ad.colunm_createuser, userIds);
+		ad.set(Ad.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
+		ad.set(Ad.colunm_isdelete, "0");
 		ad.save();
 		return ad.getPKValue();
 	}

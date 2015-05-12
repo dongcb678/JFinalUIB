@@ -42,7 +42,8 @@ public class AdController extends BaseController {
 	 */
 	@Before(AdValidator.class)
 	public void save() {
-		getModel(Ad.class).save();
+		Ad ad = getModel(Ad.class);
+		AdService.service.save(ad, getCUserIds());
 		render("/common/ad/add.html");
 	}
 	

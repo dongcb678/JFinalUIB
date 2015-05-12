@@ -1,13 +1,12 @@
 package little.ant.common.service;
 
-import org.apache.log4j.Logger;
-
+import little.ant.common.model.Location;
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.tools.ToolDateTime;
-import little.ant.platform.common.SplitPage;
-import little.ant.platform.common.DictKeys;
-import little.ant.common.model.IpBlacklist;
-import little.ant.common.model.Location;
+
+import org.apache.log4j.Logger;
 
 public class LocationService extends BaseService {
 
@@ -32,9 +31,9 @@ public class LocationService extends BaseService {
 	 * @return
 	 */
 	public String save(Location location, String userIds){
-		location.set(IpBlacklist.colunm_createuser, userIds);
-		location.set(IpBlacklist.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
-		location.set(IpBlacklist.colunm_isdelete, "0");
+		location.set(Location.colunm_createuser, userIds);
+		location.set(Location.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
+		location.set(Location.colunm_isdelete, "0");
 		location.save();
 		return location.getPKValue();
 	}

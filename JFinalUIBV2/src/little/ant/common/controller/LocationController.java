@@ -43,7 +43,7 @@ public class LocationController extends BaseController {
 	@Before(LocationValidator.class)
 	public void save() {
 		Location location = getModel(Location.class);
-		location.save();
+		LocationService.service.save(location, getCUserIds());
 		render("/common/location/add.html");
 	}
 	

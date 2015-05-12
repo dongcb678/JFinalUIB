@@ -2,39 +2,29 @@
 <div class="form-group">
 	<label class="col-sm-2 control-label">名称</label>
 	<div class="col-sm-7">
-		<input type="text" name="link.name" value="link.name" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
+		<input type="text" name="link.name" value="${link.name!}" 
+			class="form-control" maxlength="10" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);">
 		<span class="help-inline col-sm-2"></span>
 	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 2-20位任意字符 </span>
 </div>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">链接地址</label>
 	<div class="col-sm-7">
-		<input type="text" name="link.url" value="link.url" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
+		<input type="text" name="link.url" value="${link.url!}" 
+			class="form-control" maxlength="50" vMin="13" vType="length" onblur="platform_verify.onblurVali(this);">
 		<span class="help-inline col-sm-2"></span>
 	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 13-50位任意字符 </span>
 </div>
 
 <div class="form-group">
-	<label class="col-sm-2 control-label">logo图片</label>
+	<label class="col-sm-2 control-label">排序</label>
 	<div class="col-sm-7">
-		<input type="text" name="link.logo" value="link.logo" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
+		<input type="text" name="link.sort" value="${link.sort!}" 
+			class="form-control" maxlength="5" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 		<span class="help-inline col-sm-2"></span>
 	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
-</div>
-
-<div class="form-group">
-	<label class="col-sm-2 control-label">上传文件ids</label>
-	<div class="col-sm-7">
-		<input type="text" name="link.uploadids" value="link.uploadids" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
-		<span class="help-inline col-sm-2"></span>
-	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-5位数字 </span>
 </div>

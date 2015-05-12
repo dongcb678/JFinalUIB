@@ -11,17 +11,8 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 
 /**
- * XXX 管理	
+ * 友情链接管理 管理	
  * 描述：
- * 
- * /jf/common/link
- * /jf/common/link/save
- * /jf/common/link/edit
- * /jf/common/link/update
- * /jf/common/link/view
- * /jf/common/link/delete
- * /common/link/add.html
- * 
  */
 @Controller(controllerKey = "/jf/common/link")
 public class LinkController extends BaseController {
@@ -42,7 +33,8 @@ public class LinkController extends BaseController {
 	 */
 	@Before(LinkValidator.class)
 	public void save() {
-		getModel(Link.class).save();
+		Link link = getModel(Link.class);
+		LinkService.service.save(link, getCUserIds());
 		render("/common/link/add.html");
 	}
 	

@@ -11,17 +11,8 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 
 /**
- * XXX 管理	
+ * 敏感词 管理	
  * 描述：
- * 
- * /jf/common/sensitiveWord
- * /jf/common/sensitiveWord/save
- * /jf/common/sensitiveWord/edit
- * /jf/common/sensitiveWord/update
- * /jf/common/sensitiveWord/view
- * /jf/common/sensitiveWord/delete
- * /common/sensitiveWord/add.html
- * 
  */
 @Controller(controllerKey = "/jf/common/sensitiveWord")
 public class SensitiveWordController extends BaseController {
@@ -42,7 +33,8 @@ public class SensitiveWordController extends BaseController {
 	 */
 	@Before(SensitiveWordValidator.class)
 	public void save() {
-		getModel(SensitiveWord.class).save();
+		SensitiveWord sensitiveWord = getModel(SensitiveWord.class);
+		SensitiveWordService.service.save(sensitiveWord, getCUserIds());
 		render("/common/sensitiveWord/add.html");
 	}
 	
