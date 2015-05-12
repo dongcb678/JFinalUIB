@@ -42,7 +42,8 @@ public class LocationController extends BaseController {
 	 */
 	@Before(LocationValidator.class)
 	public void save() {
-		getModel(Location.class).save();
+		Location location = getModel(Location.class);
+		location.save();
 		render("/common/location/add.html");
 	}
 	

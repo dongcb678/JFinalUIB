@@ -1,11 +1,13 @@
 package little.ant.common.service;
 
-import org.apache.log4j.Logger;
-
-import little.ant.platform.service.BaseService;
-import little.ant.platform.common.SplitPage;
-import little.ant.platform.common.DictKeys;
+import little.ant.common.model.IpBlacklist;
 import little.ant.common.model.SensitiveWord;
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.SplitPage;
+import little.ant.platform.service.BaseService;
+import little.ant.platform.tools.ToolDateTime;
+
+import org.apache.log4j.Logger;
 
 public class SensitiveWordService extends BaseService {
 
@@ -22,7 +24,21 @@ public class SensitiveWordService extends BaseService {
 		String select = " select * ";
 		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "common.sensitiveWord.splitPage");
 	}
-	
+
+	/**
+	 * 保存
+	 * @param sensitiveWord
+	 * @param userIds
+	 * @return
+	 */
+	public String save(SensitiveWord sensitiveWord, String userIds){
+		sensitiveWord.set(IpBlacklist.colunm_createuser, userIds);
+		sensitiveWord.set(IpBlacklist.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
+		sensitiveWord.set(IpBlacklist.colunm_isdelete, "0");
+		sensitiveWord.save();
+		return sensitiveWord.getPKValue();
+	}
+
 	/**
 	 * 删除
 	 * @param ids
