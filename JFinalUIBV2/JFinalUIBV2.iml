@@ -23,6 +23,7 @@
       <src_folder value="file://$MODULE_DIR$/platform" expected_position="1" />
       <src_folder value="file://$MODULE_DIR$/weiXin" expected_position="2" />
       <src_folder value="file://$MODULE_DIR$/jfinal19" expected_position="3" />
+      <src_folder value="file://$MODULE_DIR$/junit" expected_position="4" />
     </src_description>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
@@ -33,10 +34,18 @@
       <sourceFolder url="file://$MODULE_DIR$/platform" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/weiXin" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jfinal19" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/junit" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.web.container" level="application" />
-    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.module.container" level="application" />
+    <orderEntry type="module-library">
+      <library name="junit4">
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="module-library">
       <library name="c3p0-0.9.1.2.jar">
         <CLASSES>
@@ -154,7 +163,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="module-library">
       <library name="javax.servlet.jsp-2.3.2.jar">
         <CLASSES>
