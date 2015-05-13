@@ -40,7 +40,7 @@
 </div>
 
 <div class="form-group">
-	<label class="col-sm-2 control-label">状态（是否启用） : 0否，1是</label>
+	<label class="col-sm-2 control-label">状态</label>
 	<div class="col-sm-7">
 		<select name="location.status" class="combox">
 			<option value="1" ${location.status! == "1" ? "selected='selected'" : "" }>启用</option>
@@ -54,7 +54,7 @@
 	<label class="col-sm-2 control-label">描述</label>
 	<div class="col-sm-7">
 		<input type="text" name="location.description" value="${location.description!}" 
-			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
+			class="form-control" maxlength="1000" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);">
 		<span class="help-inline col-sm-2"></span>
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>

@@ -11,17 +11,8 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 
 /**
- * XXX 管理	
+ * 广告位置管理	
  * 描述：
- * 
- * /jf/common/location
- * /jf/common/location/save
- * /jf/common/location/edit
- * /jf/common/location/update
- * /jf/common/location/view
- * /jf/common/location/delete
- * /common/location/add.html
- * 
  */
 @Controller(controllerKey = "/jf/common/location")
 public class LocationController extends BaseController {
