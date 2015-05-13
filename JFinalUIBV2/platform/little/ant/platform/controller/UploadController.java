@@ -46,4 +46,21 @@ public class UploadController extends BaseController {
 		renderJson(list);
 	}
 	
+	/**
+	 * 文件列表
+	 */
+	public void list() {
+		UploadService.service.list(splitPage);
+		render("/platform/upload/list.html");
+	}
+
+	/**
+	 * 删除文件
+	 */
+	public void delete() {
+		UploadService.service.delete(getPara() == null ? ids : getPara());
+		redirect("/jf/platform/upload/list");
+	}
+
+	
 }

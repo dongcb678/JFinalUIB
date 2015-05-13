@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Upload;
 
 import org.apache.log4j.Logger;
@@ -41,6 +43,26 @@ public class UploadService extends BaseService {
 			list.add(map);
 		}
 		return list;
+	}
+	
+	/**
+	 * 分页
+	 * @param splitPage
+	 */
+	public void list(SplitPage splitPage){
+		String select = " select * ";
+		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.upload.splitPage");
+	}
+
+	/**
+	 * 删除
+	 * @param ids
+	 */
+	public void delete(String ids){
+		String[] idsArr = splitByComma(ids);
+		for (String logIds : idsArr) {
+			Upload.dao.deleteById(logIds);
+		}
 	}
 	
 }
