@@ -47,11 +47,8 @@ public class GeneratorByPostgreSQL extends GeneratorCodeBase {
 				*/
 				
 				// 生成视图文件
-				base.add(classNameSmall);
 				base.form(classNameSmall, tableName);
-				base.update(classNameSmall);
 				base.view(classNameSmall, tableName);
-				base.list(classNameSmall, tableName);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

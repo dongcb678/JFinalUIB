@@ -43,28 +43,28 @@ public abstract class GeneratorCodeBase {
 //			{"blog_trample", "DictKeys.db_dataSource_main", "0", "Trample"},
 //			{"blog_type", "DictKeys.db_dataSource_main", "0", "Type"},
 			
-//			{"cms_announcement", "DictKeys.db_dataSource_main", "0", "Announcement"},
-//			{"cms_answers", "DictKeys.db_dataSource_main", "0", "Answers"},
-//			{"cms_column", "DictKeys.db_dataSource_main", "0", "Column"},
-//			{"cms_comment", "DictKeys.db_dataSource_main", "0", "Comment"},
-//			{"cms_content", "DictKeys.db_dataSource_main", "0", "Content"},
-//			{"cms_download", "DictKeys.db_dataSource_main", "0", "Download"},
-//			{"cms_job", "DictKeys.db_dataSource_main", "0", "Job"},
-//			{"cms_library", "DictKeys.db_dataSource_main", "0", "Library"},
-//			{"cms_photogallery", "DictKeys.db_dataSource_main", "0", "Photogallery"},
-//			{"cms_photogalleryitem", "DictKeys.db_dataSource_main", "0", "PhotogalleryItem"},
-//			{"cms_questions", "DictKeys.db_dataSource_main", "0", "Questions"},
-//			{"cms_template", "DictKeys.db_dataSource_main", "0", "Template"},
-//			{"cms_vote", "DictKeys.db_dataSource_main", "0", "Vote"},
-//			{"cms_voteitem", "DictKeys.db_dataSource_main", "0", "VoteItem"},
-//			{"cms_yellowpage", "DictKeys.db_dataSource_main", "0", "YellowPage"},
+			{"cms_announcement", "DictKeys.db_dataSource_main", "0", "Announcement"},
+			{"cms_answers", "DictKeys.db_dataSource_main", "0", "Answers"},
+			{"cms_column", "DictKeys.db_dataSource_main", "0", "Column"},
+			{"cms_comment", "DictKeys.db_dataSource_main", "0", "Comment"},
+			{"cms_content", "DictKeys.db_dataSource_main", "0", "Content"},
+			{"cms_download", "DictKeys.db_dataSource_main", "0", "Download"},
+			{"cms_job", "DictKeys.db_dataSource_main", "0", "Job"},
+			{"cms_library", "DictKeys.db_dataSource_main", "0", "Library"},
+			{"cms_photogallery", "DictKeys.db_dataSource_main", "0", "Photogallery"},
+			{"cms_photogalleryitem", "DictKeys.db_dataSource_main", "0", "PhotogalleryItem"},
+			{"cms_questions", "DictKeys.db_dataSource_main", "0", "Questions"},
+			{"cms_template", "DictKeys.db_dataSource_main", "0", "Template"},
+			{"cms_vote", "DictKeys.db_dataSource_main", "0", "Vote"},
+			{"cms_voteitem", "DictKeys.db_dataSource_main", "0", "VoteItem"},
+			{"cms_yellowpage", "DictKeys.db_dataSource_main", "0", "YellowPage"},
 			
-			{"common_accessstatistics", "DictKeys.db_dataSource_main", "0", "AccessStatistics"},
-			{"common_ad", "DictKeys.db_dataSource_main", "0", "Ad"},
-			{"common_ipblacklist", "DictKeys.db_dataSource_main", "0", "IpBlacklist"},
-			{"common_link", "DictKeys.db_dataSource_main", "0", "Link"},
-			{"common_location", "DictKeys.db_dataSource_main", "0", "Location"},
-			{"common_sensitiveword", "DictKeys.db_dataSource_main", "0", "SensitiveWord"}
+//			{"common_accessstatistics", "DictKeys.db_dataSource_main", "0", "AccessStatistics"},
+//			{"common_ad", "DictKeys.db_dataSource_main", "0", "Ad"},
+//			{"common_ipblacklist", "DictKeys.db_dataSource_main", "0", "IpBlacklist"},
+//			{"common_link", "DictKeys.db_dataSource_main", "0", "Link"},
+//			{"common_location", "DictKeys.db_dataSource_main", "0", "Location"},
+//			{"common_sensitiveword", "DictKeys.db_dataSource_main", "0", "SensitiveWord"}
 			
 		};
 	
@@ -79,21 +79,21 @@ public abstract class GeneratorCodeBase {
 	 * 	platform所在的包就是little.ant.platform
 	 * 	weixin所在的包就是little.ant.weixin
 	 */
-	public static String packageBase = "little.ant.common";
+	public static String packageBase = "little.ant.cms";
 	
 	/**
 	 * controller基础路径，例如
 	 * @Controller(controllerKey = "/jf/platform/authImg") 中的platform
 	 * @Controller(controllerKey = "/jf/wx/authImg") 中的wx
 	 */
-	public static String controllerBasePath = "common";
+	public static String controllerBasePath = "cms";
 
 	/**
 	 * render基础路径，例如
 	 * /platform/user/add.jsp 中的platform
 	 * /weiXin/user/list.jsp 中的weiXin
 	 */
-	public static String renderBasePath = "common";
+	public static String renderBasePath = "cms";
 	
 	/**
 	 * 获取表的所有字段名
@@ -203,18 +203,6 @@ public abstract class GeneratorCodeBase {
 	}
 	
 	/**
-	 * 生成add.html
-	 * @param classNameSmall
-	 */
-	public void add(String classNameSmall){
-		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("classNameSmall", classNameSmall);
-		
-		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/add.html";
-		createFileByTemplete("add.html", paraMap, filePath);
-	}
-
-	/**
 	 * 生成form.html
 	 * @param classNameSmall
 	 * @param tableName
@@ -230,18 +218,6 @@ public abstract class GeneratorCodeBase {
 	}
 
 	/**
-	 * 生成update.html
-	 * @param classNameSmall
-	 */
-	public void update(String classNameSmall){
-		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("classNameSmall", classNameSmall);
-		
-		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/update.html";
-		createFileByTemplete("update.html", paraMap, filePath);
-	}
-
-	/**
 	 * 生成view.html
 	 * @param classNameSmall
 	 * @param tableName
@@ -254,21 +230,6 @@ public abstract class GeneratorCodeBase {
 		
 		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/view.html";
 		createFileByTemplete("view.html", paraMap, filePath);
-	}
-
-	/**
-	 * 生成list.html
-	 * @param classNameSmall
-	 * @param tableName
-	 */
-	public void list(String classNameSmall, String tableName){
-		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("classNameSmall", classNameSmall);
-		paraMap.put("colunmList", getColunm(tableName));
-		paraMap.put("descList", getDesc(tableName));
-		
-		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/list.html";
-		createFileByTemplete("list.html", paraMap, filePath);
 	}
 
 	/**

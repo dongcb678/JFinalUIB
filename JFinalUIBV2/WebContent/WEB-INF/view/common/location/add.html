@@ -2,8 +2,8 @@
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">zzz</a></li>
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('');">zzz</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/common/location');">广告位置</a></li>
 			<li class="active">添加</li>
 		</ol>
 	</div>
@@ -17,22 +17,22 @@
 			<div class="panel-heading">
 				<h4 class="panel-title"><span class="text-bold">添加</span></h4>
 				<div class="panel-tools">										
-					xxx
+					<% include("/common/panel-tools.html"){} %>
 				</div>
 			</div>
 			
 			<div class="panel-body">	
-				<form id="editForm" action="" method="POST" role="form" class="form-horizontal">
+				<form id="editForm" action="${cxt!}/jf/common/location/save" method="POST" role="form" class="form-horizontal">
 					
-					xxxx
+					<% include("/common/location/form.html"){} %>
 					
 					<div class="form-group">
 						<div class="col-sm-2 col-sm-offset-3">
-							xxx
+							<% if(hasPrivilegeUrl("/jf/common/location/save")){ %>
 								<button type="button" class="btn btn-red" onclick="platform_verify.formValiSubmit(this.form);">
-									xxxx	<i class="fa fa-arrow-circle-right"></i>
+									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
 								</button>
-							xxx
+							<% } %>
 						</div>
 					</div>
 				</form>
