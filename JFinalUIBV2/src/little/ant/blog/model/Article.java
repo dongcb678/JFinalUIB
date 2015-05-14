@@ -21,118 +21,141 @@ public class Article extends BaseModel<Article> {
 	public static final Article dao = new Article();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 乐观锁
-	*/
+	 * 字段描述：乐观锁 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	* 创建人
-	*/
+	 * 字段描述：创建人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_createuser = "createuser";
 	
 	/**
-	* 创建时间
-	*/
+	 * 字段描述：创建时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_createdate = "createdate";
 	
 	/**
-	* 最后更新人
-	*/
+	 * 字段描述：最后更新人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_updateuser = "updateuser";
 	
 	/**
-	* 最后更新时间
-	*/
+	 * 字段描述：最后更新时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_updatedate = "updatedate";
 	
 	/**
-	* 是否删除
-	*/
+	 * 字段描述：是否删除 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_isdelete = "isdelete";
 	
 	/**
-	* 删除人
-	*/
+	 * 字段描述：删除人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_deleteuser = "deleteuser";
 	
 	/**
-	* 删除时间
-	*/
+	 * 字段描述：删除时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_deletedate = "deletedate";
 	
 	/**
-	* 是否草稿 : 0否，1是
-	*/
+	 * 字段描述：是否草稿 : 0否，1是 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_draft = "draft";
 	
 	/**
-	* 标题
-	*/
+	 * 字段描述：标题 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_title = "title";
 	
 	/**
-	* 摘要
-	*/
+	 * 字段描述：摘要 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_digest = "digest";
 	
 	/**
-	* 关键字
-	*/
+	 * 字段描述：关键字 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_keyword = "keyword";
 	
 	/**
-	* 内容
-	*/
+	 * 字段描述：内容 
+	 * 字段类型 ：text 
+	 */
 	public static final String colunm_content = "content";
 	
 	/**
-	* 评论范围 : 0游客和注册用户，1注册用户，2禁止评论
-	*/
+	 * 字段描述：评论范围 : 0游客和注册用户，1注册用户，2禁止评论 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_commentsrange = "commentsrange";
 	
 	/**
-	* 置顶 : 0否，1是
-	*/
+	 * 字段描述：置顶 : 0否，1是 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_stick = "stick";
 	
 	/**
-	* 原创 : 0否，1是
-	*/
+	 * 字段描述：原创 : 0否，1是 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_original = "original";
 	
 	/**
-	* 浏览次数
-	*/
+	 * 字段描述：浏览次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_viewcount = "viewcount";
 	
 	/**
-	* 评论次数
-	*/
+	 * 字段描述：评论次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_commentcount = "commentcount";
 	
 	/**
-	* 收藏次数
-	*/
+	 * 字段描述：收藏次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_favoritecount = "favoritecount";
 	
 	/**
-	* 点赞次数
-	*/
+	 * 字段描述：点赞次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_praisecount = "praisecount";
 	
 	/**
-	* 踩次数
-	*/
+	 * 字段描述：踩次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_tramplecount = "tramplecount";
 	
 	/**
-	* 分类主键
-	*/
+	 * 字段描述：分类主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_typeids = "typeids";
 	
 	

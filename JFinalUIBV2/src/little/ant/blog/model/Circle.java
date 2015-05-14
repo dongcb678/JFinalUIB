@@ -21,68 +21,81 @@ public class Circle extends BaseModel<Circle> {
 	public static final Circle dao = new Circle();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 乐观锁
-	*/
+	 * 字段描述：乐观锁 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	* 圈子名称
-	*/
+	 * 字段描述：圈子名称 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_name = "name";
 	
 	/**
-	* 创建人
-	*/
+	 * 字段描述：创建人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_createuser = "createuser";
 	
 	/**
-	* 创建时间
-	*/
+	 * 字段描述：创建时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_createdate = "createdate";
 	
 	/**
-	* 最后修改人
-	*/
+	 * 字段描述：最后修改人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_updateuser = "updateuser";
 	
 	/**
-	* 最后修改时间
-	*/
+	 * 字段描述：最后修改时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_updatedate = "updatedate";
 	
 	/**
-	* 是否删除
-	*/
+	 * 字段描述：是否删除 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_isdelete = "isdelete";
 	
 	/**
-	* 删除人
-	*/
+	 * 字段描述：删除人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_deleteuser = "deleteuser";
 	
 	/**
-	* 删除时间
-	*/
+	 * 字段描述：删除时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_deletedate = "deletedate";
 	
 	/**
-	* 浏览次数
-	*/
+	 * 字段描述：浏览次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_viewcount = "viewcount";
 	
 	/**
-	* 圈子url
-	*/
+	 * 字段描述：圈子url 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_url = "url";
 	
 	/**
-	* 圈子管理员 : 多个逗号隔开，最多十个
-	*/
+	 * 字段描述：圈子管理员 : 多个逗号隔开，最多十个 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_manageuser = "manageuser";
 	
 	

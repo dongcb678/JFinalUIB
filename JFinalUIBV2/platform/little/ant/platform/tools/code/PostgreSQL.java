@@ -10,14 +10,18 @@ import java.util.List;
 
 import little.ant.platform.tools.ToolString;
 
-public class GeneratorByPostgreSQL extends GeneratorCodeBase {
+/**
+ * 定制PG下的代码生成
+ * @author 董华健
+ */
+public class PostgreSQL extends Base {
 
 	/**
 	 * 循环生成文件
 	 */
 	public static void main(String[] args) {
+		Base base = new PostgreSQL();
 		try {
-			GeneratorCodeBase base = new GeneratorByPostgreSQL();
 			for (int i = 0; i < tableArr.length; i++) {
 				// 表名
 				String tableName = tableArr[i][0]; 
@@ -29,26 +33,29 @@ public class GeneratorByPostgreSQL extends GeneratorCodeBase {
 				String className = tableArr[i][3]; 
 				// 类名首字母小写
 				String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
-				/*
-				// 1.生成sql文件
-				base.sql(classNameSmall, tableName); 
-				// 2.生成model
-				base.model(className, classNameSmall, dataSource, tableName); 
 				
-				// 是否生成Controller相关
-				if(generController.equals("0")){
-					// 3.生成validator
-					base.validator(className, classNameSmall); 
-					// 4.生成controller
-					base.controller(className, classNameSmall); 
-					// 5.生成service
-					base.service(className, classNameSmall); 
-				}
-				*/
+//				// 1.生成sql文件
+//				base.sql(classNameSmall, tableName); 
+				
+				// 2.生成model
+//				base.model(className, classNameSmall, dataSource, tableName); 
+				
+//				// 6.生成DTO
+//				base.dto(className, classNameSmall, dataSource, tableName); 
+//				
+//				// 是否生成Controller相关
+//				if(generController.equals("0")){
+//					// 3.生成validator
+//					base.validator(className, classNameSmall); 
+//					// 4.生成controller
+//					base.controller(className, classNameSmall); 
+//					// 5.生成service
+//					base.service(className, classNameSmall); 
+//				}
 				
 				// 生成视图文件
-				base.form(classNameSmall, tableName);
-				base.view(classNameSmall, tableName);
+//				base.form(classNameSmall, tableName);
+//				base.view(classNameSmall, tableName);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,7 +63,6 @@ public class GeneratorByPostgreSQL extends GeneratorCodeBase {
 			System.exit(0);
 		}
 		
-//		GeneratorCodeBase base = new GeneratorByPostgreSQL();
 //		List<String> list = base.getDesc("blog_link");
 //		for (String desc : list) {
 //			System.out.println(desc);
@@ -64,7 +70,7 @@ public class GeneratorByPostgreSQL extends GeneratorCodeBase {
 	}
 
 	@Override
-	public List<String> getColunm(String tableName) {
+	public List<Column> getColunm(String tableName) {
 		try {
 			Class.forName("org.postgresql.Driver");
 		} catch (java.lang.ClassNotFoundException e) {
@@ -79,16 +85,29 @@ public class GeneratorByPostgreSQL extends GeneratorCodeBase {
 		Statement stmt = null;
 		ResultSet rs = null;
 		
-		List<String> list = new ArrayList<String>();
+		List<Column> list = new ArrayList<Column>();
 		
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
 			stmt = (Statement) conn.createStatement();
 
-			rs = (ResultSet) stmt.executeQuery("select column_name from information_schema.columns where table_name = '"+tableName+"'");
+			rs = (ResultSet) stmt.executeQuery("select column_name, data_type from information_schema.columns where table_name = '"+tableName+"'");
 			while (rs.next()) {
 				String column_name = rs.getString("column_name");
-				list.add(column_name);
+				String data_type = rs.getString("data_type");
+				
+				Column table = new Column();
+				table.setTable_name(tableName);
+				table.setColumn_name(column_name);
+				table.setColumn_type(data_type);
+				list.add(table);
+			}
+			
+			List<String> listDesc = getDesc(tableName);
+			for (int i = 0; i < list.size(); i++) {
+				Column column = list.get(i);
+				column.setTable_desc(listDesc.get(0));
+				column.setColumn_desc(listDesc.get(i+1));
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -175,5 +194,23 @@ public class GeneratorByPostgreSQL extends GeneratorCodeBase {
 		
 		return list;
 	}
-
+	
+	@Override
+	public String getJavaDataType(String columnType){
+		String javaDataType = null;
+		if(columnType.indexOf("char") != -1 || columnType.indexOf("text") != -1){
+			javaDataType = "String";
+			
+		} else if(columnType.indexOf("int") != -1){
+			javaDataType = "long";
+			
+		} else if(columnType.indexOf("time") != -1 || columnType.indexOf("date") != -1){
+			javaDataType = "Date";
+			
+		} else if(columnType.indexOf("byte") != -1 || columnType.indexOf("text") != -1){
+			javaDataType = "byte[]";
+		}
+		
+		return javaDataType;
+	}
 }

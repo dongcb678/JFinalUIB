@@ -21,59 +21,70 @@ public class IpBlacklist extends BaseModel<IpBlacklist> {
 	public static final IpBlacklist dao = new IpBlacklist();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 乐观锁
-	*/
+	 * 字段描述：乐观锁 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	* ip地址
-	*/
+	 * 字段描述：ip地址 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ip = "ip";
 	
 	/**
-	* 到期解除时间
-	*/
-	public static final String colunm_expiresdate = "expiresdate";
-	
-	/**
-	* 创建人
-	*/
+	 * 字段描述：创建人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_createuser = "createuser";
 	
 	/**
-	* 创建时间
-	*/
+	 * 字段描述：创建时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_createdate = "createdate";
 	
 	/**
-	* 最后修改时间
-	*/
+	 * 字段描述：最后修改时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_updatedate = "updatedate";
 	
 	/**
-	* 最后修改人
-	*/
+	 * 字段描述：最后修改人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_updateuser = "updateuser";
 	
 	/**
-	* 是否逻辑删除
-	*/
+	 * 字段描述：是否逻辑删除 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_isdelete = "isdelete";
 	
 	/**
-	* 删除人
-	*/
+	 * 字段描述：删除人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_deleteuser = "deleteuser";
 	
 	/**
-	* 删除时间
-	*/
+	 * 字段描述：删除时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_deletedate = "deletedate";
+	
+	/**
+	 * 字段描述：状态：0停用，1启用 
+	 * 字段类型 ：character 
+	 */
+	public static final String colunm_status = "status";
 	
 	
 }

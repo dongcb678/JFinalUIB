@@ -21,73 +21,87 @@ public class Move extends BaseModel<Move> {
 	public static final Move dao = new Move();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 乐观锁
-	*/
+	 * 字段描述：乐观锁 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	* 内容
-	*/
+	 * 字段描述：内容 
+	 * 字段类型 ：text 
+	 */
 	public static final String colunm_content = "content";
 	
 	/**
-	* 创建人
-	*/
+	 * 字段描述：创建人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_createuser = "createuser";
 	
 	/**
-	* 创建时间
-	*/
+	 * 字段描述：创建时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_createdate = "createdate";
 	
 	/**
-	* 修改人
-	*/
+	 * 字段描述：修改人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_updateuser = "updateuser";
 	
 	/**
-	* 修改时间
-	*/
+	 * 字段描述：修改时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_updatedate = "updatedate";
 	
 	/**
-	* 是否逻辑删除 : 0否，1是
-	*/
+	 * 字段描述：是否逻辑删除 : 0否，1是 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_isdelete = "isdelete";
 	
 	/**
-	* 删除人
-	*/
+	 * 字段描述：删除人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_deleteuser = "deleteuser";
 	
 	/**
-	* 删除时间
-	*/
+	 * 字段描述：删除时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_deletedate = "deletedate";
 	
 	/**
-	* 浏览次数
-	*/
+	 * 字段描述：浏览次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_viewcount = "viewcount";
 	
 	/**
-	* 评论次数
-	*/
+	 * 字段描述：评论次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_commentcount = "commentcount";
 	
 	/**
-	* 点赞次数
-	*/
+	 * 字段描述：点赞次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_praisecount = "praisecount";
 	
 	/**
-	* 踩次数
-	*/
+	 * 字段描述：踩次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_tramplecount = "tramplecount";
 	
 	

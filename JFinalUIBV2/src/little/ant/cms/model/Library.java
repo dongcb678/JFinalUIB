@@ -21,38 +21,45 @@ public class Library extends BaseModel<Library> {
 	public static final Library dao = new Library();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 作者
-	*/
+	 * 字段描述：作者 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_author = "author";
 	
 	/**
-	* 来源
-	*/
+	 * 字段描述：来源 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_source = "source";
 	
 	/**
-	* 来源url
-	*/
+	 * 字段描述：来源url 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_url = "url";
 	
 	/**
-	* 上传文档ids
-	*/
+	 * 字段描述：上传文档ids 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_uploadids = "uploadids";
 	
 	/**
-	* 文档路径
-	*/
+	 * 字段描述：文档路径 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_path = "path";
 	
 	/**
-	* 内容主键
-	*/
+	 * 字段描述：内容主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_contentids = "contentids";
 	
 	

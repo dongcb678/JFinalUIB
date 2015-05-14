@@ -18,7 +18,7 @@ import org.beetl.core.BeetlKit;
  * 
  * @author 董华健
  */
-public abstract class GeneratorCodeBase {
+public abstract class Base {
 
 	/**
 	 * 二维数组说明：表名、数据源、是否生成Controller相关、类名（不包含.java）
@@ -43,21 +43,21 @@ public abstract class GeneratorCodeBase {
 //			{"blog_trample", "DictKeys.db_dataSource_main", "0", "Trample"},
 //			{"blog_type", "DictKeys.db_dataSource_main", "0", "Type"},
 			
-			{"cms_announcement", "DictKeys.db_dataSource_main", "0", "Announcement"},
-			{"cms_answers", "DictKeys.db_dataSource_main", "0", "Answers"},
-			{"cms_column", "DictKeys.db_dataSource_main", "0", "Column"},
-			{"cms_comment", "DictKeys.db_dataSource_main", "0", "Comment"},
-			{"cms_content", "DictKeys.db_dataSource_main", "0", "Content"},
-			{"cms_download", "DictKeys.db_dataSource_main", "0", "Download"},
-			{"cms_job", "DictKeys.db_dataSource_main", "0", "Job"},
-			{"cms_library", "DictKeys.db_dataSource_main", "0", "Library"},
-			{"cms_photogallery", "DictKeys.db_dataSource_main", "0", "Photogallery"},
-			{"cms_photogalleryitem", "DictKeys.db_dataSource_main", "0", "PhotogalleryItem"},
-			{"cms_questions", "DictKeys.db_dataSource_main", "0", "Questions"},
-			{"cms_template", "DictKeys.db_dataSource_main", "0", "Template"},
-			{"cms_vote", "DictKeys.db_dataSource_main", "0", "Vote"},
-			{"cms_voteitem", "DictKeys.db_dataSource_main", "0", "VoteItem"},
-			{"cms_yellowpage", "DictKeys.db_dataSource_main", "0", "YellowPage"},
+//			{"cms_announcement", "DictKeys.db_dataSource_main", "0", "Announcement"},
+//			{"cms_answers", "DictKeys.db_dataSource_main", "0", "Answers"},
+//			{"cms_column", "DictKeys.db_dataSource_main", "0", "Column"},
+//			{"cms_comment", "DictKeys.db_dataSource_main", "0", "Comment"},
+//			{"cms_content", "DictKeys.db_dataSource_main", "0", "Content"},
+//			{"cms_download", "DictKeys.db_dataSource_main", "0", "Download"},
+//			{"cms_job", "DictKeys.db_dataSource_main", "0", "Job"},
+//			{"cms_library", "DictKeys.db_dataSource_main", "0", "Library"},
+//			{"cms_photogallery", "DictKeys.db_dataSource_main", "0", "Photogallery"},
+//			{"cms_photogalleryitem", "DictKeys.db_dataSource_main", "0", "PhotogalleryItem"},
+//			{"cms_questions", "DictKeys.db_dataSource_main", "0", "Questions"},
+//			{"cms_template", "DictKeys.db_dataSource_main", "0", "Template"},
+//			{"cms_vote", "DictKeys.db_dataSource_main", "0", "Vote"},
+//			{"cms_voteitem", "DictKeys.db_dataSource_main", "0", "VoteItem"},
+//			{"cms_yellowpage", "DictKeys.db_dataSource_main", "0", "YellowPage"},
 			
 //			{"common_accessstatistics", "DictKeys.db_dataSource_main", "0", "AccessStatistics"},
 //			{"common_ad", "DictKeys.db_dataSource_main", "0", "Ad"},
@@ -79,28 +79,25 @@ public abstract class GeneratorCodeBase {
 	 * 	platform所在的包就是little.ant.platform
 	 * 	weixin所在的包就是little.ant.weixin
 	 */
-	public static String packageBase = "little.ant.cms";
+	public static String packageBase = "little.ant.common";
 	
 	/**
 	 * controller基础路径，例如
 	 * @Controller(controllerKey = "/jf/platform/authImg") 中的platform
 	 * @Controller(controllerKey = "/jf/wx/authImg") 中的wx
-	 */
-	public static String controllerBasePath = "cms";
-
-	/**
+	 * 
 	 * render基础路径，例如
-	 * /platform/user/add.jsp 中的platform
-	 * /weiXin/user/list.jsp 中的weiXin
+	 * /platform/user/add.jsp 中的 platform
+	 * /weiXin/user/list.jsp 中的 weiXin
 	 */
-	public static String renderBasePath = "cms";
-	
+	public static String basePath = "common";
+
 	/**
 	 * 获取表的所有字段名
 	 * @param tableName
 	 * @return
 	 */
-	public abstract List<String> getColunm(String tableName);
+	public abstract List<Column> getColunm(String tableName);
 	
 	/**
 	 * 获取表描述和字段的描述
@@ -108,7 +105,14 @@ public abstract class GeneratorCodeBase {
 	 * @return
 	 */
 	public abstract List<String> getDesc(String tableName);
-
+	
+	/**
+	 * 根据数据库表列类型得到对应java数据类型
+	 * @param columnType
+	 * @return
+	 */
+	public abstract String getJavaDataType(String columnType);
+	
 	/**
 	 * 生成Model
 	 * @param className
@@ -125,10 +129,31 @@ public abstract class GeneratorCodeBase {
 		paraMap.put("tableName", tableName);
 
 		paraMap.put("colunmList", getColunm(tableName));
-		paraMap.put("descList", getDesc(tableName));
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +".java";
 		createFileByTemplete("model.html", paraMap, filePath);
+	}
+
+	/**
+	 * 生成DTO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+	 * @param base
+	 * @param className
+	 * @param classNameSmall
+	 * @param dataSource
+	 * @param tableName
+	 */
+	public void dto(Base base, String className, String classNameSmall, String dataSource, String tableName){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		String packages = packageBase + ".dto";
+		paraMap.put("package", packages);
+		paraMap.put("className", className);
+		paraMap.put("dataSource", dataSource);
+		paraMap.put("tableName", tableName);
+
+		paraMap.put("colunmList", getColunm(tableName));
+		
+		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +"Dto.java";
+		createFileByTemplete("dto.html", paraMap, filePath);
 	}
 
 	/**
@@ -139,7 +164,7 @@ public abstract class GeneratorCodeBase {
 	public void sql(String classNameSmall, String tableName){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		String packages = packageBase + ".model";
-		paraMap.put("namespace", controllerBasePath + "." + classNameSmall);
+		paraMap.put("namespace", basePath + "." + classNameSmall);
 		paraMap.put("tableName", tableName);
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + classNameSmall + ".sql.xml";
@@ -158,8 +183,8 @@ public abstract class GeneratorCodeBase {
 		paraMap.put("package", packages);
 		paraMap.put("className", className);
 		paraMap.put("classNameSmall", classNameSmall);
-		paraMap.put("controllerBasePath", controllerBasePath);
-		paraMap.put("renderBasePath", renderBasePath);
+		paraMap.put("basePath", basePath);
+		paraMap.put("basePath", basePath);
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className + "Controller.java";
 		createFileByTemplete("controller.html", paraMap, filePath);
@@ -177,8 +202,8 @@ public abstract class GeneratorCodeBase {
 		paraMap.put("package", packages);
 		paraMap.put("className", className);
 		paraMap.put("classNameSmall", classNameSmall);
-		paraMap.put("controllerBasePath", controllerBasePath);
-		paraMap.put("renderBasePath", renderBasePath);
+		paraMap.put("basePath", basePath);
+		paraMap.put("basePath", basePath);
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className + "Validator.java";
 		createFileByTemplete("validator.html", paraMap, filePath);
@@ -213,7 +238,7 @@ public abstract class GeneratorCodeBase {
 		paraMap.put("colunmList", getColunm(tableName));
 		paraMap.put("descList", getDesc(tableName));
 		
-		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/form.html";
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + basePath + "/" + classNameSmall +"/form.html";
 		createFileByTemplete("form.html", paraMap, filePath);
 	}
 
@@ -228,7 +253,7 @@ public abstract class GeneratorCodeBase {
 		paraMap.put("colunmList", getColunm(tableName));
 		paraMap.put("descList", getDesc(tableName));
 		
-		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + renderBasePath + "/" + classNameSmall +"/view.html";
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + basePath + "/" + classNameSmall +"/view.html";
 		createFileByTemplete("view.html", paraMap, filePath);
 	}
 
@@ -240,7 +265,7 @@ public abstract class GeneratorCodeBase {
 	 */
 	public void createFileByTemplete(String templateFileName, Map<String, Object> paraMap, String filePath)  {
 		try {
-			Class<?> classes = Class.forName("little.ant.platform.tools.code.GeneratorCodeBase");
+			Class<?> classes = Class.forName("little.ant.platform.tools.code.Base");
 
 			InputStream controllerInputStream = classes.getResourceAsStream(templateFileName);
 			int count = 0;
@@ -272,6 +297,6 @@ public abstract class GeneratorCodeBase {
 			e.printStackTrace();
 		}
 	}
-
+	
 }
 

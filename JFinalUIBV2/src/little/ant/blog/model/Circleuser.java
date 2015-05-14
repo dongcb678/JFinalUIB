@@ -21,58 +21,69 @@ public class Circleuser extends BaseModel<Circleuser> {
 	public static final Circleuser dao = new Circleuser();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 乐观锁
-	*/
+	 * 字段描述：乐观锁 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	* 创建人
-	*/
+	 * 字段描述：创建人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_createuser = "createuser";
 	
 	/**
-	* 创建时间
-	*/
+	 * 字段描述：创建时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_createdate = "createdate";
 	
 	/**
-	* 最后修改人
-	*/
+	 * 字段描述：最后修改人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_updateuser = "updateuser";
 	
 	/**
-	* 最后修改时间
-	*/
+	 * 字段描述：最后修改时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_updatedate = "updatedate";
 	
 	/**
-	* 是否删除
-	*/
+	 * 字段描述：是否删除 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_isdelete = "isdelete";
 	
 	/**
-	* 删除人
-	*/
+	 * 字段描述：删除人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_deleteuser = "deleteuser";
 	
 	/**
-	* 删除时间
-	*/
+	 * 字段描述：删除时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_deletedate = "deletedate";
 	
 	/**
-	* 申请加入圈子状态 : 0初始化申请，1申请通过，2不通过
-	*/
+	 * 字段描述：申请加入圈子状态 : 0初始化申请，1申请通过，2不通过 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_status = "status";
 	
 	/**
-	* 圈子主键
-	*/
+	 * 字段描述：圈子主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_circleids = "circleids";
 	
 	

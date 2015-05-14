@@ -21,48 +21,57 @@ public class Favorite extends BaseModel<Favorite> {
 	public static final Favorite dao = new Favorite();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 乐观锁
-	*/
+	 * 字段描述：乐观锁 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	* 标题
-	*/
+	 * 字段描述：标题 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_title = "title";
 	
 	/**
-	* url地址
-	*/
+	 * 字段描述：url地址 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_url = "url";
 	
 	/**
-	* 收藏用户
-	*/
+	 * 字段描述：收藏用户 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_createuser = "createuser";
 	
 	/**
-	* 收藏时间
-	*/
+	 * 字段描述：收藏时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_createdate = "createdate";
 	
 	/**
-	* 是否删除
-	*/
+	 * 字段描述：是否删除 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_isdelete = "isdelete";
 	
 	/**
-	* 删除人
-	*/
+	 * 字段描述：删除人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_deleteuser = "deleteuser";
 	
 	/**
-	* 删除时间
-	*/
+	 * 字段描述：删除时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_deletedate = "deletedate";
 	
 	

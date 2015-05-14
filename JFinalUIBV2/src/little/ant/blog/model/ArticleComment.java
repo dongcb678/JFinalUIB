@@ -21,73 +21,87 @@ public class ArticleComment extends BaseModel<ArticleComment> {
 	public static final ArticleComment dao = new ArticleComment();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 乐观锁
-	*/
+	 * 字段描述：乐观锁 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	* 评论内容
-	*/
+	 * 字段描述：评论内容 
+	 * 字段类型 ：text 
+	 */
 	public static final String colunm_content = "content";
 	
 	/**
-	* 评论人
-	*/
+	 * 字段描述：评论人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_createuser = "createuser";
 	
 	/**
-	* 评论时间
-	*/
+	 * 字段描述：评论时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_createdate = "createdate";
 	
 	/**
-	* 最后修改人
-	*/
+	 * 字段描述：最后修改人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_updateuser = "updateuser";
 	
 	/**
-	* 最后修改时间
-	*/
+	 * 字段描述：最后修改时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_updatedate = "updatedate";
 	
 	/**
-	* 是否删除
-	*/
+	 * 字段描述：是否删除 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_isdelete = "isdelete";
 	
 	/**
-	* 删除人
-	*/
+	 * 字段描述：删除人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_deleteuser = "deleteuser";
 	
 	/**
-	* 删除时间
-	*/
+	 * 字段描述：删除时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_deletedate = "deletedate";
 	
 	/**
-	* 点赞次数
-	*/
+	 * 字段描述：点赞次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_praisecount = "praisecount";
 	
 	/**
-	* 踩次数
-	*/
+	 * 字段描述：踩次数 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_tramplecount = "tramplecount";
 	
 	/**
-	* 上级评论
-	*/
+	 * 字段描述：上级评论 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_pids = "pids";
 	
 	/**
-	* 文章主键
-	*/
+	 * 字段描述：文章主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_articleids = "articleids";
 	
 	

@@ -103,6 +103,9 @@
 								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'height')">
 									高度 ${orderBy("height")}
 								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'status')">
+									状态	${orderBy("status")}
+								</th>
 								<th class="hidden-xs">
 									操作
 								</th>
@@ -118,6 +121,15 @@
 									<td>${location.type}</td>
 									<td>${location.width}</td>
 									<td>${location.height}</td>
+									<td>
+										<% if(ipBlacklist["status"] == "0"){ %>
+												停用
+										<% }else if(ipBlacklist["status"] == "1"){ %>
+												启用
+										<% }else{ %>
+												未知
+										<% } %>
+									</td>
 									<td class="hidden-xs">
 										<% if(view == true){ %>
 											<button type="button" class="btn btn-dark-yellow add-row" onclick="common_ajax.ajaxMainPanel('/jf/common/location/view/${location.ids}');">

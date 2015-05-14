@@ -21,18 +21,21 @@ public class Vote extends BaseModel<Vote> {
 	public static final Vote dao = new Vote();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 投票范围
-	*/
+	 * 字段描述：投票范围 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_voterange = "voterange";
 	
 	/**
-	* 内容主键
-	*/
+	 * 字段描述：内容主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_contentids = "contentids";
 	
 	

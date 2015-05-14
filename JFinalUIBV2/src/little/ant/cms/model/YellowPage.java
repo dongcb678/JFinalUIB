@@ -21,43 +21,51 @@ public class YellowPage extends BaseModel<YellowPage> {
 	public static final YellowPage dao = new YellowPage();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 地址
-	*/
+	 * 字段描述：地址 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_address = "address";
 	
 	/**
-	* 联系人
-	*/
+	 * 字段描述：联系人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_contacts = "contacts";
 	
 	/**
-	* 固话
-	*/
+	 * 字段描述：固话 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_fixphone = "fixphone";
 	
 	/**
-	* 移动电话
-	*/
+	 * 字段描述：移动电话 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_mobile = "mobile";
 	
 	/**
-	* 邮编
-	*/
+	 * 字段描述：邮编 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_postcode = "postcode";
 	
 	/**
-	* 在线qq : 多个逗号隔开，最多5个
-	*/
+	 * 字段描述：在线qq : 多个逗号隔开，最多5个 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_qq = "qq";
 	
 	/**
-	* 内容主键
-	*/
+	 * 字段描述：内容主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_contentids = "contentids";
 	
 	

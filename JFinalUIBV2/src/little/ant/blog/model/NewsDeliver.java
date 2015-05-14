@@ -21,68 +21,81 @@ public class NewsDeliver extends BaseModel<NewsDeliver> {
 	public static final NewsDeliver dao = new NewsDeliver();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 乐观锁
-	*/
+	 * 字段描述：乐观锁 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	* 分类
-	*/
+	 * 字段描述：分类 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_type = "type";
 	
 	/**
-	* 标题
-	*/
+	 * 字段描述：标题 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_title = "title";
 	
 	/**
-	* 内容
-	*/
+	 * 字段描述：内容 
+	 * 字段类型 ：text 
+	 */
 	public static final String colunm_content = "content";
 	
 	/**
-	* 创建人
-	*/
+	 * 字段描述：创建人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_createuser = "createuser";
 	
 	/**
-	* 创建时间
-	*/
+	 * 字段描述：创建时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_createdate = "createdate";
 	
 	/**
-	* 最后更新人
-	*/
+	 * 字段描述：最后更新人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_updateuser = "updateuser";
 	
 	/**
-	* 最后更新时间
-	*/
+	 * 字段描述：最后更新时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_updatedate = "updatedate";
 	
 	/**
-	* 是否删除
-	*/
+	 * 字段描述：是否删除 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_isdelete = "isdelete";
 	
 	/**
-	* 删除人
-	*/
+	 * 字段描述：删除人 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_deleteuser = "deleteuser";
 	
 	/**
-	* 删除时间
-	*/
+	 * 字段描述：删除时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_deletedate = "deletedate";
 	
 	/**
-	* 处理状态 : 0初始化提交，1未阅，2已阅
-	*/
+	 * 字段描述：处理状态 : 0初始化提交，1未阅，2已阅 
+	 * 字段类型 ：character 
+	 */
 	public static final String colunm_status = "status";
 	
 	

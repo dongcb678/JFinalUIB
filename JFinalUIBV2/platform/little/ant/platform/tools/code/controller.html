@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/${controllerBasePath}/${classNameSmall}
- * /jf/${controllerBasePath}/${classNameSmall}/save
- * /jf/${controllerBasePath}/${classNameSmall}/edit
- * /jf/${controllerBasePath}/${classNameSmall}/update
- * /jf/${controllerBasePath}/${classNameSmall}/view
- * /jf/${controllerBasePath}/${classNameSmall}/delete
+ * /jf/${basePath}/${classNameSmall}
+ * /jf/${basePath}/${classNameSmall}/save
+ * /jf/${basePath}/${classNameSmall}/edit
+ * /jf/${basePath}/${classNameSmall}/update
+ * /jf/${basePath}/${classNameSmall}/view
+ * /jf/${basePath}/${classNameSmall}/delete
  * /common/${classNameSmall}/add.html
  * 
  */
-@Controller(controllerKey = "/jf/${controllerBasePath}/${classNameSmall}")
+@Controller(controllerKey = "/jf/${basePath}/${classNameSmall}")
 public class ${className}Controller extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class ${className}Controller extends BaseController {
 	 */
 	public void index() {
 		${className}Service.service.list(splitPage);
-		render("/${renderBasePath}/${classNameSmall}/list.html");
+		render("/${basePath}/${classNameSmall}/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class ${className}Controller extends BaseController {
 	@Before(${className}Validator.class)
 	public void save() {
 		getModel(${className}.class).save();
-		render("/${renderBasePath}/${classNameSmall}/add.html");
+		render("/${basePath}/${classNameSmall}/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class ${className}Controller extends BaseController {
 	public void edit() {
 		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
 		setAttr("${classNameSmall}", ${classNameSmall});
-		render("/${renderBasePath}/${classNameSmall}/update.html");
+		render("/${basePath}/${classNameSmall}/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class ${className}Controller extends BaseController {
 	@Before(${className}Validator.class)
 	public void update() {
 		getModel(${className}.class).update();
-		redirect("/jf/${controllerBasePath}/${classNameSmall}");
+		redirect("/jf/${basePath}/${classNameSmall}");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class ${className}Controller extends BaseController {
 	public void view() {
 		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
 		setAttr("${classNameSmall}", ${classNameSmall});
-		render("/${renderBasePath}/${classNameSmall}/view.html");
+		render("/${basePath}/${classNameSmall}/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class ${className}Controller extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		${className}Service.service.delete(param);
-		redirect("/jf/${controllerBasePath}/${classNameSmall}");
+		redirect("/jf/${basePath}/${classNameSmall}");
 	}
 	
 }

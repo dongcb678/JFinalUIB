@@ -7,7 +7,7 @@ import little.ant.platform.model.BaseModel;
 import org.apache.log4j.Logger;
 
 /**
- * ${descList[0]} model
+ * ${colunmList[0].table_desc} model
  * @author 董华健
  */
 @SuppressWarnings("unused")
@@ -22,9 +22,10 @@ public class ${className} extends BaseModel<${className}> {
 	
 	<% for(colunm in colunmList){ %>
 	/**
-	 * ${colunmLP.index >= descList.~size ? "" : descList[colunmLP.index]!}
+	 * 字段描述：${colunm.column_desc} 
+	 * 字段类型 ：${colunm.column_type} 
 	 */
-	public static final String colunm_${colunm} = "${colunm}";
+	public static final String colunm_${colunm.column_name} = "${colunm.column_name}";
 	
 	<% } %>
 	

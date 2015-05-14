@@ -21,18 +21,21 @@ public class Questions extends BaseModel<Questions> {
 	public static final Questions dao = new Questions();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 最佳回答ids
-	*/
+	 * 字段描述：最佳回答ids 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_answersids = "answersids";
 	
 	/**
-	* 内容主键
-	*/
+	 * 字段描述：内容主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_contentids = "contentids";
 	
 	

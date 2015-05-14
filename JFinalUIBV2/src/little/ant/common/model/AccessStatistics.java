@@ -21,43 +21,51 @@ public class AccessStatistics extends BaseModel<AccessStatistics> {
 	public static final AccessStatistics dao = new AccessStatistics();
 	
 	/**
-	* 主键
-	*/
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
+	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	* 乐观锁
-	*/
+	 * 字段描述：乐观锁 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	* 总数量
-	*/
+	 * 字段描述：总数量 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_total = "total";
 	
 	/**
-	* 昨日
-	*/
+	 * 字段描述：昨日 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_yesterday = "yesterday";
 	
 	/**
-	* 今日
-	*/
+	 * 字段描述：今日 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_today = "today";
 	
 	/**
-	* 本周
-	*/
+	 * 字段描述：本周 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_week = "week";
 	
 	/**
-	* 本月
-	*/
+	 * 字段描述：本月 
+	 * 字段类型 ：bigint 
+	 */
 	public static final String colunm_month = "month";
 	
 	/**
-	* 最后更新时间
-	*/
+	 * 字段描述：最后更新时间 
+	 * 字段类型 ：timestamp with time zone 
+	 */
 	public static final String colunm_updatedate = "updatedate";
 	
 	
