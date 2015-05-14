@@ -28,102 +28,122 @@ public class Param extends BaseModel<Param> {
 	public static final Param dao = new Param();
 
 	/**
-	 * 主键
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	 * 版本号
+	 * 字段描述：版本号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	 * 描述
+	 * 字段描述：描述 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_description = "description";
 	
 	/**
-	 * 图标
+	 * 字段描述：图标 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_images = "images";
 	
 	/**
-	 * 名称
+	 * 字段描述：名称 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_names = "names";
 	
 	/**
-	 * 排序号
+	 * 字段描述：排序号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_orderids = "orderids";
 	
 	/**
-	 * tree路径
+	 * 字段描述：tree路径 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_paths = "paths";
 	
 	/**
-	 * 状态
+	 * 字段描述：状态 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_zhuangtai = "zhuangtai";
 	
 	/**
-	 * 上级ids
+	 * 字段描述：上级ids 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_parentids = "parentids";
 	
 	/**
-	 * 是否上级节点
+	 * 字段描述：是否上级节点 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_isparent = "isparent";
 	
 	/**
-	 * 层级级别
+	 * 字段描述：层级级别 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_levels = "levels";
 	
 	/**
-	 * 编号
+	 * 字段描述：编号 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_numbers = "numbers";
 	
 	/**
-	 * 值
+	 * 字段描述：值 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_val = "val";
 	
 	/**
-	 * 是否国际化 : 0否1是
+	 * 字段描述：是否国际化 : 0否1是 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_i18n = "i18n";
 	
 	/**
-	 * 中文简体值
+	 * 字段描述：中文简体值 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_val_zhcn = "val_zhcn";
 	
 	/**
-	 * 中文香港值
+	 * 字段描述：中文香港值 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_val_zhhk = "val_zhhk";
 	
 	/**
-	 * 中文台湾值
+	 * 字段描述：中文台湾值 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_val_zhtw = "val_zhtw";
 	
 	/**
-	 * 日文值
+	 * 字段描述：日文值 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_val_ja = "val_ja";
 	
 	/**
-	 * 英文值
+	 * 字段描述：英文值 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_val_enus = "val_enus";
 	
 	/**
-	 * 账号状态
+	 * 字段描述：账号状态 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_status = "status";
 	

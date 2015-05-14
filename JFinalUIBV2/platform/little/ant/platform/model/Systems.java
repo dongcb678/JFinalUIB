@@ -20,32 +20,38 @@ public class Systems extends BaseModel<Systems> {
 	public static final Systems dao = new Systems();
 
 	/**
-	 * 主键
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	 * 版本号
+	 * 字段描述：版本号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	 * 描述
+	 * 字段描述：描述 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_description = "description";
 	
 	/**
-	 * 名称
+	 * 字段描述：名称 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_names = "names";
 	
 	/**
-	 * 编号
+	 * 字段描述：编号 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_numbers = "numbers";
 	
 	/**
-	 * 排序号
+	 * 字段描述：排序号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_orderids = "orderids";
 	

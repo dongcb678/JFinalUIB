@@ -20,72 +20,86 @@ public class Resources extends BaseModel<Resources> {
 	public static final Resources dao = new Resources();
 
 	/**
-	 * 主键
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	 * 版本号
+	 * 字段描述：版本号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	 * 系统名称
+	 * 字段描述：系统名称 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_osname = "osname";
 	
 	/**
-	 * ip地址
+	 * 字段描述：ip地址 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_ips = "ips";
 	
 	/**
-	 * 主机名称
+	 * 字段描述：主机名称 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_hostname = "hostname";
 	
 	/**
-	 * cpu数量
+	 * 字段描述：cpu数量 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_cpunumber = "cpunumber";
 	
 	/**
-	 * cpu使用率
+	 * 字段描述：cpu使用率 
+	 * 字段类型 ：numeric 
 	 */
 	public static final String colunm_cpuratio = "cpuratio";
 	
 	/**
-	 * 物理内存
+	 * 字段描述：物理内存 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_phymemory = "phymemory";
 	
 	/**
-	 * 物理可用内存
+	 * 字段描述：物理可用内存 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_phyfreememory = "phyfreememory";
 	
 	/**
-	 * jvm总内存
+	 * 字段描述：jvm总内存 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_jvmtotalmemory = "jvmtotalmemory";
 	
 	/**
-	 * jvm可用内存
+	 * 字段描述：jvm可用内存 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_jvmfreememory = "jvmfreememory";
 	
 	/**
-	 * jvm最大内存
+	 * 字段描述：jvm最大内存 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_jvmmaxmemory = "jvmmaxmemory";
 	
 	/**
-	 * gc次数
+	 * 字段描述：gc次数 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_gccount = "gccount";
 	
 	/**
-	 * 创建时间
+	 * 字段描述：创建时间 
+	 * 字段类型 ：timestamp with time zone 
 	 */
 	public static final String colunm_createdate = "createdate";
 	

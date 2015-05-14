@@ -23,102 +23,122 @@ public class User extends BaseModel<User> {
 	public static final User dao = new User();
 
 	/**
-	 * 主键
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	 * 版本号
+	 * 字段描述：版本号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	 * 密码连续错误次数
+	 * 字段描述：密码连续错误次数 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_errorcount = "errorcount";
 	
 	/**
-	 * 排序号
+	 * 字段描述：排序号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_orderids = "orderids";
 	
 	/**
-	 * 密码
+	 * 字段描述：密码 
+	 * 字段类型 ：bytea 
 	 */
 	public static final String colunm_password = "password";
 	
 	/**
-	 * 密钥
+	 * 字段描述：密钥 
+	 * 字段类型 ：bytea 
 	 */
 	public static final String colunm_salt = "salt";
 	
 	/**
-	 * 账号状态
+	 * 字段描述：账号状态 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_status = "status";
 	
 	/**
-	 * 账号停用时间
+	 * 字段描述：账号停用时间 
+	 * 字段类型 ：timestamp without time zone 
 	 */
 	public static final String colunm_stopdate = "stopdate";
 	
 	/**
-	 * 账号
+	 * 字段描述：账号 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_username = "username";
 	
 	/**
-	 * 所在部门ids
+	 * 字段描述：所在部门ids 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_departmentids = "departmentids";
 	
 	/**
-	 * 用户扩展信息ids
+	 * 字段描述：用户扩展信息ids 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_userinfoids = "userinfoids";
 	
 	/**
-	 * 所在岗位ids
+	 * 字段描述：所在岗位ids 
+	 * 字段类型 ：text 
 	 */
 	public static final String colunm_stationids = "stationids";
 	
 	/**
-	 * 行级部门ids
+	 * 字段描述：行级部门ids 
+	 * 字段类型 ：text 
 	 */
 	public static final String colunm_deptids = "deptids";
 	
 	/**
-	 * 行级人员ids
+	 * 字段描述：行级人员ids 
+	 * 字段类型 ：text 
 	 */
 	public static final String colunm_userids = "userids";
 	
 	/**
-	 * 所在分组ids
+	 * 字段描述：所在分组ids 
+	 * 字段类型 ：text 
 	 */
 	public static final String colunm_groupids = "groupids";
 	
 	/**
-	 * 所在部门names
+	 * 字段描述：所在部门names 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_departmentnames = "departmentnames";
 	
 	/**
-	 * 所在岗位names
+	 * 字段描述：所在岗位names 
+	 * 字段类型 ：text 
 	 */
 	public static final String colunm_stationnames = "stationnames";
 	
 	/**
-	 * 行级部门names
+	 * 字段描述：行级部门names 
+	 * 字段类型 ：text 
 	 */
 	public static final String colunm_deptnames = "deptnames";
 	
 	/**
-	 * 行级人员names
+	 * 字段描述：行级人员names 
+	 * 字段类型 ：text 
 	 */
 	public static final String colunm_usernames = "usernames";
 	
 	/**
-	 * 所在分组names
+	 * 字段描述：所在分组names 
+	 * 字段类型 ：text 
 	 */
 	public static final String colunm_groupnames = "groupnames";
 	

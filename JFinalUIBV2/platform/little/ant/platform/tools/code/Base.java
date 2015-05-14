@@ -28,6 +28,22 @@ public abstract class Base {
 //			{"wx_bb", "DictKeys.db_dataSource_main", "0", "Bb"},
 //			{"wx_cc", "DictKeys.db_dataSource_main", "1", "Cc"} // 生成.sql.xml文件、Model类
 			
+//			{"pt_department", "DictKeys.db_dataSource_main", "0", "Department"},
+//			{"pt_dict", "DictKeys.db_dataSource_main", "0", "Dict"},
+//			{"pt_group", "DictKeys.db_dataSource_main", "0", "Group"},
+//			{"pt_menu", "DictKeys.db_dataSource_main", "0", "Menu"},
+//			{"pt_module", "DictKeys.db_dataSource_main", "0", "Module"},
+//			{"pt_operator", "DictKeys.db_dataSource_main", "0", "Operator"},
+//			{"pt_param", "DictKeys.db_dataSource_main", "0", "Param"},
+//			{"pt_resources", "DictKeys.db_dataSource_main", "0", "Resources"},
+//			{"pt_role", "DictKeys.db_dataSource_main", "0", "Role"},
+//			{"pt_station", "DictKeys.db_dataSource_main", "0", "Station"},
+//			{"pt_syslog", "DictKeys.db_dataSource_main", "0", "Syslog"},
+//			{"pt_systems", "DictKeys.db_dataSource_main", "0", "Systems"},
+//			{"pt_upload", "DictKeys.db_dataSource_main", "0", "Upload"},
+//			{"pt_user", "DictKeys.db_dataSource_main", "0", "User"},
+//			{"pt_userinfo", "DictKeys.db_dataSource_main", "0", "UserInfo"}
+		
 //			{"blog_article", "DictKeys.db_dataSource_main", "0", "Article"},
 //			{"blog_articlecomment", "DictKeys.db_dataSource_main", "0", "ArticleComment"},
 //			{"blog_circle", "DictKeys.db_dataSource_main", "0", "Circle"},

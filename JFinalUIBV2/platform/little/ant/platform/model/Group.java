@@ -23,32 +23,38 @@ public class Group extends BaseModel<Group> {
 	public static final Group dao = new Group();
 
 	/**
-	 * 主键
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	 * 版本号
+	 * 字段描述：版本号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	 * 描述
+	 * 字段描述：描述 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_description = "description";
 	
 	/**
-	 * 名称
+	 * 字段描述：名称 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_names = "names";
 	
 	/**
-	 * 拥有的角色ids
+	 * 字段描述：拥有的角色ids 
+	 * 字段类型 ：text 
 	 */
 	public static final String colunm_roleids = "roleids";
 	
 	/**
-	 * 编号
+	 * 字段描述：编号 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_numbers = "numbers";
 	

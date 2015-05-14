@@ -18,68 +18,82 @@ public class Department extends BaseModel<Department> {
 	private static Logger log = Logger.getLogger(Department.class);
 	
 	public static final Department dao = new Department();
+
 	/**
-	 * 主键
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	 * 版本号
+	 * 字段描述：版本号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	 * 所有子节点ids
+	 * 字段描述：所有子节点ids 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_allchildnodeids = "allchildnodeids";
 	
 	/**
-	 * 部门级别
+	 * 字段描述：部门级别 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_departmentlevel = "departmentlevel";
 	
 	/**
-	 * 部门类型
+	 * 字段描述：部门类型 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_depttype = "depttype";
 	
 	/**
-	 * 描述
+	 * 字段描述：描述 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_description = "description";
 	
 	/**
-	 * 图标
+	 * 字段描述：图标 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_images = "images";
 	
 	/**
-	 * 是否上级节点
+	 * 字段描述：是否上级节点 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_isparent = "isparent";
 	
 	/**
-	 * 名称
+	 * 字段描述：名称 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_names = "names";
 	
 	/**
-	 * 排序号
+	 * 字段描述：排序号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_orderids = "orderids";
 	
 	/**
-	 * url
+	 * 字段描述：url 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_url = "url";
 	
 	/**
-	 * 上级ids
+	 * 字段描述：上级ids 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_parentdepartmentids = "parentdepartmentids";
 	
 	/**
-	 * 负责人ids
+	 * 字段描述：负责人ids 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_principaluserids = "principaluserids";
 	

@@ -20,37 +20,44 @@ public class Upload extends BaseModel<Upload> {
 	public static final Upload dao = new Upload();
 
 	/**
-	 * 主键
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	 * 版本号
+	 * 字段描述：版本号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	 * 参数key
+	 * 字段描述：参数key 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_parametername = "parametername";
 	
 	/**
-	 * 文件名
+	 * 字段描述：文件名 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_filename = "filename";
 	
 	/**
-	 * contenttype
+	 * 字段描述：contenttype 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_contenttype = "contenttype";
 	
 	/**
-	 * 原文件名
+	 * 字段描述：原文件名 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_originalfilename = "originalfilename";
 	
 	/**
-	 * 存放路径
+	 * 字段描述：存放路径 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_path = "path";
 	

@@ -23,87 +23,104 @@ public class Operator extends BaseModel<Operator> {
 	public static final Operator dao = new Operator();
 
 	/**
-	 * 主键
+	 * 字段描述：主键 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_ids = "ids";
 	
 	/**
-	 * 版本号
+	 * 字段描述：版本号 
+	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_version = "version";
 	
 	/**
-	 * 描述
+	 * 字段描述：描述 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_description = "description";
 	
 	/**
-	 * 名称
+	 * 字段描述：名称 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_names = "names";
 	
 	/**
-	 * url数量 : 一个还是多个url，多个用逗号隔开
+	 * 字段描述：url数量 : 一个还是多个url，多个用逗号隔开 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_onemany = "onemany";
 	
 	/**
-	 * 返回参数keys
+	 * 字段描述：返回参数keys 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_returnparamkeys = "returnparamkeys";
 	
 	/**
-	 * 返回url
+	 * 字段描述：返回url 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_returnurl = "returnurl";
 	
 	/**
-	 * 是否行级过滤
+	 * 字段描述：是否行级过滤 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_rowfilter = "rowfilter";
 	
 	/**
-	 * url
+	 * 字段描述：url 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_url = "url";
 	
 	/**
-	 * 模块ids
+	 * 字段描述：模块ids 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_moduleids = "moduleids";
 	
 	/**
-	 * 是否分页
+	 * 字段描述：是否分页 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_splitpage = "splitpage";
 	
 	/**
-	 * 是否重复提交验证
+	 * 字段描述：是否重复提交验证 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_formtoken = "formtoken";
 	
 	/**
-	 * ip黑名单过滤
+	 * 字段描述：ip黑名单过滤 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_ipblack = "ipblack";
 	
 	/**
-	 * 是否需要权限验证
+	 * 字段描述：是否需要权限验证 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_privilegess = "privilegess";
 	
 	/**
-	 * 是否记录PV
+	 * 字段描述：是否记录PV 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_ispv = "ispv";
 	
 	/**
-	 * pv类型
+	 * 字段描述：pv类型 
+	 * 字段类型 ：character 
 	 */
 	public static final String colunm_pvtype = "pvtype";
 	
 	/**
-	 * 模块names
+	 * 字段描述：模块names 
+	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_modulenames = "modulenames";
 	
