@@ -7,6 +7,7 @@ import java.util.Map;
 
 import little.ant.platform.annotation.Controller;
 import little.ant.platform.common.DictKeys;
+import little.ant.platform.model.Syslog;
 import little.ant.platform.service.OperatorService;
 import little.ant.platform.service.SysLogService;
 import little.ant.platform.tools.ToolSqlXml;
@@ -40,7 +41,7 @@ public class TestController extends BaseController {
 	 * 日志查询显示
 	 */
 	public void sysLog() {
-		defaultOrder("startdate", "desc");
+		defaultOrder(Syslog.colunm_startdate, "desc");
 		SysLogService.service.list(splitPage);
 		render("/platform/test/sysLog.html");
 	}

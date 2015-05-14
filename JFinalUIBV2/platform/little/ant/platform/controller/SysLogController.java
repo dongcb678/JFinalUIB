@@ -1,6 +1,7 @@
 package little.ant.platform.controller;
 
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.model.Syslog;
 import little.ant.platform.service.SysLogService;
 
 import org.apache.log4j.Logger;
@@ -19,7 +20,7 @@ public class SysLogController extends BaseController {
 	 * 日志管理列表
 	 */
 	public void index() {
-		defaultOrder("startdate", "desc");
+		defaultOrder(Syslog.colunm_startdate, "desc");
 		SysLogService.service.list(splitPage);
 		render("/platform/sysLog/list.html");
 	}

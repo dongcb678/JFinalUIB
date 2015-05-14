@@ -62,9 +62,9 @@ public class ParamController extends BaseController {
 	 */
 	public void edit() {
 		Param param = Param.dao.findById(getPara());
-		String pIds = param.getStr("parentids");
+		String pIds = param.getStr(Param.colunm_parentids);
 		Param parent = Param.dao.findById(pIds);
-		setAttr("param", param.put("parentnames", parent.getStr("names")));
+		setAttr("param", param.put("parentnames", parent.getStr(Param.colunm_names)));
 		render("/platform/param/update.html");
 	}
 
@@ -90,9 +90,9 @@ public class ParamController extends BaseController {
 	 */
 	public void view() {
 		Param param = Param.dao.findById(getPara());
-		String pIds = param.getStr("parentids");
+		String pIds = param.getStr(Param.colunm_parentids);
 		Param parent = Param.dao.findById(pIds);
-		setAttr("param", param.put("parentnames", parent.getStr("names")));
+		setAttr("param", param.put("parentnames", parent.getStr(Param.colunm_names)));
 		render("/platform/param/view.html");
 	}
 
