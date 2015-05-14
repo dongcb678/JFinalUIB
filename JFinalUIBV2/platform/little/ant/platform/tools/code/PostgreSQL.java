@@ -41,7 +41,7 @@ public class PostgreSQL extends Base {
 //				base.model(className, classNameSmall, dataSource, tableName); 
 				
 //				// 6.生成DTO
-//				base.dto(className, classNameSmall, dataSource, tableName); 
+				base.dto(base, className, classNameSmall, dataSource, tableName); 
 //				
 //				// 是否生成Controller相关
 //				if(generController.equals("0")){
@@ -91,15 +91,17 @@ public class PostgreSQL extends Base {
 			conn = DriverManager.getConnection(url, user, pass);
 			stmt = (Statement) conn.createStatement();
 
-			rs = (ResultSet) stmt.executeQuery("select column_name, data_type from information_schema.columns where table_name = '"+tableName+"'");
+			rs = (ResultSet) stmt.executeQuery("select column_name, data_type, character_maximum_length from information_schema.columns where table_name = '"+tableName+"'");
 			while (rs.next()) {
 				String column_name = rs.getString("column_name");
 				String data_type = rs.getString("data_type");
+				String character_maximum_length = rs.getString("character_maximum_length");
 				
 				Column table = new Column();
 				table.setTable_name(tableName);
 				table.setColumn_name(column_name);
 				table.setColumn_type(data_type);
+				table.setColumn_length(character_maximum_length);
 				list.add(table);
 			}
 			

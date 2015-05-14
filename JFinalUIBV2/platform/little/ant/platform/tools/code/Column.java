@@ -15,6 +15,8 @@ public class Column {
 	private String column_type ; // 列类型
 	
 	private String column_desc ; // 列描述
+
+	private String column_length ; // 列最大长度，针对字符型
 	
 	public String getTable_name() {
 		return table_name;
@@ -45,6 +47,12 @@ public class Column {
 	}
 	public void setColumn_desc(String column_desc) {
 		this.column_desc = column_desc;
+	}
+	public String getColumn_length() {
+		return column_length;
+	}
+	public void setColumn_length(String column_length) {
+		this.column_length = column_length;
 	}
 	
 	
