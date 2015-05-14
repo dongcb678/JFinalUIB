@@ -151,6 +151,7 @@ public abstract class Base {
 		paraMap.put("tableName", tableName);
 
 		paraMap.put("colunmList", getColunm(tableName));
+		paraMap.put("base", base);
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +"Dto.java";
 		createFileByTemplete("dto.html", paraMap, filePath);
