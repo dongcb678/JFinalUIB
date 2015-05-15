@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import com.jfinal.kit.PathKit;
+
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.plugin.PropertiesPlugin;
 
@@ -20,33 +22,37 @@ public class ToolDataBase {
 	 * @throws IOException
 	 */
 	public static void exportSql(String exportPath) throws IOException {
+		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_type_key);
+		
 		String username = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_userName);
 		String password = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_passWord);
 		String ip = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_ip);
 		String port = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_port);
 		String database = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_dbName);
 		
-		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_type_key);
+		StringBuilder command = new StringBuilder();
+		
 		if(db_type.equals(ConstantPlatform.db_type_postgresql)){ // pg
-			
-			
+			// pg_dump --host 127.0.0.1 --port 5432 --username "postgres" --role "postgres" --no-password  --format custom --blobs --encoding UTF8 --verbose --file "D:/jfinaluibv2.backup" "jfinaluibv2"
+			command.append(PathKit.getWebRootPath()).append("/WEB-INF/database/pg/bin/pg_dump ");
+			command.append(" --host ").append(ip).append(" --port ").append(port).append(" --username ").append(" \"postgres\" ");
+			command.append(" --role \"postgres\" --no-password  --format custom --blobs --encoding UTF8 --verbose --file ").append(exportPath).append(" \"").append(database).append("\" ");
 			
 		}else if(db_type.equals(ConstantPlatform.db_type_mysql)){ // mysql
-			StringBuilder command = new StringBuilder();
 			command.append("cmd /c mysqldump -u").append(username).append(" -p").append(password)//密码是用的小p，而端口是用的大P。  
 					.append(" -h").append(ip).append(" -P").append(port).append(" ").append(database).append(" -r \"").append(exportPath+"\"");
-			try {
-				Process process = Runtime.getRuntime().exec(command.toString(), null, new File(exportPath));
-				process.waitFor();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			
 		} else if(db_type.equals(ConstantPlatform.db_type_oracle)){ // oracle
 			
-			
-			
+		}
+		
+		try {
+			Process process = Runtime.getRuntime().exec(command.toString(), null, new File(exportPath));
+			process.waitFor();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 	
