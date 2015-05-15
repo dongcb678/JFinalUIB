@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Menu;
 
@@ -130,7 +130,7 @@ public class MenuService extends BaseService {
 		// 修改上级节点的isparent
     	Menu pMenu = Menu.dao.findById(menu.getStr(Menu.colunm_parentmenuids));
 		String sql = getSql("platform.menu.childCount");
-		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pMenu.getPKValue());
+		Record record = Db.use(ConstantPlatform.db_dataSource_main).findFirst(sql, pMenu.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts == 1){
 	    	pMenu.set(Menu.colunm_isparent, "false");

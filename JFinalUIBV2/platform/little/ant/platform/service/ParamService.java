@@ -3,7 +3,7 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Param;
 
@@ -78,7 +78,7 @@ public class ParamService extends BaseService {
 			// 修改上级节点的isparent
 			Param pParam = Param.dao.findById(param.getStr(Param.colunm_parentids));
 			String sql = getSql("platform.param.childCount");
-			Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pParam.getPKValue());
+			Record record = Db.use(ConstantPlatform.db_dataSource_main).findFirst(sql, pParam.getPKValue());
 			Long counts = record.getNumber("counts").longValue();
 		    if(counts == 1){
 		    	pParam.set("isparent", "false");

@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 import little.ant.platform.service.BaseService;
 import little.ant.platform.common.SplitPage;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.blog.model.ArticleComment;
 
 public class ArticleCommentService extends BaseService {
@@ -20,7 +20,7 @@ public class ArticleCommentService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "blog.articleComment.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "blog.articleComment.splitPage");
 	}
 	
 	/**

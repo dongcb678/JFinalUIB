@@ -3,7 +3,7 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Station;
 
@@ -120,7 +120,7 @@ public class StationService extends BaseService {
 		// 修改上级节点的isparent
 		Station pStation = Station.dao.findById(station.getStr(Station.colunm_parentstationids));
 		String sql = getSql("platform.station.childCount");
-		Record record = Db.use(DictKeys.db_dataSource_main).findFirst(sql, pStation.getPKValue());
+		Record record = Db.use(ConstantPlatform.db_dataSource_main).findFirst(sql, pStation.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){
 			pStation.set(Station.colunm_isparent, "false");

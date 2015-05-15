@@ -4,7 +4,7 @@ package little.ant.platform.common;
  * 常量数据字典
  * @author 董华健
  */
-public abstract class DictKeys {
+public abstract class ConstantPlatform {
 
 	/**
 	 * URL缓存Key

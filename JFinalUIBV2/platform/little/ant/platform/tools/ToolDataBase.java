@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.plugin.PropertiesPlugin;
 
 /**
@@ -20,18 +20,18 @@ public class ToolDataBase {
 	 * @throws IOException
 	 */
 	public static void exportSql(String exportPath) throws IOException {
-		String username = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_userName);
-		String password = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_passWord);
-		String ip = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_ip);
-		String port = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_port);
-		String database = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_dbName);
+		String username = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_userName);
+		String password = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_passWord);
+		String ip = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_ip);
+		String port = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_port);
+		String database = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_dbName);
 		
-		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
-		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
+		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_type_key);
+		if(db_type.equals(ConstantPlatform.db_type_postgresql)){ // pg
 			
 			
 			
-		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
+		}else if(db_type.equals(ConstantPlatform.db_type_mysql)){ // mysql
 			StringBuilder command = new StringBuilder();
 			command.append("cmd /c mysqldump -u").append(username).append(" -p").append(password)//密码是用的小p，而端口是用的大P。  
 					.append(" -h").append(ip).append(" -P").append(port).append(" ").append(database).append(" -r \"").append(exportPath+"\"");
@@ -43,7 +43,7 @@ public class ToolDataBase {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		} else if(db_type.equals(DictKeys.db_type_oracle)){ // oracle
+		} else if(db_type.equals(ConstantPlatform.db_type_oracle)){ // oracle
 			
 			
 			
@@ -56,18 +56,18 @@ public class ToolDataBase {
 	 * @throws IOException
 	 */
 	public static void importSql(String filePath) throws IOException {
-		String username = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_userName);
-		String password = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_passWord);
-		String ip = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_ip);
-		String port = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_port);
-		String database = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_connection_dbName);
+		String username = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_userName);
+		String password = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_passWord);
+		String ip = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_ip);
+		String port = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_port);
+		String database = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_dbName);
 		
-		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
-		if(db_type.equals(DictKeys.db_type_postgresql)){ // pg
+		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_type_key);
+		if(db_type.equals(ConstantPlatform.db_type_postgresql)){ // pg
 			
 			
 			
-		}else if(db_type.equals(DictKeys.db_type_mysql)){ // mysql
+		}else if(db_type.equals(ConstantPlatform.db_type_mysql)){ // mysql
 			//第一步，获取登录命令语句  
 			String loginCommand = new StringBuilder().append("mysql -u").append(username).append(" -p").append(password).append(" -h").append(ip).append(" -P").append(port).toString();
 			//第二步，获取切换数据库到目标数据库的命令语句  

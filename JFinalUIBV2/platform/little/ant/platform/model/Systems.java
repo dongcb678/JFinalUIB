@@ -1,7 +1,7 @@
 package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 
 import org.apache.log4j.Logger;
 
@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_systems")
+@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_systems")
 public class Systems extends BaseModel<Systems> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

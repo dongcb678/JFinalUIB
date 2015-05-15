@@ -1,6 +1,6 @@
 package little.ant.platform.service;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Syslog;
 
@@ -24,7 +24,7 @@ public class SysLogService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select sy.names synames, m.names mnames, o.names onames, o.url ourl, u.username, s.* ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.sysLog.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.sysLog.splitPage");
 	}
 	
 	/**

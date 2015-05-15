@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.Controller;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.service.UploadService;
 import little.ant.platform.tools.ToolString;
@@ -40,7 +40,7 @@ public class UploadController extends BaseController {
 			sb.append(PathKit.getWebRootPath()).append(File.separator).append("WEB-INF").append(File.separator).append("files").append(File.separator).append("upload");
 		}
 		
-		List<UploadFile> files = getFiles(sb.toString(), ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_maxPostSize_key)).intValue(), ToolString.encoding);
+		List<UploadFile> files = getFiles(sb.toString(), ((Integer) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_maxPostSize_key)).intValue(), ToolString.encoding);
 		
 		List<Map<String, String>> list = UploadService.service.upload(pathType, files);
 		renderJson(list);

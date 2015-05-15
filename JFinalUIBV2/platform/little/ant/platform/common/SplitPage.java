@@ -19,8 +19,8 @@ public class SplitPage implements Serializable {
 	private Map<String, String> queryParam;// 查询条件
 	private String orderColunm;// 排序条件
 	private String orderMode;// 排序方式
-	private int pageNumber = DictKeys.default_pageNumber;// 第几页
-	private int pageSize = DictKeys.default_pageSize;// 每页显示几多
+	private int pageNumber = ConstantPlatform.default_pageNumber;// 第几页
+	private int pageSize = ConstantPlatform.default_pageSize;// 每页显示几多
 
 	/**
 	 * 分页结果住数据
@@ -122,7 +122,7 @@ public class SplitPage implements Serializable {
 	 */
 	public int getPageNumber() {
 		if (pageNumber <= 0) {
-			pageNumber = DictKeys.default_pageNumber;
+			pageNumber = ConstantPlatform.default_pageNumber;
 		}
 		return pageNumber;
 	}
@@ -137,10 +137,10 @@ public class SplitPage implements Serializable {
 	 */
 	public int getPageSize() {
 		if (pageSize <= 0) {
-			pageSize = DictKeys.default_pageSize;
+			pageSize = ConstantPlatform.default_pageSize;
 		}
 		if (pageSize > 200) {
-			pageSize = DictKeys.default_pageSize;
+			pageSize = ConstantPlatform.default_pageSize;
 		}
 		return pageSize;
 	}

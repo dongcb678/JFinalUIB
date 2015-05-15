@@ -1,7 +1,7 @@
 package little.ant.cms.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.model.BaseModel;
 
 import org.apache.log4j.Logger;
@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "cms_job")
+@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "cms_job")
 public class Job extends BaseModel<Job> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

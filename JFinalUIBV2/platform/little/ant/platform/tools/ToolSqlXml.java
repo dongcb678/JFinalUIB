@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 
 import org.beetl.core.BeetlKit;
 import org.dom4j.Document;
@@ -97,13 +97,13 @@ public class ToolSqlXml {
     	}
     	
     	String sql = null;
-    	if(null == renderType || renderType.equals(DictKeys.sql_renderType_beetl)){ // beetl
+    	if(null == renderType || renderType.equals(ConstantPlatform.sql_renderType_beetl)){ // beetl
     		sql = BeetlKit.render(sqlTemplete, param);
     		
-    	} else if(renderType.equals(DictKeys.sql_renderType_freeMarker)){ // FreeMarker
+    	} else if(renderType.equals(ConstantPlatform.sql_renderType_freeMarker)){ // FreeMarker
     		sql = ToolFreeMarker.render(sqlTemplete, param);
     		
-    	} else if(renderType.equals(DictKeys.sql_renderType_velocity)){ // Velocity
+    	} else if(renderType.equals(ConstantPlatform.sql_renderType_velocity)){ // Velocity
     		sql = ToolVelocity.render(sqlTemplete, param);
     	} 
 		
@@ -141,13 +141,13 @@ public class ToolSqlXml {
 		}
     	
     	String sql = null;
-    	if(null == renderType || renderType.equals(DictKeys.sql_renderType_beetl)){ // beetl
+    	if(null == renderType || renderType.equals(ConstantPlatform.sql_renderType_beetl)){ // beetl
     		sql = BeetlKit.render(sqlTemplete, paramMap);
     		
-    	} else if(renderType.equals(DictKeys.sql_renderType_freeMarker)){ // FreeMarker
+    	} else if(renderType.equals(ConstantPlatform.sql_renderType_freeMarker)){ // FreeMarker
     		sql = ToolFreeMarker.render(sqlTemplete, paramMap);
     		
-    	} else if(renderType.equals(DictKeys.sql_renderType_velocity)){ // Velocity
+    	} else if(renderType.equals(ConstantPlatform.sql_renderType_velocity)){ // Velocity
     		sql = ToolVelocity.render(sqlTemplete, paramMap);
     	
     	} else {

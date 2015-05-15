@@ -1,7 +1,7 @@
 package little.ant.common.service;
 
 import little.ant.common.model.SensitiveWord;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.tools.ToolDateTime;
@@ -21,7 +21,7 @@ public class SensitiveWordService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "common.sensitiveWord.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "common.sensitiveWord.splitPage");
 	}
 
 	/**

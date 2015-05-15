@@ -1,7 +1,7 @@
 package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 
 import org.apache.log4j.Logger;
 
@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_syslog")
+@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_syslog")
 public class Syslog extends BaseModel<Syslog> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;

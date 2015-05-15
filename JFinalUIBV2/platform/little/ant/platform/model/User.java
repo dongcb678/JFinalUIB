@@ -1,7 +1,7 @@
 package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.thread.ThreadParamInit;
 
 import org.apache.log4j.Logger;
@@ -13,7 +13,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_user")
+@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_user")
 public class User extends BaseModel<User> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -184,10 +184,10 @@ public class User extends BaseModel<User> {
 	public void cacheAdd(String ids){
 		User user = User.dao.findById(ids);
 		UserInfo userInfo = user.getUserInfo();
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + ids, user);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr(colunm_username), user);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_email), user);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile), user);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_user + ids, user);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr(colunm_username), user);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_email), user);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile), user);
 	}
 
 	/**
@@ -196,10 +196,10 @@ public class User extends BaseModel<User> {
 	public void cacheRemove(String ids){
 		User user = User.dao.findById(ids);
 		UserInfo userInfo = user.getUserInfo();
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr(colunm_username));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_email));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile));
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_user + ids);
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_user + user.getStr(colunm_username));
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_email));
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile));
 	}
 
 	/**
@@ -208,7 +208,7 @@ public class User extends BaseModel<User> {
 	 * @return
 	 */
 	public User cacheGet(String ids){
-		User user = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_user + ids);
+		User user = CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_user + ids);
 		return user;
 	}
 	

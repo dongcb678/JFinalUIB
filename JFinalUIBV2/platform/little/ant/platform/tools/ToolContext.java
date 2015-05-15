@@ -12,7 +12,7 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.model.Group;
 import little.ant.platform.model.Operator;
 import little.ant.platform.model.Role;
@@ -205,7 +205,7 @@ public class ToolContext {
 			// 2. 解密cookie令牌
 			byte[] securityByte = Base64.decodeBase64(loginCookie);
 
-			String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
+			String securityKey = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_securityKey_key);
 			byte[] keyByte = Base64.decodeBase64(securityKey);
 
 			byte[] dataByte = null;
@@ -254,7 +254,7 @@ public class ToolContext {
 		// 1.设置cookie有效时间
 		int maxAgeTemp = -1;
 		if (autoLogin) {
-			maxAgeTemp = ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_maxAge_key)).intValue();
+			maxAgeTemp = ((Integer) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_maxAge_key)).intValue();
 		}
 
 		// 2.设置用户名到cookie
@@ -275,7 +275,7 @@ public class ToolContext {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
+		String securityKey = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		// 4. 认证cookie加密
@@ -310,7 +310,7 @@ public class ToolContext {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
+		String securityKey = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		// 加密
@@ -330,7 +330,7 @@ public class ToolContext {
 		}
 		
 		// 登陆认证cookie
-		int maxAgeTemp = ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_maxAge_key)).intValue();
+		int maxAgeTemp = ((Integer) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_maxAge_key)).intValue();
 		ToolWeb.addCookie(response,  "", "/", true, "authCode", securityCookie, maxAgeTemp);
 	}
 
@@ -352,7 +352,7 @@ public class ToolContext {
 			// 解密
 			byte[] securityByte = Base64.decodeBase64(authCode);
 
-			String securityKey = (String) PropertiesPlugin.getParamMapValue(DictKeys.config_securityKey_key);
+			String securityKey = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_securityKey_key);
 			byte[] keyByte = Base64.decodeBase64(securityKey);
 
 			byte[] dataByte = null;

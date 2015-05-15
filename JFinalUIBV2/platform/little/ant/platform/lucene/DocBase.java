@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.model.BaseModel;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolHtml;
@@ -287,14 +287,14 @@ public abstract class DocBase implements Runnable {
 	 */
 	protected int getBatchCount(String dataSource, String sql, int batchSize){
 		int count = 0;
-		String db_type = (String) PropertiesPlugin.getParamMapValue(DictKeys.db_type_key);
-		if(db_type.equals(DictKeys.db_type_postgresql)){
+		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_type_key);
+		if(db_type.equals(ConstantPlatform.db_type_postgresql)){
 			count = Db.use(dataSource).queryLong(" select count(*) " + sql).intValue();
 			
-		}else if(db_type.equals(DictKeys.db_type_mysql)){
+		}else if(db_type.equals(ConstantPlatform.db_type_mysql)){
 			count = Db.use(dataSource).queryLong(" select count(*) " + sql).intValue();
 		
-		}else if(db_type.equals(DictKeys.db_type_oracle)){
+		}else if(db_type.equals(ConstantPlatform.db_type_oracle)){
 			count = Db.use(dataSource).queryBigDecimal(" select count(*) " + sql).intValue();
 		}
 		

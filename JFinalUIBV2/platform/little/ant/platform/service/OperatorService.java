@@ -3,7 +3,7 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Module;
@@ -194,7 +194,7 @@ public class OperatorService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, m.names as modulenames, s.names as systemsnames ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.operator.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.operator.splitPage");
 	}
 	
 }

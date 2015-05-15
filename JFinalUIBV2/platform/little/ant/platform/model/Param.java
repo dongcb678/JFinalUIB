@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.thread.ThreadParamInit;
 import little.ant.platform.tools.ToolSqlXml;
 
@@ -18,7 +18,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_param")
+@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_param")
 public class Param extends BaseModel<Param> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
@@ -261,18 +261,18 @@ public class Param extends BaseModel<Param> {
 	public void cacheAdd(String ids){
 		Param param = Param.dao.findById(ids);
 		List<Param> paramList = param.getChild();
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + ids, param);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr(colunm_numbers), param);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + ids, paramList);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr(colunm_numbers), paramList);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param + ids, param);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr(colunm_numbers), param);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param_child + ids, paramList);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr(colunm_numbers), paramList);
 		
 		String paramIds = param.getStr("parentids");
 		if(null != paramIds){
 			Param parent = Param.dao.findById(param.getStr("parentids"));
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getPKValue(), parentList);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr(colunm_numbers), parentList);
+				CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getPKValue(), parentList);
+				CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr(colunm_numbers), parentList);
 			}
 		}
 	}
@@ -283,18 +283,18 @@ public class Param extends BaseModel<Param> {
 	 */
 	public void cacheRemove(String ids){
 		Param param = Param.dao.findById(ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr(colunm_numbers));
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr(colunm_numbers));
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param + ids);
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param + param.getStr(colunm_numbers));
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param_child + ids);
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param_child + param.getStr(colunm_numbers));
 
 		String paramIds = param.getStr("parentids");
 		if(null != paramIds){
 			Param parent = Param.dao.findById(param.getStr("parentids"));
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getPKValue(), parentList);
-				CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr(colunm_numbers), parentList);
+				CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getPKValue(), parentList);
+				CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param_child + parent.getStr(colunm_numbers), parentList);
 			}
 		}
 	}
@@ -305,7 +305,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public Param cacheGet(String key){
-		Param param = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + key);
+		Param param = CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param + key);
 		return param;
 	}
 	
@@ -315,7 +315,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public List<Param> cacheGetChild(String key){
-		List<Param> paramList = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param_child + key);
+		List<Param> paramList = CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param_child + key);
 		return paramList;
 	}
 	

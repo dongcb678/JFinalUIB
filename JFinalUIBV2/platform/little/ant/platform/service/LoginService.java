@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
 import little.ant.platform.plugin.PropertiesPlugin;
@@ -106,7 +106,7 @@ public class LoginService extends BaseService {
 			String sql = getSqlByBeetl("platform.user.column", param);
 			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
-				return DictKeys.login_info_0;// 用户不存在
+				return ConstantPlatform.login_info_0;// 用户不存在
 			}
 			user = userList.get(0);
 		}
@@ -114,21 +114,21 @@ public class LoginService extends BaseService {
 		// 2.停用账户
 		String status = user.getStr(User.colunm_status);
 		if (status.equals("0")) {
-			return DictKeys.login_info_1;
+			return ConstantPlatform.login_info_1;
 		}
 
 		// 3.密码错误次数超限
 		int errorCount = user.getNumber(User.colunm_errorcount).intValue();
-		int passErrorCount = ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorCount_key)).intValue();
+		int passErrorCount = ((Integer) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_passErrorCount_key)).intValue();
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate(User.colunm_stopdate);
 			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
-			int passErrorHour = ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorHour_key)).intValue();
+			int passErrorHour = ((Integer) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_passErrorHour_key)).intValue();
 			if(hourSpace < passErrorHour){
-				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
+				return ConstantPlatform.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
 				String sql = getSql("platform.user.start");
-				Db.use(DictKeys.db_dataSource_main).update(sql, user.getPKValue());
+				Db.use(ConstantPlatform.db_dataSource_main).update(sql, user.getPKValue());
 				// 更新缓存
 				User.dao.cacheAdd(user.getPKValue());
 			}
@@ -148,14 +148,14 @@ public class LoginService extends BaseService {
 		if (bool) {
 			// 密码验证成功
 			ToolContext.setCurrentUser(request, response, user, autoLogin);// 设置登录账户
-			return DictKeys.login_info_3;
+			return ConstantPlatform.login_info_3;
 		} else {
 			// 密码验证失败
 			String sql = getSql("platform.user.stop");
-			Db.use(DictKeys.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
+			Db.use(ConstantPlatform.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
 			// 更新缓存
 			User.dao.cacheAdd(user.getPKValue());
-			return DictKeys.login_info_4;
+			return ConstantPlatform.login_info_4;
 		}
 	}
 
@@ -179,7 +179,7 @@ public class LoginService extends BaseService {
 			String sql = getSqlByBeetl("platform.user.column", param);
 			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
-				return DictKeys.login_info_0;// 用户不存在
+				return ConstantPlatform.login_info_0;// 用户不存在
 			}
 			user = userList.get(0);
 		}
@@ -187,21 +187,21 @@ public class LoginService extends BaseService {
 		// 2.停用账户
 		String status = user.getStr(User.colunm_status);
 		if (status.equals("0")) {
-			return DictKeys.login_info_1;
+			return ConstantPlatform.login_info_1;
 		}
 
 		// 3.密码错误次数超限
 		int errorCount = user.getNumber(User.colunm_errorcount).intValue();
-		int passErrorCount = ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorCount_key)).intValue();
+		int passErrorCount = ((Integer) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_passErrorCount_key)).intValue();
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate(User.colunm_stopdate);
 			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
-			int passErrorHour = ((Integer) PropertiesPlugin.getParamMapValue(DictKeys.config_passErrorHour_key)).intValue();
+			int passErrorHour = ((Integer) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_passErrorHour_key)).intValue();
 			if(hourSpace < passErrorHour){
-				return DictKeys.login_info_2;// 密码错误次数超限，几小时内不能登录
+				return ConstantPlatform.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
 				String sql = getSql("platform.user.start");
-				Db.use(DictKeys.db_dataSource_main).update(sql, user.getPKValue());
+				Db.use(ConstantPlatform.db_dataSource_main).update(sql, user.getPKValue());
 				// 更新缓存
 				User.dao.cacheAdd(user.getPKValue());
 			}
@@ -220,14 +220,14 @@ public class LoginService extends BaseService {
 		}
 		if (bool) {
 			// 密码验证成功
-			return DictKeys.login_info_3;
+			return ConstantPlatform.login_info_3;
 		} else {
 			// 密码验证失败
 			String sql = getSql("platform.user.stop");
-			Db.use(DictKeys.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
+			Db.use(ConstantPlatform.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
 			// 更新缓存
 			User.dao.cacheAdd(user.getPKValue());
-			return DictKeys.login_info_4;
+			return ConstantPlatform.login_info_4;
 		}
 	}
 

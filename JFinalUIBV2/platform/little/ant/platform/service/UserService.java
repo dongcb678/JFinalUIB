@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Department;
@@ -183,7 +183,7 @@ public class UserService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.user.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.user.splitPage");
 	}
 
 	/**

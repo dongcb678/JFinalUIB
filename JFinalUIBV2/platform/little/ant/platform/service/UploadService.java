@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Upload;
 
@@ -51,7 +51,7 @@ public class UploadService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.upload.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.upload.splitPage");
 	}
 
 	/**

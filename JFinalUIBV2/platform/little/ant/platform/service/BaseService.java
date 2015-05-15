@@ -3,7 +3,7 @@ package little.ant.platform.service;
 import java.util.LinkedList;
 import java.util.Map;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
@@ -37,7 +37,7 @@ public abstract class BaseService {
 		LinkedList<Object> paramValue = new LinkedList<Object>();
 		
 		// 调用生成from sql，并构造paramValue
-		String sql = ToolSqlXml.getSql(sqlId, splitPage.getQueryParam(), DictKeys.sql_renderType_beetl, paramValue);
+		String sql = ToolSqlXml.getSql(sqlId, splitPage.getQueryParam(), ConstantPlatform.sql_renderType_beetl, paramValue);
 		formSqlSb.append(sql);
 		
 		// 行级：过滤
@@ -76,7 +76,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, DictKeys.sql_renderType_beetl);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_beetl);
     }
     
     /**
@@ -87,7 +87,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, DictKeys.sql_renderType_beetl, list);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_beetl, list);
     }
 
     /**
@@ -97,7 +97,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, DictKeys.sql_renderType_freeMarker);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_freeMarker);
     }
     
     /**
@@ -108,7 +108,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, DictKeys.sql_renderType_freeMarker, list);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_freeMarker, list);
     }
 
     /**
@@ -118,7 +118,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByVelocity(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, DictKeys.sql_renderType_velocity);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_velocity);
     }
     
     /**
@@ -129,7 +129,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, DictKeys.sql_renderType_velocity, list);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_velocity, list);
     }
 	
 	/**
@@ -214,12 +214,12 @@ public abstract class BaseService {
 	 */
 	public ToolMail sendTextMail(){
 		ToolMail mail = new ToolMail();
-		mail.setHost((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_host));
-		mail.setPort((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_port));
+		mail.setHost((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_host));
+		mail.setPort((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_port));
 		mail.setValidate(true);
-		mail.setUserName((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_userName));
-		mail.setPassword((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_password));
-		mail.setFrom((String)PropertiesPlugin.getParamMapValue(DictKeys.config_mail_from));
+		mail.setUserName((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_userName));
+		mail.setPassword((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_password));
+		mail.setFrom((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_from));
 		return mail;
 	}
 	

@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.model.Param;
 import little.ant.platform.thread.ThreadParamInit;
 
@@ -26,7 +26,7 @@ public class ToolSignature {
 	 */
 	public static boolean checkSignature(String signature, String timestamp, String nonce) {
 		try {
-			Param param = (Param) CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_param + ToolWeiXin.weixin_token_key);
+			Param param = (Param) CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param + ToolWeiXin.weixin_token_key);
 			String weixin_token = param.getStr("val");
 			String[] strSet = new String[] { weixin_token, timestamp, nonce };
 			java.util.Arrays.sort(strSet);

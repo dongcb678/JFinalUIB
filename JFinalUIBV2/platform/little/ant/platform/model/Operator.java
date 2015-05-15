@@ -1,7 +1,7 @@
 package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.thread.ThreadParamInit;
 
 import org.apache.log4j.Logger;
@@ -13,7 +13,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_operator")
+@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_operator")
 public class Operator extends BaseModel<Operator> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -129,8 +129,8 @@ public class Operator extends BaseModel<Operator> {
 	 */
 	public void cacheAdd(String ids){
 		Operator operator = Operator.dao.findById(ids);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + ids, operator);
-		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr(colunm_url), operator);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + ids, operator);
+		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr(colunm_url), operator);
 	}
 
 	/**
@@ -139,8 +139,8 @@ public class Operator extends BaseModel<Operator> {
 	 */
 	public void cacheRemove(String ids){
 		Operator operator = Operator.dao.findById(ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + ids);
-		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr(colunm_url));
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + ids);
+		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr(colunm_url));
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class Operator extends BaseModel<Operator> {
 	 * @return
 	 */
 	public Operator cacheGet(String key){
-		Operator operator = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_operator + key);
+		Operator operator = CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + key);
 		return operator;
 	}
 	

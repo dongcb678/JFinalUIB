@@ -1,7 +1,7 @@
 package little.ant.platform.controller;
 
 import little.ant.platform.annotation.Controller;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.model.User;
 import little.ant.platform.service.LoginService;
 import little.ant.platform.tools.ToolContext;
@@ -84,7 +84,7 @@ public class LoginController extends BaseController {
 				autoLogin = true;
 			}
 			int result = LoginService.service.login(getRequest(), getResponse(), username, password, autoLogin);
-			if(result == DictKeys.login_info_3){
+			if(result == ConstantPlatform.login_info_3){
 				redirect("/jf/platform/index");
 				return;
 			}
@@ -102,7 +102,7 @@ public class LoginController extends BaseController {
 		String password = getPara("password");
 		
 		int result = LoginService.service.pass(getRequest(), getResponse(), user.getStr("username"), password);
-		if(result == DictKeys.login_info_3){
+		if(result == ConstantPlatform.login_info_3){
 			redirect("/jf/platform/index");
 			return;
 		}

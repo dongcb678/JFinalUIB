@@ -1,6 +1,6 @@
 package little.ant.platform.service;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Menu;
 import little.ant.platform.model.Module;
@@ -65,7 +65,7 @@ public class SystemsService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.systems.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.systems.splitPage");
 	}
 	
 }

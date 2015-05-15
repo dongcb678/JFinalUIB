@@ -1,6 +1,6 @@
 package little.ant.common.service;
 
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
 
@@ -19,7 +19,7 @@ public class AccessStatisticsService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "common.accessStatistics.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "common.accessStatistics.splitPage");
 	}
 
 }
