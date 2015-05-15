@@ -24,6 +24,7 @@
       <src_folder value="file://$MODULE_DIR$/weiXin" expected_position="2" />
       <src_folder value="file://$MODULE_DIR$/jfinal19" expected_position="3" />
       <src_folder value="file://$MODULE_DIR$/junit" expected_position="4" />
+      <src_folder value="file://$MODULE_DIR$/beetl" expected_position="5" />
     </src_description>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
@@ -35,6 +36,7 @@
       <sourceFolder url="file://$MODULE_DIR$/weiXin" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jfinal19" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/junit" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/beetl" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
@@ -190,6 +192,15 @@
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$MODULE_DIR$/WebContent/WEB-INF/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/doc/buildJar/beetl/antlr-4.5-complete.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
