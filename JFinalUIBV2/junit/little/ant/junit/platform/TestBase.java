@@ -32,7 +32,6 @@ public class TestBase {
     protected static I18NPlugin i18NPlugin;
     protected static EhCachePlugin ehCachePlugin;
     protected static SqlXmlPlugin sqlXmlPlugin;
-    protected static ThreadParamInit threadParamInit;
     
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -99,8 +98,7 @@ public class TestBase {
 		sqlXmlPlugin = new SqlXmlPlugin();
 		sqlXmlPlugin.start();
 		
-		threadParamInit = new ThreadParamInit();
-		threadParamInit.start();
+		ThreadParamInit.cacheAll();
     }
  
     @After
@@ -108,7 +106,6 @@ public class TestBase {
 //    	i18NPlugin.stop();
 //    	ehCachePlugin.stop();
 //    	sqlXmlPlugin.stop();
-//    	threadParamInit.stop();
 //    	
 //    	druidPlugin.stop();
 //    	arpMain.stop();
