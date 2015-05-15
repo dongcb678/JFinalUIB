@@ -13,10 +13,10 @@ public class CommentValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/cms/comment/save")){
+		if (actionKey.equals("/jf/cms/admin/comment/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/cms/comment/update")){
+		} else if (actionKey.equals("/jf/cms/admin/comment/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class CommentValidator extends Validator {
 		controller.keepModel(Comment.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/cms/comment/save")){
-			controller.render("/cms/xxx.html");
+		if (actionKey.equals("/jf/cms/admin/comment/save")){
+			controller.render("/cms/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/cms/comment/update")){
-			controller.render("/cms/xxx.html");
+		} else if (actionKey.equals("/jf/cms/admin/comment/update")){
+			controller.render("/cms/admin/xxx.html");
 		
 		}
 	}

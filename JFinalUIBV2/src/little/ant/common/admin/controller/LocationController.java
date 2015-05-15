@@ -14,7 +14,7 @@ import com.jfinal.aop.Before;
  * 广告位置管理	
  * 描述：
  */
-@Controller(controllerKey = "/jf/common/location")
+@Controller(controllerKey = "/jf/common/admin/location")
 public class LocationController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -25,7 +25,7 @@ public class LocationController extends BaseController {
 	 */
 	public void index() {
 		LocationService.service.list(splitPage);
-		render("/common/location/list.html");
+		render("/common/admin/location/list.html");
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class LocationController extends BaseController {
 	public void save() {
 		Location location = getModel(Location.class);
 		LocationService.service.save(location, getCUserIds());
-		render("/common/location/add.html");
+		render("/common/admin/location/add.html");
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class LocationController extends BaseController {
 	public void edit() {
 		Location location = Location.dao.findById(getPara());
 		setAttr("location", location);
-		render("/common/location/update.html");
+		render("/common/admin/location/update.html");
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class LocationController extends BaseController {
 	@Before(LocationValidator.class)
 	public void update() {
 		getModel(Location.class).update();
-		redirect("/jf/common/location");
+		redirect("/jf/common/admin/location");
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class LocationController extends BaseController {
 	public void view() {
 		Location location = Location.dao.findById(getPara());
 		setAttr("location", location);
-		render("/common/location/view.html");
+		render("/common/admin/location/view.html");
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class LocationController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		LocationService.service.delete(param);
-		redirect("/jf/common/location");
+		redirect("/jf/common/admin/location");
 	}
 	
 }

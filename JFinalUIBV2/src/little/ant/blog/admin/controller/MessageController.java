@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/message
- * /jf/blog/message/save
- * /jf/blog/message/edit
- * /jf/blog/message/update
- * /jf/blog/message/view
- * /jf/blog/message/delete
- * /common/message/add.html
+ * /jf/blog/admin/message
+ * /jf/blog/admin/message/save
+ * /jf/blog/admin/message/edit
+ * /jf/blog/admin/message/update
+ * /jf/blog/admin/message/view
+ * /jf/blog/admin/message/delete
+ * /common/admin/message/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/message")
+@Controller(controllerKey = "/jf/blog/admin/message")
 public class MessageController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class MessageController extends BaseController {
 	 */
 	public void index() {
 		MessageService.service.list(splitPage);
-		render("/blog/message/list.html");
+		render("/blog/admin/message/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class MessageController extends BaseController {
 	@Before(MessageValidator.class)
 	public void save() {
 		getModel(Message.class).save();
-		render("/blog/message/add.html");
+		render("/blog/admin/message/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class MessageController extends BaseController {
 	public void edit() {
 		Message message = Message.dao.findById(getPara());
 		setAttr("message", message);
-		render("/blog/message/update.html");
+		render("/blog/admin/message/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class MessageController extends BaseController {
 	@Before(MessageValidator.class)
 	public void update() {
 		getModel(Message.class).update();
-		redirect("/jf/blog/message");
+		redirect("/jf/blog/admin/message");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class MessageController extends BaseController {
 	public void view() {
 		Message message = Message.dao.findById(getPara());
 		setAttr("message", message);
-		render("/blog/message/view.html");
+		render("/blog/admin/message/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class MessageController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		MessageService.service.delete(param);
-		redirect("/jf/blog/message");
+		redirect("/jf/blog/admin/message");
 	}
 	
 }

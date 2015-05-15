@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/moveComment
- * /jf/blog/moveComment/save
- * /jf/blog/moveComment/edit
- * /jf/blog/moveComment/update
- * /jf/blog/moveComment/view
- * /jf/blog/moveComment/delete
- * /common/moveComment/add.html
+ * /jf/blog/admin/moveComment
+ * /jf/blog/admin/moveComment/save
+ * /jf/blog/admin/moveComment/edit
+ * /jf/blog/admin/moveComment/update
+ * /jf/blog/admin/moveComment/view
+ * /jf/blog/admin/moveComment/delete
+ * /common/admin/moveComment/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/moveComment")
+@Controller(controllerKey = "/jf/blog/admin/moveComment")
 public class MoveCommentController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class MoveCommentController extends BaseController {
 	 */
 	public void index() {
 		MoveCommentService.service.list(splitPage);
-		render("/blog/moveComment/list.html");
+		render("/blog/admin/moveComment/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class MoveCommentController extends BaseController {
 	@Before(MoveCommentValidator.class)
 	public void save() {
 		getModel(MoveComment.class).save();
-		render("/blog/moveComment/add.html");
+		render("/blog/admin/moveComment/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class MoveCommentController extends BaseController {
 	public void edit() {
 		MoveComment moveComment = MoveComment.dao.findById(getPara());
 		setAttr("moveComment", moveComment);
-		render("/blog/moveComment/update.html");
+		render("/blog/admin/moveComment/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class MoveCommentController extends BaseController {
 	@Before(MoveCommentValidator.class)
 	public void update() {
 		getModel(MoveComment.class).update();
-		redirect("/jf/blog/moveComment");
+		redirect("/jf/blog/admin/moveComment");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class MoveCommentController extends BaseController {
 	public void view() {
 		MoveComment moveComment = MoveComment.dao.findById(getPara());
 		setAttr("moveComment", moveComment);
-		render("/blog/moveComment/view.html");
+		render("/blog/admin/moveComment/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class MoveCommentController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		MoveCommentService.service.delete(param);
-		redirect("/jf/blog/moveComment");
+		redirect("/jf/blog/admin/moveComment");
 	}
 	
 }

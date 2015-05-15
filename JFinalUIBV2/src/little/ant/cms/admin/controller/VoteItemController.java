@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/voteItem
- * /jf/cms/voteItem/save
- * /jf/cms/voteItem/edit
- * /jf/cms/voteItem/update
- * /jf/cms/voteItem/view
- * /jf/cms/voteItem/delete
- * /common/voteItem/add.html
+ * /jf/cms/admin/voteItem
+ * /jf/cms/admin/voteItem/save
+ * /jf/cms/admin/voteItem/edit
+ * /jf/cms/admin/voteItem/update
+ * /jf/cms/admin/voteItem/view
+ * /jf/cms/admin/voteItem/delete
+ * /common/admin/voteItem/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/voteItem")
+@Controller(controllerKey = "/jf/cms/admin/voteItem")
 public class VoteItemController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class VoteItemController extends BaseController {
 	 */
 	public void index() {
 		VoteItemService.service.list(splitPage);
-		render("/cms/voteItem/list.html");
+		render("/cms/admin/voteItem/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class VoteItemController extends BaseController {
 	@Before(VoteItemValidator.class)
 	public void save() {
 		getModel(VoteItem.class).save();
-		render("/cms/voteItem/add.html");
+		render("/cms/admin/voteItem/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class VoteItemController extends BaseController {
 	public void edit() {
 		VoteItem voteItem = VoteItem.dao.findById(getPara());
 		setAttr("voteItem", voteItem);
-		render("/cms/voteItem/update.html");
+		render("/cms/admin/voteItem/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class VoteItemController extends BaseController {
 	@Before(VoteItemValidator.class)
 	public void update() {
 		getModel(VoteItem.class).update();
-		redirect("/jf/cms/voteItem");
+		redirect("/jf/cms/admin/voteItem");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class VoteItemController extends BaseController {
 	public void view() {
 		VoteItem voteItem = VoteItem.dao.findById(getPara());
 		setAttr("voteItem", voteItem);
-		render("/cms/voteItem/view.html");
+		render("/cms/admin/voteItem/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class VoteItemController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		VoteItemService.service.delete(param);
-		redirect("/jf/cms/voteItem");
+		redirect("/jf/cms/admin/voteItem");
 	}
 	
 }

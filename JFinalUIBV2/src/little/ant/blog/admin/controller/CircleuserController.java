@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/circleuser
- * /jf/blog/circleuser/save
- * /jf/blog/circleuser/edit
- * /jf/blog/circleuser/update
- * /jf/blog/circleuser/view
- * /jf/blog/circleuser/delete
- * /common/circleuser/add.html
+ * /jf/blog/admin/circleuser
+ * /jf/blog/admin/circleuser/save
+ * /jf/blog/admin/circleuser/edit
+ * /jf/blog/admin/circleuser/update
+ * /jf/blog/admin/circleuser/view
+ * /jf/blog/admin/circleuser/delete
+ * /common/admin/circleuser/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/circleuser")
+@Controller(controllerKey = "/jf/blog/admin/circleuser")
 public class CircleuserController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class CircleuserController extends BaseController {
 	 */
 	public void index() {
 		CircleuserService.service.list(splitPage);
-		render("/blog/circleuser/list.html");
+		render("/blog/admin/circleuser/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class CircleuserController extends BaseController {
 	@Before(CircleuserValidator.class)
 	public void save() {
 		getModel(Circleuser.class).save();
-		render("/blog/circleuser/add.html");
+		render("/blog/admin/circleuser/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class CircleuserController extends BaseController {
 	public void edit() {
 		Circleuser circleuser = Circleuser.dao.findById(getPara());
 		setAttr("circleuser", circleuser);
-		render("/blog/circleuser/update.html");
+		render("/blog/admin/circleuser/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class CircleuserController extends BaseController {
 	@Before(CircleuserValidator.class)
 	public void update() {
 		getModel(Circleuser.class).update();
-		redirect("/jf/blog/circleuser");
+		redirect("/jf/blog/admin/circleuser");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class CircleuserController extends BaseController {
 	public void view() {
 		Circleuser circleuser = Circleuser.dao.findById(getPara());
 		setAttr("circleuser", circleuser);
-		render("/blog/circleuser/view.html");
+		render("/blog/admin/circleuser/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class CircleuserController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		CircleuserService.service.delete(param);
-		redirect("/jf/blog/circleuser");
+		redirect("/jf/blog/admin/circleuser");
 	}
 	
 }

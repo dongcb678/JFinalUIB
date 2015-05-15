@@ -13,10 +13,10 @@ public class PhotogalleryItemValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/cms/photogalleryItem/save")){
+		if (actionKey.equals("/jf/cms/admin/photogalleryItem/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/cms/photogalleryItem/update")){
+		} else if (actionKey.equals("/jf/cms/admin/photogalleryItem/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class PhotogalleryItemValidator extends Validator {
 		controller.keepModel(PhotogalleryItem.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/cms/photogalleryItem/save")){
-			controller.render("/cms/xxx.html");
+		if (actionKey.equals("/jf/cms/admin/photogalleryItem/save")){
+			controller.render("/cms/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/cms/photogalleryItem/update")){
-			controller.render("/cms/xxx.html");
+		} else if (actionKey.equals("/jf/cms/admin/photogalleryItem/update")){
+			controller.render("/cms/admin/xxx.html");
 		
 		}
 	}

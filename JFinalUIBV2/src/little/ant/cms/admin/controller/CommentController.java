@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/comment
- * /jf/cms/comment/save
- * /jf/cms/comment/edit
- * /jf/cms/comment/update
- * /jf/cms/comment/view
- * /jf/cms/comment/delete
- * /common/comment/add.html
+ * /jf/cms/admin/comment
+ * /jf/cms/admin/comment/save
+ * /jf/cms/admin/comment/edit
+ * /jf/cms/admin/comment/update
+ * /jf/cms/admin/comment/view
+ * /jf/cms/admin/comment/delete
+ * /common/admin/comment/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/comment")
+@Controller(controllerKey = "/jf/cms/admin/comment")
 public class CommentController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class CommentController extends BaseController {
 	 */
 	public void index() {
 		CommentService.service.list(splitPage);
-		render("/cms/comment/list.html");
+		render("/cms/admin/comment/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class CommentController extends BaseController {
 	@Before(CommentValidator.class)
 	public void save() {
 		getModel(Comment.class).save();
-		render("/cms/comment/add.html");
+		render("/cms/admin/comment/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class CommentController extends BaseController {
 	public void edit() {
 		Comment comment = Comment.dao.findById(getPara());
 		setAttr("comment", comment);
-		render("/cms/comment/update.html");
+		render("/cms/admin/comment/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class CommentController extends BaseController {
 	@Before(CommentValidator.class)
 	public void update() {
 		getModel(Comment.class).update();
-		redirect("/jf/cms/comment");
+		redirect("/jf/cms/admin/comment");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class CommentController extends BaseController {
 	public void view() {
 		Comment comment = Comment.dao.findById(getPara());
 		setAttr("comment", comment);
-		render("/cms/comment/view.html");
+		render("/cms/admin/comment/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class CommentController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		CommentService.service.delete(param);
-		redirect("/jf/cms/comment");
+		redirect("/jf/cms/admin/comment");
 	}
 	
 }

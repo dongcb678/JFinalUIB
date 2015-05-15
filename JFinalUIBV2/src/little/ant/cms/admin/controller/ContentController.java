@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/content
- * /jf/cms/content/save
- * /jf/cms/content/edit
- * /jf/cms/content/update
- * /jf/cms/content/view
- * /jf/cms/content/delete
- * /common/content/add.html
+ * /jf/cms/admin/content
+ * /jf/cms/admin/content/save
+ * /jf/cms/admin/content/edit
+ * /jf/cms/admin/content/update
+ * /jf/cms/admin/content/view
+ * /jf/cms/admin/content/delete
+ * /common/admin/content/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/content")
+@Controller(controllerKey = "/jf/cms/admin/content")
 public class ContentController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class ContentController extends BaseController {
 	 */
 	public void index() {
 		ContentService.service.list(splitPage);
-		render("/cms/content/list.html");
+		render("/cms/admin/content/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class ContentController extends BaseController {
 	@Before(ContentValidator.class)
 	public void save() {
 		getModel(Content.class).save();
-		render("/cms/content/add.html");
+		render("/cms/admin/content/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class ContentController extends BaseController {
 	public void edit() {
 		Content content = Content.dao.findById(getPara());
 		setAttr("content", content);
-		render("/cms/content/update.html");
+		render("/cms/admin/content/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class ContentController extends BaseController {
 	@Before(ContentValidator.class)
 	public void update() {
 		getModel(Content.class).update();
-		redirect("/jf/cms/content");
+		redirect("/jf/cms/admin/content");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class ContentController extends BaseController {
 	public void view() {
 		Content content = Content.dao.findById(getPara());
 		setAttr("content", content);
-		render("/cms/content/view.html");
+		render("/cms/admin/content/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class ContentController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		ContentService.service.delete(param);
-		redirect("/jf/cms/content");
+		redirect("/jf/cms/admin/content");
 	}
 	
 }

@@ -13,10 +13,10 @@ public class CircleValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/blog/circle/save")){
+		if (actionKey.equals("/jf/blog/admin/circle/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/blog/circle/update")){
+		} else if (actionKey.equals("/jf/blog/admin/circle/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class CircleValidator extends Validator {
 		controller.keepModel(Circle.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/blog/circle/save")){
-			controller.render("/blog/xxx.html");
+		if (actionKey.equals("/jf/blog/admin/circle/save")){
+			controller.render("/blog/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/blog/circle/update")){
-			controller.render("/blog/xxx.html");
+		} else if (actionKey.equals("/jf/blog/admin/circle/update")){
+			controller.render("/blog/admin/xxx.html");
 		
 		}
 	}

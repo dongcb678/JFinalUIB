@@ -11,11 +11,11 @@ import org.apache.log4j.Logger;
  * XXX 管理	
  * 描述：
  * 
- * /jf/common/accessStatistics
- * /jf/common/accessStatistics/view
+ * /jf/common/admin/accessStatistics
+ * /jf/common/admin/accessStatistics/view
  * 
  */
-@Controller(controllerKey = "/jf/common/accessStatistics")
+@Controller(controllerKey = "/jf/common/admin/accessStatistics")
 public class AccessStatisticsController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -26,7 +26,7 @@ public class AccessStatisticsController extends BaseController {
 	 */
 	public void index() {
 		AccessStatisticsService.service.list(splitPage);
-		render("/common/accessStatistics/list.html");
+		render("/common/admin/accessStatistics/list.html");
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class AccessStatisticsController extends BaseController {
 	public void view() {
 		AccessStatistics accessStatistics = AccessStatistics.dao.findById(getPara());
 		setAttr("accessStatistics", accessStatistics);
-		render("/common/accessStatistics/view.html");
+		render("/common/admin/accessStatistics/view.html");
 	}
 	
 }

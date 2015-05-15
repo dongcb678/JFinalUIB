@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/common/sensitiveWord');">敏感词</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/common/admin/sensitiveWord');">敏感词</a></li>
 			<li class="active">添加</li>
 		</ol>
 	</div>
@@ -22,13 +22,13 @@
 			</div>
 			
 			<div class="panel-body">	
-				<form id="editForm" action="${cxt!}/jf/common/sensitiveWord/save" method="POST" role="form" class="form-horizontal">
+				<form id="editForm" action="${cxt!}/jf/common/admin/sensitiveWord/save" method="POST" role="form" class="form-horizontal">
 					
-					<% include("/common/sensitiveWord/form.html"){} %>
+					<% include("/common/admin/sensitiveWord/form.html"){} %>
 					
 					<div class="form-group">
 						<div class="col-sm-2 col-sm-offset-3">
-							<% if(hasPrivilegeUrl("/jf/common/sensitiveWord/save")){ %>
+							<% if(hasPrivilegeUrl("/jf/common/admin/sensitiveWord/save")){ %>
 								<button type="button" class="btn btn-red" onclick="platform_verify.formValiSubmit(this.form);">
 									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
 								</button>

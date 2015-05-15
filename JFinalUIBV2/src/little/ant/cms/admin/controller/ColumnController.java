@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/column
- * /jf/cms/column/save
- * /jf/cms/column/edit
- * /jf/cms/column/update
- * /jf/cms/column/view
- * /jf/cms/column/delete
- * /common/column/add.html
+ * /jf/cms/admin/column
+ * /jf/cms/admin/column/save
+ * /jf/cms/admin/column/edit
+ * /jf/cms/admin/column/update
+ * /jf/cms/admin/column/view
+ * /jf/cms/admin/column/delete
+ * /common/admin/column/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/column")
+@Controller(controllerKey = "/jf/cms/admin/column")
 public class ColumnController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class ColumnController extends BaseController {
 	 */
 	public void index() {
 		ColumnService.service.list(splitPage);
-		render("/cms/column/list.html");
+		render("/cms/admin/column/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class ColumnController extends BaseController {
 	@Before(ColumnValidator.class)
 	public void save() {
 		getModel(Column.class).save();
-		render("/cms/column/add.html");
+		render("/cms/admin/column/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class ColumnController extends BaseController {
 	public void edit() {
 		Column column = Column.dao.findById(getPara());
 		setAttr("column", column);
-		render("/cms/column/update.html");
+		render("/cms/admin/column/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class ColumnController extends BaseController {
 	@Before(ColumnValidator.class)
 	public void update() {
 		getModel(Column.class).update();
-		redirect("/jf/cms/column");
+		redirect("/jf/cms/admin/column");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class ColumnController extends BaseController {
 	public void view() {
 		Column column = Column.dao.findById(getPara());
 		setAttr("column", column);
-		render("/cms/column/view.html");
+		render("/cms/admin/column/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class ColumnController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		ColumnService.service.delete(param);
-		redirect("/jf/cms/column");
+		redirect("/jf/cms/admin/column");
 	}
 	
 }

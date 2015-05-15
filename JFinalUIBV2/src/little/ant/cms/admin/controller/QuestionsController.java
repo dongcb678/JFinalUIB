@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/questions
- * /jf/cms/questions/save
- * /jf/cms/questions/edit
- * /jf/cms/questions/update
- * /jf/cms/questions/view
- * /jf/cms/questions/delete
- * /common/questions/add.html
+ * /jf/cms/admin/questions
+ * /jf/cms/admin/questions/save
+ * /jf/cms/admin/questions/edit
+ * /jf/cms/admin/questions/update
+ * /jf/cms/admin/questions/view
+ * /jf/cms/admin/questions/delete
+ * /common/admin/questions/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/questions")
+@Controller(controllerKey = "/jf/cms/admin/questions")
 public class QuestionsController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class QuestionsController extends BaseController {
 	 */
 	public void index() {
 		QuestionsService.service.list(splitPage);
-		render("/cms/questions/list.html");
+		render("/cms/admin/questions/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class QuestionsController extends BaseController {
 	@Before(QuestionsValidator.class)
 	public void save() {
 		getModel(Questions.class).save();
-		render("/cms/questions/add.html");
+		render("/cms/admin/questions/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class QuestionsController extends BaseController {
 	public void edit() {
 		Questions questions = Questions.dao.findById(getPara());
 		setAttr("questions", questions);
-		render("/cms/questions/update.html");
+		render("/cms/admin/questions/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class QuestionsController extends BaseController {
 	@Before(QuestionsValidator.class)
 	public void update() {
 		getModel(Questions.class).update();
-		redirect("/jf/cms/questions");
+		redirect("/jf/cms/admin/questions");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class QuestionsController extends BaseController {
 	public void view() {
 		Questions questions = Questions.dao.findById(getPara());
 		setAttr("questions", questions);
-		render("/cms/questions/view.html");
+		render("/cms/admin/questions/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class QuestionsController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		QuestionsService.service.delete(param);
-		redirect("/jf/cms/questions");
+		redirect("/jf/cms/admin/questions");
 	}
 	
 }

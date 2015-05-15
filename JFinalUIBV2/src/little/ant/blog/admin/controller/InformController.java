@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/inform
- * /jf/blog/inform/save
- * /jf/blog/inform/edit
- * /jf/blog/inform/update
- * /jf/blog/inform/view
- * /jf/blog/inform/delete
- * /common/inform/add.html
+ * /jf/blog/admin/inform
+ * /jf/blog/admin/inform/save
+ * /jf/blog/admin/inform/edit
+ * /jf/blog/admin/inform/update
+ * /jf/blog/admin/inform/view
+ * /jf/blog/admin/inform/delete
+ * /common/admin/inform/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/inform")
+@Controller(controllerKey = "/jf/blog/admin/inform")
 public class InformController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class InformController extends BaseController {
 	 */
 	public void index() {
 		InformService.service.list(splitPage);
-		render("/blog/inform/list.html");
+		render("/blog/admin/inform/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class InformController extends BaseController {
 	@Before(InformValidator.class)
 	public void save() {
 		getModel(Inform.class).save();
-		render("/blog/inform/add.html");
+		render("/blog/admin/inform/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class InformController extends BaseController {
 	public void edit() {
 		Inform inform = Inform.dao.findById(getPara());
 		setAttr("inform", inform);
-		render("/blog/inform/update.html");
+		render("/blog/admin/inform/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class InformController extends BaseController {
 	@Before(InformValidator.class)
 	public void update() {
 		getModel(Inform.class).update();
-		redirect("/jf/blog/inform");
+		redirect("/jf/blog/admin/inform");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class InformController extends BaseController {
 	public void view() {
 		Inform inform = Inform.dao.findById(getPara());
 		setAttr("inform", inform);
-		render("/blog/inform/view.html");
+		render("/blog/admin/inform/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class InformController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		InformService.service.delete(param);
-		redirect("/jf/blog/inform");
+		redirect("/jf/blog/admin/inform");
 	}
 	
 }

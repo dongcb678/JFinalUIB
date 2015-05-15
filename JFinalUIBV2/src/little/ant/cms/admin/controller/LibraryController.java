@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/library
- * /jf/cms/library/save
- * /jf/cms/library/edit
- * /jf/cms/library/update
- * /jf/cms/library/view
- * /jf/cms/library/delete
- * /common/library/add.html
+ * /jf/cms/admin/library
+ * /jf/cms/admin/library/save
+ * /jf/cms/admin/library/edit
+ * /jf/cms/admin/library/update
+ * /jf/cms/admin/library/view
+ * /jf/cms/admin/library/delete
+ * /common/admin/library/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/library")
+@Controller(controllerKey = "/jf/cms/admin/library")
 public class LibraryController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class LibraryController extends BaseController {
 	 */
 	public void index() {
 		LibraryService.service.list(splitPage);
-		render("/cms/library/list.html");
+		render("/cms/admin/library/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class LibraryController extends BaseController {
 	@Before(LibraryValidator.class)
 	public void save() {
 		getModel(Library.class).save();
-		render("/cms/library/add.html");
+		render("/cms/admin/library/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class LibraryController extends BaseController {
 	public void edit() {
 		Library library = Library.dao.findById(getPara());
 		setAttr("library", library);
-		render("/cms/library/update.html");
+		render("/cms/admin/library/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class LibraryController extends BaseController {
 	@Before(LibraryValidator.class)
 	public void update() {
 		getModel(Library.class).update();
-		redirect("/jf/cms/library");
+		redirect("/jf/cms/admin/library");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class LibraryController extends BaseController {
 	public void view() {
 		Library library = Library.dao.findById(getPara());
 		setAttr("library", library);
-		render("/cms/library/view.html");
+		render("/cms/admin/library/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class LibraryController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		LibraryService.service.delete(param);
-		redirect("/jf/cms/library");
+		redirect("/jf/cms/admin/library");
 	}
 	
 }

@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/trample
- * /jf/blog/trample/save
- * /jf/blog/trample/edit
- * /jf/blog/trample/update
- * /jf/blog/trample/view
- * /jf/blog/trample/delete
- * /common/trample/add.html
+ * /jf/blog/admin/trample
+ * /jf/blog/admin/trample/save
+ * /jf/blog/admin/trample/edit
+ * /jf/blog/admin/trample/update
+ * /jf/blog/admin/trample/view
+ * /jf/blog/admin/trample/delete
+ * /common/admin/trample/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/trample")
+@Controller(controllerKey = "/jf/blog/admin/trample")
 public class TrampleController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class TrampleController extends BaseController {
 	 */
 	public void index() {
 		TrampleService.service.list(splitPage);
-		render("/blog/trample/list.html");
+		render("/blog/admin/trample/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class TrampleController extends BaseController {
 	@Before(TrampleValidator.class)
 	public void save() {
 		getModel(Trample.class).save();
-		render("/blog/trample/add.html");
+		render("/blog/admin/trample/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class TrampleController extends BaseController {
 	public void edit() {
 		Trample trample = Trample.dao.findById(getPara());
 		setAttr("trample", trample);
-		render("/blog/trample/update.html");
+		render("/blog/admin/trample/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class TrampleController extends BaseController {
 	@Before(TrampleValidator.class)
 	public void update() {
 		getModel(Trample.class).update();
-		redirect("/jf/blog/trample");
+		redirect("/jf/blog/admin/trample");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class TrampleController extends BaseController {
 	public void view() {
 		Trample trample = Trample.dao.findById(getPara());
 		setAttr("trample", trample);
-		render("/blog/trample/view.html");
+		render("/blog/admin/trample/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class TrampleController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		TrampleService.service.delete(param);
-		redirect("/jf/blog/trample");
+		redirect("/jf/blog/admin/trample");
 	}
 	
 }

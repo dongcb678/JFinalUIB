@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/photogalleryItem
- * /jf/cms/photogalleryItem/save
- * /jf/cms/photogalleryItem/edit
- * /jf/cms/photogalleryItem/update
- * /jf/cms/photogalleryItem/view
- * /jf/cms/photogalleryItem/delete
- * /common/photogalleryItem/add.html
+ * /jf/cms/admin/photogalleryItem
+ * /jf/cms/admin/photogalleryItem/save
+ * /jf/cms/admin/photogalleryItem/edit
+ * /jf/cms/admin/photogalleryItem/update
+ * /jf/cms/admin/photogalleryItem/view
+ * /jf/cms/admin/photogalleryItem/delete
+ * /common/admin/photogalleryItem/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/photogalleryItem")
+@Controller(controllerKey = "/jf/cms/admin/photogalleryItem")
 public class PhotogalleryItemController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class PhotogalleryItemController extends BaseController {
 	 */
 	public void index() {
 		PhotogalleryItemService.service.list(splitPage);
-		render("/cms/photogalleryItem/list.html");
+		render("/cms/admin/photogalleryItem/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class PhotogalleryItemController extends BaseController {
 	@Before(PhotogalleryItemValidator.class)
 	public void save() {
 		getModel(PhotogalleryItem.class).save();
-		render("/cms/photogalleryItem/add.html");
+		render("/cms/admin/photogalleryItem/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class PhotogalleryItemController extends BaseController {
 	public void edit() {
 		PhotogalleryItem photogalleryItem = PhotogalleryItem.dao.findById(getPara());
 		setAttr("photogalleryItem", photogalleryItem);
-		render("/cms/photogalleryItem/update.html");
+		render("/cms/admin/photogalleryItem/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class PhotogalleryItemController extends BaseController {
 	@Before(PhotogalleryItemValidator.class)
 	public void update() {
 		getModel(PhotogalleryItem.class).update();
-		redirect("/jf/cms/photogalleryItem");
+		redirect("/jf/cms/admin/photogalleryItem");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class PhotogalleryItemController extends BaseController {
 	public void view() {
 		PhotogalleryItem photogalleryItem = PhotogalleryItem.dao.findById(getPara());
 		setAttr("photogalleryItem", photogalleryItem);
-		render("/cms/photogalleryItem/view.html");
+		render("/cms/admin/photogalleryItem/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class PhotogalleryItemController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		PhotogalleryItemService.service.delete(param);
-		redirect("/jf/cms/photogalleryItem");
+		redirect("/jf/cms/admin/photogalleryItem");
 	}
 	
 }

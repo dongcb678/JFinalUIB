@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/favorite
- * /jf/blog/favorite/save
- * /jf/blog/favorite/edit
- * /jf/blog/favorite/update
- * /jf/blog/favorite/view
- * /jf/blog/favorite/delete
- * /common/favorite/add.html
+ * /jf/blog/admin/favorite
+ * /jf/blog/admin/favorite/save
+ * /jf/blog/admin/favorite/edit
+ * /jf/blog/admin/favorite/update
+ * /jf/blog/admin/favorite/view
+ * /jf/blog/admin/favorite/delete
+ * /common/admin/favorite/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/favorite")
+@Controller(controllerKey = "/jf/blog/admin/favorite")
 public class FavoriteController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class FavoriteController extends BaseController {
 	 */
 	public void index() {
 		FavoriteService.service.list(splitPage);
-		render("/blog/favorite/list.html");
+		render("/blog/admin/favorite/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class FavoriteController extends BaseController {
 	@Before(FavoriteValidator.class)
 	public void save() {
 		getModel(Favorite.class).save();
-		render("/blog/favorite/add.html");
+		render("/blog/admin/favorite/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class FavoriteController extends BaseController {
 	public void edit() {
 		Favorite favorite = Favorite.dao.findById(getPara());
 		setAttr("favorite", favorite);
-		render("/blog/favorite/update.html");
+		render("/blog/admin/favorite/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class FavoriteController extends BaseController {
 	@Before(FavoriteValidator.class)
 	public void update() {
 		getModel(Favorite.class).update();
-		redirect("/jf/blog/favorite");
+		redirect("/jf/blog/admin/favorite");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class FavoriteController extends BaseController {
 	public void view() {
 		Favorite favorite = Favorite.dao.findById(getPara());
 		setAttr("favorite", favorite);
-		render("/blog/favorite/view.html");
+		render("/blog/admin/favorite/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class FavoriteController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		FavoriteService.service.delete(param);
-		redirect("/jf/blog/favorite");
+		redirect("/jf/blog/admin/favorite");
 	}
 	
 }

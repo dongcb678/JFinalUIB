@@ -14,7 +14,7 @@ import com.jfinal.aop.Before;
  * 敏感词 管理	
  * 描述：
  */
-@Controller(controllerKey = "/jf/common/sensitiveWord")
+@Controller(controllerKey = "/jf/common/admin/sensitiveWord")
 public class SensitiveWordController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -25,7 +25,7 @@ public class SensitiveWordController extends BaseController {
 	 */
 	public void index() {
 		SensitiveWordService.service.list(splitPage);
-		render("/common/sensitiveWord/list.html");
+		render("/common/admin/sensitiveWord/list.html");
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class SensitiveWordController extends BaseController {
 	public void save() {
 		SensitiveWord sensitiveWord = getModel(SensitiveWord.class);
 		SensitiveWordService.service.save(sensitiveWord, getCUserIds());
-		render("/common/sensitiveWord/add.html");
+		render("/common/admin/sensitiveWord/add.html");
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class SensitiveWordController extends BaseController {
 	public void edit() {
 		SensitiveWord sensitiveWord = SensitiveWord.dao.findById(getPara());
 		setAttr("sensitiveWord", sensitiveWord);
-		render("/common/sensitiveWord/update.html");
+		render("/common/admin/sensitiveWord/update.html");
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class SensitiveWordController extends BaseController {
 	@Before(SensitiveWordValidator.class)
 	public void update() {
 		getModel(SensitiveWord.class).update();
-		redirect("/jf/common/sensitiveWord");
+		redirect("/jf/common/admin/sensitiveWord");
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class SensitiveWordController extends BaseController {
 	public void view() {
 		SensitiveWord sensitiveWord = SensitiveWord.dao.findById(getPara());
 		setAttr("sensitiveWord", sensitiveWord);
-		render("/common/sensitiveWord/view.html");
+		render("/common/admin/sensitiveWord/view.html");
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class SensitiveWordController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		SensitiveWordService.service.delete(param);
-		redirect("/jf/common/sensitiveWord");
+		redirect("/jf/common/admin/sensitiveWord");
 	}
 	
 }

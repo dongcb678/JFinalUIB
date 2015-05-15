@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/move
- * /jf/blog/move/save
- * /jf/blog/move/edit
- * /jf/blog/move/update
- * /jf/blog/move/view
- * /jf/blog/move/delete
- * /common/move/add.html
+ * /jf/blog/admin/move
+ * /jf/blog/admin/move/save
+ * /jf/blog/admin/move/edit
+ * /jf/blog/admin/move/update
+ * /jf/blog/admin/move/view
+ * /jf/blog/admin/move/delete
+ * /common/admin/move/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/move")
+@Controller(controllerKey = "/jf/blog/admin/move")
 public class MoveController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class MoveController extends BaseController {
 	 */
 	public void index() {
 		MoveService.service.list(splitPage);
-		render("/blog/move/list.html");
+		render("/blog/admin/move/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class MoveController extends BaseController {
 	@Before(MoveValidator.class)
 	public void save() {
 		getModel(Move.class).save();
-		render("/blog/move/add.html");
+		render("/blog/admin/move/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class MoveController extends BaseController {
 	public void edit() {
 		Move move = Move.dao.findById(getPara());
 		setAttr("move", move);
-		render("/blog/move/update.html");
+		render("/blog/admin/move/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class MoveController extends BaseController {
 	@Before(MoveValidator.class)
 	public void update() {
 		getModel(Move.class).update();
-		redirect("/jf/blog/move");
+		redirect("/jf/blog/admin/move");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class MoveController extends BaseController {
 	public void view() {
 		Move move = Move.dao.findById(getPara());
 		setAttr("move", move);
-		render("/blog/move/view.html");
+		render("/blog/admin/move/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class MoveController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		MoveService.service.delete(param);
-		redirect("/jf/blog/move");
+		redirect("/jf/blog/admin/move");
 	}
 	
 }

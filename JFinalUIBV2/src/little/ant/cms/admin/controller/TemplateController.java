@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/template
- * /jf/cms/template/save
- * /jf/cms/template/edit
- * /jf/cms/template/update
- * /jf/cms/template/view
- * /jf/cms/template/delete
- * /common/template/add.html
+ * /jf/cms/admin/template
+ * /jf/cms/admin/template/save
+ * /jf/cms/admin/template/edit
+ * /jf/cms/admin/template/update
+ * /jf/cms/admin/template/view
+ * /jf/cms/admin/template/delete
+ * /common/admin/template/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/template")
+@Controller(controllerKey = "/jf/cms/admin/template")
 public class TemplateController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class TemplateController extends BaseController {
 	 */
 	public void index() {
 		TemplateService.service.list(splitPage);
-		render("/cms/template/list.html");
+		render("/cms/admin/template/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class TemplateController extends BaseController {
 	@Before(TemplateValidator.class)
 	public void save() {
 		getModel(Template.class).save();
-		render("/cms/template/add.html");
+		render("/cms/admin/template/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class TemplateController extends BaseController {
 	public void edit() {
 		Template template = Template.dao.findById(getPara());
 		setAttr("template", template);
-		render("/cms/template/update.html");
+		render("/cms/admin/template/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class TemplateController extends BaseController {
 	@Before(TemplateValidator.class)
 	public void update() {
 		getModel(Template.class).update();
-		redirect("/jf/cms/template");
+		redirect("/jf/cms/admin/template");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class TemplateController extends BaseController {
 	public void view() {
 		Template template = Template.dao.findById(getPara());
 		setAttr("template", template);
-		render("/cms/template/view.html");
+		render("/cms/admin/template/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class TemplateController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		TemplateService.service.delete(param);
-		redirect("/jf/cms/template");
+		redirect("/jf/cms/admin/template");
 	}
 	
 }

@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/common/ipBlacklist
- * /jf/common/ipBlacklist/save
- * /jf/common/ipBlacklist/edit
- * /jf/common/ipBlacklist/update
- * /jf/common/ipBlacklist/view
- * /jf/common/ipBlacklist/delete
- * /common/ipBlacklist/add.html
+ * /jf/common/admin/ipBlacklist
+ * /jf/common/admin/ipBlacklist/save
+ * /jf/common/admin/ipBlacklist/edit
+ * /jf/common/admin/ipBlacklist/update
+ * /jf/common/admin/ipBlacklist/view
+ * /jf/common/admin/ipBlacklist/delete
+ * /common/admin/ipBlacklist/add.html
  * 
  */
-@Controller(controllerKey = "/jf/common/ipBlacklist")
+@Controller(controllerKey = "/jf/common/admin/ipBlacklist")
 public class IpBlacklistController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class IpBlacklistController extends BaseController {
 	 */
 	public void index() {
 		IpBlacklistService.service.list(splitPage);
-		render("/common/ipBlacklist/list.html");
+		render("/common/admin/ipBlacklist/list.html");
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class IpBlacklistController extends BaseController {
 	public void save() {
 		IpBlacklist ipBlacklist = getModel(IpBlacklist.class);
 		IpBlacklistService.service.save(ipBlacklist, getCUserIds());
-		render("/common/ipBlacklist/add.html");
+		render("/common/admin/ipBlacklist/add.html");
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class IpBlacklistController extends BaseController {
 	public void edit() {
 		IpBlacklist ipBlacklist = IpBlacklist.dao.findById(getPara());
 		setAttr("ipBlacklist", ipBlacklist);
-		render("/common/ipBlacklist/update.html");
+		render("/common/admin/ipBlacklist/update.html");
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class IpBlacklistController extends BaseController {
 	@Before(IpBlacklistValidator.class)
 	public void update() {
 		getModel(IpBlacklist.class).update();
-		redirect("/jf/common/ipBlacklist");
+		redirect("/jf/common/admin/ipBlacklist");
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class IpBlacklistController extends BaseController {
 	public void view() {
 		IpBlacklist ipBlacklist = IpBlacklist.dao.findById(getPara());
 		setAttr("ipBlacklist", ipBlacklist);
-		render("/common/ipBlacklist/view.html");
+		render("/common/admin/ipBlacklist/view.html");
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public class IpBlacklistController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		IpBlacklistService.service.delete(param);
-		redirect("/jf/common/ipBlacklist");
+		redirect("/jf/common/admin/ipBlacklist");
 	}
 	
 }

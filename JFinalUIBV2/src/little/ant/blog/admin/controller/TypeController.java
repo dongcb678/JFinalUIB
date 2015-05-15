@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/type
- * /jf/blog/type/save
- * /jf/blog/type/edit
- * /jf/blog/type/update
- * /jf/blog/type/view
- * /jf/blog/type/delete
- * /common/type/add.html
+ * /jf/blog/admin/type
+ * /jf/blog/admin/type/save
+ * /jf/blog/admin/type/edit
+ * /jf/blog/admin/type/update
+ * /jf/blog/admin/type/view
+ * /jf/blog/admin/type/delete
+ * /common/admin/type/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/type")
+@Controller(controllerKey = "/jf/blog/admin/type")
 public class TypeController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class TypeController extends BaseController {
 	 */
 	public void index() {
 		TypeService.service.list(splitPage);
-		render("/blog/type/list.html");
+		render("/blog/admin/type/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class TypeController extends BaseController {
 	@Before(TypeValidator.class)
 	public void save() {
 		getModel(Type.class).save();
-		render("/blog/type/add.html");
+		render("/blog/admin/type/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class TypeController extends BaseController {
 	public void edit() {
 		Type type = Type.dao.findById(getPara());
 		setAttr("type", type);
-		render("/blog/type/update.html");
+		render("/blog/admin/type/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class TypeController extends BaseController {
 	@Before(TypeValidator.class)
 	public void update() {
 		getModel(Type.class).update();
-		redirect("/jf/blog/type");
+		redirect("/jf/blog/admin/type");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class TypeController extends BaseController {
 	public void view() {
 		Type type = Type.dao.findById(getPara());
 		setAttr("type", type);
-		render("/blog/type/view.html");
+		render("/blog/admin/type/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class TypeController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		TypeService.service.delete(param);
-		redirect("/jf/blog/type");
+		redirect("/jf/blog/admin/type");
 	}
 	
 }

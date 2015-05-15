@@ -13,10 +13,10 @@ public class LibraryValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/cms/library/save")){
+		if (actionKey.equals("/jf/cms/admin/library/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/cms/library/update")){
+		} else if (actionKey.equals("/jf/cms/admin/library/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class LibraryValidator extends Validator {
 		controller.keepModel(Library.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/cms/library/save")){
-			controller.render("/cms/xxx.html");
+		if (actionKey.equals("/jf/cms/admin/library/save")){
+			controller.render("/cms/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/cms/library/update")){
-			controller.render("/cms/xxx.html");
+		} else if (actionKey.equals("/jf/cms/admin/library/update")){
+			controller.render("/cms/admin/xxx.html");
 		
 		}
 	}

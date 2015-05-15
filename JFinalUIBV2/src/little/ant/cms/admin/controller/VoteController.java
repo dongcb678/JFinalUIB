@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/vote
- * /jf/cms/vote/save
- * /jf/cms/vote/edit
- * /jf/cms/vote/update
- * /jf/cms/vote/view
- * /jf/cms/vote/delete
- * /common/vote/add.html
+ * /jf/cms/admin/vote
+ * /jf/cms/admin/vote/save
+ * /jf/cms/admin/vote/edit
+ * /jf/cms/admin/vote/update
+ * /jf/cms/admin/vote/view
+ * /jf/cms/admin/vote/delete
+ * /common/admin/vote/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/vote")
+@Controller(controllerKey = "/jf/cms/admin/vote")
 public class VoteController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class VoteController extends BaseController {
 	 */
 	public void index() {
 		VoteService.service.list(splitPage);
-		render("/cms/vote/list.html");
+		render("/cms/admin/vote/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class VoteController extends BaseController {
 	@Before(VoteValidator.class)
 	public void save() {
 		getModel(Vote.class).save();
-		render("/cms/vote/add.html");
+		render("/cms/admin/vote/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class VoteController extends BaseController {
 	public void edit() {
 		Vote vote = Vote.dao.findById(getPara());
 		setAttr("vote", vote);
-		render("/cms/vote/update.html");
+		render("/cms/admin/vote/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class VoteController extends BaseController {
 	@Before(VoteValidator.class)
 	public void update() {
 		getModel(Vote.class).update();
-		redirect("/jf/cms/vote");
+		redirect("/jf/cms/admin/vote");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class VoteController extends BaseController {
 	public void view() {
 		Vote vote = Vote.dao.findById(getPara());
 		setAttr("vote", vote);
-		render("/cms/vote/view.html");
+		render("/cms/admin/vote/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class VoteController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		VoteService.service.delete(param);
-		redirect("/jf/cms/vote");
+		redirect("/jf/cms/admin/vote");
 	}
 	
 }

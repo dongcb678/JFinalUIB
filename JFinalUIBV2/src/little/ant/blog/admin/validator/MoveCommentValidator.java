@@ -13,10 +13,10 @@ public class MoveCommentValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/blog/moveComment/save")){
+		if (actionKey.equals("/jf/blog/admin/moveComment/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/blog/moveComment/update")){
+		} else if (actionKey.equals("/jf/blog/admin/moveComment/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class MoveCommentValidator extends Validator {
 		controller.keepModel(MoveComment.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/blog/moveComment/save")){
-			controller.render("/blog/xxx.html");
+		if (actionKey.equals("/jf/blog/admin/moveComment/save")){
+			controller.render("/blog/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/blog/moveComment/update")){
-			controller.render("/blog/xxx.html");
+		} else if (actionKey.equals("/jf/blog/admin/moveComment/update")){
+			controller.render("/blog/admin/xxx.html");
 		
 		}
 	}

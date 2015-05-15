@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/newsDeliver
- * /jf/blog/newsDeliver/save
- * /jf/blog/newsDeliver/edit
- * /jf/blog/newsDeliver/update
- * /jf/blog/newsDeliver/view
- * /jf/blog/newsDeliver/delete
- * /common/newsDeliver/add.html
+ * /jf/blog/admin/newsDeliver
+ * /jf/blog/admin/newsDeliver/save
+ * /jf/blog/admin/newsDeliver/edit
+ * /jf/blog/admin/newsDeliver/update
+ * /jf/blog/admin/newsDeliver/view
+ * /jf/blog/admin/newsDeliver/delete
+ * /common/admin/newsDeliver/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/newsDeliver")
+@Controller(controllerKey = "/jf/blog/admin/newsDeliver")
 public class NewsDeliverController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class NewsDeliverController extends BaseController {
 	 */
 	public void index() {
 		NewsDeliverService.service.list(splitPage);
-		render("/blog/newsDeliver/list.html");
+		render("/blog/admin/newsDeliver/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class NewsDeliverController extends BaseController {
 	@Before(NewsDeliverValidator.class)
 	public void save() {
 		getModel(NewsDeliver.class).save();
-		render("/blog/newsDeliver/add.html");
+		render("/blog/admin/newsDeliver/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class NewsDeliverController extends BaseController {
 	public void edit() {
 		NewsDeliver newsDeliver = NewsDeliver.dao.findById(getPara());
 		setAttr("newsDeliver", newsDeliver);
-		render("/blog/newsDeliver/update.html");
+		render("/blog/admin/newsDeliver/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class NewsDeliverController extends BaseController {
 	@Before(NewsDeliverValidator.class)
 	public void update() {
 		getModel(NewsDeliver.class).update();
-		redirect("/jf/blog/newsDeliver");
+		redirect("/jf/blog/admin/newsDeliver");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class NewsDeliverController extends BaseController {
 	public void view() {
 		NewsDeliver newsDeliver = NewsDeliver.dao.findById(getPara());
 		setAttr("newsDeliver", newsDeliver);
-		render("/blog/newsDeliver/view.html");
+		render("/blog/admin/newsDeliver/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class NewsDeliverController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		NewsDeliverService.service.delete(param);
-		redirect("/jf/blog/newsDeliver");
+		redirect("/jf/blog/admin/newsDeliver");
 	}
 	
 }

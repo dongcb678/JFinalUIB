@@ -13,10 +13,10 @@ public class LocationValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/common/location/save")){
+		if (actionKey.equals("/jf/common/admin/location/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/common/location/update")){
+		} else if (actionKey.equals("/jf/common/admin/location/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class LocationValidator extends Validator {
 		controller.keepModel(Location.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/common/location/save")){
-			controller.render("/common/xxx.html");
+		if (actionKey.equals("/jf/common/admin/location/save")){
+			controller.render("/common/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/common/location/update")){
-			controller.render("/common/xxx.html");
+		} else if (actionKey.equals("/jf/common/admin/location/update")){
+			controller.render("/common/admin/xxx.html");
 		
 		}
 	}

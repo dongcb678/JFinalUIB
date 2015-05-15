@@ -13,10 +13,10 @@ public class AccessStatisticsValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/common/accessStatistics/save")){
+		if (actionKey.equals("/jf/common/admin/accessStatistics/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/common/accessStatistics/update")){
+		} else if (actionKey.equals("/jf/common/admin/accessStatistics/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class AccessStatisticsValidator extends Validator {
 		controller.keepModel(AccessStatistics.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/common/accessStatistics/save")){
-			controller.render("/common/xxx.html");
+		if (actionKey.equals("/jf/common/admin/accessStatistics/save")){
+			controller.render("/common/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/common/accessStatistics/update")){
-			controller.render("/common/xxx.html");
+		} else if (actionKey.equals("/jf/common/admin/accessStatistics/update")){
+			controller.render("/common/admin/xxx.html");
 		
 		}
 	}

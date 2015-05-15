@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/praise
- * /jf/blog/praise/save
- * /jf/blog/praise/edit
- * /jf/blog/praise/update
- * /jf/blog/praise/view
- * /jf/blog/praise/delete
- * /common/praise/add.html
+ * /jf/blog/admin/praise
+ * /jf/blog/admin/praise/save
+ * /jf/blog/admin/praise/edit
+ * /jf/blog/admin/praise/update
+ * /jf/blog/admin/praise/view
+ * /jf/blog/admin/praise/delete
+ * /common/admin/praise/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/praise")
+@Controller(controllerKey = "/jf/blog/admin/praise")
 public class PraiseController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class PraiseController extends BaseController {
 	 */
 	public void index() {
 		PraiseService.service.list(splitPage);
-		render("/blog/praise/list.html");
+		render("/blog/admin/praise/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class PraiseController extends BaseController {
 	@Before(PraiseValidator.class)
 	public void save() {
 		getModel(Praise.class).save();
-		render("/blog/praise/add.html");
+		render("/blog/admin/praise/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class PraiseController extends BaseController {
 	public void edit() {
 		Praise praise = Praise.dao.findById(getPara());
 		setAttr("praise", praise);
-		render("/blog/praise/update.html");
+		render("/blog/admin/praise/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class PraiseController extends BaseController {
 	@Before(PraiseValidator.class)
 	public void update() {
 		getModel(Praise.class).update();
-		redirect("/jf/blog/praise");
+		redirect("/jf/blog/admin/praise");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class PraiseController extends BaseController {
 	public void view() {
 		Praise praise = Praise.dao.findById(getPara());
 		setAttr("praise", praise);
-		render("/blog/praise/view.html");
+		render("/blog/admin/praise/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class PraiseController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		PraiseService.service.delete(param);
-		redirect("/jf/blog/praise");
+		redirect("/jf/blog/admin/praise");
 	}
 	
 }

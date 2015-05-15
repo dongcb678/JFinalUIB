@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/common/sensitiveWord');">敏感词</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/common/admin/ipBlacklist');">IP黑名单</a></li>
 			<li class="active">更新</li>
 		</ol>
 	</div>
@@ -22,15 +22,15 @@
 			</div>
 			
 			<div class="panel-body">	
-				<form id="editForm" action="${cxt!}/jf/common/sensitiveWord/update" method="POST" role="form" class="form-horizontal">
-					<input type="hidden" name="sensitiveWord.ids" value="${sensitiveWord.ids}" >
-					<input type="hidden" name="sensitiveWord.version" value="${sensitiveWord.version}">
+				<form id="editForm" action="${cxt!}/jf/common/admin/ipBlacklist/update" method="POST" role="form" class="form-horizontal">
+					<input type="hidden" name="ipBlacklist.ids" value="${ipBlacklist.ids}" >
+					<input type="hidden" name="ipBlacklist.version" value="${ipBlacklist.version}">
 					
-					<% include("/common/sensitiveWord/form.html"){} %>
+					<% include("/common/admin/ipBlacklist/form.html"){} %>
 					
 					<div class="form-group">
 						<div class="col-sm-2 col-sm-offset-3">
-							<% if(hasPrivilegeUrl("/jf/common/sensitiveWord/update")){ %>
+							<% if(hasPrivilegeUrl("/jf/common/admin/ipBlacklist/update")){ %>
 								<button type="button" class="btn btn-red" onclick="platform_verify.formValiSubmit(this.form);">
 									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
 								</button>

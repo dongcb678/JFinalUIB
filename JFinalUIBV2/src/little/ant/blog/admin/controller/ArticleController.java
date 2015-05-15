@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/article
- * /jf/blog/article/save
- * /jf/blog/article/edit
- * /jf/blog/article/update
- * /jf/blog/article/view
- * /jf/blog/article/delete
- * /common/article/add.html
+ * /jf/blog/admin/article
+ * /jf/blog/admin/article/save
+ * /jf/blog/admin/article/edit
+ * /jf/blog/admin/article/update
+ * /jf/blog/admin/article/view
+ * /jf/blog/admin/article/delete
+ * /common/admin/article/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/article")
+@Controller(controllerKey = "/jf/blog/admin/article")
 public class ArticleController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class ArticleController extends BaseController {
 	 */
 	public void index() {
 		ArticleService.service.list(splitPage);
-		render("/blog/article/list.html");
+		render("/blog/admin/article/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class ArticleController extends BaseController {
 	@Before(ArticleValidator.class)
 	public void save() {
 		getModel(Article.class).save();
-		render("/blog/article/add.html");
+		render("/blog/admin/article/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class ArticleController extends BaseController {
 	public void edit() {
 		Article article = Article.dao.findById(getPara());
 		setAttr("article", article);
-		render("/blog/article/update.html");
+		render("/blog/admin/article/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class ArticleController extends BaseController {
 	@Before(ArticleValidator.class)
 	public void update() {
 		getModel(Article.class).update();
-		redirect("/jf/blog/article");
+		redirect("/jf/blog/admin/article");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class ArticleController extends BaseController {
 	public void view() {
 		Article article = Article.dao.findById(getPara());
 		setAttr("article", article);
-		render("/blog/article/view.html");
+		render("/blog/admin/article/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class ArticleController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		ArticleService.service.delete(param);
-		redirect("/jf/blog/article");
+		redirect("/jf/blog/admin/article");
 	}
 	
 }

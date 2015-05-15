@@ -3,12 +3,12 @@
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
-			<li class="active">列表</li>
+			<li class="active">广告位置列表</li>
 		</ol>
 	</div>
 </div>
 						
-<form id="splitPage" role="form" class="form-horizontal" action="${cxt!}/jf/common/ipBlacklist" method="POST">
+<form id="splitPage" role="form" class="form-horizontal" action="${cxt!}/jf/common/admin/location" method="POST">
 	
 	<div class="row">
 		<div class="col-md-12">
@@ -24,9 +24,14 @@
 				
 				<div class="panel-body">		
 				  	<div class="form-group">
-						<label class="col-sm-2 control-label" for="focusedInput">IP</label>
-						<div class="col-sm-9">
-					  		<input class="form-control focused" type="text" name="_query.ip" value='${escapeXml(paramMap["_query.ip"])}' maxlength="25" >
+						<label class="col-sm-2 control-label" for="focusedInput">名称</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.name" value='${escapeXml(paramMap["_query.name"])}' maxlength="25" >
+						</div>
+						
+						<label class="col-sm-2 control-label" for="focusedInput">类型</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.type" value='${escapeXml(paramMap["_query.type"])}' maxlength="50" >
 						</div>
 				  	</div>
 				  	
@@ -49,7 +54,7 @@
 				
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<span class="text-bold">IP黑名单列表</span>
+						<span class="text-bold">列表</span>
 					</h4>
 					<div class="panel-tools">										
 						<% include("/common/panel-tools.html"){} %>
@@ -57,26 +62,26 @@
 				</div>
 				
 				<%
-					var view = hasPrivilegeUrl("/jf/common/ipBlacklist/view");
-					var edit = hasPrivilegeUrl("/jf/common/ipBlacklist/edit");
-					var delete = hasPrivilegeUrl("/jf/common/ipBlacklist/delete");
+					var view = hasPrivilegeUrl("/jf/common/admin/location/view");
+					var edit = hasPrivilegeUrl("/jf/common/admin/location/edit");
+					var delete = hasPrivilegeUrl("/jf/common/admin/location/delete");
 				%>
 				
 				<div class="panel-body">
 					
 					<div class="row">
 						<div class="col-md-12 space20">
-							<% if(hasPrivilegeUrl("/common/ipBlacklist/add.html")){ %>
-								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/common/ipBlacklist/toUrl?toUrl=/common/ipBlacklist/add.html');">
+							<% if(hasPrivilegeUrl("/common/admin/location/add.html")){ %>
+								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/common/admin/location/toUrl?toUrl=/common/admin/location/add.html');">
 									添加 <i class="fa fa-plus"></i>
 								</button>
 							<% } %>	
 							
 							<% if(delete == true){ %>
-								<button type="button" class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/common/ipBlacklist/delete"> 
+								<button type="button" class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/common/admin/location/delete"> 
 									删除 <i class="fa fa-trash-o"></i>
 								</button>
-							<% } %>
+							<% } %>	
 						</div>
 					</div>
 					
@@ -86,8 +91,17 @@
 								<th class="center hidden-xs" width="50">
 									<input type="checkbox" name="checkAll" onchange="checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
 								</th>
-								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'ip')">
-									IP地址 ${orderBy("ip")}
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'name')">
+									名称 ${orderBy("name")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'type')">
+									类型 ${orderBy("type")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'width')">
+									宽度 ${orderBy("width")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'height')">
+									高度 ${orderBy("height")}
 								</th>
 								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'status')">
 									状态	${orderBy("status")}
@@ -98,12 +112,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<% for(ipBlacklist in splitPage.list){ %>
+							<% for(location in splitPage.list){ %>
 								<tr>
 									<td class="center hidden-xs">
-										<input type="checkbox" name="checkIds" value="${ipBlacklist.ids}" class="flat-grey foocheck">
+										<input type="checkbox" name="checkIds" value="${location.ids}" class="flat-grey foocheck">
 									</td>
-									<td>${ipBlacklist.ip}</td>
+									<td>${location.name}</td>
+									<td>${location.type}</td>
+									<td>${location.width}</td>
+									<td>${location.height}</td>
 									<td>
 										<% if(ipBlacklist["status"] == "0"){ %>
 												停用
@@ -115,28 +132,28 @@
 									</td>
 									<td class="hidden-xs">
 										<% if(view == true){ %>
-											<button type="button" class="btn btn-dark-yellow add-row" onclick="common_ajax.ajaxMainPanel('/jf/common/ipBlacklist/view/${ipBlacklist.ids}');">
+											<button type="button" class="btn btn-dark-yellow add-row" onclick="common_ajax.ajaxMainPanel('/jf/common/admin/location/view/${location.ids}');">
 												查看 <i class="fa fa-eye"></i>
 											</button>
 										<% } %>
 										<% if(edit == true){ %>
-											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/common/ipBlacklist/edit/${ipBlacklist.ids}');"> 
+											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/common/admin/location/edit/${location.ids}');"> 
 												编辑 <i class="fa fa-edit"></i>
 											</button>
 										<% } %>
 										<% if(delete == true){ %>
-											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/common/ipBlacklist/delete/${ipBlacklist.ids}"> 
+											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/common/admin/location/delete/${location.ids}"> 
 												删除 <i class="fa fa-trash-o"></i>
 											</button>
 										<% } %>
 									</td>
 								</tr>
-							<% } %>
+							<% } %>	
 						</tbody>
 					</table>
 					
 					<div class="row" id="splitPageDiv">
-						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+						<% include("/common/admin/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
 					</div>
 					
 				</div>

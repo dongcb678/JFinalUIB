@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/circle
- * /jf/blog/circle/save
- * /jf/blog/circle/edit
- * /jf/blog/circle/update
- * /jf/blog/circle/view
- * /jf/blog/circle/delete
- * /common/circle/add.html
+ * /jf/blog/admin/circle
+ * /jf/blog/admin/circle/save
+ * /jf/blog/admin/circle/edit
+ * /jf/blog/admin/circle/update
+ * /jf/blog/admin/circle/view
+ * /jf/blog/admin/circle/delete
+ * /common/admin/circle/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/circle")
+@Controller(controllerKey = "/jf/blog/admin/circle")
 public class CircleController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class CircleController extends BaseController {
 	 */
 	public void index() {
 		CircleService.service.list(splitPage);
-		render("/blog/circle/list.html");
+		render("/blog/admin/circle/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class CircleController extends BaseController {
 	@Before(CircleValidator.class)
 	public void save() {
 		getModel(Circle.class).save();
-		render("/blog/circle/add.html");
+		render("/blog/admin/circle/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class CircleController extends BaseController {
 	public void edit() {
 		Circle circle = Circle.dao.findById(getPara());
 		setAttr("circle", circle);
-		render("/blog/circle/update.html");
+		render("/blog/admin/circle/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class CircleController extends BaseController {
 	@Before(CircleValidator.class)
 	public void update() {
 		getModel(Circle.class).update();
-		redirect("/jf/blog/circle");
+		redirect("/jf/blog/admin/circle");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class CircleController extends BaseController {
 	public void view() {
 		Circle circle = Circle.dao.findById(getPara());
 		setAttr("circle", circle);
-		render("/blog/circle/view.html");
+		render("/blog/admin/circle/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class CircleController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		CircleService.service.delete(param);
-		redirect("/jf/blog/circle");
+		redirect("/jf/blog/admin/circle");
 	}
 	
 }

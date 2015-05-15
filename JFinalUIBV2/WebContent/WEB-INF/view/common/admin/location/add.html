@@ -3,8 +3,8 @@
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/common/location');">广告位置</a></li>
-			<li class="active">更新</li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/common/admin/location');">广告位置</a></li>
+			<li class="active">添加</li>
 		</ol>
 	</div>
 </div>
@@ -15,22 +15,20 @@
 		<div class="panel panel-white">
 			
 			<div class="panel-heading">
-				<h4 class="panel-title"><span class="text-bold">更新</span></h4>
+				<h4 class="panel-title"><span class="text-bold">添加</span></h4>
 				<div class="panel-tools">										
 					<% include("/common/panel-tools.html"){} %>
 				</div>
 			</div>
 			
 			<div class="panel-body">	
-				<form id="editForm" action="${cxt!}/jf/common/location/update" method="POST" role="form" class="form-horizontal">
-					<input type="hidden" name="location.ids" value="${location.ids}" >
-					<input type="hidden" name="location.version" value="${location.version}">
+				<form id="editForm" action="${cxt!}/jf/common/admin/location/save" method="POST" role="form" class="form-horizontal">
 					
-					<% include("/common/location/form.html"){} %>
+					<% include("/common/admin/location/form.html"){} %>
 					
 					<div class="form-group">
 						<div class="col-sm-2 col-sm-offset-3">
-							<% if(hasPrivilegeUrl("/jf/common/location/update")){ %>
+							<% if(hasPrivilegeUrl("/jf/common/admin/location/save")){ %>
 								<button type="button" class="btn btn-red" onclick="platform_verify.formValiSubmit(this.form);">
 									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
 								</button>

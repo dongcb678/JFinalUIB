@@ -14,7 +14,7 @@ import com.jfinal.aop.Before;
  * 友情链接管理 管理	
  * 描述：
  */
-@Controller(controllerKey = "/jf/common/link")
+@Controller(controllerKey = "/jf/common/admin/link")
 public class LinkController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -25,7 +25,7 @@ public class LinkController extends BaseController {
 	 */
 	public void index() {
 		LinkService.service.list(splitPage);
-		render("/common/link/list.html");
+		render("/common/admin/link/list.html");
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class LinkController extends BaseController {
 	public void save() {
 		Link link = getModel(Link.class);
 		LinkService.service.save(link, getCUserIds());
-		render("/common/link/add.html");
+		render("/common/admin/link/add.html");
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class LinkController extends BaseController {
 	public void edit() {
 		Link link = Link.dao.findById(getPara());
 		setAttr("link", link);
-		render("/common/link/update.html");
+		render("/common/admin/link/update.html");
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class LinkController extends BaseController {
 	@Before(LinkValidator.class)
 	public void update() {
 		getModel(Link.class).update();
-		redirect("/jf/common/link");
+		redirect("/jf/common/admin/link");
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class LinkController extends BaseController {
 	public void view() {
 		Link link = Link.dao.findById(getPara());
 		setAttr("link", link);
-		render("/common/link/view.html");
+		render("/common/admin/link/view.html");
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class LinkController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		LinkService.service.delete(param);
-		redirect("/jf/common/link");
+		redirect("/jf/common/admin/link");
 	}
 	
 }

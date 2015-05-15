@@ -13,10 +13,10 @@ public class ContentValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/cms/content/save")){
+		if (actionKey.equals("/jf/cms/admin/content/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/cms/content/update")){
+		} else if (actionKey.equals("/jf/cms/admin/content/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class ContentValidator extends Validator {
 		controller.keepModel(Content.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/cms/content/save")){
-			controller.render("/cms/xxx.html");
+		if (actionKey.equals("/jf/cms/admin/content/save")){
+			controller.render("/cms/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/cms/content/update")){
-			controller.render("/cms/xxx.html");
+		} else if (actionKey.equals("/jf/cms/admin/content/update")){
+			controller.render("/cms/admin/xxx.html");
 		
 		}
 	}

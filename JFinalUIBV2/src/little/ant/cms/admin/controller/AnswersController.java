@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/answers
- * /jf/cms/answers/save
- * /jf/cms/answers/edit
- * /jf/cms/answers/update
- * /jf/cms/answers/view
- * /jf/cms/answers/delete
- * /common/answers/add.html
+ * /jf/cms/admin/answers
+ * /jf/cms/admin/answers/save
+ * /jf/cms/admin/answers/edit
+ * /jf/cms/admin/answers/update
+ * /jf/cms/admin/answers/view
+ * /jf/cms/admin/answers/delete
+ * /common/admin/answers/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/answers")
+@Controller(controllerKey = "/jf/cms/admin/answers")
 public class AnswersController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class AnswersController extends BaseController {
 	 */
 	public void index() {
 		AnswersService.service.list(splitPage);
-		render("/cms/answers/list.html");
+		render("/cms/admin/answers/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class AnswersController extends BaseController {
 	@Before(AnswersValidator.class)
 	public void save() {
 		getModel(Answers.class).save();
-		render("/cms/answers/add.html");
+		render("/cms/admin/answers/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class AnswersController extends BaseController {
 	public void edit() {
 		Answers answers = Answers.dao.findById(getPara());
 		setAttr("answers", answers);
-		render("/cms/answers/update.html");
+		render("/cms/admin/answers/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class AnswersController extends BaseController {
 	@Before(AnswersValidator.class)
 	public void update() {
 		getModel(Answers.class).update();
-		redirect("/jf/cms/answers");
+		redirect("/jf/cms/admin/answers");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class AnswersController extends BaseController {
 	public void view() {
 		Answers answers = Answers.dao.findById(getPara());
 		setAttr("answers", answers);
-		render("/cms/answers/view.html");
+		render("/cms/admin/answers/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class AnswersController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		AnswersService.service.delete(param);
-		redirect("/jf/cms/answers");
+		redirect("/jf/cms/admin/answers");
 	}
 	
 }

@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/download
- * /jf/cms/download/save
- * /jf/cms/download/edit
- * /jf/cms/download/update
- * /jf/cms/download/view
- * /jf/cms/download/delete
- * /common/download/add.html
+ * /jf/cms/admin/download
+ * /jf/cms/admin/download/save
+ * /jf/cms/admin/download/edit
+ * /jf/cms/admin/download/update
+ * /jf/cms/admin/download/view
+ * /jf/cms/admin/download/delete
+ * /common/admin/download/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/download")
+@Controller(controllerKey = "/jf/cms/admin/download")
 public class DownloadController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class DownloadController extends BaseController {
 	 */
 	public void index() {
 		DownloadService.service.list(splitPage);
-		render("/cms/download/list.html");
+		render("/cms/admin/download/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class DownloadController extends BaseController {
 	@Before(DownloadValidator.class)
 	public void save() {
 		getModel(Download.class).save();
-		render("/cms/download/add.html");
+		render("/cms/admin/download/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class DownloadController extends BaseController {
 	public void edit() {
 		Download download = Download.dao.findById(getPara());
 		setAttr("download", download);
-		render("/cms/download/update.html");
+		render("/cms/admin/download/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class DownloadController extends BaseController {
 	@Before(DownloadValidator.class)
 	public void update() {
 		getModel(Download.class).update();
-		redirect("/jf/cms/download");
+		redirect("/jf/cms/admin/download");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class DownloadController extends BaseController {
 	public void view() {
 		Download download = Download.dao.findById(getPara());
 		setAttr("download", download);
-		render("/cms/download/view.html");
+		render("/cms/admin/download/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class DownloadController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		DownloadService.service.delete(param);
-		redirect("/jf/cms/download");
+		redirect("/jf/cms/admin/download");
 	}
 	
 }

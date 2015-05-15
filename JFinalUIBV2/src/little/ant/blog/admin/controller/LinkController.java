@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/link
- * /jf/blog/link/save
- * /jf/blog/link/edit
- * /jf/blog/link/update
- * /jf/blog/link/view
- * /jf/blog/link/delete
- * /common/link/add.html
+ * /jf/blog/admin/link
+ * /jf/blog/admin/link/save
+ * /jf/blog/admin/link/edit
+ * /jf/blog/admin/link/update
+ * /jf/blog/admin/link/view
+ * /jf/blog/admin/link/delete
+ * /common/admin/link/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/link")
+@Controller(controllerKey = "/jf/blog/admin/link")
 public class LinkController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class LinkController extends BaseController {
 	 */
 	public void index() {
 		LinkService.service.list(splitPage);
-		render("/blog/link/list.html");
+		render("/blog/admin/link/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class LinkController extends BaseController {
 	@Before(LinkValidator.class)
 	public void save() {
 		getModel(Link.class).save();
-		render("/blog/link/add.html");
+		render("/blog/admin/link/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class LinkController extends BaseController {
 	public void edit() {
 		Link link = Link.dao.findById(getPara());
 		setAttr("link", link);
-		render("/blog/link/update.html");
+		render("/blog/admin/link/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class LinkController extends BaseController {
 	@Before(LinkValidator.class)
 	public void update() {
 		getModel(Link.class).update();
-		redirect("/jf/blog/link");
+		redirect("/jf/blog/admin/link");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class LinkController extends BaseController {
 	public void view() {
 		Link link = Link.dao.findById(getPara());
 		setAttr("link", link);
-		render("/blog/link/view.html");
+		render("/blog/admin/link/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class LinkController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		LinkService.service.delete(param);
-		redirect("/jf/blog/link");
+		redirect("/jf/blog/admin/link");
 	}
 	
 }

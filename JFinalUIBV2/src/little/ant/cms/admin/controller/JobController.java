@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/job
- * /jf/cms/job/save
- * /jf/cms/job/edit
- * /jf/cms/job/update
- * /jf/cms/job/view
- * /jf/cms/job/delete
- * /common/job/add.html
+ * /jf/cms/admin/job
+ * /jf/cms/admin/job/save
+ * /jf/cms/admin/job/edit
+ * /jf/cms/admin/job/update
+ * /jf/cms/admin/job/view
+ * /jf/cms/admin/job/delete
+ * /common/admin/job/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/job")
+@Controller(controllerKey = "/jf/cms/admin/job")
 public class JobController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class JobController extends BaseController {
 	 */
 	public void index() {
 		JobService.service.list(splitPage);
-		render("/cms/job/list.html");
+		render("/cms/admin/job/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class JobController extends BaseController {
 	@Before(JobValidator.class)
 	public void save() {
 		getModel(Job.class).save();
-		render("/cms/job/add.html");
+		render("/cms/admin/job/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class JobController extends BaseController {
 	public void edit() {
 		Job job = Job.dao.findById(getPara());
 		setAttr("job", job);
-		render("/cms/job/update.html");
+		render("/cms/admin/job/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class JobController extends BaseController {
 	@Before(JobValidator.class)
 	public void update() {
 		getModel(Job.class).update();
-		redirect("/jf/cms/job");
+		redirect("/jf/cms/admin/job");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class JobController extends BaseController {
 	public void view() {
 		Job job = Job.dao.findById(getPara());
 		setAttr("job", job);
-		render("/cms/job/view.html");
+		render("/cms/admin/job/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class JobController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		JobService.service.delete(param);
-		redirect("/jf/cms/job");
+		redirect("/jf/cms/admin/job");
 	}
 	
 }

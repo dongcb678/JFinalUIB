@@ -13,10 +13,10 @@ public class SensitiveWordValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/common/sensitiveWord/save")){
+		if (actionKey.equals("/jf/common/admin/sensitiveWord/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/common/sensitiveWord/update")){
+		} else if (actionKey.equals("/jf/common/admin/sensitiveWord/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class SensitiveWordValidator extends Validator {
 		controller.keepModel(SensitiveWord.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/common/sensitiveWord/save")){
-			controller.render("/common/xxx.html");
+		if (actionKey.equals("/jf/common/admin/sensitiveWord/save")){
+			controller.render("/common/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/common/sensitiveWord/update")){
-			controller.render("/common/xxx.html");
+		} else if (actionKey.equals("/jf/common/admin/sensitiveWord/update")){
+			controller.render("/common/admin/xxx.html");
 		
 		}
 	}

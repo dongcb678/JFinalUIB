@@ -13,10 +13,10 @@ public class InformValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/blog/inform/save")){
+		if (actionKey.equals("/jf/blog/admin/inform/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/blog/inform/update")){
+		} else if (actionKey.equals("/jf/blog/admin/inform/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class InformValidator extends Validator {
 		controller.keepModel(Inform.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/blog/inform/save")){
-			controller.render("/blog/xxx.html");
+		if (actionKey.equals("/jf/blog/admin/inform/save")){
+			controller.render("/blog/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/blog/inform/update")){
-			controller.render("/blog/xxx.html");
+		} else if (actionKey.equals("/jf/blog/admin/inform/update")){
+			controller.render("/blog/admin/xxx.html");
 		
 		}
 	}

@@ -13,10 +13,10 @@ public class LinkValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/common/link/save")){
+		if (actionKey.equals("/jf/common/admin/link/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/common/link/update")){
+		} else if (actionKey.equals("/jf/common/admin/link/update")){
 			
 		}
 	}
@@ -25,11 +25,11 @@ public class LinkValidator extends Validator {
 		controller.keepModel(Link.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/common/link/save")){
-			controller.render("/common/xxx.html");
+		if (actionKey.equals("/jf/common/admin/link/save")){
+			controller.render("/common/admin/xxx.html");
 		
-		} else if (actionKey.equals("/jf/common/link/update")){
-			controller.render("/common/xxx.html");
+		} else if (actionKey.equals("/jf/common/admin/link/update")){
+			controller.render("/common/admin/xxx.html");
 		
 		}
 	}

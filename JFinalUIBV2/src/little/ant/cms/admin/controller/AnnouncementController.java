@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/cms/announcement
- * /jf/cms/announcement/save
- * /jf/cms/announcement/edit
- * /jf/cms/announcement/update
- * /jf/cms/announcement/view
- * /jf/cms/announcement/delete
- * /common/announcement/add.html
+ * /jf/cms/admin/announcement
+ * /jf/cms/admin/announcement/save
+ * /jf/cms/admin/announcement/edit
+ * /jf/cms/admin/announcement/update
+ * /jf/cms/admin/announcement/view
+ * /jf/cms/admin/announcement/delete
+ * /common/admin/announcement/add.html
  * 
  */
-@Controller(controllerKey = "/jf/cms/announcement")
+@Controller(controllerKey = "/jf/cms/admin/announcement")
 public class AnnouncementController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class AnnouncementController extends BaseController {
 	 */
 	public void index() {
 		AnnouncementService.service.list(splitPage);
-		render("/cms/announcement/list.html");
+		render("/cms/admin/announcement/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class AnnouncementController extends BaseController {
 	@Before(AnnouncementValidator.class)
 	public void save() {
 		getModel(Announcement.class).save();
-		render("/cms/announcement/add.html");
+		render("/cms/admin/announcement/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class AnnouncementController extends BaseController {
 	public void edit() {
 		Announcement announcement = Announcement.dao.findById(getPara());
 		setAttr("announcement", announcement);
-		render("/cms/announcement/update.html");
+		render("/cms/admin/announcement/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class AnnouncementController extends BaseController {
 	@Before(AnnouncementValidator.class)
 	public void update() {
 		getModel(Announcement.class).update();
-		redirect("/jf/cms/announcement");
+		redirect("/jf/cms/admin/announcement");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class AnnouncementController extends BaseController {
 	public void view() {
 		Announcement announcement = Announcement.dao.findById(getPara());
 		setAttr("announcement", announcement);
-		render("/cms/announcement/view.html");
+		render("/cms/admin/announcement/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class AnnouncementController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		AnnouncementService.service.delete(param);
-		redirect("/jf/cms/announcement");
+		redirect("/jf/cms/admin/announcement");
 	}
 	
 }

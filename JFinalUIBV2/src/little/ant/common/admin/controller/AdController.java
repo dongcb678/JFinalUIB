@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/common/ad
- * /jf/common/ad/save
- * /jf/common/ad/edit
- * /jf/common/ad/update
- * /jf/common/ad/view
- * /jf/common/ad/delete
- * /common/ad/add.html
+ * /jf/common/admin/ad
+ * /jf/common/admin/ad/save
+ * /jf/common/admin/ad/edit
+ * /jf/common/admin/ad/update
+ * /jf/common/admin/ad/view
+ * /jf/common/admin/ad/delete
+ * /common/admin/ad/add.html
  * 
  */
-@Controller(controllerKey = "/jf/common/ad")
+@Controller(controllerKey = "/jf/common/admin/ad")
 public class AdController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class AdController extends BaseController {
 	 */
 	public void index() {
 		AdService.service.list(splitPage);
-		render("/common/ad/list.html");
+		render("/common/admin/ad/list.html");
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class AdController extends BaseController {
 	public void save() {
 		Ad ad = getModel(Ad.class);
 		AdService.service.save(ad, getCUserIds());
-		render("/common/ad/add.html");
+		render("/common/admin/ad/add.html");
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class AdController extends BaseController {
 	public void edit() {
 		Ad ad = Ad.dao.findById(getPara());
 		setAttr("ad", ad);
-		render("/common/ad/update.html");
+		render("/common/admin/ad/update.html");
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class AdController extends BaseController {
 	@Before(AdValidator.class)
 	public void update() {
 		getModel(Ad.class).update();
-		redirect("/jf/common/ad");
+		redirect("/jf/common/admin/ad");
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class AdController extends BaseController {
 	public void view() {
 		Ad ad = Ad.dao.findById(getPara());
 		setAttr("ad", ad);
-		render("/common/ad/view.html");
+		render("/common/admin/ad/view.html");
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public class AdController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		AdService.service.delete(param);
-		redirect("/jf/common/ad");
+		redirect("/jf/common/admin/ad");
 	}
 	
 }

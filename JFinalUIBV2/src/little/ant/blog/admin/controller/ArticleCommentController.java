@@ -14,16 +14,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/blog/articleComment
- * /jf/blog/articleComment/save
- * /jf/blog/articleComment/edit
- * /jf/blog/articleComment/update
- * /jf/blog/articleComment/view
- * /jf/blog/articleComment/delete
- * /common/articleComment/add.html
+ * /jf/blog/admin/articleComment
+ * /jf/blog/admin/articleComment/save
+ * /jf/blog/admin/articleComment/edit
+ * /jf/blog/admin/articleComment/update
+ * /jf/blog/admin/articleComment/view
+ * /jf/blog/admin/articleComment/delete
+ * /common/admin/articleComment/add.html
  * 
  */
-@Controller(controllerKey = "/jf/blog/articleComment")
+@Controller(controllerKey = "/jf/blog/admin/articleComment")
 public class ArticleCommentController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class ArticleCommentController extends BaseController {
 	 */
 	public void index() {
 		ArticleCommentService.service.list(splitPage);
-		render("/blog/articleComment/list.html");
+		render("/blog/admin/articleComment/list.html");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class ArticleCommentController extends BaseController {
 	@Before(ArticleCommentValidator.class)
 	public void save() {
 		getModel(ArticleComment.class).save();
-		render("/blog/articleComment/add.html");
+		render("/blog/admin/articleComment/add.html");
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class ArticleCommentController extends BaseController {
 	public void edit() {
 		ArticleComment articleComment = ArticleComment.dao.findById(getPara());
 		setAttr("articleComment", articleComment);
-		render("/blog/articleComment/update.html");
+		render("/blog/admin/articleComment/update.html");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class ArticleCommentController extends BaseController {
 	@Before(ArticleCommentValidator.class)
 	public void update() {
 		getModel(ArticleComment.class).update();
-		redirect("/jf/blog/articleComment");
+		redirect("/jf/blog/admin/articleComment");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class ArticleCommentController extends BaseController {
 	public void view() {
 		ArticleComment articleComment = ArticleComment.dao.findById(getPara());
 		setAttr("articleComment", articleComment);
-		render("/blog/articleComment/view.html");
+		render("/blog/admin/articleComment/view.html");
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class ArticleCommentController extends BaseController {
 	public void delete() {
 		String param = (getPara() == null ? ids : getPara());
 		ArticleCommentService.service.delete(param);
-		redirect("/jf/blog/articleComment");
+		redirect("/jf/blog/admin/articleComment");
 	}
 	
 }
