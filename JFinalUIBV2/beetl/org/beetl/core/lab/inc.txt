@@ -1,0 +1,4 @@
+<%
+var title  = title!"默认";
+%>
+${title}

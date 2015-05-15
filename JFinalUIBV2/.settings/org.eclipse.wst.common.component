@@ -6,6 +6,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/platform"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/junit"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/beetl"/>
         <property name="context-root" value="JFinal"/>
         <property name="java-output-path" value="/JFinal/build/classes"/>
     </wb-module>

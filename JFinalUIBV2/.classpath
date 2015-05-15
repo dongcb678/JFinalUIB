@@ -5,6 +5,7 @@
 	<classpathentry kind="src" path="weiXin"/>
 	<classpathentry kind="src" path="jfinal19"/>
 	<classpathentry kind="src" path="junit"/>
+	<classpathentry kind="src" path="beetl"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
@@ -21,6 +22,7 @@
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.el-3.0.0.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-api-2.3.1.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/servlet-api-3.1.jar"/>
+	<classpathentry kind="lib" path="doc/buildJar/beetl/antlr-4.5-complete.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-2.3.2.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/jetty-all-9.2.10.v20150310.jar"/>
