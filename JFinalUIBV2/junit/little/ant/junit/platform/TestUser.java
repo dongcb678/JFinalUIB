@@ -1,5 +1,6 @@
 package little.ant.junit.platform;
 
+import little.ant.junit.TestBase;
 import little.ant.platform.model.User;
 
 import org.junit.Test;
