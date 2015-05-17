@@ -30,7 +30,7 @@
 	<!-- 获取模块下面的功能 -->
 	<sql id="byModuleIds">
 		<![CDATA[ 
-        	select ids, names from pt_operator where moduleIds = ? order by url asc
+        	select ids, names from pt_operator where privilegess = '1' and moduleIds = ? order by url asc
     	]]>
 	</sql>
 	
