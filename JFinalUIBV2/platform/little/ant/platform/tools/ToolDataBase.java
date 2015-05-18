@@ -94,6 +94,10 @@ public class ToolDataBase {
 			writer.flush();
 			writer.close();
 			os.close();
+			
+		} else if(db_type.equals(ConstantPlatform.db_type_oracle)){ // oracle
+			
+			
 		}
 	}
 	

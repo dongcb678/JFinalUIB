@@ -18,7 +18,7 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: 'http://localhost:89/jf/platform/upload'
+        url: 'server/php/'
     });
 
     // Enable iframe cross-domain access via redirect option:
@@ -30,7 +30,7 @@ $(function () {
             '/cors/result.html?%s'
         )
     );
-/*
+
     if (window.location.hostname === 'blueimp.github.io') {
         // Demo settings:
         $('#fileupload').fileupload('option', {
@@ -56,7 +56,6 @@ $(function () {
             });
         }
     } else {
-    	*/
         // Load existing files:
         $('#fileupload').addClass('fileupload-processing');
         $.ajax({
@@ -71,6 +70,6 @@ $(function () {
             $(this).fileupload('option', 'done')
                 .call(this, $.Event('done'), {result: result});
         });
-   /* }*/
+    }
 
 });
