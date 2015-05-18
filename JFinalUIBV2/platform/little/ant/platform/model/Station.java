@@ -14,7 +14,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  */
 @SuppressWarnings("unused")
 @Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_station")
-public class Station extends BaseModel<Station> {
+public class Station extends BaseModelCache<Station> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 

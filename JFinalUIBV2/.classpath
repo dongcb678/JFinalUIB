@@ -4,8 +4,8 @@
 	<classpathentry kind="src" path="platform"/>
 	<classpathentry kind="src" path="weiXin"/>
 	<classpathentry kind="src" path="jfinal19"/>
-	<classpathentry kind="src" path="junit"/>
 	<classpathentry kind="src" path="beetl"/>
+	<classpathentry kind="src" path="junit"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>

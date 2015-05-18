@@ -19,7 +19,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  */
 @SuppressWarnings("unused")
 @Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_dict")
-public class Dict extends BaseModel<Dict> {
+public class Dict extends BaseModelCache<Dict> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 

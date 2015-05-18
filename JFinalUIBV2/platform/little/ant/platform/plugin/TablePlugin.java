@@ -1,12 +1,13 @@
 package little.ant.platform.plugin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.Table;
 import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.controller.BaseController;
 import little.ant.platform.model.BaseModel;
+import little.ant.platform.model.BaseModelCache;
 import little.ant.platform.tools.ToolClassSearcher;
 
 import com.jfinal.log.Logger;
@@ -31,15 +32,30 @@ public class TablePlugin implements IPlugin {
 	@Override
 	public boolean start() {
 		List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_scan_jar);
-		List<Class<? extends BaseController>> modelClasses = null;// 查询所有继承BaseModel的类
+		List<Class<? extends BaseModel>> modelClasses = new ArrayList<Class<? extends BaseModel>>();// 查询所有继承BaseModel、BaseModelCache的类
 		if(jars.size() > 0){
-			modelClasses = ToolClassSearcher.of(BaseModel.class).includeAllJarsInLib(ToolClassSearcher.isValiJar()).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件
+			List<Class<? extends BaseModel>> exBaseModel = ToolClassSearcher.of(BaseModel.class).includeAllJarsInLib(ToolClassSearcher.isValiJar()).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件
+			modelClasses.addAll(exBaseModel);
+			
+			List<Class<? extends BaseModel>> exBaseModelCache = ToolClassSearcher.of(BaseModelCache.class).includeAllJarsInLib(ToolClassSearcher.isValiJar()).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件
+			modelClasses.addAll(exBaseModelCache);
+			
 		}else{
-			modelClasses = ToolClassSearcher.of(BaseModel.class).search();
+			List<Class<? extends BaseModel>> exBaseModel = ToolClassSearcher.of(BaseModel.class).search();
+			modelClasses.addAll(exBaseModel);
+			
+			List<Class<? extends BaseModel>> exBaseModelCache = ToolClassSearcher.of(BaseModelCache.class).search();
+			modelClasses.addAll(exBaseModelCache);
 		}
 		
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
+			// 剔除BaseModelCache
+			if(model.getName().equals("little.ant.platform.model.BaseModelCache")){
+				log.info("剔除BaseModelCache");
+				continue;
+			}
+			
 			// 获取注解对象
 			Table tableBind = (Table) model.getAnnotation(Table.class);
 			if (tableBind == null) {

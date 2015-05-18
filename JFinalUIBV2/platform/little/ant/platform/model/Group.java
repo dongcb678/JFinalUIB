@@ -14,7 +14,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  */
 @SuppressWarnings("unused")
 @Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_group")
-public class Group extends BaseModel<Group> {
+public class Group extends BaseModelCache<Group> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
