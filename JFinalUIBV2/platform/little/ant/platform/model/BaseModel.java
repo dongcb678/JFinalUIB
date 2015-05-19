@@ -168,7 +168,12 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			// 2.乐观锁控制
 			Set<String> modifyFlag = null;
 			try {
-				Field field = this.getClass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
+				Field field = null;
+				if(this.getClass().getSuperclass().getName().endsWith("BaseModelCache")){
+					field = this.getClass().getSuperclass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
+				}else{
+					field = this.getClass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
+				}
 				field.setAccessible(true);
 				Object object = field.get(this);
 				if(null != object){
