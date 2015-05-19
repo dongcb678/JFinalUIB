@@ -51,7 +51,7 @@ public class TablePlugin implements IPlugin {
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
 			// 剔除BaseModelCache
-			if(model.getName().equals("little.ant.platform.model.BaseModelCache")){
+			if(model.getName().endsWith("BaseModelCache")){
 				log.info("剔除BaseModelCache");
 				continue;
 			}
