@@ -1,6 +1,8 @@
 package little.ant.platform.tools;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -22,11 +24,22 @@ import org.apache.log4j.Logger;
 /**
  * 邮件发送
  * @author 董华健
+ * 
+ * 描述：使用javamail出现java.net.SocketException: Network is unreachable: connect异常 解决方法 
+ * 
+ * 1. main方法加入System.setProperty("java.net.preferIPv4Stack", "true");  
+ * 2. tomcat服务器加上启动参数 -Djava.net.preferIPv4Stack=true   
  */
-public class ToolMail {
+public class ToolMail extends Thread {
 	
 	private static Logger log = Logger.getLogger(ToolMail.class);
+	
+	private static final String sendType_text = "text";
 
+	private static final String sendType_html = "html";
+	
+	private String sendType;		// 发送邮件的类型：text 、html
+	
 	private String host;		// 发送邮件的服务器的IP
 	private String port = "25";	// 发送邮件的服务器的端口
 	
@@ -34,13 +47,23 @@ public class ToolMail {
 	private String userName;	// 登陆邮件发送服务器的用户名
 	private String password;	// 登陆邮件发送服务器的密码
 	
-	private String to;			// 邮件接收者的地址
+	private List<String> to;			// 邮件接收者的地址
 	
 	private boolean validate = false;	// 是否需要身份验证
 	
 	private String subject;		// 邮件标题
 	private String content;		// 邮件的文本内容
 	private String[] attachFileNames;	// 邮件附件的文件名
+
+	@Override
+	public void run() {
+		if(sendType != null || sendType.equals(sendType_text)){
+			sendTextMail();
+			
+		} else if(sendType != null || sendType.equals(sendType_html)){
+			sendHtmlMail();
+		}
+	}
 
 	/**
 	 * 获得邮件会话属性
@@ -63,7 +86,6 @@ public class ToolMail {
 
 	/**
 	 * 以文本格式发送邮件
-	 * @param mailInfo   待发送的邮件的信息
 	 */
 	public boolean sendTextMail() {
 		// 判断是否需要身份认证
@@ -83,8 +105,15 @@ public class ToolMail {
 			// 设置邮件消息的发送者
 			mailMessage.setFrom(from);
 			// 创建邮件的接收者地址，并设置到邮件消息中
-			Address to = new InternetAddress(getTo());
-			mailMessage.setRecipient(Message.RecipientType.TO, to);
+			Address[] tos = new InternetAddress[to.size()];
+			for(int i=0; i<to.size(); i++){
+				String receive = to.get(i);
+				if(null != receive && !receive.isEmpty()){
+					tos[i] = new InternetAddress(receive);
+				}
+			}
+			// Message.RecipientType.TO属性表示接收者的类型为TO
+			mailMessage.setRecipients(Message.RecipientType.TO, tos);
 			// 设置邮件消息的主题
 			mailMessage.setSubject(getSubject());
 			// 设置邮件消息发送的时间
@@ -104,12 +133,8 @@ public class ToolMail {
 
 	/**
 	 * 以HTML格式发送邮件
-	 * 
-	 * @param mailInfo
-	 *            待发送的邮件信息
-	 * @throws MessagingException 
 	 */
-	public boolean sendHtmlMail() throws MessagingException {
+	public boolean sendHtmlMail() {
 		// 判断是否需要身份认证
 		MailAuthenticator authenticator = null;
 		Properties pro = getProperties();
@@ -127,9 +152,15 @@ public class ToolMail {
 			// 设置邮件消息的发送者
 			mailMessage.setFrom(from);
 			// 创建邮件的接收者地址，并设置到邮件消息中
-			Address to = new InternetAddress(getTo());
+			Address[] tos = new InternetAddress[to.size()];
+			for(int i=0; i<to.size(); i++){
+				String receive = to.get(i);
+				if(null != receive && !receive.isEmpty()){
+					tos[i] = new InternetAddress(receive);
+				}
+			}
 			// Message.RecipientType.TO属性表示接收者的类型为TO
-			mailMessage.setRecipient(Message.RecipientType.TO, to);
+			mailMessage.setRecipients(Message.RecipientType.TO, tos);
 			// 设置邮件消息的主题
 			mailMessage.setSubject(getSubject());
 			// 设置邮件消息发送的时间
@@ -146,26 +177,36 @@ public class ToolMail {
 			// 发送邮件
 			Transport.send(mailMessage);
 			return true;
-		} catch (MessagingException ex) {
-			log.error("发送html邮件异常：" + ex.getMessage());
-			ex.printStackTrace();
-			throw ex;
+		} catch (MessagingException e) {
+			log.error("发送html邮件异常：" + e.getMessage());
+			e.printStackTrace();
+			return false;
 		}
 	}
 
-	public static void main(String[] args) throws MessagingException {
+	public static void main(String[] args) {
+		// main方法加入
+		// System.setProperty("java.net.preferIPv4Stack", "true");  
+		// tomcat服务器加上启动参数 -Djava.net.preferIPv4Stack=true   
+		
 		ToolMail mailInfo = new ToolMail();
 		mailInfo.setHost("smtp.163.com");
 		mailInfo.setPort("25");
 		mailInfo.setValidate(true);
 		mailInfo.setUserName("dongcb678@163.com");
-		mailInfo.setPassword("123456");// 您的邮箱密码
+		mailInfo.setPassword("xxx");// 您的邮箱密码
 		mailInfo.setFrom("dongcb678@163.com");
-		mailInfo.setTo("150584428@qq.com");
+		List<String> toList = new ArrayList<String>();
+		toList.add("150584428@qq.com");
+		mailInfo.setTo(toList);
 		mailInfo.setSubject("标题test111");
 		mailInfo.setContent("内容test111");
-		mailInfo.sendTextMail();// 发送html格式
-		mailInfo.sendHtmlMail();// 发送html格式
+		
+		mailInfo.setSendType(sendType_text);
+//		mailInfo.sendTextMail();// 发送html格式
+//		mailInfo.sendHtmlMail();// 发送html格式
+		
+		mailInfo.start();
 	}
 
 	public String getHost() {
@@ -192,11 +233,11 @@ public class ToolMail {
 		this.from = from;
 	}
 
-	public String getTo() {
+	public List<String> getTo() {
 		return to;
 	}
 
-	public void setTo(String to) {
+	public void setTo(List<String> to) {
 		this.to = to;
 	}
 
@@ -247,6 +288,15 @@ public class ToolMail {
 	public void setAttachFileNames(String[] attachFileNames) {
 		this.attachFileNames = attachFileNames;
 	}
+
+	public String getSendType() {
+		return sendType;
+	}
+
+	public void setSendType(String sendType) {
+		this.sendType = sendType;
+	}
+	
 }
 
 class MailAuthenticator extends Authenticator {

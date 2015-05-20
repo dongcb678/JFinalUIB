@@ -1,6 +1,7 @@
 package little.ant.platform.service;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.common.ConstantPlatform;
@@ -208,11 +209,16 @@ public abstract class BaseService {
 	public void rowFilter(StringBuilder formSqlSb){
 		
 	}
-	
+
 	/**
 	 * 发送邮件对象
+	 * @param sendType 发送邮件的类型：text 、html
+	 * @param to	接收者
+	 * @param subject 邮件标题
+	 * @param content 邮件的文本内容
+	 * @return
 	 */
-	public ToolMail sendTextMail(){
+	protected void sendTextMail(String sendType,List<String> to, String subject, String content){
 		ToolMail mail = new ToolMail();
 		mail.setHost((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_host));
 		mail.setPort((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_port));
@@ -220,7 +226,11 @@ public abstract class BaseService {
 		mail.setUserName((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_userName));
 		mail.setPassword((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_password));
 		mail.setFrom((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_from));
-		return mail;
+		
+		mail.setSendType(sendType);
+		
+		mail.setTo(to);
+		mail.setSubject(subject);
+		mail.setContent(content);
 	}
-	
 }
