@@ -216,9 +216,9 @@ public abstract class BaseService {
 	 * @param to	接收者
 	 * @param subject 邮件标题
 	 * @param content 邮件的文本内容
-	 * @return
+	 * @param attachFileNames 附件
 	 */
-	protected void sendTextMail(String sendType,List<String> to, String subject, String content){
+	protected void sendTextMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
 		ToolMail mail = new ToolMail();
 		mail.setHost((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_host));
 		mail.setPort((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_port));
@@ -232,5 +232,9 @@ public abstract class BaseService {
 		mail.setTo(to);
 		mail.setSubject(subject);
 		mail.setContent(content);
+		mail.setAttachFileNames(attachFileNames);
+		
+		mail.start();
 	}
+	
 }
