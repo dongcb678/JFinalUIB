@@ -1,5 +1,6 @@
 package little.ant.platform.tools;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -138,11 +139,14 @@ public class ToolMail extends Thread {
             
             // 附件
 			for (String attachFile : attachFileNames) {
-				 mbp=new MimeBodyPart();   
-                 FileDataSource fds = new FileDataSource(attachFile); //得到数据源   
-                 mbp.setDataHandler(new DataHandler(fds)); //得到附件本身并至入BodyPart   
-                 mbp.setFileName(fds.getName());  //得到文件名同样至入BodyPart   
-                 multipart.addBodyPart(mbp);   
+				mbp = new MimeBodyPart();   
+                FileDataSource fds = new FileDataSource(attachFile); //得到数据源   
+                
+                mbp.setDataHandler(new DataHandler(fds)); //得到附件本身并至入BodyPart   
+                String filename = new String(fds.getName().getBytes(), "ISO-8859-1"); // 解决附件乱码
+                mbp.setFileName(filename);  //得到文件名同样至入BodyPart   
+                
+                multipart.addBodyPart(mbp); 
 			}
 			
 			// 设置邮件消息的主要内容
@@ -152,9 +156,13 @@ public class ToolMail extends Thread {
 			Transport.send(mailMessage);
 			
 			return true;
-		} catch (MessagingException ex) {
-			log.error("发送文本邮件异常：" + ex.getMessage());
-			ex.printStackTrace();
+		} catch (MessagingException e) {
+			log.error("发送文本邮件异常：" + e.getMessage());
+			e.printStackTrace();
+			return false;
+		} catch (UnsupportedEncodingException e) {
+			log.error("发送文本邮件异常：" + e.getMessage());
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -197,29 +205,37 @@ public class ToolMail extends Thread {
 			mailMessage.setSentDate(new Date());
 			
 			// MiniMultipart类是一个容器类，包含MimeBodyPart类型的对象
-			Multipart mainPart = new MimeMultipart();
+			Multipart multipart = new MimeMultipart();
 			
 			// 正文
 			BodyPart mbp = new MimeBodyPart();
 			mbp.setContent(getContent(), "text/html; charset=utf-8");// 设置HTML内容
-			mainPart.addBodyPart(mbp);
+			multipart.addBodyPart(mbp);
 			
 			// 附件
 			for (String attachFile : attachFileNames) {
-				 mbp = new MimeBodyPart();   
-                 FileDataSource fds = new FileDataSource(attachFile); //得到数据源   
-                 mbp.setDataHandler(new DataHandler(fds)); //得到附件本身并至入BodyPart   
-                 mbp.setFileName(fds.getName());  //得到文件名同样至入BodyPart   
-                 mainPart.addBodyPart(mbp);   
+				mbp = new MimeBodyPart();   
+                FileDataSource fds = new FileDataSource(attachFile); //得到数据源   
+                
+                mbp.setDataHandler(new DataHandler(fds)); //得到附件本身并至入BodyPart   
+                String filename = new String(fds.getName().getBytes(), "ISO-8859-1"); // 解决附件乱码
+                mbp.setFileName(filename);  //得到文件名同样至入BodyPart   
+                
+                multipart.addBodyPart(mbp);
 			}
 			
 			// 将MiniMultipart对象设置为邮件内容
-			mailMessage.setContent(mainPart);
+			mailMessage.setContent(multipart);
 			// 发送邮件
 			Transport.send(mailMessage);
 			return true;
 		} catch (MessagingException e) {
 			log.error("发送html邮件异常：" + e.getMessage());
+			e.printStackTrace();
+			return false;
+		} catch (UnsupportedEncodingException e) {
+			log.error("发送html邮件异常：" + e.getMessage());
+			e.printStackTrace();
 			e.printStackTrace();
 			return false;
 		}
