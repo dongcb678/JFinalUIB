@@ -1,5 +1,6 @@
 package little.ant.platform.controller;
 
+import java.io.File;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -130,6 +131,15 @@ public abstract class BaseController extends Controller {
 		}
 	}
 	
+	/**
+	 * 解决IE8下下载失败的问题
+	 */
+	@Override
+	public void renderFile(File file) {
+		getResponse().reset(); 
+		super.renderFile(file);
+	}
+
 	/**
 	 * 获取checkbox值，数组
 	 * @param name
