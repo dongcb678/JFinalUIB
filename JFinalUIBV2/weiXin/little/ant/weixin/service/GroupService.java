@@ -1,5 +1,6 @@
 package little.ant.weixin.service;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Group;
@@ -15,7 +16,7 @@ public class GroupService extends BaseService {
 
 	private static Logger log = Logger.getLogger(GroupService.class);
 
-	public static final GroupService service = new GroupService();
+	public static final GroupService service = MyTxProxy.newProxy(GroupService.class);
 	
 	/**
 	 * 分页

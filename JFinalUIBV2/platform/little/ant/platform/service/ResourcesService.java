@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.model.Resources;
 import little.ant.platform.plugin.PropertiesPlugin;
@@ -27,7 +28,7 @@ public class ResourcesService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ResourcesService.class);
 
-	public static final ResourcesService service = new ResourcesService();
+	public static final ResourcesService service = MyTxProxy.newProxy(ResourcesService.class);
 	
 	/**
 	 * 最近15天PV

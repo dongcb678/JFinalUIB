@@ -1,5 +1,6 @@
 package little.ant.weixin.service;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -10,7 +11,7 @@ public class UserService extends BaseService {
 
 	private static Logger log = Logger.getLogger(UserService.class);
 
-	public static final UserService service = new UserService();
+	public static final UserService service = MyTxProxy.newProxy(UserService.class);
 	
 	/**
 	 * 分页

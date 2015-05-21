@@ -1,5 +1,6 @@
 package little.ant.platform.service;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Syslog;
@@ -10,8 +11,8 @@ public class SysLogService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SysLogService.class);
-
-	public static final SysLogService service = new SysLogService();
+	
+	public static final SysLogService service = MyTxProxy.newProxy(SysLogService.class);
 	
 	public Syslog view(String ids){
 		String sql = getSql("platform.sysLog.view");

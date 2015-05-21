@@ -1,5 +1,6 @@
 package little.ant.platform.service;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.tools.ToolImageResize;
 import little.ant.platform.tools.ToolImageTailor;
 import little.ant.platform.tools.ToolOS;
@@ -10,7 +11,7 @@ public class ImageService extends BaseService {
 
 	private static Logger log = Logger.getLogger(ImageService.class);
 
-	public static final ImageService service = new ImageService();
+	public static final ImageService service = MyTxProxy.newProxy(ImageService.class);
 	
 	/**
 	 * 图片裁剪

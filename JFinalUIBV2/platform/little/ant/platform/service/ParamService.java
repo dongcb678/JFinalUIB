@@ -3,6 +3,7 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Param;
@@ -16,7 +17,7 @@ public class ParamService extends BaseService {
 
 	private static Logger log = Logger.getLogger(ParamService.class);
 
-	public static final ParamService service = new ParamService();
+	public static final ParamService service = MyTxProxy.newProxy(ParamService.class);
 	
 	/**
 	 * 保存

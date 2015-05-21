@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Group;
@@ -17,7 +18,7 @@ public class RoleService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(RoleService.class);
 
-	public static final RoleService service = new RoleService();
+	public static final RoleService service = MyTxProxy.newProxy(RoleService.class);
 	
 	/**
 	 * 保存

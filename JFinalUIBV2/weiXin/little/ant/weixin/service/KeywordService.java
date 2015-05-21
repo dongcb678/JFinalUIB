@@ -1,5 +1,6 @@
 package little.ant.weixin.service;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -12,7 +13,7 @@ public class KeywordService extends BaseService {
 
 	private static Logger log = Logger.getLogger(KeywordService.class);
 
-	public static final KeywordService service = new KeywordService();
+	public static final KeywordService service = MyTxProxy.newProxy(KeywordService.class);
 	
 	/**
 	 * 保存

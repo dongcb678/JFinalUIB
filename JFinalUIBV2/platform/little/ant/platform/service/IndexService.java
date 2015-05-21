@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.model.Group;
 import little.ant.platform.model.Menu;
 import little.ant.platform.model.Role;
@@ -17,7 +18,7 @@ public class IndexService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(IndexService.class);
 
-	public static final IndexService service = new IndexService();
+	public static final IndexService service = MyTxProxy.newProxy(IndexService.class);
 	
 	/**
 	 * 查询用户可操作的菜单

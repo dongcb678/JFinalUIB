@@ -1,5 +1,6 @@
 package little.ant.weixin.service;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -10,7 +11,7 @@ public class LocationService extends BaseService {
 
 	private static Logger log = Logger.getLogger(LocationService.class);
 
-	public static final LocationService service = new LocationService();
+	public static final LocationService service = MyTxProxy.newProxy(LocationService.class);
 	
 	/**
 	 * 分页

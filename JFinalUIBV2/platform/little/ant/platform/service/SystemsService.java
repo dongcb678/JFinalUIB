@@ -1,5 +1,6 @@
 package little.ant.platform.service;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Menu;
@@ -13,7 +14,7 @@ public class SystemsService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SystemsService.class);
 
-	public static final SystemsService service = new SystemsService();
+	public static final SystemsService service = MyTxProxy.newProxy(SystemsService.class);
 	
 	/**
 	 * 保存

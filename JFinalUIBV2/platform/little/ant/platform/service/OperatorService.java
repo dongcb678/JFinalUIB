@@ -3,6 +3,7 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.common.ZtreeNode;
@@ -16,7 +17,7 @@ public class OperatorService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(OperatorService.class);
 
-	public static final OperatorService service = new OperatorService();
+	public static final OperatorService service = MyTxProxy.newProxy(OperatorService.class);
 	
 	/**
 	 * 保存

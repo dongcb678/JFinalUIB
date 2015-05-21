@@ -3,6 +3,7 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.ZtreeNode;
 import little.ant.platform.model.Department;
@@ -17,7 +18,7 @@ public class DepartmentService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DepartmentService.class);
 	
-	public static final DepartmentService service = new DepartmentService();
+	public static final DepartmentService service = MyTxProxy.newProxy(DepartmentService.class);
 	
 	/**
 	 * 获取子节点数据
