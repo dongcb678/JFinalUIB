@@ -217,11 +217,9 @@ public abstract class BaseController extends Controller {
 		while (paramNames.hasMoreElements()) {
 			String name = paramNames.nextElement();
 			String value = getPara(name);
-			if (name.startsWith("_query") && !value.isEmpty()) {// 查询参数分拣
+			if (name.startsWith("_query") && null != value &&  !value.trim().isEmpty()) {// 查询参数分拣
 				String key = name.substring(7);
-				if(null != value && !value.trim().equals("")){
-					queryParam.put(key, value.trim());
-				}
+				queryParam.put(key, value.trim());
 			}
 		}
 		

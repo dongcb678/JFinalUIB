@@ -87,16 +87,11 @@ public class ParamPkgInterceptor implements Interceptor {
 		Enumeration<String> paramNames = controller.getParaNames();
 		while (paramNames.hasMoreElements()) {
 			String name = paramNames.nextElement();
-			if (name.startsWith("_query.")) {
-				String value = controller.getPara(name);
+			String value = controller.getPara(name);
+			if (name.startsWith("_query") && null != value && !value.trim().isEmpty()) {// 查询参数分拣
 				log.debug("分页，查询参数：name = " + name + " value = " + value);
-				if(null != value){
-					value = value.trim();
-					if(!value.isEmpty()){
-						String key = name.substring(7);
-						queryParam.put(key, value);
-					}
-				}
+				String key = name.substring(7);
+				queryParam.put(key, value.trim());
 			}
 		}
 		splitPage.setQueryParam(queryParam);
