@@ -2,9 +2,10 @@ package ${package};
 
 import org.apache.log4j.Logger;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.common.SplitPage;
-import little.ant.platform.common.DictKeys;
+import little.ant.platform.common.ConstantPlatform;
 import ${basePackage}.model.${className};
 
 public class ${className}Service extends BaseService {
@@ -12,7 +13,7 @@ public class ${className}Service extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(${className}Service.class);
 	
-	public static final ${className}Service service = new ${className}Service();
+	public static final ${className}Service service = MyTxProxy.newProxy(${className}Service.class);
 	
 	/**
 	 * 分页
@@ -20,7 +21,7 @@ public class ${className}Service extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "${namespace}.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "${namespace}.splitPage");
 	}
 	
 	/**

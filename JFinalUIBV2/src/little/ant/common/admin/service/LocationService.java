@@ -1,6 +1,7 @@
 package little.ant.common.admin.service;
 
 import little.ant.common.model.Location;
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -13,7 +14,7 @@ public class LocationService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LocationService.class);
 	
-	public static final LocationService service = new LocationService();
+	public static final LocationService service = MyTxProxy.newProxy(LocationService.class);
 	
 	/**
 	 * 分页

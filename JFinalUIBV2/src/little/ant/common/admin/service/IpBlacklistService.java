@@ -1,19 +1,20 @@
 package little.ant.common.admin.service;
 
-import org.apache.log4j.Logger;
-
+import little.ant.common.model.IpBlacklist;
+import little.ant.platform.annotation.MyTxProxy;
+import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.tools.ToolDateTime;
-import little.ant.platform.common.SplitPage;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.common.model.IpBlacklist;
+
+import org.apache.log4j.Logger;
 
 public class IpBlacklistService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(IpBlacklistService.class);
 	
-	public static final IpBlacklistService service = new IpBlacklistService();
+	public static final IpBlacklistService service = MyTxProxy.newProxy(IpBlacklistService.class);
 	
 	/**
 	 * 分页

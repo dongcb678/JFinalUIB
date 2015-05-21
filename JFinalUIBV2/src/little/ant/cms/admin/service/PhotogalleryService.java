@@ -2,6 +2,7 @@ package little.ant.cms.admin.service;
 
 import org.apache.log4j.Logger;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.common.ConstantPlatform;
@@ -12,7 +13,7 @@ public class PhotogalleryService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(PhotogalleryService.class);
 	
-	public static final PhotogalleryService service = new PhotogalleryService();
+	public static final PhotogalleryService service = MyTxProxy.newProxy(PhotogalleryService.class);
 	
 	/**
 	 * 分页
@@ -20,7 +21,7 @@ public class PhotogalleryService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "cms.photogallery.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "src.photogallery.splitPage");
 	}
 	
 	/**

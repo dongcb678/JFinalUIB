@@ -2,6 +2,7 @@ package little.ant.cms.admin.service;
 
 import org.apache.log4j.Logger;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.common.ConstantPlatform;
@@ -12,7 +13,7 @@ public class JobService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(JobService.class);
 	
-	public static final JobService service = new JobService();
+	public static final JobService service = MyTxProxy.newProxy(JobService.class);
 	
 	/**
 	 * 分页
@@ -20,7 +21,7 @@ public class JobService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "cms.job.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "src.job.splitPage");
 	}
 	
 	/**

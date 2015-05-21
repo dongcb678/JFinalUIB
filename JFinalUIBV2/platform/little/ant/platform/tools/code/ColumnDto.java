@@ -4,7 +4,7 @@ package little.ant.platform.tools.code;
  * 列描述
  * @author 董华健
  */
-public class Column {
+public class ColumnDto {
 
 	private String table_name ; // 表名称
 	

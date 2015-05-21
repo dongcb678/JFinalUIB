@@ -1,6 +1,7 @@
 package little.ant.common.admin.service;
 
 import little.ant.common.model.Ad;
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -13,7 +14,7 @@ public class AdService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(AdService.class);
 	
-	public static final AdService service = new AdService();
+	public static final AdService service = MyTxProxy.newProxy(AdService.class);
 	
 	/**
 	 * 分页

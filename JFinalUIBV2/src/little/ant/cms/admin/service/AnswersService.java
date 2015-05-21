@@ -2,6 +2,7 @@ package little.ant.cms.admin.service;
 
 import org.apache.log4j.Logger;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.common.ConstantPlatform;
@@ -12,7 +13,7 @@ public class AnswersService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(AnswersService.class);
 	
-	public static final AnswersService service = new AnswersService();
+	public static final AnswersService service = MyTxProxy.newProxy(AnswersService.class);
 	
 	/**
 	 * 分页
@@ -20,7 +21,7 @@ public class AnswersService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "cms.answers.splitPage");
+		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "src.answers.splitPage");
 	}
 	
 	/**

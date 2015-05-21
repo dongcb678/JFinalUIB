@@ -1,6 +1,7 @@
 package little.ant.common.admin.service;
 
 import little.ant.common.model.SensitiveWord;
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -13,7 +14,7 @@ public class SensitiveWordService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SensitiveWordService.class);
 	
-	public static final SensitiveWordService service = new SensitiveWordService();
+	public static final SensitiveWordService service = MyTxProxy.newProxy(SensitiveWordService.class);
 	
 	/**
 	 * 分页
