@@ -29,6 +29,9 @@ import little.ant.weixin.lucene.DocKeyword;
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
 
+import com.alibaba.druid.filter.stat.StatFilter;
+import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -119,6 +122,15 @@ public class JfinalConfig extends JFinalConfig {
 				(Integer)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_initialSize), 
 				(Integer)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_minIdle), 
 				(Integer)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_maxActive));
+		
+		log.info("configPlugin 配置Druid数据库连接池过滤器配制");
+		druidPlugin.addFilter(new StatFilter());
+		WallFilter wall = new WallFilter();
+		wall.setDbType((String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_type_key));
+		WallConfig config = new WallConfig();
+		config.setFunctionCheck(false); // 支持数据库函数
+		wall.setConfig(config);
+		druidPlugin.addFilter(wall);
 		
 		log.info("configPlugin 配置ActiveRecord插件");
 		ActiveRecordPlugin arpMain = new ActiveRecordPlugin(ConstantPlatform.db_dataSource_main, druidPlugin);
