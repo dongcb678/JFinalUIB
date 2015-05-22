@@ -33,6 +33,12 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	private static final long serialVersionUID = -900378319414539856L;
 
 	private static Logger log = Logger.getLogger(BaseModel.class);
+
+	/**
+	 * 字段描述：版本号 
+	 * 字段类型 ：bigint 
+	 */
+	public static final String colunm_version = "version";
 	
 	/**
      * 获取SQL，固定SQL
@@ -137,8 +143,8 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 */
 	public boolean save() {
 		this.set(getTable().getPrimaryKey(), ToolUtils.getUuidByJdk(true)); // 设置主键值
-		if(getTable().hasColumnLabel("version")){ // 是否需要乐观锁控制
-			this.set("version", Long.valueOf(0)); // 初始化乐观锁版本号
+		if(getTable().hasColumnLabel(colunm_version)){ // 是否需要乐观锁控制
+			this.set(colunm_version, Long.valueOf(0)); // 初始化乐观锁版本号
 		}
 		return super.save();
 	}
@@ -149,7 +155,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	@SuppressWarnings("unchecked")
 	public boolean update() {
 		Table table = getTable();
-		boolean hasVersion = table.hasColumnLabel("version");
+		boolean hasVersion = table.hasColumnLabel(colunm_version);
 		
 		if(hasVersion){// 是否需要乐观锁控制，表是否有version字段
 			String name = table.getName();
@@ -189,10 +195,10 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 				e.printStackTrace();
 				throw new RuntimeException("BaseModel访问modifyFlag异常");
 			}
-			boolean versionModify = modifyFlag.contains("version"); // 表单是否包含version字段
+			boolean versionModify = modifyFlag.contains(colunm_version); // 表单是否包含version字段
 			if(versionModify){
-				Long versionDB = modelOld.getNumber("version").longValue(); // 数据库中的版本号
-				Long versionForm = getNumber("version").longValue() + 1; // 表单中的版本号
+				Long versionDB = modelOld.getNumber(colunm_version).longValue(); // 数据库中的版本号
+				Long versionForm = getNumber(colunm_version).longValue() + 1; // 表单中的版本号
 				if(!(versionForm > versionDB)){
 					throw new RuntimeException("表单数据版本号和数据库数据版本号不一致，可能数据已经被其他人修改，请重新编辑");
 				}

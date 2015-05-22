@@ -44,6 +44,15 @@ public abstract class BaseController extends Controller {
 	}
 
 	/**
+	 * 设置日志描述
+	 * @param description
+	 */
+	protected void setLogDesc(String description){
+		log.debug("设置日志描述：" + description);
+		reqSysLog.set(Syslog.colunm_description, description);
+	}
+	
+	/**
 	 * 获取当前请求国际化参数
 	 * @return
 	 */
@@ -217,7 +226,7 @@ public abstract class BaseController extends Controller {
 		while (paramNames.hasMoreElements()) {
 			String name = paramNames.nextElement();
 			String value = getPara(name);
-			if (name.startsWith("_query") && null != value &&  !value.trim().isEmpty()) {// 查询参数分拣
+			if (name.startsWith("_query") && null != value && !value.trim().isEmpty()) {// 查询参数分拣
 				String key = name.substring(7);
 				queryParam.put(key, value.trim());
 			}
