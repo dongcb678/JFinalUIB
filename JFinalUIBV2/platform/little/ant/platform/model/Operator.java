@@ -2,7 +2,7 @@ package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
 import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.thread.ThreadParamInit;
+import little.ant.platform.plugin.ParamInitPlugin;
 
 import org.apache.log4j.Logger;
 
@@ -129,8 +129,8 @@ public class Operator extends BaseModelCache<Operator> {
 	 */
 	public void cacheAdd(String ids){
 		Operator operator = Operator.dao.findById(ids);
-		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + ids, operator);
-		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr(colunm_url), operator);
+		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + ids, operator);
+		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(colunm_url), operator);
 	}
 
 	/**
@@ -139,8 +139,8 @@ public class Operator extends BaseModelCache<Operator> {
 	 */
 	public void cacheRemove(String ids){
 		Operator operator = Operator.dao.findById(ids);
-		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + ids);
-		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + operator.getStr(colunm_url));
+		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + ids);
+		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(colunm_url));
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class Operator extends BaseModelCache<Operator> {
 	 * @return
 	 */
 	public Operator cacheGet(String key){
-		Operator operator = CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_operator + key);
+		Operator operator = CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + key);
 		return operator;
 	}
 	

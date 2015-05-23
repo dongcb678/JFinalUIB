@@ -1,4 +1,4 @@
-package little.ant.platform.thread;
+package little.ant.platform.plugin;
 
 import java.util.List;
 
@@ -13,33 +13,28 @@ import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.plugin.IPlugin;
+
 /**
  * 系统初始化缓存操作类
  * @author 董华健  2012-10-16 下午1:16:56
  */
-public class ThreadParamInit extends Thread {
+public class ParamInitPlugin implements IPlugin {
 	
-	private static Logger log = Logger.getLogger(ThreadParamInit.class);
+	private static Logger log = Logger.getLogger(ParamInitPlugin.class);
 	
-	public static String cacheStart_user = "user_";
-	public static String cacheStart_group = "group_";
-	public static String cacheStart_role = "role_";
-	public static String cacheStart_station = "station_";
-	public static String cacheStart_operator = "operator_";
-	public static String cacheStart_dict = "dict_";
-	public static String cacheStart_dict_child =  "dict_child_";
-	public static String cacheStart_param = "param_";
-	public static String cacheStart_param_child =  "param_child_";
-	
+	public static final String cacheStart_user = "user_";
+	public static final String cacheStart_group = "group_";
+	public static final String cacheStart_role = "role_";
+	public static final String cacheStart_station = "station_";
+	public static final String cacheStart_operator = "operator_";
+	public static final String cacheStart_dict = "dict_";
+	public static final String cacheStart_dict_child =  "dict_child_";
+	public static final String cacheStart_param = "param_";
+	public static final String cacheStart_param_child =  "param_child_";
+
 	@Override
-	public void run() {
-		cacheAll();
-	}
-	
-	/**
-	 * 缓存所有参数
-	 */
-	public static synchronized void cacheAll(){
+	public boolean start() {
 		log.info("缓存参数初始化 start ...");
 
 		// 1.缓存用户
@@ -64,6 +59,12 @@ public class ThreadParamInit extends Thread {
 		platform_cacheParam();
 
 		log.info("缓存参数初始化 end ...");
+		return true;
+	}
+
+	@Override
+	public boolean stop() {
+		return false;
 	}
 
 	/**

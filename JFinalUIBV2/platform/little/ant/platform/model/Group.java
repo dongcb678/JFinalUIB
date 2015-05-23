@@ -2,7 +2,7 @@ package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
 import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.thread.ThreadParamInit;
+import little.ant.platform.plugin.ParamInitPlugin;
 
 import org.apache.log4j.Logger;
 
@@ -62,14 +62,14 @@ public class Group extends BaseModelCache<Group> {
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){
-		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_group + ids, Group.dao.findById(ids));
+		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_group + ids, Group.dao.findById(ids));
 	}
 
 	/**
 	 * 删除缓存
 	 */
 	public void cacheRemove(String ids){
-		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_group + ids);
+		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_group + ids);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class Group extends BaseModelCache<Group> {
 	 * @return
 	 */
 	public Group cacheGet(String ids){
-		Group group = CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_group + ids);
+		Group group = CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_group + ids);
 		return group;
 	}
 	

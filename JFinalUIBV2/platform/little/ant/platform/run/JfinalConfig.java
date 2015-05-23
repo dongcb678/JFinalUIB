@@ -20,7 +20,7 @@ import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.plugin.SqlXmlPlugin;
 import little.ant.platform.plugin.TablePlugin;
-import little.ant.platform.thread.ThreadParamInit;
+import little.ant.platform.plugin.ParamInitPlugin;
 import little.ant.platform.thread.ThreadSysLog;
 import little.ant.platform.thread.TimerResources;
 import little.ant.platform.tools.ToolString;
@@ -174,6 +174,10 @@ public class JfinalConfig extends JFinalConfig {
 
 		log.info("SqlXmlPlugin 解析并缓存 xml sql");
 		me.add(new SqlXmlPlugin());
+		
+		log.info("afterJFinalStart 缓存参数");
+		me.add(new ParamInitPlugin());
+
 	}
 
 	/**
@@ -209,9 +213,6 @@ public class JfinalConfig extends JFinalConfig {
 	 * 系统启动完成后执行
 	 */
 	public void afterJFinalStart() {
-		log.info("afterJFinalStart 缓存参数");
-		new ThreadParamInit().start();
-
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
 

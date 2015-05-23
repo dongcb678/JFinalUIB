@@ -22,6 +22,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.jfinal.log.Logger;
+import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
  * 处理Sql Map
@@ -32,10 +33,7 @@ public class ToolSqlXml {
 
     protected static final Logger log = Logger.getLogger(ToolSqlXml.class);
 
-    /**
-     * xml中所有的sql语句
-     */
-    private static final Map<String, String> sqlMap = new HashMap<String, String>();
+	public static final String cacheStart_sql = "sql_";
     
     /**
      * 过滤掉的sql关键字
@@ -75,7 +73,7 @@ public class ToolSqlXml {
      * @return
      */
     public static String getSql(String sqlId) {
-    	String sql = sqlMap.get(sqlId);
+    	String sql = CacheKit.get(ConstantPlatform.cache_name_system, cacheStart_sql + sqlId);
     	if(null == sql || sql.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
     	}
@@ -91,7 +89,7 @@ public class ToolSqlXml {
      * @return
      */
     public static String getSql(String sqlId, Map<String, Object> param, String renderType) {
-    	String sqlTemplete = sqlMap.get(sqlId);
+    	String sqlTemplete = CacheKit.get(ConstantPlatform.cache_name_system, cacheStart_sql + sqlId);
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
     	}
@@ -129,7 +127,7 @@ public class ToolSqlXml {
      * @return
      */
     public static String getSql(String sqlId, Map<String, String> param, String renderType, LinkedList<Object> list) {
-    	String sqlTemplete = sqlMap.get(sqlId);
+    	String sqlTemplete = CacheKit.get(ConstantPlatform.cache_name_system, cacheStart_sql + sqlId);
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
     	}
@@ -192,14 +190,8 @@ public class ToolSqlXml {
     }
     
     /**
-     * 清除加载的sql
-     */
-    public static void destory() {
-        sqlMap.clear();
-    }
-
-    /**
      * 初始化加载sql语句到map
+     * @param isInit
      */
 	public static synchronized void init(boolean isInit) {
 		String classRootPath = ToolSqlXml.class.getClassLoader().getResource("").getFile();
@@ -242,15 +234,15 @@ public class ToolSqlXml {
 						}
 						
 						String key = namespace + "." + id;
-						if(isInit && sqlMap.containsKey(key)){
+						if(isInit && null != CacheKit.get(ConstantPlatform.cache_name_system, cacheStart_sql + key)){
 							log.error("sql xml文件" + fileName + "的sql语句" + key + "的存在重复命名空间和ID");
 							continue;
-						} else if(sqlMap.containsKey(key)){
+						} else if(null != CacheKit.get(ConstantPlatform.cache_name_system, cacheStart_sql + key)){
 							log.error("sql xml文件" + fileName + "的sql语句" + key + "的存在重复命名空间和ID");
 						}
 						
 						sql = sql.replaceAll("[\\s]{2,}", " ");
-						sqlMap.put(key, sql);
+						CacheKit.put(ConstantPlatform.cache_name_system, cacheStart_sql + key, sql);
 						log.debug("sql加载, sql file = " + fileName + ", sql key = " + key + ", sql content = " + sql);
 					}
 				}

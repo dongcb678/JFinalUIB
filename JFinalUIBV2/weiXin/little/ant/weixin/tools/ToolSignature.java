@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.model.Param;
-import little.ant.platform.thread.ThreadParamInit;
+import little.ant.platform.plugin.ParamInitPlugin;
 
 import org.apache.log4j.Logger;
 
@@ -26,7 +26,7 @@ public class ToolSignature {
 	 */
 	public static boolean checkSignature(String signature, String timestamp, String nonce) {
 		try {
-			Param param = (Param) CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param + ToolWeiXin.weixin_token_key);
+			Param param = (Param) CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_param + ToolWeiXin.weixin_token_key);
 			String weixin_token = param.getStr("val");
 			String[] strSet = new String[] { weixin_token, timestamp, nonce };
 			java.util.Arrays.sort(strSet);

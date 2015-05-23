@@ -1,8 +1,8 @@
 package little.ant.platform.controller;
 
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.plugin.ParamInitPlugin;
 import little.ant.platform.service.ResourcesService;
-import little.ant.platform.thread.ThreadParamInit;
 import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
@@ -30,7 +30,7 @@ public class ResourcesController extends BaseController {
 	 * 刷新参数缓存，重新加载系统初始化参数
 	 */
 	public void refreshParamCache(){
-		ThreadParamInit.cacheAll();
+		new ParamInitPlugin().start();
 		redirect("/jf/platform/resources");
 	}
 

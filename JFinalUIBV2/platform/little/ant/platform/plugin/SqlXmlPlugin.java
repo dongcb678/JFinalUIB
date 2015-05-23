@@ -21,7 +21,6 @@ public class SqlXmlPlugin implements IPlugin {
 
     @Override
     public boolean stop() {
-        ToolSqlXml.destory();
         return true;
     }
 

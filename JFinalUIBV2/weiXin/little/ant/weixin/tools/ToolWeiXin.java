@@ -6,7 +6,7 @@ import java.util.Map;
 
 import little.ant.platform.common.ConstantPlatform;
 import little.ant.platform.model.Param;
-import little.ant.platform.thread.ThreadParamInit;
+import little.ant.platform.plugin.ParamInitPlugin;
 import little.ant.platform.tools.ToolHttp;
 import little.ant.weixin.bo.message.RecevieToken;
 
@@ -77,11 +77,11 @@ public class ToolWeiXin {
 	 */
 	private static RecevieToken getAccessTokenCommon(){
 		// 参数配置的 appID
-		Param paramAppId = (Param) CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param + weixin_appID_key);
+		Param paramAppId = (Param) CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_param + weixin_appID_key);
 		String weixin_appID = paramAppId.getStr("val");
 		
 		// 参数配置的 appSecret
-		Param paramAppSecret = (Param) CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_param + weixin_appSecret_key);
+		Param paramAppSecret = (Param) CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_param + weixin_appSecret_key);
 		String weixin_appSecret = paramAppSecret.getStr("val");
 		
 		// 获取地址和参数

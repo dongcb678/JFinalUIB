@@ -9,7 +9,7 @@ import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.plugin.SqlXmlPlugin;
 import little.ant.platform.plugin.TablePlugin;
-import little.ant.platform.thread.ThreadParamInit;
+import little.ant.platform.plugin.ParamInitPlugin;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -98,7 +98,8 @@ public class TestBase {
 		sqlXmlPlugin = new SqlXmlPlugin();
 		sqlXmlPlugin.start();
 		
-		ThreadParamInit.cacheAll();
+		log.info("afterJFinalStart 缓存参数");
+		new ParamInitPlugin().start();
     }
  
     @After

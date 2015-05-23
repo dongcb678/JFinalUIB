@@ -2,7 +2,7 @@ package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
 import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.thread.ThreadParamInit;
+import little.ant.platform.plugin.ParamInitPlugin;
 
 import org.apache.log4j.Logger;
 
@@ -68,14 +68,14 @@ public class Role extends BaseModelCache<Role> {
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){
-		CacheKit.put(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_role + ids, Role.dao.findById(ids));
+		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_role + ids, Role.dao.findById(ids));
 	}
 
 	/**
 	 * 删除缓存
 	 */
 	public void cacheRemove(String ids){
-		CacheKit.remove(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_role + ids);
+		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_role + ids);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class Role extends BaseModelCache<Role> {
 	 * @return
 	 */
 	public Role cacheGet(String key){
-		Role role = CacheKit.get(ConstantPlatform.cache_name_system, ThreadParamInit.cacheStart_role + key);
+		Role role = CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_role + key);
 		return role;
 	}
 	
