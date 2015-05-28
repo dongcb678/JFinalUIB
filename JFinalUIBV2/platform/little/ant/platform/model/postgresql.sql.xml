@@ -53,5 +53,16 @@
     	]]>
 	</sql>
 	
+	<!-- 递归查询岗位树 -->
+	<sql id="getColumns">
+		<![CDATA[ 
+        	WITH RECURSIVE ptTree AS (   
+				SELECT * FROM pt_station WHERE (parentstationids is null or parentstationids = '')
+     			union   ALL   
+       			SELECT pt_station.* FROM pt_station, ptTree WHERE pt_station.parentstationids = ptTree.ids   
+			) 
+			SELECT * FROM ptTree
+    	]]>
+	</sql>
 	
 </sql-statement>
