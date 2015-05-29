@@ -22,16 +22,51 @@ import com.jfinal.plugin.IPlugin;
 public class ParamInitPlugin implements IPlugin {
 	
 	private static Logger log = Logger.getLogger(ParamInitPlugin.class);
-	
-	public static final String cacheStart_user = "user_";
-	public static final String cacheStart_group = "group_";
-	public static final String cacheStart_role = "role_";
-	public static final String cacheStart_station = "station_";
-	public static final String cacheStart_operator = "operator_";
-	public static final String cacheStart_dict = "dict_";
-	public static final String cacheStart_dict_child =  "dict_child_";
-	public static final String cacheStart_param = "param_";
-	public static final String cacheStart_param_child =  "param_child_";
+	 
+    /**
+     * 用户缓存key前缀
+     */
+	public static String cacheStart_user = "user_";
+
+    /**
+     * 分组缓存key前缀
+     */
+	public static String cacheStart_group = "group_";
+
+    /**
+     * 角色缓存key前缀
+     */
+	public static String cacheStart_role = "role_";
+
+    /**
+     * 岗位缓存key前缀
+     */
+	public static String cacheStart_station = "station_";
+    
+	/**
+     * 功能缓存key前缀
+     */
+	public static String cacheStart_operator = "operator_";
+    
+	/**
+     * 字典缓存key前缀
+     */
+	public static String cacheStart_dict = "dict_";
+    
+	/**
+     * 字典子节点缓存key前缀
+     */
+	public static String cacheStart_dict_child =  "dict_child_";
+    
+	/**
+     * 参数缓存key前缀
+     */
+	public static String cacheStart_param = "param_";
+    
+	/**
+     * 参数子节点缓存key前缀
+     */
+	public static String cacheStart_param_child =  "param_child_";
 
 	@Override
 	public boolean start() {
