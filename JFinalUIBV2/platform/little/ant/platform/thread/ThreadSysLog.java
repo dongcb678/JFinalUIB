@@ -48,13 +48,11 @@ public class ThreadSysLog {
 	public static void add(Syslog syslog){
 		if(null != syslog){	// 此队列不允许使用 null 元素
 			synchronized(queue) {
-				if(queue.size() <= queueSize){
-					queue.offer(syslog);
-				}else{
+				if(queue.size() == queueSize){
 					queue.poll(); // 获取并移除此队列的头，如果此队列为空，则返回 null
-					queue.offer(syslog); // 将指定元素插入此队列的尾部
 					log.error("日志队列：超过" + queueSize);
 				}
+				queue.offer(syslog); // 将指定元素插入此队列的尾部
 			}
 		}
 	}
@@ -64,13 +62,12 @@ public class ThreadSysLog {
 	 * @return
 	 */
 	public static Syslog getSyslog(){
-		synchronized(queue) {
-			if(queue.isEmpty()){
-				return null;
-			}else{
+//		synchronized(queue) {
+//			if(!queue.isEmpty()){
 				return queue.poll(); // 获取并移除此队列的头，如果此队列为空，则返回 null
-			}
-		}
+//			}
+//			return null;
+//		}
 	}
 	
 	/**
