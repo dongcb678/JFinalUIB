@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
-import little.ant.platform.common.ZtreeNode;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
+import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Department;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
@@ -184,7 +184,7 @@ public class UserService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.user.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "platform.user.splitPage");
 	}
 
 	/**

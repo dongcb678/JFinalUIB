@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.beetl.tag.DictTag;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
 import little.ant.platform.lucene.DocBase;
 import little.ant.platform.tools.ToolOS;
 import little.ant.weixin.model.Keyword;
@@ -80,7 +80,7 @@ public class DocKeyword extends DocBase {
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		Document document = new Document();
 		
-		int batchCount = getBatchCount(ConstantPlatform.db_dataSource_main, " from wx_keyword ", splitDataSize);
+		int batchCount = getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
 		String sql = " select * from wx_keyword limit ? offset ? ";
 
 		for (int i = 0; i < batchCount; i++) {

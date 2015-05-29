@@ -10,7 +10,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantCache;
+import little.ant.platform.constant.ConstantRender;
 import little.ant.platform.plugin.SqlXmlPlugin;
 
 import org.beetl.core.BeetlKit;
@@ -65,7 +66,7 @@ public class ToolSqlXml {
      * @return
      */
     public static String getSql(String sqlId) {
-    	String sql = CacheKit.get(ConstantPlatform.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
+    	String sql = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
     	if(null == sql || sql.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
     	}
@@ -81,21 +82,21 @@ public class ToolSqlXml {
      * @return
      */
     public static String getSql(String sqlId, Map<String, Object> param, String renderType) {
-    	String sqlTemplete = CacheKit.get(ConstantPlatform.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
+    	String sqlTemplete = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
     	}
     	
     	String sql = null;
-    	if(null == renderType || renderType.equals(ConstantPlatform.sql_renderType_beetl)){
+    	if(null == renderType || renderType.equals(ConstantRender.sql_renderType_beetl)){
     		log.debug("beetl解析sql");
     		sql = BeetlKit.render(sqlTemplete, param);
     		
-    	} else if(renderType.equals(ConstantPlatform.sql_renderType_freeMarker)){
+    	} else if(renderType.equals(ConstantRender.sql_renderType_freeMarker)){
     		log.debug("FreeMarker解析sql");
     		sql = ToolFreeMarker.render(sqlTemplete, param);
     		
-    	} else if(renderType.equals(ConstantPlatform.sql_renderType_velocity)){
+    	} else if(renderType.equals(ConstantRender.sql_renderType_velocity)){
     		log.debug("Velocity解析sql");
     		sql = ToolVelocity.render(sqlTemplete, param);
     	} 
@@ -122,7 +123,7 @@ public class ToolSqlXml {
      * @return
      */
     public static String getSql(String sqlId, Map<String, String> param, String renderType, LinkedList<Object> list) {
-    	String sqlTemplete = CacheKit.get(ConstantPlatform.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
+    	String sqlTemplete = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
     	}
@@ -134,15 +135,15 @@ public class ToolSqlXml {
 		}
     	
     	String sql = null;
-    	if(null == renderType || renderType.equals(ConstantPlatform.sql_renderType_beetl)){
+    	if(null == renderType || renderType.equals(ConstantRender.sql_renderType_beetl)){
     		log.debug("beetl解析sql");
     		sql = BeetlKit.render(sqlTemplete, paramMap);
     		
-    	} else if(renderType.equals(ConstantPlatform.sql_renderType_freeMarker)){
+    	} else if(renderType.equals(ConstantRender.sql_renderType_freeMarker)){
     		log.debug("FreeMarker解析sql");
     		sql = ToolFreeMarker.render(sqlTemplete, paramMap);
     		
-    	} else if(renderType.equals(ConstantPlatform.sql_renderType_velocity)){
+    	} else if(renderType.equals(ConstantRender.sql_renderType_velocity)){
     		log.debug("Velocity解析sql");
     		sql = ToolVelocity.render(sqlTemplete, paramMap);
     	

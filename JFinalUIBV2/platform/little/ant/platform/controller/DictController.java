@@ -3,7 +3,7 @@ package little.ant.platform.controller;
 import java.util.List;
 
 import little.ant.platform.annotation.Controller;
-import little.ant.platform.common.ZtreeNode;
+import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Dict;
 import little.ant.platform.service.DictService;
 import little.ant.platform.validator.DictValidator;

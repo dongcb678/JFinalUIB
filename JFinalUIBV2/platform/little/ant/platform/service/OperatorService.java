@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
-import little.ant.platform.common.ZtreeNode;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
+import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Module;
 import little.ant.platform.model.Operator;
 
@@ -195,7 +195,7 @@ public class OperatorService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, m.names as modulenames, s.names as systemsnames ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.operator.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "platform.operator.splitPage");
 	}
 	
 }

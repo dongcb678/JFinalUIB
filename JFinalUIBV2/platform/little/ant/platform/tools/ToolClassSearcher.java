@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.plugin.PropertiesPlugin;
 
 import com.jfinal.kit.PathKit;
@@ -46,7 +46,7 @@ public class ToolClassSearcher {
      */
     @SuppressWarnings("unchecked")
     public static boolean isValiPkg(){
-    	List<String> pkgs = (List<String>) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_scan_package);
+    	List<String> pkgs = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_package);
     	if(pkgs.size() > 0){
     		return true;
     	}
@@ -60,7 +60,7 @@ public class ToolClassSearcher {
      */
     @SuppressWarnings("unchecked")
     public static boolean valiPkg(String classFile){
-        List<String> pkgs = (List<String>) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_scan_package);
+        List<String> pkgs = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_package);
         for (String pkg : pkgs) {
         	if(classFile.startsWith(pkg)){
         		return true;
@@ -75,7 +75,7 @@ public class ToolClassSearcher {
      */
     @SuppressWarnings("unchecked")
     public static boolean isValiJar(){
-    	List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_scan_jar);
+    	List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
     	if(jars.size() > 0){
     		return true;
     	}
@@ -89,7 +89,7 @@ public class ToolClassSearcher {
      */
     @SuppressWarnings("unchecked")
     public static boolean valiJar(String jarName){
-        List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_scan_jar);
+        List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
         for (String jar : jars) {
         	if(jarName.equals(jar)){
         		return true;

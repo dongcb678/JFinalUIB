@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.ZtreeNode;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Module;
 
 import org.apache.log4j.Logger;
@@ -124,7 +124,7 @@ public class ModuleService extends BaseService {
 		// 修改上级节点的isparent
 		Module pModule = Module.dao.findById(module.getStr(Module.colunm_parentmoduleids));
 		String sql = getSql("platform.module.childCount");
-		Record record = Db.use(ConstantPlatform.db_dataSource_main).findFirst(sql, pModule.getPKValue());
+		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pModule.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){
 			pModule.set(Module.colunm_isparent, "false");

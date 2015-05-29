@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import little.ant.platform.constant.ConstantCache;
+import little.ant.platform.tools.ToolSqlXml;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.tools.ToolSqlXml;
 
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
@@ -91,15 +91,15 @@ public class SqlXmlPlugin implements IPlugin {
 						}
 						
 						String key = namespace + "." + id;
-						if(isInit && null != CacheKit.get(ConstantPlatform.cache_name_system, cacheStart_sql + key)){
+						if(isInit && null != CacheKit.get(ConstantCache.cache_name_system, cacheStart_sql + key)){
 							log.error("sql xml文件" + fileName + "的sql语句" + key + "的存在重复命名空间和ID");
 							continue;
-						} else if(null != CacheKit.get(ConstantPlatform.cache_name_system, cacheStart_sql + key)){
+						} else if(null != CacheKit.get(ConstantCache.cache_name_system, cacheStart_sql + key)){
 							log.error("sql xml文件" + fileName + "的sql语句" + key + "的存在重复命名空间和ID");
 						}
 						
 						sql = sql.replaceAll("[\\s]{2,}", " ");
-						CacheKit.put(ConstantPlatform.cache_name_system, cacheStart_sql + key, sql);
+						CacheKit.put(ConstantCache.cache_name_system, cacheStart_sql + key, sql);
 						log.debug("sql加载, sql file = " + fileName + ", sql key = " + key + ", sql content = " + sql);
 					}
 				}

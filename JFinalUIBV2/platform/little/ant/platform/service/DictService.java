@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.ZtreeNode;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Dict;
 
 import org.apache.log4j.Logger;
@@ -79,7 +79,7 @@ public class DictService extends BaseService {
 			// 修改上级节点的isparent
 			Dict pDict = Dict.dao.findById(dict.getStr(Dict.colunm_parentids));
 			String sql = getSql("platform.dict.childCount");
-			Record record = Db.use(ConstantPlatform.db_dataSource_main).findFirst(sql, pDict.getPKValue());
+			Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pDict.getPKValue());
 			Long counts = record.getNumber("counts").longValue();
 		    if(counts == 1){
 		    	pDict.set(Dict.colunm_isparent, "false");

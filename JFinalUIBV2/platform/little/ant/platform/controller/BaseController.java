@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.model.User;
@@ -187,7 +187,7 @@ public abstract class BaseController extends Controller {
 		String referer = getRequest().getHeader("Referer");
 		if (null != referer && !referer.trim().equals("")) {
 			referer = referer.toLowerCase();
-			String domainStr = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_domain_key);
+			String domainStr = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_domain_key);
 			String[] domainArr = domainStr.split(",");
 			for (String domain : domainArr) {
 				if (referer.indexOf(domain.trim()) != -1) {

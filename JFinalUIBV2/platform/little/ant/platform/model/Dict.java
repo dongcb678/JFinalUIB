@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantCache;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.plugin.ParamInitPlugin;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -18,7 +18,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_dict")
+@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "pt_dict")
 public class Dict extends BaseModelCache<Dict> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
@@ -263,18 +263,18 @@ public class Dict extends BaseModelCache<Dict> {
 	public void cacheAdd(String ids){
 		Dict dict = Dict.dao.findById(ids);
 		List<Dict> dictList = dict.getChild();
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict + ids, dict);
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(colunm_numbers), dict);
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict_child + ids, dictList);
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(colunm_numbers), dictList);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + ids, dict);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(colunm_numbers), dict);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + ids, dictList);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(colunm_numbers), dictList);
 
 		String parentIds = dict.getStr("parentids");
 		if(null != parentIds){
 			Dict parent = Dict.dao.findById(parentIds);
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
-				CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
-				CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(colunm_numbers), parentList);
+				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
+				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(colunm_numbers), parentList);
 			}
 		}
 	}
@@ -286,18 +286,18 @@ public class Dict extends BaseModelCache<Dict> {
 	public void cacheRemove(String ids){
 		Dict dict = Dict.dao.findById(ids);
 		
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict + ids);
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(colunm_numbers));
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict_child + ids);
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(colunm_numbers));
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + ids);
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(colunm_numbers));
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + ids);
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(colunm_numbers));
 
 		String parentIds = dict.getStr("parentids");
 		if(null != parentIds){
 			Dict parent = Dict.dao.findById(parentIds);
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
-				CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
-				CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(colunm_numbers), parentList);
+				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
+				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(colunm_numbers), parentList);
 			}
 		}
 	}
@@ -308,7 +308,7 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @return
 	 */
 	public Dict cacheGet(String key){
-		Dict dict = CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict + key);
+		Dict dict = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + key);
 		return dict;
 	}
 	
@@ -318,7 +318,7 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @return
 	 */
 	public List<Dict> cacheGetChild(String key){
-		List<Dict> dictList = CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_dict_child + key);
+		List<Dict> dictList = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + key);
 		return dictList;
 	}
 	

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.ZtreeNode;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Station;
 
 import org.apache.log4j.Logger;
@@ -121,7 +121,7 @@ public class StationService extends BaseService {
 		// 修改上级节点的isparent
 		Station pStation = Station.dao.findById(station.getStr(Station.colunm_parentstationids));
 		String sql = getSql("platform.station.childCount");
-		Record record = Db.use(ConstantPlatform.db_dataSource_main).findFirst(sql, pStation.getPKValue());
+		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pStation.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){
 			pStation.set(Station.colunm_isparent, "false");

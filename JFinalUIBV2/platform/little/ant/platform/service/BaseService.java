@@ -4,8 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.constant.ConstantRender;
+import little.ant.platform.dto.SplitPage;
 import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolMail;
@@ -38,7 +39,7 @@ public abstract class BaseService {
 		LinkedList<Object> paramValue = new LinkedList<Object>();
 		
 		// 调用生成from sql，并构造paramValue
-		String sql = ToolSqlXml.getSql(sqlId, splitPage.getQueryParam(), ConstantPlatform.sql_renderType_beetl, paramValue);
+		String sql = ToolSqlXml.getSql(sqlId, splitPage.getQueryParam(), ConstantRender.sql_renderType_beetl, paramValue);
 		formSqlSb.append(sql);
 		
 		// 行级：过滤
@@ -77,7 +78,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_beetl);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
     }
     
     /**
@@ -88,7 +89,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_beetl, list);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
     /**
@@ -98,7 +99,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_freeMarker);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker);
     }
     
     /**
@@ -109,7 +110,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_freeMarker, list);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker, list);
     }
 
     /**
@@ -119,7 +120,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByVelocity(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_velocity);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity);
     }
     
     /**
@@ -130,7 +131,7 @@ public abstract class BaseService {
      * @return
      */
 	protected String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_velocity, list);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity, list);
     }
 	
 	/**
@@ -154,7 +155,7 @@ public abstract class BaseService {
 		
 		String[] idsArr = ids.split(",");
 		for (String id : idsArr) {
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_4)){
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){
 				log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
@@ -183,7 +184,7 @@ public abstract class BaseService {
 		}
 		
 		for (String id : idsArr) {
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_4)){
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){
 				log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
@@ -214,7 +215,7 @@ public abstract class BaseService {
 		String[] idsArr = ids.split(",");
 		
 		for (String id : idsArr) {
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_4)){
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){
 				log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
@@ -241,12 +242,12 @@ public abstract class BaseService {
 	 */
 	protected void sendTextMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
 		ToolMail mail = new ToolMail();
-		mail.setHost((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_host));
-		mail.setPort((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_port));
+		mail.setHost((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_host));
+		mail.setPort((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_port));
 		mail.setValidate(true);
-		mail.setUserName((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_userName));
-		mail.setPassword((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_password));
-		mail.setFrom((String)PropertiesPlugin.getParamMapValue(ConstantPlatform.config_mail_from));
+		mail.setUserName((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_userName));
+		mail.setPassword((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_password));
+		mail.setFrom((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_from));
 		
 		mail.setSendType(sendType);
 		

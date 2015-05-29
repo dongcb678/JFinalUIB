@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.model.Resources;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolDateTime;
@@ -39,18 +39,18 @@ public class ResourcesService extends BaseService {
 		Date startDate = ToolDateTime.startDateByDay(endDate, -14);
 		
 		List<Record> list = null;
-		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_type_key);
-		if(db_type.equals(ConstantPlatform.db_type_postgresql)){ // pg
+		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key);
+		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg
 			String sql = getSql("platform.resources.pv_pg");
-			list = Db.use(ConstantPlatform.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
-		}else if(db_type.equals(ConstantPlatform.db_type_mysql)){ // mysql
+		}else if(db_type.equals(ConstantInit.db_type_mysql)){ // mysql
 			String sql = getSql("platform.resources.pv_mysql");
-			list = Db.use(ConstantPlatform.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
-		}else if(db_type.equals(ConstantPlatform.db_type_oracle)){ // oracle
+		}else if(db_type.equals(ConstantInit.db_type_oracle)){ // oracle
 			String sql = getSql("platform.resources.pv_oracle");
-			list = Db.use(ConstantPlatform.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		}
 		
 		List<String> adates = new LinkedList<String>();

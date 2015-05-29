@@ -6,8 +6,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import little.ant.platform.common.SplitPage;
 import little.ant.platform.controller.BaseController;
+import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Operator;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.tools.ToolDateTime;

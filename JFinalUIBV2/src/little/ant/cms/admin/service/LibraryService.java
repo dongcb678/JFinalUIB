@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 
 import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.service.BaseService;
-import little.ant.platform.common.SplitPage;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
 import little.ant.cms.model.Library;
 
 public class LibraryService extends BaseService {
@@ -21,7 +21,7 @@ public class LibraryService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "src.library.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "src.library.splitPage");
 	}
 	
 	/**

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantCache;
 import little.ant.platform.model.Param;
 import little.ant.platform.plugin.ParamInitPlugin;
 import little.ant.platform.tools.ToolHttp;
@@ -56,7 +56,7 @@ public class ToolWeiXin {
 	 */
 	public static RecevieToken getAccessToken() {
 		// 取缓存
-		RecevieToken recevieToken = (RecevieToken) CacheKit.get(ConstantPlatform.cache_name_system, weixin_access_token);
+		RecevieToken recevieToken = (RecevieToken) CacheKit.get(ConstantCache.cache_name_system, weixin_access_token);
 		if(null != recevieToken){
 			// 判断是否有效
 			long interval = (new Date().getTime() - recevieToken.getDate().getTime()) / 1000; // 存在时间，秒
@@ -77,11 +77,11 @@ public class ToolWeiXin {
 	 */
 	private static RecevieToken getAccessTokenCommon(){
 		// 参数配置的 appID
-		Param paramAppId = (Param) CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_param + weixin_appID_key);
+		Param paramAppId = (Param) CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param + weixin_appID_key);
 		String weixin_appID = paramAppId.getStr("val");
 		
 		// 参数配置的 appSecret
-		Param paramAppSecret = (Param) CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_param + weixin_appSecret_key);
+		Param paramAppSecret = (Param) CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param + weixin_appSecret_key);
 		String weixin_appSecret = paramAppSecret.getStr("val");
 		
 		// 获取地址和参数
@@ -97,7 +97,7 @@ public class ToolWeiXin {
 			if(recevieToken.getAccess_token() != null && !recevieToken.getAccess_token().isEmpty()){
 				recevieToken.setDate(new Date());// 设置获取时间
 				// 放入缓存
-				CacheKit.put(ConstantPlatform.cache_name_system, weixin_access_token, recevieToken);
+				CacheKit.put(ConstantCache.cache_name_system, weixin_access_token, recevieToken);
 				log.info("获取AccessToken：" + jsonStr);
 				return recevieToken;
 			}

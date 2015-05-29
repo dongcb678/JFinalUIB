@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.ZtreeNode;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Department;
 
 import org.apache.log4j.Logger;
@@ -120,7 +120,7 @@ public class DepartmentService extends BaseService {
 		// 修改上级节点的isparent
 		Department pDepartment = Department.dao.findById(department.getStr(Department.colunm_parentdepartmentids));
 		String sql = getSql("platform.department.childCount");
-		Record record = Db.use(ConstantPlatform.db_dataSource_main).findFirst(sql, pDepartment.getPKValue());
+		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pDepartment.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){
 			pDepartment.set(Department.colunm_isparent, "false");

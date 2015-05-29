@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.Controller;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.constant.ConstantRender;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.service.OperatorService;
 import little.ant.platform.service.SysLogService;
@@ -69,8 +70,8 @@ public class TestController extends BaseController {
 			param.put("size", size);
 			
 			LinkedList<Object> paramValue = new LinkedList<Object>();
-			String sql = ToolSqlXml.getSql("platform.test.autoComplete", param, ConstantPlatform.sql_renderType_beetl, paramValue);
-			List<Record> list = Db.use(ConstantPlatform.db_dataSource_main).find(sql, paramValue.toArray());
+			String sql = ToolSqlXml.getSql("platform.test.autoComplete", param, ConstantRender.sql_renderType_beetl, paramValue);
+			List<Record> list = Db.use(ConstantInit.db_dataSource_main).find(sql, paramValue.toArray());
 			StringBuilder sb = new StringBuilder();
 			sb.append("[");
 			for (Record record : list) {

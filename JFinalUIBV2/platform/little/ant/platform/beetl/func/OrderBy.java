@@ -1,6 +1,6 @@
 package little.ant.platform.beetl.func;
 
-import little.ant.platform.common.SplitPage;
+import little.ant.platform.dto.SplitPage;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.Context;

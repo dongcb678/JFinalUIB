@@ -11,7 +11,7 @@ import little.ant.platform.beetl.func.OrderBy;
 import little.ant.platform.beetl.render.MyBeetlRenderFactory;
 import little.ant.platform.beetl.tag.DictTag;
 import little.ant.platform.beetl.tag.ParamTag;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.handler.GlobalHandler;
 import little.ant.platform.interceptor.AuthenticationInterceptor;
 import little.ant.platform.interceptor.ParamPkgInterceptor;
@@ -68,7 +68,7 @@ public class JfinalConfig extends JFinalConfig {
 		me.setEncoding(ToolString.encoding); 
 
 		log.info("configConstant 设置是否开发模式");
-		me.setDevMode(getPropertyToBoolean(ConstantPlatform.config_devMode, false));
+		me.setDevMode(getPropertyToBoolean(ConstantInit.config_devMode, false));
 		//me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
 
 		log.info("configConstant 视图Beetl设置");
@@ -112,45 +112,45 @@ public class JfinalConfig extends JFinalConfig {
 	public void configPlugin(Plugins me) {
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
 		DruidPlugin druidPlugin = new DruidPlugin(
-				(String)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_jdbcUrl), 
-				(String)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_userName), 
-				(String)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_passWord), 
-				(String)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_connection_driverClass));
+				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_jdbcUrl), 
+				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_userName), 
+				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_passWord), 
+				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_driverClass));
 
 		log.info("configPlugin 配置Druid数据库连接池大小");
 		druidPlugin.set(
-				(Integer)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_initialSize), 
-				(Integer)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_minIdle), 
-				(Integer)PropertiesPlugin.getParamMapValue(ConstantPlatform.db_maxActive));
+				(Integer)PropertiesPlugin.getParamMapValue(ConstantInit.db_initialSize), 
+				(Integer)PropertiesPlugin.getParamMapValue(ConstantInit.db_minIdle), 
+				(Integer)PropertiesPlugin.getParamMapValue(ConstantInit.db_maxActive));
 		
 		log.info("configPlugin 配置Druid数据库连接池过滤器配制");
 		druidPlugin.addFilter(new StatFilter());
 		WallFilter wall = new WallFilter();
-		wall.setDbType((String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_type_key));
+		wall.setDbType((String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key));
 		WallConfig config = new WallConfig();
 		config.setFunctionCheck(false); // 支持数据库函数
 		wall.setConfig(config);
 		druidPlugin.addFilter(wall);
 		
 		log.info("configPlugin 配置ActiveRecord插件");
-		ActiveRecordPlugin arpMain = new ActiveRecordPlugin(ConstantPlatform.db_dataSource_main, druidPlugin);
+		ActiveRecordPlugin arpMain = new ActiveRecordPlugin(ConstantInit.db_dataSource_main, druidPlugin);
 		//arp.setTransactionLevel(4);//事务隔离级别
-		arpMain.setDevMode(getPropertyToBoolean(ConstantPlatform.config_devMode, false)); // 设置开发模式
-		arpMain.setShowSql(getPropertyToBoolean(ConstantPlatform.config_devMode, false)); // 是否显示SQL
+		arpMain.setDevMode(getPropertyToBoolean(ConstantInit.config_devMode, false)); // 设置开发模式
+		arpMain.setShowSql(getPropertyToBoolean(ConstantInit.config_devMode, false)); // 是否显示SQL
 
 		log.info("configPlugin 数据库类型判断");
-		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.db_type_key);
-		if(db_type.equals(ConstantPlatform.db_type_postgresql)){
+		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key);
+		if(db_type.equals(ConstantInit.db_type_postgresql)){
 			log.info("configPlugin 使用数据库类型是 postgresql");
 			arpMain.setDialect(new PostgreSqlDialect());
 			arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 配置属性名(字段名)大小写不敏感容器工厂
 			
-		}else if(db_type.equals(ConstantPlatform.db_type_mysql)){
+		}else if(db_type.equals(ConstantInit.db_type_mysql)){
 			log.info("configPlugin 使用数据库类型是 mysql");
 			arpMain.setDialect(new MysqlDialect());
 			arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 配置属性名(字段名)大小写不敏感容器工厂
 		
-		}else if(db_type.equals(ConstantPlatform.db_type_oracle)){
+		}else if(db_type.equals(ConstantInit.db_type_oracle)){
 			log.info("configPlugin 使用数据库类型是 oracle");
 			druidPlugin.setValidationQuery("select 1 FROM DUAL"); //指定连接验证语句(用于保存数据库连接池), 这里不加会报错误:invalid oracle validationQuery. select 1, may should be : select 1 FROM DUAL 
 			arpMain.setDialect(new OracleDialect());
@@ -162,7 +162,7 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("configPlugin 表扫描注册");
 		Map<String, ActiveRecordPlugin> arpMap = new HashMap<String, ActiveRecordPlugin>();
-		arpMap.put(ConstantPlatform.db_dataSource_main, arpMain); // 多数据源继续添加
+		arpMap.put(ConstantInit.db_dataSource_main, arpMain); // 多数据源继续添加
 		new TablePlugin(arpMap).start();
 		me.add(arpMain); // 多数据源继续添加
 
@@ -216,7 +216,7 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
 
-		boolean luceneIndex = getPropertyToBoolean(ConstantPlatform.config_luceneIndex, false);
+		boolean luceneIndex = getPropertyToBoolean(ConstantInit.config_luceneIndex, false);
 		if(luceneIndex){
 			log.info("afterJFinalStart 创建自动回复lucene索引");
 			new DocKeyword().run(); 

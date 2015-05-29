@@ -3,7 +3,7 @@ package little.ant.platform.plugin.cache;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolSerialize;
 
@@ -59,8 +59,8 @@ class RedisAPI {
             //在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
             config.setTestOnBorrow(true);
             
-            String ip = (String) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_redis_ip);
-            Integer port = (Integer) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_redis_port);
+            String ip = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_redis_ip);
+            Integer port = (Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_redis_port);
             pool = new JedisPool(config, ip, port);
         }
         return pool;

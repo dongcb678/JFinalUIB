@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Group;
 import little.ant.platform.model.User;
 
@@ -107,7 +107,7 @@ public class GroupService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select ids, names, numbers ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.group.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "platform.group.splitPage");
 	}
 	
 }

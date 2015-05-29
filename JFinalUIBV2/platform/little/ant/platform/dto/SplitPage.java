@@ -1,8 +1,10 @@
-package little.ant.platform.common;
+package little.ant.platform.dto;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+import little.ant.platform.constant.ConstantSplitPage;
 
 /**
  * 分页封装
@@ -19,8 +21,8 @@ public class SplitPage implements Serializable {
 	private Map<String, String> queryParam;// 查询条件
 	private String orderColunm;// 排序条件
 	private String orderMode;// 排序方式
-	private int pageNumber = ConstantPlatform.default_pageNumber;// 第几页
-	private int pageSize = ConstantPlatform.default_pageSize;// 每页显示几多
+	private int pageNumber = ConstantSplitPage.default_pageNumber;// 第几页
+	private int pageSize = ConstantSplitPage.default_pageSize;// 每页显示几多
 
 	/**
 	 * 分页结果住数据
@@ -122,7 +124,7 @@ public class SplitPage implements Serializable {
 	 */
 	public int getPageNumber() {
 		if (pageNumber <= 0) {
-			pageNumber = ConstantPlatform.default_pageNumber;
+			pageNumber = ConstantSplitPage.default_pageNumber;
 		}
 		return pageNumber;
 	}
@@ -137,10 +139,10 @@ public class SplitPage implements Serializable {
 	 */
 	public int getPageSize() {
 		if (pageSize <= 0) {
-			pageSize = ConstantPlatform.default_pageSize;
+			pageSize = ConstantSplitPage.default_pageSize;
 		}
 		if (pageSize > 200) {
-			pageSize = ConstantPlatform.default_pageSize;
+			pageSize = ConstantSplitPage.default_pageSize;
 		}
 		return pageSize;
 	}

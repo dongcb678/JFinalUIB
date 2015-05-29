@@ -1,7 +1,7 @@
 package little.ant.cms.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.model.BaseModel;
 
 import org.apache.log4j.Logger;
@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "cms_vote")
+@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "cms_vote")
 public class Vote extends BaseModel<Vote> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

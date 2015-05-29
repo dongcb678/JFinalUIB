@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import little.ant.platform.beetl.render.MyBeetlRender;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
@@ -53,7 +53,7 @@ public class GlobalHandler extends Handler {
 		log.debug("request 国际化");
 		String localePram = request.getParameter("localePram");
 		if(null != localePram && !localePram.isEmpty()){
-			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_maxAge_key)).intValue();
+			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
 			ToolWeb.addCookie(response,  "", "/", true, "language", localePram, maxAge);
 		}else {
 			localePram = ToolWeb.getCookieValueByName(request, "language");

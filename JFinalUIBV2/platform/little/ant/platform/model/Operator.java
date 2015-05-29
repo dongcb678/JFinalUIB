@@ -1,7 +1,8 @@
 package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantCache;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.plugin.ParamInitPlugin;
 
 import org.apache.log4j.Logger;
@@ -13,7 +14,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_operator")
+@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "pt_operator")
 public class Operator extends BaseModelCache<Operator> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -129,8 +130,8 @@ public class Operator extends BaseModelCache<Operator> {
 	 */
 	public void cacheAdd(String ids){
 		Operator operator = Operator.dao.findById(ids);
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + ids, operator);
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(colunm_url), operator);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + ids, operator);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(colunm_url), operator);
 	}
 
 	/**
@@ -139,8 +140,8 @@ public class Operator extends BaseModelCache<Operator> {
 	 */
 	public void cacheRemove(String ids){
 		Operator operator = Operator.dao.findById(ids);
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + ids);
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(colunm_url));
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + ids);
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(colunm_url));
 	}
 
 	/**
@@ -149,7 +150,7 @@ public class Operator extends BaseModelCache<Operator> {
 	 * @return
 	 */
 	public Operator cacheGet(String key){
-		Operator operator = CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_operator + key);
+		Operator operator = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + key);
 		return operator;
 	}
 	

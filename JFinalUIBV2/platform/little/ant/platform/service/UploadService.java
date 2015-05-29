@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Upload;
 
 import org.apache.log4j.Logger;
@@ -52,7 +52,7 @@ public class UploadService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select * ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.upload.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "platform.upload.splitPage");
 	}
 
 	/**

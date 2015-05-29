@@ -2,8 +2,8 @@ package little.ant.common.admin.service;
 
 import little.ant.common.model.Ad;
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.tools.ToolDateTime;
 
@@ -22,7 +22,7 @@ public class AdService extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "common.ad.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "common.ad.splitPage");
 	}
 
 	/**

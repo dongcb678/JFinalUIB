@@ -1,7 +1,8 @@
 package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantCache;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.plugin.ParamInitPlugin;
 
 import org.apache.log4j.Logger;
@@ -13,7 +14,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_station")
+@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "pt_station")
 public class Station extends BaseModelCache<Station> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -86,14 +87,14 @@ public class Station extends BaseModelCache<Station> {
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_station + ids, Station.dao.findById(ids));
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_station + ids, Station.dao.findById(ids));
 	}
 
 	/**
 	 * 删除缓存
 	 */
 	public void cacheRemove(String ids){
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_station + ids);
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_station + ids);
 	}
 
 	/**
@@ -102,7 +103,7 @@ public class Station extends BaseModelCache<Station> {
 	 * @return
 	 */
 	public Station cacheGet(String ids){
-		Station station = CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_station + ids);
+		Station station = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_station + ids);
 		return station;
 	}
 	

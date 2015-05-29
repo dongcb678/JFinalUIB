@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantRender;
 import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.tools.ToolSqlXml;
 import little.ant.platform.tools.ToolUtils;
@@ -56,7 +56,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_beetl);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
     }
     
     /**
@@ -67,7 +67,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_beetl, list);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
     /**
@@ -77,7 +77,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_freeMarker);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker);
     }
     
     /**
@@ -88,7 +88,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_freeMarker, list);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker, list);
     }
 
     /**
@@ -98,7 +98,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected String getSqlByVelocity(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_velocity);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity);
     }
     
     /**
@@ -109,7 +109,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantPlatform.sql_renderType_velocity, list);
+    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity, list);
     }
 	
 	/**
@@ -165,7 +165,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("table", name);
 			param.put("pk", pk);
-			String sql = ToolSqlXml.getSql("platform.baseModel.version", param, ConstantPlatform.sql_renderType_beetl); 
+			String sql = ToolSqlXml.getSql("platform.baseModel.version", param, ConstantRender.sql_renderType_beetl); 
 			Model<M> modelOld = findFirst(sql , getPKValue());
 			if(null == modelOld){ // 数据已经被删除
 				throw new RuntimeException("数据库中此数据不存在，可能数据已经被删除，请刷新数据后在操作");

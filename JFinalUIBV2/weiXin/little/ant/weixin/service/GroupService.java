@@ -1,8 +1,8 @@
 package little.ant.weixin.service;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Group;
 import little.ant.platform.service.BaseService;
 import little.ant.weixin.bo.message.RecevieToken;
@@ -25,7 +25,7 @@ public class GroupService extends BaseService {
 	public void list(SplitPage splitPage){
 		log.debug("微信用户分组管理：分页处理");
 		String select = " select * ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "weixin.group.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "weixin.group.splitPage");
 	}
 	
 	/**

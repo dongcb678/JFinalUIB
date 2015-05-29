@@ -1,7 +1,7 @@
 package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
 
 import org.apache.log4j.Logger;
 
@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_menu")
+@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "pt_menu")
 public class Menu extends BaseModel<Menu> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

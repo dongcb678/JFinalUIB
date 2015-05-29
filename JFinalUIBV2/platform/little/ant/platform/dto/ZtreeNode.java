@@ -1,4 +1,4 @@
-package little.ant.platform.common;
+package little.ant.platform.dto;
 
 import java.util.List;
 

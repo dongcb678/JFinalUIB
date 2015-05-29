@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.BaseModelCache;
 import little.ant.platform.tools.ToolClassSearcher;
@@ -31,7 +31,7 @@ public class TablePlugin implements IPlugin {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public boolean start() {
-		List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(ConstantPlatform.config_scan_jar);
+		List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
 		List<Class<? extends BaseModel>> modelClasses = new ArrayList<Class<? extends BaseModel>>();// 查询所有继承BaseModel、BaseModelCache的类
 		if(jars.size() > 0){
 			List<Class<? extends BaseModel>> exBaseModel = ToolClassSearcher.of(BaseModel.class).includeAllJarsInLib(ToolClassSearcher.isValiJar()).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件

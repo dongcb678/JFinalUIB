@@ -1,20 +1,10 @@
-package little.ant.platform.common;
+package little.ant.platform.constant;
 
 /**
  * 常量数据字典
  * @author 董华健
  */
-public abstract class ConstantPlatform {
-
-	/**
-	 * URL缓存Key
-	 */
-	public static final String cache_name_page = "SimplePageCachingFilter";
-	
-	/**
-	 * 系统缓存，主要是权限和数据字典等
-	 */
-	public static final String cache_name_system = "system";
+public interface ConstantInit {
 
 	/**
 	 * 扫描的包
@@ -181,54 +171,4 @@ public abstract class ConstantPlatform {
 	 */
 	public static final String db_dataSource_main = "db.dataSource.main";
 
-	/**
-	 * 分页参数初始化值：默认显示第几页
-	 */
-	public static final int default_pageNumber = 1;
-	
-	/**
-	 * 分页参数初始化值：默认每页显示几多
-	 */
-	public static final int default_pageSize = 20;
-	
-	/**
-	 * 用户登录状态码：用户不存在
-	 */
-	public static final int login_info_0 = 0;
-	
-	/**
-	 * 用户登录状态码：停用账户
-	 */
-	public static final int login_info_1 = 1;
-	
-	/**
-	 * 用户登录状态码：密码错误次数超限
-	 */
-	public static final int login_info_2 = 2;
-	
-	/**
-	 * 用户登录状态码：密码验证成功
-	 */
-	public static final int login_info_3 = 3;
-	
-	/**
-	 * 用户登录状态码：密码验证失败
-	 */
-	public static final int login_info_4 = 4;
-	
-	/**
-	 * 解析sql和param的类型：beetl
-	 */
-	public static final String sql_renderType_beetl = "beetl";
-
-	/**
-	 * 解析sql和param的类型：velocity
-	 */
-	public static final String sql_renderType_velocity = "velocity";
-
-	/**
-	 * 解析sql和param的类型：freeMarker
-	 */
-	public static final String sql_renderType_freeMarker = "freeMarker";
-	
 }

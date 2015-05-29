@@ -1,7 +1,8 @@
 package little.ant.platform.model;
 
 import little.ant.platform.annotation.Table;
-import little.ant.platform.common.ConstantPlatform;
+import little.ant.platform.constant.ConstantCache;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.plugin.ParamInitPlugin;
 
 import org.apache.log4j.Logger;
@@ -13,7 +14,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantPlatform.db_dataSource_main, tableName = "pt_user")
+@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "pt_user")
 public class User extends BaseModelCache<User> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -184,10 +185,10 @@ public class User extends BaseModelCache<User> {
 	public void cacheAdd(String ids){
 		User user = User.dao.findById(ids);
 		UserInfo userInfo = user.getUserInfo();
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_user + ids, user);
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_user + user.getStr(colunm_username), user);
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.colunm_email), user);
-		CacheKit.put(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile), user);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + ids, user);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + user.getStr(colunm_username), user);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.colunm_email), user);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile), user);
 	}
 
 	/**
@@ -196,10 +197,10 @@ public class User extends BaseModelCache<User> {
 	public void cacheRemove(String ids){
 		User user = User.dao.findById(ids);
 		UserInfo userInfo = user.getUserInfo();
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_user + ids);
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_user + user.getStr(colunm_username));
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.colunm_email));
-		CacheKit.remove(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile));
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + ids);
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + user.getStr(colunm_username));
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.colunm_email));
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.colunm_mobile));
 	}
 
 	/**
@@ -208,7 +209,7 @@ public class User extends BaseModelCache<User> {
 	 * @return
 	 */
 	public User cacheGet(String ids){
-		User user = CacheKit.get(ConstantPlatform.cache_name_system, ParamInitPlugin.cacheStart_user + ids);
+		User user = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + ids);
 		return user;
 	}
 	

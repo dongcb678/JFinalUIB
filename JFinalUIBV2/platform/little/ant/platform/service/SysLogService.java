@@ -1,8 +1,8 @@
 package little.ant.platform.service;
 
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.common.ConstantPlatform;
-import little.ant.platform.common.SplitPage;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Syslog;
 
 import org.apache.log4j.Logger;
@@ -25,7 +25,7 @@ public class SysLogService extends BaseService {
 	 */
 	public void list(SplitPage splitPage){
 		String select = " select sy.names synames, m.names mnames, o.names onames, o.url ourl, u.username, s.* ";
-		splitPageBase(ConstantPlatform.db_dataSource_main, splitPage, select, "platform.sysLog.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "platform.sysLog.splitPage");
 	}
 	
 	/**
