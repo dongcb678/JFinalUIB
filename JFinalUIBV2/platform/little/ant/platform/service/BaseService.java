@@ -10,6 +10,7 @@ import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolMail;
 import little.ant.platform.tools.ToolSqlXml;
+import little.ant.platform.tools.ToolString;
 
 import org.apache.log4j.Logger;
 
@@ -22,7 +23,6 @@ import com.jfinal.plugin.activerecord.Page;
  */
 public abstract class BaseService {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(BaseService.class);
 
 	/**
@@ -153,6 +153,13 @@ public abstract class BaseService {
 		}
 		
 		String[] idsArr = ids.split(",");
+		for (String id : idsArr) {
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_4)){
+				log.error("字符安全验证失败：" + id);
+				throw new RuntimeException("字符安全验证失败：" + id);
+			}
+		}
+		
 		StringBuilder sqlSb = new StringBuilder();
 		int length = idsArr.length;
 		for (int i = 0, size = length -1; i < size; i++) {
@@ -173,6 +180,13 @@ public abstract class BaseService {
 	public String toSql(String[] idsArr){
 		if(idsArr == null || idsArr.length == 0){
 			return null;
+		}
+		
+		for (String id : idsArr) {
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_4)){
+				log.error("字符安全验证失败：" + id);
+				throw new RuntimeException("字符安全验证失败：" + id);
+			}
 		}
 		
 		StringBuilder sqlSb = new StringBuilder();
@@ -198,6 +212,13 @@ public abstract class BaseService {
 		}
 		
 		String[] idsArr = ids.split(",");
+		
+		for (String id : idsArr) {
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_4)){
+				log.error("字符安全验证失败：" + id);
+				throw new RuntimeException("字符安全验证失败：" + id);
+			}
+		}
 		
 		return idsArr;
 	}

@@ -71,6 +71,18 @@ public abstract class ToolString {
 	 * 字符编码
 	 */
 	public final static String encoding = "UTF-8";
+	
+	/**
+	 * 验证字符串是否匹配指定正则表达式
+	 * @param content
+	 * @param regExp
+	 * @return
+	 */
+	public static boolean regExpVali(String content, String regExp){
+		Pattern pattern = Pattern.compile(regExp);
+		Matcher matcher = pattern.matcher(content);
+		return matcher.matches();
+	}
 
 	/**
 	 * Url Base64编码
@@ -127,16 +139,22 @@ public abstract class ToolString {
 	 */
 	public static String getFileExt(String contentType) {
 		String fileExt = "";
-		if ("image/jpeg".equals(contentType))
+		if ("image/jpeg".equals(contentType)){
 			fileExt = ".jpg";
-		else if ("audio/mpeg".equals(contentType))
+			
+		} else if ("audio/mpeg".equals(contentType)){
 			fileExt = ".mp3";
-		else if ("audio/amr".equals(contentType))
+			
+		} else if ("audio/amr".equals(contentType)){
 			fileExt = ".amr";
-		else if ("video/mp4".equals(contentType))
+			
+		} else if ("video/mp4".equals(contentType)){
 			fileExt = ".mp4";
-		else if ("video/mpeg4".equals(contentType))
+			
+		} else if ("video/mpeg4".equals(contentType)){
 			fileExt = ".mp4";
+		}
+		
 		return fileExt;
 	}
 
@@ -212,10 +230,11 @@ public abstract class ToolString {
 	 * @return
 	 */
 	public static String toLowerCaseFirstOne(String s) {
-        if(Character.isLowerCase(s.charAt(0)))
-            return s;
-        else
-            return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+        if(Character.isLowerCase(s.charAt(0))){
+        	return s;
+        } else {
+        	return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+        }
     }
 	
 	/**
@@ -224,10 +243,11 @@ public abstract class ToolString {
 	 * @return
 	 */
     public static String toUpperCaseFirstOne(String s) {
-        if(Character.isUpperCase(s.charAt(0)))
-            return s;
-        else
-            return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
+        if(Character.isUpperCase(s.charAt(0))){
+        	return s;
+        } else {
+        	return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
+        }
     }
     
 	public static void main(String[] args){

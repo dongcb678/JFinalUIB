@@ -87,13 +87,16 @@ public class ToolSqlXml {
     	}
     	
     	String sql = null;
-    	if(null == renderType || renderType.equals(ConstantPlatform.sql_renderType_beetl)){ // beetl
+    	if(null == renderType || renderType.equals(ConstantPlatform.sql_renderType_beetl)){
+    		log.debug("beetl解析sql");
     		sql = BeetlKit.render(sqlTemplete, param);
     		
-    	} else if(renderType.equals(ConstantPlatform.sql_renderType_freeMarker)){ // FreeMarker
+    	} else if(renderType.equals(ConstantPlatform.sql_renderType_freeMarker)){
+    		log.debug("FreeMarker解析sql");
     		sql = ToolFreeMarker.render(sqlTemplete, param);
     		
-    	} else if(renderType.equals(ConstantPlatform.sql_renderType_velocity)){ // Velocity
+    	} else if(renderType.equals(ConstantPlatform.sql_renderType_velocity)){
+    		log.debug("Velocity解析sql");
     		sql = ToolVelocity.render(sqlTemplete, param);
     	} 
 		
@@ -131,21 +134,25 @@ public class ToolSqlXml {
 		}
     	
     	String sql = null;
-    	if(null == renderType || renderType.equals(ConstantPlatform.sql_renderType_beetl)){ // beetl
+    	if(null == renderType || renderType.equals(ConstantPlatform.sql_renderType_beetl)){
+    		log.debug("beetl解析sql");
     		sql = BeetlKit.render(sqlTemplete, paramMap);
     		
-    	} else if(renderType.equals(ConstantPlatform.sql_renderType_freeMarker)){ // FreeMarker
+    	} else if(renderType.equals(ConstantPlatform.sql_renderType_freeMarker)){
+    		log.debug("FreeMarker解析sql");
     		sql = ToolFreeMarker.render(sqlTemplete, paramMap);
     		
-    	} else if(renderType.equals(ConstantPlatform.sql_renderType_velocity)){ // Velocity
+    	} else if(renderType.equals(ConstantPlatform.sql_renderType_velocity)){
+    		log.debug("Velocity解析sql");
     		sql = ToolVelocity.render(sqlTemplete, paramMap);
     	
-    	} else {
-    		sql = BeetlKit.render(sqlTemplete, paramMap); // beetl
     	}
 		
+    	// 匹配模式为 #'%$names$%'#
     	Pattern pattern = Pattern.compile("#[\\w\\d\\$\\'\\%\\_]+#");	//#[\\w\\d]+#    \\$
-		Pattern pattern2 = Pattern.compile("\\$[\\w\\d\\_]+\\$");
+		
+    	// 匹配模式为 $names$
+    	Pattern pattern2 = Pattern.compile("\\$[\\w\\d\\_]+\\$");
 		
 		Matcher matcher = pattern.matcher(sql);
 		
