@@ -2,8 +2,8 @@ package little.ant.platform.controller;
 
 import little.ant.platform.annotation.Controller;
 import little.ant.platform.plugin.ParamInitPlugin;
+import little.ant.platform.plugin.SqlXmlPlugin;
 import little.ant.platform.service.ResourcesService;
-import little.ant.platform.tools.ToolSqlXml;
 
 import org.apache.log4j.Logger;
 
@@ -38,7 +38,7 @@ public class ResourcesController extends BaseController {
 	 * 刷新Sql缓存，重新加载Sql XML
 	 */
 	public void refreshSqlCache(){
-		ToolSqlXml.init(false);
+		SqlXmlPlugin.init(false);
 		redirect("/jf/platform/resources");
 	}
 	
