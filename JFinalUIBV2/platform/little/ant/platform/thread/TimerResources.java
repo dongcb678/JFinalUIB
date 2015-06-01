@@ -36,37 +36,8 @@ public class TimerResources extends Timer {
 			@Override
 			public void run() {
 				log.info("任务执行开始");
-				String osName = ToolOS.getOsName(); // 获取操作系统类型名称
-				String ip = ToolOS.getOsLocalHostIp(); // 获取本机IP
-				String hostName = ToolOS.getOsLocalHostName(); // 获取本机名称
-				int cpuNumber = ToolOS.getOsCpuNumber(); // 获取CPU数量
-				double cpuRatio = ToolOS.getOscpuRatio(); // cpu使用率
-				if(cpuRatio < 0){
-					cpuRatio = 0;
-				}
 				
-				long phyMemory = ToolOS.getOsPhysicalMemory(); // 物理内存，总的可使用的
-				long phyFreeMemory = ToolOS.getOsPhysicalFreeMemory(); // 物理内存，剩余
-				
-				long jvmTotalMemory = ToolOS.getJvmTotalMemory(); // JVM内存，内存总量
-				long jvmFreeMemory = ToolOS.getJvmFreeMemory(); // JVM内存，空闲内存量
-				long jvmMaxMemory = ToolOS.getJvmMaxMemory(); // JVM内存，最大内存量
-				long gcCount = ToolOS.getJvmGcCount(); // 获取JVM GC次数
-				
-				Resources resources = new Resources();
-				resources.set("osname", osName);
-				resources.set("ips", ip);
-				resources.set("hostname", hostName);
-				resources.set("cpunumber", cpuNumber);
-				resources.set("cpuratio", cpuRatio);
-				resources.set("phymemory", phyMemory);
-				resources.set("phyfreememory", phyFreeMemory);
-				resources.set("jvmtotalmemory", jvmTotalMemory);
-				resources.set("jvmfreememory", jvmFreeMemory);
-				resources.set("jvmmaxmemory", jvmMaxMemory);
-				resources.set("gccount", gcCount);
-				resources.set("createdate", ToolDateTime.getSqlTimestamp(null));
-				resources.save();
+				timer.resources();
 				
 				log.info("任务执行结束");
 			}
@@ -85,6 +56,43 @@ public class TimerResources extends Timer {
 		}else{
 			log.info("任务退出失败，任务为空");
 		}
+	}
+	
+	/**
+	 * 获取资源信息入库
+	 */
+	private void resources(){
+		String osName = ToolOS.getOsName(); // 获取操作系统类型名称
+		String ip = ToolOS.getOsLocalHostIp(); // 获取本机IP
+		String hostName = ToolOS.getOsLocalHostName(); // 获取本机名称
+		int cpuNumber = ToolOS.getOsCpuNumber(); // 获取CPU数量
+		double cpuRatio = ToolOS.getOscpuRatio(); // cpu使用率
+		if(cpuRatio < 0){
+			cpuRatio = 0;
+		}
+		
+		long phyMemory = ToolOS.getOsPhysicalMemory(); // 物理内存，总的可使用的
+		long phyFreeMemory = ToolOS.getOsPhysicalFreeMemory(); // 物理内存，剩余
+		
+		long jvmTotalMemory = ToolOS.getJvmTotalMemory(); // JVM内存，内存总量
+		long jvmFreeMemory = ToolOS.getJvmFreeMemory(); // JVM内存，空闲内存量
+		long jvmMaxMemory = ToolOS.getJvmMaxMemory(); // JVM内存，最大内存量
+		long gcCount = ToolOS.getJvmGcCount(); // 获取JVM GC次数
+		
+		Resources resources = new Resources();
+		resources.set("osname", osName);
+		resources.set("ips", ip);
+		resources.set("hostname", hostName);
+		resources.set("cpunumber", cpuNumber);
+		resources.set("cpuratio", cpuRatio);
+		resources.set("phymemory", phyMemory);
+		resources.set("phyfreememory", phyFreeMemory);
+		resources.set("jvmtotalmemory", jvmTotalMemory);
+		resources.set("jvmfreememory", jvmFreeMemory);
+		resources.set("jvmmaxmemory", jvmMaxMemory);
+		resources.set("gccount", gcCount);
+		resources.set("createdate", ToolDateTime.getSqlTimestamp(null));
+		resources.save();
 	}
 	
 }
