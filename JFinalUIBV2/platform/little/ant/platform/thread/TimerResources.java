@@ -80,18 +80,18 @@ public class TimerResources extends Timer {
 		long gcCount = ToolOS.getJvmGcCount(); // 获取JVM GC次数
 		
 		Resources resources = new Resources();
-		resources.set("osname", osName);
-		resources.set("ips", ip);
-		resources.set("hostname", hostName);
-		resources.set("cpunumber", cpuNumber);
-		resources.set("cpuratio", cpuRatio);
-		resources.set("phymemory", phyMemory);
-		resources.set("phyfreememory", phyFreeMemory);
-		resources.set("jvmtotalmemory", jvmTotalMemory);
-		resources.set("jvmfreememory", jvmFreeMemory);
-		resources.set("jvmmaxmemory", jvmMaxMemory);
-		resources.set("gccount", gcCount);
-		resources.set("createdate", ToolDateTime.getSqlTimestamp(null));
+		resources.set(Resources.colunm_osname, osName);
+		resources.set(Resources.colunm_ips, ip);
+		resources.set(Resources.colunm_hostname, hostName);
+		resources.set(Resources.colunm_cpunumber, cpuNumber);
+		resources.set(Resources.colunm_cpuratio, cpuRatio);
+		resources.set(Resources.colunm_phymemory, phyMemory);
+		resources.set(Resources.colunm_phyfreememory, phyFreeMemory);
+		resources.set(Resources.colunm_jvmtotalmemory, jvmTotalMemory);
+		resources.set(Resources.colunm_jvmfreememory, jvmFreeMemory);
+		resources.set(Resources.colunm_jvmmaxmemory, jvmMaxMemory);
+		resources.set(Resources.colunm_gccount, gcCount);
+		resources.set(Resources.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
 		resources.save();
 	}
 	
