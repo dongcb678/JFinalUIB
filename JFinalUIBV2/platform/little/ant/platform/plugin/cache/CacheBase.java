@@ -8,25 +8,22 @@ public interface CacheBase {
 	
 	/**
 	 * 增加缓存
-	 * @param cacheName
 	 * @param key
 	 * @param value
 	 */
-	public void put(String cacheName, Object key, Object value);
+	public void put(Object key, Object value);
 
 	/**
 	 * 获取缓存
-	 * @param cacheName
 	 * @param key
 	 * @return
 	 */
-	public <T> T get(String cacheName, Object key);
+	public <T> T get(Object key);
 	
 	/**
 	 * 删除缓存
-	 * @param cacheName
 	 * @param key
 	 */
-	public void remove(String cacheName, Object key);
+	public void remove(Object key);
 	
 }

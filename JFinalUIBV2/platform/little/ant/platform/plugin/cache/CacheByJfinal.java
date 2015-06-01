@@ -1,5 +1,7 @@
 package little.ant.platform.plugin.cache;
 
+import little.ant.platform.constant.ConstantCache;
+
 import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
@@ -9,18 +11,18 @@ import com.jfinal.plugin.ehcache.CacheKit;
 public class CacheByJfinal implements CacheBase {
 
 	@Override
-	public void put(String cacheName, Object key, Object value) {
-		CacheKit.put(cacheName, key, value);
+	public void put(Object key, Object value) {
+		CacheKit.put(ConstantCache.cache_name_system, key, value);
 	}
 
 	@Override
-	public <T> T get(String cacheName, Object key) {
-		return CacheKit.get(cacheName, key);
+	public <T> T get(Object key) {
+		return CacheKit.get(ConstantCache.cache_name_system, key);
 	}
 
 	@Override
-	public void remove(String cacheName, Object key) {
-		CacheKit.remove(cacheName, key);
+	public void remove(Object key) {
+		CacheKit.remove(ConstantCache.cache_name_system, key);
 	}
 
 }

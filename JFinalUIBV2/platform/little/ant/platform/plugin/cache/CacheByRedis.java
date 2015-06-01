@@ -14,21 +14,21 @@ import little.ant.platform.tools.ToolSerialize;
 public class CacheByRedis implements CacheBase {
 
 	@Override
-	public void put(String cacheName, Object key, Object value) {
+	public void put(Object key, Object value) {
 		byte[] keyByte = ((String)key).getBytes();
 		byte[] valueByte = ToolSerialize.serialize(value);
 		RedisAPI.setByte(keyByte, valueByte);
 	}
 
 	@Override
-	public <T> T get(String cacheName, Object key) {
+	public <T> T get(Object key) {
 		byte[] keyByte = ((String)key).getBytes();
 		RedisAPI.getByte(keyByte);
 		return null;
 	}
 
 	@Override
-	public void remove(String cacheName, Object key) {
+	public void remove(Object key) {
 		byte[] keyByte = ((String)key).getBytes();
 		RedisAPI.delByte(keyByte);
 	}
