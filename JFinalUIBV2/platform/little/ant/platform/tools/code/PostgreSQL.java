@@ -45,12 +45,14 @@ public class PostgreSQL extends Base {
 //				
 //				// 是否生成Controller相关
 //				if(generController.equals("0")){
-//					// 3.生成validator
-//					base.validator(className, classNameSmall); 
-//					// 4.生成controller
-//					base.controller(className, classNameSmall); 
-//					// 5.生成service
-//					base.service(className, classNameSmall); 
+					// 3.生成validator
+					base.validator(className, classNameSmall); 
+					
+					// 4.生成controller
+					base.controller(className, classNameSmall); 
+					
+					// 5.生成service
+					base.service(className, classNameSmall); 
 //				}
 				
 				// 生成视图文件

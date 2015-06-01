@@ -1,4 +1,4 @@
-package ${package};
+package little.ant.cms.tourist.service;
 
 import org.apache.log4j.Logger;
 
@@ -6,14 +6,14 @@ import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.constant.ConstantInit;
-import ${basePackage}.model.${className};
+import little.ant.cms.model.PhotogalleryItem;
 
-public class ${className}Service extends BaseService {
+public class PhotogalleryItemService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(${className}Service.class);
+	private static Logger log = Logger.getLogger(PhotogalleryItemService.class);
 	
-	public static final ${className}Service service = MyTxProxy.newProxy(${className}Service.class);
+	public static final PhotogalleryItemService service = MyTxProxy.newProxy(PhotogalleryItemService.class);
 	
 	/**
 	 * 分页
@@ -21,7 +21,7 @@ public class ${className}Service extends BaseService {
 	 */
 	public void list(SplitPage splitPage) {
 		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "${namespace}.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "src.photogalleryItem.splitPage");
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public class ${className}Service extends BaseService {
 	public void delete(String ids){
 		String[] idsArr = splitByComma(ids);
 		for (String id : idsArr) {
-			${className}.dao.deleteById(id);
+			PhotogalleryItem.dao.deleteById(id);
 		}
 	}
 	

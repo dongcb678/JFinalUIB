@@ -95,7 +95,7 @@ public abstract class Base {
 	 * 	platform所在的包就是little.ant.platform
 	 * 	weixin所在的包就是little.ant.weixin
 	 */
-	public static String packageBase = "little.ant.cms";
+	public static String packageBase = "little.ant.common.tourist";
 	
 	/**
 	 * controller基础路径，例如
@@ -106,7 +106,7 @@ public abstract class Base {
 	 * /platform/user/add.jsp 中的 platform
 	 * /weiXin/user/list.jsp 中的 weiXin
 	 */
-	public static String basePath = "cms";
+	public static String basePath = "common/tourist";
 
 	/**
 	 * 获取表的所有字段名
