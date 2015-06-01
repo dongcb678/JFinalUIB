@@ -6,13 +6,12 @@ import java.util.Properties;
 
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.plugin.I18NPlugin;
+import little.ant.platform.plugin.ParamInitPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.plugin.SqlXmlPlugin;
 import little.ant.platform.plugin.TablePlugin;
-import little.ant.platform.plugin.ParamInitPlugin;
 
 import org.apache.log4j.Logger;
-import org.junit.After;
 import org.junit.BeforeClass;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -27,20 +26,15 @@ public class TestBase {
 
 	private static Logger log = Logger.getLogger(TestBase.class);
 	
-	protected static DruidPlugin druidPlugin;
-    protected static ActiveRecordPlugin arpMain;
-    protected static I18NPlugin i18NPlugin;
-    protected static EhCachePlugin ehCachePlugin;
-    protected static SqlXmlPlugin sqlXmlPlugin;
-    
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
     	Properties properties = new Properties();
     	properties.load(TestBase.class.getResourceAsStream("/init.properties"));
-		new PropertiesPlugin(properties).start();
+    	PropertiesPlugin propertiesPlugin = new PropertiesPlugin(properties);
+    	propertiesPlugin.start();
 		
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		druidPlugin = new DruidPlugin(
+		DruidPlugin druidPlugin = new DruidPlugin(
 				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_jdbcUrl), 
 				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_userName), 
 				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_passWord), 
@@ -53,7 +47,7 @@ public class TestBase {
 				(Integer)PropertiesPlugin.getParamMapValue(ConstantInit.db_maxActive));
 		
 		log.info("configPlugin 配置ActiveRecord插件");
-		arpMain = new ActiveRecordPlugin(ConstantInit.db_dataSource_main, druidPlugin);
+		ActiveRecordPlugin arpMain = new ActiveRecordPlugin(ConstantInit.db_dataSource_main, druidPlugin);
 		//arp.setTransactionLevel(4);//事务隔离级别
 		arpMain.setDevMode(Boolean.parseBoolean((String) PropertiesPlugin.getParamMapValue(ConstantInit.config_devMode))); // 设置开发模式
 		arpMain.setShowSql(Boolean.parseBoolean((String) PropertiesPlugin.getParamMapValue(ConstantInit.config_devMode))); // 是否显示SQL
@@ -87,31 +81,20 @@ public class TestBase {
 		arpMain.start();
 		
 		log.info("I18NPlugin 国际化键值对加载");
-		i18NPlugin = new I18NPlugin();
+		I18NPlugin i18NPlugin = new I18NPlugin();
 		i18NPlugin.start();
 		
 		log.info("EhCachePlugin EhCache缓存");
-		ehCachePlugin = new EhCachePlugin();
+		EhCachePlugin ehCachePlugin = new EhCachePlugin();
 		ehCachePlugin.start();
 
 		log.info("SqlXmlPlugin 解析并缓存 xml sql");
-		sqlXmlPlugin = new SqlXmlPlugin();
+		SqlXmlPlugin sqlXmlPlugin = new SqlXmlPlugin();
 		sqlXmlPlugin.start();
 		
 		log.info("afterJFinalStart 缓存参数");
-		new ParamInitPlugin().start();
+		ParamInitPlugin paramInitPlugin = new ParamInitPlugin();
+		paramInitPlugin.start();
     }
- 
-    @After
-    public void tearDown() throws Exception {
-//    	i18NPlugin.stop();
-//    	ehCachePlugin.stop();
-//    	sqlXmlPlugin.stop();
-//    	
-//    	druidPlugin.stop();
-//    	arpMain.stop();
-//    	
-//    	System.exit(0);
-    }
-    
+
 }
