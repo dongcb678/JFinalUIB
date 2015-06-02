@@ -15,24 +15,4 @@ public class QuestionsService extends BaseService {
 	
 	public static final QuestionsService service = MyTxProxy.newProxy(QuestionsService.class);
 	
-	/**
-	 * 分页
-	 * @param splitPage
-	 */
-	public void list(SplitPage splitPage) {
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "src.questions.splitPage");
-	}
-	
-	/**
-	 * 删除
-	 * @param ids
-	 */
-	public void delete(String ids){
-		String[] idsArr = splitByComma(ids);
-		for (String id : idsArr) {
-			Questions.dao.deleteById(id);
-		}
-	}
-	
 }

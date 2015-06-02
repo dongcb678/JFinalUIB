@@ -1,12 +1,9 @@
 package little.ant.cms.tourist.service;
 
-import org.apache.log4j.Logger;
-
 import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.service.BaseService;
-import little.ant.platform.dto.SplitPage;
-import little.ant.platform.constant.ConstantInit;
-import little.ant.cms.model.Photogallery;
+
+import org.apache.log4j.Logger;
 
 public class PhotogalleryService extends BaseService {
 
@@ -14,25 +11,5 @@ public class PhotogalleryService extends BaseService {
 	private static Logger log = Logger.getLogger(PhotogalleryService.class);
 	
 	public static final PhotogalleryService service = MyTxProxy.newProxy(PhotogalleryService.class);
-	
-	/**
-	 * 分页
-	 * @param splitPage
-	 */
-	public void list(SplitPage splitPage) {
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "src.photogallery.splitPage");
-	}
-	
-	/**
-	 * 删除
-	 * @param ids
-	 */
-	public void delete(String ids){
-		String[] idsArr = splitByComma(ids);
-		for (String id : idsArr) {
-			Photogallery.dao.deleteById(id);
-		}
-	}
 	
 }
