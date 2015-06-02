@@ -17,10 +17,10 @@ import little.ant.platform.interceptor.AuthenticationInterceptor;
 import little.ant.platform.interceptor.ParamPkgInterceptor;
 import little.ant.platform.plugin.ControllerPlugin;
 import little.ant.platform.plugin.I18NPlugin;
+import little.ant.platform.plugin.ParamInitPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.plugin.SqlXmlPlugin;
 import little.ant.platform.plugin.TablePlugin;
-import little.ant.platform.plugin.ParamInitPlugin;
 import little.ant.platform.thread.ThreadSysLog;
 import little.ant.platform.thread.TimerResources;
 import little.ant.platform.tools.ToolString;
@@ -28,6 +28,7 @@ import little.ant.weixin.lucene.DocKeyword;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
+import org.snaker.jfinal.plugin.SnakerPlugin;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallConfig;
@@ -177,7 +178,10 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("afterJFinalStart 缓存参数");
 		me.add(new ParamInitPlugin());
-
+		
+		log.info("afterJFinalStart 配置Snaker插件");
+		SnakerPlugin snakerPlugin = new SnakerPlugin(druidPlugin, this.prop.getProperties());
+	    me.add(snakerPlugin);
 	}
 
 	/**
