@@ -4,10 +4,4 @@
 	<bean class="org.snaker.jfinal.access.JfinalAccess"/>
 	<bean class="org.snaker.jfinal.access.JfinalTransactionInterceptor"/>
 	<bean class="org.snaker.engine.impl.JuelExpression" />
-	
-	<!--
-	<bean class="com.jfaker.framework.flow.CustomAccessStrategy"/>
-	
-	<bean name="task" class="com.jfaker.framework.flow.ExtTaskParser"/>
-	-->
 </config>
