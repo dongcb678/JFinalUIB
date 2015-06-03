@@ -1,7 +1,8 @@
 package little.ant.weixin.lucene;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,6 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.IOContext;
 import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.util.Version;
 
 import com.jfinal.kit.PathKit;
 
@@ -191,7 +191,7 @@ public class DocKeyword extends DocBase {
             	org.apache.lucene.search.Query query = queryParser.parse(searchKeyWords);
             	
             	Sort sort = new Sort(new SortField("createdDate", Type.LONG, true));//true为降序排列
-            	TopFieldCollector results = TopFieldCollector.create(sort, 1000, false, false, false, false);
+            	TopFieldCollector results = TopFieldCollector.create(sort, 1000, false, false, false);
                 //TopScoreDocCollector results = TopScoreDocCollector.create(1000, true);//收集1000条数据，限制查询结果的条目
             	
             	getSearcher().search(query, results);
@@ -252,7 +252,8 @@ public class DocKeyword extends DocBase {
 	protected Directory getDiskDir() {
 		try {
 			if (null == diskDir) {
-				diskDir = FSDirectory.open(new File(getIndexPath()));
+				Path path = Paths.get(getIndexPath());
+				diskDir = FSDirectory.open(path);
 			}
 			return diskDir;
 		} catch (Exception e) {
@@ -267,7 +268,7 @@ public class DocKeyword extends DocBase {
 				getDiskDir();
 			}
 			if (null == diskIndexWriter) {
-				IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_4_10_4, analyzer);// 索引分词配置
+				IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);// 索引分词配置
 				indexWriterConfig.setOpenMode(OpenMode.CREATE);//
 				diskIndexWriter = new IndexWriter(diskDir, indexWriterConfig);
 			}
@@ -284,7 +285,7 @@ public class DocKeyword extends DocBase {
 				getDiskIndexWriter();
 			}
 			if (null == ramDir){
-				ramDir = new RAMDirectory(diskDir, new IOContext());
+				ramDir = new RAMDirectory((FSDirectory)diskDir, new IOContext());
 			}
 			return ramDir;
 		} catch (Exception e) {
@@ -299,7 +300,7 @@ public class DocKeyword extends DocBase {
 				getRamDir();
 			}
 			if(null == ramIndexWriter){
-				IndexWriterConfig ramConfig = new IndexWriterConfig(Version.LUCENE_4_10_4, analyzer);
+				IndexWriterConfig ramConfig = new IndexWriterConfig(analyzer);
 				ramConfig.setOpenMode(OpenMode.CREATE);//
 				ramIndexWriter = new IndexWriter(ramDir, ramConfig);
 			}
