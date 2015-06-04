@@ -3,7 +3,6 @@ package little.ant.platform.service;
 import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.tools.ToolImageResize;
 import little.ant.platform.tools.ToolImageTailor;
-import little.ant.platform.tools.ToolOS;
 
 import org.apache.log4j.Logger;
 
@@ -26,8 +25,6 @@ public class ImageService extends BaseService {
 	 */
 	public String cut(int type, String imageName, String imagePath, int x1, int y1, int w, int h){
 		try {
-			String osPath = ToolOS.getOsPathType();
-			
 			String originalPath = ""; // 原图片路径
 			String targetPath = ""; // 目标路径
 			int width = 0;

@@ -14,7 +14,7 @@ public class ThreadSysLog {
 
 	private static Logger log = Logger.getLogger(ThreadSysLog.class);
 	
-	private static final int queueSize = 5000; // 入库队列大小
+//	private static final int queueSize = 5000; // 入库队列大小
 	private static boolean threadRun = true; // 线程是否运行
 	
 	/**
