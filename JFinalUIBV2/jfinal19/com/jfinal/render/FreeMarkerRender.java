@@ -22,9 +22,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+
 import javax.servlet.ServletContext;
+
+import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
-import freemarker.template.ObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
@@ -36,7 +38,7 @@ public class FreeMarkerRender extends Render {
 	
 	private static final String encoding = getEncoding();
 	private static final String contentType = "text/html; charset=" + encoding;
-	private static final Configuration config = new Configuration();
+	private static final Configuration config = new Configuration(Configuration.VERSION_2_3_22);
 	
 	public FreeMarkerRender(String view) {
 		this.view = view;
@@ -92,7 +94,7 @@ public class FreeMarkerRender extends Render {
         config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         
         // - Use beans wrapper (recommmended for most applications)
-        config.setObjectWrapper(ObjectWrapper.BEANS_WRAPPER);
+        config.setObjectWrapper(new BeansWrapper(Configuration.VERSION_2_3_22)); //  ObjectWrapper.BEANS_WRAPPER
         // - Set the default charset of the template files
         config.setDefaultEncoding(encoding);		// config.setDefaultEncoding("ISO-8859-1");
         // - Set the charset of the output. This is actually just a hint, that

@@ -30,7 +30,7 @@ public class EscapeXml implements Function {
 
 		log.debug("EscapeXml，xml转换处理，content=" + content);
 		
-		return StringEscapeUtils.escapeXml(content);
+		return StringEscapeUtils.escapeXml11(content);
 	}
 
 }

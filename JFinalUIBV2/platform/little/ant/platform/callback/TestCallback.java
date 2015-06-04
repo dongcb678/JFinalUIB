@@ -34,6 +34,7 @@ public class TestCallback implements ICallback {
 		proc.execute();
 		
 		ResultSet rs = (ResultSet) proc.getObject(2);
+		rs.getString("ids");
 		
 		return 123;
 	}

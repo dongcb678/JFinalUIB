@@ -37,7 +37,7 @@ public class ToolFreeMarker {
 	public static String render(String templateContent, Map<String, Object> paramMap) {
 		StringWriter writer = new StringWriter();
 		try {
-			Configuration cfg = new Configuration();
+			Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
 			cfg.setTemplateLoader(new StringTemplateLoader(templateContent));
 			cfg.setDefaultEncoding("UTF-8");
 
@@ -65,10 +65,10 @@ public class ToolFreeMarker {
 		FileOutputStream fileOutputStream = null;
 		OutputStreamWriter outputStreamWriter = null;
 		try {
-			Configuration configuration = new Configuration();
+			Configuration configuration = new Configuration(Configuration.VERSION_2_3_22);
 			File file = new File(ftlDirectory);// .ftl模板目录
 			configuration.setDirectoryForTemplateLoading(file);
-			configuration.setObjectWrapper(new DefaultObjectWrapper());
+			configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_22));
 			Template template = configuration.getTemplate(ftlName, ToolString.encoding);
 
 			File file2 = new File(htmlPath);// 生成html目录

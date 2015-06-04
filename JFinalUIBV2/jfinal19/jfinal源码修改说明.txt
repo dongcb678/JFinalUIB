@@ -17,3 +17,6 @@
 5.升级jetty9运行项目
 	
 	修改JettyServer类的88-99行
+	
+6.FreeMarker过时方法处理
+	FreeMarkerRender.java
