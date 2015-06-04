@@ -8,8 +8,6 @@ import java.util.Set;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import freemarker.template.TemplateException;
-
 /**
  * Velocity工具类
  * @author 董华健

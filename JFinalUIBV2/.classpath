@@ -10,13 +10,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="doc/buildJar/jfinal/c3p0-0.9.1.2.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/freemarker-2.3.20.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.asm-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.beans-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.context-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.core-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.expression-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.org.apache.commons.logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jfinal/velocity-1.7-dep.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jfinal/velocity-1.7.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.el-3.0.0.jar"/>
@@ -25,6 +18,10 @@
 	<classpathentry kind="lib" path="doc/buildJar/beetl/antlr-4.5-complete.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-2.3.2.jar"/>
 	<classpathentry kind="lib" path="doc/buildJar/jetty9/jetty-all-9.2.11.v20150529.jar"/>
+	<classpathentry kind="lib" path="doc/buildJar/jfinal/freemarker-2.3.22.jar"/>
+	<classpathentry kind="lib" path="doc/buildJar/jfinal/spring-context-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="doc/buildJar/jfinal/spring-beans-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="doc/buildJar/jfinal/spring-core-4.1.6.RELEASE.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
