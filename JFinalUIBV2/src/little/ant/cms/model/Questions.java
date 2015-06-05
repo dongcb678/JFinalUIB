@@ -37,6 +37,18 @@ public class Questions extends BaseModel<Questions> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_contentids = "contentids";
-	
+
+	/**
+	 * sqlId : cms.questions.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.questions.splitPageSelect";
+
+	/**
+	 * sqlId : cms.questions.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.questions.splitPageFrom";
+
 	
 }

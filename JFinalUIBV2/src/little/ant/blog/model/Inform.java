@@ -91,6 +91,18 @@ public class Inform extends BaseModel<Inform> {
 	 * 字段类型 ：text 
 	 */
 	public static final String colunm_result = "result";
-	
+
+	/**
+	 * sqlId : blog.inform.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "blog.inform.splitPageSelect";
+
+	/**
+	 * sqlId : blog.inform.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "blog.inform.splitPageFrom";
+
 	
 }

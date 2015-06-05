@@ -2,8 +2,15 @@
 
 <sql-statement namespace="blog.inform">
 	
-	<!-- 分页查询 -->
-	<sql id="splitPage">
+	<!-- 分页查询：select -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select * 
+    	]]>
+	</sql>
+	
+	<!-- 分页查询 ：from -->
+	<sql id="splitPageFrom">
 		<![CDATA[ 
         	from blog_inform
 			where 1=1 

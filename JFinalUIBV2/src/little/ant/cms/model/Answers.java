@@ -109,6 +109,18 @@ public class Answers extends BaseModel<Answers> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_questionsids = "questionsids";
-	
+
+	/**
+	 * sqlId : cms.answers.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.answers.splitPageSelect";
+
+	/**
+	 * sqlId : cms.answers.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.answers.splitPageFrom";
+
 	
 }

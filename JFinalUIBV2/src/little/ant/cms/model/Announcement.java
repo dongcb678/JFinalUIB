@@ -43,6 +43,18 @@ public class Announcement extends BaseModel<Announcement> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_contentids = "contentids";
-	
+
+	/**
+	 * sqlId : cms.announcement.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.announcement.splitPageSelect";
+
+	/**
+	 * sqlId : cms.announcement.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.announcement.splitPageFrom";
+
 	
 }

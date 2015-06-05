@@ -143,6 +143,7 @@ public abstract class Base {
 		paraMap.put("className", className);
 		paraMap.put("dataSource", dataSource);
 		paraMap.put("tableName", tableName);
+		paraMap.put("namespace", basePath + "." + classNameSmall);
 
 		paraMap.put("colunmList", getColunm(tableName));
 		

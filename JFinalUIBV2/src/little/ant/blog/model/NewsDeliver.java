@@ -97,6 +97,18 @@ public class NewsDeliver extends BaseModel<NewsDeliver> {
 	 * 字段类型 ：character 
 	 */
 	public static final String colunm_status = "status";
-	
+
+	/**
+	 * sqlId : blog.newsDeliver.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "blog.newsDeliver.splitPageSelect";
+
+	/**
+	 * sqlId : blog.newsDeliver.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "blog.newsDeliver.splitPageFrom";
+
 	
 }

@@ -139,6 +139,18 @@ public class Ad extends BaseModel<Ad> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_locationids = "locationids";
-	
+
+	/**
+	 * sqlId : common.ad.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "common.ad.splitPageSelect";
+
+	/**
+	 * sqlId : common.ad.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "common.ad.splitPageFrom";
+
 	
 }

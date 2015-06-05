@@ -91,6 +91,18 @@ public class Job extends BaseModel<Job> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_contentids = "contentids";
-	
+
+	/**
+	 * sqlId : cms.job.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.job.splitPageSelect";
+
+	/**
+	 * sqlId : cms.job.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.job.splitPageFrom";
+
 	
 }

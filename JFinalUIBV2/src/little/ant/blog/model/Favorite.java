@@ -73,6 +73,18 @@ public class Favorite extends BaseModel<Favorite> {
 	 * 字段类型 ：timestamp with time zone 
 	 */
 	public static final String colunm_deletedate = "deletedate";
-	
+
+	/**
+	 * sqlId : blog.favorite.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "blog.favorite.splitPageSelect";
+
+	/**
+	 * sqlId : blog.favorite.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "blog.favorite.splitPageFrom";
+
 	
 }

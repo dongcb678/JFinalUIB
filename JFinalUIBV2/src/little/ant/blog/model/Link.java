@@ -97,6 +97,18 @@ public class Link extends BaseModel<Link> {
 	 * 字段类型 ：timestamp with time zone 
 	 */
 	public static final String colunm_deletedate = "deletedate";
-	
+
+	/**
+	 * sqlId : blog.link.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "blog.link.splitPageSelect";
+
+	/**
+	 * sqlId : blog.link.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "blog.link.splitPageFrom";
+
 	
 }

@@ -103,6 +103,18 @@ public class Link extends BaseModel<Link> {
 	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_sort = "sort";
-	
+
+	/**
+	 * sqlId : common.link.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "common.link.splitPageSelect";
+
+	/**
+	 * sqlId : common.link.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "common.link.splitPageFrom";
+
 	
 }

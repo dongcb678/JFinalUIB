@@ -103,6 +103,18 @@ public class Move extends BaseModel<Move> {
 	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_tramplecount = "tramplecount";
-	
+
+	/**
+	 * sqlId : blog.move.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "blog.move.splitPageSelect";
+
+	/**
+	 * sqlId : blog.move.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "blog.move.splitPageFrom";
+
 	
 }

@@ -37,6 +37,18 @@ public class Vote extends BaseModel<Vote> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_contentids = "contentids";
-	
+
+	/**
+	 * sqlId : cms.vote.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.vote.splitPageSelect";
+
+	/**
+	 * sqlId : cms.vote.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.vote.splitPageFrom";
+
 	
 }

@@ -61,6 +61,18 @@ public class Photogallery extends BaseModel<Photogallery> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_contentids = "contentids";
-	
+
+	/**
+	 * sqlId : cms.photogallery.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.photogallery.splitPageSelect";
+
+	/**
+	 * sqlId : cms.photogallery.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.photogallery.splitPageFrom";
+
 	
 }

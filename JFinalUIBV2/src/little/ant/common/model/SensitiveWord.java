@@ -97,6 +97,18 @@ public class SensitiveWord extends BaseModel<SensitiveWord> {
 	 * 字段类型 ：timestamp with time zone 
 	 */
 	public static final String colunm_deletedate = "deletedate";
-	
+
+	/**
+	 * sqlId : common.sensitiveWord.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "common.sensitiveWord.splitPageSelect";
+
+	/**
+	 * sqlId : common.sensitiveWord.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "common.sensitiveWord.splitPageFrom";
+
 	
 }

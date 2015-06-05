@@ -151,6 +151,18 @@ public class Content extends BaseModel<Content> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_colunmids = "colunmids";
-	
+
+	/**
+	 * sqlId : cms.content.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.content.splitPageSelect";
+
+	/**
+	 * sqlId : cms.content.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.content.splitPageFrom";
+
 	
 }

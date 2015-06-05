@@ -109,6 +109,18 @@ public class Column extends BaseModel<Column> {
 	 * 字段类型 ：character 
 	 */
 	public static final String colunm_isparent = "isparent";
-	
+
+	/**
+	 * sqlId : cms.column.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.column.splitPageSelect";
+
+	/**
+	 * sqlId : cms.column.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.column.splitPageFrom";
+
 	
 }

@@ -91,6 +91,18 @@ public class VoteItem extends BaseModel<VoteItem> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_voteids = "voteids";
-	
+
+	/**
+	 * sqlId : cms.voteItem.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.voteItem.splitPageSelect";
+
+	/**
+	 * sqlId : cms.voteItem.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.voteItem.splitPageFrom";
+
 	
 }

@@ -79,6 +79,18 @@ public class Download extends BaseModel<Download> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_contentids = "contentids";
-	
+
+	/**
+	 * sqlId : cms.download.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.download.splitPageSelect";
+
+	/**
+	 * sqlId : cms.download.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.download.splitPageFrom";
+
 	
 }

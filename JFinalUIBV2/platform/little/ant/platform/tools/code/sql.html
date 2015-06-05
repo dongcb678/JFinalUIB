@@ -2,11 +2,19 @@
 
 <sql-statement namespace="${namespace}">
 	
-	<!-- 分页查询 -->
-	<sql id="splitPage">
+	<!-- 分页查询：select -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select *
+    	]]>
+	</sql>
+	
+	<!-- 分页查询：from -->
+	<sql id="splitPageFrom">
 		<![CDATA[ 
         	from 
         		${tableName}
+			
 			where 1=1 
 				
 			<% if(!isEmpty(xxx)){ %>

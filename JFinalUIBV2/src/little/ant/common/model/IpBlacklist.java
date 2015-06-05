@@ -85,6 +85,18 @@ public class IpBlacklist extends BaseModel<IpBlacklist> {
 	 * 字段类型 ：character 
 	 */
 	public static final String colunm_status = "status";
-	
+
+	/**
+	 * sqlId : common.ipBlacklist.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "common.ipBlacklist.splitPageSelect";
+
+	/**
+	 * sqlId : common.ipBlacklist.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "common.ipBlacklist.splitPageFrom";
+
 	
 }

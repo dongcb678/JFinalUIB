@@ -91,6 +91,18 @@ public class Message extends BaseModel<Message> {
 	 * 字段类型 ：timestamp with time zone 
 	 */
 	public static final String colunm_receivedate = "receivedate";
-	
+
+	/**
+	 * sqlId : blog.message.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "blog.message.splitPageSelect";
+
+	/**
+	 * sqlId : blog.message.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "blog.message.splitPageFrom";
+
 	
 }

@@ -157,6 +157,18 @@ public class Article extends BaseModel<Article> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_typeids = "typeids";
-	
+
+	/**
+	 * sqlId : blog.article.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "blog.article.splitPageSelect";
+
+	/**
+	 * sqlId : blog.article.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "blog.article.splitPageFrom";
+
 	
 }

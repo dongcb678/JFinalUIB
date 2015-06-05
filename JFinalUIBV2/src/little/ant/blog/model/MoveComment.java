@@ -103,6 +103,18 @@ public class MoveComment extends BaseModel<MoveComment> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_moveids = "moveids";
-	
+
+	/**
+	 * sqlId : blog.moveComment.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "blog.moveComment.splitPageSelect";
+
+	/**
+	 * sqlId : blog.moveComment.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "blog.moveComment.splitPageFrom";
+
 	
 }

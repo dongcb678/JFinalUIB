@@ -61,6 +61,18 @@ public class Library extends BaseModel<Library> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_contentids = "contentids";
-	
+
+	/**
+	 * sqlId : cms.library.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.library.splitPageSelect";
+
+	/**
+	 * sqlId : cms.library.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.library.splitPageFrom";
+
 	
 }

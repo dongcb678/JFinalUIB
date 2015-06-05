@@ -67,6 +67,18 @@ public class AccessStatistics extends BaseModel<AccessStatistics> {
 	 * 字段类型 ：timestamp with time zone 
 	 */
 	public static final String colunm_updatedate = "updatedate";
-	
+
+	/**
+	 * sqlId : common.accessStatistics.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "common.accessStatistics.splitPageSelect";
+
+	/**
+	 * sqlId : common.accessStatistics.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "common.accessStatistics.splitPageFrom";
+
 	
 }

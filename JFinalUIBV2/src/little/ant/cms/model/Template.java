@@ -97,6 +97,18 @@ public class Template extends BaseModel<Template> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_targetids = "targetids";
-	
+
+	/**
+	 * sqlId : cms.template.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.template.splitPageSelect";
+
+	/**
+	 * sqlId : cms.template.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.template.splitPageFrom";
+
 	
 }

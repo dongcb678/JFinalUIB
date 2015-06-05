@@ -85,6 +85,18 @@ public class Circleuser extends BaseModel<Circleuser> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_circleids = "circleids";
-	
+
+	/**
+	 * sqlId : blog.circleuser.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "blog.circleuser.splitPageSelect";
+
+	/**
+	 * sqlId : blog.circleuser.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "blog.circleuser.splitPageFrom";
+
 	
 }

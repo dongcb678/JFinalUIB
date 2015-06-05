@@ -103,6 +103,18 @@ public class Comment extends BaseModel<Comment> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_contentids = "contentids";
-	
+
+	/**
+	 * sqlId : cms.comment.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "cms.comment.splitPageSelect";
+
+	/**
+	 * sqlId : cms.comment.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "cms.comment.splitPageFrom";
+
 	
 }

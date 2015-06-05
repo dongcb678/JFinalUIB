@@ -115,6 +115,18 @@ public class Location extends BaseModel<Location> {
 	 * 字段类型 ：character 
 	 */
 	public static final String colunm_status = "status";
-	
+
+	/**
+	 * sqlId : common.location.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "common.location.splitPageSelect";
+
+	/**
+	 * sqlId : common.location.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "common.location.splitPageFrom";
+
 	
 }
