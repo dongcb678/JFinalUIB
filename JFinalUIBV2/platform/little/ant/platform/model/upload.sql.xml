@@ -6,7 +6,14 @@
 <sql-statement namespace="platform.upload">
 	
 	<!-- 动态SQL处理 -->
-	<sql id="splitPage">
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select *
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
 		<![CDATA[ 
         	from pt_upload 
         	where 1=1 

@@ -194,8 +194,7 @@ public class OperatorService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		String select = " select o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, m.names as modulenames, s.names as systemsnames ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "platform.operator.splitPage");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, "platform.operator.splitPageSelect", "platform.operator.splitPageFrom");
 	}
 	
 }

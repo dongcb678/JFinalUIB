@@ -106,8 +106,7 @@ public class GroupService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		String select = " select ids, names, numbers ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "platform.group.splitPage");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Group.sqlId_splitPage_select, Group.sqlId_splitPage_from);
 	}
 	
 }

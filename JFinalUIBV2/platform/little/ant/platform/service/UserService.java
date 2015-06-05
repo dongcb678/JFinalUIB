@@ -179,12 +179,10 @@ public class UserService extends BaseService {
 
 	/**
 	 * 分页
-	 * 
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage) {
-		String select = " select u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "platform.user.splitPage");
+		splitPageBase(ConstantInit.db_dataSource_main, splitPage, "platform.user.splitPageSelect", "platform.user.splitPageFrom");
 	}
 
 	/**

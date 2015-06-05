@@ -60,6 +60,17 @@ public class Group extends BaseModelCache<Group> {
 	public static final String colunm_numbers = "numbers";
 	
 	/**
+	 * sqlId : platform.group.splitPageSelect
+	 */
+	public static final String sqlId_splitPage_select = "platform.group.splitPageSelect";
+
+	/**
+	 * sqlId : platform.group.splitPageFrom
+	 */
+	public static final String sqlId_splitPage_from = "platform.group.splitPageFrom";
+	
+	
+	/**
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){

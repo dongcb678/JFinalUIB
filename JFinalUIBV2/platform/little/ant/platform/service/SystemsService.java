@@ -65,8 +65,7 @@ public class SystemsService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "platform.systems.splitPage");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, "platform.systems.splitPageSelect", "platform.systems.splitPageFrom");
 	}
 	
 }

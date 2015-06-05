@@ -17,13 +17,21 @@
 	</sql>
 	
 	<!-- 动态SQL处理 -->
-	<sql id="splitPage">
+	<sql id="splitPageSelect">
 		<![CDATA[ 
-        	from pt_syslog s 
-        	left join pt_user u on s.userids = u.ids 
-        	left join pt_operator o on s.operatorids = o.ids 
-        	left join pt_module m on o.moduleids = m.ids 
-        	left join pt_systems sy on m.systemsids = sy.ids 
+        	select sy.names synames, m.names mnames, o.names onames, o.url ourl, u.username, s.* 
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pt_syslog s 
+	        	left join pt_user u on s.userids = u.ids 
+	        	left join pt_operator o on s.operatorids = o.ids 
+	        	left join pt_module m on o.moduleids = m.ids 
+	        	left join pt_systems sy on m.systemsids = sy.ids 
         	where 1=1 
 			
 			<% if(!isEmpty(url)){ %>

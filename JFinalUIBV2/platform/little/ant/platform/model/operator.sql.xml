@@ -35,7 +35,14 @@
 	</sql>
 	
 	<!-- 动态SQL处理 -->
-	<sql id="splitPage">
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, m.names as modulenames, s.names as systemsnames
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
 		<![CDATA[ 
         	from pt_operator o
         	left join pt_module m on o.moduleids = m.ids

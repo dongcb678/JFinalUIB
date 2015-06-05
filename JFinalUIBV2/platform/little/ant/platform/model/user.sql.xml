@@ -41,12 +41,22 @@
 	</sql>
 	
 	<!-- 动态SQL处理 -->
-	<sql id="splitPage">
+	<sql id="splitPageSelect">
 		<![CDATA[ 
-        	from pt_user u 
-			left join pt_userinfo ui on u.userinfoids = ui.ids 
-			left join pt_department d on u.departmentids = d.ids 
+        	select u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pt_user u 
+				left join pt_userinfo ui on u.userinfoids = ui.ids 
+				left join pt_department d on u.departmentids = d.ids 
+			
 			where 1=1 
+			
 			<% if(!isEmpty(userClass)){ %>
 					and u.userClass = #'$userClass$'#
 			<% } %>

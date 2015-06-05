@@ -30,16 +30,16 @@ public abstract class BaseService {
 	 * 分页
 	 * @param dataSource 数据源
 	 * @param splitPage
-	 * @param select
-	 * @param sqlId
+	 * @param selectContent
+	 * @param fromSqlId
 	 */
-	public void splitPageBase(String dataSource, SplitPage splitPage, String select, String sqlId){
+	public void splitPageBase(String dataSource, SplitPage splitPage, String selectContent, String fromSqlId){
 		// 接收返回值对象
 		StringBuilder formSqlSb = new StringBuilder();
 		LinkedList<Object> paramValue = new LinkedList<Object>();
 		
 		// 调用生成from sql，并构造paramValue
-		String sql = ToolSqlXml.getSql(sqlId, splitPage.getQueryParam(), ConstantRender.sql_renderType_beetl, paramValue);
+		String sql = ToolSqlXml.getSql(fromSqlId, splitPage.getQueryParam(), ConstantRender.sql_renderType_beetl, paramValue);
 		formSqlSb.append(sql);
 		
 		// 行级：过滤
@@ -55,11 +55,23 @@ public abstract class BaseService {
 		String formSql = formSqlSb.toString();
 		
 		// 分页封装
-		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), select, formSql, paramValue.toArray());
+		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), selectContent, formSql, paramValue.toArray());
 		splitPage.setTotalPage(page.getTotalPage());
 		splitPage.setTotalRow(page.getTotalRow());
 		splitPage.setList(page.getList());
 		splitPage.compute();
+	}
+
+	/**
+	 * 分页
+	 * @param dataSource 数据源
+	 * @param splitPage
+	 * @param selectSqlId
+	 * @param fromSqlId
+	 */
+	public void splitPageBySqlId(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
+		String selectSql = getSql(selectSqlId);
+		splitPageBase(dataSource, splitPage, selectSql, fromSqlId);
 	}
 
 	/**
