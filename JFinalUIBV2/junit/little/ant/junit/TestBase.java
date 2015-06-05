@@ -13,6 +13,7 @@ import little.ant.platform.plugin.TablePlugin;
 
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
+import org.snaker.jfinal.plugin.SnakerPlugin;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
@@ -95,6 +96,10 @@ public class TestBase {
 		log.info("afterJFinalStart 缓存参数");
 		ParamInitPlugin paramInitPlugin = new ParamInitPlugin();
 		paramInitPlugin.start();
+
+		log.info("afterJFinalStart 配置Snaker插件");
+		SnakerPlugin snakerPlugin = new SnakerPlugin(druidPlugin, properties);
+		snakerPlugin.start();
     }
 
 }
