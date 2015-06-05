@@ -1,12 +1,12 @@
 package little.ant.blog.admin.service;
 
-import org.apache.log4j.Logger;
-
+import little.ant.blog.model.NewsDeliver;
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.service.BaseService;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
-import little.ant.blog.model.NewsDeliver;
+import little.ant.platform.service.BaseService;
+
+import org.apache.log4j.Logger;
 
 public class NewsDeliverService extends BaseService {
 
@@ -20,8 +20,7 @@ public class NewsDeliverService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage) {
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "src.newsDeliver.splitPage");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, NewsDeliver.sqlId_splitPage_select, NewsDeliver.sqlId_splitPage_from);
 	}
 	
 	/**

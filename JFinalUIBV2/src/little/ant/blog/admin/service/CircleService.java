@@ -1,12 +1,12 @@
 package little.ant.blog.admin.service;
 
-import org.apache.log4j.Logger;
-
+import little.ant.blog.model.Circle;
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.service.BaseService;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
-import little.ant.blog.model.Circle;
+import little.ant.platform.service.BaseService;
+
+import org.apache.log4j.Logger;
 
 public class CircleService extends BaseService {
 
@@ -20,8 +20,7 @@ public class CircleService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage) {
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "src.circle.splitPage");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Circle.sqlId_splitPage_select, Circle.sqlId_splitPage_from);
 	}
 	
 	/**

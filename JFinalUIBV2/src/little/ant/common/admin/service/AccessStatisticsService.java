@@ -1,5 +1,6 @@
 package little.ant.common.admin.service;
 
+import little.ant.common.model.AccessStatistics;
 import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
@@ -19,8 +20,7 @@ public class AccessStatisticsService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage) {
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "common.accessStatistics.splitPage");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, AccessStatistics.sqlId_splitPage_select, AccessStatistics.sqlId_splitPage_from);
 	}
 
 }

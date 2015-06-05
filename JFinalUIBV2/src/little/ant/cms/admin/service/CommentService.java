@@ -1,12 +1,12 @@
 package little.ant.cms.admin.service;
 
-import org.apache.log4j.Logger;
-
+import little.ant.cms.model.Comment;
 import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.service.BaseService;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
-import little.ant.cms.model.Comment;
+import little.ant.platform.service.BaseService;
+
+import org.apache.log4j.Logger;
 
 public class CommentService extends BaseService {
 
@@ -20,8 +20,7 @@ public class CommentService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage) {
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "src.comment.splitPage");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Comment.sqlId_splitPage_select, Comment.sqlId_splitPage_from);
 	}
 	
 	/**

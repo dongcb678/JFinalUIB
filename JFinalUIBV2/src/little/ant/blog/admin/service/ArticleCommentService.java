@@ -20,8 +20,7 @@ public class ArticleCommentService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage) {
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "src.articleComment.splitPage");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, ArticleComment.sqlId_splitPage_select, ArticleComment.sqlId_splitPage_from);
 	}
 	
 	/**

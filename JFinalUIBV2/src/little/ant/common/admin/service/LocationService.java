@@ -21,8 +21,7 @@ public class LocationService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage) {
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "common.location.splitPage");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Location.sqlId_splitPage_select, Location.sqlId_splitPage_from);
 	}
 
 	/**
