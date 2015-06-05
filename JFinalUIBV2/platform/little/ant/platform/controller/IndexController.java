@@ -30,7 +30,7 @@ public class IndexController extends BaseController {
 	public void index() {
 		User user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
 		if(null != user){//后台
-			String sql = IndexService.service.getSql("platform.systems.all");
+			String sql = IndexService.service.getSql(Systems.sqlId_all);
 			systemsList = Systems.dao.find(sql);
 			if(null == ids || ids.isEmpty()){ // 默认系统
 				ids = "8a40c0353fa828a6013fa898d4ac0020";

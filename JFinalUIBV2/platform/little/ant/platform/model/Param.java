@@ -146,7 +146,85 @@ public class Param extends BaseModelCache<Param> {
 	 * 字段类型 ：character 
 	 */
 	public static final String colunm_status = "status";
-	
+
+	/**
+	 * sqlId : platform.param.all
+	 * 描述：查询所有参数
+	 */
+	public static final String sqlId_all = "platform.param.all";
+
+	/**
+	 * sqlId : platform.param.treeTableNodeRoot
+	 * 描述：查询参数树根节点
+	 */
+	public static final String sqlId_treeTableNodeRoot = "platform.param.treeTableNodeRoot";
+
+	/**
+	 * sqlId : platform.param.treeTableChildNode
+	 * 描述：查询参数树子节点
+	 */
+	public static final String sqlId_treeTableChildNode = "platform.param.treeTableChildNode";
+
+	/**
+	 * sqlId : platform.param.treeNodeRoot
+	 * 描述：查询参数树根节点
+	 */
+	public static final String sqlId_treeNodeRoot = "platform.param.treeNodeRoot";
+
+	/**
+	 * sqlId : platform.param.treeChildNode
+	 * 描述：查询参数树子节点
+	 */
+	public static final String sqlId_treeChildNode = "platform.param.treeChildNode";
+
+	/**
+	 * sqlId : platform.param.idAndI18n
+	 * 描述：根据id查询国际化参数值 
+	 */
+	public static final String sqlId_idAndI18n = "platform.param.idAndI18n";
+
+	/**
+	 * sqlId : platform.param.numbers
+	 * 描述：根据编号查询参数值
+	 */
+	public static final String sqlId_numbers = "platform.param.numbers";
+
+	/**
+	 * sqlId : platform.param.numbersAndI18n
+	 * 描述：根据编号查询国际化参数值
+	 */
+	public static final String sqlId_numbersAndI18n = "platform.param.numbersAndI18n";
+
+	/**
+	 * sqlId : platform.param.child
+	 * 描述：查询子节点参数值
+	 */
+	public static final String sqlId_child = "platform.param.child";
+
+	/**
+	 * sqlId : platform.param.childAndI8n
+	 * 描述：查询子节点国际化参数值
+	 */
+	public static final String sqlId_childAndI8n = "platform.param.childAndI8n";
+
+	/**
+	 * sqlId : platform.param.parent
+	 * 描述：查询父节点参数值
+	 */
+	public static final String sqlId_parent = "platform.param.parent";
+
+	/**
+	 * sqlId : platform.param.parentAndI18n
+	 * 描述：查询父节点国际化参数值
+	 */
+	public static final String sqlId_parentAndI18n = "platform.param.parentAndI18n";
+
+	/**
+	 * sqlId : platform.param.childCount
+	 * 描述：查询子节点数量
+	 */
+	public static final String sqlId_childCount = "platform.param.childCount";
+
 	/**
 	 * 根据主键查询参数，带国际化
 	 * @param ids 主键
@@ -159,7 +237,7 @@ public class Param extends BaseModelCache<Param> {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("val", val);
 		
-		String sql = getSqlByBeetl("platform.param.idAndI18n", paramMap);
+		String sql = getSqlByBeetl(sqlId_idAndI18n, paramMap);
 		
 		Param param = dao.findFirst(sql, ids);
 		return param;
@@ -171,7 +249,7 @@ public class Param extends BaseModelCache<Param> {
 	 * @return
 	 */
 	public Param getByNumber(String number){
-		String sql = getSql("platform.param.numbers");
+		String sql = getSql(sqlId_numbers);
 		Param param = dao.findFirst(sql, number);
 		return param;
 	}
@@ -188,7 +266,7 @@ public class Param extends BaseModelCache<Param> {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("val", val);
 		
-		String sql = getSqlByBeetl("platform.param.numbersAndI18n", paramMap);
+		String sql = getSqlByBeetl(sqlId_numbersAndI18n, paramMap);
 		
 		Param param = dao.findFirst(sql, number);
 		return param;
@@ -199,7 +277,7 @@ public class Param extends BaseModelCache<Param> {
 	 * @return
 	 */
 	public List<Param> getChild(){
-		String sql = getSql("platform.param.child");
+		String sql = getSql(sqlId_child);
 		return dao.find(sql, getPKValue());
 	}
 
@@ -209,7 +287,7 @@ public class Param extends BaseModelCache<Param> {
 	 * @return
 	 */
 	public List<Param> getChild(String prentIds){
-		String sql = getSql("platform.param.child");
+		String sql = getSql(sqlId_child);
 		return dao.find(sql, prentIds);
 	}
 
@@ -225,7 +303,7 @@ public class Param extends BaseModelCache<Param> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSqlByBeetl("platform.param.childAndI8n", param);
+		String sql = getSqlByBeetl(sqlId_childAndI8n, param);
 		
 		return dao.find(sql, prentIds);
 	}
@@ -235,7 +313,7 @@ public class Param extends BaseModelCache<Param> {
 	 * @return
 	 */
 	public Param getParent(){
-		String sql = getSql("platform.param.parent");
+		String sql = getSql(sqlId_parent);
 		return dao.findFirst(sql, get(colunm_parentids));
 	}
 
@@ -250,7 +328,7 @@ public class Param extends BaseModelCache<Param> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSqlByBeetl("platform..parentAndI18n", param);
+		String sql = getSqlByBeetl(sqlId_parentAndI18n, param);
 		
 		return dao.findFirst(sql, get(colunm_parentids));
 	}

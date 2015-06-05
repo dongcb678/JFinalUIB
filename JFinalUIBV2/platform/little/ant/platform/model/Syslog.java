@@ -204,5 +204,23 @@ public class Syslog extends BaseModel<Syslog> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_userids = "userids";
-	
+
+	/**
+	 * sqlId : platform.sysLog.view
+	 * 描述：
+	 */
+	public static final String sqlId_view = "platform.sysLog.view";
+
+	/**
+	 * sqlId : platform.sysLog.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "platform.sysLog.splitPageSelect";
+
+	/**
+	 * sqlId : platform.sysLog.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "platform.sysLog.splitPageFrom";
+
 }

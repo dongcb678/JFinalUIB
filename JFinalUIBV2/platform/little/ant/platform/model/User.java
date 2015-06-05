@@ -142,7 +142,49 @@ public class User extends BaseModelCache<User> {
 	 * 字段类型 ：text 
 	 */
 	public static final String colunm_groupnames = "groupnames";
-	
+
+	/**
+	 * sqlId : platform.user.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "platform.user.splitPageSelect";
+
+	/**
+	 * sqlId : platform.user.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "platform.user.splitPageFrom";
+
+	/**
+	 * sqlId : platform.user.all
+	 * 描述：查询所有用户
+	 */
+	public static final String sqlId_all = "platform.user.all";
+
+	/**
+	 * sqlId : platform.user.treeUserNode
+	 * 描述：根据部门Id查询，人员树节点数据 
+	 */
+	public static final String sqlId_treeUserNode = "platform.user.treeUserNode";
+
+	/**
+	 * sqlId : platform.user.column
+	 * 描述：查询用户，自定义字段和值
+	 */
+	public static final String sqlId_column = "platform.user.column";
+
+	/**
+	 * sqlId : platform.user.stop
+	 * 描述：停用账户
+	 */
+	public static final String sqlId_stop = "platform.user.stop";
+
+	/**
+	 * sqlId : platform.user.start
+	 * 描述：启用停用账户
+	 */
+	public static final String sqlId_start = "platform.user.start";
+
 	/**
 	 * 关联查询，获取用户详细信息
 	 * @return

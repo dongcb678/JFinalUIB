@@ -28,11 +28,11 @@ public class StationService extends BaseService {
 	public List<ZtreeNode> childNodeData(String parentIds){
 		List<Station> list = null;
 		if(null != parentIds){
-			String sql = getSql("platform.station.child");
+			String sql = getSql(Station.sqlId_child);
 			list = Station.dao.find(sql, parentIds);
 			
 		}else{
-			String sql = getSql("platform.station.root");
+			String sql = getSql(Station.sqlId_root);
 			list = Station.dao.find(sql);
 		}
 		
@@ -120,7 +120,7 @@ public class StationService extends BaseService {
 
 		// 修改上级节点的isparent
 		Station pStation = Station.dao.findById(station.getStr(Station.colunm_parentstationids));
-		String sql = getSql("platform.station.childCount");
+		String sql = getSql(Station.sqlId_childCount);
 		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pStation.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){

@@ -298,7 +298,7 @@ public abstract class ToolString {
 			} else {
 				Map<String, Object> param = new HashMap<String, Object>();
 				param.put("column", "username");
-				String sql = ToolSqlXml.getSql("platform.user.column", param, ConstantRender.sql_renderType_beetl);
+				String sql = ToolSqlXml.getSql(User.sqlId_column, param, ConstantRender.sql_renderType_beetl);
 				List<User> userList = User.dao.find(sql, userName);
 				if (userList.size() == 1) {
 					user = userList.get(0);

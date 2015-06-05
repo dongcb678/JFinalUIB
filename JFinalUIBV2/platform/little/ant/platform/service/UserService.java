@@ -130,17 +130,17 @@ public class UserService extends BaseService {
 		// 查询部门数据
 		List<Department> deptList = null;
 		if (null != deptIds) {
-			String sql = getSql("platform.department.childNode");
+			String sql = getSql(Department.sqlId_childNode);
 			deptList = Department.dao.find(sql, deptIds.replace("dept_", ""));
 		} else {
-			String sql = getSql("platform.department.rootNode");
+			String sql = getSql(Department.sqlId_rootNode);
 			deptList = Department.dao.find(sql);
 		}
 
 		// 查询用户数据
 		List<User> userList = null;
 		if (null != deptIds) {
-			String sql = getSql("platform.user.treeUserNode");
+			String sql = getSql(User.sqlId_treeUserNode);
 			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
 		}
 
@@ -182,7 +182,7 @@ public class UserService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage) {
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, "platform.user.splitPageSelect", "platform.user.splitPageFrom");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, User.sqlId_splitPage_select, User.sqlId_splitPage_from);
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class UserService extends BaseService {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", User.colunm_username);
-			String sql = getSqlByBeetl("platform.user.column", param);
+			String sql = getSqlByBeetl(User.sqlId_column, param);
 			User user = User.dao.findFirst(sql, userName);
 			byte[] salt = user.getBytes(User.colunm_salt);// 密码盐
 			byte[] encryptedPassword = user.getBytes(User.colunm_password);
@@ -220,7 +220,7 @@ public class UserService extends BaseService {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", User.colunm_username);
-			String sql = getSqlByBeetl("platform.user.column", param);
+			String sql = getSqlByBeetl(User.sqlId_column, param);
 			User user = User.dao.findFirst(sql, userName);
 			
 			// 验证密码

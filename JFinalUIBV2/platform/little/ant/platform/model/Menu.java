@@ -102,7 +102,37 @@ public class Menu extends BaseModel<Menu> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_names_enus = "names_enus";
-	
+
+	/**
+	 * sqlId : platform.menu.root
+	 * 描述：查询根菜单
+	 */
+	public static final String sqlId_root = "platform.menu.root";
+
+	/**
+	 * sqlId : platform.menu.child
+	 * 描述：查询子菜单
+	 */
+	public static final String sqlId_child = "platform.menu.child";
+
+	/**
+	 * sqlId : platform.menu.childCount
+	 * 描述：查询子菜单数量
+	 */
+	public static final String sqlId_childCount = "platform.menu.childCount";
+
+	/**
+	 * sqlId : platform.menu.rootId
+	 * 描述：查询根菜单id
+	 */
+	public static final String sqlId_rootId = "platform.menu.rootId";
+
+	/**
+	 * sqlId : platform.menu.operator
+	 * 描述：查询根菜单，包含对应功能
+	 */
+	public static final String sqlId_operator = "platform.menu.operator";
+
 	/**
 	 * 根据菜单获取对应的功能，可能为空
 	 * @return

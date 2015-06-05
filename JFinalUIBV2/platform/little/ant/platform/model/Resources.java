@@ -102,5 +102,29 @@ public class Resources extends BaseModel<Resources> {
 	 * 字段类型 ：timestamp with time zone 
 	 */
 	public static final String colunm_createdate = "createdate";
+
+	/**
+	 * sqlId : platform.resources.pv_pg
+	 * 描述：
+	 */
+	public static final String sqlId_pv_pg = "platform.resources.pv_pg";
+
+	/**
+	 * sqlId : platform.resources.pv_mysql
+	 * 描述：
+	 */
+	public static final String sqlId_pv_mysql = "platform.resources.pv_mysql";
+
+	/**
+	 * sqlId : platform.resources.pv_oracle
+	 * 描述：
+	 */
+	public static final String sqlId_pv_oracle = "platform.resources.pv_oracle";
+
+	/**
+	 * sqlId : platform.resources.24hour
+	 * 描述：
+	 */
+	public static final String sqlId_24hour = "platform.resources.24hour";
 	
 }

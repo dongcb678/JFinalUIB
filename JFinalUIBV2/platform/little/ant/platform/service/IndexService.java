@@ -64,17 +64,17 @@ public class IndexService extends BaseService {
 		String fitler = toSql(operatorIdsSb.toString()).replace("operator_", "");
 		
 		// 查询根菜单节点
-		Menu menu = Menu.dao.findFirst(getSql("platform.menu.rootId"), systemsIds);
+		Menu menu = Menu.dao.findFirst(getSql(Menu.sqlId_rootId), systemsIds);
 		String parentmenuids = menu.getPKValue();
 		
 		// 一级菜单
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("names", names);
-		List<Menu> oneList = Menu.dao.find(getSqlByBeetl("platform.menu.child", param), parentmenuids);
+		List<Menu> oneList = Menu.dao.find(getSqlByBeetl(Menu.sqlId_child, param), parentmenuids);
 		param.put("fitler", fitler);
 		for (Menu oneMenu : oneList) {
 			// 二级菜单
-			String sql = getSqlByBeetl("platform.menu.operator", param);
+			String sql = getSqlByBeetl(Menu.sqlId_operator, param);
 			List<Menu> twoList = Menu.dao.find(sql, oneMenu.getPKValue());
 			oneMenu.put("subList", twoList);
 		}

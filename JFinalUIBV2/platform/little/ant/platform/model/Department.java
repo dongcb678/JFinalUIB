@@ -97,4 +97,22 @@ public class Department extends BaseModel<Department> {
 	 */
 	public static final String colunm_principaluserids = "principaluserids";
 	
+	/**
+	 * sqlId : platform.department.noChecked
+	 * 描述：查询根节点
+	 */
+	public static final String sqlId_rootNode = "platform.department.rootNode";
+
+	/**
+	 * sqlId : platform.department.childNode
+	 * 描述：根据上级节点id查询子部门信息 
+	 */
+	public static final String sqlId_childNode = "platform.department.childNode";
+
+	/**
+	 * sqlId : platform.department.childCount
+	 * 描述：根据上级节点id查询子节点数量
+	 */
+	public static final String sqlId_childCount = "platform.department.childCount";
+	
 }

@@ -87,10 +87,10 @@ public class RoleService extends BaseService {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);
 			
-			noCheckedList = Role.dao.find(getSqlByBeetl("platform.role.noCheckedFilter", param));
-			checkedList = Role.dao.find(getSqlByBeetl("platform.role.checkedFilter", param));
+			noCheckedList = Role.dao.find(getSqlByBeetl(Role.sqlId_noCheckedFilter, param));
+			checkedList = Role.dao.find(getSqlByBeetl(Role.sqlId_checkedFilter, param));
 		}else{
-			noCheckedList = Role.dao.find(getSql("platform.role.noChecked"));
+			noCheckedList = Role.dao.find(getSql(Role.sqlId_noChecked));
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -104,7 +104,7 @@ public class RoleService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, "platform.role.splitPageSelect", "platform.role.splitPageFrom");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Role.sqlId_splitPage_select, Role.sqlId_splitPage_from);
 	}
 	
 }

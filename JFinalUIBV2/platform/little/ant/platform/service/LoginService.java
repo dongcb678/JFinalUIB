@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantLogin;
 import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
 import little.ant.platform.plugin.PropertiesPlugin;
@@ -40,7 +41,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_user");
 		param.put("column", User.colunm_username);
-		String sql = getSqlByBeetl("platform.baseModel.selectCount", param);
+		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
 		int count = Db.queryLong(sql, userName).intValue();
 		return count;
 	}
@@ -54,7 +55,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
 		param.put("column", UserInfo.colunm_email);
-		String sql = getSqlByBeetl("platform.baseModel.selectCount", param);
+		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
 		int count = Db.queryLong(sql, mailBox).intValue();
 		return count;
 	}
@@ -68,7 +69,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
 		param.put("column", UserInfo.colunm_idcard);
-		String sql = getSqlByBeetl("platform.baseModel.selectCount", param);
+		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
 		int count = Db.queryLong(sql, idcard).intValue();
 		return count;
 	}
@@ -82,7 +83,7 @@ public class LoginService extends BaseService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
 		param.put("column", UserInfo.colunm_mobile);
-		String sql = getSqlByBeetl("platform.baseModel.selectCount", param);
+		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
 		int count = Db.queryLong(sql, mobile).intValue();
 		return count;
 	}
@@ -105,7 +106,7 @@ public class LoginService extends BaseService {
 		} else {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", User.colunm_username);
-			String sql = getSqlByBeetl("platform.user.column", param);
+			String sql = getSqlByBeetl(User.sqlId_column, param);
 			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
 				return ConstantLogin.login_info_0;// 用户不存在
@@ -129,7 +130,7 @@ public class LoginService extends BaseService {
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
-				String sql = getSql("platform.user.start");
+				String sql = getSql(User.sqlId_start);
 				Db.use(ConstantInit.db_dataSource_main).update(sql, user.getPKValue());
 				// 更新缓存
 				User.dao.cacheAdd(user.getPKValue());
@@ -153,7 +154,7 @@ public class LoginService extends BaseService {
 			return ConstantLogin.login_info_3;
 		} else {
 			// 密码验证失败
-			String sql = getSql("platform.user.stop");
+			String sql = getSql(User.sqlId_stop);
 			Db.use(ConstantInit.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
 			// 更新缓存
 			User.dao.cacheAdd(user.getPKValue());
@@ -178,7 +179,7 @@ public class LoginService extends BaseService {
 		} else {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", User.colunm_username);
-			String sql = getSqlByBeetl("platform.user.column", param);
+			String sql = getSqlByBeetl(User.sqlId_column, param);
 			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
 				return ConstantLogin.login_info_0;// 用户不存在
@@ -202,7 +203,7 @@ public class LoginService extends BaseService {
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
-				String sql = getSql("platform.user.start");
+				String sql = getSql(User.sqlId_start);
 				Db.use(ConstantInit.db_dataSource_main).update(sql, user.getPKValue());
 				// 更新缓存
 				User.dao.cacheAdd(user.getPKValue());
@@ -225,7 +226,7 @@ public class LoginService extends BaseService {
 			return ConstantLogin.login_info_3;
 		} else {
 			// 密码验证失败
-			String sql = getSql("platform.user.stop");
+			String sql = getSql(User.sqlId_stop);
 			Db.use(ConstantInit.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
 			// 更新缓存
 			User.dao.cacheAdd(user.getPKValue());

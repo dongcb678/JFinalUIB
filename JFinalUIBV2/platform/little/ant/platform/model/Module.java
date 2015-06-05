@@ -72,5 +72,29 @@ public class Module extends BaseModel<Module> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_systemsids = "systemsids";
-	
+
+	/**
+	 * sqlId : platform.module.rootBySystemIds
+	 * 描述：根节点
+	 */
+	public static final String sqlId_rootBySystemIds = "platform.module.rootBySystemIds";
+
+	/**
+	 * sqlId : platform.module.root
+	 * 描述：根节点
+	 */
+	public static final String sqlId_root = "platform.module.root";
+
+	/**
+	 * sqlId : platform.module.child
+	 * 描述：子节点
+	 */
+	public static final String sqlId_child = "platform.module.child";
+
+	/**
+	 * sqlId : platform.module.childCount
+	 * 描述：子节点数量
+	 */
+	public static final String sqlId_childCount = "platform.module.childCount";
+
 }

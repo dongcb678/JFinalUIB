@@ -75,16 +75,16 @@ public class OperatorService extends BaseService {
 		
 		if (null == moduleIds) {
 			// 1.模块功能初始化调用
-			String sql = getSql("platform.operator.rootModule");
+			String sql = getSql(Operator.sqlId_rootModule);
 			listModule = Module.dao.find(sql);
 			
 		} else if (null != moduleIds) {
 			moduleIds = moduleIds.replace("module_", "");
 			// 2.通用子节点查询
-			String sqlModule = getSql("platform.operator.childModule");
+			String sqlModule = getSql(Operator.sqlId_childModule);
 			listModule = Module.dao.find(sqlModule, moduleIds);
 			
-			String sqlOperator = getSql("platform.operator.byModuleIds");
+			String sqlOperator = getSql(Operator.sqlId_byModuleIds);
 			operatorList = Operator.dao.find(sqlOperator, moduleIds);
 		}
 
@@ -122,7 +122,7 @@ public class OperatorService extends BaseService {
 	 */
 	public List<ZtreeNode> tree(){
 		// 1.根模块
-		String sql = getSql("platform.operator.rootModule");
+		String sql = getSql(Operator.sqlId_rootModule);
 		List<Module> rootModuleList = Module.dao.find(sql);
 
 		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
@@ -154,7 +154,7 @@ public class OperatorService extends BaseService {
 		List<ZtreeNode> children = new ArrayList<ZtreeNode>();
 
 		// 功能
-		String sqlOperator = getSql("platform.operator.byModuleIds");
+		String sqlOperator = getSql(Operator.sqlId_byModuleIds);
 		List<Operator> operatorList = Operator.dao.find(sqlOperator, pModule.getPKValue());
 		for (Operator operator : operatorList) {
 			ZtreeNode node = new ZtreeNode();
@@ -169,7 +169,7 @@ public class OperatorService extends BaseService {
 		}
 		
 		// 模块
-		String sqlModule = getSql("platform.operator.childModule");
+		String sqlModule = getSql(Operator.sqlId_childModule);
 		List<Module> moduleList = Module.dao.find(sqlModule, pModule.getPKValue());
 		for (Module module : moduleList) {
 			ZtreeNode node = new ZtreeNode();
@@ -194,7 +194,7 @@ public class OperatorService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, "platform.operator.splitPageSelect", "platform.operator.splitPageFrom");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage_select, Operator.sqlId_splitPage_from);
 	}
 	
 }

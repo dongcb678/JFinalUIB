@@ -146,6 +146,84 @@ public class Dict extends BaseModelCache<Dict> {
 	 * 字段类型 ：character 
 	 */
 	public static final String colunm_status = "status";
+
+	/**
+	 * sqlId : platform.dict.all
+	 * 描述：查询所有字典
+	 */
+	public static final String sqlId_all = "platform.dict.all";
+
+	/**
+	 * sqlId : platform.dict.treeTableNodeRoot
+	 * 描述：查询字典树根节点
+	 */
+	public static final String sqlId_treeTableNodeRoot = "platform.dict.treeTableNodeRoot";
+
+	/**
+	 * sqlId : platform.dict.treeTableChildNode
+	 * 描述：查询字典树子节点
+	 */
+	public static final String sqlId_treeTableChildNode = "platform.dict.treeTableChildNode";
+
+	/**
+	 * sqlId : platform.dict.treeNodeRoot
+	 * 描述：查询字典树根节点
+	 */
+	public static final String sqlId_treeNodeRoot = "platform.dict.treeNodeRoot";
+
+	/**
+	 * sqlId : platform.dict.treeChildNode
+	 * 描述：查询字典树子节点
+	 */
+	public static final String sqlId_treeChildNode = "platform.dict.treeChildNode";
+
+	/**
+	 * sqlId : platform.dict.idAndI18n
+	 * 描述：根据id查询国际化字典值
+	 */
+	public static final String sqlId_idAndI18n = "platform.dict.idAndI18n";
+
+	/**
+	 * sqlId : platform.dict.numbers
+	 * 描述：根据编号查询字典值
+	 */
+	public static final String sqlId_numbers = "platform.dict.numbers";
+
+	/**
+	 * sqlId : platform.dict.numbersAndI18n
+	 * 描述：根据编号查询国际化字典值
+	 */
+	public static final String sqlId_numbersAndI18n = "platform.dict.numbersAndI18n";
+
+	/**
+	 * sqlId : platform.dict.child
+	 * 描述：查询子节点字典值
+	 */
+	public static final String sqlId_child = "platform.dict.child";
+
+	/**
+	 * sqlId : platform.dict.childAndI8n
+	 * 描述：查询子节点国际化字典值
+	 */
+	public static final String sqlId_childAndI8n = "platform.dict.childAndI8n";
+
+	/**
+	 * sqlId : platform.dict.parent
+	 * 描述：查询父节点字典值
+	 */
+	public static final String sqlId_parent = "platform.dict.parent";
+
+	/**
+	 * sqlId : platform.dict.parentAndI18n
+	 * 描述：查询父节点国际化字典值
+	 */
+	public static final String sqlId_parentAndI18n = "platform.dict.parentAndI18n";
+
+	/**
+	 * sqlId : platform.dict.childCount
+	 * 描述：查询子节点数量
+	 */
+	public static final String sqlId_childCount = "platform.dict.childCount";
 	
 	/**
 	 * 根据主键查询字典，带国际化
@@ -159,7 +237,7 @@ public class Dict extends BaseModelCache<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSqlByBeetl("platform.dict.idAndI18n", param);
+		String sql = getSqlByBeetl(sqlId_idAndI18n, param);
 		
 		Dict dict = dao.findFirst(sql, ids);
 		
@@ -172,7 +250,7 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @return
 	 */
 	public Dict getByNumber(String number){
-		String sql = getSql("platform.dict.numbers");
+		String sql = getSql(sqlId_numbers);
 		Dict dict = dao.findFirst(sql, number);
 		return dict;
 	}
@@ -189,7 +267,7 @@ public class Dict extends BaseModelCache<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSqlByBeetl("platform.dict.numbersAndI18n", param);
+		String sql = getSqlByBeetl(sqlId_numbersAndI18n, param);
 		
 		Dict dict = dao.findFirst(sql, number);
 		
@@ -201,7 +279,7 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(){
-		String sql = getSql("platform.dict.child");
+		String sql = getSql(sqlId_child);
 		return dao.find(sql, getPKValue());
 	}
 
@@ -211,7 +289,7 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(String prentIds){
-		String sql = getSql("platform.dict.child");
+		String sql = getSql(sqlId_child);
 		return dao.find(sql, prentIds);
 	}
 
@@ -227,7 +305,7 @@ public class Dict extends BaseModelCache<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSqlByBeetl("platform.dict.childAndI8n", param);
+		String sql = getSqlByBeetl(sqlId_childAndI8n, param);
 		
 		return dao.find(sql, prentIds);
 	}
@@ -237,7 +315,7 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @return
 	 */
 	public Dict getParent(){
-		String sql = getSql("platform.dict.parent");
+		String sql = getSql(sqlId_parent);
 		return dao.findFirst(sql, get(colunm_parentids));
 	}
 
@@ -252,7 +330,7 @@ public class Dict extends BaseModelCache<Dict> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSqlByBeetl("platform.dict.parentAndI18n", param);
+		String sql = getSqlByBeetl(sqlId_parentAndI18n, param);
 		
 		return dao.findFirst(sql, get(colunm_parentids));
 	}

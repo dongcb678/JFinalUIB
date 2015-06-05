@@ -15,7 +15,7 @@ public class SysLogService extends BaseService {
 	public static final SysLogService service = MyTxProxy.newProxy(SysLogService.class);
 	
 	public Syslog view(String ids){
-		String sql = getSql("platform.sysLog.view");
+		String sql = getSql(Syslog.sqlId_view);
 		return Syslog.dao.findFirst(sql, ids);
 	}
 
@@ -24,7 +24,7 @@ public class SysLogService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, "platform.sysLog.splitPageSelect", "platform.sysLog.splitPageFrom");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPage_select, Syslog.sqlId_splitPage_from);
 	}
 	
 	/**

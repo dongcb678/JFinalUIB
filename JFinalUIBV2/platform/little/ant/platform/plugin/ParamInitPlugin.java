@@ -108,7 +108,7 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheUser() {
 		log.info("缓存加载：User start");
-		String sql = ToolSqlXml.getSql("platform.user.all");
+		String sql = ToolSqlXml.getSql(User.sqlId_all);
 		List<User> userList = User.dao.find(sql);
 		for (User user : userList) {
 			User.dao.cacheAdd(user.getPKValue());
@@ -124,7 +124,7 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheGroup() {
 		log.info("缓存加载：Group start");
-		String sql = ToolSqlXml.getSql("platform.group.all");
+		String sql = ToolSqlXml.getSql(Group.sqlId_all);
 		List<Group> groupList = Group.dao.find(sql);
 		for (Group group : groupList) {
 			Group.dao.cacheAdd(group.getPKValue());
@@ -139,7 +139,7 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheRole() {
 		log.info("缓存加载：Role start");
-		String sql = ToolSqlXml.getSql("platform.role.all");
+		String sql = ToolSqlXml.getSql(Role.sqlId_all);
 		List<Role> roleList = Role.dao.find(sql);
 		for (Role role : roleList) {
 			Role.dao.cacheAdd(role.getPKValue());
@@ -154,7 +154,7 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheStation() {
 		log.info("缓存加载：Station start");
-		String sql = ToolSqlXml.getSql("platform.station.all");
+		String sql = ToolSqlXml.getSql(Station.sqlId_all);
 		List<Station> stationList = Station.dao.find(sql);
 		for (Station station : stationList) {
 			Station.dao.cacheAdd(station.getPKValue());
@@ -169,7 +169,7 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheOperator() {
 		log.info("缓存加载：Operator start");
-		String sql = ToolSqlXml.getSql("platform.operator.all");
+		String sql = ToolSqlXml.getSql(Operator.sqlId_all);
 		List<Operator> operatorList = Operator.dao.find(sql);
 		for (Operator operator : operatorList) {
 			Operator.dao.cacheAdd(operator.getPKValue());
@@ -185,7 +185,7 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheDict() {
 		log.info("缓存加载：Dict start");
-		String sql = ToolSqlXml.getSql("platform.dict.all");
+		String sql = ToolSqlXml.getSql(Dict.sqlId_all);
 		List<Dict> dictList = Dict.dao.find(sql);
 		for (Dict dict : dictList) {
 			Dict.dao.cacheAdd(dict.getPKValue());
@@ -201,7 +201,7 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheParam() {
 		log.info("缓存加载：Param start");
-		String sql = ToolSqlXml.getSql("platform.param.all");
+		String sql = ToolSqlXml.getSql(Param.sqlId_all);
 		List<Param> paramList = Param.dao.find(sql);
 		for (Param param : paramList) {
 			Param.dao.cacheAdd(param.getPKValue());

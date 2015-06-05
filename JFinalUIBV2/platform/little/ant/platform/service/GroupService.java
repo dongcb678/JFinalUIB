@@ -76,10 +76,10 @@ public class GroupService extends BaseService {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);
 			
-			noCheckedList = Group.dao.find(getSqlByBeetl("platform.group.noCheckedFilter", param));
-			checkedList = Group.dao.find(getSqlByBeetl("platform.group.checkedFilter", param));
+			noCheckedList = Group.dao.find(getSqlByBeetl(Group.sqlId_noCheckedFilter, param));
+			checkedList = Group.dao.find(getSqlByBeetl(Group.sqlId_checkedFilter, param));
 		}else{
-			noCheckedList = Group.dao.find(getSql("platform.group.noChecked"));
+			noCheckedList = Group.dao.find(getSql(Group.sqlId_noChecked));
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();

@@ -54,5 +54,23 @@ public class Systems extends BaseModel<Systems> {
 	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_orderids = "orderids";
-	
+
+	/**
+	 * sqlId : platform.systems.all
+	 * 描述：
+	 */
+	public static final String sqlId_all = "platform.systems.all";
+
+	/**
+	 * sqlId : platform.systems.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "platform.systems.splitPageSelect";
+
+	/**
+	 * sqlId : platform.systems.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "platform.systems.splitPageFrom";
+
 }

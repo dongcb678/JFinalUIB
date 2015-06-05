@@ -82,7 +82,31 @@ public class Station extends BaseModelCache<Station> {
 	 * 字段类型 ：text 
 	 */
 	public static final String colunm_moduleids = "moduleids";
-	
+
+	/**
+	 * sqlId : platform.station.all
+	 * 描述：查询所有岗位
+	 */
+	public static final String sqlId_all = "platform.station.all";
+
+	/**
+	 * sqlId : platform.station.root
+	 * 描述：根节点
+	 */
+	public static final String sqlId_root = "platform.station.root";
+
+	/**
+	 * sqlId : platform.station.child
+	 * 描述：子节点 
+	 */
+	public static final String sqlId_child = "platform.station.child";
+
+	/**
+	 * sqlId : platform.station.childCount
+	 * 描述：子节点数量 
+	 */
+	public static final String sqlId_childCount = "platform.station.childCount";
+
 	/**
 	 * 添加或者更新缓存
 	 */

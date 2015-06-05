@@ -61,14 +61,39 @@ public class Group extends BaseModelCache<Group> {
 	
 	/**
 	 * sqlId : platform.group.splitPageSelect
+	 * 描述：分页Select
 	 */
 	public static final String sqlId_splitPage_select = "platform.group.splitPageSelect";
 
 	/**
 	 * sqlId : platform.group.splitPageFrom
+	 * 描述：分页from
 	 */
 	public static final String sqlId_splitPage_from = "platform.group.splitPageFrom";
-	
+
+	/**
+	 * sqlId : platform.group.all
+	 * 描述：查询所有分组 
+	 */
+	public static final String sqlId_all = "platform.group.all";
+
+	/**
+	 * sqlId : platform.group.noCheckedFilter
+	 * 描述：用户分组选择：未选择
+	 */
+	public static final String sqlId_noCheckedFilter = "platform.group.noCheckedFilter";
+
+	/**
+	 * sqlId : platform.group.checkedFilter
+	 * 描述：用户分组选择：已选择
+	 */
+	public static final String sqlId_checkedFilter = "platform.group.checkedFilter";
+
+	/**
+	 * sqlId : platform.group.noChecked
+	 * 描述：用户分组选择：所有未选择
+	 */
+	public static final String sqlId_noChecked = "platform.group.noChecked";
 	
 	/**
 	 * 添加或者更新缓存

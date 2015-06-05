@@ -29,17 +29,17 @@ public class ModuleService extends BaseService {
 		List<Module> list = null;
 		if (null != systemsIds && null == parentIds) {
 			// 1.根据系统ID查询模块树
-			String sql = getSql("platform.module.rootBySystemIds");
+			String sql = getSql(Module.sqlId_rootBySystemIds);
 			list = Module.dao.find(sql, systemsIds);
 			
 		}else if(null == systemsIds && null == parentIds){
 			// 2.模块单选初始化调用
-			String sql = getSql("platform.module.root");
+			String sql = getSql(Module.sqlId_root);
 			list = Module.dao.find(sql);
 			
 		}else if(null != parentIds){
 			// 3.通用子节点查询
-			String sql = getSql("platform.module.child");
+			String sql = getSql(Module.sqlId_child);
 			list = Module.dao.find(sql, parentIds);
 		}
 		
@@ -123,7 +123,7 @@ public class ModuleService extends BaseService {
 
 		// 修改上级节点的isparent
 		Module pModule = Module.dao.findById(module.getStr(Module.colunm_parentmoduleids));
-		String sql = getSql("platform.module.childCount");
+		String sql = getSql(Module.sqlId_childCount);
 		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pModule.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){

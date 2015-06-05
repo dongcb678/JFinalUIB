@@ -41,15 +41,15 @@ public class ResourcesService extends BaseService {
 		List<Record> list = null;
 		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key);
 		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg
-			String sql = getSql("platform.resources.pv_pg");
+			String sql = getSql(Resources.sqlId_pv_pg);
 			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		}else if(db_type.equals(ConstantInit.db_type_mysql)){ // mysql
-			String sql = getSql("platform.resources.pv_mysql");
+			String sql = getSql(Resources.sqlId_pv_mysql);
 			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		}else if(db_type.equals(ConstantInit.db_type_oracle)){ // oracle
-			String sql = getSql("platform.resources.pv_oracle");
+			String sql = getSql(Resources.sqlId_pv_oracle);
 			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		}
 		
@@ -76,7 +76,7 @@ public class ResourcesService extends BaseService {
 		
 		String hostName = ToolOS.getOsLocalHostName(); // 获取本机名称
 
-		String sql = getSql("platform.resources.24hour");
+		String sql = getSql(Resources.sqlId_24hour);
 		List<Resources> list = Resources.dao.find(sql, hostName, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		List<String> datesList = new LinkedList<String>();

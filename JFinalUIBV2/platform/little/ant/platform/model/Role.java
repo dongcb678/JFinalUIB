@@ -64,7 +64,43 @@ public class Role extends BaseModelCache<Role> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_numbers = "numbers";
-	
+
+	/**
+	 * sqlId : platform.role.all
+	 * 描述：查询所有角色
+	 */
+	public static final String sqlId_all = "platform.role.all";
+
+	/**
+	 * sqlId : platform.role.noCheckedFilter
+	 * 描述：
+	 */
+	public static final String sqlId_noCheckedFilter = "platform.role.noCheckedFilter";
+
+	/**
+	 * sqlId : platform.role.checkedFilter
+	 * 描述：
+	 */
+	public static final String sqlId_checkedFilter = "platform.role.checkedFilter";
+
+	/**
+	 * sqlId : platform.role.noChecked
+	 * 描述：
+	 */
+	public static final String sqlId_noChecked = "platform.role.noChecked";
+
+	/**
+	 * sqlId : platform.role.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "platform.role.splitPageSelect";
+
+	/**
+	 * sqlId : platform.role.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "platform.role.splitPageFrom";
+
 	/**
 	 * 添加或者更新缓存
 	 */

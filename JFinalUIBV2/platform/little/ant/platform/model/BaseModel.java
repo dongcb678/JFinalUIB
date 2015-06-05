@@ -39,7 +39,37 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * 字段类型 ：bigint 
 	 */
 	public static final String colunm_version = "version";
-	
+
+	/**
+	 * sqlId : platform.baseModel.version
+	 * 描述：查询版本号
+	 */
+	public static final String sqlId_version = "platform.baseModel.version";
+
+	/**
+	 * sqlId : platform.baseModel.select
+	 * 描述：通用查询
+	 */
+	public static final String sqlId_select = "platform.baseModel.select";
+
+	/**
+	 * sqlId : platform.baseModel.selectCount
+	 * 描述：通用查询
+	 */
+	public static final String sqlId_selectCount = "platform.baseModel.selectCount";
+
+	/**
+	 * sqlId : platform.baseModel.update
+	 * 描述：通用查询
+	 */
+	public static final String sqlId_update = "platform.baseModel.update";
+
+	/**
+	 * sqlId : platform.baseModel.delete
+	 * 描述：通用查询
+	 */
+	public static final String sqlId_delete = "platform.baseModel.delete";
+
 	/**
      * 获取SQL，固定SQL
      * @param sqlId
@@ -165,7 +195,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("table", name);
 			param.put("pk", pk);
-			String sql = ToolSqlXml.getSql("platform.baseModel.version", param, ConstantRender.sql_renderType_beetl); 
+			String sql = ToolSqlXml.getSql(sqlId_version, param, ConstantRender.sql_renderType_beetl); 
 			Model<M> modelOld = findFirst(sql , getPKValue());
 			if(null == modelOld){ // 数据已经被删除
 				throw new RuntimeException("数据库中此数据不存在，可能数据已经被删除，请刷新数据后在操作");

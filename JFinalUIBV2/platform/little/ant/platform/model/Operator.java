@@ -124,7 +124,43 @@ public class Operator extends BaseModelCache<Operator> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String colunm_modulenames = "modulenames";
-	
+
+	/**
+	 * sqlId : platform.operator.all
+	 * 描述：查询所有功能
+	 */
+	public static final String sqlId_all = "platform.operator.all";
+
+	/**
+	 * sqlId : platform.operator.rootModule
+	 * 描述：获取模块根节点
+	 */
+	public static final String sqlId_rootModule = "platform.operator.rootModule";
+
+	/**
+	 * sqlId : platform.operator.childModule
+	 * 描述：获取模块子节点
+	 */
+	public static final String sqlId_childModule = "platform.operator.childModule";
+
+	/**
+	 * sqlId : platform.operator.byModuleIds
+	 * 描述：获取模块下面的功能
+	 */
+	public static final String sqlId_byModuleIds = "platform.operator.byModuleIds";
+
+	/**
+	 * sqlId : platform.operator.splitPageSelect
+	 * 描述：分页Select
+	 */
+	public static final String sqlId_splitPage_select = "platform.operator.splitPageSelect";
+
+	/**
+	 * sqlId : platform.operator.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "platform.operator.splitPageFrom";
+
 	/**
 	 * 添加或者更新缓存
 	 */

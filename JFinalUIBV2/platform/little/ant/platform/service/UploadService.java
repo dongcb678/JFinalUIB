@@ -51,7 +51,7 @@ public class UploadService extends BaseService {
 	 * @param splitPage
 	 */
 	public void list(SplitPage splitPage){
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, "platform.upload.splitPageSelect", "platform.upload.splitPageFrom");
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Upload.sqlId_splitPage_select, Upload.sqlId_splitPage_from);
 	}
 
 	/**

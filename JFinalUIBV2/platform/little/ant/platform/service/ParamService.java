@@ -78,7 +78,7 @@ public class ParamService extends BaseService {
 			
 			// 修改上级节点的isparent
 			Param pParam = Param.dao.findById(param.getStr(Param.colunm_parentids));
-			String sql = getSql("platform.param.childCount");
+			String sql = getSql(Param.sqlId_childCount);
 			Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pParam.getPKValue());
 			Long counts = record.getNumber("counts").longValue();
 		    if(counts == 1){
@@ -102,10 +102,10 @@ public class ParamService extends BaseService {
 	public List<ZtreeNode> childNodeData(String parentIds){
 		List<Param> list = null;
 		if (null != parentIds) {
-			String sql = getSql("platform.param.treeChildNode");
+			String sql = getSql(Param.sqlId_treeChildNode);
 			list = Param.dao.find(sql, parentIds);
 		} else {
-			String sql = getSql("platform.param.treeNodeRoot");
+			String sql = getSql(Param.sqlId_treeNodeRoot);
 			list = Param.dao.find(sql);
 		}
 

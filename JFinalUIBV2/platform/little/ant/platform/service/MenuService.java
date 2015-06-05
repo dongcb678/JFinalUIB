@@ -37,11 +37,11 @@ public class MenuService extends BaseService {
 		
 		List<Menu> list = null;
 		if(null != parentIds){
-			String sql = getSqlByBeetl("platform.menu.child", param);
+			String sql = getSqlByBeetl(Menu.sqlId_child, param);
 			list = Menu.dao.find(sql, parentIds);
 			
 		}else{
-			String sql = getSqlByBeetl("platform.menu.root", param);
+			String sql = getSqlByBeetl(Menu.sqlId_root, param);
 			list = Menu.dao.find(sql, systemsIds);
 		}
 		
@@ -130,7 +130,7 @@ public class MenuService extends BaseService {
 		
 		// 修改上级节点的isparent
     	Menu pMenu = Menu.dao.findById(menu.getStr(Menu.colunm_parentmenuids));
-		String sql = getSql("platform.menu.childCount");
+		String sql = getSql(Menu.sqlId_childCount);
 		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pMenu.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts == 1){
