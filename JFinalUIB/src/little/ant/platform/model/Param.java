@@ -130,7 +130,7 @@ public class Param extends BaseModel<Param> {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("val", val);
 		
-		String sql = getSql("platform..parentAndI18n", param);
+		String sql = getSql("platform.parentAndI18n", param);
 		
 		return dao.findFirst(sql, get("parentids"));
 	}
