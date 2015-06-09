@@ -2,6 +2,7 @@ package little.ant.platform.service;
 
 import java.util.List;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.model.Station;
 
@@ -15,7 +16,7 @@ public class StationService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(StationService.class);
 
-	public static final StationService service = new StationService();
+	public static final StationService service = MyTxProxy.newProxy(StationService.class);
 	
 	/**
 	 * 获取子节点数据

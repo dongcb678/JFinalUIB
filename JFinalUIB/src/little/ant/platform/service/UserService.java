@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Department;
@@ -19,7 +20,7 @@ public class UserService extends BaseService {
 
 	private static Logger log = Logger.getLogger(UserService.class);
 
-	public static final UserService service = new UserService();
+	public static final UserService service = MyTxProxy.newProxy(UserService.class);
 	
 	/**
 	 * 保存

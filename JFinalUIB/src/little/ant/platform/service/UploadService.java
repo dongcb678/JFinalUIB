@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.model.Upload;
 
 import org.apache.log4j.Logger;
@@ -16,7 +17,7 @@ public class UploadService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UploadService.class);
 
-	public static final UploadService service = new UploadService();
+	public static final UploadService service = MyTxProxy.newProxy(UploadService.class);
 	
 	public List<Map<String, String>> upload(String pathType, List<UploadFile> files){
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
 import little.ant.platform.model.Group;
@@ -17,7 +18,7 @@ public class GroupService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(GroupService.class);
 
-	public static final GroupService service = new GroupService();
+	public static final GroupService service = MyTxProxy.newProxy(GroupService.class);
 	
 	/**
 	 * 保存

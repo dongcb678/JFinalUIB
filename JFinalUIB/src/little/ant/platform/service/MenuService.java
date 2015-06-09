@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.model.Menu;
 
@@ -17,7 +18,7 @@ public class MenuService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(MenuService.class);
 
-	public static final MenuService service = new MenuService();
+	public static final MenuService service = MyTxProxy.newProxy(MenuService.class);
 	
 	/**
 	 * 获取子节点数据

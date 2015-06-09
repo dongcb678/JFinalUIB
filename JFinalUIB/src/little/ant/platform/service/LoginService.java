@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.model.User;
 import little.ant.platform.plugin.PropertiesPlugin;
@@ -26,7 +27,7 @@ public class LoginService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginService.class);
 
-	public static final LoginService service = new LoginService();
+	public static final LoginService service = MyTxProxy.newProxy(LoginService.class);
 
 	/**
 	 * 验证账号是否存在

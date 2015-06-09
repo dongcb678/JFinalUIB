@@ -2,6 +2,7 @@ package little.ant.platform.service;
 
 import java.util.List;
 
+import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.model.Dict;
 
@@ -14,7 +15,7 @@ public class DictService extends BaseService {
 
 	private static Logger log = Logger.getLogger(DictService.class);
 
-	public static final DictService service = new DictService();
+	public static final DictService service = MyTxProxy.newProxy(DictService.class);
 	
 	/**
 	 * 保存
