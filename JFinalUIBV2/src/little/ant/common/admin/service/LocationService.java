@@ -31,10 +31,10 @@ public class LocationService extends BaseService {
 	 * @return
 	 */
 	public String save(Location location, String userIds){
-		location.set(Location.colunm_adcount, 0);
-		location.set(Location.colunm_createuser, userIds);
-		location.set(Location.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
-		location.set(Location.colunm_isdelete, "0");
+		location.set(Location.column_adcount, 0);
+		location.set(Location.column_createuser, userIds);
+		location.set(Location.column_createdate, ToolDateTime.getSqlTimestamp(null));
+		location.set(Location.column_isdelete, "0");
 		location.save();
 		return location.getPKValue();
 	}

@@ -60,7 +60,7 @@ public class DepartmentService extends BaseService {
 	 */
 	public String save(String pIds, String names, int orderIds) {
 		Department pDept = Department.dao.findById(pIds);
-		pDept.set(Department.colunm_isparent, "true").update();
+		pDept.set(Department.column_isparent, "true").update();
 		
 		String images = "";
 		if(orderIds < 2 || orderIds > 9){
@@ -71,11 +71,11 @@ public class DepartmentService extends BaseService {
 		}
 
 		Department dept = new Department();
-		dept.set(Department.colunm_isparent, "false");
-		dept.set(Department.colunm_parentdepartmentids, pIds);
-		dept.set(Department.colunm_orderids, orderIds);
-		dept.set(Department.colunm_names, names);
-		dept.set(Department.colunm_images, images);
+		dept.set(Department.column_isparent, "false");
+		dept.set(Department.column_parentdepartmentids, pIds);
+		dept.set(Department.column_orderids, orderIds);
+		dept.set(Department.column_names, names);
+		dept.set(Department.column_images, images);
 		dept.save();
 		
 		return dept.getPKValue();
@@ -92,15 +92,15 @@ public class DepartmentService extends BaseService {
 		Department dept = Department.dao.findById(ids);
 		if(null != names && !names.isEmpty()){
 			//更新模块名称
-			dept.set(Department.colunm_names, names).update();
+			dept.set(Department.column_names, names).update();
 			
 		}else if(null != pIds && !pIds.isEmpty()){
 			//更新上级模块
-			dept.set(Department.colunm_parentdepartmentids, pIds).update();
+			dept.set(Department.column_parentdepartmentids, pIds).update();
 			
 		}else if(null != principalIds && !principalIds.isEmpty()){
 			//更新部门负责人
-			dept.set(Department.colunm_principaluserids, principalIds).update();
+			dept.set(Department.column_principaluserids, principalIds).update();
 		}
 	}
 	
@@ -113,17 +113,17 @@ public class DepartmentService extends BaseService {
 		Department department = Department.dao.findById(ids);
 		
 		// 是否存在子节点
-		if(department.getStr(Department.colunm_isparent).equals("true")){
+		if(department.getStr(Department.column_isparent).equals("true")){
 			return false; //存在子节点，不能直接删除
 		}
 
 		// 修改上级节点的isparent
-		Department pDepartment = Department.dao.findById(department.getStr(Department.colunm_parentdepartmentids));
+		Department pDepartment = Department.dao.findById(department.getStr(Department.column_parentdepartmentids));
 		String sql = getSql(Department.sqlId_childCount);
 		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pDepartment.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){
-			pDepartment.set(Department.colunm_isparent, "false");
+			pDepartment.set(Department.column_isparent, "false");
 			pDepartment.update();
 		}
 

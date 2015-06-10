@@ -31,9 +31,9 @@ public class IpBlacklistService extends BaseService {
 	 * @return
 	 */
 	public String save(IpBlacklist ipBlacklist, String userIds){
-		ipBlacklist.set(IpBlacklist.colunm_createuser, userIds);
-		ipBlacklist.set(IpBlacklist.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
-		ipBlacklist.set(IpBlacklist.colunm_isdelete, "0");
+		ipBlacklist.set(IpBlacklist.column_createuser, userIds);
+		ipBlacklist.set(IpBlacklist.column_createdate, ToolDateTime.getSqlTimestamp(null));
+		ipBlacklist.set(IpBlacklist.column_isdelete, "0");
 		ipBlacklist.save();
 		return ipBlacklist.getPKValue();
 	}

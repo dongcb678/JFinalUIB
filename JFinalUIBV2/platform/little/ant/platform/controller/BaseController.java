@@ -49,7 +49,7 @@ public abstract class BaseController extends Controller {
 	 */
 	protected void setLogDesc(String description){
 		log.debug("设置日志描述：" + description);
-		reqSysLog.set(Syslog.colunm_description, description);
+		reqSysLog.set(Syslog.column_description, description);
 	}
 	
 	/**

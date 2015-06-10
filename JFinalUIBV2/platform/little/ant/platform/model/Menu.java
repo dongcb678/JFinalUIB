@@ -23,85 +23,85 @@ public class Menu extends BaseModel<Menu> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_version = "version";
+	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：图标 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_images = "images";
+	public static final String column_images = "images";
 	
 	/**
 	 * 字段描述：层级级别 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_levels = "levels";
+	public static final String column_levels = "levels";
 	
 	/**
 	 * 字段描述：名称中文简体 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_names_zhcn = "names_zhcn";
+	public static final String column_names_zhcn = "names_zhcn";
 	
 	/**
 	 * 字段描述：排序号 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_orderids = "orderids";
+	public static final String column_orderids = "orderids";
 	
 	/**
 	 * 字段描述：菜单对应功能ids 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_operatorids = "operatorids";
+	public static final String column_operatorids = "operatorids";
 	
 	/**
 	 * 字段描述：上级菜单ids 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_parentmenuids = "parentmenuids";
+	public static final String column_parentmenuids = "parentmenuids";
 	
 	/**
 	 * 字段描述：所属系统ids 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_systemsids = "systemsids";
+	public static final String column_systemsids = "systemsids";
 	
 	/**
 	 * 字段描述：是否上级节点 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_isparent = "isparent";
+	public static final String column_isparent = "isparent";
 	
 	/**
 	 * 字段描述：名称中文台湾 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_names_zhtw = "names_zhtw";
+	public static final String column_names_zhtw = "names_zhtw";
 	
 	/**
 	 * 字段描述：名称中文香港 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_names_zhhk = "names_zhhk";
+	public static final String column_names_zhhk = "names_zhhk";
 	
 	/**
 	 * 字段描述：名称日文 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_names_ja = "names_ja";
+	public static final String column_names_ja = "names_ja";
 	
 	/**
 	 * 字段描述：名称英文 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_names_enus = "names_enus";
+	public static final String column_names_enus = "names_enus";
 
 	/**
 	 * sqlId : platform.menu.root
@@ -138,7 +138,7 @@ public class Menu extends BaseModel<Menu> {
 	 * @return
 	 */
 	public Operator getOperator(){
-		String operatorIds = get(colunm_operatorids);
+		String operatorIds = get(column_operatorids);
 		if(null != operatorIds && !operatorIds.isEmpty()){
 			return Operator.dao.findById(operatorIds);
 		}

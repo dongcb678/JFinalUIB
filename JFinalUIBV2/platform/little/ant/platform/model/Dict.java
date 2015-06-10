@@ -31,121 +31,121 @@ public class Dict extends BaseModelCache<Dict> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_version = "version";
+	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：描述 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_description = "description";
+	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：图标 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_images = "images";
+	public static final String column_images = "images";
 	
 	/**
 	 * 字段描述：名称 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_names = "names";
+	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：排序号 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_orderids = "orderids";
+	public static final String column_orderids = "orderids";
 	
 	/**
 	 * 字段描述：tree路径 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_paths = "paths";
+	public static final String column_paths = "paths";
 	
 	/**
 	 * 字段描述：状态 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_zhuangtai = "zhuangtai";
+	public static final String column_zhuangtai = "zhuangtai";
 	
 	/**
 	 * 字段描述：上级ids 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_parentids = "parentids";
+	public static final String column_parentids = "parentids";
 	
 	/**
 	 * 字段描述：是否上级节点 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_isparent = "isparent";
+	public static final String column_isparent = "isparent";
 	
 	/**
 	 * 字段描述：层级级别 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_levels = "levels";
+	public static final String column_levels = "levels";
 	
 	/**
 	 * 字段描述：编号 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_numbers = "numbers";
+	public static final String column_numbers = "numbers";
 	
 	/**
 	 * 字段描述：值 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_val = "val";
+	public static final String column_val = "val";
 	
 	/**
 	 * 字段描述：是否国际化 : 0否1是 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_i18n = "i18n";
+	public static final String column_i18n = "i18n";
 	
 	/**
 	 * 字段描述：中文简体值 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_val_zhcn = "val_zhcn";
+	public static final String column_val_zhcn = "val_zhcn";
 	
 	/**
 	 * 字段描述：中文香港值 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_val_zhhk = "val_zhhk";
+	public static final String column_val_zhhk = "val_zhhk";
 	
 	/**
 	 * 字段描述：中文台湾值 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_val_zhtw = "val_zhtw";
+	public static final String column_val_zhtw = "val_zhtw";
 	
 	/**
 	 * 字段描述：日文值 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_val_ja = "val_ja";
+	public static final String column_val_ja = "val_ja";
 	
 	/**
 	 * 字段描述：英文值 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_val_enus = "val_enus";
+	public static final String column_val_enus = "val_enus";
 	
 	/**
 	 * 字段描述：账号状态 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_status = "status";
+	public static final String column_status = "status";
 
 	/**
 	 * sqlId : platform.dict.all
@@ -316,7 +316,7 @@ public class Dict extends BaseModelCache<Dict> {
 	 */
 	public Dict getParent(){
 		String sql = getSql(sqlId_parent);
-		return dao.findFirst(sql, get(colunm_parentids));
+		return dao.findFirst(sql, get(column_parentids));
 	}
 
 	/**
@@ -332,7 +332,7 @@ public class Dict extends BaseModelCache<Dict> {
 		
 		String sql = getSqlByBeetl(sqlId_parentAndI18n, param);
 		
-		return dao.findFirst(sql, get(colunm_parentids));
+		return dao.findFirst(sql, get(column_parentids));
 	}
 
 	/**
@@ -342,9 +342,9 @@ public class Dict extends BaseModelCache<Dict> {
 		Dict dict = Dict.dao.findById(ids);
 		List<Dict> dictList = dict.getChild();
 		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + ids, dict);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(colunm_numbers), dict);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(column_numbers), dict);
 		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + ids, dictList);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(colunm_numbers), dictList);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(column_numbers), dictList);
 
 		String parentIds = dict.getStr("parentids");
 		if(null != parentIds){
@@ -352,7 +352,7 @@ public class Dict extends BaseModelCache<Dict> {
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
 				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(colunm_numbers), parentList);
+				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(column_numbers), parentList);
 			}
 		}
 	}
@@ -365,9 +365,9 @@ public class Dict extends BaseModelCache<Dict> {
 		Dict dict = Dict.dao.findById(ids);
 		
 		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(colunm_numbers));
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(column_numbers));
 		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(colunm_numbers));
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(column_numbers));
 
 		String parentIds = dict.getStr("parentids");
 		if(null != parentIds){
@@ -375,7 +375,7 @@ public class Dict extends BaseModelCache<Dict> {
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
 				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(colunm_numbers), parentList);
+				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(column_numbers), parentList);
 			}
 		}
 	}

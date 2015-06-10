@@ -24,49 +24,49 @@ public class YellowPage extends BaseModel<YellowPage> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：地址 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_address = "address";
+	public static final String column_address = "address";
 	
 	/**
 	 * 字段描述：联系人 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_contacts = "contacts";
+	public static final String column_contacts = "contacts";
 	
 	/**
 	 * 字段描述：固话 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_fixphone = "fixphone";
+	public static final String column_fixphone = "fixphone";
 	
 	/**
 	 * 字段描述：移动电话 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_mobile = "mobile";
+	public static final String column_mobile = "mobile";
 	
 	/**
 	 * 字段描述：邮编 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_postcode = "postcode";
+	public static final String column_postcode = "postcode";
 	
 	/**
 	 * 字段描述：在线qq : 多个逗号隔开，最多5个 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_qq = "qq";
+	public static final String column_qq = "qq";
 	
 	/**
 	 * 字段描述：内容主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_contentids = "contentids";
+	public static final String column_contentids = "contentids";
 
 	/**
 	 * sqlId : cms.yellowPage.splitPageSelect

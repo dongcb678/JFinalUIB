@@ -27,43 +27,43 @@ public class Role extends BaseModelCache<Role> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_version = "version";
+	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：描述 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_description = "description";
+	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：名称 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_names = "names";
+	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：拥有的功能ids 
 	 * 字段类型 ：text 
 	 */
-	public static final String colunm_operatorids = "operatorids";
+	public static final String column_operatorids = "operatorids";
 	
 	/**
 	 * 字段描述：拥有的功能模块ids 
 	 * 字段类型 ：text 
 	 */
-	public static final String colunm_moduleids = "moduleids";
+	public static final String column_moduleids = "moduleids";
 	
 	/**
 	 * 字段描述：编号 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_numbers = "numbers";
+	public static final String column_numbers = "numbers";
 
 	/**
 	 * sqlId : platform.role.all

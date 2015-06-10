@@ -23,43 +23,43 @@ public class Upload extends BaseModel<Upload> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_version = "version";
+	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：参数key 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_parametername = "parametername";
+	public static final String column_parametername = "parametername";
 	
 	/**
 	 * 字段描述：文件名 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_filename = "filename";
+	public static final String column_filename = "filename";
 	
 	/**
 	 * 字段描述：contenttype 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_contenttype = "contenttype";
+	public static final String column_contenttype = "contenttype";
 	
 	/**
 	 * 字段描述：原文件名 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_originalfilename = "originalfilename";
+	public static final String column_originalfilename = "originalfilename";
 	
 	/**
 	 * 字段描述：存放路径 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_path = "path";
+	public static final String column_path = "path";
 
 	/**
 	 * sqlId : platform.upload.splitPageSelect

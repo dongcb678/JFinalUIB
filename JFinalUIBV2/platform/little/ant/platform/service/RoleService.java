@@ -67,7 +67,7 @@ public class RoleService extends BaseService {
 	public void setOperator(String roleIds, String moduleIds, String operatorIds){
 		Role role = Role.dao.findById(roleIds);
 		//role.set("moduleids", moduleIds);
-		role.set(Role.colunm_operatorids, operatorIds).update();
+		role.set(Role.column_operatorids, operatorIds).update();
 		
 		// 缓存
 		Role.dao.cacheAdd(roleIds);
@@ -80,7 +80,7 @@ public class RoleService extends BaseService {
 	public Map<String,Object> select(String ids){
 		List<Role> noCheckedList = new ArrayList<Role>();
 		List<Role> checkedList = new ArrayList<Role>();
-		String roleIds = Group.dao.findById(ids).getStr(Group.colunm_roleids);
+		String roleIds = Group.dao.findById(ids).getStr(Group.column_roleids);
 		if(null != roleIds && !roleIds.equals("")){
 			String fitler = toSql(roleIds);
 

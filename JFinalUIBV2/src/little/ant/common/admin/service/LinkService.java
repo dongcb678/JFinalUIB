@@ -31,9 +31,9 @@ public class LinkService extends BaseService {
 	 * @return
 	 */
 	public String save(Link link, String userIds){
-		link.set(Link.colunm_createuser, userIds);
-		link.set(Link.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
-		link.set(Link.colunm_isdelete, "0");
+		link.set(Link.column_createuser, userIds);
+		link.set(Link.column_createdate, ToolDateTime.getSqlTimestamp(null));
+		link.set(Link.column_isdelete, "0");
 		link.save();
 		return link.getPKValue();
 	}

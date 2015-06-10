@@ -62,9 +62,9 @@ public class DictController extends BaseController {
 	 */
 	public void edit() {
 		Dict dict = Dict.dao.findById(getPara());
-		String pIds = dict.getStr(Dict.colunm_parentids);
+		String pIds = dict.getStr(Dict.column_parentids);
 		Dict parent = Dict.dao.findById(pIds);
-		setAttr("dict", dict.put("parentnames", parent.getStr(Dict.colunm_names)));
+		setAttr("dict", dict.put("parentnames", parent.getStr(Dict.column_names)));
 		render("/platform/dict/update.html");
 	}
 	
@@ -90,9 +90,9 @@ public class DictController extends BaseController {
 	 */
 	public void view() {
 		Dict dict = Dict.dao.findById(getPara());
-		String pIds = dict.getStr(Dict.colunm_parentids);
+		String pIds = dict.getStr(Dict.column_parentids);
 		Dict parent = Dict.dao.findById(pIds);
-		setAttr("dict", dict.put("parentnames", parent.getStr(Dict.colunm_names)));
+		setAttr("dict", dict.put("parentnames", parent.getStr(Dict.column_names)));
 		render("/platform/dict/view.html");
 	}
 

@@ -24,19 +24,19 @@ public class Vote extends BaseModel<Vote> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：投票范围 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_voterange = "voterange";
+	public static final String column_voterange = "voterange";
 	
 	/**
 	 * 字段描述：内容主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_contentids = "contentids";
+	public static final String column_contentids = "contentids";
 
 	/**
 	 * sqlId : cms.vote.splitPageSelect

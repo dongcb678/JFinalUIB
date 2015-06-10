@@ -31,9 +31,9 @@ public class SensitiveWordService extends BaseService {
 	 * @return
 	 */
 	public String save(SensitiveWord sensitiveWord, String userIds){
-		sensitiveWord.set(SensitiveWord.colunm_createuser, userIds);
-		sensitiveWord.set(SensitiveWord.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
-		sensitiveWord.set(SensitiveWord.colunm_isdelete, "0");
+		sensitiveWord.set(SensitiveWord.column_createuser, userIds);
+		sensitiveWord.set(SensitiveWord.column_createdate, ToolDateTime.getSqlTimestamp(null));
+		sensitiveWord.set(SensitiveWord.column_isdelete, "0");
 		sensitiveWord.save();
 		return sensitiveWord.getPKValue();
 	}

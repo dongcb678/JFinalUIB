@@ -24,25 +24,25 @@ public class Announcement extends BaseModel<Announcement> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：有效开始时间 
 	 * 字段类型 ：timestamp with time zone 
 	 */
-	public static final String colunm_startdate = "startdate";
+	public static final String column_startdate = "startdate";
 	
 	/**
 	 * 字段描述：有效结束时间 
 	 * 字段类型 ：timestamp with time zone 
 	 */
-	public static final String colunm_enddate = "enddate";
+	public static final String column_enddate = "enddate";
 	
 	/**
 	 * 字段描述：内容主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_contentids = "contentids";
+	public static final String column_contentids = "contentids";
 
 	/**
 	 * sqlId : cms.announcement.splitPageSelect

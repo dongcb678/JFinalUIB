@@ -77,7 +77,7 @@ public class ParamService extends BaseService {
 			}
 			
 			// 修改上级节点的isparent
-			Param pParam = Param.dao.findById(param.getStr(Param.colunm_parentids));
+			Param pParam = Param.dao.findById(param.getStr(Param.column_parentids));
 			String sql = getSql(Param.sqlId_childCount);
 			Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pParam.getPKValue());
 			Long counts = record.getNumber("counts").longValue();

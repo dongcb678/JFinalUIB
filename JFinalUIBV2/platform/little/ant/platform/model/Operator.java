@@ -27,103 +27,103 @@ public class Operator extends BaseModelCache<Operator> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_version = "version";
+	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：描述 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_description = "description";
+	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：名称 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_names = "names";
+	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：url数量 : 一个还是多个url，多个用逗号隔开 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_onemany = "onemany";
+	public static final String column_onemany = "onemany";
 	
 	/**
 	 * 字段描述：返回参数keys 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_returnparamkeys = "returnparamkeys";
+	public static final String column_returnparamkeys = "returnparamkeys";
 	
 	/**
 	 * 字段描述：返回url 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_returnurl = "returnurl";
+	public static final String column_returnurl = "returnurl";
 	
 	/**
 	 * 字段描述：是否行级过滤 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_rowfilter = "rowfilter";
+	public static final String column_rowfilter = "rowfilter";
 	
 	/**
 	 * 字段描述：url 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_url = "url";
+	public static final String column_url = "url";
 	
 	/**
 	 * 字段描述：模块ids 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_moduleids = "moduleids";
+	public static final String column_moduleids = "moduleids";
 	
 	/**
 	 * 字段描述：是否分页 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_splitpage = "splitpage";
+	public static final String column_splitpage = "splitpage";
 	
 	/**
 	 * 字段描述：是否重复提交验证 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_formtoken = "formtoken";
+	public static final String column_formtoken = "formtoken";
 	
 	/**
 	 * 字段描述：ip黑名单过滤 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_ipblack = "ipblack";
+	public static final String column_ipblack = "ipblack";
 	
 	/**
 	 * 字段描述：是否需要权限验证 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_privilegess = "privilegess";
+	public static final String column_privilegess = "privilegess";
 	
 	/**
 	 * 字段描述：是否记录PV 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_ispv = "ispv";
+	public static final String column_ispv = "ispv";
 	
 	/**
 	 * 字段描述：pv类型 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_pvtype = "pvtype";
+	public static final String column_pvtype = "pvtype";
 	
 	/**
 	 * 字段描述：模块names 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_modulenames = "modulenames";
+	public static final String column_modulenames = "modulenames";
 
 	/**
 	 * sqlId : platform.operator.all
@@ -167,7 +167,7 @@ public class Operator extends BaseModelCache<Operator> {
 	public void cacheAdd(String ids){
 		Operator operator = Operator.dao.findById(ids);
 		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + ids, operator);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(colunm_url), operator);
+		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(column_url), operator);
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class Operator extends BaseModelCache<Operator> {
 	public void cacheRemove(String ids){
 		Operator operator = Operator.dao.findById(ids);
 		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(colunm_url));
+		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(column_url));
 	}
 
 	/**

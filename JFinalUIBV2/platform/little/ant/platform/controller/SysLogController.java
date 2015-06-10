@@ -20,7 +20,7 @@ public class SysLogController extends BaseController {
 	 * 日志管理列表
 	 */
 	public void index() {
-		defaultOrder(Syslog.colunm_startdate, "desc");
+		defaultOrder(Syslog.column_startdate, "desc");
 		SysLogService.service.list(splitPage);
 		render("/platform/sysLog/list.html");
 	}

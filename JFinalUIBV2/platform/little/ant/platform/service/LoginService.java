@@ -40,7 +40,7 @@ public class LoginService extends BaseService {
 	public int valiUserName(String userName){
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_user");
-		param.put("column", User.colunm_username);
+		param.put("column", User.column_username);
 		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
 		int count = Db.queryLong(sql, userName).intValue();
 		return count;
@@ -54,7 +54,7 @@ public class LoginService extends BaseService {
 	public int valiMailBox(String mailBox){
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
-		param.put("column", UserInfo.colunm_email);
+		param.put("column", UserInfo.column_email);
 		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
 		int count = Db.queryLong(sql, mailBox).intValue();
 		return count;
@@ -68,7 +68,7 @@ public class LoginService extends BaseService {
 	public int valiIdcard(String idcard){
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
-		param.put("column", UserInfo.colunm_idcard);
+		param.put("column", UserInfo.column_idcard);
 		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
 		int count = Db.queryLong(sql, idcard).intValue();
 		return count;
@@ -82,7 +82,7 @@ public class LoginService extends BaseService {
 	public int valiMobile(String mobile){
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("table", "pt_userinfo");
-		param.put("column", UserInfo.colunm_mobile);
+		param.put("column", UserInfo.column_mobile);
 		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
 		int count = Db.queryLong(sql, mobile).intValue();
 		return count;
@@ -105,7 +105,7 @@ public class LoginService extends BaseService {
 			user = (User) userObj;
 		} else {
 			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("column", User.colunm_username);
+			param.put("column", User.column_username);
 			String sql = getSqlByBeetl(User.sqlId_column, param);
 			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
@@ -115,16 +115,16 @@ public class LoginService extends BaseService {
 		}
 		
 		// 2.停用账户
-		String status = user.getStr(User.colunm_status);
+		String status = user.getStr(User.column_status);
 		if (status.equals("0")) {
 			return ConstantLogin.login_info_1;
 		}
 
 		// 3.密码错误次数超限
-		int errorCount = user.getNumber(User.colunm_errorcount).intValue();
+		int errorCount = user.getNumber(User.column_errorcount).intValue();
 		int passErrorCount = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_passErrorCount_key)).intValue();
 		if(errorCount >= passErrorCount){
-			Date stopDate = user.getDate(User.colunm_stopdate);
+			Date stopDate = user.getDate(User.column_stopdate);
 			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
 			int passErrorHour = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_passErrorHour_key)).intValue();
 			if(hourSpace < passErrorHour){
@@ -138,8 +138,8 @@ public class LoginService extends BaseService {
 		}
 
 		// 4.验证密码
-		byte[] salt = user.getBytes(User.colunm_salt);// 密码盐
-		byte[] encryptedPassword = user.getBytes(User.colunm_password);
+		byte[] salt = user.getBytes(User.column_salt);// 密码盐
+		byte[] encryptedPassword = user.getBytes(User.column_password);
 		boolean bool = false;
 		try {
 			bool = ToolSecurityPbkdf2.authenticate(passWord, encryptedPassword, salt);
@@ -178,7 +178,7 @@ public class LoginService extends BaseService {
 			user = (User) userObj;
 		} else {
 			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("column", User.colunm_username);
+			param.put("column", User.column_username);
 			String sql = getSqlByBeetl(User.sqlId_column, param);
 			List<User> userList = User.dao.find(sql, userName);
 			if (userList.size() != 1) {
@@ -188,16 +188,16 @@ public class LoginService extends BaseService {
 		}
 		
 		// 2.停用账户
-		String status = user.getStr(User.colunm_status);
+		String status = user.getStr(User.column_status);
 		if (status.equals("0")) {
 			return ConstantLogin.login_info_1;
 		}
 
 		// 3.密码错误次数超限
-		int errorCount = user.getNumber(User.colunm_errorcount).intValue();
+		int errorCount = user.getNumber(User.column_errorcount).intValue();
 		int passErrorCount = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_passErrorCount_key)).intValue();
 		if(errorCount >= passErrorCount){
-			Date stopDate = user.getDate(User.colunm_stopdate);
+			Date stopDate = user.getDate(User.column_stopdate);
 			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
 			int passErrorHour = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_passErrorHour_key)).intValue();
 			if(hourSpace < passErrorHour){
@@ -211,8 +211,8 @@ public class LoginService extends BaseService {
 		}
 
 		// 4.验证密码
-		byte[] salt = user.getBytes(User.colunm_salt);// 密码盐
-		byte[] encryptedPassword = user.getBytes(User.colunm_password);
+		byte[] salt = user.getBytes(User.column_salt);// 密码盐
+		byte[] encryptedPassword = user.getBytes(User.column_password);
 		boolean bool = false;
 		try {
 			bool = ToolSecurityPbkdf2.authenticate(passWord, encryptedPassword, salt);

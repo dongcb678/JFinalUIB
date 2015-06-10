@@ -24,19 +24,19 @@ public class Questions extends BaseModel<Questions> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：最佳回答ids 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_answersids = "answersids";
+	public static final String column_answersids = "answersids";
 	
 	/**
 	 * 字段描述：内容主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_contentids = "contentids";
+	public static final String column_contentids = "contentids";
 
 	/**
 	 * sqlId : cms.questions.splitPageSelect

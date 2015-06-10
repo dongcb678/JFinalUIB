@@ -24,55 +24,55 @@ public class Trample extends BaseModel<Trample> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：乐观锁 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_version = "version";
+	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：分类 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_type = "type";
+	public static final String column_type = "type";
 	
 	/**
 	 * 字段描述：目标ids 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_targetids = "targetids";
+	public static final String column_targetids = "targetids";
 	
 	/**
 	 * 字段描述：创建人 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_createuser = "createuser";
+	public static final String column_createuser = "createuser";
 	
 	/**
 	 * 字段描述：创建时间 
 	 * 字段类型 ：timestamp with time zone 
 	 */
-	public static final String colunm_createdate = "createdate";
+	public static final String column_createdate = "createdate";
 	
 	/**
 	 * 字段描述：是否删除 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_isdelete = "isdelete";
+	public static final String column_isdelete = "isdelete";
 	
 	/**
 	 * 字段描述：删除人 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_deleteuser = "deleteuser";
+	public static final String column_deleteuser = "deleteuser";
 	
 	/**
 	 * 字段描述：删除时间 
 	 * 字段类型 ：timestamp with time zone 
 	 */
-	public static final String colunm_deletedate = "deletedate";
+	public static final String column_deletedate = "deletedate";
 
 	/**
 	 * sqlId : blog.trample.splitPageSelect

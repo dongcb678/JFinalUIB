@@ -24,49 +24,49 @@ public class AccessStatistics extends BaseModel<AccessStatistics> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：乐观锁 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_version = "version";
+	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：总数量 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_total = "total";
+	public static final String column_total = "total";
 	
 	/**
 	 * 字段描述：昨日 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_yesterday = "yesterday";
+	public static final String column_yesterday = "yesterday";
 	
 	/**
 	 * 字段描述：今日 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_today = "today";
+	public static final String column_today = "today";
 	
 	/**
 	 * 字段描述：本周 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_week = "week";
+	public static final String column_week = "week";
 	
 	/**
 	 * 字段描述：本月 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_month = "month";
+	public static final String column_month = "month";
 	
 	/**
 	 * 字段描述：最后更新时间 
 	 * 字段类型 ：timestamp with time zone 
 	 */
-	public static final String colunm_updatedate = "updatedate";
+	public static final String column_updatedate = "updatedate";
 
 	/**
 	 * sqlId : common.accessStatistics.splitPageSelect

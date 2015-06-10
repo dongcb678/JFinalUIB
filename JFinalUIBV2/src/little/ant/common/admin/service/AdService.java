@@ -31,9 +31,9 @@ public class AdService extends BaseService {
 	 * @return
 	 */
 	public String save(Ad ad, String userIds){
-		ad.set(Ad.colunm_createuser, userIds);
-		ad.set(Ad.colunm_createdate, ToolDateTime.getSqlTimestamp(null));
-		ad.set(Ad.colunm_isdelete, "0");
+		ad.set(Ad.column_createuser, userIds);
+		ad.set(Ad.column_createdate, ToolDateTime.getSqlTimestamp(null));
+		ad.set(Ad.column_isdelete, "0");
 		ad.save();
 		return ad.getPKValue();
 	}

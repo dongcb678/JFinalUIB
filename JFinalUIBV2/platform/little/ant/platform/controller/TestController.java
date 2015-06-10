@@ -42,7 +42,7 @@ public class TestController extends BaseController {
 	 * 日志查询显示
 	 */
 	public void sysLog() {
-		defaultOrder(Syslog.colunm_startdate, "desc");
+		defaultOrder(Syslog.column_startdate, "desc");
 		SysLogService.service.list(splitPage);
 		render("/platform/test/sysLog.html");
 	}

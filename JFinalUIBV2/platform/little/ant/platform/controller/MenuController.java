@@ -77,7 +77,7 @@ public class MenuController extends BaseController {
 		Menu menu = getModel(Menu.class);
 		menu.update();
 		menu = Menu.dao.findById(menu.getPKValue());
-		redirect("/jf/platform/menu?systemsIds=" + menu.getStr(Menu.colunm_systemsids));
+		redirect("/jf/platform/menu?systemsIds=" + menu.getStr(Menu.column_systemsids));
 	}
 
 	/**

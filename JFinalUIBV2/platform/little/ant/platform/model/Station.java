@@ -27,61 +27,61 @@ public class Station extends BaseModelCache<Station> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_version = "version";
+	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：描述 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_description = "description";
+	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：图标 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_images = "images";
+	public static final String column_images = "images";
 	
 	/**
 	 * 字段描述：是否上级节点 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_isparent = "isparent";
+	public static final String column_isparent = "isparent";
 	
 	/**
 	 * 字段描述：名称 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_names = "names";
+	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：排序号 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_orderids = "orderids";
+	public static final String column_orderids = "orderids";
 	
 	/**
 	 * 字段描述：上级岗位ids 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_parentstationids = "parentstationids";
+	public static final String column_parentstationids = "parentstationids";
 	
 	/**
 	 * 字段描述：拥有的功能ids 
 	 * 字段类型 ：text 
 	 */
-	public static final String colunm_operatorids = "operatorids";
+	public static final String column_operatorids = "operatorids";
 	
 	/**
 	 * 字段描述：拥有的功能模块ids 
 	 * 字段类型 ：text 
 	 */
-	public static final String colunm_moduleids = "moduleids";
+	public static final String column_moduleids = "moduleids";
 
 	/**
 	 * sqlId : platform.station.all

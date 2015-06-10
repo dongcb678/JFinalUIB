@@ -24,55 +24,55 @@ public class Favorite extends BaseModel<Favorite> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：乐观锁 
 	 * 字段类型 ：bigint 
 	 */
-	public static final String colunm_version = "version";
+	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：标题 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_title = "title";
+	public static final String column_title = "title";
 	
 	/**
 	 * 字段描述：url地址 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_url = "url";
+	public static final String column_url = "url";
 	
 	/**
 	 * 字段描述：收藏用户 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_createuser = "createuser";
+	public static final String column_createuser = "createuser";
 	
 	/**
 	 * 字段描述：收藏时间 
 	 * 字段类型 ：timestamp with time zone 
 	 */
-	public static final String colunm_createdate = "createdate";
+	public static final String column_createdate = "createdate";
 	
 	/**
 	 * 字段描述：是否删除 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_isdelete = "isdelete";
+	public static final String column_isdelete = "isdelete";
 	
 	/**
 	 * 字段描述：删除人 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_deleteuser = "deleteuser";
+	public static final String column_deleteuser = "deleteuser";
 	
 	/**
 	 * 字段描述：删除时间 
 	 * 字段类型 ：timestamp with time zone 
 	 */
-	public static final String colunm_deletedate = "deletedate";
+	public static final String column_deletedate = "deletedate";
 
 	/**
 	 * sqlId : blog.favorite.splitPageSelect

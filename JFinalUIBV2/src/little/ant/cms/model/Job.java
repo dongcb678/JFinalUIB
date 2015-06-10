@@ -24,73 +24,73 @@ public class Job extends BaseModel<Job> {
 	 * 字段描述：主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_ids = "ids";
+	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：发布开始时间 
 	 * 字段类型 ：timestamp with time zone 
 	 */
-	public static final String colunm_startdate = "startdate";
+	public static final String column_startdate = "startdate";
 	
 	/**
 	 * 字段描述：发布截止时间 
 	 * 字段类型 ：timestamp with time zone 
 	 */
-	public static final String colunm_enddate = "enddate";
+	public static final String column_enddate = "enddate";
 	
 	/**
 	 * 字段描述：职位类别 : 字典配置 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_type = "type";
+	public static final String column_type = "type";
 	
 	/**
 	 * 字段描述：工作年限 : 字典进行配置 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_year = "year";
+	public static final String column_year = "year";
 	
 	/**
 	 * 字段描述：学历 : 字典配置 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_education = "education";
+	public static final String column_education = "education";
 	
 	/**
 	 * 字段描述：薪水 : 字典配置 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_salary = "salary";
+	public static final String column_salary = "salary";
 	
 	/**
 	 * 字段描述：工作地点 : 字典配置 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_address = "address";
+	public static final String column_address = "address";
 	
 	/**
 	 * 字段描述：工作性质 : 0全职， 1兼职 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_nature = "nature";
+	public static final String column_nature = "nature";
 	
 	/**
 	 * 字段描述：管理经验 : 0要求， 1不要求 
 	 * 字段类型 ：character 
 	 */
-	public static final String colunm_manage = "manage";
+	public static final String column_manage = "manage";
 	
 	/**
 	 * 字段描述：招聘人数 : 字典配置 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_quantity = "quantity";
+	public static final String column_quantity = "quantity";
 	
 	/**
 	 * 字段描述：内容主键 
 	 * 字段类型 ：character varying 
 	 */
-	public static final String colunm_contentids = "contentids";
+	public static final String column_contentids = "contentids";
 
 	/**
 	 * sqlId : cms.job.splitPageSelect

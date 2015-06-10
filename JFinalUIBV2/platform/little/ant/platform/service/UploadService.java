@@ -30,11 +30,11 @@ public class UploadService extends BaseService {
 			String originalFileName = uploadFile.getOriginalFileName();
 			
 			Upload upload = new Upload();
-			upload.set(Upload.colunm_parametername, parameterName);
-			upload.set(Upload.colunm_filename, fileName);
-			upload.set(Upload.colunm_contenttype, contentType);
-			upload.set(Upload.colunm_originalfilename, originalFileName);
-			upload.set(Upload.colunm_path, pathType);
+			upload.set(Upload.column_parametername, parameterName);
+			upload.set(Upload.column_filename, fileName);
+			upload.set(Upload.column_contenttype, contentType);
+			upload.set(Upload.column_originalfilename, originalFileName);
+			upload.set(Upload.column_path, pathType);
 			upload.save();
 			
 			Map<String, String> map = new HashMap<String, String>();

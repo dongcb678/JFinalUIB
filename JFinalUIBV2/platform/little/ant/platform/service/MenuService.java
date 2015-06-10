@@ -53,7 +53,7 @@ public class MenuService extends BaseService {
 			node.setId(menu.getPKValue());
 			node.setName(menu.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + menu.getStr(Menu.colunm_images));
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + menu.getStr(Menu.column_images));
 			nodeList.add(node);
 		}
 		
@@ -72,7 +72,7 @@ public class MenuService extends BaseService {
 		String namesColunm = "names" + i18n(i18n);
 		
 		Menu pMenu = Menu.dao.findById(pIds);
-		pMenu.set(Menu.colunm_isparent, "true").update();
+		pMenu.set(Menu.column_isparent, "true").update();
 		
 		String images = "";
 		if(orderIds < 2 || orderIds > 9){
@@ -83,12 +83,12 @@ public class MenuService extends BaseService {
 		}
 
 		Menu menu = new Menu();
-		menu.set(Menu.colunm_isparent, "false");
-		menu.set(Menu.colunm_parentmenuids, pIds);
-		menu.set(Menu.colunm_orderids, orderIds);
+		menu.set(Menu.column_isparent, "false");
+		menu.set(Menu.column_parentmenuids, pIds);
+		menu.set(Menu.column_orderids, orderIds);
 		menu.set(namesColunm, names);
-		menu.set(Menu.colunm_images, images);
-		menu.set(Menu.colunm_systemsids, pMenu.getStr(Menu.colunm_systemsids));
+		menu.set(Menu.column_images, images);
+		menu.set(Menu.column_systemsids, pMenu.getStr(Menu.column_systemsids));
 		menu.save();
 		
 		return menu.getPKValue();
@@ -111,7 +111,7 @@ public class MenuService extends BaseService {
 			
 		}else if(null != pIds && !pIds.isEmpty()){
 			//更新上级模块
-			menu.set(Menu.colunm_parentmenuids, pIds).update();
+			menu.set(Menu.column_parentmenuids, pIds).update();
 		}
 	}
 	
@@ -124,17 +124,17 @@ public class MenuService extends BaseService {
 		Menu menu = Menu.dao.findById(ids);
 		
 		// 是否存在子节点
-		if(menu.getStr(Menu.colunm_isparent).equals("true")){
+		if(menu.getStr(Menu.column_isparent).equals("true")){
 			return false; //存在子节点，不能直接删除
 		}
 		
 		// 修改上级节点的isparent
-    	Menu pMenu = Menu.dao.findById(menu.getStr(Menu.colunm_parentmenuids));
+    	Menu pMenu = Menu.dao.findById(menu.getStr(Menu.column_parentmenuids));
 		String sql = getSql(Menu.sqlId_childCount);
 		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pMenu.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts == 1){
-	    	pMenu.set(Menu.colunm_isparent, "false");
+	    	pMenu.set(Menu.column_isparent, "false");
 	    	pMenu.update();
 	    }
 	    
@@ -152,7 +152,7 @@ public class MenuService extends BaseService {
 	 */
 	public void setOperator(String menuIds, String operatorIds){
 		Menu menu = Menu.dao.findById(menuIds);
-		menu.set(Menu.colunm_operatorids, operatorIds).update();
+		menu.set(Menu.column_operatorids, operatorIds).update();
 	}
 	
 }

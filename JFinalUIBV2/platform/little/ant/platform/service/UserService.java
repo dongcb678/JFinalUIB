@@ -36,16 +36,16 @@ public class UserService extends BaseService {
 			// 密码加密
 			byte[] salt = ToolSecurityPbkdf2.generateSalt();// 密码盐
 			byte[] encryptedPassword = ToolSecurityPbkdf2.getEncryptedPassword(password, salt);
-			user.set(User.colunm_salt, salt);
-			user.set(User.colunm_password, encryptedPassword);
+			user.set(User.column_salt, salt);
+			user.set(User.column_password, encryptedPassword);
 
 			// 保存用户信息
 			userInfo.save();
 
 			// 保存用户
-			user.set(User.colunm_userinfoids, userInfo.getPKValue());
-			user.set(User.colunm_errorcount, 0);
-			user.set(User.colunm_status, "1");
+			user.set(User.column_userinfoids, userInfo.getPKValue());
+			user.set(User.column_errorcount, 0);
+			user.set(User.column_status, "1");
 			user.save();
 
 			// 缓存
@@ -71,9 +71,9 @@ public class UserService extends BaseService {
 			// 密码加密
 			if (null != password && !password.trim().equals("")) {
 				User oldUser = User.dao.findById(user.getPKValue());
-				byte[] salt = oldUser.getBytes(User.colunm_salt);// 密码盐
+				byte[] salt = oldUser.getBytes(User.column_salt);// 密码盐
 				byte[] encryptedPassword = ToolSecurityPbkdf2.getEncryptedPassword(password, salt);
-				user.set(User.colunm_password, encryptedPassword);
+				user.set(User.column_password, encryptedPassword);
 			}
 
 			// 更新用户
@@ -96,7 +96,7 @@ public class UserService extends BaseService {
 		String[] idsArr = splitByComma(ids);
 		for (String userIds : idsArr) {
 			User user = User.dao.findById(userIds);
-			String userInfoIds = user.getStr(User.colunm_userinfoids);
+			String userInfoIds = user.getStr(User.column_userinfoids);
 
 			// 缓存
 			User.dao.cacheRemove(userIds);
@@ -115,7 +115,7 @@ public class UserService extends BaseService {
 	 */
 	public void setGroup(String userIds, String groupIds) {
 		User user = User.dao.findById(userIds);
-		user.set(User.colunm_groupids, groupIds).update();
+		user.set(User.column_groupids, groupIds).update();
 
 		// 缓存
 		User.dao.cacheAdd(userIds);
@@ -168,9 +168,9 @@ public class UserService extends BaseService {
 			if (null != deptIds) {
 				node.setIsParent(true);
 			} else {
-				node.setIsParent(Boolean.parseBoolean(dept.getStr(Department.colunm_isparent)));
+				node.setIsParent(Boolean.parseBoolean(dept.getStr(Department.column_isparent)));
 			}
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + dept.getStr(Department.colunm_images));
+			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + dept.getStr(Department.column_images));
 			nodeList.add(node);
 		}
 
@@ -194,11 +194,11 @@ public class UserService extends BaseService {
 	public boolean valiPassWord(String userName, String passWord) {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("column", User.colunm_username);
+			param.put("column", User.column_username);
 			String sql = getSqlByBeetl(User.sqlId_column, param);
 			User user = User.dao.findFirst(sql, userName);
-			byte[] salt = user.getBytes(User.colunm_salt);// 密码盐
-			byte[] encryptedPassword = user.getBytes(User.colunm_password);
+			byte[] salt = user.getBytes(User.column_salt);// 密码盐
+			byte[] encryptedPassword = user.getBytes(User.column_password);
 			boolean bool = ToolSecurityPbkdf2.authenticate(passWord, encryptedPassword, salt);
 			if (bool) {
 				return true;
@@ -219,13 +219,13 @@ public class UserService extends BaseService {
 	public void passChange(String userName, String passOld, String passNew){
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("column", User.colunm_username);
+			param.put("column", User.column_username);
 			String sql = getSqlByBeetl(User.sqlId_column, param);
 			User user = User.dao.findFirst(sql, userName);
 			
 			// 验证密码
-			byte[] salt = user.getBytes(User.colunm_salt);// 密码盐
-			byte[] encryptedPassword = user.getBytes(User.colunm_password);
+			byte[] salt = user.getBytes(User.column_salt);// 密码盐
+			byte[] encryptedPassword = user.getBytes(User.column_password);
 			boolean bool = false;
 			try {
 				bool = ToolSecurityPbkdf2.authenticate(passOld, encryptedPassword, salt);
@@ -237,8 +237,8 @@ public class UserService extends BaseService {
 			if (bool) {
 				byte[] saltNew = ToolSecurityPbkdf2.generateSalt();// 密码盐
 				byte[] encryptedPasswordNew = ToolSecurityPbkdf2.getEncryptedPassword(passNew, saltNew);
-				user.set(User.colunm_salt, saltNew);
-				user.set(User.colunm_password, encryptedPasswordNew);
+				user.set(User.column_salt, saltNew);
+				user.set(User.column_password, encryptedPasswordNew);
 				// 更新用户
 				user.update();
 				// 缓存

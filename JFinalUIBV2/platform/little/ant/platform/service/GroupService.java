@@ -69,7 +69,7 @@ public class GroupService extends BaseService {
 	public Map<String,Object> select(String ids){
 		List<Group> noCheckedList = new ArrayList<Group>();
 		List<Group> checkedList = new ArrayList<Group>();
-		String groupIds = User.dao.findById(ids).getStr(User.colunm_groupids);
+		String groupIds = User.dao.findById(ids).getStr(User.column_groupids);
 		if(null != groupIds && !groupIds.equals("")){
 			String fitler = toSql(groupIds);
 
@@ -95,7 +95,7 @@ public class GroupService extends BaseService {
 	 */
 	public void setRole(String groupIds, String roleIds){
 		Group group = Group.dao.findById(groupIds);
-		group.set(Group.colunm_roleids, roleIds).update();
+		group.set(Group.column_roleids, roleIds).update();
 		
 		// 缓存
 		Group.dao.cacheAdd(groupIds);
