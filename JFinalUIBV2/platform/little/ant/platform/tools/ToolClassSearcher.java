@@ -31,7 +31,13 @@ public class ToolClassSearcher {
         		continue;
         	}
         	
-            Class<?> classInFile = ToolReflect.on(classFile).get();
+            Class<?> classInFile = null;
+            try {
+            	classInFile = Class.forName(classFile);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();;
+            }
+            
             if (clazz.isAssignableFrom(classInFile) && clazz != classInFile) {
                 classList.add((Class<? extends T>) classInFile);
             }

@@ -50,6 +50,16 @@ public class ToolHttp {
 	private static Logger log = Logger.getLogger(ToolHttp.class);
 
 	/**
+	 * HTTP请求方法GET
+	 */
+	public static final String http_method_get = "GET";
+
+	/**
+	 * HTTP请求方法POST
+	 */
+	public static final String http_method_post = "POST";
+
+	/**
 	 * 进行HttpClient get连接
 	 * @param isHttps 是否ssl链接
 	 * @param url
