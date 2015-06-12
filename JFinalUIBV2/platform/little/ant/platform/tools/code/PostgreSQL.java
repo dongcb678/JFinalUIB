@@ -93,26 +93,35 @@ public class PostgreSQL extends Base {
 			conn = DriverManager.getConnection(url, user, pass);
 			stmt = (Statement) conn.createStatement();
 
+			List<String> listDesc = getDesc(tableName);
+			int index = 1;
+			
 			rs = (ResultSet) stmt.executeQuery("select column_name, data_type, character_maximum_length from information_schema.columns where table_name = '"+tableName+"'");
 			while (rs.next()) {
 				String column_name = rs.getString("column_name");
 				String data_type = rs.getString("data_type");
 				String character_maximum_length = rs.getString("character_maximum_length");
+
+				// 需要跳过的字段
+				if("xxx".equals(column_name) || "yyy".equals(column_name) || "zzz".equals(column_name)){
+					index += 1;
+					continue;
+				}
 				
 				ColumnDto table = new ColumnDto();
 				table.setTable_name(tableName);
 				table.setColumn_name(column_name);
 				table.setColumn_type(data_type);
 				table.setColumn_length(character_maximum_length);
+
+				table.setTable_desc(listDesc.get(0));
+				table.setColumn_desc(listDesc.get(index));
+				
 				list.add(table);
+				
+				index += 1;
 			}
 			
-			List<String> listDesc = getDesc(tableName);
-			for (int i = 0; i < list.size(); i++) {
-				ColumnDto column = list.get(i);
-				column.setTable_desc(listDesc.get(0));
-				column.setColumn_desc(listDesc.get(i+1));
-			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return list;
