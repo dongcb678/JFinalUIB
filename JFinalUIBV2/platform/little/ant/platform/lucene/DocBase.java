@@ -33,7 +33,8 @@ import org.apache.lucene.search.highlight.Scorer;
 import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.store.Directory;
-import org.wltea.analyzer.lucene.IKAnalyzer;
+import org.lionsoul.jcseg.analyzer.JcsegAnalyzer5X;
+import org.lionsoul.jcseg.core.JcsegTaskConfig;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Table;
@@ -50,9 +51,27 @@ import com.jfinal.plugin.activerecord.TableMapping;
  */
 public abstract class DocBase implements Runnable {
 	
-	protected static final int splitDataSize = 200;//初始化索引，每批次处理一万行
+	/**
+	 * 初始化索引，每批次处理一万行
+	 */
+	protected static final int splitDataSize = 200;
 	
-	protected static final Analyzer analyzer = new IKAnalyzer();//分词器
+	/**
+	 * IKAnalyzer 分词器
+	 */
+	//protected static final Analyzer analyzer = new IKAnalyzer();//分词器
+	
+	/**
+	 * Jcseg 分词器
+	 * 
+	 * 1.JcsegTaskConfig.COMPLEX_MODE 为复杂模式：
+	 * 特点：四种过滤算法。
+	 * 
+	 * 2.JcsegTaskConfig.SIMPLE_MODE 为简易模式
+	 * 特点：只使用了最大化过滤算法，其他的同复杂模式。
+	 * 
+	*/
+	protected static final Analyzer analyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
 	
 	/**
 	 * 获取索引路径
@@ -103,6 +122,7 @@ public abstract class DocBase implements Runnable {
 
 	/**
 	 * 高亮器
+	 * @param query
 	 * @return
 	 */
 	protected Highlighter getHighlighter(Query query) {
@@ -142,10 +162,8 @@ public abstract class DocBase implements Runnable {
 	/**
 	 * 根据对象属性名称返回lucene对象的Fields
 	 * @param fieldNames
-	 * @param entityClass
+	 * @param modelClass
 	 * @return
-	 * @throws NoSuchFieldException
-	 * @throws SecurityException
 	 */
 	protected <T extends BaseModel<?>> List<Field> getFields(String[] fieldNames, Class<T> modelClass){
 		List<Field> fields = new LinkedList<Field>();
