@@ -1,9 +1,11 @@
 
 1.修改文件上传的名称策略：FileRenamePolicyPlugin
+
 	在com.jfinal.upload包中新增FileRenamePolicyPlugin
 	修改MultipartRequest第40行，调用FileRenamePolicyPlugin
 
 2.表单数组上传：ToolModel
+
 	在com.jfinal.core包中新增ToolModel类
 
 3.增加sql打印格式化
@@ -19,4 +21,9 @@
 	修改JettyServer类的88-99行
 	
 6.FreeMarker过时方法处理
+
 	FreeMarkerRender.java
+	
+7.增加SqlServer方言类
+
+	com.jfinal.plugin.activerecord.dialect.MsSqlDialect2005.java
