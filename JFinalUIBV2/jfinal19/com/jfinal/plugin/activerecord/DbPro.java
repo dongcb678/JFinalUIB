@@ -25,7 +25,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.jfinal.plugin.activerecord.cache.ICache;
+
 import static com.jfinal.plugin.activerecord.DbKit.NULL_PARA_ARRAY;
 
 /**
@@ -477,6 +479,49 @@ public class DbPro {
 		List<Record> list = find(config, conn, sql.toString(), paras);
 		return new Page<Record>(list, pageNumber, pageSize, totalPage, (int)totalRow);
 	}
+
+	/**
+	 * 处理distinct分页支持
+	 * @param config
+	 * @param conn
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param select
+	 * @param selectCount
+	 * @param sqlExceptSelect
+	 * @param paras
+	 * @return
+	 * @throws SQLException
+	 */
+	Page<Record> paginate(Config config, Connection conn, int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect, Object... paras) throws SQLException {
+		if (pageNumber < 1 || pageSize < 1)
+			throw new ActiveRecordException("pageNumber and pageSize must be more than 0");
+		
+		if (config.dialect.isTakeOverDbPaginate())
+			return config.dialect.takeOverDbPaginate(conn, pageNumber, pageSize, select, sqlExceptSelect, paras);
+		
+		long totalRow = 0;
+		int totalPage = 0;
+		List result = query(config, conn, selectCount + DbKit.replaceFormatSqlOrderBy(sqlExceptSelect), paras);
+		int size = result.size();
+		if (size == 1)
+			totalRow = ((Number)result.get(0)).longValue();
+		else if (size > 1)
+			totalRow = result.size();
+		else
+			return new Page<Record>(new ArrayList<Record>(0), pageNumber, pageSize, 0, 0);
+		
+		totalPage = (int) (totalRow / pageSize);
+		if (totalRow % pageSize != 0) {
+			totalPage++;
+		}
+		
+		// --------
+		StringBuilder sql = new StringBuilder();
+		config.dialect.forPaginate(sql, pageNumber, pageSize, select, sqlExceptSelect);
+		List<Record> list = find(config, conn, sql.toString(), paras);
+		return new Page<Record>(list, pageNumber, pageSize, totalPage, (int)totalRow);
+	}
 	
 	/**
 	 * @see #paginate(String, int, int, String, String, Object...)
@@ -486,6 +531,28 @@ public class DbPro {
 		try {
 			conn = config.getConnection();
 			return paginate(config, conn, pageNumber, pageSize, select, sqlExceptSelect, paras);
+		} catch (Exception e) {
+			throw new ActiveRecordException(e);
+		} finally {
+			config.close(conn);
+		}
+	}
+
+	/**
+	 * 处理distinct分页支持
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param selectSql 示例 select dictinc colunm1 
+	 * @param countSql	示例 select count(dictinc colunm1) 
+	 * @param fromSql  	示例 from table1 where colunm1='aa'
+	 * @param paras
+	 * @return
+	 */
+	public Page<Record> paginate(int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect, Object... paras) {
+		Connection conn = null;
+		try {
+			conn = config.getConnection();
+			return paginate(config, conn, pageNumber, pageSize, select, selectCount, sqlExceptSelect, paras);
 		} catch (Exception e) {
 			throw new ActiveRecordException(e);
 		} finally {

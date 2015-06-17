@@ -75,6 +75,57 @@ public abstract class BaseService {
 	}
 
 	/**
+	 * Distinct分页
+	 * @param dataSource 数据源
+	 * @param splitPage
+	 * @param selectContent
+	 * @param selectCount
+	 * @param fromSqlId
+	 */
+	public void splitPageDistinctBase(String dataSource, SplitPage splitPage, String selectContent, String selectCount, String fromSqlId){
+		// 接收返回值对象
+		StringBuilder formSqlSb = new StringBuilder();
+		LinkedList<Object> paramValue = new LinkedList<Object>();
+		
+		// 调用生成from sql，并构造paramValue
+		String sql = ToolSqlXml.getSql(fromSqlId, splitPage.getQueryParam(), ConstantRender.sql_renderType_beetl, paramValue);
+		formSqlSb.append(sql);
+		
+		// 行级：过滤
+		rowFilter(formSqlSb);
+		
+		// 排序
+		String orderColunm = splitPage.getOrderColunm();
+		String orderMode = splitPage.getOrderMode();
+		if(null != orderColunm && !orderColunm.isEmpty() && null != orderMode && !orderMode.isEmpty()){
+			formSqlSb.append(" order by ").append(orderColunm).append(" ").append(orderMode);
+		}
+		
+		String formSql = formSqlSb.toString();
+		
+		// 分页封装
+		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), selectContent, selectCount, formSql, paramValue.toArray());
+		splitPage.setTotalPage(page.getTotalPage());
+		splitPage.setTotalRow(page.getTotalRow());
+		splitPage.setList(page.getList());
+		splitPage.compute();
+	}
+
+	/**
+	 * Distinct分页
+	 * @param dataSource 数据源
+	 * @param splitPage
+	 * @param selectSqlId
+	 * @param selectCountId
+	 * @param fromSqlId
+	 */
+	public void splitPageDistinctBySqlId(String dataSource, SplitPage splitPage, String selectSqlId, String selectCountId, String fromSqlId){
+		String selectSql = getSql(selectSqlId);
+		String selectCount = getSql(selectCountId);
+		splitPageDistinctBase(dataSource, splitPage, selectSql, selectCount, fromSqlId);
+	}
+
+	/**
      * 获取SQL，固定SQL
      * @param sqlId
      * @return

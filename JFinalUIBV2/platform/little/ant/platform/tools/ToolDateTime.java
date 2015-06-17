@@ -48,6 +48,22 @@ public class ToolDateTime {
 	public static Timestamp getSqlTimestamp(long time){
 		return new java.sql.Timestamp(time);
 	}
+
+	/**
+	 * 主要是给jfinal使用，数据库只认java.sql.*
+	 * @param date
+	 * @param pattern
+	 * @return
+	 */
+	public static Timestamp getSqlTimestamp(String date, String pattern){
+		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		try {
+			return new java.sql.Timestamp(format.parse(date).getTime());
+		} catch (ParseException e) {
+			log.error("ToolDateTime.parse异常：date值" + date + "，pattern值" + pattern);
+			return null;
+		}
+	}
 	
 	/**
 	 * 获取当前时间
