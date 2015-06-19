@@ -1,6 +1,5 @@
 package little.ant.weixin.service;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Group;
@@ -12,11 +11,14 @@ import little.ant.weixin.tools.ToolWeiXin;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class GroupService extends BaseService {
 
 	private static Logger log = Logger.getLogger(GroupService.class);
 
-	public static final GroupService service = MyTxProxy.newProxy(GroupService.class);
+	public static final GroupService service = Enhancer.enhance(GroupService.class, Tx.class);
 	
 	/**
 	 * 分页

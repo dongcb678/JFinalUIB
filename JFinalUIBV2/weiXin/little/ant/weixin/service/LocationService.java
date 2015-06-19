@@ -1,17 +1,19 @@
 package little.ant.weixin.service;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class LocationService extends BaseService {
 
 	private static Logger log = Logger.getLogger(LocationService.class);
 
-	public static final LocationService service = MyTxProxy.newProxy(LocationService.class);
+	public static final LocationService service = Enhancer.enhance(LocationService.class, Tx.class);
 	
 	/**
 	 * 分页

@@ -1,7 +1,10 @@
 package little.ant.cms.admin.service;
 
 import little.ant.cms.model.Job;
-import little.ant.platform.annotation.MyTxProxy;
+
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -13,7 +16,7 @@ public class JobService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(JobService.class);
 	
-	public static final JobService service = MyTxProxy.newProxy(JobService.class);
+	public static final JobService service = Enhancer.enhance(JobService.class, Tx.class);
 	
 	/**
 	 * 分页

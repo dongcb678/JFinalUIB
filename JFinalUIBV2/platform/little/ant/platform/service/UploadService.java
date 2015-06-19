@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Upload;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.upload.UploadFile;
 
 public class UploadService extends BaseService {
@@ -19,7 +20,7 @@ public class UploadService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UploadService.class);
 
-	public static final UploadService service = MyTxProxy.newProxy(UploadService.class);
+	public static final UploadService service = Enhancer.enhance(UploadService.class, Tx.class);
 	
 	public List<Map<String, String>> upload(String pathType, List<UploadFile> files){
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();

@@ -1,7 +1,10 @@
 package little.ant.blog.admin.service;
 
 import little.ant.blog.model.Article;
-import little.ant.platform.annotation.MyTxProxy;
+
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -13,7 +16,7 @@ public class ArticleService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ArticleService.class);
 	
-	public static final ArticleService service = MyTxProxy.newProxy(ArticleService.class);
+	public static final ArticleService service = Enhancer.enhance(ArticleService.class, Tx.class);
 	
 	/**
 	 * 分页

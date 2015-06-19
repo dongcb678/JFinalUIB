@@ -10,9 +10,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.platform.annotation.MyTxProxy;
-import little.ant.platform.constant.ConstantLogin;
 import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.constant.ConstantLogin;
 import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
@@ -23,14 +22,16 @@ import little.ant.platform.tools.ToolSecurityPbkdf2;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.tx.Tx;
 
 public class LoginService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginService.class);
 
-	public static final LoginService service = MyTxProxy.newProxy(LoginService.class);
+	public static final LoginService service = Enhancer.enhance(LoginService.class, Tx.class);
 
 	/**
 	 * 验证账号是否存在

@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Menu;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
@@ -20,7 +20,7 @@ public class MenuService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(MenuService.class);
 
-	public static final MenuService service = MyTxProxy.newProxy(MenuService.class);
+	public static final MenuService service = Enhancer.enhance(MenuService.class);
 	
 	/**
 	 * 获取子节点数据

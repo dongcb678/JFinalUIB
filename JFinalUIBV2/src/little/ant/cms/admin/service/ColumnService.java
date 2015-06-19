@@ -1,7 +1,10 @@
 package little.ant.cms.admin.service;
 
 import little.ant.cms.model.Column;
-import little.ant.platform.annotation.MyTxProxy;
+
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -13,7 +16,7 @@ public class ColumnService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ColumnService.class);
 	
-	public static final ColumnService service = MyTxProxy.newProxy(ColumnService.class);
+	public static final ColumnService service = Enhancer.enhance(ColumnService.class, Tx.class);
 	
 	/**
 	 * 分页

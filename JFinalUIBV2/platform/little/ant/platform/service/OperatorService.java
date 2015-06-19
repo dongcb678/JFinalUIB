@@ -3,7 +3,6 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.dto.ZtreeNode;
@@ -12,12 +11,15 @@ import little.ant.platform.model.Operator;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class OperatorService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(OperatorService.class);
 
-	public static final OperatorService service = MyTxProxy.newProxy(OperatorService.class);
+	public static final OperatorService service = Enhancer.enhance(OperatorService.class, Tx.class);
 	
 	/**
 	 * 保存

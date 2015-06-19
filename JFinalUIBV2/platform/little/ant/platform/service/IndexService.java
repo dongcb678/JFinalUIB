@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.model.Group;
 import little.ant.platform.model.Menu;
 import little.ant.platform.model.Role;
@@ -13,12 +12,15 @@ import little.ant.platform.model.User;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class IndexService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(IndexService.class);
 
-	public static final IndexService service = MyTxProxy.newProxy(IndexService.class);
+	public static final IndexService service = Enhancer.enhance(IndexService.class, Tx.class);
 	
 	/**
 	 * 查询用户可操作的菜单

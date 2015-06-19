@@ -1,17 +1,19 @@
 package little.ant.weixin.service;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.tools.ToolXml;
 import little.ant.weixin.tools.ToolMessage;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class MessageService extends BaseService {
 
 	private static Logger log = Logger.getLogger(MessageService.class);
 
-	public static final MessageService service = MyTxProxy.newProxy(MessageService.class);
+	public static final MessageService service = Enhancer.enhance(MessageService.class, Tx.class);
 	
 	/**
 	 * 消息处理

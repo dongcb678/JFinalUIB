@@ -1,7 +1,10 @@
 package little.ant.blog.admin.service;
 
 import little.ant.blog.model.Praise;
-import little.ant.platform.annotation.MyTxProxy;
+
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -13,7 +16,7 @@ public class PraiseService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(PraiseService.class);
 	
-	public static final PraiseService service = MyTxProxy.newProxy(PraiseService.class);
+	public static final PraiseService service = Enhancer.enhance(PraiseService.class, Tx.class);
 	
 	/**
 	 * 分页

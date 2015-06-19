@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Group;
@@ -13,12 +12,15 @@ import little.ant.platform.model.Role;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class RoleService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(RoleService.class);
 
-	public static final RoleService service = MyTxProxy.newProxy(RoleService.class);
+	public static final RoleService service = Enhancer.enhance(RoleService.class, Tx.class);
 	
 	/**
 	 * 保存

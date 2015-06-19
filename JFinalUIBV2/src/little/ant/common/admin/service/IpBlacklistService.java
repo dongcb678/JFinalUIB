@@ -1,7 +1,6 @@
 package little.ant.common.admin.service;
 
 import little.ant.common.model.IpBlacklist;
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -9,12 +8,15 @@ import little.ant.platform.tools.ToolDateTime;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class IpBlacklistService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(IpBlacklistService.class);
 	
-	public static final IpBlacklistService service = MyTxProxy.newProxy(IpBlacklistService.class);
+	public static final IpBlacklistService service = Enhancer.enhance(IpBlacklistService.class, Tx.class);
 	
 	/**
 	 * 分页

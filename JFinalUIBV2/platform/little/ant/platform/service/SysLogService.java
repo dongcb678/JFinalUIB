@@ -1,18 +1,20 @@
 package little.ant.platform.service;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Syslog;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class SysLogService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SysLogService.class);
 	
-	public static final SysLogService service = MyTxProxy.newProxy(SysLogService.class);
+	public static final SysLogService service = Enhancer.enhance(SysLogService.class, Tx.class);
 	
 	public Syslog view(String ids){
 		String sql = getSql(Syslog.sqlId_view);

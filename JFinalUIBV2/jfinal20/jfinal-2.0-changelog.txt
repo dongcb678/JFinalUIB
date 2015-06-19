@@ -1,0 +1,76 @@
+JFinal 2.0 changelog
+
+1：极速化业务层 AOP 支持
+
+2：极速化 redis 支持
+
+3：极速化 ActiveRecord 复合主键支持
+
+4：极速化 Model 多数据源多table支持
+
+5：极速化 i18n 支持
+
+6：ActionInvocation 更名为 Invocation
+
+7：ClearInterceptor更名为Clear，并增强功能，支持移除指定的拦截器，删掉ClearyLayer
+
+8：添加 Model.findFirstByCache(...)、Db.findFirstByCache(...)，方便对单个对象进行缓存，省时省力省代码
+
+9：Model.findById 带String columns 参数的方法更名为 findByIdLoadColumns
+
+10：删除 Db.findById 带String columns 的方法，可用 Db.findFirst 代替
+
+11：改进 Validator，添加系列方法支持 urlPara 验证。添加setDatePattern(...)方法可指定Date的pattern
+
+12：Db.batch(...) 系列方法添加事务及嵌套事务支持
+
+13：添加 Config.isInTransaction() 方法
+
+14：EncryptionKit 更名为 HashKit，并添加盐值生成方法generateSalt()
+
+15：改进 Tx 拦截器，放行 ActionException，便于 renderError 正确响应 error code
+
+16：添加 Sqls 工具类，用于加载和使用外部 sql 文件，例如：User.dao.find(Sqls.get("findAll"));
+
+17：ActiveRecord 添加 SqlServerDialect 支持 SqlServer 数据库
+
+18：添加 Controller.getParaValuesToLong(String)方法
+
+19：添加 OreillyCos.setFileRenamePolicy(...) 支持自定义上传文件重名时的更名策略
+
+20：改进 ActionMapping，在 actionKey 重复时终止启动而非输出警告，优化Action映射，进一步提升系统启动速度
+
+21：TableBuilder 重构，进一步减少代码量、提升性能，提高可读性
+
+22：添加 com.jfinal.ext.kit.ElResolverListener 支持 weblogic 等容器注册 EL增强
+
+23：CacheInterceptor 添加 JsonRender 支持
+
+24：去掉了 Render 类中所有方法的 final 关键字，更加便于扩展自定义 render
+
+25：添加 PathKit.setRootClassPath(...) 方法，便于在如Resin这类容器下无法自动探测class目录时使用
+
+26：JsonKit、JsonRender 默认转换深度增大到 15 层
+
+27：添加 DbKit.removeConfig(...) 方法，便于动态管理多数源
+
+28：改进 JettyServer 在启动过程中允许抛出异常终止启动并退出 JVM
+
+29：改进 ActionException 在 renderError(...) 时支持 viewPath
+
+30：移除 SpringPlugin
+
+31：改进 PropKit，对多线程更加严格，让 PropKit 的重度使用者以及有代码洁癖工程师更加顺爽
+
+32：改进 Controller，urlPara 转换错误由 500 error 改为 404 error
+
+33：添加 Controller.checkUrlPara(...) 系列方法，支持严格 url，避免出现多余 urlPara
+
+34：Tx 拦截器开放 getConfigWithTxConfig() 方法，方便扩展自定义事务拦截器
+
+35：改进OneConnectionPerThread支持事务以及嵌套拦截
+
+36：TxByActionMethods 更名为 TxByMethods，可用于拦截控制层于业务层
+
+37：删除 Controller、Constants 中与 i18n 有关代码
+

@@ -1,7 +1,10 @@
 package little.ant.cms.admin.service;
 
 import little.ant.cms.model.Download;
-import little.ant.platform.annotation.MyTxProxy;
+
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -13,7 +16,7 @@ public class DownloadService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DownloadService.class);
 	
-	public static final DownloadService service = MyTxProxy.newProxy(DownloadService.class);
+	public static final DownloadService service = Enhancer.enhance(DownloadService.class, Tx.class);
 	
 	/**
 	 * 分页

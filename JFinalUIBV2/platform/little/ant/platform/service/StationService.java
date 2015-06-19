@@ -3,22 +3,23 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Station;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.tx.Tx;
 
 public class StationService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(StationService.class);
 
-	public static final StationService service = MyTxProxy.newProxy(StationService.class);
+	public static final StationService service = Enhancer.enhance(StationService.class, Tx.class);
 	
 	/**
 	 * 获取子节点数据

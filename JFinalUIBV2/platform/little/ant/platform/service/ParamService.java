@@ -3,21 +3,22 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Param;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.tx.Tx;
 
 public class ParamService extends BaseService {
 
 	private static Logger log = Logger.getLogger(ParamService.class);
 
-	public static final ParamService service = MyTxProxy.newProxy(ParamService.class);
+	public static final ParamService service = Enhancer.enhance(ParamService.class, Tx.class);
 	
 	/**
 	 * 保存

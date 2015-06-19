@@ -1,6 +1,5 @@
 package little.ant.platform.service;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Menu;
@@ -9,12 +8,15 @@ import little.ant.platform.model.Systems;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class SystemsService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SystemsService.class);
 
-	public static final SystemsService service = MyTxProxy.newProxy(SystemsService.class);
+	public static final SystemsService service = Enhancer.enhance(SystemsService.class, Tx.class);
 	
 	/**
 	 * 保存

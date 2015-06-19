@@ -2,7 +2,9 @@ package little.ant.blog.admin.service;
 
 import org.apache.log4j.Logger;
 
-import little.ant.platform.annotation.MyTxProxy;
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 import little.ant.platform.service.BaseService;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
@@ -13,7 +15,7 @@ public class ArticleCommentService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ArticleCommentService.class);
 	
-	public static final ArticleCommentService service = MyTxProxy.newProxy(ArticleCommentService.class);
+	public static final ArticleCommentService service = Enhancer.enhance(ArticleCommentService.class, Tx.class);
 	
 	/**
 	 * 分页

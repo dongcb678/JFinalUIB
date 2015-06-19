@@ -1,16 +1,18 @@
 package little.ant.platform.service;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.tools.ToolImageResize;
 import little.ant.platform.tools.ToolImageTailor;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class ImageService extends BaseService {
 
 	private static Logger log = Logger.getLogger(ImageService.class);
 
-	public static final ImageService service = MyTxProxy.newProxy(ImageService.class);
+	public static final ImageService service = Enhancer.enhance(ImageService.class, Tx.class);
 	
 	/**
 	 * 图片裁剪

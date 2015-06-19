@@ -1,6 +1,5 @@
 package little.ant.weixin.service;
 
-import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -9,11 +8,14 @@ import little.ant.weixin.model.Keyword;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 public class KeywordService extends BaseService {
 
 	private static Logger log = Logger.getLogger(KeywordService.class);
 
-	public static final KeywordService service = MyTxProxy.newProxy(KeywordService.class);
+	public static final KeywordService service = Enhancer.enhance(KeywordService.class, Tx.class);
 	
 	/**
 	 * 保存

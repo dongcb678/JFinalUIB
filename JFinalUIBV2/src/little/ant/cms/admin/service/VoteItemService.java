@@ -1,7 +1,10 @@
 package little.ant.cms.admin.service;
 
 import little.ant.cms.model.VoteItem;
-import little.ant.platform.annotation.MyTxProxy;
+
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.service.BaseService;
@@ -13,7 +16,7 @@ public class VoteItemService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(VoteItemService.class);
 	
-	public static final VoteItemService service = MyTxProxy.newProxy(VoteItemService.class);
+	public static final VoteItemService service = Enhancer.enhance(VoteItemService.class, Tx.class);
 	
 	/**
 	 * 分页
