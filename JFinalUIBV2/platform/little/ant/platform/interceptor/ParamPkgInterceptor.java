@@ -15,7 +15,7 @@ import little.ant.platform.tools.ToolDateTime;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 
 /**
  * 参数封装拦截器
@@ -26,8 +26,8 @@ public class ParamPkgInterceptor implements Interceptor {
 	private static Logger log = Logger.getLogger(ParamPkgInterceptor.class);
 	
 	@Override
-	public void intercept(ActionInvocation ai) {
-		BaseController controller = (BaseController) ai.getController();
+	public void intercept(Invocation invoc) {
+		BaseController controller = (BaseController) invoc.getController();
 		
 		Class<?> controllerClass = controller.getClass();
 		Class<?> superControllerClass = controllerClass.getSuperclass();
@@ -58,7 +58,7 @@ public class ParamPkgInterceptor implements Interceptor {
 
 		log.debug("*********************** 封装参数值到 controller 全局变量  end ***********************");
 		
-		ai.invoke();
+		invoc.invoke();
 		
 		log.debug("*********************** 设置全局变量值到 request start ***********************");
 

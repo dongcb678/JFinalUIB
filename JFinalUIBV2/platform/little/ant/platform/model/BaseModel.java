@@ -165,14 +165,20 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 * @return
 	 */
 	public String getPKValue(){
-		return this.getStr(getTable().getPrimaryKey());
+		String[] pkNameArr = getTable().getPrimaryKey();
+		String pk = "";
+		for (String pkName : pkNameArr) {
+			pk += this.getStr(pkName);
+		}
+		return pk;
 	}
 
 	/**
 	 * 重写save方法
 	 */
 	public boolean save() {
-		this.set(getTable().getPrimaryKey(), ToolUtils.getUuidByJdk(true)); // 设置主键值
+		String[] pkArr = getTable().getPrimaryKey();
+		this.set(pkArr[0], ToolUtils.getUuidByJdk(true)); // 设置主键值
 		if(getTable().hasColumnLabel(column_version)){ // 是否需要乐观锁控制
 			this.set(column_version, Long.valueOf(0)); // 初始化乐观锁版本号
 		}
@@ -189,12 +195,12 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		
 		if(hasVersion){// 是否需要乐观锁控制，表是否有version字段
 			String name = table.getName();
-			String pk = table.getPrimaryKey();
+			String[] pkArr = table.getPrimaryKey();
 			
 			// 1.数据是否还存在
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("table", name);
-			param.put("pk", pk);
+			param.put("pk", pkArr[0]);
 			String sql = ToolSqlXml.getSql(sqlId_version, param, ConstantRender.sql_renderType_beetl); 
 			Model<M> modelOld = findFirst(sql , getPKValue());
 			if(null == modelOld){ // 数据已经被删除

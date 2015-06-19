@@ -16,6 +16,7 @@ import little.ant.platform.handler.GlobalHandler;
 import little.ant.platform.interceptor.AuthenticationInterceptor;
 import little.ant.platform.interceptor.ParamPkgInterceptor;
 import little.ant.platform.plugin.ControllerPlugin;
+import little.ant.platform.plugin.FileRenamePlugin;
 import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.ParamInitPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
@@ -46,7 +47,6 @@ import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.activerecord.tx.TxByActionKeys;
-import com.jfinal.plugin.activerecord.tx.TxByActionMethods;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
@@ -182,6 +182,10 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("afterJFinalStart 配置Snaker插件");
 		SnakerPlugin snakerPlugin = new SnakerPlugin(druidPlugin, this.prop.getProperties());
 	    me.add(snakerPlugin);
+
+		log.info("afterJFinalStart 配置文件上传命名策略插件");
+		me.add(new FileRenamePlugin());
+		
 	}
 
 	/**
@@ -198,7 +202,6 @@ public class JfinalConfig extends JFinalConfig {
 		me.add(new ParamPkgInterceptor());
 		
 		// 配置开启事物规则
-		me.add(new TxByActionMethods("save", "update", "delete"));
 		me.add(new TxByRegex(".*save.*"));
 		me.add(new TxByRegex(".*update.*"));
 		me.add(new TxByRegex(".*delete.*"));

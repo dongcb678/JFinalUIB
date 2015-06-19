@@ -17,7 +17,7 @@ import little.ant.platform.tools.ToolWeb;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 
 /**
  * 权限认证拦截器
@@ -28,8 +28,8 @@ public class AuthenticationInterceptor implements Interceptor {
 	private static Logger log = Logger.getLogger(AuthenticationInterceptor.class);
 	
 	@Override
-	public void intercept(ActionInvocation ai) {
-		BaseController contro = (BaseController) ai.getController();
+	public void intercept(Invocation invoc) {
+		BaseController contro = (BaseController) invoc.getController();
 		HttpServletRequest request = contro.getRequest();
 		HttpServletResponse response = contro.getResponse();
 		
@@ -38,8 +38,8 @@ public class AuthenticationInterceptor implements Interceptor {
 		contro.setReqSysLog(reqSysLog);
 		
 		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");
-		String uri = ai.getActionKey(); // 默认就是ActionKey
-		if(ai.getMethodName().equals("toUrl")){
+		String uri = invoc.getActionKey(); // 默认就是ActionKey
+		if(invoc.getMethodName().equals("toUrl")){
 			uri = ToolContext.getParam(request, "toUrl"); // 否则就是toUrl的值
 		}
 		
@@ -137,7 +137,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		reqSysLog.set("actionstarttime", actionStartDate.getTime());
 
 		try {
-			ai.invoke();
+			invoc.invoke();
 		} catch (Exception e) {
 			e.printStackTrace();
 			
