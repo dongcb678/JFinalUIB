@@ -2,9 +2,10 @@ package little.ant.platform.model;
 
 import java.lang.reflect.Field;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,7 +17,9 @@ import oracle.sql.TIMESTAMP;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
 
@@ -161,16 +164,65 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	}
 
 	/**
-	 * 获取主键值
+	 * 获取表名称
+	 * 
+	 * @return
+	 */
+	protected String getTableName() {
+		return getTable().getName();
+	}
+
+	/**
+	 * 获取主键名称
+	 * @return
+	 */
+	public String[] getPKNameArr(){
+		return getTable().getPrimaryKey();
+	}
+
+	/**
+	 * 获取主键名称
+	 * @return
+	 */
+	public String getPKNameStr(){
+		String[] pkArr = getPKNameArr();
+		String pk = "";
+		for (String pkName : pkArr) {
+			pk += pkName + ",";
+		}
+		return pk;
+	}
+
+	/**
+	 * 获取主键值：非复合主键
 	 * @return
 	 */
 	public String getPKValue(){
 		String[] pkNameArr = getTable().getPrimaryKey();
-		String pk = "";
-		for (String pkName : pkNameArr) {
-			pk += this.getStr(pkName);
+		if(pkNameArr.length == 1){
+			return this.getStr(pkNameArr[0]);
+		}else{
+			String pk = "";
+			for (String pkName : pkNameArr) {
+				pk += this.get(pkName) + ",";
+			}
+			return pk;
 		}
-		return pk;
+	}
+
+	/**
+	 * 获取主键值：复合主键
+	 * @return
+	 */
+	public List<Object> getPKValueList(){
+		String[] pkNameArr = getTable().getPrimaryKey();
+		
+		List<Object> pkValueList = new ArrayList<Object>();
+		for (String pkName : pkNameArr) {
+			pkValueList.add(this.get(pkName));
+		}
+		
+		return pkValueList;
 	}
 
 	/**
@@ -178,10 +230,14 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 */
 	public boolean save() {
 		String[] pkArr = getTable().getPrimaryKey();
-		this.set(pkArr[0], ToolUtils.getUuidByJdk(true)); // 设置主键值
+		for (String pk : pkArr) {
+			this.set(pk, ToolUtils.getUuidByJdk(true)); // 设置主键值
+		}
+		
 		if(getTable().hasColumnLabel(column_version)){ // 是否需要乐观锁控制
 			this.set(column_version, Long.valueOf(0)); // 初始化乐观锁版本号
 		}
+		
 		return super.save();
 	}
 
@@ -194,16 +250,16 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		boolean hasVersion = table.hasColumnLabel(column_version);
 		
 		if(hasVersion){// 是否需要乐观锁控制，表是否有version字段
-			String name = table.getName();
-			String[] pkArr = table.getPrimaryKey();
-			
 			// 1.数据是否还存在
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("table", name);
-			param.put("pk", pkArr[0]);
-			String sql = ToolSqlXml.getSql(sqlId_version, param, ConstantRender.sql_renderType_beetl); 
-			Model<M> modelOld = findFirst(sql , getPKValue());
-			if(null == modelOld){ // 数据已经被删除
+//			Map<String, Object> param = new HashMap<String, Object>();
+//			param.put("table", name);
+//			param.put("pk", pkArr[0]);
+//			String sql = ToolSqlXml.getSql(sqlId_version, param, ConstantRender.sql_renderType_beetl); 
+			
+			Record recordOld = Db.findById(table.getName(), getPKNameStr(), getPKValueList().toArray());
+			
+//			Model<M> modelOld = findFirst(sql , getPKValue());
+			if(null == recordOld){ // 数据已经被删除
 				throw new RuntimeException("数据库中此数据不存在，可能数据已经被删除，请刷新数据后在操作");
 			}
 			
@@ -233,7 +289,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			}
 			boolean versionModify = modifyFlag.contains(column_version); // 表单是否包含version字段
 			if(versionModify){
-				Long versionDB = modelOld.getNumber(column_version).longValue(); // 数据库中的版本号
+				Long versionDB = recordOld.getNumber(column_version).longValue(); // 数据库中的版本号
 				Long versionForm = getNumber(column_version).longValue() + 1; // 表单中的版本号
 				if(!(versionForm > versionDB)){
 					throw new RuntimeException("表单数据版本号和数据库数据版本号不一致，可能数据已经被其他人修改，请重新编辑");
