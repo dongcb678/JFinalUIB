@@ -150,12 +150,27 @@ public class ToolContext {
 	 * @param content
 	 */
 	public static void outPage(HttpServletResponse response, String content) {
+		try {
+			outPage(response, content.getBytes(ToolString.encoding)); // char to byte 性能提升
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 输出servlet文本内容
+	 * 
+	 * @author 董华健 2012-9-14 下午8:04:01
+	 * @param response
+	 * @param content
+	 */
+	public static void outPage(HttpServletResponse response, byte[] content) {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding(ToolString.encoding);
 		// PrintWriter out = response.getWriter();
 		// out.print(content);
 		try {
-			response.getOutputStream().write(content.getBytes(ToolString.encoding));// char to byte 性能提升
+			response.getOutputStream().write(content);// char to byte 性能提升
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
