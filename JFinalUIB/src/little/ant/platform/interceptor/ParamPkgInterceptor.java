@@ -11,6 +11,7 @@ import little.ant.platform.controller.BaseController;
 import little.ant.platform.model.Operator;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.tools.ToolDateTime;
+import little.ant.platform.tools.ToolString;
 
 import org.apache.log4j.Logger;
 
@@ -85,17 +86,19 @@ public class ParamPkgInterceptor implements Interceptor {
 		// 分页查询参数分拣
 		Map<String, String> queryParam = new HashMap<String, String>();
 		Enumeration<String> paramNames = controller.getParaNames();
+		String name = null;
+		String value = null;
+		String key = null;
 		while (paramNames.hasMoreElements()) {
-			String name = paramNames.nextElement();
-			if (name.startsWith("_query.")) {
-				String value = controller.getPara(name);
+			name = paramNames.nextElement();
+			value = controller.getPara(name);
+			if (name.startsWith("_query") && null != value && !value.trim().isEmpty()) {// 查询参数分拣
 				log.debug("分页，查询参数：name = " + name + " value = " + value);
-				if(null != value){
-					value = value.trim();
-					if(!value.isEmpty()){
-						String key = name.substring(7);
-						queryParam.put(key, value);
-					}
+				key = name.substring(7);
+				if(ToolString.regExpVali(key, ToolString.regExp_letter_5)){
+					queryParam.put(key, value.trim());
+				}else{
+					log.error("分页，查询参数存在恶意提交字符：name = " + name + " value = " + value);
 				}
 			}
 		}

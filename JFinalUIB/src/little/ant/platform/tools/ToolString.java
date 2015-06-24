@@ -72,6 +72,18 @@ public abstract class ToolString {
 	public final static String encoding = "UTF-8";
 
 	/**
+	 * 验证字符串是否匹配指定正则表达式
+	 * @param content
+	 * @param regExp
+	 * @return
+	 */
+	public static boolean regExpVali(String content, String regExp){
+		Pattern pattern = Pattern.compile(regExp);
+		Matcher matcher = pattern.matcher(content);
+		return matcher.matches();
+	}
+
+	/**
 	 * Url Base64编码
 	 * 
 	 * @param data
