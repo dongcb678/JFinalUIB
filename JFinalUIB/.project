@@ -5,6 +5,7 @@
 	<projects>
 	</projects>
 	<buildSpec>
+		<!--
 		<buildCommand>
 			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
 			<triggers>full,incremental,</triggers>
@@ -15,6 +16,7 @@
 				</dictionary>
 			</arguments>
 		</buildCommand>
+		-->
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
@@ -36,6 +38,8 @@
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<!--
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+		-->
 	</natures>
 </projectDescription>
