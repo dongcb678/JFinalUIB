@@ -1,5 +1,6 @@
 package little.ant.weixin.lucene;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,12 +23,16 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
+import org.apache.lucene.index.TrackingIndexWriter;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.ControlledRealTimeReopenThread;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.SearcherFactory;
+import org.apache.lucene.search.SearcherManager;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.SortField.Type;
@@ -67,6 +72,7 @@ public class DocKeyword extends DocBase {
 	
 	@Override
 	public void run() {
+		init();
 		indexAllKeyword();
 	}
 
@@ -85,7 +91,6 @@ public class DocKeyword extends DocBase {
 
 		for (int i = 0; i < batchCount; i++) {
 			log.info("索引批次：" + i);
-			IndexWriter ramIndexWriter = getRamIndexWriter();//调用RAM写
 			List<Keyword> list = Keyword.dao.find(sql, DocBase.splitDataSize, i * DocBase.splitDataSize);
 			for (Keyword keyword : list) {
 				addDoc(ramIndexWriter, keyword, document, fields);
@@ -101,7 +106,6 @@ public class DocKeyword extends DocBase {
 	 * @param keyword
 	 */
 	public void add(Keyword keyword) {
-		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		Document document = new Document();
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		addDoc(diskIndexWriter, keyword, document, fields);
@@ -118,7 +122,6 @@ public class DocKeyword extends DocBase {
 	 * @param keyword
 	 */
 	public void update(Keyword keyword){
-		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		Document document = new Document();
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		updateDoc(diskIndexWriter, keyword, document, fields);
@@ -135,7 +138,6 @@ public class DocKeyword extends DocBase {
 	 * @param ids
 	 */
 	public void delete(String ids){
-		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		deleteDoc(diskIndexWriter, ids);
 	}
 	
@@ -154,7 +156,6 @@ public class DocKeyword extends DocBase {
             
         	Query query = queryParser.parse(searchKeyWords);
             
-        	searcher = getSearcher();
 			TopDocs topDocs = searcher.search(query, 1);
 			
             int length = topDocs.totalHits;//当前页有多少条记录
@@ -194,7 +195,7 @@ public class DocKeyword extends DocBase {
             	TopFieldCollector results = TopFieldCollector.create(sort, 1000, false, false, false);
                 //TopScoreDocCollector results = TopScoreDocCollector.create(1000, true);//收集1000条数据，限制查询结果的条目
             	
-            	getSearcher().search(query, results);
+            	searcher.search(query, results);
                 //TopDocs topDocs = getSearcher().search(query, 10000, sort);
     			
             	int maxResult = splitPage.getPageSize();// 抓取数
@@ -236,108 +237,59 @@ public class DocKeyword extends DocBase {
 		}
 	}
 
-	protected String getIndexPath(){
-		if(null == indexPath){
-			String path = ToolOS.getOsPathType();
-			StringBuilder sb = new StringBuilder();
-			sb.append(PathKit.getWebRootPath()).append(path);
-			sb.append("WEB-INF").append(path).append("lucene").append(path);
-			sb.append("weiXin").append(path).append("keyword");//索引目录
-			indexPath = sb.toString();
-		}
-		return indexPath;
-	}
-	
 	@Override
-	protected Directory getDiskDir() {
+	protected void init() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(PathKit.getWebRootPath()).append(File.separator);
+		sb.append("WEB-INF").append(File.separator).append("lucene").append(File.separator);
+		sb.append("weiXin").append(File.separator).append("keyword");//索引目录
+		indexPath = sb.toString();
+		
 		try {
-			if (null == diskDir) {
-				Path path = Paths.get(getIndexPath());
-				diskDir = FSDirectory.open(path);
-			}
-			return diskDir;
+			Path path = Paths.get(indexPath);
+			diskDir = FSDirectory.open(path);
 		} catch (Exception e) {
-			throw new RuntimeException("创建getDiskDir异常!!!" + getIndexPath());
+			throw new RuntimeException("创建getDiskDir异常!!!" + indexPath);
 		}
-	}
-
-	@Override
-	protected IndexWriter getDiskIndexWriter() {
+		
 		try {
-			if (null == diskDir) {
-				getDiskDir();
-			}
-			if (null == diskIndexWriter) {
-				IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);// 索引分词配置
-				indexWriterConfig.setOpenMode(OpenMode.CREATE);//
-				diskIndexWriter = new IndexWriter(diskDir, indexWriterConfig);
-			}
-			return diskIndexWriter;
+			IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);// 索引分词配置
+			indexWriterConfig.setOpenMode(OpenMode.CREATE);//
+			diskIndexWriter = new IndexWriter(diskDir, indexWriterConfig);
+			
+		    TrackingIndexWriter tkWriter = new TrackingIndexWriter(diskIndexWriter); //为writer 包装了一层  
+		    SearcherManager mgr = new SearcherManager(diskIndexWriter, false, new SearcherFactory());  
+			log.info("创建线程，线程安全的，我们不须处理      ");
+		    ControlledRealTimeReopenThread<IndexSearcher> crtThread = new ControlledRealTimeReopenThread<IndexSearcher>(tkWriter, mgr, 5.0, 0.025);  
+            crtThread.setDaemon(true);//设为后台进程  
+            crtThread.setName("lucene实时索引线程");  
+            crtThread.start();//启动线程
 		} catch (Exception e) {
-			throw new RuntimeException("创建getDiskIndexWriter异常!!!" + getIndexPath());
+			throw new RuntimeException("创建getDiskIndexWriter异常!!!" + indexPath);
 		}
-	}
-
-	@Override
-	protected Directory getRamDir() {
+		
 		try {
-			if (null == diskIndexWriter) {
-				getDiskIndexWriter();
-			}
-			if (null == ramDir){
-				ramDir = new RAMDirectory((FSDirectory)diskDir, new IOContext());
-			}
-			return ramDir;
+			ramDir = new RAMDirectory((FSDirectory)diskDir, new IOContext());
 		} catch (Exception e) {
-			throw new RuntimeException("创建==getRamDir异常!!!" + getIndexPath());
+			throw new RuntimeException("创建==getRamDir异常!!!" + indexPath);
 		}
-	}
-
-	@Override
-	protected IndexWriter getRamIndexWriter() {
+		
 		try {
-			if(null == ramDir){
-				getRamDir();
-			}
-			if(null == ramIndexWriter){
-				IndexWriterConfig ramConfig = new IndexWriterConfig(analyzer);
-				ramConfig.setOpenMode(OpenMode.CREATE);//
-				ramIndexWriter = new IndexWriter(ramDir, ramConfig);
-			}
-			return ramIndexWriter;
+			IndexWriterConfig ramConfig = new IndexWriterConfig(analyzer);
+			ramConfig.setOpenMode(OpenMode.CREATE);//
+			ramIndexWriter = new IndexWriter(ramDir, ramConfig);
 		} catch (Exception e) {
-			throw new RuntimeException("创建==getRamIndexWriter异常!!!" + getIndexPath());
+			throw new RuntimeException("创建==getRamIndexWriter异常!!!" + indexPath);
 		}
-	}
-
-	@Override
-	protected IndexReader getReader() {
+		
 		try {
-			if(null == diskDir){
-				getDiskDir();
-			}
-			if(null == reader){
-				reader = DirectoryReader.open(diskDir);// 查询目标DISK：diskDir，RAM：ramDir
-			}
-			return reader;
+			reader = DirectoryReader.open(diskDir);// 查询目标DISK：diskDir，RAM：ramDir
 		} catch (Exception e) {
 			throw new RuntimeException("获取==getReader异常!!!");
 		}
-	}
-
-	@Override
-	protected IndexSearcher getSearcher() {
+		
 		try {
-			if(null == ramDir){
-				getRamDir();
-			}
-			if(null == reader){
-				getReader();
-			}
-			if(null == searcher){
-				searcher = new IndexSearcher(reader);
-			}
-			return searcher;
+			searcher = new IndexSearcher(reader);
 		} catch (Exception e) {
 			throw new RuntimeException("获取==getSearcher异常!!!");
 		}
