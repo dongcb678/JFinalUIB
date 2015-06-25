@@ -12,7 +12,6 @@ import little.ant.platform.beetl.tag.DictTag;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.lucene.DocBase;
-import little.ant.platform.tools.ToolOS;
 import little.ant.weixin.model.Keyword;
 
 import org.apache.log4j.Logger;
@@ -64,6 +63,10 @@ public class DocKeyword extends DocBase {
 	
 	private static IndexReader reader;
 	private static IndexSearcher searcher;
+	
+	private static TrackingIndexWriter tkWriter;
+	private static SearcherManager mgr;
+	private static ControlledRealTimeReopenThread<IndexSearcher> crtThread;
 	
 	//需要索引的字段
 	private static final String[] fieldNames = { 
@@ -257,10 +260,10 @@ public class DocKeyword extends DocBase {
 			indexWriterConfig.setOpenMode(OpenMode.CREATE);//
 			diskIndexWriter = new IndexWriter(diskDir, indexWriterConfig);
 			
-		    TrackingIndexWriter tkWriter = new TrackingIndexWriter(diskIndexWriter); //为writer 包装了一层  
-		    SearcherManager mgr = new SearcherManager(diskIndexWriter, false, new SearcherFactory());  
-			log.info("创建线程，线程安全的，我们不须处理      ");
-		    ControlledRealTimeReopenThread<IndexSearcher> crtThread = new ControlledRealTimeReopenThread<IndexSearcher>(tkWriter, mgr, 5.0, 0.025);  
+		    tkWriter = new TrackingIndexWriter(diskIndexWriter); //为writer 包装了一层  
+		    mgr = new SearcherManager(diskIndexWriter, false, new SearcherFactory());  
+			log.info("创建线程，线程安全的，我们不须处理");
+		    crtThread = new ControlledRealTimeReopenThread<IndexSearcher>(tkWriter, mgr, 5.0, 0.025);  
             crtThread.setDaemon(true);//设为后台进程  
             crtThread.setName("lucene实时索引线程");  
             crtThread.start();//启动线程
@@ -325,6 +328,7 @@ public class DocKeyword extends DocBase {
 		if(null != searcher){
 			searcher = null;
 		}
+		
 		if(null != reader){
 			try {
 				reader.close();
@@ -333,6 +337,7 @@ public class DocKeyword extends DocBase {
 				e.printStackTrace();
 			}
 		}
+		
 		if(null != ramIndexWriter){
 			try {
 				ramIndexWriter.close();
@@ -341,6 +346,7 @@ public class DocKeyword extends DocBase {
 				e.printStackTrace();
 			}
 		}
+		
 		if(null != ramDir){
 			try {
 				ramDir.close();
@@ -349,6 +355,23 @@ public class DocKeyword extends DocBase {
 				e.printStackTrace();
 			}
 		}
+
+		if (null != crtThread) {
+			crtThread.close();
+		}
+		
+		if (null != mgr) {
+			try {
+				mgr.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (null != tkWriter) {
+			tkWriter = null;
+		}
+		
 		if (null != diskIndexWriter) {
 			try {
 				diskIndexWriter.close();
@@ -357,6 +380,7 @@ public class DocKeyword extends DocBase {
 				e.printStackTrace();
 			}
 		}
+		
 		if (null != diskDir) {
 			try {
 				diskDir.close();
