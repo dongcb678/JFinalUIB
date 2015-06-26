@@ -18,3 +18,7 @@
 5.FreeMarker过时方法处理
 
 	FreeMarkerRender.java
+	
+6.处理distinct分页支持
+
+	修改 Db.java 和 DbPro.java， 增加 paginateDistinct 方法

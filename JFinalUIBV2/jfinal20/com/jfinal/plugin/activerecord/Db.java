@@ -352,6 +352,50 @@ public class Db {
 	public static Page<Record> paginate(int pageNumber, int pageSize, String select, String sqlExceptSelect) {
 		return dbPro.paginate(pageNumber, pageSize, select, sqlExceptSelect);
 	}
+
+	/**
+	 * 处理distinct分页支持
+	 * @param config
+	 * @param conn
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param select
+	 * @param selectCount
+	 * @param sqlExceptSelect
+	 * @param paras
+	 * @return
+	 * @throws SQLException
+	 */
+	static Page<Record> paginateDistinct(Config config, Connection conn, int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect, Object... paras) throws SQLException {
+		return dbPro.paginateDistinct(config, conn, pageNumber, pageSize, select, selectCount, sqlExceptSelect, paras);
+	}
+	
+	/**
+	 * 处理distinct分页支持
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param select
+	 * @param selectCount
+	 * @param sqlExceptSelect
+	 * @param paras
+	 * @return
+	 */
+	public static Page<Record> paginateDistinct(int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect, Object... paras) {
+		return dbPro.paginateDistinct(pageNumber, pageSize, select, selectCount, sqlExceptSelect, paras);
+	}
+	
+	/**
+	 * 处理distinct分页支持
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param select
+	 * @param selectCount
+	 * @param sqlExceptSelect
+	 * @return
+	 */
+	public static Page<Record> paginateDistinct(int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect) {
+		return dbPro.paginateDistinct(pageNumber, pageSize, select, selectCount, sqlExceptSelect);
+	}
 	
 	static boolean save(Config config, Connection conn, String tableName, String primaryKey, Record record) throws SQLException {
 		return dbPro.save(config, conn, tableName, primaryKey, record);
