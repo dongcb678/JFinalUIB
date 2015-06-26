@@ -32,6 +32,11 @@ public class SplitPage implements Serializable {
 	private int totalRow; // 总行数
 
 	/**
+	 * 分页返回扩展数据
+	 */
+	private Object extData; // 返回扩展数据
+	
+	/**
 	 * 分页显示辅助属性
 	 */
 	private int currentPageCount;// 当前页记录数量
@@ -173,6 +178,14 @@ public class SplitPage implements Serializable {
 
 	public void setLast(boolean isLast) {
 		this.isLast = isLast;
+	}
+
+	public Object getExtData() {
+		return extData;
+	}
+
+	public void setExtData(Object extData) {
+		this.extData = extData;
 	}
 
 }
