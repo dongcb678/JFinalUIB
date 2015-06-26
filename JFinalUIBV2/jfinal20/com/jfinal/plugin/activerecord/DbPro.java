@@ -499,19 +499,19 @@ public class DbPro {
 	 * @param conn
 	 * @param pageNumber
 	 * @param pageSize
-	 * @param select
+	 * @param selectColumn
 	 * @param selectCount
 	 * @param sqlExceptSelect
 	 * @param paras
 	 * @return
 	 * @throws SQLException
 	 */
-	Page<Record> paginateDistinct(Config config, Connection conn, int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect, Object... paras) throws SQLException {
+	Page<Record> paginateDistinct(Config config, Connection conn, int pageNumber, int pageSize, String selectColumn, String selectCount, String sqlExceptSelect, Object... paras) throws SQLException {
 		if (pageNumber < 1 || pageSize < 1)
 			throw new ActiveRecordException("pageNumber and pageSize must be more than 0");
 		
 		if (config.dialect.isTakeOverDbPaginate())
-			return config.dialect.takeOverDbPaginate(conn, pageNumber, pageSize, select, sqlExceptSelect, paras);
+			return config.dialect.takeOverDbPaginate(conn, pageNumber, pageSize, selectColumn, sqlExceptSelect, paras);
 		
 		long totalRow = 0;
 		int totalPage = 0;
@@ -531,7 +531,7 @@ public class DbPro {
 		
 		// --------
 		StringBuilder sql = new StringBuilder();
-		config.dialect.forPaginate(sql, pageNumber, pageSize, select, sqlExceptSelect);
+		config.dialect.forPaginate(sql, pageNumber, pageSize, selectColumn, sqlExceptSelect);
 		List<Record> list = find(config, conn, sql.toString(), paras);
 		return new Page<Record>(list, pageNumber, pageSize, totalPage, (int)totalRow);
 	}
@@ -540,16 +540,16 @@ public class DbPro {
 	 * 处理distinct分页支持
 	 * @param pageNumber
 	 * @param pageSize
-	 * @param select
+	 * @param selectColumn
 	 * @param sqlExceptSelect
 	 * @param paras
 	 * @return
 	 */
-	public Page<Record> paginateDistinct(int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect, Object... paras) {
+	public Page<Record> paginateDistinct(int pageNumber, int pageSize, String selectColumn, String selectCount, String sqlExceptSelect, Object... paras) {
 		Connection conn = null;
 		try {
 			conn = config.getConnection();
-			return paginateDistinct(config, conn, pageNumber, pageSize, select, selectCount, sqlExceptSelect, paras);
+			return paginateDistinct(config, conn, pageNumber, pageSize, selectColumn, selectCount, sqlExceptSelect, paras);
 		} catch (Exception e) {
 			throw new ActiveRecordException(e);
 		} finally {
@@ -561,12 +561,12 @@ public class DbPro {
 	 * 处理distinct分页支持
 	 * @param pageNumber
 	 * @param pageSize
-	 * @param select
+	 * @param selectColumn
 	 * @param sqlExceptSelect
 	 * @return
 	 */
-	public Page<Record> paginateDistinct(int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect) {
-		return paginateDistinct(pageNumber, pageSize, select, selectCount, sqlExceptSelect, NULL_PARA_ARRAY);
+	public Page<Record> paginateDistinct(int pageNumber, int pageSize, String selectColumn, String selectCount, String sqlExceptSelect) {
+		return paginateDistinct(pageNumber, pageSize, selectColumn, selectCount, sqlExceptSelect, NULL_PARA_ARRAY);
 	}
 
 	boolean save(Config config, Connection conn, String tableName, String primaryKey, Record record) throws SQLException {

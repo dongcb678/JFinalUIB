@@ -359,42 +359,42 @@ public class Db {
 	 * @param conn
 	 * @param pageNumber
 	 * @param pageSize
-	 * @param select
+	 * @param selectColumn
 	 * @param selectCount
 	 * @param sqlExceptSelect
 	 * @param paras
 	 * @return
 	 * @throws SQLException
 	 */
-	static Page<Record> paginateDistinct(Config config, Connection conn, int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect, Object... paras) throws SQLException {
-		return dbPro.paginateDistinct(config, conn, pageNumber, pageSize, select, selectCount, sqlExceptSelect, paras);
+	static Page<Record> paginateDistinct(Config config, Connection conn, int pageNumber, int pageSize, String selectColumn, String selectCount, String sqlExceptSelect, Object... paras) throws SQLException {
+		return dbPro.paginateDistinct(config, conn, pageNumber, pageSize, selectColumn, selectCount, sqlExceptSelect, paras);
 	}
 	
 	/**
 	 * 处理distinct分页支持
 	 * @param pageNumber
 	 * @param pageSize
-	 * @param select
+	 * @param selectColumn
 	 * @param selectCount
 	 * @param sqlExceptSelect
 	 * @param paras
 	 * @return
 	 */
-	public static Page<Record> paginateDistinct(int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect, Object... paras) {
-		return dbPro.paginateDistinct(pageNumber, pageSize, select, selectCount, sqlExceptSelect, paras);
+	public static Page<Record> paginateDistinct(int pageNumber, int pageSize, String selectColumn, String selectCount, String sqlExceptSelect, Object... paras) {
+		return dbPro.paginateDistinct(pageNumber, pageSize, selectColumn, selectCount, sqlExceptSelect, paras);
 	}
 	
 	/**
 	 * 处理distinct分页支持
 	 * @param pageNumber
 	 * @param pageSize
-	 * @param select
+	 * @param selectColumn
 	 * @param selectCount
 	 * @param sqlExceptSelect
 	 * @return
 	 */
-	public static Page<Record> paginateDistinct(int pageNumber, int pageSize, String select, String selectCount, String sqlExceptSelect) {
-		return dbPro.paginateDistinct(pageNumber, pageSize, select, selectCount, sqlExceptSelect);
+	public static Page<Record> paginateDistinct(int pageNumber, int pageSize, String selectColumn, String selectCount, String sqlExceptSelect) {
+		return dbPro.paginateDistinct(pageNumber, pageSize, selectColumn, selectCount, sqlExceptSelect);
 	}
 	
 	static boolean save(Config config, Connection conn, String tableName, String primaryKey, Record record) throws SQLException {
