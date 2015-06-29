@@ -493,6 +493,49 @@ public abstract class Model<M extends Model> implements Serializable {
 			config.close(conn);
 		}
 	}
+
+	/**
+	 * Update model.
+	 */
+	public boolean updateByVersion(Long version) {
+		if (getModifyFlag().isEmpty())
+			return false;
+		
+		Table table = getTable();
+		String[] pKeys = table.getPrimaryKey();
+		for (String pKey : pKeys) {
+			Object id = attrs.get(pKey);
+			if (id == null)
+				throw new ActiveRecordException("You can't update model without Primary Key, " + pKey + " can not be null.");
+		}
+		
+		Config config = getConfig();
+		StringBuilder sql = new StringBuilder();
+		List<Object> paras = new ArrayList<Object>();
+		config.dialect.forModelUpdate(table, attrs, getModifyFlag(), sql, paras);
+		
+		if (paras.size() <= 1) {	// Needn't update
+			return false;
+		}
+		
+		paras.add(version);
+		
+		// --------
+		Connection conn = null;
+		try {
+			conn = config.getConnection();
+			int result = Db.update(config, conn, sql.toString() + " and version < ? ", paras.toArray());
+			if (result >= 1) {
+				getModifyFlag().clear();
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			throw new ActiveRecordException(e);
+		} finally {
+			config.close(conn);
+		}
+	}
 	
 	/**
 	 * Find model.

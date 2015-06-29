@@ -22,3 +22,7 @@
 6.处理distinct分页支持
 
 	修改 Db.java 和 DbPro.java， 增加 paginateDistinct 方法
+	
+7.在Model.java中增加updateByVersion方法
+	
+	处理乐观锁

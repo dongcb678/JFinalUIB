@@ -17,9 +17,7 @@ import oracle.sql.TIMESTAMP;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
-import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
 
@@ -266,20 +264,6 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		boolean hasVersion = table.hasColumnLabel(column_version);
 		
 		if(hasVersion){// 是否需要乐观锁控制，表是否有version字段
-			// 1.数据是否还存在
-//			Map<String, Object> param = new HashMap<String, Object>();
-//			param.put("table", name);
-//			param.put("pk", pkArr[0]);
-//			String sql = ToolSqlXml.getSql(sqlId_version, param, ConstantRender.sql_renderType_beetl); 
-			
-			Record recordOld = Db.findById(table.getName(), getPKNameStr(), getPKValueList().toArray());
-			
-//			Model<M> modelOld = findFirst(sql , getPKValue());
-			if(null == recordOld){ // 数据已经被删除
-				throw new RuntimeException("数据库中此数据不存在，可能数据已经被删除，请刷新数据后在操作");
-			}
-			
-			// 2.乐观锁控制
 			Set<String> modifyFlag = null;
 			try {
 				Field field = null;
@@ -305,11 +289,8 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			}
 			boolean versionModify = modifyFlag.contains(column_version); // 表单是否包含version字段
 			if(versionModify){
-				Long versionDB = recordOld.getNumber(column_version).longValue(); // 数据库中的版本号
 				Long versionForm = getNumber(column_version).longValue() + 1; // 表单中的版本号
-				if(!(versionForm > versionDB)){
-					throw new RuntimeException("表单数据版本号和数据库数据版本号不一致，可能数据已经被其他人修改，请重新编辑");
-				}
+				return super.updateByVersion(versionForm); // ***** 增加updateByVersion方法 ***** //
 			}
 		}
 		
