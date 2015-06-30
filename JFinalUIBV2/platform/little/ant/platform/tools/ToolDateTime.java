@@ -27,7 +27,16 @@ public class ToolDateTime {
 	public static final String pattern_ymd = "yyyy-MM-dd"; // pattern_ymd
 	public static final String pattern_ymd_hms = "yyyy-MM-dd HH:mm:ss"; // pattern_ymdtime
 	public static final String pattern_ymd_hms_s = "yyyy-MM-dd HH:mm:ss:SSS"; // pattern_ymdtimeMillisecond
-	
+
+	/**
+	 * 主要是给jfinal使用，数据库只认java.sql.*
+	 * @param date
+	 * @return
+	 */
+	public static Timestamp getSqlTimestamp(){
+		return getSqlTimestamp(new Date().getTime());
+	}
+
 	/**
 	 * 主要是给jfinal使用，数据库只认java.sql.*
 	 * @param date
@@ -35,7 +44,7 @@ public class ToolDateTime {
 	 */
 	public static Timestamp getSqlTimestamp(Date date){
 		if(null == date){
-			date = new Date();
+			return getSqlTimestamp();
 		}
 		return getSqlTimestamp(date.getTime());
 	}
