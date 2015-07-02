@@ -75,7 +75,6 @@ public class DocKeyword extends DocBase {
 	
 	@Override
 	public void run() {
-		init();
 		indexAllKeyword();
 	}
 
@@ -92,6 +91,7 @@ public class DocKeyword extends DocBase {
 		int batchCount = getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
 		String sql = " select * from wx_keyword limit ? offset ? ";
 
+		IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写
 		for (int i = 0; i < batchCount; i++) {
 			log.info("索引批次：" + i);
 			List<Keyword> list = Keyword.dao.find(sql, DocBase.splitDataSize, i * DocBase.splitDataSize);
@@ -109,6 +109,7 @@ public class DocKeyword extends DocBase {
 	 * @param keyword
 	 */
 	public void add(Keyword keyword) {
+		IndexWriter diskIndexWriter = getDiskIndexWriter(); // 调用Disk写
 		Document document = new Document();
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		addDoc(diskIndexWriter, keyword, document, fields);
@@ -125,6 +126,7 @@ public class DocKeyword extends DocBase {
 	 * @param keyword
 	 */
 	public void update(Keyword keyword){
+		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		Document document = new Document();
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		updateDoc(diskIndexWriter, keyword, document, fields);
@@ -141,6 +143,7 @@ public class DocKeyword extends DocBase {
 	 * @param ids
 	 */
 	public void delete(String ids){
+		IndexWriter diskIndexWriter = getDiskIndexWriter();//调用Disk写
 		deleteDoc(diskIndexWriter, ids);
 	}
 	
@@ -158,7 +161,8 @@ public class DocKeyword extends DocBase {
             queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
             
         	Query query = queryParser.parse(searchKeyWords);
-            
+
+        	IndexSearcher searcher = getSearcher();
 			TopDocs topDocs = searcher.search(query, 1);
 			
             int length = topDocs.totalHits;//当前页有多少条记录
@@ -197,7 +201,8 @@ public class DocKeyword extends DocBase {
             	Sort sort = new Sort(new SortField("createdDate", Type.LONG, true));//true为降序排列
             	TopFieldCollector results = TopFieldCollector.create(sort, 1000, false, false, false);
                 //TopScoreDocCollector results = TopScoreDocCollector.create(1000, true);//收集1000条数据，限制查询结果的条目
-            	
+
+            	IndexSearcher searcher = getSearcher();
             	searcher.search(query, results);
                 //TopDocs topDocs = getSearcher().search(query, 10000, sort);
     			
@@ -240,64 +245,6 @@ public class DocKeyword extends DocBase {
 		}
 	}
 
-	@Override
-	protected void init() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(PathKit.getWebRootPath()).append(File.separator);
-		sb.append("WEB-INF").append(File.separator).append("lucene").append(File.separator);
-		sb.append("weiXin").append(File.separator).append("keyword");//索引目录
-		indexPath = sb.toString();
-		
-		try {
-			Path path = Paths.get(indexPath);
-			diskDir = FSDirectory.open(path);
-		} catch (Exception e) {
-			throw new RuntimeException("创建getDiskDir异常!!!" + indexPath);
-		}
-		
-		try {
-			IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);// 索引分词配置
-			indexWriterConfig.setOpenMode(OpenMode.CREATE);//
-			diskIndexWriter = new IndexWriter(diskDir, indexWriterConfig);
-			
-		    tkWriter = new TrackingIndexWriter(diskIndexWriter); //为writer 包装了一层  
-		    mgr = new SearcherManager(diskIndexWriter, false, new SearcherFactory());  
-			log.info("创建线程，线程安全的，我们不须处理");
-		    crtThread = new ControlledRealTimeReopenThread<IndexSearcher>(tkWriter, mgr, 5.0, 0.025);  
-            crtThread.setDaemon(true);//设为后台进程  
-            crtThread.setName("lucene实时索引线程");  
-            crtThread.start();//启动线程
-		} catch (Exception e) {
-			throw new RuntimeException("创建getDiskIndexWriter异常!!!" + indexPath);
-		}
-		
-		try {
-			ramDir = new RAMDirectory((FSDirectory)diskDir, new IOContext());
-		} catch (Exception e) {
-			throw new RuntimeException("创建==getRamDir异常!!!" + indexPath);
-		}
-		
-		try {
-			IndexWriterConfig ramConfig = new IndexWriterConfig(analyzer);
-			ramConfig.setOpenMode(OpenMode.CREATE);//
-			ramIndexWriter = new IndexWriter(ramDir, ramConfig);
-		} catch (Exception e) {
-			throw new RuntimeException("创建==getRamIndexWriter异常!!!" + indexPath);
-		}
-		
-		try {
-			reader = DirectoryReader.open(diskDir);// 查询目标DISK：diskDir，RAM：ramDir
-		} catch (Exception e) {
-			throw new RuntimeException("获取==getReader异常!!!");
-		}
-		
-		try {
-			searcher = new IndexSearcher(reader);
-		} catch (Exception e) {
-			throw new RuntimeException("获取==getSearcher异常!!!");
-		}
-	}
-
 	/**
 	 * 将RAM保存到DISK
 	 * @author 董华健    2012-11-21 下午8:28:37
@@ -305,10 +252,10 @@ public class DocKeyword extends DocBase {
 	protected void ramToDisk(){
 		try {
 			// 1.先关闭内存读写
-			ramIndexWriter.close();
+			getRamIndexWriter().close();
 			ramIndexWriter = null;
 			// 2.添加内存目录内容到磁盘读写
-			diskIndexWriter.addIndexes(ramDir);
+			getDiskIndexWriter().addIndexes(ramDir);
 			// 3.保存提交
 			diskIndexWriter.forceMerge(splitDataSize);//对索引文件进行优化，从而减少IO操作  
 			diskIndexWriter.commit();  
@@ -317,6 +264,122 @@ public class DocKeyword extends DocBase {
 		}
 	}
 	
+	@Override
+	protected String getIndexPath() {
+		if(indexPath == null ){
+			StringBuilder sb = new StringBuilder();
+			sb.append(PathKit.getWebRootPath()).append(File.separator);
+			sb.append("WEB-INF").append(File.separator).append("lucene").append(File.separator);
+			sb.append("weiXin").append(File.separator).append("keyword");//索引目录
+			indexPath = sb.toString();
+		}
+		return indexPath;
+	}
+	
+	@Override
+	protected Directory getDiskDir() {
+		try {
+			if (null == diskDir) {
+				Path path = Paths.get(getIndexPath());
+				diskDir = FSDirectory.open(path);
+			}
+			return diskDir;
+		} catch (Exception e) {
+			throw new RuntimeException("创建getDiskDir异常!!!" + getIndexPath());
+		}
+	}
+
+	@Override
+	protected IndexWriter getDiskIndexWriter() {
+		try {
+			if (null == diskDir) {
+				getDiskDir();
+			}
+			if (null == diskIndexWriter) {
+				IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);// 索引分词配置
+				indexWriterConfig.setOpenMode(OpenMode.CREATE_OR_APPEND); // CREATE
+				diskIndexWriter = new IndexWriter(diskDir, indexWriterConfig);
+				//diskIndexWriter.commit(); // 在索引库没有建立并且没有索引文件的时候首先要commit一下让他建立一个索引库的版本信息     
+		        
+			    tkWriter = new TrackingIndexWriter(diskIndexWriter); //为writer 包装了一层  
+			    mgr = new SearcherManager(diskIndexWriter, false, new SearcherFactory());  
+				log.info("创建线程，线程安全的，我们不须处理");
+			    crtThread = new ControlledRealTimeReopenThread<IndexSearcher>(tkWriter, mgr, 5.0, 0.025);  
+	            crtThread.setDaemon(true);//设为后台进程  
+	            crtThread.setName("lucene实时索引线程");  
+	            crtThread.start();//启动线程
+			}
+			return diskIndexWriter;
+		} catch (Exception e) {
+			throw new RuntimeException("创建getDiskIndexWriter异常!!!" + getIndexPath());
+		}
+	}
+
+	@Override
+	protected Directory getRamDir() {
+		try {
+			if (null == diskIndexWriter) {
+				getDiskIndexWriter();
+			}
+			if (null == ramDir){
+				ramDir = new RAMDirectory((FSDirectory)diskDir, new IOContext());
+			}
+			return ramDir;
+		} catch (Exception e) {
+			throw new RuntimeException("创建==getRamDir异常!!!" + getIndexPath());
+		}
+	}
+
+	@Override
+	protected IndexWriter getRamIndexWriter() {
+		try {
+			if(null == ramDir){
+				getRamDir();
+			}
+			if(null == ramIndexWriter){
+				IndexWriterConfig ramConfig = new IndexWriterConfig(analyzer);
+				ramConfig.setOpenMode(OpenMode.CREATE_OR_APPEND); // 
+				ramIndexWriter = new IndexWriter(ramDir, ramConfig);
+			}
+			return ramIndexWriter;
+		} catch (Exception e) {
+			throw new RuntimeException("创建==getRamIndexWriter异常!!!" + getIndexPath());
+		}
+	}
+
+	@Override
+	protected IndexReader getReader() {
+		try {
+			if(null == diskDir){
+				getDiskDir();
+			}
+			if(null == reader){
+				reader = DirectoryReader.open(diskDir);// 查询目标DISK：diskDir，RAM：ramDir
+			}
+			return reader;
+		} catch (Exception e) {
+			throw new RuntimeException("获取==getReader异常!!!");
+		}
+	}
+
+	@Override
+	protected IndexSearcher getSearcher() {
+		try {
+			if(null == ramDir){
+				getRamDir();
+			}
+			if(null == reader){
+				getReader();
+			}
+			if(null == searcher){
+				searcher = new IndexSearcher(reader);
+			}
+			return searcher;
+		} catch (Exception e) {
+			throw new RuntimeException("获取==getSearcher异常!!!");
+		}
+	}
+
 	/**
 	 * 释放资源
 	 * 

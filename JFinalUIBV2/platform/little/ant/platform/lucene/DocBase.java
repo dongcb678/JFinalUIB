@@ -6,12 +6,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.model.BaseModel;
-import little.ant.platform.plugin.PropertiesPlugin;
-import little.ant.platform.tools.ToolHtml;
-import little.ant.platform.tools.ToolString;
-
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.DoubleField;
@@ -19,8 +13,10 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.highlight.Formatter;
 import org.apache.lucene.search.highlight.Fragmenter;
@@ -30,12 +26,19 @@ import org.apache.lucene.search.highlight.QueryScorer;
 import org.apache.lucene.search.highlight.Scorer;
 import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
+import org.apache.lucene.store.Directory;
 import org.lionsoul.jcseg.analyzer.JcsegAnalyzer5X;
 import org.lionsoul.jcseg.core.JcsegTaskConfig;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
+
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.model.BaseModel;
+import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.tools.ToolHtml;
+import little.ant.platform.tools.ToolString;
 
 /**
  * @author 董华健
@@ -69,11 +72,53 @@ public abstract class DocBase implements Runnable {
 	 * 
 	*/
 	protected static final Analyzer analyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
+
+	/**
+	 * 获取索引路径
+	 * @return
+	 */
+	protected abstract String getIndexPath();
 	
 	/**
-	 * 初始化对象
+	 * 获取索引目录：磁盘
+	 * @return
 	 */
-	protected abstract void init();
+	protected abstract Directory getDiskDir();
+	
+	/**
+	 * 获取索引读写对象：磁盘
+	 * @return
+	 */
+	protected abstract IndexWriter getDiskIndexWriter();
+
+	/**
+	 * 获取索引目录：内存
+	 * @return
+	 */
+	protected abstract Directory getRamDir();
+
+	/**
+	 * 获取索引读写对象：内存
+	 * @return
+	 */
+	protected abstract IndexWriter getRamIndexWriter();
+	
+	/**
+	 * 内存索引转磁盘
+	 */
+	protected abstract void ramToDisk();
+
+	/**
+	 * 获取Reader
+	 * @return
+	 */
+	protected abstract IndexReader getReader();
+
+	/**
+	 * 获取Searcher
+	 * @return
+	 */
+	protected abstract IndexSearcher getSearcher();
 	
 	/**
 	 * 高亮器
