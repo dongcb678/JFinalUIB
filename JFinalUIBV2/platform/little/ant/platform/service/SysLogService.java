@@ -3,10 +3,15 @@ package little.ant.platform.service;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.model.Syslog;
+import little.ant.platform.tools.ToolDateTime;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.tx.Tx;
 
 public class SysLogService extends BaseService {
@@ -38,6 +43,15 @@ public class SysLogService extends BaseService {
 		for (String logIds : idsArr) {
 			Syslog.dao.deleteById(logIds);
 		}
+	}
+
+	/**
+	 * 定时清理数据
+	 */
+	public void timerDataClear(){
+		Date date = ToolDateTime.getDate(-365, 0, 0, 0, 0); // 设置时间为365天前
+		Timestamp timestamp = ToolDateTime.getSqlTimestamp(date);
+		Db.update(" delete from pt_syslog where startdate < ? ", timestamp);
 	}
 	
 }

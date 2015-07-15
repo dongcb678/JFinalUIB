@@ -1,5 +1,6 @@
 package little.ant.platform.service;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -118,6 +119,15 @@ public class ResourcesService extends BaseService {
 		
 		map.put("gccount", JSON.toJSON(gccountList).toString());
 		return map;
+	}
+
+	/**
+	 * 定时清理数据
+	 */
+	public void timerDataClear(){
+		Date date = ToolDateTime.getDate(-365, 0, 0, 0, 0); // 设置时间为365天前
+		Timestamp timestamp = ToolDateTime.getSqlTimestamp(date);
+		Db.update(" delete from pt_syslog where startdate < ? ", timestamp);
 	}
 	
 }

@@ -3,30 +3,6 @@ package little.ant.platform.run;
 import java.util.HashMap;
 import java.util.Map;
 
-import little.ant.platform.beetl.format.DateFormat;
-import little.ant.platform.beetl.func.EscapeXml;
-import little.ant.platform.beetl.func.HasPrivilegeUrl;
-import little.ant.platform.beetl.func.I18nFormat;
-import little.ant.platform.beetl.func.OrderBy;
-import little.ant.platform.beetl.render.MyBeetlRenderFactory;
-import little.ant.platform.beetl.tag.DictTag;
-import little.ant.platform.beetl.tag.ParamTag;
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.handler.GlobalHandler;
-import little.ant.platform.interceptor.AuthenticationInterceptor;
-import little.ant.platform.interceptor.ParamPkgInterceptor;
-import little.ant.platform.plugin.ControllerPlugin;
-import little.ant.platform.plugin.FileRenamePlugin;
-import little.ant.platform.plugin.I18NPlugin;
-import little.ant.platform.plugin.ParamInitPlugin;
-import little.ant.platform.plugin.PropertiesPlugin;
-import little.ant.platform.plugin.SqlXmlPlugin;
-import little.ant.platform.plugin.TablePlugin;
-import little.ant.platform.thread.ThreadSysLog;
-import little.ant.platform.thread.TimerResources;
-import little.ant.platform.tools.ToolString;
-import little.ant.weixin.lucene.DocKeyword;
-
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
 import org.snaker.jfinal.plugin.SnakerPlugin;
@@ -50,6 +26,31 @@ import com.jfinal.plugin.activerecord.tx.TxByActionKeys;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+
+import little.ant.platform.beetl.format.DateFormat;
+import little.ant.platform.beetl.func.EscapeXml;
+import little.ant.platform.beetl.func.HasPrivilegeUrl;
+import little.ant.platform.beetl.func.I18nFormat;
+import little.ant.platform.beetl.func.OrderBy;
+import little.ant.platform.beetl.render.MyBeetlRenderFactory;
+import little.ant.platform.beetl.tag.DictTag;
+import little.ant.platform.beetl.tag.ParamTag;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.handler.GlobalHandler;
+import little.ant.platform.interceptor.AuthenticationInterceptor;
+import little.ant.platform.interceptor.ParamPkgInterceptor;
+import little.ant.platform.plugin.ControllerPlugin;
+import little.ant.platform.plugin.FileRenamePlugin;
+import little.ant.platform.plugin.I18NPlugin;
+import little.ant.platform.plugin.ParamInitPlugin;
+import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.plugin.SqlXmlPlugin;
+import little.ant.platform.plugin.TablePlugin;
+import little.ant.platform.thread.DataClear;
+import little.ant.platform.thread.ThreadSysLog;
+import little.ant.platform.thread.TimerResources;
+import little.ant.platform.tools.ToolString;
+import little.ant.weixin.lucene.DocKeyword;
 
 /**
  * Jfinal API 引导式配置
@@ -231,6 +232,9 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("afterJFinalStart 系统负载");
 		TimerResources.start();
+		
+		log.info("afterJFinalStart 数据清理");
+		DataClear.start();
 	}
 	
 	/**
@@ -245,6 +249,9 @@ public class JfinalConfig extends JFinalConfig {
 
 		log.info("beforeJFinalStop 释放系统负载抓取线程");
 		TimerResources.stop();
+
+		log.info("beforeJFinalStop 数据清理");
+		DataClear.stop();
 	}
 	
 	/**
@@ -254,7 +261,7 @@ public class JfinalConfig extends JFinalConfig {
 	 * 2. idea 中运行记得加上当前的module名称
 	 */
 	public static void main(String[] args) {
-		JFinal.start("WebContent", 89, "/", 5); // 
+		JFinal.start("WebContent", 99, "/", 5); // 
 		// JFinal.start("JfinalUIB/WebContent", 89, "/", 5); // idea 中运行记得加上当前的module名称
 	}
 }
