@@ -43,12 +43,22 @@ public class DataClear extends Timer {
 			@Override
 			public void run() {
 				log.info("任务执行开始");
+				
+				try {
+					log.info("清理访问日志数据");
+					SysLogService.service.timerDataClear();
+				} catch (Exception e) {
+					log.error("清理访问日志数据失败：" + e.getMessage());
+					e.printStackTrace();
+				}
 
-				log.info("清理访问日志数据");
-				SysLogService.service.timerDataClear();
-
-				log.info("清理资源负载日志数据");
-				ResourcesService.service.timerDataClear();
+				try {
+					log.info("清理资源负载日志数据");
+					ResourcesService.service.timerDataClear();
+				} catch (Exception e) {
+					log.error("清理资源负载日志数据失败：" + e.getMessage());
+					e.printStackTrace();
+				}
 				
 				log.info("任务执行结束");
 			}

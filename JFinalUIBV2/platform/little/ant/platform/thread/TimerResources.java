@@ -3,11 +3,11 @@ package little.ant.platform.thread;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.log4j.Logger;
+
 import little.ant.platform.model.Resources;
 import little.ant.platform.tools.ToolDateTime;
 import little.ant.platform.tools.ToolOS;
-
-import org.apache.log4j.Logger;
 
 /**
  * 定时记录系统资源负载情况
@@ -30,18 +30,27 @@ public class TimerResources extends Timer {
 			log.info("启动失败，任务已经启动");
 			return;
 		}
+		
 		log.info("开始启动任务");
+		
 		timer = new TimerResources();
+		
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				log.info("任务执行开始");
 				
-				timer.resources();
+				try {
+					log.info("定时记录系统资源负载开始");
+					timer.resources();
+					log.info("定时记录系统资源负载结束");
+				} catch (Exception e) {
+					log.error("定时记录系统资源负载失败：" + e.getMessage());
+					e.printStackTrace();
+				}
 				
-				log.info("任务执行结束");
 			}
 		}, 1000, 1000 * 60 * 2);// 启动项目一秒后执行，然后每次间隔2分钟
+		
 		log.info("启动任务完成");
 	}
 	

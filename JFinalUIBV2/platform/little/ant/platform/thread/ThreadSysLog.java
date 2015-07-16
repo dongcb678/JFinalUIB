@@ -78,7 +78,9 @@ public class ThreadSysLog {
 			for (int i = 0; i < 10; i++) {
 				Thread insertDbThread = new Thread(new Runnable() {
 					public void run() {
+						
 						while (threadRun) {
+							
 							try {
 								// 取队列数据
 								//Syslog sysLog = queue.take(); // 基于LinkedBlockingQueue
@@ -91,11 +93,12 @@ public class ThreadSysLog {
 									log.info("保存操作日志到数据库end......");
 								}
 							} catch (Exception e) {
-								log.error("保存操作日志到数据库异常");
+								log.error("保存操作日志到数据库异常：" + e.getMessage());
 								e.printStackTrace();
-								throw new RuntimeException("ThreadSysLog -> save Exception");
 							}
+							
 						}
+						
 					}
 				});
 
