@@ -12,6 +12,9 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.log4j.Logger;
+
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.model.Group;
 import little.ant.platform.model.Operator;
@@ -19,9 +22,6 @@ import little.ant.platform.model.Role;
 import little.ant.platform.model.Station;
 import little.ant.platform.model.User;
 import little.ant.platform.plugin.PropertiesPlugin;
-
-import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 
 /**
  * WEB上下文工具类
@@ -237,7 +237,8 @@ public class ToolContext {
 			String userIds = datas[1];// 用户id
 			String ips = datas[2];// ip地址
 			String userAgent = datas[3];// USER_AGENT
-
+			boolean autoLogin = Boolean.valueOf(datas[4]);// autoLogin
+			
 			String newIp = ToolWeb.getIpAddr(request);
 			String newUserAgent = request.getHeader("User-Agent");
 
@@ -245,8 +246,19 @@ public class ToolContext {
 			start.setTime(loginDateTimes);
 			int day = ToolDateTime.getDateDaySpace(start, ToolDateTime.getDate());
 			
+			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
+			
 			// 4. 验证数据有效性
-			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= 365) {
+			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= maxAge) {
+				// 如果不记住密码，单次登陆有效时间验证
+				if(!autoLogin){
+					int minute = ToolDateTime.getDateMinuteSpace(start, new Date());
+					int session = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_session_key)).intValue();
+					if(minute > session){
+						return null;
+					}
+				}
+				
 				Object userObj = User.dao.cacheGet(userIds);
 				if (null != userObj) {
 					User user = (User) userObj;
@@ -282,7 +294,7 @@ public class ToolContext {
 		long date = ToolDateTime.getDateByTime();
 
 		StringBuilder token = new StringBuilder();// 时间戳#USERID#USER_IP#USER_AGENT
-		token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent);
+		token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
 		String authToken = token.toString();
 		byte[] authTokenByte = null;
 		try {

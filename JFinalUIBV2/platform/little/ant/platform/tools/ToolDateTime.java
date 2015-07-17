@@ -166,12 +166,12 @@ public class ToolDateTime {
 	/**
 	 * 两个日期的时间差，返回"X天X小时X分X秒"
 	 * 
-	 * @param begin
+	 * @param start
 	 * @param end
 	 * @return
 	 */
-	public static String getBetween(Date begin, Date end) {
-		long between = (end.getTime() - begin.getTime()) / 1000;// 除以1000是为了转换成秒
+	public static String getBetween(Date start, Date end) {
+		long between = (end.getTime() - start.getTime()) / 1000;// 除以1000是为了转换成秒
 		long day = between / (24 * 3600);
 		long hour = between % (24 * 3600) / 3600;
 		long minute = between % 3600 / 60;
@@ -189,28 +189,40 @@ public class ToolDateTime {
 
 		return sb.toString();
 	}
+
+	/**
+	 * 返回两个日期之间隔了多少分钟
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static int getDateMinuteSpace(Date start, Date end) {
+		int hour = (int) ((end.getTime() - start.getTime()) / (60 * 1000));
+		return hour;
+	}
 	
 	/**
 	 * 返回两个日期之间隔了多少小时
 	 * 
-	 * @param date1
+	 * @param start
 	 * @param end
 	 * @return
 	 */
 	public static int getDateHourSpace(Date start, Date end) {
-		int hour = (int) ((start.getTime() - end.getTime()) / 3600 / 1000);
+		int hour = (int) ((end.getTime() - start.getTime()) / (60 * 60 * 1000));
 		return hour;
 	}
 	
 	/**
 	 * 返回两个日期之间隔了多少天
 	 * 
-	 * @param date1
+	 * @param start
 	 * @param end
 	 * @return
 	 */
 	public static int getDateDaySpace(Date start, Date end) {
-		int day = (int) (getDateHourSpace(start, end) / 24);
+		int day = (int) ((end.getTime() - start.getTime()) / (60 * 60 * 24 * 1000));
 		return day;
 	}
 	

@@ -161,6 +161,8 @@ public class PropertiesPlugin implements IPlugin {
 		paramMap.put(ConstantInit.config_maxPostSize_key, Integer.valueOf(properties.getProperty(ConstantInit.config_maxPostSize_key)));
 		
 		paramMap.put(ConstantInit.config_maxAge_key, Integer.valueOf(properties.getProperty(ConstantInit.config_maxAge_key)));
+
+		paramMap.put(ConstantInit.config_session_key, Integer.valueOf(properties.getProperty(ConstantInit.config_session_key)));
 		
 		paramMap.put(ConstantInit.config_domain_key, properties.getProperty(ConstantInit.config_domain_key));
 		

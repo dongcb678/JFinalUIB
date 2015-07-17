@@ -52,6 +52,11 @@ public interface ConstantInit {
 	public static final String config_maxAge_key = "config.maxAge";
 
 	/**
+	 * # 不使用自动登陆时，最大超时时间，单位：分钟
+	 */
+	public static final String config_session_key = "config.session";
+
+	/**
 	 * # 域名或者服务器IP，多个逗号隔开，验证Referer时使用
 	 */
 	public static final String config_domain_key = "config.domain";
