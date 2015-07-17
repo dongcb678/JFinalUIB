@@ -8,16 +8,16 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/c3p0-0.9.1.2.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/velocity-1.7-dep.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/velocity-1.7.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.el-3.0.0.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-api-2.3.1.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/servlet-api-3.1.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-2.3.2.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/freemarker-2.3.22.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/fst-2.25.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/jetty-all-9.3.1.v20150714-uber.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_45"/>
+	<classpathentry kind="lib" path="build-lib/jetty9/javax.el-3.0.0.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty9/javax.servlet.jsp-2.3.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty9/javax.servlet.jsp-api-2.3.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty9/jetty-all-9.3.1.v20150714-uber.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty9/servlet-api-3.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal20/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal20/freemarker-2.3.22.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal20/fst-2.25.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal20/velocity-1.7-dep.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal20/velocity-1.7.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
