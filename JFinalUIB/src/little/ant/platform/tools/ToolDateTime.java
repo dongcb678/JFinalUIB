@@ -154,7 +154,7 @@ public class ToolDateTime {
 	 * @return
 	 */
 	public static int getDateHourSpace(Date start, Date end) {
-		int hour = (int) ((start.getTime() - end.getTime()) / 3600 / 1000);
+		int hour = (int) ((end.getTime() - start.getTime()) / 3600 / 1000);
 		return hour;
 	}
 	
