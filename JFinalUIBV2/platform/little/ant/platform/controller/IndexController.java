@@ -2,15 +2,14 @@ package little.ant.platform.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import little.ant.platform.annotation.Controller;
 import little.ant.platform.model.Menu;
 import little.ant.platform.model.Systems;
 import little.ant.platform.model.User;
 import little.ant.platform.service.IndexService;
 import little.ant.platform.service.ResourcesService;
-import little.ant.platform.tools.ToolContext;
-
-import org.apache.log4j.Logger;
 
 /**
  * 首页处理

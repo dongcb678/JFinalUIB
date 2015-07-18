@@ -10,21 +10,21 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.constant.ConstantLogin;
-import little.ant.platform.model.BaseModel;
-import little.ant.platform.model.User;
-import little.ant.platform.model.UserInfo;
-import little.ant.platform.plugin.PropertiesPlugin;
-import little.ant.platform.tools.ToolContext;
-import little.ant.platform.tools.ToolDateTime;
-import little.ant.platform.tools.ToolSecurityPbkdf2;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.tx.Tx;
+
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.constant.ConstantLogin;
+import little.ant.platform.interceptor.AuthenticationInterceptor;
+import little.ant.platform.model.BaseModel;
+import little.ant.platform.model.User;
+import little.ant.platform.model.UserInfo;
+import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.tools.ToolDateTime;
+import little.ant.platform.tools.ToolSecurityPbkdf2;
 
 public class LoginService extends BaseService {
 
@@ -151,7 +151,7 @@ public class LoginService extends BaseService {
 		}
 		if (bool) {
 			// 密码验证成功
-			ToolContext.setCurrentUser(request, response, user, autoLogin);// 设置登录账户
+			AuthenticationInterceptor.setCurrentUser(request, response, user, autoLogin);// 设置登录账户
 			return ConstantLogin.login_info_3;
 		} else {
 			// 密码验证失败

@@ -13,6 +13,7 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 
 import little.ant.platform.constant.ConstantAuth;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.controller.BaseController;
 import little.ant.platform.handler.GlobalHandler;
 import little.ant.platform.model.Group;
@@ -21,14 +22,17 @@ import little.ant.platform.model.Role;
 import little.ant.platform.model.Station;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.model.User;
-import little.ant.platform.tools.ToolContext;
+import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolDateTime;
+import little.ant.platform.tools.ToolSecurityIDEA;
 import little.ant.platform.tools.ToolWeb;
 
 /**
  * 权限认证拦截器
- * 
  * @author 董华健
+ * 描述：
+ * 1.处理权限验证
+ * 2.处理权限相关的工具类
  */
 public class AuthenticationInterceptor implements Interceptor {
 
@@ -47,7 +51,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");
 		String uri = invoc.getActionKey(); // 默认就是ActionKey
 		if (invoc.getMethodName().equals("toUrl")) {
-			uri = ToolContext.getParam(request, "toUrl"); // 否则就是toUrl的值
+			uri = ToolWeb.getParam(request, "toUrl"); // 否则就是toUrl的值
 		}
 
 		log.info("druid特殊处理");
@@ -60,7 +64,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		if (uri.equals("/jf/platform/ueditor") || uri.equals("/jf/platform/upload")) { // 针对ueditor特殊处理
 			userAgentVali = false;
 		}
-		User user = ToolContext.getCurrentUser(request, response, userAgentVali);// 当前登录用户
+		User user = getCurrentUser(request, response, userAgentVali);// 当前登录用户
 		if (null != user) {
 			reqSysLog.set("userids", user.getPKValue());
 			contro.setAttr("cUser", user);
@@ -118,7 +122,7 @@ public class AuthenticationInterceptor implements Interceptor {
 
 		log.info("是否需要表单重复提交验证!");
 		if (operator.getStr("formtoken").equals("1")) {
-			String tokenRequest = ToolContext.getParam(request, "formToken");
+			String tokenRequest = ToolWeb.getParam(request, "formToken");
 			String tokenCookie = ToolWeb.getCookieValueByName(request, "token");
 			if (null == tokenRequest || tokenRequest.equals("")) {
 				log.info("tokenRequest为空，无需表单验证!");
@@ -249,6 +253,130 @@ public class AuthenticationInterceptor implements Interceptor {
 		}
 
 		return false;
+	}
+
+	/**
+	 * 获取当前登录用户
+	 * @param request
+	 * @param response
+	 * @param userAgentVali 是否验证 User-Agent
+	 * @return
+	 */
+	public static User getCurrentUser(HttpServletRequest request, HttpServletResponse response, boolean userAgentVali) {
+		String loginCookie = ToolWeb.getCookieValueByName(request, "authmark");
+		if (null != loginCookie && !loginCookie.equals("")) {
+			// 1.解密数据
+			String data = ToolSecurityIDEA.decrypt(loginCookie);
+			String[] datas = data.split(".#.");	//arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
+			
+			// 2. 分解获取数据
+			long loginDateTimes = Long.parseLong(datas[0]);// 时间戳
+			String userIds = datas[1];// 用户id
+			String ips = datas[2];// ip地址
+			String userAgent = datas[3];// USER_AGENT
+			boolean autoLogin = Boolean.valueOf(datas[4]);// autoLogin
+			
+			String newIp = ToolWeb.getIpAddr(request);
+			String newUserAgent = request.getHeader("User-Agent");
+
+			Date start = ToolDateTime.getDate();
+			start.setTime(loginDateTimes);
+			int day = ToolDateTime.getDateDaySpace(start, ToolDateTime.getDate());
+			
+			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
+			
+			// 4. 验证数据有效性
+			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= maxAge) {
+				// 如果不记住密码，单次登陆有效时间验证
+				if(!autoLogin){
+					int minute = ToolDateTime.getDateMinuteSpace(start, new Date());
+					int session = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_session_key)).intValue();
+					if(minute > session){
+						return null;
+					}else{
+						// 重新生成认证cookie，目的是更新时间戳
+						long date = ToolDateTime.getDateByTime();
+						StringBuilder token = new StringBuilder();// 时间戳.#.USERID.#.USER_IP.#.USER_AGENT.#.autoLogin
+						token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
+						String authmark = ToolSecurityIDEA.encrypt(token.toString());
+						
+						// 添加到Cookie
+						int maxAgeTemp = -1; // 设置cookie有效时间
+						ToolWeb.addCookie(response,  "", "/", true, "authmark", authmark, maxAgeTemp);
+					}
+				}
+				
+				// 返回用户数据
+				Object userObj = User.dao.cacheGet(userIds);
+				if (null != userObj) {
+					User user = (User) userObj;
+					return user;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * 设置当前登录用户
+	 * @param request
+	 * @param response
+	 * @param user
+	 * @param autoLogin
+	 */
+	public static void setCurrentUser(HttpServletRequest request, HttpServletResponse response, User user, boolean autoLogin) {
+		// 1.设置cookie有效时间
+		int maxAgeTemp = -1;
+		if (autoLogin) {
+			maxAgeTemp = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
+		}
+
+		// 2.设置用户名到cookie
+		ToolWeb.addCookie(response, "", "/", true, "userName", user.getStr("username"), maxAgeTemp);
+
+		// 3.生成登陆认证cookie
+		String userIds = user.getPKValue();
+		String ips = ToolWeb.getIpAddr(request);
+		String userAgent = request.getHeader("User-Agent");
+		long date = ToolDateTime.getDateByTime();
+		
+		StringBuilder token = new StringBuilder();// 时间戳.#.USERID.#.USER_IP.#.USER_AGENT.#.autoLogin
+		token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
+		String authmark = ToolSecurityIDEA.encrypt(token.toString());
+		
+		// 4. 添加到Cookie
+		ToolWeb.addCookie(response,  "", "/", true, "authmark", authmark, maxAgeTemp);
+	}
+	
+	/**
+	 * 设置验证码
+	 * @param response
+	 * @param authCode
+	 */
+	public static void setAuthCode(HttpServletResponse response, String authCode){
+		// 1.生成验证码加密cookie
+		String authCodeCookie = ToolSecurityIDEA.encrypt(authCode);
+		
+		// 2.设置登陆验证码cookie
+		int maxAgeTemp = -1;
+		ToolWeb.addCookie(response,  "", "/", true, "authCode", authCodeCookie, maxAgeTemp);
+	}
+
+	/**
+	 * 获取验证码
+	 * @param request
+	 * @return
+	 */
+	public static String getAuthCode(HttpServletRequest request){
+		// 1.获取cookie加密数据
+		String authCode = ToolWeb.getCookieValueByName(request, "authCode");
+		if (null != authCode && !authCode.equals("")) {
+			// 2.解密数据
+			authCode = ToolSecurityIDEA.decrypt(authCode);
+			return authCode;
+		}
+		return null;
 	}
 
 }

@@ -1,18 +1,18 @@
 package little.ant.weixin.controller;
 
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Before;
+
 import little.ant.platform.annotation.Controller;
 import little.ant.platform.controller.BaseController;
-import little.ant.platform.tools.ToolContext;
+import little.ant.platform.tools.ToolWeb;
+import little.ant.weixin.bo.oauth.RecevieOauth2Token;
+import little.ant.weixin.bo.oauth.RecevieSNSUserInfo;
 import little.ant.weixin.service.MessageService;
 import little.ant.weixin.tools.ToolOAuth2;
 import little.ant.weixin.tools.ToolSignature;
 import little.ant.weixin.validator.KeywordValidator;
-import little.ant.weixin.bo.oauth.RecevieOauth2Token;
-import little.ant.weixin.bo.oauth.RecevieSNSUserInfo;
-
-import org.apache.log4j.Logger;
-
-import com.jfinal.aop.Before;
 
 /**
  * 接收微信消息
@@ -46,7 +46,7 @@ public class MessageController extends BaseController {
 		}else{
 			if(flag){
 				String accountId = getPara("accountId");// 公众账号标识
-				String recverMsg = ToolContext.requestStream(getRequest());
+				String recverMsg = ToolWeb.requestStream(getRequest());
 				log.info("接收微信发送过来的消息" + recverMsg);
 				String responseMsg = MessageService.service.messageProcess(accountId, recverMsg);
 				log.info("返回消息" + responseMsg);

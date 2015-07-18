@@ -6,18 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.dto.SplitPage;
-import little.ant.platform.model.BaseModel;
-import little.ant.platform.model.Syslog;
-import little.ant.platform.model.User;
-import little.ant.platform.plugin.PropertiesPlugin;
-import little.ant.platform.tools.ToolContext;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
 import com.jfinal.render.JsonRender;
+
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.SplitPage;
+import little.ant.platform.interceptor.AuthenticationInterceptor;
+import little.ant.platform.model.BaseModel;
+import little.ant.platform.model.Syslog;
+import little.ant.platform.model.User;
+import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.tools.ToolWeb;
 
 /**
  * 公共Controller
@@ -123,7 +124,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected String getRequestContent(){
-		return ToolContext.requestStream(getRequest());
+		return ToolWeb.requestStream(getRequest());
 	}
 	
 	/**
@@ -131,7 +132,7 @@ public abstract class BaseController extends Controller {
 	 */
 	@Override
 	public String getPara(String name) {
-		String value = ToolContext.getParam(getRequest(), name);
+		String value = ToolWeb.getParam(getRequest(), name);
 		return value;
 	}
 	
@@ -174,7 +175,7 @@ public abstract class BaseController extends Controller {
 	 */
 	protected boolean authCode() {
 		String authCodePram = getPara("authCode");
-		String authCodeCookie = ToolContext.getAuthCode(getRequest());
+		String authCodeCookie = AuthenticationInterceptor.getAuthCode(getRequest());
 		if (null != authCodePram && null != authCodeCookie) {
 			authCodePram = authCodePram.toLowerCase();// 统一小写
 			authCodeCookie = authCodeCookie.toLowerCase();// 统一小写

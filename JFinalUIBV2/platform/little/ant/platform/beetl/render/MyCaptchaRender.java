@@ -14,12 +14,12 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 
-import little.ant.platform.tools.ToolContext;
-import little.ant.platform.tools.ToolRandoms;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.render.Render;
+
+import little.ant.platform.interceptor.AuthenticationInterceptor;
+import little.ant.platform.tools.ToolRandoms;
 
 /**
  * 验证码
@@ -80,7 +80,7 @@ public class MyCaptchaRender extends Render {
 		log.debug("验证码：" + sRand);
 
 		// 设置验证码值到cookie
-		ToolContext.setAuthCode(response, sRand);
+		AuthenticationInterceptor.setAuthCode(response, sRand);
 
 		response.setHeader("Pragma", "no-cache");
 		response.setHeader("Cache-Control", "no-cache");

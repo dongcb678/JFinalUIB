@@ -1,10 +1,17 @@
 package little.ant.platform.tools;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +24,6 @@ import org.apache.log4j.Logger;
  */
 public class ToolWeb {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolWeb.class);
 
 	/**
@@ -62,7 +68,26 @@ public class ToolWeb {
 	public static String getRequestURIWithParam(HttpServletRequest request) {
 		return request.getRequestURI() + (request.getQueryString() == null ? "" : "?" + request.getQueryString());
 	}
-	
+
+	/**
+	 * 获取请求参数
+	 * 
+	 * @param request
+	 * @param name
+	 * @return
+	 */
+	public static String getParam(HttpServletRequest request, String name) {
+		String value = request.getParameter(name);
+		if (null != value && !value.isEmpty()) {
+			try {
+				value = URLDecoder.decode(value, ToolString.encoding).trim();
+			} catch (UnsupportedEncodingException e) {
+				log.error("decode异常：" + value);
+			}
+		}
+		return value;
+	}
+
 	/**
 	 * 获取ParameterMap
 	 * @param request
@@ -78,6 +103,124 @@ public class ToolWeb {
 		return map;
 	}
 
+	/**
+	 * 输出servlet文本内容
+	 * 
+	 * @author 董华健 2012-9-14 下午8:04:01
+	 * @param response
+	 * @param content
+	 * @param contentType
+	 */
+	public static void outPage(HttpServletResponse response, String content, String contentType) {
+		try {
+			outPage(response, content.getBytes(ToolString.encoding), contentType); // char to byte 性能提升
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 输出servlet文本内容
+	 * 
+	 * @author 董华健 2012-9-14 下午8:04:01
+	 * @param response
+	 * @param content
+	 * @param contentType
+	 */
+	public static void outPage(HttpServletResponse response, byte[] content, String contentType) {
+		if(contentType == null || contentType.isEmpty()){
+			contentType = "text/html; charset=UTF-8";
+		}
+		response.setContentType(contentType);
+		response.setCharacterEncoding(ToolString.encoding);
+		// PrintWriter out = response.getWriter();
+		// out.print(content);
+		try {
+			response.getOutputStream().write(content);// char to byte 性能提升
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 输出CSV文件下载
+	 * 
+	 * @author 董华健 2012-9-14 下午8:02:33
+	 * @param response
+	 * @param content CSV内容
+	 */
+	public static void outDownCsv(HttpServletResponse response, String content) {
+		response.setContentType("application/download; charset=gb18030");
+		try {
+			response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(ToolDateTime.format(ToolDateTime.getDate(), ToolDateTime.pattern_ymd_hms_s) + ".csv", ToolString.encoding));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		// PrintWriter out = response.getWriter();
+		// out.write(content);
+		try {
+			response.getOutputStream().write(content.getBytes(ToolString.encoding));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}// char to byte 性能提升
+			// out.flush();
+			// out.close();
+	}
+
+	/**
+	 * 请求流转字符串
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static String requestStream(HttpServletRequest request) {
+		InputStream inputStream = null;
+		InputStreamReader inputStreamReader = null;
+		BufferedReader bufferedReader = null;
+		try {
+			request.setCharacterEncoding(ToolString.encoding);
+			inputStream = (ServletInputStream) request.getInputStream();
+			inputStreamReader = new InputStreamReader(inputStream, ToolString.encoding);
+			bufferedReader = new BufferedReader(inputStreamReader);
+			String line = null;
+			StringBuilder sb = new StringBuilder();
+			while ((line = bufferedReader.readLine()) != null) {
+				sb.append(line);
+			}
+			return sb.toString();
+		} catch (IOException e) {
+			log.error("request.getInputStream() to String 异常", e);
+			return null;
+		} finally { // 释放资源
+			if(null != bufferedReader){
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					log.error("bufferedReader.close()异常", e);
+				}
+				bufferedReader = null;
+			}
+			
+			if(null != inputStreamReader){
+				try {
+					inputStreamReader.close();
+				} catch (IOException e) {
+					log.error("inputStreamReader.close()异常", e);
+				}
+				inputStreamReader = null;
+			}
+			
+			if(null != inputStream){
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					log.error("inputStream.close()异常", e);
+				}
+				inputStream = null;
+			}
+		}
+	}
+	
 	/**
 	 * 
 	 * @param response
