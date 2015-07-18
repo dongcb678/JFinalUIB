@@ -1,9 +1,16 @@
 package little.ant.platform.interceptor;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Interceptor;
+import com.jfinal.aop.Invocation;
 
 import little.ant.platform.constant.ConstantAuth;
 import little.ant.platform.controller.BaseController;
@@ -17,11 +24,6 @@ import little.ant.platform.model.User;
 import little.ant.platform.tools.ToolContext;
 import little.ant.platform.tools.ToolDateTime;
 import little.ant.platform.tools.ToolWeb;
-
-import org.apache.log4j.Logger;
-
-import com.jfinal.aop.Interceptor;
-import com.jfinal.aop.Invocation;
 
 /**
  * 权限认证拦截器
@@ -78,7 +80,7 @@ public class AuthenticationInterceptor implements Interceptor {
 			reqSysLog.set("cause", "1");// URL不存在
 
 			log.info("返回失败提示页面!");
-			toInfoJsp(contro, ConstantAuth.auth_no_url);
+			toInfoJsp(contro, ConstantAuth.auth_no_url, "权限认证过滤器检测：URI不存在");
 			return;
 		}
 
@@ -95,7 +97,7 @@ public class AuthenticationInterceptor implements Interceptor {
 				reqSysLog.set("description", "未登录");
 				reqSysLog.set("cause", "2");// 2 未登录
 
-				toInfoJsp(contro, ConstantAuth.auth_no_login);
+				toInfoJsp(contro, ConstantAuth.auth_no_login, "权限认证过滤器检测：未登录");
 				return;
 			}
 
@@ -107,7 +109,7 @@ public class AuthenticationInterceptor implements Interceptor {
 				reqSysLog.set("cause", "0");// 没有权限
 
 				log.info("返回失败提示页面!");
-				toInfoJsp(contro, ConstantAuth.auth_no_permissions);
+				toInfoJsp(contro, ConstantAuth.auth_no_permissions, "权限验证失败，您没有操作权限");
 				return;
 			}
 		}
@@ -127,7 +129,7 @@ public class AuthenticationInterceptor implements Interceptor {
 
 			} else if (tokenCookie.equals(tokenRequest)) {
 				log.info("表单重复提交!");
-				toInfoJsp(contro, ConstantAuth.auth_form);
+				toInfoJsp(contro, ConstantAuth.auth_form, "请不要重复提交表单");
 				return;
 
 			} else {
@@ -144,15 +146,16 @@ public class AuthenticationInterceptor implements Interceptor {
 		try {
 			invoc.invoke();
 		} catch (Exception e) {
-			e.printStackTrace();
-
-			log.info("业务逻辑代码遇到异常时保存日志!");
+			log.error("业务逻辑代码遇到异常时保存日志!");
 			reqSysLog.set("status", "0");// 失败
 			reqSysLog.set("description", e.getMessage());
 			reqSysLog.set("cause", "3");// 业务代码异常
 
-			log.info("返回失败提示页面!");
-			toInfoJsp(contro, ConstantAuth.auth_exception);
+			log.error("返回失败提示页面!Exception = " + e.getMessage());
+			ByteArrayOutputStream buf = new ByteArrayOutputStream();
+			e.printStackTrace(new PrintWriter(buf, true));
+			String expMessage = buf.toString();
+			toInfoJsp(contro, ConstantAuth.auth_exception, "业务逻辑代码遇到异常Exception = " + expMessage);
 
 		} finally {
 
@@ -165,7 +168,7 @@ public class AuthenticationInterceptor implements Interceptor {
 	 * @param contro
 	 * @param type
 	 */
-	private void toInfoJsp(BaseController contro, String type) {
+	private void toInfoJsp(BaseController contro, String type, String msg) {
 		if (type.equals(ConstantAuth.auth_no_login)) {// 未登录处理
 			contro.redirect("/jf/platform/login");
 			return;
@@ -175,20 +178,6 @@ public class AuthenticationInterceptor implements Interceptor {
 		String toPage = "/common/msgAjax.html";
 		if (null == referer || referer.isEmpty()) {
 			toPage = "/common/msg.html";
-		}
-
-		String msg = null;
-		if (type.equals(ConstantAuth.auth_no_permissions)) {// 权限验证失败处理
-			msg = "权限验证失败!";
-
-		} else if (type.equals(ConstantAuth.auth_ip)) {// IP验证失败
-			msg = "IP验证失败!";
-
-		} else if (type.equals(ConstantAuth.auth_form)) {// 表单验证失败
-			msg = "请不要重复提交表单数据!";
-
-		} else if (type.equals(ConstantAuth.auth_exception)) {// 业务代码异常
-			msg = "业务代码异常!";
 		}
 
 		contro.setAttr("referer", referer);
