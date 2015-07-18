@@ -79,6 +79,8 @@ public class SqlXmlPlugin implements IPlugin {
 					Element element = (Element) iterTemp.next();	
 					if(element.getName().toLowerCase().equals("sql")){
 						String id = element.attributeValue("id");
+						String key = namespace + "." + id;
+						
 						if(null == id || id.trim().isEmpty()){
 							log.error("sql xml文件" + fileName + "的存在没有id的sql语句");
 							continue;
@@ -86,16 +88,15 @@ public class SqlXmlPlugin implements IPlugin {
 						
 						String sql = element.getText();
 						if(null == sql || sql.trim().isEmpty()){
-							log.error("sql xml文件" + fileName + "的存在没有内容的sql语句");
+							log.error("sql xml文件" + fileName + "的存在没有内容的sql语句，sqlId = " + key);
 							continue;
 						}
 						
-						String key = namespace + "." + id;
 						if(isInit && null != CacheKit.get(ConstantCache.cache_name_system, cacheStart_sql + key)){
-							log.error("sql xml文件" + fileName + "的sql语句" + key + "的存在重复命名空间和ID");
+							log.error("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
 							continue;
 						} else if(null != CacheKit.get(ConstantCache.cache_name_system, cacheStart_sql + key)){
-							log.error("sql xml文件" + fileName + "的sql语句" + key + "的存在重复命名空间和ID");
+							log.error("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
 						}
 						
 						sql = sql.replaceAll("[\\s]{2,}", " ");
