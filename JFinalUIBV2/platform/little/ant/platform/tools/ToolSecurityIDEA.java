@@ -1,5 +1,6 @@
 package little.ant.platform.tools;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.security.Security;
 
@@ -11,6 +12,9 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.plugin.PropertiesPlugin;
 
 /**
  * IDEA安全编码组件
@@ -117,6 +121,72 @@ public class ToolSecurityIDEA {
 		// 获得密钥的二进制编码形式
 		return secretKey.getEncoded();
 	}
+
+	/**
+	 * 解密加密字符串
+	 * @param content 待加密的字符串
+	 * @return
+	 * 说明：增加Base64编码
+	 */
+	public static String decrypt(String content){
+		// 1. Base64解码cookie令牌
+		try {
+			content = ToolString.decode(content);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// 2. 解密cookie令牌
+		byte[] securityByte = Base64.decodeBase64(content);
+
+		String securityKey = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_securityKey_key);
+		byte[] keyByte = Base64.decodeBase64(securityKey);
+
+		byte[] dataByte = null;
+		try {
+			dataByte = decrypt(securityByte, keyByte);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String data = new String(dataByte);
+		
+		return data;
+	}
+	
+	/**
+	 * 生成加密字符串
+	 * @param content 待加密的字符串
+	 * @return
+	 * 说明：增加Base64编码
+	 */
+	public static String encrypt(String content){
+		byte[] authTokenByte = null;
+		try {
+			authTokenByte = content.getBytes(ToolString.encoding);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String securityKey = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_securityKey_key);
+		byte[] keyByte = Base64.decodeBase64(securityKey);
+
+		// 认证cookie加密
+		byte[] securityByte = null;
+		try {
+			securityByte = encrypt(authTokenByte, keyByte);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String securityCookie = Base64.encodeBase64String(securityByte);
+
+		// 认证cookie Base64编码
+		try {
+			securityCookie = ToolString.encode(securityCookie);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return securityCookie;
+	}
 	
 	/**
 	 * 测试
@@ -142,4 +212,6 @@ public class ToolSecurityIDEA {
 		String outputStr = new String(outputData);
 		System.err.println("解密后:\t" + outputStr);
 	}
+	
+	
 }

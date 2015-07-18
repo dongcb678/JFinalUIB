@@ -1,11 +1,11 @@
 package little.ant.platform.beetl.func;
 
-import little.ant.platform.model.Syslog;
-import little.ant.platform.tools.ToolContext;
-
 import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
+
+import little.ant.platform.interceptor.AuthenticationInterceptor;
+import little.ant.platform.model.Syslog;
 
 /**
  * 页面按钮权限验证函数
@@ -35,7 +35,7 @@ public class HasPrivilegeUrl implements Function {
 			return false;
 		}
 		
-		boolean bool = ToolContext.hasPrivilegeUrl(url, userIds);
+		boolean bool = AuthenticationInterceptor.hasPrivilegeUrl(url, userIds);
 		
 		log.debug("beetl HasPrivilegeUrl 权限标签验证：userIds=" + userIds + "，url=" + url + "，验证结果" + bool);
 		

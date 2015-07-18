@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import little.ant.platform.controller.BaseController;
 import little.ant.platform.handler.GlobalHandler;
+import little.ant.platform.model.Group;
 import little.ant.platform.model.Operator;
+import little.ant.platform.model.Role;
+import little.ant.platform.model.Station;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.model.User;
 import little.ant.platform.tools.ToolContext;
@@ -53,7 +56,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		if(uri.equals("/jf/platform/ueditor") || uri.equals("/jf/platform/upload")){ // 针对ueditor特殊处理
 			userAgentVali = false;
 		}
-		User user = ToolContext.getCurrentUser(request, userAgentVali);// 当前登录用户
+		User user = ToolContext.getCurrentUser(request, response, userAgentVali);// 当前登录用户
 		if(null != user){
 			reqSysLog.set("userids", user.getPKValue());
 			contro.setAttr("cUser", user);
@@ -94,7 +97,7 @@ public class AuthenticationInterceptor implements Interceptor {
 				return;
 			}
 			
-			if(!ToolContext.hasPrivilegeOperator(operator, user)){// 权限验证
+			if(!hasPrivilegeOperator(operator, user)){// 权限验证
 				log.info("权限验证失败，没有权限!");
 				
 				reqSysLog.set("status", "0");//失败
@@ -189,5 +192,82 @@ public class AuthenticationInterceptor implements Interceptor {
 		contro.setAttr("msg", msg);
 		contro.render(toPage);
 	}
-	
+
+	/**
+	 * 判断用户是否拥有某个url的操作权限
+	 * @param url
+	 * @param userIds
+	 * @return
+	 */
+	public static boolean hasPrivilegeUrl(String url, String userIds) {
+		// 基于缓存查询operator
+		Operator operator = Operator.dao.cacheGet(url);
+		if (null == operator) {
+			log.error("URL缓存不存在：" + url);
+			return false;
+		}
+
+		// 基于缓存查询user
+		Object userObj = User.dao.cacheGet(userIds);
+		if (null == userObj) {
+			log.error("用户缓存不存在：" + userIds);
+			return false;
+		}
+		User user = (User) userObj;
+
+		// 权限验证对象
+		String operatorIds = operator.getPKValue() + ",";
+		String groupIds = user.getStr("groupids");
+		String stationIds = user.getStr("stationids");
+
+		// 根据分组查询权限
+		if (null != groupIds) {
+			String[] groupIdsArr = groupIds.split(",");
+			for (String groupIdsTemp : groupIdsArr) {
+				Group group = Group.dao.cacheGet(groupIdsTemp);
+				String roleIdsStr = group.getStr("roleids");
+				if(null == roleIdsStr || roleIdsStr.equals("")){
+					continue;
+				}
+				String[] roleIdsArr = roleIdsStr.split(",");
+				for (String roleIdsTemp : roleIdsArr) {
+					Role role = Role.dao.cacheGet(roleIdsTemp);
+					String operatorIdsStr = role.getStr("operatorids");
+					if (operatorIdsStr.indexOf(operatorIds) != -1) {
+						return true;
+					}
+				}
+			}
+		}
+
+		// 根据岗位查询权限
+		if (null != stationIds) {
+			String[] stationIdsArr = stationIds.split(",");
+			for (String ids : stationIdsArr) {
+				Station station = Station.dao.cacheGet(ids);
+				String operatorIdsStr = station.getStr("operatorids");
+				if(null == operatorIdsStr || operatorIdsStr.equals("")){
+					continue;
+				}
+				if (operatorIdsStr.indexOf(operatorIds) != -1) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * 判断用户是否对某个功能具有操作权限
+	 * 
+	 * @param operator
+	 * @param user
+	 * @return
+	 */
+	public static boolean hasPrivilegeOperator(Operator operator, User user) {
+		String url = operator.getStr(Operator.column_url);
+		return hasPrivilegeUrl(url, user.getPKValue());
+	}
+
 }

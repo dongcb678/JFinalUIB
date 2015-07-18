@@ -1,16 +1,15 @@
 package little.ant.platform.controller;
 
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Before;
+
 import little.ant.platform.annotation.Controller;
 import little.ant.platform.constant.ConstantLogin;
 import little.ant.platform.model.User;
 import little.ant.platform.service.LoginService;
-import little.ant.platform.tools.ToolContext;
 import little.ant.platform.tools.ToolWeb;
 import little.ant.platform.validator.LoginValidator;
-
-import org.apache.log4j.Logger;
-
-import com.jfinal.aop.Before;
 
 /**
  * 登陆处理
@@ -25,7 +24,7 @@ public class LoginController extends BaseController {
 	 * 准备登陆
 	 */
 	public void index() {
-		User user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
+		User user = getCUser(); // cookie认证自动登陆处理
 		if(null != user){//后台
 			redirect("/jf/platform/");
 		}else{

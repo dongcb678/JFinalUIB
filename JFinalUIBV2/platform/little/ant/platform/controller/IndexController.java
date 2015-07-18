@@ -28,7 +28,7 @@ public class IndexController extends BaseController {
 	 * 首页
 	 */
 	public void index() {
-		User user = ToolContext.getCurrentUser(getRequest(), true); // cookie认证自动登陆处理
+		User user = getCUser(); // cookie认证自动登陆处理
 		if(null != user){//后台
 			String sql = IndexService.service.getSql(Systems.sqlId_all);
 			systemsList = Systems.dao.find(sql);
