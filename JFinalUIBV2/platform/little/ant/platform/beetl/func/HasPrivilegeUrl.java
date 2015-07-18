@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 
-import little.ant.platform.interceptor.AuthenticationInterceptor;
+import little.ant.platform.interceptor.AuthInterceptor;
 import little.ant.platform.model.Syslog;
 
 /**
@@ -35,7 +35,7 @@ public class HasPrivilegeUrl implements Function {
 			return false;
 		}
 		
-		boolean bool = AuthenticationInterceptor.hasPrivilegeUrl(userIds, url);
+		boolean bool = AuthInterceptor.hasPrivilegeUrl(userIds, url);
 		
 		log.debug("beetl HasPrivilegeUrl 权限标签验证：userIds=" + userIds + "，url=" + url + "，验证结果" + bool);
 		

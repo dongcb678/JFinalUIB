@@ -13,7 +13,7 @@ import com.jfinal.render.JsonRender;
 
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
-import little.ant.platform.interceptor.AuthenticationInterceptor;
+import little.ant.platform.interceptor.AuthInterceptor;
 import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.model.User;
@@ -175,7 +175,7 @@ public abstract class BaseController extends Controller {
 	 */
 	protected boolean authCode() {
 		String authCodePram = getPara("authCode");
-		String authCodeCookie = AuthenticationInterceptor.getAuthCode(getRequest());
+		String authCodeCookie = AuthInterceptor.getAuthCode(getRequest());
 		if (null != authCodePram && null != authCodeCookie) {
 			authCodePram = authCodePram.toLowerCase();// 统一小写
 			authCodeCookie = authCodeCookie.toLowerCase();// 统一小写

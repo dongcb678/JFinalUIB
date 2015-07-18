@@ -37,7 +37,7 @@ import little.ant.platform.beetl.tag.DictTag;
 import little.ant.platform.beetl.tag.ParamTag;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.handler.GlobalHandler;
-import little.ant.platform.interceptor.AuthenticationInterceptor;
+import little.ant.platform.interceptor.AuthInterceptor;
 import little.ant.platform.interceptor.ParamPkgInterceptor;
 import little.ant.platform.plugin.ControllerPlugin;
 import little.ant.platform.plugin.FileRenamePlugin;
@@ -197,7 +197,7 @@ public class JfinalConfig extends JFinalConfig {
 		//me.add(new SessionInViewInterceptor());
 		
 		log.info("configInterceptor 权限认证拦截器");
-		me.add(new AuthenticationInterceptor());
+		me.add(new AuthInterceptor());
 		
 		log.info("configInterceptor 参数封装拦截器");
 		me.add(new ParamPkgInterceptor());

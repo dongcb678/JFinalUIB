@@ -34,9 +34,9 @@ import little.ant.platform.tools.ToolWeb;
  * 1.处理权限验证
  * 2.处理权限相关的工具类
  */
-public class AuthenticationInterceptor implements Interceptor {
+public class AuthInterceptor implements Interceptor {
 
-	private static Logger log = Logger.getLogger(AuthenticationInterceptor.class);
+	private static Logger log = Logger.getLogger(AuthInterceptor.class);
 
 	@Override
 	public void intercept(Invocation invoc) {
