@@ -1,5 +1,8 @@
 package little.ant.platform.constant;
 
+/**
+ * 缓存
+ */
 public interface ConstantCache {
 
 	/**

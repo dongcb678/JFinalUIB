@@ -1,5 +1,8 @@
 package little.ant.platform.constant;
 
+/**
+ * 登陆判断相关的
+ */
 public interface ConstantLogin {
 
 	/**

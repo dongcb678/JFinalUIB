@@ -1,7 +1,7 @@
 package little.ant.platform.constant;
 
 /**
- * 常量数据字典
+ * init配置文件对应的key
  * @author 董华健
  */
 public interface ConstantInit {

@@ -35,7 +35,7 @@ public class HasPrivilegeUrl implements Function {
 			return false;
 		}
 		
-		boolean bool = AuthenticationInterceptor.hasPrivilegeUrl(url, userIds);
+		boolean bool = AuthenticationInterceptor.hasPrivilegeUrl(userIds, url);
 		
 		log.debug("beetl HasPrivilegeUrl 权限标签验证：userIds=" + userIds + "，url=" + url + "，验证结果" + bool);
 		
