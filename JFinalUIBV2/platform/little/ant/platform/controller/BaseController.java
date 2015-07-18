@@ -117,6 +117,14 @@ public abstract class BaseController extends Controller {
 		Map<String, String> map = getAttr("paramMap");
 		map.put(key, value);
 	}
+
+	/**
+	 * request流转字符串
+	 * @return
+	 */
+	protected String getRequestContent(){
+		return ToolContext.requestStream(getRequest());
+	}
 	
 	/**
 	 * 重写getPara，进行二次decode解码

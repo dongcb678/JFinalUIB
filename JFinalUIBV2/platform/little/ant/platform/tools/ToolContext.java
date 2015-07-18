@@ -210,6 +210,7 @@ public class ToolContext {
 					}
 				}
 				
+				// 返回用户数据
 				Object userObj = User.dao.cacheGet(userIds);
 				if (null != userObj) {
 					User user = (User) userObj;
@@ -258,11 +259,11 @@ public class ToolContext {
 	 * @param authCode
 	 */
 	public static void setAuthCode(HttpServletResponse response, String authCode){
-		// 生成验证码加密cookie
+		// 1.生成验证码加密cookie
 		String authCodeCookie = ToolSecurityIDEA.encrypt(authCode);
 		
-		// 设置登陆验证码cookie
-		int maxAgeTemp = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
+		// 2.设置登陆验证码cookie
+		int maxAgeTemp = -1;
 		ToolWeb.addCookie(response,  "", "/", true, "authCode", authCodeCookie, maxAgeTemp);
 	}
 
@@ -272,12 +273,14 @@ public class ToolContext {
 	 * @return
 	 */
 	public static String getAuthCode(HttpServletRequest request){
+		// 1.获取cookie加密数据
 		String authCode = ToolWeb.getCookieValueByName(request, "authCode");
 		if (null != authCode && !authCode.equals("")) {
-			// 解密数据
+			// 2.解密数据
 			authCode = ToolSecurityIDEA.decrypt(authCode);
+			return authCode;
 		}
-		return authCode;
+		return null;
 	}
 
 }
