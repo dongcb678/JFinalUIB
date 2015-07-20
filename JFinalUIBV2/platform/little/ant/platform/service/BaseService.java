@@ -15,17 +15,21 @@ import little.ant.platform.tools.ToolString;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.tx.Tx;
 
 /**
  * 公共方法
  * @author 董华健
  */
-public abstract class BaseService {
+public class BaseService {
 
 	private static Logger log = Logger.getLogger(BaseService.class);
 
+	public static final BaseService service = Enhancer.enhance(BaseService.class, Tx.class);
+	
 	/**
 	 * 分页
 	 * @param dataSource 数据源

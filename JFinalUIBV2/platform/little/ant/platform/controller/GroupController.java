@@ -3,14 +3,16 @@ package little.ant.platform.controller;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.annotation.Controller;
-import little.ant.platform.model.Group;
-import little.ant.platform.service.GroupService;
-import little.ant.platform.validator.GroupValidator;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+
+import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.model.Group;
+import little.ant.platform.service.BaseService;
+import little.ant.platform.service.GroupService;
+import little.ant.platform.validator.GroupValidator;
 
 /**
  * 人员分组管理
@@ -30,7 +32,7 @@ public class GroupController extends BaseController {
 	 * 分组管理列表
 	 */
 	public void index() {
-		GroupService.service.list(splitPage);
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Group.sqlId_splitPage_select, Group.sqlId_splitPage_from);
 		render("/platform/group/list.html");
 	}
 	

@@ -5,15 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.dto.SplitPage;
-import little.ant.platform.model.Upload;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.upload.UploadFile;
+
+import little.ant.platform.model.Upload;
 
 public class UploadService extends BaseService {
 
@@ -47,14 +45,6 @@ public class UploadService extends BaseService {
 		return list;
 	}
 	
-	/**
-	 * 分页
-	 * @param splitPage
-	 */
-	public void list(SplitPage splitPage){
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Upload.sqlId_splitPage_select, Upload.sqlId_splitPage_from);
-	}
-
 	/**
 	 * 删除
 	 * @param ids

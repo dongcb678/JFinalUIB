@@ -2,15 +2,16 @@ package little.ant.platform.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Before;
+
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Operator;
 import little.ant.platform.service.OperatorService;
 import little.ant.platform.validator.OperatorValidator;
-
-import org.apache.log4j.Logger;
-
-import com.jfinal.aop.Before;
 
 /**
  * 功能管理
@@ -28,7 +29,7 @@ public class OperatorController extends BaseController {
 	 * 功能管理列表页
 	 */
 	public void index() {
-		OperatorService.service.list(splitPage);
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage_select, Operator.sqlId_splitPage_from);
 		render("/platform/operator/list.html");
 	}
 

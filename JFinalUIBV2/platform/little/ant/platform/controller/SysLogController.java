@@ -1,10 +1,11 @@
 package little.ant.platform.controller;
 
+import org.apache.log4j.Logger;
+
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.service.SysLogService;
-
-import org.apache.log4j.Logger;
 
 /**
  * 系统日志管理
@@ -21,7 +22,7 @@ public class SysLogController extends BaseController {
 	 */
 	public void index() {
 		defaultOrder(Syslog.column_startdate, "desc");
-		SysLogService.service.list(splitPage);
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPage_select, Syslog.sqlId_splitPage_from);
 		render("/platform/sysLog/list.html");
 	}
 

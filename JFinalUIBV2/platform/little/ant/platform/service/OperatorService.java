@@ -3,16 +3,14 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.dto.SplitPage;
-import little.ant.platform.dto.ZtreeNode;
-import little.ant.platform.model.Module;
-import little.ant.platform.model.Operator;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.tx.Tx;
+
+import little.ant.platform.dto.ZtreeNode;
+import little.ant.platform.model.Module;
+import little.ant.platform.model.Operator;
 
 public class OperatorService extends BaseService {
 
@@ -189,14 +187,6 @@ public class OperatorService extends BaseService {
 		}
 		
 		treeNode.setChildren(children);
-	}
-	
-	/**
-	 * 分页
-	 * @param splitPage
-	 */
-	public void list(SplitPage splitPage){
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage_select, Operator.sqlId_splitPage_from);
 	}
 	
 }

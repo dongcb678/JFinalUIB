@@ -3,15 +3,17 @@ package little.ant.platform.controller;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.annotation.Controller;
-import little.ant.platform.model.Group;
-import little.ant.platform.model.Role;
-import little.ant.platform.service.RoleService;
-import little.ant.platform.validator.RoleValidator;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+
+import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.model.Group;
+import little.ant.platform.model.Role;
+import little.ant.platform.service.BaseService;
+import little.ant.platform.service.RoleService;
+import little.ant.platform.validator.RoleValidator;
 
 /**
  * 角色管理
@@ -33,7 +35,7 @@ public class RoleController extends BaseController {
 	 * 角色列表
 	 */
 	public void index() {
-		RoleService.service.list(splitPage);
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Role.sqlId_splitPage_select, Role.sqlId_splitPage_from);
 		render("/platform/role/list.html");
 	}
 

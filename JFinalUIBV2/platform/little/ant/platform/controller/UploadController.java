@@ -4,16 +4,18 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.annotation.Controller;
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.plugin.PropertiesPlugin;
-import little.ant.platform.service.UploadService;
-import little.ant.platform.tools.ToolString;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.kit.PathKit;
 import com.jfinal.upload.UploadFile;
+
+import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.model.Upload;
+import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.service.BaseService;
+import little.ant.platform.service.UploadService;
+import little.ant.platform.tools.ToolString;
 
 /**
  * 文件上传
@@ -50,7 +52,7 @@ public class UploadController extends BaseController {
 	 * 文件列表
 	 */
 	public void list() {
-		UploadService.service.list(splitPage);
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Upload.sqlId_splitPage_select, Upload.sqlId_splitPage_from);
 		render("/platform/upload/list.html");
 	}
 

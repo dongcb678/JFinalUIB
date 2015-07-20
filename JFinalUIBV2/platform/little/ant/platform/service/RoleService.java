@@ -5,15 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.dto.SplitPage;
-import little.ant.platform.model.Group;
-import little.ant.platform.model.Role;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.tx.Tx;
+
+import little.ant.platform.model.Group;
+import little.ant.platform.model.Role;
 
 public class RoleService extends BaseService {
 
@@ -99,14 +97,6 @@ public class RoleService extends BaseService {
 		map.put("noCheckedList", noCheckedList);
 		map.put("checkedList", checkedList);
 		return map;
-	}
-	
-	/**
-	 * 分页
-	 * @param splitPage
-	 */
-	public void list(SplitPage splitPage){
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Role.sqlId_splitPage_select, Role.sqlId_splitPage_from);
 	}
 	
 }

@@ -7,18 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.dto.SplitPage;
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
 import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Department;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
 import little.ant.platform.tools.ToolSecurityPbkdf2;
-
-import org.apache.log4j.Logger;
-
-import com.jfinal.aop.Enhancer;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 public class UserService extends BaseService {
 
@@ -177,14 +175,6 @@ public class UserService extends BaseService {
 		}
 
 		return nodeList;
-	}
-
-	/**
-	 * 分页
-	 * @param splitPage
-	 */
-	public void list(SplitPage splitPage) {
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, User.sqlId_splitPage_select, User.sqlId_splitPage_from);
 	}
 
 	/**

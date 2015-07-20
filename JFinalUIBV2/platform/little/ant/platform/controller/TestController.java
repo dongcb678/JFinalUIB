@@ -5,19 +5,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.annotation.Controller;
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.constant.ConstantRender;
-import little.ant.platform.model.Syslog;
-import little.ant.platform.service.OperatorService;
-import little.ant.platform.service.SysLogService;
-import little.ant.platform.tools.ToolSqlXml;
-import little.ant.weixin.lucene.DocKeyword;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+
+import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.constant.ConstantRender;
+import little.ant.platform.model.Operator;
+import little.ant.platform.model.Syslog;
+import little.ant.platform.tools.ToolSqlXml;
+import little.ant.weixin.lucene.DocKeyword;
 
 /**
  * 功能测试
@@ -34,7 +33,7 @@ public class TestController extends BaseController {
 	 * 功能查询显示
 	 */
 	public void operator() {
-		OperatorService.service.list(splitPage);
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage_select, Operator.sqlId_splitPage_from);
 		render("/platform/test/operator.html");
 	}
 
@@ -43,7 +42,7 @@ public class TestController extends BaseController {
 	 */
 	public void sysLog() {
 		defaultOrder(Syslog.column_startdate, "desc");
-		SysLogService.service.list(splitPage);
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPage_select, Syslog.sqlId_splitPage_from);
 		render("/platform/test/sysLog.html");
 	}
 	

@@ -2,16 +2,17 @@ package little.ant.platform.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Before;
+
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
 import little.ant.platform.service.UserService;
 import little.ant.platform.validator.UserValidator;
-
-import org.apache.log4j.Logger;
-
-import com.jfinal.aop.Before;
 
 /**
  * 用户管理
@@ -29,7 +30,7 @@ public class UserController extends BaseController {
 	 * 默认列表
 	 */
 	public void index() {
-		UserService.service.list(splitPage);
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, User.sqlId_splitPage_select, User.sqlId_splitPage_from);
 		render("/platform/user/list.html");
 	}
 	

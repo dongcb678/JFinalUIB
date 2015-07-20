@@ -19,6 +19,7 @@ import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.model.User;
 import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.service.BaseService;
 import little.ant.platform.tools.ToolWeb;
 
 /**
@@ -275,6 +276,52 @@ public abstract class BaseController extends Controller {
 	protected String getOrderMode(){
 		String orderMode = getPara(ConstantWebContext.request_orderMode);
 		return orderMode;
+	}
+
+	/**
+	 * 分页
+	 * @param dataSource 数据源
+	 * @param splitPage
+	 * @param selectContent
+	 * @param fromSqlId
+	 */
+	protected void splitPageBase(String dataSource, SplitPage splitPage, String selectContent, String fromSqlId){
+		BaseService.service.splitPageBase(dataSource, splitPage, selectContent, fromSqlId);
+	}
+	
+	/**
+	 * 分页
+	 * @param dataSource 数据源
+	 * @param splitPage
+	 * @param selectSqlId
+	 * @param fromSqlId
+	 */
+	protected void splitPageBySqlId(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
+		BaseService.service.splitPageBySqlId(dataSource, splitPage, selectSqlId, fromSqlId);
+	}
+
+	/**
+	 * Distinct分页
+	 * @param dataSource 数据源
+	 * @param splitPage
+	 * @param selectContent
+	 * @param selectCount
+	 * @param fromSqlId
+	 */
+	protected void splitPageDistinctBase(String dataSource, SplitPage splitPage, String selectContent, String selectCount, String fromSqlId){
+		BaseService.service.splitPageDistinctBase(dataSource, splitPage, selectContent, selectCount, fromSqlId);
+	}
+	
+	/**
+	 * Distinct分页
+	 * @param dataSource 数据源
+	 * @param splitPage
+	 * @param selectSqlId
+	 * @param selectCountId
+	 * @param fromSqlId
+	 */
+	protected void splitPageDistinctBySqlId(String dataSource, SplitPage splitPage, String selectSqlId, String selectCountId, String fromSqlId){
+		BaseService.service.splitPageDistinctBySqlId(dataSource, splitPage, selectSqlId, selectCountId, fromSqlId);
 	}
 	
 	/************************************		get 	set 	方法		************************************************/
