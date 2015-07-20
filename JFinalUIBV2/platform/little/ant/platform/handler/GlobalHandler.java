@@ -42,22 +42,22 @@ public class GlobalHandler extends Handler {
 		
 		log.info("设置 web 路径");
 		String cxt = ToolWeb.getContextPath(request);
-		request.setAttribute(ConstantWebContext.cxt, cxt);
+		request.setAttribute(ConstantWebContext.request_cxt, cxt);
 		
 		log.debug("request cookie 处理");
 		Map<String, Cookie> cookieMap = ToolWeb.readCookieMap(request);
-		request.setAttribute(ConstantWebContext.cookieMap, cookieMap);
+		request.setAttribute(ConstantWebContext.request_cookieMap, cookieMap);
 
 		log.debug("request param 请求参数处理");
-		request.setAttribute(ConstantWebContext.paramMap, ToolWeb.getParamMap(request));
+		request.setAttribute(ConstantWebContext.request_paramMap, ToolWeb.getParamMap(request));
 
 		log.debug("request 国际化");
-		String localePram = request.getParameter(ConstantWebContext.localePram);
+		String localePram = request.getParameter(ConstantWebContext.request_localePram);
 		if(null != localePram && !localePram.isEmpty()){
 			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
-			ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.language, localePram, maxAge);
+			ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_language, localePram, maxAge);
 		}else {
-			localePram = ToolWeb.getCookieValueByName(request, ConstantWebContext.language);
+			localePram = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_language);
 			if(null == localePram || localePram.isEmpty()){
 				Locale locale = request.getLocale();
 				String language = locale.getLanguage();
@@ -70,8 +70,8 @@ public class GlobalHandler extends Handler {
 		}
 		localePram = localePram.toLowerCase();
 		Map<String, String> i18nMap = I18NPlugin.get(localePram);
-		request.setAttribute(ConstantWebContext.localePram, localePram);
-		request.setAttribute(ConstantWebContext.i18nMap, i18nMap);
+		request.setAttribute(ConstantWebContext.request_localePram, localePram);
+		request.setAttribute(ConstantWebContext.request_i18nMap, i18nMap);
 		
 		log.info("设置Header");
 		request.setAttribute("decorator", "none");

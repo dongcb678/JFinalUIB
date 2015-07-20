@@ -51,8 +51,8 @@ public class AuthInterceptor implements Interceptor {
 
 		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");
 		String uri = invoc.getActionKey(); // 默认就是ActionKey
-		if (invoc.getMethodName().equals(ConstantWebContext.toUrl)) {
-			uri = ToolWeb.getParam(request, ConstantWebContext.toUrl); // 否则就是toUrl的值
+		if (invoc.getMethodName().equals(ConstantWebContext.request_toUrl)) {
+			uri = ToolWeb.getParam(request, ConstantWebContext.request_toUrl); // 否则就是toUrl的值
 		}
 
 		log.info("druid特殊处理");
@@ -68,8 +68,8 @@ public class AuthInterceptor implements Interceptor {
 		User user = getCurrentUser(request, response, userAgentVali);// 当前登录用户
 		if (null != user) {
 			reqSysLog.set(Syslog.column_userids, user.getPKValue());
-			contro.setAttr(ConstantWebContext.cUser, user);
-			contro.setAttr(ConstantWebContext.cUserIds, user.getPKValue());
+			contro.setAttr(ConstantWebContext.request_cUser, user);
+			contro.setAttr(ConstantWebContext.request_cUserIds, user.getPKValue());
 		}
 
 		log.info("获取URI对象!");
@@ -123,14 +123,14 @@ public class AuthInterceptor implements Interceptor {
 
 		log.info("是否需要表单重复提交验证!");
 		if (operator.getStr(Operator.column_formtoken).equals("1")) {
-			String tokenRequest = ToolWeb.getParam(request, ConstantWebContext.formToken);
-			String tokenCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.token);
+			String tokenRequest = ToolWeb.getParam(request, ConstantWebContext.request_formToken);
+			String tokenCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_token);
 			if (null == tokenRequest || tokenRequest.equals("")) {
 				log.info("tokenRequest为空，无需表单验证!");
 
 			} else if (null == tokenCookie || tokenCookie.equals("") || !tokenCookie.equals(tokenRequest)) {
 				log.info("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
-				ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.token, tokenRequest, 0);
+				ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.cookie_token, tokenRequest, 0);
 
 			} else if (tokenCookie.equals(tokenRequest)) {
 				log.info("表单重复提交!");
@@ -270,7 +270,7 @@ public class AuthInterceptor implements Interceptor {
 	 * @return
 	 */
 	public static User getCurrentUser(HttpServletRequest request, HttpServletResponse response, boolean userAgentVali) {
-		String loginCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.authmark);
+		String loginCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_authmark);
 		if (null != loginCookie && !loginCookie.equals("")) {
 			// 1.解密数据
 			String data = ToolSecurityIDEA.decrypt(loginCookie);
@@ -309,7 +309,7 @@ public class AuthInterceptor implements Interceptor {
 						
 						// 添加到Cookie
 						int maxAgeTemp = -1; // 设置cookie有效时间
-						ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.authmark, authmark, maxAgeTemp);
+						ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
 					}
 				}
 				
@@ -353,7 +353,7 @@ public class AuthInterceptor implements Interceptor {
 		String authmark = ToolSecurityIDEA.encrypt(token.toString());
 		
 		// 4. 添加到Cookie
-		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.authmark, authmark, maxAgeTemp);
+		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
 	}
 	
 	/**
@@ -367,7 +367,7 @@ public class AuthInterceptor implements Interceptor {
 		
 		// 2.设置登陆验证码cookie
 		int maxAgeTemp = -1;
-		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.authCode, authCodeCookie, maxAgeTemp);
+		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.request_authCode, authCodeCookie, maxAgeTemp);
 	}
 
 	/**
@@ -377,7 +377,7 @@ public class AuthInterceptor implements Interceptor {
 	 */
 	public static String getAuthCode(HttpServletRequest request){
 		// 1.获取cookie加密数据
-		String authCode = ToolWeb.getCookieValueByName(request, ConstantWebContext.authCode);
+		String authCode = ToolWeb.getCookieValueByName(request, ConstantWebContext.request_authCode);
 		if (null != authCode && !authCode.equals("")) {
 			// 2.解密数据
 			authCode = ToolSecurityIDEA.decrypt(authCode);

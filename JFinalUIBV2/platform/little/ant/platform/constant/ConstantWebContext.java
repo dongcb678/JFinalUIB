@@ -8,92 +8,92 @@ public interface ConstantWebContext {
 	/**
 	 * web 路径
 	 */
-	public static final String cxt = "cxt";
+	public static final String request_cxt = "cxt";
 
 	/**
 	 * request cookie
 	 */
-	public static final String cookieMap = "cookieMap";
+	public static final String request_cookieMap = "cookieMap";
 
 	/**
 	 * request param
 	 */
-	public static final String paramMap = "paramMap";
+	public static final String request_paramMap = "paramMap";
 
 	/**
 	 * 国际化，设置request中的当前语言
 	 */
-	public static final String localePram = "localePram";
+	public static final String request_localePram = "localePram";
 
 	/**
 	 * 国际化，设置cookie中当前语言的key
 	 */
-	public static final String language = "language";
+	public static final String cookie_language = "language";
 
 	/**
 	 * 国际化，设置request中的当前语言map
 	 */
-	public static final String i18nMap = "i18nMap";
+	public static final String request_i18nMap = "i18nMap";
 
 	/**
 	 * 直接渲染模板的路径
 	 */
-	public static final String toUrl = "toUrl";
+	public static final String request_toUrl = "toUrl";
 
 	/**
 	 * 当前登录用户的id
 	 */
-	public static final String cUserIds = "cUserIds";
+	public static final String request_cUserIds = "cUserIds";
 
 	/**
 	 * 当前登录用户
 	 */
-	public static final String cUser = "cUser";
+	public static final String request_cUser = "cUser";
 
 	/**
 	 * 验证码key
 	 */
-	public static final String authCode = "authCode";
+	public static final String request_authCode = "authCode";
 
 	/**
 	 * 权限标示验证码
 	 */
-	public static final String authmark = "authmark";
+	public static final String cookie_authmark = "authmark";
 
 	/**
 	 * 排序方式
 	 */
-	public static final String orderMode = "orderMode";
+	public static final String request_orderMode = "orderMode";
 
 	/**
 	 * 第几页
 	 */
-	public static final String pageNumber = "pageNumber";
+	public static final String request_pageNumber = "pageNumber";
 	
 	/**
 	 * 每页显示几多
 	 */
-	public static final String pageSize = "pageSize";
+	public static final String request_pageSize = "pageSize";
 	
 	/**
 	 * 排序条件
 	 */
-	public static final String orderColunm = "orderColunm";
+	public static final String request_orderColunm = "orderColunm";
 
 	/**
 	 * 分页查询条件key前缀
 	 */
-	public static final String _query = "_query";
+	public static final String request_query = "_query";
 
 	/**
 	 * 表单重复提交验证key
 	 */
-	public static final String formToken = "formToken";
+	public static final String request_formToken = "formToken";
 
 	/**
 	 * 表单重复提交验证token
 	 */
-	public static final String token = "token";
+	public static final String cookie_token = "token";
 
 	
 	

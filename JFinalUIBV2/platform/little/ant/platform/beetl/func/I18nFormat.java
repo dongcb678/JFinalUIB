@@ -31,7 +31,7 @@ public class I18nFormat implements Function {
 		}
 		
 		// 第一个参数时国际化模板的key
-		Map<String, String> i18nMap = (Map<String, String>) context.getGlobal(ConstantWebContext.i18nMap);
+		Map<String, String> i18nMap = (Map<String, String>) context.getGlobal(ConstantWebContext.request_i18nMap);
 		String formatTemplateKey = (String) arg[0];
 		String formatTemplate = i18nMap.get(formatTemplateKey);
 		

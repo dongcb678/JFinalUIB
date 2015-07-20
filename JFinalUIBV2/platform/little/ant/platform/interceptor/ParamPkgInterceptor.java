@@ -93,7 +93,7 @@ public class ParamPkgInterceptor implements Interceptor {
 		while (paramNames.hasMoreElements()) {
 			name = paramNames.nextElement();
 			value = controller.getPara(name);
-			if (name.startsWith(ConstantWebContext._query) && null != value && !value.trim().isEmpty()) {// 查询参数分拣
+			if (name.startsWith(ConstantWebContext.request_query) && null != value && !value.trim().isEmpty()) {// 查询参数分拣
 				log.debug("分页，查询参数：name = " + name + " value = " + value);
 				key = name.substring(7);
 				if(ToolString.regExpVali(key, ToolString.regExp_letter_5)){
@@ -105,25 +105,25 @@ public class ParamPkgInterceptor implements Interceptor {
 		}
 		splitPage.setQueryParam(queryParam);
 		
-		String orderColunm = controller.getPara(ConstantWebContext.orderColunm);// 排序条件
+		String orderColunm = controller.getPara(ConstantWebContext.request_orderColunm);// 排序条件
 		if(null != orderColunm && !orderColunm.isEmpty()){
 			log.debug("分页，排序条件：orderColunm = " + orderColunm);
 			splitPage.setOrderColunm(orderColunm);
 		}
 
-		String orderMode = controller.getPara(ConstantWebContext.orderMode);// 排序方式
+		String orderMode = controller.getPara(ConstantWebContext.request_orderMode);// 排序方式
 		if(null != orderMode && !orderMode.isEmpty()){
 			log.debug("分页，排序方式：orderMode = " + orderMode);
 			splitPage.setOrderMode(orderMode);
 		}
 
-		String pageNumber = controller.getPara(ConstantWebContext.pageNumber);// 第几页
+		String pageNumber = controller.getPara(ConstantWebContext.request_pageNumber);// 第几页
 		if(null != pageNumber && !pageNumber.isEmpty()){
 			log.debug("分页，第几页：pageNumber = " + pageNumber);
 			splitPage.setPageNumber(Integer.parseInt(pageNumber));
 		}
 		
-		String pageSize = controller.getPara(ConstantWebContext.pageSize);// 每页显示几多
+		String pageSize = controller.getPara(ConstantWebContext.request_pageSize);// 每页显示几多
 		if(null != pageSize && !pageSize.isEmpty()){
 			log.debug("分页，每页显示几多：pageSize = " + pageSize);
 			splitPage.setPageSize(Integer.parseInt(pageSize));

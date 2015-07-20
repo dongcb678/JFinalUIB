@@ -41,7 +41,7 @@ public abstract class BaseController extends Controller {
 	 * 请求/WEB-INF/下的视图文件
 	 */
 	public void toUrl() {
-		String toUrl = getPara(ConstantWebContext.toUrl);
+		String toUrl = getPara(ConstantWebContext.request_toUrl);
 		render(toUrl);
 	}
 
@@ -59,7 +59,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected String getI18nPram() {
-		return getAttr(ConstantWebContext.localePram);
+		return getAttr(ConstantWebContext.request_localePram);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected Map<String, String> getI18nMap() {
-		return getAttr(ConstantWebContext.i18nMap);
+		return getAttr(ConstantWebContext.request_i18nMap);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected String getCxt() {
-		return getAttr(ConstantWebContext.cxt);
+		return getAttr(ConstantWebContext.request_cxt);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected String getCUserIds(){
-		return getAttr(ConstantWebContext.cUserIds);
+		return getAttr(ConstantWebContext.request_cUserIds);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected User getCUser(){
-		return getAttr(ConstantWebContext.cUser);
+		return getAttr(ConstantWebContext.request_cUser);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected Map<String, String> getParamMap(){
-		return getAttr(ConstantWebContext.paramMap);
+		return getAttr(ConstantWebContext.request_paramMap);
 	}
 
 	/**
@@ -116,7 +116,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected void addToParamMap(String key, String value){
-		Map<String, String> map = getAttr(ConstantWebContext.paramMap);
+		Map<String, String> map = getAttr(ConstantWebContext.request_paramMap);
 		map.put(key, value);
 	}
 
@@ -175,7 +175,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected boolean authCode() {
-		String authCodePram = getPara(ConstantWebContext.authCode);
+		String authCodePram = getPara(ConstantWebContext.request_authCode);
 		String authCodeCookie = AuthInterceptor.getAuthCode(getRequest());
 		if (null != authCodePram && null != authCodeCookie) {
 			authCodePram = authCodePram.toLowerCase();// 统一小写
@@ -236,7 +236,7 @@ public abstract class BaseController extends Controller {
 		while (paramNames.hasMoreElements()) {
 			String name = paramNames.nextElement();
 			String value = getPara(name);
-			if (name.startsWith(ConstantWebContext._query) && null != value && !value.trim().isEmpty()) {// 查询参数分拣
+			if (name.startsWith(ConstantWebContext.request_query) && null != value && !value.trim().isEmpty()) {// 查询参数分拣
 				String key = name.substring(7);
 				queryParam.put(key, value.trim());
 			}
@@ -263,7 +263,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected String getOrderColunm(){
-		String orderColunm = getPara(ConstantWebContext.orderColunm);
+		String orderColunm = getPara(ConstantWebContext.request_orderColunm);
 		return orderColunm;
 	}
 
@@ -273,7 +273,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected String getOrderMode(){
-		String orderMode = getPara(ConstantWebContext.orderMode);
+		String orderMode = getPara(ConstantWebContext.request_orderMode);
 		return orderMode;
 	}
 	

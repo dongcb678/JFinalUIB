@@ -88,7 +88,7 @@ public class ParamTag extends Tag {
 		
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
-			String localePram = (String) ctx.getGlobal(ConstantWebContext.localePram);
+			String localePram = (String) ctx.getGlobal(ConstantWebContext.request_localePram);
 			val += I18NPlugin.i18n(localePram);
 		}
 		List<Param> paramList = Param.dao.cacheGetChild(number);
@@ -136,7 +136,7 @@ public class ParamTag extends Tag {
 		
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
-			String localePram = (String) ctx.getGlobal(ConstantWebContext.localePram);
+			String localePram = (String) ctx.getGlobal(ConstantWebContext.request_localePram);
 			val += I18NPlugin.i18n(localePram);
 		}
 		List<Param> paramList = Param.dao.cacheGetChild(number);
@@ -182,7 +182,7 @@ public class ParamTag extends Tag {
 		
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
-			String localePram = (String) ctx.getGlobal(ConstantWebContext.localePram);
+			String localePram = (String) ctx.getGlobal(ConstantWebContext.request_localePram);
 			val += I18NPlugin.i18n(localePram);
 		}
 		List<Param> paramList = Param.dao.cacheGetChild(number);
