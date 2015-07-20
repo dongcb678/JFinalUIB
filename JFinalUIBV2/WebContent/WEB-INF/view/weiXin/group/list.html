@@ -67,7 +67,7 @@
 					</thead>
 					<tbody>
 						<%
-							var userMessage = hasPrivilegeUrl("/jf/wx/message/userMessage");
+							var userMessage = authUrl("/jf/wx/message/userMessage");
 						%>
 						<% for(group in splitPage.list){ %>
 							<tr>

@@ -71,17 +71,17 @@
 				</div>
 				
 				<%
-					var view = hasPrivilegeUrl("/jf/platform/user/view");
-					var edit = hasPrivilegeUrl("/jf/platform/user/edit");
-					var delete = hasPrivilegeUrl("/jf/platform/user/delete");
-					var group = hasPrivilegeUrl("/jf/platform/group/select");
+					var view = authUrl("/jf/platform/user/view");
+					var edit = authUrl("/jf/platform/user/edit");
+					var delete = authUrl("/jf/platform/user/delete");
+					var group = authUrl("/jf/platform/group/select");
 				%>
 				
 				<div class="panel-body">
 					
 					<div class="row">
 						<div class="col-md-12 space20">
-							<% if(hasPrivilegeUrl("/platform/user/add.html")){ %>
+							<% if(authUrl("/platform/user/add.html")){ %>
 								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
 									${i18nMap["admin.user.add"]} <i class="fa fa-plus"></i>
 								</button>

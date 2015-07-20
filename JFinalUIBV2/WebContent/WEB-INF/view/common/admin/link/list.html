@@ -62,16 +62,16 @@
 				</div>
 				
 				<%
-					var view = hasPrivilegeUrl("/jf/common/admin/link/view");
-					var edit = hasPrivilegeUrl("/jf/common/admin/link/edit");
-					var delete = hasPrivilegeUrl("/jf/common/admin/link/delete");
+					var view = authUrl("/jf/common/admin/link/view");
+					var edit = authUrl("/jf/common/admin/link/edit");
+					var delete = authUrl("/jf/common/admin/link/delete");
 				%>
 				
 				<div class="panel-body">
 					
 					<div class="row">
 						<div class="col-md-12 space20">
-							<% if(hasPrivilegeUrl("/common/admin/link/add.html")){ %>
+							<% if(authUrl("/common/admin/link/add.html")){ %>
 								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/common/admin/link/toUrl?toUrl=/common/admin/link/add.html');">
 									添加 <i class="fa fa-plus"></i>
 								</button>

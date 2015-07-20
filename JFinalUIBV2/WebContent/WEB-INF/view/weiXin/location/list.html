@@ -76,7 +76,7 @@
 					</thead>
 					<tbody>
 						<%
-							var delete = hasPrivilegeUrl("/jf/wx/location/delete");
+							var delete = authUrl("/jf/wx/location/delete");
 						%>
 						<% for(location in splitPage.list){ %>
 							<tr>

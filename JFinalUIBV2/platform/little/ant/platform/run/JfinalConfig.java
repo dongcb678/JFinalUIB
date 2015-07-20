@@ -29,7 +29,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 
 import little.ant.platform.beetl.format.DateFormat;
 import little.ant.platform.beetl.func.EscapeXml;
-import little.ant.platform.beetl.func.HasPrivilegeUrl;
+import little.ant.platform.beetl.func.AuthUrl;
 import little.ant.platform.beetl.func.I18nFormat;
 import little.ant.platform.beetl.func.OrderBy;
 import little.ant.platform.beetl.render.MyBeetlRenderFactory;
@@ -85,7 +85,7 @@ public class JfinalConfig extends JFinalConfig {
 //		}
 		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
 		
-		groupTemplate.registerFunction("hasPrivilegeUrl", new HasPrivilegeUrl());
+		groupTemplate.registerFunction("authUrl", new AuthUrl());
 		groupTemplate.registerFunction("orderBy", new OrderBy());
 		groupTemplate.registerFunction("escapeXml", new EscapeXml());
 		groupTemplate.registerFunction("i18nFormat", new I18nFormat());

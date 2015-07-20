@@ -23,7 +23,7 @@
 				
 				<% include("/platform/param/form.html"){} %>
 				<div class="form-actions">
-					<% if(hasPrivilegeUrl("/jf/platform/param/save")){ %>
+					<% if(authUrl("/jf/platform/param/save")){ %>
 						<button class="btn btn-primary" type="button" onclick="platform_verify.formValiSubmit(this.form);">${i18nMap["admin.common.submit"]}</button>
 					<% } %>
 				</div>
@@ -66,7 +66,7 @@
 					
 					<div class="form-group">
 						<div class="col-sm-2 col-sm-offset-3">
-							<% if(hasPrivilegeUrl("/jf/platform/param/update")){ %>
+							<% if(authUrl("/jf/platform/param/update")){ %>
 								<button type="button" class="btn btn-red" onclick="platform_verify.formValiSubmit(this.form);">
 									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
 								</button>

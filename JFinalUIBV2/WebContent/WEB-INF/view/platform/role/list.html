@@ -62,16 +62,16 @@
 				</div>
 				
 				<%
-					var edit = hasPrivilegeUrl("/jf/platform/role/edit");
-					var delete = hasPrivilegeUrl("/jf/platform/role/delete");
-					var operator = hasPrivilegeUrl("/platform/role/operatorTree.html");
+					var edit = authUrl("/jf/platform/role/edit");
+					var delete = authUrl("/jf/platform/role/delete");
+					var operator = authUrl("/platform/role/operatorTree.html");
 				%>
 				
 				<div class="panel-body">
 					
 					<div class="row">
 						<div class="col-md-12 space20">
-							<% if(hasPrivilegeUrl("/platform/role/add.html")){ %>
+							<% if(authUrl("/platform/role/add.html")){ %>
 								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/role/toUrl?toUrl=/platform/role/add.html');">
 									${i18nMap["admin.role.add"]} <i class="fa fa-plus"></i>
 								</button>

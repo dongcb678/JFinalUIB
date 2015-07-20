@@ -47,7 +47,7 @@
 	    });	
 
 		function view(ids){
-			var has = ${hasPrivilegeUrl("/jf/platform/param/view")};
+			var has = ${authUrl("/jf/platform/param/view")};
 			if(has){
 				parent.window.common_ajax.ajaxMainPanel('/jf/platform/param/view/' + ids);
 			}else{
@@ -56,7 +56,7 @@
 		}
 	
 		function update(ids){
-			var has = ${hasPrivilegeUrl("/jf/platform/param/edit")};
+			var has = ${authUrl("/jf/platform/param/edit")};
 			if(has){
 				parent.window.common_ajax.ajaxMainPanel('/jf/platform/param/edit/' + ids);
 			}else{
@@ -65,7 +65,7 @@
 		}
 	
 		function deleteFunc(ids){
-			var has = ${hasPrivilegeUrl("/jf/platform/param/delete")};
+			var has = ${authUrl("/jf/platform/param/delete")};
 			if(has){
 				var d = dialog({
 				    title: '操作提示',

@@ -47,7 +47,7 @@
 	    });	
 
 		function view(ids){
-			var has = ${hasPrivilegeUrl("/jf/platform/dict/view")};
+			var has = ${authUrl("/jf/platform/dict/view")};
 			if(has){
 				parent.window.common_ajax.ajaxMainPanel('/jf/platform/dict/view/' + ids);
 			}else{
@@ -56,7 +56,7 @@
 		}
 	
 		function update(ids){
-			var has = ${hasPrivilegeUrl("/jf/platform/dict/edit")};
+			var has = ${authUrl("/jf/platform/dict/edit")};
 			if(has){
 				parent.window.common_ajax.ajaxMainPanel('/jf/platform/dict/edit/' + ids);
 			}else{
@@ -65,7 +65,7 @@
 		}
 	
 		function deleteFunc(ids){
-			var has = ${hasPrivilegeUrl("/jf/platform/dict/delete")};
+			var has = ${authUrl("/jf/platform/dict/delete")};
 			if(has){
 				var d = dialog({
 				    title: '操作提示',

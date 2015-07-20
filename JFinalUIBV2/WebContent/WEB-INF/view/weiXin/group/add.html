@@ -22,7 +22,7 @@
 			<form class="form-horizontal" id="editForm" action="${cxt!}/jf/wx/group/save" method="POST">
 				<% include("/platform/group/form.html"){} %>
 				<div class="form-actions">
-					<% if(hasPrivilegeUrl("/jf/wx/group/save")){ %>
+					<% if(authUrl("/jf/wx/group/save")){ %>
 						<button class="btn btn-primary" type="button" onclick="platform_verify.formValiSubmit(this.form);">${i18nMap["admin.common.submit"]}</button>
 					<% } %>
 				</div>

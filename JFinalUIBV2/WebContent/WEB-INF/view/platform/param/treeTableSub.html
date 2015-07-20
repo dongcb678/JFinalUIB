@@ -1,7 +1,7 @@
 <%
-	var view = hasPrivilegeUrl("/jf/platform/param/view");
-	var edit = hasPrivilegeUrl("/jf/platform/param/edit");
-	var delete = hasPrivilegeUrl("/jf/platform/param/delete");
+	var view = authUrl("/jf/platform/param/view");
+	var edit = authUrl("/jf/platform/param/edit");
+	var delete = authUrl("/jf/platform/param/delete");
 %>
 
 <% for(param in list){ %>

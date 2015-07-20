@@ -146,7 +146,7 @@ public class SplitPage implements Serializable {
 		if (pageSize <= 0) {
 			pageSize = ConstantSplitPage.default_pageSize;
 		}
-		if (pageSize > 200) {
+		if (pageSize > ConstantSplitPage.default_maxSize) {
 			pageSize = ConstantSplitPage.default_pageSize;
 		}
 		return pageSize;

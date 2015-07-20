@@ -11,9 +11,9 @@ import little.ant.platform.model.Syslog;
  * 页面按钮权限验证函数
  * @author 董华健
  */
-public class HasPrivilegeUrl implements Function {
+public class AuthUrl implements Function {
 
-	private static Logger log = Logger.getLogger(HasPrivilegeUrl.class);
+	private static Logger log = Logger.getLogger(AuthUrl.class);
 	
 	/**
 	 * 页面按钮权限验证

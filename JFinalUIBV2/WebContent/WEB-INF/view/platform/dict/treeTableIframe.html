@@ -24,7 +24,7 @@
 				
 				<div class="row">
 					<div class="col-md-12 space20">
-						<% if(hasPrivilegeUrl("/platform/dict/add.html")){ %>
+						<% if(authUrl("/platform/dict/add.html")){ %>
 							<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/dict/toUrl?toUrl=/platform/dict/add.html&i18n=1');">
 								${i18nMap["admin.dict.treeTable.addI18n"]} <i class="fa fa-plus"></i>
 							</button>

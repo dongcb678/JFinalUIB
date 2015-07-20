@@ -24,7 +24,7 @@
 				
 				<div class="row">
 					<div class="col-md-12 space20">
-						<% if(hasPrivilegeUrl("/platform/param/add.html")){ %>
+						<% if(authUrl("/platform/param/add.html")){ %>
 							<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/param/toUrl?toUrl=/platform/param/add.html&i18n=1');">
 								${i18nMap["admin.param.treeTable.addI18n"]} <i class="fa fa-plus"></i>
 							</button>

@@ -1,5 +1,9 @@
 package little.ant.platform.constant;
 
+/**
+ * 解析sql和param的类型
+ * @author 董华健
+ */
 public interface ConstantRender {
 
 	/**

@@ -28,7 +28,7 @@
 					
 					<div class="form-group">
 						<div class="col-sm-2 col-sm-offset-3">
-							<% if(hasPrivilegeUrl("/jf/common/admin/ipBlacklist/save")){ %>
+							<% if(authUrl("/jf/common/admin/ipBlacklist/save")){ %>
 								<button type="button" class="btn btn-red" onclick="platform_verify.formValiSubmit(this.form);">
 									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
 								</button>
