@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import little.ant.platform.beetl.render.MyBeetlRender;
 import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.constant.ConstantWebContext;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
@@ -41,22 +42,22 @@ public class GlobalHandler extends Handler {
 		
 		log.info("设置 web 路径");
 		String cxt = ToolWeb.getContextPath(request);
-		request.setAttribute("cxt", cxt);
+		request.setAttribute(ConstantWebContext.cxt, cxt);
 		
 		log.debug("request cookie 处理");
 		Map<String, Cookie> cookieMap = ToolWeb.readCookieMap(request);
-		request.setAttribute("cookieMap", cookieMap);
+		request.setAttribute(ConstantWebContext.cookieMap, cookieMap);
 
 		log.debug("request param 请求参数处理");
-		request.setAttribute("paramMap", ToolWeb.getParamMap(request));
+		request.setAttribute(ConstantWebContext.paramMap, ToolWeb.getParamMap(request));
 
 		log.debug("request 国际化");
-		String localePram = request.getParameter("localePram");
+		String localePram = request.getParameter(ConstantWebContext.localePram);
 		if(null != localePram && !localePram.isEmpty()){
 			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
-			ToolWeb.addCookie(response,  "", "/", true, "language", localePram, maxAge);
+			ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.language, localePram, maxAge);
 		}else {
-			localePram = ToolWeb.getCookieValueByName(request, "language");
+			localePram = ToolWeb.getCookieValueByName(request, ConstantWebContext.language);
 			if(null == localePram || localePram.isEmpty()){
 				Locale locale = request.getLocale();
 				String language = locale.getLanguage();
@@ -69,8 +70,8 @@ public class GlobalHandler extends Handler {
 		}
 		localePram = localePram.toLowerCase();
 		Map<String, String> i18nMap = I18NPlugin.get(localePram);
-		request.setAttribute("localePram", localePram);
-		request.setAttribute("i18nMap", i18nMap);
+		request.setAttribute(ConstantWebContext.localePram, localePram);
+		request.setAttribute(ConstantWebContext.i18nMap, i18nMap);
 		
 		log.info("设置Header");
 		request.setAttribute("decorator", "none");

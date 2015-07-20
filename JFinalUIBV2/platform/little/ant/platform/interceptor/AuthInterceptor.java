@@ -14,6 +14,7 @@ import com.jfinal.aop.Invocation;
 
 import little.ant.platform.constant.ConstantAuth;
 import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.constant.ConstantWebContext;
 import little.ant.platform.controller.BaseController;
 import little.ant.platform.handler.GlobalHandler;
 import little.ant.platform.model.Group;
@@ -50,8 +51,8 @@ public class AuthInterceptor implements Interceptor {
 
 		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");
 		String uri = invoc.getActionKey(); // 默认就是ActionKey
-		if (invoc.getMethodName().equals("toUrl")) {
-			uri = ToolWeb.getParam(request, "toUrl"); // 否则就是toUrl的值
+		if (invoc.getMethodName().equals(ConstantWebContext.toUrl)) {
+			uri = ToolWeb.getParam(request, ConstantWebContext.toUrl); // 否则就是toUrl的值
 		}
 
 		log.info("druid特殊处理");
@@ -67,8 +68,8 @@ public class AuthInterceptor implements Interceptor {
 		User user = getCurrentUser(request, response, userAgentVali);// 当前登录用户
 		if (null != user) {
 			reqSysLog.set(Syslog.column_userids, user.getPKValue());
-			contro.setAttr("cUser", user);
-			contro.setAttr("cUserIds", user.getPKValue());
+			contro.setAttr(ConstantWebContext.cUser, user);
+			contro.setAttr(ConstantWebContext.cUserIds, user.getPKValue());
 		}
 
 		log.info("获取URI对象!");
@@ -122,14 +123,14 @@ public class AuthInterceptor implements Interceptor {
 
 		log.info("是否需要表单重复提交验证!");
 		if (operator.getStr("formtoken").equals("1")) {
-			String tokenRequest = ToolWeb.getParam(request, "formToken");
-			String tokenCookie = ToolWeb.getCookieValueByName(request, "token");
+			String tokenRequest = ToolWeb.getParam(request, ConstantWebContext.formToken);
+			String tokenCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.token);
 			if (null == tokenRequest || tokenRequest.equals("")) {
 				log.info("tokenRequest为空，无需表单验证!");
 
 			} else if (null == tokenCookie || tokenCookie.equals("") || !tokenCookie.equals(tokenRequest)) {
 				log.info("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
-				ToolWeb.addCookie(response, "", "/", true, "token", tokenRequest, 0);
+				ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.token, tokenRequest, 0);
 
 			} else if (tokenCookie.equals(tokenRequest)) {
 				log.info("表单重复提交!");
@@ -220,22 +221,22 @@ public class AuthInterceptor implements Interceptor {
 
 		// 权限验证对象
 		String operatorIds = operator.getPKValue() + ",";
-		String groupIds = user.getStr("groupids");
-		String stationIds = user.getStr("stationids");
+		String groupIds = user.getStr(User.column_groupids);
+		String stationIds = user.getStr(User.column_stationids);
 
 		// 根据分组查询权限
 		if (null != groupIds) {
 			String[] groupIdsArr = groupIds.split(",");
 			for (String groupIdsTemp : groupIdsArr) {
 				Group group = Group.dao.cacheGet(groupIdsTemp);
-				String roleIdsStr = group.getStr("roleids");
+				String roleIdsStr = group.getStr(Group.column_roleids);
 				if (null == roleIdsStr || roleIdsStr.equals("")) {
 					continue;
 				}
 				String[] roleIdsArr = roleIdsStr.split(",");
 				for (String roleIdsTemp : roleIdsArr) {
 					Role role = Role.dao.cacheGet(roleIdsTemp);
-					String operatorIdsStr = role.getStr("operatorids");
+					String operatorIdsStr = role.getStr(Role.column_operatorids);
 					if (operatorIdsStr.indexOf(operatorIds) != -1) {
 						return true;
 					}
@@ -248,7 +249,7 @@ public class AuthInterceptor implements Interceptor {
 			String[] stationIdsArr = stationIds.split(",");
 			for (String ids : stationIdsArr) {
 				Station station = Station.dao.cacheGet(ids);
-				String operatorIdsStr = station.getStr("operatorids");
+				String operatorIdsStr = station.getStr(Station.column_operatorids);
 				if (null == operatorIdsStr || operatorIdsStr.equals("")) {
 					continue;
 				}
@@ -269,7 +270,7 @@ public class AuthInterceptor implements Interceptor {
 	 * @return
 	 */
 	public static User getCurrentUser(HttpServletRequest request, HttpServletResponse response, boolean userAgentVali) {
-		String loginCookie = ToolWeb.getCookieValueByName(request, "authmark");
+		String loginCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.authmark);
 		if (null != loginCookie && !loginCookie.equals("")) {
 			// 1.解密数据
 			String data = ToolSecurityIDEA.decrypt(loginCookie);
@@ -308,7 +309,7 @@ public class AuthInterceptor implements Interceptor {
 						
 						// 添加到Cookie
 						int maxAgeTemp = -1; // 设置cookie有效时间
-						ToolWeb.addCookie(response,  "", "/", true, "authmark", authmark, maxAgeTemp);
+						ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.authmark, authmark, maxAgeTemp);
 					}
 				}
 				
@@ -352,7 +353,7 @@ public class AuthInterceptor implements Interceptor {
 		String authmark = ToolSecurityIDEA.encrypt(token.toString());
 		
 		// 4. 添加到Cookie
-		ToolWeb.addCookie(response,  "", "/", true, "authmark", authmark, maxAgeTemp);
+		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.authmark, authmark, maxAgeTemp);
 	}
 	
 	/**
@@ -366,7 +367,7 @@ public class AuthInterceptor implements Interceptor {
 		
 		// 2.设置登陆验证码cookie
 		int maxAgeTemp = -1;
-		ToolWeb.addCookie(response,  "", "/", true, "authCode", authCodeCookie, maxAgeTemp);
+		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.authCode, authCodeCookie, maxAgeTemp);
 	}
 
 	/**
@@ -376,7 +377,7 @@ public class AuthInterceptor implements Interceptor {
 	 */
 	public static String getAuthCode(HttpServletRequest request){
 		// 1.获取cookie加密数据
-		String authCode = ToolWeb.getCookieValueByName(request, "authCode");
+		String authCode = ToolWeb.getCookieValueByName(request, ConstantWebContext.authCode);
 		if (null != authCode && !authCode.equals("")) {
 			// 2.解密数据
 			authCode = ToolSecurityIDEA.decrypt(authCode);
