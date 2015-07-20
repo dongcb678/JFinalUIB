@@ -36,7 +36,7 @@ public class GlobalHandler extends Handler {
 		log.info("初始化访问系统功能日志");
 		Syslog reqSysLog = getSysLog(request);
 		long starttime = ToolDateTime.getDateByTime();
-		reqSysLog.set("startdate", ToolDateTime.getSqlTimestamp(starttime));//开始时间
+		reqSysLog.set(Syslog.column_startdate, ToolDateTime.getSqlTimestamp(starttime));//开始时间
 		request.setAttribute(reqSysLogKey, reqSysLog);
 		
 		log.info("设置 web 路径");
@@ -84,21 +84,21 @@ public class GlobalHandler extends Handler {
 		
 		// 结束时间
 		long endtime = ToolDateTime.getDateByTime();
-		reqSysLog.set("enddate", ToolDateTime.getSqlTimestamp(endtime));
+		reqSysLog.set(Syslog.column_enddate, ToolDateTime.getSqlTimestamp(endtime));
 		
 		// 总耗时
 		Long haoshi = endtime - starttime;
-		reqSysLog.set("haoshi", haoshi);
+		reqSysLog.set(Syslog.column_haoshi, haoshi);
 		
 		// 视图耗时
 		long renderTime = 0;
 		if(null != request.getAttribute(MyBeetlRender.renderTimeKey)){
 			renderTime = (long) request.getAttribute(MyBeetlRender.renderTimeKey);
 		}
-		reqSysLog.set("viewhaoshi", renderTime);
+		reqSysLog.set(Syslog.column_viewhaoshi, renderTime);
 		
 		// action耗时
-		reqSysLog.set("actionhaoshi", haoshi - renderTime);
+		reqSysLog.set(Syslog.column_actionhaoshi, haoshi - renderTime);
 		
 		log.info("日志添加到入库队列");
 		ThreadSysLog.add(reqSysLog);
@@ -125,18 +125,18 @@ public class GlobalHandler extends Handler {
 
 		Syslog reqSysLog = new Syslog();
 		
-		reqSysLog.set("ips", ip);
-		reqSysLog.set("requestpath", requestPath);
-		reqSysLog.set("referer", referer);
-		reqSysLog.set("useragent", userAgent);
-		reqSysLog.set("cookie", cookie);
-		reqSysLog.set("method", method);
-		reqSysLog.set("xrequestedwith", xRequestedWith);
-		reqSysLog.set("host", host);
-		reqSysLog.set("acceptlanguage", acceptLanguage);
-		reqSysLog.set("acceptencoding", acceptEncoding);
-		reqSysLog.set("accept", accept);
-		reqSysLog.set("connection", connection);
+		reqSysLog.set(Syslog.column_ips, ip);
+		reqSysLog.set(Syslog.column_requestpath, requestPath);
+		reqSysLog.set(Syslog.column_referer, referer);
+		reqSysLog.set(Syslog.column_useragent, userAgent);
+		reqSysLog.set(Syslog.column_cookie, cookie);
+		reqSysLog.set(Syslog.column_method, method);
+		reqSysLog.set(Syslog.column_xrequestedwith, xRequestedWith);
+		reqSysLog.set(Syslog.column_host, host);
+		reqSysLog.set(Syslog.column_acceptlanguage, acceptLanguage);
+		reqSysLog.set(Syslog.column_acceptencoding, acceptEncoding);
+		reqSysLog.set(Syslog.column_accept, accept);
+		reqSysLog.set(Syslog.column_connection, connection);
 
 		return reqSysLog;
 	}

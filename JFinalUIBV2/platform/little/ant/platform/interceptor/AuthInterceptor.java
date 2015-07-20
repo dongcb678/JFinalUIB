@@ -66,7 +66,7 @@ public class AuthInterceptor implements Interceptor {
 		}
 		User user = getCurrentUser(request, response, userAgentVali);// 当前登录用户
 		if (null != user) {
-			reqSysLog.set("userids", user.getPKValue());
+			reqSysLog.set(Syslog.column_userids, user.getPKValue());
 			contro.setAttr("cUser", user);
 			contro.setAttr("cUserIds", user.getPKValue());
 		}
@@ -79,9 +79,9 @@ public class AuthInterceptor implements Interceptor {
 			log.info("URI不存在!");
 
 			log.info("访问失败时保存日志!");
-			reqSysLog.set("status", "0");// 失败
-			reqSysLog.set("description", "URL不存在");
-			reqSysLog.set("cause", "1");// URL不存在
+			reqSysLog.set(Syslog.column_status, "0");// 失败
+			reqSysLog.set(Syslog.column_description, "URL不存在");
+			reqSysLog.set(Syslog.column_cause, "1");// URL不存在
 
 			log.info("返回失败提示页面!");
 			toInfoJsp(contro, ConstantAuth.auth_no_url, "权限认证过滤器检测：URI不存在");
@@ -90,16 +90,16 @@ public class AuthInterceptor implements Interceptor {
 
 		log.info("URI存在!");
 		Operator operator = (Operator) operatorObj;
-		reqSysLog.set("operatorids", operator.getPKValue());
+		reqSysLog.set(Syslog.column_operatorids, operator.getPKValue());
 
 		if (operator.get("privilegess").equals("1")) {// 是否需要权限验证
 			log.info("需要权限验证!");
 			if (user == null) {
 				log.info("权限认证过滤器检测:未登录!");
 
-				reqSysLog.set("status", "0");// 失败
-				reqSysLog.set("description", "未登录");
-				reqSysLog.set("cause", "2");// 2 未登录
+				reqSysLog.set(Syslog.column_status, "0");// 失败
+				reqSysLog.set(Syslog.column_description, "未登录");
+				reqSysLog.set(Syslog.column_cause, "2");// 2 未登录
 
 				toInfoJsp(contro, ConstantAuth.auth_no_login, "权限认证过滤器检测：未登录");
 				return;
@@ -108,9 +108,9 @@ public class AuthInterceptor implements Interceptor {
 			if (!hasPrivilegeUrl(user.getPKValue(), uri)) {// 权限验证
 				log.info("权限验证失败，没有权限!");
 
-				reqSysLog.set("status", "0");// 失败
-				reqSysLog.set("description", "没有权限!");
-				reqSysLog.set("cause", "0");// 没有权限
+				reqSysLog.set(Syslog.column_status, "0");// 失败
+				reqSysLog.set(Syslog.column_description, "没有权限!");
+				reqSysLog.set(Syslog.column_cause, "0");// 没有权限
 
 				log.info("返回失败提示页面!");
 				toInfoJsp(contro, ConstantAuth.auth_no_permissions, "权限验证失败，您没有操作权限");
@@ -142,27 +142,33 @@ public class AuthInterceptor implements Interceptor {
 		}
 
 		log.info("权限认真成功更新日志对象属性!");
-		reqSysLog.set("status", "1");// 成功
+		reqSysLog.set(Syslog.column_status, "1");// 成功
 		Date actionStartDate = ToolDateTime.getDate();// action开始时间
-		reqSysLog.set("actionstartdate", ToolDateTime.getSqlTimestamp(actionStartDate));
-		reqSysLog.set("actionstarttime", actionStartDate.getTime());
+		reqSysLog.set(Syslog.column_actionstartdate, ToolDateTime.getSqlTimestamp(actionStartDate));
+		reqSysLog.set(Syslog.column_actionstarttime, actionStartDate.getTime());
 
 		try {
 			invoc.invoke();
 		} catch (Exception e) {
+			String expMessage = e.getMessage();
+			// 开发模式下的异常信息
+			//if(Boolean.parseBoolean((String) PropertiesPlugin.getParamMapValue(ConstantInit.config_devMode))){
+				ByteArrayOutputStream buf = new ByteArrayOutputStream();
+				e.printStackTrace(new PrintWriter(buf, true));
+				expMessage = buf.toString();
+			//}
+			
 			log.error("业务逻辑代码遇到异常时保存日志!");
-			reqSysLog.set("status", "0");// 失败
-			reqSysLog.set("description", e.getMessage());
-			reqSysLog.set("cause", "3");// 业务代码异常
+			reqSysLog.set(Syslog.column_status, "0");// 失败
+			reqSysLog.set(Syslog.column_description, expMessage);
+			reqSysLog.set(Syslog.column_cause, "3");// 业务代码异常
 
 			log.error("返回失败提示页面!Exception = " + e.getMessage());
-			ByteArrayOutputStream buf = new ByteArrayOutputStream();
-			e.printStackTrace(new PrintWriter(buf, true));
-			String expMessage = buf.toString();
+
 			toInfoJsp(contro, ConstantAuth.auth_exception, "业务逻辑代码遇到异常Exception = " + expMessage);
 
 		} finally {
-
+			// 
 		}
 	}
 
