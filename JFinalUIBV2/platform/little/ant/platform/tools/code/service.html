@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.service.BaseService;
-import little.ant.platform.dto.SplitPage;
 import little.ant.platform.constant.ConstantInit;
 import ${basePackage}.model.${className};
 
@@ -14,14 +13,6 @@ public class ${className}Service extends BaseService {
 	private static Logger log = Logger.getLogger(${className}Service.class);
 	
 	public static final ${className}Service service = MyTxProxy.newProxy(${className}Service.class);
-	
-	/**
-	 * 分页
-	 * @param splitPage
-	 */
-	public void list(SplitPage splitPage) {
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, ${className}.sqlId_splitPage_select, ${className}.sqlId_splitPage_from);
-	}
 	
 	/**
 	 * 删除

@@ -33,7 +33,7 @@ public class ${className}Controller extends BaseController {
 	 * 列表
 	 */
 	public void index() {
-		${className}Service.service.list(splitPage);
+		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, ${className}.sqlId_splitPage_select, ${className}.sqlId_splitPage_from);
 		render("/${basePath}/${classNameSmall}/list.html");
 	}
 	
