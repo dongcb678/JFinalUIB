@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.model.Param;
-import little.ant.platform.plugin.I18NPlugin;
-
 import org.apache.log4j.Logger;
 import org.beetl.core.Tag;
+
+import little.ant.platform.constant.ConstantWebContext;
+import little.ant.platform.model.Param;
+import little.ant.platform.plugin.I18NPlugin;
 
 /**
  * 参数输出标签：支持select、radio、checkbox
@@ -87,7 +88,7 @@ public class ParamTag extends Tag {
 		
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
-			String localePram = (String) ctx.getGlobal("localePram");
+			String localePram = (String) ctx.getGlobal(ConstantWebContext.localePram);
 			val += I18NPlugin.i18n(localePram);
 		}
 		List<Param> paramList = Param.dao.cacheGetChild(number);
@@ -135,7 +136,7 @@ public class ParamTag extends Tag {
 		
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
-			String localePram = (String) ctx.getGlobal("localePram");
+			String localePram = (String) ctx.getGlobal(ConstantWebContext.localePram);
 			val += I18NPlugin.i18n(localePram);
 		}
 		List<Param> paramList = Param.dao.cacheGetChild(number);
@@ -181,7 +182,7 @@ public class ParamTag extends Tag {
 		
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
-			String localePram = (String) ctx.getGlobal("localePram");
+			String localePram = (String) ctx.getGlobal(ConstantWebContext.localePram);
 			val += I18NPlugin.i18n(localePram);
 		}
 		List<Param> paramList = Param.dao.cacheGetChild(number);

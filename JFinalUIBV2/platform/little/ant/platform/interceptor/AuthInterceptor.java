@@ -122,7 +122,7 @@ public class AuthInterceptor implements Interceptor {
 		log.info("不需要权限验证、权限认证成功!!!继续处理请求...");
 
 		log.info("是否需要表单重复提交验证!");
-		if (operator.getStr("formtoken").equals("1")) {
+		if (operator.getStr(Operator.column_formtoken).equals("1")) {
 			String tokenRequest = ToolWeb.getParam(request, ConstantWebContext.formToken);
 			String tokenCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.token);
 			if (null == tokenRequest || tokenRequest.equals("")) {

@@ -7,6 +7,8 @@ import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 
+import little.ant.platform.constant.ConstantWebContext;
+
 /**
  * 国际化输出
  * @author 董华健
@@ -29,7 +31,7 @@ public class I18nFormat implements Function {
 		}
 		
 		// 第一个参数时国际化模板的key
-		Map<String, String> i18nMap = (Map<String, String>) context.getGlobal("i18nMap");
+		Map<String, String> i18nMap = (Map<String, String>) context.getGlobal(ConstantWebContext.i18nMap);
 		String formatTemplateKey = (String) arg[0];
 		String formatTemplate = i18nMap.get(formatTemplateKey);
 		

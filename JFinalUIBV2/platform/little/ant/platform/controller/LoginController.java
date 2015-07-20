@@ -6,6 +6,7 @@ import com.jfinal.aop.Before;
 
 import little.ant.platform.annotation.Controller;
 import little.ant.platform.constant.ConstantLogin;
+import little.ant.platform.constant.ConstantWebContext;
 import little.ant.platform.model.User;
 import little.ant.platform.service.LoginService;
 import little.ant.platform.tools.ToolWeb;
@@ -113,7 +114,7 @@ public class LoginController extends BaseController {
 	 * 注销
 	 */
 	public void logout() {
-		ToolWeb.addCookie(getResponse(), "", "/", true, "authmark", null, 0);
+		ToolWeb.addCookie(getResponse(), "", "/", true, ConstantWebContext.authmark, null, 0);
 		redirect("/jf/platform/login");
 	}
 
