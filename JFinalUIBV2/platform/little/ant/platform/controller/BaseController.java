@@ -330,7 +330,7 @@ public abstract class BaseController extends Controller {
      * @param sqlId
      * @return
      */
-	public String getSql(String sqlId){
+	protected String getSql(String sqlId){
 		return BaseService.service.getSql(sqlId);
 	}
 
@@ -340,7 +340,7 @@ public abstract class BaseController extends Controller {
      * @param param
      * @return
      */
-	public String getSqlByBeetl(String sqlId, Map<String, Object> param){
+	protected String getSqlByBeetl(String sqlId, Map<String, Object> param){
     	return BaseService.service.getSqlByBeetl(sqlId, param);
     }
     
@@ -351,7 +351,7 @@ public abstract class BaseController extends Controller {
      * @param list 用于接收预处理的值
      * @return
      */
-	public String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	protected String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
     	return BaseService.service.getSqlByBeetl(sqlId, param, list);
     }
 
@@ -361,7 +361,7 @@ public abstract class BaseController extends Controller {
      * @param param
      * @return
      */
-	public String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
+	protected String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
     	return BaseService.service.getSqlByFreeMarker(sqlId, param);
     }
     
@@ -372,7 +372,7 @@ public abstract class BaseController extends Controller {
      * @param list 用于接收预处理的值
      * @return
      */
-	public String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	protected String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
     	return BaseService.service.getSqlByFreeMarker(sqlId, param, list);
     }
 
@@ -382,7 +382,7 @@ public abstract class BaseController extends Controller {
      * @param param
      * @return
      */
-	public String getSqlByVelocity(String sqlId, Map<String, Object> param){
+	protected String getSqlByVelocity(String sqlId, Map<String, Object> param){
     	return BaseService.service.getSqlByVelocity(sqlId, param);
     }
     
@@ -393,7 +393,7 @@ public abstract class BaseController extends Controller {
      * @param list 用于接收预处理的值
      * @return
      */
-	public String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	protected String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
     	return BaseService.service.getSqlByVelocity(sqlId, param, list);
     }
 	
