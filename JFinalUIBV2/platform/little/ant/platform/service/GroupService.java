@@ -71,7 +71,7 @@ public class GroupService extends BaseService {
 		List<Group> checkedList = new ArrayList<Group>();
 		String groupIds = User.dao.findById(ids).getStr(User.column_groupids);
 		if(null != groupIds && !groupIds.equals("")){
-			String fitler = toSql(groupIds);
+			String fitler = sqlIn(groupIds);
 
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);

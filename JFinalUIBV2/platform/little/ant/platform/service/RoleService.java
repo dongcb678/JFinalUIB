@@ -82,7 +82,7 @@ public class RoleService extends BaseService {
 		List<Role> checkedList = new ArrayList<Role>();
 		String roleIds = Group.dao.findById(ids).getStr(Group.column_roleids);
 		if(null != roleIds && !roleIds.equals("")){
-			String fitler = toSql(roleIds);
+			String fitler = sqlIn(roleIds);
 
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("fitler", fitler);

@@ -1,5 +1,7 @@
 package little.ant.platform.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -215,25 +217,31 @@ public class BaseService {
 	 * @param ids
 	 * @return
 	 */
-	public String toSql(String ids){
+	public String sqlIn(String ids){
 		if(null == ids || ids.trim().isEmpty()){
 			return null;
 		}
 		
 		String[] idsArr = ids.split(",");
-		for (String id : idsArr) {
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){
+		int length = idsArr.length;
+		
+		StringBuilder sqlSb = new StringBuilder();
+		
+		for (int i = 0, size = length -1; i < size; i++) {
+			String id = idsArr[i];
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
 				log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
-		}
-		
-		StringBuilder sqlSb = new StringBuilder();
-		int length = idsArr.length;
-		for (int i = 0, size = length -1; i < size; i++) {
 			sqlSb.append(" '").append(idsArr[i]).append("', ");
 		}
+		
 		if(length != 0){
+			String id = idsArr[length-1];
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				log.error("字符安全验证失败：" + id);
+				throw new RuntimeException("字符安全验证失败：" + id);
+			}
 			sqlSb.append(" '").append(idsArr[length-1]).append("' ");
 		}
 		
@@ -245,32 +253,87 @@ public class BaseService {
 	 * @param ids
 	 * @return
 	 */
-	public String toSql(String[] idsArr){
+	public String sqlIn(String[] idsArr){
 		if(idsArr == null || idsArr.length == 0){
 			return null;
 		}
 		
-		for (String id : idsArr) {
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){
+		int length = idsArr.length;
+		
+		StringBuilder sqlSb = new StringBuilder();
+		
+		for (int i = 0, size = length -1; i < size; i++) {
+			String id = idsArr[i];
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
 				log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
+			sqlSb.append(" '").append(id).append("', ");
 		}
 		
-		StringBuilder sqlSb = new StringBuilder();
-		int length = idsArr.length;
-		for (int i = 0, size = length -1; i < size; i++) {
-			sqlSb.append(" '").append(idsArr[i]).append("', ");
-		}
 		if(length != 0){
-			sqlSb.append(" '").append(idsArr[length-1]).append("' ");
+			String id = idsArr[length-1];
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				log.error("字符安全验证失败：" + id);
+				throw new RuntimeException("字符安全验证失败：" + id);
+			}
+			sqlSb.append(" '").append(id).append("' ");
 		}
 		
 		return sqlSb.toString();
 	}
 
 	/**
-	 * 把11,22,33...转成['11','22','33'...]
+	 * 把11,22,33...转成map，分两部分，sql和值
+	 * @param ids
+	 * @return
+	 * 描述：
+	 * 返回map包含两部分数据
+	 * 一是 name=? or name=? or name=? or ...
+	 * 二是 list = ['11','22','33'...]
+	 */
+	public Map<String, Object> sqlInMap(String column, String ids){
+		if(null == ids || ids.trim().isEmpty()){
+			return null;
+		}
+		
+		String[] idsArr = ids.split(",");
+		int length = idsArr.length;
+		
+		StringBuilder sql = new StringBuilder();
+		List<Object> value = new ArrayList<Object>(length);
+		
+		for (int i = 0, size = length -1; i < size; i++) {
+			String id = idsArr[i];
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				log.error("字符安全验证失败：" + id);
+				throw new RuntimeException("字符安全验证失败：" + id);
+			}
+			
+			sql.append(column).append(" = ? or ");
+			value.add(id);
+		}
+		
+		if(length != 0){
+			String id = idsArr[length-1];
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				log.error("字符安全验证失败：" + id);
+				throw new RuntimeException("字符安全验证失败：" + id);
+			}
+			
+			sql.append(column).append(" = ? ");
+			value.add(id);
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sql", sql);
+		map.put("value", value);
+		
+		return map;
+	}
+
+	/**
+	 * 把11,22,33...转成数组['11','22','33'...]
 	 * @param ids
 	 * @return
 	 */
@@ -282,7 +345,7 @@ public class BaseService {
 		String[] idsArr = ids.split(",");
 		
 		for (String id : idsArr) {
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
 				log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}

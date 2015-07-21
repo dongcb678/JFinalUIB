@@ -63,7 +63,7 @@ public class IndexService extends BaseService {
 		}
 		
 		// 转换成过滤SQL
-		String fitler = toSql(operatorIdsSb.toString()).replace("operator_", "");
+		String fitler = sqlIn(operatorIdsSb.toString()).replace("operator_", "");
 		
 		// 查询根菜单节点
 		Menu menu = Menu.dao.findFirst(getSql(Menu.sqlId_rootId), systemsIds);
