@@ -146,7 +146,7 @@ public class BaseService {
      * @param param
      * @return
      */
-	protected String getSqlByBeetl(String sqlId, Map<String, Object> param){
+	public String getSqlByBeetl(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
     }
     
@@ -157,7 +157,7 @@ public class BaseService {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	public String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
@@ -167,7 +167,7 @@ public class BaseService {
      * @param param
      * @return
      */
-	protected String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
+	public String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker);
     }
     
@@ -178,7 +178,7 @@ public class BaseService {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	public String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker, list);
     }
 
@@ -188,7 +188,7 @@ public class BaseService {
      * @param param
      * @return
      */
-	protected String getSqlByVelocity(String sqlId, Map<String, Object> param){
+	public String getSqlByVelocity(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity);
     }
     
@@ -199,7 +199,7 @@ public class BaseService {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	public String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity, list);
     }
 	
@@ -223,29 +223,8 @@ public class BaseService {
 		}
 		
 		String[] idsArr = ids.split(",");
-		int length = idsArr.length;
 		
-		StringBuilder sqlSb = new StringBuilder();
-		
-		for (int i = 0, size = length -1; i < size; i++) {
-			String id = idsArr[i];
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
-				log.error("字符安全验证失败：" + id);
-				throw new RuntimeException("字符安全验证失败：" + id);
-			}
-			sqlSb.append(" '").append(idsArr[i]).append("', ");
-		}
-		
-		if(length != 0){
-			String id = idsArr[length-1];
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
-				log.error("字符安全验证失败：" + id);
-				throw new RuntimeException("字符安全验证失败：" + id);
-			}
-			sqlSb.append(" '").append(idsArr[length-1]).append("' ");
-		}
-		
-		return sqlSb.toString();
+		return sqlIn(idsArr);
 	}
 
 	/**
@@ -336,6 +315,7 @@ public class BaseService {
 	 * 把11,22,33...转成数组['11','22','33'...]
 	 * @param ids
 	 * @return
+	 * 描述：把字符串分割成数组返回，并验证分割后的数据
 	 */
 	public String[] splitByComma(String ids){
 		if(null == ids || ids.trim().isEmpty()){
@@ -356,7 +336,7 @@ public class BaseService {
 
 	/**
 	 * 行级：过滤
-	 * @return
+	 * @param formSqlSb
 	 */
 	public void rowFilter(StringBuilder formSqlSb){
 		
@@ -370,7 +350,7 @@ public class BaseService {
 	 * @param content 邮件的文本内容
 	 * @param attachFileNames 附件
 	 */
-	protected void sendTextMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
+	public void sendTextMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
 		ToolMail mail = new ToolMail();
 		mail.setHost((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_host));
 		mail.setPort((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_port));

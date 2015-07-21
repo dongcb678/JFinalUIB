@@ -3,6 +3,7 @@ package little.ant.platform.controller;
 import java.io.File;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -323,6 +324,78 @@ public abstract class BaseController extends Controller {
 	protected void splitPageDistinctBySqlId(String dataSource, SplitPage splitPage, String selectSqlId, String selectCountId, String fromSqlId){
 		BaseService.service.splitPageDistinctBySqlId(dataSource, splitPage, selectSqlId, selectCountId, fromSqlId);
 	}
+
+	/**
+     * 获取SQL，固定SQL
+     * @param sqlId
+     * @return
+     */
+	public String getSql(String sqlId){
+		return BaseService.service.getSql(sqlId);
+	}
+
+    /**
+     * 获取SQL，动态SQL，使用Beetl解析
+     * @param sqlId
+     * @param param
+     * @return
+     */
+	public String getSqlByBeetl(String sqlId, Map<String, Object> param){
+    	return BaseService.service.getSqlByBeetl(sqlId, param);
+    }
+    
+    /**
+     * 获取SQL，动态SQL，使用Beetl解析
+     * @param sqlId 
+     * @param param 查询参数
+     * @param list 用于接收预处理的值
+     * @return
+     */
+	public String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
+    	return BaseService.service.getSqlByBeetl(sqlId, param, list);
+    }
+
+    /**
+     * 获取SQL，动态SQL，使用FreeMarker解析
+     * @param sqlId
+     * @param param
+     * @return
+     */
+	public String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
+    	return BaseService.service.getSqlByFreeMarker(sqlId, param);
+    }
+    
+    /**
+     * 获取SQL，动态SQL，使用FreeMarker解析
+     * @param sqlId 
+     * @param param 查询参数
+     * @param list 用于接收预处理的值
+     * @return
+     */
+	public String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
+    	return BaseService.service.getSqlByFreeMarker(sqlId, param, list);
+    }
+
+    /**
+     * 获取SQL，动态SQL，使用Velocity解析
+     * @param sqlId
+     * @param param
+     * @return
+     */
+	public String getSqlByVelocity(String sqlId, Map<String, Object> param){
+    	return BaseService.service.getSqlByVelocity(sqlId, param);
+    }
+    
+    /**
+     * 获取SQL，动态SQL，使用Velocity解析
+     * @param sqlId 
+     * @param param 查询参数
+     * @param list 用于接收预处理的值
+     * @return
+     */
+	public String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
+    	return BaseService.service.getSqlByVelocity(sqlId, param, list);
+    }
 	
 	/************************************		get 	set 	方法		************************************************/
 
