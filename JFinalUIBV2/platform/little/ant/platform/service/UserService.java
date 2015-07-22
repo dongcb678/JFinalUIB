@@ -16,7 +16,7 @@ import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Department;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
-import little.ant.platform.tools.ToolSecurityPbkdf2;
+import little.ant.platform.tools.security.ToolPbkdf2;
 
 public class UserService extends BaseService {
 
@@ -34,8 +34,8 @@ public class UserService extends BaseService {
 	public void save(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
-			byte[] salt = ToolSecurityPbkdf2.generateSalt();// 密码盐
-			byte[] encryptedPassword = ToolSecurityPbkdf2.getEncryptedPassword(password, salt);
+			byte[] salt = ToolPbkdf2.generateSalt();// 密码盐
+			byte[] encryptedPassword = ToolPbkdf2.getEncryptedPassword(password, salt);
 			user.set(User.column_salt, salt);
 			user.set(User.column_password, encryptedPassword);
 
@@ -72,7 +72,7 @@ public class UserService extends BaseService {
 			if (null != password && !password.trim().equals("")) {
 				User oldUser = User.dao.findById(user.getPKValue());
 				byte[] salt = oldUser.getBytes(User.column_salt);// 密码盐
-				byte[] encryptedPassword = ToolSecurityPbkdf2.getEncryptedPassword(password, salt);
+				byte[] encryptedPassword = ToolPbkdf2.getEncryptedPassword(password, salt);
 				user.set(User.column_password, encryptedPassword);
 			}
 
@@ -191,7 +191,7 @@ public class UserService extends BaseService {
 			User user = User.dao.findFirst(sql, userName);
 			byte[] salt = user.getBytes(User.column_salt);// 密码盐
 			byte[] encryptedPassword = user.getBytes(User.column_password);
-			boolean bool = ToolSecurityPbkdf2.authenticate(passWord, encryptedPassword, salt);
+			boolean bool = ToolPbkdf2.authenticate(passWord, encryptedPassword, salt);
 			if (bool) {
 				return true;
 			}
@@ -220,15 +220,15 @@ public class UserService extends BaseService {
 			byte[] encryptedPassword = user.getBytes(User.column_password);
 			boolean bool = false;
 			try {
-				bool = ToolSecurityPbkdf2.authenticate(passOld, encryptedPassword, salt);
+				bool = ToolPbkdf2.authenticate(passOld, encryptedPassword, salt);
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			} catch (InvalidKeySpecException e) {
 				e.printStackTrace();
 			}
 			if (bool) {
-				byte[] saltNew = ToolSecurityPbkdf2.generateSalt();// 密码盐
-				byte[] encryptedPasswordNew = ToolSecurityPbkdf2.getEncryptedPassword(passNew, saltNew);
+				byte[] saltNew = ToolPbkdf2.generateSalt();// 密码盐
+				byte[] encryptedPasswordNew = ToolPbkdf2.getEncryptedPassword(passNew, saltNew);
 				user.set(User.column_salt, saltNew);
 				user.set(User.column_password, encryptedPasswordNew);
 				// 更新用户

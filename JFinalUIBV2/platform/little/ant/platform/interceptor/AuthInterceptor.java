@@ -25,8 +25,8 @@ import little.ant.platform.model.Syslog;
 import little.ant.platform.model.User;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolDateTime;
-import little.ant.platform.tools.ToolSecurityIDEA;
 import little.ant.platform.tools.ToolWeb;
+import little.ant.platform.tools.security.ToolIDEA;
 
 /**
  * 权限认证拦截器
@@ -273,7 +273,7 @@ public class AuthInterceptor implements Interceptor {
 		String loginCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_authmark);
 		if (null != loginCookie && !loginCookie.equals("")) {
 			// 1.解密数据
-			String data = ToolSecurityIDEA.decrypt(loginCookie);
+			String data = ToolIDEA.decrypt(loginCookie);
 			String[] datas = data.split(".#.");	//arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
 			
 			// 2. 分解获取数据
@@ -305,7 +305,7 @@ public class AuthInterceptor implements Interceptor {
 						long date = ToolDateTime.getDateByTime();
 						StringBuilder token = new StringBuilder();// 时间戳.#.USERID.#.USER_IP.#.USER_AGENT.#.autoLogin
 						token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
-						String authmark = ToolSecurityIDEA.encrypt(token.toString());
+						String authmark = ToolIDEA.encrypt(token.toString());
 						
 						// 添加到Cookie
 						int maxAgeTemp = -1; // 设置cookie有效时间
@@ -350,7 +350,7 @@ public class AuthInterceptor implements Interceptor {
 		
 		StringBuilder token = new StringBuilder();// 时间戳.#.USERID.#.USER_IP.#.USER_AGENT.#.autoLogin
 		token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
-		String authmark = ToolSecurityIDEA.encrypt(token.toString());
+		String authmark = ToolIDEA.encrypt(token.toString());
 		
 		// 4. 添加到Cookie
 		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
@@ -363,7 +363,7 @@ public class AuthInterceptor implements Interceptor {
 	 */
 	public static void setAuthCode(HttpServletResponse response, String authCode){
 		// 1.生成验证码加密cookie
-		String authCodeCookie = ToolSecurityIDEA.encrypt(authCode);
+		String authCodeCookie = ToolIDEA.encrypt(authCode);
 		
 		// 2.设置登陆验证码cookie
 		int maxAgeTemp = -1;
@@ -380,7 +380,7 @@ public class AuthInterceptor implements Interceptor {
 		String authCode = ToolWeb.getCookieValueByName(request, ConstantWebContext.request_authCode);
 		if (null != authCode && !authCode.equals("")) {
 			// 2.解密数据
-			authCode = ToolSecurityIDEA.decrypt(authCode);
+			authCode = ToolIDEA.decrypt(authCode);
 			return authCode;
 		}
 		return null;

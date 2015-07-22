@@ -1,4 +1,4 @@
-package little.ant.platform.tools;
+package little.ant.platform.tools.security;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -23,10 +23,10 @@ import org.apache.log4j.Logger;
  * 
  * 3.当用户修改密码的时候，仍然可以使用原来的盐，只需要调用getEncryptedPassword()方法重新生成密文就可以了。
  */
-public class ToolSecurityPbkdf2 {
+public class ToolPbkdf2 {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolSecurityPbkdf2.class);
+	private static Logger log = Logger.getLogger(ToolPbkdf2.class);
 
 	public static boolean authenticate(String attemptedPassword, byte[] encryptedPassword, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Encrypt the clear-text password using the same salt that was used to

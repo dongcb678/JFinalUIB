@@ -1,4 +1,4 @@
-package little.ant.platform.tools;
+package little.ant.platform.tools.security;
 
 import java.security.Key;
 
@@ -12,15 +12,21 @@ import org.apache.log4j.Logger;
 
 /**
  * AES安全编码组件
+ * 
+ * 高级数据加密标准---AES：由于DES的问题所以产生了AES,像是DES的升级，密钥建立时间短，灵敏性好，内存要求低，被广泛应用
+ * 
  * 说明：
- * 对于java.security.InvalidKeyException: Illegal key size or default parameters异常，
- * 去掉这种限制需要下载Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files，
- * 下载包的readme.txt 有安装说明。就是替换${java_home}/jre/lib/security/ 下面的local_policy.jar和US_export_policy.jar
+ * 
+ * 对于java.security.InvalidKeyException: Illegal key size or default
+ * parameters异常， 去掉这种限制需要下载Java Cryptography Extension (JCE) Unlimited Strength
+ * Jurisdiction Policy Files， 下载包的readme.txt
+ * 有安装说明。就是替换${java_home}/jre/lib/security/
+ * 下面的local_policy.jar和US_export_policy.jar
  */
-public class ToolSecurityAES {
+public class ToolAES {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolSecurityAES.class);
+	private static Logger log = Logger.getLogger(ToolAES.class);
 
 	/**
 	 * 密钥算法
@@ -28,16 +34,16 @@ public class ToolSecurityAES {
 	public static final String KEY_ALGORITHM = "AES";
 
 	/**
-	 * 加密/解密算法 / 工作模式 / 填充方式 
-	 * Java 6支持PKCS5Padding填充方式 
-	 * Bouncy Castle支持PKCS7Padding填充方式
+	 * 加密/解密算法 / 工作模式 / 填充方式 Java 6支持PKCS5Padding填充方式 Bouncy
+	 * Castle支持PKCS7Padding填充方式
 	 */
 	public static final String CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";
-	
+
 	/**
 	 * 转换密钥
 	 * 
-	 * @param key 二进制密钥
+	 * @param key
+	 *            二进制密钥
 	 * @return Key 密钥
 	 * @throws Exception
 	 */
@@ -51,8 +57,10 @@ public class ToolSecurityAES {
 	/**
 	 * 解密
 	 * 
-	 * @param data 待解密数据
-	 * @param key 密钥
+	 * @param data
+	 *            待解密数据
+	 * @param key
+	 *            密钥
 	 * @return byte[] 解密数据
 	 * @throws Exception
 	 */
@@ -61,9 +69,7 @@ public class ToolSecurityAES {
 		Key k = toKey(key);
 
 		/*
-		 * 实例化 
-		 * 使用PKCS7Padding填充方式，按如下方式实现 
-		 * Cipher.getInstance(CIPHER_ALGORITHM, "BC");
+		 * 实例化 使用PKCS7Padding填充方式，按如下方式实现 Cipher.getInstance(CIPHER_ALGORITHM, "BC");
 		 */
 		Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
 
@@ -77,20 +83,20 @@ public class ToolSecurityAES {
 	/**
 	 * 加密
 	 * 
-	 * @param data 待加密数据
-	 * @param key 密钥
+	 * @param data
+	 *            待加密数据
+	 * @param key
+	 *            密钥
 	 * @return byte[] 加密数据
 	 * @throws Exception
 	 */
 	public static byte[] encrypt(byte[] data, byte[] key) throws Exception {
-
 		// 还原密钥
 		Key k = toKey(key);
 
 		/*
-		 * 实例化 
-		 * 使用PKCS7Padding填充方式，按如下方式实现
-		 * Cipher.getInstance(CIPHER_ALGORITHM, "BC");
+		 * 实例化 使用PKCS7Padding填充方式，按如下方式实现 Cipher.getInstance(CIPHER_ALGORITHM,
+		 * "BC");
 		 */
 		Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
 
@@ -122,9 +128,10 @@ public class ToolSecurityAES {
 		// 获得密钥的二进制编码形式
 		return secretKey.getEncoded();
 	}
-	
+
 	/**
 	 * 测试
+	 * 
 	 * @throws Exception
 	 */
 	public static void main() throws Exception {

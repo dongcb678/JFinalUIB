@@ -1,4 +1,4 @@
-package little.ant.platform.tools;
+package little.ant.platform.tools.security;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
@@ -15,15 +15,18 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.tools.ToolString;
 
 /**
  * IDEA安全编码组件
+ * 
+ * 国际数据加密标准---IDEA：完全是新突破，几乎同时和AES出现
  */
-public class ToolSecurityIDEA {
+public class ToolIDEA {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolSecurityIDEA.class);
-	
+	private static Logger log = Logger.getLogger(ToolIDEA.class);
+
 	/**
 	 * 密钥算法
 	 */
@@ -124,11 +127,12 @@ public class ToolSecurityIDEA {
 
 	/**
 	 * 解密加密字符串
-	 * @param content 待加密的字符串
-	 * @return
-	 * 说明：增加Base64编码
+	 * 
+	 * @param content
+	 *            待加密的字符串
+	 * @return 说明：增加Base64编码
 	 */
-	public static String decrypt(String content){
+	public static String decrypt(String content) {
 		// 1. Base64解码cookie令牌
 		try {
 			content = ToolString.decode(content);
@@ -149,17 +153,18 @@ public class ToolSecurityIDEA {
 			e.printStackTrace();
 		}
 		String data = new String(dataByte);
-		
+
 		return data;
 	}
-	
+
 	/**
 	 * 生成加密字符串
-	 * @param content 待加密的字符串
-	 * @return
-	 * 说明：增加Base64编码
+	 * 
+	 * @param content
+	 *            待加密的字符串
+	 * @return 说明：增加Base64编码
 	 */
-	public static String encrypt(String content){
+	public static String encrypt(String content) {
 		byte[] authTokenByte = null;
 		try {
 			authTokenByte = content.getBytes(ToolString.encoding);
@@ -184,10 +189,10 @@ public class ToolSecurityIDEA {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return securityCookie;
 	}
-	
+
 	/**
 	 * 测试
 	 * 
@@ -212,6 +217,5 @@ public class ToolSecurityIDEA {
 		String outputStr = new String(outputData);
 		System.err.println("解密后:\t" + outputStr);
 	}
-	
-	
+
 }

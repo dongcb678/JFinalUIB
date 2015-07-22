@@ -24,7 +24,7 @@ import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolDateTime;
-import little.ant.platform.tools.ToolSecurityPbkdf2;
+import little.ant.platform.tools.security.ToolPbkdf2;
 
 public class LoginService extends BaseService {
 
@@ -143,7 +143,7 @@ public class LoginService extends BaseService {
 		byte[] encryptedPassword = user.getBytes(User.column_password);
 		boolean bool = false;
 		try {
-			bool = ToolSecurityPbkdf2.authenticate(passWord, encryptedPassword, salt);
+			bool = ToolPbkdf2.authenticate(passWord, encryptedPassword, salt);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
@@ -216,7 +216,7 @@ public class LoginService extends BaseService {
 		byte[] encryptedPassword = user.getBytes(User.column_password);
 		boolean bool = false;
 		try {
-			bool = ToolSecurityPbkdf2.authenticate(passWord, encryptedPassword, salt);
+			bool = ToolPbkdf2.authenticate(passWord, encryptedPassword, salt);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
