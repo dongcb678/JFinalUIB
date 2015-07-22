@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
-import org.snaker.jfinal.plugin.SnakerPlugin;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallConfig;
@@ -28,8 +27,8 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 
 import little.ant.platform.beetl.format.DateFormat;
-import little.ant.platform.beetl.func.EscapeXml;
 import little.ant.platform.beetl.func.AuthUrl;
+import little.ant.platform.beetl.func.EscapeXml;
 import little.ant.platform.beetl.func.I18nFormat;
 import little.ant.platform.beetl.func.OrderBy;
 import little.ant.platform.beetl.render.MyBeetlRenderFactory;
@@ -180,10 +179,6 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("afterJFinalStart 缓存参数");
 		me.add(new ParamInitPlugin());
 		
-		log.info("afterJFinalStart 配置Snaker插件");
-		SnakerPlugin snakerPlugin = new SnakerPlugin(druidPlugin, this.prop.getProperties());
-	    me.add(snakerPlugin);
-
 		log.info("afterJFinalStart 配置文件上传命名策略插件");
 		me.add(new FileRenamePlugin());
 		

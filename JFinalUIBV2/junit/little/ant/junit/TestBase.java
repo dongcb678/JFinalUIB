@@ -4,16 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.plugin.I18NPlugin;
-import little.ant.platform.plugin.ParamInitPlugin;
-import little.ant.platform.plugin.PropertiesPlugin;
-import little.ant.platform.plugin.SqlXmlPlugin;
-import little.ant.platform.plugin.TablePlugin;
-
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
-import org.snaker.jfinal.plugin.SnakerPlugin;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
@@ -22,6 +14,13 @@ import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.plugin.I18NPlugin;
+import little.ant.platform.plugin.ParamInitPlugin;
+import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.plugin.SqlXmlPlugin;
+import little.ant.platform.plugin.TablePlugin;
 
 public class TestBase {
 
@@ -96,10 +95,6 @@ public class TestBase {
 		log.info("afterJFinalStart 缓存参数");
 		ParamInitPlugin paramInitPlugin = new ParamInitPlugin();
 		paramInitPlugin.start();
-
-		log.info("afterJFinalStart 配置Snaker插件");
-		SnakerPlugin snakerPlugin = new SnakerPlugin(druidPlugin, properties);
-		snakerPlugin.start();
     }
 
 }
