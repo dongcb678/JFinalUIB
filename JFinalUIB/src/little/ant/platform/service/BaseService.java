@@ -9,6 +9,7 @@ import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolMail;
 import little.ant.platform.tools.ToolSqlXml;
+import little.ant.platform.tools.ToolString;
 
 import org.apache.log4j.Logger;
 
@@ -17,7 +18,6 @@ import com.jfinal.plugin.activerecord.Page;
 
 public abstract class BaseService {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(BaseService.class);
 
 	/**
@@ -102,6 +102,29 @@ public abstract class BaseService {
 		}
 		
 		return sqlSb.toString();
+	}
+
+	/**
+	 * 把11,22,33...转成数组['11','22','33'...]
+	 * @param ids
+	 * @return
+	 * 描述：把字符串分割成数组返回，并验证分割后的数据
+	 */
+	public String[] splitByComma(String ids){
+		if(null == ids || ids.trim().isEmpty()){
+			return null;
+		}
+		
+		String[] idsArr = ids.split(",");
+		
+		for (String id : idsArr) {
+			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				log.error("字符安全验证失败：" + id);
+				throw new RuntimeException("字符安全验证失败：" + id);
+			}
+		}
+		
+		return idsArr;
 	}
 
 	/**

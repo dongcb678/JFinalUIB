@@ -1,5 +1,6 @@
 package little.ant.platform.service;
 
+import little.ant.platform.annotation.MyTx;
 import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
@@ -27,5 +28,17 @@ public class SysLogService extends BaseService {
 		String select = " select o.names onames, o.url ourl, u.username, s.* ";
 		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "platform.sysLog.splitPage");
 	}
-	
+
+	/**
+	 * 删除
+	 * @param ids
+	 */
+	@MyTx
+	public void delete(String ids){
+		String[] idsArr = splitByComma(ids);
+		for (String logIds : idsArr) {
+			Syslog.dao.deleteById(logIds);
+		}
+	}
+
 }
