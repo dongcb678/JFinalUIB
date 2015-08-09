@@ -29,7 +29,7 @@ public class OperatorController extends BaseController {
 	 * 功能管理列表页
 	 */
 	public void index() {
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage_select, Operator.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage_select, Operator.sqlId_splitPage_from);
 		render("/platform/operator/list.html");
 	}
 
@@ -79,7 +79,7 @@ public class OperatorController extends BaseController {
 	 * 功能treeData
 	 */
 	public void treeData() {
-		List<ZtreeNode> nodeList = OperatorService.service.treeData(moduleIds);
+		List<ZtreeNode> nodeList = OperatorService.service.treeData(getCxt(), moduleIds);
 		renderJson(nodeList);
 	}
 	
@@ -87,7 +87,7 @@ public class OperatorController extends BaseController {
 	 * 功能treeData，一次性加载
 	 */
 	public void tree() {
-		List<ZtreeNode> nodeList = OperatorService.service.tree();
+		List<ZtreeNode> nodeList = OperatorService.service.tree(getCxt());
 		renderJson(nodeList);
 	}
 }

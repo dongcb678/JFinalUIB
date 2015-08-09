@@ -1,15 +1,13 @@
 package little.ant.platform.service;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.dto.SplitPage;
-import little.ant.platform.model.Menu;
-import little.ant.platform.model.Module;
-import little.ant.platform.model.Systems;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.tx.Tx;
+
+import little.ant.platform.model.Menu;
+import little.ant.platform.model.Module;
+import little.ant.platform.model.Systems;
 
 public class SystemsService extends BaseService {
 
@@ -60,14 +58,6 @@ public class SystemsService extends BaseService {
 			
 			//删除关联日志
 		}
-	}
-	
-	/**
-	 * 分页
-	 * @param splitPage
-	 */
-	public void list(SplitPage splitPage){
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Systems.sqlId_splitPage_select, Systems.sqlId_splitPage_from);
 	}
 	
 }

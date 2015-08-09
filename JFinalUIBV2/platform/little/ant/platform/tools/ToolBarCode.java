@@ -31,7 +31,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
  * 
  * @author 董华健
  */
-public class ToolBarCode {
+public abstract class ToolBarCode {
 
 	/**
 	 * 生成二维码

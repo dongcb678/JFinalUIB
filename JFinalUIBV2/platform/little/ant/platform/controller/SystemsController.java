@@ -1,6 +1,8 @@
 package little.ant.platform.controller;
 
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.Systems;
 import little.ant.platform.service.SystemsService;
 import little.ant.platform.validator.SystemsValidator;
@@ -23,7 +25,7 @@ public class SystemsController extends BaseController {
 	 * 系统管理列表
 	 */
 	public void index() {
-		SystemsService.service.list(splitPage);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, Systems.sqlId_splitPage_from);
 		render("/platform/systems/list.html");
 	}
 	

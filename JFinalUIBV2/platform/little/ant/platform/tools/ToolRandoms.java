@@ -1,13 +1,14 @@
 package little.ant.platform.tools;
 
 import java.util.Random;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
 /**
  * 随机数类
  */
-public class ToolRandoms {
+public abstract class ToolRandoms {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolRandoms.class);
@@ -41,7 +42,20 @@ public class ToolRandoms {
 		}
 		return sb.toString();
 	}
-	
+
+	/**
+	 * 获取UUID by jdk
+	 * @author 董华健    2012-9-7 下午2:22:18
+	 * @return
+	 */
+	public static String getUuid(boolean is32bit){
+		String uuid = UUID.randomUUID().toString();
+		if(is32bit){
+			return uuid.toString().replace("-", ""); 
+		}
+		return uuid;
+	}
+
 	/**
 	 * 产生两个数之间的随机数
 	 * @param min 小数

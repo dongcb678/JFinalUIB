@@ -9,9 +9,9 @@ import com.jfinal.aop.Before;
 
 import little.ant.platform.annotation.Controller;
 import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.Group;
 import little.ant.platform.model.Role;
-import little.ant.platform.service.BaseService;
 import little.ant.platform.service.RoleService;
 import little.ant.platform.validator.RoleValidator;
 
@@ -35,7 +35,7 @@ public class RoleController extends BaseController {
 	 * 角色列表
 	 */
 	public void index() {
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Role.sqlId_splitPage_select, Role.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, Role.sqlId_splitPage_from);
 		render("/platform/role/list.html");
 	}
 

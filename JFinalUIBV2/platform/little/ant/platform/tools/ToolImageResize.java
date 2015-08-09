@@ -31,7 +31,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * 
  * @author 董华健 2012-9-3 下午7:34:20
  */
-public class ToolImageResize {
+public abstract class ToolImageResize {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolImageResize.class);

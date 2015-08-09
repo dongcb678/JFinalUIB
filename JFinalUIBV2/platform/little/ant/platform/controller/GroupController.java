@@ -9,6 +9,7 @@ import com.jfinal.aop.Before;
 
 import little.ant.platform.annotation.Controller;
 import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.Group;
 import little.ant.platform.service.BaseService;
 import little.ant.platform.service.GroupService;
@@ -32,7 +33,7 @@ public class GroupController extends BaseController {
 	 * 分组管理列表
 	 */
 	public void index() {
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Group.sqlId_splitPage_select, Group.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, Group.sqlId_splitPage_from);
 		render("/platform/group/list.html");
 	}
 	

@@ -23,10 +23,11 @@ public class StationService extends BaseService {
 	
 	/**
 	 * 获取子节点数据
+	 * @param cxt
 	 * @param parentIds
 	 * @return
 	 */
-	public List<ZtreeNode> childNodeData(String parentIds){
+	public List<ZtreeNode> childNodeData(String cxt, String parentIds){
 		List<Station> list = null;
 		if(null != parentIds){
 			String sql = getSql(Station.sqlId_child);
@@ -45,7 +46,7 @@ public class StationService extends BaseService {
 			node.setId(station.getPKValue());
 			node.setName(station.getStr(Station.column_names));
 			node.setIsParent(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + station.getStr(Station.column_images));
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + station.getStr(Station.column_images));
 			nodeList.add(node);
 		}
 		

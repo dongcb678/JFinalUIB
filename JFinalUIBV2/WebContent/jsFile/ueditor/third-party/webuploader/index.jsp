@@ -18,7 +18,7 @@ String path = sb.toString();
     </script>
     
 	<link rel="stylesheet" href="<%=path%>/jsFile/ueditor/third-party/webuploader/webuploader.css" type="text/css">
-	<script src="<%=path%>/ui/charisma/js/jquery-1.7.2.min.js"></script>
+	<script src="<%=path%>/jsFile/jquery/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="<%=path%>/jsFile/ueditor/third-party/webuploader/webuploader.js"></script>
 
     <style type="text/css">

@@ -34,13 +34,6 @@
 	</sql>
 	
 	<!-- 动态SQL处理 -->
-	<sql id="splitPageSelect">
-		<![CDATA[ 
-        	select ids, names, numbers
-    	]]>
-	</sql>
-	
-	<!-- 动态SQL处理 -->
 	<sql id="splitPageFrom">
 		<![CDATA[ 
         	from 

@@ -9,6 +9,7 @@ import java.util.Map;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.constant.ConstantRender;
 import little.ant.platform.dto.SplitPage;
+import little.ant.platform.model.BaseModel;
 import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.tools.ToolMail;
@@ -36,81 +37,18 @@ public class BaseService {
 	 * 分页
 	 * @param dataSource 数据源
 	 * @param splitPage
-	 * @param selectContent
-	 * @param fromSqlId
-	 */
-	public void splitPageBase(String dataSource, SplitPage splitPage, String selectContent, String fromSqlId){
-		// 接收返回值对象
-		StringBuilder formSqlSb = new StringBuilder();
-		LinkedList<Object> paramValue = new LinkedList<Object>();
-		
-		// 调用生成from sql，并构造paramValue
-		String sql = ToolSqlXml.getSql(fromSqlId, splitPage.getQueryParam(), ConstantRender.sql_renderType_beetl, paramValue);
-		formSqlSb.append(sql);
-		
-		// 行级：过滤
-		rowFilter(formSqlSb);
-		
-		// 排序
-		String orderColunm = splitPage.getOrderColunm();
-		String orderMode = splitPage.getOrderMode();
-		if(null != orderColunm && !orderColunm.isEmpty() && null != orderMode && !orderMode.isEmpty()){
-			formSqlSb.append(" order by ").append(orderColunm).append(" ").append(orderMode);
-		}
-		
-		String formSql = formSqlSb.toString();
-		
-		// 分页封装
-		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), selectContent, formSql, paramValue.toArray());
-		splitPage.setTotalPage(page.getTotalPage());
-		splitPage.setTotalRow(page.getTotalRow());
-		splitPage.setList(page.getList());
-		splitPage.compute();
-	}
-
-	/**
-	 * 分页
-	 * @param dataSource 数据源
-	 * @param splitPage
 	 * @param selectSqlId
 	 * @param fromSqlId
 	 */
-	public void splitPageBySqlId(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
+	@SuppressWarnings("unchecked")
+	public void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
 		String selectSql = getSql(selectSqlId);
-		splitPageBase(dataSource, splitPage, selectSql, fromSqlId);
-	}
-
-	/**
-	 * Distinct分页
-	 * @param dataSource 数据源
-	 * @param splitPage
-	 * @param selectContent
-	 * @param selectCount
-	 * @param fromSqlId
-	 */
-	public void splitPageDistinctBase(String dataSource, SplitPage splitPage, String selectContent, String selectCount, String fromSqlId){
-		// 接收返回值对象
-		StringBuilder formSqlSb = new StringBuilder();
-		LinkedList<Object> paramValue = new LinkedList<Object>();
-		
-		// 调用生成from sql，并构造paramValue
-		String sql = ToolSqlXml.getSql(fromSqlId, splitPage.getQueryParam(), ConstantRender.sql_renderType_beetl, paramValue);
-		formSqlSb.append(sql);
-		
-		// 行级：过滤
-		rowFilter(formSqlSb);
-		
-		// 排序
-		String orderColunm = splitPage.getOrderColunm();
-		String orderMode = splitPage.getOrderMode();
-		if(null != orderColunm && !orderColunm.isEmpty() && null != orderMode && !orderMode.isEmpty()){
-			formSqlSb.append(" order by ").append(orderColunm).append(" ").append(orderMode);
-		}
-		
-		String formSql = formSqlSb.toString();
+		Map<String, Object> map = getFromSql(splitPage, fromSqlId);
+		String formSql = (String) map.get("formSql");
+		LinkedList<Object> paramValue = (LinkedList<Object>) map.get("paramValue");
 		
 		// 分页封装
-		Page<?> page = Db.use(dataSource).paginateDistinct(splitPage.getPageNumber(), splitPage.getPageSize(), selectContent, selectCount, formSql, paramValue.toArray());
+		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), selectSql, formSql, paramValue.toArray());
 		splitPage.setTotalPage(page.getTotalPage());
 		splitPage.setTotalRow(page.getTotalRow());
 		splitPage.setList(page.getList());
@@ -125,10 +63,54 @@ public class BaseService {
 	 * @param selectCountId
 	 * @param fromSqlId
 	 */
-	public void splitPageDistinctBySqlId(String dataSource, SplitPage splitPage, String selectSqlId, String selectCountId, String fromSqlId){
+	@SuppressWarnings("unchecked")
+	public void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String selectCountId, String fromSqlId){
 		String selectSql = getSql(selectSqlId);
 		String selectCount = getSql(selectCountId);
-		splitPageDistinctBase(dataSource, splitPage, selectSql, selectCount, fromSqlId);
+		Map<String, Object> map = getFromSql(splitPage, fromSqlId);
+		String formSql = (String) map.get("formSql");
+		LinkedList<Object> paramValue = (LinkedList<Object>) map.get("paramValue");
+				
+		// 分页封装
+		Page<?> page = Db.use(dataSource).paginateDistinct(splitPage.getPageNumber(), splitPage.getPageSize(), selectSql, selectCount, formSql, paramValue.toArray());
+		splitPage.setTotalPage(page.getTotalPage());
+		splitPage.setTotalRow(page.getTotalRow());
+		splitPage.setList(page.getList());
+		splitPage.compute();
+	}
+	
+	/**
+	 * 分页获取form sql和预处理参数
+	 * @param splitPage
+	 * @param fromSqlId
+	 * @return
+	 */
+	private Map<String, Object> getFromSql(SplitPage splitPage, String fromSqlId){
+		// 接收返回值对象
+		StringBuilder formSqlSb = new StringBuilder();
+		LinkedList<Object> paramValue = new LinkedList<Object>();
+		
+		// 调用生成from sql，并构造paramValue
+		String sql = getSqlByBeetl(fromSqlId, splitPage.getQueryParam(), paramValue);
+		formSqlSb.append(sql);
+		
+		// 行级：过滤
+		rowFilter(formSqlSb);
+		
+		// 排序
+		String orderColunm = splitPage.getOrderColunm();
+		String orderMode = splitPage.getOrderMode();
+		if(null != orderColunm && !orderColunm.isEmpty() && null != orderMode && !orderMode.isEmpty()){
+			formSqlSb.append(" order by ").append(orderColunm).append(" ").append(orderMode);
+		}
+		
+		String formSql = formSqlSb.toString();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("formSql", formSql);
+		map.put("paramValue", paramValue);
+		
+		return map;	
 	}
 
 	/**
@@ -161,48 +143,6 @@ public class BaseService {
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
-    /**
-     * 获取SQL，动态SQL，使用FreeMarker解析
-     * @param sqlId
-     * @param param
-     * @return
-     */
-	public String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker);
-    }
-    
-    /**
-     * 获取SQL，动态SQL，使用FreeMarker解析
-     * @param sqlId 
-     * @param param 查询参数
-     * @param list 用于接收预处理的值
-     * @return
-     */
-	public String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker, list);
-    }
-
-    /**
-     * 获取SQL，动态SQL，使用Velocity解析
-     * @param sqlId
-     * @param param
-     * @return
-     */
-	public String getSqlByVelocity(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity);
-    }
-    
-    /**
-     * 获取SQL，动态SQL，使用Velocity解析
-     * @param sqlId 
-     * @param param 查询参数
-     * @param list 用于接收预处理的值
-     * @return
-     */
-	public String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity, list);
-    }
-	
 	/**
 	 * 根据i18n参数查询获取哪个字段的值
 	 * @param i18n
@@ -271,7 +211,7 @@ public class BaseService {
 	 * 一是 name=? or name=? or name=? or ...
 	 * 二是 list = ['11','22','33'...]
 	 */
-	public Map<String, Object> sqlInMap(String column, String ids){
+	public Map<String, Object> sqlOr(String column, String ids){
 		if(null == ids || ids.trim().isEmpty()){
 			return null;
 		}
@@ -333,6 +273,23 @@ public class BaseService {
 		
 		return idsArr;
 	}
+	
+	/**
+	 * 通用删除
+	 * @param table
+	 * @param ids 逗号分隔的列值
+	 */
+	public void delete(String table, String ids){
+		String sqlIn = sqlIn(ids);
+
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("table", table);
+		param.put("sqlIn", sqlIn);
+		
+		String sql = getSqlByBeetl(BaseModel.sqlId_deleteIn, param);
+		
+		Db.update(sql);
+	}
 
 	/**
 	 * 行级：过滤
@@ -351,22 +308,24 @@ public class BaseService {
 	 * @param attachFileNames 附件
 	 */
 	public void sendTextMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
-		ToolMail mail = new ToolMail();
-		mail.setHost((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_host));
-		mail.setPort((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_port));
-		mail.setValidate(true);
-		mail.setUserName((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_userName));
-		mail.setPassword((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_password));
-		mail.setFrom((String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_from));
+		String host = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_host);		// 发送邮件的服务器的IP
+		String port = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_port);	// 发送邮件的服务器的端口
+
+		boolean validate = true;	// 是否需要身份验证
 		
-		mail.setSendType(sendType);
+		String from = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_from);		// 邮件发送者的地址
+		String userName = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_userName);	// 登陆邮件发送服务器的用户名
+		String password = (String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_password);	// 登陆邮件发送服务器的密码
 		
-		mail.setTo(to);
-		mail.setSubject(subject);
-		mail.setContent(content);
-		mail.setAttachFileNames(attachFileNames);
-		
-		mail.start();
+		if(sendType != null && sendType.equals(ToolMail.sendType_text)){
+			ToolMail.sendTextMail(host, port, validate, userName, password, from, to, subject, content, attachFileNames);
+			
+		} else if(sendType != null && sendType.equals(ToolMail.sendType_html)){
+			ToolMail.sendHtmlMail(host, port, validate, userName, password, from, to, subject, content, attachFileNames);
+			
+		} else {
+			log.error("发送邮件参数sendType错误");
+		}
 	}
 	
 }

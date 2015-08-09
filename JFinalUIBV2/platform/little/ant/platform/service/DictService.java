@@ -97,10 +97,11 @@ public class DictService extends BaseService {
 
 	/**
 	 * 获取子节点数据
+	 * @param cxt
 	 * @param parentIds
 	 * @return
 	 */
-	public List<ZtreeNode> childNodeData(String parentIds){
+	public List<ZtreeNode> childNodeData(String cxt, String parentIds){
 		List<Dict> list = null;
 		if (null != parentIds) {
 			String sql = getSql(Dict.sqlId_treeChildNode);
@@ -118,7 +119,7 @@ public class DictService extends BaseService {
 			node.setId(dict.getPKValue());
 			node.setName(dict.getStr(Dict.column_names));
 			node.setIsParent(Boolean.parseBoolean(dict.getStr(Dict.column_isparent)));
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + dict.getStr(Dict.column_images));
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + dict.getStr(Dict.column_images));
 			nodeList.add(node);
 		}
 		

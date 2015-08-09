@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import little.ant.platform.tools.ToolDateTime;
+import little.ant.platform.tools.ToolSqlXml;
 import little.ant.platform.tools.ToolXml;
 import little.ant.weixin.model.Location;
 import little.ant.weixin.model.Message;
@@ -485,7 +486,7 @@ public class ToolMessage {
 		if (content.startsWith("附近")) {// 周边搜索
 			String keyWord = content.replaceAll("附近", "").trim();
 			// 获取用户最后一次发送的地理位置
-			Location location = Location.dao.findFirst("select * form wx_userlocation where open_id=? order by createdate desc ", recevieText.getFromUserName());
+			Location location = Location.dao.findFirst(ToolSqlXml.getSql("weixin.location.getByOpenId"), recevieText.getFromUserName());
 			// 未获取到
 			if (null == location) {
 				responseContent = getUsage();

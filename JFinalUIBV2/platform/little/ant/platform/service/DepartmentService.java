@@ -23,10 +23,11 @@ public class DepartmentService extends BaseService {
 	
 	/**
 	 * 获取子节点数据
+	 * @param cxt
 	 * @param parentIds
 	 * @return
 	 */
-	public List<ZtreeNode> childNodeData(String parentIds){
+	public List<ZtreeNode> childNodeData(String cxt, String parentIds){
 		List<Department> list = null;
 		if(null != parentIds){
 			String sql = getSql(Department.sqlId_childNode);
@@ -45,7 +46,7 @@ public class DepartmentService extends BaseService {
 			node.setId(dept.getPKValue());
 			node.setName(dept.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + dept.getStr("images"));
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + dept.getStr("images"));
 			nodeList.add(node);
 		}
 		

@@ -40,9 +40,10 @@ public class LoginService extends BaseService {
 	 */
 	public int valiUserName(String userName){
 		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("column", "count(*)");
 		param.put("table", "pt_user");
-		param.put("column", User.column_username);
-		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
+		param.put("condition", User.column_username);
+		String sql = getSqlByBeetl(BaseModel.sqlId_select, param);
 		int count = Db.queryLong(sql, userName).intValue();
 		return count;
 	}
@@ -54,9 +55,10 @@ public class LoginService extends BaseService {
 	 */
 	public int valiMailBox(String mailBox){
 		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("column", "count(*)");
 		param.put("table", "pt_userinfo");
-		param.put("column", UserInfo.column_email);
-		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
+		param.put("condition", UserInfo.column_email);
+		String sql = getSqlByBeetl(BaseModel.sqlId_select, param);
 		int count = Db.queryLong(sql, mailBox).intValue();
 		return count;
 	}
@@ -68,9 +70,10 @@ public class LoginService extends BaseService {
 	 */
 	public int valiIdcard(String idcard){
 		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("column", "count(*)");
 		param.put("table", "pt_userinfo");
-		param.put("column", UserInfo.column_idcard);
-		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
+		param.put("condition", UserInfo.column_idcard);
+		String sql = getSqlByBeetl(BaseModel.sqlId_select, param);
 		int count = Db.queryLong(sql, idcard).intValue();
 		return count;
 	}
@@ -82,9 +85,10 @@ public class LoginService extends BaseService {
 	 */
 	public int valiMobile(String mobile){
 		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("column", "count(*)");
 		param.put("table", "pt_userinfo");
-		param.put("column", UserInfo.column_mobile);
-		String sql = getSqlByBeetl(BaseModel.sqlId_selectCount, param);
+		param.put("condition", UserInfo.column_mobile);
+		String sql = getSqlByBeetl(BaseModel.sqlId_select, param);
 		int count = Db.queryLong(sql, mobile).intValue();
 		return count;
 	}

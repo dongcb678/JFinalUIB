@@ -17,7 +17,7 @@ public class UserValidator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/user/save")){
+		if (actionKey.equals("/user/save") || actionKey.equals("/user/update")){
 			validateString("user.username", 5, 16, "usernameMsg", "登陆名不正确!");
 			validateString("password", 6, 18, "passwordMsg", "密码不正确!");
 			validateString("userInfo.idcard", 15, 18, "idcardMsg", "身份证号码不正确!");
@@ -43,4 +43,5 @@ public class UserValidator extends Validator {
 			controller.render("/platform/user/update.jsp");
 		}
 	}
+	
 }

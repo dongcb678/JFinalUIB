@@ -5,24 +5,10 @@
 -->
 <sql-statement namespace="platform.baseModel">
 	
-	<!-- 查询版本号 -->
-	<sql id="version">
-		<![CDATA[ 
-        	select version from ${table} where ${pk} = ?
-    	]]>
-	</sql>
-	
 	<!-- 通用查询 -->
 	<sql id="select">
 		<![CDATA[ 
-        	select * from ${table} where ${column} = ?
-    	]]>
-	</sql>
-	
-	<!-- 通用查询 -->
-	<sql id="selectCount">
-		<![CDATA[ 
-        	select count(*) from ${table} where ${column} = ?
+        	select ${column} from ${table} where ${condition} = ?
     	]]>
 	</sql>
 	
@@ -37,6 +23,27 @@
 	<sql id="delete">
 		<![CDATA[ 
         	delete from ${table} where ${column} = ?
+    	]]>
+	</sql>
+	
+	<!-- 通用删除 -->
+	<sql id="deleteIn">
+		<![CDATA[ 
+        	delete from ${table} where ids in( ${sqlIn} )
+    	]]>
+	</sql>
+	
+	<!-- 通用删除 -->
+	<sql id="deleteOr">
+		<![CDATA[ 
+        	delete from ${table} where ${sqlOr}
+    	]]>
+	</sql>
+	
+	<!-- 分页公共select -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select * 
     	]]>
 	</sql>
 	

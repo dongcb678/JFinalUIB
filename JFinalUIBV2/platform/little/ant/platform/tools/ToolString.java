@@ -1,17 +1,18 @@
 package little.ant.platform.tools;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import little.ant.platform.constant.ConstantRender;
-import little.ant.platform.model.User;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
+
+import little.ant.platform.constant.ConstantRender;
+import little.ant.platform.model.User;
 
 /**
  * 字符串处理常用方法
@@ -183,6 +184,18 @@ public abstract class ToolString {
 		return matcher.matches();
 	}
 
+	/**
+	 * double精度调整
+	 * @param doubleValue 需要调整的值123.454
+	 * @param format 目标样式".##"
+	 * @return
+	 */
+	public static String decimalFormat(double doubleValue, String format){
+		DecimalFormat myFormatter = new DecimalFormat(format);  
+		String formatValue = myFormatter.format(doubleValue);
+		return formatValue;
+	}
+	
 	/**
 	 * Url Base64编码
 	 * 

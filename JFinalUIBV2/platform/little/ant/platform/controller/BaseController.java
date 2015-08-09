@@ -283,36 +283,13 @@ public abstract class BaseController extends Controller {
 	 * 分页
 	 * @param dataSource 数据源
 	 * @param splitPage
-	 * @param selectContent
-	 * @param fromSqlId
-	 */
-	protected void splitPageBase(String dataSource, SplitPage splitPage, String selectContent, String fromSqlId){
-		BaseService.service.splitPageBase(dataSource, splitPage, selectContent, fromSqlId);
-	}
-	
-	/**
-	 * 分页
-	 * @param dataSource 数据源
-	 * @param splitPage
 	 * @param selectSqlId
 	 * @param fromSqlId
 	 */
-	protected void splitPageBySqlId(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
-		BaseService.service.splitPageBySqlId(dataSource, splitPage, selectSqlId, fromSqlId);
+	protected void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
+		BaseService.service.paging(dataSource, splitPage, selectSqlId, fromSqlId);
 	}
 
-	/**
-	 * Distinct分页
-	 * @param dataSource 数据源
-	 * @param splitPage
-	 * @param selectContent
-	 * @param selectCount
-	 * @param fromSqlId
-	 */
-	protected void splitPageDistinctBase(String dataSource, SplitPage splitPage, String selectContent, String selectCount, String fromSqlId){
-		BaseService.service.splitPageDistinctBase(dataSource, splitPage, selectContent, selectCount, fromSqlId);
-	}
-	
 	/**
 	 * Distinct分页
 	 * @param dataSource 数据源
@@ -321,8 +298,8 @@ public abstract class BaseController extends Controller {
 	 * @param selectCountId
 	 * @param fromSqlId
 	 */
-	protected void splitPageDistinctBySqlId(String dataSource, SplitPage splitPage, String selectSqlId, String selectCountId, String fromSqlId){
-		BaseService.service.splitPageDistinctBySqlId(dataSource, splitPage, selectSqlId, selectCountId, fromSqlId);
+	protected void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String selectCountId, String fromSqlId){
+		BaseService.service.pagingDistinct(dataSource, splitPage, selectSqlId, selectCountId, fromSqlId);
 	}
 
 	/**
@@ -355,48 +332,6 @@ public abstract class BaseController extends Controller {
     	return BaseService.service.getSqlByBeetl(sqlId, param, list);
     }
 
-    /**
-     * 获取SQL，动态SQL，使用FreeMarker解析
-     * @param sqlId
-     * @param param
-     * @return
-     */
-	protected String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
-    	return BaseService.service.getSqlByFreeMarker(sqlId, param);
-    }
-    
-    /**
-     * 获取SQL，动态SQL，使用FreeMarker解析
-     * @param sqlId 
-     * @param param 查询参数
-     * @param list 用于接收预处理的值
-     * @return
-     */
-	protected String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return BaseService.service.getSqlByFreeMarker(sqlId, param, list);
-    }
-
-    /**
-     * 获取SQL，动态SQL，使用Velocity解析
-     * @param sqlId
-     * @param param
-     * @return
-     */
-	protected String getSqlByVelocity(String sqlId, Map<String, Object> param){
-    	return BaseService.service.getSqlByVelocity(sqlId, param);
-    }
-    
-    /**
-     * 获取SQL，动态SQL，使用Velocity解析
-     * @param sqlId 
-     * @param param 查询参数
-     * @param list 用于接收预处理的值
-     * @return
-     */
-	protected String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
-    	return BaseService.service.getSqlByVelocity(sqlId, param, list);
-    }
-	
 	/************************************		get 	set 	方法		************************************************/
 
 	public Syslog getReqSysLog() {

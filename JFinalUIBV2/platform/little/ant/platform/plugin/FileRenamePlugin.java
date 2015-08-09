@@ -2,11 +2,11 @@ package little.ant.platform.plugin;
 
 import java.io.File;
 
-import little.ant.platform.tools.ToolUtils;
-
 import com.jfinal.plugin.IPlugin;
 import com.jfinal.upload.OreillyCos;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
+
+import little.ant.platform.tools.ToolRandoms;
 
 /**
  * 配置文件上传命名策略
@@ -25,7 +25,7 @@ public class FileRenamePlugin implements IPlugin {
 		        }else{   
 		        	ext = "";   
 		        }   
-		        String newName = ToolUtils.getUuidByJdk(true) + ext;   
+		        String newName = ToolRandoms.getUuid(true) + ext;   
 		        file = new File(file.getParent(),newName);   
 		        return file;
 			}

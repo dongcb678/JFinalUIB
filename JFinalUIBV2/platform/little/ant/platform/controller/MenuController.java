@@ -39,7 +39,7 @@ public class MenuController extends BaseController {
 	 * ztree子节点数据
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = MenuService.service.childNodeData(systemsIds, ids, getI18nPram());
+		List<ZtreeNode> nodeList = MenuService.service.childNodeData(getCxt(), systemsIds, ids, getI18nPram());
 		renderJson(nodeList);
 	}
 

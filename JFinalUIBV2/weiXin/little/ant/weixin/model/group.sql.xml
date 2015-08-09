@@ -3,7 +3,7 @@
 <sql-statement namespace="weixin.group">
 
 	<!-- 动态SQL处理 -->
-	<sql id="splitPage">
+	<sql id="splitPageFrom">
 		<![CDATA[ 
         	from wx_group where 1=1
 			

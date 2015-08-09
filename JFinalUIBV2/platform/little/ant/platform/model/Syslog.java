@@ -223,4 +223,10 @@ public class Syslog extends BaseModel<Syslog> {
 	 */
 	public static final String sqlId_splitPage_from = "platform.sysLog.splitPageFrom";
 
+	/**
+	 * sqlId : platform.sysLog.clear
+	 * 描述：清除数据
+	 */
+	public static final String sqlId_clear = "platform.sysLog.clear";
+
 }

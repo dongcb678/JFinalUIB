@@ -15,5 +15,11 @@ public class User extends BaseModel<User> {
 	private static Logger log = Logger.getLogger(User.class);
 	
 	public static final User dao = new User();
-	
+
+	/**
+	 * sqlId : weixin.user.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "weixin.user.splitPageFrom";
+
 }

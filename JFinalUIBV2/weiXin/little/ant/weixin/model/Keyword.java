@@ -15,5 +15,11 @@ public class Keyword extends BaseModel<Keyword> {
 	private static Logger log = Logger.getLogger(Keyword.class);
 	
 	public static final Keyword dao = new Keyword();
-	
+
+	/**
+	 * sqlId : weixin.keyword.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "weixin.keyword.splitPageFrom";
+
 }

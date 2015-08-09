@@ -66,10 +66,11 @@ public class OperatorService extends BaseService {
 	
 	/**
 	 * 获取子节点数据
+	 * @param cxt
 	 * @param moduleIds
 	 * @return
 	 */
-	public List<ZtreeNode> treeData(String moduleIds){
+	public List<ZtreeNode> treeData(String cxt, String moduleIds){
 		List<Module> listModule = new ArrayList<Module>();
 		List<Operator> operatorList = new ArrayList<Operator>();
 		
@@ -98,7 +99,7 @@ public class OperatorService extends BaseService {
 			node.setIsParent(true);
 			//node.setChecked(false);
 			node.setNocheck(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
 			nodeList.add(node);
 		}
 		
@@ -108,7 +109,7 @@ public class OperatorService extends BaseService {
 			node.setName(operator.getStr(Operator.column_names));
 			node.setIsParent(false);
 			node.setChecked(false);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
 			nodeList.add(node);
 		}
 
@@ -116,11 +117,11 @@ public class OperatorService extends BaseService {
 	}
 
 	/**
-	 * 获取子节点数据
-	 * @param moduleIds
+	 * 获取节点数据
+	 * @param cxt
 	 * @return
 	 */
-	public List<ZtreeNode> tree(){
+	public List<ZtreeNode> tree(String cxt){
 		// 1.根模块
 		String sql = getSql(Operator.sqlId_rootModule);
 		List<Module> rootModuleList = Module.dao.find(sql);
@@ -135,9 +136,9 @@ public class OperatorService extends BaseService {
 			node.setIsParent(true);
 			//node.setChecked(false);
 			node.setNocheck(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
 			
-			recursion(node, module);
+			recursion(cxt, node, module);
 			
 			nodeList.add(node);
 		}
@@ -147,10 +148,11 @@ public class OperatorService extends BaseService {
 	
 	/**
 	 * 递归获取节点信息
+	 * @param cxt
 	 * @param treeNode
 	 * @param pModule
 	 */
-	private void recursion(ZtreeNode treeNode, Module pModule){
+	private void recursion(String cxt, ZtreeNode treeNode, Module pModule){
 		List<ZtreeNode> children = new ArrayList<ZtreeNode>();
 
 		// 功能
@@ -163,7 +165,7 @@ public class OperatorService extends BaseService {
 			node.setName(operator.getStr(Operator.column_names));
 			node.setIsParent(false);
 			node.setChecked(false);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
 			
 			children.add(node);
 		}
@@ -179,9 +181,9 @@ public class OperatorService extends BaseService {
 			node.setIsParent(true);
 			//node.setChecked(false);
 			node.setNocheck(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
 			
-			recursion(node, module);
+			recursion(cxt, node, module);
 			
 			children.add(node);
 		}

@@ -37,7 +37,7 @@ public class ModuleController extends BaseController {
 	 * 模块tree数据
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = ModuleService.service.childNodeData(systemsIds, ids);
+		List<ZtreeNode> nodeList = ModuleService.service.childNodeData(getCxt(), systemsIds, ids);
 		renderJson(nodeList);
 	}
 

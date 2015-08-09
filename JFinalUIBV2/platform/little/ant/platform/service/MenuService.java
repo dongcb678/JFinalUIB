@@ -24,12 +24,13 @@ public class MenuService extends BaseService {
 	
 	/**
 	 * 获取子节点数据
+	 * @param cxt
 	 * @param systemsIds
 	 * @param parentIds
 	 * @param i18n
 	 * @return
 	 */
-	public List<ZtreeNode> childNodeData(String systemsIds, String parentIds, String i18n){
+	public List<ZtreeNode> childNodeData(String cxt, String systemsIds, String parentIds, String i18n){
 		String names = "names" + i18n(i18n) + " as names";
 
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -53,7 +54,7 @@ public class MenuService extends BaseService {
 			node.setId(menu.getPKValue());
 			node.setName(menu.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + menu.getStr(Menu.column_images));
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + menu.getStr(Menu.column_images));
 			nodeList.add(node);
 		}
 		

@@ -18,55 +18,28 @@ import org.apache.log4j.Logger;
  * 图片裁剪
  * @author 董华健
  */
-public class ToolImageTailor {
+public abstract class ToolImageTailor {
 
-	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolImageTailor.class);
-
-	// ===源图片路径名称如:c:/1.jpg
-	private String srcpath;
-
-	// ===剪切图片存放路径名称.如:c:/2.jpg
-	private String subpath;
-
-	// ===剪切点x坐标
-	private int x;
-
-	private int y;
-
-	// ===剪切点宽度
-	private int width;
-
-	private int height;
-
-	public ToolImageTailor() {
-
-	}
+	static Logger log = Logger.getLogger(ToolImageTailor.class);
 
 	/**
-	 * 构造函数
-	 * 
-	 * @param x
+	 * 裁剪
+	 * @param srcPath	源图片路径名称如:c:/1.jpg
+	 * @param savePath	剪切图片存放路径名称.如:c:/2.jpg
+	 * @param x	剪切点x坐标
 	 * @param y
-	 * @param width
+	 * @param width	剪切点大小
 	 * @param height
+	 * @throws IOException
 	 */
-	public ToolImageTailor(int x, int y, int width, int height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-	}
-
-	/**
-	 * 对图片裁剪，并把裁剪完蛋新图片保存 。
-	 */
-	public void cut() throws IOException {
+	public static void cut(String srcPath, String savePath, int x, int y, int width, int height) {
+		String houZhui = srcPath.substring(srcPath.lastIndexOf(".") + 1);// 后缀
+		
 		FileInputStream is = null;
 		ImageInputStream iis = null;
 		try {
 			// 读取图片文件
-			is = new FileInputStream(srcpath);
+			is = new FileInputStream(srcPath);
 
 			/*
 			 * 返回包含所有当前已注册 ImageReader 的 Iterator，这些 ImageReader 声称能够解码指定格式。 参数：formatName - 包含非正式格式名称 .（例如 "jpeg" 或 "tiff"）等 。
@@ -101,72 +74,31 @@ public class ToolImageTailor {
 			BufferedImage bi = reader.read(0, param);
 
 			// 保存新图片
-			ImageIO.write(bi, "jpg", new File(subpath));
+			ImageIO.write(bi, houZhui, new File(savePath)); // "jpg"
 		} catch (Exception e) {
 			throw new RuntimeException("裁剪图片异常");
 		} finally {
 			if (is != null) {
-				is.close();
+				try {
+					is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+			
 			if (iis != null) {
-				iis.close();
+				try {
+					iis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public String getSrcpath() {
-		return srcpath;
-	}
-
-	public void setSrcpath(String srcpath) {
-		this.srcpath = srcpath;
-	}
-
-	public String getSubpath() {
-		return subpath;
-	}
-
-	public void setSubpath(String subpath) {
-		this.subpath = subpath;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
 
 	public static void main(String[] args) throws Exception {
-		ToolImageTailor o = new ToolImageTailor(100, 100, 100, 100);
-		o.setSrcpath("d:/sago.jpg");
-		o.setSubpath("d:/sago2.jpg");
-		o.cut();
+		ToolImageTailor.cut("d:/sago.jpg", "d:/sago2.jpg", 100, 100, 100, 100);
 	}
 
 }

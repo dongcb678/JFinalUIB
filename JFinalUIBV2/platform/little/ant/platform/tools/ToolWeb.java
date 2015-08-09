@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
  * WEB工具类
  * @author 董华健 2012-9-3 下午7:39:43
  */
-public class ToolWeb {
+public abstract class ToolWeb {
 
 	private static Logger log = Logger.getLogger(ToolWeb.class);
 

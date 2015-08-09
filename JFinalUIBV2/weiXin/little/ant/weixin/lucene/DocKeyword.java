@@ -12,6 +12,7 @@ import little.ant.platform.beetl.tag.DictTag;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.dto.SplitPage;
 import little.ant.platform.lucene.DocBase;
+import little.ant.platform.tools.ToolSqlXml;
 import little.ant.weixin.model.Keyword;
 
 import org.apache.log4j.Logger;
@@ -89,7 +90,7 @@ public class DocKeyword extends DocBase {
 		Document document = new Document();
 		
 		int batchCount = getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
-		String sql = " select * from wx_keyword limit ? offset ? ";
+		String sql = ToolSqlXml.getSql("weixin.keyword.paging");
 
 		IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写
 		for (int i = 0; i < batchCount; i++) {

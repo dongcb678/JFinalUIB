@@ -44,7 +44,7 @@ public class DictController extends BaseController {
 	 * ztree子节点数据获取
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = DictService.service.childNodeData(ids);
+		List<ZtreeNode> nodeList = DictService.service.childNodeData(getCxt(), ids);
 		renderJson(nodeList);
 	}
 	

@@ -24,7 +24,7 @@ import com.thoughtworks.xstream.mapper.MapperWrapper;
  * XML工具类
  * @author 董华健
  */
-public class ToolXml {
+public abstract class ToolXml {
 	
 	/**
 	 * 获取XStream对象

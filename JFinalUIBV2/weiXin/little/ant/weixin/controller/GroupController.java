@@ -1,8 +1,10 @@
 package little.ant.weixin.controller;
 
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.controller.BaseController;
-import little.ant.platform.model.Group;
+import little.ant.platform.model.BaseModel;
+import little.ant.weixin.model.Group;
 import little.ant.weixin.service.GroupService;
 import little.ant.weixin.validator.GroupValidator;
 
@@ -21,7 +23,7 @@ public class GroupController extends BaseController {
 	
 	public void index(){
 		log.debug("微信用户分组管理：分页");
-		GroupService.service.list(splitPage);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, Group.sqlId_splitPage_from);
 		render("/weiXin/group/list.html");
 	}
 

@@ -1,34 +1,22 @@
 package little.ant.weixin.service;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.dto.SplitPage;
-import little.ant.platform.model.Group;
-import little.ant.platform.service.BaseService;
-import little.ant.weixin.bo.message.RecevieToken;
-import little.ant.weixin.bo.user.RecevieGroup;
-import little.ant.weixin.tools.ToolGroup;
-import little.ant.weixin.tools.ToolWeiXin;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.tx.Tx;
+
+import little.ant.platform.service.BaseService;
+import little.ant.weixin.bo.message.RecevieToken;
+import little.ant.weixin.bo.user.RecevieGroup;
+import little.ant.weixin.model.Group;
+import little.ant.weixin.tools.ToolGroup;
+import little.ant.weixin.tools.ToolWeiXin;
 
 public class GroupService extends BaseService {
 
 	private static Logger log = Logger.getLogger(GroupService.class);
 
 	public static final GroupService service = Enhancer.enhance(GroupService.class, Tx.class);
-	
-	/**
-	 * 分页
-	 * @param splitPage
-	 */
-	public void list(SplitPage splitPage){
-		log.debug("微信用户分组管理：分页处理");
-		String select = " select * ";
-		splitPageBase(ConstantInit.db_dataSource_main, splitPage, select, "weixin.group.splitPage");
-	}
 	
 	/**
 	 * 新建分组
@@ -38,7 +26,8 @@ public class GroupService extends BaseService {
 		RecevieToken accessToken = ToolWeiXin.getAccessToken();
 		RecevieGroup recevieGroup = ToolGroup.createGroup(accessToken.getAccess_token(), group.getStr("name"));
 		if(null != recevieGroup.getErrcode()){
-			throw new RuntimeException("新建用户分组，微信接口返回异常");
+			log.error("新建用户分组，微信接口返回异常");
+			return;
 		}
 		group.set("id", recevieGroup.getId());
 		group.set("name", recevieGroup.getName());
@@ -55,7 +44,7 @@ public class GroupService extends BaseService {
 		if(bool){
 			group.update();
 		}else{
-			throw new RuntimeException("更新用户分组，微信接口返回异常");
+			log.error("更新用户分组，微信接口返回异常");
 		}
 	}
 

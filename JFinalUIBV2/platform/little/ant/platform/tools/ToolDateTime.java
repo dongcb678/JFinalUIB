@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
  * 
  * @author 董华健 2012-9-7 下午1:58:46
  */
-public class ToolDateTime {
+public abstract class ToolDateTime {
 
 	private static Logger log = Logger.getLogger(ToolDateTime.class);
 	

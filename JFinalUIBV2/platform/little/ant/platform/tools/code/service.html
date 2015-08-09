@@ -14,15 +14,4 @@ public class ${className}Service extends BaseService {
 	
 	public static final ${className}Service service = MyTxProxy.newProxy(${className}Service.class);
 	
-	/**
-	 * 删除
-	 * @param ids
-	 */
-	public void delete(String ids){
-		String[] idsArr = splitByComma(ids);
-		for (String id : idsArr) {
-			${className}.dao.deleteById(id);
-		}
-	}
-	
 }

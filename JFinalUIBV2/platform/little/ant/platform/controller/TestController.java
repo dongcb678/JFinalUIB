@@ -33,7 +33,7 @@ public class TestController extends BaseController {
 	 * 功能查询显示
 	 */
 	public void operator() {
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage_select, Operator.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage_select, Operator.sqlId_splitPage_from);
 		render("/platform/test/operator.html");
 	}
 
@@ -42,7 +42,7 @@ public class TestController extends BaseController {
 	 */
 	public void sysLog() {
 		defaultOrder(Syslog.column_startdate, "desc");
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPage_select, Syslog.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPage_select, Syslog.sqlId_splitPage_from);
 		render("/platform/test/sysLog.html");
 	}
 	

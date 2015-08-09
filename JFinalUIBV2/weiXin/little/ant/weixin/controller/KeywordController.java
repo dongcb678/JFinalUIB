@@ -1,7 +1,9 @@
 package little.ant.weixin.controller;
 
 import little.ant.platform.annotation.Controller;
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.controller.BaseController;
+import little.ant.platform.model.BaseModel;
 import little.ant.weixin.model.Keyword;
 import little.ant.weixin.service.KeywordService;
 import little.ant.weixin.validator.KeywordValidator;
@@ -21,7 +23,7 @@ public class KeywordController extends BaseController {
 	
 	public void index(){
 		log.debug("微信自动回复管理：分页");
-		KeywordService.service.list(splitPage);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, Keyword.sqlId_splitPage_from);
 		render("/weiXin/keyword/list.html");
 	}
 	

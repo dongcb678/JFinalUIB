@@ -21,6 +21,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 
 import org.apache.log4j.Logger;
 
@@ -33,13 +34,87 @@ import org.apache.log4j.Logger;
  * 1. main方法加入System.setProperty("java.net.preferIPv4Stack", "true");  
  * 2. tomcat服务器加上启动参数 -Djava.net.preferIPv4Stack=true   
  */
-public class ToolMail extends Thread {
+public class ToolMail {
 	
 	private static Logger log = Logger.getLogger(ToolMail.class);
-	
-	private static final String sendType_text = "text";
 
-	private static final String sendType_html = "html";
+	public static final String sendType_text = "text";
+
+	public static final String sendType_html = "html";
+	
+	/**
+	 * 发送文本邮件
+	 * @param host
+	 * @param port
+	 * @param validate
+	 * @param userName
+	 * @param password
+	 * @param from
+	 * @param to
+	 * @param subject
+	 * @param content
+	 * @param attachFileNames
+	 */
+	public static void sendTextMail(
+			String host, String port, boolean validate, String userName, String password,
+			String from, List<String> to, 
+			String subject, String content, String[] attachFileNames) {
+		log.info("发送文本邮件");
+		SendMail mail = new SendMail(sendType_text, host, port, validate, userName, password, from, to, subject, content, attachFileNames);
+		mail.start();
+	}
+	
+	/**
+	 * 发送html邮件
+	 * @param host
+	 * @param port
+	 * @param validate
+	 * @param userName
+	 * @param password
+	 * @param from
+	 * @param to
+	 * @param subject
+	 * @param content
+	 * @param attachFileNames
+	 */
+	public static void sendHtmlMail(
+			String host, String port, boolean validate, String userName, String password,
+			String from, List<String> to, 
+			String subject, String content, String[] attachFileNames) {
+		log.info("发送html邮件");
+		SendMail mail = new SendMail(sendType_html, host, port, validate, userName, password, from, to, subject, content, attachFileNames);
+		mail.start();
+	}
+	
+	public static void main(String[] args) {
+		String host = "smtp.163.com";		// 发送邮件的服务器的IP
+		String port = "25";	// 发送邮件的服务器的端口
+		
+		String from = "dongcb678@163.com";		// 邮件发送者的地址
+		String userName = "dongcb678@163.com";	// 登陆邮件发送服务器的用户名
+		String password = "xxx";	// 登陆邮件发送服务器的密码
+		
+		List<String> to = new ArrayList<String>();			// 邮件接收者的地址
+		to.add("150584428@qq.com");
+		
+		boolean validate = true;	// 是否需要身份验证
+		
+		String subject = "标题test111";		// 邮件标题
+		String content = "内容test111";		// 邮件的文本内容
+		String[] attachFileNames = new String[]{"D:/code.jpg"};	// 邮件附件的文件名
+		
+		sendTextMail(host, port, validate, userName, password, from, to, subject, content, attachFileNames);
+	}
+
+}
+
+/**
+ * 异步发送邮件线程
+ * @author 董华健  dongcb678@163.com
+ */
+class SendMail extends Thread {
+
+	private static Logger log = Logger.getLogger(SendMail.class);
 	
 	private String sendType;		// 发送邮件的类型：text 、html
 	
@@ -58,13 +133,36 @@ public class ToolMail extends Thread {
 	private String content;		// 邮件的文本内容
 	private String[] attachFileNames;	// 邮件附件的文件名
 
+	public SendMail(String sendType, 
+			String host, String port, boolean validate, String userName, String password,
+			String from, List<String> to, 
+			String subject, String content, String[] attachFileNames) {
+		this.sendType = sendType;
+		this.host = host;
+		this.port = port;
+		this.from = from;
+		this.userName = userName;
+		this.password = password;
+		this.to = to;
+		this.validate = validate;
+		this.subject = subject;
+		this.content = content;
+		this.attachFileNames = attachFileNames;
+		
+		// tomcat服务器加上启动参数 -Djava.net.preferIPv4Stack=true   
+		System.setProperty("java.net.preferIPv4Stack", "true");  
+	}
+
 	@Override
 	public void run() {
-		if(sendType != null || sendType.equals(sendType_text)){
+		if(sendType.equals(ToolMail.sendType_text)){
 			sendTextMail();
 			
-		} else if(sendType != null || sendType.equals(sendType_html)){
+		} else if(sendType.equals(ToolMail.sendType_html)){
 			sendHtmlMail();
+			
+		} else {
+			log.error("发送邮件参数sendType不能为空");
 		}
 	}
 
@@ -143,7 +241,7 @@ public class ToolMail extends Thread {
                 FileDataSource fds = new FileDataSource(attachFile); //得到数据源   
                 
                 mbp.setDataHandler(new DataHandler(fds)); //得到附件本身并至入BodyPart   
-                String filename = new String(fds.getName().getBytes(), "ISO-8859-1"); // 解决附件乱码
+                String filename = MimeUtility.encodeText(fds.getName()); // 解决附件乱码
                 mbp.setFileName(filename);  //得到文件名同样至入BodyPart   
                 
                 multipart.addBodyPart(mbp); 
@@ -218,7 +316,7 @@ public class ToolMail extends Thread {
                 FileDataSource fds = new FileDataSource(attachFile); //得到数据源   
                 
                 mbp.setDataHandler(new DataHandler(fds)); //得到附件本身并至入BodyPart   
-                String filename = new String(fds.getName().getBytes(), "ISO-8859-1"); // 解决附件乱码
+                String filename = MimeUtility.encodeText(fds.getName()); // 解决附件乱码
                 mbp.setFileName(filename);  //得到文件名同样至入BodyPart   
                 
                 multipart.addBodyPart(mbp);
@@ -239,33 +337,6 @@ public class ToolMail extends Thread {
 			e.printStackTrace();
 			return false;
 		}
-	}
-
-	public static void main(String[] args) {
-		// main方法加入
-		System.setProperty("java.net.preferIPv4Stack", "true");  
-		// tomcat服务器加上启动参数 -Djava.net.preferIPv4Stack=true   
-		
-		ToolMail mailInfo = new ToolMail();
-		mailInfo.setHost("smtp.163.com");
-		mailInfo.setPort("25");
-		mailInfo.setValidate(true);
-		mailInfo.setUserName("dongcb678@163.com");
-		mailInfo.setPassword("xxx");// 您的邮箱密码
-		mailInfo.setFrom("dongcb678@163.com");
-		List<String> toList = new ArrayList<String>();
-		toList.add("150584428@qq.com");
-		mailInfo.setTo(toList);
-		mailInfo.setSubject("标题test111");
-		mailInfo.setContent("内容test111");
-		
-		mailInfo.setSendType(sendType_text);
-//		mailInfo.sendTextMail();// 发送html格式
-//		mailInfo.sendHtmlMail();// 发送html格式
-		
-		mailInfo.setAttachFileNames( new String[]{"D:/code.jpg"} );
-		
-		mailInfo.start();
 	}
 
 	public String getHost() {

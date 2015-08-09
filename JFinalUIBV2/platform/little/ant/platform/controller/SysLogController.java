@@ -22,7 +22,7 @@ public class SysLogController extends BaseController {
 	 */
 	public void index() {
 		defaultOrder(Syslog.column_startdate, "desc");
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPage_select, Syslog.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPage_select, Syslog.sqlId_splitPage_from);
 		render("/platform/sysLog/list.html");
 	}
 
@@ -30,7 +30,8 @@ public class SysLogController extends BaseController {
 	 * 查看日志
 	 */
 	public void view() {
-		setAttr("sysLog", SysLogService.service.view(getPara()));
+		Syslog log =  Syslog.dao.findFirst(getSql(Syslog.sqlId_view), ids);
+		setAttr("sysLog", log);
 		render("/platform/sysLog/view.html");
 	}
 
@@ -38,7 +39,7 @@ public class SysLogController extends BaseController {
 	 * 删除日志
 	 */
 	public void delete() {
-		SysLogService.service.delete(getPara() == null ? ids : getPara());
+		SysLogService.service.delete("pt_syslog", getPara() == null ? ids : getPara());
 		redirect("/jf/platform/sysLog");
 	}
 

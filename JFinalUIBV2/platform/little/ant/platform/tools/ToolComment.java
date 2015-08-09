@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
  * 代码注释处理：清除注释 
  * @author 董华健
  */
-public class ToolComment {  
+public abstract class ToolComment {  
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolComment.class);

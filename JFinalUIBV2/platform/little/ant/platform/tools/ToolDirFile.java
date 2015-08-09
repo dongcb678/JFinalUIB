@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
  * 
  * @author 董华健 2012-9-7 下午2:06:13
  */
-public class ToolDirFile {
+public abstract class ToolDirFile {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolDirFile.class);

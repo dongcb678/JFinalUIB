@@ -194,7 +194,7 @@ public abstract class Base {
 	 * @param className
 	 * @param classNameSmall
 	 */
-	public void controller(String className, String classNameSmall){
+	public void controller(String className, String classNameSmall, String tableName){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		String packages = packageBase + ".controller";
 		paraMap.put("basePackage", packageBase);
@@ -202,7 +202,7 @@ public abstract class Base {
 		paraMap.put("className", className);
 		paraMap.put("classNameSmall", classNameSmall);
 		paraMap.put("basePath", basePath);
-		paraMap.put("basePath", basePath);
+		paraMap.put("tableName", tableName);
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className + "Controller.java";
 		createFileByTemplete("controller.html", paraMap, filePath);

@@ -9,17 +9,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import little.ant.platform.constant.ConstantRender;
-import little.ant.platform.plugin.I18NPlugin;
-import little.ant.platform.tools.ToolSqlXml;
-import little.ant.platform.tools.ToolUtils;
-import oracle.sql.TIMESTAMP;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
+
+import little.ant.platform.constant.ConstantRender;
+import little.ant.platform.plugin.I18NPlugin;
+import little.ant.platform.tools.ToolRandoms;
+import little.ant.platform.tools.ToolSqlXml;
+import oracle.sql.TIMESTAMP;
 
 /**
  * Model基础类
@@ -42,35 +42,41 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	public static final String column_version = "version";
 
 	/**
-	 * sqlId : platform.baseModel.version
-	 * 描述：查询版本号
-	 */
-	public static final String sqlId_version = "platform.baseModel.version";
-
-	/**
 	 * sqlId : platform.baseModel.select
 	 * 描述：通用查询
 	 */
 	public static final String sqlId_select = "platform.baseModel.select";
 
 	/**
-	 * sqlId : platform.baseModel.selectCount
-	 * 描述：通用查询
-	 */
-	public static final String sqlId_selectCount = "platform.baseModel.selectCount";
-
-	/**
 	 * sqlId : platform.baseModel.update
-	 * 描述：通用查询
+	 * 描述：通用更新
 	 */
 	public static final String sqlId_update = "platform.baseModel.update";
 
 	/**
 	 * sqlId : platform.baseModel.delete
-	 * 描述：通用查询
+	 * 描述：通用删除
 	 */
 	public static final String sqlId_delete = "platform.baseModel.delete";
 
+	/**
+	 * sqlId : platform.baseModel.deleteIn
+	 * 描述：通用删除
+	 */
+	public static final String sqlId_deleteIn = "platform.baseModel.deleteIn";
+
+	/**
+	 * sqlId : platform.baseModel.deleteOr
+	 * 描述：通用删除
+	 */
+	public static final String sqlId_deleteOr = "platform.baseModel.deleteOr";
+
+	/**
+	 * sqlId : platform.baseModel.splitPageSelect
+	 * 描述：分页公共select
+	 */
+	public static final String sqlId_splitPage_select = "platform.baseModel.splitPageSelect";
+	
 	/**
      * 获取SQL，固定SQL
      * @param sqlId
@@ -184,11 +190,16 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	 */
 	public String getPKNameStr(){
 		String[] pkArr = getPKNameArr();
-		String pk = "";
-		for (String pkName : pkArr) {
-			pk += pkName + ",";
+		if(pkArr.length == 1){
+			return pkArr[0];
+		}else{
+			String pk = "";
+			for (String pkName : pkArr) {
+				pk += pkName + ",";
+			}
+			return pk;
 		}
-		return pk;
+		
 	}
 
 	/**
@@ -229,7 +240,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	public boolean save() {
 		String[] pkArr = getTable().getPrimaryKey();
 		for (String pk : pkArr) {
-			this.set(pk, ToolUtils.getUuidByJdk(true)); // 设置主键值
+			this.set(pk, ToolRandoms.getUuid(true)); // 设置主键值
 		}
 		
 		if(getTable().hasColumnLabel(column_version)){ // 是否需要乐观锁控制

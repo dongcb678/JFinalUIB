@@ -22,7 +22,7 @@ import freemarker.template.TemplateException;
  * FreeMarker工具类
  * @author 董华健
  */
-public class ToolFreeMarker {
+public abstract class ToolFreeMarker {
 
 	private static Logger log = Logger.getLogger(ToolFreeMarker.class);
 	

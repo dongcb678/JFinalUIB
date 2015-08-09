@@ -38,7 +38,7 @@ public class DepartmentController extends BaseController {
 	 * tree节点数据
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = DepartmentService.service.childNodeData(ids);
+		List<ZtreeNode> nodeList = DepartmentService.service.childNodeData(getCxt(), ids);
 		renderJson(nodeList);
 	}
 	

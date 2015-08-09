@@ -15,5 +15,11 @@ public class Group extends BaseModel<Group> {
 	private static Logger log = Logger.getLogger(Group.class);
 	
 	public static final Group dao = new Group();
-	
+
+	/**
+	 * sqlId : weixin.group.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "weixin.group.splitPageFrom";
+
 }

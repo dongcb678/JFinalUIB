@@ -7,7 +7,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.platform.beetl.render.MyBeetlRender;
+import org.apache.log4j.Logger;
+
+import com.jfinal.handler.Handler;
+
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.constant.ConstantWebContext;
 import little.ant.platform.model.Syslog;
@@ -16,10 +19,6 @@ import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.thread.ThreadSysLog;
 import little.ant.platform.tools.ToolDateTime;
 import little.ant.platform.tools.ToolWeb;
-
-import org.apache.log4j.Logger;
-
-import com.jfinal.handler.Handler;
 
 /**
  * 全局Handler，设置一些通用功能
@@ -30,7 +29,15 @@ public class GlobalHandler extends Handler {
 	
 	private static Logger log = Logger.getLogger(GlobalHandler.class);
 
+	/**
+	 * 当前范文日志request key
+	 */
 	public static final String reqSysLogKey = "reqSysLog";
+
+	/**
+	 * render耗时计算key
+	 */
+	public static final String renderTimeKey = "renderTime";
 	
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
@@ -93,8 +100,8 @@ public class GlobalHandler extends Handler {
 		
 		// 视图耗时
 		long renderTime = 0;
-		if(null != request.getAttribute(MyBeetlRender.renderTimeKey)){
-			renderTime = (long) request.getAttribute(MyBeetlRender.renderTimeKey);
+		if(null != request.getAttribute(renderTimeKey)){
+			renderTime = (long) request.getAttribute(renderTimeKey);
 		}
 		reqSysLog.set(Syslog.column_viewhaoshi, renderTime);
 		

@@ -19,36 +19,33 @@ public class ImageService extends BaseService {
 	 * @param type
 	 * @param imageName
 	 * @param imagePath
-	 * @param x1
-	 * @param y1
-	 * @param w
-	 * @param h
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
 	 * @return
 	 */
-	public String cut(int type, String imageName, String imagePath, int x1, int y1, int w, int h){
+	public String cut(int type, String imageName, String imagePath, int x, int y, int width, int height){
 		try {
 			String originalPath = ""; // 原图片路径
 			String targetPath = ""; // 目标路径
-			int width = 0;
 			
 			if(type == 1){ // 头像
 				originalPath = "";
 				targetPath = "";
-				width = 200;
+				
 			} else if(type == 1){ // 内容图片
 				originalPath = "";
 				targetPath = "";
-				width = 200;
 			} 
 			
+			// 后缀
+			String houZhui = imageName.substring(imageName.lastIndexOf(".") + 1);
+			
 			// 裁剪
-			ToolImageTailor tailor = new ToolImageTailor(x1, y1, w, h);
-			tailor.setSrcpath(originalPath);
-			tailor.setSubpath(originalPath);
-			tailor.cut();
+			ToolImageTailor.cut(originalPath, originalPath, x, y, width, height);
 			
 			// 压缩
-			String houZhui = imageName.substring(imageName.lastIndexOf(".") + 1);// 后缀
 			ToolImageResize.resize(originalPath, targetPath + imageName, width, houZhui);
 		} catch (Exception e) {
 			log.error("图片裁剪异常：" + e.getMessage());

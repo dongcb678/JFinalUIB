@@ -20,7 +20,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * @author 董华健
  *
  */
-public class ToolImagePressText {
+public abstract class ToolImagePressText {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolImagePressText.class);

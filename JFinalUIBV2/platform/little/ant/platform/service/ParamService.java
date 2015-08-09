@@ -97,10 +97,11 @@ public class ParamService extends BaseService {
 
 	/**
 	 * 获取子节点数据
+	 * @param cxt
 	 * @param parentIds
 	 * @return
 	 */
-	public List<ZtreeNode> childNodeData(String parentIds){
+	public List<ZtreeNode> childNodeData(String cxt, String parentIds){
 		List<Param> list = null;
 		if (null != parentIds) {
 			String sql = getSql(Param.sqlId_treeChildNode);
@@ -118,7 +119,7 @@ public class ParamService extends BaseService {
 			node.setId(param.getPKValue());
 			node.setName(param.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + param.getStr("images"));
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + param.getStr("images"));
 			nodeList.add(node);
 		}
 		

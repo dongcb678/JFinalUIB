@@ -15,5 +15,11 @@ public class Location extends BaseModel<Location> {
 	private static Logger log = Logger.getLogger(Location.class);
 	
 	public static final Location dao = new Location();
-	
+
+	/**
+	 * sqlId : weixin.location.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPage_from = "weixin.location.splitPageFrom";
+
 }

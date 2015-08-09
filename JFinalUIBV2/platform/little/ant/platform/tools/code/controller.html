@@ -33,7 +33,7 @@ public class ${className}Controller extends BaseController {
 	 * 列表
 	 */
 	public void index() {
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, ${className}.sqlId_splitPage_select, ${className}.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, ${className}.sqlId_splitPage_from);
 		render("/${basePath}/${classNameSmall}/list.html");
 	}
 	
@@ -77,8 +77,7 @@ public class ${className}Controller extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		String param = (getPara() == null ? ids : getPara());
-		${className}Service.service.delete(param);
+		${className}Service.service.delete("${tableName}", getPara() == null ? ids : getPara());
 		redirect("/jf/${basePath}/${classNameSmall}");
 	}
 	

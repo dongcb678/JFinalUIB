@@ -1,5 +1,6 @@
 package little.ant.platform.tools;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
@@ -7,7 +8,16 @@ import org.jsoup.safety.Whitelist;
  * Html处理
  * @author 董华健
  */
-public class ToolHtml {
+public abstract class ToolHtml {
+	
+	/**
+	 * 特殊字符转义，避免XSS
+	 * @param content
+	 * @return
+	 */
+	public static String escapeXml(String content){
+		return StringEscapeUtils.escapeXml11(content);
+	}
 	
 	/**
 	 * 富文本内容处理返回纯文本

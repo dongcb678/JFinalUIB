@@ -45,7 +45,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("deprecation")
-public class ToolHttp {
+public abstract class ToolHttp {
 
 	private static Logger log = Logger.getLogger(ToolHttp.class);
 

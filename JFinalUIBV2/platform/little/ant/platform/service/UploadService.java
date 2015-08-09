@@ -45,15 +45,4 @@ public class UploadService extends BaseService {
 		return list;
 	}
 	
-	/**
-	 * 删除
-	 * @param ids
-	 */
-	public void delete(String ids){
-		String[] idsArr = splitByComma(ids);
-		for (String logIds : idsArr) {
-			Upload.dao.deleteById(logIds);
-		}
-	}
-	
 }

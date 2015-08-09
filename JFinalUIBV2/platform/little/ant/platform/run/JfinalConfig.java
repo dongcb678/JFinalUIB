@@ -135,7 +135,7 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("configPlugin 配置ActiveRecord插件");
 		ActiveRecordPlugin arpMain = new ActiveRecordPlugin(ConstantInit.db_dataSource_main, druidPlugin);
-		//arp.setTransactionLevel(4);//事务隔离级别
+		//arpMain.setTransactionLevel(4);//事务隔离级别
 		arpMain.setDevMode(getPropertyToBoolean(ConstantInit.config_devMode, false)); // 设置开发模式
 		arpMain.setShowSql(getPropertyToBoolean(ConstantInit.config_devMode, false)); // 是否显示SQL
 
@@ -253,10 +253,9 @@ public class JfinalConfig extends JFinalConfig {
 	 * 运行此 main 方法可以启动项目
 	 * 说明：
 	 * 1. linux 下非root账户运行端口要>1024
-	 * 2. idea 中运行记得加上当前的module名称
+	 * 2. idea 中运行webAppDir路径可能需要适当调整
 	 */
 	public static void main(String[] args) {
-		JFinal.start("WebContent", 99, "/", 5); // 
-		// JFinal.start("JfinalUIB/WebContent", 89, "/", 5); // idea 中运行记得加上当前的module名称
+		JFinal.start("WebContent", 99, "/", 5);
 	}
 }

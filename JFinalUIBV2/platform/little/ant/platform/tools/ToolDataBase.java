@@ -14,7 +14,7 @@ import little.ant.platform.plugin.PropertiesPlugin;
  * 数据库导入导出处理
  * @author 董华健
  */
-public class ToolDataBase {
+public abstract class ToolDataBase {
 	
 	/**
 	 * 数据库导出

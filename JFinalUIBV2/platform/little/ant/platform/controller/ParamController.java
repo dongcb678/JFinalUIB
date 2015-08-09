@@ -44,7 +44,7 @@ public class ParamController extends BaseController {
 	 * 参数管理ztree数据
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = ParamService.service.childNodeData(ids);
+		List<ZtreeNode> nodeList = ParamService.service.childNodeData(getCxt(), ids);
 		renderJson(nodeList);
 	}
 

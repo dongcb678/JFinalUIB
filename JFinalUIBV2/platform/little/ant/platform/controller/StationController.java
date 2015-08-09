@@ -40,7 +40,7 @@ public class StationController extends BaseController {
 	 * 岗位treeData
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = StationService.service.childNodeData(ids);
+		List<ZtreeNode> nodeList = StationService.service.childNodeData(getCxt(), ids);
 		renderJson(nodeList);
 	}
 

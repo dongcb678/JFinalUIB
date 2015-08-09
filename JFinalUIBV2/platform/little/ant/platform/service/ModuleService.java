@@ -23,10 +23,11 @@ public class ModuleService extends BaseService {
 	
 	/**
 	 * 获取子节点数据
+	 * @param cxt
 	 * @param parentIds
 	 * @return
 	 */
-	public List<ZtreeNode> childNodeData(String systemsIds, String parentIds){
+	public List<ZtreeNode> childNodeData(String cxt, String systemsIds, String parentIds){
 		List<Module> list = null;
 		if (null != systemsIds && null == parentIds) {
 			// 1.根据系统ID查询模块树
@@ -52,7 +53,7 @@ public class ModuleService extends BaseService {
 			node.setId(module.getPKValue());
 			node.setName(module.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon("/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
+			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
 			nodeList.add(node);
 		}
 		

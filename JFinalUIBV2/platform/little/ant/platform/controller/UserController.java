@@ -30,7 +30,7 @@ public class UserController extends BaseController {
 	 * 默认列表
 	 */
 	public void index() {
-		splitPageBySqlId(ConstantInit.db_dataSource_main, splitPage, User.sqlId_splitPage_select, User.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, User.sqlId_splitPage_select, User.sqlId_splitPage_from);
 		render("/platform/user/list.html");
 	}
 	
@@ -90,7 +90,7 @@ public class UserController extends BaseController {
 	 * 用户树ztree节点数据
 	 */
 	public void treeData() {
-		List<ZtreeNode> list = UserService.service.childNodeData(deptIds);
+		List<ZtreeNode> list = UserService.service.childNodeData(getCxt(), deptIds);
 		renderJson(list);
 	}
 	

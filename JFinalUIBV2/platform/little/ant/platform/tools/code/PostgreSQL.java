@@ -49,7 +49,7 @@ public class PostgreSQL extends Base {
 					base.validator(className, classNameSmall); 
 					
 					// 4.生成controller
-					base.controller(className, classNameSmall); 
+					base.controller(className, classNameSmall, tableName); 
 					
 					// 5.生成service
 					base.service(className, classNameSmall); 

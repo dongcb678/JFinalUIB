@@ -12,7 +12,7 @@ import org.apache.velocity.app.VelocityEngine;
  * Velocity工具类
  * @author 董华健
  */
-public class ToolVelocity {
+public abstract class ToolVelocity {
 
 	/**
 	 * 渲染模板

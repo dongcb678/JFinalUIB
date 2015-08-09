@@ -24,7 +24,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  * 说明：加载sql map中的sql到map中，并提供动态长度sql处理
  */
-public class ToolSqlXml {
+public abstract class ToolSqlXml {
 
     protected static final Logger log = Logger.getLogger(ToolSqlXml.class);
 
