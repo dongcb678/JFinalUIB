@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_menu")
+@Table(tableName = "pt_menu")
 public class Menu extends BaseModel<Menu> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

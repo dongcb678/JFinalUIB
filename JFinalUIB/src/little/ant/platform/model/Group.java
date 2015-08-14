@@ -13,7 +13,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_group")
+@Table(tableName = "pt_group")
 public class Group extends BaseModel<Group> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

@@ -18,7 +18,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_param")
+@Table(tableName = "pt_param")
 public class Param extends BaseModel<Param> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
