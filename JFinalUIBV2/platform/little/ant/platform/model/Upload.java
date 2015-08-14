@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "pt_upload")
+@Table(tableName = "pt_upload")
 public class Upload extends BaseModel<Upload> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;

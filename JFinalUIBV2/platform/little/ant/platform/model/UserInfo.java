@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "pt_userinfo")
+@Table(tableName = "pt_userinfo")
 public class UserInfo extends BaseModel<UserInfo> {
 
 	private static final long serialVersionUID = 2592706064072264621L;

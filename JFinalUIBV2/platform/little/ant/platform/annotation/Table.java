@@ -6,6 +6,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import little.ant.platform.constant.ConstantInit;
+
 /**
  * Model注解
  * 说明：标注Model对应的数据源名称、表名称、主键列名称
@@ -20,7 +22,7 @@ public @interface Table {
 	 * Model对应的数据库
 	 * @return
 	 */
-    String dataSourceName();
+    String dataSourceName() default ConstantInit.db_dataSource_main;
     
     /**
      * Model对应的表

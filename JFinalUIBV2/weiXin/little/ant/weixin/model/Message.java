@@ -7,7 +7,7 @@ import little.ant.platform.model.BaseModel;
 import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName= "wx_message")
+@Table(tableName= "wx_message")
 public class Message extends BaseModel<Message> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
