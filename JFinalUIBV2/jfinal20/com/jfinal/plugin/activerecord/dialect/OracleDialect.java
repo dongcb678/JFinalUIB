@@ -21,6 +21,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.log4j.Logger;
+
 import java.util.Set;
 
 import com.jfinal.plugin.activerecord.DbKit;
@@ -31,6 +34,8 @@ import com.jfinal.plugin.activerecord.Table;
  * OracleDialect.
  */
 public class OracleDialect extends Dialect {
+
+	private static Logger log = Logger.getLogger(OracleDialect.class);
 	
 	public String forTableBuilderDoBuild(String tableName) {
 		return "select * from " + tableName + " where rownum < 1";
@@ -216,8 +221,10 @@ public class OracleDialect extends Dialect {
 		int size = paras.size();
 		boolean isShowSql = DbKit.getConfig().isShowSql();
 		
+		StringBuilder sb = null;
 		if(isShowSql){
-			System.out.println("Sql param: " + (size == 0 ? " empty " :  size));
+			sb = new StringBuilder();
+			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
 		}
 			
 		for (int i=0; i<size; i++) {
@@ -234,10 +241,14 @@ public class OracleDialect extends Dialect {
 			}
 			
 			if(isShowSql){
-				System.out.println("param index: " + paramIndex 
-						+ "   param type: " + (null != value ? value.getClass().getSimpleName() : "null") 
-						+ "   param value: " + String.valueOf(value));
+				sb.append("param index: ").append(paramIndex)
+				.append("   param type: ").append((null != value ? value.getClass().getSimpleName() : "null") )
+				.append("   param value: ").append(String.valueOf(value)).append(" \r\n ");
 			}
+		}
+		
+		if(isShowSql){
+			log.info(sb.toString());
 		}
 	}
 	
@@ -245,8 +256,10 @@ public class OracleDialect extends Dialect {
 		int size = paras.length;
 		boolean isShowSql = DbKit.getConfig().isShowSql();
 		
+		StringBuilder sb = null;
 		if(isShowSql){
-			System.out.println("Sql param: " + (size == 0 ? " empty " :  size));
+			sb = new StringBuilder();
+			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
 		}
 			
 		for (int i=0; i<size; i++) {
@@ -263,10 +276,14 @@ public class OracleDialect extends Dialect {
 			}
 			
 			if(isShowSql){
-				System.out.println("param index: " + paramIndex 
-						+ "   param type: " + (null != value ? value.getClass().getSimpleName() : "null") 
-						+ "   param value: " + String.valueOf(value));
+				sb.append("param index: ").append(paramIndex)
+				.append("   param type: ").append((null != value ? value.getClass().getSimpleName() : "null") )
+				.append("   param value: ").append(String.valueOf(value)).append(" \r\n ");
 			}
+		}
+
+		if(isShowSql){
+			log.info(sb.toString());
 		}
 	}
 	

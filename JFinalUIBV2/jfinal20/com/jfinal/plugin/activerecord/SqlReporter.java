@@ -22,9 +22,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 
-import little.ant.platform.tools.ToolSqlFormatter;
-
 import com.jfinal.log.Logger;
+
+import little.ant.platform.tools.ToolFormatSql;
 
 /**
  * SqlReporter.
@@ -32,16 +32,16 @@ import com.jfinal.log.Logger;
 public class SqlReporter implements InvocationHandler {
 	
 	private Connection conn;
-	private static boolean loggerOn = false;
+//	private static boolean loggerOn = false;
 	private static final Logger log = Logger.getLogger(SqlReporter.class);
 	
 	SqlReporter(Connection conn) {
 		this.conn = conn;
 	}
 	
-	public static void setLogger(boolean on) {
-		SqlReporter.loggerOn = on;
-	}
+//	public static void setLogger(boolean on) {
+//		SqlReporter.loggerOn = on;
+//	}
 	
 	@SuppressWarnings("rawtypes")
 	Connection getConnection() {
@@ -51,12 +51,9 @@ public class SqlReporter implements InvocationHandler {
 	
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		try {
-			if (method.getName().equals("prepareStatement")) {
-				String info = "Sql: " + ToolSqlFormatter.format(String.valueOf(args[0]));
-				if (loggerOn)
-					log.info(info);
-				else
-					System.out.println(info);
+			boolean isShowSql = DbKit.getConfig().isShowSql();
+			if (method.getName().equals("prepareStatement") && isShowSql) {
+				log.info("\r\n Sql: \r\n " + ToolFormatSql.format(String.valueOf(args[0])) + " \r\n ");
 			}
 			return method.invoke(conn, args);
 		} catch (InvocationTargetException e) {

@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
@@ -33,6 +35,9 @@ import com.jfinal.plugin.activerecord.Table;
  * Dialect.
  */
 public abstract class Dialect {
+
+	private static Logger log = Logger.getLogger(Dialect.class);
+	
 	public abstract String forTableBuilderDoBuild(String tableName);
 	public abstract void forModelSave(Table table, Map<String, Object> attrs, StringBuilder sql, List<Object> paras);
 	public abstract String forModelDeleteById(Table table);
@@ -68,42 +73,54 @@ public abstract class Dialect {
 	public void fillStatement(PreparedStatement pst, List<Object> paras) throws SQLException {
 		int size = paras.size();
 		boolean isShowSql = DbKit.getConfig().isShowSql();
-		
+
+		StringBuilder sb = null;
 		if(isShowSql){
-			System.out.println("Sql param: " + (size == 0 ? " empty " :  size));
+			sb = new StringBuilder();
+			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
 		}
-		
+			
 		for (int i=0; i<size; i++) {
 			int paramIndex = i + 1;
 			Object paramObject = paras.get(i);
 			pst.setObject(paramIndex, paramObject);
-			
+
 			if(isShowSql){
-				System.out.println("param index: " + paramIndex 
-						+ "   param type: " + (null != paramObject ? paramObject.getClass().getSimpleName() : "null") 
-						+ "   param value: " + String.valueOf(paramObject));
+				sb.append("param index: ").append(paramIndex)
+				.append("   param type: ").append((null != paramObject ? paramObject.getClass().getSimpleName() : "null"))
+				.append("   param value: ").append(String.valueOf(paramObject)).append(" \r\n ");
 			}
+		}
+		
+		if(isShowSql){
+			log.info(sb.toString());
 		}
 	}
 	
 	public void fillStatement(PreparedStatement pst, Object... paras) throws SQLException {
 		int size = paras.length;
 		boolean isShowSql = DbKit.getConfig().isShowSql();
-		
+
+		StringBuilder sb = null;
 		if(isShowSql){
-			System.out.println("Sql param: " + (size == 0 ? " empty " :  size));
+			sb = new StringBuilder();
+			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
 		}
-		
+			
 		for (int i=0; i<size; i++) {
 			int paramIndex = i + 1;
 			Object paramObject = paras[i];
 			pst.setObject(paramIndex, paramObject);
 			
 			if(isShowSql){
-				System.out.println("param index: " + paramIndex 
-						+ "   param type: " + (null != paramObject ? paramObject.getClass().getSimpleName() : "null") 
-						+ "   param value: " + String.valueOf(paramObject));
+				sb.append("param index: ").append(paramIndex)
+				.append("   param type: ").append((null != paramObject ? paramObject.getClass().getSimpleName() : "null"))
+				.append("   param value: ").append(String.valueOf(paramObject)).append(" \r\n ");
 			}
+		}
+		
+		if(isShowSql){
+			log.info(sb.toString());
 		}
 	}
 	
