@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName = "pt_syslog")
+@Table(tableName = "pt_syslog")
 public class Syslog extends BaseModel<Syslog> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;

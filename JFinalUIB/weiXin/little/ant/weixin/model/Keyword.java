@@ -7,7 +7,7 @@ import little.ant.platform.model.BaseModel;
 import org.apache.log4j.Logger;
 
 @SuppressWarnings("unused")
-@Table(dataSourceName = DictKeys.db_dataSource_main, tableName= "wx_keyword")
+@Table(tableName= "wx_keyword")
 public class Keyword extends BaseModel<Keyword> {
 	
 	private static final long serialVersionUID = 7513950057125407026L;
