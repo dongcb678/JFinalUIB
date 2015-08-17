@@ -21,6 +21,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.log4j.Logger;
+
 import java.util.Set;
 
 import com.jfinal.plugin.activerecord.DbKit;
@@ -31,6 +34,8 @@ import com.jfinal.plugin.activerecord.Table;
  * OracleDialect.
  */
 public class OracleDialect extends Dialect {
+
+	private static Logger log = Logger.getLogger(OracleDialect.class);
 	
 	public String forTableBuilderDoBuild(String tableName) {
 		return "select * from " + tableName + " where rownum < 1";
@@ -189,7 +194,9 @@ public class OracleDialect extends Dialect {
 		int size = paras.size();
 		boolean isShowSql = DbKit.getConfig().isShowSql();
 		if(isShowSql){
-			System.out.println("Sql param: " + (size == 0 ? " empty " :  size));
+			StringBuilder sb = new StringBuilder();
+			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
+			
 			for (int i=0; i<size; i++) {
 				int paramIndex = i + 1;
 				Object paramObject = paras.get(i);
@@ -198,10 +205,13 @@ public class OracleDialect extends Dialect {
 				}else{
 					pst.setObject(paramIndex, paramObject);
 				}
-				System.out.println("param index: " + paramIndex 
-						+ "   param type: " + (null != paramObject ? paramObject.getClass().getSimpleName() : "null") 
-						+ "   param value: " + String.valueOf(paramObject));
+				
+				sb.append("param index: ").append(paramIndex)
+				.append("   param type: ").append((null != paramObject ? paramObject.getClass().getSimpleName() : "null"))
+				.append("   param value: ").append(String.valueOf(paramObject)).append(" \r\n ");
 			}
+
+			log.info(sb.toString());
 			
 		}else{
 			for (int i=0; i<size; i++) {
@@ -220,7 +230,9 @@ public class OracleDialect extends Dialect {
 		int size = paras.length;
 		boolean isShowSql = DbKit.getConfig().isShowSql();
 		if(isShowSql){
-			System.out.println("Sql param: " + (size == 0 ? " empty " :  size));
+			StringBuilder sb = new StringBuilder();
+			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
+			
 			for (int i=0; i<size; i++) {
 				int paramIndex = i + 1;
 				Object paramObject = paras[i];
@@ -229,10 +241,14 @@ public class OracleDialect extends Dialect {
 				}else{
 					pst.setObject(paramIndex, paramObject);
 				}
-				System.out.println("param index: " + paramIndex 
-						+ "   param type: " + (null != paramObject ? paramObject.getClass().getSimpleName() : "null") 
-						+ "   param value: " + String.valueOf(paramObject));
+				
+				sb.append("param index: ").append(paramIndex)
+				.append("   param type: ").append((null != paramObject ? paramObject.getClass().getSimpleName() : "null"))
+				.append("   param value: ").append(String.valueOf(paramObject)).append(" \r\n ");
 			}
+
+			log.info(sb.toString());
+			
 		}else{
 			for (int i=0; i<size; i++) {
 				int paramIndex = i + 1;
