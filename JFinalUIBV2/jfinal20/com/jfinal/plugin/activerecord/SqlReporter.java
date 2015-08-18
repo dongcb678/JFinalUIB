@@ -51,8 +51,7 @@ public class SqlReporter implements InvocationHandler {
 	
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		try {
-			boolean isShowSql = DbKit.getConfig().isShowSql();
-			if (method.getName().equals("prepareStatement") && isShowSql) {
+			if (method.getName().equals("prepareStatement")) {
 				log.info("\r\n Sql: \r\n " + ToolFormatSql.format(String.valueOf(args[0])) + " \r\n ");
 			}
 			return method.invoke(conn, args);

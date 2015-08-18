@@ -77,7 +77,7 @@ public abstract class Dialect {
 		StringBuilder sb = null;
 		if(isShowSql){
 			sb = new StringBuilder();
-			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
+			sb.append("\r\n Sql param: ").append((size == 0 ? " empty " :  size)).append(" \r\n ");
 		}
 			
 		for (int i=0; i<size; i++) {
@@ -104,7 +104,7 @@ public abstract class Dialect {
 		StringBuilder sb = null;
 		if(isShowSql){
 			sb = new StringBuilder();
-			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
+			sb.append("\r\n Sql param: ").append((size == 0 ? " empty " :  size)).append(" \r\n ");
 		}
 			
 		for (int i=0; i<size; i++) {
