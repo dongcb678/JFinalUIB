@@ -16,6 +16,8 @@
 
 package com.jfinal.plugin.activerecord;
 
+import static com.jfinal.plugin.activerecord.DbKit.NULL_PARA_ARRAY;
+
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,10 +28,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
+
 import com.jfinal.plugin.activerecord.cache.ICache;
-import static com.jfinal.plugin.activerecord.DbKit.NULL_PARA_ARRAY;
+
+import little.ant.platform.model.BaseModel;
 
 /**
  * Model.
@@ -477,6 +481,13 @@ public abstract class Model<M extends Model> implements Serializable {
 			return false;
 		}
 		
+		boolean versionModify = modifyFlag.contains(BaseModel.column_version); // 是否包含version字段
+		if(versionModify){
+			Long newVersion = getNumber(BaseModel.column_version).longValue(); // 新版本号
+			paras.add(newVersion);
+			sql.append(" and version < ? ");
+		}
+		
 		// --------
 		Connection conn = null;
 		try {
@@ -494,49 +505,6 @@ public abstract class Model<M extends Model> implements Serializable {
 		}
 	}
 
-	/**
-	 * Update model.
-	 */
-	public boolean updateByVersion(Long version) {
-		if (getModifyFlag().isEmpty())
-			return false;
-		
-		Table table = getTable();
-		String[] pKeys = table.getPrimaryKey();
-		for (String pKey : pKeys) {
-			Object id = attrs.get(pKey);
-			if (id == null)
-				throw new ActiveRecordException("You can't update model without Primary Key, " + pKey + " can not be null.");
-		}
-		
-		Config config = getConfig();
-		StringBuilder sql = new StringBuilder();
-		List<Object> paras = new ArrayList<Object>();
-		config.dialect.forModelUpdate(table, attrs, getModifyFlag(), sql, paras);
-		
-		if (paras.size() <= 1) {	// Needn't update
-			return false;
-		}
-		
-		paras.add(version);
-		
-		// --------
-		Connection conn = null;
-		try {
-			conn = config.getConnection();
-			int result = Db.update(config, conn, sql.toString() + " and version < ? ", paras.toArray());
-			if (result >= 1) {
-				getModifyFlag().clear();
-				return true;
-			}
-			return false;
-		} catch (Exception e) {
-			throw new ActiveRecordException(e);
-		} finally {
-			config.close(conn);
-		}
-	}
-	
 	/**
 	 * Find model.
 	 */

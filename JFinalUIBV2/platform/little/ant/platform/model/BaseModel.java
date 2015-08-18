@@ -300,8 +300,8 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			}
 			boolean versionModify = modifyFlag.contains(column_version); // 表单是否包含version字段
 			if(versionModify){
-				Long versionForm = getNumber(column_version).longValue() + 1; // 表单中的版本号
-				return super.updateByVersion(versionForm); // ***** 增加updateByVersion方法 ***** //
+				Long newVersion = getNumber(column_version).longValue() + 1; // 表单中的版本号+1
+				this.set(column_version, newVersion); // 保存新版本号
 			}
 		}
 		
