@@ -75,7 +75,7 @@ public abstract class Dialect {
 		boolean isShowSql = DbKit.getConfig().isShowSql();
 		if(isShowSql){
 			StringBuilder sb = new StringBuilder();
-			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
+			sb.append("\r\n Sql param: ").append((size == 0 ? " empty " :  size)).append(" \r\n ");
 			
 			for (int i=0; i<size; i++) {
 				int paramIndex = i + 1;
@@ -101,7 +101,7 @@ public abstract class Dialect {
 		boolean isShowSql = DbKit.getConfig().isShowSql();
 		if(isShowSql){
 			StringBuilder sb = new StringBuilder();
-			sb.append("\r\n Sql param: \r\n ").append((size == 0 ? " empty " :  size));
+			sb.append("\r\n Sql param: ").append((size == 0 ? " empty " :  size)).append(" \r\n ");
 			
 			for (int i=0; i<size; i++) {
 				int paramIndex = i + 1;
