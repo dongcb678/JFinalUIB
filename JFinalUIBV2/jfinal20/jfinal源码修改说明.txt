@@ -26,3 +26,7 @@
 7.在Model.java中增加updateByVersion方法
 	
 	处理乐观锁
+	
+8.com.jfinal.render包下面的视图render增加耗时计算
+	所有的render实现类都在render方法前后加上视图耗时计算
+	

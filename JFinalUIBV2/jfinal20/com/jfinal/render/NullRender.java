@@ -16,6 +16,8 @@
 
 package com.jfinal.render;
 
+import little.ant.platform.handler.GlobalHandler;
+
 /**
  * NullRender.
  */
@@ -25,6 +27,7 @@ public class NullRender extends Render {
 	 * Render nothing
 	 */
 	public final void render() {
-		
+		long renderTime = 0;
+		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
 	}
 }

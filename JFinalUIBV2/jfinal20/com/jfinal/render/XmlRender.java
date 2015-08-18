@@ -21,6 +21,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import freemarker.template.Template;
+import little.ant.platform.handler.GlobalHandler;
 
 /**
  * XmlRender use FreeMarker
@@ -35,6 +36,8 @@ public class XmlRender extends FreeMarkerRender {
 	
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void render() {
+		long start = System.currentTimeMillis();
+		
 		response.setContentType(contentType);
         
 		Map root = new HashMap();
@@ -55,5 +58,11 @@ public class XmlRender extends FreeMarkerRender {
 			if (writer != null)
 				writer.close();
 		}
+        
+		long end = System.currentTimeMillis();
+		long renderTime = end - start;
+
+		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
 	}
+	
 }

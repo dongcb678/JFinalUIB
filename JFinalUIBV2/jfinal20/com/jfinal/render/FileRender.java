@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StrKit;
 
+import little.ant.platform.handler.GlobalHandler;
+
 /**
  * FileRender.
  */
@@ -56,6 +58,8 @@ public class FileRender extends Render {
 	}
 	
 	public void render() {
+		long start = System.currentTimeMillis();
+		
 		if (file == null || !file.isFile()) {
 			RenderFactory.me().getErrorRender(404).setContext(request, response).render();
 			return ;
@@ -72,6 +76,11 @@ public class FileRender extends Render {
         	normalRender();
         else
         	rangeRender();
+
+		long end = System.currentTimeMillis();
+		long renderTime = end - start;
+
+		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
 	}
 	
 	private String encodeFileName(String fileName) {

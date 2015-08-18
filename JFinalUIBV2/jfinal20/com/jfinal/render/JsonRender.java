@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Set;
 import com.jfinal.kit.JsonKit;
 
+import little.ant.platform.handler.GlobalHandler;
+
 /**
  * JsonRender.
  * <p>
@@ -125,6 +127,8 @@ public class JsonRender extends Render {
 	}
 	
 	public void render() {
+		long start = System.currentTimeMillis();
+		
 		if (jsonText == null)
 			buildJsonText();
 		
@@ -145,6 +149,11 @@ public class JsonRender extends Render {
 			if (writer != null)
 				writer.close();
 		}
+		
+		long end = System.currentTimeMillis();
+		long renderTime = end - start;
+
+		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
 	}
 	
 	@SuppressWarnings({"rawtypes", "unchecked"})

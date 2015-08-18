@@ -18,6 +18,8 @@ package com.jfinal.render;
 
 import javax.servlet.http.HttpServletResponse;
 
+import little.ant.platform.handler.GlobalHandler;
+
 /**
  * Redirect301Render.
  */
@@ -38,6 +40,8 @@ public class Redirect301Render extends Render {
 	}
 	
 	public void render() {
+		long start = System.currentTimeMillis();
+		
 		if (contextPath != null && url.indexOf("://") == -1)
 			url = contextPath + url;
 		
@@ -51,5 +55,10 @@ public class Redirect301Render extends Render {
 		// response.sendRedirect(url);	// always 302
 		response.setHeader("Location", url);
 		response.setHeader("Connection", "close");
+
+		long end = System.currentTimeMillis();
+		long renderTime = end - start;
+
+		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
 	}
 }

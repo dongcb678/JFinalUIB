@@ -19,6 +19,8 @@ package com.jfinal.render;
 import java.io.IOException;
 import com.jfinal.core.JFinal;
 
+import little.ant.platform.handler.GlobalHandler;
+
 /**
  * RedirectRender with status: 302 Found.
  */
@@ -44,6 +46,8 @@ public class RedirectRender extends Render {
 	}
 	
 	public void render() {
+		long start = System.currentTimeMillis();
+		
 		if (contextPath != null && url.indexOf("://") == -1)
 			url = contextPath + url;
 		
@@ -61,6 +65,11 @@ public class RedirectRender extends Render {
 		} catch (IOException e) {
 			throw new RenderException(e);
 		}
+
+		long end = System.currentTimeMillis();
+		long renderTime = end - start;
+
+		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
 	}
 }
 

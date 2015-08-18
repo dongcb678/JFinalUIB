@@ -30,6 +30,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
+import little.ant.platform.handler.GlobalHandler;
 
 /**
  * FreeMarkerRender.
@@ -115,10 +116,12 @@ public class FreeMarkerRender extends Render {
     
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void render() {
+		long start = System.currentTimeMillis();
+		
 		response.setContentType(contentType);
         
 		Map root = new HashMap();
-		for (Enumeration<String> attrs=request.getAttributeNames(); attrs.hasMoreElements();) {
+		for (Enumeration<String> attrs = request.getAttributeNames(); attrs.hasMoreElements();) {
 			String attrName = attrs.nextElement();
 			root.put(attrName, request.getAttribute(attrName));
 		}
@@ -130,11 +133,16 @@ public class FreeMarkerRender extends Render {
 			template.process(root, writer);		// Merge the data-model and the template
 		} catch (Exception e) {
 			throw new RenderException(e);
-		}
-		finally {
+		} finally {
 			if (writer != null)
 				writer.close();
 		}
+        
+		long end = System.currentTimeMillis();
+		long renderTime = end - start;
+
+		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
 	}
+	
 }
 

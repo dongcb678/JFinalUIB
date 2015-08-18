@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
 import org.beetl.ext.jfinal.BeetlRender;
 
+import little.ant.platform.handler.GlobalHandler;
+
 /**
  * 继承BeetlRender，实现视图耗时的计算
  * @author 董华健
@@ -11,11 +13,6 @@ import org.beetl.ext.jfinal.BeetlRender;
 public class MyBeetlRender extends BeetlRender {
 
 	private static Logger log = Logger.getLogger(MyBeetlRender.class);
-	
-	/**
-	 * render耗时计算key
-	 */
-	public static final String renderTimeKey = "renderTime";
 	
 	public MyBeetlRender(GroupTemplate gt, String view) {
 		super(gt, view);
@@ -31,7 +28,7 @@ public class MyBeetlRender extends BeetlRender {
 		long renderTime = end - start;
 		log.debug("MyBeetlRender render end time = " + end + "，renderTime = " + renderTime);
 		
-		request.setAttribute(MyBeetlRender.renderTimeKey, renderTime);
+		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
 	}
 
 }

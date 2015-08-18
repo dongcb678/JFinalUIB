@@ -21,12 +21,16 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import com.jfinal.plugin.activerecord.CPI;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.ModelRecordElResolver;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+
+import little.ant.platform.handler.GlobalHandler;
 
 /**
  * JspRender.
@@ -56,18 +60,25 @@ public class JspRender extends Render {
 	}
 	
 	public void render() {
+		long start = System.currentTimeMillis();
 		// 在 jsp 页面使用如下指令则无需再指字符集, 否则是重复指定了,与页面指定的不一致时还会出乱码
 		// <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 		// response.setContentType(contentType);
 		// response.setCharacterEncoding(encoding);
 		
 		try {
-			if (isSupportActiveRecord)
+			if(isSupportActiveRecord){
 				supportActiveRecord(request);
+			}
 			request.getRequestDispatcher(view).forward(request, response);
 		} catch (Exception e) {
 			throw new RenderException(e);
 		}
+
+		long end = System.currentTimeMillis();
+		long renderTime = end - start;
+
+		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
 	}
 	
 	private static int DEPTH = 8;
