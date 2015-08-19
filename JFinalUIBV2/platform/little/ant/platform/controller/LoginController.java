@@ -34,39 +34,43 @@ public class LoginController extends BaseController {
 	}
 
 	/**
-	 * 验证账号是否存在
+	 * 验证账号是否可用
 	 */
 	public void valiUserName(){
+		String userIds = getPara("userIds");
 		String userName = getPara("userName");
-		int count = LoginService.service.valiUserName(userName);
-		renderText(String.valueOf(count));
+		boolean bool = LoginService.service.valiUserName(userIds, userName);
+		renderText(String.valueOf(bool));
 	}
 	
 	/**
-	 * 验证邮箱是否存在
+	 * 验证邮箱是否可用
 	 */
 	public void valiMailBox(){
+		String userInfoIds = getPara("userInfoIds");
 		String mailBox = getPara("mailBox");
-		int count = LoginService.service.valiMailBox(mailBox);
-		renderText(String.valueOf(count));
+		boolean bool = LoginService.service.valiMailBox(userInfoIds, mailBox);
+		renderText(String.valueOf(bool));
 	}
 
 	/**
-	 * 验证身份证是否存在
+	 * 验证身份证是否可用
 	 */
 	public void valiIdcard(){
+		String userInfoIds = getPara("userInfoIds");
 		String idcard = getPara("idcard");
-		int count = LoginService.service.valiIdcard(idcard);
-		renderText(String.valueOf(count));
+		boolean bool = LoginService.service.valiIdcard(userInfoIds, idcard);
+		renderText(String.valueOf(bool));
 	}
 
 	/**
-	 * 验证手机号是否存在
+	 * 验证手机号是否可用
 	 */
 	public void valiMobile(){
+		String userInfoIds = getPara("userInfoIds");
 		String mobile = getPara("mobile");
-		int count = LoginService.service.valiMobile(mobile);
-		renderText(String.valueOf(count));
+		boolean bool = LoginService.service.valiMobile(userInfoIds, mobile);
+		renderText(String.valueOf(bool));
 	}
 
 	/**

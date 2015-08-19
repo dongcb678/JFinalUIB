@@ -19,7 +19,6 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.constant.ConstantLogin;
 import little.ant.platform.interceptor.AuthInterceptor;
-import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.User;
 import little.ant.platform.model.UserInfo;
 import little.ant.platform.plugin.PropertiesPlugin;
@@ -35,62 +34,98 @@ public class LoginService extends BaseService {
 
 	/**
 	 * 验证账号是否存在
-	 * @param mailbox
+	 * @param userIds
+	 * @param userName
 	 * @return
+	 * 描述：新增用户时userIds为空，修改用户时userIds传值
 	 */
-	public int valiUserName(String userName){
+	public boolean valiUserName(String userIds, String userName){
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("column", "count(*)");
+		param.put("column", "ids");
 		param.put("table", "pt_user");
 		param.put("condition", User.column_username);
-		String sql = getSqlByBeetl(BaseModel.sqlId_select, param);
-		int count = Db.queryLong(sql, userName).intValue();
-		return count;
+		String sql = getSqlByBeetl("platform.baseModel.select", param);
+		User user = User.dao.findFirst(sql, userName);
+		if(user == null){
+			return true;
+		}else{
+			if(userIds != null && user.getStr(UserInfo.column_ids).equals(userIds)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
 	 * 验证邮箱是否存在
-	 * @param mailbox
+	 * @param userInfoIds
+	 * @param mailBox
 	 * @return
+	 * 描述：新增用户时userInfoIds为空，修改用户时userInfoIds传值
 	 */
-	public int valiMailBox(String mailBox){
+	public boolean valiMailBox(String userInfoIds, String mailBox){
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("column", "count(*)");
+		param.put("column", "ids");
 		param.put("table", "pt_userinfo");
 		param.put("condition", UserInfo.column_email);
-		String sql = getSqlByBeetl(BaseModel.sqlId_select, param);
-		int count = Db.queryLong(sql, mailBox).intValue();
-		return count;
+		String sql = getSqlByBeetl("platform.baseModel.select", param);
+		UserInfo userInfo = UserInfo.dao.findFirst(sql, mailBox);
+		if(userInfo == null){
+			return true;
+		}else{
+			if(userInfoIds != null && userInfo.getStr(UserInfo.column_ids).equals(userInfoIds)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
 	 * 验证身份证是否存在
-	 * @param mailbox
+	 * @param userInfoIds
+	 * @param idcard
 	 * @return
+	 * 描述：新增用户时userInfoIds为空，修改用户时userInfoIds传值
 	 */
-	public int valiIdcard(String idcard){
+	public boolean valiIdcard(String userInfoIds, String idcard){
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("column", "count(*)");
+		param.put("column", "ids");
 		param.put("table", "pt_userinfo");
 		param.put("condition", UserInfo.column_idcard);
-		String sql = getSqlByBeetl(BaseModel.sqlId_select, param);
-		int count = Db.queryLong(sql, idcard).intValue();
-		return count;
+		String sql = getSqlByBeetl("platform.baseModel.select", param);
+		UserInfo userInfo = UserInfo.dao.findFirst(sql, idcard);
+		if(userInfo == null){
+			return true;
+		}else{
+			if(userInfoIds != null && userInfo.getStr(UserInfo.column_ids).equals(userInfoIds)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
 	 * 验证手机号是否存在
-	 * @param mailbox
+	 * @param userInfoIds
+	 * @param mobile
 	 * @return
+	 * 描述：新增用户时userInfoIds为空，修改用户时userInfoIds传值
 	 */
-	public int valiMobile(String mobile){
+	public boolean valiMobile(String userInfoIds, String mobile){
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("column", "count(*)");
+		param.put("column", "ids");
 		param.put("table", "pt_userinfo");
 		param.put("condition", UserInfo.column_mobile);
-		String sql = getSqlByBeetl(BaseModel.sqlId_select, param);
-		int count = Db.queryLong(sql, mobile).intValue();
-		return count;
+		String sql = getSqlByBeetl("platform.baseModel.select", param);
+		UserInfo userInfo = UserInfo.dao.findFirst(sql, mobile);
+		if(userInfo == null){
+			return true;
+		}else{
+			if(userInfoIds != null && userInfo.getStr(UserInfo.column_ids).equals(userInfoIds)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
