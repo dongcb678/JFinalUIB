@@ -7,21 +7,32 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/c3p0-0.9.1.2.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/freemarker-2.3.20.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.asm-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.beans-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.context-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.core-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.expression-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/org.springframework.org.apache.commons.logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/velocity-1.7-dep.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jfinal/velocity-1.7.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.el-3.0.0.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-api-2.3.1.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/servlet-api-3.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/javax.servlet.jsp-2.3.2.jar"/>
-	<classpathentry kind="lib" path="doc/buildJar/jetty9/jetty-all-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/javax.el-3.0.0.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/javax.servlet.jsp-2.3.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/javax.servlet.jsp-api-2.3.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/javax.servlet.jsp.jstl-1.2.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/jetty-all-9.2.12.v20150709.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/jetty-jsp-9.2.12.v20150709.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/jetty-jsp-jdt-2.3.3.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.apache.taglibs.taglibs-standard-impl-1.2.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.apache.taglibs.taglibs-standard-spec-1.2.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.eclipse.jdt.core-3.8.2.v20130121.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.eclipse.jetty.apache-jsp-9.2.12.v20150709.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.eclipse.jetty.orbit.javax.servlet.jsp.jstl-1.2.0.v201105211821.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.eclipse.jetty.orbit.org.eclipse.jdt.core-3.8.2.v20130121.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.mortbay.jasper.apache-el-8.0.9.M3.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.mortbay.jasper.apache-jsp-8.0.9.M3.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/servlet-api-3.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/freemarker-2.3.20.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/org.springframework.asm-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/org.springframework.beans-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/org.springframework.context-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/org.springframework.core-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/org.springframework.expression-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/org.springframework.org.apache.commons.logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/velocity-1.7-dep.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal19/velocity-1.7.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
