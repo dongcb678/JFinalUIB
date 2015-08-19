@@ -19,10 +19,10 @@ public class ControllerPlugin implements IPlugin {
 
     protected final Logger log = Logger.getLogger(getClass());
     
-    private Routes me;
+    private Routes routes;
 
-	public ControllerPlugin(Routes me){
-		this.me = me;
+	public ControllerPlugin(Routes routes){
+		this.routes = routes;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -55,7 +55,7 @@ public class ControllerPlugin implements IPlugin {
 					continue;
 				}
 				// 注册映射
-				me.add(controllerKey, controller);
+				routes.add(controllerKey, controller);
 				log.debug("Controller注册： controller = " + controller + ", controllerKey = " + controllerKey);
 			}
 		}

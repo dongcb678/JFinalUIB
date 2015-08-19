@@ -45,13 +45,19 @@ public class LoginService extends BaseService {
 		param.put("table", "pt_user");
 		param.put("condition", User.column_username);
 		String sql = getSqlByBeetl("platform.baseModel.select", param);
-		User user = User.dao.findFirst(sql, userName);
-		if(user == null){
+		List<User> list = User.dao.find(sql, userName);
+		int size = list.size();
+		if(size == 0){
 			return true;
-		}else{
+		}
+		if(size == 1){
+			User user = list.get(0);
 			if(userIds != null && user.getStr(UserInfo.column_ids).equals(userIds)){
 				return true;
 			}
+		}
+		if(size > 1){
+			return false;
 		}
 		return false;
 	}
@@ -64,20 +70,7 @@ public class LoginService extends BaseService {
 	 * 描述：新增用户时userInfoIds为空，修改用户时userInfoIds传值
 	 */
 	public boolean valiMailBox(String userInfoIds, String mailBox){
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("column", "ids");
-		param.put("table", "pt_userinfo");
-		param.put("condition", UserInfo.column_email);
-		String sql = getSqlByBeetl("platform.baseModel.select", param);
-		UserInfo userInfo = UserInfo.dao.findFirst(sql, mailBox);
-		if(userInfo == null){
-			return true;
-		}else{
-			if(userInfoIds != null && userInfo.getStr(UserInfo.column_ids).equals(userInfoIds)){
-				return true;
-			}
-		}
-		return false;
+		return valiByUserInfo(userInfoIds, UserInfo.column_email, mailBox);
 	}
 
 	/**
@@ -88,20 +81,7 @@ public class LoginService extends BaseService {
 	 * 描述：新增用户时userInfoIds为空，修改用户时userInfoIds传值
 	 */
 	public boolean valiIdcard(String userInfoIds, String idcard){
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("column", "ids");
-		param.put("table", "pt_userinfo");
-		param.put("condition", UserInfo.column_idcard);
-		String sql = getSqlByBeetl("platform.baseModel.select", param);
-		UserInfo userInfo = UserInfo.dao.findFirst(sql, idcard);
-		if(userInfo == null){
-			return true;
-		}else{
-			if(userInfoIds != null && userInfo.getStr(UserInfo.column_ids).equals(userInfoIds)){
-				return true;
-			}
-		}
-		return false;
+		return valiByUserInfo(userInfoIds, UserInfo.column_idcard, idcard);
 	}
 
 	/**
@@ -112,18 +92,35 @@ public class LoginService extends BaseService {
 	 * 描述：新增用户时userInfoIds为空，修改用户时userInfoIds传值
 	 */
 	public boolean valiMobile(String userInfoIds, String mobile){
+		return valiByUserInfo(userInfoIds, UserInfo.column_mobile, mobile);
+	}
+	
+	/**
+	 * 验证UserInfo表中的某一列是否唯一可用
+	 * @param userInfoIds
+	 * @param condition
+	 * @param value
+	 * @return
+	 */
+	private boolean valiByUserInfo(String userInfoIds, String condition, String value){
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("column", "ids");
 		param.put("table", "pt_userinfo");
-		param.put("condition", UserInfo.column_mobile);
+		param.put("condition", condition);
 		String sql = getSqlByBeetl("platform.baseModel.select", param);
-		UserInfo userInfo = UserInfo.dao.findFirst(sql, mobile);
-		if(userInfo == null){
+		List<UserInfo> list = UserInfo.dao.find(sql, value);
+		int size = list.size();
+		if(size == 0){
 			return true;
-		}else{
+		}
+		if(size == 1){
+			UserInfo userInfo = list.get(0);
 			if(userInfoIds != null && userInfo.getStr(UserInfo.column_ids).equals(userInfoIds)){
 				return true;
 			}
+		}
+		if(size > 1){
+			return false;
 		}
 		return false;
 	}

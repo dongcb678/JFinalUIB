@@ -61,19 +61,19 @@ public class JfinalConfig extends JFinalConfig {
 	/**
 	 * 配置常量
 	 */
-	public void configConstant(Constants me) {
+	public void configConstant(Constants constants) {
 		log.info("configConstant 缓存 properties");
 		new PropertiesPlugin(loadPropertyFile("init.properties")).start();
 
 		log.info("configConstant 设置字符集");
-		me.setEncoding(ToolString.encoding); 
+		constants.setEncoding(ToolString.encoding); 
 
 		log.info("configConstant 设置是否开发模式");
-		me.setDevMode(getPropertyToBoolean(ConstantInit.config_devMode, false));
+		constants.setDevMode(getPropertyToBoolean(ConstantInit.config_devMode, false));
 		//me.setViewType(ViewType.JSP);//设置视图类型为Jsp，否则默认为FreeMarker
 
 		log.info("configConstant 视图Beetl设置");
-		me.setMainRenderFactory(new MyBeetlRenderFactory()); // BeetlRenderFactory( new WebAppResourceLoader(PathKit.getWebRootPath() + "") )
+		constants.setMainRenderFactory(new MyBeetlRenderFactory()); // BeetlRenderFactory( new WebAppResourceLoader(PathKit.getWebRootPath() + "") )
 		
 		// 修正Weblogic 11g下beetl web路径获取不正确的bug，Configuration.defaultConfiguration() 会抛出IO异常
 //		try {
@@ -95,22 +95,22 @@ public class JfinalConfig extends JFinalConfig {
 		groupTemplate.registerFormat("dateFormat", new DateFormat());
 		
 		log.info("configConstant 视图error page设置");
-		me.setError404View("/common/404.html");
-		me.setError500View("/common/500.html");
+		constants.setError404View("/common/404.html");
+		constants.setError500View("/common/500.html");
 	}
 	
 	/**
 	 * 配置路由
 	 */
-	public void configRoute(Routes me) { 
+	public void configRoute(Routes routes) { 
 		log.info("configRoute 路由扫描注册");
-		new ControllerPlugin(me).start();
+		new ControllerPlugin(routes).start();
 	}
 	
 	/**
 	 * 配置插件
 	 */
-	public void configPlugin(Plugins me) {
+	public void configPlugin(Plugins plugins) {
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
 		DruidPlugin druidPlugin = new DruidPlugin(
 				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_jdbcUrl), 
@@ -159,57 +159,57 @@ public class JfinalConfig extends JFinalConfig {
 		}
 
 		log.info("configPlugin 添加druidPlugin插件");
-		me.add(druidPlugin); // 多数据源继续添加
+		plugins.add(druidPlugin); // 多数据源继续添加
 		
 		log.info("configPlugin 表扫描注册");
 		Map<String, ActiveRecordPlugin> arpMap = new HashMap<String, ActiveRecordPlugin>();
 		arpMap.put(ConstantInit.db_dataSource_main, arpMain); // 多数据源继续添加
 		new TablePlugin(arpMap).start();
-		me.add(arpMain); // 多数据源继续添加
+		plugins.add(arpMain); // 多数据源继续添加
 
 		log.info("I18NPlugin 国际化键值对加载");
-		me.add(new I18NPlugin());
+		plugins.add(new I18NPlugin());
 		
 		log.info("EhCachePlugin EhCache缓存");
-		me.add(new EhCachePlugin());
+		plugins.add(new EhCachePlugin());
 
 		log.info("SqlXmlPlugin 解析并缓存 xml sql");
-		me.add(new SqlXmlPlugin());
+		plugins.add(new SqlXmlPlugin());
 		
 		log.info("afterJFinalStart 缓存参数");
-		me.add(new ParamInitPlugin());
+		plugins.add(new ParamInitPlugin());
 		
 		log.info("afterJFinalStart 配置文件上传命名策略插件");
-		me.add(new FileRenamePlugin());
+		plugins.add(new FileRenamePlugin());
 		
 	}
 
 	/**
 	 * 配置全局拦截器
 	 */
-	public void configInterceptor(Interceptors me) {
+	public void configInterceptor(Interceptors interceptors) {
 		//log.info("configInterceptor 支持使用session");
 		//me.add(new SessionInViewInterceptor());
 		
 		log.info("configInterceptor 权限认证拦截器");
-		me.add(new AuthInterceptor());
+		interceptors.add(new AuthInterceptor());
 		
 		log.info("configInterceptor 参数封装拦截器");
-		me.add(new ParamPkgInterceptor());
+		interceptors.add(new ParamPkgInterceptor());
 		
 		// 配置开启事物规则
-		me.add(new TxByRegex(".*save.*"));
-		me.add(new TxByRegex(".*update.*"));
-		me.add(new TxByRegex(".*delete.*"));
-		me.add(new TxByActionKeys("/jf/wx/message", "/jf/wx/message/index"));
+		interceptors.add(new TxByRegex(".*save.*"));
+		interceptors.add(new TxByRegex(".*update.*"));
+		interceptors.add(new TxByRegex(".*delete.*"));
+		interceptors.add(new TxByActionKeys("/jf/wx/message", "/jf/wx/message/index"));
 	}
 	
 	/**
 	 * 配置处理器
 	 */
-	public void configHandler(Handlers me) {
+	public void configHandler(Handlers handlers) {
 		log.info("configHandler 全局配置处理器，主要是记录日志和request域值处理");
-		me.add(new GlobalHandler());
+		handlers.add(new GlobalHandler());
 	}
 	
 	/**
