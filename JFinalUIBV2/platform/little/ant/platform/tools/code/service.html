@@ -2,7 +2,8 @@ package ${package};
 
 import org.apache.log4j.Logger;
 
-import little.ant.platform.annotation.MyTxProxy;
+import com.jfinal.aop.Enhancer;
+
 import little.ant.platform.service.BaseService;
 import little.ant.platform.constant.ConstantInit;
 import ${basePackage}.model.${className};
@@ -12,6 +13,6 @@ public class ${className}Service extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(${className}Service.class);
 	
-	public static final ${className}Service service = MyTxProxy.newProxy(${className}Service.class);
+	public static final ${className}Service service = Enhancer.enhance(${className}Service.class, Tx.class);
 	
 }
