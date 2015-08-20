@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.TableMapping;
 /**
  * ModelInjector
  */
-final class ModelInjector {
+public final class ModelInjector {
 	
 	@SuppressWarnings("unchecked")
 	public static <T> T inject(Class<?> modelClass, HttpServletRequest request, boolean skipConvertError) {

@@ -21,6 +21,7 @@ import little.ant.platform.model.Syslog;
 import little.ant.platform.model.User;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.service.BaseService;
+import little.ant.platform.tools.ToolModelInjector;
 import little.ant.platform.tools.ToolWeb;
 
 /**
@@ -161,6 +162,25 @@ public abstract class BaseController extends Controller {
 		super.renderFile(file);
 	}
 
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @return
+	 */
+	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass){
+		return ToolModelInjector.injectModels(getRequest(), modelClass);
+	}
+	
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @param prefix
+	 * @return
+	 */
+	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix){
+		return ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
+	}
+	
 	/**
 	 * 获取checkbox值，数组
 	 * @param name
