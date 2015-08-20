@@ -18,6 +18,7 @@ import little.ant.platform.tools.ToolString;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Before;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -279,6 +280,7 @@ public class BaseService {
 	 * @param table
 	 * @param ids 逗号分隔的列值
 	 */
+	@Before(Tx.class)
 	public void delete(String table, String ids){
 		String sqlIn = sqlIn(ids);
 
