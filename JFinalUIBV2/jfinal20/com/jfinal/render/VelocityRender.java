@@ -18,18 +18,20 @@ package com.jfinal.render;
 
 import java.io.PrintWriter;
 import java.util.Enumeration;
-import java.util.Map.Entry;
 import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
+
 import javax.servlet.ServletContext;
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import little.ant.platform.handler.GlobalHandler;
+import little.ant.platform.constant.ConstantWebContext;
 
 /**
  * VelocityRender.
@@ -136,7 +138,7 @@ public class VelocityRender extends Render {
 		long end = System.currentTimeMillis();
 		long renderTime = end - start;
 
-		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
+		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 }
 

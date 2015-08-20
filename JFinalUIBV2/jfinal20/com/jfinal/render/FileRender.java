@@ -23,12 +23,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StrKit;
 
-import little.ant.platform.handler.GlobalHandler;
+import little.ant.platform.constant.ConstantWebContext;
 
 /**
  * FileRender.
@@ -80,7 +82,7 @@ public class FileRender extends Render {
 		long end = System.currentTimeMillis();
 		long renderTime = end - start;
 
-		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
+		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 	
 	private String encodeFileName(String fileName) {

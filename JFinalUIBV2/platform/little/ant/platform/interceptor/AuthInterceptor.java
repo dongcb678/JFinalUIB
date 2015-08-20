@@ -16,7 +16,6 @@ import little.ant.platform.constant.ConstantAuth;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.constant.ConstantWebContext;
 import little.ant.platform.controller.BaseController;
-import little.ant.platform.handler.GlobalHandler;
 import little.ant.platform.model.Group;
 import little.ant.platform.model.Operator;
 import little.ant.platform.model.Role;
@@ -46,7 +45,7 @@ public class AuthInterceptor implements Interceptor {
 		HttpServletResponse response = contro.getResponse();
 
 		log.info("获取reqSysLog!");
-		Syslog reqSysLog = contro.getAttr(GlobalHandler.reqSysLogKey);
+		Syslog reqSysLog = contro.getAttr(ConstantWebContext.reqSysLogKey);
 		contro.setReqSysLog(reqSysLog);
 
 		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");

@@ -18,7 +18,7 @@ package com.jfinal.render;
 
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.platform.handler.GlobalHandler;
+import little.ant.platform.constant.ConstantWebContext;
 
 /**
  * Redirect301Render.
@@ -59,6 +59,6 @@ public class Redirect301Render extends Render {
 		long end = System.currentTimeMillis();
 		long renderTime = end - start;
 
-		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
+		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 }

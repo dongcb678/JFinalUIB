@@ -95,6 +95,15 @@ public interface ConstantWebContext {
 	 */
 	public static final String cookie_token = "token";
 
+	/**
+	 * 当前范文日志request key
+	 */
+	public static final String reqSysLogKey = "reqSysLog";
+
+	/**
+	 * render耗时计算key
+	 */
+	public static final String renderTimeKey = "renderTime";
 	
 	
 }

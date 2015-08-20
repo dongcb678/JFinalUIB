@@ -30,7 +30,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
-import little.ant.platform.handler.GlobalHandler;
+import little.ant.platform.constant.ConstantWebContext;
 
 /**
  * FreeMarkerRender.
@@ -141,7 +141,7 @@ public class FreeMarkerRender extends Render {
 		long end = System.currentTimeMillis();
 		long renderTime = end - start;
 
-		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
+		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 	
 }

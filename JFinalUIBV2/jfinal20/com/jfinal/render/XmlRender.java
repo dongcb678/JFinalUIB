@@ -20,8 +20,9 @@ import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+
 import freemarker.template.Template;
-import little.ant.platform.handler.GlobalHandler;
+import little.ant.platform.constant.ConstantWebContext;
 
 /**
  * XmlRender use FreeMarker
@@ -62,7 +63,7 @@ public class XmlRender extends FreeMarkerRender {
 		long end = System.currentTimeMillis();
 		long renderTime = end - start;
 
-		request.setAttribute(GlobalHandler.renderTimeKey, renderTime);
+		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 	
 }
