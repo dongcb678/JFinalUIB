@@ -152,11 +152,11 @@ public class AuthInterceptor implements Interceptor {
 		} catch (Exception e) {
 			String expMessage = e.getMessage();
 			// 开发模式下的异常信息
-			//if(Boolean.parseBoolean((String) PropertiesPlugin.getParamMapValue(ConstantInit.config_devMode))){
+			if(Boolean.parseBoolean((String) PropertiesPlugin.getParamMapValue(ConstantInit.config_devMode))){
 				ByteArrayOutputStream buf = new ByteArrayOutputStream();
 				e.printStackTrace(new PrintWriter(buf, true));
 				expMessage = buf.toString();
-			//}
+			}
 			
 			log.error("业务逻辑代码遇到异常时保存日志!");
 			reqSysLog.set(Syslog.column_status, "0");// 失败
@@ -164,6 +164,12 @@ public class AuthInterceptor implements Interceptor {
 			reqSysLog.set(Syslog.column_cause, "3");// 业务代码异常
 
 			log.error("返回失败提示页面!Exception = " + e.getMessage());
+			
+//			if(e instanceof RuntimeException){
+//				expMessage = "自定义异常描述11" + expMessage;
+//			} else if(e instanceof RuntimeException){
+//				expMessage = "自定义异常描述22" + expMessage;
+//			}
 
 			toInfoJsp(contro, ConstantAuth.auth_exception, "业务逻辑代码遇到异常Exception = " + expMessage);
 
