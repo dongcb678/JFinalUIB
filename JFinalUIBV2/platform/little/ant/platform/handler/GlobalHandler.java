@@ -18,6 +18,7 @@ import little.ant.platform.plugin.I18NPlugin;
 import little.ant.platform.plugin.PropertiesPlugin;
 import little.ant.platform.thread.ThreadSysLog;
 import little.ant.platform.tools.ToolDateTime;
+import little.ant.platform.tools.ToolRandoms;
 import little.ant.platform.tools.ToolWeb;
 
 /**
@@ -40,6 +41,9 @@ public class GlobalHandler extends Handler {
 		log.info("设置 web 路径");
 		String cxt = ToolWeb.getContextPath(request);
 		request.setAttribute(ConstantWebContext.request_cxt, cxt);
+
+		log.info("request 随机分配一个请求id");
+		request.setAttribute(ConstantWebContext.request_id, ToolRandoms.getUuid(true));
 		
 		log.debug("request cookie 处理");
 		Map<String, Cookie> cookieMap = ToolWeb.readCookieMap(request);

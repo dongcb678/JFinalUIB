@@ -11,6 +11,11 @@ public interface ConstantWebContext {
 	public static final String request_cxt = "cxt";
 
 	/**
+	 * request 请求id
+	 */
+	public static final String request_id = "request_id";
+
+	/**
 	 * request cookie
 	 */
 	public static final String request_cookieMap = "cookieMap";
