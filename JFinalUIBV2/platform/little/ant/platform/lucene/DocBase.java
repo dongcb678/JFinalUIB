@@ -27,8 +27,7 @@ import org.apache.lucene.search.highlight.Scorer;
 import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.store.Directory;
-import org.lionsoul.jcseg.analyzer.JcsegAnalyzer5X;
-import org.lionsoul.jcseg.core.JcsegTaskConfig;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Table;
@@ -59,7 +58,7 @@ public abstract class DocBase implements Runnable {
 	/**
 	 * IKAnalyzer 分词器
 	 */
-	//protected static final Analyzer analyzer = new IKAnalyzer();//分词器
+	protected static final Analyzer analyzer = new IKAnalyzer();//分词器
 	
 	/**
 	 * Jcseg 分词器
@@ -71,7 +70,7 @@ public abstract class DocBase implements Runnable {
 	 * 特点：只使用了最大化过滤算法，其他的同复杂模式。
 	 * 
 	*/
-	protected static final Analyzer analyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
+	//protected static final Analyzer analyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
 
 	/**
 	 * 获取索引路径
