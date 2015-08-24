@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 
+import little.ant.platform.constant.ConstantWebContext;
 import little.ant.platform.interceptor.AuthInterceptor;
 import little.ant.platform.model.Syslog;
 
@@ -28,8 +29,8 @@ public class AuthUrl implements Function {
 		String userIds = null;
 		try {
 			url = (String) arg[0]; 
-			Syslog reqSysLog = (Syslog) context.getGlobal("reqSysLog");
-			userIds = reqSysLog.getStr("userids");
+			Syslog reqSysLog = (Syslog) context.getGlobal(ConstantWebContext.reqSysLogKey);
+			userIds = reqSysLog.getStr(Syslog.column_userids);
 		} catch (Exception e) {
 			log.error("权限标签验证，获取参数异常：" + e.getMessage());
 			return false;
