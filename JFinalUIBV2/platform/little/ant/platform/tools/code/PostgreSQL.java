@@ -35,16 +35,16 @@ public class PostgreSQL extends Base {
 				String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
 				
 //				// 1.生成sql文件
-//				base.sql(classNameSmall, tableName); 
+				base.sql(classNameSmall, tableName); 
 				
 				// 2.生成model
-//				base.model(className, classNameSmall, dataSource, tableName); 
+				base.model(className, classNameSmall, dataSource, tableName); 
 				
 //				// 6.生成DTO
 //				base.dto(base, className, classNameSmall, dataSource, tableName); 
-//				
+				
 //				// 是否生成Controller相关
-//				if(generController.equals("0")){
+				if(generController.equals("0")){
 					// 3.生成validator
 					base.validator(className, classNameSmall); 
 					
@@ -53,7 +53,7 @@ public class PostgreSQL extends Base {
 					
 					// 5.生成service
 					base.service(className, classNameSmall); 
-//				}
+				}
 				
 				// 生成视图文件
 //				base.form(classNameSmall, tableName);

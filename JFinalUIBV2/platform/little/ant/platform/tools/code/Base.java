@@ -24,65 +24,8 @@ public abstract class Base {
 	 * 二维数组说明：表名、数据源、是否生成Controller相关、类名（不包含.java）
 	 */
 	public static String[][] tableArr = {
-//			{"wx_aa", "DictKeys.db_dataSource_main", "0", "Aa"}, // 生成.sql.xml文件、Model类、Service类、validator类、Controller类
-//			{"wx_bb", "DictKeys.db_dataSource_main", "0", "Bb"},
-//			{"wx_cc", "DictKeys.db_dataSource_main", "1", "Cc"} // 生成.sql.xml文件、Model类
-			
-//			{"pt_department", "DictKeys.db_dataSource_main", "0", "Department"},
-//			{"pt_dict", "DictKeys.db_dataSource_main", "0", "Dict"},
-//			{"pt_group", "DictKeys.db_dataSource_main", "0", "Group"},
-//			{"pt_menu", "DictKeys.db_dataSource_main", "0", "Menu"},
-//			{"pt_module", "DictKeys.db_dataSource_main", "0", "Module"},
-//			{"pt_operator", "DictKeys.db_dataSource_main", "0", "Operator"},
-//			{"pt_param", "DictKeys.db_dataSource_main", "0", "Param"},
-//			{"pt_resources", "DictKeys.db_dataSource_main", "0", "Resources"},
-//			{"pt_role", "DictKeys.db_dataSource_main", "0", "Role"},
-//			{"pt_station", "DictKeys.db_dataSource_main", "0", "Station"},
-//			{"pt_syslog", "DictKeys.db_dataSource_main", "0", "Syslog"},
-//			{"pt_systems", "DictKeys.db_dataSource_main", "0", "Systems"},
-//			{"pt_upload", "DictKeys.db_dataSource_main", "0", "Upload"},
-//			{"pt_user", "DictKeys.db_dataSource_main", "0", "User"},
-//			{"pt_userinfo", "DictKeys.db_dataSource_main", "0", "UserInfo"}
-		
-//			{"blog_article", "DictKeys.db_dataSource_main", "0", "Article"},
-//			{"blog_articlecomment", "DictKeys.db_dataSource_main", "0", "ArticleComment"},
-//			{"blog_circle", "DictKeys.db_dataSource_main", "0", "Circle"},
-//			{"blog_circleuser", "DictKeys.db_dataSource_main", "0", "Circleuser"},
-//			{"blog_favorite", "DictKeys.db_dataSource_main", "0", "Favorite"},
-//			{"blog_inform", "DictKeys.db_dataSource_main", "0", "Inform"},
-//			{"blog_link", "DictKeys.db_dataSource_main", "0", "Link"},
-//			{"blog_message", "DictKeys.db_dataSource_main", "0", "Message"},
-//			{"blog_move", "DictKeys.db_dataSource_main", "0", "Move"},
-//			{"blog_movecomment", "DictKeys.db_dataSource_main", "0", "MoveComment"},
-//			{"blog_newsdeliver", "DictKeys.db_dataSource_main", "0", "NewsDeliver"},
-//			{"blog_praise", "DictKeys.db_dataSource_main", "0", "Praise"},
-//			{"blog_trample", "DictKeys.db_dataSource_main", "0", "Trample"},
-//			{"blog_type", "DictKeys.db_dataSource_main", "0", "Type"},
-			
-//			{"cms_announcement", "DictKeys.db_dataSource_main", "0", "Announcement"},
-//			{"cms_answers", "DictKeys.db_dataSource_main", "0", "Answers"},
-//			{"cms_column", "DictKeys.db_dataSource_main", "0", "Column"},
-//			{"cms_comment", "DictKeys.db_dataSource_main", "0", "Comment"},
-//			{"cms_content", "DictKeys.db_dataSource_main", "0", "Content"},
-//			{"cms_download", "DictKeys.db_dataSource_main", "0", "Download"},
-//			{"cms_job", "DictKeys.db_dataSource_main", "0", "Job"},
-//			{"cms_library", "DictKeys.db_dataSource_main", "0", "Library"},
-//			{"cms_photogallery", "DictKeys.db_dataSource_main", "0", "Photogallery"},
-//			{"cms_photogalleryitem", "DictKeys.db_dataSource_main", "0", "PhotogalleryItem"},
-//			{"cms_questions", "DictKeys.db_dataSource_main", "0", "Questions"},
-//			{"cms_template", "DictKeys.db_dataSource_main", "0", "Template"},
-//			{"cms_vote", "DictKeys.db_dataSource_main", "0", "Vote"},
-//			{"cms_voteitem", "DictKeys.db_dataSource_main", "0", "VoteItem"},
-//			{"cms_yellowpage", "DictKeys.db_dataSource_main", "0", "YellowPage"},
-			
-//			{"common_accessstatistics", "DictKeys.db_dataSource_main", "0", "AccessStatistics"},
-//			{"common_ad", "DictKeys.db_dataSource_main", "0", "Ad"},
-//			{"common_ipblacklist", "DictKeys.db_dataSource_main", "0", "IpBlacklist"},
-//			{"common_link", "DictKeys.db_dataSource_main", "0", "Link"},
-//			{"common_location", "DictKeys.db_dataSource_main", "0", "Location"},
-//			{"common_sensitiveword", "DictKeys.db_dataSource_main", "0", "SensitiveWord"}
-			
-		};
+		{"test_blog", "ConstantInit.db_dataSource_main", "0", "TestBlog"}
+	};
 	
 	/**
 	 * 生成的包和类所在的源码根目录，比如src或者是weiXin
@@ -95,7 +38,7 @@ public abstract class Base {
 	 * 	platform所在的包就是little.ant.platform
 	 * 	weixin所在的包就是little.ant.weixin
 	 */
-	public static String packageBase = "little.ant.common.tourist";
+	public static String packageBase = "little.ant.test";
 	
 	/**
 	 * controller基础路径，例如
@@ -106,7 +49,7 @@ public abstract class Base {
 	 * /platform/user/add.jsp 中的 platform
 	 * /weiXin/user/list.jsp 中的 weiXin
 	 */
-	public static String basePath = "common/tourist";
+	public static String basePath = "test";
 
 	/**
 	 * 获取表的所有字段名
