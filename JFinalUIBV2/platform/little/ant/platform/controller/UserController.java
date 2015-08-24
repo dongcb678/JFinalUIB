@@ -35,7 +35,7 @@ public class UserController extends BaseController {
 	}
 	
 	/**
-	 * 保存
+	 * 保存新增用户
 	 */
 	@Before(UserValidator.class)
 	public void save() {

@@ -84,7 +84,7 @@ public class AuthInterceptor implements Interceptor {
 			reqSysLog.set(Syslog.column_cause, "1");// URL不存在
 
 			log.info("返回失败提示页面!");
-			toInfoJsp(contro, ConstantAuth.auth_no_url, "权限认证过滤器检测：URI不存在");
+			toView(contro, ConstantAuth.auth_no_url, "权限认证过滤器检测：URI不存在");
 			return;
 		}
 
@@ -101,7 +101,7 @@ public class AuthInterceptor implements Interceptor {
 				reqSysLog.set(Syslog.column_description, "未登录");
 				reqSysLog.set(Syslog.column_cause, "2");// 2 未登录
 
-				toInfoJsp(contro, ConstantAuth.auth_no_login, "权限认证过滤器检测：未登录");
+				toView(contro, ConstantAuth.auth_no_login, "权限认证过滤器检测：未登录");
 				return;
 			}
 
@@ -113,7 +113,7 @@ public class AuthInterceptor implements Interceptor {
 				reqSysLog.set(Syslog.column_cause, "0");// 没有权限
 
 				log.info("返回失败提示页面!");
-				toInfoJsp(contro, ConstantAuth.auth_no_permissions, "权限验证失败，您没有操作权限");
+				toView(contro, ConstantAuth.auth_no_permissions, "权限验证失败，您没有操作权限");
 				return;
 			}
 		}
@@ -133,7 +133,7 @@ public class AuthInterceptor implements Interceptor {
 
 			} else if (tokenCookie.equals(tokenRequest)) {
 				log.info("表单重复提交!");
-				toInfoJsp(contro, ConstantAuth.auth_form, "请不要重复提交表单");
+				toView(contro, ConstantAuth.auth_form, "请不要重复提交表单");
 				return;
 
 			} else {
@@ -171,34 +171,30 @@ public class AuthInterceptor implements Interceptor {
 //				expMessage = "自定义异常描述22" + expMessage;
 //			}
 
-			toInfoJsp(contro, ConstantAuth.auth_exception, "业务逻辑代码遇到异常Exception = " + expMessage);
-
-		} finally {
-			// 
-		}
+			toView(contro, ConstantAuth.auth_exception, "业务逻辑代码遇到异常Exception = " + expMessage);
+		} 
 	}
 
 	/**
 	 * 提示信息展示页
-	 * 
 	 * @param contro
 	 * @param type
+	 * @param msg
 	 */
-	private void toInfoJsp(BaseController contro, String type, String msg) {
+	private void toView(BaseController contro, String type, String msg) {
 		if (type.equals(ConstantAuth.auth_no_login)) {// 未登录处理
 			contro.redirect("/jf/platform/login");
 			return;
 		}
 
-		String referer = contro.getRequest().getHeader("X-Requested-With");
-		String toPage = "/common/msgAjax.html";
-		if (null == referer || referer.isEmpty()) {
-			toPage = "/common/msg.html";
-		}
-
-		contro.setAttr("referer", referer);
 		contro.setAttr("msg", msg);
-		contro.render(toPage);
+		
+		String isAjax = contro.getRequest().getHeader("X-Requested-With");
+		if(isAjax != null && isAjax.equalsIgnoreCase("XMLHttpRequest")){
+			contro.render("/common/msgAjax.html");
+		}else{
+			contro.render("/common/msg.html");
+		}
 	}
 
 	/**

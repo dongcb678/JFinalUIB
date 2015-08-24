@@ -11,7 +11,7 @@ import java.util.List;
 import little.ant.platform.tools.ToolString;
 
 /**
- * 定制PG下的代码生成
+ * 定制PostgreSQL下的代码生成
  * @author 董华健
  */
 public class PostgreSQL extends Base {
@@ -34,16 +34,16 @@ public class PostgreSQL extends Base {
 				// 类名首字母小写
 				String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
 				
-//				// 1.生成sql文件
+				// 1.生成sql文件
 				base.sql(classNameSmall, tableName); 
 				
 				// 2.生成model
 				base.model(className, classNameSmall, dataSource, tableName); 
 				
-//				// 6.生成DTO
-//				base.dto(base, className, classNameSmall, dataSource, tableName); 
+				// 6.生成DTO
+				//base.dto(base, className, classNameSmall, dataSource, tableName); 
 				
-//				// 是否生成Controller相关
+				// 是否生成Controller相关
 				if(generController.equals("0")){
 					// 3.生成validator
 					base.validator(className, classNameSmall); 
@@ -56,8 +56,8 @@ public class PostgreSQL extends Base {
 				}
 				
 				// 生成视图文件
-//				base.form(classNameSmall, tableName);
-//				base.view(classNameSmall, tableName);
+				//base.form(classNameSmall, tableName);
+				//base.view(classNameSmall, tableName);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
