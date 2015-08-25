@@ -9,7 +9,14 @@
         		test_blog
 			
 			where 1=1 
-				
+			
+			<% if(!isEmpty(title)){ %>
+					and title like #'%$title$%'#
+			<% } %>	
+			
+			<% if(!isEmpty(content)){ %>
+					and content like #'%$content$%'#
+			<% } %>	
     	]]>
 	</sql>
 	
