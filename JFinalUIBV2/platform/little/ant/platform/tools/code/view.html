@@ -26,9 +26,9 @@
 					
 					<% for(colunm in colunmList){ %>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">${colunmLP.index >= descList.~size ? "" : descList[colunmLP.index]!}</label>
+						<label class="col-sm-2 control-label">${colunm.column_desc} </label>
 						<div class="col-sm-7">
-							<input type="text" class="form-control" readonly="readonly" value="${classNameSmall}.${colunm}">
+							<input type="text" class="form-control" readonly="readonly" value="${classNameSmall}.${colunm.column_name}">
 						</div>
 					</div>
 					

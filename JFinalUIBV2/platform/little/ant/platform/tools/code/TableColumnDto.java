@@ -1,10 +1,10 @@
 package little.ant.platform.tools.code;
 
 /**
- * 列描述
+ * 数据库表对应的列描述
  * @author 董华健
  */
-public class ColumnDto {
+public class TableColumnDto {
 
 	private String table_name ; // 表名称
 	

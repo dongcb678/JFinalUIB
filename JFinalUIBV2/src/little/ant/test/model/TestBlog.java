@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "test_blog")
+@Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "test_blog", pkName = "ids")
 public class TestBlog extends BaseModel<TestBlog> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -34,13 +34,13 @@ public class TestBlog extends BaseModel<TestBlog> {
 	
 	/**
 	 * 字段描述：内容 
-	 * 字段类型：text  
+	 * 字段类型：text  长度：null
 	 */
 	public static final String column_content = "content";
 	
 	/**
 	 * 字段描述：创建时间 
-	 * 字段类型：timestamp with time zone  
+	 * 字段类型：timestamp with time zone  长度：null
 	 */
 	public static final String column_createtime = "createtime";
 	

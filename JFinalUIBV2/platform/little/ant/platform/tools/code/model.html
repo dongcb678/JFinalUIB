@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(dataSourceName = ${dataSource}, tableName = "${tableName}")
+@Table(${isEmpty(dataSource) ? "" : "dataSourceName = " + dataSource + ", "}tableName = "${tableName}"${isEmpty(pkName) ? "" : ", pkName = \"" + pkName + "\""})
 public class ${className} extends BaseModel<${className}> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

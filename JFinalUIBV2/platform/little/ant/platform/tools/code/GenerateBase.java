@@ -18,13 +18,18 @@ import org.beetl.core.BeetlKit;
  * 
  * @author 董华健
  */
-public abstract class Base {
+public abstract class GenerateBase {
 
 	/**
-	 * 二维数组说明：表名、数据源、是否生成Controller相关、类名（不包含.java）
+	 * 二维数组说明：
+	 * 
+	 * 数据源（默认可以是null）、
+	 * 表名、
+	 * 主键名（默认可以是null）、
+	 * 类名（不包含后缀.java）
 	 */
 	public static String[][] tableArr = {
-		{"test_blog", "ConstantInit.db_dataSource_main", "0", "TestBlog"}
+		{"ConstantInit.db_dataSource_main", "test_blog", "ids", "TestBlog"}
 	};
 	
 	/**
@@ -56,21 +61,14 @@ public abstract class Base {
 	 * @param tableName
 	 * @return
 	 */
-	public abstract List<ColumnDto> getColunm(String tableName);
-	
-	/**
-	 * 获取表描述和字段的描述
-	 * @param tableName
-	 * @return
-	 */
-	public abstract List<String> getDesc(String tableName);
+	public abstract List<TableColumnDto> getColunm(String tableName);
 	
 	/**
 	 * 根据数据库表列类型得到对应java数据类型
 	 * @param columnType
 	 * @return
 	 */
-	public abstract String getJavaDataType(String columnType);
+	public abstract String dbTypeToJava(String columnType);
 	
 	/**
 	 * 生成Model
@@ -78,14 +76,16 @@ public abstract class Base {
 	 * @param classNameSmall
 	 * @param dataSource
 	 * @param tableName
+	 * @param pkName
 	 */
-	public void model(String className, String classNameSmall, String dataSource, String tableName){
+	public void model(String className, String classNameSmall, String dataSource, String tableName, String pkName){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		String packages = packageBase + ".model";
 		paraMap.put("package", packages);
 		paraMap.put("className", className);
 		paraMap.put("dataSource", dataSource);
 		paraMap.put("tableName", tableName);
+		paraMap.put("pkName", pkName);
 		paraMap.put("namespace", basePath + "." + classNameSmall);
 
 		paraMap.put("colunmList", getColunm(tableName));
@@ -102,7 +102,7 @@ public abstract class Base {
 	 * @param dataSource
 	 * @param tableName
 	 */
-	public void dto(Base base, String className, String classNameSmall, String dataSource, String tableName){
+	public void dto(GenerateBase base, String className, String classNameSmall, String dataSource, String tableName){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		String packages = packageBase + ".dto";
 		paraMap.put("package", packages);
@@ -197,7 +197,6 @@ public abstract class Base {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("classNameSmall", classNameSmall);
 		paraMap.put("colunmList", getColunm(tableName));
-		paraMap.put("descList", getDesc(tableName));
 		
 		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + basePath + "/" + classNameSmall +"/form.html";
 		createFileByTemplete("form.html", paraMap, filePath);
@@ -212,7 +211,6 @@ public abstract class Base {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("classNameSmall", classNameSmall);
 		paraMap.put("colunmList", getColunm(tableName));
-		paraMap.put("descList", getDesc(tableName));
 		
 		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + basePath + "/" + classNameSmall +"/view.html";
 		createFileByTemplete("view.html", paraMap, filePath);
