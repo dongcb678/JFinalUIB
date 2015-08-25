@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 /**
  * ${colunmList[0].table_desc} model
- * @author 董华健
+ * @author 董华健  dongcb678@163.com
  */
 @SuppressWarnings("unused")
 @Table(${isEmpty(dataSource) ? "" : "dataSourceName = " + dataSource + ", "}tableName = "${tableName}"${isEmpty(pkName) ? "" : ", pkName = \"" + pkName + "\""})

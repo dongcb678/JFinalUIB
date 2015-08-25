@@ -31,46 +31,42 @@ public class GeneratePostgreSQL extends GenerateBase {
     	log.info("启动ConfigCore end ......");
     	
 		GenerateBase base = new GeneratePostgreSQL();
-		try {
-			for (int i = 0; i < tableArr.length; i++) {
-				// 数据源名称
-				String dataSource = tableArr[i][0]; 
-				// 表名
-				String tableName = tableArr[i][1]; 
-				// 主键
-				String pkName = tableArr[i][2]; 
-				// 类名
-				String className = tableArr[i][3]; 
-				// 类名首字母小写
-				String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
-				
-				// 1.生成sql文件
-				base.sql(classNameSmall, tableName); 
-				
-				// 2.生成model
-				base.model(className, classNameSmall, dataSource, tableName, pkName); 
-				
-				// 3.生成validator
-				base.validator(className, classNameSmall); 
-				
-				// 4.生成controller
-				base.controller(className, classNameSmall, tableName); 
-				
-				// 5.生成service
-				base.service(className, classNameSmall); 
+		for (int i = 0; i < tableArr.length; i++) {
+			// 数据源名称
+			String dataSource = tableArr[i][0]; 
+			// 表名
+			String tableName = tableArr[i][1]; 
+			// 主键
+			String pkName = tableArr[i][2]; 
+			// 类名
+			String className = tableArr[i][3]; 
+			// 类名首字母小写
+			String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
+			
+			// 1.生成sql文件
+			base.sql(classNameSmall, tableName); 
+			
+			// 2.生成model
+			base.model(className, classNameSmall, dataSource, tableName, pkName); 
+			
+			// 3.生成validator
+			base.validator(className, classNameSmall); 
+			
+			// 4.生成controller
+			base.controller(className, classNameSmall, tableName); 
+			
+			// 5.生成service
+			base.service(className, classNameSmall); 
 
-				// 6.生成DTO，还没有处理数据库字段类型到java数据类型的对应转换
-				//base.dto(base, className, classNameSmall, dataSource, tableName); 
-				
-				// 7.生成视图文件
-				//base.form(classNameSmall, tableName);
-				//base.view(classNameSmall, tableName);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			System.exit(0);
+			// 6.生成DTO，还没有处理数据库字段类型到java数据类型的对应转换
+			//base.dto(base, className, classNameSmall, dataSource, tableName); 
+			
+			// 7.生成视图文件
+			//base.form(classNameSmall, tableName);
+			//base.view(classNameSmall, tableName);
 		}
+		
+		System.exit(0);
 	}
 
 	@Override
