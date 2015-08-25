@@ -72,9 +72,9 @@ public abstract class Dialect {
 	
 	public void fillStatement(PreparedStatement pst, List<Object> paras) throws SQLException {
 		int size = paras.size();
-		boolean isShowSql = DbKit.getConfig().isShowSql();
-
-		StringBuilder sb = null;
+		boolean isShowSql = DbKit.getConfig().isShowSql(); // 是否显示sql
+	
+		StringBuilder sb = null; // 拼接sql预处理参数
 		if(isShowSql){
 			sb = new StringBuilder();
 			sb.append("\r\n Sql param: ").append((size == 0 ? " empty " :  size)).append(" \r\n ");
@@ -84,7 +84,7 @@ public abstract class Dialect {
 			int paramIndex = i + 1;
 			Object paramObject = paras.get(i);
 			pst.setObject(paramIndex, paramObject);
-
+	
 			if(isShowSql){
 				sb.append("param index: ").append(paramIndex)
 				.append("   param type: ").append((null != paramObject ? paramObject.getClass().getSimpleName() : "null"))
@@ -92,7 +92,7 @@ public abstract class Dialect {
 			}
 		}
 		
-		if(isShowSql){
+		if(isShowSql){ // 如果显示sql，log4j输出sql预处理参数
 			log.info(sb.toString());
 		}
 	}
