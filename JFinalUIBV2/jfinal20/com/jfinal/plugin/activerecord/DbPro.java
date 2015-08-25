@@ -437,7 +437,19 @@ public class DbPro {
 		String defaultPrimaryKey = config.dialect.getDefaultPrimaryKey();
 		return deleteById(tableName, defaultPrimaryKey, record.get(defaultPrimaryKey));
 	}
-	
+
+	/**
+	 * 分页
+	 * @param config			Jfinal Config对象
+	 * @param conn				数据库连接实例
+	 * @param pageNumber		查询第几页
+	 * @param pageSize			每页显示多少条
+	 * @param select			select语句
+	 * @param sqlExceptSelect	from语句
+	 * @param paras				sql预处理参数值
+	 * @return
+	 * @throws SQLException
+	 */
 	Page<Record> paginate(Config config, Connection conn, int pageNumber, int pageSize, String select, String sqlExceptSelect, Object... paras) throws SQLException {
 		if (pageNumber < 1 || pageSize < 1)
 			throw new ActiveRecordException("pageNumber and pageSize must be more than 0");
@@ -447,6 +459,7 @@ public class DbPro {
 		
 		long totalRow = 0;
 		int totalPage = 0;
+		// 这里是固定的 "select count(*) "，不能支持distinct
 		List result = query(config, conn, "select count(*) " + DbKit.replaceFormatSqlOrderBy(sqlExceptSelect), paras);
 		int size = result.size();
 		if (size == 1)
@@ -472,7 +485,13 @@ public class DbPro {
 	}
 
 	/**
-	 * @see #paginate(String, int, int, String, String, Object...)
+	 * 分页
+	 * @param pageNumber		查询第几页
+	 * @param pageSize			每页显示多少条
+	 * @param select			select语句
+	 * @param sqlExceptSelect	from语句
+	 * @param paras				sql预处理参数值
+	 * @return
 	 */
 	public Page<Record> paginate(int pageNumber, int pageSize, String select, String sqlExceptSelect, Object... paras) {
 		Connection conn = null;
@@ -495,14 +514,14 @@ public class DbPro {
 
 	/**
 	 * 处理distinct分页支持
-	 * @param config
-	 * @param conn
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param selectColumn
-	 * @param selectCount
-	 * @param sqlExceptSelect
-	 * @param paras
+	 * @param config			Jfinal Config对象
+	 * @param conn				数据库连接实例
+	 * @param pageNumber		查询第几页
+	 * @param pageSize			每页显示多少条
+	 * @param selectColumn		select语句
+	 * @param selectCount		select distinct语句
+	 * @param sqlExceptSelect	from语句
+	 * @param paras				sql预处理参数值
 	 * @return
 	 * @throws SQLException
 	 */
@@ -538,11 +557,12 @@ public class DbPro {
 
 	/**
 	 * 处理distinct分页支持
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param selectColumn
-	 * @param sqlExceptSelect
-	 * @param paras
+	 * @param pageNumber		查询第几页
+	 * @param pageSize			每页显示多少条
+	 * @param selectColumn		select语句
+	 * @param selectCount		select distinct语句
+	 * @param sqlExceptSelect	from语句
+	 * @param paras				sql预处理参数值
 	 * @return
 	 */
 	public Page<Record> paginateDistinct(int pageNumber, int pageSize, String selectColumn, String selectCount, String sqlExceptSelect, Object... paras) {
@@ -559,10 +579,11 @@ public class DbPro {
 	
 	/**
 	 * 处理distinct分页支持
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param selectColumn
-	 * @param sqlExceptSelect
+	 * @param pageNumber		查询第几页
+	 * @param pageSize			每页显示多少条
+	 * @param selectColumn		select语句
+	 * @param selectCount		select distinct语句
+	 * @param sqlExceptSelect	from语句
 	 * @return
 	 */
 	public Page<Record> paginateDistinct(int pageNumber, int pageSize, String selectColumn, String selectCount, String sqlExceptSelect) {

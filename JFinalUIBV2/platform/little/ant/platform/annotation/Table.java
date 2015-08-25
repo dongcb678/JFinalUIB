@@ -20,6 +20,7 @@ public @interface Table {
 	
 	/**
 	 * Model对应的数据库
+     * 描述：默认是主数据源
 	 * @return
 	 */
     String dataSourceName() default ConstantInit.db_dataSource_main;
@@ -32,7 +33,7 @@ public @interface Table {
 
     /**
      * Model的主键列名称
-     * 描述：列明可以不是ids，但是在建立model的时候那就必须用pkName="xxx"注明
+     * 描述：默认ids，如果用其他列名称，必须用pkName="xxx"注明
      * @return
      */
     String pkName() default "ids";

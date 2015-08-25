@@ -29,6 +29,8 @@ public class ParamPkgInterceptor implements Interceptor {
 	
 	@Override
 	public void intercept(Invocation invoc) {
+		log.debug("********* 反射获取 controller 全局变量  start *********");
+		
 		BaseController controller = (BaseController) invoc.getController();
 		
 		Class<?> controllerClass = controller.getClass();
@@ -37,7 +39,9 @@ public class ParamPkgInterceptor implements Interceptor {
 		Field[] fields = controllerClass.getDeclaredFields();
 		Field[] parentFields = superControllerClass.getDeclaredFields();
 		
-		log.debug("*********************** 封装参数值到 controller 全局变量  start ***********************");
+		log.debug("********* 反射获取 controller 全局变量  end *********");
+		
+		log.debug("********* 封装参数值到 controller 全局变量  start *********");
 		
 		// 是否需要分页
 		Syslog reqSysLog = controller.getReqSysLog();
@@ -58,11 +62,11 @@ public class ParamPkgInterceptor implements Interceptor {
 			setControllerFieldValue(controller, field);
 		}
 
-		log.debug("*********************** 封装参数值到 controller 全局变量  end ***********************");
+		log.debug("********* 封装参数值到 controller 全局变量  end *********");
 		
 		invoc.invoke();
 		
-		log.debug("*********************** 设置全局变量值到 request start ***********************");
+		log.debug("********* 设置全局变量值到 request start *********");
 
 		// 封装controller变量值
 		for (Field field : fields) {
@@ -74,7 +78,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			setRequestValue(controller, field);
 		}
 		
-		log.debug("*********************** 设置全局变量值到 request end ***********************");
+		log.debug("********* 设置全局变量值到 request end *********");
 	}
 	
 	/**
@@ -210,4 +214,5 @@ public class ParamPkgInterceptor implements Interceptor {
 			field.setAccessible(false);
 		}
 	}
+	
 }
