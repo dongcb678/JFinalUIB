@@ -101,8 +101,8 @@ public class I18nInterceptor implements Interceptor {
 			switchView(locale, c);
 		}
 		else {
-			Res res = I18n.use(getBaseName(), locale);
-			c.setAttr(getResName(), res);
+			Res res = I18n.use(getBaseName(), locale); // 读取资源文件
+			c.setAttr(getResName(), res); // set到request
 		}
 	}
 	
