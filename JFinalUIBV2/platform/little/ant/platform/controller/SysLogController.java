@@ -21,7 +21,7 @@ public class SysLogController extends BaseController {
 	 * 日志管理列表
 	 */
 	public void index() {
-		defaultOrder(Syslog.column_startdate, "desc");
+		defaultOrder(Syslog.column_startdate, "desc"); // 默认排序方式，指定列明和排序方式
 		paging(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPage_select, Syslog.sqlId_splitPage_from);
 		render("/platform/sysLog/list.html");
 	}

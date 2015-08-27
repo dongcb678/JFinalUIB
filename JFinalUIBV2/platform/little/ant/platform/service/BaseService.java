@@ -95,7 +95,7 @@ public class BaseService {
 		String sql = getSqlByBeetl(fromSqlId, splitPage.getQueryParam(), paramValue);
 		formSqlSb.append(sql);
 		
-		// 行级：过滤
+		// 行级：过滤，暂未做实现
 		rowFilter(formSqlSb);
 		
 		// 排序
