@@ -327,7 +327,7 @@ public class AuthInterceptor implements Interceptor {
 	}
 
 	/**
-	 * 设置当前登录用户
+	 * 设置当前登录用户到cookie
 	 * @param request
 	 * @param response
 	 * @param user

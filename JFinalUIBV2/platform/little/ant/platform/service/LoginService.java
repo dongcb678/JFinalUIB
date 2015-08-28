@@ -129,9 +129,9 @@ public class LoginService extends BaseService {
 	 * 用户登录后台验证
 	 * @param request
 	 * @param response
-	 * @param userName
-	 * @param passWord
-	 * @param autoLogin
+	 * @param userName	账号
+	 * @param passWord	密码
+	 * @param autoLogin	是否自动登录
 	 * @return
 	 */
 	public int login(HttpServletRequest request, HttpServletResponse response, String userName, String passWord, boolean autoLogin) {

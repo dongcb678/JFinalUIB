@@ -194,7 +194,7 @@ public class ToolIDEA {
 	}
 
 	/**
-	 * 测试
+	 * IDEA测试
 	 * 
 	 * @throws Exception
 	 */
