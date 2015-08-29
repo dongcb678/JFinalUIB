@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import little.ant.platform.annotation.MyTx;
 import little.ant.platform.annotation.MyTxProxy;
 import little.ant.platform.common.DictKeys;
 import little.ant.platform.common.SplitPage;
@@ -29,6 +30,7 @@ public class UserService extends BaseService {
 	 * @param passWord
 	 * @param userInfo
 	 */
+	@MyTx
 	public void save(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
@@ -48,9 +50,7 @@ public class UserService extends BaseService {
 
 			// 缓存
 			User.dao.cacheAdd(user.getPKValue());
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException("保存用户密码加密操作异常", e);
-		} catch (InvalidKeySpecException e) {
+		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			throw new RuntimeException("保存用户密码加密操作异常", e);
 		} catch (Exception e) {
 			throw new RuntimeException("保存用户异常", e);
@@ -64,6 +64,7 @@ public class UserService extends BaseService {
 	 * @param passWord
 	 * @param userInfo
 	 */
+	@MyTx
 	public void update(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
@@ -90,6 +91,7 @@ public class UserService extends BaseService {
 	 * 
 	 * @param userIds
 	 */
+	@MyTx
 	public void delete(String userIds) {
 		User user = User.dao.findById(userIds);
 		String userInfoIds = user.getStr("userinfoids");

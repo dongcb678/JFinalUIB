@@ -37,6 +37,7 @@ public abstract class BaseController extends Controller {
 	 */
 	public void toUrl() {
 		String toUrl = getPara("toUrl");
+		log.debug("toUrl = " + toUrl);
 		render(toUrl);
 	}
 
