@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Before;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.tx.Tx;
 
@@ -25,12 +26,12 @@ public class UserService extends BaseService {
 	public static final UserService service = Enhancer.enhance(UserService.class, Tx.class);
 	
 	/**
-	 * 保存
-	 * 
+	 * 新增用户信息保存
 	 * @param user
 	 * @param passWord
 	 * @param userInfo
 	 */
+	@Before(Tx.class)
 	public void save(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
@@ -50,9 +51,7 @@ public class UserService extends BaseService {
 
 			// 缓存
 			User.dao.cacheAdd(user.getPKValue());
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException("保存用户密码加密操作异常", e);
-		} catch (InvalidKeySpecException e) {
+		} catch (NoSuchAlgorithmException  | InvalidKeySpecException e) {
 			throw new RuntimeException("保存用户密码加密操作异常", e);
 		} catch (Exception e) {
 			throw new RuntimeException("保存用户异常", e);
@@ -60,12 +59,12 @@ public class UserService extends BaseService {
 	}
 
 	/**
-	 * 更新
-	 * 
+	 * 更新用户信息
 	 * @param user
 	 * @param passWord
 	 * @param userInfo
 	 */
+	@Before(Tx.class)
 	public void update(User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
@@ -88,10 +87,10 @@ public class UserService extends BaseService {
 	}
 
 	/**
-	 * 删除
-	 * 
+	 * 删除用户信息
 	 * @param ids
 	 */
+	@Before(Tx.class)
 	public void delete(String ids) {
 		String[] idsArr = splitByComma(ids);
 		for (String userIds : idsArr) {
