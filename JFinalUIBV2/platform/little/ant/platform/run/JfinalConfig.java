@@ -22,6 +22,7 @@ import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.activerecord.tx.TxByActionKeys;
+import com.jfinal.plugin.activerecord.tx.TxByMethods;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
@@ -198,6 +199,7 @@ public class JfinalConfig extends JFinalConfig {
 		interceptors.add(new ParamPkgInterceptor());
 		
 		// 配置开启事物规则
+		interceptors.add(new TxByMethods("save", "update", "delete"));
 		interceptors.add(new TxByRegex(".*save.*"));
 		interceptors.add(new TxByRegex(".*update.*"));
 		interceptors.add(new TxByRegex(".*delete.*"));
