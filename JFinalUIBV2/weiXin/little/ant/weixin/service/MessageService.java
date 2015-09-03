@@ -1,19 +1,18 @@
 package little.ant.weixin.service;
 
-import little.ant.platform.service.BaseService;
-import little.ant.platform.tools.ToolXml;
-import little.ant.weixin.tools.ToolMessage;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
-import com.jfinal.plugin.activerecord.tx.Tx;
+
+import little.ant.platform.service.BaseService;
+import little.ant.platform.tools.ToolXml;
+import little.ant.weixin.tools.ToolMessage;
 
 public class MessageService extends BaseService {
 
 	private static Logger log = Logger.getLogger(MessageService.class);
 
-	public static final MessageService service = Enhancer.enhance(MessageService.class, Tx.class);
+	public static final MessageService service = Enhancer.enhance(MessageService.class);
 	
 	/**
 	 * 消息处理

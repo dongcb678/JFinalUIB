@@ -23,7 +23,7 @@ public class UserService extends BaseService {
 
 	private static Logger log = Logger.getLogger(UserService.class);
 
-	public static final UserService service = Enhancer.enhance(UserService.class, Tx.class);
+	public static final UserService service = Enhancer.enhance(UserService.class);
 	
 	/**
 	 * 新增用户信息保存

@@ -1,17 +1,17 @@
 package little.ant.junit.platform;
 
-import java.sql.SQLException;
+import org.junit.Test;
 
 import little.ant.junit.TestBase;
 import little.ant.platform.service.SysLogService;
 
-import org.junit.Test;
-
 public class TestSyslog extends TestBase {
 	
 	@Test
-    public void deleteSysLog() throws SQLException{
-		SysLogService.service.delete("pt_syslog", "04e0b6b2deef4d40961d7f462569f406,0f10d03afca64fefaea6428151d5a9f0");
+    public void deleteSysLog() {
+		System.out.println("==============");
+		SysLogService.service.delete("pt_syslog", "11f7e84fb9694c94ac3563b8b02f73f8,0fd1521c13ce4e91bcba5caf6bdcc5d1");
+		System.out.println("==============");
     }
 
 }

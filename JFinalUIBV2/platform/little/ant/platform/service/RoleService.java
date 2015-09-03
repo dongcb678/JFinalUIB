@@ -8,7 +8,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 import little.ant.platform.model.Group;
 import little.ant.platform.model.Role;
@@ -18,7 +17,7 @@ public class RoleService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(RoleService.class);
 
-	public static final RoleService service = Enhancer.enhance(RoleService.class, Tx.class);
+	public static final RoleService service = Enhancer.enhance(RoleService.class);
 	
 	/**
 	 * 保存

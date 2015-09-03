@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.jfinal.aop.Enhancer;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 import little.ant.platform.service.BaseService;
 import little.ant.weixin.lucene.DocKeyword;
@@ -14,7 +13,7 @@ public class KeywordService extends BaseService {
 
 	private static Logger log = Logger.getLogger(KeywordService.class);
 
-	public static final KeywordService service = Enhancer.enhance(KeywordService.class, Tx.class);
+	public static final KeywordService service = Enhancer.enhance(KeywordService.class);
 	
 	/**
 	 * 保存

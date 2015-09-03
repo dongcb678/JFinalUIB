@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 import little.ant.platform.model.Syslog;
 import little.ant.platform.tools.ToolDateTime;
@@ -17,7 +16,7 @@ public class SysLogService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SysLogService.class);
 	
-	public static final SysLogService service = Enhancer.enhance(SysLogService.class, Tx.class);
+	public static final SysLogService service = Enhancer.enhance(SysLogService.class);
 	
 	/**
 	 * 定时清理数据

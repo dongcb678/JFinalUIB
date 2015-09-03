@@ -7,19 +7,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.model.Resources;
-import little.ant.platform.plugin.PropertiesPlugin;
-import little.ant.platform.tools.ToolDateTime;
-import little.ant.platform.tools.ToolOS;
-
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.activerecord.tx.Tx;
+
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.model.Resources;
+import little.ant.platform.plugin.PropertiesPlugin;
+import little.ant.platform.tools.ToolDateTime;
+import little.ant.platform.tools.ToolOS;
 
 /**
  * 系统资源负载
@@ -30,7 +29,7 @@ public class ResourcesService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ResourcesService.class);
 
-	public static final ResourcesService service = Enhancer.enhance(ResourcesService.class, Tx.class);
+	public static final ResourcesService service = Enhancer.enhance(ResourcesService.class);
 	
 	/**
 	 * 最近15天PV

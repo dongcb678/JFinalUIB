@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.constant.ConstantLogin;
@@ -30,7 +29,7 @@ public class LoginService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginService.class);
 
-	public static final LoginService service = Enhancer.enhance(LoginService.class, Tx.class);
+	public static final LoginService service = Enhancer.enhance(LoginService.class);
 
 	/**
 	 * 验证账号是否存在

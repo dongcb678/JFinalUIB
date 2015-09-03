@@ -3,7 +3,6 @@ package little.ant.weixin.service;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 import little.ant.platform.service.BaseService;
 import little.ant.weixin.bo.message.RecevieToken;
@@ -16,7 +15,7 @@ public class GroupService extends BaseService {
 
 	private static Logger log = Logger.getLogger(GroupService.class);
 
-	public static final GroupService service = Enhancer.enhance(GroupService.class, Tx.class);
+	public static final GroupService service = Enhancer.enhance(GroupService.class);
 	
 	/**
 	 * 新建分组

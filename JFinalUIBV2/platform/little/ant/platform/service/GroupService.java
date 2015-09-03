@@ -8,7 +8,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 import little.ant.platform.model.Group;
 import little.ant.platform.model.User;
@@ -18,7 +17,7 @@ public class GroupService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(GroupService.class);
 
-	public static final GroupService service = Enhancer.enhance(GroupService.class, Tx.class);
+	public static final GroupService service = Enhancer.enhance(GroupService.class);
 	
 	/**
 	 * 保存

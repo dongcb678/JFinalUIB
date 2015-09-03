@@ -8,7 +8,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
-import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.upload.UploadFile;
 
 import little.ant.platform.model.Upload;
@@ -18,7 +17,7 @@ public class UploadService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UploadService.class);
 
-	public static final UploadService service = Enhancer.enhance(UploadService.class, Tx.class);
+	public static final UploadService service = Enhancer.enhance(UploadService.class);
 	
 	public List<Map<String, String>> upload(String pathType, List<UploadFile> files){
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();

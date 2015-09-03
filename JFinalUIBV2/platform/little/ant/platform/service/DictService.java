@@ -3,22 +3,21 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.dto.ZtreeNode;
-import little.ant.platform.model.Dict;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.activerecord.tx.Tx;
+
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.ZtreeNode;
+import little.ant.platform.model.Dict;
 
 public class DictService extends BaseService {
 
 	private static Logger log = Logger.getLogger(DictService.class);
 
-	public static final DictService service = Enhancer.enhance(DictService.class, Tx.class);
+	public static final DictService service = Enhancer.enhance(DictService.class);
 	
 	/**
 	 * 保存

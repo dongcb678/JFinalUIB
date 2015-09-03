@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
-import com.jfinal.plugin.activerecord.tx.Tx;
 
 import little.ant.platform.dto.ZtreeNode;
 import little.ant.platform.model.Module;
@@ -17,7 +16,7 @@ public class OperatorService extends BaseService {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(OperatorService.class);
 
-	public static final OperatorService service = Enhancer.enhance(OperatorService.class, Tx.class);
+	public static final OperatorService service = Enhancer.enhance(OperatorService.class);
 	
 	/**
 	 * 保存

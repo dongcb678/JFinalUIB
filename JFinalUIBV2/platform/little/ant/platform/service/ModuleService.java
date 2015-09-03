@@ -3,23 +3,22 @@ package little.ant.platform.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.dto.ZtreeNode;
-import little.ant.platform.model.Module;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.activerecord.tx.Tx;
+
+import little.ant.platform.constant.ConstantInit;
+import little.ant.platform.dto.ZtreeNode;
+import little.ant.platform.model.Module;
 
 public class ModuleService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ModuleService.class);
 
-	public static final ModuleService service = Enhancer.enhance(ModuleService.class, Tx.class);
+	public static final ModuleService service = Enhancer.enhance(ModuleService.class);
 	
 	/**
 	 * 获取子节点数据
