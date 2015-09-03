@@ -290,7 +290,7 @@ public class BaseService {
 		
 		String sql = getSqlByBeetl(BaseModel.sqlId_deleteIn, param);
 		
-		Db.update(sql);
+		Db.use(ConstantInit.db_dataSource_main).update(sql);
 	}
 
 	/**

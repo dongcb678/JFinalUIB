@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.model.Syslog;
 import little.ant.platform.tools.ToolDateTime;
 
@@ -24,7 +25,7 @@ public class SysLogService extends BaseService {
 	public void timerDataClear(){
 		Date date = ToolDateTime.getDate(-365, 0, 0, 0, 0); // 设置时间为365天前
 		Timestamp timestamp = ToolDateTime.getSqlTimestamp(date);
-		Db.update(getSql(Syslog.sqlId_clear), timestamp);
+		Db.use(ConstantInit.db_dataSource_main).update(getSql(Syslog.sqlId_clear), timestamp);
 	}
 	
 }

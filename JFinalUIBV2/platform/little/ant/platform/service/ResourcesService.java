@@ -126,7 +126,7 @@ public class ResourcesService extends BaseService {
 	public void timerDataClear(){
 		Date date = ToolDateTime.getDate(-365, 0, 0, 0, 0); // 设置时间为365天前
 		Timestamp timestamp = ToolDateTime.getSqlTimestamp(date);
-		Db.update(" delete from pt_syslog where startdate < ? ", timestamp);
+		Db.use(ConstantInit.db_dataSource_main).update(" delete from pt_syslog where startdate < ? ", timestamp);
 	}
 	
 }

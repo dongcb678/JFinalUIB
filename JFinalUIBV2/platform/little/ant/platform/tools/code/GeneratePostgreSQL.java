@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
+import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.run.ConfigCore;
 import little.ant.platform.tools.ToolSqlXml;
 import little.ant.platform.tools.ToolString;
@@ -73,10 +74,10 @@ public class GeneratePostgreSQL extends GenerateBase {
 	public List<TableColumnDto> getColunm(String tableName) {
 		List<TableColumnDto> list = new ArrayList<TableColumnDto>();
 		
-		List<Record> listDesc = Db.find(ToolSqlXml.getSql("platform.postgresql.getColumnsInfo"), tableName);
+		List<Record> listDesc = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumnsInfo"), tableName);
 		int index = 1;
 		
-		List<Record> listColumn = Db.find(ToolSqlXml.getSql("platform.postgresql.getColumns"), tableName);
+		List<Record> listColumn = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumns"), tableName);
 		for (Record record : listColumn) {
 			String column_name = record.getStr("column_name");
 			String data_type = record.getStr("data_type");
