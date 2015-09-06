@@ -12,17 +12,23 @@
     	]]>
 	</sql>
 	
-	<!-- 查询所有表名称 -->
+	<!-- 查询所有表名称：
+		USE information_schema; 
+	-->
 	<sql id="getTables">
 		<![CDATA[ 
-        	show tables
+        	select * from tables where table_schema = ? and table_name = ?
     	]]>
 	</sql>
 	
-	<!-- 查询所有列名称 -->
+	<!-- 
+		查询所有列名称：
+		USE information_schema; 
+		show full columns from ?
+	-->
 	<sql id="getColumns">
 		<![CDATA[ 
-        	desc ?
+        	select * from columns where table_schema = ? and table_name = ?
     	]]>
 	</sql>
 	
