@@ -39,7 +39,7 @@ public class LoginService extends BaseService {
 		param.put("table", "pt_user");
 		param.put("column", "username");
 		String sql = getSql("platform.baseModel.selectCount", param);
-		int count = Db.queryLong(sql, userName).intValue();
+		int count = Db.use(DictKeys.db_dataSource_main).queryLong(sql, userName).intValue();
 		return count;
 	}
 
@@ -53,7 +53,7 @@ public class LoginService extends BaseService {
 		param.put("table", "pt_userinfo");
 		param.put("column", "email");
 		String sql = getSql("platform.baseModel.selectCount", param);
-		int count = Db.queryLong(sql, mailBox).intValue();
+		int count = Db.use(DictKeys.db_dataSource_main).queryLong(sql, mailBox).intValue();
 		return count;
 	}
 
@@ -67,7 +67,7 @@ public class LoginService extends BaseService {
 		param.put("table", "pt_userinfo");
 		param.put("column", "idcard");
 		String sql = getSql("platform.baseModel.selectCount", param);
-		int count = Db.queryLong(sql, idcard).intValue();
+		int count = Db.use(DictKeys.db_dataSource_main).queryLong(sql, idcard).intValue();
 		return count;
 	}
 
@@ -81,7 +81,7 @@ public class LoginService extends BaseService {
 		param.put("table", "pt_userinfo");
 		param.put("column", "mobile");
 		String sql = getSql("platform.baseModel.selectCount", param);
-		int count = Db.queryLong(sql, mobile).intValue();
+		int count = Db.use(DictKeys.db_dataSource_main).queryLong(sql, mobile).intValue();
 		return count;
 	}
 	
