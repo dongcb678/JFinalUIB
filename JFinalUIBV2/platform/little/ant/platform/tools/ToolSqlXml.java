@@ -67,8 +67,10 @@ public abstract class ToolSqlXml {
      */
     public static String getSql(String sqlId) {
     	String sql = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
+    	
     	if(null == sql || sql.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
+			return null;
     	}
     	
         return sql.replaceAll("[\\s]{2,}", " ");
@@ -83,8 +85,10 @@ public abstract class ToolSqlXml {
      */
     public static String getSql(String sqlId, Map<String, Object> param, String renderType) {
     	String sqlTemplete = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
+    	
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
+			return null;
     	}
     	
     	String sql = null;
@@ -126,6 +130,7 @@ public abstract class ToolSqlXml {
     	String sqlTemplete = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
+			return null;
     	}
     	
     	Map<String, Object> paramMap = new HashMap<String, Object>();

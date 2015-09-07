@@ -482,10 +482,13 @@ public abstract class Model<M extends Model> implements Serializable {
 		}
 		
 		// ################  新增代码块   start   #################
-		boolean versionModify = modifyFlag.contains(BaseModel.column_version); // 是否包含version字段
+		boolean versionModify = modifyFlag.contains(BaseModel.column_version); 
+		// 是否包含version字段
 		if(versionModify){
-			Long newVersion = getNumber(BaseModel.column_version).longValue(); // 新版本号
+			// 新版本号
+			Long newVersion = getNumber(BaseModel.column_version).longValue(); 
 			paras.add(newVersion);
+			// 追加条件sql
 			sql.append(" and version < ? ");
 		}
 		// ################  新增代码块   end   #################

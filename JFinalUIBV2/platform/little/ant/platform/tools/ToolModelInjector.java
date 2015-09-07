@@ -36,7 +36,7 @@ public class ToolModelInjector {
 	/**
 	 * 将页面中的数组对象转换成List
 	 * @param request
-	 * @param modelClass
+	 * @param modelClass model类
 	 * @return
 	 */
 	public static <T extends BaseModel<T>> List<T> injectModels(final HttpServletRequest request, Class<? extends T> modelClass) {
@@ -48,8 +48,8 @@ public class ToolModelInjector {
 	/**
 	 * 将页面中的数组对象转换成List
 	 * @param request
-	 * @param modelClass
-	 * @param prefix
+	 * @param modelClass	model类
+	 * @param prefix		数组前缀
 	 * @return
 	 */
 	public static <T extends BaseModel<T>> List<T> injectModels(final HttpServletRequest request, Class<? extends T> modelClass, String prefix) {
