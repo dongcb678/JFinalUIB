@@ -22,9 +22,8 @@
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
       <src_folder value="file://$MODULE_DIR$/platform" expected_position="1" />
       <src_folder value="file://$MODULE_DIR$/weiXin" expected_position="2" />
-      <src_folder value="file://$MODULE_DIR$/jfinal19" expected_position="3" />
+      <src_folder value="file://$MODULE_DIR$/jfinal20" expected_position="3" />
       <src_folder value="file://$MODULE_DIR$/junit" expected_position="4" />
-      <src_folder value="file://$MODULE_DIR$/beetl" expected_position="5" />
     </src_description>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
@@ -34,156 +33,11 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/platform" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/weiXin" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/jfinal19" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jfinal20" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/junit" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/beetl" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="junit4">
-        <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="c3p0-0.9.1.2.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/c3p0-0.9.1.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="freemarker-2.3.20.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/freemarker-2.3.20.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="org.springframework.asm-3.1.1.RELEASE.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/org.springframework.asm-3.1.1.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="org.springframework.beans-3.1.1.RELEASE.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/org.springframework.beans-3.1.1.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="org.springframework.context-3.1.1.RELEASE.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/org.springframework.context-3.1.1.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="org.springframework.core-3.1.1.RELEASE.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/org.springframework.core-3.1.1.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="org.springframework.expression-3.1.1.RELEASE.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/org.springframework.expression-3.1.1.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="org.springframework.org.apache.commons.logging-1.1.1.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/org.springframework.org.apache.commons.logging-1.1.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="velocity-1.7-dep.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/velocity-1.7-dep.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="velocity-1.7.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jfinal/velocity-1.7.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="javax.el-3.0.0.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jetty9/javax.el-3.0.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="javax.servlet.jsp-api-2.3.1.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jetty9/javax.servlet.jsp-api-2.3.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="servlet-api-3.1.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jetty9/servlet-api-3.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
-    <orderEntry type="module-library">
-      <library name="javax.servlet.jsp-2.3.2.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jetty9/javax.servlet.jsp-2.3.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="jetty-all-9.2.10.v20150310.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/jetty9/jetty-all-9.2.10.v20150310.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -194,15 +48,26 @@
         <jarDirectory url="file://$MODULE_DIR$/WebContent/WEB-INF/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: junit:junit:4.11" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/doc/buildJar/beetl/antlr-4.5-complete.jar!/" />
+          <root url="file://$MODULE_DIR$/build-lib/jetty-9.2-jdk7+" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/build-lib/jetty-9.2-jdk7+" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/build-lib/jfinal20" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/build-lib/jfinal20" recursive="false" />
       </library>
     </orderEntry>
   </component>
 </module>
-

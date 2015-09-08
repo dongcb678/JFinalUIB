@@ -255,7 +255,7 @@ public class JfinalConfig extends JFinalConfig {
 	 * 运行此 main 方法可以启动项目
 	 * 说明：
 	 * 1. linux 下非root账户运行端口要>1024
-	 * 2. idea 中运行webAppDir路径可能需要适当调整
+	 * 2. idea 中运行webAppDir路径可能需要适当调整，可以设置为WebContent的绝对路径
 	 */
 	public static void main(String[] args) {
 		JFinal.start("WebContent", 99, "/", 5);
