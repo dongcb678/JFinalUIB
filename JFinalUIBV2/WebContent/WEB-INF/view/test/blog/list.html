@@ -24,15 +24,21 @@
 				
 				<div class="panel-body">		
 				  	<div class="form-group">
+				  	
 						<label class="col-sm-2 control-label" for="focusedInput">标题</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.title" value='${escapeXml(paramMap["_query.title"])}' maxlength="50" >
+						 	<input class="form-control focused" type="text" 
+						 	name="_query.title" value='${escapeXml(paramMap["_query.title"])}' 
+						 	maxlength="50" >
 						</div>
-				  		
+								
 						<label class="col-sm-2 control-label" for="focusedInput">内容</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.content" value='${escapeXml(paramMap["_query.content"])}' maxlength="50" >
+						 	<input class="form-control focused" type="text" 
+						 	name="_query.content" value='${escapeXml(paramMap["_query.content"])}' 
+						 	maxlength="50" >
 						</div>
+
 				  	</div>
 				  	
 					<div class="form-group">
@@ -70,25 +76,31 @@
 					
 					<div class="row">
 						<div class="col-md-12 space20">
+						
 							<% if(authUrl("/test/blog/add.html")){ %>
-								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/test/blog/toUrl?toUrl=/test/blog/add.html');">
+								<button type="button" class="btn btn-success add-row" 
+									onclick="common_ajax.ajaxMainPanel('/jf/test/blog/toUrl?toUrl=/test/blog/add.html');">
 									添加博客 <i class="fa fa-plus"></i>
 								</button>
 							<% } %>	
 							
 							<% if(delete == true){ %>
-								<button type="button" class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/test/user/delete"> 
+								<button type="button" class="btn btn-red delete-row" 
+									data-bb="deleteList" data-url="/jf/test/user/delete"> 
 									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
 								</button>
 							<% } %>
+
 						</div>
 					</div>
 					
 					<table class="table table-bordered table-hover" id="dataTable">
 						<thead>
 							<tr>
+							
 								<th class="center hidden-xs" width="50">
-									<input type="checkbox" name="checkAll" onchange="common_common.checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
+									<input type="checkbox" name="checkAll" class="flat-grey selectall" 
+										onchange="common_common.checkFunc('dataTable', this.checked);"> 
 								</th>
 								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'numbers')">
 									标题	${orderBy("title")}
@@ -99,9 +111,11 @@
 								<th class="hidden-xs">
 									${i18nMap["admin.common.operation"]}
 								</th>
+
 							</tr>
 						</thead>
 						<tbody>
+							
 							<% for(blog in splitPage.list){ %>
 								<tr>
 									<td class="center hidden-xs">
@@ -111,19 +125,22 @@
 									<td>${escapeXml(blog["content"]!)}</td>
 									<td class="hidden-xs">
 										<% if(edit == true){ %>
-											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/test/blog/edit/${escapeXml(blog.ids!)}');"> 
+											<button type="button" class="btn btn-green edit-row" 
+												onclick="common_ajax.ajaxMainPanel('/jf/test/blog/edit/${escapeXml(blog.ids!)}');"> 
 												${i18nMap["admin.common.edit"]} <i class="fa fa-edit"></i>
 											</button>
 										<% } %>
 										
 										<% if(delete == true){ %>
-											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/test/blog/delete/${blog.ids!}"> 
+											<button type="button" class="btn btn-red delete-row" 
+												data-bb="deleteOne" data-url="/jf/test/blog/delete/${blog.ids!}"> 
 												${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
 											</button>
 										<% } %>
 									</td>
 								</tr>
 							<% } %>
+							
 						</tbody>
 					</table>
 					
