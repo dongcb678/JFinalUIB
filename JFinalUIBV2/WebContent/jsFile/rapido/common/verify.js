@@ -326,16 +326,16 @@ var platform_verify = function() {
 	 * @param nodeId
 	 * @returns {Boolean}
 	 */
-	var inputDataVali = function (inputNode, nodeType){
-		var vType = inputNode.attr("vType");
+	var inputDataVali = function (inputNode){
 		var type = inputNode.attr("type");
-		if(null != vType && (type == "text" || type == "password")){// || inputNode.type == "hidden"
+		var vType = inputNode.attr("vType");
+		if(null != vType && (type == "text" || type == "password")){
 			var value = inputNode.val();
 			value = $.trim(value);
 			inputNode.val(value);
 			 
 			var minLength = inputNode.attr("vMin");
-			var maxLength = inputNode.attr("maxlength");//inputNode.getAttribute("vMax");
+			var maxLength = inputNode.attr("maxlength");
 	
 			var resultArr = {"result" : false, "message" : ""};
 			
@@ -433,7 +433,7 @@ var platform_verify = function() {
 	 */
 	var onblurVali = function(inputNode){
 		inputNode = $(inputNode);
-		inputDataVali(inputNode, "input");
+		inputDataVali(inputNode);
 	}
 	
 	/**
@@ -447,7 +447,7 @@ var platform_verify = function() {
 		for ( var i = 0; i < length; i++) {
 			var node = formNode.elements[i];
 			node = $(node);
-			var result = inputDataVali(node, "form");
+			var result = inputDataVali(node);
 			if(result == false){
 				errorCount += 1;
 			}
