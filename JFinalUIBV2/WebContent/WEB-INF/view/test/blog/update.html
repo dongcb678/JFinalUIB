@@ -3,8 +3,8 @@
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/test/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/test/blog');">${i18nMap["admin.testBlog.common.name"]}</a></li>
-			<li class="active">${i18nMap["admin.testBlog.update"]}</li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/test/blog');">博客管理</a></li>
+			<li class="active">更新</li>
 		</ol>
 	</div>
 </div>
@@ -15,7 +15,7 @@
 		<div class="panel panel-white">
 			
 			<div class="panel-heading">
-				<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.testBlog.update"]}</span></h4>
+				<h4 class="panel-title"><span class="text-bold">更新</span></h4>
 				<div class="panel-tools">										
 					<% include("/common/panel-tools.html"){} %>
 				</div>
@@ -23,8 +23,8 @@
 			
 			<div class="panel-body">	
 				<form id="editForm" action="${cxt!}/jf/test/blog/update" method="POST" role="form" class="form-horizontal">
-					<input type="hidden" name="testBlog.ids" value="${escapeXml(testBlog.ids!)}" >
-					<input type="hidden" name="testBlog.version" value="${testBlog.version!}">
+					<input type="hidden" name="blog.ids" value="${escapeXml(blog.ids!)}" >
+					<input type="hidden" name="blog.version" value="${blog.version!}">
 					
 					<% include("/test/blog/form.html"){} %>
 					

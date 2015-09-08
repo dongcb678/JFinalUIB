@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/test/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
-			<li class="active">博文管理</li>
+			<li class="active">博客管理</li>
 		</ol>
 	</div>
 </div>
@@ -16,7 +16,7 @@
 			<div class="panel panel-white">
 				
 				<div class="panel-heading">
-					<h4 class="panel-title"><span class="text-bold">博文查询</span></h4>
+					<h4 class="panel-title"><span class="text-bold">博客查询</span></h4>
 					<div class="panel-tools">										
 						<% include("/common/panel-tools.html"){} %>
 					</div>
@@ -54,7 +54,7 @@
 				
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<span class="text-bold">博文列表</span>
+						<span class="text-bold">博客列表</span>
 					</h4>
 					<div class="panel-tools">										
 						<% include("/common/panel-tools.html"){} %>
@@ -72,7 +72,7 @@
 						<div class="col-md-12 space20">
 							<% if(authUrl("/test/blog/add.html")){ %>
 								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/test/blog/toUrl?toUrl=/test/blog/add.html');">
-									添加博文 <i class="fa fa-plus"></i>
+									添加博客 <i class="fa fa-plus"></i>
 								</button>
 							<% } %>	
 							
@@ -102,22 +102,22 @@
 							</tr>
 						</thead>
 						<tbody>
-							<% for(testBlog in splitPage.list){ %>
+							<% for(blog in splitPage.list){ %>
 								<tr>
 									<td class="center hidden-xs">
 										<input type="checkbox" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
 									</td>
-									<td><span class="label label-sm label-success">${escapeXml(testBlog["title"]!)}</span></td>
-									<td>${escapeXml(testBlog["content"]!)}</td>
+									<td><span class="label label-sm label-success">${escapeXml(blog["title"]!)}</span></td>
+									<td>${escapeXml(blog["content"]!)}</td>
 									<td class="hidden-xs">
 										<% if(edit == true){ %>
-											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/test/blog/edit/${escapeXml(testBlog.ids!)}');"> 
+											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/test/blog/edit/${escapeXml(blog.ids!)}');"> 
 												${i18nMap["admin.common.edit"]} <i class="fa fa-edit"></i>
 											</button>
 										<% } %>
 										
 										<% if(delete == true){ %>
-											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/test/blog/delete/${testBlog.ids!}"> 
+											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/test/blog/delete/${blog.ids!}"> 
 												${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
 											</button>
 										<% } %>

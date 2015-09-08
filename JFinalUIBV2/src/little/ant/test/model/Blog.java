@@ -12,13 +12,13 @@ import org.apache.log4j.Logger;
  */
 @SuppressWarnings("unused")
 @Table(dataSourceName = ConstantInit.db_dataSource_main, tableName = "test_blog", pkName = "ids")
-public class TestBlog extends BaseModel<TestBlog> {
+public class Blog extends BaseModel<Blog> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(TestBlog.class);
+	private static Logger log = Logger.getLogger(Blog.class);
 	
-	public static final TestBlog dao = new TestBlog();
+	public static final Blog dao = new Blog();
 	
 	/**
 	 * 字段描述：主键 
