@@ -327,17 +327,17 @@ var platform_verify = function() {
 	 * @returns {Boolean}
 	 */
 	var inputDataVali = function (inputNode){
-		var type = inputNode.attr("type");
-		var vType = inputNode.attr("vType");
+		var type = inputNode.attr("type"); // input类型
+		var vType = inputNode.attr("vType"); // 校验类型
 		if(null != vType && (type == "text" || type == "password")){
 			var value = inputNode.val();
 			value = $.trim(value);
-			inputNode.val(value);
+			inputNode.val(value); // 去除两端空格
 			 
-			var minLength = inputNode.attr("vMin");
-			var maxLength = inputNode.attr("maxlength");
+			var minLength = inputNode.attr("vMin");// input最小长度
+			var maxLength = inputNode.attr("maxlength");// input最大长度
 	
-			var resultArr = {"result" : false, "message" : ""};
+			var resultArr = {"result" : false, "message" : ""};// 接收验证结果
 			
 			//1.验证长度
 			resultArr = minMax(value, minLength, maxLength);
