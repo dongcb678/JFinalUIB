@@ -2,7 +2,6 @@ package little.ant.platform.tools;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -10,14 +9,14 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import little.ant.platform.constant.ConstantCache;
-import little.ant.platform.constant.ConstantRender;
-import little.ant.platform.plugin.SqlXmlPlugin;
-
 import org.beetl.core.BeetlKit;
 
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.ehcache.CacheKit;
+
+import little.ant.platform.constant.ConstantCache;
+import little.ant.platform.constant.ConstantRender;
+import little.ant.platform.plugin.SqlXmlPlugin;
 
 /**
  * 处理Sql Map
@@ -126,31 +125,25 @@ public abstract class ToolSqlXml {
      * @param list 用于接收预处理的值
      * @return
      */
-    public static String getSql(String sqlId, Map<String, String> param, String renderType, LinkedList<Object> list) {
+    public static String getSql(String sqlId, Map<String, Object> param, String renderType, LinkedList<Object> list) {
     	String sqlTemplete = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
 			return null;
     	}
     	
-    	Map<String, Object> paramMap = new HashMap<String, Object>();
-    	Set<String> paramKeySet = param.keySet();
-    	for (String paramKey : paramKeySet) {
-    		paramMap.put(paramKey, (Object)param.get(paramKey));
-		}
-    	
     	String sql = null;
     	if(null == renderType || renderType.equals(ConstantRender.sql_renderType_beetl)){
     		log.debug("beetl解析sql");
-    		sql = BeetlKit.render(sqlTemplete, paramMap);
+    		sql = BeetlKit.render(sqlTemplete, param);
     		
     	} else if(renderType.equals(ConstantRender.sql_renderType_freeMarker)){
     		log.debug("FreeMarker解析sql");
-    		sql = ToolFreeMarker.render(sqlTemplete, paramMap);
+    		sql = ToolFreeMarker.render(sqlTemplete, param);
     		
     	} else if(renderType.equals(ConstantRender.sql_renderType_velocity)){
     		log.debug("Velocity解析sql");
-    		sql = ToolVelocity.render(sqlTemplete, paramMap);
+    		sql = ToolVelocity.render(sqlTemplete, param);
     	
     	}
 		
@@ -172,7 +165,7 @@ public abstract class ToolSqlXml {
 			String clounm3 = clounm2.replace("$", "");
 			
 			if(clounm.equals("#" + clounm2 + "#")){ // 数值型，可以对应处理int、long、bigdecimal、double等等
-				String val = (String) param.get(clounm3);
+				String val = String.valueOf(param.get(clounm3));
 				try {
 					Integer.parseInt(val);
 					sql = sql.replace(clounm, val);

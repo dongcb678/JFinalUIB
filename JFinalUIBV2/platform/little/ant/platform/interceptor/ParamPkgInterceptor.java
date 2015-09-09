@@ -89,7 +89,7 @@ public class ParamPkgInterceptor implements Interceptor {
 	public void splitPage(BaseController controller, Class<?> superControllerClass){
 		SplitPage splitPage = new SplitPage();
 		// 分页查询参数分拣
-		Map<String, String> queryParam = new HashMap<String, String>();
+		Map<String, Object> queryParam = new HashMap<String, Object>();
 		Enumeration<String> paramNames = controller.getParaNames();
 		String name = null;
 		String value = null;

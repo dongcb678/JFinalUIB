@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost-mysql
-Source Server Version : 50530
+Source Server Version : 50612
 Source Host           : localhost:3306
-Source Database       : jfinaluib
+Source Database       : jfinaluibv2
 
 Target Server Type    : MYSQL
-Target Server Version : 50530
+Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2015-04-22 22:30:52
+Date: 2015-09-09 16:55:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -683,6 +683,22 @@ CREATE TABLE `pt_userinfo` (
 -- Records of pt_userinfo
 -- ----------------------------
 INSERT INTO `pt_userinfo` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '湖北钟祥', null, '55', '2012-03-07', 'bloodGroup_A', '2015-03-26 19:16:26', '2014-06-09 11:21:13', 'wenHuaChenDu_chuZhong', '湖北钟祥', 'dongcb678@163.com', '2010-10-25', 'folk_han', 'government_dangYuan', 'http://www.4bu4.com', '湖北钟祥', '420881198609285832', 'marriage_no', '13871558042', null, '董华健', '湖北钟祥', '431924', '150584428', '西安外事学院', 'man', '电子商务', '165', '027-65155060');
+
+-- ----------------------------
+-- Table structure for `test_blog`
+-- ----------------------------
+DROP TABLE IF EXISTS `test_blog`;
+CREATE TABLE `test_blog` (
+  `ids` varchar(32) COLLATE utf8_bin NOT NULL COMMENT '主键',
+  `title` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '标题',
+  `content` text COLLATE utf8_bin COMMENT '内容',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`ids`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of test_blog
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `wx_article`

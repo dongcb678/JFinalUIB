@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -33,6 +34,12 @@ public class BaseService {
 	private static Logger log = Logger.getLogger(BaseService.class);
 
 	public static final BaseService service = Enhancer.enhance(BaseService.class);
+	
+	public List<?> query(String sqlId, Map<String, Object> param){
+		LinkedList<Object> paramValue = new LinkedList<Object>();
+		String sql = getSqlByBeetl(sqlId, param, paramValue);
+		return Db.query(sql, paramValue.toArray());
+	}
 	
 	/**
 	 * 分页
@@ -140,7 +147,7 @@ public class BaseService {
      * @param list 用于接收预处理的值
      * @return
      */
-	public String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	public String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 

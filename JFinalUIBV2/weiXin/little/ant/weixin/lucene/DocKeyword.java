@@ -189,8 +189,12 @@ public class DocKeyword extends DocBase {
 	 */
 	public void search(SplitPage splitPage){
         try {
-        	Map<String, String> queryParam = splitPage.getQueryParam(); 
-    		String searchKeyWords = queryParam.get("searchKeyWords");//查询关键字
+        	Map<String, Object> queryParam = splitPage.getQueryParam(); 
+        	Object skwObj = queryParam.get("searchKeyWords");//查询关键字
+        	String searchKeyWords = null;
+        	if(skwObj != null){
+        		searchKeyWords = (String) skwObj;
+        	}
     		if(searchKeyWords != null && !searchKeyWords.isEmpty()){
     			String[] queryFields = new String[]{"question", "questionkey", "answer"};
         		

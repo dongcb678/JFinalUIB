@@ -64,7 +64,7 @@ public class TestController extends BaseController {
 			renderText("[]");
 			
 		}else{
-			Map<String, String> param = new HashMap<String, String>();
+			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("url", keyword);
 			param.put("size", size);
 			

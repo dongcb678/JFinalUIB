@@ -103,7 +103,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	protected String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
@@ -124,7 +124,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByFreeMarker(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	protected String getSqlByFreeMarker(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker, list);
     }
 
@@ -145,7 +145,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByVelocity(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	protected String getSqlByVelocity(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity, list);
     }
 	

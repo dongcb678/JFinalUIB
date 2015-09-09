@@ -348,7 +348,7 @@ public abstract class BaseController extends Controller {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByBeetl(String sqlId, Map<String, String> param, LinkedList<Object> list){
+	protected String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return BaseService.service.getSqlByBeetl(sqlId, param, list);
     }
 

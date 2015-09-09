@@ -18,7 +18,7 @@ public class SplitPage implements Serializable {
 	/**
 	 * 分页查询参数
 	 */
-	private Map<String, String> queryParam;// 查询条件
+	private Map<String, Object> queryParam;// 查询条件
 	private String orderColunm;// 排序条件
 	private String orderMode;// 排序方式
 	private int pageNumber = ConstantSplitPage.default_pageNumber;// 第几页
@@ -99,11 +99,11 @@ public class SplitPage implements Serializable {
 		this.list = list;
 	}
 
-	public Map<String, String> getQueryParam() {
+	public Map<String, Object> getQueryParam() {
 		return queryParam;
 	}
 
-	public void setQueryParam(Map<String, String> queryParam) {
+	public void setQueryParam(Map<String, Object> queryParam) {
 		this.queryParam = queryParam;
 	}
 
