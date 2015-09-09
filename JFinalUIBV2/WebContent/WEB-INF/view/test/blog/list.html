@@ -70,6 +70,7 @@
 				<%
 					var edit = authUrl("/jf/test/blog/edit");
 					var delete = authUrl("/jf/test/blog/delete");
+					var view = authUrl("/jf/test/blog/view");
 				%>
 				
 				<div class="panel-body">
@@ -102,11 +103,13 @@
 									<input type="checkbox" name="checkAll" class="flat-grey selectall" 
 										onchange="common_common.checkFunc('dataTable', this.checked);"> 
 								</th>
-								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'numbers')">
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun(
+										'mainPanel', 'splitPage', 'title')">
 									标题	${orderBy("title")}
 								</th>
-								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'names')">
-									内容	${orderBy("content")}
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun(
+										'mainPanel', 'splitPage', 'createtime')">
+									创建时间	${orderBy("createtime")}
 								</th>
 								<th class="hidden-xs">
 									${i18nMap["admin.common.operation"]}
@@ -117,28 +120,47 @@
 						<tbody>
 							
 							<% for(blog in splitPage.list){ %>
-								<tr>
-									<td class="center hidden-xs">
-										<input type="checkbox" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
-									</td>
-									<td><span class="label label-sm label-success">${escapeXml(blog["title"]!)}</span></td>
-									<td>${escapeXml(blog["content"]!)}</td>
-									<td class="hidden-xs">
-										<% if(edit == true){ %>
-											<button type="button" class="btn btn-green edit-row" 
-												onclick="common_ajax.ajaxMainPanel('/jf/test/blog/edit/${escapeXml(blog.ids!)}');"> 
-												${i18nMap["admin.common.edit"]} <i class="fa fa-edit"></i>
-											</button>
-										<% } %>
+							<tr>
+								<td class="center hidden-xs">
+									<input type="checkbox" name="checkIds" 
+										value="${user.ids!}" class="flat-grey foocheck">
+								</td>
+								<td>
+									<span class="label label-sm label-success">
+										${escapeXml(blog["title"]!)}
+									</span>
+								</td>
+								<td>
+									${blog.createtime !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
+								</td>
+								<td class="hidden-xs">
+									<% if(view == true){ %>
+									<button type="button" class="btn btn-dark-yellow add-row" 
+										onclick="common_ajax.ajaxMainPanel(
+												'/jf/test/blog/view/${blog.ids!}');">
+										${i18nMap["admin.common.see"]} <i class="fa fa-eye"></i>
+									</button>
+									<% } %>
 										
-										<% if(delete == true){ %>
-											<button type="button" class="btn btn-red delete-row" 
-												data-bb="deleteOne" data-url="/jf/test/blog/delete/${blog.ids!}"> 
-												${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
-											</button>
-										<% } %>
-									</td>
-								</tr>
+									<% if(edit == true){ %>
+									<button type="button" class="btn btn-green edit-row" 
+										onclick="common_ajax.ajaxMainPanel(
+												'/jf/test/blog/edit/${escapeXml(blog.ids!)}');"> 
+										${i18nMap["admin.common.edit"]} 
+										<i class="fa fa-edit"></i>
+									</button>
+									<% } %>
+									
+									<% if(delete == true){ %>
+									<button type="button" class="btn btn-red delete-row" 
+										data-bb="deleteOne" 
+										data-url="/jf/test/blog/delete/${blog.ids!}"> 
+										${i18nMap["admin.common.delete"]} 
+										<i class="fa fa-trash-o"></i>
+									</button>
+									<% } %>
+								</td>
+							</tr>
 							<% } %>
 							
 						</tbody>
