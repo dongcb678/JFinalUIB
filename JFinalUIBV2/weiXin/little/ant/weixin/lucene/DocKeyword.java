@@ -302,7 +302,7 @@ public class DocKeyword extends DocBase {
 			}
 			if (null == diskIndexWriter) {
 				IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);// 索引分词配置
-				indexWriterConfig.setOpenMode(OpenMode.CREATE_OR_APPEND); // CREATE
+				indexWriterConfig.setOpenMode(OpenMode.CREATE); // CREATE CREATE_OR_APPEND
 				diskIndexWriter = new IndexWriter(diskDir, indexWriterConfig);
 				//diskIndexWriter.commit(); // 在索引库没有建立并且没有索引文件的时候首先要commit一下让他建立一个索引库的版本信息     
 		        
