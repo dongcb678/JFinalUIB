@@ -148,14 +148,16 @@ public class ToolClassSearch {
             	log.error("baseDirName");
                 return classFiles;
             } 
-        
+            
+            // 验证过滤jar
             String[] filelist = baseDir.list(new FilenameFilter() {
                 @Override
                 public boolean accept(File dir, String name) {
-                    return scanJars || jarsList.contains(name);
+                    return scanJars && jarsList.contains(name);
                 }
             });
             
+            // jar中文件查找
             for (int i = 0; i < filelist.length; i++) {
                 JarFile jarFile = new JarFile(new File(libPath + File.separator + filelist[i]));
                 Enumeration<JarEntry> entries = jarFile.entries();
