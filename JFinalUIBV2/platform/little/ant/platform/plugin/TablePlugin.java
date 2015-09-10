@@ -30,7 +30,7 @@ public class TablePlugin implements IPlugin {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public boolean start() {
-		// 查询所有继承BaseModel、BaseModelCache的类
+		// 查询所有继承BaseModel、BaseModelCache的子类
 		List<String> jarsList = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
 		List<Class<?>> modelClasses = ToolClassSearch.search(BaseModel.class, jarsList);
 		modelClasses.addAll(ToolClassSearch.search(BaseModelCache.class, jarsList));

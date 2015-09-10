@@ -13,7 +13,6 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;
 
 import little.ant.platform.constant.ConstantInit;
-import little.ant.platform.model.BaseModel;
 import little.ant.platform.plugin.PropertiesPlugin;
 
 /**
@@ -24,15 +23,30 @@ public class ToolClassSearch {
 
 	private static final Logger log = Logger.getLogger(ToolClassSearch.class);
 
-    private boolean scanJars;
-    
-    private List<String> jarsList;
-    
+    /**
+     * 指定的父类或者接口
+     */
+    private Class<?> target;
+
+    /**
+     * classes目录
+     */
     private String classesPath;
     
+    /**
+     * lib目录
+     */
     private String libPath;
     
-    private Class<?> target;
+	/**
+	 * 是否扫描lib目录的jar
+	 */
+    private boolean scanJars;
+    
+    /**
+     * 扫描指定的jar文件
+     */
+    private List<String> jarsList;
     
 	public void setScanJars(boolean scanJars) {
 		this.scanJars = scanJars;
@@ -53,7 +67,12 @@ public class ToolClassSearch {
 	public void setTarget(Class<?> target) {
 		this.target = target;
 	}
-
+	
+	/**
+	 * 验证是否子类或者接口
+	 * @param classFileList
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	private <T> List<Class<? extends T>> isAssignableFrom(List<String> classFileList) {
         List<Class<? extends T>> classList = new ArrayList<Class<? extends T>>();
@@ -74,7 +93,7 @@ public class ToolClassSearch {
     }
 
     /**
-     * 递归查找.class文件
+     * 递归查找指定包内的.class文件
      * @param dirPath
      * @return
      */
@@ -116,6 +135,10 @@ public class ToolClassSearch {
         return classFiles;
     }
     
+    /**
+     * 查找jar中指定包内的.class文件
+     * @return
+     */
     private List<String> findJarFiles() {
         List<String> classFiles = new ArrayList<String>();;
         try {
@@ -161,6 +184,12 @@ public class ToolClassSearch {
         return classFiles;
     }
 
+    /**
+     * 搜索指定类的子类
+     * @param target
+     * @param jarsList
+     * @return
+     */
     public static List<Class<?>> search(Class<?> target, List<String> jarsList){
     	ToolClassSearch cs = new ToolClassSearch();
     	cs.setClassesPath(PathKit.getRootClassPath());
@@ -177,10 +206,6 @@ public class ToolClassSearch {
     	
     	List<Class<?>> list = cs.isAssignableFrom(classFileList);
     	return list;
-    }
-    
-    public static void main(String[] args){
-    	search(BaseModel.class, null);
     }
     
 }

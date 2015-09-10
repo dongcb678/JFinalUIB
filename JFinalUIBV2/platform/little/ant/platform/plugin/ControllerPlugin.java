@@ -13,7 +13,7 @@ import little.ant.platform.tools.ToolClassSearch;
 
 /**
  * 扫描Controller上的注解，绑定Controller和controllerKey
- * @author 董华健
+ * @author 董华健  dongcb678@163.com
  */
 public class ControllerPlugin implements IPlugin {
 
@@ -28,7 +28,7 @@ public class ControllerPlugin implements IPlugin {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public boolean start() {
-		// 查询所有继承BaseController的类
+		// 查询所有继承BaseController的子类
 		List<String> jarsList = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
 		List<Class<?>> controllerClasses = ToolClassSearch.search(BaseController.class, jarsList);
 		
