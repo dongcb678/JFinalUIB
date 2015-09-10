@@ -12,6 +12,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 
 import little.ant.platform.constant.ConstantInit;
@@ -34,10 +35,40 @@ public class BaseService {
 
 	public static final BaseService service = Enhancer.enhance(BaseService.class);
 	
-	public List<?> query(String sqlId, Map<String, Object> param){
+	/**
+	 * 封装预处理参数解析并执行查询
+	 * @param sqlId
+	 * @param param
+	 * @return
+	 */
+	public <T> List<T> query(String sqlId, Map<String, Object> param){
 		LinkedList<Object> paramValue = new LinkedList<Object>();
 		String sql = getSqlByBeetl(sqlId, param, paramValue);
 		return Db.query(sql, paramValue.toArray());
+	}
+
+	/**
+	 * 封装预处理参数解析并执行查询
+	 * @param sqlId
+	 * @param param
+	 * @return
+	 */
+	public List<Record> find(String sqlId, Map<String, Object> param){
+		LinkedList<Object> paramValue = new LinkedList<Object>();
+		String sql = getSqlByBeetl(sqlId, param, paramValue);
+		return Db.find(sql, paramValue.toArray());
+	}
+
+	/**
+	 * 封装预处理参数解析并执行更新
+	 * @param sqlId
+	 * @param param
+	 * @return
+	 */
+	public int update(String sqlId, Map<String, Object> param){
+		LinkedList<Object> paramValue = new LinkedList<Object>();
+		String sql = getSqlByBeetl(sqlId, param, paramValue);
+		return Db.update(sql, paramValue.toArray());
 	}
 	
 	/**
