@@ -1,18 +1,17 @@
 package little.ant.platform.plugin;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.jfinal.log.Logger;
+import com.jfinal.plugin.IPlugin;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 
 import little.ant.platform.annotation.Table;
 import little.ant.platform.constant.ConstantInit;
 import little.ant.platform.model.BaseModel;
 import little.ant.platform.model.BaseModelCache;
-import little.ant.platform.tools.ToolClassSearcher;
-
-import com.jfinal.log.Logger;
-import com.jfinal.plugin.IPlugin;
-import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import little.ant.platform.tools.ToolClassSearch;
 
 /**
  * 扫描model上的注解，绑定model和table
@@ -31,22 +30,10 @@ public class TablePlugin implements IPlugin {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public boolean start() {
-		List<String> jars = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
-		List<Class<? extends BaseModel>> modelClasses = new ArrayList<Class<? extends BaseModel>>();// 查询所有继承BaseModel、BaseModelCache的类
-		if(jars.size() > 0){
-			List<Class<? extends BaseModel>> exBaseModel = ToolClassSearcher.of(BaseModel.class).includeAllJarsInLib(ToolClassSearcher.isValiJar()).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件
-			modelClasses.addAll(exBaseModel);
-			
-			List<Class<? extends BaseModel>> exBaseModelCache = ToolClassSearcher.of(BaseModelCache.class).includeAllJarsInLib(ToolClassSearcher.isValiJar()).injars(jars).search();// 可以指定查找jar包，jar名称固定，避免扫描所有文件
-			modelClasses.addAll(exBaseModelCache);
-			
-		}else{
-			List<Class<? extends BaseModel>> exBaseModel = ToolClassSearcher.of(BaseModel.class).search();
-			modelClasses.addAll(exBaseModel);
-			
-			List<Class<? extends BaseModel>> exBaseModelCache = ToolClassSearcher.of(BaseModelCache.class).search();
-			modelClasses.addAll(exBaseModelCache);
-		}
+		// 查询所有继承BaseModel、BaseModelCache的类
+		List<String> jarsList = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
+		List<Class<?>> modelClasses = ToolClassSearch.search(BaseModel.class, jarsList);
+		modelClasses.addAll(ToolClassSearch.search(BaseModelCache.class, jarsList));
 		
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
