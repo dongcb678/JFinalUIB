@@ -31,7 +31,7 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import little.ant.platform.constant.ConstantWebContext;
+import com.platform.constant.ConstantWebContext;
 
 /**
  * VelocityRender.

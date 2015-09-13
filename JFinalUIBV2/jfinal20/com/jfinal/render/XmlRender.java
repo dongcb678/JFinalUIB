@@ -21,8 +21,9 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.platform.constant.ConstantWebContext;
+
 import freemarker.template.Template;
-import little.ant.platform.constant.ConstantWebContext;
 
 /**
  * XmlRender use FreeMarker

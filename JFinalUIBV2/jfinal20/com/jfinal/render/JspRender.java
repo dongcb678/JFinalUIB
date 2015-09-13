@@ -29,8 +29,7 @@ import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.ModelRecordElResolver;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-
-import little.ant.platform.constant.ConstantWebContext;
+import com.platform.constant.ConstantWebContext;
 
 /**
  * JspRender.

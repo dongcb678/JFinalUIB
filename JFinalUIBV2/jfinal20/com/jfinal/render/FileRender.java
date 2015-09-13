@@ -29,8 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StrKit;
-
-import little.ant.platform.constant.ConstantWebContext;
+import com.platform.constant.ConstantWebContext;
 
 /**
  * FileRender.

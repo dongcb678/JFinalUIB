@@ -18,7 +18,7 @@ package com.jfinal.render;
 
 import javax.servlet.http.HttpServletResponse;
 
-import little.ant.platform.constant.ConstantWebContext;
+import com.platform.constant.ConstantWebContext;
 
 /**
  * Redirect301Render.

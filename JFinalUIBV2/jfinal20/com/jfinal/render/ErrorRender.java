@@ -20,8 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.jfinal.core.Const;
-
-import little.ant.platform.constant.ConstantWebContext;
+import com.platform.constant.ConstantWebContext;
 
 /**
  * ErrorRender.

@@ -23,8 +23,7 @@ import java.lang.reflect.Proxy;
 import java.sql.Connection;
 
 import com.jfinal.log.Logger;
-
-import little.ant.platform.tools.ToolFormatSql;
+import com.platform.tools.ToolFormatSql;
 
 /**
  * SqlReporter.

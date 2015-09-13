@@ -19,8 +19,7 @@ package com.jfinal.render;
 import java.io.IOException;
 
 import com.jfinal.core.JFinal;
-
-import little.ant.platform.constant.ConstantWebContext;
+import com.platform.constant.ConstantWebContext;
 
 /**
  * RedirectRender with status: 302 Found.

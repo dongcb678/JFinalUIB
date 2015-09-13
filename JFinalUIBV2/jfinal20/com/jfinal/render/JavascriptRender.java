@@ -19,7 +19,7 @@ package com.jfinal.render;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import little.ant.platform.constant.ConstantWebContext;
+import com.platform.constant.ConstantWebContext;
 
 /**
  * JavascriptRender.

@@ -48,7 +48,6 @@
         <jarDirectory url="file://$MODULE_DIR$/WebContent/WEB-INF/lib" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: junit:junit:4.11" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -69,5 +68,7 @@
         <jarDirectory url="file://$MODULE_DIR$/build-lib/jfinal20" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="junit:junit:4.8.1" level="project" />
   </component>
 </module>
+

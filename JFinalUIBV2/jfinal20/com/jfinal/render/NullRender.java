@@ -16,7 +16,7 @@
 
 package com.jfinal.render;
 
-import little.ant.platform.constant.ConstantWebContext;
+import com.platform.constant.ConstantWebContext;
 
 /**
  * NullRender.

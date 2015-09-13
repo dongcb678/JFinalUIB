@@ -25,12 +25,13 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
+import com.platform.constant.ConstantWebContext;
+
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
-import little.ant.platform.constant.ConstantWebContext;
 
 /**
  * FreeMarkerRender.

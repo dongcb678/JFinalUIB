@@ -32,8 +32,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.jfinal.plugin.activerecord.cache.ICache;
-
-import little.ant.platform.model.BaseModel;
+import com.platform.mvc.base.BaseModel;
 
 /**
  * Model.
