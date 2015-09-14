@@ -28,15 +28,19 @@ public class ControllerPlugin implements IPlugin {
 	@Override
 	public boolean start() {
 		// 查询所有继承BaseController的子类
-		List<String> jarsList = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
-		List<Class<?>> controllerClasses = ToolClassSearch.search(BaseController.class, jarsList);
+		List<String> jarsList = (List<String>) PropertiesPlugin
+				.getParamMapValue(ConstantInit.config_scan_jar);
+		List<Class<?>> controllerClasses = ToolClassSearch
+				.search(BaseController.class, jarsList);
 		
 		// 循环处理自动注册映射
 		for (Class controller : controllerClasses) {
 			// 获取注解对象
-			Controller controllerBind = (Controller) controller.getAnnotation(Controller.class);
+			Controller controllerBind = (Controller) controller
+					.getAnnotation(Controller.class);
 			if (controllerBind == null) {
-				log.error(controller.getName() + "继承了BaseController，但是没有注解绑定映射路径");
+				log.error(controller.getName() + 
+						"继承了BaseController，但是没有注解绑定映射路径");
 				continue;
 			}
 
@@ -50,7 +54,8 @@ public class ControllerPlugin implements IPlugin {
 				}
 				// 注册映射
 				routes.add(controllerKey, controller);
-				log.debug("Controller注册： controller = " + controller + ", controllerKey = " + controllerKey);
+				log.debug("Controller注册： controller = " + controller + 
+						", controllerKey = " + controllerKey);
 			}
 		}
 		return true;

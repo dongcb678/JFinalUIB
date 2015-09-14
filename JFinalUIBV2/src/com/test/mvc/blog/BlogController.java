@@ -31,7 +31,9 @@ public class BlogController extends BaseController {
 	 * 列表
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, Blog.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, 
+				BaseModel.sqlId_splitPage_select, 
+				Blog.sqlId_splitPage_from);
 		render("/test/blog/list.html");
 	}
 	
@@ -41,7 +43,8 @@ public class BlogController extends BaseController {
 	@Before(BlogValidator.class)
 	public void save() {
 		Blog blog = getModel(Blog.class);
-		blog.set(Blog.column_createtime, ToolDateTime.getSqlTimestamp(null));
+		blog.set(Blog.column_createtime, 
+				ToolDateTime.getSqlTimestamp(null));
 		blog.save();
 		render("/test/blog/add.html");
 	}
@@ -77,7 +80,8 @@ public class BlogController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		BlogService.service.delete("test_blog", getPara() == null ? ids : getPara());
+		BlogService.service.delete("test_blog", 
+				getPara() == null ? ids : getPara());
 		redirect("/jf/test/blog");
 	}
 	

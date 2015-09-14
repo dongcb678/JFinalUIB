@@ -26,6 +26,7 @@ import com.platform.constant.ConstantInit;
 import com.platform.handler.GlobalHandler;
 import com.platform.interceptor.AuthInterceptor;
 import com.platform.interceptor.ParamPkgInterceptor;
+import com.platform.plugin.ControllerPlugin;
 import com.platform.plugin.FileRenamePlugin;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ParamInitPlugin;
@@ -77,8 +78,10 @@ public class JfinalConfig extends JFinalConfig {
 	 * 配置路由
 	 */
 	public void configRoute(Routes routes) { 
-		log.info("configRoute 路由扫描注册");
-		//new ControllerPlugin(routes).start(); // 注解路由扫描
+		log.info("configRoute 注解注册路由");
+		new ControllerPlugin(routes).start(); // 注解路由扫描
+		
+		log.info("configRoute 手动注册路由");
 		routes.add(new PlatformRoutes());
 		routes.add(new WeiXinRoutes());
 		routes.add(new TestRoutes());
@@ -105,7 +108,6 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("afterJFinalStart 配置文件上传命名策略插件");
 		plugins.add(new FileRenamePlugin());
-		
 	}
 
 	/**

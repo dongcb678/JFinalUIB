@@ -22,8 +22,10 @@ public class BaseMapping {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void scan() {
 		// 查询所有继承BaseModel、BaseModelCache的子类
-		List<String> jarsList = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
-		List<Class<?>> modelClasses = ToolClassSearch.search(BaseModel.class, jarsList);
+		List<String> jarsList = (List<String>) PropertiesPlugin
+				.getParamMapValue(ConstantInit.config_scan_jar);
+		List<Class<?>> modelClasses = ToolClassSearch
+				.search(BaseModel.class, jarsList);
 		modelClasses.addAll(ToolClassSearch.search(BaseModelCache.class, jarsList));
 		
 		// 循环处理自动注册映射
@@ -61,7 +63,8 @@ public class BaseMapping {
 			}
 			if(dataSourceName.equals(configName)){
 				arp.addMapping(tableName, pkName, model);
-				log.debug("Model注册： model = " + model + ", tableName = " + tableName + ", pkName: " + pkName);
+				log.debug("Model注册： model = " + model + 
+						", tableName = " + tableName + ", pkName: " + pkName);
 			}
 		}
 	}
