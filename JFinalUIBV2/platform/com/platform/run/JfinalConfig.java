@@ -10,6 +10,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
+import com.jfinal.i18n.I18nInterceptor;
 import com.jfinal.plugin.activerecord.tx.TxByActionKeys;
 import com.jfinal.plugin.activerecord.tx.TxByMethods;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
@@ -72,6 +73,9 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("configConstant 视图error page设置");
 		constants.setError404View("/common/404.html");
 		constants.setError500View("/common/500.html");
+
+		log.info("configConstant i18n文件前缀设置设置");
+		constants.setI18nDefaultBaseName("message");
 	}
 	
 	/**
@@ -123,12 +127,15 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("configInterceptor 参数封装拦截器");
 		interceptors.add(new ParamPkgInterceptor());
 		
-		// 配置开启事物规则
+		log.info("configInterceptor 配置开启事物规则");
 		interceptors.add(new TxByMethods("save", "update", "delete"));
 		interceptors.add(new TxByRegex(".*save.*"));
 		interceptors.add(new TxByRegex(".*update.*"));
 		interceptors.add(new TxByRegex(".*delete.*"));
 		interceptors.add(new TxByActionKeys("/jf/wx/message", "/jf/wx/message/index"));
+
+		log.info("configInterceptor i18n拦截器");
+		interceptors.add(new I18nInterceptor());
 	}
 	
 	/**
