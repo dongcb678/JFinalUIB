@@ -182,7 +182,7 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("beforeJFinalStop 数据清理");
 		DataClear.stop();
 	}
-	
+
 	/**
 	 * 运行此 main 方法可以启动项目
 	 * 说明：
@@ -191,5 +191,7 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public static void main(String[] args) {
 		JFinal.start("WebContent", 99, "/", 5);
+		//JFinal.start("D:\\DevelopmentTool\\IntelliJIDEA14.1.4" +
+		//		"\\IdeaProjects\\JFinalUIBV2\\JFinalUIBV2\\WebContent", 99, "/", 5);
 	}
 }
