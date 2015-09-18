@@ -1,0 +1,99 @@
+
+-----------------------------------------------------------------------
+
+百度阅读地址 ：http://yuedu.baidu.com/ebook/3fc54b55d5bbfd0a7956739f
+
+定价55.55元，百度阅读抽取三成，剩下为作者所得，谢谢大家支持！
+
+暂时没有出纸质版本是因为费用实在太高，个人无法承受，望大家体谅。
+
+-----------------------------------------------------------------------
+
+学习交流QQ群 ：309647612
+
+书籍整个创作周期从2015年8月1日开始到2015年9月10日，时间仓促，难免有瑕疵，
+希望大家能够指出存在的问题，我会不断的更新纠正，谢谢大家！
+
+-----------------------------------------------------------------------
+
+Jfinal极速开发实战 目录
+
+-----------------------------------------------------------------------
+
+为什么要写这本书
+读者对象
+能学到什么
+如何阅读这本书
+勘误和支持
+致谢
+1	初识Jfinal
+1.1	Jfinal的简介
+1.2	Jfinal的特点
+1.3	Jfinal下载
+2	搭建开发环境
+2.1	开发环境要求
+2.2	下载安装配置JDK
+2.3	下载安装配置Eclipse
+2.4	下载安装配置Maven
+2.5	下载安装配置TomcatPlugin
+2.6	嵌入式Tomcat
+2.7	热部署神器之Jrebel
+2.8	热部署神器之springloaded
+3	导入示例项目
+3.1	eclipse导入Jfinal demo项目
+3.2	eclipse导入Jfinal demo for maven项目
+3.3	使用eclipse git下载JfinalUIB项目
+4	运行项目方式
+4.1	Jetty运行Jfinal demo
+4.2	TomcatEclipsePlugin运行Jfinal demo
+4.3	Tomcat Embedded运行Jfinal demo
+4.4	Jetty运行Jfinal demo for maven
+4.5	Mvn jetty:run运行Jfinal demo for maven
+4.6	Eclipse自带server运行Jfinal demo for maven
+4.7	配置运行JfinalUIB
+4.8	使用idea开发JfinalUIB项目
+4.9	创建并运行普通java web项目
+4.10	创建并运行maven版java web项目
+5	部署项目
+5.1	项目打包
+5.2	项目部署到tomcat
+5.3	项目部署到jetty
+5.4	项目部署到resin
+5.5	整合nginx
+6	Jfinal快速入门
+6.1	Jfinal总体架构图
+6.2	入口控制类JfinalConfig
+6.3	MVC控制器Controller
+6.4	数据校验Validator
+6.5	数据库操作ActiveRecord
+6.6	缓存的配置使用
+6.7	国际化
+6.8	常用工具类
+7	实战项目之项目设计
+7.1	数据处理流程
+7.2	项目结构
+7.3	功能模块
+7.4	数据库
+7.5	Base类
+7.6	前端和后端交互
+8	实战项目之扩展开发
+8.1	Controller、Model自动注册
+8.2	Controller全局参数封装
+8.3	支持distinct分页
+8.4	高仿mybatis动态SQL管理
+8.5	格式化输出SQL和预处理参数输出
+8.6	乐观锁控制
+8.7	请求耗时计算
+8.8	国际化
+8.9	使用Junit做单元测试
+8.10	简易代码生成器
+8.11	表单数组提交
+8.12	表单重复提交
+8.13	统一异常处理
+8.14	Service层事务控制
+9	实战项目之业务功能开发
+9.1	权限设计
+9.2	登陆验证
+9.3	分页详解
+9.4	通用表单验证器
+9.5	开发一个新功能
