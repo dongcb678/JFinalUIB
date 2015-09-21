@@ -1,13 +1,22 @@
 package com.platform.tools.code;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.druid.DruidPlugin;
 import com.platform.constant.ConstantInit;
 import com.platform.run.ConfigCore;
 import com.platform.tools.ToolSqlXml;
@@ -75,7 +84,9 @@ public class GeneratePostgreSQL extends GenerateBase {
 		
 		List<Record> listDesc = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumnsInfo"), tableName);
 		int index = 1;
-		
+
+		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
+				
 		List<Record> listColumn = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumns"), tableName);
 		for (Record record : listColumn) {
 			String column_name = record.getStr("column_name");
@@ -90,12 +101,16 @@ public class GeneratePostgreSQL extends GenerateBase {
 			
 			TableColumnDto table = new TableColumnDto();
 			table.setTable_name(tableName);
+			table.setTable_desc(listDesc.get(0).getStr("description"));
+			
 			table.setColumn_name(column_name);
+			table.setColumn_name_upperCaseFirstOne(ToolString.toUpperCaseFirstOne(column_name));
+			
 			table.setColumn_type(data_type);
 			table.setColumn_length(character_maximum_length);
-
-			table.setTable_desc(listDesc.get(0).getStr("description"));
 			table.setColumn_desc(listDesc.get(index).getStr("description"));
+
+			table.setColumn_className(columnJavaTypeMap.get(column_name.toLowerCase()));
 			
 			list.add(table);
 			
@@ -103,6 +118,43 @@ public class GeneratePostgreSQL extends GenerateBase {
 		}
 		
 		return list;
+	}
+
+	public Map<String, String> getJavaType(String tableName){
+		log.info("configPlugin 配置Druid数据库连接池连接属性");
+		DruidPlugin druidPluginUIB = new DruidPlugin(
+				"jdbc:postgresql://127.0.0.1:5432/jfinaluibv2", 
+				"postgres", 
+				"678789", 
+				"org.postgresql.Driver");
+		druidPluginUIB.start();
+
+        //  获取字段数
+	    Map<String, String> columnJavaTypeMap = new HashMap<String, String>();
+		try {
+			DataSource dataSource = druidPluginUIB.getDataSource();
+			Connection conn = dataSource.getConnection();
+			
+			Statement stmt = conn.createStatement();    
+		    String sql = "select * from " + tableName + " where 1 != 1 ";   
+		    ResultSet rs = stmt.executeQuery(sql);    
+		    ResultSetMetaData rsmd = rs.getMetaData(); 
+
+	        int columns = rsmd.getColumnCount();   
+	        for (int i=1; i<=columns; i++){   
+	            //获取字段名
+	            String columnName = rsmd.getColumnName(i).toLowerCase(); 
+	 			String columnClassName = rsmd.getColumnClassName(i);   
+	 			if(columnClassName.equals("[B")){
+	 				columnClassName = "byte[]";
+	 			}
+	 			columnJavaTypeMap.put(columnName, columnClassName);
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return columnJavaTypeMap;
 	}
 
 }
