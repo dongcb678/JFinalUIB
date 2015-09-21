@@ -105,22 +105,4 @@ public class GeneratePostgreSQL extends GenerateBase {
 		return list;
 	}
 
-	@Override
-	public String dbTypeToJava(String columnType){
-		String javaDataType = null;
-		if(columnType.indexOf("char") != -1 || columnType.indexOf("text") != -1){
-			javaDataType = "String";
-			
-		} else if(columnType.indexOf("int") != -1){
-			javaDataType = "long";
-			
-		} else if(columnType.indexOf("time") != -1 || columnType.indexOf("date") != -1){
-			javaDataType = "Date";
-			
-		} else if(columnType.indexOf("byte") != -1 || columnType.indexOf("text") != -1){
-			javaDataType = "byte[]";
-		}
-		
-		return javaDataType;
-	}
 }

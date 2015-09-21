@@ -59,18 +59,11 @@ public abstract class GenerateBase {
 	public static String basePath = "test";
 
 	/**
-	 * 获取表的所有字段名
+	 * 获取表的所有字段信息
 	 * @param tableName
 	 * @return
 	 */
-	public abstract List<TableColumnDto> getColunm(String tableName);
-	
-	/**
-	 * 根据数据库表列类型得到对应java数据类型
-	 * @param columnType
-	 * @return
-	 */
-	public abstract String dbTypeToJava(String columnType);
+	public abstract List<TableColumnDto> getColunm(String tableName) ;
 	
 	/**
 	 * 生成Model

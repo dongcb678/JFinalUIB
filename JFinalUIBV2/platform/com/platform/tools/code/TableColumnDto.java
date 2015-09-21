@@ -11,6 +11,7 @@ public class TableColumnDto {
 	private String table_desc ; // 表描述
 	
 	private String column_name ; // 列名称
+	private String column_name_upperCaseFirstOne ; // 列名称，首字母大写
 	
 	private String column_type ; // 列类型
 	
@@ -18,6 +19,14 @@ public class TableColumnDto {
 
 	private String column_length ; // 列最大长度，针对字符型
 	
+	private String column_className; // 对应的java数据类型
+	
+	public String getColumn_name_upperCaseFirstOne() {
+		return column_name_upperCaseFirstOne;
+	}
+	public void setColumn_name_upperCaseFirstOne(String column_name_upperCaseFirstOne) {
+		this.column_name_upperCaseFirstOne = column_name_upperCaseFirstOne;
+	}
 	public String getTable_name() {
 		return table_name;
 	}
@@ -53,6 +62,12 @@ public class TableColumnDto {
 	}
 	public void setColumn_length(String column_length) {
 		this.column_length = column_length;
+	}
+	public String getColumn_className() {
+		return column_className;
+	}
+	public void setColumn_className(String column_className) {
+		this.column_className = column_className;
 	}
 	
 	
