@@ -67,6 +67,9 @@ public class TableColumnDto {
 		return column_className;
 	}
 	public void setColumn_className(String column_className) {
+		if(column_className.startsWith("java.lang.")){
+			column_className = column_className.replace("java.lang.", "");
+		}
 		this.column_className = column_className;
 	}
 	
