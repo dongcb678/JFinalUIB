@@ -24,7 +24,7 @@
 	<!-- 
 		查询所有列名称：
 		USE information_schema; 
-		--//show full columns from ?
+		show full columns from ?
 	-->
 	<sql id="getColumns">
 		<![CDATA[ 
