@@ -1,7 +1,7 @@
 
-1.表单数组上传：ToolModel
+1.表单数组上传：
 
-	在com.jfinal.core包中新增ToolModel类
+	修改 com.jfinal.core.ModelInjector 类为 public
 
 2.增加sql打印格式化
 
@@ -23,10 +23,11 @@
 
 	修改 Db.java 和 DbPro.java， 增加 paginateDistinct 方法
 	
-7.在Model.java中增加updateByVersion方法
+7.在Model.java中修改update方法
 	
-	处理乐观锁
+	处理乐观锁，增加了更新sql语句的版本号条件
 	
 8.com.jfinal.render包下面的视图render增加耗时计算
+
 	所有的render实现类都在render方法前后加上视图耗时计算
 	
