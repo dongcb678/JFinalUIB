@@ -76,7 +76,11 @@ public class GenerateMySQL extends GenerateBase {
 		
 		System.exit(0);
 	}
-
+	
+	/**
+	 * 根据自己的情况修改这里的数据源IP、端口、用户名、密码
+	 * 数据库information_schema是mysql的系统库，不能改
+	 */
 	@Override
 	public List<TableColumnDto> getColunm(String tableName)  {
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
@@ -139,7 +143,10 @@ public class GenerateMySQL extends GenerateBase {
 		
 		return list;
 	}
-	
+
+	/**
+	 * 根据自己的情况修改这里的数据源IP、端口、数据库名称、用户名、密码
+	 */
 	public Map<String, String> getJavaType(String tableName){
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
 		DruidPlugin druidPluginUIB = new DruidPlugin(
