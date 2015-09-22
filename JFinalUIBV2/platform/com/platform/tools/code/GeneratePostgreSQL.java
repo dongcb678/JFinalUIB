@@ -51,12 +51,14 @@ public class GeneratePostgreSQL extends GenerateBase {
 			String className = tableArr[i][3]; 
 			// 类名首字母小写
 			String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
+
+			List<TableColumnDto> colunmList = base.getColunm(tableName);
 			
 			// 1.生成sql文件
 			base.sql(classNameSmall, tableName); 
 			
 			// 2.生成model
-			base.model(className, classNameSmall, dataSource, tableName, pkName); 
+			base.model(className, classNameSmall, dataSource, tableName, pkName, colunmList); 
 			
 			// 3.生成validator
 			base.validator(className, classNameSmall); 
@@ -68,11 +70,11 @@ public class GeneratePostgreSQL extends GenerateBase {
 			base.service(className, classNameSmall); 
 
 			// 6.生成DTO，还没有处理数据库字段类型到java数据类型的对应转换
-			//base.dto(base, className, classNameSmall, dataSource, tableName); 
+			//base.dto(base, className, classNameSmall, dataSource, tableName, colunmList); 
 			
 			// 7.生成视图文件
-			//base.form(classNameSmall, tableName);
-			//base.view(classNameSmall, tableName);
+			//base.form(classNameSmall, tableName, colunmList);
+			//base.view(classNameSmall, tableName, colunmList);
 		}
 		
 		System.exit(0);

@@ -73,7 +73,7 @@ public abstract class GenerateBase {
 	 * @param tableName
 	 * @param pkName
 	 */
-	public void model(String className, String classNameSmall, String dataSource, String tableName, String pkName){
+	public void model(String className, String classNameSmall, String dataSource, String tableName, String pkName, List<TableColumnDto> colunmList){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		String packages = packageBase + "." + className.toLowerCase();
 		paraMap.put("package", packages);
@@ -83,7 +83,7 @@ public abstract class GenerateBase {
 		paraMap.put("pkName", pkName);
 		paraMap.put("namespace", basePath + "." + classNameSmall);
 
-		paraMap.put("colunmList", getColunm(tableName));
+		paraMap.put("colunmList", colunmList);
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +".java";
 		createFileByTemplete("model.html", paraMap, filePath);
@@ -97,7 +97,7 @@ public abstract class GenerateBase {
 	 * @param dataSource
 	 * @param tableName
 	 */
-	public void dto(GenerateBase base, String className, String classNameSmall, String dataSource, String tableName){
+	public void dto(String className, String classNameSmall, String dataSource, String tableName, List<TableColumnDto> colunmList){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		String packages = packageBase + "." + className.toLowerCase();
 		paraMap.put("package", packages);
@@ -105,8 +105,7 @@ public abstract class GenerateBase {
 		paraMap.put("dataSource", dataSource);
 		paraMap.put("tableName", tableName);
 
-		paraMap.put("colunmList", getColunm(tableName));
-		paraMap.put("base", base);
+		paraMap.put("colunmList", colunmList);
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +"Dto.java";
 		createFileByTemplete("dto.html", paraMap, filePath);
@@ -185,10 +184,10 @@ public abstract class GenerateBase {
 	 * @param classNameSmall
 	 * @param tableName
 	 */
-	public void form(String classNameSmall, String tableName){
+	public void form(String classNameSmall, String tableName, List<TableColumnDto> colunmList){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("classNameSmall", classNameSmall);
-		paraMap.put("colunmList", getColunm(tableName));
+		paraMap.put("colunmList", colunmList);
 		
 		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + basePath + "/" + classNameSmall +"/form.html";
 		createFileByTemplete("form.html", paraMap, filePath);
@@ -199,10 +198,10 @@ public abstract class GenerateBase {
 	 * @param classNameSmall
 	 * @param tableName
 	 */
-	public void view(String classNameSmall, String tableName){
+	public void view(String classNameSmall, String tableName, List<TableColumnDto> colunmList){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("classNameSmall", classNameSmall);
-		paraMap.put("colunmList", getColunm(tableName));
+		paraMap.put("colunmList", colunmList);
 		
 		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + basePath + "/" + classNameSmall +"/view.html";
 		createFileByTemplete("view.html", paraMap, filePath);

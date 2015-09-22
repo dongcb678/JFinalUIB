@@ -32,6 +32,15 @@ import com.platform.tools.ToolString;
 public class GenerateMySQL extends GenerateBase {
 
 	private static Logger log = Logger.getLogger(GenerateMySQL.class);
+
+	/**
+	 * 根据自己的情况修改这里的数据源IP、端口、数据库名称、用户名、密码
+	 */
+	public String ip = "127.0.0.1";
+	public String port = "3306";
+	public String username = "root";
+	public String password = "678789";
+	public String database = "jfinaluibv2";
 	
 	/**
 	 * 循环生成文件
@@ -51,11 +60,13 @@ public class GenerateMySQL extends GenerateBase {
 			// 类名首字母小写
 			String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
 			
+			List<TableColumnDto> colunmList = base.getColunm(tableName);
+			
 			// 1.生成sql文件
 			base.sql(classNameSmall, tableName); 
 			
 			// 2.生成model
-			base.model(className, classNameSmall, dataSource, tableName, pkName); 
+			base.model(className, classNameSmall, dataSource, tableName, pkName, colunmList); 
 			
 			// 3.生成validator
 			base.validator(className, classNameSmall); 
@@ -66,30 +77,24 @@ public class GenerateMySQL extends GenerateBase {
 			// 5.生成service
 			base.service(className, classNameSmall); 
 
-			// 6.生成DTO，还没有处理数据库字段类型到java数据类型的对应转换
-			//base.dto(base, className, classNameSmall, dataSource, tableName); 
+			// 6.生成DTO
+			base.dto(className, classNameSmall, dataSource, tableName, colunmList); 
 			
 			// 7.生成视图文件
-			//base.form(classNameSmall, tableName);
-			//base.view(classNameSmall, tableName);
+//			base.form(classNameSmall, tableName, colunmList);
+//			base.view(classNameSmall, tableName, colunmList);
 		}
 		
 		System.exit(0);
 	}
 	
-	/**
-	 * 根据自己的情况修改这里的数据源IP、端口、用户名、密码
-	 * 数据库information_schema是mysql的系统库，不能改
-	 */
 	@Override
 	public List<TableColumnDto> getColunm(String tableName)  {
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
 		DruidPlugin druidPluginIS = new DruidPlugin(
-				"jdbc:mysql://127.0.0.1:3306/information_schema?characterEncoding=UTF-8"
+				"jdbc:mysql://"+ip+":"+port+"/information_schema?characterEncoding=UTF-8"
 				+ "&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull", 
-				"root", 
-				"678789", 
-				"com.mysql.jdbc.Driver");
+				username, password, "com.mysql.jdbc.Driver");
 		druidPluginIS.start();
 
 		log.info("configPlugin 配置ActiveRecord插件");
@@ -144,17 +149,12 @@ public class GenerateMySQL extends GenerateBase {
 		return list;
 	}
 
-	/**
-	 * 根据自己的情况修改这里的数据源IP、端口、数据库名称、用户名、密码
-	 */
 	public Map<String, String> getJavaType(String tableName){
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
 		DruidPlugin druidPluginUIB = new DruidPlugin(
-				"jdbc:mysql://127.0.0.1:3306/jfinaluibv2?characterEncoding=UTF-8"
+				"jdbc:mysql://"+ip+":"+port+"/"+database+"?characterEncoding=UTF-8"
 				+ "&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull", 
-				"root", 
-				"678789", 
-				"com.mysql.jdbc.Driver");
+				username, password, "com.mysql.jdbc.Driver");
 		druidPluginUIB.start();
 
         //  获取字段数

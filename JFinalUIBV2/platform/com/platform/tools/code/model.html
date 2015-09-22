@@ -45,7 +45,7 @@ public class ${className} extends BaseModel<${className}> {
 	public void set${colunm.column_name_upperCaseFirstOne}(${colunm.column_className} ${colunm.column_name}){
 		set(column_${colunm.column_name}, ${colunm.column_name});
 	}
-	public <T> T get${colunm.column_name_upperCaseFirstOne}(String ${colunm.column_name}) {
+	public <T> T get${colunm.column_name_upperCaseFirstOne}() {
 		return get(column_${colunm.column_name});
 	}
 	<% } %>
