@@ -115,5 +115,98 @@ public class Department extends BaseModel<Department> {
 	 * 描述：根据上级节点id查询子节点数量
 	 */
 	public static final String sqlId_childCount = "platform.department.childCount";
+
+	private String ids;
+	private Long version;
+	private String allchildnodeids;
+	private Long departmentlevel;
+	private String depttype;
+	private String description;
+	private String images;
+	private String isparent;
+	private String names;
+	private Long orderids;
+	private String url;
+	private String parentdepartmentids;
+	private String principaluserids;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setAllchildnodeids(String allchildnodeids){
+		set(column_allchildnodeids, allchildnodeids);
+	}
+	public <T> T getAllchildnodeids() {
+		return get(column_allchildnodeids);
+	}
+	public void setDepartmentlevel(Long departmentlevel){
+		set(column_departmentlevel, departmentlevel);
+	}
+	public <T> T getDepartmentlevel() {
+		return get(column_departmentlevel);
+	}
+	public void setDepttype(String depttype){
+		set(column_depttype, depttype);
+	}
+	public <T> T getDepttype() {
+		return get(column_depttype);
+	}
+	public void setDescription(String description){
+		set(column_description, description);
+	}
+	public <T> T getDescription() {
+		return get(column_description);
+	}
+	public void setImages(String images){
+		set(column_images, images);
+	}
+	public <T> T getImages() {
+		return get(column_images);
+	}
+	public void setIsparent(String isparent){
+		set(column_isparent, isparent);
+	}
+	public <T> T getIsparent() {
+		return get(column_isparent);
+	}
+	public void setNames(String names){
+		set(column_names, names);
+	}
+	public <T> T getNames() {
+		return get(column_names);
+	}
+	public void setOrderids(Long orderids){
+		set(column_orderids, orderids);
+	}
+	public <T> T getOrderids() {
+		return get(column_orderids);
+	}
+	public void setUrl(String url){
+		set(column_url, url);
+	}
+	public <T> T getUrl() {
+		return get(column_url);
+	}
+	public void setParentdepartmentids(String parentdepartmentids){
+		set(column_parentdepartmentids, parentdepartmentids);
+	}
+	public <T> T getParentdepartmentids() {
+		return get(column_parentdepartmentids);
+	}
+	public void setPrincipaluserids(String principaluserids){
+		set(column_principaluserids, principaluserids);
+	}
+	public <T> T getPrincipaluserids() {
+		return get(column_principaluserids);
+	}
 	
 }

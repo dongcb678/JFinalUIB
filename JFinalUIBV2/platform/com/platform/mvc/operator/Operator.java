@@ -161,6 +161,127 @@ public class Operator extends BaseModelCache<Operator> {
 	 */
 	public static final String sqlId_splitPage_from = "platform.operator.splitPageFrom";
 
+	private String ids;
+	private Long version;
+	private String description;
+	private String names;
+	private String onemany;
+	private String returnparamkeys;
+	private String returnurl;
+	private String rowfilter;
+	private String url;
+	private String moduleids;
+	private String splitpage;
+	private String formtoken;
+	private String ipblack;
+	private String privilegess;
+	private String ispv;
+	private String pvtype;
+	private String modulenames;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setDescription(String description){
+		set(column_description, description);
+	}
+	public <T> T getDescription() {
+		return get(column_description);
+	}
+	public void setNames(String names){
+		set(column_names, names);
+	}
+	public <T> T getNames() {
+		return get(column_names);
+	}
+	public void setOnemany(String onemany){
+		set(column_onemany, onemany);
+	}
+	public <T> T getOnemany() {
+		return get(column_onemany);
+	}
+	public void setReturnparamkeys(String returnparamkeys){
+		set(column_returnparamkeys, returnparamkeys);
+	}
+	public <T> T getReturnparamkeys() {
+		return get(column_returnparamkeys);
+	}
+	public void setReturnurl(String returnurl){
+		set(column_returnurl, returnurl);
+	}
+	public <T> T getReturnurl() {
+		return get(column_returnurl);
+	}
+	public void setRowfilter(String rowfilter){
+		set(column_rowfilter, rowfilter);
+	}
+	public <T> T getRowfilter() {
+		return get(column_rowfilter);
+	}
+	public void setUrl(String url){
+		set(column_url, url);
+	}
+	public <T> T getUrl() {
+		return get(column_url);
+	}
+	public void setModuleids(String moduleids){
+		set(column_moduleids, moduleids);
+	}
+	public <T> T getModuleids() {
+		return get(column_moduleids);
+	}
+	public void setSplitpage(String splitpage){
+		set(column_splitpage, splitpage);
+	}
+	public <T> T getSplitpage() {
+		return get(column_splitpage);
+	}
+	public void setFormtoken(String formtoken){
+		set(column_formtoken, formtoken);
+	}
+	public <T> T getFormtoken() {
+		return get(column_formtoken);
+	}
+	public void setIpblack(String ipblack){
+		set(column_ipblack, ipblack);
+	}
+	public <T> T getIpblack() {
+		return get(column_ipblack);
+	}
+	public void setPrivilegess(String privilegess){
+		set(column_privilegess, privilegess);
+	}
+	public <T> T getPrivilegess() {
+		return get(column_privilegess);
+	}
+	public void setIspv(String ispv){
+		set(column_ispv, ispv);
+	}
+	public <T> T getIspv() {
+		return get(column_ispv);
+	}
+	public void setPvtype(String pvtype){
+		set(column_pvtype, pvtype);
+	}
+	public <T> T getPvtype() {
+		return get(column_pvtype);
+	}
+	public void setModulenames(String modulenames){
+		set(column_modulenames, modulenames);
+	}
+	public <T> T getModulenames() {
+		return get(column_modulenames);
+	}
+	
 	/**
 	 * 添加或者更新缓存
 	 */

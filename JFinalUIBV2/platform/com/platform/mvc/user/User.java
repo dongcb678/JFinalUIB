@@ -187,6 +187,148 @@ public class User extends BaseModelCache<User> {
 	 */
 	public static final String sqlId_start = "platform.user.start";
 
+	private String ids;
+	private Long version;
+	private Long errorcount;
+	private Long orderids;
+	private byte[] password;
+	private byte[] salt;
+	private String status;
+	private java.sql.Timestamp stopdate;
+	private String username;
+	private String departmentids;
+	private String userinfoids;
+	private String stationids;
+	private String deptids;
+	private String userids;
+	private String groupids;
+	private String departmentnames;
+	private String stationnames;
+	private String deptnames;
+	private String usernames;
+	private String groupnames;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setErrorcount(Long errorcount){
+		set(column_errorcount, errorcount);
+	}
+	public <T> T getErrorcount() {
+		return get(column_errorcount);
+	}
+	public void setOrderids(Long orderids){
+		set(column_orderids, orderids);
+	}
+	public <T> T getOrderids() {
+		return get(column_orderids);
+	}
+	public void setPassword(byte[] password){
+		set(column_password, password);
+	}
+	public <T> T getPassword() {
+		return get(column_password);
+	}
+	public void setSalt(byte[] salt){
+		set(column_salt, salt);
+	}
+	public <T> T getSalt() {
+		return get(column_salt);
+	}
+	public void setStatus(String status){
+		set(column_status, status);
+	}
+	public <T> T getStatus() {
+		return get(column_status);
+	}
+	public void setStopdate(java.sql.Timestamp stopdate){
+		set(column_stopdate, stopdate);
+	}
+	public <T> T getStopdate() {
+		return get(column_stopdate);
+	}
+	public void setUsername(String username){
+		set(column_username, username);
+	}
+	public <T> T getUsername() {
+		return get(column_username);
+	}
+	public void setDepartmentids(String departmentids){
+		set(column_departmentids, departmentids);
+	}
+	public <T> T getDepartmentids() {
+		return get(column_departmentids);
+	}
+	public void setUserinfoids(String userinfoids){
+		set(column_userinfoids, userinfoids);
+	}
+	public <T> T getUserinfoids() {
+		return get(column_userinfoids);
+	}
+	public void setStationids(String stationids){
+		set(column_stationids, stationids);
+	}
+	public <T> T getStationids() {
+		return get(column_stationids);
+	}
+	public void setDeptids(String deptids){
+		set(column_deptids, deptids);
+	}
+	public <T> T getDeptids() {
+		return get(column_deptids);
+	}
+	public void setUserids(String userids){
+		set(column_userids, userids);
+	}
+	public <T> T getUserids() {
+		return get(column_userids);
+	}
+	public void setGroupids(String groupids){
+		set(column_groupids, groupids);
+	}
+	public <T> T getGroupids() {
+		return get(column_groupids);
+	}
+	public void setDepartmentnames(String departmentnames){
+		set(column_departmentnames, departmentnames);
+	}
+	public <T> T getDepartmentnames() {
+		return get(column_departmentnames);
+	}
+	public void setStationnames(String stationnames){
+		set(column_stationnames, stationnames);
+	}
+	public <T> T getStationnames() {
+		return get(column_stationnames);
+	}
+	public void setDeptnames(String deptnames){
+		set(column_deptnames, deptnames);
+	}
+	public <T> T getDeptnames() {
+		return get(column_deptnames);
+	}
+	public void setUsernames(String usernames){
+		set(column_usernames, usernames);
+	}
+	public <T> T getUsernames() {
+		return get(column_usernames);
+	}
+	public void setGroupnames(String groupnames){
+		set(column_groupnames, groupnames);
+	}
+	public <T> T getGroupnames() {
+		return get(column_groupnames);
+	}
+	
 	/**
 	 * 关联查询，获取用户详细信息
 	 * @return

@@ -94,6 +94,50 @@ public class Group extends BaseModelCache<Group> {
 	 * 描述：用户分组选择：所有未选择
 	 */
 	public static final String sqlId_noChecked = "platform.group.noChecked";
+
+	private String ids;
+	private Long version;
+	private String description;
+	private String names;
+	private String roleids;
+	private String numbers;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setDescription(String description){
+		set(column_description, description);
+	}
+	public <T> T getDescription() {
+		return get(column_description);
+	}
+	public void setNames(String names){
+		set(column_names, names);
+	}
+	public <T> T getNames() {
+		return get(column_names);
+	}
+	public void setRoleids(String roleids){
+		set(column_roleids, roleids);
+	}
+	public <T> T getRoleids() {
+		return get(column_roleids);
+	}
+	public void setNumbers(String numbers){
+		set(column_numbers, numbers);
+	}
+	public <T> T getNumbers() {
+		return get(column_numbers);
+	}
 	
 	/**
 	 * 添加或者更新缓存

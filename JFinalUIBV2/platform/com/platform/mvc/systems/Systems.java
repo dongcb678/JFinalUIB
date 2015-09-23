@@ -74,4 +74,48 @@ public class Systems extends BaseModel<Systems> {
 	 */
 	public static final String sqlId_splitPage_from = "platform.systems.splitPageFrom";
 
+	private String ids;
+	private Long version;
+	private String description;
+	private String names;
+	private String numbers;
+	private Long orderids;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setDescription(String description){
+		set(column_description, description);
+	}
+	public <T> T getDescription() {
+		return get(column_description);
+	}
+	public void setNames(String names){
+		set(column_names, names);
+	}
+	public <T> T getNames() {
+		return get(column_names);
+	}
+	public void setNumbers(String numbers){
+		set(column_numbers, numbers);
+	}
+	public <T> T getNumbers() {
+		return get(column_numbers);
+	}
+	public void setOrderids(Long orderids){
+		set(column_orderids, orderids);
+	}
+	public <T> T getOrderids() {
+		return get(column_orderids);
+	}
+	
 }

@@ -135,6 +135,106 @@ public class Menu extends BaseModel<Menu> {
 	 */
 	public static final String sqlId_operator = "platform.menu.operator";
 
+	private String ids;
+	private Long version;
+	private String images;
+	private Long levels;
+	private String names_zhcn;
+	private Long orderids;
+	private String operatorids;
+	private String parentmenuids;
+	private String systemsids;
+	private String isparent;
+	private String names_zhtw;
+	private String names_zhhk;
+	private String names_ja;
+	private String names_enus;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setImages(String images){
+		set(column_images, images);
+	}
+	public <T> T getImages() {
+		return get(column_images);
+	}
+	public void setLevels(Long levels){
+		set(column_levels, levels);
+	}
+	public <T> T getLevels() {
+		return get(column_levels);
+	}
+	public void setNames_zhcn(String names_zhcn){
+		set(column_names_zhcn, names_zhcn);
+	}
+	public <T> T getNames_zhcn() {
+		return get(column_names_zhcn);
+	}
+	public void setOrderids(Long orderids){
+		set(column_orderids, orderids);
+	}
+	public <T> T getOrderids() {
+		return get(column_orderids);
+	}
+	public void setOperatorids(String operatorids){
+		set(column_operatorids, operatorids);
+	}
+	public <T> T getOperatorids() {
+		return get(column_operatorids);
+	}
+	public void setParentmenuids(String parentmenuids){
+		set(column_parentmenuids, parentmenuids);
+	}
+	public <T> T getParentmenuids() {
+		return get(column_parentmenuids);
+	}
+	public void setSystemsids(String systemsids){
+		set(column_systemsids, systemsids);
+	}
+	public <T> T getSystemsids() {
+		return get(column_systemsids);
+	}
+	public void setIsparent(String isparent){
+		set(column_isparent, isparent);
+	}
+	public <T> T getIsparent() {
+		return get(column_isparent);
+	}
+	public void setNames_zhtw(String names_zhtw){
+		set(column_names_zhtw, names_zhtw);
+	}
+	public <T> T getNames_zhtw() {
+		return get(column_names_zhtw);
+	}
+	public void setNames_zhhk(String names_zhhk){
+		set(column_names_zhhk, names_zhhk);
+	}
+	public <T> T getNames_zhhk() {
+		return get(column_names_zhhk);
+	}
+	public void setNames_ja(String names_ja){
+		set(column_names_ja, names_ja);
+	}
+	public <T> T getNames_ja() {
+		return get(column_names_ja);
+	}
+	public void setNames_enus(String names_enus){
+		set(column_names_enus, names_enus);
+	}
+	public <T> T getNames_enus() {
+		return get(column_names_enus);
+	}
+	
 	/**
 	 * 根据菜单获取对应的功能，可能为空
 	 * @return

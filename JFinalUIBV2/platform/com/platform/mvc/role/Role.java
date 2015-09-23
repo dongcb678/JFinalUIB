@@ -101,6 +101,57 @@ public class Role extends BaseModelCache<Role> {
 	 */
 	public static final String sqlId_splitPage_from = "platform.role.splitPageFrom";
 
+	private String ids;
+	private Long version;
+	private String description;
+	private String names;
+	private String operatorids;
+	private String moduleids;
+	private String numbers;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setDescription(String description){
+		set(column_description, description);
+	}
+	public <T> T getDescription() {
+		return get(column_description);
+	}
+	public void setNames(String names){
+		set(column_names, names);
+	}
+	public <T> T getNames() {
+		return get(column_names);
+	}
+	public void setOperatorids(String operatorids){
+		set(column_operatorids, operatorids);
+	}
+	public <T> T getOperatorids() {
+		return get(column_operatorids);
+	}
+	public void setModuleids(String moduleids){
+		set(column_moduleids, moduleids);
+	}
+	public <T> T getModuleids() {
+		return get(column_moduleids);
+	}
+	public void setNumbers(String numbers){
+		set(column_numbers, numbers);
+	}
+	public <T> T getNumbers() {
+		return get(column_numbers);
+	}
+	
 	/**
 	 * 添加或者更新缓存
 	 */

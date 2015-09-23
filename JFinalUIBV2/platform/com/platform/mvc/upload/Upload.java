@@ -74,4 +74,55 @@ public class Upload extends BaseModel<Upload> {
 	 */
 	public static final String sqlId_splitPage_from = "platform.upload.splitPageFrom";
 
+	private String ids;
+	private Long version;
+	private String parametername;
+	private String filename;
+	private String contenttype;
+	private String originalfilename;
+	private String path;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setParametername(String parametername){
+		set(column_parametername, parametername);
+	}
+	public <T> T getParametername() {
+		return get(column_parametername);
+	}
+	public void setFilename(String filename){
+		set(column_filename, filename);
+	}
+	public <T> T getFilename() {
+		return get(column_filename);
+	}
+	public void setContenttype(String contenttype){
+		set(column_contenttype, contenttype);
+	}
+	public <T> T getContenttype() {
+		return get(column_contenttype);
+	}
+	public void setOriginalfilename(String originalfilename){
+		set(column_originalfilename, originalfilename);
+	}
+	public <T> T getOriginalfilename() {
+		return get(column_originalfilename);
+	}
+	public void setPath(String path){
+		set(column_path, path);
+	}
+	public <T> T getPath() {
+		return get(column_path);
+	}
+	
 }

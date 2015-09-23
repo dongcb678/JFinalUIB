@@ -224,6 +224,148 @@ public class Dict extends BaseModelCache<Dict> {
 	 * 描述：查询子节点数量
 	 */
 	public static final String sqlId_childCount = "platform.dict.childCount";
+
+	private String ids;
+	private Long version;
+	private String description;
+	private String images;
+	private String names;
+	private Long orderids;
+	private String paths;
+	private String zhuangtai;
+	private String parentids;
+	private String isparent;
+	private Long levels;
+	private String numbers;
+	private String val;
+	private String i18n;
+	private String val_zhcn;
+	private String val_zhhk;
+	private String val_zhtw;
+	private String val_ja;
+	private String val_enus;
+	private String status;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setDescription(String description){
+		set(column_description, description);
+	}
+	public <T> T getDescription() {
+		return get(column_description);
+	}
+	public void setImages(String images){
+		set(column_images, images);
+	}
+	public <T> T getImages() {
+		return get(column_images);
+	}
+	public void setNames(String names){
+		set(column_names, names);
+	}
+	public <T> T getNames() {
+		return get(column_names);
+	}
+	public void setOrderids(Long orderids){
+		set(column_orderids, orderids);
+	}
+	public <T> T getOrderids() {
+		return get(column_orderids);
+	}
+	public void setPaths(String paths){
+		set(column_paths, paths);
+	}
+	public <T> T getPaths() {
+		return get(column_paths);
+	}
+	public void setZhuangtai(String zhuangtai){
+		set(column_zhuangtai, zhuangtai);
+	}
+	public <T> T getZhuangtai() {
+		return get(column_zhuangtai);
+	}
+	public void setParentids(String parentids){
+		set(column_parentids, parentids);
+	}
+	public <T> T getParentids() {
+		return get(column_parentids);
+	}
+	public void setIsparent(String isparent){
+		set(column_isparent, isparent);
+	}
+	public <T> T getIsparent() {
+		return get(column_isparent);
+	}
+	public void setLevels(Long levels){
+		set(column_levels, levels);
+	}
+	public <T> T getLevels() {
+		return get(column_levels);
+	}
+	public void setNumbers(String numbers){
+		set(column_numbers, numbers);
+	}
+	public <T> T getNumbers() {
+		return get(column_numbers);
+	}
+	public void setVal(String val){
+		set(column_val, val);
+	}
+	public <T> T getVal() {
+		return get(column_val);
+	}
+	public void setI18n(String i18n){
+		set(column_i18n, i18n);
+	}
+	public <T> T getI18n() {
+		return get(column_i18n);
+	}
+	public void setVal_zhcn(String val_zhcn){
+		set(column_val_zhcn, val_zhcn);
+	}
+	public <T> T getVal_zhcn() {
+		return get(column_val_zhcn);
+	}
+	public void setVal_zhhk(String val_zhhk){
+		set(column_val_zhhk, val_zhhk);
+	}
+	public <T> T getVal_zhhk() {
+		return get(column_val_zhhk);
+	}
+	public void setVal_zhtw(String val_zhtw){
+		set(column_val_zhtw, val_zhtw);
+	}
+	public <T> T getVal_zhtw() {
+		return get(column_val_zhtw);
+	}
+	public void setVal_ja(String val_ja){
+		set(column_val_ja, val_ja);
+	}
+	public <T> T getVal_ja() {
+		return get(column_val_ja);
+	}
+	public void setVal_enus(String val_enus){
+		set(column_val_enus, val_enus);
+	}
+	public <T> T getVal_enus() {
+		return get(column_val_enus);
+	}
+	public void setStatus(String status){
+		set(column_status, status);
+	}
+	public <T> T getStatus() {
+		return get(column_status);
+	}
 	
 	/**
 	 * 根据主键查询字典，带国际化

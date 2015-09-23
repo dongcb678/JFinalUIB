@@ -98,4 +98,69 @@ public class Module extends BaseModel<Module> {
 	 */
 	public static final String sqlId_childCount = "platform.module.childCount";
 
+	private String ids;
+	private Long version;
+	private String description;
+	private String images;
+	private String isparent;
+	private String names;
+	private Long orderids;
+	private String parentmoduleids;
+	private String systemsids;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setDescription(String description){
+		set(column_description, description);
+	}
+	public <T> T getDescription() {
+		return get(column_description);
+	}
+	public void setImages(String images){
+		set(column_images, images);
+	}
+	public <T> T getImages() {
+		return get(column_images);
+	}
+	public void setIsparent(String isparent){
+		set(column_isparent, isparent);
+	}
+	public <T> T getIsparent() {
+		return get(column_isparent);
+	}
+	public void setNames(String names){
+		set(column_names, names);
+	}
+	public <T> T getNames() {
+		return get(column_names);
+	}
+	public void setOrderids(Long orderids){
+		set(column_orderids, orderids);
+	}
+	public <T> T getOrderids() {
+		return get(column_orderids);
+	}
+	public void setParentmoduleids(String parentmoduleids){
+		set(column_parentmoduleids, parentmoduleids);
+	}
+	public <T> T getParentmoduleids() {
+		return get(column_parentmoduleids);
+	}
+	public void setSystemsids(String systemsids){
+		set(column_systemsids, systemsids);
+	}
+	public <T> T getSystemsids() {
+		return get(column_systemsids);
+	}
+	
 }

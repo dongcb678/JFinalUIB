@@ -50,5 +50,35 @@ public class Blog extends BaseModel<Blog> {
 	 * 描述：分页from
 	 */
 	public static final String sqlId_splitPage_from = "test.blog.splitPageFrom";
+
+	private String ids;
+	private String title;
+	private String content;
+	private java.sql.Timestamp createtime;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setTitle(String title){
+		set(column_title, title);
+	}
+	public <T> T getTitle() {
+		return get(column_title);
+	}
+	public void setContent(String content){
+		set(column_content, content);
+	}
+	public <T> T getContent() {
+		return get(column_content);
+	}
+	public void setCreatetime(java.sql.Timestamp createtime){
+		set(column_createtime, createtime);
+	}
+	public <T> T getCreatetime() {
+		return get(column_createtime);
+	}
 	
 }

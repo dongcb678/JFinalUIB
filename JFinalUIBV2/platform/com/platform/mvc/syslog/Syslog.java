@@ -230,4 +230,223 @@ public class Syslog extends BaseModel<Syslog> {
 	 */
 	public static final String sqlId_clear = "platform.sysLog.clear";
 
+	private String ids;
+	private Long version;
+	private java.sql.Timestamp actionenddate;
+	private Long actionendtime;
+	private Long actionhaoshi;
+	private java.sql.Timestamp actionstartdate;
+	private Long actionstarttime;
+	private String cause;
+	private String cookie;
+	private String description;
+	private java.sql.Timestamp enddate;
+	private Long endtime;
+	private Long haoshi;
+	private String ips;
+	private String method;
+	private String referer;
+	private String requestpath;
+	private java.sql.Timestamp startdate;
+	private Long starttime;
+	private String status;
+	private String useragent;
+	private Long viewhaoshi;
+	private String operatorids;
+	private String accept;
+	private String acceptencoding;
+	private String acceptlanguage;
+	private String connection;
+	private String host;
+	private String xrequestedwith;
+	private String pvids;
+	private String userids;
+
+	public void setIds(String ids){
+		set(column_ids, ids);
+	}
+	public <T> T getIds() {
+		return get(column_ids);
+	}
+	public void setVersion(Long version){
+		set(column_version, version);
+	}
+	public <T> T getVersion() {
+		return get(column_version);
+	}
+	public void setActionenddate(java.sql.Timestamp actionenddate){
+		set(column_actionenddate, actionenddate);
+	}
+	public <T> T getActionenddate() {
+		return get(column_actionenddate);
+	}
+	public void setActionendtime(Long actionendtime){
+		set(column_actionendtime, actionendtime);
+	}
+	public <T> T getActionendtime() {
+		return get(column_actionendtime);
+	}
+	public void setActionhaoshi(Long actionhaoshi){
+		set(column_actionhaoshi, actionhaoshi);
+	}
+	public <T> T getActionhaoshi() {
+		return get(column_actionhaoshi);
+	}
+	public void setActionstartdate(java.sql.Timestamp actionstartdate){
+		set(column_actionstartdate, actionstartdate);
+	}
+	public <T> T getActionstartdate() {
+		return get(column_actionstartdate);
+	}
+	public void setActionstarttime(Long actionstarttime){
+		set(column_actionstarttime, actionstarttime);
+	}
+	public <T> T getActionstarttime() {
+		return get(column_actionstarttime);
+	}
+	public void setCause(String cause){
+		set(column_cause, cause);
+	}
+	public <T> T getCause() {
+		return get(column_cause);
+	}
+	public void setCookie(String cookie){
+		set(column_cookie, cookie);
+	}
+	public <T> T getCookie() {
+		return get(column_cookie);
+	}
+	public void setDescription(String description){
+		set(column_description, description);
+	}
+	public <T> T getDescription() {
+		return get(column_description);
+	}
+	public void setEnddate(java.sql.Timestamp enddate){
+		set(column_enddate, enddate);
+	}
+	public <T> T getEnddate() {
+		return get(column_enddate);
+	}
+	public void setEndtime(Long endtime){
+		set(column_endtime, endtime);
+	}
+	public <T> T getEndtime() {
+		return get(column_endtime);
+	}
+	public void setHaoshi(Long haoshi){
+		set(column_haoshi, haoshi);
+	}
+	public <T> T getHaoshi() {
+		return get(column_haoshi);
+	}
+	public void setIps(String ips){
+		set(column_ips, ips);
+	}
+	public <T> T getIps() {
+		return get(column_ips);
+	}
+	public void setMethod(String method){
+		set(column_method, method);
+	}
+	public <T> T getMethod() {
+		return get(column_method);
+	}
+	public void setReferer(String referer){
+		set(column_referer, referer);
+	}
+	public <T> T getReferer() {
+		return get(column_referer);
+	}
+	public void setRequestpath(String requestpath){
+		set(column_requestpath, requestpath);
+	}
+	public <T> T getRequestpath() {
+		return get(column_requestpath);
+	}
+	public void setStartdate(java.sql.Timestamp startdate){
+		set(column_startdate, startdate);
+	}
+	public <T> T getStartdate() {
+		return get(column_startdate);
+	}
+	public void setStarttime(Long starttime){
+		set(column_starttime, starttime);
+	}
+	public <T> T getStarttime() {
+		return get(column_starttime);
+	}
+	public void setStatus(String status){
+		set(column_status, status);
+	}
+	public <T> T getStatus() {
+		return get(column_status);
+	}
+	public void setUseragent(String useragent){
+		set(column_useragent, useragent);
+	}
+	public <T> T getUseragent() {
+		return get(column_useragent);
+	}
+	public void setViewhaoshi(Long viewhaoshi){
+		set(column_viewhaoshi, viewhaoshi);
+	}
+	public <T> T getViewhaoshi() {
+		return get(column_viewhaoshi);
+	}
+	public void setOperatorids(String operatorids){
+		set(column_operatorids, operatorids);
+	}
+	public <T> T getOperatorids() {
+		return get(column_operatorids);
+	}
+	public void setAccept(String accept){
+		set(column_accept, accept);
+	}
+	public <T> T getAccept() {
+		return get(column_accept);
+	}
+	public void setAcceptencoding(String acceptencoding){
+		set(column_acceptencoding, acceptencoding);
+	}
+	public <T> T getAcceptencoding() {
+		return get(column_acceptencoding);
+	}
+	public void setAcceptlanguage(String acceptlanguage){
+		set(column_acceptlanguage, acceptlanguage);
+	}
+	public <T> T getAcceptlanguage() {
+		return get(column_acceptlanguage);
+	}
+	public void setConnection(String connection){
+		set(column_connection, connection);
+	}
+	public <T> T getConnection() {
+		return get(column_connection);
+	}
+	public void setHost(String host){
+		set(column_host, host);
+	}
+	public <T> T getHost() {
+		return get(column_host);
+	}
+	public void setXrequestedwith(String xrequestedwith){
+		set(column_xrequestedwith, xrequestedwith);
+	}
+	public <T> T getXrequestedwith() {
+		return get(column_xrequestedwith);
+	}
+	public void setPvids(String pvids){
+		set(column_pvids, pvids);
+	}
+	public <T> T getPvids() {
+		return get(column_pvids);
+	}
+	public void setUserids(String userids){
+		set(column_userids, userids);
+	}
+	public <T> T getUserids() {
+		return get(column_userids);
+	}
+	
 }
