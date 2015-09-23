@@ -4,19 +4,18 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.druid.DruidPlugin;
 import com.platform.constant.ConstantInit;
 import com.platform.run.ConfigCore;
 import com.platform.tools.ToolSqlXml;
@@ -112,6 +111,9 @@ public class GeneratePostgreSQL extends GenerateBase {
 			table.setColumn_length(character_maximum_length);
 			table.setColumn_desc(listDesc.get(index).getStr("description"));
 
+			if(columnJavaTypeMap.get(column_name.toLowerCase()) == null){
+				System.out.println("========");
+			}
 			table.setColumn_className(columnJavaTypeMap.get(column_name.toLowerCase()));
 			
 			list.add(table);
@@ -121,25 +123,20 @@ public class GeneratePostgreSQL extends GenerateBase {
 		
 		return list;
 	}
-
+	
 	public Map<String, String> getJavaType(String tableName){
-		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		DruidPlugin druidPluginUIB = new DruidPlugin(
-				"jdbc:postgresql://127.0.0.1:5432/jfinaluibv2", 
-				"postgres", 
-				"678789", 
-				"org.postgresql.Driver");
-		druidPluginUIB.start();
-
         //  获取字段数
 	    Map<String, String> columnJavaTypeMap = new HashMap<String, String>();
+	    
+	    Connection conn = null;
+	    Statement stmt = null;
+	    ResultSet rs = null;
+	    
 		try {
-			DataSource dataSource = druidPluginUIB.getDataSource();
-			Connection conn = dataSource.getConnection();
-			
-			Statement stmt = conn.createStatement();    
+			conn = DbKit.getConfig().getConnection();
+			stmt = conn.createStatement();    
 		    String sql = "select * from " + tableName + " where 1 != 1 ";   
-		    ResultSet rs = stmt.executeQuery(sql);    
+		    rs = stmt.executeQuery(sql);    
 		    ResultSetMetaData rsmd = rs.getMetaData(); 
 
 	        int columns = rsmd.getColumnCount();   
@@ -154,6 +151,22 @@ public class GeneratePostgreSQL extends GenerateBase {
 	        }
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return columnJavaTypeMap;
