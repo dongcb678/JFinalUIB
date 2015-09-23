@@ -36,17 +36,50 @@ public class GenerateMySQL extends GenerateBase {
 	/**
 	 * 根据自己的情况修改这里的数据源IP、端口、数据库名称、用户名、密码
 	 */
-	public String ip = "127.0.0.1";
-	public String port = "3306";
-	public String username = "root";
-	public String password = "678789";
-	public String database = "jfinaluibv2";
+	public static String ip = "127.0.0.1";
+	public static String port = "3306";
+	public static String username = "root";
+	public static String password = "678789";
+	public static String database = "jfinaluibv2";
+	
+	public static DruidPlugin druidPluginIS = null;
+	public static DruidPlugin druidPluginUIB = null;
 	
 	/**
 	 * 循环生成文件
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
+		log.info("configPlugin 配置Druid数据库连接池连接属性");
+		druidPluginIS = new DruidPlugin(
+				"jdbc:mysql://"+ip+":"+port+"/information_schema?characterEncoding=UTF-8"
+				+ "&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull", 
+				username, password, "com.mysql.jdbc.Driver");
+		druidPluginIS.start();
+		
+		log.info("configPlugin 配置ActiveRecord插件");
+		ActiveRecordPlugin arpIS = new ActiveRecordPlugin("information_schema", druidPluginIS);
+		arpIS.setDevMode(true); // 设置开发模式
+		arpIS.setShowSql(true); // 是否显示SQL
+		arpIS.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 大小写不敏感
+		arpIS.setDialect(new MysqlDialect());
+		arpIS.start();
+		
+		log.info("EhCachePlugin EhCache缓存");
+		EhCachePlugin ehCachePlugin = new EhCachePlugin();
+		ehCachePlugin.start();
+
+		log.info("SqlXmlPlugin 解析并缓存 xml sql");
+		SqlXmlPlugin sqlXmlPlugin = new SqlXmlPlugin();
+		sqlXmlPlugin.start();
+		
+		log.info("configPlugin 配置Druid数据库连接池连接属性");
+		druidPluginUIB = new DruidPlugin(
+				"jdbc:mysql://"+ip+":"+port+"/"+database+"?characterEncoding=UTF-8"
+				+ "&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull", 
+				username, password, "com.mysql.jdbc.Driver");
+		druidPluginUIB.start();
+
 		GenerateBase base = new GenerateMySQL();
 		for (int i = 0; i < tableArr.length; i++) {
 			// 数据源名称
@@ -78,7 +111,7 @@ public class GenerateMySQL extends GenerateBase {
 			base.service(className, classNameSmall); 
 
 			// 6.生成DTO
-			base.dto(className, classNameSmall, dataSource, tableName, colunmList); 
+//			base.dto(className, classNameSmall, dataSource, tableName, colunmList); 
 			
 			// 7.生成视图文件
 //			base.form(classNameSmall, tableName, colunmList);
@@ -90,29 +123,6 @@ public class GenerateMySQL extends GenerateBase {
 	
 	@Override
 	public List<TableColumnDto> getColunm(String tableName)  {
-		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		DruidPlugin druidPluginIS = new DruidPlugin(
-				"jdbc:mysql://"+ip+":"+port+"/information_schema?characterEncoding=UTF-8"
-				+ "&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull", 
-				username, password, "com.mysql.jdbc.Driver");
-		druidPluginIS.start();
-
-		log.info("configPlugin 配置ActiveRecord插件");
-		ActiveRecordPlugin arpIS = new ActiveRecordPlugin("information_schema", druidPluginIS);
-		arpIS.setDevMode(true); // 设置开发模式
-		arpIS.setShowSql(true); // 是否显示SQL
-		arpIS.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 大小写不敏感
-		arpIS.setDialect(new MysqlDialect());
-		arpIS.start();
-		
-		log.info("EhCachePlugin EhCache缓存");
-		EhCachePlugin ehCachePlugin = new EhCachePlugin();
-		ehCachePlugin.start();
-
-		log.info("SqlXmlPlugin 解析并缓存 xml sql");
-		SqlXmlPlugin sqlXmlPlugin = new SqlXmlPlugin();
-		sqlXmlPlugin.start();
-		
 		List<TableColumnDto> list = new ArrayList<TableColumnDto>();
 		
 		String tableDesc = Db.use("information_schema").findFirst(ToolSqlXml.getSql("platform.mysql.getTables"), "jfinaluibv2", tableName).getStr("table_COMMENT");
@@ -150,13 +160,6 @@ public class GenerateMySQL extends GenerateBase {
 	}
 
 	public Map<String, String> getJavaType(String tableName){
-		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		DruidPlugin druidPluginUIB = new DruidPlugin(
-				"jdbc:mysql://"+ip+":"+port+"/"+database+"?characterEncoding=UTF-8"
-				+ "&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull", 
-				username, password, "com.mysql.jdbc.Driver");
-		druidPluginUIB.start();
-
         //  获取字段数
 	    Map<String, String> columnJavaTypeMap = new HashMap<String, String>();
 		try {
