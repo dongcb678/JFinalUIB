@@ -63,16 +63,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/build-lib/jetty-9.2-jdk7+" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/build-lib/jetty-9.2-jdk7+" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="file://$MODULE_DIR$/build-lib/jfinal20" />
         </CLASSES>
         <JAVADOC />
@@ -81,6 +71,15 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="junit:junit:4.8.1" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/build-lib/jetty-8.1.8/jetty-server-8.1.8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 
