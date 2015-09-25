@@ -2,12 +2,9 @@ package com.platform.mvc.operator;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.annotation.Table;
-import com.platform.constant.ConstantCache;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModelCache;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 /**
  * 系统功能model
@@ -287,8 +284,8 @@ public class Operator extends BaseModelCache<Operator> {
 	 */
 	public void cacheAdd(String ids){
 		Operator operator = Operator.dao.findById(ids);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + ids, operator);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(column_url), operator);
+		ToolCache.set(ParamInitPlugin.cacheStart_operator + ids, operator);
+		ToolCache.set(ParamInitPlugin.cacheStart_operator + operator.getStr(column_url), operator);
 	}
 
 	/**
@@ -297,8 +294,8 @@ public class Operator extends BaseModelCache<Operator> {
 	 */
 	public void cacheRemove(String ids){
 		Operator operator = Operator.dao.findById(ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + operator.getStr(column_url));
+		ToolCache.remove(ParamInitPlugin.cacheStart_operator + ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_operator + operator.getStr(column_url));
 	}
 
 	/**
@@ -307,7 +304,7 @@ public class Operator extends BaseModelCache<Operator> {
 	 * @return
 	 */
 	public Operator cacheGet(String key){
-		Operator operator = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_operator + key);
+		Operator operator = ToolCache.get(ParamInitPlugin.cacheStart_operator + key);
 		return operator;
 	}
 	

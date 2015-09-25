@@ -12,8 +12,6 @@ import java.util.regex.Pattern;
 import org.beetl.core.BeetlKit;
 
 import com.jfinal.log.Logger;
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantRender;
 import com.platform.plugin.SqlXmlPlugin;
 
@@ -64,7 +62,7 @@ public abstract class ToolSqlXml {
      * @return
      */
     public static String getSql(String sqlId) {
-    	String sql = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
+    	String sql = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	
     	if(null == sql || sql.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
@@ -82,7 +80,7 @@ public abstract class ToolSqlXml {
      * @return
      */
     public static String getSql(String sqlId, Map<String, Object> param, String renderType) {
-    	String sqlTemplete = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
+    	String sqlTemplete = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
@@ -125,7 +123,7 @@ public abstract class ToolSqlXml {
      * @return
      */
     public static String getSql(String sqlId, Map<String, Object> param, String renderType, LinkedList<Object> list) {
-    	String sqlTemplete = CacheKit.get(ConstantCache.cache_name_system, SqlXmlPlugin.cacheStart_sql + sqlId);
+    	String sqlTemplete = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
 			return null;

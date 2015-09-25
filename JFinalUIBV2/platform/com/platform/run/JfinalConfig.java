@@ -15,6 +15,7 @@ import com.jfinal.plugin.activerecord.tx.TxByActionKeys;
 import com.jfinal.plugin.activerecord.tx.TxByMethods;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.jfinal.plugin.redis.RedisPlugin;
 import com.platform.beetl.format.DateFormat;
 import com.platform.beetl.func.AuthUrl;
 import com.platform.beetl.func.EscapeXml;
@@ -23,6 +24,7 @@ import com.platform.beetl.func.OrderBy;
 import com.platform.beetl.render.MyBeetlRenderFactory;
 import com.platform.beetl.tag.DictTag;
 import com.platform.beetl.tag.ParamTag;
+import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
 import com.platform.handler.GlobalHandler;
 import com.platform.interceptor.AuthInterceptor;
@@ -36,6 +38,7 @@ import com.platform.plugin.SqlXmlPlugin;
 import com.platform.thread.DataClear;
 import com.platform.thread.ThreadSysLog;
 import com.platform.thread.TimerResources;
+import com.platform.tools.ToolCache;
 import com.platform.tools.ToolString;
 import com.weixin.lucene.DocKeyword;
 
@@ -101,9 +104,18 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("I18NPlugin 国际化键值对加载");
 		plugins.add(new I18NPlugin());
 		
-		log.info("EhCachePlugin EhCache缓存");
-		plugins.add(new EhCachePlugin());
-
+		if(ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)){
+			log.info("EhCachePlugin EhCache缓存");
+			plugins.add(new EhCachePlugin());
+			
+		}else if(ToolCache.getCacheType().equals(ConstantCache.cache_type_redis)){
+			log.info("RedisPlugin Redis缓存");
+			String redisIp = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_redis_ip);
+			Integer redisPort = (Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_redis_port);
+			RedisPlugin systemRedis = new RedisPlugin(ConstantCache.cache_name_redis_system, redisIp, redisPort);
+			plugins.add(systemRedis);
+		}
+		
 		log.info("SqlXmlPlugin 解析并缓存 xml sql");
 		plugins.add(new SqlXmlPlugin());
 		

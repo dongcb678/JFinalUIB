@@ -92,6 +92,11 @@ public interface ConstantInit {
 	public static final String config_mail_to = "config.mail.to";
 
 	/**
+	 *  缓存类型配置
+	 */
+	public static final String config_cache_type = "config.cache.type";
+
+	/**
 	 *  redis 配置：ip
 	 */
 	public static final String config_redis_ip = "config.redis.ip";

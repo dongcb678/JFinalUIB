@@ -11,7 +11,7 @@
 
 	修改Dialect类，由于Oracle重写了打印方法，所以还修改了OracleDialect类
 	
-4.升级jetty9运行项目
+4.升级jetty9运行项目（暂时退回jfinal自带的jetty版本）
 	
 	修改JettyServer类的88-99行
 	

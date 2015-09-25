@@ -6,12 +6,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.annotation.Table;
-import com.platform.constant.ConstantCache;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModelCache;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 /**
  * 字典model
@@ -483,18 +480,18 @@ public class Dict extends BaseModelCache<Dict> {
 	public void cacheAdd(String ids){
 		Dict dict = Dict.dao.findById(ids);
 		List<Dict> dictList = dict.getChild();
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + ids, dict);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(column_numbers), dict);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + ids, dictList);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(column_numbers), dictList);
+		ToolCache.set(ParamInitPlugin.cacheStart_dict + ids, dict);
+		ToolCache.set(ParamInitPlugin.cacheStart_dict + dict.getStr(column_numbers), dict);
+		ToolCache.set(ParamInitPlugin.cacheStart_dict_child + ids, dictList);
+		ToolCache.set(ParamInitPlugin.cacheStart_dict_child + dict.getStr(column_numbers), dictList);
 
 		String parentIds = dict.getStr("parentids");
 		if(null != parentIds){
 			Dict parent = Dict.dao.findById(parentIds);
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(column_numbers), parentList);
+				ToolCache.set(ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
+				ToolCache.set(ParamInitPlugin.cacheStart_dict_child + parent.getStr(column_numbers), parentList);
 			}
 		}
 	}
@@ -506,18 +503,18 @@ public class Dict extends BaseModelCache<Dict> {
 	public void cacheRemove(String ids){
 		Dict dict = Dict.dao.findById(ids);
 		
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + dict.getStr(column_numbers));
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + dict.getStr(column_numbers));
+		ToolCache.remove(ParamInitPlugin.cacheStart_dict + ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_dict + dict.getStr(column_numbers));
+		ToolCache.remove(ParamInitPlugin.cacheStart_dict_child + ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_dict_child + dict.getStr(column_numbers));
 
 		String parentIds = dict.getStr("parentids");
 		if(null != parentIds){
 			Dict parent = Dict.dao.findById(parentIds);
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + parent.getStr(column_numbers), parentList);
+				ToolCache.set(ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
+				ToolCache.set(ParamInitPlugin.cacheStart_dict_child + parent.getStr(column_numbers), parentList);
 			}
 		}
 	}
@@ -528,7 +525,7 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @return
 	 */
 	public Dict cacheGet(String key){
-		Dict dict = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict + key);
+		Dict dict = ToolCache.get(ParamInitPlugin.cacheStart_dict + key);
 		return dict;
 	}
 	
@@ -538,7 +535,7 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @return
 	 */
 	public List<Dict> cacheGetChild(String key){
-		List<Dict> dictList = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_dict_child + key);
+		List<Dict> dictList = ToolCache.get(ParamInitPlugin.cacheStart_dict_child + key);
 		return dictList;
 	}
 	

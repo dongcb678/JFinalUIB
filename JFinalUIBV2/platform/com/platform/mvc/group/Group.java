@@ -2,12 +2,9 @@ package com.platform.mvc.group;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.annotation.Table;
-import com.platform.constant.ConstantCache;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModelCache;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 /**
  * 人员分组model
@@ -143,14 +140,14 @@ public class Group extends BaseModelCache<Group> {
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_group + ids, Group.dao.findById(ids));
+		ToolCache.set(ParamInitPlugin.cacheStart_group + ids, Group.dao.findById(ids));
 	}
 
 	/**
 	 * 删除缓存
 	 */
 	public void cacheRemove(String ids){
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_group + ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_group + ids);
 	}
 
 	/**
@@ -159,7 +156,7 @@ public class Group extends BaseModelCache<Group> {
 	 * @return
 	 */
 	public Group cacheGet(String ids){
-		Group group = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_group + ids);
+		Group group = ToolCache.get(ParamInitPlugin.cacheStart_group + ids);
 		return group;
 	}
 	

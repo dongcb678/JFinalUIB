@@ -13,8 +13,7 @@ import org.dom4j.io.SAXReader;
 
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.constant.ConstantCache;
+import com.platform.tools.ToolCache;
 import com.platform.tools.ToolSqlXml;
 
 /**
@@ -91,15 +90,15 @@ public class SqlXmlPlugin implements IPlugin {
 							continue;
 						}
 						
-						if(isInit && null != CacheKit.get(ConstantCache.cache_name_system, cacheStart_sql + key)){
+						if(isInit && null != ToolCache.get(cacheStart_sql + key)){
 							log.error("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
 							continue;
-						} else if(null != CacheKit.get(ConstantCache.cache_name_system, cacheStart_sql + key)){
+						} else if(null != ToolCache.get(cacheStart_sql + key)){
 							log.error("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
 						}
 						
 						sql = sql.replaceAll("[\\s]{2,}", " ");
-						CacheKit.put(ConstantCache.cache_name_system, cacheStart_sql + key, sql);
+						ToolCache.set(cacheStart_sql + key, sql);
 						log.debug("sql加载, sql file = " + fileName + ", sql key = " + key + ", sql content = " + sql);
 					}
 				}

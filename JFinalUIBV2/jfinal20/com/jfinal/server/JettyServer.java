@@ -21,11 +21,9 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 
-import org.eclipse.jetty.server.HttpConfiguration;
-import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SessionManager;
+import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.server.session.HashSessionManager;
 import org.eclipse.jetty.server.session.SessionHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -87,14 +85,14 @@ class JettyServer implements IServer {
 		server = new Server();
 
 		// jetty 8 start
-		//SelectChannelConnector connector = new SelectChannelConnector();
+		SelectChannelConnector connector = new SelectChannelConnector();
 		// jetty 8 end
 		
 		// jetty 9 start
-		HttpConfiguration config = new HttpConfiguration();
-		ServerConnector connector = new ServerConnector(server, new HttpConnectionFactory(config));
-		connector.setReuseAddress(true);
-		connector.setIdleTimeout(30000);
+//		HttpConfiguration config = new HttpConfiguration();
+//		ServerConnector connector = new ServerConnector(server, new HttpConnectionFactory(config));
+//		connector.setReuseAddress(true);
+//		connector.setIdleTimeout(30000);
 		// jetty 9 end
 		
 		connector.setPort(port);

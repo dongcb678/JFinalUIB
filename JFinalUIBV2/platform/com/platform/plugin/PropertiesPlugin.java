@@ -172,6 +172,9 @@ public class PropertiesPlugin implements IPlugin {
 		paramMap.put(ConstantInit.config_mail_userName, properties.getProperty(ConstantInit.config_mail_userName).trim());
 		paramMap.put(ConstantInit.config_mail_password, properties.getProperty(ConstantInit.config_mail_password).trim());
 		paramMap.put(ConstantInit.config_mail_to, properties.getProperty(ConstantInit.config_mail_to).trim());
+
+		// 缓存类型配置
+		paramMap.put(ConstantInit.config_cache_type, properties.getProperty(ConstantInit.config_cache_type).trim());
 		
 		// redis 配置
 		paramMap.put(ConstantInit.config_redis_ip, properties.getProperty(ConstantInit.config_redis_ip).trim());

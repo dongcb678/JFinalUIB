@@ -12,7 +12,9 @@ import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.jfinal.plugin.redis.RedisPlugin;
 import com.junit.TestBase;
+import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.dept.Department;
 import com.platform.mvc.dict.Dict;
@@ -33,6 +35,7 @@ import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.plugin.PropertiesPlugin;
 import com.platform.plugin.SqlXmlPlugin;
+import com.platform.tools.ToolCache;
 import com.test.mvc.blog.Blog;
 import com.weixin.mvc.article.Article;
 import com.weixin.mvc.keyword.Keyword;
@@ -130,10 +133,19 @@ public class ConfigCore {
 		I18NPlugin i18NPlugin = new I18NPlugin();
 		i18NPlugin.start();
 		
-		log.info("EhCachePlugin EhCache缓存");
-		EhCachePlugin ehCachePlugin = new EhCachePlugin();
-		ehCachePlugin.start();
-
+		if(ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)){
+			log.info("EhCachePlugin EhCache缓存");
+			EhCachePlugin ehCachePlugin = new EhCachePlugin();
+			ehCachePlugin.start();
+			
+		}else if(ToolCache.getCacheType().equals(ConstantCache.cache_type_redis)){
+			log.info("RedisPlugin Redis缓存");
+			String redisIp = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_redis_ip);
+			Integer redisPort = (Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_redis_port);
+			RedisPlugin systemRedis = new RedisPlugin(ConstantCache.cache_name_redis_system, redisIp, redisPort);
+			systemRedis.start();
+		}
+		
 		log.info("SqlXmlPlugin 解析并缓存 xml sql");
 		SqlXmlPlugin sqlXmlPlugin = new SqlXmlPlugin();
 		sqlXmlPlugin.start();

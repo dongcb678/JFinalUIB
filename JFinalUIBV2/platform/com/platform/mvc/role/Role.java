@@ -2,12 +2,9 @@ package com.platform.mvc.role;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.annotation.Table;
-import com.platform.constant.ConstantCache;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModelCache;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 /**
  * 角色model
@@ -156,14 +153,14 @@ public class Role extends BaseModelCache<Role> {
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_role + ids, Role.dao.findById(ids));
+		ToolCache.set(ParamInitPlugin.cacheStart_role + ids, Role.dao.findById(ids));
 	}
 
 	/**
 	 * 删除缓存
 	 */
 	public void cacheRemove(String ids){
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_role + ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_role + ids);
 	}
 
 	/**
@@ -172,7 +169,7 @@ public class Role extends BaseModelCache<Role> {
 	 * @return
 	 */
 	public Role cacheGet(String key){
-		Role role = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_role + key);
+		Role role = ToolCache.get(ParamInitPlugin.cacheStart_role + key);
 		return role;
 	}
 	

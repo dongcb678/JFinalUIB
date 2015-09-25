@@ -2,14 +2,11 @@ package com.platform.mvc.user;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.annotation.Table;
-import com.platform.constant.ConstantCache;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModelCache;
 import com.platform.mvc.dept.Department;
 import com.platform.mvc.station.Station;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 /**
  * 用户model
@@ -371,10 +368,10 @@ public class User extends BaseModelCache<User> {
 	public void cacheAdd(String ids){
 		User user = User.dao.findById(ids);
 		UserInfo userInfo = user.getUserInfo();
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + ids, user);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + user.getStr(column_username), user);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_email), user);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_mobile), user);
+		ToolCache.set(ParamInitPlugin.cacheStart_user + ids, user);
+		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_username), user);
+		ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_email), user);
+		ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_mobile), user);
 	}
 
 	/**
@@ -383,10 +380,10 @@ public class User extends BaseModelCache<User> {
 	public void cacheRemove(String ids){
 		User user = User.dao.findById(ids);
 		UserInfo userInfo = user.getUserInfo();
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + user.getStr(column_username));
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_email));
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_mobile));
+		ToolCache.remove(ParamInitPlugin.cacheStart_user + ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_username));
+		ToolCache.remove(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_email));
+		ToolCache.remove(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_mobile));
 	}
 
 	/**
@@ -395,7 +392,7 @@ public class User extends BaseModelCache<User> {
 	 * @return
 	 */
 	public User cacheGet(String ids){
-		User user = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_user + ids);
+		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + ids);
 		return user;
 	}
 	

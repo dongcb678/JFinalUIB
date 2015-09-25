@@ -6,12 +6,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.annotation.Table;
-import com.platform.constant.ConstantCache;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModelCache;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 /**
  * 参数model
@@ -481,18 +478,18 @@ public class Param extends BaseModelCache<Param> {
 	public void cacheAdd(String ids){
 		Param param = Param.dao.findById(ids);
 		List<Param> paramList = param.getChild();
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param + ids, param);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param + param.getStr(column_numbers), param);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param_child + ids, paramList);
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param_child + param.getStr(column_numbers), paramList);
+		ToolCache.set(ParamInitPlugin.cacheStart_param + ids, param);
+		ToolCache.set(ParamInitPlugin.cacheStart_param + param.getStr(column_numbers), param);
+		ToolCache.set(ParamInitPlugin.cacheStart_param_child + ids, paramList);
+		ToolCache.set(ParamInitPlugin.cacheStart_param_child + param.getStr(column_numbers), paramList);
 		
 		String paramIds = param.getStr("parentids");
 		if(null != paramIds){
 			Param parent = Param.dao.findById(param.getStr("parentids"));
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param_child + parent.getPKValue(), parentList);
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param_child + parent.getStr(column_numbers), parentList);
+				ToolCache.set(ParamInitPlugin.cacheStart_param_child + parent.getPKValue(), parentList);
+				ToolCache.set(ParamInitPlugin.cacheStart_param_child + parent.getStr(column_numbers), parentList);
 			}
 		}
 	}
@@ -503,18 +500,18 @@ public class Param extends BaseModelCache<Param> {
 	 */
 	public void cacheRemove(String ids){
 		Param param = Param.dao.findById(ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param + ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param + param.getStr(column_numbers));
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param_child + ids);
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param_child + param.getStr(column_numbers));
+		ToolCache.remove(ParamInitPlugin.cacheStart_param + ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_param + param.getStr(column_numbers));
+		ToolCache.remove(ParamInitPlugin.cacheStart_param_child + ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_param_child + param.getStr(column_numbers));
 
 		String paramIds = param.getStr("parentids");
 		if(null != paramIds){
 			Param parent = Param.dao.findById(param.getStr("parentids"));
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param_child + parent.getPKValue(), parentList);
-				CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param_child + parent.getStr(column_numbers), parentList);
+				ToolCache.set(ParamInitPlugin.cacheStart_param_child + parent.getPKValue(), parentList);
+				ToolCache.set(ParamInitPlugin.cacheStart_param_child + parent.getStr(column_numbers), parentList);
 			}
 		}
 	}
@@ -525,7 +522,7 @@ public class Param extends BaseModelCache<Param> {
 	 * @return
 	 */
 	public Param cacheGet(String key){
-		Param param = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param + key);
+		Param param = ToolCache.get(ParamInitPlugin.cacheStart_param + key);
 		return param;
 	}
 	
@@ -535,7 +532,7 @@ public class Param extends BaseModelCache<Param> {
 	 * @return
 	 */
 	public List<Param> cacheGetChild(String key){
-		List<Param> paramList = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param_child + key);
+		List<Param> paramList = ToolCache.get(ParamInitPlugin.cacheStart_param_child + key);
 		return paramList;
 	}
 	

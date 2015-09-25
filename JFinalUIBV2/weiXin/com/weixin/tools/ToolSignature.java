@@ -6,10 +6,9 @@ import java.security.NoSuchAlgorithmException;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.constant.ConstantCache;
 import com.platform.mvc.param.Param;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 public class ToolSignature {
 
@@ -25,7 +24,7 @@ public class ToolSignature {
 	 */
 	public static boolean checkSignature(String signature, String timestamp, String nonce) {
 		try {
-			Param param = (Param) CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_param + ToolWeiXin.weixin_token_key);
+			Param param = (Param) ToolCache.get(ParamInitPlugin.cacheStart_param + ToolWeiXin.weixin_token_key);
 			String weixin_token = param.getStr("val");
 			String[] strSet = new String[] { weixin_token, timestamp, nonce };
 			java.util.Arrays.sort(strSet);

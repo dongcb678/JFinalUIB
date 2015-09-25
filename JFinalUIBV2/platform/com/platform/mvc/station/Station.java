@@ -2,12 +2,9 @@ package com.platform.mvc.station;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.platform.annotation.Table;
-import com.platform.constant.ConstantCache;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModelCache;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 /**
  * 岗位model
@@ -183,14 +180,14 @@ public class Station extends BaseModelCache<Station> {
 	 * 添加或者更新缓存
 	 */
 	public void cacheAdd(String ids){
-		CacheKit.put(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_station + ids, Station.dao.findById(ids));
+		ToolCache.set(ParamInitPlugin.cacheStart_station + ids, Station.dao.findById(ids));
 	}
 
 	/**
 	 * 删除缓存
 	 */
 	public void cacheRemove(String ids){
-		CacheKit.remove(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_station + ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_station + ids);
 	}
 
 	/**
@@ -199,7 +196,7 @@ public class Station extends BaseModelCache<Station> {
 	 * @return
 	 */
 	public Station cacheGet(String ids){
-		Station station = CacheKit.get(ConstantCache.cache_name_system, ParamInitPlugin.cacheStart_station + ids);
+		Station station = ToolCache.get(ParamInitPlugin.cacheStart_station + ids);
 		return station;
 	}
 	
