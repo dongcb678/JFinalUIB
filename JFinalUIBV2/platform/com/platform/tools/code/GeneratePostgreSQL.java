@@ -69,11 +69,11 @@ public class GeneratePostgreSQL extends GenerateBase {
 			base.service(className, classNameSmall); 
 
 			// 6.生成DTO，还没有处理数据库字段类型到java数据类型的对应转换
-//			base.dto(className, classNameSmall, dataSource, tableName, colunmList); 
+			//base.dto(className, classNameSmall, dataSource, tableName, colunmList); 
 			
 			// 7.生成视图文件
-//			base.form(classNameSmall, tableName, colunmList);
-//			base.view(classNameSmall, tableName, colunmList);
+			//base.form(classNameSmall, tableName, colunmList);
+			//base.view(classNameSmall, tableName, colunmList);
 		}
 		
 		System.exit(0);
