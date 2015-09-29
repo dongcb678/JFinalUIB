@@ -93,8 +93,8 @@ public class GenerateOracle extends GenerateBase {
 				
 		List<Record> listColumnComments = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.oracle.getColumnComments"), dbUser, tableName, tableName);
 		for (Record record : listColumnComments) {
-			String column_name = record.getStr("COLUMN_NAME");
-			String column_type = record.getStr("DATA_TYPE");
+			String column_name = record.getStr("COLUMN_NAME").toLowerCase();
+			String column_type = record.getStr("DATA_TYPE").toLowerCase();
 			BigDecimal column_length = record.getBigDecimal("DATA_LENGTH");
 			String comments = record.getStr("COMMENTS");
 			

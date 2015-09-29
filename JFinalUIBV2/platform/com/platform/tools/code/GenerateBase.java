@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.beetl.core.BeetlKit;
 
@@ -66,6 +68,32 @@ public abstract class GenerateBase {
 	public abstract List<TableColumnDto> getColunm(String tableName) ;
 	
 	/**
+	 * 获取所有数据类型
+	 * @param tableName
+	 * @return
+	 */
+	public abstract Map<String, String> getJavaType(String tableName);
+
+	/**
+	 * 获取所有数据类型
+	 * @param tableName
+	 * @return
+	 */
+	public Set<String> getJataTypeList(String tableName){
+		Map<String, String> map = getJavaType(tableName);
+		Set<String> keys = map.keySet();
+		Set<String> typeSet = new HashSet<String>();
+		for (String key : keys) {
+			String type = map.get(key);
+			if(type.equals("byte[]") || type.startsWith("java.lang.")){
+				continue;
+			}
+			typeSet.add(map.get(key));
+		}
+		return typeSet;
+	}
+	
+	/**
 	 * 生成Model
 	 * @param className
 	 * @param classNameSmall
@@ -84,6 +112,7 @@ public abstract class GenerateBase {
 		paraMap.put("namespace", basePath + "." + classNameSmall);
 
 		paraMap.put("colunmList", colunmList);
+		paraMap.put("dataTypes", getJataTypeList(tableName));
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +".java";
 		createFileByTemplete("model.html", paraMap, filePath);
@@ -106,6 +135,7 @@ public abstract class GenerateBase {
 		paraMap.put("tableName", tableName);
 
 		paraMap.put("colunmList", colunmList);
+		paraMap.put("dataTypes", getJataTypeList(tableName));
 		
 		String filePath = System.getProperty("user.dir") + "/"+srcFolder+"/" + packages.replace(".", "/") + "/" + className +"Dto.java";
 		createFileByTemplete("dto.html", paraMap, filePath);

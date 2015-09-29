@@ -4,7 +4,9 @@ import com.platform.annotation.Table;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 
-
+<% for(dataType in dataTypes){ %>
+import ${dataType}; 
+<% } %>
 
 import org.apache.log4j.Logger;
 
