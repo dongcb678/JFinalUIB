@@ -1,6 +1,7 @@
 package com.platform.tools.code;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -17,17 +18,18 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.constant.ConstantInit;
+import com.platform.plugin.PropertiesPlugin;
 import com.platform.run.ConfigCore;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 
 /**
- * 定制PostgreSQL下的代码生成
+ * 定制Oracle下的代码生成
  * @author 董华健
  */
-public class GeneratePostgreSQL extends GenerateBase {
+public class GenerateOracle extends GenerateBase {
 
-	private static Logger log = Logger.getLogger(GeneratePostgreSQL.class);
+	private static Logger log = Logger.getLogger(GenerateOracle.class);
 	
 	/**
 	 * 循环生成文件
@@ -38,7 +40,7 @@ public class GeneratePostgreSQL extends GenerateBase {
     	new ConfigCore();
     	log.info("启动ConfigCore end ......");
     	
-		GenerateBase base = new GeneratePostgreSQL();
+		GenerateBase base = new GenerateOracle();
 		for (int i = 0; i < tableArr.length; i++) {
 			// 数据源名称
 			String dataSource = tableArr[i][0]; 
@@ -81,41 +83,40 @@ public class GeneratePostgreSQL extends GenerateBase {
 
 	@Override
 	public List<TableColumnDto> getColunm(String tableName) {
+		String dbUser = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_userName);
+		
 		List<TableColumnDto> list = new ArrayList<TableColumnDto>();
 		
-		List<Record> listDesc = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumnsInfo"), tableName);
-		int index = 1;
-
+		String tableDesc = Db.use(ConstantInit.db_dataSource_main).findFirst(ToolSqlXml.getSql("platform.oracle.getTableComments"), dbUser, tableName).getStr("COMMENTS");
+		
 		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
 				
-		List<Record> listColumn = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumns"), tableName);
-		for (Record record : listColumn) {
-			String column_name = record.getStr("column_name");
-			String data_type = record.getStr("data_type");
-			String character_maximum_length = String.valueOf(record.getInt("character_maximum_length"));
-
+		List<Record> listColumnComments = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.oracle.getColumnComments"), dbUser, tableName, tableName);
+		for (Record record : listColumnComments) {
+			String column_name = record.getStr("COLUMN_NAME");
+			String column_type = record.getStr("DATA_TYPE");
+			BigDecimal column_length = record.getBigDecimal("DATA_LENGTH");
+			String comments = record.getStr("COMMENTS");
+			
 			// 需要跳过的字段
 			if("xxx".equals(column_name) || "yyy".equals(column_name) || "zzz".equals(column_name)){
-				index += 1;
 				continue;
 			}
 			
 			TableColumnDto table = new TableColumnDto();
 			table.setTable_name(tableName);
-			table.setTable_desc(listDesc.get(0).getStr("description"));
+			table.setTable_desc(tableDesc);
 			
 			table.setColumn_name(column_name);
 			table.setColumn_name_upperCaseFirstOne(ToolString.toUpperCaseFirstOne(column_name));
 			
-			table.setColumn_type(data_type);
-			table.setColumn_length(character_maximum_length);
-			table.setColumn_desc(listDesc.get(index).getStr("description"));
+			table.setColumn_type(column_type);
+			table.setColumn_length(column_length.toString());
+			table.setColumn_desc(comments);
 
 			table.setColumn_className(columnJavaTypeMap.get(column_name.toLowerCase()));
 			
 			list.add(table);
-			
-			index += 1;
 		}
 		
 		return list;
