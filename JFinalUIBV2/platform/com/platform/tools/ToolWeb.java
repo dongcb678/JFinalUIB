@@ -80,9 +80,10 @@ public abstract class ToolWeb {
 		String value = request.getParameter(name);
 		if (null != value && !value.isEmpty()) {
 			try {
-				value = URLDecoder.decode(value, ToolString.encoding).trim();
+				return URLDecoder.decode(value, ToolString.encoding).trim();
 			} catch (UnsupportedEncodingException e) {
 				log.error("decode异常：" + value);
+				return value;
 			}
 		}
 		return value;
