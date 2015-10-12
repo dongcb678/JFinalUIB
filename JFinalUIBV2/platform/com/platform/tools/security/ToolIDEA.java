@@ -24,7 +24,6 @@ import com.platform.tools.ToolString;
  */
 public class ToolIDEA {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolIDEA.class);
 
 	/**
@@ -137,7 +136,8 @@ public class ToolIDEA {
 		try {
 			content = ToolString.decode(content);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Base64解码异常：content = " + content);
+			return null;
 		}
 
 		// 2. 解密cookie令牌
@@ -150,7 +150,8 @@ public class ToolIDEA {
 		try {
 			dataByte = decrypt(securityByte, keyByte);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("解密数据异常：content = " + content + "，securityKey = " + securityKey);
+			return null;
 		}
 		String data = new String(dataByte);
 
@@ -169,7 +170,8 @@ public class ToolIDEA {
 		try {
 			authTokenByte = content.getBytes(ToolString.encoding);
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			log.error("字符串数据转byte异常：content = " + content);
+			return null;
 		}
 		String securityKey = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
@@ -179,7 +181,8 @@ public class ToolIDEA {
 		try {
 			securityByte = encrypt(authTokenByte, keyByte);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("加密数据异常：content = " + content + "，securityKey = " + securityKey);
+			return null;
 		}
 		String securityCookie = Base64.encodeBase64String(securityByte);
 
@@ -187,7 +190,8 @@ public class ToolIDEA {
 		try {
 			securityCookie = ToolString.encode(securityCookie);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("数据Base64编码异常：content = " + content + "，securityKey = " + securityKey);
+			return null;
 		}
 
 		return securityCookie;

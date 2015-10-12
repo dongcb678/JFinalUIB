@@ -274,6 +274,10 @@ public class AuthInterceptor implements Interceptor {
 		if (null != loginCookie && !loginCookie.equals("")) {
 			// 1.解密数据
 			String data = ToolIDEA.decrypt(loginCookie);
+			if(null == data || data.isEmpty()){
+				ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
+				return null;
+			}
 			String[] datas = data.split(".#.");	//arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
 			
 			// 2. 分解获取数据
