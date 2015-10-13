@@ -1,6 +1,7 @@
 package com.platform.mvc.base;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8,8 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.formula.functions.T;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.render.JsonRender;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantWebContext;
@@ -176,6 +179,54 @@ public abstract class BaseController extends Controller {
 	 */
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix){
 		return ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
+	}
+
+	/**
+	 * 表单数组映射Record
+	 * @param modelClass
+	 * @return
+	 */
+	public <T extends BaseModel<T>> Record getRecord(Class<? extends T> modelClass){
+		return getModel(modelClass).toRecord();
+	}
+	
+	/**
+	 * 表单数组映射Record
+	 * @param modelClass
+	 * @param modelName
+	 * @return
+	 */
+	public <T extends BaseModel<T>> Record getRecord(Class<? extends T> modelClass, String modelName){
+		return getModel(modelClass, modelName).toRecord();
+	}
+	
+	/**
+	 * 表单数组映射List<Record>
+	 * @param modelClass
+	 * @return
+	 */
+	public <T extends BaseModel<T>> List<Record> getRecords(Class<? extends T> modelClass){
+		List<T> models = ToolModelInjector.injectModels(getRequest(), modelClass);
+		List<Record> records = new ArrayList<Record>(models.size());
+		for (BaseModel model : models) {
+			records.add(model.toRecord());
+		}
+		return records;
+	}
+	
+	/**
+	 * 表单数组映射List<Record>
+	 * @param modelClass
+	 * @param prefix
+	 * @return
+	 */
+	public <T extends BaseModel<T>> List<Record> getRecords(Class<? extends T> modelClass, String prefix){
+		List<T> models = ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
+		List<Record> records = new ArrayList<Record>(models.size());
+		for (BaseModel model : models) {
+			records.add(model.toRecord());
+		}
+		return records;
 	}
 	
 	/**
