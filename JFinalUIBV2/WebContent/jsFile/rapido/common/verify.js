@@ -138,7 +138,7 @@ var platform_verify = function() {
 	 * @returns
 	 */
 	var phone = function(str){
-		var partten = /^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/; ///^1[3,5]\d{9}$/;
+		var partten = /^0?(13[0-9]|15[012356789]|18[01236789]|14[57])[0-9]{8}$/; ///^1[3,5]\d{9}$/;
 		if(partten.test(str)){
 			return {"result" : true, "message" : ""};
 		}else{
