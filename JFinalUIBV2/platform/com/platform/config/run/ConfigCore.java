@@ -1,4 +1,4 @@
-package com.platform.run;
+package com.platform.config.run;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -14,6 +14,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.junit.TestBase;
+import com.platform.config.mapping.BaseMapping;
 import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.dept.Department;

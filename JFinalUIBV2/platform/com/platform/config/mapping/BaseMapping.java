@@ -1,4 +1,4 @@
-package com.platform.run;
+package com.platform.config.mapping;
 
 import java.util.List;
 

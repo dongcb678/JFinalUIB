@@ -1,4 +1,4 @@
-package com.platform.run;
+package com.platform.config.routes;
 
 import com.jfinal.config.Routes;
 import com.weixin.mvc.group.GroupController;

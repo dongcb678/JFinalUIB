@@ -1,4 +1,4 @@
-package com.platform.run;
+package com.platform.config.run;
 
 import org.apache.log4j.Logger;
 import org.beetl.core.GroupTemplate;
@@ -24,6 +24,10 @@ import com.platform.beetl.func.OrderBy;
 import com.platform.beetl.render.MyBeetlRenderFactory;
 import com.platform.beetl.tag.DictTag;
 import com.platform.beetl.tag.ParamTag;
+import com.platform.config.mapping.PlatformMapping;
+import com.platform.config.routes.PlatformRoutes;
+import com.platform.config.routes.TestRoutes;
+import com.platform.config.routes.WeiXinRoutes;
 import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
 import com.platform.handler.GlobalHandler;

@@ -3,7 +3,7 @@ package com.junit;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 
-import com.platform.run.ConfigCore;
+import com.platform.config.run.ConfigCore;
 
 public class TestBase {
 

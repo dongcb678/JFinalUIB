@@ -17,9 +17,9 @@ import org.apache.log4j.Logger;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Record;
+import com.platform.config.run.ConfigCore;
 import com.platform.constant.ConstantInit;
 import com.platform.plugin.PropertiesPlugin;
-import com.platform.run.ConfigCore;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 
