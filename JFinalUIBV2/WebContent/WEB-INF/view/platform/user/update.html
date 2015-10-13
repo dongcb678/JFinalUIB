@@ -23,10 +23,10 @@
 			
 			<div class="panel-body">	
 				<form id="editForm" action="${cxt!}/jf/platform/user/update" method="POST" role="form" class="form-horizontal">
-					<input type="hidden" name="user.ids" value="${escapeXml(user.ids!)}" >
+					<input type="hidden" id="userIds" name="user.ids" value="${escapeXml(user.ids!)}" >
 					<input type="hidden" name="user.version" value="${user.version!}">
 					
-					<input type="hidden" name="userInfo.ids" value="${escapeXml(userInfo.ids!)}" >
+					<input type="hidden" id="userInfoIds" name="userInfo.ids" value="${escapeXml(userInfo.ids!)}" >
 					<input type="hidden" name="userInfo.version" value="${userInfo.version!}">
 					
 					<% include("/platform/user/form.html", {"operatorType" : "update"}){}%>
