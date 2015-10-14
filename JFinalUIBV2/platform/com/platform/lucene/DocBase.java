@@ -32,9 +32,7 @@ import org.wltea.analyzer.lucene.IKAnalyzer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.tools.ToolHtml;
 import com.platform.tools.ToolString;
 
@@ -302,19 +300,8 @@ public abstract class DocBase implements Runnable {
 	 * @return
 	 */
 	protected int getBatchCount(String dataSource, String sql, int batchSize){
-		int count = 0;
-		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key);
-		if(db_type.equals(ConstantInit.db_type_postgresql)){
-			count = Db.use(dataSource).queryLong(" select count(*) " + sql).intValue();
-			
-		}else if(db_type.equals(ConstantInit.db_type_mysql)){
-			count = Db.use(dataSource).queryLong(" select count(*) " + sql).intValue();
-		
-		}else if(db_type.equals(ConstantInit.db_type_oracle)){
-			count = Db.use(dataSource).queryBigDecimal(" select count(*) " + sql).intValue();
-		}
-		
 		int batchCount = 0;
+		int count = Db.use(dataSource).queryNumber(" select count(*) " + sql).intValue();
 		if(count % batchSize == 0){
 			batchCount = count / batchSize;
 		}else{
