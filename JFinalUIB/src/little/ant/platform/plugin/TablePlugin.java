@@ -42,7 +42,7 @@ public class TablePlugin implements IPlugin {
 			// 获取注解对象
 			Table tableBind = (Table) model.getAnnotation(Table.class);
 			if (tableBind == null) {
-				log.error(model.getName() + "继承了BaseModel，但是没有注解绑定表名 ！！！");
+				log.warn(model.getName() + "继承了BaseModel，但是没有注解绑定表名 ！！！");
 				break;
 			}
 

@@ -42,7 +42,7 @@ public class ControllerPlugin implements IPlugin {
 			// 获取注解对象
 			Controller controllerBind = (Controller) controller.getAnnotation(Controller.class);
 			if (controllerBind == null) {
-				log.error(controller.getName() + "继承了BaseController，但是没有注解绑定映射路径");
+				log.warn(controller.getName() + "继承了BaseController，但是没有注解绑定映射路径");
 				continue;
 			}
 
