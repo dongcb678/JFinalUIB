@@ -281,11 +281,21 @@ public class AuthInterceptor implements Interceptor {
 			String[] datas = data.split(".#.");	//arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
 			
 			// 2. 分解获取数据
-			long loginDateTimes = Long.parseLong(datas[0]);// 时间戳
-			String userIds = datas[1];// 用户id
-			String ips = datas[2];// ip地址
-			String userAgent = datas[3];// USER_AGENT
-			boolean autoLogin = Boolean.valueOf(datas[4]);// autoLogin
+			long loginDateTimes;
+			String userIds = null;
+			String ips = null;
+			String userAgent = null;
+			boolean autoLogin = false;
+			try {
+				loginDateTimes = Long.parseLong(datas[0]);// 时间戳
+				userIds = datas[1];// 用户id
+				ips = datas[2];// ip地址
+				userAgent = datas[3];// USER_AGENT
+				autoLogin = Boolean.valueOf(datas[4]);// autoLogin
+			} catch (Exception e) {
+				ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
+				return null;
+			}
 			
 			String newIp = ToolWeb.getIpAddr(request);
 			String newUserAgent = request.getHeader("User-Agent");
