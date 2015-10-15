@@ -31,7 +31,8 @@ import com.platform.tools.security.ToolIDEA;
  * @author 董华健
  * 描述：
  * 1.处理权限验证
- * 2.处理权限相关的工具类
+ * 2.处理全局异常
+ * 3.处理权限相关的工具类方法
  */
 public class AuthInterceptor implements Interceptor {
 
@@ -272,7 +273,7 @@ public class AuthInterceptor implements Interceptor {
 	public static User getCurrentUser(HttpServletRequest request, HttpServletResponse response, boolean userAgentVali) {
 		String loginCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_authmark);
 		if (null != loginCookie && !loginCookie.equals("")) {
-			// 1.解密数据
+			// 1.解密认证数据
 			String data = ToolIDEA.decrypt(loginCookie);
 			if(null == data || data.isEmpty()){
 				ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
@@ -280,29 +281,30 @@ public class AuthInterceptor implements Interceptor {
 			}
 			String[] datas = data.split(".#.");	//arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
 			
-			// 2. 分解获取数据
+			// 2. 分解认证数据
 			long loginDateTimes;
 			String userIds = null;
 			String ips = null;
 			String userAgent = null;
 			boolean autoLogin = false;
 			try {
-				loginDateTimes = Long.parseLong(datas[0]);// 时间戳
-				userIds = datas[1];// 用户id
-				ips = datas[2];// ip地址
-				userAgent = datas[3];// USER_AGENT
-				autoLogin = Boolean.valueOf(datas[4]);// autoLogin
+				loginDateTimes = Long.parseLong(datas[0]); // 时间戳
+				userIds = datas[1]; // 用户id
+				ips = datas[2]; // ip地址
+				userAgent = datas[3]; // USER_AGENT
+				autoLogin = Boolean.valueOf(datas[4]); // 是否自动登录
 			} catch (Exception e) {
 				ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
 				return null;
 			}
 			
+			// 3.用户当前数据
 			String newIp = ToolWeb.getIpAddr(request);
 			String newUserAgent = request.getHeader("User-Agent");
-
+			
 			Date start = ToolDateTime.getDate();
-			start.setTime(loginDateTimes);
-			int day = ToolDateTime.getDateDaySpace(start, ToolDateTime.getDate());
+			start.setTime(loginDateTimes); // 用户自动登录开始时间
+			int day = ToolDateTime.getDateDaySpace(start, ToolDateTime.getDate()); // 已经登录多少天
 			
 			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
 			
