@@ -106,9 +106,13 @@ public abstract class ToolSqlXml {
 			if(param.get(key) == null){
 				break;
 			}
-			String value = (String) param.get(key);
-			value = value.replace("'", "").replace(";", "").replace("--", "");
-			sql = sql.replace("#" + key + "#", value);
+			
+			Object paramValue = param.get(key);
+			if(paramValue instanceof String){
+				String value = (String) param.get(key);
+				value = value.replace("'", "").replace(";", "").replace("--", "");
+				sql = sql.replace("#" + key + "#", value);
+			}
 		}
 		
         return sql.replaceAll("[\\s]{2,}", " ");
