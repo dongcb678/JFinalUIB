@@ -109,7 +109,7 @@ public abstract class ToolSqlXml {
 			
 			Object paramValue = param.get(key);
 			if(paramValue instanceof String){
-				String value = (String) param.get(key);
+				String value = (String) paramValue;
 				value = value.replace("'", "").replace(";", "").replace("--", "");
 				sql = sql.replace("#" + key + "#", value);
 			}
