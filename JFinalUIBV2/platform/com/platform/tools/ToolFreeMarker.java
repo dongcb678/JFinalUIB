@@ -56,20 +56,20 @@ public abstract class ToolFreeMarker {
 	
 	/**
 	 * 生成HTML
-	 * @param ftlDirectory ftl模板目录
-	 * @param ftlName	ftl模板
+	 * @param tlDirectory tl模板目录
+	 * @param tlName	ftl模板
 	 * @param paramMap	参数map
 	 * @param htmlPath 生成HTML存放路径
 	 */
-	public static void makeHtml(String ftlDirectory, String ftlName, Map<String, Object> paramMap, String htmlPath) {
+	public static void makeHtml(String tlDirectory, String tlName, Map<String, Object> paramMap, String htmlPath) {
 		FileOutputStream fileOutputStream = null;
 		OutputStreamWriter outputStreamWriter = null;
 		try {
 			Configuration configuration = new Configuration(Configuration.VERSION_2_3_22);
-			File file = new File(ftlDirectory);// .ftl模板目录
+			File file = new File(tlDirectory);// .ftl模板目录
 			configuration.setDirectoryForTemplateLoading(file);
 			configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_22));
-			Template template = configuration.getTemplate(ftlName, ToolString.encoding);
+			Template template = configuration.getTemplate(tlName, ToolString.encoding);
 
 			File file2 = new File(htmlPath);// 生成html目录
 			fileOutputStream = new FileOutputStream(file2);

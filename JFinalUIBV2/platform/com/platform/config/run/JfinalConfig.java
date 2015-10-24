@@ -1,7 +1,6 @@
 package com.platform.config.run;
 
 import org.apache.log4j.Logger;
-import org.beetl.core.GroupTemplate;
 
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -16,14 +15,7 @@ import com.jfinal.plugin.activerecord.tx.TxByMethods;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
-import com.platform.beetl.format.DateFormat;
-import com.platform.beetl.func.AuthUrl;
-import com.platform.beetl.func.EscapeXml;
-import com.platform.beetl.func.I18nFormat;
-import com.platform.beetl.func.OrderBy;
 import com.platform.beetl.render.MyBeetlRenderFactory;
-import com.platform.beetl.tag.DictTag;
-import com.platform.beetl.tag.ParamTag;
 import com.platform.config.mapping.PlatformMapping;
 import com.platform.config.routes.PlatformRoutes;
 import com.platform.config.routes.TestRoutes;
@@ -68,14 +60,7 @@ public class JfinalConfig extends JFinalConfig {
 
 		log.info("configConstant 视图Beetl设置");
 		constants.setMainRenderFactory(new MyBeetlRenderFactory());
-		GroupTemplate groupTemplate = MyBeetlRenderFactory.groupTemplate;
-		groupTemplate.registerFunction("authUrl", new AuthUrl());
-		groupTemplate.registerFunction("orderBy", new OrderBy());
-		groupTemplate.registerFunction("escapeXml", new EscapeXml());
-		groupTemplate.registerFunction("i18nFormat", new I18nFormat());
-		groupTemplate.registerTag("dict", DictTag.class);
-		groupTemplate.registerTag("param", ParamTag.class);
-		groupTemplate.registerFormat("dateFormat", new DateFormat());
+		MyBeetlRenderFactory.regiseter();
 		
 		log.info("configConstant 视图error page设置");
 		constants.setError404View("/common/404.html");

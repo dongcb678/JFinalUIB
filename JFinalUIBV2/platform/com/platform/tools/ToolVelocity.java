@@ -54,14 +54,15 @@ public abstract class ToolVelocity {
 	
 	/**
 	 * 生成静态html
-	 * @param ftlPath 模板路径
+	 * @param tlPath 模板路径
 	 * @param paramMap 参数
 	 * @param htmlPath html文件保存路径
 	 */
-	public static void makeHtml(String ftlPath, Map<String, Object> paramMap, String htmlPath) {
+	public static void makeHtml(String tlPath, Map<String, Object> paramMap, String htmlPath) {
+		PrintWriter pw = null;
 		try {
             //初始化vm模板
-            Template template = Velocity.getTemplate(ftlPath, "UTF-8");
+            Template template = Velocity.getTemplate(tlPath, "UTF-8");
            
             //初始化上下文
             VelocityContext context = new VelocityContext();
@@ -73,11 +74,8 @@ public abstract class ToolVelocity {
 			}
             
             //生成html页面
-            PrintWriter pw=new PrintWriter("htmlPath");
+            pw = new PrintWriter(htmlPath);
             template.merge(context, pw);
-            
-            //关闭流
-            pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (ResourceNotFoundException e) {
@@ -86,6 +84,11 @@ public abstract class ToolVelocity {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+        	if(pw != null ){
+                //关闭流
+        		pw.close();
+        	}
         }
 	}
 	
