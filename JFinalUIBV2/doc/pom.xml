@@ -1,0 +1,803 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>JfinalUIB.V2.FOR.MAVEN</groupId>
+	<artifactId>JfinalUIB-V2-FOR-MAVEN</artifactId>
+	
+	<packaging>war</packaging>
+	
+	<version>2.0-SNAPSHOT</version>
+	<name>JfinalUIB-V2-FOR-MAVEN Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>8.1.8</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.22</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.14</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>cos</artifactId>
+			<version>26Dec2008</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.0.2</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.35</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4-1201-jdbc41</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+				
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+				
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.12</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>		
+				
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.3</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>		
+				
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>		
+			
+		<dependency>
+			<groupId>commons-dbutils</groupId>
+			<artifactId>commons-dbutils</artifactId>
+			<version>1.6</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.ow2.asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>5.0.4</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.4.1</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20141113</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.8.2</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>de.odysseus.juel</groupId>
+			<artifactId>juel-impl</artifactId>
+			<version>2.2.7</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.52</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-ext-jdk15on</artifactId>
+			<version>1.52</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>2.6.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-exec</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.1</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.6</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.4.1</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.1</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.3</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.7.2</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>5.3.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queries</artifactId>
+			<version>5.3.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>5.3.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-highlighter</artifactId>
+			<version>5.3.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-backward-codecs</artifactId>
+			<version>5.3.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<version>5.3.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-memory</artifactId>
+			<version>5.3.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.12</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.12</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>3.12</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.10.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-web</artifactId>
+			<version>2.0.4</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.0</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.2.0</version>
+			<scope>test</scope>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.8</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+		  	<groupId>org.beetl</groupId>
+		  	<artifactId>beetl-core</artifactId>
+		  	<version>2.2.3</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+
+		<dependency>
+		  	<groupId>com.oracle</groupId>
+		  	<artifactId>ojdbc6</artifactId>
+		  	<version>11.2.0.3</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>little.ant.IKAnalyzer2012FF_u1</groupId>
+			<artifactId>IKAnalyzer2012FF_u1</artifactId>
+			<version>u1</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>little.ant.jcseg.analyzer</groupId>
+			<artifactId>jcseg-analyzer</artifactId>
+			<version>1.9.6</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>little.ant.jcseg.core</groupId>
+			<artifactId>jcseg-core</artifactId>
+			<version>1.9.6</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>little.ant.ueditor</groupId>
+			<artifactId>ueditor</artifactId>
+			<version>1.1.3</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>little.ant.jfinal-2.0-for-uib</groupId>
+			<artifactId>jfinal-2.0-for-uib</artifactId>
+			<version>2.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+
+	</dependencies>
+	
+	<build>
+		<finalName>JfinalUIB_V2_FOR_MAVEN</finalName>
+		
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>*.properties</include>
+					<include>*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+		
+		<plugins>
+            <!-- Compile -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			
+            <!-- Test -->
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            
+            <!-- Jetty -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>8.1.8.v20121106</version>
+				<configuration>            
+					<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>  
+					<scanIntervalSeconds>5</scanIntervalSeconds>
+					<webAppConfig>
+						<contextPath>/</contextPath>
+					</webAppConfig>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>99</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+					<stopKey>stop</stopKey>
+					<stopPort>5599</stopPort>
+				</configuration>
+			</plugin>
+			
+            <!-- Tomcat -->
+			<plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/${project.artifactId}</path>
+                </configuration>
+            </plugin>
+		</plugins>
+	</build>
+	
+    <repositories>
+        <repository>
+            <id>nexus</id>
+        	<name>local private nexus</name>
+        	<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+        </repository>
+    </repositories>
+    
+</project>
