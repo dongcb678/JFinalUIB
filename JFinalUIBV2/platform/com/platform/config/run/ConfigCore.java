@@ -13,7 +13,6 @@ import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
-import com.junit.TestBase;
 import com.platform.config.mapping.BaseMapping;
 import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
@@ -53,7 +52,7 @@ public class ConfigCore {
 	
     public ConfigCore() throws IOException {
     	Properties properties = new Properties();
-    	properties.load(TestBase.class.getResourceAsStream("/init.properties"));
+    	properties.load(ConfigCore.class.getResourceAsStream("/init.properties"));
     	PropertiesPlugin propertiesPlugin = new PropertiesPlugin(properties);
     	propertiesPlugin.start();
 		
