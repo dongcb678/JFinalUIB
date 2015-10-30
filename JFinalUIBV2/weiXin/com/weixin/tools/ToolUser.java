@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.tools.ToolHttp;
-import com.weixin.bo.user.RecevieUserInfo;
-import com.weixin.bo.user.RecevieUserList;
+import com.weixin.dto.user.RecevieUserInfo;
+import com.weixin.dto.user.RecevieUserList;
 
 public class ToolUser {
 

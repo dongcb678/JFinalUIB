@@ -16,9 +16,9 @@ import org.dom4j.Element;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.tools.ToolString;
-import com.weixin.bo.map.RecevieBaiduPlace;
-import com.weixin.bo.map.RecevieUserLocation;
-import com.weixin.bo.message.ResponseMsgArticle;
+import com.weixin.dto.map.RecevieBaiduPlace;
+import com.weixin.dto.map.RecevieUserLocation;
+import com.weixin.dto.message.ResponseMsgArticle;
 
 /**
  * 百度地图操作类

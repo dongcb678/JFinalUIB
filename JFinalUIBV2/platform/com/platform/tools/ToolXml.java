@@ -17,7 +17,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
-import com.weixin.bo.message.RecevieMsgText;
+import com.weixin.dto.message.RecevieMsgText;
 
 /**
  * XML工具类

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.platform.tools.ToolHttp;
-import com.weixin.bo.user.RecevieGroup;
+import com.weixin.dto.user.RecevieGroup;
 
 public class ToolGroup {
 

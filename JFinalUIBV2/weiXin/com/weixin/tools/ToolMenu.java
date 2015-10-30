@@ -4,9 +4,9 @@ import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.platform.tools.ToolHttp;
-import com.weixin.bo.menu.RecevieMenuCreate;
-import com.weixin.bo.menu.RecevieMenuDelete;
-import com.weixin.bo.menu.ResponseMenu;
+import com.weixin.dto.menu.RecevieMenuCreate;
+import com.weixin.dto.menu.RecevieMenuDelete;
+import com.weixin.dto.menu.ResponseMenu;
 
 /**
  * 菜单操作

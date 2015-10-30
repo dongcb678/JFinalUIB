@@ -11,7 +11,7 @@ import com.platform.mvc.param.Param;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolHttp;
-import com.weixin.bo.message.RecevieToken;
+import com.weixin.dto.message.RecevieToken;
 
 /**
  * 微信工具类

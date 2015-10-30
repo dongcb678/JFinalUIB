@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
 import com.platform.mvc.base.BaseService;
-import com.weixin.bo.message.RecevieToken;
-import com.weixin.bo.user.RecevieGroup;
+import com.weixin.dto.message.RecevieToken;
+import com.weixin.dto.user.RecevieGroup;
 import com.weixin.tools.ToolGroup;
 import com.weixin.tools.ToolWeiXin;
 

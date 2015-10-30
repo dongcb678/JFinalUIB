@@ -5,7 +5,20 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Enhancer;
 import com.platform.mvc.base.BaseService;
 import com.platform.tools.ToolXml;
-import com.weixin.tools.ToolMessage;
+import com.weixin.constant.ConstantEvent;
+import com.weixin.constant.ConstantMsg;
+import com.weixin.handler.event.ClickHandler;
+import com.weixin.handler.event.ScanHandler;
+import com.weixin.handler.event.SubscribeHandler;
+import com.weixin.handler.event.SubscribeScanHandler;
+import com.weixin.handler.event.UnSubscribeHandler;
+import com.weixin.handler.event.ViewHandler;
+import com.weixin.handler.message.ImageHandler;
+import com.weixin.handler.message.LinkHandler;
+import com.weixin.handler.message.LocationHandler;
+import com.weixin.handler.message.TextHandler;
+import com.weixin.handler.message.VideoHandler;
+import com.weixin.handler.message.VoiceHandler;
 
 public class MessageService extends BaseService {
 
@@ -24,7 +37,7 @@ public class MessageService extends BaseService {
 		String msgType = ToolXml.getStairText(recverMsg, "msgType");
 		
 		// 1.事件推送
-		if (msgType.equals(ToolMessage.recevie_event)) {
+		if (msgType.equals(ConstantEvent.recevie_event)) {
 			log.info("事件推送类型消息处理");
 			String event = ToolXml.getStairText(recverMsg, "Event");
 			return event(event, recverMsg);
@@ -44,30 +57,30 @@ public class MessageService extends BaseService {
 	public String event(String event, String recverMsg){
 		String responseMsg = null;
 		
-		if(event.equals(ToolMessage.recevie_event_subscribe)){//订阅
+		if(event.equals(ConstantEvent.recevie_event_subscribe)){//订阅
 			String eventKey = ToolXml.getStairText(recverMsg, "EventKey");
 			if(null == eventKey){//订阅
-				responseMsg = ToolMessage.recevie_event_subscribe(recverMsg);
+				responseMsg = (String) new SubscribeHandler().handle(recverMsg);
 				
 			}else{// 扫描二维码事件1：如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值关注事件推送给开发者。
-				responseMsg = ToolMessage.recevie_event_subscribe_scan(recverMsg);
+				responseMsg = (String) new SubscribeScanHandler().handle(recverMsg);
 				
 			}
 			
-		}else if(event.equals(ToolMessage.recevie_event_unsubscribe)){//取消订阅
-			responseMsg = ToolMessage.recevie_event_unsubscribe(recverMsg);
+		}else if(event.equals(ConstantEvent.recevie_event_unsubscribe)){//取消订阅
+			responseMsg = (String) new UnSubscribeHandler().handle(recverMsg);
 			
-		}else if(event.equals(ToolMessage.recevie_event_scan)){//扫描二维码事件2：如果用户已经关注公众号，则微信会将带场景值扫描事件推送给开发者。
-			responseMsg = ToolMessage.recevie_event_scan(recverMsg);
+		}else if(event.equals(ConstantEvent.recevie_event_scan)){//扫描二维码事件2：如果用户已经关注公众号，则微信会将带场景值扫描事件推送给开发者。
+			responseMsg = (String) new ScanHandler().handle(recverMsg);
 			
-		}else if(event.equals(ToolMessage.recevie_event_location)){//上报地理位置事件
-			responseMsg = ToolMessage.recevie_event_location(recverMsg);
+		}else if(event.equals(ConstantEvent.recevie_event_location)){//上报地理位置事件
+			responseMsg = (String) new LocationHandler().handle(recverMsg);
 			
-		}else if(event.equals(ToolMessage.recevie_event_click)){//点击菜单拉取消息时的事件推送
-			responseMsg = ToolMessage.recevie_event_click(recverMsg);
+		}else if(event.equals(ConstantEvent.recevie_event_click)){//点击菜单拉取消息时的事件推送
+			responseMsg = (String) new ClickHandler().handle(recverMsg);
 			
-		}else if(event.equals(ToolMessage.recevie_event_view)){//点击菜单跳转链接时的事件推送
-			responseMsg = ToolMessage.recevie_event_view(recverMsg);
+		}else if(event.equals(ConstantEvent.recevie_event_view)){//点击菜单跳转链接时的事件推送
+			responseMsg = (String) new ViewHandler().handle(recverMsg);
 		}
 		
 		return responseMsg;
@@ -82,23 +95,23 @@ public class MessageService extends BaseService {
 	public String message(String msgType, String recverMsg){
 		String responseMsg = null;
 		
-		if (msgType.equals(ToolMessage.recevie_msg_text)) {// 文本消息
-			responseMsg = ToolMessage.recevie_msg_text(recverMsg);
+		if (msgType.equals(ConstantMsg.recevie_msg_text)) {// 文本消息
+			responseMsg = (String) new TextHandler().handle(recverMsg);
 
-		} else if (msgType.equals(ToolMessage.recevie_msg_image)) {// 图片消息
-			responseMsg = ToolMessage.recevie_msg_image(recverMsg);
+		} else if (msgType.equals(ConstantMsg.recevie_msg_image)) {// 图片消息
+			responseMsg = (String) new ImageHandler().handle(recverMsg);
 
-		} else if (msgType.equals(ToolMessage.recevie_msg_voice)) {// 语音消息
-			responseMsg = ToolMessage.recevie_msg_voice(recverMsg);
+		} else if (msgType.equals(ConstantMsg.recevie_msg_voice)) {// 语音消息
+			responseMsg = (String) new VoiceHandler().handle(recverMsg);
 			
-		} else if (msgType.equals(ToolMessage.recevie_msg_video)) {// 视频消息
-			responseMsg = ToolMessage.recevie_msg_video(recverMsg);
+		} else if (msgType.equals(ConstantMsg.recevie_msg_video)) {// 视频消息
+			responseMsg = (String) new VideoHandler().handle(recverMsg);
 			
-		} else if (msgType.equals(ToolMessage.recevie_msg_location)) {// 地理位置消息
-			responseMsg = ToolMessage.recevie_msg_location(recverMsg);
+		} else if (msgType.equals(ConstantMsg.recevie_msg_location)) {// 地理位置消息
+			responseMsg = (String) new LocationHandler().handle(recverMsg);
 			
-		} else if (msgType.equals(ToolMessage.recevie_msg_link)) {// 链接消息
-			responseMsg = ToolMessage.recevie_msg_link(recverMsg);
+		} else if (msgType.equals(ConstantMsg.recevie_msg_link)) {// 链接消息
+			responseMsg = (String) new LinkHandler().handle(recverMsg);
 		}
 		
 		return responseMsg;

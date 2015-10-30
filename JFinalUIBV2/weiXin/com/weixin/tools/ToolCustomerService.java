@@ -9,8 +9,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.platform.tools.ToolHttp;
-import com.weixin.bo.message.ResponseMsgArticle;
-import com.weixin.bo.music.ResponseMusic;
+import com.weixin.dto.message.ResponseMsgArticle;
+import com.weixin.dto.music.ResponseMusic;
 
 public class ToolCustomerService {
 

@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.tools.ToolString;
-import com.weixin.bo.media.RecevieMedia;
+import com.weixin.dto.media.RecevieMedia;
 
 public class ToolMedia {
 	

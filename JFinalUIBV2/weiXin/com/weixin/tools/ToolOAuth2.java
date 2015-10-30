@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.platform.tools.ToolHttp;
-import com.weixin.bo.oauth.RecevieOauth2Token;
-import com.weixin.bo.oauth.RecevieSNSUserInfo;
+import com.weixin.dto.oauth.RecevieOauth2Token;
+import com.weixin.dto.oauth.RecevieSNSUserInfo;
 
 public class ToolOAuth2 {
 

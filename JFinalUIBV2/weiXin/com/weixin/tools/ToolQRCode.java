@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import com.alibaba.fastjson.JSON;
 import com.platform.tools.ToolHttp;
 import com.platform.tools.ToolString;
-import com.weixin.bo.qrcode.RecevieQRCode;
+import com.weixin.dto.qrcode.RecevieQRCode;
 
 public class ToolQRCode {
 
