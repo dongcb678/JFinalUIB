@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolXml;
-import com.weixin.constant.ConstantMsg;
+import com.weixin.constant.ConstantTable;
 import com.weixin.dto.message.RecevieMsgLink;
 import com.weixin.dto.message.ResponseMsgText;
 import com.weixin.handler.BaseHandler;
@@ -26,8 +26,8 @@ public class LinkHandler implements BaseHandler {
 
 		//请求数据入库
 		Message messageIn = new Message();
-		messageIn.set("inouts", ConstantMsg.message_inouts_in);
-		messageIn.set("datatype", ConstantMsg.message_datatype_xml);
+		messageIn.set("inouts", ConstantTable.message_inouts_in);
+		messageIn.set("datatype", ConstantTable.message_datatype_xml);
 		messageIn.set("datacontent", message);//请求数据
 		messageIn.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		
@@ -56,8 +56,8 @@ public class LinkHandler implements BaseHandler {
 		
 		//返回数据入库
 		Message messageOut = new Message();
-		messageOut.set("inouts", ConstantMsg.message_inouts_out);
-		messageOut.set("datatype", ConstantMsg.message_datatype_xml);
+		messageOut.set("inouts", ConstantTable.message_inouts_out);
+		messageOut.set("datatype", ConstantTable.message_datatype_xml);
 		messageOut.set("datacontent", responseXml);//返回数据
 		messageOut.set("createdate", ToolDateTime.getSqlTimestamp(null));//数据创建时间
 		messageOut.set("ToUserName", responseText.getToUserName());	// 开发者微信号

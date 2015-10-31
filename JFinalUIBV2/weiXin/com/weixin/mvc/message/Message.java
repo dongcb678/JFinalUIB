@@ -1,9 +1,10 @@
 package com.weixin.mvc.message;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
 import org.apache.log4j.Logger;
 
-import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 
 @SuppressWarnings("unused")
@@ -219,34 +220,34 @@ public class Message extends BaseModel<Message> {
 	private String inouts;
 	private String datatype;
 	private String datacontent;
-	private java.sql.Timestamp createdate;
+	private Timestamp createdate;
 	private String msgType;
 	private String Event;
 	private String EventKey;
 	private String ToUserName;
 	private String FromUserName;
-	private java.math.BigDecimal CreateTime;
-	private java.math.BigDecimal MsgId;
+	private BigDecimal CreateTime;
+	private BigDecimal MsgId;
 	private String PicUrl;
 	private String MediaId;
 	private String Title;
 	private String Description;
 	private String Url;
-	private java.math.BigDecimal Location_X;
-	private java.math.BigDecimal Location_Y;
-	private java.math.BigDecimal Scale;
+	private BigDecimal Location_X;
+	private BigDecimal Location_Y;
+	private BigDecimal Scale;
 	private String Labels;
 	private String Content;
 	private String ThumbMediaId;
 	private String Format;
 	private String Recognition;
-	private java.math.BigDecimal Latitude;
-	private java.math.BigDecimal Longitude;
-	private java.math.BigDecimal Precisions;
+	private BigDecimal Latitude;
+	private BigDecimal Longitude;
+	private BigDecimal Precisions;
 	private String Ticket;
 	private String MusicURL;
 	private String HQMusicUrl;
-	private java.math.BigDecimal ArticleCount;
+	private BigDecimal ArticleCount;
 
 	public void setIds(String ids){
 		set(column_ids, ids);
@@ -272,7 +273,7 @@ public class Message extends BaseModel<Message> {
 	public <T> T getDatacontent() {
 		return get(column_datacontent);
 	}
-	public void setCreatedate(java.sql.Timestamp createdate){
+	public void setCreatedate(Timestamp createdate){
 		set(column_createdate, createdate);
 	}
 	public <T> T getCreatedate() {
@@ -308,13 +309,13 @@ public class Message extends BaseModel<Message> {
 	public <T> T getFromUserName() {
 		return get(column_FromUserName);
 	}
-	public void setCreateTime(java.math.BigDecimal CreateTime){
+	public void setCreateTime(BigDecimal CreateTime){
 		set(column_CreateTime, CreateTime);
 	}
 	public <T> T getCreateTime() {
 		return get(column_CreateTime);
 	}
-	public void setMsgId(java.math.BigDecimal MsgId){
+	public void setMsgId(BigDecimal MsgId){
 		set(column_MsgId, MsgId);
 	}
 	public <T> T getMsgId() {
@@ -350,19 +351,19 @@ public class Message extends BaseModel<Message> {
 	public <T> T getUrl() {
 		return get(column_Url);
 	}
-	public void setLocation_X(java.math.BigDecimal Location_X){
+	public void setLocation_X(BigDecimal Location_X){
 		set(column_Location_X, Location_X);
 	}
 	public <T> T getLocation_X() {
 		return get(column_Location_X);
 	}
-	public void setLocation_Y(java.math.BigDecimal Location_Y){
+	public void setLocation_Y(BigDecimal Location_Y){
 		set(column_Location_Y, Location_Y);
 	}
 	public <T> T getLocation_Y() {
 		return get(column_Location_Y);
 	}
-	public void setScale(java.math.BigDecimal Scale){
+	public void setScale(BigDecimal Scale){
 		set(column_Scale, Scale);
 	}
 	public <T> T getScale() {
@@ -398,19 +399,19 @@ public class Message extends BaseModel<Message> {
 	public <T> T getRecognition() {
 		return get(column_Recognition);
 	}
-	public void setLatitude(java.math.BigDecimal Latitude){
+	public void setLatitude(BigDecimal Latitude){
 		set(column_Latitude, Latitude);
 	}
 	public <T> T getLatitude() {
 		return get(column_Latitude);
 	}
-	public void setLongitude(java.math.BigDecimal Longitude){
+	public void setLongitude(BigDecimal Longitude){
 		set(column_Longitude, Longitude);
 	}
 	public <T> T getLongitude() {
 		return get(column_Longitude);
 	}
-	public void setPrecisions(java.math.BigDecimal Precisions){
+	public void setPrecisions(BigDecimal Precisions){
 		set(column_Precisions, Precisions);
 	}
 	public <T> T getPrecisions() {
@@ -434,7 +435,7 @@ public class Message extends BaseModel<Message> {
 	public <T> T getHQMusicUrl() {
 		return get(column_HQMusicUrl);
 	}
-	public void setArticleCount(java.math.BigDecimal ArticleCount){
+	public void setArticleCount(BigDecimal ArticleCount){
 		set(column_ArticleCount, ArticleCount);
 	}
 	public <T> T getArticleCount() {

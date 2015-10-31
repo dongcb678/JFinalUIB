@@ -17,12 +17,4 @@ public interface ConstantMsg {
 	
 	public static final String recevie_msg_link = "link";
 	
-	/**
-	 * wx_message表字段值
-	 */
-	public static final String message_inouts_in = "0";//接受的消息
-	public static final String message_inouts_out = "1";//发出的消息
-	public static final String message_datatype_xml = "0";//数据类型XML
-	public static final String message_datatype_json = "1";//数据类型JSON
-	
 }
