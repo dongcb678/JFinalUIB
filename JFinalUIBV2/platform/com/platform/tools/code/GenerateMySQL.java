@@ -105,9 +105,11 @@ public class GenerateMySQL extends GenerateBase {
 	@Override
 	public List<TableColumnDto> getColunm(String tableName)  {
 		List<TableColumnDto> list = new ArrayList<TableColumnDto>();
+
+		String dbName = (String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_dbName);
 		
-		String tableDesc = Db.use("information_schema").findFirst(ToolSqlXml.getSql("platform.mysql.getTables"), "jfinaluibv2", tableName).getStr("table_COMMENT");
-		List<Record> listColumn = Db.use("information_schema").find(ToolSqlXml.getSql("platform.mysql.getColumns"), "jfinaluibv2", tableName);
+		String tableDesc = Db.use("information_schema").findFirst(ToolSqlXml.getSql("platform.mysql.getTables"), dbName, tableName).getStr("table_COMMENT");
+		List<Record> listColumn = Db.use("information_schema").find(ToolSqlXml.getSql("platform.mysql.getColumns"), dbName, tableName);
 		
 		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
 				
