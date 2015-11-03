@@ -4,24 +4,25 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
-import com.jfinal.plugin.ehcache.EhCachePlugin;
-import com.platform.plugin.SqlXmlPlugin;
+import com.platform.config.run.ConfigCore;
+import com.platform.constant.ConstantInit;
+import com.platform.plugin.PropertiesPlugin;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 
@@ -34,27 +35,22 @@ public class GenerateMySQL extends GenerateBase {
 	private static Logger log = Logger.getLogger(GenerateMySQL.class);
 
 	/**
-	 * 根据自己的情况修改这里的数据源IP、端口、数据库名称、用户名、密码
-	 */
-	public static String ip = "127.0.0.1";
-	public static String port = "3306";
-	public static String username = "root";
-	public static String password = "678789";
-	public static String database = "jfinaluibv2";
-	
-	public static DruidPlugin druidPluginIS = null;
-	public static DruidPlugin druidPluginUIB = null;
-	
-	/**
 	 * 循环生成文件
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
+		log.info("启动ConfigCore start ......");
+    	new ConfigCore();
+    	log.info("启动ConfigCore end ......");
+    	
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		druidPluginIS = new DruidPlugin(
-				"jdbc:mysql://"+ip+":"+port+"/information_schema?characterEncoding=UTF-8"
-				+ "&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull", 
-				username, password, "com.mysql.jdbc.Driver");
+		String ip = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_ip);
+		String port = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_port);
+		String username = (String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_userName);
+		String password = (String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_passWord);
+		
+		String jdbcUrl = "jdbc:mysql://"+ip+":"+port+"/information_schema?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull";
+		DruidPlugin druidPluginIS = new DruidPlugin(jdbcUrl, username, password, "com.mysql.jdbc.Driver");
 		druidPluginIS.start();
 		
 		log.info("configPlugin 配置ActiveRecord插件");
@@ -65,21 +61,6 @@ public class GenerateMySQL extends GenerateBase {
 		arpIS.setDialect(new MysqlDialect());
 		arpIS.start();
 		
-		log.info("EhCachePlugin EhCache缓存");
-		EhCachePlugin ehCachePlugin = new EhCachePlugin();
-		ehCachePlugin.start();
-
-		log.info("SqlXmlPlugin 解析并缓存 xml sql");
-		SqlXmlPlugin sqlXmlPlugin = new SqlXmlPlugin();
-		sqlXmlPlugin.start();
-		
-		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		druidPluginUIB = new DruidPlugin(
-				"jdbc:mysql://"+ip+":"+port+"/"+database+"?characterEncoding=UTF-8"
-				+ "&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull", 
-				username, password, "com.mysql.jdbc.Driver");
-		druidPluginUIB.start();
-
 		GenerateBase base = new GenerateMySQL();
 		for (int i = 0; i < tableArr.length; i++) {
 			// 数据源名称
@@ -162,13 +143,16 @@ public class GenerateMySQL extends GenerateBase {
 	public Map<String, String> getJavaType(String tableName){
         //  获取字段数
 	    Map<String, String> columnJavaTypeMap = new HashMap<String, String>();
+
+	    Connection conn = null;
+	    Statement stmt = null;
+	    ResultSet rs = null;
+	    
 		try {
-			DataSource dataSource = druidPluginUIB.getDataSource();
-			Connection conn = dataSource.getConnection();
-			
-			Statement stmt = conn.createStatement();    
+			conn = DbKit.getConfig().getConnection(); // 默认数据源jfinaluibv2
+			stmt = conn.createStatement();    
 		    String sql = "select * from " + tableName + " where 1 != 1 ";   
-		    ResultSet rs = stmt.executeQuery(sql);    
+		    rs = stmt.executeQuery(sql);    
 		    ResultSetMetaData rsmd = rs.getMetaData(); 
 
 	        int columns = rsmd.getColumnCount();   
@@ -183,6 +167,22 @@ public class GenerateMySQL extends GenerateBase {
 	        }
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return columnJavaTypeMap;
