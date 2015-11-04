@@ -27,7 +27,7 @@
 		
 		<dependency>
 		  	<groupId>little.ant.jfinal-2.0-for-uib</groupId>
-		  	<artifactId>jfinal-2.0-for-uib</artifactId>
+  			<artifactId>jfinal-2.0-for-uib</artifactId>
 		  	<version>2.0</version>
 			<exclusions>   
 		        <exclusion>   
@@ -37,74 +37,74 @@
 		    </exclusions>
 		</dependency>
 		
-	<dependency>
-    	<groupId>com.jfinal</groupId>
-    	<artifactId>jetty-server</artifactId>
-    	<version>8.1.8</version>
-    	<scope>provided</scope>
-    </dependency>
-	<!-- Jetty JSP：根据 Dependency Hierarchy 视图拆分成了七个 dependency，
-            - 方便项目以及便于 导出 war的在jetty与tomcat间无缝迁移
-            - Dependencies: http://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jsp
-	<dependency>
-		<groupId>org.eclipse.jetty</groupId>
-		<artifactId>jetty-jsp</artifactId>
-		<version>8.1.8.v20121106</version>
-		<scope>provided</scope>
-	</dependency>
-	 -->
-	<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
-		<groupId>org.eclipse.jetty.orbit</groupId>
-		<artifactId>javax.servlet.jsp</artifactId>
-		<version>2.2.0.v201112011158</version>
-		<scope>provided</scope>
-	</dependency>
-	<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
-		<groupId>org.eclipse.jetty.orbit</groupId>
-		<artifactId>org.apache.jasper.glassfish</artifactId>
-		<version>2.2.2.v201112011158</version>
-		<scope>provided</scope>
-	</dependency>
-	<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
-		<groupId>org.eclipse.jetty.orbit</groupId>
-		<artifactId>javax.el</artifactId>
-		<version>2.2.0.v201108011116</version>
-		<scope>provided</scope>
-	</dependency>
-	<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
-		<groupId>org.eclipse.jetty.orbit</groupId>
-		<artifactId>com.sun.el</artifactId>
-		<version>2.2.0.v201108011116</version>
-		<scope>provided</scope>
-	</dependency>
-	<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
-		<groupId>org.eclipse.jetty.orbit</groupId>
-		<artifactId>org.eclipse.jdt.core</artifactId>
-		<version>3.7.1</version>
-		<scope>provided</scope>
-	</dependency>
-	<dependency><!-- JSTL 支持 -->
-		<groupId>org.eclipse.jetty.orbit</groupId>
-		<artifactId>javax.servlet.jsp.jstl</artifactId>
-		<version>1.2.0.v201105211821</version>
-		<exclusions><!-- 避免导出 servlet jar 包 -->
-		    <exclusion>
-		        <groupId>org.eclipse.jetty.orbit</groupId>
-		        <artifactId>javax.servlet</artifactId>
-		    </exclusion>
-		</exclusions>
-	</dependency>
-	<dependency><!-- JSTL 支持 -->
-		<groupId>org.eclipse.jetty.orbit</groupId>
-		<artifactId>org.apache.taglibs.standard.glassfish</artifactId>
-		<version>1.2.0.v201112081803</version>
-		<exclusions><!-- 避免导出 servlet jar 包 -->
-		    <exclusion>
-		        <groupId>org.eclipse.jetty.orbit</groupId>
-		        <artifactId>javax.servlet</artifactId>
-		    </exclusion>
-		</exclusions>
-	</dependency>
+		<dependency>
+	    	<groupId>com.jfinal</groupId>
+	    	<artifactId>jetty-server</artifactId>
+	    	<version>8.1.8</version>
+	    	<scope>provided</scope>
+	    </dependency>
+		<!-- Jetty JSP：根据 Dependency Hierarchy 视图拆分成了七个 dependency，
+	            - 方便项目以及便于 导出 war的在jetty与tomcat间无缝迁移
+	            - Dependencies: http://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jsp
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-jsp</artifactId>
+			<version>8.1.8.v20121106</version>
+			<scope>provided</scope>
+		</dependency>
+		 -->
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>javax.servlet.jsp</artifactId>
+			<version>2.2.0.v201112011158</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>org.apache.jasper.glassfish</artifactId>
+			<version>2.2.2.v201112011158</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>2.2.0.v201108011116</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>com.sun.el</artifactId>
+			<version>2.2.0.v201108011116</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>org.eclipse.jdt.core</artifactId>
+			<version>3.7.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- JSTL 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>javax.servlet.jsp.jstl</artifactId>
+			<version>1.2.0.v201105211821</version>
+			<exclusions><!-- 避免导出 servlet jar 包 -->
+			    <exclusion>
+			        <groupId>org.eclipse.jetty.orbit</groupId>
+			        <artifactId>javax.servlet</artifactId>
+			    </exclusion>
+			</exclusions>
+		</dependency>
+		<dependency><!-- JSTL 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>org.apache.taglibs.standard.glassfish</artifactId>
+			<version>1.2.0.v201112081803</version>
+			<exclusions><!-- 避免导出 servlet jar 包 -->
+			    <exclusion>
+			        <groupId>org.eclipse.jetty.orbit</groupId>
+			        <artifactId>javax.servlet</artifactId>
+			    </exclusion>
+			</exclusions>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
@@ -724,12 +724,6 @@
 		  	<groupId>com.ibeetl</groupId>
 		  	<artifactId>beetl</artifactId>
 		  	<version>2.2.6</version>
-			<exclusions>   
-		        <exclusion>   
-		            <groupId>*</groupId>   
-		            <artifactId>*</artifactId>   
-		        </exclusion>   
-		    </exclusions>
 		</dependency>
 		
 		<dependency>
@@ -829,8 +823,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
