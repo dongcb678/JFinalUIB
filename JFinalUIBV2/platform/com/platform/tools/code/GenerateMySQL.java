@@ -1,13 +1,7 @@
 package com.platform.tools.code;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +10,6 @@ import org.apache.log4j.Logger;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -140,54 +133,6 @@ public class GenerateMySQL extends GenerateBase {
 		}
 		
 		return list;
-	}
-
-	public Map<String, String> getJavaType(String tableName){
-        //  获取字段数
-	    Map<String, String> columnJavaTypeMap = new HashMap<String, String>();
-
-	    Connection conn = null;
-	    Statement stmt = null;
-	    ResultSet rs = null;
-	    
-		try {
-			conn = DbKit.getConfig().getConnection(); // 默认数据源jfinaluibv2
-			stmt = conn.createStatement();    
-		    String sql = "select * from " + tableName + " where 1 != 1 ";   
-		    rs = stmt.executeQuery(sql);    
-		    ResultSetMetaData rsmd = rs.getMetaData(); 
-
-	        int columns = rsmd.getColumnCount();   
-	        for (int i=1; i<=columns; i++){   
-	            //获取字段名
-	            String columnName = rsmd.getColumnName(i).toLowerCase(); 
-	 			String columnClassName = rsmd.getColumnClassName(i);   
-	 			if(columnClassName.equals("[B")){
-	 				columnClassName = "byte[]";
-	 			}
-	 			columnJavaTypeMap.put(columnName, columnClassName);
-	        }
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-			try {
-				stmt.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return columnJavaTypeMap;
 	}
 
 }

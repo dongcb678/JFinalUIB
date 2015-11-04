@@ -4,6 +4,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +15,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.beetl.core.BeetlKit;
+
+import com.jfinal.plugin.activerecord.DbKit;
 
 /**
  * 简易辅助开发代码生成器
@@ -68,11 +74,43 @@ public abstract class GenerateBase {
 	public abstract List<TableColumnDto> getColunm(String tableName) ;
 	
 	/**
-	 * 获取所有数据类型
+	 * 获取表所有数据类型
 	 * @param tableName
 	 * @return
 	 */
-	public abstract Map<String, String> getJavaType(String tableName);
+	public Map<String, String> getJavaType(String tableName){
+        //  获取字段数
+	    Map<String, String> columnJavaTypeMap = new HashMap<String, String>();
+	    
+	    Connection conn = null;
+	    Statement st = null;
+	    ResultSet rs = null;
+	    
+		try {
+			conn = DbKit.getConfig().getConnection();
+			st = conn.createStatement();    
+		    String sql = "select * from " + tableName + " where 1 != 1 ";   
+		    rs = st.executeQuery(sql);    
+		    ResultSetMetaData rsmd = rs.getMetaData(); 
+
+	        int columns = rsmd.getColumnCount();   
+	        for (int i=1; i<=columns; i++){   
+	            //获取字段名
+	            String columnName = rsmd.getColumnName(i).toLowerCase(); 
+	 			String columnClassName = rsmd.getColumnClassName(i);   
+	 			if(columnClassName.equals("[B")){
+	 				columnClassName = "byte[]";
+	 			}
+	 			columnJavaTypeMap.put(columnName, columnClassName);
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbKit.getConfig().close(rs, st, conn);
+		}
+		
+		return columnJavaTypeMap;
+	}
 
 	/**
 	 * 获取所有数据类型
