@@ -40,57 +40,79 @@
 		</dependency>
 		
 		<dependency>
+		  	<groupId>little.ant.uib</groupId>
+		  	<artifactId>jfinal2-for-uib</artifactId>
+		  	<version>2.0</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+
+		<dependency>
 	    	<groupId>com.jfinal</groupId>
 	    	<artifactId>jetty-server</artifactId>
 	    	<version>8.1.8</version>
 	    	<scope>provided</scope>
 	    </dependency>
+		<!-- Jetty JSP：根据 Dependency Hierarchy 视图拆分成了七个 dependency，
+	            - 方便项目以及便于 导出 war的在jetty与tomcat间无缝迁移
+	            - Dependencies: http://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jsp
 		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-jsp</artifactId>
+			<version>8.1.8.v20121106</version>
+			<scope>provided</scope>
+		</dependency>
+		 -->
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
 			<groupId>org.eclipse.jetty.orbit</groupId>
 			<artifactId>javax.servlet.jsp</artifactId>
 			<version>2.2.0.v201112011158</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
 			<groupId>org.eclipse.jetty.orbit</groupId>
 			<artifactId>org.apache.jasper.glassfish</artifactId>
 			<version>2.2.2.v201112011158</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
 			<groupId>org.eclipse.jetty.orbit</groupId>
 			<artifactId>javax.el</artifactId>
 			<version>2.2.0.v201108011116</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
 			<groupId>org.eclipse.jetty.orbit</groupId>
 			<artifactId>com.sun.el</artifactId>
 			<version>2.2.0.v201108011116</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
 			<groupId>org.eclipse.jetty.orbit</groupId>
 			<artifactId>org.eclipse.jdt.core</artifactId>
 			<version>3.7.1</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
+		<dependency><!-- JSTL 支持 -->
 			<groupId>org.eclipse.jetty.orbit</groupId>
 			<artifactId>javax.servlet.jsp.jstl</artifactId>
 			<version>1.2.0.v201105211821</version>
-			<exclusions>
+			<exclusions><!-- 避免导出 servlet jar 包 -->
 			    <exclusion>
 			        <groupId>org.eclipse.jetty.orbit</groupId>
 			        <artifactId>javax.servlet</artifactId>
 			    </exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
+		<dependency><!-- JSTL 支持 -->
 			<groupId>org.eclipse.jetty.orbit</groupId>
 			<artifactId>org.apache.taglibs.standard.glassfish</artifactId>
 			<version>1.2.0.v201112081803</version>
-			<exclusions>
+			<exclusions><!-- 避免导出 servlet jar 包 -->
 			    <exclusion>
 			        <groupId>org.eclipse.jetty.orbit</groupId>
 			        <artifactId>javax.servlet</artifactId>
@@ -102,7 +124,6 @@
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -115,7 +136,6 @@
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 			<version>2.3.22</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -128,7 +148,6 @@
 	    	<groupId>c3p0</groupId>
 	    	<artifactId>c3p0</artifactId>
 	    	<version>0.9.1.2</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -177,7 +196,6 @@
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>3.0.2</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -418,7 +436,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-exec</artifactId>
 			<version>1.3</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -479,7 +496,6 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.4.1</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -492,7 +508,6 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
 			<version>4.4.1</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -505,7 +520,6 @@
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.5.3</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -518,7 +532,6 @@
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.7.2</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -530,7 +543,7 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
-			<version>5.3.0</version>
+			<version>5.3.1</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -542,7 +555,7 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-queries</artifactId>
-			<version>5.3.0</version>
+			<version>5.3.1</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -554,7 +567,7 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-queryparser</artifactId>
-			<version>5.3.0</version>
+			<version>5.3.1</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -566,7 +579,7 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-highlighter</artifactId>
-			<version>5.3.0</version>
+			<version>5.3.1</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -578,7 +591,7 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-backward-codecs</artifactId>
-			<version>5.3.0</version>
+			<version>5.3.1</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -590,7 +603,7 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-analyzers-common</artifactId>
-			<version>5.3.0</version>
+			<version>5.3.1</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -602,7 +615,7 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-memory</artifactId>
-			<version>5.3.0</version>
+			<version>5.3.1</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -615,7 +628,6 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>3.12</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -628,7 +640,6 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.12</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -641,7 +652,6 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml-schemas</artifactId>
 			<version>3.12</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -678,7 +688,6 @@
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
 			<version>3.2.0</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -691,7 +700,6 @@
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
 			<version>3.2.0</version>
-			<scope>test</scope>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -790,18 +798,6 @@
 		    </exclusions>
 		</dependency>
 		
-		<dependency>
-		  	<groupId>little.ant.uib</groupId>
-		  	<artifactId>jfinal2-for-uib</artifactId>
-		  	<version>2.0</version>
-			<exclusions>   
-		        <exclusion>   
-		            <groupId>*</groupId>   
-		            <artifactId>*</artifactId>   
-		        </exclusion>   
-		    </exclusions>
-		</dependency>
-		
 	</dependencies>
 	
 	<build>
@@ -827,10 +823,16 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
+					<skip>true</skip>
 					<source>1.7</source>
 					<target>1.7</target>
 					<encoding>UTF-8</encoding>
+					<compilerArguments>  
+			        	<verbose />  
+			        	<bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>  
+			        </compilerArguments>  
 				</configuration>
+				
 			</plugin>
 			
             <!-- Test -->
@@ -862,6 +864,7 @@
 					</connectors>
 					<stopKey>stop</stopKey>
 					<stopPort>5599</stopPort>
+					<contextXml>${project.basedir}/src/main/resources/jetty-context.xml</contextXml>
 				</configuration>
 			</plugin>
 			
@@ -872,6 +875,11 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/${project.artifactId}</path>
+                    <port>99</port>
+                    <path>/</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <finalName>JfinalUIB_V2_FOR_MAVEN</finalName>
+                    <server>tomcat7</server>
                 </configuration>
             </plugin>
 		</plugins>
@@ -885,6 +893,5 @@
         	<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
         </repository>
     </repositories>
-    
     
 </project>
