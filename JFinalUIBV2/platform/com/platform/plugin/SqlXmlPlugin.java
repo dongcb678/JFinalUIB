@@ -57,7 +57,7 @@ public class SqlXmlPlugin implements IPlugin {
 			log.error("初始化加载sql：获取classRootPath异常");
 		}
 		*/
-		String classRootPath = PathKit.getRootClassPath();
+		String classRootPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
         File file = new File(classRootPath);
     	List<File> files = new ArrayList<File>();
         findFiles(file, files);

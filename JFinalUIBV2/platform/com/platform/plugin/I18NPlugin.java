@@ -92,6 +92,7 @@ public class I18NPlugin implements IPlugin {
 			};
 		
 		String fileName = null;
+		String classRootPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
 		
 		for (String language : languages) {
 			fileName = "message_" + language + ".properties";// + File.separator + 
@@ -99,7 +100,6 @@ public class I18NPlugin implements IPlugin {
 			try {
 				//inputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
 				//inputStream = I18NPlugin.class.getResourceAsStream(fileName);// "/init.properties"
-				String classRootPath = PathKit.getRootClassPath();//
 				inputStream = new FileInputStream(new File(classRootPath  + File.separator +  fileName));
 				
 				Properties properties = new Properties();
