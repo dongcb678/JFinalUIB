@@ -1,7 +1,6 @@
 package com.platform.plugin;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,10 +10,10 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 import com.platform.tools.ToolCache;
-import com.platform.tools.ToolSqlXml;
 
 /**
  * 加载sql文件
@@ -49,6 +48,7 @@ public class SqlXmlPlugin implements IPlugin {
      * @param isInit
      */
 	public static synchronized void init(boolean isInit) {
+		/*
 		String classRootPath = ToolSqlXml.class.getClassLoader().getResource("").getFile();
 		try {
 			classRootPath = java.net.URLDecoder.decode(classRootPath, "UTF-8");
@@ -56,6 +56,8 @@ public class SqlXmlPlugin implements IPlugin {
 			e.printStackTrace();
 			log.error("初始化加载sql：获取classRootPath异常");
 		}
+		*/
+		String classRootPath = PathKit.getRootClassPath();
         File file = new File(classRootPath);
     	List<File> files = new ArrayList<File>();
         findFiles(file, files);

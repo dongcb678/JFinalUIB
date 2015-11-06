@@ -1,5 +1,7 @@
 package com.platform.plugin;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
@@ -7,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 
@@ -91,11 +94,13 @@ public class I18NPlugin implements IPlugin {
 		String fileName = null;
 		
 		for (String language : languages) {
-			fileName = "/message_" + language + ".properties";
+			fileName = "message_" + language + ".properties";// + File.separator + 
 			InputStream inputStream = null;
 			try {
 				//inputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
-				inputStream = I18NPlugin.class.getResourceAsStream(fileName);// "/init.properties"
+				//inputStream = I18NPlugin.class.getResourceAsStream(fileName);// "/init.properties"
+				String classRootPath = PathKit.getRootClassPath();//
+				inputStream = new FileInputStream(new File(classRootPath  + File.separator +  fileName));
 				
 				Properties properties = new Properties();
 				properties.load(inputStream);
