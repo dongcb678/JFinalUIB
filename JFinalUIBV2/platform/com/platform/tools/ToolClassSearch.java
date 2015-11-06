@@ -193,7 +193,8 @@ public class ToolClassSearch {
      */
     public static List<Class<?>> search(Class<?> target, List<String> jarsList){
     	ToolClassSearch cs = new ToolClassSearch();
-    	String classRootPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
+    	//String classRootPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes"; // jboss
+    	String classRootPath = PathKit.getRootClassPath();
     	cs.setClassesPath(classRootPath);
     	cs.target = target;
 

@@ -92,7 +92,8 @@ public class I18NPlugin implements IPlugin {
 			};
 		
 		String fileName = null;
-		String classRootPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
+		//String classRootPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes"; // jboss
+		String classRootPath = PathKit.getRootClassPath();
 		
 		for (String language : languages) {
 			fileName = "message_" + language + ".properties";// + File.separator + 
