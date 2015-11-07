@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.jfinal.core.Const;
-import com.platform.constant.ConstantWebContext;
 
 /**
  * ErrorRender.
@@ -45,8 +44,6 @@ public class ErrorRender extends Render {
 	}
 	
 	public void render() {
-		long start = System.currentTimeMillis();
-		
 		response.setStatus(getErrorCode());	// HttpServletResponse.SC_XXX_XXX
 		
 		// render with view
@@ -70,11 +67,6 @@ public class ErrorRender extends Render {
 			if (writer != null)
 				writer.close();
 		}
-
-		long end = System.currentTimeMillis();
-		long renderTime = end - start;
-
-		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 	
 	public String getErrorHtml() {

@@ -27,7 +27,7 @@
 	
 	处理乐观锁，增加了更新sql语句的版本号条件
 	
-8.com.jfinal.render包下面的视图render增加耗时计算
+8.视图render增加耗时计算
 
-	所有的render实现类都在render方法前后加上视图耗时计算
+	ActionHandler.java
 	

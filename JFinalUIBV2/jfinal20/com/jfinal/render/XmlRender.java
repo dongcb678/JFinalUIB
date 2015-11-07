@@ -21,8 +21,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.platform.constant.ConstantWebContext;
-
 import freemarker.template.Template;
 
 /**
@@ -38,8 +36,6 @@ public class XmlRender extends FreeMarkerRender {
 	
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void render() {
-		long start = System.currentTimeMillis();
-		
 		response.setContentType(contentType);
         
 		Map root = new HashMap();
@@ -60,11 +56,6 @@ public class XmlRender extends FreeMarkerRender {
 			if (writer != null)
 				writer.close();
 		}
-        
-		long end = System.currentTimeMillis();
-		long renderTime = end - start;
-
-		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 	
 }

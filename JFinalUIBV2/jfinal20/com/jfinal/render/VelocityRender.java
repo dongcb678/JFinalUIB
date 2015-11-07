@@ -31,8 +31,6 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import com.platform.constant.ConstantWebContext;
-
 /**
  * VelocityRender.
  */
@@ -78,8 +76,6 @@ public class VelocityRender extends Render {
 	}
 	
 	public void render() {
-		long start = System.currentTimeMillis();
-		
 		 if (notInit) {
 			 Velocity.init(properties);	// Velocity.init("velocity.properties");	// setup
 			 notInit = false;
@@ -134,11 +130,6 @@ public class VelocityRender extends Render {
         	if (writer != null)
         		writer.close();
         }
-        
-		long end = System.currentTimeMillis();
-		long renderTime = end - start;
-
-		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 }
 

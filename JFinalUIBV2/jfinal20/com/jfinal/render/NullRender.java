@@ -16,8 +16,6 @@
 
 package com.jfinal.render;
 
-import com.platform.constant.ConstantWebContext;
-
 /**
  * NullRender.
  */
@@ -27,7 +25,7 @@ public class NullRender extends Render {
 	 * Render nothing
 	 */
 	public final void render() {
-		long renderTime = 0;
-		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
+		
 	}
+	
 }

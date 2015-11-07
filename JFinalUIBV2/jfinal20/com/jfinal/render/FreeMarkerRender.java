@@ -25,8 +25,6 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
-import com.platform.constant.ConstantWebContext;
-
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -117,8 +115,6 @@ public class FreeMarkerRender extends Render {
     
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void render() {
-		long start = System.currentTimeMillis();
-		
 		response.setContentType(contentType);
         
 		Map root = new HashMap();
@@ -138,11 +134,6 @@ public class FreeMarkerRender extends Render {
 			if (writer != null)
 				writer.close();
 		}
-        
-		long end = System.currentTimeMillis();
-		long renderTime = end - start;
-
-		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 	
 }

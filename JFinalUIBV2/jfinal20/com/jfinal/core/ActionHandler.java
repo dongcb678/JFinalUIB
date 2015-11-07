@@ -18,13 +18,15 @@ package com.jfinal.core;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.jfinal.config.Constants;
+
 import com.jfinal.aop.Invocation;
+import com.jfinal.config.Constants;
 import com.jfinal.handler.Handler;
 import com.jfinal.log.Logger;
 import com.jfinal.render.Render;
 import com.jfinal.render.RenderException;
 import com.jfinal.render.RenderFactory;
+import com.platform.constant.ConstantWebContext;
 
 /**
  * ActionHandler
@@ -90,7 +92,17 @@ final class ActionHandler extends Handler {
 			
 			if (render == null)
 				render = renderFactory.getDefaultRender(action.getViewPath() + action.getMethodName());
+			
+			long start = System.currentTimeMillis();
+			log.debug("视图耗时计算 start currentTimeMillis = " + start);
+			
 			render.setContext(request, response, action.getViewPath()).render();
+
+			long end = System.currentTimeMillis();
+			long renderTime = end - start;
+			log.debug("视图耗时计算 end currentTimeMillis = " + end + "，renderTime = " + renderTime);
+			
+			request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 		}
 		catch (RenderException e) {
 			if (log.isErrorEnabled()) {

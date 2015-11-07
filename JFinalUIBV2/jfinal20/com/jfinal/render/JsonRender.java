@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.jfinal.kit.JsonKit;
-import com.platform.constant.ConstantWebContext;
 
 /**
  * JsonRender.
@@ -127,8 +126,6 @@ public class JsonRender extends Render {
 	}
 	
 	public void render() {
-		long start = System.currentTimeMillis();
-		
 		if (jsonText == null)
 			buildJsonText();
 		
@@ -149,11 +146,6 @@ public class JsonRender extends Render {
 			if (writer != null)
 				writer.close();
 		}
-		
-		long end = System.currentTimeMillis();
-		long renderTime = end - start;
-
-		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 	
 	@SuppressWarnings({"rawtypes", "unchecked"})

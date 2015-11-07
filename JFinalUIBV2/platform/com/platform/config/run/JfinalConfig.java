@@ -1,6 +1,7 @@
 package com.platform.config.run;
 
 import org.apache.log4j.Logger;
+import org.beetl.ext.jfinal.BeetlRenderFactory;
 
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -15,7 +16,6 @@ import com.jfinal.plugin.activerecord.tx.TxByMethods;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
-import com.platform.beetl.render.MyBeetlRenderFactory;
 import com.platform.config.mapping.PlatformMapping;
 import com.platform.config.routes.PlatformRoutes;
 import com.platform.config.routes.TestRoutes;
@@ -34,6 +34,7 @@ import com.platform.plugin.SqlXmlPlugin;
 import com.platform.thread.DataClear;
 import com.platform.thread.ThreadSysLog;
 import com.platform.thread.TimerResources;
+import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolString;
 import com.weixin.lucene.DocKeyword;
@@ -59,8 +60,8 @@ public class JfinalConfig extends JFinalConfig {
 		constants.setDevMode(getPropertyToBoolean(ConstantInit.config_devMode, false));
 
 		log.info("configConstant 视图Beetl设置");
-		constants.setMainRenderFactory(new MyBeetlRenderFactory());
-		MyBeetlRenderFactory.regiseter();
+		constants.setMainRenderFactory(new BeetlRenderFactory());
+		ToolBeetl.regiseter();
 		
 		log.info("configConstant 视图error page设置");
 		constants.setError404View("/common/404.html");

@@ -19,8 +19,6 @@ package com.jfinal.render;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import com.platform.constant.ConstantWebContext;
-
 /**
  * JavascriptRender.
  */
@@ -34,8 +32,6 @@ public class JavascriptRender extends Render {
 	}
 	
 	public void render() {
-		long start = System.currentTimeMillis();
-		
 		PrintWriter writer = null;
 		try {
 			response.setContentType(contentType);
@@ -49,11 +45,6 @@ public class JavascriptRender extends Render {
 			if (writer != null)
 				writer.close();
 		}
-		
-		long end = System.currentTimeMillis();
-		long renderTime = end - start;
-
-		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 }
 

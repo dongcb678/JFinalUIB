@@ -19,8 +19,6 @@ package com.jfinal.render;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import com.platform.constant.ConstantWebContext;
-
 /**
  * HtmlRender.
  */
@@ -34,8 +32,6 @@ public class HtmlRender extends Render {
 	}
 	
 	public void render() {
-		long start = System.currentTimeMillis();
-		
 		PrintWriter writer = null;
 		try {
 			response.setHeader("Pragma", "no-cache");	// HTTP/1.0 caches might not implement Cache-Control and might only implement Pragma: no-cache
@@ -53,11 +49,6 @@ public class HtmlRender extends Render {
 			if (writer != null)
 				writer.close();
 		}
-		
-		long end = System.currentTimeMillis();
-		long renderTime = end - start;
-
-		request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
 	}
 }
 
