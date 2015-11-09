@@ -179,6 +179,9 @@ public class PropertiesPlugin implements IPlugin {
 		// redis 配置
 		paramMap.put(ConstantInit.config_redis_ip, properties.getProperty(ConstantInit.config_redis_ip).trim());
 		paramMap.put(ConstantInit.config_redis_port, Integer.valueOf(properties.getProperty(ConstantInit.config_redis_port).trim()));
+
+		// 国际化配置，资源文件前缀
+		paramMap.put(ConstantInit.config_i18n_filePrefix, properties.getProperty(ConstantInit.config_i18n_filePrefix).trim());
 		
 		for (String key : paramMap.keySet()) {
 			log.debug("全局参数配置：" + key + " = " + paramMap.get(key));

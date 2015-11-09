@@ -105,6 +105,11 @@ public interface ConstantInit {
 	 *  redis 配置：port
 	 */
 	public static final String config_redis_port = "config.redis.port";
+
+	/**
+	 *  国际化配置，资源文件前缀
+	 */
+	public static final String config_i18n_filePrefix = "config.i18n.filePrefix";
 	
 	/**
 	 * 当前数据库类型

@@ -68,7 +68,7 @@ public class JfinalConfig extends JFinalConfig {
 		constants.setError500View("/common/500.html");
 
 		log.info("configConstant i18n文件前缀设置设置");
-		constants.setI18nDefaultBaseName("message");
+		constants.setI18nDefaultBaseName(getProperty(ConstantInit.config_i18n_filePrefix));
 	}
 	
 	/**

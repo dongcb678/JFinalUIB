@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
+import com.platform.constant.ConstantInit;
 import com.platform.tools.ToolDirFile;
 
 /**
@@ -90,12 +91,13 @@ public class I18NPlugin implements IPlugin {
 				"en_US",
 				"ja"
 			};
-		
+
+		String fileNamePrefix = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_i18n_filePrefix);
 		String fileName = null;
 		String classesPath = ToolDirFile.getClassesPath();
 		
 		for (String language : languages) {
-			fileName = "message_" + language + ".properties";// + File.separator + 
+			fileName = fileNamePrefix + "_" + language + ".properties";// + File.separator + 
 			InputStream inputStream = null;
 			try {
 				//inputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
