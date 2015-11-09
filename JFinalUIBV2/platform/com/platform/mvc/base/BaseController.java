@@ -167,6 +167,7 @@ public abstract class BaseController extends Controller {
 	 * @param modelClass
 	 * @return
 	 */
+	@SuppressWarnings("hiding")
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass){
 		return ToolModelInjector.injectModels(getRequest(), modelClass);
 	}
@@ -177,6 +178,7 @@ public abstract class BaseController extends Controller {
 	 * @param prefix
 	 * @return
 	 */
+	@SuppressWarnings("hiding")
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix){
 		return ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
 	}
@@ -186,6 +188,7 @@ public abstract class BaseController extends Controller {
 	 * @param modelClass
 	 * @return
 	 */
+	@SuppressWarnings("hiding")
 	public <T extends BaseModel<T>> Record getRecord(Class<? extends T> modelClass){
 		return getModel(modelClass).toRecord();
 	}
@@ -196,6 +199,7 @@ public abstract class BaseController extends Controller {
 	 * @param modelName
 	 * @return
 	 */
+	@SuppressWarnings("hiding")
 	public <T extends BaseModel<T>> Record getRecord(Class<? extends T> modelClass, String modelName){
 		return getModel(modelClass, modelName).toRecord();
 	}
@@ -205,6 +209,7 @@ public abstract class BaseController extends Controller {
 	 * @param modelClass
 	 * @return
 	 */
+	@SuppressWarnings({ "hiding", "rawtypes" })
 	public <T extends BaseModel<T>> List<Record> getRecords(Class<? extends T> modelClass){
 		List<T> models = ToolModelInjector.injectModels(getRequest(), modelClass);
 		List<Record> records = new ArrayList<Record>(models.size());
@@ -220,6 +225,7 @@ public abstract class BaseController extends Controller {
 	 * @param prefix
 	 * @return
 	 */
+	@SuppressWarnings({ "hiding", "rawtypes" })
 	public <T extends BaseModel<T>> List<Record> getRecords(Class<? extends T> modelClass, String prefix){
 		List<T> models = ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
 		List<Record> records = new ArrayList<Record>(models.size());
@@ -284,6 +290,7 @@ public abstract class BaseController extends Controller {
 	 * @param user
 	 * @return
 	 */
+	@SuppressWarnings({ "hiding" })
 	protected <T extends BaseModel<?>>  boolean authCreate(T model){
 		String createids = model.getStr("createids");
 		if(null != createids && !createids.isEmpty()){

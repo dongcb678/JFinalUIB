@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.kit.PathKit;
+
 /**
  * 文件和目录相关
  * 
@@ -25,8 +27,49 @@ import org.apache.log4j.Logger;
  */
 public abstract class ToolDirFile {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolDirFile.class);
+	
+	private static String libPath;
+	private static String classesPath;
+	
+	/**
+	 * 获取lib目录
+	 * @return
+	 */
+	public static String getLibPath(){
+		if(libPath == null){
+			libPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "lib";
+		}
+		return libPath;
+	}
+
+	/**
+	 * 获取classes目录
+	 * @return
+	 */
+	public static String getClassesPath(){
+		if(classesPath == null){
+			//PathKit.getRootClassPath();
+			classesPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes"; // 兼容jboss war部署
+		}
+		return classesPath;
+	}
+
+	/**
+	 * 获取classes路径
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public static String getClassesPath(Class classs){
+		String classRootPath = classs.getClassLoader().getResource("").getFile();
+		try {
+			classRootPath = java.net.URLDecoder.decode(classRootPath, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			log.error("初始化加载sql：获取classRootPath异常");
+		}
+		return classRootPath;
+	}
 	
 	/**
 	 * 获取当前代码所在行

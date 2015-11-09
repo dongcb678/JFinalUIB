@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
+import com.platform.tools.ToolDirFile;
 
 /**
  * 初始化I18N数据信息的加载
@@ -92,8 +92,7 @@ public class I18NPlugin implements IPlugin {
 			};
 		
 		String fileName = null;
-		//String classRootPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes"; // jboss
-		String classRootPath = PathKit.getRootClassPath();
+		String classesPath = ToolDirFile.getClassesPath();
 		
 		for (String language : languages) {
 			fileName = "message_" + language + ".properties";// + File.separator + 
@@ -101,7 +100,7 @@ public class I18NPlugin implements IPlugin {
 			try {
 				//inputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
 				//inputStream = I18NPlugin.class.getResourceAsStream(fileName);// "/init.properties"
-				inputStream = new FileInputStream(new File(classRootPath  + File.separator +  fileName));
+				inputStream = new FileInputStream(new File(classesPath  + File.separator +  fileName));
 				
 				Properties properties = new Properties();
 				properties.load(inputStream);
