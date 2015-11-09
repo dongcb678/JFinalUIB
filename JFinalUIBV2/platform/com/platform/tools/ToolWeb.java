@@ -249,7 +249,11 @@ public abstract class ToolWeb {
 		}
 		
 		// 是否只读
-		cookie.setHttpOnly(isHttpOnly);
+		try {
+			cookie.setHttpOnly(isHttpOnly);
+		} catch (Exception e) {
+			log.error("servlet容器版本太低，servlet3.0以前不支持设置cookie只读" + e.getMessage());
+		}
 		
 		// 设置cookie的过期时间
 		if (maxAge > 0){
