@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import com.jfinal.kit.PropKit;
 import com.jfinal.log.Logger;
 import com.platform.constant.ConstantInit;
-import com.platform.plugin.PropertiesPlugin;
 
 /**
  * 类文件检索
@@ -20,18 +20,14 @@ public class ToolClassSearch {
 
 	private static final Logger log = Logger.getLogger(ToolClassSearch.class);
 
-    /**
-     * 指定的父类或者接口
-     */
-    private Class<?> target;
-
 	/**
 	 * 验证是否子类或者接口
-	 * @param classFileList
+	 * @param target 指定的父类或者接口
+	 * @param classFileList 
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private <T> List<Class<? extends T>> isAssignableFrom(List<String> classFileList) {
+	private <T> List<Class<? extends T>> isAssignableFrom(Class<?> target, List<String> classFileList) {
         List<Class<? extends T>> classList = new ArrayList<Class<? extends T>>();
         for (String classFile : classFileList) {
             Class<?> classInFile = null;
@@ -79,8 +75,7 @@ public class ToolClassSearch {
                 String ablPath = readfile.getAbsoluteFile().getAbsolutePath().replace("\\", "/");
                 String classFilePath = ablPath.substring(ToolDirFile.getClassesPath().length() + 1, ablPath.indexOf(".class")).replace("/", ".");
                 
-                @SuppressWarnings("unchecked")
-				List<String> pkgs = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_package);
+				List<String> pkgs = scanPkgList();
                 for (String pkg : pkgs) {
                 	if(classFilePath.startsWith(pkg)){
                 		classFiles.add(classFilePath);
@@ -96,12 +91,11 @@ public class ToolClassSearch {
      * 查找jar中指定包内的.class文件
      * @return
      */
-    @SuppressWarnings("unchecked")
     private List<String> findJarFiles() {
         List<String> classFiles = new ArrayList<String>();;
         try {
             // jar中文件查找
-        	List<String> jarList = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
+        	List<String> jarList = scanJarList();
         	int size = jarList.size();
             for (int i = 0; i < size; i++) {
                 JarFile jarFile = new JarFile(new File(ToolDirFile.getLibPath() + File.separator + jarList.get(i)));
@@ -112,7 +106,7 @@ public class ToolClassSearch {
                     String pkgEntryName = entryName.replaceAll("/", ".");
                     
                     // 去除不需要扫描的包
-                    List<String> pkgs = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_package);
+                    List<String> pkgs = scanPkgList();
                     boolean pkgResult = false;
                     for (String pkg : pkgs) {
                     	if(pkgEntryName.startsWith(pkg)){
@@ -137,22 +131,54 @@ public class ToolClassSearch {
 
     /**
      * 搜索指定类或者接口的子类
-     * @param target
+     * @param target 指定类或者接口
      * @return
      */
     public static List<Class<?>> search(Class<?> target){
     	ToolClassSearch cs = new ToolClassSearch();
-    	// 1.指定类或者接口
-    	cs.target = target;
-    	
-    	// 2.查找classes目录
+    	// 1.查找classes目录
     	List<String> classFileList = cs.findFiles(ToolDirFile.getClassesPath());
     	
-        // 3.查找lib目录中指定的jar
+        // 2.查找lib目录中指定的jar
     	classFileList.addAll(cs.findJarFiles());
-    	
-    	List<Class<?>> list = cs.isAssignableFrom(classFileList);
+
+        // 3.比对
+    	List<Class<?>> list = cs.isAssignableFrom(target, classFileList);
     	return list;
+    }
+    
+    /**
+     * 需要扫描的jar
+     * @return
+     */
+    public static List<String> scanJarList(){
+		String scan_jar = PropKit.get(ConstantInit.config_scan_jar);
+		if(null != scan_jar && !scan_jar.isEmpty()){
+			List<String> list = new ArrayList<String>();
+			String[] jars = scan_jar.split(",");
+			for (String jar : jars) {
+				list.add(jar.trim());
+			}
+			return list;
+		}
+		return new ArrayList<String>();
+    }
+
+    /**
+     * 需要扫描的包
+     * @return
+     */
+    public static List<String> scanPkgList(){
+		String scan_package = PropKit.get(ConstantInit.config_scan_package);
+		if(null != scan_package && !scan_package.isEmpty()){
+			List<String> list = new ArrayList<String>();
+			String[] pkgs = scan_package.split(",");
+			for (String pkg : pkgs) {
+				list.add(pkg.trim());
+			}
+			return list;
+		}
+		return new ArrayList<String>();
     }
     
 }

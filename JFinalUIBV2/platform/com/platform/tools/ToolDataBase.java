@@ -6,14 +6,97 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 import com.jfinal.kit.PathKit;
+import com.jfinal.kit.PropKit;
 import com.platform.constant.ConstantInit;
-import com.platform.plugin.PropertiesPlugin;
+import com.platform.dto.DataBase;
 
 /**
  * 数据库导入导出处理
  * @author 董华健
  */
 public abstract class ToolDataBase {
+
+	/**
+	 * 分解数据库连接url
+	 * @return
+	 */
+	public static DataBase getDbInfo(){
+		String driverClass = null;
+		String jdbcUrl = null;
+		String userName = null;
+		String passWord = null;
+		String ip = null;
+		String port = null;
+		String dbName = null;
+		
+		// 判断数据库类型
+		String db_type = PropKit.get(ConstantInit.db_type_key);
+		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg 数据库连接信息
+			driverClass = PropKit.get(ConstantInit.db_connection_postgresql_driverClass);
+			jdbcUrl = PropKit.get(ConstantInit.db_connection_postgresql_jdbcUrl);
+			userName = PropKit.get(ConstantInit.db_connection_postgresql_userName);
+			passWord = PropKit.get(ConstantInit.db_connection_postgresql_passWord);
+			
+			// 解析数据库连接URL，获取数据库名称
+			dbName = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			dbName = dbName.substring(dbName.indexOf("/") + 1);
+
+			// 解析数据库连接URL，获取数据库地址IP
+			ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			ip = ip.substring(0, ip.indexOf(":"));
+
+			// 解析数据库连接URL，获取数据库地址端口
+			port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
+			
+		}else if(db_type.equals(ConstantInit.db_type_mysql)){ // mysql 数据库连接信息
+			driverClass = PropKit.get(ConstantInit.db_connection_mysql_driverClass);
+			jdbcUrl = PropKit.get(ConstantInit.db_connection_mysql_jdbcUrl);
+			userName = PropKit.get(ConstantInit.db_connection_mysql_userName);
+			passWord = PropKit.get(ConstantInit.db_connection_mysql_passWord);
+			
+			// 解析数据库连接URL，获取数据库名称
+			dbName = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			dbName = dbName.substring(dbName.indexOf("/") + 1, dbName.indexOf("?"));
+
+			// 解析数据库连接URL，获取数据库地址IP
+			ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			ip = ip.substring(0, ip.indexOf(":"));
+
+			// 解析数据库连接URL，获取数据库地址端口
+			port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
+			
+		}else if(db_type.equals(ConstantInit.db_type_oracle)){ // oracle 数据库连接信息
+			driverClass = PropKit.get(ConstantInit.db_connection_oracle_driverClass);
+			jdbcUrl = PropKit.get(ConstantInit.db_connection_oracle_jdbcUrl);
+			userName = PropKit.get(ConstantInit.db_connection_oracle_userName);
+			passWord = PropKit.get(ConstantInit.db_connection_oracle_passWord);
+			
+			// 解析数据库连接URL，获取数据库名称
+			String[] prop = jdbcUrl.substring(jdbcUrl.indexOf("@") + 1).split(":");
+			dbName = prop[2];
+
+			// 解析数据库连接URL，获取数据库地址IP
+			ip = prop[0];
+
+			// 解析数据库连接URL，获取数据库地址端口
+			port = prop[1];
+		}
+		
+		// 把数据库连接信息写入常用map
+		DataBase db = new DataBase();
+		db.setDriverClass(driverClass);
+		db.setJdbcUrl(jdbcUrl);
+		db.setUserName(userName);
+		db.setPassWord(passWord);
+		
+		db.setIp(ip);
+		db.setPort(port);
+		db.setDbName(dbName);
+		
+		return db;
+	}
 	
 	/**
 	 * 数据库导出
@@ -21,16 +104,16 @@ public abstract class ToolDataBase {
 	 * @throws IOException
 	 */
 	public static void exportSql(String exportPath) throws IOException {
-		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key);
-		
-		String username = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_userName);
-		String password = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_passWord);
-		String ip = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_ip);
-		String port = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_port);
-		String database = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_dbName);
+		DataBase db = getDbInfo();
+		String username = db.getUserName();
+		String password = db.getPassWord();
+		String ip = db.getIp();
+		String port = db.getPort();
+		String database = db.getDbName();
 		
 		StringBuilder command = new StringBuilder();
-		
+
+		String db_type = PropKit.get(ConstantInit.db_type_key);
 		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg
 			// pg_dump --host 127.0.0.1 --port 5432 --username "postgres" --role "postgres" --no-password  --format custom --blobs --encoding UTF8 --verbose --file "D:/jfinaluibv2.backup" "jfinaluibv2"
 			command.append(PathKit.getWebRootPath()).append("/WEB-INF/database/pg/bin/pg_dump ");
@@ -61,13 +144,14 @@ public abstract class ToolDataBase {
 	 * @throws IOException
 	 */
 	public static void importSql(String filePath) throws IOException {
-		String username = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_userName);
-		String password = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_passWord);
-		String ip = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_ip);
-		String port = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_port);
-		String database = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_dbName);
+		DataBase db = getDbInfo();
+		String username = db.getUserName();
+		String password = db.getPassWord();
+		String ip = db.getIp();
+		String port = db.getPort();
+		String database = db.getDbName();
 		
-		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key);
+		String db_type = PropKit.get(ConstantInit.db_type_key);
 		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg
 			
 			

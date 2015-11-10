@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Enhancer;
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -18,7 +19,6 @@ import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantRender;
 import com.platform.dto.SplitPage;
 import com.platform.plugin.I18NPlugin;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.tools.ToolMail;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
@@ -345,14 +345,14 @@ public class BaseService {
 	 * @param attachFileNames 附件
 	 */
 	public void sendTextMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
-		String host = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_host);		// 发送邮件的服务器的IP
-		String port = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_port);	// 发送邮件的服务器的端口
+		String host = PropKit.get(ConstantInit.config_mail_host);		// 发送邮件的服务器的IP
+		String port = PropKit.get(ConstantInit.config_mail_port);	// 发送邮件的服务器的端口
 
 		boolean validate = true;	// 是否需要身份验证
 		
-		String from = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_from);		// 邮件发送者的地址
-		String userName = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_userName);	// 登陆邮件发送服务器的用户名
-		String password = (String)PropertiesPlugin.getParamMapValue(ConstantInit.config_mail_password);	// 登陆邮件发送服务器的密码
+		String from = PropKit.get(ConstantInit.config_mail_from);		// 邮件发送者的地址
+		String userName = PropKit.get(ConstantInit.config_mail_userName);	// 登陆邮件发送服务器的用户名
+		String password = PropKit.get(ConstantInit.config_mail_password);	// 登陆邮件发送服务器的密码
 		
 		if(sendType != null && sendType.equals(ToolMail.sendType_text)){
 			ToolMail.sendTextMail(host, port, validate, userName, password, from, to, subject, content, attachFileNames);

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Enhancer;
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantLogin;
@@ -20,7 +21,6 @@ import com.platform.interceptor.AuthInterceptor;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.user.User;
 import com.platform.mvc.user.UserInfo;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.security.ToolPbkdf2;
 
@@ -158,11 +158,11 @@ public class LoginService extends BaseService {
 
 		// 3.密码错误次数超限
 		int errorCount = user.getNumber(User.column_errorcount).intValue();
-		int passErrorCount = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_passErrorCount_key)).intValue();
+		int passErrorCount = PropKit.getInt(ConstantInit.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate(User.column_stopdate);
 			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
-			int passErrorHour = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_passErrorHour_key)).intValue();
+			int passErrorHour = PropKit.getInt(ConstantInit.config_passErrorHour_key);
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
@@ -231,11 +231,11 @@ public class LoginService extends BaseService {
 
 		// 3.密码错误次数超限
 		int errorCount = user.getNumber(User.column_errorcount).intValue();
-		int passErrorCount = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_passErrorCount_key)).intValue();
+		int passErrorCount = PropKit.getInt(ConstantInit.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate(User.column_stopdate);
 			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
-			int passErrorHour = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_passErrorHour_key)).intValue();
+			int passErrorHour = PropKit.getInt(ConstantInit.config_passErrorHour_key);
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{

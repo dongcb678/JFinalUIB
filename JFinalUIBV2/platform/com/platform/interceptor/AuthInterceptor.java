@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
+import com.jfinal.kit.PropKit;
 import com.platform.constant.ConstantAuth;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantWebContext;
@@ -21,7 +22,6 @@ import com.platform.mvc.role.Role;
 import com.platform.mvc.station.Station;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolWeb;
 import com.platform.tools.security.ToolIDEA;
@@ -152,7 +152,7 @@ public class AuthInterceptor implements Interceptor {
 		} catch (Exception e) {
 			String expMessage = e.getMessage();
 			// 开发模式下的异常信息
-			if(Boolean.parseBoolean((String) PropertiesPlugin.getParamMapValue(ConstantInit.config_devMode))){
+			if(Boolean.parseBoolean(PropKit.get(ConstantInit.config_devMode))){
 				ByteArrayOutputStream buf = new ByteArrayOutputStream();
 				e.printStackTrace(new PrintWriter(buf, true));
 				expMessage = buf.toString();
@@ -306,14 +306,14 @@ public class AuthInterceptor implements Interceptor {
 			start.setTime(loginDateTimes); // 用户自动登录开始时间
 			int day = ToolDateTime.getDateDaySpace(start, ToolDateTime.getDate()); // 已经登录多少天
 			
-			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
+			int maxAge = PropKit.getInt(ConstantInit.config_maxAge_key);
 			
 			// 4. 验证数据有效性
 			if (ips.equals(newIp) && (userAgentVali ? userAgent.equals(newUserAgent) : true) && day <= maxAge) {
 				// 如果不记住密码，单次登陆有效时间验证
 				if(!autoLogin){
 					int minute = ToolDateTime.getDateMinuteSpace(start, new Date());
-					int session = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_session_key)).intValue();
+					int session = PropKit.getInt(ConstantInit.config_session_key);
 					if(minute > session){
 						return null;
 					}else{
@@ -352,7 +352,7 @@ public class AuthInterceptor implements Interceptor {
 		// 1.设置cookie有效时间
 		int maxAgeTemp = -1;
 		if (autoLogin) {
-			maxAgeTemp = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
+			maxAgeTemp = PropKit.getInt(ConstantInit.config_maxAge_key);
 		}
 
 		// 2.设置用户名到cookie

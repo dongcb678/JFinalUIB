@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.jfinal.handler.Handler;
+import com.jfinal.kit.PropKit;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantWebContext;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.thread.ThreadSysLog;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolRandoms;
@@ -54,7 +54,7 @@ public class GlobalHandler extends Handler {
 		log.debug("request 国际化");
 		String localePram = request.getParameter(ConstantWebContext.request_localePram);
 		if(null != localePram && !localePram.isEmpty()){
-			int maxAge = ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxAge_key)).intValue();
+			int maxAge = PropKit.getInt(ConstantInit.config_maxAge_key);
 			ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_language, localePram, maxAge);
 		}else {
 			localePram = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_language);

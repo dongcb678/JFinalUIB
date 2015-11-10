@@ -134,37 +134,62 @@ public interface ConstantInit {
 	/**
 	 * 数据库连接参数：驱动
 	 */
-	public static final String db_connection_driverClass = "driverClass";
+	public static final String db_connection_postgresql_driverClass = "postgresql.driverClass";
 	
 	/**
 	 * 数据库连接参数：连接URL
 	 */
-	public static final String db_connection_jdbcUrl = "jdbcUrl";
+	public static final String db_connection_postgresql_jdbcUrl = "postgresql.jdbcUrl";
 	
 	/**
 	 * 数据库连接参数：用户名
 	 */
-	public static final String db_connection_userName = "userName";
+	public static final String db_connection_postgresql_userName = "postgresql.userName";
 	
 	/**
 	 * 数据库连接参数：密码
 	 */
-	public static final String db_connection_passWord = "passWord";
+	public static final String db_connection_postgresql_passWord = "postgresql.passWord";
 
 	/**
-	 * 数据库连接参数：数据库服务器IP
+	 * 数据库连接参数：驱动
 	 */
-	public static final String db_connection_ip = "db_ip";
+	public static final String db_connection_mysql_driverClass = "mysql.driverClass";
 	
 	/**
-	 * 数据库连接参数：数据库服务器端口
+	 * 数据库连接参数：连接URL
 	 */
-	public static final String db_connection_port = "db_port";
+	public static final String db_connection_mysql_jdbcUrl = "mysql.jdbcUrl";
 	
 	/**
-	 * 数据库连接参数：数据库名称
+	 * 数据库连接参数：用户名
 	 */
-	public static final String db_connection_dbName = "db_name";
+	public static final String db_connection_mysql_userName = "mysql.userName";
+	
+	/**
+	 * 数据库连接参数：密码
+	 */
+	public static final String db_connection_mysql_passWord = "mysql.passWord";
+
+	/**
+	 * 数据库连接参数：驱动
+	 */
+	public static final String db_connection_oracle_driverClass = "oracle.driverClass";
+	
+	/**
+	 * 数据库连接参数：连接URL
+	 */
+	public static final String db_connection_oracle_jdbcUrl = "oracle.jdbcUrl";
+	
+	/**
+	 * 数据库连接参数：用户名
+	 */
+	public static final String db_connection_oracle_userName = "oracle.userName";
+	
+	/**
+	 * 数据库连接参数：密码
+	 */
+	public static final String db_connection_oracle_passWord = "oracle.passWord";
 
 	/**
 	 * 数据库连接池参数：初始化连接大小

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.jfinal.kit.PropKit;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 import com.platform.constant.ConstantInit;
@@ -92,7 +93,7 @@ public class I18NPlugin implements IPlugin {
 				"ja"
 			};
 
-		String fileNamePrefix = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_i18n_filePrefix);
+		String fileNamePrefix = PropKit.get(ConstantInit.config_i18n_filePrefix);
 		String fileName = null;
 		String classesPath = ToolDirFile.getClassesPath();
 		

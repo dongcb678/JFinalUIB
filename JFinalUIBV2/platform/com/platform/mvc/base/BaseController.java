@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.apache.poi.ss.formula.functions.T;
 
 import com.jfinal.core.Controller;
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.render.JsonRender;
 import com.platform.constant.ConstantInit;
@@ -20,7 +20,6 @@ import com.platform.dto.SplitPage;
 import com.platform.interceptor.AuthInterceptor;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.tools.ToolModelInjector;
 import com.platform.tools.ToolWeb;
 
@@ -167,7 +166,6 @@ public abstract class BaseController extends Controller {
 	 * @param modelClass
 	 * @return
 	 */
-	@SuppressWarnings("hiding")
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass){
 		return ToolModelInjector.injectModels(getRequest(), modelClass);
 	}
@@ -178,7 +176,6 @@ public abstract class BaseController extends Controller {
 	 * @param prefix
 	 * @return
 	 */
-	@SuppressWarnings("hiding")
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix){
 		return ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
 	}
@@ -188,7 +185,6 @@ public abstract class BaseController extends Controller {
 	 * @param modelClass
 	 * @return
 	 */
-	@SuppressWarnings("hiding")
 	public <T extends BaseModel<T>> Record getRecord(Class<? extends T> modelClass){
 		return getModel(modelClass).toRecord();
 	}
@@ -199,7 +195,6 @@ public abstract class BaseController extends Controller {
 	 * @param modelName
 	 * @return
 	 */
-	@SuppressWarnings("hiding")
 	public <T extends BaseModel<T>> Record getRecord(Class<? extends T> modelClass, String modelName){
 		return getModel(modelClass, modelName).toRecord();
 	}
@@ -209,7 +204,7 @@ public abstract class BaseController extends Controller {
 	 * @param modelClass
 	 * @return
 	 */
-	@SuppressWarnings({ "hiding", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	public <T extends BaseModel<T>> List<Record> getRecords(Class<? extends T> modelClass){
 		List<T> models = ToolModelInjector.injectModels(getRequest(), modelClass);
 		List<Record> records = new ArrayList<Record>(models.size());
@@ -225,7 +220,7 @@ public abstract class BaseController extends Controller {
 	 * @param prefix
 	 * @return
 	 */
-	@SuppressWarnings({ "hiding", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	public <T extends BaseModel<T>> List<Record> getRecords(Class<? extends T> modelClass, String prefix){
 		List<T> models = ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
 		List<Record> records = new ArrayList<Record>(models.size());
@@ -273,7 +268,7 @@ public abstract class BaseController extends Controller {
 		String referer = getRequest().getHeader("Referer");
 		if (null != referer && !referer.trim().equals("")) {
 			referer = referer.toLowerCase();
-			String domainStr = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_domain_key);
+			String domainStr = PropKit.get(ConstantInit.config_domain_key);
 			String[] domainArr = domainStr.split(",");
 			for (String domain : domainArr) {
 				if (referer.indexOf(domain.trim()) != -1) {
@@ -290,7 +285,6 @@ public abstract class BaseController extends Controller {
 	 * @param user
 	 * @return
 	 */
-	@SuppressWarnings({ "hiding" })
 	protected <T extends BaseModel<?>>  boolean authCreate(T model){
 		String createids = model.getStr("createids");
 		if(null != createids && !createids.isEmpty()){

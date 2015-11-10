@@ -1,11 +1,11 @@
 package com.platform.tools;
 
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.plugin.redis.Cache;
 import com.jfinal.plugin.redis.Redis;
 import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
-import com.platform.plugin.PropertiesPlugin;
 
 /**
  * 缓存工具类
@@ -24,7 +24,7 @@ public abstract class ToolCache {
 	 */
 	public static String getCacheType(){
 		if(cacheType == null){
-			cacheType = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_cache_type);
+			cacheType = PropKit.get(ConstantInit.config_cache_type);
 		}
 		return cacheType;
 	}

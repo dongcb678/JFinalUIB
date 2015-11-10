@@ -13,8 +13,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
+import com.jfinal.kit.PropKit;
 import com.platform.constant.ConstantInit;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.tools.ToolString;
 
 /**
@@ -143,7 +143,7 @@ public class ToolIDEA {
 		// 2. 解密cookie令牌
 		byte[] securityByte = Base64.decodeBase64(content);
 
-		String securityKey = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_securityKey_key);
+		String securityKey = PropKit.get(ConstantInit.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		byte[] dataByte = null;
@@ -173,7 +173,7 @@ public class ToolIDEA {
 			log.error("字符串数据转byte异常：content = " + content);
 			return null;
 		}
-		String securityKey = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_securityKey_key);
+		String securityKey = PropKit.get(ConstantInit.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		// 认证cookie加密

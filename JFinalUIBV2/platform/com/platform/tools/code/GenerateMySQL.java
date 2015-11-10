@@ -14,8 +14,8 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.platform.config.run.ConfigCore;
-import com.platform.constant.ConstantInit;
-import com.platform.plugin.PropertiesPlugin;
+import com.platform.dto.DataBase;
+import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 
@@ -37,12 +37,12 @@ public class GenerateMySQL extends GenerateBase {
     	log.info("启动ConfigCore end ......");
     	
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		String ip = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_ip);
-		String port = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_port);
-		String username = (String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_userName);
-		String password = (String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_passWord);
-		
-		String jdbcUrl = "jdbc:mysql://"+ip+":"+port+"/information_schema?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull";
+		DataBase db = ToolDataBase.getDbInfo();
+		String username = db.getUserName();
+		String password = db.getPassWord();
+		String jdbcUrl = db.getJdbcUrl();
+		String dbName = ToolDataBase.getDbInfo().getDbName();
+		jdbcUrl = jdbcUrl.replace(dbName, "information_schema");
 		DruidPlugin druidPluginIS = new DruidPlugin(jdbcUrl, username, password, "com.mysql.jdbc.Driver");
 		druidPluginIS.start();
 		
@@ -99,7 +99,7 @@ public class GenerateMySQL extends GenerateBase {
 	public List<TableColumnDto> getColunm(String tableName)  {
 		List<TableColumnDto> list = new ArrayList<TableColumnDto>();
 
-		String dbName = (String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_dbName);
+		String dbName = ToolDataBase.getDbInfo().getDbName();
 		
 		String tableDesc = Db.use("information_schema").findFirst(ToolSqlXml.getSql("platform.mysql.getTables"), dbName, tableName).getStr("table_COMMENT");
 		List<Record> listColumn = Db.use("information_schema").find(ToolSqlXml.getSql("platform.mysql.getColumns"), dbName, tableName);

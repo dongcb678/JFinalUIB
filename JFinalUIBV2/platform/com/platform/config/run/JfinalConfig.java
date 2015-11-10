@@ -29,7 +29,6 @@ import com.platform.plugin.ControllerPlugin;
 import com.platform.plugin.FileRenamePlugin;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ParamInitPlugin;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.plugin.SqlXmlPlugin;
 import com.platform.thread.DataClear;
 import com.platform.thread.ThreadSysLog;
@@ -51,7 +50,7 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public void configConstant(Constants constants) {
 		log.info("configConstant 缓存 properties");
-		new PropertiesPlugin(loadPropertyFile("init.properties")).start();
+		loadPropertyFile("init.properties");
 
 		log.info("configConstant 设置字符集");
 		constants.setEncoding(ToolString.encoding); 
@@ -100,8 +99,8 @@ public class JfinalConfig extends JFinalConfig {
 			
 		}else if(ToolCache.getCacheType().equals(ConstantCache.cache_type_redis)){
 			log.info("RedisPlugin Redis缓存");
-			String redisIp = (String) PropertiesPlugin.getParamMapValue(ConstantInit.config_redis_ip);
-			Integer redisPort = (Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_redis_port);
+			String redisIp = getProperty(ConstantInit.config_redis_ip);
+			Integer redisPort = getPropertyToInt(ConstantInit.config_redis_port);
 			RedisPlugin systemRedis = new RedisPlugin(ConstantCache.cache_name_redis_system, redisIp, redisPort);
 			plugins.add(systemRedis);
 		}

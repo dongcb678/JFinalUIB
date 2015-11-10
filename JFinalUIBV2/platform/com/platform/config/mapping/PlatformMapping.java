@@ -6,6 +6,7 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.config.Plugins;
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
@@ -13,6 +14,7 @@ import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.platform.constant.ConstantInit;
+import com.platform.dto.DataBase;
 import com.platform.mvc.dept.Department;
 import com.platform.mvc.dict.Dict;
 import com.platform.mvc.group.Group;
@@ -28,7 +30,7 @@ import com.platform.mvc.systems.Systems;
 import com.platform.mvc.upload.Upload;
 import com.platform.mvc.user.User;
 import com.platform.mvc.user.UserInfo;
-import com.platform.plugin.PropertiesPlugin;
+import com.platform.tools.ToolDataBase;
 import com.test.mvc.blog.Blog;
 import com.weixin.mvc.article.Article;
 import com.weixin.mvc.keyword.Keyword;
@@ -41,22 +43,23 @@ public class PlatformMapping extends BaseMapping{
 	
 	public PlatformMapping(Plugins plugins){
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		DruidPlugin druidPlugin = new DruidPlugin(
-				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_jdbcUrl), 
-				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_userName), 
-				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_passWord), 
-				(String)PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_driverClass));
+		DataBase db = ToolDataBase.getDbInfo();
+		String driverClass = db.getDriverClass();
+		String jdbcUrl = db.getJdbcUrl();
+		String username = db.getUserName();
+		String password = db.getPassWord();
+		DruidPlugin druidPlugin = new DruidPlugin(jdbcUrl, username, password, driverClass);
 
 		log.info("configPlugin 配置Druid数据库连接池大小");
 		druidPlugin.set(
-				(Integer)PropertiesPlugin.getParamMapValue(ConstantInit.db_initialSize), 
-				(Integer)PropertiesPlugin.getParamMapValue(ConstantInit.db_minIdle), 
-				(Integer)PropertiesPlugin.getParamMapValue(ConstantInit.db_maxActive));
+				PropKit.getInt(ConstantInit.db_initialSize), 
+				PropKit.getInt(ConstantInit.db_minIdle), 
+				PropKit.getInt(ConstantInit.db_maxActive));
 		
 		log.info("configPlugin 配置Druid数据库连接池过滤器配制");
 		druidPlugin.addFilter(new StatFilter());
 		WallFilter wall = new WallFilter();
-		wall.setDbType((String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key));
+		wall.setDbType(PropKit.get(ConstantInit.db_type_key));
 		WallConfig config = new WallConfig();
 		config.setFunctionCheck(false); // 支持数据库函数
 		wall.setConfig(config);
@@ -66,13 +69,13 @@ public class PlatformMapping extends BaseMapping{
 		configName = ConstantInit.db_dataSource_main;
 		arp = new ActiveRecordPlugin(configName, druidPlugin);
 		//arp.setTransactionLevel(4);//事务隔离级别
-		boolean devMode = Boolean.parseBoolean((String) PropertiesPlugin.getParamMapValue(ConstantInit.config_devMode));
+		boolean devMode = Boolean.parseBoolean(PropKit.get(ConstantInit.config_devMode));
 		arp.setDevMode(devMode); // 设置开发模式
 		arp.setShowSql(devMode); // 是否显示SQL
 		arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 大小写不敏感
 		
 		log.info("configPlugin 数据库类型判断");
-		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key);
+		String db_type = PropKit.get(ConstantInit.db_type_key);
 		if(db_type.equals(ConstantInit.db_type_postgresql)){
 			log.info("configPlugin 使用数据库类型是 postgresql");
 			arp.setDialect(new PostgreSqlDialect());

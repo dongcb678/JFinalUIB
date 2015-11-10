@@ -17,8 +17,8 @@ import org.dom4j.io.SAXReader;
 
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
-import com.platform.constant.ConstantInit;
 import com.platform.tools.ToolCache;
+import com.platform.tools.ToolClassSearch;
 import com.platform.tools.ToolDirFile;
 
 /**
@@ -101,11 +101,10 @@ public class SqlXmlPlugin implements IPlugin {
      * 查找jar文件中的.sql.xml文件
      * @param sqlXmlFiles
      */
-    @SuppressWarnings("unchecked")
 	private static void findByJars(boolean isInit) {
     	try {
             // jar中文件查找
-        	List<String> jarList = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_jar);
+        	List<String> jarList = ToolClassSearch.scanJarList();
         	int size = jarList.size();
             for (int i = 0; i < size; i++) {
                 JarFile jarFile = new JarFile(new File(ToolDirFile.getLibPath() + File.separator + jarList.get(i)));
@@ -116,7 +115,7 @@ public class SqlXmlPlugin implements IPlugin {
                     String pkgEntryName = entryName.replaceAll("/", ".");
                     
                     // 去除不需要扫描的包
-                    List<String> pkgs = (List<String>) PropertiesPlugin.getParamMapValue(ConstantInit.config_scan_package);
+                    List<String> pkgs = ToolClassSearch.scanPkgList();
                     boolean pkgResult = false;
                     for (String pkg : pkgs) {
                     	if(pkgEntryName.startsWith(pkg)){

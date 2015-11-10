@@ -7,11 +7,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.jfinal.kit.PathKit;
+import com.jfinal.kit.PropKit;
 import com.jfinal.upload.UploadFile;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.tools.ToolString;
 
 /**
@@ -62,7 +62,7 @@ public class UploadController extends BaseController {
 			log.error("保存到路径错误，必须传递pathType值");
 		}
 		
-		List<UploadFile> files = getFiles(path, ((Integer) PropertiesPlugin.getParamMapValue(ConstantInit.config_maxPostSize_key)).intValue(), ToolString.encoding);
+		List<UploadFile> files = getFiles(path, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding);
 		
 		List<Map<String, String>> list = UploadService.service.upload(pathType, files);
 		renderJson(list);

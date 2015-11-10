@@ -11,11 +11,11 @@ import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.jfinal.aop.Enhancer;
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseService;
-import com.platform.plugin.PropertiesPlugin;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolOS;
 
@@ -39,7 +39,7 @@ public class ResourcesService extends BaseService {
 		Date startDate = ToolDateTime.startDateByDay(endDate, -14);
 		
 		List<Record> list = null;
-		String db_type = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_type_key);
+		String db_type = PropKit.get(ConstantInit.db_type_key);
 		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg
 			String sql = getSql(Resources.sqlId_pv_pg);
 			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));

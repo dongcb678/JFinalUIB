@@ -12,7 +12,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.config.run.ConfigCore;
 import com.platform.constant.ConstantInit;
-import com.platform.plugin.PropertiesPlugin;
+import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 
@@ -76,7 +76,7 @@ public class GenerateOracle extends GenerateBase {
 
 	@Override
 	public List<TableColumnDto> getColunm(String tableName) {
-		String dbUser = (String) PropertiesPlugin.getParamMapValue(ConstantInit.db_connection_userName);
+		String dbUser = ToolDataBase.getDbInfo().getUserName();
 		
 		List<TableColumnDto> list = new ArrayList<TableColumnDto>();
 		
