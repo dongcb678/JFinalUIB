@@ -39,7 +39,8 @@
 	<sql id="getColumnsInfo">
 		<![CDATA[ 
         	select 
-				tbl.tablename, des.objsubid, des.description 
+				tbl.tablename, des.objsubid, des.description,
+				(select att.attname from pg_attribute att where c.oid = att.attrelid and des.objsubid = att.attnum) attname
 			from 
 				pg_tables as tbl 
 				inner join pg_class c ON tbl.tablename = c.relname

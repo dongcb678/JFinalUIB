@@ -2,6 +2,7 @@ package com.platform.tools.code;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,10 +76,17 @@ public class GeneratePostgreSQL extends GenerateBase {
 	@Override
 	public List<TableColumnDto> getColunm(String tableName) {
 		List<TableColumnDto> list = new ArrayList<TableColumnDto>();
-		
-		List<Record> listDesc = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumnsInfo"), tableName);
-		int index = 1;
 
+		Map<String, String> map = new HashMap<String, String>();
+		List<Record> listDesc = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumnsInfo"), tableName);
+		for (Record record : listDesc) {
+			if(record.getStr("attname") == null){
+				map.put("tableName", record.getStr("description"));
+			}else{
+				map.put(record.getStr("attname"), record.getStr("description"));
+			}
+		}
+		
 		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
 				
 		List<Record> listColumn = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumns"), tableName);
@@ -89,7 +97,6 @@ public class GeneratePostgreSQL extends GenerateBase {
 
 			// 需要跳过的字段
 			if("xxx".equals(column_name) || "yyy".equals(column_name) || "zzz".equals(column_name)){
-				index += 1;
 				continue;
 			}
 			
@@ -102,13 +109,11 @@ public class GeneratePostgreSQL extends GenerateBase {
 			
 			table.setColumn_type(data_type);
 			table.setColumn_length(character_maximum_length);
-			table.setColumn_desc(listDesc.get(index).getStr("description"));
+			table.setColumn_desc(map.get(column_name));
 
 			table.setColumn_className(columnJavaTypeMap.get(column_name.toLowerCase()));
 			
 			list.add(table);
-			
-			index += 1;
 		}
 		
 		return list;
