@@ -6,9 +6,9 @@
 <sql-statement namespace="platform.group">
 	
 	<!-- 查询所有分组 -->
-	<sql id="all">
+	<sql id="paging">
 		<![CDATA[ 
-        	select ids from pt_group
+        	select * from pt_group order by ids asc limit ? offset ? 
     	]]>
 	</sql>
 	

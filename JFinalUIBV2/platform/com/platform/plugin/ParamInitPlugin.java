@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.IPlugin;
+import com.platform.constant.ConstantInit;
+import com.platform.mvc.base.BaseService;
 import com.platform.mvc.dict.Dict;
 import com.platform.mvc.group.Group;
 import com.platform.mvc.operator.Operator;
@@ -12,6 +14,8 @@ import com.platform.mvc.param.Param;
 import com.platform.mvc.role.Role;
 import com.platform.mvc.station.Station;
 import com.platform.mvc.user.User;
+import com.platform.mvc.user.UserInfo;
+import com.platform.tools.ToolCache;
 import com.platform.tools.ToolSqlXml;
 
 /**
@@ -21,11 +25,21 @@ import com.platform.tools.ToolSqlXml;
 public class ParamInitPlugin implements IPlugin {
 	
 	private static Logger log = Logger.getLogger(ParamInitPlugin.class);
-	 
+
+	/**
+	 * 数据批处理大小，每批次处理一万行
+	 */
+	protected static final int splitDataSize = 10000;
+	
     /**
      * 用户缓存key前缀
      */
 	public static String cacheStart_user = "user_";
+
+    /**
+     * 用户缓存key前缀
+     */
+	public static String cacheStart_userInfo = "userInfo_";
 
     /**
      * 分组缓存key前缀
@@ -73,7 +87,8 @@ public class ParamInitPlugin implements IPlugin {
 
 		// 1.缓存用户
 		platform_cacheUser();
-
+		platform_cacheUserInfo();
+		
 		// 2.缓存组
 		platform_cacheGroup();
 
@@ -107,14 +122,36 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheUser() {
 		log.info("缓存加载：User start");
-		String sql = ToolSqlXml.getSql(User.sqlId_all);
-		List<User> userList = User.dao.find(sql);
-		for (User user : userList) {
-			User.dao.cacheAdd(user.getPKValue());
-			user = null;
+		String sql = ToolSqlXml.getSql(User.sqlId_paging);
+		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_user ", splitDataSize);
+		for (int i = 0; i < batchCount; i++) {
+			List<User> userList = User.dao.find(sql, splitDataSize, i * splitDataSize);
+			for (User user : userList) {
+				ToolCache.set(ParamInitPlugin.cacheStart_user + user.getPKValue(), user);
+				ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(User.column_username), user);
+			}
+			userList = null;
 		}
-		log.info("缓存加载：User end, size = " + userList.size());
-		userList = null;
+		log.info("缓存加载：User end");
+	}
+
+	/**
+	 * 缓存所有用户
+	 * @author 董华健    2012-10-16 下午1:16:48
+	 */
+	public static void platform_cacheUserInfo() {
+		log.info("缓存加载：UserInfo start");
+		String sql = ToolSqlXml.getSql(UserInfo.sqlId_paging);
+		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_userInfo ", splitDataSize);
+		for (int i = 0; i < batchCount; i++) {
+			List<UserInfo> userInfoList = UserInfo.dao.find(sql, splitDataSize, i * splitDataSize);
+			for (UserInfo userInfo : userInfoList) {
+				ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_email), userInfo);
+				ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_mobile), userInfo);
+			}
+			userInfoList = null;
+		}
+		log.info("缓存加载：UserInfo end");
 	}
 
 	/**
@@ -123,13 +160,18 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheGroup() {
 		log.info("缓存加载：Group start");
-		String sql = ToolSqlXml.getSql(Group.sqlId_all);
-		List<Group> groupList = Group.dao.find(sql);
-		for (Group group : groupList) {
-			Group.dao.cacheAdd(group.getPKValue());
+		
+		String sql = ToolSqlXml.getSql(Group.sqlId_paging);
+		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_group ", splitDataSize);
+		for (int i = 0; i < batchCount; i++) {
+			List<Group> groupList = Group.dao.find(sql, splitDataSize, i * splitDataSize);
+			for (Group group : groupList) {
+				ToolCache.set(ParamInitPlugin.cacheStart_group + group.getPKValue(), group);
+			}
+			groupList = null;
 		}
-		log.info("缓存加载：Group end, size = " + groupList.size());
-		groupList = null;
+		
+		log.info("缓存加载：Group end");
 	}
 
 	/**
@@ -138,13 +180,16 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheRole() {
 		log.info("缓存加载：Role start");
-		String sql = ToolSqlXml.getSql(Role.sqlId_all);
-		List<Role> roleList = Role.dao.find(sql);
-		for (Role role : roleList) {
-			Role.dao.cacheAdd(role.getPKValue());
+		String sql = ToolSqlXml.getSql(Role.sqlId_paging);
+		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_role ", splitDataSize);
+		for (int i = 0; i < batchCount; i++) {
+			List<Role> roleList = Role.dao.find(sql, splitDataSize, i * splitDataSize);
+			for (Role role : roleList) {
+				ToolCache.set(ParamInitPlugin.cacheStart_role + role.getPKValue(), role);
+			}
+			roleList = null;
 		}
-		log.info("缓存加载：Role end, size = " + roleList.size());
-		roleList = null;
+		log.info("缓存加载：Role end");
 	}
 	
 	/**
@@ -153,13 +198,18 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheStation() {
 		log.info("缓存加载：Station start");
-		String sql = ToolSqlXml.getSql(Station.sqlId_all);
-		List<Station> stationList = Station.dao.find(sql);
-		for (Station station : stationList) {
-			Station.dao.cacheAdd(station.getPKValue());
+		
+		String sql = ToolSqlXml.getSql(Station.sqlId_paging);
+		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_station ", splitDataSize);
+		for (int i = 0; i < batchCount; i++) {
+			List<Station> stationList = Station.dao.find(sql, splitDataSize, i * splitDataSize);
+			for (Station station : stationList) {
+				ToolCache.set(ParamInitPlugin.cacheStart_station + station.getPKValue(), station);
+			}
+			stationList = null;
 		}
-		log.info("缓存加载：Station end, size = " + stationList.size());
-		stationList = null;
+		
+		log.info("缓存加载：Station end");
 	}
 
 	/**
@@ -168,14 +218,19 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheOperator() {
 		log.info("缓存加载：Operator start");
-		String sql = ToolSqlXml.getSql(Operator.sqlId_all);
-		List<Operator> operatorList = Operator.dao.find(sql);
-		for (Operator operator : operatorList) {
-			Operator.dao.cacheAdd(operator.getPKValue());
-			operator = null;
+		
+		String sql = ToolSqlXml.getSql(Operator.sqlId_paging);
+		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_operator ", splitDataSize);
+		for (int i = 0; i < batchCount; i++) {
+			List<Operator> operatorList = Operator.dao.find(sql, splitDataSize, i * splitDataSize);
+			for (Operator operator : operatorList) {
+				ToolCache.set(ParamInitPlugin.cacheStart_operator + operator.getPKValue(), operator);
+				ToolCache.set(ParamInitPlugin.cacheStart_operator + operator.getStr(Operator.column_url), operator);
+			}
+			operatorList = null;
 		}
-		log.info("缓存加载：Operator end, size = " + operatorList.size());
-		operatorList = null;
+		
+		log.info("缓存加载：Operator end");
 	}
 
 	/**

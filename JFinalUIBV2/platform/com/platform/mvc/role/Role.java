@@ -63,10 +63,10 @@ public class Role extends BaseModelCache<Role> {
 	public static final String column_numbers = "numbers";
 
 	/**
-	 * sqlId : platform.role.all
+	 * sqlId : platform.role.paging
 	 * 描述：查询所有角色
 	 */
-	public static final String sqlId_all = "platform.role.all";
+	public static final String sqlId_paging = "platform.role.paging";
 
 	/**
 	 * sqlId : platform.role.noCheckedFilter

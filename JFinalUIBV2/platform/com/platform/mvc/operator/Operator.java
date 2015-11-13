@@ -123,10 +123,10 @@ public class Operator extends BaseModelCache<Operator> {
 	public static final String column_modulenames = "modulenames";
 
 	/**
-	 * sqlId : platform.operator.all
+	 * sqlId : platform.operator.paging
 	 * 描述：查询所有功能
 	 */
-	public static final String sqlId_all = "platform.operator.all";
+	public static final String sqlId_paging = "platform.operator.paging";
 
 	/**
 	 * sqlId : platform.operator.rootModule

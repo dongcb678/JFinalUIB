@@ -95,7 +95,7 @@ public class DocKeyword extends DocBase {
 		IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写
 		for (int i = 0; i < batchCount; i++) {
 			log.info("索引批次：" + i);
-			List<Keyword> list = Keyword.dao.find(sql, DocBase.splitDataSize, i * DocBase.splitDataSize);
+			List<Keyword> list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
 			for (Keyword keyword : list) {
 				addDoc(ramIndexWriter, keyword, document, fields);
 			}

@@ -5,10 +5,10 @@
 -->
 <sql-statement namespace="platform.user">
 	
-	<!-- 查询所有用户 -->
-	<sql id="all">
+	<!-- 分页查询用户 -->
+	<sql id="paging">
 		<![CDATA[ 
-        	select ids from pt_user
+        	select * from pt_user order by ids asc limit ? offset ? 
     	]]>
 	</sql>
 	

@@ -6,9 +6,9 @@
 <sql-statement namespace="platform.role">
 	
 	<!-- 查询所有角色 -->
-	<sql id="all">
+	<sql id="paging">
 		<![CDATA[ 
-        	select ids from pt_role
+        	select * from pt_role order by ids asc limit ? offset ? 
     	]]>
 	</sql>
 	

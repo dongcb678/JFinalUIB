@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import com.platform.annotation.Table;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
+import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 /**
  * 用户详情model
@@ -199,6 +201,12 @@ public class UserInfo extends BaseModel<UserInfo> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String column_telephone = "telephone";
+
+	/**
+	 * sqlId : platform.user.paging
+	 * 描述：查询所有用户
+	 */
+	public static final String sqlId_paging = "platform.userInfo.paging";
 
 	private String ids;
 	private Long version;
@@ -410,6 +418,34 @@ public class UserInfo extends BaseModel<UserInfo> {
 	}
 	public <T> T getTelephone() {
 		return get(column_telephone);
+	}
+
+	/**
+	 * 添加或者更新缓存
+	 */
+	public void cacheAdd(String ids){
+		UserInfo userInfo = UserInfo.dao.findById(ids);
+		ToolCache.set(ParamInitPlugin.cacheStart_userInfo + userInfo.getStr(UserInfo.column_email), userInfo);
+		ToolCache.set(ParamInitPlugin.cacheStart_userInfo + userInfo.getStr(UserInfo.column_mobile), userInfo);
+	}
+
+	/**
+	 * 删除缓存
+	 */
+	public void cacheRemove(String ids){
+		UserInfo userInfo = UserInfo.dao.findById(ids);
+		ToolCache.remove(ParamInitPlugin.cacheStart_userInfo + userInfo.getStr(UserInfo.column_email));
+		ToolCache.remove(ParamInitPlugin.cacheStart_userInfo + userInfo.getStr(UserInfo.column_mobile));
+	}
+
+	/**
+	 * 获取缓存
+	 * @param ids
+	 * @return
+	 */
+	public UserInfo cacheGet(String ids){
+		UserInfo userInfo = ToolCache.get(ParamInitPlugin.cacheStart_userInfo + ids);
+		return userInfo;
 	}
 	
 }

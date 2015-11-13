@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	用户sql
+-->
+<sql-statement namespace="platform.userInfo">
+	
+	<!-- 分页查询用户 -->
+	<sql id="paging">
+		<![CDATA[ 
+        	select * from pt_userinfo order by ids asc limit ? offset ?
+    	]]>
+	</sql>
+
+</sql-statement>

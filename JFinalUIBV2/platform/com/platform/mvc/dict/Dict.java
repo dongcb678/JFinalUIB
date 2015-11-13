@@ -479,9 +479,10 @@ public class Dict extends BaseModelCache<Dict> {
 	 */
 	public void cacheAdd(String ids){
 		Dict dict = Dict.dao.findById(ids);
-		List<Dict> dictList = dict.getChild();
 		ToolCache.set(ParamInitPlugin.cacheStart_dict + ids, dict);
 		ToolCache.set(ParamInitPlugin.cacheStart_dict + dict.getStr(column_numbers), dict);
+		
+		List<Dict> dictList = dict.getChild();
 		ToolCache.set(ParamInitPlugin.cacheStart_dict_child + ids, dictList);
 		ToolCache.set(ParamInitPlugin.cacheStart_dict_child + dict.getStr(column_numbers), dictList);
 

@@ -155,10 +155,10 @@ public class User extends BaseModelCache<User> {
 	public static final String sqlId_splitPage_from = "platform.user.splitPageFrom";
 
 	/**
-	 * sqlId : platform.user.all
+	 * sqlId : platform.user.paging
 	 * 描述：查询所有用户
 	 */
-	public static final String sqlId_all = "platform.user.all";
+	public static final String sqlId_paging = "platform.user.paging";
 
 	/**
 	 * sqlId : platform.user.treeUserNode
@@ -367,11 +367,12 @@ public class User extends BaseModelCache<User> {
 	 */
 	public void cacheAdd(String ids){
 		User user = User.dao.findById(ids);
-		UserInfo userInfo = user.getUserInfo();
+		
 		ToolCache.set(ParamInitPlugin.cacheStart_user + ids, user);
 		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_username), user);
-		ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_email), user);
-		ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_mobile), user);
+		
+		String userInfoIds = user.getStr(User.column_userinfoids);
+		UserInfo.dao.cacheAdd(userInfoIds);
 	}
 
 	/**
@@ -379,11 +380,11 @@ public class User extends BaseModelCache<User> {
 	 */
 	public void cacheRemove(String ids){
 		User user = User.dao.findById(ids);
-		UserInfo userInfo = user.getUserInfo();
 		ToolCache.remove(ParamInitPlugin.cacheStart_user + ids);
 		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_username));
-		ToolCache.remove(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_email));
-		ToolCache.remove(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_mobile));
+
+		String userInfoIds = user.getStr(User.column_userinfoids);
+		UserInfo.dao.cacheRemove(userInfoIds);
 	}
 
 	/**

@@ -6,9 +6,9 @@
 <sql-statement namespace="platform.operator">
 	
 	<!-- 查询所有功能 -->
-	<sql id="all">
+	<sql id="paging">
 		<![CDATA[ 
-        	select ids from pt_operator
+        	select * from pt_operator order by ids asc limit ? offset ? 
     	]]>
 	</sql>
 	

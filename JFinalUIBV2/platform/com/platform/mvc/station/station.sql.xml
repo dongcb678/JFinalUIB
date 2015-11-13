@@ -6,9 +6,9 @@
 <sql-statement namespace="platform.station">
 	
 	<!-- 查询所有岗位 -->
-	<sql id="all">
+	<sql id="paging">
 		<![CDATA[ 
-        	select ids from pt_station
+        	select * from pt_station order by ids asc limit ? offset ? 
     	]]>
 	</sql>
 	

@@ -69,10 +69,10 @@ public class Group extends BaseModelCache<Group> {
 	public static final String sqlId_splitPage_from = "platform.group.splitPageFrom";
 
 	/**
-	 * sqlId : platform.group.all
+	 * sqlId : platform.group.paging
 	 * 描述：查询所有分组 
 	 */
-	public static final String sqlId_all = "platform.group.all";
+	public static final String sqlId_paging = "platform.group.paging";
 
 	/**
 	 * sqlId : platform.group.noCheckedFilter

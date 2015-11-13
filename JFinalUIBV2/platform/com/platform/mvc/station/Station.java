@@ -81,10 +81,10 @@ public class Station extends BaseModelCache<Station> {
 	public static final String column_moduleids = "moduleids";
 
 	/**
-	 * sqlId : platform.station.all
+	 * sqlId : platform.station.paging
 	 * 描述：查询所有岗位
 	 */
-	public static final String sqlId_all = "platform.station.all";
+	public static final String sqlId_paging = "platform.station.paging";
 
 	/**
 	 * sqlId : platform.station.root
