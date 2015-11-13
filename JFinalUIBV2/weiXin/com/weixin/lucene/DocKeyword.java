@@ -42,6 +42,7 @@ import com.platform.beetl.tag.DictTag;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.SplitPage;
 import com.platform.lucene.DocBase;
+import com.platform.mvc.base.BaseService;
 import com.platform.tools.ToolSqlXml;
 import com.weixin.mvc.keyword.Keyword;
 
@@ -88,7 +89,7 @@ public class DocKeyword extends DocBase {
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		Document document = new Document();
 		
-		int batchCount = getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
+		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
 		String sql = ToolSqlXml.getSql("weixin.keyword.paging");
 
 		IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写

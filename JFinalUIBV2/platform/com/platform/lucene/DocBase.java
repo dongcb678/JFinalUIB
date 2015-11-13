@@ -29,7 +29,6 @@ import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.store.Directory;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
-import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
 import com.platform.mvc.base.BaseModel;
@@ -292,22 +291,4 @@ public abstract class DocBase implements Runnable {
 		return doc;
 	}
 
-	/**
-	 * 根据数据量计算分多少次批处理
-	 * @param dataSource
-	 * @param sql
-	 * @param batchSize 每次数据多少条
-	 * @return
-	 */
-	protected int getBatchCount(String dataSource, String sql, int batchSize){
-		int batchCount = 0;
-		int count = Db.use(dataSource).queryNumber(" select count(*) " + sql).intValue();
-		if(count % batchSize == 0){
-			batchCount = count / batchSize;
-		}else{
-			batchCount = count / batchSize + 1;
-		}
-		return batchCount;
-	}
-	
 }
