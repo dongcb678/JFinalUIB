@@ -41,7 +41,10 @@ public class ParamPkgInterceptor implements Interceptor {
 		log.debug("********* 反射获取 controller 全局变量  end *********");
 		
 		log.debug("********* 封装参数值到 controller 全局变量  start *********");
-		
+//		boolean isMultipart = ServletFileUpload.isMultipartContent(controller.getRequest()); // 判断是否文件上传类型
+//		if(isMultipart){
+//			controller.getFile();
+//		}
 		// 是否需要分页
 		Syslog reqSysLog = controller.getReqSysLog();
 		String operatorids = reqSysLog.getStr(Syslog.column_operatorids);
@@ -85,7 +88,7 @@ public class ParamPkgInterceptor implements Interceptor {
 	 * @param controller
 	 * @param superControllerClass
 	 */
-	public void splitPage(BaseController controller, Class<?> superControllerClass){
+	private void splitPage(BaseController controller, Class<?> superControllerClass){
 		SplitPage splitPage = new SplitPage();
 		// 分页查询参数分拣
 		Map<String, Object> queryParam = new HashMap<String, Object>();
@@ -140,7 +143,7 @@ public class ParamPkgInterceptor implements Interceptor {
 	 * @param controller
 	 * @param field
 	 */
-	public void setControllerFieldValue(BaseController controller, Field field){
+	private void setControllerFieldValue(BaseController controller, Field field){
 		try {
 			field.setAccessible(true);
 			String name = field.getName();
@@ -191,7 +194,7 @@ public class ParamPkgInterceptor implements Interceptor {
 	 * @param controller
 	 * @param field
 	 */
-	public void setRequestValue(BaseController controller, Field field){
+	private void setRequestValue(BaseController controller, Field field){
 		try {
 			field.setAccessible(true);
 			String name = field.getName();
