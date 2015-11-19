@@ -18,7 +18,7 @@ public class DateClearCallback implements ICallback {
 	public Object call(Connection conn) throws SQLException {
 		CallableStatement proc = null;
 
-		proc = conn.prepareCall("{ call clearData(?) }");
+		proc = conn.prepareCall("{ call dataClear(?) }");
 		
 		proc.setString(1, ctype);
 		

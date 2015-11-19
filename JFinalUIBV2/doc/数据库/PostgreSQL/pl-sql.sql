@@ -1,6 +1,6 @@
-DROP FUNCTION IF EXISTS clearData( ctype varchar );  
+DROP FUNCTION IF EXISTS dataClear( ctype varchar );  
 
-Create or replace function clearData(ctype varchar) returns void as
+Create or replace function dataClear(ctype varchar) returns void as
 $$
 Declare
 sql varchar;
