@@ -1,6 +1,7 @@
 package com.platform.tools;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -8,6 +9,7 @@ import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
 import org.beetl.ext.jfinal.BeetlRenderFactory;
 
+import com.jfinal.kit.PropKit;
 import com.platform.beetl.format.DateFormat;
 import com.platform.beetl.func.AuthUrl;
 import com.platform.beetl.func.EscapeXml;
@@ -15,6 +17,7 @@ import com.platform.beetl.func.I18nFormat;
 import com.platform.beetl.func.OrderBy;
 import com.platform.beetl.tag.DictTag;
 import com.platform.beetl.tag.ParamTag;
+import com.platform.constant.ConstantInit;
 
 /**
  * Beetl工具类
@@ -38,6 +41,10 @@ public abstract class ToolBeetl {
 		groupTemplate.registerTag("dict", DictTag.class);
 		groupTemplate.registerTag("param", ParamTag.class);
 		groupTemplate.registerFormat("dateFormat", new DateFormat());
+		
+		Map<String, Object> sharedVars = new HashMap<String, Object>();
+		sharedVars.put("db_type", PropKit.get(ConstantInit.db_type_key));
+		groupTemplate.setSharedVars(sharedVars);
 		
 		return groupTemplate;
 	}

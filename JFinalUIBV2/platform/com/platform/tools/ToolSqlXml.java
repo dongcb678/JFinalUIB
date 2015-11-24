@@ -2,6 +2,7 @@ package com.platform.tools;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +86,10 @@ public abstract class ToolSqlXml {
     	if(null == sqlTemplete || sqlTemplete.isEmpty()){
 			log.error("sql语句不存在：sql id是" + sqlId);
 			return null;
+    	}
+    	
+    	if(param == null){
+    		param = new HashMap<String, Object>();
     	}
     	
     	String sql = null;

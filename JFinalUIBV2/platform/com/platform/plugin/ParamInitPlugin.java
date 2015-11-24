@@ -1,11 +1,15 @@
 package com.platform.plugin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.IPlugin;
 import com.platform.constant.ConstantInit;
+import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.dict.Dict;
 import com.platform.mvc.group.Group;
@@ -122,10 +126,24 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheUser() {
 		log.info("缓存加载：User start");
-		String sql = ToolSqlXml.getSql(User.sqlId_paging);
+		Map<String, Object> vars = new HashMap<String, Object>();
+		String db_type = PropKit.get(ConstantInit.db_type_key);
+		vars.put("db_type", db_type);
+		String sql = ToolSqlXml.getSql(User.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
+		
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_user ", splitDataSize);
+		List<User> userList = null;
 		for (int i = 0; i < batchCount; i++) {
-			List<User> userList = User.dao.find(sql, splitDataSize, i * splitDataSize);
+			if(db_type.equals(ConstantInit.db_type_postgresql)){
+				userList = User.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_mysql)){
+				userList = User.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+				userList = User.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
+			}
+			
 			for (User user : userList) {
 				ToolCache.set(ParamInitPlugin.cacheStart_user + user.getPKValue(), user);
 				ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(User.column_username), user);
@@ -141,10 +159,24 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheUserInfo() {
 		log.info("缓存加载：UserInfo start");
-		String sql = ToolSqlXml.getSql(UserInfo.sqlId_paging);
+		Map<String, Object> vars = new HashMap<String, Object>();
+		String db_type = PropKit.get(ConstantInit.db_type_key);
+		vars.put("db_type", db_type);
+		String sql = ToolSqlXml.getSql(UserInfo.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
+		
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_userInfo ", splitDataSize);
+		List<UserInfo> userInfoList = null;
 		for (int i = 0; i < batchCount; i++) {
-			List<UserInfo> userInfoList = UserInfo.dao.find(sql, splitDataSize, i * splitDataSize);
+			if(db_type.equals(ConstantInit.db_type_postgresql)){
+				userInfoList = UserInfo.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_mysql)){
+				userInfoList = UserInfo.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+				userInfoList = UserInfo.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
+			}
+			
 			for (UserInfo userInfo : userInfoList) {
 				ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_email), userInfo);
 				ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_mobile), userInfo);
@@ -160,11 +192,24 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheGroup() {
 		log.info("缓存加载：Group start");
+		Map<String, Object> vars = new HashMap<String, Object>();
+		String db_type = PropKit.get(ConstantInit.db_type_key);
+		vars.put("db_type", db_type);
+		String sql = ToolSqlXml.getSql(Group.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
 		
-		String sql = ToolSqlXml.getSql(Group.sqlId_paging);
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_group ", splitDataSize);
+		List<Group> groupList = null;
 		for (int i = 0; i < batchCount; i++) {
-			List<Group> groupList = Group.dao.find(sql, splitDataSize, i * splitDataSize);
+			if(db_type.equals(ConstantInit.db_type_postgresql)){
+				groupList = Group.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_mysql)){
+				groupList = Group.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+				groupList = Group.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
+			}
+			
 			for (Group group : groupList) {
 				ToolCache.set(ParamInitPlugin.cacheStart_group + group.getPKValue(), group);
 			}
@@ -180,10 +225,24 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheRole() {
 		log.info("缓存加载：Role start");
-		String sql = ToolSqlXml.getSql(Role.sqlId_paging);
+		Map<String, Object> vars = new HashMap<String, Object>();
+		String db_type = PropKit.get(ConstantInit.db_type_key);
+		vars.put("db_type", db_type);
+		String sql = ToolSqlXml.getSql(Role.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
+		
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_role ", splitDataSize);
+		List<Role> roleList = null;
 		for (int i = 0; i < batchCount; i++) {
-			List<Role> roleList = Role.dao.find(sql, splitDataSize, i * splitDataSize);
+			if(db_type.equals(ConstantInit.db_type_postgresql)){
+				roleList = Role.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_mysql)){
+				roleList = Role.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+				roleList = Role.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
+			}
+			
 			for (Role role : roleList) {
 				ToolCache.set(ParamInitPlugin.cacheStart_role + role.getPKValue(), role);
 			}
@@ -198,11 +257,24 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheStation() {
 		log.info("缓存加载：Station start");
+		Map<String, Object> vars = new HashMap<String, Object>();
+		String db_type = PropKit.get(ConstantInit.db_type_key);
+		vars.put("db_type", db_type);
+		String sql = ToolSqlXml.getSql(Station.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
 		
-		String sql = ToolSqlXml.getSql(Station.sqlId_paging);
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_station ", splitDataSize);
+		List<Station> stationList = null;
 		for (int i = 0; i < batchCount; i++) {
-			List<Station> stationList = Station.dao.find(sql, splitDataSize, i * splitDataSize);
+			if(db_type.equals(ConstantInit.db_type_postgresql)){
+				stationList = Station.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_mysql)){
+				stationList = Station.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+				stationList = Station.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
+			}
+			
 			for (Station station : stationList) {
 				ToolCache.set(ParamInitPlugin.cacheStart_station + station.getPKValue(), station);
 			}
@@ -218,11 +290,24 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheOperator() {
 		log.info("缓存加载：Operator start");
+		Map<String, Object> vars = new HashMap<String, Object>();
+		String db_type = PropKit.get(ConstantInit.db_type_key);
+		vars.put("db_type", db_type);
+		String sql = ToolSqlXml.getSql(Operator.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
 		
-		String sql = ToolSqlXml.getSql(Operator.sqlId_paging);
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_operator ", splitDataSize);
+		List<Operator> operatorList = null;
 		for (int i = 0; i < batchCount; i++) {
-			List<Operator> operatorList = Operator.dao.find(sql, splitDataSize, i * splitDataSize);
+			if(db_type.equals(ConstantInit.db_type_postgresql)){
+				operatorList = Operator.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_mysql)){
+				operatorList = Operator.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+				operatorList = Operator.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
+			}
+			
 			for (Operator operator : operatorList) {
 				ToolCache.set(ParamInitPlugin.cacheStart_operator + operator.getPKValue(), operator);
 				ToolCache.set(ParamInitPlugin.cacheStart_operator + operator.getStr(Operator.column_url), operator);

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,8 +39,10 @@ import org.apache.lucene.store.IOContext;
 import org.apache.lucene.store.RAMDirectory;
 
 import com.jfinal.kit.PathKit;
+import com.jfinal.kit.PropKit;
 import com.platform.beetl.tag.DictTag;
 import com.platform.constant.ConstantInit;
+import com.platform.constant.ConstantRender;
 import com.platform.dto.SplitPage;
 import com.platform.lucene.DocBase;
 import com.platform.mvc.base.BaseService;
@@ -89,16 +92,29 @@ public class DocKeyword extends DocBase {
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		Document document = new Document();
 		
-		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
-		String sql = ToolSqlXml.getSql("weixin.keyword.paging");
+		Map<String, Object> vars = new HashMap<String, Object>();
+		String db_type = PropKit.get(ConstantInit.db_type_key);
+		vars.put("db_type", db_type);
+		String sql = ToolSqlXml.getSql("weixin.keyword.paging", vars, ConstantRender.sql_renderType_beetl);
 
 		IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写
+		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
+		List<Keyword> list = null;
 		for (int i = 0; i < batchCount; i++) {
 			log.info("索引批次：" + i);
-			List<Keyword> list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
+			if(db_type.equals(ConstantInit.db_type_postgresql)){
+				list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_mysql)){
+				list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
+				
+			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+				list = Keyword.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
+			}
 			for (Keyword keyword : list) {
 				addDoc(ramIndexWriter, keyword, document, fields);
 			}
+			list = null;
 			ramToDisk();//把RAM写同步更新到DISK
 		}
 		long end = System.currentTimeMillis();

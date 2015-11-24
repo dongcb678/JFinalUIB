@@ -8,7 +8,19 @@
 	<!-- 查询所有功能 -->
 	<sql id="paging">
 		<![CDATA[ 
-        	select * from pt_operator order by ids asc limit ? offset ? 
+        	<% if(db_type == "mysql"){ %>
+        	
+        		select * from pt_operator order by ids asc limit ? offset ? 
+        	
+        	<% } else if(db_type == "postgresql"){ %>
+        	
+        		select * from pt_operator order by ids asc limit ? offset ? 
+        		
+        	<% } else if(db_type == "oracle"){ %>
+        	
+        		select * from ( select a.*, rownum rn from (select * from pt_operator) a where rownum <= ? ) where rn >= ?
+        		
+        	<% } %>
     	]]>
 	</sql>
 	

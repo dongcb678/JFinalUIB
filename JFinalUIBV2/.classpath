@@ -9,7 +9,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="build-lib/jfinal20/c3p0-0.9.1.2.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal20/freemarker-2.3.22.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal20/freemarker-2.3.22.jar" sourcepath="D:/DevelopmentTool/apache-maven-3.2.2/repository/org/freemarker/freemarker/2.3.22/freemarker-2.3.22-sources.jar"/>
 	<classpathentry kind="lib" path="build-lib/jfinal20/velocity-1.7-dep.jar"/>
 	<classpathentry kind="lib" path="build-lib/jfinal20/velocity-1.7.jar"/>
 	<classpathentry kind="lib" path="build-lib/jetty-8.1.8/jetty-server-8.1.8.jar"/>

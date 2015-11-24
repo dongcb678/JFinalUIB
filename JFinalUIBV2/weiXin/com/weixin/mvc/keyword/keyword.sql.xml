@@ -24,7 +24,19 @@
 	<!-- 查询 -->
 	<sql id="paging">
 		<![CDATA[ 
-        	select * from wx_keyword limit ? offset ?
+        	<% if(db_type == "mysql"){ %>
+        	
+        		select * from wx_keyword order by ids asc limit ?, ? 
+        	
+        	<% } else if(db_type == "postgresql"){ %>
+        	
+        		select * from wx_keyword order by ids asc limit ? offset ? 
+        		
+        	<% } else if(db_type == "oracle"){ %>
+        	
+        		select * from ( select a.*, rownum rn from (select * from wx_keyword) a where rownum <= ? ) where rn >= ?
+        		
+        	<% } %>
     	]]>
 	</sql>
 	
