@@ -94,7 +94,6 @@ public class DocKeyword extends DocBase {
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql("weixin.keyword.paging", null, ConstantRender.sql_renderType_beetl);
 
-		IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
 		
 		if(batchCount == 0){
@@ -113,7 +112,7 @@ public class DocKeyword extends DocBase {
 					list = Keyword.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
 				}
 				for (Keyword keyword : list) {
-					addDoc(ramIndexWriter, keyword, document, fields);
+					addDoc(getRamIndexWriter(), keyword, document, fields);
 				}
 				list = null;
 				ramToDisk();//把RAM写同步更新到DISK
