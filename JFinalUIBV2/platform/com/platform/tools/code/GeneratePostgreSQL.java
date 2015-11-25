@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.config.run.ConfigCore;
@@ -31,6 +32,12 @@ public class GeneratePostgreSQL extends GenerateBase {
 		log.info("启动ConfigCore start ......");
     	new ConfigCore();
     	log.info("启动ConfigCore end ......");
+    	
+    	String db_type = PropKit.get(ConstantInit.db_type_key);
+		log.info("db_type = " + db_type);
+		if(!db_type.equals(ConstantInit.db_type_postgresql)){
+			throw new RuntimeException("请设置init.properties配置文件db.type = postgresql");
+		}
     	
 		GenerateBase base = new GeneratePostgreSQL();
 		for (int i = 0; i < tableArr.length; i++) {

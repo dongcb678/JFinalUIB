@@ -1,8 +1,6 @@
 package com.platform.plugin;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -126,10 +124,8 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheUser() {
 		log.info("缓存加载：User start");
-		Map<String, Object> vars = new HashMap<String, Object>();
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		vars.put("db_type", db_type);
-		String sql = ToolSqlXml.getSql(User.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSql(User.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_user ", splitDataSize);
 		List<User> userList = null;
@@ -159,10 +155,8 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheUserInfo() {
 		log.info("缓存加载：UserInfo start");
-		Map<String, Object> vars = new HashMap<String, Object>();
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		vars.put("db_type", db_type);
-		String sql = ToolSqlXml.getSql(UserInfo.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSql(UserInfo.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_userInfo ", splitDataSize);
 		List<UserInfo> userInfoList = null;
@@ -192,10 +186,8 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheGroup() {
 		log.info("缓存加载：Group start");
-		Map<String, Object> vars = new HashMap<String, Object>();
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		vars.put("db_type", db_type);
-		String sql = ToolSqlXml.getSql(Group.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSql(Group.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_group ", splitDataSize);
 		List<Group> groupList = null;
@@ -225,10 +217,8 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheRole() {
 		log.info("缓存加载：Role start");
-		Map<String, Object> vars = new HashMap<String, Object>();
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		vars.put("db_type", db_type);
-		String sql = ToolSqlXml.getSql(Role.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSql(Role.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_role ", splitDataSize);
 		List<Role> roleList = null;
@@ -257,10 +247,8 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheStation() {
 		log.info("缓存加载：Station start");
-		Map<String, Object> vars = new HashMap<String, Object>();
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		vars.put("db_type", db_type);
-		String sql = ToolSqlXml.getSql(Station.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSql(Station.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_station ", splitDataSize);
 		List<Station> stationList = null;
@@ -290,10 +278,8 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheOperator() {
 		log.info("缓存加载：Operator start");
-		Map<String, Object> vars = new HashMap<String, Object>();
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		vars.put("db_type", db_type);
-		String sql = ToolSqlXml.getSql(Operator.sqlId_paging, vars, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSql(Operator.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_operator ", splitDataSize);
 		List<Operator> operatorList = null;

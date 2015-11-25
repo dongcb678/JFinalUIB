@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,10 +91,8 @@ public class DocKeyword extends DocBase {
 		List<Field> fields = getFields(fieldNames, Keyword.class);
 		Document document = new Document();
 		
-		Map<String, Object> vars = new HashMap<String, Object>();
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		vars.put("db_type", db_type);
-		String sql = ToolSqlXml.getSql("weixin.keyword.paging", vars, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSql("weixin.keyword.paging", null, ConstantRender.sql_renderType_beetl);
 
 		IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);

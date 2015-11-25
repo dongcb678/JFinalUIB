@@ -35,6 +35,7 @@ import com.platform.mvc.user.UserInfo;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.plugin.SqlXmlPlugin;
+import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolDataBase;
 import com.test.mvc.blog.Blog;
@@ -53,7 +54,10 @@ public class ConfigCore {
 	
     public ConfigCore() throws IOException {
     	PropKit.use("init.properties");
-		
+
+		log.info("Beetl设置");
+    	ToolBeetl.regiseter();
+    	
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
 		DataBase db = ToolDataBase.getDbInfo();
 		String driverClass = db.getDriverClass();
