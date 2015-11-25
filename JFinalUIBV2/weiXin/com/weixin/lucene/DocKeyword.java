@@ -96,24 +96,30 @@ public class DocKeyword extends DocBase {
 
 		IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写
 		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
-		List<Keyword> list = null;
-		for (int i = 0; i < batchCount; i++) {
-			log.info("索引批次：" + i);
-			if(db_type.equals(ConstantInit.db_type_postgresql)){
-				list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
-				
-			}else if(db_type.equals(ConstantInit.db_type_mysql)){
-				list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
-				
-			}else if(db_type.equals(ConstantInit.db_type_oracle)){
-				list = Keyword.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
-			}
-			for (Keyword keyword : list) {
-				addDoc(ramIndexWriter, keyword, document, fields);
-			}
-			list = null;
+		
+		if(batchCount == 0){
 			ramToDisk();//把RAM写同步更新到DISK
+		}else{
+			List<Keyword> list = null;
+			for (int i = 0; i < batchCount; i++) {
+				log.info("索引批次：" + i);
+				if(db_type.equals(ConstantInit.db_type_postgresql)){
+					list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
+					
+				}else if(db_type.equals(ConstantInit.db_type_mysql)){
+					list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
+					
+				}else if(db_type.equals(ConstantInit.db_type_oracle)){
+					list = Keyword.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
+				}
+				for (Keyword keyword : list) {
+					addDoc(ramIndexWriter, keyword, document, fields);
+				}
+				list = null;
+				ramToDisk();//把RAM写同步更新到DISK
+			}
 		}
+		
 		long end = System.currentTimeMillis();
 		log.info("索引结束，耗时：" + (end-start));
 	}
