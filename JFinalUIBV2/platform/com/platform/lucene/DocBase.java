@@ -49,7 +49,7 @@ public abstract class DocBase implements Runnable {
 	/**
 	 * 初始化索引，每批次处理一万行
 	 */
-	protected static final int splitDataSize = 200;
+	protected static final int splitDataSize = 1000;
 	
 	/**
 	 * IKAnalyzer 分词器

@@ -102,14 +102,11 @@ public class DocKeyword extends DocBase {
 			List<Keyword> list = null;
 			for (int i = 0; i < batchCount; i++) {
 				log.info("索引批次：" + i);
-				if(db_type.equals(ConstantInit.db_type_postgresql)){
-					list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
-					
-				}else if(db_type.equals(ConstantInit.db_type_mysql)){
-					list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize);
+				if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
+					list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize); // start 0
 					
 				}else if(db_type.equals(ConstantInit.db_type_oracle)){
-					list = Keyword.dao.find(sql, i * splitDataSize + splitDataSize, i * splitDataSize);
+					list = Keyword.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 				}
 				for (Keyword keyword : list) {
 					addDoc(getRamIndexWriter(), keyword, document, fields);

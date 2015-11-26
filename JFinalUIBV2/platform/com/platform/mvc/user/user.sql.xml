@@ -8,17 +8,13 @@
 	<!-- 分页查询用户 -->
 	<sql id="paging">
 		<![CDATA[ 
-        	<% if(db_type == "mysql"){ %>
+        	<% if(db_type == "mysql" || db_type == "postgresql"){ %>
         	
         		select * from pt_user order by ids asc limit ? offset ? 
         	
-        	<% } else if(db_type == "postgresql"){ %>
-        	
-        		select * from pt_user order by ids asc limit ? offset ? 
-        		
         	<% } else if(db_type == "oracle"){ %>
         	
-        		select * from ( select a.*, rownum rn from (select * from pt_user) a where rownum <= ? ) where rn >= ?
+        		select * from ( select a.*, rownum rn from (select * from pt_user) a where rownum < ? ) where rn >= ?
         		
         	<% } %>
     	]]>

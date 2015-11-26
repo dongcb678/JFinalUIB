@@ -2,6 +2,21 @@
 
 <sql-statement namespace="weixin.keyword">
 	
+	<!-- 查询 -->
+	<sql id="paging">
+		<![CDATA[ 
+        	<% if(db_type == "mysql" || db_type == "postgresql"){ %>
+        	
+        		select * from wx_keyword order by ids asc limit ? offset ? 
+        	
+        	<% } else if(db_type == "oracle"){ %>
+        	
+        		select * from ( select a.*, rownum rn from (select * from wx_keyword) a where rownum <= ? ) where rn >= ?
+        		
+        	<% } %>
+    	]]>
+	</sql>
+	
 	<!-- 动态SQL处理 -->
 	<sql id="splitPageFrom">
 		<![CDATA[ 
@@ -18,25 +33,6 @@
 			<% if(!isEmpty(answer)){ %>
 					and answer like #'%$answer$%'#
 			<% } %>
-    	]]>
-	</sql>
-	
-	<!-- 查询 -->
-	<sql id="paging">
-		<![CDATA[ 
-        	<% if(db_type == "mysql"){ %>
-        	
-        		select * from wx_keyword order by ids asc limit ? offset ? 
-        	
-        	<% } else if(db_type == "postgresql"){ %>
-        	
-        		select * from wx_keyword order by ids asc limit ? offset ? 
-        		
-        	<% } else if(db_type == "oracle"){ %>
-        	
-        		select * from ( select a.*, rownum rn from (select * from wx_keyword) a where rownum <= ? ) where rn >= ?
-        		
-        	<% } %>
     	]]>
 	</sql>
 	
