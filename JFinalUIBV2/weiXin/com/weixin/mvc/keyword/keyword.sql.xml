@@ -26,7 +26,7 @@
 		<![CDATA[ 
         	<% if(db_type == "mysql"){ %>
         	
-        		select * from wx_keyword order by ids asc limit ?, ? 
+        		select * from wx_keyword order by ids asc limit ? offset ? 
         	
         	<% } else if(db_type == "postgresql"){ %>
         	

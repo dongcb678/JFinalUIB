@@ -10,7 +10,7 @@
 		<![CDATA[ 
         	<% if(db_type == "mysql"){ %>
         	
-        		select * from pt_user order by ids asc limit ?, ? 
+        		select * from pt_user order by ids asc limit ? offset ? 
         	
         	<% } else if(db_type == "postgresql"){ %>
         	
