@@ -108,8 +108,9 @@ public class DocKeyword extends DocBase {
 				}else if(db_type.equals(ConstantInit.db_type_oracle)){
 					list = Keyword.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 				}
+				IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写
 				for (Keyword keyword : list) {
-					addDoc(getRamIndexWriter(), keyword, document, fields);
+					addDoc(ramIndexWriter, keyword, document, fields);
 				}
 				list = null;
 				ramToDisk();//把RAM写同步更新到DISK
