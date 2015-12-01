@@ -4,7 +4,7 @@
 
 请查阅同级目录中的
 
-Jfinal极速开发实战（密码：jfinaluib）.pdf
+Jfinal极速开发实战.pdf
 
 4.7 配置运行 JfinalUIB
 
