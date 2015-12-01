@@ -5,7 +5,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.apache.log4j.Logger;
+
+/**
+ * 序列化操作
+ * @author 董华健  dongcb678@163.com
+ */
 public abstract class ToolSerialize {
+
+	private static Logger log = Logger.getLogger(ToolRandoms.class);
 	
 	/**
      * 序列化
@@ -24,7 +32,8 @@ public abstract class ToolSerialize {
             byte[] bytes = baos.toByteArray();
             return bytes;
         } catch (Exception e) {
-
+        	log.error("序列化异常：" + e.getMessage());
+        	e.printStackTrace();
         }
         return null;
     }
@@ -43,7 +52,8 @@ public abstract class ToolSerialize {
             ObjectInputStream ois = new ObjectInputStream(bais);
             return ois.readObject();
         } catch (Exception e) {
-
+        	log.error("反序列化异常：" + e.getMessage());
+        	e.printStackTrace();
         }
         return null;
     }

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 /**
  * 随机数类
+ * @author 董华健  dongcb678@163.com
  */
 public abstract class ToolRandoms {
 

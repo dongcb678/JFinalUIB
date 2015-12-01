@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 
+import com.platform.constant.ConstantWebContext;
 import com.platform.dto.SplitPage;
 
 /**
@@ -42,10 +43,11 @@ public class OrderBy implements Function {
 		log.debug("分页列表排序，orderLaber=" + orderLaber + "， orderColunm=" + orderColunm + "，orderMode= " + orderMode);
 		
 		if(null != orderMode && orderLaber.equals(orderColunm)){
+			String cxt = (String) context.getGlobal(ConstantWebContext.request_cxt);
 			if(orderMode.equals("asc")){
-				return "<img src='/files/images/platform/order/asc.gif' />";
+				return "<img src='" + cxt + "/files/images/platform/order/asc.gif' />";
 			}else if(orderMode.equals("desc")){
-				return "<img src='/files/images/platform/order/desc.gif' />";
+				return "<img src='" + cxt + "/files/images/platform/order/desc.gif' />";
 			}
 		}
 		

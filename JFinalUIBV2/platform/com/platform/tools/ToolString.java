@@ -199,15 +199,13 @@ public abstract class ToolString {
 	/**
 	 * Url Base64编码
 	 * 
-	 * @param data
-	 *            待编码数据
+	 * @param data  待编码数据
 	 * @return String 编码数据
 	 * @throws Exception
 	 */
 	public static String encode(String data) throws Exception {
 		// 执行编码
 		byte[] b = Base64.encodeBase64URLSafe(data.getBytes(encoding));
-
 		return new String(b, encoding);
 	}
 
@@ -222,7 +220,6 @@ public abstract class ToolString {
 	public static String decode(String data) throws Exception {
 		// 执行解码
 		byte[] b = Base64.decodeBase64(data.getBytes(encoding));
-
 		return new String(b, encoding);
 	}
 
@@ -244,9 +241,7 @@ public abstract class ToolString {
 
 	/**
 	 * 根据内容类型判断文件扩展名
-	 * 
-	 * @param contentType
-	 *            内容类型
+	 * @param contentType 内容类型
 	 * @return
 	 */
 	public static String getFileExt(String contentType) {
@@ -272,7 +267,6 @@ public abstract class ToolString {
 
 	/**
 	 * 获取bean名称
-	 * 
 	 * @param bean
 	 * @return
 	 */
@@ -362,8 +356,4 @@ public abstract class ToolString {
         }
     }
     
-	public static void main(String[] args){
-		
-	}
-	
 }
