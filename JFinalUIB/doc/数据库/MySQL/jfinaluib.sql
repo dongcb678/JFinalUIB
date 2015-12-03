@@ -531,7 +531,7 @@ CREATE TABLE `pt_syslog` (
   `startdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `starttime` bigint(20) DEFAULT NULL,
   `status` char(1) COLLATE utf8_bin DEFAULT NULL,
-  `useragent` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `useragent` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
   `viewhaoshi` bigint(20) DEFAULT NULL,
   `operatorids` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   `accept` varchar(200) COLLATE utf8_bin DEFAULT NULL,
