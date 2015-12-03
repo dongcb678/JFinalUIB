@@ -54,7 +54,7 @@
 			<% } %>
 			
 			<% if(!isEmpty(status)){ %>
-					and s.status = #$status$#
+					and s.status = #'$status$'#
 			<% } %>
     	]]>
 	</sql>
