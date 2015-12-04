@@ -35,7 +35,7 @@ public class FileRenamePlugin implements IPlugin {
 
 	@Override
 	public boolean stop() {
-		return false;
+		return true;
 	}
 	
 }

@@ -21,23 +21,17 @@ public class DataClear extends Timer {
 	/**
 	 * 定时任务对象
 	 */
-	private static DataClear timer = null;
+	private static final DataClear timer = new DataClear();
 	
 	/**
 	 * 启动任务
 	 */
 	public static void start() {
-		if(null != timer){
-			log.info("启动失败，任务已经启动");
-			return;
-		}
-		
 		log.info("开始启动任务");
 
 		// 获取固定时间，明天2点
 		Date date = ToolDateTime.getDate(+1, 2, 0, 0, 0);
 					
-		timer = new DataClear();
 		// 固定时间执行任务，每天都是凌晨2点
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
@@ -71,13 +65,9 @@ public class DataClear extends Timer {
 	 * 停止任务
 	 */
 	public static void stop(){
-		if(null != timer){
-			log.info("任务退出开始");
-			timer.cancel();
-			log.info("任务退出成功");
-		}else{
-			log.info("任务退出失败，任务为空");
-		}
+		log.info("任务退出开始");
+		timer.cancel();
+		log.info("任务退出成功");
 	}
 	
 }

@@ -115,7 +115,7 @@ public class ParamInitPlugin implements IPlugin {
 
 	@Override
 	public boolean stop() {
-		return false;
+		return true;
 	}
 
 	/**

@@ -20,25 +20,17 @@ public class TimerResources extends Timer {
 	/**
 	 * 定时任务对象
 	 */
-	private static TimerResources timer = null;
+	private static final TimerResources timer = new TimerResources();
 	
 	/**
 	 * 启动任务
 	 */
-	public static void start() {
-		if(null != timer){
-			log.info("启动失败，任务已经启动");
-			return;
-		}
-		
+	public static synchronized void start() {
 		log.info("开始启动任务");
-		
-		timer = new TimerResources();
 		
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				
 				try {
 					log.info("定时记录系统资源负载开始");
 					timer.resources();
@@ -47,7 +39,6 @@ public class TimerResources extends Timer {
 					log.error("定时记录系统资源负载失败：" + e.getMessage());
 					e.printStackTrace();
 				}
-				
 			}
 		}, 1000, 1000 * 60 * 2);// 启动项目一秒后执行，然后每次间隔2分钟
 		
@@ -57,14 +48,10 @@ public class TimerResources extends Timer {
 	/**
 	 * 停止任务
 	 */
-	public static void stop(){
-		if(null != timer){
-			log.info("任务退出开始");
-			timer.cancel();
-			log.info("任务退出成功");
-		}else{
-			log.info("任务退出失败，任务为空");
-		}
+	public static synchronized void stop(){
+		log.info("任务退出开始");
+		timer.cancel();
+		log.info("任务退出成功");
 	}
 	
 	/**
