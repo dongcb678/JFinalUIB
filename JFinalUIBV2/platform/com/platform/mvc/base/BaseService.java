@@ -78,7 +78,7 @@ public class BaseService {
 	 */
 	@SuppressWarnings("unchecked")
 	public void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
-		String selectSql = getSql(selectSqlId);
+		String selectSql = getSqlByBeetl(selectSqlId, splitPage.getQueryParam());//(selectSqlId);
 		Map<String, Object> map = getFromSql(splitPage, fromSqlId);
 		String formSql = (String) map.get("formSql");
 		LinkedList<Object> paramValue = (LinkedList<Object>) map.get("paramValue");
