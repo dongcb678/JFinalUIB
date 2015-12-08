@@ -94,7 +94,8 @@ public class ParamPkgInterceptor implements Interceptor {
 		// 分页查询参数分拣
 		Map<String, Object> queryParam = new HashMap<String, Object>();
 		String localePram = controller.getAttr(ConstantWebContext.request_localePram);
-		queryParam.put("i18nColumnSuffix", I18NPlugin.columnSuffix(localePram)); // 设置国际化当前语言环境
+		queryParam.put(ConstantWebContext.request_localePram, localePram); // 设置国际化当前语言环境
+		queryParam.put("i18nColumnSuffix", I18NPlugin.columnSuffix(localePram)); // 设置国际化动态列后缀
 		Enumeration<String> paramNames = controller.getParaNames();
 		String name = null;
 		String value = null;
