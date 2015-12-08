@@ -56,9 +56,17 @@ public abstract class BaseController extends Controller {
 		log.debug("设置日志描述：" + description);
 		reqSysLog.set(Syslog.column_description, description);
 	}
-	
+
 	/**
-	 * 获取当前国际化资源
+	 * 获取当前国际化标示
+	 * @return
+	 */
+	protected String getI18nLocalePram() {
+		return getAttr(ConstantWebContext.request_localePram);
+	}
+
+	/**
+	 * 获取当前国际化资源Map
 	 * @return
 	 */
 	protected Map<String, String> getI18nMap() {
@@ -76,7 +84,7 @@ public abstract class BaseController extends Controller {
 	}
 
 	/**
-	 * 根据i18n参数查询获取哪个字段的值
+	 * 根据当前国际化查询字段扩展名
 	 * @param i18n
 	 * @return
 	 */

@@ -41,6 +41,11 @@ public interface ConstantWebContext {
 	public static final String request_i18nMap = "i18nMap";
 
 	/**
+	 * 国际化，设置request中的当前语言对应列后缀
+	 */
+	public static final String request_i18nColumnSuffix = "i18nColumnSuffix";
+
+	/**
 	 * 直接渲染模板的路径
 	 */
 	public static final String request_toUrl = "toUrl";
