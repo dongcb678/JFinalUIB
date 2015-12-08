@@ -43,7 +43,7 @@
 	<!-- 根据id查询国际化字典值 -->
 	<sql id="idAndI18n">
 		<![CDATA[ 
-        	select ids, numbers, parentids, ${val} as val from pt_dict where ids = ?
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_dict where ids = ?
     	]]>
 	</sql>
 	
@@ -57,7 +57,7 @@
 	<!-- 根据编号查询国际化字典值 -->
 	<sql id="numbersAndI18n">
 		<![CDATA[ 
-        	select ids, numbers, parentids, ${val} as val from pt_dict where numbers = ?
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_dict where numbers = ?
     	]]>
 	</sql>
 	
@@ -71,7 +71,7 @@
 	<!-- 查询子节点国际化字典值 -->
 	<sql id="childAndI8n">
 		<![CDATA[ 
-        	select ids, numbers, parentids, ${val} as val from pt_dict where parentids = ? and status = '1' order by orderids asc
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_dict where parentids = ? and status = '1' order by orderids asc
     	]]>
 	</sql>
 	
@@ -85,7 +85,7 @@
 	<!-- 查询父节点国际化字典值 -->
 	<sql id="parentAndI18n">
 		<![CDATA[ 
-        	select ids, numbers, parentids, ${val} as val from pt_dict where ids = ?
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_dict where ids = ?
     	]]>
 	</sql>
 	

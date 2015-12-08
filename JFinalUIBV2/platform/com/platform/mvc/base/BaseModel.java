@@ -15,7 +15,6 @@ import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
 import com.platform.constant.ConstantRender;
-import com.platform.plugin.I18NPlugin;
 import com.platform.tools.ToolRandoms;
 import com.platform.tools.ToolSqlXml;
 
@@ -148,15 +147,6 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	protected String getSqlByVelocity(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity, list);
     }
-	
-	/**
-	 * 根据i18n参数查询获取哪个字段的值
-	 * @param i18n
-	 * @return
-	 */
-	protected String i18n(String i18n){
-		return I18NPlugin.i18n(i18n);
-	}
 	
 	/**
 	 * 获取表映射对象

@@ -34,7 +34,7 @@ public class IndexController extends BaseController {
 			if(null == ids || ids.isEmpty()){ // 默认系统
 				ids = "8a40c0353fa828a6013fa898d4ac0020";
 			}
-			menuList = IndexService.service.menu(ids, user, getI18nPram());
+			menuList = IndexService.service.menu(ids, user, geti18nColumnSuffix());
 			render("/platform/index/index.html");
 		}else{
 			render("/platform/login/login.html");

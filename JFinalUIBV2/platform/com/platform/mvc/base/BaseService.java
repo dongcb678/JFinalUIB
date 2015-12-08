@@ -18,7 +18,6 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantRender;
 import com.platform.dto.SplitPage;
-import com.platform.plugin.I18NPlugin;
 import com.platform.tools.ToolMail;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
@@ -179,15 +178,6 @@ public class BaseService {
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
-	/**
-	 * 根据i18n参数查询获取哪个字段的值
-	 * @param i18n
-	 * @return
-	 */
-	public String i18n(String i18n){
-		return I18NPlugin.i18n(i18n);
-	}
-	
 	/**
 	 * 把11,22,33...转成'11','22','33'...
 	 * @param ids

@@ -29,8 +29,8 @@ public class MenuService extends BaseService {
 	 * @param i18n
 	 * @return
 	 */
-	public List<ZtreeNode> childNodeData(String cxt, String systemsIds, String parentIds, String i18n){
-		String names = "names" + i18n(i18n) + " as names";
+	public List<ZtreeNode> childNodeData(String cxt, String systemsIds, String parentIds, String i18nColumnSuffix){
+		String names = "names" + i18nColumnSuffix + " as names";
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("names", names);
@@ -68,8 +68,8 @@ public class MenuService extends BaseService {
 	 * @param i18n
 	 * @return
 	 */
-	public String save(String pIds, String names, int orderIds, String i18n){
-		String namesColunm = "names" + i18n(i18n);
+	public String save(String pIds, String names, int orderIds, String i18nColumnSuffix){
+		String namesColunm = "names" + i18nColumnSuffix;
 		
 		Menu pMenu = Menu.dao.findById(pIds);
 		pMenu.set(Menu.column_isparent, "true").update();
@@ -101,8 +101,8 @@ public class MenuService extends BaseService {
 	 * @param names
 	 * @param principalIds
 	 */
-	public void update(String ids, String pIds, String names, String i18n){
-		String namesColunm = "names" + i18n(i18n);
+	public void update(String ids, String pIds, String names, String i18nColumnSuffix){
+		String namesColunm = "names" + i18nColumnSuffix;
 		
 		Menu menu = Menu.dao.findById(ids);
 		if(null != names && !names.isEmpty()){

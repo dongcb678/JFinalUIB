@@ -28,8 +28,8 @@ public class IndexService extends BaseService {
 	 * @param i18n
 	 * @return
 	 */
-	public List<Menu> menu(String systemsIds, User user, String i18n){
-		String names = "names" + i18n(i18n) + " as names";
+	public List<Menu> menu(String systemsIds, User user, String i18nColumnSuffix){
+		String names = "names" + i18nColumnSuffix + " as names";
 		
 		//基于缓存查询
 		StringBuilder operatorIdsSb = new StringBuilder();

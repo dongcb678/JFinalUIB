@@ -20,6 +20,7 @@ import com.platform.dto.SplitPage;
 import com.platform.interceptor.AuthInterceptor;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
+import com.platform.plugin.I18NPlugin;
 import com.platform.tools.ToolModelInjector;
 import com.platform.tools.ToolWeb;
 
@@ -57,19 +58,12 @@ public abstract class BaseController extends Controller {
 	}
 	
 	/**
-	 * 获取当前请求国际化参数
-	 * @return
-	 */
-	protected String getI18nPram() {
-		return getAttr(ConstantWebContext.request_localePram);
-	}
-
-	/**
 	 * 获取当前国际化资源
 	 * @return
 	 */
 	protected Map<String, String> getI18nMap() {
-		return getAttr(ConstantWebContext.request_i18nMap);
+		String localePram = getAttr(ConstantWebContext.request_localePram);
+		return I18NPlugin.get(localePram);
 	}
 
 	/**
@@ -81,6 +75,16 @@ public abstract class BaseController extends Controller {
 		return i18nMap.get(key);
 	}
 
+	/**
+	 * 根据i18n参数查询获取哪个字段的值
+	 * @param i18n
+	 * @return
+	 */
+	protected String geti18nColumnSuffix(){
+		String localePram = getAttr(ConstantWebContext.request_localePram);
+		return I18NPlugin.columnSuffix(localePram);
+	}
+	
 	/**
 	 * 获取项目请求根路径
 	 * @return

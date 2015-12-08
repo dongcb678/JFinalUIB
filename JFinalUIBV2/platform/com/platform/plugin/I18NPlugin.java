@@ -22,6 +22,16 @@ import com.platform.tools.ToolDirFile;
 public class I18NPlugin implements IPlugin {
 
     protected final Logger log = Logger.getLogger(getClass());
+    
+    public static final String i18n_local_zh_CN = "zh_CN";
+    
+    public static final String i18n_local_zh_HK = "zh_HK";
+    
+    public static final String i18n_local_zh_TW = "zh_TW";
+    
+    public static final String i18n_local_en_US = "en_US";
+    
+    public static final String i18n_local_ja = "ja";
 
 	private static final Map<String, Map<String, String>> resourceBundleMap = new HashMap<String, Map<String, String>>();
 
@@ -30,21 +40,21 @@ public class I18NPlugin implements IPlugin {
 	 * @param i18n
 	 * @return
 	 */
-	public static String i18n(String i18n){
-		String val = "_zhcn";
-		if(i18n.equals("zh") || i18n.equals("zh_cn")){
+	public static String columnSuffix(String i18n){
+		String val = null;
+		if(i18n.equals(i18n_local_zh_CN)){
 			val = "_zhcn";
 			
-		} else if(i18n.equals("en") || i18n.equals("en_us")){
+		} else if(i18n.equals(i18n_local_en_US)){
 			val = "_enus";
 			
-		} else if(i18n.equals("ja") || i18n.equals("ja_jp")){
+		} else if(i18n.equals(i18n_local_ja)){
 			val = "_ja";
 			
-		} else if(i18n.equals("zh_hk")){
+		} else if(i18n.equals(i18n_local_zh_HK)){
 			val = "_zhhk";
 			
-		} else if(i18n.equals("zh_tw")){
+		} else if(i18n.equals(i18n_local_zh_TW)){
 			val = "_zhtw";
 		}
 		return val;
@@ -52,24 +62,11 @@ public class I18NPlugin implements IPlugin {
 	
 	/**
 	 * 获取国际化Map
-	 * @param localePramKey
+	 * @param localePram
 	 * @return
 	 */
-	public static Map<String, String> get(String localePramKey){
-		if(localePramKey.equals("zh")){
-			localePramKey = "zh_cn";
-			
-		}else if(localePramKey.equals("en")){
-			localePramKey = "en_us";
-		
-		}
-		
-		Map<String, String> map = resourceBundleMap.get(localePramKey);
-		if(map != null){
-			return map;
-		}else{
-			return resourceBundleMap.get("zh_cn");
-		}
+	public static Map<String, String> get(String localePram){
+		return resourceBundleMap.get(localePram);
 	}
 
 	/**
@@ -82,15 +79,44 @@ public class I18NPlugin implements IPlugin {
 		Map<String, String> map = get(i18n);
 		return map.get(key);
 	}
+
+	/**
+	 * 国际化key值处理
+	 * @param localePram
+	 * @return
+	 */
+	public static String localParse(String localePram){
+		localePram = localePram.toLowerCase();
+		if(localePram.equals("zh") || localePram.equals("zh_cn")){
+			localePram = i18n_local_zh_CN;
+			
+		}else if(localePram.equals("en") || localePram.equals("en_us")){
+			localePram = i18n_local_en_US;
+		
+		}else if(localePram.equals("ja") || localePram.equals("ja_jp")){
+			localePram = i18n_local_ja;
+			
+		} else if(localePram.equals("zh_HK")){
+			localePram = i18n_local_zh_HK;
+			
+		} else if(localePram.equals("zh_TW")){
+			localePram = i18n_local_zh_TW;
+			
+		} else{
+			localePram = i18n_local_zh_CN;
+		}
+		
+		return localePram;
+	}
 	
 	@Override
 	public boolean start() {
 		String[] languages = {
-				"zh_CN", 
-				"zh_HK", 
-				"zh_TW",
-				"en_US",
-				"ja"
+				i18n_local_zh_CN, 
+				i18n_local_zh_HK, 
+				i18n_local_zh_TW,
+				i18n_local_en_US,
+				i18n_local_ja
 			};
 
 		String fileNamePrefix = PropKit.get(ConstantInit.config_i18n_filePrefix);
@@ -117,7 +143,7 @@ public class I18NPlugin implements IPlugin {
 					String value = properties.getProperty(key);
 					i18nMap.put(key, value);
 				}
-				resourceBundleMap.put(language.toLowerCase(), i18nMap);
+				resourceBundleMap.put(language, i18nMap);
 			} catch (Exception exception) {
 				log.info("加载properties失败！...");
 			} finally {

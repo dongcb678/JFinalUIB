@@ -35,7 +35,7 @@ public class MenuController extends BaseController {
 	 * ztree子节点数据
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = MenuService.service.childNodeData(getCxt(), systemsIds, ids, getI18nPram());
+		List<ZtreeNode> nodeList = MenuService.service.childNodeData(getCxt(), systemsIds, ids, geti18nColumnSuffix());
 		renderJson(nodeList);
 	}
 
@@ -44,7 +44,7 @@ public class MenuController extends BaseController {
 	 */
 	@Before(MenuValidator.class)
 	public void save() {
-		ids = MenuService.service.save(pIds, names, orderIds, getI18nPram());
+		ids = MenuService.service.save(pIds, names, orderIds, geti18nColumnSuffix());
 		renderText(ids);
 	}
 
@@ -53,7 +53,7 @@ public class MenuController extends BaseController {
 	 */
 	@Before(MenuValidator.class)
 	public void update() {
-		MenuService.service.update(ids, pIds, names, getI18nPram());
+		MenuService.service.update(ids, pIds, names, geti18nColumnSuffix());
 		renderText(ids);
 	}
 

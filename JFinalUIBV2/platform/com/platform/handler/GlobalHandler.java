@@ -55,6 +55,7 @@ public class GlobalHandler extends Handler {
 		String localePram = request.getParameter(ConstantWebContext.request_localePram);
 		if(null != localePram && !localePram.isEmpty()){
 			int maxAge = PropKit.getInt(ConstantInit.config_maxAge_key);
+			localePram = I18NPlugin.localParse(localePram);
 			ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_language, localePram, maxAge);
 		}else {
 			localePram = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_language);
@@ -67,8 +68,8 @@ public class GlobalHandler extends Handler {
 					localePram += "_" + country;
 				}
 			}
+			localePram = I18NPlugin.localParse(localePram);
 		}
-		localePram = localePram.toLowerCase();
 		Map<String, String> i18nMap = I18NPlugin.get(localePram);
 		request.setAttribute(ConstantWebContext.request_localePram, localePram);
 		request.setAttribute(ConstantWebContext.request_i18nMap, i18nMap);

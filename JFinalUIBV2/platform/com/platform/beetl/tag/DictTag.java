@@ -89,7 +89,7 @@ public class DictTag extends Tag {
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
 			String localePram = (String) ctx.getGlobal(ConstantWebContext.request_localePram);
-			val += I18NPlugin.i18n(localePram);
+			val += I18NPlugin.columnSuffix(localePram);
 		}
 		List<Dict> dictList = Dict.dao.cacheGetChild(number);
 
@@ -139,7 +139,7 @@ public class DictTag extends Tag {
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
 			String localePram = (String) ctx.getGlobal(ConstantWebContext.request_localePram);
-			val += I18NPlugin.i18n(localePram);
+			val += I18NPlugin.columnSuffix(localePram);
 		}
 		List<Dict> dictList = Dict.dao.cacheGetChild(number);
 
@@ -185,7 +185,7 @@ public class DictTag extends Tag {
 		String val = "val";
 		if(null != parentI18n && parentI18n.equals("1")){
 			String localePram = (String) ctx.getGlobal(ConstantWebContext.request_localePram);
-			val += I18NPlugin.i18n(localePram);
+			val += I18NPlugin.columnSuffix(localePram);
 		}
 		List<Dict> dictList = Dict.dao.cacheGetChild(number);
 

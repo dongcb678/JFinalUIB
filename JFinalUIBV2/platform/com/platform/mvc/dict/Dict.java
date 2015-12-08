@@ -370,11 +370,9 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @param i18n 国际化参数
 	 * @return
 	 */
-	public Dict getByIds(String ids, String i18n){
-		String val = "val" + i18n(i18n);
-		
+	public Dict getByIds(String ids, String i18nColumnSuffix){
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("val", val);
+		param.put("i18nColumnSuffix", i18nColumnSuffix);
 		
 		String sql = getSqlByBeetl(sqlId_idAndI18n, param);
 		
@@ -400,11 +398,9 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @param i18n 国际化参数
 	 * @return
 	 */
-	public Dict getByNumber(String number, String i18n){
-		String val = "val" + i18n(i18n);
-		
+	public Dict getByNumber(String number, String i18nColumnSuffix){
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("val", val);
+		param.put("i18nColumnSuffix", i18nColumnSuffix);
 		
 		String sql = getSqlByBeetl(sqlId_numbersAndI18n, param);
 		
@@ -438,11 +434,9 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @param i18n
 	 * @return
 	 */
-	public List<Dict> getChild(String prentIds, String i18n){
-		String val = "val" + i18n(i18n);
-		
+	public List<Dict> getChild(String prentIds, String i18nColumnSuffix){
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("val", val);
+		param.put("i18nColumnSuffix", i18nColumnSuffix);
 		
 		String sql = getSqlByBeetl(sqlId_childAndI8n, param);
 		
@@ -463,11 +457,9 @@ public class Dict extends BaseModelCache<Dict> {
 	 * @param i18n
 	 * @return
 	 */
-	public Dict getParent(String i18n){
-		String val = "val" + i18n(i18n);
-		
+	public Dict getParent(String i18nColumnSuffix){
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("val", val);
+		param.put("i18nColumnSuffix", i18nColumnSuffix);
 		
 		String sql = getSqlByBeetl(sqlId_parentAndI18n, param);
 		

@@ -15,6 +15,7 @@ import com.platform.dto.SplitPage;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.operator.Operator;
 import com.platform.mvc.syslog.Syslog;
+import com.platform.plugin.I18NPlugin;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolString;
 
@@ -92,7 +93,8 @@ public class ParamPkgInterceptor implements Interceptor {
 		SplitPage splitPage = new SplitPage();
 		// 分页查询参数分拣
 		Map<String, Object> queryParam = new HashMap<String, Object>();
-		queryParam.put(ConstantWebContext.request_localePram, controller.getAttr(ConstantWebContext.request_localePram)); // 设置国际化当前语言环境
+		String localePram = controller.getAttr(ConstantWebContext.request_localePram);
+		queryParam.put("i18nColumnSuffix", I18NPlugin.columnSuffix(localePram)); // 设置国际化当前语言环境
 		Enumeration<String> paramNames = controller.getParaNames();
 		String name = null;
 		String value = null;
