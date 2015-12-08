@@ -281,7 +281,7 @@ public abstract class GenerateBase {
 	 * @param paraMap
 	 * @param filePath
 	 */
-	public void createFileByTemplete(String templateFileName, Map<String, Object> paraMap, String filePath)  {
+	public static void createFileByTemplete(String templateFileName, Map<String, Object> paraMap, String filePath)  {
 		try {
 			Class<?> classes = Class.forName("com.platform.tools.code.GenerateBase");
 
