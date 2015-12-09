@@ -95,19 +95,6 @@ public class User extends BaseModel<User> {
 	 */
 	public static final String sqlId_splitPage_from = "weixin.user.splitPageFrom";
 
-	private String ids;
-	private String openId;
-	private String subscribe;
-	private java.math.BigDecimal subscribeTime;
-	private String nickname;
-	private String sex;
-	private String country;
-	private String province;
-	private String city;
-	private String language;
-	private String headImgUrl;
-	private String groupids;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

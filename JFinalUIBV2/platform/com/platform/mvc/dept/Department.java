@@ -116,20 +116,6 @@ public class Department extends BaseModel<Department> {
 	 */
 	public static final String sqlId_childCount = "platform.department.childCount";
 
-	private String ids;
-	private Long version;
-	private String allchildnodeids;
-	private Long departmentlevel;
-	private String depttype;
-	private String description;
-	private String images;
-	private String isparent;
-	private String names;
-	private Long orderids;
-	private String url;
-	private String parentdepartmentids;
-	private String principaluserids;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

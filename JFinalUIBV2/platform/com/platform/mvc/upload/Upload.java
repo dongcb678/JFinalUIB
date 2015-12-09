@@ -74,14 +74,6 @@ public class Upload extends BaseModel<Upload> {
 	 */
 	public static final String sqlId_splitPage_from = "platform.upload.splitPageFrom";
 
-	private String ids;
-	private Long version;
-	private String parametername;
-	private String filename;
-	private String contenttype;
-	private String originalfilename;
-	private String path;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

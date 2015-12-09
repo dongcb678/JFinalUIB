@@ -98,16 +98,6 @@ public class Module extends BaseModel<Module> {
 	 */
 	public static final String sqlId_childCount = "platform.module.childCount";
 
-	private String ids;
-	private Long version;
-	private String description;
-	private String images;
-	private String isparent;
-	private String names;
-	private Long orderids;
-	private String parentmoduleids;
-	private String systemsids;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

@@ -92,13 +92,6 @@ public class Group extends BaseModelCache<Group> {
 	 */
 	public static final String sqlId_noChecked = "platform.group.noChecked";
 
-	private String ids;
-	private Long version;
-	private String description;
-	private String names;
-	private String roleids;
-	private String numbers;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

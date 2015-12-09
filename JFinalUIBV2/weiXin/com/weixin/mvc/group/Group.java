@@ -47,11 +47,6 @@ public class Group extends BaseModel<Group> {
 	 */
 	public static final String sqlId_splitPage_from = "weixin.group.splitPageFrom";
 
-	private String ids;
-	private String id;
-	private String name;
-	private java.math.BigDecimal count;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

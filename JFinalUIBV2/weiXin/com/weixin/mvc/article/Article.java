@@ -59,13 +59,6 @@ public class Article extends BaseModel<Article> {
 	 */
 	public static final String sqlId_splitPage_from = "weixin.article.splitPageFrom";
 
-	private String ids;
-	private String messageids;
-	private String Title;
-	private String Description;
-	private String PicUrl;
-	private String Url;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

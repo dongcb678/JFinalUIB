@@ -65,14 +65,6 @@ public class Location extends BaseModel<Location> {
 	 */
 	public static final String sqlId_splitPage_from = "weixin.location.splitPageFrom";
 
-	private String ids;
-	private String open_id;
-	private String lng;
-	private String lat;
-	private String bd09_lng;
-	private String bd09_lat;
-	private java.sql.Timestamp createdate;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

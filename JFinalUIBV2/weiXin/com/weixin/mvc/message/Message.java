@@ -216,39 +216,6 @@ public class Message extends BaseModel<Message> {
 	 */
 	public static final String sqlId_splitPage_from = "weixin.message.splitPageFrom";
 
-	private String ids;
-	private String inouts;
-	private String datatype;
-	private String datacontent;
-	private Timestamp createdate;
-	private String msgType;
-	private String Event;
-	private String EventKey;
-	private String ToUserName;
-	private String FromUserName;
-	private BigDecimal CreateTime;
-	private BigDecimal MsgId;
-	private String PicUrl;
-	private String MediaId;
-	private String Title;
-	private String Description;
-	private String Url;
-	private BigDecimal Location_X;
-	private BigDecimal Location_Y;
-	private BigDecimal Scale;
-	private String Labels;
-	private String Content;
-	private String ThumbMediaId;
-	private String Format;
-	private String Recognition;
-	private BigDecimal Latitude;
-	private BigDecimal Longitude;
-	private BigDecimal Precisions;
-	private String Ticket;
-	private String MusicURL;
-	private String HQMusicUrl;
-	private BigDecimal ArticleCount;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

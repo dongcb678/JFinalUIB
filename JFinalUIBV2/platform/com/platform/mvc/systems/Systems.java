@@ -74,13 +74,6 @@ public class Systems extends BaseModel<Systems> {
 	 */
 	public static final String sqlId_splitPage_from = "platform.systems.splitPageFrom";
 
-	private String ids;
-	private Long version;
-	private String description;
-	private String names;
-	private String numbers;
-	private Long orderids;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

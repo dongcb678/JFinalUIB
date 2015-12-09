@@ -230,38 +230,6 @@ public class Syslog extends BaseModel<Syslog> {
 	 */
 	public static final String sqlId_clear = "platform.sysLog.clear";
 
-	private String ids;
-	private Long version;
-	private java.sql.Timestamp actionenddate;
-	private Long actionendtime;
-	private Long actionhaoshi;
-	private java.sql.Timestamp actionstartdate;
-	private Long actionstarttime;
-	private String cause;
-	private String cookie;
-	private String description;
-	private java.sql.Timestamp enddate;
-	private Long endtime;
-	private Long haoshi;
-	private String ips;
-	private String method;
-	private String referer;
-	private String requestpath;
-	private java.sql.Timestamp startdate;
-	private Long starttime;
-	private String status;
-	private String useragent;
-	private Long viewhaoshi;
-	private String operatorids;
-	private String accept;
-	private String acceptencoding;
-	private String acceptlanguage;
-	private String connection;
-	private String host;
-	private String xrequestedwith;
-	private String pvids;
-	private String userids;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
