@@ -1,9 +1,9 @@
 package com.test.mvc.blog;
 
+import java.sql.Timestamp;
+
 import org.apache.log4j.Logger;
 
-import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 
 /**
@@ -51,33 +51,28 @@ public class Blog extends BaseModel<Blog> {
 	 */
 	public static final String sqlId_splitPage_from = "test.blog.splitPageFrom";
 
-	private String ids;
-	private String title;
-	private String content;
-	private java.sql.Timestamp createtime;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setTitle(String title){
 		set(column_title, title);
 	}
-	public <T> T getTitle() {
+	public String getTitle() {
 		return get(column_title);
 	}
 	public void setContent(String content){
 		set(column_content, content);
 	}
-	public <T> T getContent() {
+	public String getContent() {
 		return get(column_content);
 	}
-	public void setCreatetime(java.sql.Timestamp createtime){
+	public void setCreatetime(Timestamp createtime){
 		set(column_createtime, createtime);
 	}
-	public <T> T getCreatetime() {
+	public Timestamp getCreatetime() {
 		return get(column_createtime);
 	}
 	

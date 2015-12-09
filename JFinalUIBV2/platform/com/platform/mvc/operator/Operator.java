@@ -161,103 +161,103 @@ public class Operator extends BaseModelCache<Operator> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setDescription(String description){
 		set(column_description, description);
 	}
-	public <T> T getDescription() {
+	public String getDescription() {
 		return get(column_description);
 	}
 	public void setNames(String names){
 		set(column_names, names);
 	}
-	public <T> T getNames() {
+	public String getNames() {
 		return get(column_names);
 	}
 	public void setOnemany(String onemany){
 		set(column_onemany, onemany);
 	}
-	public <T> T getOnemany() {
+	public String getOnemany() {
 		return get(column_onemany);
 	}
 	public void setReturnparamkeys(String returnparamkeys){
 		set(column_returnparamkeys, returnparamkeys);
 	}
-	public <T> T getReturnparamkeys() {
+	public String getReturnparamkeys() {
 		return get(column_returnparamkeys);
 	}
 	public void setReturnurl(String returnurl){
 		set(column_returnurl, returnurl);
 	}
-	public <T> T getReturnurl() {
+	public String getReturnurl() {
 		return get(column_returnurl);
 	}
 	public void setRowfilter(String rowfilter){
 		set(column_rowfilter, rowfilter);
 	}
-	public <T> T getRowfilter() {
+	public String getRowfilter() {
 		return get(column_rowfilter);
 	}
 	public void setUrl(String url){
 		set(column_url, url);
 	}
-	public <T> T getUrl() {
+	public String getUrl() {
 		return get(column_url);
 	}
 	public void setModuleids(String moduleids){
 		set(column_moduleids, moduleids);
 	}
-	public <T> T getModuleids() {
+	public String getModuleids() {
 		return get(column_moduleids);
 	}
 	public void setSplitpage(String splitpage){
 		set(column_splitpage, splitpage);
 	}
-	public <T> T getSplitpage() {
+	public String getSplitpage() {
 		return get(column_splitpage);
 	}
 	public void setFormtoken(String formtoken){
 		set(column_formtoken, formtoken);
 	}
-	public <T> T getFormtoken() {
+	public String getFormtoken() {
 		return get(column_formtoken);
 	}
 	public void setIpblack(String ipblack){
 		set(column_ipblack, ipblack);
 	}
-	public <T> T getIpblack() {
+	public String getIpblack() {
 		return get(column_ipblack);
 	}
 	public void setPrivilegess(String privilegess){
 		set(column_privilegess, privilegess);
 	}
-	public <T> T getPrivilegess() {
+	public String getPrivilegess() {
 		return get(column_privilegess);
 	}
 	public void setIspv(String ispv){
 		set(column_ispv, ispv);
 	}
-	public <T> T getIspv() {
+	public String getIspv() {
 		return get(column_ispv);
 	}
 	public void setPvtype(String pvtype){
 		set(column_pvtype, pvtype);
 	}
-	public <T> T getPvtype() {
+	public String getPvtype() {
 		return get(column_pvtype);
 	}
 	public void setModulenames(String modulenames){
 		set(column_modulenames, modulenames);
 	}
-	public <T> T getModulenames() {
+	public String getModulenames() {
 		return get(column_modulenames);
 	}
 	

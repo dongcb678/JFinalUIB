@@ -50,25 +50,25 @@ public class Keyword extends BaseModel<Keyword> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setQuestion(String question){
 		set(column_question, question);
 	}
-	public <T> T getQuestion() {
+	public String getQuestion() {
 		return get(column_question);
 	}
 	public void setQuestionkey(String questionkey){
 		set(column_questionkey, questionkey);
 	}
-	public <T> T getQuestionkey() {
+	public String getQuestionkey() {
 		return get(column_questionkey);
 	}
 	public void setAnswer(String answer){
 		set(column_answer, answer);
 	}
-	public <T> T getAnswer() {
+	public String getAnswer() {
 		return get(column_answer);
 	}
 	

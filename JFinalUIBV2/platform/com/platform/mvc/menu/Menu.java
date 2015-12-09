@@ -138,85 +138,85 @@ public class Menu extends BaseModel<Menu> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setImages(String images){
 		set(column_images, images);
 	}
-	public <T> T getImages() {
+	public String getImages() {
 		return get(column_images);
 	}
 	public void setLevels(Long levels){
 		set(column_levels, levels);
 	}
-	public <T> T getLevels() {
+	public Long getLevels() {
 		return get(column_levels);
 	}
 	public void setNames_zhcn(String names_zhcn){
 		set(column_names_zhcn, names_zhcn);
 	}
-	public <T> T getNames_zhcn() {
+	public String getNames_zhcn() {
 		return get(column_names_zhcn);
 	}
 	public void setOrderids(Long orderids){
 		set(column_orderids, orderids);
 	}
-	public <T> T getOrderids() {
+	public Long getOrderids() {
 		return get(column_orderids);
 	}
 	public void setOperatorids(String operatorids){
 		set(column_operatorids, operatorids);
 	}
-	public <T> T getOperatorids() {
+	public String getOperatorids() {
 		return get(column_operatorids);
 	}
 	public void setParentmenuids(String parentmenuids){
 		set(column_parentmenuids, parentmenuids);
 	}
-	public <T> T getParentmenuids() {
+	public String getParentmenuids() {
 		return get(column_parentmenuids);
 	}
 	public void setSystemsids(String systemsids){
 		set(column_systemsids, systemsids);
 	}
-	public <T> T getSystemsids() {
+	public String getSystemsids() {
 		return get(column_systemsids);
 	}
 	public void setIsparent(String isparent){
 		set(column_isparent, isparent);
 	}
-	public <T> T getIsparent() {
+	public String getIsparent() {
 		return get(column_isparent);
 	}
 	public void setNames_zhtw(String names_zhtw){
 		set(column_names_zhtw, names_zhtw);
 	}
-	public <T> T getNames_zhtw() {
+	public String getNames_zhtw() {
 		return get(column_names_zhtw);
 	}
 	public void setNames_zhhk(String names_zhhk){
 		set(column_names_zhhk, names_zhhk);
 	}
-	public <T> T getNames_zhhk() {
+	public String getNames_zhhk() {
 		return get(column_names_zhhk);
 	}
 	public void setNames_ja(String names_ja){
 		set(column_names_ja, names_ja);
 	}
-	public <T> T getNames_ja() {
+	public String getNames_ja() {
 		return get(column_names_ja);
 	}
 	public void setNames_enus(String names_enus){
 		set(column_names_enus, names_enus);
 	}
-	public <T> T getNames_enus() {
+	public String getNames_enus() {
 		return get(column_names_enus);
 	}
 	

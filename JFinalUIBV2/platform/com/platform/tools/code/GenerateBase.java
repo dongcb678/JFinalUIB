@@ -37,9 +37,33 @@ public abstract class GenerateBase {
 	 * 类名（不包含后缀.java）
 	 */
 	public static String[][] tableArr = {
-		//{"ConstantInit.db_dataSource_main", "test_blog", "ids", "TestBlog"}
-//		{null, "test_blog", null, "TestBlog"}
-		{null, "pt_user", null, "User"}
+//		{"ConstantInit.db_dataSource_main", "test_blog", "ids", "TestBlog"}
+		{null, "test_blog", null, "TestBlog"}
+
+//		{null, "pt_department", null, "Department"},
+//		{null, "pt_dict", null, "Dict"},
+//		{null, "pt_group", null, "Group"},
+//		{null, "pt_menu", null, "Menu"},
+//		{null, "pt_module", null, "Module"},
+//		{null, "pt_operator", null, "Operator"},
+//		{null, "pt_param", null, "Param"},
+//		{null, "pt_role", null, "Role"},
+//		{null, "pt_station", null, "Station"},
+//		{null, "pt_systems", null, "Systems"},
+//		{null, "pt_upload", null, "Upload"},
+//		{null, "pt_syslog", null, "SysLog"},
+//		{null, "pt_resources", null, "Resources"},
+//		{null, "pt_user", null, "User"},
+//		{null, "pt_userinfo", null, "UserInfo"}
+		
+//		{null, "wx_article", null, "Article"},
+//		{null, "wx_file", null, "File"},
+//		{null, "wx_group", null, "Group"},
+//		{null, "wx_location", null, "Location"},
+//		{null, "wx_message", null, "Message"},
+//		{null, "wx_role", null, "Role"},
+//		{null, "wx_user", null, "User"},
+//		{null, "wx_keyword", null, "Keyword"}
 	};
 	
 	/**

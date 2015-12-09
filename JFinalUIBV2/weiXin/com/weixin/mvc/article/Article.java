@@ -18,40 +18,39 @@ public class Article extends BaseModel<Article> {
 
 	/**
 	 * 字段描述： 
-	 * 字段类型：varchar(32)  长度：32
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述： 
-	 * 字段类型：varchar(32)  长度：32
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_messageids = "messageids";
 	
 	/**
 	 * 字段描述： 
-	 * 字段类型：varchar(100)  长度：100
+	 * 字段类型：character varying  长度：100
 	 */
-	public static final String column_Title = "Title";
+	public static final String column_title = "title";
 	
 	/**
 	 * 字段描述： 
-	 * 字段类型：text  长度：65535
+	 * 字段类型：text  长度：null
 	 */
-	public static final String column_Description = "Description";
+	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：图片链接，支持JPG、PNG格式，较好的效果为大图640*320，小图80*80 
-	 * 字段类型：varchar(500)  长度：500
+	 * 字段类型：character varying  长度：500
 	 */
-	public static final String column_PicUrl = "PicUrl";
+	public static final String column_picurl = "picurl";
 	
 	/**
 	 * 字段描述：点击图文消息跳转链接 
-	 * 字段类型：varchar(500)  长度：500
+	 * 字段类型：character varying  长度：500
 	 */
-	public static final String column_Url = "Url";
-	
+	public static final String column_url = "url";
 	
 	/**
 	 * sqlId : test.article.splitPageFrom
@@ -62,38 +61,37 @@ public class Article extends BaseModel<Article> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setMessageids(String messageids){
 		set(column_messageids, messageids);
 	}
-	public <T> T getMessageids() {
+	public String getMessageids() {
 		return get(column_messageids);
 	}
-	public void setTitle(String Title){
-		set(column_Title, Title);
+	public void setTitle(String title){
+		set(column_title, title);
 	}
-	public <T> T getTitle() {
-		return get(column_Title);
+	public String getTitle() {
+		return get(column_title);
 	}
-	public void setDescription(String Description){
-		set(column_Description, Description);
+	public void setDescription(String description){
+		set(column_description, description);
 	}
-	public <T> T getDescription() {
-		return get(column_Description);
+	public String getDescription() {
+		return get(column_description);
 	}
-	public void setPicUrl(String PicUrl){
-		set(column_PicUrl, PicUrl);
+	public void setPicurl(String picurl){
+		set(column_picurl, picurl);
 	}
-	public <T> T getPicUrl() {
-		return get(column_PicUrl);
+	public String getPicurl() {
+		return get(column_picurl);
 	}
-	public void setUrl(String Url){
-		set(column_Url, Url);
+	public void setUrl(String url){
+		set(column_url, url);
 	}
-	public <T> T getUrl() {
-		return get(column_Url);
+	public String getUrl() {
+		return get(column_url);
 	}
-	
 }

@@ -1,5 +1,8 @@
 package com.platform.mvc.resources;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
@@ -131,85 +134,85 @@ public class Resources extends BaseModel<Resources> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setOsname(String osname){
 		set(column_osname, osname);
 	}
-	public <T> T getOsname() {
+	public String getOsname() {
 		return get(column_osname);
 	}
 	public void setIps(String ips){
 		set(column_ips, ips);
 	}
-	public <T> T getIps() {
+	public String getIps() {
 		return get(column_ips);
 	}
 	public void setHostname(String hostname){
 		set(column_hostname, hostname);
 	}
-	public <T> T getHostname() {
+	public String getHostname() {
 		return get(column_hostname);
 	}
 	public void setCpunumber(Long cpunumber){
 		set(column_cpunumber, cpunumber);
 	}
-	public <T> T getCpunumber() {
+	public Long getCpunumber() {
 		return get(column_cpunumber);
 	}
-	public void setCpuratio(java.math.BigDecimal cpuratio){
+	public void setCpuratio(BigDecimal cpuratio){
 		set(column_cpuratio, cpuratio);
 	}
-	public <T> T getCpuratio() {
+	public BigDecimal getCpuratio() {
 		return get(column_cpuratio);
 	}
 	public void setPhymemory(Long phymemory){
 		set(column_phymemory, phymemory);
 	}
-	public <T> T getPhymemory() {
+	public Long getPhymemory() {
 		return get(column_phymemory);
 	}
 	public void setPhyfreememory(Long phyfreememory){
 		set(column_phyfreememory, phyfreememory);
 	}
-	public <T> T getPhyfreememory() {
+	public Long getPhyfreememory() {
 		return get(column_phyfreememory);
 	}
 	public void setJvmtotalmemory(Long jvmtotalmemory){
 		set(column_jvmtotalmemory, jvmtotalmemory);
 	}
-	public <T> T getJvmtotalmemory() {
+	public Long getJvmtotalmemory() {
 		return get(column_jvmtotalmemory);
 	}
 	public void setJvmfreememory(Long jvmfreememory){
 		set(column_jvmfreememory, jvmfreememory);
 	}
-	public <T> T getJvmfreememory() {
+	public Long getJvmfreememory() {
 		return get(column_jvmfreememory);
 	}
 	public void setJvmmaxmemory(Long jvmmaxmemory){
 		set(column_jvmmaxmemory, jvmmaxmemory);
 	}
-	public <T> T getJvmmaxmemory() {
+	public Long getJvmmaxmemory() {
 		return get(column_jvmmaxmemory);
 	}
 	public void setGccount(Long gccount){
 		set(column_gccount, gccount);
 	}
-	public <T> T getGccount() {
+	public Long getGccount() {
 		return get(column_gccount);
 	}
-	public void setCreatedate(java.sql.Timestamp createdate){
+	public void setCreatedate(Timestamp createdate){
 		set(column_createdate, createdate);
 	}
-	public <T> T getCreatedate() {
+	public Timestamp getCreatedate() {
 		return get(column_createdate);
 	}
 	

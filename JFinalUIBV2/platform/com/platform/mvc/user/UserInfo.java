@@ -1,5 +1,8 @@
 package com.platform.mvc.user;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
@@ -208,215 +211,184 @@ public class UserInfo extends BaseModel<UserInfo> {
 	 */
 	public static final String sqlId_paging = "platform.userInfo.paging";
 
-	private String ids;
-	private Long version;
-	private String address;
-	private String addressinfo;
-	private String avoirdupois;
-	private java.sql.Date birthday;
-	private String bloodgroup;
-	private java.sql.Timestamp clientlevelend;
-	private java.sql.Timestamp clientlevelstart;
-	private String culture;
-	private String description;
-	private String email;
-	private java.sql.Date finishschooldate;
-	private String folk;
-	private String government;
-	private String homepage;
-	private String householder;
-	private String idcard;
-	private String marriage;
-	private String mobile;
-	private String msn;
-	private String names;
-	private String nativityaddress;
-	private String postboy;
-	private String qq;
-	private String schoolname;
-	private String sex;
-	private String speciality;
-	private String stature;
-	private String telephone;
-
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setAddress(String address){
 		set(column_address, address);
 	}
-	public <T> T getAddress() {
+	public String getAddress() {
 		return get(column_address);
 	}
 	public void setAddressinfo(String addressinfo){
 		set(column_addressinfo, addressinfo);
 	}
-	public <T> T getAddressinfo() {
+	public String getAddressinfo() {
 		return get(column_addressinfo);
 	}
 	public void setAvoirdupois(String avoirdupois){
 		set(column_avoirdupois, avoirdupois);
 	}
-	public <T> T getAvoirdupois() {
+	public String getAvoirdupois() {
 		return get(column_avoirdupois);
 	}
-	public void setBirthday(java.sql.Date birthday){
+	public void setBirthday(Date birthday){
 		set(column_birthday, birthday);
 	}
-	public <T> T getBirthday() {
+	public Date getBirthday() {
 		return get(column_birthday);
 	}
 	public void setBloodgroup(String bloodgroup){
 		set(column_bloodgroup, bloodgroup);
 	}
-	public <T> T getBloodgroup() {
+	public String getBloodgroup() {
 		return get(column_bloodgroup);
 	}
-	public void setClientlevelend(java.sql.Timestamp clientlevelend){
+	public void setClientlevelend(Timestamp clientlevelend){
 		set(column_clientlevelend, clientlevelend);
 	}
-	public <T> T getClientlevelend() {
+	public Timestamp getClientlevelend() {
 		return get(column_clientlevelend);
 	}
-	public void setClientlevelstart(java.sql.Timestamp clientlevelstart){
+	public void setClientlevelstart(Timestamp clientlevelstart){
 		set(column_clientlevelstart, clientlevelstart);
 	}
-	public <T> T getClientlevelstart() {
+	public Timestamp getClientlevelstart() {
 		return get(column_clientlevelstart);
 	}
 	public void setCulture(String culture){
 		set(column_culture, culture);
 	}
-	public <T> T getCulture() {
+	public String getCulture() {
 		return get(column_culture);
 	}
 	public void setDescription(String description){
 		set(column_description, description);
 	}
-	public <T> T getDescription() {
+	public String getDescription() {
 		return get(column_description);
 	}
 	public void setEmail(String email){
 		set(column_email, email);
 	}
-	public <T> T getEmail() {
+	public String getEmail() {
 		return get(column_email);
 	}
-	public void setFinishschooldate(java.sql.Date finishschooldate){
+	public void setFinishschooldate(Date finishschooldate){
 		set(column_finishschooldate, finishschooldate);
 	}
-	public <T> T getFinishschooldate() {
+	public Date getFinishschooldate() {
 		return get(column_finishschooldate);
 	}
 	public void setFolk(String folk){
 		set(column_folk, folk);
 	}
-	public <T> T getFolk() {
+	public String getFolk() {
 		return get(column_folk);
 	}
 	public void setGovernment(String government){
 		set(column_government, government);
 	}
-	public <T> T getGovernment() {
+	public String getGovernment() {
 		return get(column_government);
 	}
 	public void setHomepage(String homepage){
 		set(column_homepage, homepage);
 	}
-	public <T> T getHomepage() {
+	public String getHomepage() {
 		return get(column_homepage);
 	}
 	public void setHouseholder(String householder){
 		set(column_householder, householder);
 	}
-	public <T> T getHouseholder() {
+	public String getHouseholder() {
 		return get(column_householder);
 	}
 	public void setIdcard(String idcard){
 		set(column_idcard, idcard);
 	}
-	public <T> T getIdcard() {
+	public String getIdcard() {
 		return get(column_idcard);
 	}
 	public void setMarriage(String marriage){
 		set(column_marriage, marriage);
 	}
-	public <T> T getMarriage() {
+	public String getMarriage() {
 		return get(column_marriage);
 	}
 	public void setMobile(String mobile){
 		set(column_mobile, mobile);
 	}
-	public <T> T getMobile() {
+	public String getMobile() {
 		return get(column_mobile);
 	}
 	public void setMsn(String msn){
 		set(column_msn, msn);
 	}
-	public <T> T getMsn() {
+	public String getMsn() {
 		return get(column_msn);
 	}
 	public void setNames(String names){
 		set(column_names, names);
 	}
-	public <T> T getNames() {
+	public String getNames() {
 		return get(column_names);
 	}
 	public void setNativityaddress(String nativityaddress){
 		set(column_nativityaddress, nativityaddress);
 	}
-	public <T> T getNativityaddress() {
+	public String getNativityaddress() {
 		return get(column_nativityaddress);
 	}
 	public void setPostboy(String postboy){
 		set(column_postboy, postboy);
 	}
-	public <T> T getPostboy() {
+	public String getPostboy() {
 		return get(column_postboy);
 	}
 	public void setQq(String qq){
 		set(column_qq, qq);
 	}
-	public <T> T getQq() {
+	public String getQq() {
 		return get(column_qq);
 	}
 	public void setSchoolname(String schoolname){
 		set(column_schoolname, schoolname);
 	}
-	public <T> T getSchoolname() {
+	public String getSchoolname() {
 		return get(column_schoolname);
 	}
 	public void setSex(String sex){
 		set(column_sex, sex);
 	}
-	public <T> T getSex() {
+	public String getSex() {
 		return get(column_sex);
 	}
 	public void setSpeciality(String speciality){
 		set(column_speciality, speciality);
 	}
-	public <T> T getSpeciality() {
+	public String getSpeciality() {
 		return get(column_speciality);
 	}
 	public void setStature(String stature){
 		set(column_stature, stature);
 	}
-	public <T> T getStature() {
+	public String getStature() {
 		return get(column_stature);
 	}
 	public void setTelephone(String telephone){
 		set(column_telephone, telephone);
 	}
-	public <T> T getTelephone() {
+	public String getTelephone() {
 		return get(column_telephone);
 	}
 

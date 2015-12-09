@@ -95,37 +95,37 @@ public class Group extends BaseModelCache<Group> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setDescription(String description){
 		set(column_description, description);
 	}
-	public <T> T getDescription() {
+	public String getDescription() {
 		return get(column_description);
 	}
 	public void setNames(String names){
 		set(column_names, names);
 	}
-	public <T> T getNames() {
+	public String getNames() {
 		return get(column_names);
 	}
 	public void setRoleids(String roleids){
 		set(column_roleids, roleids);
 	}
-	public <T> T getRoleids() {
+	public String getRoleids() {
 		return get(column_roleids);
 	}
 	public void setNumbers(String numbers){
 		set(column_numbers, numbers);
 	}
-	public <T> T getNumbers() {
+	public String getNumbers() {
 		return get(column_numbers);
 	}
 	

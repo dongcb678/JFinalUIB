@@ -1,5 +1,7 @@
 package com.weixin.mvc.group;
 
+import java.math.BigDecimal;
+
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
@@ -50,25 +52,25 @@ public class Group extends BaseModel<Group> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setId(String id){
 		set(column_id, id);
 	}
-	public <T> T getId() {
+	public String getId() {
 		return get(column_id);
 	}
 	public void setName(String name){
 		set(column_name, name);
 	}
-	public <T> T getName() {
+	public String getName() {
 		return get(column_name);
 	}
-	public void setCount(java.math.BigDecimal count){
+	public void setCount(BigDecimal count){
 		set(column_count, count);
 	}
-	public <T> T getCount() {
+	public BigDecimal getCount() {
 		return get(column_count);
 	}
 	

@@ -1,5 +1,7 @@
 package com.weixin.mvc.location;
 
+import java.sql.Timestamp;
+
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
@@ -68,44 +70,43 @@ public class Location extends BaseModel<Location> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setOpen_id(String open_id){
 		set(column_open_id, open_id);
 	}
-	public <T> T getOpen_id() {
+	public String getOpen_id() {
 		return get(column_open_id);
 	}
 	public void setLng(String lng){
 		set(column_lng, lng);
 	}
-	public <T> T getLng() {
+	public String getLng() {
 		return get(column_lng);
 	}
 	public void setLat(String lat){
 		set(column_lat, lat);
 	}
-	public <T> T getLat() {
+	public String getLat() {
 		return get(column_lat);
 	}
 	public void setBd09_lng(String bd09_lng){
 		set(column_bd09_lng, bd09_lng);
 	}
-	public <T> T getBd09_lng() {
+	public String getBd09_lng() {
 		return get(column_bd09_lng);
 	}
 	public void setBd09_lat(String bd09_lat){
 		set(column_bd09_lat, bd09_lat);
 	}
-	public <T> T getBd09_lat() {
+	public String getBd09_lat() {
 		return get(column_bd09_lat);
 	}
-	public void setCreatedate(java.sql.Timestamp createdate){
+	public void setCreatedate(Timestamp createdate){
 		set(column_createdate, createdate);
 	}
-	public <T> T getCreatedate() {
+	public Timestamp getCreatedate() {
 		return get(column_createdate);
 	}
-	
 }

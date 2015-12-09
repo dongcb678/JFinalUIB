@@ -1,5 +1,7 @@
 package com.platform.mvc.user;
 
+import java.sql.Timestamp;
+
 import org.apache.log4j.Logger;
 
 import com.platform.mvc.base.BaseModelCache;
@@ -187,121 +189,121 @@ public class User extends BaseModelCache<User> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setErrorcount(Long errorcount){
 		set(column_errorcount, errorcount);
 	}
-	public <T> T getErrorcount() {
+	public Long getErrorcount() {
 		return get(column_errorcount);
 	}
 	public void setOrderids(Long orderids){
 		set(column_orderids, orderids);
 	}
-	public <T> T getOrderids() {
+	public Long getOrderids() {
 		return get(column_orderids);
 	}
 	public void setPassword(byte[] password){
 		set(column_password, password);
 	}
-	public <T> T getPassword() {
+	public byte[] getPassword() {
 		return get(column_password);
 	}
 	public void setSalt(byte[] salt){
 		set(column_salt, salt);
 	}
-	public <T> T getSalt() {
+	public byte[] getSalt() {
 		return get(column_salt);
 	}
 	public void setStatus(String status){
 		set(column_status, status);
 	}
-	public <T> T getStatus() {
+	public String getStatus() {
 		return get(column_status);
 	}
-	public void setStopdate(java.sql.Timestamp stopdate){
+	public void setStopdate(Timestamp stopdate){
 		set(column_stopdate, stopdate);
 	}
-	public <T> T getStopdate() {
+	public Timestamp getStopdate() {
 		return get(column_stopdate);
 	}
 	public void setUsername(String username){
 		set(column_username, username);
 	}
-	public <T> T getUsername() {
+	public String getUsername() {
 		return get(column_username);
 	}
 	public void setDepartmentids(String departmentids){
 		set(column_departmentids, departmentids);
 	}
-	public <T> T getDepartmentids() {
+	public String getDepartmentids() {
 		return get(column_departmentids);
 	}
 	public void setUserinfoids(String userinfoids){
 		set(column_userinfoids, userinfoids);
 	}
-	public <T> T getUserinfoids() {
+	public String getUserinfoids() {
 		return get(column_userinfoids);
 	}
 	public void setStationids(String stationids){
 		set(column_stationids, stationids);
 	}
-	public <T> T getStationids() {
+	public String getStationids() {
 		return get(column_stationids);
 	}
 	public void setDeptids(String deptids){
 		set(column_deptids, deptids);
 	}
-	public <T> T getDeptids() {
+	public String getDeptids() {
 		return get(column_deptids);
 	}
 	public void setUserids(String userids){
 		set(column_userids, userids);
 	}
-	public <T> T getUserids() {
+	public String getUserids() {
 		return get(column_userids);
 	}
 	public void setGroupids(String groupids){
 		set(column_groupids, groupids);
 	}
-	public <T> T getGroupids() {
+	public String getGroupids() {
 		return get(column_groupids);
 	}
 	public void setDepartmentnames(String departmentnames){
 		set(column_departmentnames, departmentnames);
 	}
-	public <T> T getDepartmentnames() {
+	public String getDepartmentnames() {
 		return get(column_departmentnames);
 	}
 	public void setStationnames(String stationnames){
 		set(column_stationnames, stationnames);
 	}
-	public <T> T getStationnames() {
+	public String getStationnames() {
 		return get(column_stationnames);
 	}
 	public void setDeptnames(String deptnames){
 		set(column_deptnames, deptnames);
 	}
-	public <T> T getDeptnames() {
+	public String getDeptnames() {
 		return get(column_deptnames);
 	}
 	public void setUsernames(String usernames){
 		set(column_usernames, usernames);
 	}
-	public <T> T getUsernames() {
+	public String getUsernames() {
 		return get(column_usernames);
 	}
 	public void setGroupnames(String groupnames){
 		set(column_groupnames, groupnames);
 	}
-	public <T> T getGroupnames() {
+	public String getGroupnames() {
 		return get(column_groupnames);
 	}
 	

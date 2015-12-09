@@ -101,55 +101,55 @@ public class Module extends BaseModel<Module> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setDescription(String description){
 		set(column_description, description);
 	}
-	public <T> T getDescription() {
+	public String getDescription() {
 		return get(column_description);
 	}
 	public void setImages(String images){
 		set(column_images, images);
 	}
-	public <T> T getImages() {
+	public String getImages() {
 		return get(column_images);
 	}
 	public void setIsparent(String isparent){
 		set(column_isparent, isparent);
 	}
-	public <T> T getIsparent() {
+	public String getIsparent() {
 		return get(column_isparent);
 	}
 	public void setNames(String names){
 		set(column_names, names);
 	}
-	public <T> T getNames() {
+	public String getNames() {
 		return get(column_names);
 	}
 	public void setOrderids(Long orderids){
 		set(column_orderids, orderids);
 	}
-	public <T> T getOrderids() {
+	public Long getOrderids() {
 		return get(column_orderids);
 	}
 	public void setParentmoduleids(String parentmoduleids){
 		set(column_parentmoduleids, parentmoduleids);
 	}
-	public <T> T getParentmoduleids() {
+	public String getParentmoduleids() {
 		return get(column_parentmoduleids);
 	}
 	public void setSystemsids(String systemsids){
 		set(column_systemsids, systemsids);
 	}
-	public <T> T getSystemsids() {
+	public String getSystemsids() {
 		return get(column_systemsids);
 	}
 	

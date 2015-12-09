@@ -1,5 +1,7 @@
 package com.platform.mvc.syslog;
 
+import java.sql.Timestamp;
+
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
@@ -233,187 +235,187 @@ public class Syslog extends BaseModel<Syslog> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
-	public void setActionenddate(java.sql.Timestamp actionenddate){
+	public void setActionenddate(Timestamp actionenddate){
 		set(column_actionenddate, actionenddate);
 	}
-	public <T> T getActionenddate() {
+	public Timestamp getActionenddate() {
 		return get(column_actionenddate);
 	}
 	public void setActionendtime(Long actionendtime){
 		set(column_actionendtime, actionendtime);
 	}
-	public <T> T getActionendtime() {
+	public Long getActionendtime() {
 		return get(column_actionendtime);
 	}
 	public void setActionhaoshi(Long actionhaoshi){
 		set(column_actionhaoshi, actionhaoshi);
 	}
-	public <T> T getActionhaoshi() {
+	public Long getActionhaoshi() {
 		return get(column_actionhaoshi);
 	}
-	public void setActionstartdate(java.sql.Timestamp actionstartdate){
+	public void setActionstartdate(Timestamp actionstartdate){
 		set(column_actionstartdate, actionstartdate);
 	}
-	public <T> T getActionstartdate() {
+	public Timestamp getActionstartdate() {
 		return get(column_actionstartdate);
 	}
 	public void setActionstarttime(Long actionstarttime){
 		set(column_actionstarttime, actionstarttime);
 	}
-	public <T> T getActionstarttime() {
+	public Long getActionstarttime() {
 		return get(column_actionstarttime);
 	}
 	public void setCause(String cause){
 		set(column_cause, cause);
 	}
-	public <T> T getCause() {
+	public String getCause() {
 		return get(column_cause);
 	}
 	public void setCookie(String cookie){
 		set(column_cookie, cookie);
 	}
-	public <T> T getCookie() {
+	public String getCookie() {
 		return get(column_cookie);
 	}
 	public void setDescription(String description){
 		set(column_description, description);
 	}
-	public <T> T getDescription() {
+	public String getDescription() {
 		return get(column_description);
 	}
-	public void setEnddate(java.sql.Timestamp enddate){
+	public void setEnddate(Timestamp enddate){
 		set(column_enddate, enddate);
 	}
-	public <T> T getEnddate() {
+	public Timestamp getEnddate() {
 		return get(column_enddate);
 	}
 	public void setEndtime(Long endtime){
 		set(column_endtime, endtime);
 	}
-	public <T> T getEndtime() {
+	public Long getEndtime() {
 		return get(column_endtime);
 	}
 	public void setHaoshi(Long haoshi){
 		set(column_haoshi, haoshi);
 	}
-	public <T> T getHaoshi() {
+	public Long getHaoshi() {
 		return get(column_haoshi);
 	}
 	public void setIps(String ips){
 		set(column_ips, ips);
 	}
-	public <T> T getIps() {
+	public String getIps() {
 		return get(column_ips);
 	}
 	public void setMethod(String method){
 		set(column_method, method);
 	}
-	public <T> T getMethod() {
+	public String getMethod() {
 		return get(column_method);
 	}
 	public void setReferer(String referer){
 		set(column_referer, referer);
 	}
-	public <T> T getReferer() {
+	public String getReferer() {
 		return get(column_referer);
 	}
 	public void setRequestpath(String requestpath){
 		set(column_requestpath, requestpath);
 	}
-	public <T> T getRequestpath() {
+	public String getRequestpath() {
 		return get(column_requestpath);
 	}
-	public void setStartdate(java.sql.Timestamp startdate){
+	public void setStartdate(Timestamp startdate){
 		set(column_startdate, startdate);
 	}
-	public <T> T getStartdate() {
+	public Timestamp getStartdate() {
 		return get(column_startdate);
 	}
 	public void setStarttime(Long starttime){
 		set(column_starttime, starttime);
 	}
-	public <T> T getStarttime() {
+	public Long getStarttime() {
 		return get(column_starttime);
 	}
 	public void setStatus(String status){
 		set(column_status, status);
 	}
-	public <T> T getStatus() {
+	public String getStatus() {
 		return get(column_status);
 	}
 	public void setUseragent(String useragent){
 		set(column_useragent, useragent);
 	}
-	public <T> T getUseragent() {
+	public String getUseragent() {
 		return get(column_useragent);
 	}
 	public void setViewhaoshi(Long viewhaoshi){
 		set(column_viewhaoshi, viewhaoshi);
 	}
-	public <T> T getViewhaoshi() {
+	public Long getViewhaoshi() {
 		return get(column_viewhaoshi);
 	}
 	public void setOperatorids(String operatorids){
 		set(column_operatorids, operatorids);
 	}
-	public <T> T getOperatorids() {
+	public String getOperatorids() {
 		return get(column_operatorids);
 	}
 	public void setAccept(String accept){
 		set(column_accept, accept);
 	}
-	public <T> T getAccept() {
+	public String getAccept() {
 		return get(column_accept);
 	}
 	public void setAcceptencoding(String acceptencoding){
 		set(column_acceptencoding, acceptencoding);
 	}
-	public <T> T getAcceptencoding() {
+	public String getAcceptencoding() {
 		return get(column_acceptencoding);
 	}
 	public void setAcceptlanguage(String acceptlanguage){
 		set(column_acceptlanguage, acceptlanguage);
 	}
-	public <T> T getAcceptlanguage() {
+	public String getAcceptlanguage() {
 		return get(column_acceptlanguage);
 	}
 	public void setConnection(String connection){
 		set(column_connection, connection);
 	}
-	public <T> T getConnection() {
+	public String getConnection() {
 		return get(column_connection);
 	}
 	public void setHost(String host){
 		set(column_host, host);
 	}
-	public <T> T getHost() {
+	public String getHost() {
 		return get(column_host);
 	}
 	public void setXrequestedwith(String xrequestedwith){
 		set(column_xrequestedwith, xrequestedwith);
 	}
-	public <T> T getXrequestedwith() {
+	public String getXrequestedwith() {
 		return get(column_xrequestedwith);
 	}
 	public void setPvids(String pvids){
 		set(column_pvids, pvids);
 	}
-	public <T> T getPvids() {
+	public String getPvids() {
 		return get(column_pvids);
 	}
 	public void setUserids(String userids){
 		set(column_userids, userids);
 	}
-	public <T> T getUserids() {
+	public String getUserids() {
 		return get(column_userids);
 	}
 	

@@ -119,79 +119,79 @@ public class Department extends BaseModel<Department> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setAllchildnodeids(String allchildnodeids){
 		set(column_allchildnodeids, allchildnodeids);
 	}
-	public <T> T getAllchildnodeids() {
+	public String getAllchildnodeids() {
 		return get(column_allchildnodeids);
 	}
 	public void setDepartmentlevel(Long departmentlevel){
 		set(column_departmentlevel, departmentlevel);
 	}
-	public <T> T getDepartmentlevel() {
+	public Long getDepartmentlevel() {
 		return get(column_departmentlevel);
 	}
 	public void setDepttype(String depttype){
 		set(column_depttype, depttype);
 	}
-	public <T> T getDepttype() {
+	public String getDepttype() {
 		return get(column_depttype);
 	}
 	public void setDescription(String description){
 		set(column_description, description);
 	}
-	public <T> T getDescription() {
+	public String getDescription() {
 		return get(column_description);
 	}
 	public void setImages(String images){
 		set(column_images, images);
 	}
-	public <T> T getImages() {
+	public String getImages() {
 		return get(column_images);
 	}
 	public void setIsparent(String isparent){
 		set(column_isparent, isparent);
 	}
-	public <T> T getIsparent() {
+	public String getIsparent() {
 		return get(column_isparent);
 	}
 	public void setNames(String names){
 		set(column_names, names);
 	}
-	public <T> T getNames() {
+	public String getNames() {
 		return get(column_names);
 	}
 	public void setOrderids(Long orderids){
 		set(column_orderids, orderids);
 	}
-	public <T> T getOrderids() {
+	public Long getOrderids() {
 		return get(column_orderids);
 	}
 	public void setUrl(String url){
 		set(column_url, url);
 	}
-	public <T> T getUrl() {
+	public String getUrl() {
 		return get(column_url);
 	}
 	public void setParentdepartmentids(String parentdepartmentids){
 		set(column_parentdepartmentids, parentdepartmentids);
 	}
-	public <T> T getParentdepartmentids() {
+	public String getParentdepartmentids() {
 		return get(column_parentdepartmentids);
 	}
 	public void setPrincipaluserids(String principaluserids){
 		set(column_principaluserids, principaluserids);
 	}
-	public <T> T getPrincipaluserids() {
+	public String getPrincipaluserids() {
 		return get(column_principaluserids);
 	}
 	

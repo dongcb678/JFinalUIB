@@ -107,61 +107,61 @@ public class Station extends BaseModelCache<Station> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setDescription(String description){
 		set(column_description, description);
 	}
-	public <T> T getDescription() {
+	public String getDescription() {
 		return get(column_description);
 	}
 	public void setImages(String images){
 		set(column_images, images);
 	}
-	public <T> T getImages() {
+	public String getImages() {
 		return get(column_images);
 	}
 	public void setIsparent(String isparent){
 		set(column_isparent, isparent);
 	}
-	public <T> T getIsparent() {
+	public String getIsparent() {
 		return get(column_isparent);
 	}
 	public void setNames(String names){
 		set(column_names, names);
 	}
-	public <T> T getNames() {
+	public String getNames() {
 		return get(column_names);
 	}
 	public void setOrderids(Long orderids){
 		set(column_orderids, orderids);
 	}
-	public <T> T getOrderids() {
+	public Long getOrderids() {
 		return get(column_orderids);
 	}
 	public void setParentstationids(String parentstationids){
 		set(column_parentstationids, parentstationids);
 	}
-	public <T> T getParentstationids() {
+	public String getParentstationids() {
 		return get(column_parentstationids);
 	}
 	public void setOperatorids(String operatorids){
 		set(column_operatorids, operatorids);
 	}
-	public <T> T getOperatorids() {
+	public String getOperatorids() {
 		return get(column_operatorids);
 	}
 	public void setModuleids(String moduleids){
 		set(column_moduleids, moduleids);
 	}
-	public <T> T getModuleids() {
+	public String getModuleids() {
 		return get(column_moduleids);
 	}
 	

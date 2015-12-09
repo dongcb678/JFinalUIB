@@ -77,43 +77,43 @@ public class Upload extends BaseModel<Upload> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setParametername(String parametername){
 		set(column_parametername, parametername);
 	}
-	public <T> T getParametername() {
+	public String getParametername() {
 		return get(column_parametername);
 	}
 	public void setFilename(String filename){
 		set(column_filename, filename);
 	}
-	public <T> T getFilename() {
+	public String getFilename() {
 		return get(column_filename);
 	}
 	public void setContenttype(String contenttype){
 		set(column_contenttype, contenttype);
 	}
-	public <T> T getContenttype() {
+	public String getContenttype() {
 		return get(column_contenttype);
 	}
 	public void setOriginalfilename(String originalfilename){
 		set(column_originalfilename, originalfilename);
 	}
-	public <T> T getOriginalfilename() {
+	public String getOriginalfilename() {
 		return get(column_originalfilename);
 	}
 	public void setPath(String path){
 		set(column_path, path);
 	}
-	public <T> T getPath() {
+	public String getPath() {
 		return get(column_path);
 	}
 	

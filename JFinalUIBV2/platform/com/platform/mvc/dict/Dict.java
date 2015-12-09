@@ -225,121 +225,121 @@ public class Dict extends BaseModelCache<Dict> {
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
-	public <T> T getIds() {
+	public String getIds() {
 		return get(column_ids);
 	}
 	public void setVersion(Long version){
 		set(column_version, version);
 	}
-	public <T> T getVersion() {
+	public Long getVersion() {
 		return get(column_version);
 	}
 	public void setDescription(String description){
 		set(column_description, description);
 	}
-	public <T> T getDescription() {
+	public String getDescription() {
 		return get(column_description);
 	}
 	public void setImages(String images){
 		set(column_images, images);
 	}
-	public <T> T getImages() {
+	public String getImages() {
 		return get(column_images);
 	}
 	public void setNames(String names){
 		set(column_names, names);
 	}
-	public <T> T getNames() {
+	public String getNames() {
 		return get(column_names);
 	}
 	public void setOrderids(Long orderids){
 		set(column_orderids, orderids);
 	}
-	public <T> T getOrderids() {
+	public Long getOrderids() {
 		return get(column_orderids);
 	}
 	public void setPaths(String paths){
 		set(column_paths, paths);
 	}
-	public <T> T getPaths() {
+	public String getPaths() {
 		return get(column_paths);
 	}
 	public void setZhuangtai(String zhuangtai){
 		set(column_zhuangtai, zhuangtai);
 	}
-	public <T> T getZhuangtai() {
+	public String getZhuangtai() {
 		return get(column_zhuangtai);
 	}
 	public void setParentids(String parentids){
 		set(column_parentids, parentids);
 	}
-	public <T> T getParentids() {
+	public String getParentids() {
 		return get(column_parentids);
 	}
 	public void setIsparent(String isparent){
 		set(column_isparent, isparent);
 	}
-	public <T> T getIsparent() {
+	public String getIsparent() {
 		return get(column_isparent);
 	}
 	public void setLevels(Long levels){
 		set(column_levels, levels);
 	}
-	public <T> T getLevels() {
+	public Long getLevels() {
 		return get(column_levels);
 	}
 	public void setNumbers(String numbers){
 		set(column_numbers, numbers);
 	}
-	public <T> T getNumbers() {
+	public String getNumbers() {
 		return get(column_numbers);
 	}
 	public void setVal(String val){
 		set(column_val, val);
 	}
-	public <T> T getVal() {
+	public String getVal() {
 		return get(column_val);
 	}
 	public void setI18n(String i18n){
 		set(column_i18n, i18n);
 	}
-	public <T> T getI18n() {
+	public String getI18n() {
 		return get(column_i18n);
 	}
 	public void setVal_zhcn(String val_zhcn){
 		set(column_val_zhcn, val_zhcn);
 	}
-	public <T> T getVal_zhcn() {
+	public String getVal_zhcn() {
 		return get(column_val_zhcn);
 	}
 	public void setVal_zhhk(String val_zhhk){
 		set(column_val_zhhk, val_zhhk);
 	}
-	public <T> T getVal_zhhk() {
+	public String getVal_zhhk() {
 		return get(column_val_zhhk);
 	}
 	public void setVal_zhtw(String val_zhtw){
 		set(column_val_zhtw, val_zhtw);
 	}
-	public <T> T getVal_zhtw() {
+	public String getVal_zhtw() {
 		return get(column_val_zhtw);
 	}
 	public void setVal_ja(String val_ja){
 		set(column_val_ja, val_ja);
 	}
-	public <T> T getVal_ja() {
+	public String getVal_ja() {
 		return get(column_val_ja);
 	}
 	public void setVal_enus(String val_enus){
 		set(column_val_enus, val_enus);
 	}
-	public <T> T getVal_enus() {
+	public String getVal_enus() {
 		return get(column_val_enus);
 	}
 	public void setStatus(String status){
 		set(column_status, status);
 	}
-	public <T> T getStatus() {
+	public String getStatus() {
 		return get(column_status);
 	}
 	
