@@ -232,6 +232,38 @@ public class Syslog extends BaseModel<Syslog> {
 	 */
 	public static final String sqlId_clear = "platform.sysLog.clear";
 
+	private String ids;
+	private String version;
+	private String actionenddate;
+	private String actionendtime;
+	private String actionhaoshi;
+	private String actionstartdate;
+	private String actionstarttime;
+	private String cause;
+	private String cookie;
+	private String description;
+	private String enddate;
+	private String endtime;
+	private String haoshi;
+	private String ips;
+	private String method;
+	private String referer;
+	private String requestpath;
+	private String startdate;
+	private String starttime;
+	private String status;
+	private String useragent;
+	private String viewhaoshi;
+	private String operatorids;
+	private String accept;
+	private String acceptencoding;
+	private String acceptlanguage;
+	private String connection;
+	private String host;
+	private String xrequestedwith;
+	private String pvids;
+	private String userids;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

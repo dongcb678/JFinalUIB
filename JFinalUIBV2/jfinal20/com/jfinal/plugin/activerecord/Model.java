@@ -32,7 +32,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.jfinal.plugin.activerecord.cache.ICache;
-import com.platform.mvc.base.BaseModel;
 
 /**
  * Model.
@@ -481,11 +480,11 @@ public abstract class Model<M extends Model> implements Serializable {
 		}
 		
 		// ################  新增代码块   start   #################
-		boolean versionModify = modifyFlag.contains(BaseModel.column_version); 
+		boolean versionModify = modifyFlag.contains("version"); 
 		// 是否包含version字段
 		if(versionModify){
 			// 新版本号
-			Long newVersion = getNumber(BaseModel.column_version).longValue(); 
+			Long newVersion = getNumber("version").longValue(); 
 			paras.add(newVersion);
 			// 追加条件sql
 			sql.append(" and version < ? ");

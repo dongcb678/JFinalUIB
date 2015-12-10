@@ -158,6 +158,24 @@ public class Operator extends BaseModelCache<Operator> {
 	 */
 	public static final String sqlId_splitPage_from = "platform.operator.splitPageFrom";
 
+	private String ids;
+	private String version;
+	private String description;
+	private String names;
+	private String onemany;
+	private String returnparamkeys;
+	private String returnurl;
+	private String rowfilter;
+	private String url;
+	private String moduleids;
+	private String splitpage;
+	private String formtoken;
+	private String ipblack;
+	private String privilegess;
+	private String ispv;
+	private String pvtype;
+	private String modulenames;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

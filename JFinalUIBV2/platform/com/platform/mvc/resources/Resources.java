@@ -131,6 +131,21 @@ public class Resources extends BaseModel<Resources> {
 	 */
 	public static final String sqlId_24hour = "platform.resources.24hour";
 
+	private String ids;
+	private String version;
+	private String osname;
+	private String ips;
+	private String hostname;
+	private String cpunumber;
+	private String cpuratio;
+	private String phymemory;
+	private String phyfreememory;
+	private String jvmtotalmemory;
+	private String jvmfreememory;
+	private String jvmmaxmemory;
+	private String gccount;
+	private String createdate;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

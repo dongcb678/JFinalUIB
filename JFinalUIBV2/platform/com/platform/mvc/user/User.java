@@ -186,6 +186,27 @@ public class User extends BaseModelCache<User> {
 	 */
 	public static final String sqlId_start = "platform.user.start";
 
+	private String ids;
+	private String version;
+	private String errorcount;
+	private String orderids;
+	private String password;
+	private String salt;
+	private String status;
+	private String stopdate;
+	private String username;
+	private String departmentids;
+	private String userinfoids;
+	private String stationids;
+	private String deptids;
+	private String userids;
+	private String groupids;
+	private String departmentnames;
+	private String stationnames;
+	private String deptnames;
+	private String usernames;
+	private String groupnames;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

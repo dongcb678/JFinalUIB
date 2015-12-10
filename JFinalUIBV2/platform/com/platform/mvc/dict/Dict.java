@@ -222,6 +222,27 @@ public class Dict extends BaseModelCache<Dict> {
 	 */
 	public static final String sqlId_childCount = "platform.dict.childCount";
 
+	private String ids;
+	private String version;
+	private String description;
+	private String images;
+	private String names;
+	private String orderids;
+	private String paths;
+	private String zhuangtai;
+	private String parentids;
+	private String isparent;
+	private String levels;
+	private String numbers;
+	private String val;
+	private String i18n;
+	private String val_zhcn;
+	private String val_zhhk;
+	private String val_zhtw;
+	private String val_ja;
+	private String val_enus;
+	private String status;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

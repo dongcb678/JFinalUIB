@@ -135,6 +135,21 @@ public class Menu extends BaseModel<Menu> {
 	 */
 	public static final String sqlId_operator = "platform.menu.operator";
 
+	private String ids;
+	private String version;
+	private String images;
+	private String levels;
+	private String names_zhcn;
+	private String orderids;
+	private String operatorids;
+	private String parentmenuids;
+	private String systemsids;
+	private String isparent;
+	private String names_zhtw;
+	private String names_zhhk;
+	private String names_ja;
+	private String names_enus;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

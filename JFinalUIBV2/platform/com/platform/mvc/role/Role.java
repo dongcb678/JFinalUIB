@@ -98,6 +98,14 @@ public class Role extends BaseModelCache<Role> {
 	 */
 	public static final String sqlId_splitPage_from = "platform.role.splitPageFrom";
 
+	private String ids;
+	private String version;
+	private String description;
+	private String names;
+	private String operatorids;
+	private String moduleids;
+	private String numbers;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

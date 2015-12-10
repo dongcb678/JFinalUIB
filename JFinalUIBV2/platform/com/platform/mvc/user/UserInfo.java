@@ -211,6 +211,37 @@ public class UserInfo extends BaseModel<UserInfo> {
 	 */
 	public static final String sqlId_paging = "platform.userInfo.paging";
 
+	private String ids;
+	private String version;
+	private String address;
+	private String addressinfo;
+	private String avoirdupois;
+	private String birthday;
+	private String bloodgroup;
+	private String clientlevelend;
+	private String clientlevelstart;
+	private String culture;
+	private String description;
+	private String email;
+	private String finishschooldate;
+	private String folk;
+	private String government;
+	private String homepage;
+	private String householder;
+	private String idcard;
+	private String marriage;
+	private String mobile;
+	private String msn;
+	private String names;
+	private String nativityaddress;
+	private String postboy;
+	private String qq;
+	private String schoolname;
+	private String sex;
+	private String speciality;
+	private String stature;
+	private String telephone;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

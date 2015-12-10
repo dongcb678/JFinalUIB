@@ -26,7 +26,6 @@ import com.jfinal.log.Logger;
 import com.jfinal.render.Render;
 import com.jfinal.render.RenderException;
 import com.jfinal.render.RenderFactory;
-import com.platform.constant.ConstantWebContext;
 
 /**
  * ActionHandler
@@ -102,7 +101,7 @@ final class ActionHandler extends Handler {
 			long renderTime = end - start;
 			log.debug("视图耗时计算 end currentTimeMillis = " + end + "，renderTime = " + renderTime);
 			
-			request.setAttribute(ConstantWebContext.renderTimeKey, renderTime);
+			request.setAttribute("renderTime", renderTime);
 		}
 		catch (RenderException e) {
 			if (log.isErrorEnabled()) {

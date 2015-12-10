@@ -47,6 +47,11 @@ public class Keyword extends BaseModel<Keyword> {
 	 */
 	public static final String sqlId_splitPage_from = "weixin.keyword.splitPageFrom";
 
+	private String ids;
+	private String question;
+	private String questionkey;
+	private String answer;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}
