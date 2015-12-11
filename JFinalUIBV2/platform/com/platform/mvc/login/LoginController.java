@@ -5,9 +5,11 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 import com.platform.constant.ConstantLogin;
 import com.platform.constant.ConstantWebContext;
+import com.platform.interceptor.AuthInterceptor;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.user.User;
 import com.platform.tools.ToolWeb;
+import com.platform.tools.security.ToolIDEA;
 
 /**
  * 登陆处理
@@ -28,6 +30,33 @@ public class LoginController extends BaseController {
 		}else{
 			render("/platform/login/login.html");
 		}
+	}
+
+	/**
+	 * 第三方系统P3P登陆
+	 * 最后面URL的参数可以是UIB中加密过的认证字符串，也可以是其他协定好的加密串，加密串里面主要存放的是用户的id或者账号
+	 * <script type="text/javascript" src="http://www.uib.com/jf/platform/login/p3p/RUdtNVpET1E5ZWF6bFNFTGJDa0dzK2E1NURXYTF5TXpBay8zZ0p
+	 * pN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd
+	 * 1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS"></script>
+	 */
+	public void p3p() {
+		String act = getPara();
+		if(null != act){
+			// 1.解密认证数据
+			String data = ToolIDEA.decrypt(act);
+			String[] datas = data.split(".#.");	//arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
+			
+			// 2. 分解认证数据
+			String userIds = datas[1]; // 用户id
+			User user = User.dao.cacheGet(userIds);
+			if(user != null){
+				getResponse().setHeader("P3P", "CP=\"NON DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAa IVDa CONa HISa TELa OTPa OUR UNRa IND UNI COM NAV INT DEM CNT PRE LOC\""); 
+				AuthInterceptor.setCurrentUser(getRequest(), getResponse(), user, false);
+				renderText("success");
+				return;
+			}
+		}
+		renderText("error");
 	}
 
 	/**
