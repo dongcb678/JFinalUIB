@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
 
@@ -130,7 +131,19 @@ public abstract class ToolDateTime {
 
 	/**
 	 * 格式化
-	 * 
+	 * @param date
+	 * @param pattern
+	 * @param timeZone
+	 * @return
+	 */
+	public static String format(Date date, String pattern, TimeZone timeZone) {
+		DateFormat format = new SimpleDateFormat(pattern);
+		format.setTimeZone(timeZone);
+		return format.format(date);
+	}
+
+	/**
+	 * 格式化
 	 * @param date
 	 * @param parsePattern
 	 * @param returnPattern
@@ -138,6 +151,18 @@ public abstract class ToolDateTime {
 	 */
 	public static String format(String date, String parsePattern, String returnPattern) {
 		return format(parse(date, parsePattern), returnPattern);
+	}
+
+	/**
+	 * 格式化
+	 * @param date
+	 * @param parsePattern
+	 * @param returnPattern
+	 * @param timeZone
+	 * @return
+	 */
+	public static String format(String date, String parsePattern, String returnPattern, TimeZone timeZone) {
+		return format(parse(date, parsePattern), returnPattern, timeZone);
 	}
 
 	/**
@@ -513,5 +538,5 @@ public abstract class ToolDateTime {
 		}
 		return listArray;
 	}
-
+	
 }
