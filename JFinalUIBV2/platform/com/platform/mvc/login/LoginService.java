@@ -157,7 +157,7 @@ public class LoginService extends BaseService {
 		}
 
 		// 3.密码错误次数超限
-		int errorCount = user.getNumber(User.column_errorcount).intValue();
+		long errorCount = user.getNumber(User.column_errorcount).longValue();
 		int passErrorCount = PropKit.getInt(ConstantInit.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate(User.column_stopdate);
@@ -230,7 +230,7 @@ public class LoginService extends BaseService {
 		}
 
 		// 3.密码错误次数超限
-		int errorCount = user.getNumber(User.column_errorcount).intValue();
+		long errorCount = user.getNumber(User.column_errorcount).longValue();
 		int passErrorCount = PropKit.getInt(ConstantInit.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate(User.column_stopdate);

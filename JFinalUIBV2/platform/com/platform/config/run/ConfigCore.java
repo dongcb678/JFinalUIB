@@ -47,6 +47,7 @@ import com.weixin.mvc.message.Message;
 /**
  * 独立启动Jfinal中的插件，不依赖web容器调用插件
  * @author 董华健  dongcb678@163.com
+ * 描述：独立启用核心组件主要给单元测试、代码生成器使用
  */
 public class ConfigCore {
 

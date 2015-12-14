@@ -362,9 +362,9 @@ public class BaseService {
 	 * @param batchSize 每次数据多少条
 	 * @return
 	 */
-	public int getBatchCount(String dataSource, String sql, int batchSize){
-		int batchCount = 0;
-		int count = Db.use(dataSource).queryNumber(" select count(*) " + sql).intValue();
+	public long getBatchCount(String dataSource, String sql, int batchSize){
+		long batchCount = 0;
+		long count = Db.use(dataSource).queryNumber(" select count(*) " + sql).longValue();
 		if(count % batchSize == 0){
 			batchCount = count / batchSize;
 		}else{

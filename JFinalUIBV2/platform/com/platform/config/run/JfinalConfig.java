@@ -39,7 +39,7 @@ import com.platform.tools.ToolString;
 import com.weixin.lucene.DocKeyword;
 
 /**
- * Jfinal API 引导式配置
+ * Jfinal API 引导式配置，系统的核心配置，负责生产、加载所有核心组件
  */
 public class JfinalConfig extends JFinalConfig {
 	

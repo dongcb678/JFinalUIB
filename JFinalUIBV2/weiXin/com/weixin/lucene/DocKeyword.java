@@ -94,13 +94,13 @@ public class DocKeyword extends DocBase {
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql("weixin.keyword.paging", null, ConstantRender.sql_renderType_beetl);
 
-		int batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
+		long batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from wx_keyword ", splitDataSize);
 		
 		if(batchCount == 0){
 			ramToDisk();//把RAM写同步更新到DISK
 		}else{
 			List<Keyword> list = null;
-			for (int i = 0; i < batchCount; i++) {
+			for (long i = 0; i < batchCount; i++) {
 				log.info("索引批次：" + i);
 				if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
 					list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize); // start 0
