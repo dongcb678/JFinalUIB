@@ -74,8 +74,8 @@ public class AuthInterceptor implements Interceptor {
 			MDC.put("userId", user.getPKValue());
 			MDC.put("userName", user.getUsername());
 		}else{
-			MDC.put("userId", "empty");
-			MDC.put("userName", "empty");
+			MDC.put("userId", "*unknown userId*");
+			MDC.put("userName", "*unknown userName*");
 		}
 
 		log.info("获取URI对象!");
@@ -179,7 +179,10 @@ public class AuthInterceptor implements Interceptor {
 //			}
 
 			toView(contro, ConstantAuth.auth_exception, "业务逻辑代码遇到异常Exception = " + expMessage);
-		} 
+		} finally {
+			MDC.remove("userId");
+			MDC.remove("userName");
+		}
 	}
 
 	/**
