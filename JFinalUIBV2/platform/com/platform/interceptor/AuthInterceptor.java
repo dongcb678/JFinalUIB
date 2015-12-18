@@ -74,8 +74,8 @@ public class AuthInterceptor implements Interceptor {
 			MDC.put("userId", user.getPKValue());
 			MDC.put("userName", user.getUsername());
 		}else{
-			MDC.put("userId", "empty");
-			MDC.put("userName", "empty");
+			MDC.put("userId", "*unknown userId*");
+			MDC.put("userName", "*unknown userName*");
 		}
 
 		log.info("获取URI对象!");
