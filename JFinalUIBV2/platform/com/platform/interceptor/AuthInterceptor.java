@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
@@ -69,6 +70,12 @@ public class AuthInterceptor implements Interceptor {
 			reqSysLog.set(Syslog.column_userids, user.getPKValue());
 			contro.setAttr(ConstantWebContext.request_cUser, user);
 			contro.setAttr(ConstantWebContext.request_cUserIds, user.getPKValue());
+			
+			MDC.put("userId", user.getPKValue());
+			MDC.put("userName", user.getUsername());
+		}else{
+			MDC.put("userId", "empty");
+			MDC.put("userName", "empty");
 		}
 
 		log.info("获取URI对象!");
