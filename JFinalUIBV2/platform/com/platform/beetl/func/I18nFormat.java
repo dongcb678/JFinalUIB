@@ -1,5 +1,6 @@
 package com.platform.beetl.func;
 
+import java.text.MessageFormat;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -42,8 +43,9 @@ public class I18nFormat implements Function {
 		}
 
 		// 格式化
-		String value = String.format(formatTemplate, paramValue.toArray());
-
+		//String value = String.format(formatTemplate, paramValue.toArray());	// %s %d ...
+		String value = MessageFormat.format(formatTemplate, paramValue.toArray());	// {0} {1} ...
+		
 		log.debug("I18nFormat，国际化模板格式化处理，value=" + value);
 		
 		return value;
