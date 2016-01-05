@@ -25,7 +25,7 @@ public class OperatorController extends BaseController {
 	 * 功能管理列表页
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage_select, Operator.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPage);
 		render("/platform/operator/list.html");
 	}
 

@@ -147,16 +147,10 @@ public class Operator extends BaseModelCache<Operator> {
 	public static final String sqlId_byModuleIds = "platform.operator.byModuleIds";
 
 	/**
-	 * sqlId : platform.operator.splitPageSelect
-	 * 描述：分页Select
-	 */
-	public static final String sqlId_splitPage_select = "platform.operator.splitPageSelect";
-
-	/**
-	 * sqlId : platform.operator.splitPageFrom
+	 * sqlId : platform.operator.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "platform.operator.splitPageFrom";
+	public static final String sqlId_splitPage = "platform.operator.splitPage";
 
 	private String ids;
 	private String version;

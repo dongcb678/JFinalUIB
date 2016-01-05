@@ -9,8 +9,7 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.net.telnet.TelnetClient;
-
-import com.jfinal.log.Logger;
+import org.apache.log4j.Logger;
 
 public abstract class ToolNet {
 

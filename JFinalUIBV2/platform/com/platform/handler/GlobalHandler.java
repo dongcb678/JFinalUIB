@@ -80,7 +80,7 @@ public class GlobalHandler extends Handler {
 		response.setHeader("Pragma","no-cache"); //HTTP 1.0
 		response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 		
-		nextHandler.handle(target, request, response, isHandled);
+		next.handle(target, request, response, isHandled);
 		
 		log.info("请求处理完毕，计算耗时");
 		

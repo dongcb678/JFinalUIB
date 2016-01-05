@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
-import com.platform.mvc.base.BaseModel;
 
 /**
  * 用户分组管理
@@ -18,7 +17,7 @@ public class GroupController extends BaseController {
 	
 	public void index(){
 		log.debug("微信用户分组管理：分页");
-		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, Group.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, Group.sqlId_splitPage);
 		render("/weiXin/group/list.html");
 	}
 

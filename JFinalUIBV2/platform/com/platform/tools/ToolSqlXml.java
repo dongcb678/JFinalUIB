@@ -10,9 +10,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.beetl.core.BeetlKit;
 
-import com.jfinal.log.Logger;
 import com.platform.constant.ConstantRender;
 import com.platform.plugin.SqlXmlPlugin;
 

@@ -221,10 +221,10 @@ public class Syslog extends BaseModel<Syslog> {
 	public static final String sqlId_splitPage_select = "platform.sysLog.splitPageSelect";
 
 	/**
-	 * sqlId : platform.sysLog.splitPageFrom
+	 * sqlId : platform.sysLog.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "platform.sysLog.splitPageFrom";
+	public static final String sqlId_splitPage = "platform.sysLog.splitPage";
 
 	/**
 	 * sqlId : platform.sysLog.clear

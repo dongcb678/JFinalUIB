@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.jfinal.core.ModelInjector;
+import com.jfinal.core.Injector;
 import com.jfinal.kit.StrKit;
 import com.platform.mvc.base.BaseModel;
 
@@ -69,8 +69,7 @@ public class ToolModelInjector {
 		
 		List<T> modelList = new ArrayList<T>();
 		for (int i = 0; i <= index; i++) {
-			@SuppressWarnings("unchecked")
-			T baseModel = (T) ModelInjector.inject(modelClass, prefix + "[" + i + "]", request, false);
+			T baseModel = (T) Injector.injectModel(modelClass, prefix + "[" + i + "]", request, false);
 			modelList.add(baseModel);
 		}
 		return modelList;

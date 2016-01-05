@@ -42,8 +42,10 @@
 	</sql>
 	
 	<!-- 动态SQL处理 -->
-	<sql id="splitPageFrom">
+	<sql id="splitPage">
 		<![CDATA[ 
+			select 
+				*
         	from 
         		pt_group 
         	where 

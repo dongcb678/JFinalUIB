@@ -42,10 +42,10 @@ public class Keyword extends BaseModel<Keyword> {
 	
 	
 	/**
-	 * sqlId : weixin.keyword.splitPageFrom
+	 * sqlId : weixin.keyword.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "weixin.keyword.splitPageFrom";
+	public static final String sqlId_splitPage = "weixin.keyword.splitPage";
 
 	private String ids;
 	private String question;

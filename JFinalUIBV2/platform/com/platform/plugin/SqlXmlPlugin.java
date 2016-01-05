@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolClassSearch;

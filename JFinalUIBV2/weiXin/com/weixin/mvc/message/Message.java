@@ -210,10 +210,10 @@ public class Message extends BaseModel<Message> {
 	public static final String column_articlecount = "articlecount";
 	
 	/**
-	 * sqlId : weixin.message.splitPageFrom
+	 * sqlId : weixin.message.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "weixin.message.splitPageFrom";
+	public static final String sqlId_splitPage = "weixin.message.splitPage";
 
 	private String ids;
 	private String inouts;

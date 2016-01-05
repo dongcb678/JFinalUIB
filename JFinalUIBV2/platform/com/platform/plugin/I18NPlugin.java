@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 import com.jfinal.kit.PropKit;
-import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 import com.platform.constant.ConstantInit;
 import com.platform.tools.ToolDirFile;

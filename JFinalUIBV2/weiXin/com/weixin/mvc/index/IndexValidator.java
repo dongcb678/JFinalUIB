@@ -18,7 +18,7 @@ public class IndexValidator extends Validator {
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(IndexValidator.class);
+//		controller.keepModel(xxxModel.class);
 		
 		String actionKey = getActionKey();
 		if (actionKey.equals("/jf/wx/index")){

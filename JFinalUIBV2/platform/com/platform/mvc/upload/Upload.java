@@ -69,10 +69,10 @@ public class Upload extends BaseModel<Upload> {
 	public static final String sqlId_splitPage_select = "platform.upload.splitPageSelect";
 
 	/**
-	 * sqlId : platform.upload.splitPageFrom
+	 * sqlId : platform.upload.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "platform.upload.splitPageFrom";
+	public static final String sqlId_splitPage = "platform.upload.splitPage";
 
 	private String ids;
 	private String version;

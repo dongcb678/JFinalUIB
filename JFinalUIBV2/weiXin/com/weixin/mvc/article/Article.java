@@ -53,10 +53,10 @@ public class Article extends BaseModel<Article> {
 	public static final String column_url = "url";
 	
 	/**
-	 * sqlId : test.article.splitPageFrom
+	 * sqlId : test.article.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "weixin.article.splitPageFrom";
+	public static final String sqlId_splitPage = "weixin.article.splitPage";
 
 	private String ids;
 	private String messageids;

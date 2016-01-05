@@ -11,9 +11,11 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.i18n.I18nInterceptor;
+import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.tx.TxByActionKeyRegex;
 import com.jfinal.plugin.activerecord.tx.TxByActionKeys;
+import com.jfinal.plugin.activerecord.tx.TxByMethodRegex;
 import com.jfinal.plugin.activerecord.tx.TxByMethods;
-import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.platform.config.mapping.PlatformMapping;
@@ -51,6 +53,7 @@ public class JfinalConfig extends JFinalConfig {
 	public void configConstant(Constants constants) {
 		log.info("configConstant 缓存 properties");
 		loadPropertyFile("init.properties");
+    	PropKit.use("init.properties");
 
 		log.info("configConstant 设置字符集");
 		constants.setEncoding(ToolString.encoding); 
@@ -58,6 +61,9 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("configConstant 设置是否开发模式");
 		constants.setDevMode(getPropertyToBoolean(ConstantInit.config_devMode, false));
 
+		log.info("configConstant 设置json工厂类");
+//		constants.setJsonFactory(new FastJsonFactory()); // new JacksonFactory()
+		
 		log.info("configConstant 视图Beetl设置");
 		constants.setMainRenderFactory(new BeetlRenderFactory());
 		ToolBeetl.regiseter();
@@ -130,10 +136,9 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("configInterceptor 配置开启事物规则");
 		interceptors.add(new TxByMethods("save", "update", "delete"));
-		interceptors.add(new TxByRegex(".*save.*"));
-		interceptors.add(new TxByRegex(".*update.*"));
-		interceptors.add(new TxByRegex(".*delete.*"));
+		interceptors.add(new TxByMethodRegex("(.*save.*|.*update.*|.*delete.*)")); // 多方法名匹配使用一个正则匹配，2.1只支持单添加实例
 		interceptors.add(new TxByActionKeys("/jf/wx/message", "/jf/wx/message/index"));
+		interceptors.add(new TxByActionKeyRegex("/jf/wx/message.*"));
 
 		log.info("configInterceptor i18n拦截器");
 		interceptors.add(new I18nInterceptor());

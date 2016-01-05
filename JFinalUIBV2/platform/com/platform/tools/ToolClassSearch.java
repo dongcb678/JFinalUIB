@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.apache.log4j.Logger;
+
 import com.jfinal.kit.PropKit;
-import com.jfinal.log.Logger;
 import com.platform.constant.ConstantInit;
 
 /**

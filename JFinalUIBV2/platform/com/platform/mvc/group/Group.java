@@ -55,18 +55,12 @@ public class Group extends BaseModelCache<Group> {
 	 * 字段类型 ：character varying 
 	 */
 	public static final String column_numbers = "numbers";
-	
-	/**
-	 * sqlId : platform.group.splitPageSelect
-	 * 描述：分页Select
-	 */
-	public static final String sqlId_splitPage_select = "platform.group.splitPageSelect";
 
 	/**
-	 * sqlId : platform.group.splitPageFrom
+	 * sqlId : platform.group.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "platform.group.splitPageFrom";
+	public static final String sqlId_splitPage = "platform.group.splitPage";
 
 	/**
 	 * sqlId : platform.group.paging

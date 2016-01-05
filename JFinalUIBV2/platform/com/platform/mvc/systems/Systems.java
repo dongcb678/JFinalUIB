@@ -69,10 +69,10 @@ public class Systems extends BaseModel<Systems> {
 	public static final String sqlId_splitPage_select = "platform.systems.splitPageSelect";
 
 	/**
-	 * sqlId : platform.systems.splitPageFrom
+	 * sqlId : platform.systems.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "platform.systems.splitPageFrom";
+	public static final String sqlId_splitPage = "platform.systems.splitPage";
 
 	private String ids;
 	private String version;

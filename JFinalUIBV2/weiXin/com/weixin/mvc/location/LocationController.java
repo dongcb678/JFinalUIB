@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
-import com.platform.mvc.base.BaseModel;
 
 /**
  * 位置管理
@@ -17,7 +16,7 @@ public class LocationController extends BaseController {
 	
 	public void index(){
 		log.debug("微信用户位置管理：分页");
-		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, Location.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, Location.sqlId_splitPage);
 		render("/weiXin/location/list.html");
 	}
 	

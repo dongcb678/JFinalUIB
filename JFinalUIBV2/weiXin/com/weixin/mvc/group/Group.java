@@ -44,10 +44,10 @@ public class Group extends BaseModel<Group> {
 	
 	
 	/**
-	 * sqlId : weixin.group.splitPageFrom
+	 * sqlId : weixin.group.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "weixin.group.splitPageFrom";
+	public static final String sqlId_splitPage = "weixin.group.splitPage";
 
 	private String ids;
 	private String id;

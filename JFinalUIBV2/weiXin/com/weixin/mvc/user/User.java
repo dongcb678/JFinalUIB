@@ -91,10 +91,10 @@ public class User extends BaseModel<User> {
 	public static final String column_groupids = "groupids";
 	
 	/**
-	 * sqlId : weixin.user.splitPageFrom
+	 * sqlId : weixin.user.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage_from = "weixin.user.splitPageFrom";
+	public static final String sqlId_splitPage = "weixin.user.splitPage";
 
 	private String ids;
 	private String openid;

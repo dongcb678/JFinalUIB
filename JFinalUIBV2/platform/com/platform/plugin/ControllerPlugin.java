@@ -2,8 +2,9 @@ package com.platform.plugin;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.jfinal.config.Routes;
-import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;

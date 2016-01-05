@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
-import com.platform.mvc.base.BaseModel;
 
 /**
  * 自动回复管理
@@ -18,7 +17,7 @@ public class KeywordController extends BaseController {
 	
 	public void index(){
 		log.debug("微信自动回复管理：分页");
-		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, Keyword.sqlId_splitPage_from);
+		paging(ConstantInit.db_dataSource_main, splitPage, Keyword.sqlId_splitPage);
 		render("/weiXin/keyword/list.html");
 	}
 	
