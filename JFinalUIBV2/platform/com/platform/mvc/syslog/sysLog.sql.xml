@@ -61,4 +61,30 @@
     	]]>
 	</sql>
 	
+	<!-- 根据系统id清理模块数据 
+				delete 
+					s.* 
+				from 
+					pt_syslog s 
+					left join pt_operator o on s.operatorids = o.ids 
+		        	left join pt_module m on o.moduleids = m.ids 
+		        	left join pt_systems sy on m.systemsids = sy.ids 
+        		where 
+        			systemsids = ?
+	-->
+	<sql id="deleteBySystemsId">
+		<![CDATA[ 
+        	delete from pt_syslog where operatorids in (
+        		select 
+        			o.ids 
+        		from 
+        			pt_operator o 
+		        	left join pt_module m on o.moduleids = m.ids 
+		        	left join pt_systems sy on m.systemsids = sy.ids 
+        		where 
+        			systemsids = ?
+        	)
+    	]]>
+	</sql>
+	
 </sql-statement>

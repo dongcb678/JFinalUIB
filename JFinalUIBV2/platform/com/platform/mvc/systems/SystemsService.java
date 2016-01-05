@@ -2,7 +2,10 @@ package com.platform.mvc.systems;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.aop.Before;
 import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.tx.Tx;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.menu.Menu;
 import com.platform.mvc.module.Module;
@@ -18,6 +21,7 @@ public class SystemsService extends BaseService {
 	 * 保存
 	 * @param systems
 	 */
+	@Before(Tx.class)
 	public void save(Systems systems){
 		// 保存系统
 		systems.save();
@@ -45,16 +49,24 @@ public class SystemsService extends BaseService {
 	 * 删除
 	 * @param ids
 	 */
+	@Before(Tx.class)
 	public void delete(String ids){
 		String[] idsArr = splitByComma(ids);
 		for (String systemsIds : idsArr) {
 			//删除系统
 			Systems.dao.deleteById(systemsIds);
+			
 			//删除关联模块
+			String moduleSql = getSql("platform.module.deleteBySystemsId");
+			Db.update(moduleSql, systemsIds);
 			
 			//删除关联菜单
+			String menuSql = getSql("platform.menu.deleteBySystemsId");
+			Db.update(menuSql, systemsIds);
 			
 			//删除关联日志
+			String sysLogSql = getSql("platform.sysLog.deleteBySystemsId");
+			Db.update(sysLogSql, systemsIds);
 		}
 	}
 	

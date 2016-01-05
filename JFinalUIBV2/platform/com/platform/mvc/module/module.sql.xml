@@ -34,4 +34,11 @@
     	]]>
 	</sql>
 	
+	<!-- 根据系统id清理模块数据 -->
+	<sql id="deleteBySystemsId">
+		<![CDATA[ 
+        	delete from pt_module where systemsids = ?
+    	]]>
+	</sql>
+	
 </sql-statement>
