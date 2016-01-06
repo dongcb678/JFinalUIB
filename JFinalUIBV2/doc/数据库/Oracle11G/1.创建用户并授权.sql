@@ -1,5 +1,5 @@
 
--- 使用系统管理员账号操作
+-- 使用系统管理员账号进行操作
 
 --删除用户
 drop user jfinaluibv2 cascade;

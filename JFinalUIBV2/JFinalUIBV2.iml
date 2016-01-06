@@ -22,7 +22,7 @@
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
       <src_folder value="file://$MODULE_DIR$/platform" expected_position="1" />
       <src_folder value="file://$MODULE_DIR$/weiXin" expected_position="2" />
-      <src_folder value="file://$MODULE_DIR$/jfinal20" expected_position="3" />
+      <src_folder value="file://$MODULE_DIR$/jfinal21" expected_position="3" />
       <src_folder value="file://$MODULE_DIR$/junit" expected_position="4" />
     </src_description>
   </component>
@@ -35,6 +35,12 @@
         <webroots>
           <root url="file://$MODULE_DIR$/WebContent" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src" />
+          <root url="file://$MODULE_DIR$/platform" />
+          <root url="file://$MODULE_DIR$/weiXin" />
+          <root url="file://$MODULE_DIR$/junit" />
+        </sourceRoots>
       </configuration>
     </facet>
   </component>
@@ -45,7 +51,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/platform" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/weiXin" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/jfinal20" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jfinal21" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/junit" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
@@ -63,18 +69,26 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/build-lib/jfinal20" />
+          <root url="jar://$MODULE_DIR$/build-lib/jetty-8.1.8/jetty-server-8.1.8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/build-lib/jfinal20" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="junit:junit:4.8.1" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/build-lib/jetty-8.1.8/jetty-server-8.1.8.jar!/" />
+          <root url="file://$MODULE_DIR$/build-lib/jfinal21" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/build-lib/jfinal21" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
