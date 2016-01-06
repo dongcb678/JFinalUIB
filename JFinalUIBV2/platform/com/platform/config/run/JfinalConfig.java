@@ -52,17 +52,21 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public void configConstant(Constants constants) {
 		log.info("configConstant 缓存 properties");
-		loadPropertyFile("init.properties");
     	PropKit.use("init.properties");
 
 		log.info("configConstant 设置字符集");
 		constants.setEncoding(ToolString.encoding); 
 
 		log.info("configConstant 设置是否开发模式");
-		constants.setDevMode(getPropertyToBoolean(ConstantInit.config_devMode, false));
+		constants.setDevMode(PropKit.getBoolean(ConstantInit.config_devMode, false));
 
 		log.info("configConstant 设置json工厂类");
-//		constants.setJsonFactory(new FastJsonFactory()); // new JacksonFactory()
+		//constants.setJsonFactory(new FastJsonFactory()); // new JacksonFactory()
+
+		log.info("configConstant 设置path相关");
+		//constants.setBaseUploadPath(PathKit.getWebRootPath() + "/WEB-INF/files/upload"); // 上传公共路径
+		//constants.setBaseDownloadPath(PathKit.getWebRootPath() + "/WEB-INF/files/upload"); // 下载公共路径
+		//constants.setBaseViewPath("/jf"); //设置路由公共路径
 		
 		log.info("configConstant 视图Beetl设置");
 		constants.setMainRenderFactory(new BeetlRenderFactory());
@@ -73,7 +77,8 @@ public class JfinalConfig extends JFinalConfig {
 		constants.setError500View("/common/500.html");
 
 		log.info("configConstant i18n文件前缀设置设置");
-		constants.setI18nDefaultBaseName(getProperty(ConstantInit.config_i18n_filePrefix));
+		constants.setI18nDefaultBaseName(PropKit.get(ConstantInit.config_i18n_filePrefix));
+		//constants.setI18nDefaultLocale("zh_CN");
 	}
 	
 	/**
@@ -105,8 +110,8 @@ public class JfinalConfig extends JFinalConfig {
 			
 		}else if(ToolCache.getCacheType().equals(ConstantCache.cache_type_redis)){
 			log.info("RedisPlugin Redis缓存");
-			String redisIp = getProperty(ConstantInit.config_redis_ip);
-			Integer redisPort = getPropertyToInt(ConstantInit.config_redis_port);
+			String redisIp = PropKit.get(ConstantInit.config_redis_ip);
+			Integer redisPort = PropKit.getInt(ConstantInit.config_redis_port);
 			RedisPlugin systemRedis = new RedisPlugin(ConstantCache.cache_name_redis_system, redisIp, redisPort);
 			plugins.add(systemRedis);
 		}
@@ -159,7 +164,7 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
 
-		boolean luceneIndex = getPropertyToBoolean(ConstantInit.config_luceneIndex, false);
+		boolean luceneIndex = PropKit.getBoolean(ConstantInit.config_luceneIndex, false);
 		if(luceneIndex){
 			log.info("afterJFinalStart 创建自动回复lucene索引");
 			new DocKeyword().run(); 
@@ -197,7 +202,6 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public static void main(String[] args) {
 		JFinal.start("WebContent", 99, "/", 5);
-		//JFinal.start("D:\\DevelopmentTool\\IntelliJIDEA14.1.4" +
-		//		"\\IdeaProjects\\JFinalUIBV2\\JFinalUIBV2\\WebContent", 99, "/", 5);
+		//JFinal.start("D:\\DevelopmentTool\\IntelliJIDEA14.1.4\\IdeaProjects\\JFinalUIBV2\\JFinalUIBV2\\WebContent", 99, "/", 5);
 	}
 }
