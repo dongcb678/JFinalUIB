@@ -141,7 +141,7 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("configInterceptor 配置开启事物规则");
 		interceptors.add(new TxByMethods("save", "update", "delete"));
-		interceptors.add(new TxByMethodRegex("(.*save.*|.*update.*|.*delete.*)")); // 多方法名匹配使用一个正则匹配，2.1只支持单添加实例
+		interceptors.add(new TxByMethodRegex("(.*save.*|.*update.*|.*delete.*)")); // 2.1只支持单实例添加，多方法名匹配使用一个正则匹配
 		interceptors.add(new TxByActionKeys("/jf/wx/message", "/jf/wx/message/index"));
 		interceptors.add(new TxByActionKeyRegex("/jf/wx/message.*"));
 
@@ -183,13 +183,13 @@ public class JfinalConfig extends JFinalConfig {
 	public void beforeJFinalStop() {
 		log.info("beforeJFinalStop 释放lucene索引资源");
 		new DocKeyword().close();
-
+	
 		log.info("beforeJFinalStop 释放日志入库线程");
 		ThreadSysLog.setThreadRun(false);
-
+	
 		log.info("beforeJFinalStop 释放系统负载抓取线程");
 		TimerResources.stop();
-
+	
 		log.info("beforeJFinalStop 数据清理");
 		DataClear.stop();
 	}

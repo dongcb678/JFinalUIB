@@ -1,6 +1,7 @@
 package com.platform.mvc.upload;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +60,10 @@ public class UploadController extends BaseController {
 			
 		} else {
 			log.error("保存到路径错误，必须传递pathType值");
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("error", "必须传递pathType值");
+			renderJson(map);
+			return;
 		}
 		
 		List<UploadFile> files = getFiles(path, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding);
