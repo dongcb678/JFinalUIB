@@ -56,12 +56,12 @@ public abstract class ToolDirFile {
 			 * maven： jetty:run
 			 * maven： tomcat7:run
 			 */
-			classesPath = PathKit.getRootClassPath();
+//			classesPath = PathKit.getRootClassPath();
 			
 			/**
 			 * 2.兼容jboss war部署
 			 */
-			//classesPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
+			classesPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
 		}
 		return classesPath;
 	}

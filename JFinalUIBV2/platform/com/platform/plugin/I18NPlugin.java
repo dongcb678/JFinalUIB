@@ -130,13 +130,12 @@ public class I18NPlugin implements IPlugin {
 			try {
 				//inputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
 				//inputStream = I18NPlugin.class.getResourceAsStream(fileName);// "/init.properties"
+				log.debug("加载国际化资源文件：" + classesPath  + File.separator +  fileName);
 				inputStream = new FileInputStream(new File(classesPath  + File.separator +  fileName));
 				
 				Properties properties = new Properties();
 				properties.load(inputStream);
 
-				log.debug("加载国际化资源文件：" + fileName); 
-				
 				Map<String, String> i18nMap = new HashMap<String, String>();
 				Enumeration<Object> keys = properties.keys();
 				while (keys.hasMoreElements()) {
@@ -145,15 +144,16 @@ public class I18NPlugin implements IPlugin {
 					i18nMap.put(key, value);
 				}
 				resourceBundleMap.put(language, i18nMap);
-			} catch (Exception exception) {
-				log.info("加载properties失败！...");
+			} catch (Exception e) {
+				log.error("加载properties失败！..." + e.getMessage());
+				e.printStackTrace();
 			} finally {
 				try {
 					if (inputStream != null) {
 						inputStream.close();
 					}
 				} catch (IOException e) {
-					log.info("加载properties后关闭失败！...");
+					log.error("加载properties后关闭失败！...");
 				}
 			}
 		}
