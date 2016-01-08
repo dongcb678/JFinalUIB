@@ -147,8 +147,10 @@ public abstract class BaseController extends Controller {
 	 */
 	@Override
 	public String getPara(String name) {
-		String value = ToolWeb.getParam(getRequest(), name);
-		return value;
+		if ("GET".equalsIgnoreCase(getRequest().getMethod().toUpperCase())){
+			return ToolWeb.getParam(getRequest(), name);
+		}
+		return getPara(name);
 	}
 	
 	/**
