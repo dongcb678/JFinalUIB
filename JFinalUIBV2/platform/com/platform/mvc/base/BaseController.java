@@ -150,7 +150,7 @@ public abstract class BaseController extends Controller {
 		if ("GET".equalsIgnoreCase(getRequest().getMethod().toUpperCase())){
 			return ToolWeb.getParam(getRequest(), name);
 		}
-		return getPara(name);
+		return super.getPara(name);
 	}
 	
 	/**
