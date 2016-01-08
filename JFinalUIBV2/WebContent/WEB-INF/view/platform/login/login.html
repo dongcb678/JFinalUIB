@@ -85,9 +85,9 @@
 							
 							<div class="form-group form-actions">
 								<span class="input-icon">
-									<input type="text" class="form-control password" name="authCode" placeholder="验证码">
+									<input type="text" class="form-control password" id="login_authCode"  name="authCode" placeholder="验证码">
 									<i class="fa fa-lock"></i>
-									<a href="#" onclick="showImage(this);" class="forgot">${i18nMap["admin.login.clickAuthCode"]}</a>
+									<a href="#" id="login_authCodeHref" onclick="showImage(this);" class="forgot">${i18nMap["admin.login.clickAuthCode"]}</a>
 								</span>
 							</div>
 							
@@ -96,7 +96,7 @@
 									<input type="checkbox" class="grey remember" id="remember" name="remember" value="1">
 									保持登录状态
 								</label>
-								<button type="submit" class="btn btn-green pull-right">
+								<button id="login_submit" type="submit" class="btn btn-green pull-right">
 									登陆 <i class="fa fa-arrow-circle-right"></i>
 								</button>
 							</div>
@@ -251,21 +251,26 @@
 				
 				// 初始化页面焦点
 				var userName = $("#login_username");
+				var passWord = $("#login_password");
 				if(userName.val() == ""){
 					userName.focus();
+				}else if(passWord.val() == ""){
+					passWord.focus();
 				}else{
-					$("#login_password").focus();
+					$("#login_authCode").focus();
 				}
 				
+				showImage($("#login_authCodeHref"));
+				
 				// 键盘回车事件
-// 				var tds = $("html"); 
-// 				tds.keydown(function(event){
-// 					var myEvent = event || window.event; //解决不同浏览器获取事件对象的差异
-// 						switch(myEvent.keyCode) {
-// 							case 13://回车事件
-// 								validata(); break;
-// 						}
-// 				});
+				var tds = $("html"); 
+				tds.keydown(function(event){
+					var myEvent = event || window.event; //解决不同浏览器获取事件对象的差异
+						switch(myEvent.keyCode) {
+							case 13://回车事件
+								$("#login_submit").click(); break;
+						}
+				});
 			});
 			
 
