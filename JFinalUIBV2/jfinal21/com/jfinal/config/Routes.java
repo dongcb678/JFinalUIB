@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import com.jfinal.core.Controller;
-import com.jfinal.kit.StrKit;
 
 /**
  * Routes.
@@ -30,8 +29,8 @@ public abstract class Routes {
 	
 	private static String baseViewPath;
 	
-	private final Map<String, Class<? extends Controller>> map = new HashMap<String, Class<? extends Controller>>();
-	private final Map<String, String> viewPathMap = new HashMap<String, String>();
+	private Map<String, Class<? extends Controller>> map = new HashMap<String, Class<? extends Controller>>();
+	private Map<String, String> viewPathMap = new HashMap<String, String>();
 	
 	/**
 	 * you must implement config method and use add method to config route
@@ -44,13 +43,12 @@ public abstract class Routes {
 			
 			for (Entry<String, Class<? extends Controller>> e : routes.map.entrySet()) {
 				String controllerKey = e.getKey();
-				Class<? extends Controller> controllerClass = e.getValue();
-				String viewPath = routes.getViewPath(controllerKey);
-				if (StrKit.notBlank(viewPath)) {
-					add(controllerKey, controllerClass, viewPath);
-				} else {
-					add(controllerKey, controllerClass);
+				if (this.map.containsKey(controllerKey)) {
+					throw new IllegalArgumentException("The controllerKey already exists: " + controllerKey); 
 				}
+				
+				this.map.put(controllerKey, e.getValue());
+				this.viewPathMap.put(controllerKey, routes.getViewPath(controllerKey));
 			}
 		}
 		return this;
@@ -130,6 +128,14 @@ public abstract class Routes {
 			baseViewPath = baseViewPath.substring(0, baseViewPath.length() - 1);
 		
 		Routes.baseViewPath = baseViewPath;
+	}
+	
+	public void clear() {
+		map.clear();
+		viewPathMap.clear();
+		
+		map = null;
+		viewPathMap = null;
 	}
 }
 
