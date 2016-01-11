@@ -351,6 +351,10 @@ public class Db {
 		return dbPro.paginate(pageNumber, pageSize, sql, paras);
 	}
 	
+	public static Page<Record> paginate(int pageNumber, int pageSize, String[] selectAndSqlExceptSelect, Object... paras) {
+		return dbPro.paginate(pageNumber, pageSize, selectAndSqlExceptSelect, paras);
+	}
+		
 	/**
 	 * @see #paginate(String, int, int, String, Object...)
 	 */

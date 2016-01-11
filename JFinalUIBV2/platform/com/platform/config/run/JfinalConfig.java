@@ -60,8 +60,10 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("configConstant 设置是否开发模式");
 		constants.setDevMode(PropKit.getBoolean(ConstantInit.config_devMode, false));
 
-		log.info("configConstant 设置json工厂类");
-		//constants.setJsonFactory(new FastJsonFactory()); // new JacksonFactory()
+		//log.info("configConstant 设置json工厂类");
+		//constants.setJsonFactory(JFinalJsonFactory.me()); // 默认无需设置
+		//constants.setJsonFactory(FastJsonFactory.me()); // FastJson
+		//constants.setJsonFactory(JacksonFactory.me()); // Jackson
 
 		log.info("configConstant 设置path相关");
 		//constants.setBaseUploadPath(PathKit.getWebRootPath() + "/WEB-INF/files/upload"); // 上传公共路径

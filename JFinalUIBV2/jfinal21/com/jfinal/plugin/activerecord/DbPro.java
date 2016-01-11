@@ -453,16 +453,20 @@ public class DbPro {
 	}
 	
 	Page<Record> paginate(Config config, Connection conn, int pageNumber, int pageSize, String sql, Object... paras) throws SQLException {
-		if (pageNumber < 1 || pageSize < 1)
-			throw new ActiveRecordException("pageNumber and pageSize must be more than 0");
-		
-		if (config.dialect.isTakeOverDbPaginate())
-			return config.dialect.takeOverDbPaginate(conn, pageNumber, pageSize, sql, paras);
-		
 		Object[] actualSqlParas = new Object[2];
 		String totalRowSql = config.dialect.forTotalRow(actualSqlParas, sql, null, paras);
 		sql = (String)actualSqlParas[0];
 		paras = (Object[])actualSqlParas[1];
+		return doPaginate(config, conn, pageNumber, pageSize, totalRowSql, sql, paras);
+	}
+	
+	Page<Record> doPaginate(Config config, Connection conn, int pageNumber, int pageSize, String totalRowSql, String sql, Object... paras) throws SQLException {
+		if (pageNumber < 1 || pageSize < 1) {
+			throw new ActiveRecordException("pageNumber and pageSize must be more than 0");
+		}
+		if (config.dialect.isTakeOverDbPaginate()) {
+			return config.dialect.takeOverDbPaginate(conn, pageNumber, pageSize, totalRowSql, sql, paras);
+		}
 		
 		long totalRow;
 		List result = query(config, conn, totalRowSql, paras);
@@ -510,6 +514,20 @@ public class DbPro {
 		}
 	}
 	
+	public Page<Record> paginate(int pageNumber, int pageSize, String[] selectAndSqlExceptSelect, Object... paras) {
+		Connection conn = null;
+		try {
+			String totalRowSql = "select count(*) " + config.dialect.replaceOrderBy(selectAndSqlExceptSelect[1]);
+			String sql = selectAndSqlExceptSelect[0] + " " + selectAndSqlExceptSelect[1];
+			conn = config.getConnection();
+			return doPaginate(config, conn, pageNumber, pageSize, totalRowSql, sql, paras);
+		} catch (Exception e) {
+			throw new ActiveRecordException(e);
+		} finally {
+			config.close(conn);
+		}
+	}
+	
 	/**
 	 * @see #paginate(String, int, int, String, Object...)
 	 */
@@ -530,41 +548,11 @@ public class DbPro {
 	 * @throws SQLException
 	 */
 	Page<Record> paginateDistinct(Config config, Connection conn, int pageNumber, int pageSize, String sql, String distinctSql, Object... paras) throws SQLException {
-		if (pageNumber < 1 || pageSize < 1)
-			throw new ActiveRecordException("pageNumber and pageSize must be more than 0");
-		
-		if (config.dialect.isTakeOverDbPaginate())
-			return config.dialect.takeOverDbPaginate(conn, pageNumber, pageSize, sql, paras);
-		
 		Object[] actualSqlParas = new Object[2];
 		String totalRowSql = config.dialect.forTotalRow(actualSqlParas, sql, distinctSql, paras);
 		sql = (String)actualSqlParas[0];
 		paras = (Object[])actualSqlParas[1];
-		
-		long totalRow;
-		List result = query(config, conn, totalRowSql, paras);
-		if (config.dialect.isGroupBySql(sql)) {
-			totalRow = result.size();
-		} else {
-			totalRow = (result.size() > 0) ? ((Number)result.get(0)).longValue() : 0;
-		}
-		if (totalRow == 0) {
-			return new Page<Record>(new ArrayList<Record>(0), pageNumber, pageSize, 0, 0);
-		}
-		
-		int totalPage = (int) (totalRow / pageSize);
-		if (totalRow % pageSize != 0) {
-			totalPage++;
-		}
-		
-		if (pageNumber > totalPage) {
-			return new Page<Record>(new ArrayList<Record>(0), pageNumber, pageSize, totalPage, (int)totalRow);
-		}
-		
-		// --------
-		sql = config.dialect.forPaginate(pageNumber, pageSize, sql);
-		List<Record> list = find(config, conn, sql, paras);
-		return new Page<Record>(list, pageNumber, pageSize, totalPage, (int)totalRow);
+		return doPaginate(config, conn, pageNumber, pageSize, totalRowSql, sql, paras);
 	}
 
 	/**
