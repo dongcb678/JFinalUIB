@@ -100,7 +100,7 @@ public class GeneratePostgreSQL extends GenerateBase {
 		for (Record record : listColumn) {
 			String column_name = record.getStr("column_name");
 			String data_type = record.getStr("data_type");
-			String character_maximum_length = String.valueOf(record.getInt("character_maximum_length"));
+			String character_maximum_length = String.valueOf(record.getNumber("character_maximum_length"));
 
 			// 需要跳过的字段
 			if("xxx".equals(column_name) || "yyy".equals(column_name) || "zzz".equals(column_name)){

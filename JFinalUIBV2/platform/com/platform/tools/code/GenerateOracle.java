@@ -1,7 +1,6 @@
 package com.platform.tools.code;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +94,7 @@ public class GenerateOracle extends GenerateBase {
 		for (Record record : listColumnComments) {
 			String column_name = record.getStr("COLUMN_NAME").toLowerCase();
 			String column_type = record.getStr("DATA_TYPE").toLowerCase();
-			BigDecimal column_length = record.getBigDecimal("DATA_LENGTH");
+			String column_length = String.valueOf(record.getNumber("DATA_LENGTH"));
 			String comments = record.getStr("COMMENTS");
 			
 			// 需要跳过的字段
@@ -111,7 +110,7 @@ public class GenerateOracle extends GenerateBase {
 			table.setColumn_name_upperCaseFirstOne(ToolString.toUpperCaseFirstOne(column_name));
 			
 			table.setColumn_type(column_type);
-			table.setColumn_length(column_length.toString());
+			table.setColumn_length(column_length);
 			table.setColumn_desc(comments);
 
 			table.setColumn_className(columnJavaTypeMap.get(column_name.toLowerCase()));

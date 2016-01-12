@@ -117,7 +117,7 @@ public class GenerateMySQL extends GenerateBase {
 		for (Record record : listColumn) {
 			String column_name = record.getStr("column_name");
 			String column_type = record.getStr("column_type");
-			String character_maximum_length = String.valueOf(record.getBigInteger("CHARACTER_MAXIMUM_LENGTH"));
+			String character_maximum_length = String.valueOf(record.getNumber("CHARACTER_MAXIMUM_LENGTH"));
 			String column_comment = record.getStr("COLUMN_COMMENT");
 
 			// 需要跳过的字段
