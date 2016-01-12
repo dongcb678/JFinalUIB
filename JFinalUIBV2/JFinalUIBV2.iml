@@ -69,15 +69,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/build-lib/jetty-8.1.8/jetty-server-8.1.8.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="file://$MODULE_DIR$/build-lib/jfinal21" />
         </CLASSES>
         <JAVADOC />
@@ -92,6 +83,16 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/build-lib/jetty-9.2-jdk7+" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/build-lib/jetty-9.2-jdk7+" recursive="false" />
       </library>
     </orderEntry>
   </component>
