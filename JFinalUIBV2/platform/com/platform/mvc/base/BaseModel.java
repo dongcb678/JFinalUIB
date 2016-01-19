@@ -71,6 +71,12 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	public static final String sqlId_deleteOr = "platform.baseModel.deleteOr";
 
 	/**
+	 * sqlId : platform.baseModel.splitPageSelect
+	 * 描述：通用select *
+	 */
+	public static final String sqlId_splitPageSelect = "platform.baseModel.splitPageSelect";
+
+	/**
      * 获取SQL，固定SQL
      * @param sqlId
      * @return

@@ -18,12 +18,22 @@
         		s.ids = ?
     	]]>
 	</sql>
-	
+		
 	<!-- 动态SQL处理 -->
-	<sql id="splitPage">
+	<sql id="splitPageSelect">
 		<![CDATA[ 
 			select 
-				sy.names synames, m.names mnames, o.names onames, o.url ourl, u.username, s.* 
+				sy.names synames, 
+				m.names mnames, 
+				o.names onames, o.url ourl, 
+				u.username, 
+				s.* 
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
         	from 
         		pt_syslog s 
 	        	left join pt_user u on s.userids = u.ids 

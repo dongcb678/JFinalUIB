@@ -3,10 +3,8 @@
 <sql-statement namespace="test.blog">
 	
 	<!-- 分页查询：from -->
-	<sql id="splitPage">
+	<sql id="splitPageFrom">
 		<![CDATA[ 
-			select 
-				*
         	from 
         		test_blog
 			

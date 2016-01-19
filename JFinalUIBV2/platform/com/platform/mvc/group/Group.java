@@ -60,7 +60,7 @@ public class Group extends BaseModelCache<Group> {
 	 * sqlId : platform.group.splitPage
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage = "platform.group.splitPage";
+	public static final String sqlId_splitPageFrom = "platform.group.splitPageFrom";
 
 	/**
 	 * sqlId : platform.group.paging

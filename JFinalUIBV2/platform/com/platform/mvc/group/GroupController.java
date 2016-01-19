@@ -30,7 +30,7 @@ public class GroupController extends BaseController {
 	 * 分组管理列表
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, Group.sqlId_splitPage);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, Group.sqlId_splitPageFrom);
 		render("/platform/group/list.html");
 	}
 	

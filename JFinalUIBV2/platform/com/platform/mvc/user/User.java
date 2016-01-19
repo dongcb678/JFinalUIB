@@ -148,13 +148,13 @@ public class User extends BaseModelCache<User> {
 	 * sqlId : platform.user.splitPageSelect
 	 * 描述：分页Select
 	 */
-	public static final String sqlId_splitPage_select = "platform.user.splitPageSelect";
+	public static final String sqlId_splitPageSelect = "platform.user.splitPageSelect";
 
 	/**
-	 * sqlId : platform.user.splitPage
+	 * sqlId : platform.user.splitPageFrom
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage = "platform.user.splitPage";
+	public static final String sqlId_splitPageFrom = "platform.user.splitPageFrom";
 
 	/**
 	 * sqlId : platform.user.paging

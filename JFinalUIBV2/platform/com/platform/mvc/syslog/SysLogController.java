@@ -20,7 +20,7 @@ public class SysLogController extends BaseController {
 	 */
 	public void index() {
 		defaultOrder(Syslog.column_startdate, "desc"); // 默认排序方式，指定列名和排序方式
-		paging(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPage);
+		paging(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPageSelect, Syslog.sqlId_splitPageFrom);
 		render("/platform/sysLog/list.html");
 	}
 

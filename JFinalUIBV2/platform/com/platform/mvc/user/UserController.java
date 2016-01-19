@@ -25,7 +25,7 @@ public class UserController extends BaseController {
 	 * 默认列表
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, User.sqlId_splitPage);
+		paging(ConstantInit.db_dataSource_main, splitPage, User.sqlId_splitPageSelect, User.sqlId_splitPageFrom);
 		render("/platform/user/list.html");
 	}
 	

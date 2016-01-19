@@ -62,10 +62,10 @@ public class Location extends BaseModel<Location> {
 	
 	
 	/**
-	 * sqlId : weixin.location.splitPage
+	 * sqlId : weixin.location.splitPageFrom
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage = "weixin.location.splitPage";
+	public static final String sqlId_splitPageFrom = "weixin.location.splitPageFrom";
 
 	private String ids;
 	private String open_id;

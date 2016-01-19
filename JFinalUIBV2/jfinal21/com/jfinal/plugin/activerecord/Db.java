@@ -335,72 +335,32 @@ public class Db {
 		return dbPro.delete(tableName, record);
 	}
 	
-	static Page<Record> paginate(Config config, Connection conn, int pageNumber, int pageSize, String sql, Object... paras) throws SQLException {
-		return dbPro.paginate(config, conn, pageNumber, pageSize, sql, paras);
+	static Page<Record> paginate(Config config, Connection conn, int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect, Object... paras) throws SQLException {
+		return dbPro.paginate(config, conn, pageNumber, pageSize, select, selectDistinct, sqlExceptSelect, paras);
 	}
 	
 	/**
 	 * Paginate.
 	 * @param pageNumber the page number
 	 * @param pageSize the page size
-	 * @param sql the sql statement 
+	 * @param select the select part of the sql statement
+	 * @param sqlExceptSelect the sql statement excluded select part
 	 * @param paras the parameters of sql
 	 * @return the Page object
 	 */
-	public static Page<Record> paginate(int pageNumber, int pageSize, String sql, Object... paras) {
-		return dbPro.paginate(pageNumber, pageSize, sql, paras);
+	public static Page<Record> paginate(int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect, Object... paras) {
+		return dbPro.paginate(pageNumber, pageSize, select, selectDistinct, sqlExceptSelect, paras);
 	}
 	
-	public static Page<Record> paginate(int pageNumber, int pageSize, String[] selectAndSqlExceptSelect, Object... paras) {
-		return dbPro.paginate(pageNumber, pageSize, selectAndSqlExceptSelect, paras);
-	}
-		
-	/**
-	 * @see #paginate(String, int, int, String, Object...)
-	 */
-	public static Page<Record> paginate(int pageNumber, int pageSize, String sql) {
-		return dbPro.paginate(pageNumber, pageSize, sql);
-	}
-
-	/**
-	 * 处理distinct分页支持
-	 * @param config
-	 * @param conn
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param sql
-	 * @param distinctSql
-	 * @param paras
-	 * @return
-	 * @throws SQLException
-	 */
-	static Page<Record> paginateDistinct(Config config, Connection conn, int pageNumber, int pageSize, String sql, String distinctSql, Object... paras) throws SQLException {
-		return dbPro.paginateDistinct(config, conn, pageNumber, pageSize, sql, distinctSql, paras);
+	public static Page<Record> paginate(int pageNumber, int pageSize, boolean isGroupBySql, String select, String selectDistinct, String sqlExceptSelect, Object... paras) {
+		return dbPro.paginate(pageNumber, pageSize, isGroupBySql, select, selectDistinct, sqlExceptSelect, paras);
 	}
 	
 	/**
-	 * 处理distinct分页支持
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param sql
-	 * @param distinctSql
-	 * @param paras
-	 * @return
+	 * @see #paginate(String, int, int, String, String, Object...)
 	 */
-	public static Page<Record> paginateDistinct(int pageNumber, int pageSize, String sql, String distinctSql, Object... paras) {
-		return dbPro.paginateDistinct(pageNumber, pageSize, sql, distinctSql, paras);
-	}
-	
-	/**
-	 * 处理distinct分页支持
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param sql
-	 * @param distinctSql
-	 * @return
-	 */
-	public static Page<Record> paginateDistinct(int pageNumber, int pageSize, String sql, String distinctSql) {
-		return dbPro.paginateDistinct(pageNumber, pageSize, sql, distinctSql);
+	public static Page<Record> paginate(int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect) {
+		return dbPro.paginate(pageNumber, pageSize, select, selectDistinct, sqlExceptSelect);
 	}
 	
 	static boolean save(Config config, Connection conn, String tableName, String primaryKey, Record record) throws SQLException {
@@ -540,18 +500,22 @@ public class Db {
 	
 	/**
 	 * Paginate by cache.
-	 * @see #paginate(int, int, String, Object...)
+	 * @see #paginate(int, int, String, String, Object...)
 	 * @return Page
 	 */
-	public static Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, String sql, Object... paras) {
-		return dbPro.paginateByCache(cacheName, key, pageNumber, pageSize, sql, paras);
+	public static Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect, Object... paras) {
+		return dbPro.paginateByCache(cacheName, key, pageNumber, pageSize, select, selectDistinct, sqlExceptSelect, paras);
+	}
+	
+	public static Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, boolean isGroupBySql, String select, String selectDistinct, String sqlExceptSelect, Object... paras) {
+		return dbPro.paginateByCache(cacheName, key, pageNumber, pageSize, isGroupBySql, select, selectDistinct, sqlExceptSelect, paras);
 	}
 	
 	/**
-	 * @see #paginateByCache(String, Object, int, int, String, Object...)
+	 * @see #paginateByCache(String, Object, int, int, String, String, Object...)
 	 */
-	public static Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, String sql) {
-		return dbPro.paginateByCache(cacheName, key, pageNumber, pageSize, sql);
+	public static Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect) {
+		return dbPro.paginateByCache(cacheName, key, pageNumber, pageSize, select, selectDistinct, sqlExceptSelect);
 	}
 	
 	/**

@@ -49,10 +49,18 @@
 	</sql>
 	
 	<!-- 动态SQL处理 -->
-	<sql id="splitPage">
+	<sql id="splitPageSelect">
 		<![CDATA[ 
 			select 
-				u.ids, u.username, ui.names, ui.email, ui.mobile, ui.birthday, d.names as deptnames
+				u.ids, u.username, 
+				ui.names, ui.email, ui.mobile, ui.birthday, 
+				d.names as deptnames
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
         	from 
         		pt_user u 
 				left join pt_userinfo ui on u.userinfoids = ui.ids 

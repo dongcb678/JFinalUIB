@@ -46,10 +46,10 @@ public class Blog extends BaseModel<Blog> {
 	
 	
 	/**
-	 * sqlId : test.testBlog.splitPage
+	 * sqlId : test.testBlog.splitPageFrom
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage = "test.blog.splitPage";
+	public static final String sqlId_splitPageFrom = "test.blog.splitPageFrom";
 
 	public void setIds(String ids){
 		set(column_ids, ids);

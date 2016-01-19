@@ -12,6 +12,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.upload.UploadFile;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
+import com.platform.mvc.base.BaseModel;
 import com.platform.tools.ToolString;
 
 /**
@@ -76,7 +77,7 @@ public class UploadController extends BaseController {
 	 * 文件列表
 	 */
 	public void list() {
-		paging(ConstantInit.db_dataSource_main, splitPage, Upload.sqlId_splitPage);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, Upload.sqlId_splitPageFrom);
 		render("/platform/upload/list.html");
 	}
 

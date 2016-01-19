@@ -70,18 +70,21 @@ public class BaseService {
 	
 	/**
 	 * 分页
-	 * @param dataSource 数据源
+	 * @param dataSource
 	 * @param splitPage
-	 * @param sqlId
+	 * @param selectSqlId
+	 * @param fromSqlId
 	 */
 	@SuppressWarnings("unchecked")
-	public void paging(String dataSource, SplitPage splitPage, String sqlId){
-		Map<String, Object> map = getFromSql(splitPage, sqlId);
-		String sql = (String) map.get("sql");
+	public void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
+		String selectSql = getSqlByBeetl(selectSqlId, splitPage.getQueryParam());
+		
+		Map<String, Object> map = getFromSql(splitPage, fromSqlId);
+		String fromSql = (String) map.get("sql");
 		LinkedList<Object> paramValue = (LinkedList<Object>) map.get("paramValue");
 		
 		// 分页封装
-		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), sql, paramValue.toArray());
+		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), selectSql, null, fromSql, paramValue.toArray());
 		splitPage.setTotalPage(page.getTotalPage());
 		splitPage.setTotalRow(page.getTotalRow());
 		splitPage.setList(page.getList());
@@ -90,21 +93,24 @@ public class BaseService {
 
 	/**
 	 * Distinct分页
-	 * @param dataSource 		数据源
+	 * @param dataSource		数据源
 	 * @param splitPage			分页对象
-	 * @param sqlId				完整的分页sql语句
-	 * @param distinctSqlId		分页查询distinct语句，不包含from之后
+	 * @param selectSqlId		select
+	 * @param distinctSqlId		select distinct
+	 * @param fromSqlId			from之后
 	 */
 	@SuppressWarnings("unchecked")
-	public void pagingDistinct(String dataSource, SplitPage splitPage, String sqlId, String distinctSqlId){
-		Map<String, Object> map = getFromSql(splitPage, sqlId);
-		String sql = (String) map.get("sql");
-		LinkedList<Object> paramValue = (LinkedList<Object>) map.get("paramValue");
+	public void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
+		String selectSql = getSqlByBeetl(selectSqlId, splitPage.getQueryParam());
 		
 		String distinctSql = getSqlByBeetl(distinctSqlId, splitPage.getQueryParam());
 		
+		Map<String, Object> map = getFromSql(splitPage, fromSqlId);
+		String fromSql = (String) map.get("sql");
+		LinkedList<Object> paramValue = (LinkedList<Object>) map.get("paramValue");
+		
 		// 分页封装
-		Page<?> page = Db.use(dataSource).paginateDistinct(splitPage.getPageNumber(), splitPage.getPageSize(), sql, distinctSql, paramValue.toArray());
+		Page<?> page = Db.use(dataSource).paginate(splitPage.getPageNumber(), splitPage.getPageSize(), selectSql, distinctSql, fromSql, paramValue.toArray());
 		splitPage.setTotalPage(page.getTotalPage());
 		splitPage.setTotalRow(page.getTotalRow());
 		splitPage.setList(page.getList());

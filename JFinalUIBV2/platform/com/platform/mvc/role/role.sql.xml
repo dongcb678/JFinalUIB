@@ -42,10 +42,8 @@
 	</sql>
 	
 	<!-- 动态SQL处理 -->
-	<sql id="splitPage">
+	<sql id="splitPageFrom">
 		<![CDATA[ 
-			select 
-				*
         	from 
         		pt_role 
         	where 

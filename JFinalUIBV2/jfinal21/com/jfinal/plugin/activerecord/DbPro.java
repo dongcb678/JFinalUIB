@@ -452,28 +452,30 @@ public class DbPro {
 		return deleteById(tableName, defaultPrimaryKey, record.get(defaultPrimaryKey));
 	}
 	
-	Page<Record> paginate(Config config, Connection conn, int pageNumber, int pageSize, String sql, Object... paras) throws SQLException {
-		Object[] actualSqlParas = new Object[2];
-		String totalRowSql = config.dialect.forTotalRow(actualSqlParas, sql, null, paras);
-		sql = (String)actualSqlParas[0];
-		paras = (Object[])actualSqlParas[1];
-		return doPaginate(config, conn, pageNumber, pageSize, totalRowSql, sql, paras);
+	Page<Record> paginate(Config config, Connection conn, int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect, Object... paras) throws SQLException {
+		return doPaginate(config, conn, pageNumber, pageSize, null, select, selectDistinct, sqlExceptSelect, paras);
 	}
 	
-	Page<Record> doPaginate(Config config, Connection conn, int pageNumber, int pageSize, String totalRowSql, String sql, Object... paras) throws SQLException {
+	Page<Record> doPaginate(Config config, Connection conn, int pageNumber, int pageSize, Boolean isGroupBySql, String select, String selectDistinct, String sqlExceptSelect, Object... paras) throws SQLException {
 		if (pageNumber < 1 || pageSize < 1) {
-			throw new ActiveRecordException("pageNumber and pageSize must be more than 0");
+			throw new ActiveRecordException("pageNumber and pageSize must more than 0");
 		}
 		if (config.dialect.isTakeOverDbPaginate()) {
-			return config.dialect.takeOverDbPaginate(conn, pageNumber, pageSize, totalRowSql, sql, paras);
+			return config.dialect.takeOverDbPaginate(conn, pageNumber, pageSize, isGroupBySql, select, sqlExceptSelect, paras);
+		}
+		
+		String totalRowSql = (selectDistinct != null ? selectDistinct : "select count(*) ") + config.dialect.replaceOrderBy(sqlExceptSelect);
+		List result = query(config, conn, totalRowSql, paras);
+		int size = result.size();
+		if (isGroupBySql == null) {
+			isGroupBySql = size > 1;
 		}
 		
 		long totalRow;
-		List result = query(config, conn, totalRowSql, paras);
-		if (config.dialect.isGroupBySql(sql)) {
-			totalRow = result.size();
+		if (isGroupBySql) {
+			totalRow = size;
 		} else {
-			totalRow = (result.size() > 0) ? ((Number)result.get(0)).longValue() : 0;
+			totalRow = (size > 0) ? ((Number)result.get(0)).longValue() : 0;
 		}
 		if (totalRow == 0) {
 			return new Page<Record>(new ArrayList<Record>(0), pageNumber, pageSize, 0, 0);
@@ -489,7 +491,7 @@ public class DbPro {
 		}
 		
 		// --------
-		sql = config.dialect.forPaginate(pageNumber, pageSize, sql);
+		String sql = config.dialect.forPaginate(pageNumber, pageSize, select, sqlExceptSelect);
 		List<Record> list = find(config, conn, sql, paras);
 		return new Page<Record>(list, pageNumber, pageSize, totalPage, (int)totalRow);
 	}
@@ -498,15 +500,16 @@ public class DbPro {
 	 * Paginate.
 	 * @param pageNumber the page number
 	 * @param pageSize the page size
-	 * @param sql the sql statement 
+	 * @param select the select part of the sql statement
+	 * @param sqlExceptSelect the sql statement excluded select part
 	 * @param paras the parameters of sql
 	 * @return the Page object
 	 */
-	public Page<Record> paginate(int pageNumber, int pageSize, String sql, Object... paras) {
+	public Page<Record> paginate(int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect, Object... paras) {
 		Connection conn = null;
 		try {
 			conn = config.getConnection();
-			return paginate(config, conn, pageNumber, pageSize, sql, paras);
+			return paginate(config, conn, pageNumber, pageSize, select, selectDistinct, sqlExceptSelect, paras);
 		} catch (Exception e) {
 			throw new ActiveRecordException(e);
 		} finally {
@@ -514,13 +517,11 @@ public class DbPro {
 		}
 	}
 	
-	public Page<Record> paginate(int pageNumber, int pageSize, String[] selectAndSqlExceptSelect, Object... paras) {
+	public Page<Record> paginate(int pageNumber, int pageSize, boolean isGroupBySql, String select, String selectDistinct, String sqlExceptSelect, Object... paras) {
 		Connection conn = null;
 		try {
-			String totalRowSql = "select count(*) " + config.dialect.replaceOrderBy(selectAndSqlExceptSelect[1]);
-			String sql = selectAndSqlExceptSelect[0] + " " + selectAndSqlExceptSelect[1];
 			conn = config.getConnection();
-			return doPaginate(config, conn, pageNumber, pageSize, totalRowSql, sql, paras);
+			return doPaginate(config, conn, pageNumber, pageSize, isGroupBySql, select, selectDistinct, sqlExceptSelect, paras);
 		} catch (Exception e) {
 			throw new ActiveRecordException(e);
 		} finally {
@@ -529,12 +530,12 @@ public class DbPro {
 	}
 	
 	/**
-	 * @see #paginate(String, int, int, String, Object...)
+	 * @see #paginate(String, int, int, String, String, Object...)
 	 */
-	public Page<Record> paginate(int pageNumber, int pageSize, String sql) {
-		return paginate(pageNumber, pageSize, sql, NULL_PARA_ARRAY);
+	public Page<Record> paginate(int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect) {
+		return paginate(pageNumber, pageSize, select, selectDistinct, sqlExceptSelect, NULL_PARA_ARRAY);
 	}
-
+	
 	/**
 	 * 处理distinct分页支持
 	 * @param config			Jfinal Config对象
@@ -547,46 +548,6 @@ public class DbPro {
 	 * @return
 	 * @throws SQLException
 	 */
-	Page<Record> paginateDistinct(Config config, Connection conn, int pageNumber, int pageSize, String sql, String distinctSql, Object... paras) throws SQLException {
-		Object[] actualSqlParas = new Object[2];
-		String totalRowSql = config.dialect.forTotalRow(actualSqlParas, sql, distinctSql, paras);
-		sql = (String)actualSqlParas[0];
-		paras = (Object[])actualSqlParas[1];
-		return doPaginate(config, conn, pageNumber, pageSize, totalRowSql, sql, paras);
-	}
-
-	/**
-	 * 处理distinct分页支持
-	 * @param pageNumber		查询第几页
-	 * @param pageSize			每页显示多少条
-	 * @param sql				完整sql语句
-	 * @param distinctSql		select distinct语句
-	 * @param paras				sql预处理参数值
-	 * @return
-	 */
-	public Page<Record> paginateDistinct(int pageNumber, int pageSize, String sql, String distinctSql, Object... paras) {
-		Connection conn = null;
-		try {
-			conn = config.getConnection();
-			return paginateDistinct(config, conn, pageNumber, pageSize, sql, distinctSql, paras);
-		} catch (Exception e) {
-			throw new ActiveRecordException(e);
-		} finally {
-			config.close(conn);
-		}
-	}
-	
-	/**
-	 * 处理distinct分页支持
-	 * @param pageNumber		查询第几页
-	 * @param pageSize			每页显示多少条
-	 * @param sql				完整sql语句
-	 * @param distinctSql		select distinct语句
-	 * @return
-	 */
-	public Page<Record> paginateDistinct(int pageNumber, int pageSize, String sql, String distinctSql) {
-		return paginateDistinct(pageNumber, pageSize, sql, distinctSql, NULL_PARA_ARRAY);
-	}
 
 	boolean save(Config config, Connection conn, String tableName, String primaryKey, Record record) throws SQLException {
 		String[] pKeys = primaryKey.split(",");
@@ -849,27 +810,37 @@ public class DbPro {
 	public Record findFirstByCache(String cacheName, Object key, String sql) {
 		return findFirstByCache(cacheName, key, sql, NULL_PARA_ARRAY);
 	}
-	
+
 	/**
 	 * Paginate by cache.
-	 * @see #paginate(int, int, String, Object...)
+	 * @see #paginate(int, int, String, String, Object...)
 	 * @return Page
 	 */
-	public Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, String sql, Object... paras) {
+	public Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect, Object... paras) {
 		ICache cache = config.getCache();
 		Page<Record> result = cache.get(cacheName, key);
 		if (result == null) {
-			result = paginate(pageNumber, pageSize, sql, paras);
+			result = paginate(pageNumber, pageSize, select, selectDistinct, sqlExceptSelect, paras);
+			cache.put(cacheName, key, result);
+		}
+		return result;
+	}
+	
+	public Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, boolean isGroupBySql, String select, String selectDistinct, String sqlExceptSelect, Object... paras) {
+		ICache cache = config.getCache();
+		Page<Record> result = cache.get(cacheName, key);
+		if (result == null) {
+			result = paginate(pageNumber, pageSize, isGroupBySql, select, selectDistinct, sqlExceptSelect, paras);
 			cache.put(cacheName, key, result);
 		}
 		return result;
 	}
 	
 	/**
-	 * @see #paginateByCache(String, Object, int, int, String, Object...)
+	 * @see #paginateByCache(String, Object, int, int, String, String, Object...)
 	 */
-	public Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, String sql) {
-		return paginateByCache(cacheName, key, pageNumber, pageSize, sql, NULL_PARA_ARRAY);
+	public Page<Record> paginateByCache(String cacheName, Object key, int pageNumber, int pageSize, String select, String selectDistinct, String sqlExceptSelect) {
+		return paginateByCache(cacheName, key, pageNumber, pageSize, select, selectDistinct, sqlExceptSelect, NULL_PARA_ARRAY);
 	}
 	
 	private int[] batch(Config config, Connection conn, String sql, Object[][] paras, int batchSize) throws SQLException {

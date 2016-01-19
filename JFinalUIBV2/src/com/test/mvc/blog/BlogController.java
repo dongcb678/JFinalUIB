@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
+import com.platform.mvc.base.BaseModel;
 import com.platform.tools.ToolDateTime;
 
 /**
@@ -30,7 +31,7 @@ public class BlogController extends BaseController {
 	 * 列表
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, Blog.sqlId_splitPage);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, Blog.sqlId_splitPageFrom);
 		render("/test/blog/list.html");
 	}
 	

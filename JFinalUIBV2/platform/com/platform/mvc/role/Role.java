@@ -93,10 +93,10 @@ public class Role extends BaseModelCache<Role> {
 	public static final String sqlId_splitPage_select = "platform.role.splitPageSelect";
 
 	/**
-	 * sqlId : platform.role.splitPage
+	 * sqlId : platform.role.splitPageFrom
 	 * 描述：分页from
 	 */
-	public static final String sqlId_splitPage = "platform.role.splitPage";
+	public static final String sqlId_splitPageFrom = "platform.role.splitPageFrom";
 
 	private String ids;
 	private String version;

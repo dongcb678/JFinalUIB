@@ -368,8 +368,8 @@ public abstract class BaseController extends Controller {
 	 * @param splitPage
 	 * @param sqlId
 	 */
-	protected void paging(String dataSource, SplitPage splitPage, String sqlId){
-		BaseService.service.paging(dataSource, splitPage, sqlId);
+	protected void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
+		BaseService.service.paging(dataSource, splitPage, selectSqlId, fromSqlId);
 	}
 
 	/**
@@ -379,8 +379,8 @@ public abstract class BaseController extends Controller {
 	 * @param sqlId				完整的分页sql语句
 	 * @param distinctSqlId		分页查询distinct语句，不包含from之后
 	 */
-	protected void pagingDistinct(String dataSource, SplitPage splitPage, String sqlId, String distinctSqlId){
-		BaseService.service.pagingDistinct(dataSource, splitPage, sqlId, distinctSqlId);
+	protected void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
+		BaseService.service.pagingDistinct(dataSource, splitPage, selectSqlId, distinctSqlId, fromSqlId);
 	}
 
 	/**
