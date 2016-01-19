@@ -22,7 +22,7 @@
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
       <src_folder value="file://$MODULE_DIR$/platform" expected_position="1" />
       <src_folder value="file://$MODULE_DIR$/weiXin" expected_position="2" />
-      <src_folder value="file://$MODULE_DIR$/jfinal21" expected_position="3" />
+      <src_folder value="file://$MODULE_DIR$/jfinal22" expected_position="3" />
       <src_folder value="file://$MODULE_DIR$/junit" expected_position="4" />
     </src_description>
   </component>
@@ -51,7 +51,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/platform" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/weiXin" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/jfinal21" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jfinal22" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/junit" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
@@ -69,11 +69,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/build-lib/jfinal21" />
+          <root url="file://$MODULE_DIR$/build-lib/jfinal22" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/build-lib/jfinal21" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/build-lib/jfinal22" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
