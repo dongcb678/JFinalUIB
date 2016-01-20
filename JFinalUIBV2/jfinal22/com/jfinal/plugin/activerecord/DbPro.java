@@ -464,7 +464,12 @@ public class DbPro {
 			return config.dialect.takeOverDbPaginate(conn, pageNumber, pageSize, isGroupBySql, select, sqlExceptSelect, paras);
 		}
 		
-		String totalRowSql = (selectDistinct != null ? selectDistinct : "select count(*) ") + config.dialect.replaceOrderBy(sqlExceptSelect);
+		String totalRowSql = null; // 根据新增selectDistinct参数进行动态SQL处理
+		if(selectDistinct != null && !selectDistinct.isEmpty()){
+			totalRowSql = selectDistinct + config.dialect.replaceOrderBy(sqlExceptSelect);
+		}else{
+			totalRowSql = " select count(*) " + config.dialect.replaceOrderBy(sqlExceptSelect);
+		}
 		List result = query(config, conn, totalRowSql, paras);
 		int size = result.size();
 		if (isGroupBySql == null) {
@@ -501,6 +506,7 @@ public class DbPro {
 	 * @param pageNumber the page number
 	 * @param pageSize the page size
 	 * @param select the select part of the sql statement
+	 * @param selectDistinct 新增distinct语句参数
 	 * @param sqlExceptSelect the sql statement excluded select part
 	 * @param paras the parameters of sql
 	 * @return the Page object

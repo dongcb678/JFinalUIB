@@ -70,10 +70,10 @@ public class BaseService {
 	
 	/**
 	 * 分页
-	 * @param dataSource
-	 * @param splitPage
-	 * @param selectSqlId
-	 * @param fromSqlId
+	 * @param dataSource	数据源
+	 * @param splitPage		分页对象
+	 * @param selectSqlId	select之后，from之前
+	 * @param fromSqlId		from之后
 	 */
 	@SuppressWarnings("unchecked")
 	public void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
@@ -90,13 +90,13 @@ public class BaseService {
 		splitPage.setList(page.getList());
 		splitPage.compute();
 	}
-
+	
 	/**
 	 * Distinct分页
 	 * @param dataSource		数据源
 	 * @param splitPage			分页对象
-	 * @param selectSqlId		select
-	 * @param distinctSqlId		select distinct
+	 * @param selectSqlId		select之后，from之前
+	 * @param distinctSqlId		select distinct之后，from之前
 	 * @param fromSqlId			from之后
 	 */
 	@SuppressWarnings("unchecked")
