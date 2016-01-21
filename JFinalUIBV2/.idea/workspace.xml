@@ -86,7 +86,7 @@
       <file leaf-file-name="JfinalConfig.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="205" column="8" selection-start="6391" selection-end="6391" vertical-scroll-proportion="0.6994992" vertical-offset="2587" max-vertical-offset="3186">
+            <state line="206" column="115" selection-start="6450" selection-end="6541" vertical-scroll-proportion="0.7295492" vertical-offset="2587" max-vertical-offset="3186">
               <folding />
             </state>
           </provider>
@@ -174,6 +174,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -195,7 +196,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -545,11 +545,12 @@
       <workItem from="1450322350716" duration="1516000" />
       <workItem from="1452070873725" duration="1734000" />
       <workItem from="1452569645863" duration="202000" />
+      <workItem from="1453359396300" duration="340000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18647000" />
+    <option name="totallyTimeSpent" value="18987000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1060" extended-state="6" />
@@ -569,7 +570,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21831736" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47923324" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -621,6 +622,13 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="205" column="8" selection-start="6391" selection-end="6391" vertical-scroll-proportion="0.0" vertical-offset="3186" max-vertical-offset="3186">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/mvc/group/GroupController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="11" selection-start="901" selection-end="901" vertical-scroll-proportion="0.0" vertical-offset="666" max-vertical-offset="1566">
@@ -720,11 +728,6 @@
         <state line="4" column="16" selection-start="77" selection-end="77" vertical-scroll-proportion="0.10183875" vertical-offset="0" max-vertical-offset="707" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jfinal21/com/jfinal/render/FreeMarkerRender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="27" selection-start="914" selection-end="914" vertical-scroll-proportion="0.33239037" vertical-offset="35" max-vertical-offset="2628" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JFinalUIBV2.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="72" column="18" selection-start="4151" selection-end="4151" vertical-scroll-proportion="1.0557184" vertical-offset="936" max-vertical-offset="1890" />
@@ -737,9 +740,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/jfinal22/com/jfinal/plugin/c3p0/C3p0Plugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="58" selection-start="993" selection-end="993" vertical-scroll-proportion="0.30691642" vertical-offset="21" max-vertical-offset="3150">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="205" column="8" selection-start="6391" selection-end="6391" vertical-scroll-proportion="0.6994992" vertical-offset="2587" max-vertical-offset="3186">
+        <state line="206" column="115" selection-start="6450" selection-end="6541" vertical-scroll-proportion="0.7295492" vertical-offset="2587" max-vertical-offset="3186">
           <folding />
         </state>
       </provider>
