@@ -1,7 +1,6 @@
 package com.platform.mvc.upload;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +51,7 @@ public class UploadController extends BaseController {
 	 * 文件上传处理
 	 */
 	public void index() {
+		/*
 		String path = null;
 		if(null != pathType && pathType.equals("webRoot")){//pathType = "webRoot";
 			path = path_web_root;
@@ -66,8 +66,9 @@ public class UploadController extends BaseController {
 			renderJson(map);
 			return;
 		}
-		
 		List<UploadFile> files = getFiles(path, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding);
+		*/
+		List<UploadFile> files = getFiles("/upload", PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding);
 		
 		List<Map<String, String>> list = UploadService.service.upload(pathType, files);
 		renderJson(list);

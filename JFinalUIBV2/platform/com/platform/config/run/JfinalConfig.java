@@ -11,6 +11,7 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.i18n.I18nInterceptor;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.tx.TxByActionKeyRegex;
 import com.jfinal.plugin.activerecord.tx.TxByActionKeys;
@@ -66,8 +67,8 @@ public class JfinalConfig extends JFinalConfig {
 		//constants.setJsonFactory(JacksonFactory.me()); // Jackson
 
 		log.info("configConstant 设置path相关");
-		//constants.setBaseUploadPath(PathKit.getWebRootPath() + "/WEB-INF/files/upload"); // 上传公共路径
-		//constants.setBaseDownloadPath(PathKit.getWebRootPath() + "/WEB-INF/files/upload"); // 下载公共路径
+		constants.setBaseUploadPath(PathKit.getWebRootPath() + "/files"); // 上传公共路径
+		constants.setBaseDownloadPath(PathKit.getWebRootPath() + "/files"); // 下载公共路径
 		//constants.setBaseViewPath("/jf"); //设置路由公共路径
 		
 		log.info("configConstant 视图Beetl设置");
