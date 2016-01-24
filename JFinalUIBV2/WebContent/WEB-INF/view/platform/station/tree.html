@@ -118,7 +118,7 @@
 			var addName = "新增岗位" + (newCount++);//岗位初始化名称
 			var orderIds = (treeNode.children == undefined ? 1 : (treeNode.children.length + 1));
 			
-			var url = "${cxt!}/jf/platform/station/save";
+			var url = "/jf/platform/station/save";
 			var data = { 
 				"pIds" : treeNode.id, 
 				"names" : addName, 
