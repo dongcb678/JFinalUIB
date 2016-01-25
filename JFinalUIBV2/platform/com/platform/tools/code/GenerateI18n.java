@@ -24,7 +24,7 @@ public class GenerateI18n  {
 
 	public static void main(String[] args) throws IOException {
 		log.info("启动ConfigCore start ......");
-    	new ConfigCore();
+    	ConfigCore.getSingleton();
     	log.info("启动ConfigCore end ......");
 
 		String propPath = ToolDirFile.getClassesPath() + File.separator + "message_zh_CN.properties";

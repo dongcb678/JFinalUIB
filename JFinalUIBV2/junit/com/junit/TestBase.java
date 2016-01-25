@@ -12,7 +12,7 @@ public class TestBase {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
     	log.info("启动ConfigCore start ......");
-    	new ConfigCore();
+    	ConfigCore.getSingleton();
     	log.info("启动ConfigCore end ......");
     }
 

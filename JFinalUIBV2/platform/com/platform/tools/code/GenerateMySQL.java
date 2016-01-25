@@ -35,7 +35,7 @@ public class GenerateMySQL extends GenerateBase {
 	 */
 	public static void main(String[] args) throws IOException {
 		log.info("启动ConfigCore start ......");
-    	new ConfigCore();
+    	ConfigCore.getSingleton();
     	log.info("启动ConfigCore end ......");
 
     	String db_type = PropKit.get(ConstantInit.db_type_key);

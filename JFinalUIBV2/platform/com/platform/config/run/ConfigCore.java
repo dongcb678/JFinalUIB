@@ -1,7 +1,5 @@
 package com.platform.config.run;
 
-import java.io.IOException;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.kit.PropKit;
@@ -52,8 +50,21 @@ import com.weixin.mvc.message.Message;
 public class ConfigCore {
 
 	private static Logger log = Logger.getLogger(ConfigCore.class);
+
+	public static volatile ConfigCore configCore;
 	
-    public ConfigCore() throws IOException {
+	public static ConfigCore getSingleton(){
+		if(configCore == null){
+			synchronized (ConfigCore.class) {
+				if(configCore == null){
+					configCore = new ConfigCore();
+				}
+			}
+		}
+		return configCore;
+	}
+	
+    private ConfigCore() {
     	PropKit.use("init.properties");
 
 		log.info("Beetl设置");
