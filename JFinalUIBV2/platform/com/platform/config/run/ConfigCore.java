@@ -51,7 +51,7 @@ public class ConfigCore {
 
 	private static Logger log = Logger.getLogger(ConfigCore.class);
 
-	public static volatile ConfigCore configCore;
+	private static volatile ConfigCore configCore;
 	
 	public static ConfigCore getSingleton(){
 		if(configCore == null){
