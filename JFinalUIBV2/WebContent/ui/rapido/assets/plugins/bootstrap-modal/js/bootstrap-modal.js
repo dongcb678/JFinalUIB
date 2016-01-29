@@ -143,7 +143,6 @@
 					.addClass('modal-overflow');
 			} else {
 				this.$element
-					.css('margin-top', 0 - this.$element.height() / 2)
 					.css('margin-top', (0 - this.$element.height() / 2) < 0 ? 0 : (0 - this.$element.height()) / 2)
 					.removeClass('modal-overflow');
 			}
