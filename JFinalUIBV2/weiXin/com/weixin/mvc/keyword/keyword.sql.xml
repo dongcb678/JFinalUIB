@@ -13,6 +13,10 @@
         	
         		select * from ( select a.*, rownum rn from (select * from wx_keyword) a where rownum <= ? ) where rn >= ?
         		
+        	<% } else if(db_type == "sqlserver"){ %>
+        		
+        		select top {0, number, #.#} * from wx_keyword where ids not in ( select top {1, number, #.#} ids from wx_keyword )
+        		
         	<% } %>
     	]]>
 	</sql>

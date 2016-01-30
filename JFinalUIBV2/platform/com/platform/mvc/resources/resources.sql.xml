@@ -33,6 +33,21 @@
 	</sql>
 	
 	<!--  -->
+	<sql id="pv_sqlserver">
+		<![CDATA[ 
+        	select 
+        		CONVERT(varchar(100), startdate, 23) adates, 
+        		count(*) acounts 
+        	from 
+        		pt_syslog 
+        	where 
+        		startdate>=? and startdate<=? 
+        	group by CONVERT(varchar(100), startdate, 23) 
+        	order by adates asc 
+    	]]>
+	</sql>
+	
+	<!--  -->
 	<sql id="24hour">
 		<![CDATA[ 
         	select * from pt_resources where hostname=? and createdate>=? and createdate<=? order by createdate asc 

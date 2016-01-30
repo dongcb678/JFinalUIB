@@ -15,6 +15,10 @@
         	<% } else if(db_type == "oracle"){ %>
         	
         		select * from ( select a.*, rownum rn from (select * from pt_user) a where rownum < ? ) where rn >= ?
+        	
+        	<% } else if(db_type == "sqlserver"){ %>
+        		
+        		select top {0, number, #.#} * from pt_user where ids not in ( select top {1, number, #.#} ids from pt_user )
         		
         	<% } %>
     	]]>
@@ -37,14 +41,14 @@
 	<!-- 停用账户 -->
 	<sql id="stop">
 		<![CDATA[ 
-        	update pt_user u set stopDate = ?, errorCount = ? where u.ids = ? 
+        	update pt_user set stopDate = ?, errorCount = ? where ids = ? 
     	]]>
 	</sql>
 	
 	<!-- 启用停用账户 -->
 	<sql id="start">
 		<![CDATA[ 
-        	update pt_user u set stopdate = null, errorcount = 0 where u.ids = ?
+        	update pt_user set stopdate = null, errorcount = 0 where ids = ?
     	]]>
 	</sql>
 	

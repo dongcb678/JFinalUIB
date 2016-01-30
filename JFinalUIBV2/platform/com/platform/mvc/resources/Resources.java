@@ -126,6 +126,12 @@ public class Resources extends BaseModel<Resources> {
 	public static final String sqlId_pv_oracle = "platform.resources.pv_oracle";
 
 	/**
+	 * sqlId : platform.resources.pv_sqlserver
+	 * 描述：
+	 */
+	public static final String sqlId_pv_sqlserver = "platform.resources.pv_sqlserver";
+
+	/**
 	 * sqlId : platform.resources.24hour
 	 * 描述：
 	 */

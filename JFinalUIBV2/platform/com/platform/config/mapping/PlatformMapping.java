@@ -12,6 +12,7 @@ import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
+import com.jfinal.plugin.activerecord.dialect.SqlServerDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
@@ -88,6 +89,10 @@ public class PlatformMapping extends BaseMapping{
 			log.info("configPlugin 使用数据库类型是 oracle");
 			druidPlugin.setValidationQuery("select 1 FROM DUAL"); //连接验证语句
 			arp.setDialect(new OracleDialect());
+			
+		}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+			log.info("configPlugin 使用数据库类型是 sqlserver");
+			arp.setDialect(new SqlServerDialect());
 		}
 
 		log.info("configPlugin 添加druidPlugin插件");

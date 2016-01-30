@@ -132,6 +132,11 @@ public interface ConstantInit {
 	public static final String db_type_oracle = "oracle";
 
 	/**
+	 * 当前数据库类型：sqlserver
+	 */
+	public static final String db_type_sqlserver = "sqlserver";
+
+	/**
 	 * 数据库连接参数：驱动
 	 */
 	public static final String db_connection_postgresql_driverClass = "postgresql.driverClass";
@@ -190,6 +195,26 @@ public interface ConstantInit {
 	 * 数据库连接参数：密码
 	 */
 	public static final String db_connection_oracle_passWord = "oracle.passWord";
+	
+	/**
+	 * 数据库连接参数：驱动
+	 */
+	public static final String db_connection_sqlserver_driverClass = "sqlserver.driverClass";
+	
+	/**
+	 * 数据库连接参数：连接URL
+	 */
+	public static final String db_connection_sqlserver_jdbcUrl = "sqlserver.jdbcUrl";
+	
+	/**
+	 * 数据库连接参数：用户名
+	 */
+	public static final String db_connection_sqlserver_userName = "sqlserver.userName";
+	
+	/**
+	 * 数据库连接参数：密码
+	 */
+	public static final String db_connection_sqlserver_passWord = "sqlserver.passWord";
 
 	/**
 	 * 数据库连接池参数：初始化连接大小

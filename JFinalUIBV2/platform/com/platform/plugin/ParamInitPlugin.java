@@ -1,5 +1,6 @@
 package com.platform.plugin;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -135,6 +136,10 @@ public class ParamInitPlugin implements IPlugin {
 				
 			}else if(db_type.equals(ConstantInit.db_type_oracle)){
 				userList = User.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
+			
+			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
+				userList = User.dao.find(topSql);
 			}
 			
 			for (User user : userList) {
@@ -163,6 +168,10 @@ public class ParamInitPlugin implements IPlugin {
 				
 			}else if(db_type.equals(ConstantInit.db_type_oracle)){
 				userInfoList = UserInfo.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
+			
+			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
+				userInfoList = UserInfo.dao.find(topSql);
 			}
 			
 			for (UserInfo userInfo : userInfoList) {
@@ -191,6 +200,10 @@ public class ParamInitPlugin implements IPlugin {
 				
 			}else if(db_type.equals(ConstantInit.db_type_oracle)){
 				groupList = Group.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
+
+			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
+				groupList = Group.dao.find(topSql);
 			}
 			
 			for (Group group : groupList) {
@@ -219,6 +232,10 @@ public class ParamInitPlugin implements IPlugin {
 				
 			}else if(db_type.equals(ConstantInit.db_type_oracle)){
 				roleList = Role.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
+			
+			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
+				roleList = Role.dao.find(topSql);
 			}
 			
 			for (Role role : roleList) {
@@ -246,6 +263,10 @@ public class ParamInitPlugin implements IPlugin {
 				
 			}else if(db_type.equals(ConstantInit.db_type_oracle)){
 				stationList = Station.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
+
+			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
+				stationList = Station.dao.find(topSql);
 			}
 			
 			for (Station station : stationList) {
@@ -274,6 +295,10 @@ public class ParamInitPlugin implements IPlugin {
 				
 			}else if(db_type.equals(ConstantInit.db_type_oracle)){
 				operatorList = Operator.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
+
+			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
+				operatorList = Operator.dao.find(topSql);
 			}
 			
 			for (Operator operator : operatorList) {

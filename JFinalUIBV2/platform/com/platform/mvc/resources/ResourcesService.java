@@ -51,6 +51,10 @@ public class ResourcesService extends BaseService {
 		}else if(db_type.equals(ConstantInit.db_type_oracle)){ // oracle
 			String sql = getSql(Resources.sqlId_pv_oracle);
 			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+		
+		}else if(db_type.equals(ConstantInit.db_type_sqlserver)){ // sqlserver
+			String sql = getSql(Resources.sqlId_pv_sqlserver);
+			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		}
 		
 		List<String> adates = new LinkedList<String>();

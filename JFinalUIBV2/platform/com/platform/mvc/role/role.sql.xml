@@ -16,6 +16,10 @@
         	
         		select * from ( select a.*, rownum rn from (select * from pt_role) a where rownum <= ? ) where rn >= ?
         		
+        	<% } else if(db_type == "sqlserver"){ %>
+        		
+        		select top {0, number, #.#} * from pt_role where ids not in ( select top {1, number, #.#} ids from pt_role )
+        		
         	<% } %>
     	]]>
 	</sql>

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -107,7 +108,12 @@ public class DocKeyword extends DocBase {
 					
 				}else if(db_type.equals(ConstantInit.db_type_oracle)){
 					list = Keyword.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
+					
+				}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+					String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
+					list = Keyword.dao.find(topSql);
 				}
+				
 				IndexWriter ramIndexWriter = getRamIndexWriter(); // 调用RAM写
 				for (Keyword keyword : list) {
 					addDoc(ramIndexWriter, keyword, document, fields);
