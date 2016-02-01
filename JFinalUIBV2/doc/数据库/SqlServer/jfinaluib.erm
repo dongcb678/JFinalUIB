@@ -11,8 +11,8 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>1303</x>
-	<y>1329</y>
+	<x>1086</x>
+	<y>96</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -213,7 +213,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2015-04-08 13:35:05</creation_date>
-			<updated_date>2016-01-30 11:43:02</updated_date>
+			<updated_date>2016-02-01 10:00:32</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -2243,7 +2243,7 @@
 		</word>
 		<word>
 			<id>133</id>
-			<length>null</length>
+			<length>100</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -2254,7 +2254,7 @@
 			<description></description>
 			<logical_name>密码</logical_name>
 			<physical_name>password</physical_name>
-			<type>binary1</type>
+			<type>varbinary(n)</type>
 		</word>
 		<word>
 			<id>134</id>
@@ -2603,7 +2603,7 @@
 		</word>
 		<word>
 			<id>157</id>
-			<length>null</length>
+			<length>1000</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -2614,7 +2614,7 @@
 			<description></description>
 			<logical_name>密钥</logical_name>
 			<physical_name>salt</physical_name>
-			<type>binary1</type>
+			<type>varbinary(n)</type>
 		</word>
 		<word>
 			<id>158</id>
@@ -6529,7 +6529,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>binary1</type>
+					<type>varbinary(n)</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -6595,7 +6595,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>binary1</type>
+					<type>varbinary(n)</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
