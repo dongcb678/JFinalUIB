@@ -28,8 +28,6 @@ public class EscapeXml implements Function {
 			return "";
 		}
 
-		log.debug("EscapeXml，xml转换处理，content=" + content);
-		
 		return StringEscapeUtils.escapeXml11(content);
 	}
 

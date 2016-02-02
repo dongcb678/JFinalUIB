@@ -26,7 +26,7 @@
 	<font_name>宋体</font_name>
 	<font_size>9</font_size>
 	<settings>
-		<database>MySQL</database>
+		<database>DB2</database>
 		<capital>false</capital>
 		<table_style></table_style>
 		<notation></notation>
@@ -41,7 +41,7 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<export_ddl_setting>
-				<output_path>doc\数据库\MySQL\blog.sql</output_path>
+				<output_path>doc\数据库\DB2\blog.sql</output_path>
 				<encoding>UTF-8</encoding>
 				<line_feed>CR+LF</line_feed>
 				<is_open_after_saved>true</is_open_after_saved>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2015-08-24 15:39:14</creation_date>
-			<updated_date>2016-02-01 10:22:43</updated_date>
+			<updated_date>2016-02-01 10:31:46</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -159,10 +159,6 @@
 		</model_properties>
 		<table_properties>
 			<schema></schema>
-			<character_set></character_set>
-			<collation></collation>
-			<storage_engine></storage_engine>
-			<primary_key_length_of_text>null</primary_key_length_of_text>
 		</table_properties>
 		<environment_setting>
 			<environment>
@@ -397,10 +393,6 @@
 			</complex_unique_key_list>
 			<table_properties>
 				<schema></schema>
-				<character_set></character_set>
-				<collation></collation>
-				<storage_engine></storage_engine>
-				<primary_key_length_of_text>null</primary_key_length_of_text>
 			</table_properties>
 		</table>
 	</contents>

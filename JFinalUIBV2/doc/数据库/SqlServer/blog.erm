@@ -41,7 +41,7 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<export_ddl_setting>
-				<output_path>C:\Users\Administrator\Desktop\blog.sql</output_path>
+				<output_path>doc\数据库\SqlServer\blog.sql</output_path>
 				<encoding>UTF-8</encoding>
 				<line_feed>CR+LF</line_feed>
 				<is_open_after_saved>true</is_open_after_saved>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2015-08-24 15:39:14</creation_date>
-			<updated_date>2016-01-30 11:23:18</updated_date>
+			<updated_date>2016-02-01 10:21:44</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>

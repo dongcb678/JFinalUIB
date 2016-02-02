@@ -100,6 +100,24 @@ public abstract class ToolDataBase {
 			// 解析数据库连接URL，获取数据库地址端口
 			port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
 			port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
+			
+		}else if(db_type.equals(ConstantInit.db_type_db2)){ // db2 数据库连接信息
+			driverClass = PropKit.get(ConstantInit.db_connection_db2_driverClass);
+			jdbcUrl = PropKit.get(ConstantInit.db_connection_db2_jdbcUrl);
+			userName = PropKit.get(ConstantInit.db_connection_db2_userName);
+			passWord = PropKit.get(ConstantInit.db_connection_db2_passWord);
+			
+			// 解析数据库连接URL，获取数据库名称
+			dbName = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			dbName = dbName.substring(dbName.indexOf("/") + 1);
+
+			// 解析数据库连接URL，获取数据库地址IP
+			ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			ip = ip.substring(0, ip.indexOf(":"));
+
+			// 解析数据库连接URL，获取数据库地址端口
+			port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+			port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
 		}
 		
 		// 把数据库连接信息写入常用map

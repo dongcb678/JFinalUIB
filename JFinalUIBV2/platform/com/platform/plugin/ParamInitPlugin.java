@@ -134,7 +134,7 @@ public class ParamInitPlugin implements IPlugin {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
 				userList = User.dao.find(sql, splitDataSize, i * splitDataSize); // start 0
 				
-			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+			}else if(db_type.equals(ConstantInit.db_type_oracle) || db_type.equals(ConstantInit.db_type_db2)){
 				userList = User.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 			
 			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
@@ -163,10 +163,10 @@ public class ParamInitPlugin implements IPlugin {
 		long batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_userInfo ", splitDataSize);
 		List<UserInfo> userInfoList = null;
 		for (long i = 0; i < batchCount; i++) {
-			if(db_type.equals(ConstantInit.db_type_postgresql) ||db_type.equals(ConstantInit.db_type_mysql)){
+			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
 				userInfoList = UserInfo.dao.find(sql, splitDataSize, i * splitDataSize); // start 0
 				
-			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+			}else if(db_type.equals(ConstantInit.db_type_oracle) || db_type.equals(ConstantInit.db_type_db2)){
 				userInfoList = UserInfo.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 			
 			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
@@ -198,7 +198,7 @@ public class ParamInitPlugin implements IPlugin {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
 				groupList = Group.dao.find(sql, splitDataSize, i * splitDataSize);
 				
-			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+			}else if(db_type.equals(ConstantInit.db_type_oracle) || db_type.equals(ConstantInit.db_type_db2)){
 				groupList = Group.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 
 			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
@@ -230,7 +230,7 @@ public class ParamInitPlugin implements IPlugin {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
 				roleList = Role.dao.find(sql, splitDataSize, i * splitDataSize);
 				
-			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+			}else if(db_type.equals(ConstantInit.db_type_oracle) || db_type.equals(ConstantInit.db_type_db2)){
 				roleList = Role.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 			
 			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
@@ -261,7 +261,7 @@ public class ParamInitPlugin implements IPlugin {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
 				stationList = Station.dao.find(sql, splitDataSize, i * splitDataSize);
 				
-			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+			}else if(db_type.equals(ConstantInit.db_type_oracle) || db_type.equals(ConstantInit.db_type_db2)){
 				stationList = Station.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 
 			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
@@ -293,7 +293,7 @@ public class ParamInitPlugin implements IPlugin {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
 				operatorList = Operator.dao.find(sql, splitDataSize, i * splitDataSize);
 				
-			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+			}else if(db_type.equals(ConstantInit.db_type_oracle) || db_type.equals(ConstantInit.db_type_db2)){
 				operatorList = Operator.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 
 			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){

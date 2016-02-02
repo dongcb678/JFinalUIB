@@ -37,25 +37,14 @@ public class ResourcesService extends BaseService {
 	public Map<String, Object> pv(){
 		Date endDate = ToolDateTime.endDateByDay(ToolDateTime.getDate());
 		Date startDate = ToolDateTime.startDateByDay(endDate, -14);
-		
-		List<Record> list = null;
+
 		String db_type = PropKit.get(ConstantInit.db_type_key);
-		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg
-			String sql = getSql(Resources.sqlId_pv_pg);
-			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
-		}else if(db_type.equals(ConstantInit.db_type_mysql)){ // mysql
-			String sql = getSql(Resources.sqlId_pv_mysql);
-			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
+		Map<String, Object> sqlMap = new HashMap<String, Object>();
+		sqlMap.put("db_type", db_type);
 		
-		}else if(db_type.equals(ConstantInit.db_type_oracle)){ // oracle
-			String sql = getSql(Resources.sqlId_pv_oracle);
-			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
-		
-		}else if(db_type.equals(ConstantInit.db_type_sqlserver)){ // sqlserver
-			String sql = getSql(Resources.sqlId_pv_sqlserver);
-			list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
-		}
+		String sql = getSqlByBeetl(Resources.sqlId_pv, sqlMap);
+		List<Record> list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		List<String> adates = new LinkedList<String>();
 		List<Long> acounts = new LinkedList<Long>();

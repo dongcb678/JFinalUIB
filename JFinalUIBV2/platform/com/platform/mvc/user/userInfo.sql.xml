@@ -20,6 +20,10 @@
         		
         		select top {0, number, #.#} * from pt_userinfo where ids not in ( select top {1, number, #.#} ids from pt_userinfo )
         		
+        	<% } else if(db_type == "db2"){ %>
+        		
+        		select * from ( select b.*, rownumber() over() as rn from ( select * from pt_userinfo ) as b ) as a where a.rn < ? and a.rn >= ?
+        		
         	<% } %>
     	]]>
 	</sql>

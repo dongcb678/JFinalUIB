@@ -69,7 +69,7 @@ public class UserController extends BaseController {
 	public void view() {
 		User user = User.dao.findById(getPara());
 		setAttr("user", user);
-		setAttr("userInfo", UserInfo.dao.findById(User.column_userinfoids));
+		setAttr("userInfo", user.getUserInfo());
 		render("/platform/user/view.html");
 	}
 	

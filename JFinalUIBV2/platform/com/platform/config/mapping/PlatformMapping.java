@@ -9,6 +9,7 @@ import com.jfinal.config.Plugins;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
+import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
@@ -93,6 +94,11 @@ public class PlatformMapping extends BaseMapping{
 		}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
 			log.info("configPlugin 使用数据库类型是 sqlserver");
 			arp.setDialect(new SqlServerDialect());
+			
+		}else if(db_type.equals(ConstantInit.db_type_db2)){
+			log.info("configPlugin 使用数据库类型是 db2");
+			druidPlugin.setValidationQuery("select 1 from sysibm.sysdummy1"); //连接验证语句
+			arp.setDialect(new AnsiSqlDialect());
 		}
 
 		log.info("configPlugin 添加druidPlugin插件");

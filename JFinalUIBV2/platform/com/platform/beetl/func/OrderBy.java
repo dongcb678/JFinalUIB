@@ -40,7 +40,7 @@ public class OrderBy implements Function {
 			return "";
 		}
 
-		log.debug("分页列表排序，orderLaber=" + orderLaber + "， orderColunm=" + orderColunm + "，orderMode= " + orderMode);
+		//log.debug("分页列表排序，orderLaber=" + orderLaber + "， orderColunm=" + orderColunm + "，orderMode= " + orderMode);
 		
 		if(null != orderMode && orderLaber.equals(orderColunm)){
 			String cxt = (String) context.getGlobal(ConstantWebContext.request_cxt);

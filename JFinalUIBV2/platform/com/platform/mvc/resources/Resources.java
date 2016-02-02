@@ -108,28 +108,10 @@ public class Resources extends BaseModel<Resources> {
 	public static final String column_createdate = "createdate";
 
 	/**
-	 * sqlId : platform.resources.pv_pg
+	 * sqlId : platform.resources.pv
 	 * 描述：
 	 */
-	public static final String sqlId_pv_pg = "platform.resources.pv_pg";
-
-	/**
-	 * sqlId : platform.resources.pv_mysql
-	 * 描述：
-	 */
-	public static final String sqlId_pv_mysql = "platform.resources.pv_mysql";
-
-	/**
-	 * sqlId : platform.resources.pv_oracle
-	 * 描述：
-	 */
-	public static final String sqlId_pv_oracle = "platform.resources.pv_oracle";
-
-	/**
-	 * sqlId : platform.resources.pv_sqlserver
-	 * 描述：
-	 */
-	public static final String sqlId_pv_sqlserver = "platform.resources.pv_sqlserver";
+	public static final String sqlId_pv = "platform.resources.pv";
 
 	/**
 	 * sqlId : platform.resources.24hour

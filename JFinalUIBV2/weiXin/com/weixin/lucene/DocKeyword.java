@@ -106,7 +106,7 @@ public class DocKeyword extends DocBase {
 				if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
 					list = Keyword.dao.find(sql, splitDataSize, i * splitDataSize); // start 0
 					
-				}else if(db_type.equals(ConstantInit.db_type_oracle)){
+				}else if(db_type.equals(ConstantInit.db_type_oracle) || db_type.equals(ConstantInit.db_type_db2)){
 					list = Keyword.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 					
 				}else if(db_type.equals(ConstantInit.db_type_sqlserver)){

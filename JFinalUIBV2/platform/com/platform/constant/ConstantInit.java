@@ -137,6 +137,11 @@ public interface ConstantInit {
 	public static final String db_type_sqlserver = "sqlserver";
 
 	/**
+	 * 当前数据库类型：db2
+	 */
+	public static final String db_type_db2 = "db2";
+
+	/**
 	 * 数据库连接参数：驱动
 	 */
 	public static final String db_connection_postgresql_driverClass = "postgresql.driverClass";
@@ -215,6 +220,26 @@ public interface ConstantInit {
 	 * 数据库连接参数：密码
 	 */
 	public static final String db_connection_sqlserver_passWord = "sqlserver.passWord";
+
+	/**
+	 * 数据库连接参数：驱动
+	 */
+	public static final String db_connection_db2_driverClass = "db2.driverClass";
+	
+	/**
+	 * 数据库连接参数：连接URL
+	 */
+	public static final String db_connection_db2_jdbcUrl = "db2.jdbcUrl";
+	
+	/**
+	 * 数据库连接参数：用户名
+	 */
+	public static final String db_connection_db2_userName = "db2.userName";
+	
+	/**
+	 * 数据库连接参数：密码
+	 */
+	public static final String db_connection_db2_passWord = "db2.passWord";
 
 	/**
 	 * 数据库连接池参数：初始化连接大小
