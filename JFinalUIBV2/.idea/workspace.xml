@@ -86,7 +86,7 @@
       <file leaf-file-name="JfinalConfig.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="206" column="115" selection-start="6450" selection-end="6541" vertical-scroll-proportion="0.7295492" vertical-offset="2587" max-vertical-offset="3186">
+            <state line="195" column="10" selection-start="6053" selection-end="6053" vertical-scroll-proportion="1.2904842" vertical-offset="2071" max-vertical-offset="3006">
               <folding />
             </state>
           </provider>
@@ -174,8 +174,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -191,6 +191,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="JFinalUIBV2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JFinalUIBV2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JFinalUIBV2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junit" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -546,11 +560,12 @@
       <workItem from="1452070873725" duration="1734000" />
       <workItem from="1452569645863" duration="202000" />
       <workItem from="1453359396300" duration="340000" />
+      <workItem from="1454485739288" duration="135000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18987000" />
+    <option name="totallyTimeSpent" value="19122000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1060" extended-state="6" />
@@ -622,6 +637,13 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="206" column="115" selection-start="6450" selection-end="6541" vertical-scroll-proportion="0.0" vertical-offset="3186" max-vertical-offset="3186">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="205" column="8" selection-start="6391" selection-end="6391" vertical-scroll-proportion="0.0" vertical-offset="3186" max-vertical-offset="3186">
@@ -742,14 +764,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jfinal22/com/jfinal/plugin/c3p0/C3p0Plugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="58" selection-start="993" selection-end="993" vertical-scroll-proportion="0.30691642" vertical-offset="21" max-vertical-offset="3150">
-          <folding />
-        </state>
+        <state line="27" column="58" selection-start="993" selection-end="993" vertical-scroll-proportion="0.30691642" vertical-offset="21" max-vertical-offset="3150" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="115" selection-start="6450" selection-end="6541" vertical-scroll-proportion="0.7295492" vertical-offset="2587" max-vertical-offset="3186">
+        <state line="195" column="10" selection-start="6053" selection-end="6053" vertical-scroll-proportion="1.2904842" vertical-offset="2071" max-vertical-offset="3006">
           <folding />
         </state>
       </provider>
