@@ -39,10 +39,6 @@ import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolDataBase;
 import com.test.mvc.blog.Blog;
-import com.weixin.mvc.article.Article;
-import com.weixin.mvc.keyword.Keyword;
-import com.weixin.mvc.location.Location;
-import com.weixin.mvc.message.Message;
 
 /**
  * 独立启动Jfinal中的插件，不依赖web容器调用插件
@@ -144,13 +140,6 @@ public class ConfigCore {
 		arp.addMapping("pt_user", "ids", User.class);
 		arp.addMapping("pt_userinfo", "ids", UserInfo.class);
 		
-		arp.addMapping("wx_article", "ids", Article.class);
-		arp.addMapping("wx_group", "ids", com.weixin.mvc.group.Group.class);
-		arp.addMapping("wx_keyword", "ids", Keyword.class);
-		arp.addMapping("wx_location", "ids", Location.class);
-		arp.addMapping("wx_message", "ids", Message.class);
-		arp.addMapping("wx_user", "ids", com.weixin.mvc.user.User.class);
-
 		arp.addMapping("test_blog", "ids", Blog.class);
 
 		arp.start();

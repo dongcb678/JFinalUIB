@@ -22,7 +22,6 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.platform.config.mapping.PlatformMapping;
 import com.platform.config.routes.PlatformRoutes;
 import com.platform.config.routes.TestRoutes;
-import com.platform.config.routes.WeiXinRoutes;
 import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
 import com.platform.handler.GlobalHandler;
@@ -39,7 +38,6 @@ import com.platform.thread.TimerResources;
 import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolString;
-import com.weixin.lucene.DocKeyword;
 
 /**
  * Jfinal API 引导式配置，系统的核心配置，负责生产、加载所有核心组件
@@ -93,7 +91,6 @@ public class JfinalConfig extends JFinalConfig {
 		
 		log.info("configRoute 手动注册路由");
 		routes.add(new PlatformRoutes());
-		routes.add(new WeiXinRoutes());
 		routes.add(new TestRoutes());
 	}
 	
@@ -167,12 +164,6 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
 
-		boolean luceneIndex = PropKit.getBoolean(ConstantInit.config_luceneIndex, false);
-		if(luceneIndex){
-			log.info("afterJFinalStart 创建自动回复lucene索引");
-			new DocKeyword().run(); 
-		}
-		
 		log.info("afterJFinalStart 系统负载");
 		TimerResources.start();
 		
@@ -184,9 +175,6 @@ public class JfinalConfig extends JFinalConfig {
 	 * 系统关闭前调用
 	 */
 	public void beforeJFinalStop() {
-		log.info("beforeJFinalStop 释放lucene索引资源");
-		new DocKeyword().close();
-	
 		log.info("beforeJFinalStop 释放日志入库线程");
 		ThreadSysLog.setThreadRun(false);
 	

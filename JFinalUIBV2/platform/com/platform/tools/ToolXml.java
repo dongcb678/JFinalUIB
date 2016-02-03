@@ -1,7 +1,6 @@
 package com.platform.tools;
 
 import java.io.Writer;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +16,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
-import com.weixin.dto.message.RecevieMsgText;
 
 /**
  * XML工具类
@@ -135,12 +133,12 @@ public abstract class ToolXml {
 		xml += "<MsgId>11</MsgId>";
 		xml += "</xml>";
 
-		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
-		map.put("xml", RecevieMsgText.class);
-		
-		RecevieMsgText recevie = (RecevieMsgText) xmlToBean(xml, map);
-
-		System.out.println(beanToXml(recevie, RecevieMsgText.class));
+//		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+//		map.put("xml", RecevieMsgText.class);
+//		
+//		RecevieMsgText recevie = (RecevieMsgText) xmlToBean(xml, map);
+//
+//		System.out.println(beanToXml(recevie, RecevieMsgText.class));
 	}
 	
 

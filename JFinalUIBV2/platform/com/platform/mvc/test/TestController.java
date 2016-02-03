@@ -15,7 +15,6 @@ import com.platform.mvc.base.BaseController;
 import com.platform.mvc.operator.Operator;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.tools.ToolSqlXml;
-import com.weixin.lucene.DocKeyword;
 
 /**
  * 功能测试
@@ -43,14 +42,6 @@ public class TestController extends BaseController {
 		defaultOrder(Syslog.column_startdate, "desc");
 		paging(ConstantInit.db_dataSource_main, splitPage, Syslog.sqlId_splitPageSelect, Syslog.sqlId_splitPageFrom);
 		render("/platform/test/sysLog.html");
-	}
-	
-	/**
-	 * lucene查询显示
-	 */
-	public void lucene() {
-		new DocKeyword().search(splitPage);
-		render("/platform/test/lucene.html");
 	}
 	
 	/**

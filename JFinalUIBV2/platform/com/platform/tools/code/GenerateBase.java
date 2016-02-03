@@ -55,15 +55,6 @@ public abstract class GenerateBase {
 //		{null, "pt_resources", null, "Resources"},
 //		{null, "pt_user", null, "User"},
 //		{null, "pt_userinfo", null, "UserInfo"}
-		
-//		{null, "wx_article", null, "Article"},
-//		{null, "wx_file", null, "File"},
-//		{null, "wx_group", null, "Group"},
-//		{null, "wx_location", null, "Location"},
-//		{null, "wx_message", null, "Message"},
-//		{null, "wx_role", null, "Role"},
-//		{null, "wx_user", null, "User"},
-//		{null, "wx_keyword", null, "Keyword"}
 	};
 	
 	/**
