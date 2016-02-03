@@ -86,7 +86,7 @@
       <file leaf-file-name="JfinalConfig.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="195" column="10" selection-start="6053" selection-end="6053" vertical-scroll-proportion="1.2904842" vertical-offset="2071" max-vertical-offset="3006">
+            <state line="194" column="8" selection-start="6009" selection-end="6009" vertical-scroll-proportion="1.260434" vertical-offset="2071" max-vertical-offset="3006">
               <folding />
             </state>
           </provider>
@@ -174,8 +174,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -210,6 +208,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -222,7 +222,7 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -561,11 +561,12 @@
       <workItem from="1452569645863" duration="202000" />
       <workItem from="1453359396300" duration="340000" />
       <workItem from="1454485739288" duration="135000" />
+      <workItem from="1454487632284" duration="87000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19122000" />
+    <option name="totallyTimeSpent" value="19209000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1060" extended-state="6" />
@@ -637,6 +638,13 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="195" column="10" selection-start="6053" selection-end="6053" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="206" column="115" selection-start="6450" selection-end="6541" vertical-scroll-proportion="0.0" vertical-offset="3186" max-vertical-offset="3186">
@@ -769,7 +777,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="10" selection-start="6053" selection-end="6053" vertical-scroll-proportion="1.2904842" vertical-offset="2071" max-vertical-offset="3006">
+        <state line="194" column="8" selection-start="6009" selection-end="6009" vertical-scroll-proportion="1.260434" vertical-offset="2071" max-vertical-offset="3006">
           <folding />
         </state>
       </provider>
