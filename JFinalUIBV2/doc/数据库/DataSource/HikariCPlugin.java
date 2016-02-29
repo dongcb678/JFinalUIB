@@ -36,7 +36,7 @@ public class HikariCPlugin implements IPlugin, IDataSourceProvider {
 	private HikariDataSource dataSource;
 	private boolean isStarted = false;
 	
-	public HikariCPlugin(String jdbcUrl, String user, String password, String driverClass) {
+	public HikariCPlugin(String driverClass, String jdbcUrl, String user, String password, int minimumIdle, int maximumPoolSize) {
 		this.jdbcUrl = jdbcUrl;
 		this.user = user;
 		this.password = password;
@@ -69,6 +69,11 @@ public class HikariCPlugin implements IPlugin, IDataSourceProvider {
 		config.addDataSourceProperty("useUnicode", "true");
 		config.addDataSourceProperty("characterEncoding", "utf8");
 		
+		// Statement Cache
+		config.addDataSourceProperty("cachePrepStmts", "true");
+		config.addDataSourceProperty("prepStmtCacheSize", "250");
+		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+
 		dataSource = new HikariDataSource(config);
 		
 		isStarted = true;

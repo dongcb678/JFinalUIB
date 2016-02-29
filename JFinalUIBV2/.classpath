@@ -25,11 +25,11 @@
 	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/servlet-api-3.1.jar"/>
 	<classpathentry kind="lib" path="build-lib/jfinal22/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="lib" path="build-lib/jfinal22/freemarker-2.3.22.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-annotations-2.4.0.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-core-2.5.3.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-databind-2.4.3.jar"/>
 	<classpathentry kind="lib" path="build-lib/jfinal22/velocity-1.7-dep.jar"/>
 	<classpathentry kind="lib" path="build-lib/jfinal22/velocity-1.7.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-annotations-2.7.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-core-2.7.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-databind-2.7.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
