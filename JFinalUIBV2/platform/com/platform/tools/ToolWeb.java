@@ -53,7 +53,12 @@ public abstract class ToolWeb {
 	 */
 	public static String getContextPath(HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(request.getScheme()).append("://").append(request.getServerName()).append(":").append(request.getServerPort()).append(request.getContextPath());
+		sb.append(request.getScheme()).append("://").append(request.getServerName());
+		int port = request.getServerPort();
+		if(port != 80 ){
+			sb.append(":").append(port);
+		}
+		sb.append(request.getContextPath());
 		String path = sb.toString();
 		sb = null;
 		return path;
