@@ -97,10 +97,10 @@ public class I18NPlugin implements IPlugin {
 		}else if(localePram.equals("ja") || localePram.equals("ja_jp")){
 			localePram = i18n_local_ja;
 			
-		} else if(localePram.equals("zh_HK")){
+		} else if(localePram.equals("zh_hk")){
 			localePram = i18n_local_zh_HK;
 			
-		} else if(localePram.equals("zh_TW")){
+		} else if(localePram.equals("zh_tw")){
 			localePram = i18n_local_zh_TW;
 			
 		} else{
