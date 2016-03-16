@@ -16,6 +16,12 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -23,11 +29,15 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -35,8 +45,11 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContextBuilder;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
@@ -345,6 +358,219 @@ public abstract class ToolHttp {
 		}
 	}
 	
+	/**
+	 * 模拟登陆，返回的client对象可以保存cookie和session信息，
+	 * 然后按权限继续进行其他URL请求，
+	 * 切记：使用完关闭对象try catch finally client.close();
+	 * @param loginUrl
+	 * @param loginParam
+	 * @return
+	 */
+	public static CloseableHttpClient mocklogin(String loginUrl, Map<String, String> loginParam) {
+		CloseableHttpClient client = null;
+		try {
+			// 直接创建client
+			client = HttpClients.createDefault();
+			
+			// 执行post登陆请求
+			HttpPost loginHP = new HttpPost(loginUrl);
+			UrlEncodedFormEntity loginEntity = new UrlEncodedFormEntity(getParam(loginParam), "UTF-8");
+			loginHP.setEntity(loginEntity);
+			HttpResponse loginHR = client.execute(loginHP);
+			HttpEntity loginHE = loginHR.getEntity();
+			String loginReturn = EntityUtils.toString(loginHE);
+			if(loginReturn.indexOf("\"status\":\"success\"") == -1){
+				log.error("登录失败");
+				return null;
+			}
+
+			return client;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return null;
+	}
+
+	/**
+	 * 使用登陆成功的client对象继续其他post请求
+	 * @param client
+	 * @param dataUrl
+	 * @param dataParam
+	 * @return
+	 */
+	public static String mockPostByClient(CloseableHttpClient client, String dataUrl, Map<String, String> dataParam)  {
+		String dataReturn = null;
+		try {
+			// 使用post方式请求URL数据
+			HttpPost dataHP = new HttpPost(dataUrl);
+			UrlEncodedFormEntity dataEntity = new UrlEncodedFormEntity(getParam(dataParam), "UTF-8");
+			dataHP.setEntity(dataEntity);
+			HttpResponse dataHR = client.execute(dataHP);
+			HttpEntity dataHE = dataHR.getEntity();
+			dataReturn = EntityUtils.toString(dataHE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return dataReturn;
+	}
+
+	/**
+	 * 使用登陆成功的client对象继续其他get请求
+	 * @param client
+	 * @param dataUrl
+	 * @param dataParam
+	 * @return
+	 */
+	public static String mockGetByClient(CloseableHttpClient client, String dataUrl, Map<String, String> dataParam)  {
+		String dataReturn = null;
+		try {
+			// 使用get方式请求URL数据
+			HttpGet dataHG = new HttpGet(dataUrl);
+			HttpResponse dataHR = client.execute(dataHG);
+			HttpEntity dataHE = dataHR.getEntity();
+			dataReturn = EntityUtils.toString(dataHE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return dataReturn;
+	}
+	
+	/**
+	 * 模拟登陆，并取出登陆验证cookie，然后构造自己的通用cookie对象
+	 * @param loginUrl
+	 * @param loginParam
+	 * @return
+	 */
+	public static CookieStore mockCookie(String loginUrl, Map<String, String> loginParam) {
+		CloseableHttpClient client = null;
+		CookieStore cookieStore = null;
+		try {
+			// 直接创建client
+			client = HttpClients.createDefault();
+			
+			// 执行post登陆请求
+			HttpPost loginHP = new HttpPost(loginUrl);
+			UrlEncodedFormEntity loginEntity = new UrlEncodedFormEntity(getParam(loginParam), "UTF-8");
+			loginHP.setEntity(loginEntity);
+			HttpResponse loginHR = client.execute(loginHP);
+			HttpEntity loginHE = loginHR.getEntity();
+			String loginReturn = EntityUtils.toString(loginHE);
+			if(loginReturn.indexOf("\"status\":\"success\"") == -1){
+				log.error("登录失败");
+				return null;
+			}
+			
+			cookieStore = new BasicCookieStore();
+			cookieStore = new BasicCookieStore();
+			Header[] headers = loginHR.getHeaders("Set-Cookie");
+			String authmark = null;
+			for (Header header : headers) {
+				authmark = 	header.getValue();
+				if(authmark.indexOf("authmark=") != -1){
+					authmark = authmark.replace("authmark=", "");
+					authmark = authmark.substring(0, authmark.indexOf(";"));
+					break;
+				}
+			}
+			
+			// 新建一个Cookie
+			BasicClientCookie cookie = new BasicClientCookie("authmark", authmark);
+			cookie.setVersion(0);
+			cookie.setDomain("127.0.0.1");
+			cookie.setPath("/");
+			// cookie.setAttribute(ClientCookie.VERSION_ATTR, "0");
+			// cookie.setAttribute(ClientCookie.DOMAIN_ATTR, "127.0.0.1");
+			// cookie.setAttribute(ClientCookie.PORT_ATTR, "89");
+			// cookie.setAttribute(ClientCookie.PATH_ATTR, "/");
+			cookieStore.addCookie(cookie);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				client.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return cookieStore;
+	}
+
+	/**
+	 * 使用登陆成功的Cookie对象继续其他post请求
+	 * @param cookie
+	 * @param dataUrl
+	 * @param dataParam
+	 * @return
+	 */
+	public static String mockPostByCookie(CookieStore cookie, String dataUrl, Map<String, String> dataParam)  {
+		CloseableHttpClient client = null;
+		String dataReturn = null;
+		try {
+			client = HttpClients.custom().setDefaultCookieStore(cookie).build();
+			// 使用post方式请求URL数据
+			HttpPost dataHP = new HttpPost(dataUrl);
+			UrlEncodedFormEntity dataEntity = new UrlEncodedFormEntity(getParam(dataParam), "UTF-8");
+			dataHP.setEntity(dataEntity);
+			HttpResponse dataHR = client.execute(dataHP);
+			HttpEntity dataHE = dataHR.getEntity();
+			dataReturn = EntityUtils.toString(dataHE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				client.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return dataReturn;
+	}
+
+	/**
+	 * 使用登陆成功的Cookie对象继续其他get请求
+	 * @param cookie
+	 * @param dataUrl
+	 * @param dataParam
+	 * @return
+	 */
+	public static String mockGetByCookie(CookieStore cookie, String dataUrl, Map<String, String> dataParam)  {
+		CloseableHttpClient client = null;
+		String dataReturn = null;
+		try {
+			client = HttpClients.custom().setDefaultCookieStore(cookie).build();
+			// 使用get方式请求URL数据
+			HttpGet dataHG = new HttpGet(dataUrl);
+			HttpResponse dataHR = client.execute(dataHG);
+			HttpEntity dataHE = dataHR.getEntity();
+			dataReturn = EntityUtils.toString(dataHE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				client.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return dataReturn;
+	}
+	
+	/**
+	 * map参数转list
+	 * @param parameterMap
+	 * @return
+	 */
+	public static List<NameValuePair> getParam(Map<String, String> parameterMap) {
+		List<NameValuePair> param = new ArrayList<NameValuePair>();
+		Iterator<Entry<String, String>> it = parameterMap.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<String, String> parmEntry = (Entry<String, String>) it.next();
+			param.add(new BasicNameValuePair(parmEntry.getKey(), parmEntry.getValue()));
+		}
+		return param;
+	}
+	
 	public static void main(String[] args){
 		//System.out.println(get("http://127.0.0.1:89/jf/platform/login"));
 		//System.out.println(post("http://127.0.0.1:89/jf/platform/login", null, null));
@@ -372,7 +598,14 @@ public abstract class ToolHttp {
 		//System.out.println(post("http://littleant.duapp.com/msg", returnMsg, "application/xml"));
 		
 		//System.out.println(post(true, "https://www.oschina.net/home/login?goto_page=http%3A%2F%2Fwww.oschina.net%2F", null, "application/text"));
-		System.out.println(httpRequest(false, "https://passport.csdn.net/account/login", "GET", null));
+		//System.out.println(httpRequest(false, "https://passport.csdn.net/account/login", "GET", null));
+
+		Map<String, String> loginParam = new HashMap<String, String>();
+		loginParam.put("username", "admins");
+		loginParam.put("password", "000000");
+		loginParam.put("password", "1234");
+		
+		mocklogin("http://127.0.0.1:99", loginParam);
 	}
 }
 
