@@ -115,7 +115,12 @@ public class LoginController extends BaseController {
 			}
 			int result = LoginService.service.login(getRequest(), getResponse(), username, password, autoLogin);
 			if(result == ConstantLogin.login_info_3){
-				redirect("/jf/platform/index");
+				String returnJson = getPara("returnText");
+				if(null != returnJson && !returnJson.isEmpty()){
+					renderText("success");
+				}else{
+					redirect("/jf/platform/index");
+				}
 				return;
 			}
 		}

@@ -281,7 +281,16 @@ public class AuthInterceptor implements Interceptor {
 	 * @return
 	 */
 	public static User getCurrentUser(HttpServletRequest request, HttpServletResponse response, boolean userAgentVali) {
-		String loginCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_authmark);
+		// 加密串存储位置，默认先取header
+		String store = ConstantAuth.auth_store_header;
+		String loginCookie = request.getHeader(ConstantWebContext.cookie_authmark);
+		if(loginCookie == null || loginCookie.isEmpty()){
+			// 如果为空，再取cookie
+			store = ConstantAuth.auth_store_cookie;
+			loginCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_authmark);
+		}
+		
+		// 处理加密串的解析和验证
 		if (null != loginCookie && !loginCookie.equals("")) {
 			// 1.解密认证数据
 			String data = ToolIDEA.decrypt(loginCookie);
@@ -304,7 +313,9 @@ public class AuthInterceptor implements Interceptor {
 				userAgent = datas[3]; // USER_AGENT
 				autoLogin = Boolean.valueOf(datas[4]); // 是否自动登录
 			} catch (Exception e) {
-				ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
+				if(store.equals(ConstantAuth.auth_store_cookie)){
+					ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
+				}
 				return null;
 			}
 			
@@ -334,8 +345,13 @@ public class AuthInterceptor implements Interceptor {
 						String authmark = ToolIDEA.encrypt(token.toString());
 						
 						// 添加到Cookie
-						int maxAgeTemp = -1; // 设置cookie有效时间
-						ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
+						if(store.equals(ConstantAuth.auth_store_cookie)){
+							int maxAgeTemp = -1; // 设置cookie有效时间
+							ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
+						
+						}else if(store.equals(ConstantAuth.auth_store_header)){
+							response.setHeader(ConstantWebContext.cookie_authmark, authmark);
+						}
 					}
 				}
 				
@@ -378,8 +394,9 @@ public class AuthInterceptor implements Interceptor {
 		token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
 		String authmark = ToolIDEA.encrypt(token.toString());
 		
-		// 4. 添加到Cookie
+		// 4. 添加到Cookie和header
 		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
+		response.setHeader(ConstantWebContext.cookie_authmark, authmark);
 	}
 	
 	/**

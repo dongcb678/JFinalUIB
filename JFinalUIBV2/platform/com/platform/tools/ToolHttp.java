@@ -17,7 +17,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -379,7 +378,7 @@ public abstract class ToolHttp {
 			HttpResponse loginHR = client.execute(loginHP);
 			HttpEntity loginHE = loginHR.getEntity();
 			String loginReturn = EntityUtils.toString(loginHE);
-			if(loginReturn.indexOf("\"status\":\"success\"") == -1){
+			if(!loginReturn.equals("success")){
 				log.error("登录失败");
 				return null;
 			}
@@ -455,7 +454,7 @@ public abstract class ToolHttp {
 			HttpResponse loginHR = client.execute(loginHP);
 			HttpEntity loginHE = loginHR.getEntity();
 			String loginReturn = EntityUtils.toString(loginHE);
-			if(loginReturn.indexOf("\"status\":\"success\"") == -1){
+			if(!loginReturn.equals("success")){
 				log.error("登录失败");
 				return null;
 			}
@@ -555,7 +554,86 @@ public abstract class ToolHttp {
 		}
 		return dataReturn;
 	}
-	
+
+	/**
+	 * 模拟登陆，并取出登陆验证标示，然后构造在header中使用
+	 * @param loginUrl
+	 * @param loginParam
+	 * @return
+	 */
+	public static String mockHeader(String loginUrl, Map<String, String> loginParam) {
+		CloseableHttpClient client = null;
+		String authmark = null;
+		try {
+			// 直接创建client
+			client = HttpClients.createDefault();
+			
+			// 执行post登陆请求
+			HttpPost loginHP = new HttpPost(loginUrl);
+			UrlEncodedFormEntity loginEntity = new UrlEncodedFormEntity(getParam(loginParam), "UTF-8");
+			loginHP.setEntity(loginEntity);
+			HttpResponse loginHR = client.execute(loginHP);
+			HttpEntity loginHE = loginHR.getEntity();
+			String loginReturn = EntityUtils.toString(loginHE);
+			if(!loginReturn.equals("success")){
+				log.error("登录失败");
+				return null;
+			}
+			
+			Header[] headers = loginHR.getHeaders("Set-Cookie");
+			for (Header header : headers) {
+				authmark = 	header.getValue();
+				if(authmark.indexOf("authmark=") != -1){
+					authmark = authmark.replace("authmark=", "");
+					authmark = authmark.substring(0, authmark.indexOf(";"));
+					break;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				client.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return authmark;
+	}
+
+	/**
+	 * 使用登陆成功的Cookie对象继续其他post请求
+	 * @param cookie
+	 * @param dataUrl
+	 * @param dataParam
+	 * @return
+	 */
+	public static String mockPostByHeader(String authmark, String dataUrl, Map<String, String> dataParam)  {
+		CloseableHttpClient client = null;
+		String dataReturn = null;
+		try {
+			client = HttpClients.createDefault();
+			// 使用post方式请求URL数据
+			HttpPost dataHP = new HttpPost(dataUrl);
+			UrlEncodedFormEntity dataEntity = new UrlEncodedFormEntity(getParam(dataParam), "UTF-8");
+			dataHP.setEntity(dataEntity);
+			dataHP.addHeader("authmark", authmark);
+			HttpResponse dataHR = client.execute(dataHP);
+			HttpEntity dataHE = dataHR.getEntity();
+			dataReturn = EntityUtils.toString(dataHE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				client.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return dataReturn;
+	}
+
 	/**
 	 * map参数转list
 	 * @param parameterMap
@@ -599,13 +677,6 @@ public abstract class ToolHttp {
 		
 		//System.out.println(post(true, "https://www.oschina.net/home/login?goto_page=http%3A%2F%2Fwww.oschina.net%2F", null, "application/text"));
 		//System.out.println(httpRequest(false, "https://passport.csdn.net/account/login", "GET", null));
-
-		Map<String, String> loginParam = new HashMap<String, String>();
-		loginParam.put("username", "admins");
-		loginParam.put("password", "000000");
-		loginParam.put("password", "1234");
-		
-		mocklogin("http://127.0.0.1:99", loginParam);
 	}
 }
 

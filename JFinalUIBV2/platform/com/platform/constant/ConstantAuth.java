@@ -34,6 +34,17 @@ public interface ConstantAuth {
 	 * 权限验证：业务代码异常
 	 */
 	public static final String auth_exception = "exception";
+
+	/**
+	 * 权限验证：加密验证标示存储位置cookie
+	 */
+	public static final String auth_store_cookie = "cookie";
+
+	/**
+	 * 权限验证：加密验证标示存储位置header
+	 */
+	public static final String auth_store_header = "header";
+	
 	
 	
 }
