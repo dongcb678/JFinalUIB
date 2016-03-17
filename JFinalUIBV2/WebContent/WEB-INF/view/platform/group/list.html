@@ -106,7 +106,7 @@
 							<% for(group in splitPage.list){ %>
 								<tr>
 									<td class="center hidden-xs">
-										<input type="checkbox" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
+										<input type="checkbox" name="checkIds" value="${group.ids!}" class="flat-grey foocheck">
 									</td>
 									<td><span class="label label-sm label-success">${escapeXml(group["numbers"]!)}</span></td>
 									<td>${escapeXml(group["names"]!)}</td>

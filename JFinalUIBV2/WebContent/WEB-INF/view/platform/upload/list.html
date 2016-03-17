@@ -102,7 +102,7 @@
 							<% for(upload in splitPage.list){ %>
 								<tr>
 									<td class="center hidden-xs">
-										<input type="checkbox" name="checkIds" value="${sysLog.ids!}" class="flat-grey foocheck">
+										<input type="checkbox" name="checkIds" value="${upload.ids!}" class="flat-grey foocheck">
 									</td>
 									<td align="center">${escapeXml(upload["filename"]!)}</td>
 									<td align="center">${escapeXml(upload["originalfilename"]!)}</td>

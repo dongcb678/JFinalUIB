@@ -110,7 +110,7 @@
 							<% for(systems in splitPage.list){ %>
 								<tr>
 									<td class="center hidden-xs">
-										<input type="checkbox" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
+										<input type="checkbox" name="checkIds" value="${systems.ids!}" class="flat-grey foocheck">
 									</td>
 									<td><span class="label label-sm label-success">${escapeXml(systems["numbers"]!)}</span></td>
 									<td>${escapeXml(systems["names"]!)}</td>
