@@ -23,7 +23,7 @@ public class TestToolHttpClient {
 	public void cookie(){
 		// 1.构造登陆参数
 		Map<String, String> loginParam = new HashMap<String, String>();
-		loginParam.put("username", "admins");			// 登陆账号
+		loginParam.put("username", "admins");	// 登陆账号
 		loginParam.put("password", "000000");	// 登陆密码
 		loginParam.put("returnText", "true");	// 返回文本，好识别
 		

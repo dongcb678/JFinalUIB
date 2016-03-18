@@ -104,24 +104,32 @@ public class LoginController extends BaseController {
 	 */
 	@Before(LoginValidator.class)
 	public void vali() {
-		boolean authCode = authCode();
-		if(authCode){
-			String username = getPara("username");
-			String password = getPara("password");
-			String remember = getPara("remember");
-			boolean autoLogin = false;
-			if(null != remember && remember.equals("1")){
-				autoLogin = true;
-			}
-			int result = LoginService.service.login(getRequest(), getResponse(), username, password, autoLogin);
-			if(result == ConstantLogin.login_info_3){
-				String returnJson = getPara("returnText");
-				if(null != returnJson && !returnJson.isEmpty()){
-					renderText("success");
-				}else{
-					redirect("/jf/platform/index");
-				}
+		// 获取表单信息
+		String username = getPara("username");
+		String password = getPara("password");
+		String remember = getPara("remember");
+		String returnJson = getPara("returnText");
+
+		// 如果是httpclient登陆就不处理验证码，不用担心密码暴力破解，因为init文件有密码错误次数限制
+		if(null != returnJson && !returnJson.isEmpty()){
+			int result = LoginService.service.login(getRequest(), getResponse(), username, password, false);
+			if(result == ConstantLogin.login_info_3){ // 登陆验证成功
+				renderText("success");
 				return;
+			}
+		}else{
+			boolean authCode = authCode(); // 验证验证码
+			if(authCode){
+				boolean autoLogin = false;
+				if(null != remember && remember.equals("1")){ // 是否选中记住密码自动登陆
+					autoLogin = true;
+				}
+				
+				int result = LoginService.service.login(getRequest(), getResponse(), username, password, autoLogin);
+				if(result == ConstantLogin.login_info_3){ // 登陆验证成功
+					redirect("/jf/platform/index");
+					return;
+				}
 			}
 		}
 		
@@ -133,11 +141,11 @@ public class LoginController extends BaseController {
 	 */
 	@Before(LoginValidator.class)
 	public void pass() {
-		User user = getCUser();
-		String password = getPara("password");
+		User user = getCUser(); // 获取当前用户
+		String password = getPara("password"); // 获取输入的密码
 		
 		int result = LoginService.service.pass(getRequest(), getResponse(), user.getStr("username"), password);
-		if(result == ConstantLogin.login_info_3){
+		if(result == ConstantLogin.login_info_3){ // 密码验证成功
 			redirect("/jf/platform/index");
 			return;
 		}
