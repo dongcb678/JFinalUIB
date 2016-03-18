@@ -68,7 +68,7 @@ var platform_verify = function() {
 	 */
 	var floatZ = function(str){
 		var exp = /^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/;
-	    if(exp.test(num)){
+	    if(exp.test(str)){
 	    	return {"result" : true, "message" : ""};
 	    }else{
 	    	return {"result" : false, "message" : i18n_utils_msg_positiveInteger};
@@ -166,7 +166,7 @@ var platform_verify = function() {
 	 * @returns
 	 */
 	var idCard =  function(str){
-		var result=str.match(/\d{15}|\d{18}/);
+		var result = str.match(/\d{15}|\d{18}/);
 	    if(result == null){
 			return {"result" : false, "message" : i18n_utils_msg_format};
 	    }else{
