@@ -60,7 +60,10 @@
     	]]>
 	</sql>
 	
-	<!-- 动态SQL处理 -->
+	<!-- 
+		动态SQL处理 
+		不区分大小写：and upper(o.url) like upper(#'%$url$%'#)
+	-->
 	<sql id="splitPageFrom">
 		<![CDATA[ 
         	from 
