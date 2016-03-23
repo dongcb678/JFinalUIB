@@ -181,10 +181,20 @@ public abstract class ToolSqlXml {
 				}
 				
 			}else{ // 字符串，主要是字符串模糊查询、日期比较的查询
-				String val = (String) param.get(clounm3);
+				
+				String val = (String) param.get(clounm3); // 预处理参数值
+				
+				if(clounm.indexOf("%") != -1){ 	// 判断是否like查询，like查询一般都含有%，然后处理最常见的占位符%和_
+					if(val.indexOf("%") != -1){
+						val = val.replace("%", "\\%");
+					}
+					if(val.indexOf("_") != -1){
+						val = val.replace("_", "\\_");
+					}
+				}
 				
 				String clounm4 = clounm.replace("#", "").replace("'", "").replace(clounm2, val);
-				list.add(clounm4);
+				list.add(clounm4); // 预处理值
 				
 				sql = sql.replace(clounm, "?");
 			}

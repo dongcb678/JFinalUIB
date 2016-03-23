@@ -104,14 +104,6 @@ public class ParamPkgInterceptor implements Interceptor {
 			name = paramNames.nextElement();
 			value = controller.getPara(name);
 			if (name.startsWith(ConstantWebContext.request_query) && null != value && !value.trim().isEmpty()) {// 查询参数分拣
-				// 分页查询条件值中存在%时需要转义
-				if(value.indexOf("%") != -1){
-					value = value.replace("%", "\\%");
-				}
-				// 分页查询条件值中存在_时需要转义
-				if(value.indexOf("_") != -1){
-					value = value.replace("_", "\\_");
-				}
 				log.debug("分页，查询参数：name = " + name + " value = " + value);
 				key = name.substring(7);
 				if(ToolString.regExpVali(key, ToolString.regExp_letter_5)){
