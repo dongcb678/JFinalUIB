@@ -1,21 +1,22 @@
 <script type="text/javascript">
 	
-	function passChange(){
+	function passChange(form){
+		//var oldPass = $("#oldPass").val();
+		
 		var newPass1 = $("#newPass1").val();
 		var newPass2 = $("#newPass2").val();
 		if(newPass1 != newPass2){
-			simpleDialog('验证提示', '两次输入密码不一致，请从新输入！');
+			toastr.warning("两次输入密码不一致，请从新输入！");
 	 		return false;
 		}
 		
-		var form = document.getElementById("passChangeForm");
-		var errorCount = formVali(form);
+		var errorCount = platform_verify.formVali(document.getElementById("passChangeForm"));
 		if(errorCount != 0){
-			simpleDialog('验证提示', '有'+errorCount+'处错误，请修正！');
+			toastr.warning("有" + errorCount + "处错误，请修正！");
 	 		return false;
 		}
 		
-		ajaxForm("content", "passChangeForm");
+		common_ajax.ajaxForm("passChangeForm");
 	}
 	
 </script>
