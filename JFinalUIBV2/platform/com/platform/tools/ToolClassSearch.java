@@ -111,7 +111,7 @@ public class ToolClassSearch {
                     boolean pkgResult = false;
                     for (String pkg : pkgs) {
                     	if(pkgEntryName.startsWith(pkg)){
-                    		pkgResult = false;
+                    		pkgResult = true;
                     		break;
                     	}
                     }
