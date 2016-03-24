@@ -1,0 +1,79 @@
+<script type="text/javascript">
+	
+	function addChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("checkedRole").add(option);
+		setRole();
+	}
+
+	function delChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("allRole").add(option);
+		setRole();
+	}
+	
+	function setRole(){
+		var userIds = "${escapeXml(ids!)}";
+		var roleIds = "";
+		
+		var checkedRole = document.getElementById("checkedRole");
+		var length = checkedRole.length;
+		for (var i=0; i<length; i++){
+			roleIds += checkedRole.options[i].value + ",";
+	    }
+		
+		var url = "/jf/platform/group/setRole";
+		var data = { "ids" : userIds, "roleIds" : roleIds };
+
+		var result = common_ajax.ajaxFunc(url, data);
+	}
+</script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>${i18nMap["admin.role.select"]}</h3>
+</div>
+
+<div class="modal-body">
+	<div class="row">
+		
+		<div class="col-md-6">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<i class="icon-user"></i> ${i18nMap["admin.role.select.noChecked"]}
+				</h4>
+			</div>
+			<div class="panel-body">
+				<select id="allRole" multiple size="18" ondblclick="addChecked(this);" >
+					<% for(role in noCheckedList){ %>
+						<option value='${escapeXml(role.ids!)}'>${escapeXml(role.names!)}</option>
+					<% } %>
+			  	</select>
+			</div>
+		</div>
+		
+		<div class="col-md-6">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<i class="icon-user"></i> ${i18nMap["admin.role.select.checked"]}
+				</h4>
+			</div>
+			<div class="panel-body">
+				<select id="checkedRole" multiple size="18" ondblclick="delChecked(this);" >
+					<% for(role in checkedList){ %>
+						<option value='${escapeXml(role.ids!)}'>${escapeXml(role.names!)}</option>
+					<% } %>
+			  	</select>
+			</div>
+		</div>
+		
+	</div>  
+</div>
+
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">${i18nMap["admin.common.close"]}</button>
+</div>

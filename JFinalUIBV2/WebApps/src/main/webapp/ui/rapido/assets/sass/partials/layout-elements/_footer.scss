@@ -1,0 +1,50 @@
+/* ---------------------------------------------------------------------- */
+/*  Footer
+/* ---------------------------------------------------------------------- */
+footer {
+  font-size: $font-size-small;
+  position: relative;
+  z-index: 191;
+  border: none !important;
+  height: $footer-height;
+  .footer-inner {
+    padding: 0 20px;
+    line-height: $footer-height;
+    margin-left: $slideBar-width;
+    .sidebar-close & {
+      margin-left: 0; 
+    }
+  }
+  .right-sidebar-open & {
+    left: -$slideBar-width;
+  }
+  .footer-fixed & {
+    bottom: 0 !important;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 1000;
+    border-top-width: 1px;
+    border-top-style: solid;
+  }
+  .footer-fixed.right-sidebar-open & {
+      left: -$slideBar-width;
+      right: $slideBar-width;
+  }
+  .footer-fixed.sidebar-mobile-open & {
+      left: $slideBar-width;
+      right: -$slideBar-width;
+  }
+}
+.go-top {
+  cursor: pointer;
+  display: block;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  margin-bottom: 0;
+  margin-right: 0;
+  text-decoration: none;
+  line-height: $footer-height;
+  text-align: center;
+}

@@ -1,0 +1,227 @@
+/* ---------------------------------------------------------------------- */
+/*  Subview
+/* ---------------------------------------------------------------------- */
+.subviews {
+  background-color: #FFFFFF;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 501;
+  display: none;
+  overflow-y: auto;
+  @include transition(all, .3s, ease-in-out); 
+}
+.subviews-top {
+  height: 0;
+  left: 0;
+}
+.subviews-right {
+  width: 0;
+  left: auto;
+  right: 0;
+}
+.barTopSubview {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.button-sv {
+  border: 1px solid #DDDDDD;
+  border-top: none;
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  background-color: #FFFFFF;
+  display: inline-block;
+  padding: 0 20px;
+  color: #858585;
+  @include opacity(0.8);
+  &:hover {
+    color: #858585;
+    @include opacity(1);
+    text-decoration: none;
+  }
+}
+
+.close-subviews, .back-subviews {
+  @include border-radius(3px); 
+  color: #111111;
+  font-size: $font-size-extra-small;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 31px;
+  margin-right: 3px;
+  margin-top: 2px;
+  opacity: 0.9;
+  padding: 8px 0 7px 0;
+  position: relative;
+  text-align: center;
+  width: 90px;
+  float: right;
+  left: 20px;
+  @include transition-property(left);
+  @include transition-duration(0.2s);
+  @include transition-timing-function(ease-in);
+  @include opacity(0);
+  display: none;
+}
+.back-subviews {
+  left: 110px;
+}
+.close-subviews > i, .back-subviews > i {
+  display: block;
+  margin-top: 12px;
+  color: #111111;
+  font-size: 16px;
+}
+.close-subviews:hover, .close-subviews:focus, .back-subviews:hover, .back-subviews:focus {
+  background-color: #EEEEEE;
+  color: #111111;
+  text-decoration: none;
+}
+#newNote {
+  display: none;
+}
+
+.note-title {
+  background-color: rgba(0, 0, 0, 0);
+  border: none !important;
+  color: #111111;
+  font-size: 20px;
+  font-weight: 600;
+  height: 40px;
+  z-index: 103;
+  padding: 0 !important;
+}
+.note-title:focus {
+  border-color: none !important;
+  box-shadow: none !important;
+}
+
+
+#notes .note-content {
+  display: none;
+}
+#notes .note-short-content p {
+  margin: 0;
+}
+#notes .note-short-content h1, #notes .note-short-content h2, #notes .note-short-content h3 {
+  font-size: $font-size-base;
+  margin: 0;
+  line-height: 20px;
+}
+#readNote {
+  display: none;
+}
+#readNote .panel-note {
+  box-shadow: none;
+}
+#readNote .panel-note .panel-heading {
+  background: none;
+}
+#readNote .note-short-content {
+  display: none;
+}
+#readNote .note-content p {
+  margin: 0 0 18px 0;
+}
+#readNote .note-content h1, #readNote .note-content h2, #readNote .note-content h3 {
+  font-size: $font-size-base;
+  margin: 0;
+  line-height: 20px;
+}
+#readNote .noteslider {
+  display: none;
+}
+#readNote .noteslider .slides > li {
+  display: none;
+}
+#readNote .flex-direction-nav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+#readNote .read-note {
+  display: none;
+}
+#showCalendar {
+  display: none;
+}
+#newEvent {
+  display: none;
+}
+#readEvent {
+  display: none;
+}
+#readEvent .event-content {
+  background: url("../images/line.png");
+  color: #858585;
+  line-height: 18px;
+  margin: 15px 0 0 0;
+  padding: 0;
+}
+#readEvent .event-start, #readEvent .event-end {
+  color: #858585;
+  margin: 15px 0 0 0;
+  padding: 10px;
+  margin-top: 20px;
+  background: #EEEEEE;
+}
+#readEvent .event-allday {
+  color: #858585;
+}
+#readEvent .event-allday i {
+  color: #00AAFF;
+}
+#readEvent .event-start p, #readEvent .event-end p {
+  margin: 0 0 5px 0;
+}
+#readEvent .event-day h2, #readEvent .event-date h3, #readEvent .event-date h4 {
+  margin: 0;
+  padding: 0;
+}
+#readEvent .event-day h2 {
+  font-size: 45px;
+  line-height: 30px;
+  margin-right: 5px;
+}
+#readEvent .event-date h3 {
+  font-size: 15px;
+  line-height: 20px;
+}
+#readEvent .event-date h4 {
+  font-size: $font-size-small;
+}
+#readEvent .event-day, #readEvent .event-date, #readEvent .event-time {
+  display: inline-block;
+}
+#readEvent .event-time {
+  margin-left: 20px;
+}
+#readEvent .event-time h3 {
+  margin: 0;
+  padding: 0;
+  font-size: $font-size-small;
+}
+#readEvent .event-category:before {
+  line-height: 18px;
+  padding-right: 0;
+}
+#newContributor {
+  display: none;
+}
+#showContributors {
+  display: none;
+}
+#contributors .bootstrap-select:not([class*="span"])
+:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+  width: auto;
+}
+.contributor-avatar .fileupload-preview {
+  max-width: 50px;
+  max-height: 50px;
+  line-height: 20px !important;
+}
+.contributor-avatar .contributor-avatar-options {
+  display: inline-block;
+  margin-left: 10px;
+}

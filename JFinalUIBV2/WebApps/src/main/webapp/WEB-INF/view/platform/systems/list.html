@@ -1,0 +1,165 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">${i18nMap["admin.systems.common.name"]}</li>
+		</ol>
+	</div>
+</div>
+						
+<form id="splitPage" role="form" class="form-horizontal" action="${cxt!}/jf/platform/systems" method="POST">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.systems.list.select"]}</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">		
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.systems.property.numbers"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.numbers" value='${escapeXml(paramMap["_query.numbers"])}' maxlength="50" >
+						</div>
+				  		
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.systems.property.name"]}</label>
+						<div class="col-sm-4">
+					  		<input class="input-xlarge focused" type="text" name="_query.names" value='${escapeXml(paramMap["_query.names"])}' maxlength="25" >
+						</div>
+				  	</div>
+				  	
+					<div class="form-group">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
+						</div>
+				  	</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">${i18nMap["admin.systems.list.table"]}</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<%
+					var edit = authUrl("/jf/platform/systems/edit");
+					var delete = authUrl("/jf/platform/systems/delete");
+					var module = authUrl("/jf/platform/module");
+					var menu = authUrl("/jf/platform/menu");
+				%>
+				
+				<div class="panel-body">
+					
+					<div class="row">
+						<div class="col-md-12 space20">
+							<% if(authUrl("/platform/systems/add.html")){ %>
+								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/systems/toUrl?toUrl=/platform/systems/add.html');">
+									${i18nMap["admin.systems.add"]} <i class="fa fa-plus"></i>
+								</button>
+							<% } %>	
+							
+							<% if(delete == true){ %>
+								<button type="button" class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/platform/user/delete"> 
+									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+								</button>
+							<% } %>
+						</div>
+					</div>
+					
+					<table class="table table-bordered table-hover" id="dataTable">
+						<thead>
+							<tr>
+								<th class="center hidden-xs" width="50">
+									<input type="checkbox" name="checkAll" onchange="common_common.checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'numbers')">
+									${i18nMap["admin.systems.property.numbers"]}	${orderBy("numbers")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'names')">
+									${i18nMap["admin.systems.property.name"]}	${orderBy("names")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'orderids')">
+									${i18nMap["admin.systems.property.orderids"]}	${orderBy("orderids")}
+								</th>
+								<th class="hidden-xs">
+									${i18nMap["admin.common.operation"]}
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(systems in splitPage.list){ %>
+								<tr>
+									<td class="center hidden-xs">
+										<input type="checkbox" name="checkIds" value="${systems.ids!}" class="flat-grey foocheck">
+									</td>
+									<td><span class="label label-sm label-success">${escapeXml(systems["numbers"]!)}</span></td>
+									<td>${escapeXml(systems["names"]!)}</td>
+									<td>${systems["orderids"]!}</td>
+									<td class="hidden-xs">
+										<% if(edit == true){ %>
+											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/systems/edit/${escapeXml(systems.ids!)}');"> 
+												${i18nMap["admin.common.edit"]} <i class="fa fa-edit"></i>
+											</button>
+										<% } %>
+										
+										<% if(delete == true){ %>
+											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/platform/systems/delete/${escapeXml(systems.ids!)}"> 
+												${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+											</button>
+										<% } %>
+										
+										<% if(module == true){ %>
+											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/module?systemsIds=${escapeXml(systems.ids!)}');"> 
+												${i18nMap["admin.systems.list.table.module"]} <i class="fa fa-edit"></i>
+											</button>
+										<% } %>
+										
+										<% if(menu == true){ %>
+											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/menu?systemsIds=${escapeXml(systems.ids!)}');"> 
+												${i18nMap["admin.systems.list.table.menu"]} <i class="fa fa-edit"></i>
+											</button>
+										<% } %>
+									</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

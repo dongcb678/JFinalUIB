@@ -1,0 +1,140 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">上传文件列表</li>
+		</ol>
+	</div>
+</div>
+						
+<form id="splitPage" action="${cxt!}/jf/platform/upload/list" method="POST" role="form" class="form-horizontal">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">查询</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">			
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">原文件名</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.originalfilename" value='${escapeXml(paramMap["_query.originalfilename"])}' maxlength="20" >
+						</div>
+						
+						<label class="col-sm-2 control-label" for="focusedInput">文件名</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.filename" value='${escapeXml(paramMap["_query.filename"])}' maxlength="20" >
+						</div>
+				  	</div>
+				  	
+					<div class="form-group">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
+						</div>
+				  	</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">列表</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<%
+					var delete = authUrl("/jf/platform/upload/delete");
+				%>
+				
+				<div class="panel-body">
+					
+					<div class="row">
+						<div class="col-md-12 space20">
+							<% if(delete == true){ %>
+								<button type="button" class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/platform/upload/delete"> 
+									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+								</button>
+							<% } %>
+						</div>
+					</div>
+					
+					<table class="table table-bordered table-hover" id="dataTable">
+						<thead>
+							<tr>
+								<th class="center hidden-xs" width="50">
+									<input type="checkbox" name="checkAll" onchange="common_common.checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'filename')">
+									文件名	${orderBy("filename")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'originalfilename')">
+									原文件名	${orderBy("originalfilename")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'path')">
+									存放路径	${orderBy("path")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'contenttype')">
+									ContentType	${orderBy("contenttype")}
+								</th>
+								<th class="hidden-xs">${i18nMap["admin.common.operation"]}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(upload in splitPage.list){ %>
+								<tr>
+									<td class="center hidden-xs">
+										<input type="checkbox" name="checkIds" value="${upload.ids!}" class="flat-grey foocheck">
+									</td>
+									<td align="center">${escapeXml(upload["filename"]!)}</td>
+									<td align="center">${escapeXml(upload["originalfilename"]!)}</td>
+									<td align="center">${escapeXml(upload["path"]!)}</td>
+									<td align="center">${escapeXml(upload["contenttype"]!)}</td>
+									<td class="hidden-xs">
+										<% if(delete == true){ %>
+											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/platform/upload/delete/${escapeXml(upload.ids!)}"> 
+												${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+											</button>
+										<% } %>
+									</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

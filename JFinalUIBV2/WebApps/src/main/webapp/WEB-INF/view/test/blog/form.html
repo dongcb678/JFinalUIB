@@ -1,0 +1,24 @@
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">标题</label>
+	<div class="col-sm-7">
+		<input type="text" name="blog.title" value="${escapeXml(blog.title!)}" 
+			class="form-control" maxlength="100" vMin="2" 
+			vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> 
+		<i class="fa fa-info-circle"></i> 1-50位任意字符 
+	</span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">内容</label>
+	<div class="col-sm-7">
+		<input type="text" name="blog.content" value="${escapeXml(blog.content!)}" 
+			class="form-control" maxlength="10000" vMin="2" 
+			vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> 
+		<i class="fa fa-info-circle"></i> 1-50位任意字符 
+	</span>
+</div>

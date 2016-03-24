@@ -1,0 +1,186 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">${i18nMap["admin.user.common.name"]}</li>
+		</ol>
+	</div>
+</div>
+						
+<form id="splitPage" action="${cxt!}/jf/platform/user" method="POST" role="form" class="form-horizontal">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.user.list.select"]}</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">			
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.user.property.userName"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.userName" value='${escapeXml(paramMap["_query.userName"])}' maxlength="20" >
+						</div>
+						
+						<label class="col-sm-2 control-label">${i18nMap["admin.user.property.email"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control" type="text" name="_query.email" value='${escapeXml(paramMap["_query.email"])}' maxlength="40" >
+						</div>
+				  	</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.user.property.birthday"]}</label>
+						<div class="col-sm-4 input-group">
+					  		<input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}'
+					  			 data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
+							<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+						</div>
+				  	</div>
+				  	
+					<div class="form-group">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
+						</div>
+				  	</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">${i18nMap["admin.user.list.table"]}</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<%
+					var view = authUrl("/jf/platform/user/view");
+					var edit = authUrl("/jf/platform/user/edit");
+					var delete = authUrl("/jf/platform/user/delete");
+					var group = authUrl("/jf/platform/group/select");
+				%>
+				
+				<div class="panel-body">
+					
+					<div class="row">
+						<div class="col-md-12 space20">
+							<% if(authUrl("/platform/user/add.html")){ %>
+								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
+									${i18nMap["admin.user.add"]} <i class="fa fa-plus"></i>
+								</button>
+							<% } %>	
+							
+							<% if(delete == true){ %>
+								<button type="button" class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/platform/user/delete"> 
+									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+								</button>
+							<% } %>
+						</div>
+					</div>
+					
+					<table class="table table-bordered table-hover" id="dataTable">
+						<thead>
+							<tr>
+								<th class="center hidden-xs" width="50">
+									<input type="checkbox" name="checkAll" onchange="common_common.checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'd.names')">
+									${i18nMap["admin.user.property.department"]}	${orderBy("d.names")}
+		      					</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'userName')">
+									${i18nMap["admin.user.property.userName"]}	${orderBy("userName")}
+		      					</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'names')">
+									${i18nMap["admin.user.property.nickname"]}	${orderBy("names")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'email')">
+									${i18nMap["admin.user.property.email"]}	${orderBy("email")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'mobile')">
+									${i18nMap["admin.user.property.mobilePhone"]}	${orderBy("mobile")}
+								</th>
+								<th class="hidden-xs">
+									${i18nMap["admin.common.operation"]}
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(user in splitPage.list){ %>
+								<tr>
+									<td class="center hidden-xs">
+										<input type="checkbox" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
+									</td>
+									<td class="hidden-xs">${escapeXml(user.deptnames!) }</td>
+									<td class="hidden-xs">${escapeXml(user["username"]!) }</td>
+									<td class="hidden-xs">${escapeXml(user["names"]!) }</td>
+									<td class="hidden-xs">${escapeXml(user["email"]!) }</td>
+									<td class="hidden-xs">
+										<span class="label label-sm label-success">${escapeXml(user["mobile"]!) }</span>
+									</td>
+									<td class="hidden-xs">
+										<% if(view == true){ %>
+											<button type="button" class="btn btn-dark-yellow add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/view/${user.ids!}');">
+												${i18nMap["admin.common.see"]} <i class="fa fa-eye"></i>
+											</button>
+										<% } %>
+										
+										<% if(edit == true){ %>
+											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/edit/${user.ids!}');"> 
+												${i18nMap["admin.common.edit"]} <i class="fa fa-edit"></i>
+											</button>
+										<% } %>
+										
+										<% if(group == true){ %>
+											<a href="#" data-toggle="modal" class="ajaxDialog btn btn-purple add-row" 
+												data-url="/jf/platform/group/select"
+												data-param='{ "ids" : "${user.ids!}" }'>
+												${i18nMap["admin.user.list.table.group"]} <i class="fa fa-leaf"></i>
+											</a>
+										<% } %>
+										
+										<% if(delete == true){ %>
+											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/platform/user/delete/${user.ids!}"> 
+												${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+											</button>
+										<% } %>
+									</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

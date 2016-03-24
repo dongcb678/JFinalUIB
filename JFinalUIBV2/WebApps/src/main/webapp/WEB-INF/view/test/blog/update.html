@@ -1,0 +1,49 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/test/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/test/blog');">博客管理</a></li>
+			<li class="active">更新</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">更新</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+			
+				<form id="editForm" action="${cxt!}/jf/test/blog/update" 
+					method="POST" role="form" class="form-horizontal">
+					<input type="hidden" name="blog.ids" value="${escapeXml(blog.ids!)}" >
+					
+					<% include("/test/blog/form.html"){} %>
+					
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-3">
+							<% if(authUrl("/jf/test/blog/update")){ %>
+								<button type="button" class="btn btn-red" 
+									onclick="platform_verify.formValiSubmit(this.form);">
+									${i18nMap["admin.common.submit"]}	
+									<i class="fa fa-arrow-circle-right"></i>
+								</button>
+							<% } %>
+						</div>
+					</div>
+				</form>
+				
+			</div>
+		
+		</div>
+	</div>
+</div>	

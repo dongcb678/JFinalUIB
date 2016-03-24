@@ -1,0 +1,89 @@
+			<header class="topbar navbar navbar-inverse navbar-fixed-top inner">
+				<!-- start: TOPBAR CONTAINER -->
+				<div class="container">
+					<div class="navbar-header">
+						<a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
+							<i class="fa fa-bars"></i>
+						</a>
+						<!-- start: LOGO -->
+						<a class="navbar-brand" href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">
+							<img src="${cxt!}/ui/rapido/assets/images/logo.png" alt="Rapido"/>
+						</a>
+						<!-- end: LOGO -->
+					</div>
+					
+					<div class="topbar-tools">
+						<!-- start: TOP NAVIGATION MENU -->
+						<ul class="nav navbar-right">
+							
+							<!-- start: USER DROPDOWN -->
+							<li class="dropdown current-user">
+								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+									<img src="${cxt!}/ui/rapido/assets/images/avatar-1-small.jpg" class="img-circle" alt=""> 
+									<span class="username hidden-xs">${escapeXml(cookieMap.userName.value!)}</span> 
+									<i class="fa fa-caret-down "></i>
+								</a>
+								<ul class="dropdown-menu dropdown-dark">
+									<li>
+										<a href="#" data-toggle="modal" class="ajaxDialog" data-url="/jf/platform/index/toUrl"
+											data-param='{ "toUrl" : "/platform/user/passChange.html" }'>
+											${i18nMap["admin.top.passChange"]}
+										</a>
+									</li>
+									<li>
+										<a href="${cxt!}/jf/platform/index/toUrl?toUrl=/platform/login/lock_screen.html">
+											锁屏
+										</a>
+									</li>
+									<li>
+										<a href="${cxt!}/jf/platform/login/logout">
+											${i18nMap["admin.top.exitSystem"]}
+										</a>
+									</li>
+								</ul>
+							</li>
+							<!-- end: USER DROPDOWN -->
+							
+							<!-- start: system change -->
+							<li class="dropdown current-user">
+								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+									<span class="username hidden-xs">系统切换</span> 
+									<i class="fa fa-caret-down "></i>
+								</a>
+								<ul class="dropdown-menu dropdown-dark">
+									<% for(systems in systemsList){ %>
+										<li>
+											<a href="${cxt!}/jf/platform/index?ids=${systems.ids!}">${escapeXml(systems.names!)}</a>
+										</li>
+									<% } %>
+								</ul>
+							</li>
+							<!-- end: system change -->
+							
+							<!-- start: language change -->
+							<li class="dropdown current-user">
+								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+									<span class="username hidden-xs">${i18nMap["admin.top.language"]}</span> 
+									<i class="fa fa-caret-down "></i>
+								</a>
+								<ul class="dropdown-menu dropdown-dark">
+									<li><a href="${cxt!}/jf/platform/index?localePram=zh_CN">${i18nMap["admin.top.language.zhcn"]}</a></li>
+									<li><a href="${cxt!}/jf/platform/index?localePram=en_US">${i18nMap["admin.top.language.enus"]}</a></li>
+									<li><a href="${cxt!}/jf/platform/index?localePram=zh_TW">${i18nMap["admin.top.language.zhtw"]}</a></li>
+									<li><a href="${cxt!}/jf/platform/index?localePram=zh_HK">${i18nMap["admin.top.language.zhhk"]}</a></li>
+									<li><a href="${cxt!}/jf/platform/index?localePram=ja">${i18nMap["admin.top.language.ja"]}</a></li>
+								</ul>
+							</li>
+							<!-- end: language change -->
+							
+							<li class="right-menu-toggle">
+								<a href="#" class="sb-toggle-right">
+									<i class="fa fa-globe toggle-icon"></i> <i class="fa fa-caret-right"></i> <span class="notifications-count badge badge-default hide"> 3</span>
+								</a>
+							</li>
+						</ul>
+						<!-- end: TOP NAVIGATION MENU -->
+					</div>
+				</div>
+				<!-- end: TOPBAR CONTAINER -->
+			</header>

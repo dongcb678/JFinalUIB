@@ -1,0 +1,76 @@
+			<div id="newEvent">
+				<div class="noteWrap col-md-8 col-md-offset-2">
+					<h3>添加事件</h3>
+					<form class="form-event">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input class="event-id hide" type="text">
+									<input class="event-name form-control" name="eventName" type="text" placeholder="Event Name...">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<input type="checkbox" class="all-day" data-label-text="All-Day" data-on-text="True" data-off-text="False">
+								</div>
+							</div>
+							<div class="no-all-day-range">
+								<div class="col-md-8">
+									<div class="form-group">
+										<div class="form-group">
+											<span class="input-icon">
+												<input type="text" class="event-range-date form-control" name="eventRangeDate" placeholder="Range date"/>
+												<i class="fa fa-clock-o"></i> </span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="all-day-range">
+								<div class="col-md-8">
+									<div class="form-group">
+										<div class="form-group">
+											<span class="input-icon">
+												<input type="text" class="event-range-date form-control" name="ad_eventRangeDate" placeholder="Range date"/>
+												<i class="fa fa-calendar"></i> </span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="hide">
+								<input type="text" class="event-start-date" name="eventStartDate"/>
+								<input type="text" class="event-end-date" name="eventEndDate"/>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<select class="form-control selectpicker event-categories">
+										<option data-content="<span class='event-category event-cancelled'>Cancelled</span>" value="event-cancelled">Cancelled</option>
+										<option data-content="<span class='event-category event-home'>Home</span>" value="event-home">Home</option>
+										<option data-content="<span class='event-category event-overtime'>Overtime</span>" value="event-overtime">Overtime</option>
+										<option data-content="<span class='event-category event-generic'>Generic</span>" value="event-generic" selected="selected">Generic</option>
+										<option data-content="<span class='event-category event-job'>Job</span>" value="event-job">Job</option>
+										<option data-content="<span class='event-category event-offsite'>Off-site work</span>" value="event-offsite">Off-site work</option>
+										<option data-content="<span class='event-category event-todo'>To Do</span>" value="event-todo">To Do</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<textarea class="summernote" placeholder="Write note here..."></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="pull-right">
+							<div class="btn-group">
+								<a href="#" class="btn btn-info close-subview-button">
+									关闭
+								</a>
+							</div>
+							<div class="btn-group">
+								<button class="btn btn-info save-new-event" type="submit">
+									保存
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>

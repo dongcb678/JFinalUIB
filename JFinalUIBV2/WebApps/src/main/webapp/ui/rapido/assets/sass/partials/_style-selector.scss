@@ -1,0 +1,120 @@
+/* ---------------------------------------------------------------------- */
+/*  Style Selector
+/* ---------------------------------------------------------------------- */
+
+#style_selector_container {
+  padding: 0 20px 10px;
+}
+.style-main-title {
+  background: #D9D9D9;
+  border-bottom: 1px solid rgba(23, 24, 26, 0.15);
+  color: #000000;
+  font-size: 15px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+}
+.box-title {
+  font-size: 12px;
+  height: 33px;
+  line-height: 33px;
+  text-align: center;
+}
+.input-box {
+  padding-bottom: 10px;
+  text-align: center;
+}
+#style_selector .style-toggle {
+  background: #ffffff;
+  cursor: pointer;
+  height: 44px;
+  width: 35px;
+  border: 1px solid rgba(23, 24, 26, 0.15);
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  line-height: 44px;
+  text-align: center;
+  color: #007AFF;
+  font-size: 14px;
+}
+#style_selector > .open:before {
+  content: "\e162";
+  font-family: 'clip-font';
+  line-height: 1;
+}
+#style_selector > .open {
+  background-position: left top;
+  left: -35px;
+  position: absolute;
+  top: 44px;
+  width: 35px;
+  opacity: 1;
+}
+#style_selector > .close:before {
+  content: "\e163";
+  font-family: 'clip-font';
+  line-height: 1;
+}
+#style_selector > .close {
+  background-position: left bottom;
+  position: absolute;
+  right: 0;
+  top: 45px;
+  width: 35px;
+  opacity: 0.9;
+}
+#style_selector .images {
+  padding-bottom: 10px;
+  text-align: center;
+  position: relative;
+}
+#style_selector .images img {
+  height: 32px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  width: 32px;
+  z-index: 1000;
+}
+#style_selector .images .form-group {
+  width: 50px;
+  text-align: center;
+  color: #AAA9A9;
+  font-size: 10px;
+  margin-bottom: 0;
+}
+#style_selector .images input {
+  display: none;
+}
+#style_selector .images .form-group {
+  display: inline-block;
+}
+#style_selector .images .add-on {
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  display: inline-block;
+  font-weight: normal;
+  line-height: 20px;
+  min-width: 20px;
+  padding: 5px;
+  text-align: center;
+  text-shadow: 0 1px 0 #FFFFFF;
+  width: auto;
+  margin-left: 2px;
+}
+#style_selector .images .add-on i {
+  cursor: pointer;
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+#style_selector .clear_style {
+  margin-right: 20px;
+}
+.style-options {
+  height: 25px;
+  line-height: 25px; 
+  text-align: center;
+  a {
+    color: darken($white, 10%)
+  }
+}

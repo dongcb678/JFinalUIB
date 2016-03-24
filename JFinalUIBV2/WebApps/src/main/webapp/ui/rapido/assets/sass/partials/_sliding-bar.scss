@@ -1,0 +1,17 @@
+/* ---------------------------------------------------------------------- */
+/*  Sliding Bar (SB)
+/* ---------------------------------------------------------------------- */
+#slidingbar-area {
+   overflow: auto !important;
+}
+#slidingbar-area address, #slidingbar-area h2{
+   color: $white !important;
+}
+#slidingbar-area .sb_toggle{
+   color: $white !important;
+   @include opacity(0.7);
+   @include transition(all 0.3s ease 0s);
+   &:hover {
+    @include opacity(1);  
+   }
+}

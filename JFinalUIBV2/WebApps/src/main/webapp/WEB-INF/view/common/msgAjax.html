@@ -1,0 +1,31 @@
+
+<!-- start: BREADCRUMB -->
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">操作失败</li>
+		</ol>
+	</div>
+</div>
+<!-- end: BREADCRUMB -->
+
+<!-- start: PAGE CONTENT -->
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: 500 -->
+		<div class="page-error animated shake">
+			<div class="error-number text-red">
+				操作失败
+			</div>
+			<div class="error-details col-sm-6 col-sm-offset-3">
+				<h3>失败描述</h3>
+				<p>
+					${msg!}
+				</p>
+			</div>
+		</div>
+		<!-- end: 500 -->
+	</div>
+</div>
+<!-- end: PAGE CONTENT-->

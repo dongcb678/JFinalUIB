@@ -1,0 +1,118 @@
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.parent"]}</label>
+	<div class="col-sm-7">
+		<input type="hidden" id="parentId" name="param.parentids" value="${escapeXml(param.parentids!)}"/>
+		<input type="text" id="parentName" value="${escapeXml(param.parentnames!)}" 
+			class="form-control focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> 
+		<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
+			data-url="/jf/platform/param/toUrl"
+			data-param='{ "toUrl" : "/platform/param/radio.html", "ids" : "${escapeXml(param.parentids!)}", "paramId" : "parentId", "paramName" : "parentName" }'>
+			${i18nMap["admin.common.choice"]}
+		</a>
+	</span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.name"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="param.names" value="${escapeXml(param.names!)}" 
+			class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-10位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.number"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="param.numbers" value="${escapeXml(param.numbers!)}" 
+			class="form-control" maxlength="50" vMin="5" vType="letterNumber" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 5-50位字母数字 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.status"]}</label>
+	<div class="col-sm-7">
+		<select name="param.status" class="combox">
+			<option value="1" ${param.status! == "1" ? "selected='selected'":"" }>${i18nMap["admin.param.property.status.start"]}</option>
+			<option value="0" ${param.status! == "0" ? "selected='selected'":"" }>${i18nMap["admin.param.property.status.stop"]}</option>
+		</select>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>  </span>
+</div>
+
+<input type="hidden" name="param.i18n" value='${paramMap["i18n"]!}' >
+			
+<% if(paramMap["i18n"]! == "0" || param["i18n"]! == "0"){ %>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="param.val" value="${escapeXml(param.val!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<% } else { %>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="param.val_ja" value="${escapeXml(param.val_ja!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="param.val_enus" value="${escapeXml(param.val_enus!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="param.val_zhcn" value="${escapeXml(param.val_zhcn!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="param.val_zhhk" value="${escapeXml(param.val_zhhk!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="param.val_zhtw" value="${escapeXml(param.val_zhtw!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<% } %>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.common.order"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="param.orderids" value="${param.orderids!}" 
+			class="form-control" maxlength="10" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 2-10位任意字符 </span>
+</div>

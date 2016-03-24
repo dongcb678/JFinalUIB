@@ -1,0 +1,16 @@
+/* ---------------------------------------------------------------------- */
+/*  OWL CAROUSEL
+/* ---------------------------------------------------------------------- */
+.panel .owl-item {
+  overflow: hidden;
+}
+.owl-theme .owl-controls .owl-page span, .owl-theme .owl-controls .owl-buttons div {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+
+.panel-white .owl-theme .owl-controls .owl-page span, .panel-white .owl-theme .owl-controls .owl-buttons div, .partition-white .owl-theme .owl-controls .owl-page span, .partition-white .owl-theme .owl-controls .owl-buttons div{
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+.panel-note .owl-theme .owl-controls .owl-page span, .panel-note .owl-theme .owl-controls .owl-buttons div, .partition-note .owl-theme .owl-controls .owl-page span, .partition-note .owl-theme .owl-controls .owl-buttons div{
+  background: rgba(0, 0, 0, 0.2) !important;
+}

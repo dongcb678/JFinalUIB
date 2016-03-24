@@ -1,0 +1,108 @@
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.mname"]}</label>
+	<div class="col-sm-7">
+		<input type="hidden" id="moduleId" name="operator.moduleids" value="${escapeXml(operator.moduleids!)}"/>
+		<input type="text" id="moduleName" name="operator.modulenames" value="${escapeXml(operator.modulenames!)}" 
+			class="form-control focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> 
+		<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
+			data-url="/jf/platform/module/toUrl"
+			data-param='{ "toUrl" : "/platform/module/radio.html", "ids" : "${escapeXml(operator.moduleids!)}", "moduleId" : "moduleId", "moduleName" : "moduleName" }'>
+			${i18nMap["admin.common.choice"]}
+		</a>
+	</span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.name"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="operator.names" value="${escapeXml(operator.names!)}" 
+			class="form-control" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 2-25位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.privilegess"]}</label>
+	<div class="col-sm-7">
+		<select name="operator.privilegess" class="combox">
+			<option value="1" ${operator.privilegess! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			<option value="0" ${operator.privilegess! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		</select>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>  </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.url"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="operator.url" value="${escapeXml(operator.url!)}" 
+			class="form-control" maxlength="200" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-200位字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.splitPage"]}</label>
+	<div class="col-sm-7">
+		<select name="operator.splitpage" class="combox">
+			<option value="0" ${operator.splitpage! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+			<option value="1" ${operator.splitpage! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>  </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.rowFilter"]}</label>
+	<div class="col-sm-7">
+		<select name="operator.rowfilter" class="combox">
+			<option value="0" ${operator.rowfilter! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+			<option value="1" ${operator.rowfilter! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>  </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.formToken"]}</label>
+	<div class="col-sm-7">
+		<select name="operator.formtoken" class="combox">
+			<option value="0" ${operator.formtoken! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+			<option value="1" ${operator.formtoken! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>  </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.ip"]}</label>
+	<div class="col-sm-7">
+		<select name="operator.ipblack" class="combox">
+			<option value="0" ${operator.ipblack! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+			<option value="1" ${operator.ipblack! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>  </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.returnUrl"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="operator.returnurl" value="${escapeXml(operator.returnurl!)}" 
+			class="form-control" maxlength="200" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 0-200位长度 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="operator.returnparamkeys" value="${escapeXml(operator.returnparamkeys!)}" 
+			class="form-control" maxlength="100" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 0-100位长度 </span>
+</div>

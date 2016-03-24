@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	参数sql
+-->
+<sql-statement namespace="platform.param">
+	
+	<!-- 查询所有参数 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select ids from pt_param
+    	]]>
+	</sql>
+	
+	<!-- 查询参数树根节点 -->
+	<sql id="treeTableNodeRoot">
+		<![CDATA[ 
+        	select * from pt_param where parentids is null order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 查询参数树子节点 -->
+	<sql id="treeTableChildNode">
+		<![CDATA[ 
+        	select * from pt_param where parentids=? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 查询参数树根节点 -->
+	<sql id="treeNodeRoot">
+		<![CDATA[ 
+        	select ids, names, isparent, images, status from pt_param where parentIds is null order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 查询参数树子节点 -->
+	<sql id="treeChildNode">
+		<![CDATA[ 
+        	select ids, names, isparent, images, status from pt_param where parentIds = ? order by orderids asc
+    	]]>
+	</sql>
+	
+	<!-- 根据id查询国际化参数值 -->
+	<sql id="idAndI18n">
+		<![CDATA[ 
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_param where ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据编号查询参数值 -->
+	<sql id="numbers">
+		<![CDATA[ 
+        	select * from pt_param where numbers = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据编号查询国际化参数值 -->
+	<sql id="numbersAndI18n">
+		<![CDATA[ 
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_param where numbers = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询子节点参数值 -->
+	<sql id="child">
+		<![CDATA[ 
+        	select * from pt_param where parentids = ? and status = '1' order by orderids asc
+    	]]>
+	</sql>
+	
+	<!-- 查询子节点国际化参数值 -->
+	<sql id="childAndI8n">
+		<![CDATA[ 
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_param where parentids = ? and status = '1' order by orderids asc
+    	]]>
+	</sql>
+	
+	<!-- 查询父节点参数值 -->
+	<sql id="parent">
+		<![CDATA[ 
+        	select * from pt_param where ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询父节点国际化参数值 -->
+	<sql id="parentAndI18n">
+		<![CDATA[ 
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_param where ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询子节点数量 -->
+	<sql id="childCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_param where parentids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

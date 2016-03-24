@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	oracle
+-->
+<sql-statement namespace="platform.oracle">
+	
+	<!-- 
+		查询表注释 
+	-->
+	<sql id="getTableComments">
+		<![CDATA[ 
+        	select * from all_tab_comments where owner = upper(?) and table_name = upper(?)
+    	]]>
+	</sql>
+	
+	<!-- 
+		查询列和注释
+	-->
+	<sql id="getColumnComments">
+		<![CDATA[ 
+        	select 
+		       t1.* ,
+		       (select t2.comments from all_col_comments t2 where t2.COLUMN_NAME = t1.COLUMN_NAME and owner = upper(?) and table_name=upper(?)) as comments
+			from 
+			       user_tab_columns t1
+			
+			where t1.table_name=upper(?)
+    	]]>
+	</sql>
+	
+</sql-statement>

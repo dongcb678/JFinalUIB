@@ -1,0 +1,274 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">系统负载</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">系统负载</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				
+				<div class="row">
+					<div class="col-md-12 space20">
+						<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanelConfirm('/jf/platform/resources/refreshParamCache');">
+							刷新缓存 <i class="fa fa-plus"></i>
+						</button>
+						
+						<button type="button" class="btn btn-red delete-row" onclick="common_ajax.ajaxMainPanelConfirm('/jf/platform/resources/refreshSqlCache');"> 
+							刷新SQL <i class="fa fa-trash-o"></i>
+						</button>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12 space20">
+						<div class="row" id="content_pv" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
+					</div>
+				</div>
+						
+				<div class="row">
+					<div class="col-md-12 space20">
+						<div class="row" id="content_cpu" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
+					</div>
+				</div>
+						
+				<div class="row">
+					<div class="col-md-12 space20">
+						<div class="row" id="content_phymemory" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
+					</div>
+				</div>
+						
+				<div class="row">
+					<div class="col-md-12 space20">
+						<div class="row" id="content_jvmmemory" style="height:200px;border:1px solid #ccc;padding:10px;"></div>
+					</div>
+				</div>
+				
+			</div>
+		
+		</div>
+	</div>
+</div>	
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		content_pv();
+		content_cpu();
+		content_phymemory();
+		content_jvmmemory();
+	});
+
+	function content_pv(){
+		setTimeout(function(){
+			var content_pv = echarts.init(document.getElementById('content_pv'));
+		    content_pv.setOption({
+		        tooltip : {
+		            trigger: 'axis'
+		        },
+		        legend: {
+		            data:['访问量']
+		        },
+		        toolbox: {
+		            show : true,
+		            feature : {
+		                mark : {show: true},
+		                dataView : {show: true, readOnly: false},
+		                magicType : {show: true, type: ['line']},
+		                restore : {show: true},
+		                saveAsImage : {show: true}
+		            }
+		        },
+		        calculable : true,
+		        xAxis : [
+		            {
+		                type : 'category',
+		                boundaryGap : false,
+		                data : ${adates}
+		            }
+		        ],
+		        yAxis : [
+		            {
+		                type : 'value'
+		            }
+		        ],
+		        series : [
+		            {
+		                name:'访问量',
+		                type:'line',
+		                stack: '总量',
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data:${acounts}
+		            }
+		        ]
+		    });
+		},200);
+	}
+
+	function content_cpu(){
+		setTimeout(function(){
+			var content_cpu = echarts.init(document.getElementById('content_cpu'));
+		    content_cpu.setOption({
+		        tooltip : {
+		            trigger: 'axis'
+		        },
+		        legend: {
+		            data:['CPU负载']
+		        },
+		        toolbox: {
+		            show : true,
+		            feature : {
+		                mark : {show: true},
+		                dataView : {show: true, readOnly: false},
+		                magicType : {show: true, type: ['line']},
+		                restore : {show: true},
+		                saveAsImage : {show: true}
+		            }
+		        },
+		        calculable : true,
+		        xAxis : [
+		            {
+		                type : 'category',
+		                boundaryGap : false,
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data : ${dates}
+		            }
+		        ],
+		        yAxis : [
+		            {
+		                type : 'value',
+		                max : 100
+		            }
+		        ],
+		        series : [
+		            {
+		                name:'CPU负载',   
+		                type:'line',
+		                stack: '总量',
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data:${cpu}
+		            }
+		        ]
+		    });
+		},200);
+	}
+
+	function content_phymemory(){
+		setTimeout(function(){
+			var content_phymemory = echarts.init(document.getElementById('content_phymemory'));
+		    content_phymemory.setOption({
+		        tooltip : {
+		            trigger: 'axis'
+		        },
+		        legend: {
+		            data:['物理内存']
+		        },
+		        toolbox: {
+		            show : true,
+		            feature : {
+		                mark : {show: true},
+		                dataView : {show: true, readOnly: false},
+		                magicType : {show: true, type: ['line']},
+		                restore : {show: true},
+		                saveAsImage : {show: true}
+		            }
+		        },
+		        calculable : true,
+		        xAxis : [
+		            {
+		                type : 'category',
+		                boundaryGap : false,
+		                data : ${dates}
+		            }
+		        ],
+		        yAxis : [
+		            {
+		                type : 'value',
+		                max : ${phymemorymax}
+		            }
+		        ],
+		        series : [
+		            {
+		            	name:'物理内存',
+		                type:'line',
+		                stack: '总量',
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data:${phymemoryval}
+		            }
+		        ]
+		    });
+		},200);
+	}
+    
+	function content_jvmmemory(){
+		setTimeout(function(){
+			var content_jvmmemory = echarts.init(document.getElementById('content_jvmmemory'));
+		    content_jvmmemory.setOption({
+		        tooltip : {
+		            trigger: 'axis'
+		        },
+		        legend: {
+		            data:['JVM内存']
+		        },
+		        toolbox: {
+		            show : true,
+		            feature : {
+		                mark : {show: true},
+		                dataView : {show: true, readOnly: false},
+		                magicType : {show: true, type: ['line']},
+		                restore : {show: true},
+		                saveAsImage : {show: true}
+		            }
+		        },
+		        calculable : true,
+		        xAxis : [
+		            {
+		                type : 'category',
+		                boundaryGap : false,
+		                data : ${dates}
+		            }
+		        ],
+		        yAxis : [
+		            {
+		                type : 'value',
+		                max : ${jvmmemorymax}
+		            }
+		        ],
+		        series : [
+		            {
+		            	name:'JVM内存',
+		                type:'line',
+		                stack: '总量',
+		                itemStyle: {normal: {areaStyle: {
+		                    color: 'rgba(34, 139, 34, 0.4)'
+		                }}},
+		                data:${jvmmemoryval}
+		            }
+		        ]
+		    });
+		},200);
+	}
+    
+</script>

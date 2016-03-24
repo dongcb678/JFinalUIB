@@ -1,0 +1,81 @@
+<div>
+	<ul class="breadcrumb">
+		<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+		<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html');">${i18nMap["admin.param.common.name"]}</a> <span class="divider">/</span></li>
+		<li><a href="#">${i18nMap["admin.param.update"]}</a></li>
+	</ul>
+</div>
+
+<div class="row-fluid sortable">
+	<div class="box span12">
+		<div class="box-header well" data-original-title>
+			<h2>
+				<i class="icon-edit"></i> ${i18nMap["admin.param.update"]}
+			</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a> 
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		
+		<div class="box-content">
+			<form role="form" class="form-horizontal" id="editForm" action="${cxt!}/jf/platform/param/update" method="POST">
+				
+				<% include("/platform/param/form.html"){} %>
+				<div class="form-actions">
+					<% if(authUrl("/jf/platform/param/save")){ %>
+						<button class="btn btn-primary" type="button" onclick="platform_verify.formValiSubmit(this.form);">${i18nMap["admin.common.submit"]}</button>
+					<% } %>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--/span-->
+</div>
+<!--/row-->
+
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/group');">${i18nMap["admin.param.common.name"]}</a></li>
+			<li class="active">${i18nMap["admin.param.update"]}</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.param.update"]}</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form id="editForm" action="${cxt!}/jf/platform/param/update" method="POST" role="form" class="form-horizontal">
+					<input type="hidden" name="param.ids" value="${param.ids!}" >
+					<input type="hidden" name="param.version" value="${param.version!}">
+				
+					<% include("/platform/param/form.html"){} %>
+					
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-3">
+							<% if(authUrl("/jf/platform/param/update")){ %>
+								<button type="button" class="btn btn-red" onclick="platform_verify.formValiSubmit(this.form);">
+									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+								</button>
+							<% } %>
+						</div>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

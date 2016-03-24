@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- Template Name: Rapido - Responsive Admin Template build with Twitter Bootstrap 3.x Version: 1.3 Author: ClipTheme -->
+<!--[if IE 8]><html class="ie8 no-js" lang="zh-CN"><![endif]-->
+<!--[if IE 9]><html class="ie9 no-js" lang="zh-CN"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-CN" class="no-js">
+	<!--<![endif]-->
+	<!-- start: HEAD -->
+	<head>
+		<title>锁屏</title>
+		
+		<!-- start: META -->
+		<meta charset="utf-8" />
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta content="" name="description" />
+		<meta content="" name="author" />
+		<!-- end: META -->
+		
+		<!-- start: MAIN CSS -->
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/plugins/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/css/styles.css">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/css/styles-responsive.css">
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/plugins/animate.css/animate.min.css">
+		<!--  
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/css/theme_light.css" type="text/css" id="skin_color">
+		-->
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/css/print.css" type="text/css" media="print"/>
+		<!--[if IE 7]>
+		<link rel="stylesheet" href="${cxt!}/ui/rapido/assets/plugins/font-awesome/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!-- end: MAIN CSS -->
+		
+		<!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
+		<!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
+		
+		<!-- start: The fav icon -->
+		<link rel="icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="${cxt!}/files/images/favicon.ico" type="image/x-icon" />
+		<!-- end: The fav icon -->
+		
+		<!-- start: common js -->
+		<script type="text/javascript">
+			var cxt = "${cxt!}";
+		</script>	
+		<!-- end: common js -->
+	</head>
+	<!-- end: HEAD -->
+	<!-- start: BODY -->
+	<body class="lock-screen">
+		
+		<div class="main-ls animated flipInX">
+			<div class="logo">
+				<img src="${cxt!}/ui/rapido/assets/images/logo.png">
+			</div>
+			
+			<div class="box-ls">
+				<img alt="" src="${cxt!}/ui/rapido/assets/images/avatar-1-xl.jpg"/>
+				<div class="user-info">
+					<h1><i class="fa fa-lock"></i> ${i18nMap["admin.top.exitSystem"]}</h1>
+					<span>dongcb678@163.com</span>
+					<span><em>请输入您的密码解锁</em></span>
+					<form action="${cxt!}/jf/platform/login/pass" method="post">
+						<div class="input-group">
+							<input type="text" placeholder="Password" class="form-control" name="password">
+							<span class="input-group-btn">
+								<button class="btn btn-green" type="submit">
+									<i class="fa fa-chevron-right"></i>
+								</button> 
+							</span>
+						</div>
+						<div class="relogin">
+							<a href="${cxt!}/jf/platform/login/logout">
+								您不是&nbsp;${i18nMap["admin.top.exitSystem"]}？</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<div class="copyright">
+				2015 &copy; JfinalUIB.
+			</div>
+		</div>
+		
+		<!-- start: MAIN JAVASCRIPTS -->
+		<!--[if lt IE 9]>
+		<script src="${cxt!}/ui/rapido/assets/plugins/respond.min.js"></script>
+		<script src="${cxt!}/ui/rapido/assets/plugins/excanvas.min.js"></script>
+		<script type="text/javascript" src="https://ajax.useso.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<![endif]-->
+		<!--[if gte IE 9]><!-->
+		<!-- <script src="https://ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+		<script src="${cxt!}/ui/rapido/assets/plugins/jQuery/jquery-2.1.1.min.js"></script>
+		<!--<![endif]-->
+		<script src="${cxt!}/ui/rapido/assets/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
+		<script src="${cxt!}/ui/rapido/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="${cxt!}/ui/rapido/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+		<script src="${cxt!}/ui/rapido/assets/js/main.js"></script>
+		<!-- end: MAIN JAVASCRIPTS -->
+		
+		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		
+		<script>
+			jQuery(document).ready(function() {
+				Main.init();
+			});
+		</script>
+	</body>
+	<!-- end: BODY -->
+</html>

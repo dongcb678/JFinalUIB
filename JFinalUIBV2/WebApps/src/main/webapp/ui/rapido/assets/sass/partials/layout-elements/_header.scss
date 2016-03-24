@@ -1,0 +1,123 @@
+/* ---------------------------------------------------------------------- */
+/*  Page Header and Page Header elements
+/* ---------------------------------------------------------------------- */
+.topbar {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: $header-height !important;
+  border: none !important;
+  .header-default & {
+     position: relative !important;
+  }
+  .right-sidebar-open & {
+    left: -$slideBar-width;
+    right: $slideBar-width;
+  }
+  .container {
+    max-width: none !important;
+    width: auto !important;
+    .navbar-header {
+      margin: 12px auto 0;
+      float: none;
+      width: 140px;
+      .sb-toggle-left {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: $header-height;
+        width: 36px;
+        text-align: center;
+        background: none;
+        color: #FFFFFF;
+        font-size: 1.3em;
+        line-height: $header-height;
+        padding: 0; 
+        i {
+          @include opacity(1);
+        }
+        &:hover, &:active, &:focus {
+          i{
+            @include opacity(0.6);
+          }
+        }
+      }
+      .navbar-brand {
+        padding: 0;
+        min-width: 100px;
+        line-height: $header-height;
+        top: 0;
+        position: absolute;
+        margin: 0;
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+   .topbar-tools {
+      float: right;
+      height: $header-height;
+      margin-top: -13px;
+      max-height: $header-height;
+      > ul {
+        list-style: none;
+        margin: 0;
+        > li {
+          float: left;
+          > a {
+            padding: 0;
+            font-size: $font-size-base;
+          }
+          &.view-all {
+            a {
+              padding: 8px 8px 6px !important;
+            }
+          }
+          &.current-user {
+            .dropdown-toggle {
+              line-height: $header-height;
+              padding-right: 20px;
+              height: $header-height;
+              i {
+                margin-left: 10px;
+              }
+            }
+            .dropdown-menu {
+              &:after {
+                left: auto;
+                right: 12px;
+              }
+            }
+          }
+          &.right-menu-toggle {
+            a {
+              margin: 5px 0;
+              line-height: $header-height - 10px;
+              padding-left: 20px !important;
+              height: $header-height - 10px;            
+              .toggle-icon {
+                font-size: 1.3em !important;
+              }
+              i{
+                @include opacity(1); 
+              }
+              &:hover, &:active, &:focus {
+                i{
+                  @include opacity(0.8);
+                }
+              }
+            }
+            .badge {
+              background-color: #F35958;
+              color: #FFFFFF;
+              padding: 4px 6px;
+              position: absolute;
+              left: 7px;
+              top: 2px;
+              font-size: 10px;
+            }
+          }
+        }      
+      }
+    } 
+  }
+}

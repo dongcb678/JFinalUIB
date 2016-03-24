@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- Template Name: Rapido - Responsive Admin Template build with Twitter Bootstrap 3.x Version: 1.0 Author: ClipTheme -->
+<!--[if IE 8]><html class="ie8" lang="zh-CN"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="zh-CN"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+
+<!-- /platform/index/index.html -->
+
+<!-- start: HEAD -->
+<head>
+	<title>JFinalUIBV2</title>
+	<% include("/platform/index/head.html"){} %>
+	
+	<% include("/platform/index/i18n.html"){} %>
+</head>
+<!-- end: HEAD -->
+
+<!-- start: BODY -->
+<body>
+	
+	<% include("/platform/index/slidingbar.html"){} %>
+	
+	<div class="main-wrapper">
+		<!-- start: TOPBAR -->
+		<% include("/platform/index/header.html"){} %>
+		<!-- end: TOPBAR -->
+		
+		<!-- start: PAGESLIDE LEFT -->
+		<% include("/platform/index/pageslide-left.html"){} %>
+		<!-- end: PAGESLIDE LEFT -->
+		
+		<!-- start: PAGESLIDE RIGHT -->
+		<% include("/platform/index/pageslide-right.html"){} %>
+		<!-- end: PAGESLIDE RIGHT -->
+		
+		<!-- start: MAIN CONTAINER -->
+		<div class="main-container inner">
+			<!-- start: PAGE -->
+			<div class="main-content">
+				<!-- start: PANEL CONFIGURATION MODAL FORM -->
+				<div class="modal fade" id="panel-config" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title">Panel Configuration</h4>
+							</div>
+							<div class="modal-body">
+								Here will be a configuration form
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									Close
+								</button>
+								<button type="button" class="btn btn-primary">
+									Save changes
+								</button>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+				<!-- end: SPANEL CONFIGURATION MODAL FORM -->
+				
+				<!-- start: ajax弹出框显示div -->
+				<div id="ajax-modal" class="modal extended-modal fade no-display" tabindex="-1"></div>
+				<!-- end: ajax弹出框显示div -->
+				
+				<div class="container">
+					<!-- start: PAGE HEADER -->
+					<!-- start: TOOLBAR -->
+					<% include("/platform/index/toolbar.html"){} %>
+					<!-- end: TOOLBAR -->
+					<!-- end: PAGE HEADER -->
+					
+					<!-- start: BREADCRUMB -->
+					<!-- end: BREADCRUMB -->
+					
+					<!-- start: PAGE CONTENT -->
+					<!-- end: PAGE CONTENT-->
+				</div>
+				
+				<div class="subviews">
+					<div class="subviews-container"></div>
+				</div>
+			</div>
+			<!-- end: PAGE -->
+		</div>
+		<!-- end: MAIN CONTAINER -->
+		
+		<!-- start: FOOTER -->
+		<% include("/platform/index/footer.html"){} %>
+		<!-- end: FOOTER -->
+		
+		<!-- start: SUBVIEW SAMPLE CONTENTS -->
+		
+		<!-- *** NEW NOTE *** -->
+		<% include("/platform/index/newNote.html"){} %>
+		
+		<!-- *** READ NOTE *** -->
+		<% include("/platform/index/readNote.html"){} %>
+		
+		<!-- *** SHOW CALENDAR *** -->
+		<% include("/platform/index/showCalendar.html"){} %>
+		
+		<!-- *** NEW EVENT *** -->
+		<% include("/platform/index/newEvent.html"){} %>
+		
+		<!-- *** READ EVENT *** -->
+		<% include("/platform/index/readEvent.html"){} %>
+		
+		<!-- *** NEW CONTRIBUTOR *** -->
+		<% include("/platform/index/newContributor.html"){} %>
+		
+		<!-- *** SHOW CONTRIBUTORS *** -->
+		<% include("/platform/index/slidingbar.html"){} %>
+		
+		<!-- end: SUBVIEW SAMPLE CONTENTS -->
+	</div>
+	
+	<% include("/platform/index/js.html"){} %>
+	
+	<script type="text/javascript">
+		
+		jQuery(document).ready(function() {
+			Main.init();
+			SVExamples.init();
+			common_modals.init();
+			// 加载默认显示页
+			common_ajax.ajaxMainPanel("/jf/platform/index/content");
+		});
+		
+	</script>
+</body>
+<!-- end: BODY -->
+	
+</html>

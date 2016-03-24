@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	系统sql
+-->
+<sql-statement namespace="platform.systems">
+	
+	<!-- 查询所有系统 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select ids, names from pt_systems order by orderids asc
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pt_systems 
+        	where 
+        		1=1 
+			
+			<% if(!isEmpty(names)){ %>
+					and names like #'%$names$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
+</sql-statement>

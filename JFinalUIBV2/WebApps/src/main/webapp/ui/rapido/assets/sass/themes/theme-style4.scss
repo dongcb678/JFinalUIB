@@ -1,0 +1,199 @@
+/* ---------------------------------------------------------------------- */
+/*  Theme Default
+/* ---------------------------------------------------------------------- */
+@import "modules/css3-mixins";
+@import "modules/variables";
+$base-color: #364150;
+$header-color : #1D232C;
+$label-color : $blue;
+
+body {
+  background-color: $base-color !important;
+   &.layout-boxed {
+    background: url("../../images/bg_4.png") $base-color;
+  }
+}
+.main-container, #pageslide-left, #pageslide-right {
+  background-color: $base-color !important;
+}
+.label-default, .badge-default {
+   background: $label-color !important;
+}
+.topbar {
+  background: $header-color;
+  @include background-gradient(lighten($header-color,10%) 0px, $header-color 100%);
+  > .container .navbar-brand, .logo {
+    color: $white;
+  }
+  .topbar-tools > ul > li {
+    > a {
+      color: $white;
+    }
+    &.right-menu-toggle > a {
+      border-left-width: 1px;
+      border-left-style: solid;
+      border-left-color: $header-color;
+    }
+  }
+  .nav li.dropdown.open > .dropdown-toggle, .nav li.dropdown.active > .dropdown-toggle, .nav li.dropdown.open.active > .dropdown-toggle {
+    background: none;
+    color: $white;
+  }
+  .nav > li:hover > a, .nav > li:active > a, .nav > li > a:focus {
+    color: $white;
+    background: none;
+  }
+}
+
+
+ul.main-navigation-menu > li {
+
+  a {
+    border-bottom: none;
+    border-top-color: lighten($base-color,5%);
+    color: lighten($base-color,85%);
+    i {
+      color: desaturate(lighten($base-color,25%),15%);
+      font-weight: normal;
+    }
+  }
+  &.active > a {
+    background: desaturate(lighten($base-color,6%),5%) !important;
+    border-top: none !important;
+    color: $white;
+    i {
+      color: $white;
+    }
+  } 
+}
+ul.main-navigation-menu li > ul.sub-menu > li > a:hover {
+    background: lighten($base-color,6%);
+    color: $white !important;
+}
+ul.main-navigation-menu li > ul.sub-menu > li.open > a, ul.main-navigation-menu li > ul.sub-menu > li.active > a, ul.main-navigation-menu li > ul.sub-menu > li.open > a:hover, ul.main-navigation-menu li > ul.sub-menu > li.active > a:hover {
+    background: darken($base-color,5%);
+    color: $white !important;
+}
+ul.main-navigation-menu > li.open > a, ul.main-navigation-menu > li > a:hover, ul.main-navigation-menu > li:hover > a {
+  background-color: darken($base-color,2%);
+}
+ul.main-navigation-menu  li.divider {
+  background-color: lighten($base-color,5%) !important;
+}
+ul.main-navigation-menu  li.dropdown-header, ul.main-navigation-menu .mega-menu-sub-title {
+  color: desaturate(lighten($base-color,30%),10%) !important;
+}
+ul.main-navigation-menu  li.dropdown-header, ul.main-navigation-menu .mega-menu-sub-title {
+  color: desaturate(lighten($base-color,30%),10%) !important;
+}
+ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu a {
+  color: lighten($base-color,85%)!important;
+  &:hover {
+    background: none !important;
+  }
+}
+ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu li.active a, ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu li.active a:hover, ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu li.active a:focus {
+  background-color: darken($base-color,5%) !important;
+  text-decoration: none;
+}
+ul.main-navigation-menu .mega-menu .mega-menu-content ul.mega-sub-menu li a:hover {
+  background-color: lighten($base-color,6%) !important;
+  text-decoration: none;
+}
+
+#horizontal-menu {
+  .container {
+    background: $base-color;
+  }
+  .navbar-collapse {
+    .navbar-nav {
+      > li {
+        > a {
+          color: lighten($base-color,45%);
+          &:hover {
+            color: lighten($base-color,85%); 
+            background: darken($base-color, 5%);
+          }
+          &:active, &:focus {
+            background: darken($base-color, 10%);
+          }
+        }
+        &.active {
+          > a {
+            color: lighten($base-color,85%); 
+            background: $label-color;
+            &:after {
+              border-top-color: $label-color;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+.main-content {
+  background: #DDDDDD;
+}
+.go-top {
+  color: $white;
+}
+.footer-inner {
+  color: $white;
+}
+#pageslide-left {
+  .slide-tools {
+      background-color: darken($base-color,5%);
+  }
+  .btn {
+        color: transparentize($white, .7); 
+        &:hover {
+            color: $white;
+            background-color: transparentize(lighten(darken($base-color,10%),2%), .6); 
+        }
+    }
+  .user-profile {
+      border-color: lighten($base-color,5%);
+      position: relative; 
+      h5{
+        color: desaturate(lighten($base-color,30%),10%);
+      }
+  } 
+}
+.closedbar {
+  background-color: darken($base-color,5%) !important;
+  &:hover {
+    background-color: $base-color !important;
+  }
+}
+#pageslide-right {
+  .pageslide-title {
+    color: transparentize($white,.6);
+  }
+  .notifications {
+  a {
+    color: #EEEEEE;
+    background: darken($base-color,3%);
+    &:hover{
+      background: darken($base-color,5%);
+    }
+    .time {
+      color: desaturate(lighten($base-color,30%),30%);
+    }
+  }
+}
+}
+#style_selector_container {
+  .box-title {
+    color: transparentize($white,.2) !important;
+  }
+  .images {
+    border-bottom: 1px solid lighten($base-color,5%);
+    img.active {
+      border: 2px solid lighten($base-color,65%);
+    }
+  }
+}
+footer {
+  background-color: $base-color;
+}

@@ -1,0 +1,74 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>${i18nMap["admin.menu.edit"]}</h3>
+</div>
+
+<form id="menuEditForm" action="${cxt!}/jf/platform/menu/edit" method="POST" role="form" class="form-horizontal">
+	<input type="hidden" name="menu.ids" value="${menu.ids!}" >
+	<input type="hidden" name="menu.version" value="${menu.version!}">
+	
+	<div class="modal-body">
+			
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+			<div class="col-sm-7">
+				<input type="text" name="menu.names_ja" value="${escapeXml(menu.names_ja!)}" 
+					class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			</div>
+			<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-25位任意字符 </span>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+			<div class="col-sm-7">
+				<input type="text" name="menu.names_enus" value="${escapeXml(menu.names_enus!)}" 
+					class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			</div>
+			<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-25位任意字符 </span>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+			<div class="col-sm-7">
+				<input type="text" name="menu.names_zhcn" value="${escapeXml(menu.names_zhcn!)}" 
+					class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			</div>
+			<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-25位任意字符 </span>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+			<div class="col-sm-7">
+				<input type="text" name="menu.names_zhhk" value="${escapeXml(menu.names_zhhk!)}" 
+					class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			</div>
+			<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-25位任意字符 </span>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+			<div class="col-sm-7">
+				<input type="text" name="menu.names_zhtw" value="${escapeXml(menu.names_zhtw!)}" 
+					class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			</div>
+			<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-25位任意字符 </span>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">${i18nMap["admin.menu.property.orderids"]}</label>
+			<div class="col-sm-7">
+				<input type="text" name="menu.orderids" value="${menu.orderids!}" 
+					class="form-control" maxlength="10" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);">
+			</div>
+			<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-10位数字 </span>
+		</div>
+					
+	</div>
+	
+	<div class="modal-footer">
+		<button type="button" data-dismiss="modal" class="btn">${i18nMap["admin.common.close"]}</button>
+		<button type="button" data-dismiss="modal" class="btn btn-primary" onclick="common_ajax.ajaxForm('menuEditForm');">${i18nMap["admin.common.determine"]}</button>
+	</div>	
+	
+</form>

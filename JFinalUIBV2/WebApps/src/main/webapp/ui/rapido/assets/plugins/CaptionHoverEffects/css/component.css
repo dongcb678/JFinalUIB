@@ -1,0 +1,19 @@
+.portfolio-grid {
+	padding: 0;
+	text-align: center;
+	overflow: hidden;
+	max-height: 200px;
+}
+
+.portfolio-grid  .item {
+	overflow: hidden !important;
+}
+
+
+
+.portfolio-grid  img {
+	display: block;
+	position: relative;
+	width: 100%;
+}
+

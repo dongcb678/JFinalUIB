@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	字典sql
+-->
+<sql-statement namespace="platform.dict">
+	
+	<!-- 查询所有字典 -->
+	<sql id="all">
+		<![CDATA[ 
+        	select ids from pt_dict
+    	]]>
+	</sql>
+	
+	<!-- 查询字典树根节点 -->
+	<sql id="treeTableNodeRoot">
+		<![CDATA[ 
+        	select * from pt_dict where parentids is null order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 查询字典树子节点 -->
+	<sql id="treeTableChildNode">
+		<![CDATA[ 
+        	select * from pt_dict where parentids=? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 查询字典树根节点 -->
+	<sql id="treeNodeRoot">
+		<![CDATA[ 
+        	select ids, names, isparent, images, status from pt_dict where parentIds is null order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 查询字典树子节点 -->
+	<sql id="treeChildNode">
+		<![CDATA[ 
+        	select ids, names, isparent, images, status from pt_dict where parentIds = ? order by orderids asc
+    	]]>
+	</sql>
+	
+	<!-- 根据id查询国际化字典值 -->
+	<sql id="idAndI18n">
+		<![CDATA[ 
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_dict where ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据编号查询字典值 -->
+	<sql id="numbers">
+		<![CDATA[ 
+        	select * from pt_dict where numbers = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据编号查询国际化字典值 -->
+	<sql id="numbersAndI18n">
+		<![CDATA[ 
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_dict where numbers = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询子节点字典值 -->
+	<sql id="child">
+		<![CDATA[ 
+        	select * from pt_dict where parentids = ? and status = '1' order by orderids asc
+    	]]>
+	</sql>
+	
+	<!-- 查询子节点国际化字典值 -->
+	<sql id="childAndI8n">
+		<![CDATA[ 
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_dict where parentids = ? and status = '1' order by orderids asc
+    	]]>
+	</sql>
+	
+	<!-- 查询父节点字典值 -->
+	<sql id="parent">
+		<![CDATA[ 
+        	select * from pt_dict where ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询父节点国际化字典值 -->
+	<sql id="parentAndI18n">
+		<![CDATA[ 
+        	select ids, numbers, parentids, val${i18nColumnSuffix} as val from pt_dict where ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询子节点数量 -->
+	<sql id="childCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_dict where parentids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

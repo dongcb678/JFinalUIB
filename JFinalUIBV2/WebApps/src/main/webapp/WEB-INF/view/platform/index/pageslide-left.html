@@ -1,0 +1,84 @@
+		<a class="closedbar inner hidden-sm hidden-xs" href="#"></a>
+			<nav id="pageslide-left" class="pageslide inner">
+				<div class="navbar-content">
+					
+					<!-- start: SIDEBAR -->
+					<div class="main-navigation left-wrapper transition-left">
+						
+						<div class="navigation-toggler hidden-sm hidden-xs">
+							<a href="#main-navbar" class="sb-toggle-left">
+							</a>
+						</div>
+						
+						<div class="user-profile border-top padding-horizontal-10 block">
+							<div class="inline-block">
+								<img src="${cxt!}/ui/rapido/assets/images/avatar-1.jpg" alt="">
+							</div>
+							<div class="inline-block">
+								<h5 class="no-margin"> 欢迎 </h5>
+								<h4 class="no-margin"> ${escapeXml(cookieMap.userName.value!)} </h4>
+								<a class="btn user-options sb_toggle">
+									<i class="fa fa-cog"></i>
+								</a>
+							</div>
+						</div>
+						
+						<!-- start: MAIN NAVIGATION MENU -->
+						<ul class="main-navigation-menu">
+							<li class="active open">
+								<a href="#" onclick='common_ajax.ajaxMainPanel("/jf/platform/index/content");'>
+									<i class="fa fa-home"></i> 
+									<span class="title"> 主页 </span>
+									<span class="label label-default pull-right ">LABEL</span> 
+								</a>
+							</li>
+							
+							<% for(one in menuList){ %>
+								
+								<% if(isEmpty(one.subList) == false){ %>
+									<li>
+										<a href="javascript:;">
+											<i class="fa fa-folder-open"></i> <span class="title"> ${one.names } </span><i class="icon-arrow"></i> <span class="arrow "></span>
+										</a>
+										<ul class="sub-menu">
+											<% for(two in one.subList){ %>
+												<li title="${two.names!}">
+													<% if(strutil.contain(two.url, ".html") == false){ %>
+														<li>
+															<a href="#" onclick='common_ajax.ajaxMainPanel("${two.url!}");'>
+																${two.names} <i class="icon-arrow"></i>
+															</a>
+														</li>
+													<% }else{ %>
+														<li>
+															<a href="#" onclick='common_ajax.ajaxMainPanel("/jf/platform/index/toUrl?toUrl=${two.url!}");'>
+																${two.names} <i class="icon-arrow"></i>
+															</a>
+														</li>
+													<% } %>
+												</li>
+											<% } %>
+										</ul>
+									</li>
+								<% } %>
+								
+							<% } %>
+							
+						</ul>
+						<!-- end: MAIN NAVIGATION MENU -->
+					</div>
+					<!-- end: SIDEBAR -->
+				</div>
+				<div class="slide-tools">
+					<div class="col-xs-6 text-left no-padding">
+						<a class="btn btn-sm status" href="#">
+							状态 <i class="fa fa-dot-circle-o text-green"></i> <span>在线</span>
+						</a>
+					</div>
+					<div class="col-xs-6 text-right no-padding">
+						<a class="btn btn-sm log-out text-right" href="${cxt!}/jf/platform/login/logout">
+							<i class="fa fa-power-off"></i> ${i18nMap["admin.top.exitSystem"]}
+						</a>
+					</div>
+				</div>
+			</nav>

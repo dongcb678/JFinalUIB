@@ -1,0 +1,208 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">${i18nMap["admin.sysLog.common.name"]}</li>
+		</ol>
+	</div>
+</div>
+						
+<form id="splitPage" action="${cxt!}/jf/platform/sysLog" method="POST" role="form" class="form-horizontal">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.sysLog.list.select"]}</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">			
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ourl"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.url" value='${escapeXml(paramMap["_query.url"])}' maxlength="20" >
+						</div>
+					  	
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.oname"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.names" value='${escapeXml(paramMap["_query.names"])}' maxlength="20" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.username"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.username" value='${escapeXml(paramMap["_query.username"])}' maxlength="20" >
+						</div>
+				  		
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ips"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.ips" value='${escapeXml(paramMap["_query.ips"])}' maxlength="20" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">${i18nMap["admin.sysLog.property.status"]}</label>
+						<div class="col-sm-4">
+					  		<select name="_query.status" class="combox">
+								<option></option>
+								<option value="1" ${paramMap["_query.status"]! == "1" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.success"]}</option>
+								<option value="0" ${paramMap["_query.status"]! == "0" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.error"]}</option>
+							</select>
+						</div>
+				  	</div>
+				  	
+					<div class="form-group">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
+						</div>
+				  	</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">${i18nMap["admin.sysLog.list.table"]}</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<%
+					var view = authUrl("/jf/platform/sysLog/view");
+					var delete = authUrl("/jf/platform/sysLog/delete");
+				%>
+				
+				<div class="panel-body">
+					
+					<div class="row">
+						<div class="col-md-12 space20">
+							<% if(delete == true){ %>
+								<button type="button" class="btn btn-red delete-row" data-bb="deleteList" data-url="/jf/platform/sysLog/delete"> 
+									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+								</button>
+							<% } %>
+						</div>
+					</div>
+					
+					<table class="table table-bordered table-hover" id="dataTable">
+						<thead>
+							<tr>
+								<th class="center hidden-xs" width="50">
+									<input type="checkbox" name="checkAll" onchange="common_common.checkFunc('dataTable', this.checked);" class="flat-grey selectall"> 
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'sy.names')">
+									${i18nMap["admin.sysLog.common.synames"]}	${orderBy("sy.names")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'm.names')">
+									${i18nMap["admin.sysLog.common.mnames"]}	${orderBy("m.names")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'onames')">
+									${i18nMap["admin.sysLog.property.oname"]}	${orderBy("onames")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'u.username')">
+									${i18nMap["admin.sysLog.property.username"]}	${orderBy("u.username")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'status')">
+									${i18nMap["admin.sysLog.property.status"]}	${orderBy("status")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'ips')">
+									${i18nMap["admin.sysLog.property.ips"]}	${orderBy("ips")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'startDate')">
+									${i18nMap["admin.sysLog.property.startdate"]}	${orderBy("startDate")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'actionHaoShi')">
+									${i18nMap["admin.sysLog.property.actionhaoshi"]}	${orderBy("actionHaoShi")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'viewHaoShi')">
+									${i18nMap["admin.sysLog.property.viewhaoshi"]}	${orderBy("viewHaoShi")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'haoShi')">
+									${i18nMap["admin.sysLog.property.haoshi"]}	${orderBy("haoShi")}
+								</th>
+								<th class="hidden-xs">${i18nMap["admin.common.operation"]}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(sysLog in splitPage.list){ %>
+								<tr>
+									<td class="center hidden-xs">
+										<input type="checkbox" name="checkIds" value="${sysLog.ids!}" class="flat-grey foocheck">
+									</td>
+									<td align="center">${escapeXml(sysLog["synames"]!)}</td>
+									<td align="center">${escapeXml(sysLog["mnames"]!)}</td>
+									<td align="center">${escapeXml(sysLog["onames"]!)}：${sysLog.ourl }</td>
+									<td align="center">${escapeXml(sysLog["username"]!)}</td>
+									<td align="center">
+										<% if(sysLog["status"] == "1"){%>
+											<span class="label label-success">${i18nMap["admin.sysLog.property.status.success"]}</span>
+										<% } else if(sysLog["status"] == "0"){%>
+											<span class="label label-warning">${i18nMap["admin.sysLog.property.status.error"]}</span>
+										<% } %>
+									</td>
+									<td align="center">${escapeXml(sysLog["ips"]!)}</td>
+									<td align="center">
+										${sysLog.startdate !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
+									</td>
+									<td align="center">${sysLog["actionhaoshi"] }</td>
+									<td align="center">${sysLog["viewhaoshi"] }</td>
+									<td align="center">
+										<% if(sysLog["haoshi"] > 1000){%>
+											<span class="label label-warning">${sysLog["haoshi"] }</span>
+										<% } else {%>
+											<span class="label label-success">${sysLog["haoshi"] }</span>
+										<% } %>	
+									</td>
+									<td class="hidden-xs">
+										<% if(view == true){ %>
+											<button type="button" class="btn btn-dark-yellow add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/sysLog/view/${escapeXml(sysLog.ids!)}');">
+												${i18nMap["admin.common.see"]} <i class="fa fa-eye"></i>
+											</button>
+										<% } %>
+										
+										<% if(delete == true){ %>
+											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/platform/sysLog/delete/${escapeXml(sysLog.ids!)}"> 
+												${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+											</button>
+										<% } %>
+									</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

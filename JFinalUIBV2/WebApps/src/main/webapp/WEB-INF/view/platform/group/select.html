@@ -1,0 +1,79 @@
+<script type="text/javascript">
+	
+	function addChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("checkedGroup").add(option);
+		setGroup();
+	}
+
+	function delChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("allGroup").add(option);
+		setGroup();
+	}
+	
+	function setGroup(){
+		var userIds = "${escapeXml(ids!)}";
+		var groupIds = "";
+		
+		var checkedGroup = document.getElementById("checkedGroup");
+		var length = checkedGroup.length;
+		for (var i=0; i<length; i++){
+			groupIds += checkedGroup.options[i].value + ",";
+	    }
+
+		var url = "/jf/platform/user/setGroup";
+		var data = { "ids" : userIds, "groupIds" : groupIds };
+
+		var result = common_ajax.ajaxFunc(url, data);
+	}
+</script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>${i18nMap["admin.group.select"]}</h3>
+</div>
+
+<div class="modal-body">
+	<div class="row">
+		
+		<div class="col-md-6">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<i class="icon-user"></i> ${i18nMap["admin.group.select.noChecked"]}
+				</h4>
+			</div>
+			<div class="panel-body">
+				<select id="allGroup" ondblclick="addChecked(this);" multiple="multiple" size="5" class="form-control">
+					<% for(group in noCheckedList){ %>
+						<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
+					<% } %>
+			  	</select>
+			</div>
+		</div>
+		
+		<div class="col-md-6">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<i class="icon-user"></i> ${i18nMap["admin.group.select.checked"]}
+				</h4>
+			</div>
+			<div class="panel-body">
+				<select id="checkedGroup" ondblclick="delChecked(this);" multiple="multiple" size="5" class="form-control">
+					<% for(group in checkedList){ %>
+						<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
+					<% } %>
+			  	</select>
+			</div>
+		</div>
+		
+	</div>  
+</div>
+
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">${i18nMap["admin.common.close"]}</button>
+</div>

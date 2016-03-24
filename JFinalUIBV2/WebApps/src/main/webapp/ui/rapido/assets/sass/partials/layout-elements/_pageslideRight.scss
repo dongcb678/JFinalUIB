@@ -1,0 +1,73 @@
+/* ---------------------------------------------------------------------- */
+/*  PageSlide Right
+/* ---------------------------------------------------------------------- */
+#pageslide-right {
+  width: $slideBar-width;
+  position: fixed;
+  padding-top: 0;
+  margin-top: -1px;
+  z-index: 190;
+  top: 0;
+  right: -$slideBar-width;
+  .right-sidebar-open & {
+    right: 0;
+  }
+
+  .right-wrapper {
+    padding: 0;
+    max-height: none !important;
+    overflow: hidden;
+    position: relative;
+    left: 0;
+    width: 100%;
+  }
+  .pageslide-title {
+    font-size: $font-size-extra-small;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .pageslide-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.notifications {
+  padding: 20px 10px;
+  a {
+    display: block;
+    @include border-radius(3px); 
+    margin: 8px 0;
+    padding: 10px;
+    position: relative;
+  }
+  .pageslide-list {
+    a {
+     .label {
+        @include opacity(0.7);
+        position: absolute;
+      }
+     &:hover {
+      .label {
+        @include opacity(1);
+      } 
+     }
+    }
+  }
+  .message {
+    padding-left: 30px;
+  }
+  .time {
+    display: block;
+    float: right;
+    font-size: 10px;
+    font-style: italic;
+    font-weight: 600;
+    color: #747B89;
+  }
+  .view-all a {
+    background: #0F0F1E;
+    text-align: right;
+  }
+}

@@ -1,0 +1,205 @@
+/* ---------------------------------------------------------------------- */
+/*  Forms
+/* ---------------------------------------------------------------------- */
+textarea, select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+  background-color: #FFFFFF;
+  border: 1px solid #E6E8E8;
+  border-radius: 0 0 0 0 !important;
+  color: $text-color;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 5px 4px;
+  transition-duration: 0.1s;
+  box-shadow: none !important;
+  -webkit-transition: 300ms ease-in-out;
+  -moz-transition: 300ms ease-in-out;
+  -ms-transition: 300ms ease-in-out;
+  -o-transition: 300ms ease-in-out;
+  transition: 300ms ease-in-out;
+ &:hover{
+   border-color: #D2D7D7;
+  
+ }
+ &:focus {
+    box-shadow : none !important;
+    border-color: #eeeeee !important;
+    background-color: #F8F8F8 !important;
+ }
+}
+textarea[disabled], input[disabled], select[disabled] {
+  background: #F8F8F8 !important;
+  border-color: #F8F8F8 !important;
+  &:hover, &:focus{
+    background: #F8F8F8 !important;
+    border-color: #F8F8F8 !important;
+ }
+}
+.input-group-addon {
+    background-color: lighten($text-color, 10%);
+    border: 1px solid lighten($text-color, 10%);
+    color: $white;
+}
+select option {
+   background-color: $white !important;
+}
+select[multiple="multiple"]:focus option{
+  background: #F8F8F8 !important;
+}
+.has-error .form-control, .has-warning .form-control, .has-success .form-control {
+  &:focus {
+    box-shadow : none;
+    border: 1px solid #E6E8E8;
+    background-color: #E6E8E8;
+ }
+
+}
+label {
+  font-weight: normal;
+  color: #858585;
+}
+span.input-icon, span.input-help {
+  display: block;
+  position: relative;
+}
+.input-icon > input {
+  padding-left: 25px;
+  padding-right: 6px;
+}
+.input-icon.input-icon-right > input {
+  padding-left: 6px;
+  padding-right: 25px;
+}
+span.input-help > input {
+  padding-left: 30px;
+  padding-right: 6px;
+}
+.input-icon > [class*="fa-"], .input-icon > [class*="clip-"] {
+  bottom: 0;
+  color: #909090;
+  display: inline-block;
+  font-size: 14px;
+  left: 5px;
+  line-height: 35px;
+  padding: 0 3px;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+.input-icon.input-icon-right > [class*="fa-"], .input-icon.input-icon-right > [class*="clip-"] {
+  left: auto;
+  right: 4px;
+}
+.input-icon > input:focus + [class*="fa-"], .input-icon > input:focus + [class*="clip-"] {
+  color: #557799;
+}
+.help-button {
+  background-color: #65BCDA;
+  border-radius: 100% 100% 100% 100%;
+  color: #FFFFFF;
+  cursor: default;
+  position: absolute;
+  font-size: 14px;
+  font-weight: bold;
+  height: 20px;
+  padding: 0;
+  text-align: center;
+  width: 20px;
+  line-height: 20px;
+  top: 7px;
+  left: 7px;
+}
+.help-button:before {
+  content: "\f128";
+  display: inline;
+  font-family: FontAwesome;
+  font-weight: 300;
+  height: auto;
+  text-shadow: none;
+  font-style: normal;
+}
+select.form-control {
+  background-color: #FFFFFF;
+  border: 1px solid #D5D5D5;
+  border-radius: 0 0 0 0;
+  color: #858585;
+}
+select.form-control option {
+  padding: 3px 4px;
+}
+.form-control.search-select {
+  padding: 0 !important;
+  box-shadow: none;
+  border: none;
+}
+
+textarea.autosize {
+  vertical-align: top;
+  transition: height 0.2s;
+  -webkit-transition: height 0.2s;
+  -moz-transition: height 0.2s;
+  transition: height 0.2s;
+  overflow: hidden; 
+  word-wrap: break-word; 
+  resize: horizontal; 
+  height: 69px;
+}
+
+.radio label.radio-inline, .checkbox label.checkbox-inline {
+  display: inline-block;
+}
+
+.radio-inline, .radio-inline + .radio-inline, .checkbox-inline, .checkbox-inline + .checkbox-inline {
+  margin-right: 10px !important;
+  margin-top: 5px !important;
+  margin-left: 0 !important;
+  margin-bottom: 10px !important;
+}
+.radio label, .checkbox label {
+  margin-bottom: 5px;
+}
+.checkbox-table {
+  display: inline-block;
+  margin: 2px 0 0 0;
+  padding-left: 20px;
+  line-height: 10px;
+}
+.checkbox-table label {
+  margin-bottom: 0;
+}
+[class^="icheckbox_"], [class*="icheckbox_"], [class^="iradio_"], [class*="iradio_"] {
+  float: left !important;
+  margin: 0 5px 0 -20px !important;
+}
+.help-inline {
+  margin-top: 6px;
+  color: #737373;
+}
+.help-block.error {
+  color: #B94A48;
+}
+
+.symbol.required:before {
+  content: "*";
+  display: inline;
+  color: #E6674A;
+}
+.symbol.ok:before {
+  content: "\f00c";
+  display: inline;
+  font-family: FontAwesome;
+  color: #468847;
+}
+.has-error .note-editor, .has-error .cke_chrome {
+  border-color: #B94A48 !important;
+}
+.form-group {
+  position: relative;
+}
+.form-group .text {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 7px;
+}

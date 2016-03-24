@@ -1,0 +1,118 @@
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.parent"]}</label>
+	<div class="col-sm-7">
+		<input type="hidden" id="parentId" name="dict.parentids" value="${escapeXml(dict.parentids!)}"/>
+		<input type="text" id="parentName" value="${escapeXml(dict.parentnames!)}" 
+			class="form-control focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> 
+		<a href="#" data-toggle="modal" class="ajaxDialog btn btn-blue" 
+			data-url="/jf/platform/dict/toUrl"
+			data-param='{ "toUrl" : "/platform/dict/radio.html", "ids" : "${escapeXml(dict.parentids!)}", "dictId" : "parentId", "dictName" : "parentName" }'>
+			${i18nMap["admin.common.choice"]}
+		</a>
+	</span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.name"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="dict.names" value="${escapeXml(dict.names!)}" 
+			class="form-control" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-10位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.number"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="dict.numbers" value="${escapeXml(dict.numbers!)}" 
+			class="form-control" maxlength="50" vMin="5" vType="letterNumber" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 5-50位字母数字 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.status"]}</label>
+	<div class="col-sm-7">
+		<select name="dict.status" class="combox">
+			<option value="1" ${dict.status! == "1" ? "selected='selected'":"" }>${i18nMap["admin.dict.property.status.start"]}</option>
+			<option value="0" ${dict.status! == "0" ? "selected='selected'":"" }>${i18nMap["admin.dict.property.status.stop"]}</option>
+		</select>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>  </span>
+</div>
+
+<input type="hidden" name="dict.i18n" value='${dictMap["i18n"]!}' >
+			
+<% if(paramMap["i18n"]! == "0" || dict["i18n"]! == "0"){ %>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="dict.val" value="${escapeXml(dict.val!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<% } else { %>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="dict.val_ja" value="${escapeXml(dict.val_ja!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="dict.val_enus" value="${escapeXml(dict.val_enus!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="dict.val_zhcn" value="${escapeXml(dict.val_zhcn!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="dict.val_zhhk" value="${escapeXml(dict.val_zhhk!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+	<div class="col-sm-7">
+		<input type="text" name="dict.val_zhtw" value="${escapeXml(dict.val_zhtw!)}" 
+			class="form-control" maxlength="500" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-500位任意字符 </span>
+</div>
+
+<% } %>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">${i18nMap["admin.common.order"]}</label>
+	<div class="col-sm-7">
+		<input type="text" name="dict.orderids" value="${dict.orderids!}" 
+			class="form-control" maxlength="10" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 2-10位任意字符 </span>
+</div>

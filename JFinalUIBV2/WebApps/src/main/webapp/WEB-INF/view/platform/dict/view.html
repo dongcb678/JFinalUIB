@@ -1,0 +1,113 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html');">${i18nMap["admin.dict.common.name"]}</a></li>
+			<li class="active">${i18nMap["admin.dict.view"]}</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.dict.view"]}</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form role="form" class="form-horizontal">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.parent"]}</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(dict.parentnames!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.name"]}</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(dict.names!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.number"]}</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(dict.numbers!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.status"]}</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value='${dict.status == "1" ? i18nMap["admin.dict.property.status.start"] : i18nMap["admin.dict.property.status.stop"]}'>
+						</div>
+					</div>
+					
+					<input type="hidden" name="dict.i18n" value='${paramMap["i18n"]}' >
+								
+					<% if(paramMap["i18n"] == "0"){ %>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}</label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(dict.val!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					
+					<% } else { %>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(dict.val_ja!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(dict.val_enus!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(dict.val_zhcn!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(dict.val_zhhk!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(dict.val_zhtw!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					
+					<% } %>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.common.order"]}</label>
+						<div class="col-sm-7">
+							<input type="text" value="${dict.orderids!}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+				
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>little.ant</groupId>
+	<artifactId>JFinalUIBV2</artifactId>
+
+	<packaging>pom</packaging>
+
+	<version>2.0</version>
+	<name>JFinalUIBV2</name>
+	<url>https://git.oschina.net/dongcb678/JfinalUIB</url>
+	<description>
+		项目地址：https://git.oschina.net/dongcb678/JfinalUIB
+		不同构建版本见项目分支
+	</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+	</properties>
+
+	<modules>
+		<module>JFinal</module>
+		<module>UIB</module>
+		<module>Test</module>
+		<module>WebApps</module>
+	</modules>
+	
+	<!--  -->
+    <repositories>
+        <repository>
+            <id>nexus</id>
+        	<name>local private nexus</name>
+        	<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+        </repository>
+    </repositories>
+    
+</project>

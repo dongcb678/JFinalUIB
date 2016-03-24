@@ -1,0 +1,223 @@
+/* ---------------------------------------------------------------------- */
+/*  Messages
+/* ---------------------------------------------------------------------- */
+.panel-body.messages {
+  padding: 0;
+}
+.messages-list {
+  border-right: 1px solid lighten($lightGrey,20%);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+ 
+  .messages-item {
+    border-bottom: 1px solid lighten($lightGrey,20%);
+    padding: 5px 15px 5px 25px;
+    position: relative;
+    &:hover {
+      background-color: lighten($lightGrey,30%);
+      cursor: pointer !important;
+      .messages-item-star {
+       @include opacity(0.3);
+      }
+    }
+    &.active {
+      background-color: lighten($lightGrey,28%);
+    }
+    &.starred .messages-item-star {
+      display: block;
+       @include opacity(1);
+    }
+    span {
+      color: $grey;
+      display: block;
+    }
+    .messages-item-star, .messages-item-attachment, .messages-item-time, .messages-item-actions {
+      position: absolute;      
+    }
+    .messages-item-star {
+      color: $green;
+      left: 7px;
+      @include opacity(0);
+      @include transition(opacity, .3s, ease-in-out 0s);
+      &:hover, &:active, &:focus {
+        @include opacity(1);  
+      }
+    }
+    .messages-item-attachment {
+      left: 7px;
+      top: 25px;
+      color: $blue;
+    }
+    .messages-item-avatar {
+      border-radius: 4px;
+      float: left;
+      height: 40px;
+      width: 40px;
+    }
+    .messages-item-from, .messages-item-subject {
+      margin-left: 45px;
+    }
+    .messages-item-from {
+      font-weight: bold;
+      margin-top: 2px;
+      color: $darkGrey;
+    }
+    .messages-item-time {
+      @include opacity(1);  
+      right: 15px;
+      top: 8px;
+      @include transition(opacity, .3s, ease-in-out 0s);
+      &:hover {
+        .text {
+          @include opacity(0); 
+        }
+        .messages-item-actions {
+          @include opacity(1); 
+        }
+      }
+      .text {
+        color: $text-color;
+        font-size: $font-size-extra-small;
+      }
+      .messages-item-actions {
+        @include opacity(0);  
+        right: 0;
+        top: 0;
+        @include transition(opacity, .3s, ease-in-out 0s);
+        width: 65px;
+        > a, .dropdown > a {
+          margin-left: 5px;
+        }
+        > div {
+          display: inline-block;
+        }
+        .dropdown-menu {
+          margin-top: 0;
+        }
+        .tag-icon {
+          border-radius: 30px;
+          display: inline-block;
+          height: 11px;
+          margin: 0 5px 0 -13px;
+          width: 11px;
+          &.red {
+            background: $red;
+          }
+          &.blue {
+            background: $blue;
+          }
+          &.green {
+            background: $green;
+          }
+        }
+      }
+    }
+    .messages-item-subject {
+      font-size: $font-size-small;
+      margin-bottom: 4px;
+    }
+    .messages-item-preview {
+      color: $darkGrey;
+      font-size: $font-size-small;
+    }
+  }
+  .messages-search {
+    border-bottom: 1px solid lighten($lightGrey,20%);
+    padding: 0 15px 15px 15px;
+    position: relative;
+  }
+}
+
+.messages-content {
+  background-color: none;
+  border-top: 1px solid lighten($lightGrey,20%);
+  height: auto;
+  position: relative;
+  color: $text-color;
+  .message-header {
+    border-bottom: 1px solid lighten($lightGrey,20%);
+    padding: 10px 15px;
+    .message-from {
+      font-weight: bold;
+      color: $darkGrey;
+    }
+    .message-to {
+      color: $lightGrey;
+    }
+    .message-time {
+      color: $lightGrey;
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: $font-size-extra-small;
+    }
+    .message-actions {
+      left: 50%;
+      margin-left: -60px;
+      position: absolute;
+      width: 120px;
+      font-size: $font-size-base;
+      a {
+        background-color: $white;
+        border-bottom: 1px solid lighten($lightGrey,20%);
+        border-left: 1px solid lighten($lightGrey,20%);
+        border-top: 1px solid lighten($lightGrey,20%);
+        color: $lightGrey;
+        margin: 0 0 0 -4px;
+        padding: 4px 7px;
+        i {
+          @include transition(opacity, .3s, ease-in-out 0s);
+          @include opacity(0.7);
+        }
+        &:hover {
+          color: $green;
+           i {
+            @include opacity(1);
+          }         
+        }
+        &:first-child {
+          border-bottom-left-radius: 4px;
+          border-top-left-radius: 4px;
+          padding-left: 10px;
+        }
+        &:last-child {
+          border-bottom-right-radius: 4px;
+          border-right: 1px solid #F5F4F9;
+          border-top-right-radius: 4px;
+        }
+      }
+    }
+  }
+  .message-content {
+    padding: 20px 10px;
+    color: $text-color;
+  }
+}
+
+/* ie8 fixes */
+.ie8 .messages-list .messages-item .messages-item-star {
+  display: none;
+}
+.ie8 .messages-list .messages-item:hover .messages-item-star {
+  display: block;
+}
+/**/
+
+
+
+
+
+
+/* ie8 fixes */
+.ie8 .messages-list .messages-item .messages-item-time .messages-item-actions {
+  display: none;
+}
+
+/**/
+
+
+
+
+
+

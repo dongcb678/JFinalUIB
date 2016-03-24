@@ -1,0 +1,234 @@
+/* ---------------------------------------------------------------------- */
+/*  Calendar
+/* ---------------------------------------------------------------------- */
+#calendar {
+  position: relative;
+}
+.fc-event {
+  padding: 2px;
+}
+.fc-day-number {
+  margin: 2px 2px 0 0;
+}
+.fc-header-title h2 {
+  color: #666666;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  letter-spacing: -1px;
+}
+.fc-today .fc-day-number {
+  font-weight: bold;
+}
+
+.fc-state-highlight {
+  background: #F5F5F5 !important;
+}
+.fc-button {
+  color: #858585 !important;
+  height: 40px;
+  line-height: 40px;
+  opacity: 0.6;
+}
+.fc-button:hover {
+  opacity: 1;
+}
+.fc-button-prev, .fc-button-next {
+  padding: 0;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  position: relative;
+  text-indent: -9999px;
+}
+.fc-button-prev .fc-text-arrow, .fc-button-next .fc-text-arrow {
+  font-weight: bold;
+}
+.fc-button-prev:after, .fc-button-next:after {
+  font-family: FontAwesome;
+  text-indent: 0;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.fc-button-prev:after {
+  content: "\f104";
+}
+.fc-button-next:after {
+  content: "\f105";
+}
+.fc-state-default {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border-color: #DDDDDD !important;
+  box-shadow: none !important;
+  color: #666666;
+  text-shadow: none !important;
+  border-radius: 0 !important;
+}
+.fc-state-down, .fc-state-active {
+  opacity: 1;
+}
+.fc-header-left {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 50% !important;
+}
+.fc-header-right {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  width: 50% !important;
+}
+.fc-header-center {
+  display: block !important;
+  padding-top: 60px !important;
+}
+.event-category {
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 3px;
+  margin: 5px 0;
+}
+.label-default, .badge-default {
+  background-color: #3A87AD !important;
+  border-color: #3A87AD !important;
+}
+.label-orange, .badge-orange {
+  background-color: #E6674A !important;
+  border-color: #E6674A !important;
+}
+.label-purple, .badge-purple {
+  background-color: #57517B !important;
+  border-color: #57517B !important;
+}
+.label-yellow, .badge-yellow {
+  background-color: #FFB848 !important;
+  border-color: #FFB848 !important;
+}
+.label-teal, .badge-teal {
+  background-color: #569099 !important;
+  border-color: #569099 !important;
+}
+.label-beige, .badge-beige {
+  background-color: #CCCC99 !important;
+  border-color: #CCCC99 !important;
+}
+.label-green, .badge-green {
+  background-color: #3D9400 !important;
+  border-color: #3D9400 !important;
+}
+.fc-border-separate tr.fc-last th {
+  border-top: none !important;
+  border-left: none !important;
+}
+.fc-border-separate th.fc-last {
+  border-right: none !important;
+}
+.fc-grid th {
+  text-align: right;
+}
+.fc-event {
+  background-color: #F0F0F0;
+  border: none;
+  color: #333333;
+  font-size: 12px;
+}
+.fc-event .fc-event-title:before, .event-category:before {
+  content: "\f111";
+  font-family: FontAwesome;
+  font-size: 6px;
+  line-height: 16px;
+  padding-right: 5px;
+  color: #00AEFF;
+  float: left;
+}
+.event-category {
+  color: #858585;
+}
+.event-category:before {
+  line-height: 20px;
+}
+.event-cancelled .fc-event-title:before, .event-category.event-cancelled:before {
+  color: #E6C800;
+}
+.event-home .fc-event-title:before, .event-category.event-home:before {
+  color: #FF2968;
+}
+.event-overtime .fc-event-title:before, .event-category.event-overtime:before {
+  color: #711A76;
+}
+.event-generic .fc-event-title:before, .event-category.event-generic:before {
+  color: #00AEFF;
+}
+.event-job .fc-event-title:before, .event-category.event-job:before {
+  color: #882F00;
+}
+.event-offsite .fc-event-title:before, .event-category.event-offsite:before {
+  color: #44A703;
+}
+.event-todo .fc-event-title:before, .event-category.event-todo:before {
+  color: #FF3B30;
+}
+.fc-view-month .fc-event-time {
+  display: none;
+}
+#readFullEvent, #newFullEvent {
+  display: none;
+}
+#readFullEvent .event-content {
+  background: url("../images/line.png");
+  color: #858585;
+  line-height: 18px;
+  margin: 15px 0 0 0;
+  padding: 0;
+}
+#readFullEvent .event-start, #readFullEvent .event-end {
+  color: #858585;
+  margin: 15px 0 0 0;
+  padding: 10px;
+  margin-top: 20px;
+  background: #EEEEEE;
+}
+#readFullEvent .event-allday {
+  color: #858585;
+}
+#readFullEvent .event-allday i {
+  color: #00AAFF;
+}
+#readFullEvent .event-start p, #readFullEvent .event-end p {
+  margin: 0 0 5px 0;
+}
+#readFullEvent .event-day h2, #readFullEvent .event-date h3, #readFullEvent .event-date h4 {
+  margin: 0;
+  padding: 0;
+}
+#readFullEvent .event-day h2 {
+  font-size: 45px;
+  line-height: 30px;
+  margin-right: 5px;
+}
+#readFullEvent .event-date h3 {
+  font-size: 15px;
+  line-height: 20px;
+}
+#readFullEvent .event-date h4 {
+  font-size: $font-size-small;
+}
+#readFullEvent .event-day, #readFullEvent .event-date, #readFullEvent .event-time {
+  display: inline-block;
+}
+#readFullEvent .event-time {
+  margin-left: 20px;
+}
+#readFullEvent .event-time h3 {
+  margin: 0;
+  padding: 0;
+  font-size: $font-size-small;
+}
+#readFullEvent .event-category:before {
+  line-height: 18px;
+  padding-right: 0;
+}

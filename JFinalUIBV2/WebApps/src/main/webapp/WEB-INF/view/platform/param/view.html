@@ -1,0 +1,113 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html');">${i18nMap["admin.param.common.name"]}</a></li>
+			<li class="active">${i18nMap["admin.param.view"]}</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.param.view"]}</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form role="form" class="form-horizontal">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.parent"]}</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(param.parentnames!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.name"]}</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(param.names!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.number"]}</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(param.numbers!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.status"]}</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value='${param.status == "1" ? i18nMap["admin.param.property.status.start"] : i18nMap["admin.param.property.status.stop"]}'>
+						</div>
+					</div>
+					
+					<input type="hidden" name="param.i18n" value='${paramMap["i18n"]}' >
+								
+					<% if(paramMap["i18n"] == "0"){ %>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}</label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(param.val!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					
+					<% } else { %>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(param.val_ja!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(param.val_enus!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(param.val_zhcn!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(param.val_zhhk!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.param.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+						<div class="col-sm-7">
+							<input type="text" value="${escapeXml(param.val_zhtw!)}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					
+					<% } %>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">${i18nMap["admin.common.order"]}</label>
+						<div class="col-sm-7">
+							<input type="text" value="${param.orderids!}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+				
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	
