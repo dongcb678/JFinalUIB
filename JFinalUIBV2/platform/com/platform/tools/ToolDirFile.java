@@ -3,6 +3,8 @@ package com.platform.tools;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,9 +15,16 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
 import org.apache.log4j.Logger;
 
 import com.jfinal.kit.PathKit;
@@ -28,16 +37,17 @@ import com.jfinal.kit.PathKit;
 public abstract class ToolDirFile {
 
 	private static Logger log = Logger.getLogger(ToolDirFile.class);
-	
+
 	private static String libPath;
 	private static String classesPath;
-	
+
 	/**
 	 * 获取lib目录
+	 * 
 	 * @return
 	 */
-	public static String getLibPath(){
-		if(libPath == null){
+	public static String getLibPath() {
+		if (libPath == null) {
 			libPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "lib";
 		}
 		return libPath;
@@ -45,19 +55,17 @@ public abstract class ToolDirFile {
 
 	/**
 	 * 获取classes目录
+	 * 
 	 * @return
 	 */
-	public static String getClassesPath(){
-		if(classesPath == null){
+	public static String getClassesPath() {
+		if (classesPath == null) {
 			/**
-			 * 1.兼容运行模式
-			 * 直接运行 JfinalConfig 中的 main 方法
-			 * maven：  直接运行 JfinalConfig 中的 main 方法
-			 * maven： jetty:run
-			 * maven： tomcat7:run
+			 * 1.兼容运行模式 直接运行 JfinalConfig 中的 main 方法 maven： 直接运行 JfinalConfig 中的
+			 * main 方法 maven： jetty:run maven： tomcat7:run
 			 */
-//			classesPath = PathKit.getRootClassPath();
-			
+			// classesPath = PathKit.getRootClassPath();
+
 			/**
 			 * 2.兼容jboss war部署
 			 */
@@ -68,10 +76,11 @@ public abstract class ToolDirFile {
 
 	/**
 	 * 获取classes路径
+	 * 
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public static String getClassesPath(Class classs){
+	public static String getClassesPath(Class classs) {
 		String classRootPath = classs.getClassLoader().getResource("").getFile();
 		try {
 			classRootPath = java.net.URLDecoder.decode(classRootPath, "UTF-8");
@@ -81,16 +90,17 @@ public abstract class ToolDirFile {
 		}
 		return classRootPath;
 	}
-	
+
 	/**
 	 * 获取当前代码所在行
+	 * 
 	 * @return
 	 */
-	public static String getLineNumber(){
+	public static String getLineNumber() {
 		StackTraceElement ste = new Throwable().getStackTrace()[1];
 		return ste.getFileName() + ": Line " + ste.getLineNumber();
 	}
-	
+
 	/**
 	 * 获取目录下的文件名称，不包含子目录名称
 	 * 
@@ -109,7 +119,7 @@ public abstract class ToolDirFile {
 		}
 		return nameList;
 	}
-	
+
 	/**
 	 * 复制文件夹或文件
 	 * 
@@ -237,108 +247,264 @@ public abstract class ToolDirFile {
 			}
 		}
 	}
-	
+
 	/**
 	 * 检查目录是否存在，如果不存在就创建目录
 	 * 
-	 * @author 董华健    2012-9-10 下午5:17:58
+	 * @author 董华健 2012-9-10 下午5:17:58
 	 * @param dirPath
 	 */
-	public static void createDirectory(String dirPath){
+	public static void createDirectory(String dirPath) {
 		File file = new File(dirPath);
-		if(!file.exists()){
+		if (!file.exists()) {
 			file.mkdirs();
 		}
 	}
-	
+
 	/**
 	 * 删除文件或者目录
+	 * 
 	 * @param file
 	 */
 	public static void delete(File file) {
 		if (file != null && file.exists()) {
 			if (file.isDirectory()) {
 				File files[] = file.listFiles();
-				for (int i=0, length = files.length; i<length; i++) {
+				for (int i = 0, length = files.length; i < length; i++) {
 					delete(files[i]);
 				}
-			}else{
+			} else {
 				file.delete();
 			}
 		}
 	}
-	
+
 	/**
 	 * 文件下载
+	 * 
 	 * @param response
 	 * @param fileName
 	 * @param filePath
 	 * @throws IOException
 	 */
-	public static void download(HttpServletResponse response, String fileName, String filePath) throws IOException{
+	public static void download(HttpServletResponse response, String fileName, String filePath) throws IOException {
 		FileInputStream fis = null;
-        BufferedInputStream buff = null;
+		BufferedInputStream buff = null;
 		try {
-    		File file = new File(filePath);
-    		response.setContentType("application/x-msdownload");//设置response的编码方式
-            response.setContentLength((int)file.length());//写明要下载的文件的大小
-			response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes(ToolString.encoding), "iso-8859-1")); //解决中文乱码
-	        
-	        //读出文件到i/o流
-	        fis = new FileInputStream(file);
-	        buff = new BufferedInputStream(fis);
-	        byte[] bytes = new byte[1024];//相当于我们的缓存
-	        long k = 0;//该值用于计算当前实际下载了多少字节
-	        OutputStream os = response.getOutputStream();//从response对象中得到输出流,准备下载
-	        
-	        //开始循环下载
-	        while(k < file.length()){
-	            int j = buff.read(bytes, 0, 1024);
-	            k += j;
-	            os.write(bytes, 0, j);//将b中的数据写到客户端的内存
-	        }
-	        
-	        os.flush();//将写入到客户端的内存的数据,刷新到磁盘
-	        
-	        buff.close();
-	        buff = null;
-	        
-	        fis.close();
-	        fis = null;
+			File file = new File(filePath);
+			response.setContentType("application/x-msdownload");// 设置response的编码方式
+			response.setContentLength((int) file.length());// 写明要下载的文件的大小
+			response.setHeader("Content-Disposition",
+					"attachment;filename=" + new String(fileName.getBytes(ToolString.encoding), "iso-8859-1")); // 解决中文乱码
+
+			// 读出文件到i/o流
+			fis = new FileInputStream(file);
+			buff = new BufferedInputStream(fis);
+			byte[] bytes = new byte[1024];// 相当于我们的缓存
+			long k = 0;// 该值用于计算当前实际下载了多少字节
+			OutputStream os = response.getOutputStream();// 从response对象中得到输出流,准备下载
+
+			// 开始循环下载
+			while (k < file.length()) {
+				int j = buff.read(bytes, 0, 1024);
+				k += j;
+				os.write(bytes, 0, j);// 将b中的数据写到客户端的内存
+			}
+
+			os.flush();// 将写入到客户端的内存的数据,刷新到磁盘
+
+			buff.close();
+			buff = null;
+
+			fis.close();
+			fis = null;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} finally {
-			if(buff != null){
+			if (buff != null) {
 				buff.close();
-		        buff = null;
+				buff = null;
 			}
-			if(fis != null){
+			if (fis != null) {
 				fis.close();
 				fis = null;
 			}
 		}
 	}
-	
+
 	/**
 	 * 创建文件
-	 * @param savePath 保存路径
-	 * @param content 文件内容
+	 * 
+	 * @param savePath
+	 *            保存路径
+	 * @param content
+	 *            文件内容
 	 */
-	public static void createFile(String savePath, String content){
+	public static void createFile(String savePath, String content) {
 		try {
 			File file = new File(savePath);
-			BufferedWriter output = new BufferedWriter(new FileWriter(file));   
-			output.write(content);   
+			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			output.write(content);
 			output.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String[] args) throws IOException{
-		copyDir("D:\\aa\\新建文本文档 (2).txt", "D:\\bb\\新建文本文档 (2).txt");
+
+	/***
+	 * 压缩GZip
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static byte[] gZip(byte[] data) {
+		byte[] b = null;
+		try {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			GZIPOutputStream gzip = new GZIPOutputStream(bos);
+			gzip.write(data);
+			gzip.finish();
+			gzip.close();
+			b = bos.toByteArray();
+			bos.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return b;
 	}
 
+	/***
+	 * 解压GZip
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static byte[] unGZip(byte[] data) {
+		byte[] b = null;
+		try {
+			ByteArrayInputStream bis = new ByteArrayInputStream(data);
+			GZIPInputStream gzip = new GZIPInputStream(bis);
+			byte[] buf = new byte[1024];
+			int num = -1;
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			while ((num = gzip.read(buf, 0, buf.length)) != -1) {
+				baos.write(buf, 0, num);
+			}
+			b = baos.toByteArray();
+			baos.flush();
+			baos.close();
+			gzip.close();
+			bis.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return b;
+	}
+
+	/***
+	 * 压缩Zip
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static byte[] zip(byte[] data) {
+		byte[] b = null;
+		try {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			ZipOutputStream zip = new ZipOutputStream(bos);
+			ZipEntry entry = new ZipEntry("zip");
+			entry.setSize(data.length);
+			zip.putNextEntry(entry);
+			zip.write(data);
+			zip.closeEntry();
+			zip.close();
+			b = bos.toByteArray();
+			bos.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return b;
+	}
+
+	/***
+	 * 解压Zip
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static byte[] unZip(byte[] data) {
+		byte[] b = null;
+		try {
+			ByteArrayInputStream bis = new ByteArrayInputStream(data);
+			ZipInputStream zip = new ZipInputStream(bis);
+			while (zip.getNextEntry() != null) {
+				byte[] buf = new byte[1024];
+				int num = -1;
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				while ((num = zip.read(buf, 0, buf.length)) != -1) {
+					baos.write(buf, 0, num);
+				}
+				b = baos.toByteArray();
+				baos.flush();
+				baos.close();
+			}
+			zip.close();
+			bis.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return b;
+	}
+
+	/***
+	 * 压缩BZip2
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static byte[] bZip2(byte[] data) {
+		byte[] b = null;
+		try {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			BZip2CompressorOutputStream bzip2 = new BZip2CompressorOutputStream(bos);
+			bzip2.write(data);
+			bzip2.flush();
+			bzip2.close();
+			b = bos.toByteArray();
+			bos.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return b;
+	}
+
+	/***
+	 * 解压BZip2
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static byte[] unBZip2(byte[] data) {
+		byte[] b = null;
+		try {
+			ByteArrayInputStream bis = new ByteArrayInputStream(data);
+			BZip2CompressorInputStream bzip2 = new BZip2CompressorInputStream(bis);
+			byte[] buf = new byte[1024];
+			int num = -1;
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			while ((num = bzip2.read(buf, 0, buf.length)) != -1) {
+				baos.write(buf, 0, num);
+			}
+			b = baos.toByteArray();
+			baos.flush();
+			baos.close();
+			bzip2.close();
+			bis.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return b;
+	}
 }

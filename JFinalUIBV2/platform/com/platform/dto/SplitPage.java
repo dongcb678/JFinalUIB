@@ -51,6 +51,10 @@ public class SplitPage implements Serializable {
 			getTotalPage();
 		}
 		
+		if(pageNumber > totalPage){
+			pageNumber = totalPage;
+		}
+		
 		this.currentPageCount = (null != this.list ? this.list.size() : 0);// 当前页记录数
 
 		if (pageNumber == 1) {
