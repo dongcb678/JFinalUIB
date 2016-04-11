@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.kit.PathKit;
+
 /**
  * 文件和目录相关
  * 
@@ -27,7 +29,43 @@ public class ToolDirFile {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolDirFile.class);
-	
+
+	private static String libPath;
+	private static String classesPath;
+
+	/**
+	 * 获取lib目录
+	 * 
+	 * @return
+	 */
+	public static String getLibPath() {
+		if (libPath == null) {
+			libPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "lib";
+		}
+		return libPath;
+	}
+
+	/**
+	 * 获取classes目录
+	 * 
+	 * @return
+	 */
+	public static String getClassesPath() {
+		if (classesPath == null) {
+			/**
+			 * 1.兼容运行模式 直接运行 JfinalConfig 中的 main 方法 maven： 直接运行 JfinalConfig 中的
+			 * main 方法 maven： jetty:run maven： tomcat7:run
+			 */
+			// classesPath = PathKit.getRootClassPath();
+
+			/**
+			 * 2.兼容jboss war部署
+			 */
+			classesPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
+		}
+		return classesPath;
+	}
+
 	/**
 	 * 获取当前代码所在行
 	 * @return
