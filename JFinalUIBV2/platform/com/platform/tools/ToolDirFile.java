@@ -61,7 +61,7 @@ public abstract class ToolDirFile {
 	public static String getClassesPath() {
 		if (classesPath == null) {
 			/**
-			 * 1.兼容运行模式 直接运行 JfinalConfig 中的 main 方法 maven： 直接运行 JfinalConfig 中的
+			 * 1.兼容运行模式 直接运行 JFinalConfig 中的 main 方法 maven： 直接运行 JFinalConfig 中的
 			 * main 方法 maven： jetty:run maven： tomcat7:run
 			 */
 			// classesPath = PathKit.getRootClassPath();

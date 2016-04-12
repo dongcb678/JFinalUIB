@@ -1,6 +1,5 @@
-package com.platform.tools.code;
+package com.platform.tools.code.handler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,30 +13,22 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
-import com.platform.config.run.ConfigCore;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
 import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
+import com.platform.tools.code.run.ColumnDto;
 
 /**
  * 定制MySQL下的代码生成
  * @author 董华健
  */
-public class GenerateMySQL extends GenerateBase {
+public class MySQLHandler extends BaseHandler {
 
-	private static Logger log = Logger.getLogger(GenerateMySQL.class);
+	private static Logger log = Logger.getLogger(MySQLHandler.class);
 
-	/**
-	 * 循环生成文件
-	 * @throws IOException 
-	 */
-	public static void main(String[] args) throws IOException {
-		log.info("启动ConfigCore start ......");
-    	ConfigCore.getSingleton();
-    	log.info("启动ConfigCore end ......");
-
+	public MySQLHandler() {
     	String db_type = PropKit.get(ConstantInit.db_type_key);
 		log.info("db_type = " + db_type);
 		if(!db_type.equals(ConstantInit.db_type_mysql)){
@@ -61,51 +52,11 @@ public class GenerateMySQL extends GenerateBase {
 		arpIS.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 大小写不敏感
 		arpIS.setDialect(new MysqlDialect());
 		arpIS.start();
-		
-		GenerateBase base = new GenerateMySQL();
-		for (int i = 0; i < tableArr.length; i++) {
-			// 数据源名称
-			String dataSource = tableArr[i][0]; 
-			// 表名
-			String tableName = tableArr[i][1]; 
-			// 主键
-			String pkName = tableArr[i][2]; 
-			// 类名
-			String className = tableArr[i][3]; 
-			// 类名首字母小写
-			String classNameSmall = ToolString.toLowerCaseFirstOne(className); 
-			
-			List<TableColumnDto> colunmList = base.getColunm(tableName);
-			
-			// 1.生成sql文件
-			base.sql(classNameSmall, tableName); 
-			
-			// 2.生成model
-			base.model(className, classNameSmall, dataSource, tableName, pkName, colunmList); 
-			
-			// 3.生成validator
-			base.validator(className, classNameSmall); 
-			
-			// 4.生成controller
-			base.controller(className, classNameSmall, tableName); 
-			
-			// 5.生成service
-			base.service(className, classNameSmall); 
-
-			// 6.生成DTO
-//			base.dto(className, classNameSmall, dataSource, tableName, colunmList); 
-			
-			// 7.生成视图文件
-//			base.form(classNameSmall, tableName, colunmList);
-//			base.view(classNameSmall, tableName, colunmList);
-		}
-		
-		System.exit(0);
 	}
 	
 	@Override
-	public List<TableColumnDto> getColunm(String tableName)  {
-		List<TableColumnDto> list = new ArrayList<TableColumnDto>();
+	public List<ColumnDto> getColunm(String tableName)  {
+		List<ColumnDto> list = new ArrayList<ColumnDto>();
 
 		String dbName = ToolDataBase.getDbInfo().getDbName();
 		
@@ -125,7 +76,7 @@ public class GenerateMySQL extends GenerateBase {
 				continue;
 			}
 			
-			TableColumnDto table = new TableColumnDto();
+			ColumnDto table = new ColumnDto();
 			table.setTable_name(tableName);
 			table.setTable_desc(tableDesc);
 			

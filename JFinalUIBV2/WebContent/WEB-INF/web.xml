@@ -54,7 +54,7 @@
 		<filter-class>com.jfinal.core.JFinalFilter</filter-class>
 		<init-param>
 			<param-name>configClass</param-name>
-			<param-value>com.platform.config.run.JfinalConfig</param-value>
+			<param-value>com.platform.config.run.JFinalConfig</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

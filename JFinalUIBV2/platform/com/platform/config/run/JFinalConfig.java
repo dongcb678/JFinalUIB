@@ -6,7 +6,6 @@ import org.beetl.ext.jfinal.BeetlRenderFactory;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
-import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
@@ -40,11 +39,11 @@ import com.platform.tools.ToolCache;
 import com.platform.tools.ToolString;
 
 /**
- * Jfinal API 引导式配置，系统的核心配置，负责生产、加载所有核心组件
+ * JFinal API 引导式配置，系统的核心配置，负责生产、加载所有核心组件
  */
-public class JfinalConfig extends JFinalConfig {
+public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	
-	private static Logger log = Logger.getLogger(JfinalConfig.class);
+	private static Logger log = Logger.getLogger(JFinalConfig.class);
 	
 	/**
 	 * 配置常量
