@@ -1,6 +1,5 @@
 package com.platform.tools.code.handler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,10 +23,6 @@ public class OracleHandler extends BaseHandler {
 
 	private static Logger log = Logger.getLogger(OracleHandler.class);
 	
-	/**
-	 * 循环生成文件
-	 * @throws IOException 
-	 */
 	public OracleHandler() {
     	String db_type = PropKit.get(ConstantInit.db_type_key);
 		log.info("db_type = " + db_type);
@@ -39,14 +34,21 @@ public class OracleHandler extends BaseHandler {
 	@Override
 	public List<ColumnDto> getColunm(String tableName) {
 		String dbUser = ToolDataBase.getDbInfo().getUserName();
+
+		// 1.查询表和字段描述信息
+		String tcSql = ToolSqlXml.getSql("platform.oracle.getTableComments");
+		String tableDesc = Db.use(ConstantInit.db_dataSource_main).findFirst(tcSql, dbUser, tableName).getStr("COMMENTS");
+
+		// 2.查询表字段信息
+		String ccSql = ToolSqlXml.getSql("platform.oracle.getColumnComments");
+		List<Record> listColumnComments = Db.use(ConstantInit.db_dataSource_main).find(ccSql, dbUser, tableName, tableName);
+
+		// 3.查询表字段对应的所有java数据类型
+		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
 		
 		List<ColumnDto> list = new ArrayList<ColumnDto>();
-		
-		String tableDesc = Db.use(ConstantInit.db_dataSource_main).findFirst(ToolSqlXml.getSql("platform.oracle.getTableComments"), dbUser, tableName).getStr("COMMENTS");
-		
-		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
-				
-		List<Record> listColumnComments = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.oracle.getColumnComments"), dbUser, tableName, tableName);
+
+		// 4.循环合并表字段详细信息
 		for (Record record : listColumnComments) {
 			String column_name = record.getStr("COLUMN_NAME").toLowerCase();
 			String column_type = record.getStr("DATA_TYPE").toLowerCase();

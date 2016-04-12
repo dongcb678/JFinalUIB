@@ -37,13 +37,20 @@ public class SqlServerHandler extends BaseHandler {
 	
 	@Override
 	public List<ColumnDto> getColunm(String tableName)  {
+		// 1.查询表和字段描述信息
+		String tSql = ToolSqlXml.getSql("platform.sqlserver.getTables");
+		String tableDesc = Db.use(ConstantInit.db_dataSource_main).findFirst(tSql, tableName).getStr("value");
+
+		// 2.查询表字段信息
+		String cSql = ToolSqlXml.getSql("platform.sqlserver.getColumns");
+		List<Record> listColumn = Db.use(ConstantInit.db_dataSource_main).find(cSql, tableName);
+
+		// 3.查询表字段对应的所有java数据类型
+		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
+
 		List<ColumnDto> list = new ArrayList<ColumnDto>();
 
-		String tableDesc = Db.use(ConstantInit.db_dataSource_main).findFirst(ToolSqlXml.getSql("platform.sqlserver.getTables"), tableName).getStr("value");
-		List<Record> listColumn = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.sqlserver.getColumns"), tableName);
-		
-		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
-				
+		// 4.循环合并表字段详细信息
 		for (Record record : listColumn) {
 			String column_name = record.getStr("name");
 			String column_type = record.getStr("type");

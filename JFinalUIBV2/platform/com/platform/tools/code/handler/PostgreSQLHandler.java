@@ -33,10 +33,10 @@ public class PostgreSQLHandler extends BaseHandler {
 
 	@Override
 	public List<ColumnDto> getColunm(String tableName) {
-		List<ColumnDto> list = new ArrayList<ColumnDto>();
-
+		// 1.查询表和字段描述信息
 		Map<String, String> map = new HashMap<String, String>();
-		List<Record> listDesc = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumnsInfo"), tableName);
+		String ciSql = ToolSqlXml.getSql("platform.postgresql.getColumnsInfo");
+		List<Record> listDesc = Db.use(ConstantInit.db_dataSource_main).find(ciSql, tableName);
 		for (Record record : listDesc) {
 			if(record.getStr("attname") == null){
 				map.put("tableName", record.getStr("description"));
@@ -45,9 +45,16 @@ public class PostgreSQLHandler extends BaseHandler {
 			}
 		}
 		
+		// 2.查询表字段信息
+		String cSql = ToolSqlXml.getSql("platform.postgresql.getColumns");
+		List<Record> listColumn = Db.use(ConstantInit.db_dataSource_main).find(cSql, tableName);
+
+		// 3.查询表字段对应的所有java数据类型
 		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
-				
-		List<Record> listColumn = Db.use(ConstantInit.db_dataSource_main).find(ToolSqlXml.getSql("platform.postgresql.getColumns"), tableName);
+		
+		List<ColumnDto> list = new ArrayList<ColumnDto>();
+		
+		// 4.循环合并表字段详细信息
 		for (Record record : listColumn) {
 			String column_name = record.getStr("column_name");
 			String data_type = record.getStr("data_type");

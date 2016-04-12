@@ -59,14 +59,18 @@ public class GenerateCode {
 	public static final String srcFolder = "src";
 
 	/**
+	 * <blockquote><pre>
+	 * 
 	 * 生成的文件存放的包，公共基础包
-	 * 描述：比如
-	 * 	platform所在的包就是com.platform
-	 * 	weixin所在的包就是com.weixin
+	 * 描述：比如platform所在的包就是com.platform，weixin所在的包就是com.weixin
+	 * 
+	 * </pre></blockquote>
 	 */
 	public static final String packageBase = "com.test.mvc";
 	
 	/**
+	 * <blockquote><pre>
+	 * 
 	 * controller基础路径，例如
 	 * @Controller(controllerKey = "/jf/platform/authImg") 中的platform
 	 * @Controller(controllerKey = "/jf/wx/authImg") 中的wx
@@ -74,14 +78,13 @@ public class GenerateCode {
 	 * render基础路径，例如
 	 * /platform/user/add.jsp 中的 platform
 	 * /weiXin/user/list.jsp 中的 weiXin
+	 * 
+	 * </pre></blockquote>
 	 */
 	public static final String basePath = "test";
 
 	/**
 	 * 循环生成文件
-	 * @throws ClassNotFoundException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
 	 */
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		log.info("启动ConfigCore start ......");
@@ -140,8 +143,8 @@ public class GenerateCode {
 			//handler.dto(className, classNameSmall, dataSource, tableName, colunmList); 
 			
 			// 7.生成视图文件
-			//handler.form(classNameSmall, tableName, colunmList);
-			//handler.view(classNameSmall, tableName, colunmList);
+			//handler.form(classNameSmall, colunmList);
+			//handler.view(classNameSmall, colunmList);
 		}
 		
 		System.exit(0);

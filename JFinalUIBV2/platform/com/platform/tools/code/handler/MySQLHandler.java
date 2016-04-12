@@ -56,15 +56,22 @@ public class MySQLHandler extends BaseHandler {
 	
 	@Override
 	public List<ColumnDto> getColunm(String tableName)  {
+		String dbName = ToolDataBase.getDbInfo().getDbName();
+
+		// 1.查询表和字段描述信息
+		String tSql = ToolSqlXml.getSql("platform.mysql.getTables");
+		String tableDesc = Db.use("information_schema").findFirst(tSql, dbName, tableName).getStr("table_COMMENT");
+
+		// 2.查询表字段信息
+		String cSql = ToolSqlXml.getSql("platform.mysql.getColumns");
+		List<Record> listColumn = Db.use("information_schema").find(cSql, dbName, tableName);
+
+		// 3.查询表字段对应的所有java数据类型
+		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
+		
 		List<ColumnDto> list = new ArrayList<ColumnDto>();
 
-		String dbName = ToolDataBase.getDbInfo().getDbName();
-		
-		String tableDesc = Db.use("information_schema").findFirst(ToolSqlXml.getSql("platform.mysql.getTables"), dbName, tableName).getStr("table_COMMENT");
-		List<Record> listColumn = Db.use("information_schema").find(ToolSqlXml.getSql("platform.mysql.getColumns"), dbName, tableName);
-		
-		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
-				
+		// 4.循环合并表字段详细信息
 		for (Record record : listColumn) {
 			String column_name = record.getStr("column_name");
 			String column_type = record.getStr("column_type");
