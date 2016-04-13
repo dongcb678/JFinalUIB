@@ -11,7 +11,7 @@ import com.platform.mvc.base.BaseModel;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-//@Table(tableName = "pt_upload")
+@Table(tableName = "pt_upload")
 public class Upload extends BaseModel<Upload> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;

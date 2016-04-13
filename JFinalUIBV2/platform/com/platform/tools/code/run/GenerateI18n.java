@@ -11,7 +11,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.platform.config.run.ConfigCore;
+import com.platform.run.ConfigCore;
 import com.platform.tools.ToolDirFile;
 import com.platform.tools.code.handler.BaseHandler;
 

@@ -3,6 +3,7 @@ package com.test.mvc.blog;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
@@ -21,7 +22,7 @@ import com.platform.tools.ToolDateTime;
  * /common/blog/add.html
  * 
  */
-//@Controller(controllerKey = "/jf/test/blog")
+@Controller(controllerKey = "/jf/test/blog")
 public class BlogController extends BaseController {
 
 	@SuppressWarnings("unused")

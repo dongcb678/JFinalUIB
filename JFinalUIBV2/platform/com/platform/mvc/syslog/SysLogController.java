@@ -2,6 +2,7 @@ package com.platform.mvc.syslog;
 
 import org.apache.log4j.Logger;
 
+import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 
@@ -9,7 +10,7 @@ import com.platform.mvc.base.BaseController;
  * 系统日志管理
  * @author 董华健
  */
-//@Controller(controllerKey = "/jf/platform/sysLog")
+@Controller(controllerKey = "/jf/platform/sysLog")
 public class SysLogController extends BaseController {
 
 	@SuppressWarnings("unused")

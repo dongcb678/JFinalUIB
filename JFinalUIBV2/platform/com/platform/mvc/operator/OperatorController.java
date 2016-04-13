@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
@@ -13,7 +14,7 @@ import com.platform.mvc.base.BaseController;
  * 功能管理
  * @author 董华健
  */
-//@Controller(controllerKey = "/jf/platform/operator")
+@Controller(controllerKey = "/jf/platform/operator")
 public class OperatorController extends BaseController {
 
 	@SuppressWarnings("unused")

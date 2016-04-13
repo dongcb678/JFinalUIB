@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModelCache;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
@@ -15,7 +16,7 @@ import com.platform.tools.ToolCache;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-//@Table(tableName = "pt_dict")
+@Table(tableName = "pt_dict")
 public class Dict extends BaseModelCache<Dict> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;

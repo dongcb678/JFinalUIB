@@ -3,6 +3,7 @@ package com.platform.mvc.systems;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
@@ -11,7 +12,7 @@ import com.platform.mvc.base.BaseModel;
  * 系统管理
  * @author 董华健
  */
-//@Controller(controllerKey = "/jf/platform/systems")
+@Controller(controllerKey = "/jf/platform/systems")
 public class SystemsController extends BaseController {
 
 	@SuppressWarnings("unused")

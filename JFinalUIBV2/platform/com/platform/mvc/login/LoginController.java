@@ -3,6 +3,7 @@ package com.platform.mvc.login;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.platform.annotation.Controller;
 import com.platform.constant.ConstantLogin;
 import com.platform.constant.ConstantWebContext;
 import com.platform.interceptor.AuthInterceptor;
@@ -14,7 +15,7 @@ import com.platform.tools.security.ToolIDEA;
 /**
  * 登陆处理
  */
-//@Controller(controllerKey = "/jf/platform/login")
+@Controller(controllerKey = "/jf/platform/login")
 public class LoginController extends BaseController {
 
 	@SuppressWarnings("unused")

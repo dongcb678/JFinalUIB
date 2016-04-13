@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
@@ -12,7 +13,7 @@ import com.platform.mvc.base.BaseController;
 /**
  * 用户管理
  */
-//@Controller(controllerKey = "/jf/platform/user")
+@Controller(controllerKey = "/jf/platform/user")
 public class UserController extends BaseController {
 
 	@SuppressWarnings("unused")

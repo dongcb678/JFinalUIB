@@ -3,6 +3,7 @@ package com.platform.mvc.image;
 import org.apache.log4j.Logger;
 
 import com.jfinal.render.Render;
+import com.platform.annotation.Controller;
 import com.platform.beetl.render.MyCaptchaRender;
 import com.platform.mvc.base.BaseController;
 
@@ -10,7 +11,7 @@ import com.platform.mvc.base.BaseController;
  * 验证码
  * @author 董华健
  */
-//@Controller(controllerKey = "/jf/platform/authImg")
+@Controller(controllerKey = "/jf/platform/authImg")
 public class AuthImgController extends BaseController {
 
 	@SuppressWarnings("unused")

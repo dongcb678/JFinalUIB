@@ -17,7 +17,7 @@ import com.platform.mvc.group.Group;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-//@Controller(controllerKey = "/jf/platform/role")
+@Controller(controllerKey = "/jf/platform/role")
 public class RoleController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(RoleController.class);

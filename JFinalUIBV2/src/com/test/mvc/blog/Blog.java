@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import org.apache.log4j.Logger;
 
+import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
 
 /**
@@ -11,7 +12,7 @@ import com.platform.mvc.base.BaseModel;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-//@Table(tableName = "test_blog")
+@Table(tableName = "test_blog")
 public class Blog extends BaseModel<Blog> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

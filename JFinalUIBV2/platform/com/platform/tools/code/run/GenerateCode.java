@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jfinal.kit.PropKit;
-import com.platform.config.run.ConfigCore;
 import com.platform.constant.ConstantInit;
+import com.platform.run.ConfigCore;
 import com.platform.tools.ToolString;
 import com.platform.tools.code.handler.BaseHandler;
 import com.platform.tools.code.handler.DB2Handler;

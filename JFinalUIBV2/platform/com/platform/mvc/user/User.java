@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import org.apache.log4j.Logger;
 
+import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModelCache;
 import com.platform.mvc.dept.Department;
 import com.platform.mvc.station.Station;
@@ -15,7 +16,7 @@ import com.platform.tools.ToolCache;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-//@Table(tableName = "pt_user")
+@Table(tableName = "pt_user")
 public class User extends BaseModelCache<User> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

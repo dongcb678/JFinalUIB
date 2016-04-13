@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.platform.annotation.Controller;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
 
@@ -12,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * 字典管理
  * @author 董华健
  */
-//@Controller(controllerKey = "/jf/platform/dict")
+@Controller(controllerKey = "/jf/platform/dict")
 public class DictController extends BaseController {
 
 	@SuppressWarnings("unused")

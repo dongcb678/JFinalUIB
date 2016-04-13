@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
@@ -21,7 +22,7 @@ import com.platform.tools.ToolSqlXml;
  * @author 董华健
  * 描述：比如首页登陆进去显示的数据处理
  */
-//@Controller(controllerKey = "/jf/platform/test")
+@Controller(controllerKey = "/jf/platform/test")
 public class TestController extends BaseController {
 
 	@SuppressWarnings("unused")

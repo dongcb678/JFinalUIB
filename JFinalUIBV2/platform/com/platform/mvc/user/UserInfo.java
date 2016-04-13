@@ -16,7 +16,7 @@ import com.platform.tools.ToolCache;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-//@Table(tableName = "pt_userinfo")
+@Table(tableName = "pt_userinfo")
 public class UserInfo extends BaseModel<UserInfo> {
 
 	private static final long serialVersionUID = 2592706064072264621L;

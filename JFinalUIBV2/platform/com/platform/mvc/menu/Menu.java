@@ -12,7 +12,7 @@ import com.platform.mvc.operator.Operator;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-//@Table(tableName = "pt_menu")
+@Table(tableName = "pt_menu")
 public class Menu extends BaseModel<Menu> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

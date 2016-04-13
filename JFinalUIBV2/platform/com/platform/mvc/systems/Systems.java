@@ -11,7 +11,7 @@ import com.platform.mvc.base.BaseModel;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-//@Table(tableName = "pt_systems")
+@Table(tableName = "pt_systems")
 public class Systems extends BaseModel<Systems> {
 
 	private static final long serialVersionUID = 6761767368352810428L;

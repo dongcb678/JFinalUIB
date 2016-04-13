@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.upload.UploadFile;
+import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
@@ -17,7 +18,7 @@ import com.platform.tools.ToolString;
 /**
  * 文件上传
  */
-//@Controller(controllerKey = {"/jf/platform/upload"})
+@Controller(controllerKey = {"/jf/platform/upload"})
 public class UploadController extends BaseController {
 
 	private static Logger log = Logger.getLogger(UploadController.class);
