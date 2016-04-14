@@ -159,14 +159,15 @@ public class ParamPkgInterceptor implements Interceptor {
 			Class<?> sc = field.getType().getSuperclass();
 			if(sc != null){
 				if(type.equals("BaseService")){ // 针对BaseController
-					BaseService service = ServicePlugin.getService(name);
-					field.set(controller, service);
+					// 取出实例
+					BaseService service = ServicePlugin.getService(name); 
+					field.set(controller, service); // set到BaseController全局变量
 					return;
 				}
-				String ssName = sc.getSimpleName(); // 针对BaseController子类
+				String ssName = sc.getSimpleName(); // 针对Controller
 				if(ssName.equals("BaseService")){
 					BaseService service = ServicePlugin.getService(name);
-					field.set(controller, service);
+					field.set(controller, service); // set到Controller全局变量
 					return;
 				}
 			}

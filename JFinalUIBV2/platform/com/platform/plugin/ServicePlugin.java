@@ -38,32 +38,33 @@ public class ServicePlugin implements IPlugin {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public boolean start() {
-    	// 扫描service类
+		// 扫描所有继承BaseService的类
 		List<Class<?>> modelClasses = ToolClassSearch.search(BaseService.class);
-		modelClasses.add(BaseService.class);
+		modelClasses.add(BaseService.class); // 加入BaseService本身
 		
-		// 循环处理自动注册映射
+		// 循环处理Service实例化
 		for (Class service : modelClasses) {
 			// 获取注解对象
 			Service serviceBind = (Service) service.getAnnotation(Service.class);
 			if (serviceBind == null) {
-				log.warn(service.getName() + "继承了BaseModel，但是没有注解绑定表名，请检查是否已经手动绑定 ！！！");
+				log.warn(service.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
 				continue;
 			}
-
+		
 			// 获取映射属性
 			String name = serviceBind.name().trim();
 			if (name.equals("")) {
-				log.error(service.getName() + "注解错误，Service name不能为空 ！！！");
+				log.error(service.getName() + "注解错误，name不能为空 ！！！");
 				break;
 			}
-
+		
 			if (serviceMap.get(name) == null) {
 				BaseService baseService = null;
+				// 是否需要对service中的所有方法开启事务管理
 				if(serviceBind.tx()){
-					baseService = Enhancer.enhance(service, Tx.class);
+					baseService = Enhancer.enhance(service, Tx.class); 	// 是
 				}else{
-					baseService = Enhancer.enhance(service);
+					baseService = Enhancer.enhance(service);			// 否
 				}
 				serviceMap.put(name, baseService);
 				log.debug("Service注册： name = " + name + ", class = " + service.getName());
@@ -72,6 +73,7 @@ public class ServicePlugin implements IPlugin {
 				break;
 			}
 		}
+		
 		return true;
     }
 
