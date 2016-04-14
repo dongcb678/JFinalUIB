@@ -12,12 +12,14 @@ import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
-@Service(name = "departmentService")
+@Service(name = DepartmentService.serviceName)
 public class DepartmentService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DepartmentService.class);
-	
+
+	public static final String serviceName = "departmentService";
+
 	/**
 	 * 获取子节点数据
 	 * @param cxt

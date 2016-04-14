@@ -152,11 +152,18 @@ public class ParamPkgInterceptor implements Interceptor {
 	private void setControllerFieldValue(BaseController controller, Field field){
 		try {
 			field.setAccessible(true);
+			String type = field.getType().getSimpleName();
 			String name = field.getName();
 			
+			// service对象实例填充
 			Class<?> sc = field.getType().getSuperclass();
 			if(sc != null){
-				String ssName = sc.getSimpleName();
+				if(type.equals("BaseService")){ // 针对BaseController
+					BaseService service = ServicePlugin.getService(name);
+					field.set(controller, service);
+					return;
+				}
+				String ssName = sc.getSimpleName(); // 针对BaseController子类
 				if(ssName.equals("BaseService")){
 					BaseService service = ServicePlugin.getService(name);
 					field.set(controller, service);
@@ -164,14 +171,13 @@ public class ParamPkgInterceptor implements Interceptor {
 				}
 			}
 			
-			String type = field.getType().getSimpleName();
+			// 参数值为空直接结束
 			String value = controller.getPara(name);
-			if(null == value || value.trim().isEmpty()){// 参数值为空直接结束
-				log.debug("封装参数值到全局变量：field name = " + name + " value = 空");
+			if(null == value || value.trim().isEmpty()){
 				return;
 			}
-			log.debug("封装参数值到全局变量：field name = " + name + " value = " + value);
 			
+			// 封装参数值到全局变量
 			if(type.equals("String")){
 				field.set(controller, value);
 			
@@ -217,6 +223,19 @@ public class ParamPkgInterceptor implements Interceptor {
 		try {
 			field.setAccessible(true);
 			String name = field.getName();
+			
+			// 越过所有的BaseService子类变量
+			Class<?> sc = field.getType().getSuperclass();
+			if(sc != null){
+				String type = field.getType().getSimpleName(); // 针对BaseController
+				String ssName = sc.getSimpleName(); // 针对普通Controller
+				if(type.equals("BaseService") || ssName.equals("BaseService")){
+					log.debug("设置全局变量到request：field name = " + name + " value = 空");
+					return;
+				}
+			}
+
+			// 越过空值、和指定的实例变量
 			Object value = field.get(controller);
 			if(null == value 
 					|| (value instanceof String && ((String)value).isEmpty() 
@@ -225,6 +244,7 @@ public class ParamPkgInterceptor implements Interceptor {
 				log.debug("设置全局变量到request：field name = " + name + " value = 空");
 				return;
 			}
+			
 			log.debug("设置全局变量到request：field name = " + name + " value = " + value);
 			controller.setAttr(name, value);
 		} catch (IllegalArgumentException e1) {

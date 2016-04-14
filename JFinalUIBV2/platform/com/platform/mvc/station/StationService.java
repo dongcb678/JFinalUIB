@@ -12,11 +12,13 @@ import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
-@Service(name = "stationService")
+@Service(name = StationService.serviceName)
 public class StationService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(StationService.class);
+
+	public static final String serviceName = "stationService";
 
 	/**
 	 * 获取子节点数据

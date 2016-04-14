@@ -14,11 +14,13 @@ import com.platform.mvc.role.Role;
 import com.platform.mvc.station.Station;
 import com.platform.mvc.user.User;
 
-@Service(name="indexService")
+@Service(name = IndexService.serviceName)
 public class IndexService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(IndexService.class);
+
+	public static final String serviceName = "indexService";
 
 	/**
 	 * 查询用户可操作的菜单

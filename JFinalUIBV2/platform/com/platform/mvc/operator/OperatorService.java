@@ -10,11 +10,13 @@ import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.module.Module;
 
-@Service(name = "operatorService")
+@Service(name = OperatorService.serviceName)
 public class OperatorService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(OperatorService.class);
+
+	public static final String serviceName = "operatorService";
 
 	/**
 	 * 保存

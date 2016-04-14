@@ -40,6 +40,7 @@ public class ServicePlugin implements IPlugin {
     public boolean start() {
     	// 扫描service类
 		List<Class<?>> modelClasses = ToolClassSearch.search(BaseService.class);
+		modelClasses.add(BaseService.class);
 		
 		// 循环处理自动注册映射
 		for (Class service : modelClasses) {

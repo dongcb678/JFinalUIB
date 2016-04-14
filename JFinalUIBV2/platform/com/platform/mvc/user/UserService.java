@@ -17,10 +17,12 @@ import com.platform.mvc.base.BaseService;
 import com.platform.mvc.dept.Department;
 import com.platform.tools.security.ToolPbkdf2;
 
-@Service(name = "userService")
+@Service(name = UserService.serviceName)
 public class UserService extends BaseService {
 
 	private static Logger log = Logger.getLogger(UserService.class);
+
+	public static final String serviceName = "userService";
 
 	/**
 	 * 新增用户信息保存

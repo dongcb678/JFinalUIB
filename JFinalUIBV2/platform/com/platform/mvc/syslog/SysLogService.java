@@ -11,12 +11,14 @@ import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseService;
 import com.platform.tools.ToolDateTime;
 
-@Service(name = "sysLogService")
+@Service(name = SysLogService.serviceName)
 public class SysLogService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SysLogService.class);
-	
+
+	public static final String serviceName = "sysLogService";
+
 	/**
 	 * 定时清理数据
 	 */

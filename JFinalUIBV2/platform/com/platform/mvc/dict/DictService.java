@@ -12,10 +12,12 @@ import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
-@Service(name = "dictService")
+@Service(name = DictService.serviceName)
 public class DictService extends BaseService {
 
 	private static Logger log = Logger.getLogger(DictService.class);
+
+	public static final String serviceName = "dictService";
 
 	/**
 	 * 保存

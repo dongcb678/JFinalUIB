@@ -12,10 +12,12 @@ import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
-@Service(name = "paramService")
+@Service(name = ParamService.serviceName)
 public class ParamService extends BaseService {
 
 	private static Logger log = Logger.getLogger(ParamService.class);
+
+	public static final String serviceName = "paramService";
 
 	/**
 	 * 保存

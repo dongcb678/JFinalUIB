@@ -11,11 +11,13 @@ import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.group.Group;
 
-@Service(name = "roleService")
+@Service(name = RoleService.serviceName)
 public class RoleService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(RoleService.class);
+
+	public static final String serviceName = "roleService";
 
 	/**
 	 * 保存

@@ -11,11 +11,13 @@ import com.jfinal.upload.UploadFile;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 
-@Service(name = "uploadService")
+@Service(name = UploadService.serviceName)
 public class UploadService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UploadService.class);
+
+	public static final String serviceName = "uploadService";
 
 	public List<Map<String, String>> upload(String pathType, List<UploadFile> files){
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();

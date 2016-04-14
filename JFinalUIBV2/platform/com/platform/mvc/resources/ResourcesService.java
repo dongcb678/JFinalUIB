@@ -23,11 +23,13 @@ import com.platform.tools.ToolOS;
  * 系统资源负载
  * @author 董华健
  */
-@Service(name = "resourcesService")
+@Service(name = ResourcesService.serviceName)
 public class ResourcesService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ResourcesService.class);
+
+	public static final String serviceName = "resourcesService";
 
 	/**
 	 * 最近15天PV

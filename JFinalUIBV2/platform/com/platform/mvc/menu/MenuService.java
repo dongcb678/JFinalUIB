@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
@@ -15,14 +14,14 @@ import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
-@Service(name="menuService")
+@Service(name = MenuService.serviceName)
 public class MenuService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(MenuService.class);
 
-	public static final MenuService service = Enhancer.enhance(MenuService.class);
-	
+	public static final String serviceName = "menuService";
+
 	/**
 	 * 获取子节点数据
 	 * @param cxt

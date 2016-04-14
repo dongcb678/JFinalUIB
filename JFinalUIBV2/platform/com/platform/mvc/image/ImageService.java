@@ -7,10 +7,12 @@ import com.platform.mvc.base.BaseService;
 import com.platform.tools.ToolImageResize;
 import com.platform.tools.ToolImageTailor;
 
-@Service(name = "imageService")
+@Service(name = ImageService.serviceName)
 public class ImageService extends BaseService {
 
 	private static Logger log = Logger.getLogger(ImageService.class);
+
+	public static final String serviceName = "imageService";
 
 	/**
 	 * 图片裁剪

@@ -26,10 +26,12 @@ import com.platform.tools.ToolString;
  * 公共方法
  * @author 董华健
  */
-@Service(name="baseService")
+@Service(name = BaseService.serviceName)
 public class BaseService {
 
 	private static Logger log = Logger.getLogger(BaseService.class);
+	
+	public static final String serviceName = "baseService";
 
 	/**
 	 * 封装预处理参数解析并执行查询

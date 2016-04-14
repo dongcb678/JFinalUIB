@@ -10,11 +10,13 @@ import com.platform.mvc.base.BaseService;
 import com.platform.mvc.menu.Menu;
 import com.platform.mvc.module.Module;
 
-@Service(name = "systemsService")
+@Service(name = SystemsService.serviceName)
 public class SystemsService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SystemsService.class);
+
+	public static final String serviceName = "systemsService";
 
 	/**
 	 * 保存

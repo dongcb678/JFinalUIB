@@ -24,11 +24,13 @@ import com.platform.mvc.user.UserInfo;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.security.ToolPbkdf2;
 
-@Service(name="loginService")
+@Service(name = LoginService.serviceName)
 public class LoginService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginService.class);
+
+	public static final String serviceName = "loginService";
 
 	/**
 	 * 验证账号是否存在
