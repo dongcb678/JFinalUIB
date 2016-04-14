@@ -41,7 +41,7 @@ public class DataClear extends Timer {
 				
 				try {
 					log.info("清理访问日志数据");
-					SysLogService slService = (SysLogService) ServicePlugin.getService("sysLogService");
+					SysLogService slService = (SysLogService) ServicePlugin.getService(SysLogService.serviceName);
 					slService.timerDataClear();
 				} catch (Exception e) {
 					log.error("清理访问日志数据失败：" + e.getMessage());
@@ -50,7 +50,7 @@ public class DataClear extends Timer {
 
 				try {
 					log.info("清理资源负载日志数据");
-					ResourcesService rService = (ResourcesService) ServicePlugin.getService("resourcesService");
+					ResourcesService rService = (ResourcesService) ServicePlugin.getService(ResourcesService.serviceName);
 					rService.timerDataClear();
 				} catch (Exception e) {
 					log.error("清理资源负载日志数据失败：" + e.getMessage());

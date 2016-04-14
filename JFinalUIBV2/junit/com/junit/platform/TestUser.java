@@ -17,7 +17,7 @@ public class TestUser extends TestBase {
 
 	@Test
     public void testdelete(){
-		UserService uService = (UserService) ServicePlugin.getService("userService");
+		UserService uService = (UserService) ServicePlugin.getService(UserService.serviceName);
 		uService.delete("03a44ba0aa4e4905bea726d4da976ba0,03a44ba0aa4e4905bea726d4da976ba1");
     }
 

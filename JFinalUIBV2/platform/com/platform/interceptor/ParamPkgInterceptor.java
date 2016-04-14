@@ -160,7 +160,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			if(sc != null){
 				if(type.equals("BaseService")){ // 针对BaseController
 					// 取出实例
-					BaseService service = ServicePlugin.getService(name); 
+					BaseService service = ServicePlugin.getService(BaseService.serviceName); 
 					field.set(controller, service); // set到BaseController全局变量
 					return;
 				}
