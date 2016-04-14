@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import com.junit.TestBase;
-import com.platform.mvc.syslog.SysLogService;
+import com.platform.mvc.base.BaseService;
+import com.platform.plugin.ServicePlugin;
 
 /**
  * 博客单元测试类
@@ -15,7 +16,8 @@ public class TestBlog extends TestBase {
 	
 	@Test
     public void delete() throws SQLException{
-		SysLogService.service.delete("test_blog", "ids001,ids002");
+		BaseService bService = (BaseService) ServicePlugin.getService("baseService");
+		bService.delete("test_blog", "ids001,ids002");
     }
 
 }

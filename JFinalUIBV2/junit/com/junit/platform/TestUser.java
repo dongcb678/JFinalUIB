@@ -5,6 +5,7 @@ import org.junit.Test;
 import com.junit.TestBase;
 import com.platform.mvc.user.User;
 import com.platform.mvc.user.UserService;
+import com.platform.plugin.ServicePlugin;
 
 public class TestUser extends TestBase {
 	
@@ -16,7 +17,8 @@ public class TestUser extends TestBase {
 
 	@Test
     public void testdelete(){
-		UserService.service.delete("03a44ba0aa4e4905bea726d4da976ba0,03a44ba0aa4e4905bea726d4da976ba1");
+		UserService uService = (UserService) ServicePlugin.getService("userService");
+		uService.delete("03a44ba0aa4e4905bea726d4da976ba0,03a44ba0aa4e4905bea726d4da976ba1");
     }
 
 }

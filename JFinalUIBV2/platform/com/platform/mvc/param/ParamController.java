@@ -19,11 +19,13 @@ public class ParamController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ParamController.class);
 	
+	private ParamService paramService;
+	
 	/**
 	 * 参数管理treeTable首页
 	 */
 	public void index() {
-		String sql = ParamService.service.getSql(Param.sqlId_treeTableNodeRoot);
+		String sql = paramService.getSql(Param.sqlId_treeTableNodeRoot);
 		list = Param.dao.find(sql);
 		render("/platform/param/treeTable.html");
 	}
@@ -32,7 +34,7 @@ public class ParamController extends BaseController {
 	 * 参数管理treeTable数据
 	 */
 	public void treeTable() {
-		String sql = ParamService.service.getSql(Param.sqlId_treeTableChildNode);
+		String sql = paramService.getSql(Param.sqlId_treeTableChildNode);
 		list = Param.dao.find(sql, ids);
 		render("/platform/param/treeTableSub.html");
 	}
@@ -41,7 +43,7 @@ public class ParamController extends BaseController {
 	 * 参数管理ztree数据
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = ParamService.service.childNodeData(getCxt(), ids);
+		List<ZtreeNode> nodeList = paramService.childNodeData(getCxt(), ids);
 		renderJson(nodeList);
 	}
 
@@ -50,7 +52,7 @@ public class ParamController extends BaseController {
 	 */
 	@Before(ParamValidator.class)
 	public void save() {
-		ParamService.service.save(getModel(Param.class));
+		paramService.save(getModel(Param.class));
 		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html");
 	}
 
@@ -70,7 +72,7 @@ public class ParamController extends BaseController {
 	 */
 	@Before(ParamValidator.class)
 	public void update() {
-		ParamService.service.update(getModel(Param.class));
+		paramService.update(getModel(Param.class));
 		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html", true);
 	}
 
@@ -78,7 +80,7 @@ public class ParamController extends BaseController {
 	 * 删除参数
 	 */
 	public void delete() {
-		ParamService.service.delete(getPara() == null ? ids : getPara());
+		paramService.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html");
 	}
 

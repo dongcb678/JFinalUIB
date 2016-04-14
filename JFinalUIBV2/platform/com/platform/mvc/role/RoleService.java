@@ -7,17 +7,16 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
+import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.group.Group;
 
+@Service(name = "roleService")
 public class RoleService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(RoleService.class);
 
-	public static final RoleService service = Enhancer.enhance(RoleService.class);
-	
 	/**
 	 * 保存
 	 * @param role

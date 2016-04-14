@@ -20,6 +20,9 @@ public class IndexController extends BaseController {
 
 	private static Logger log = Logger.getLogger(IndexController.class);
 	
+	private IndexService indexService;
+	private ResourcesService resourcesService;
+	
 	private List<Systems> systemsList; // 系统列表
 	private List<Menu> menuList; // 菜单列表
 	
@@ -29,12 +32,12 @@ public class IndexController extends BaseController {
 	public void index() {
 		User user = getCUser(); // cookie认证自动登陆处理
 		if(null != user){//后台
-			String sql = IndexService.service.getSql(Systems.sqlId_all);
+			String sql = indexService.getSql(Systems.sqlId_all);
 			systemsList = Systems.dao.find(sql);
 			if(null == ids || ids.isEmpty()){ // 默认系统
 				ids = "8a40c0353fa828a6013fa898d4ac0020";
 			}
-			menuList = IndexService.service.menu(ids, user, geti18nColumnSuffix());
+			menuList = indexService.menu(ids, user, geti18nColumnSuffix());
 			render("/platform/index/index.html");
 		}else{
 			render("/platform/login/login.html");
@@ -45,8 +48,8 @@ public class IndexController extends BaseController {
 	 * 首页content
 	 */
 	public void content(){;
-		setAttrs(ResourcesService.service.pv());
-		setAttrs(ResourcesService.service.getResources());
+		setAttrs(resourcesService.pv());
+		setAttrs(resourcesService.getResources());
 		render("/platform/index/content.html");
 	}
 	

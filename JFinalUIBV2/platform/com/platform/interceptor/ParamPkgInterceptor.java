@@ -13,9 +13,11 @@ import com.jfinal.aop.Invocation;
 import com.platform.constant.ConstantWebContext;
 import com.platform.dto.SplitPage;
 import com.platform.mvc.base.BaseController;
+import com.platform.mvc.base.BaseService;
 import com.platform.mvc.operator.Operator;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
+import com.platform.plugin.ServicePlugin;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolString;
 
@@ -151,6 +153,18 @@ public class ParamPkgInterceptor implements Interceptor {
 		try {
 			field.setAccessible(true);
 			String name = field.getName();
+			
+			Class<?> sc = field.getType().getSuperclass();
+			if(sc != null){
+				String ssName = sc.getSimpleName();
+				if(ssName.equals("BaseService")){
+					BaseService service = ServicePlugin.getService(name);
+					field.set(controller, service);
+					return;
+				}
+			}
+			
+			String type = field.getType().getSimpleName();
 			String value = controller.getPara(name);
 			if(null == value || value.trim().isEmpty()){// 参数值为空直接结束
 				log.debug("封装参数值到全局变量：field name = " + name + " value = 空");
@@ -158,14 +172,13 @@ public class ParamPkgInterceptor implements Interceptor {
 			}
 			log.debug("封装参数值到全局变量：field name = " + name + " value = " + value);
 			
-			String fieldType = field.getType().getSimpleName();
-			if(fieldType.equals("String")){
+			if(type.equals("String")){
 				field.set(controller, value);
 			
-			}else if(fieldType.equals("int")){
+			}else if(type.equals("int")){
 				field.set(controller, Integer.parseInt(value));
 				
-			}else if(fieldType.equals("Date")){
+			}else if(type.equals("Date")){
 				int dateLength = value.length();
 				if(dateLength == ToolDateTime.pattern_ymd.length()){
 					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd));
@@ -177,7 +190,7 @@ public class ParamPkgInterceptor implements Interceptor {
 					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms_s));
 				}
 				
-			}else if(fieldType.equals("BigDecimal")){
+			}else if(type.equals("BigDecimal")){
 				BigDecimal bdValue = new BigDecimal(value);
 				field.set(controller, bdValue);
 				
@@ -187,6 +200,8 @@ public class ParamPkgInterceptor implements Interceptor {
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		} finally {
 			field.setAccessible(false);

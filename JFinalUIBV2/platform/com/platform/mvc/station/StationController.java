@@ -19,6 +19,8 @@ public class StationController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(StationController.class);
 	
+	private StationService stationService;
+	
 	private String pIds;
 	private String names;
 	private int orderIds;
@@ -37,7 +39,7 @@ public class StationController extends BaseController {
 	 * 岗位treeData
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = StationService.service.childNodeData(getCxt(), ids);
+		List<ZtreeNode> nodeList = stationService.childNodeData(getCxt(), ids);
 		renderJson(nodeList);
 	}
 
@@ -46,7 +48,7 @@ public class StationController extends BaseController {
 	 */
 	@Before(StationValidator.class)
 	public void save() {
-		ids = StationService.service.save(pIds, names, orderIds);
+		ids = stationService.save(pIds, names, orderIds);
 		renderText(ids);
 	}
 
@@ -55,7 +57,7 @@ public class StationController extends BaseController {
 	 */
 	@Before(StationValidator.class)
 	public void update() {
-		StationService.service.update(ids, pIds, names);
+		stationService.update(ids, pIds, names);
 		renderText(ids);
 	}
 
@@ -63,7 +65,7 @@ public class StationController extends BaseController {
 	 * 删除岗位
 	 */
 	public void delete() {
-		StationService.service.delete(ids);
+		stationService.delete(ids);
 		renderText(ids);
 	}
 
@@ -79,7 +81,7 @@ public class StationController extends BaseController {
 	 * 设置岗位对应的功能
 	 */
 	public void setOperator(){
-		StationService.service.setOperator(ids, moduleIds, operatorIds);
+		stationService.setOperator(ids, moduleIds, operatorIds);
 		renderJson(ids);
 	}
 	

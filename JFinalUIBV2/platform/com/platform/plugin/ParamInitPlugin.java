@@ -128,7 +128,7 @@ public class ParamInitPlugin implements IPlugin {
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql(User.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
-		long batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_user ", splitDataSize);
+		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_user ", splitDataSize);
 		List<User> userList = null;
 		for (long i = 0; i < batchCount; i++) {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
@@ -160,7 +160,7 @@ public class ParamInitPlugin implements IPlugin {
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql(UserInfo.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
-		long batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_userInfo ", splitDataSize);
+		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_userInfo ", splitDataSize);
 		List<UserInfo> userInfoList = null;
 		for (long i = 0; i < batchCount; i++) {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
@@ -192,7 +192,7 @@ public class ParamInitPlugin implements IPlugin {
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql(Group.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
-		long batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_group ", splitDataSize);
+		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_group ", splitDataSize);
 		List<Group> groupList = null;
 		for (long i = 0; i < batchCount; i++) {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
@@ -224,7 +224,7 @@ public class ParamInitPlugin implements IPlugin {
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql(Role.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
-		long batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_role ", splitDataSize);
+		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_role ", splitDataSize);
 		List<Role> roleList = null;
 		for (long i = 0; i < batchCount; i++) {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
@@ -255,7 +255,7 @@ public class ParamInitPlugin implements IPlugin {
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql(Station.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
-		long batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_station ", splitDataSize);
+		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_station ", splitDataSize);
 		List<Station> stationList = null;
 		for (long i = 0; i < batchCount; i++) {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
@@ -287,7 +287,7 @@ public class ParamInitPlugin implements IPlugin {
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql(Operator.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
-		long batchCount = BaseService.service.getBatchCount(ConstantInit.db_dataSource_main, " from pt_operator ", splitDataSize);
+		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_operator ", splitDataSize);
 		List<Operator> operatorList = null;
 		for (long i = 0; i < batchCount; i++) {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){

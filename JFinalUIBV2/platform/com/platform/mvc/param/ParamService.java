@@ -5,19 +5,18 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
+@Service(name = "paramService")
 public class ParamService extends BaseService {
 
 	private static Logger log = Logger.getLogger(ParamService.class);
 
-	public static final ParamService service = Enhancer.enhance(ParamService.class);
-	
 	/**
 	 * 保存
 	 * @param param

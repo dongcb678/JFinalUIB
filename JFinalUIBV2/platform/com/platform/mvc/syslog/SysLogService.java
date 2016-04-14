@@ -5,18 +5,17 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
+import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseService;
 import com.platform.tools.ToolDateTime;
 
+@Service(name = "sysLogService")
 public class SysLogService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SysLogService.class);
-	
-	public static final SysLogService service = Enhancer.enhance(SysLogService.class);
 	
 	/**
 	 * 定时清理数据

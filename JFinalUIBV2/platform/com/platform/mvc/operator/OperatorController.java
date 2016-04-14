@@ -20,6 +20,8 @@ public class OperatorController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(OperatorController.class);
 	
+	private OperatorService operatorService;
+	
 	private String moduleIds; // 功能对应的模块
 	
 	/**
@@ -35,7 +37,7 @@ public class OperatorController extends BaseController {
 	 */
 	@Before(OperatorValidator.class)
 	public void save() {
-		ids = OperatorService.service.save(getModel(Operator.class));
+		ids = operatorService.save(getModel(Operator.class));
 		redirect("/jf/platform/operator");
 	}
 
@@ -52,7 +54,7 @@ public class OperatorController extends BaseController {
 	 */
 	@Before(OperatorValidator.class)
 	public void update() {
-		OperatorService.service.update(getModel(Operator.class));
+		operatorService.update(getModel(Operator.class));
 		redirect("/jf/platform/operator");
 	}
 
@@ -68,7 +70,7 @@ public class OperatorController extends BaseController {
 	 * 删除功能
 	 */
 	public void delete() {
-		OperatorService.service.delete(getPara() == null ? ids : getPara());
+		operatorService.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/operator");
 	}
 
@@ -76,7 +78,7 @@ public class OperatorController extends BaseController {
 	 * 功能treeData
 	 */
 	public void treeData() {
-		List<ZtreeNode> nodeList = OperatorService.service.treeData(getCxt(), moduleIds);
+		List<ZtreeNode> nodeList = operatorService.treeData(getCxt(), moduleIds);
 		renderJson(nodeList);
 	}
 	
@@ -84,7 +86,7 @@ public class OperatorController extends BaseController {
 	 * 功能treeData，一次性加载
 	 */
 	public void tree() {
-		List<ZtreeNode> nodeList = OperatorService.service.tree(getCxt());
+		List<ZtreeNode> nodeList = operatorService.tree(getCxt());
 		renderJson(nodeList);
 	}
 }

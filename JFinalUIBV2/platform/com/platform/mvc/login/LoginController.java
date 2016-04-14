@@ -21,6 +21,8 @@ public class LoginController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginController.class);
 	
+	private LoginService loginService;
+	
 	/**
 	 * 准备登陆
 	 */
@@ -66,7 +68,7 @@ public class LoginController extends BaseController {
 	public void valiUserName(){
 		String userIds = getPara("userIds");
 		String userName = getPara("userName");
-		boolean bool = LoginService.service.valiUserName(userIds, userName);
+		boolean bool = loginService.valiUserName(userIds, userName);
 		renderText(String.valueOf(bool));
 	}
 	
@@ -76,7 +78,7 @@ public class LoginController extends BaseController {
 	public void valiMailBox(){
 		String userInfoIds = getPara("userInfoIds");
 		String mailBox = getPara("mailBox");
-		boolean bool = LoginService.service.valiMailBox(userInfoIds, mailBox);
+		boolean bool = loginService.valiMailBox(userInfoIds, mailBox);
 		renderText(String.valueOf(bool));
 	}
 
@@ -86,7 +88,7 @@ public class LoginController extends BaseController {
 	public void valiIdcard(){
 		String userInfoIds = getPara("userInfoIds");
 		String idcard = getPara("idcard");
-		boolean bool = LoginService.service.valiIdcard(userInfoIds, idcard);
+		boolean bool = loginService.valiIdcard(userInfoIds, idcard);
 		renderText(String.valueOf(bool));
 	}
 
@@ -96,7 +98,7 @@ public class LoginController extends BaseController {
 	public void valiMobile(){
 		String userInfoIds = getPara("userInfoIds");
 		String mobile = getPara("mobile");
-		boolean bool = LoginService.service.valiMobile(userInfoIds, mobile);
+		boolean bool = loginService.valiMobile(userInfoIds, mobile);
 		renderText(String.valueOf(bool));
 	}
 
@@ -113,7 +115,7 @@ public class LoginController extends BaseController {
 
 		// 如果是httpclient登陆就不处理验证码，不用担心密码暴力破解，因为init文件有密码错误次数限制
 		if(null != returnJson && !returnJson.isEmpty()){
-			int result = LoginService.service.login(getRequest(), getResponse(), username, password, false);
+			int result = loginService.login(getRequest(), getResponse(), username, password, false);
 			if(result == ConstantLogin.login_info_3){ // 登陆验证成功
 				renderText("success");
 				return;
@@ -126,7 +128,7 @@ public class LoginController extends BaseController {
 					autoLogin = true;
 				}
 				
-				int result = LoginService.service.login(getRequest(), getResponse(), username, password, autoLogin);
+				int result = loginService.login(getRequest(), getResponse(), username, password, autoLogin);
 				if(result == ConstantLogin.login_info_3){ // 登陆验证成功
 					redirect("/jf/platform/index");
 					return;
@@ -145,7 +147,7 @@ public class LoginController extends BaseController {
 		User user = getCUser(); // 获取当前用户
 		String password = getPara("password"); // 获取输入的密码
 		
-		int result = LoginService.service.pass(getRequest(), getResponse(), user.getStr("username"), password);
+		int result = loginService.pass(getRequest(), getResponse(), user.getStr("username"), password);
 		if(result == ConstantLogin.login_info_3){ // 密码验证成功
 			redirect("/jf/platform/index");
 			return;

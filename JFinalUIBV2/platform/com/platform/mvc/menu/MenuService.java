@@ -10,10 +10,12 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
+@Service(name="menuService")
 public class MenuService extends BaseService {
 
 	@SuppressWarnings("unused")

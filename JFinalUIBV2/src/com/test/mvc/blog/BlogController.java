@@ -28,6 +28,8 @@ public class BlogController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(BlogController.class);
 	
+	private BlogService blogService;
+	
 	/**
 	 * 列表
 	 */
@@ -79,8 +81,7 @@ public class BlogController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		BlogService.service.delete("test_blog", 
-				getPara() == null ? ids : getPara());
+		blogService.delete("test_blog", getPara() == null ? ids : getPara());
 		redirect("/jf/test/blog");
 	}
 	

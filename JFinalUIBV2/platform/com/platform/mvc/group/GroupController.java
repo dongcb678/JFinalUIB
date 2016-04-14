@@ -22,6 +22,8 @@ public class GroupController extends BaseController {
 
 	private static Logger log = Logger.getLogger(GroupController.class);
 	
+	private GroupService groupService;
+	
 	private List<Group> noCheckedList; // 用户不在的组
 	private List<Group> checkedList; // 用户所在的组
 	private String roleIds; // 组拥有的角色
@@ -39,7 +41,7 @@ public class GroupController extends BaseController {
 	 */
 	@Before(GroupValidator.class)
 	public void save() {
-		ids = GroupService.service.save(getModel(Group.class));
+		ids = groupService.save(getModel(Group.class));
 		redirect("/jf/platform/group");
 	}
 	
@@ -56,7 +58,7 @@ public class GroupController extends BaseController {
 	 */
 	@Before(GroupValidator.class)
 	public void update() {
-		GroupService.service.update(getModel(Group.class));
+		groupService.update(getModel(Group.class));
 		redirect("/jf/platform/group");
 	}
 
@@ -64,7 +66,7 @@ public class GroupController extends BaseController {
 	 * 删除分组
 	 */
 	public void delete() {
-		GroupService.service.delete(getPara() == null ? ids : getPara());
+		groupService.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/group");
 	}
 
@@ -73,7 +75,7 @@ public class GroupController extends BaseController {
 	 */
 	@SuppressWarnings("unchecked")
 	public void select(){
-		Map<String,Object> map = GroupService.service.select(ids);
+		Map<String,Object> map = groupService.select(ids);
 		noCheckedList = (List<Group>) map.get("noCheckedList");
 		checkedList = (List<Group>) map.get("checkedList");
 		render("/platform/group/select.html");
@@ -83,7 +85,7 @@ public class GroupController extends BaseController {
 	 * 设置分组对应的角色
 	 */
 	public void setRole(){
-		GroupService.service.setRole(ids, roleIds);
+		groupService.setRole(ids, roleIds);
 		renderText(ids);
 	}
 }

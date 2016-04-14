@@ -19,6 +19,8 @@ public class ModuleController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ModuleController.class);
 	
+	private ModuleService moduleService;
+	
 	private String systemsIds; // 哪个系统下的模块
 	private String pIds; // 上级模块ids
 	private String names; // 模块名称
@@ -35,7 +37,7 @@ public class ModuleController extends BaseController {
 	 * 模块tree数据
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = ModuleService.service.childNodeData(getCxt(), systemsIds, ids);
+		List<ZtreeNode> nodeList = moduleService.childNodeData(getCxt(), systemsIds, ids);
 		renderJson(nodeList);
 	}
 
@@ -44,7 +46,7 @@ public class ModuleController extends BaseController {
 	 */
 	@Before(ModuleValidator.class)
 	public void save() {
-		ids = ModuleService.service.save(pIds, names, orderIds);
+		ids = moduleService.save(pIds, names, orderIds);
 		renderText(ids);
 	}
 
@@ -53,7 +55,7 @@ public class ModuleController extends BaseController {
 	 */
 	@Before(ModuleValidator.class)
 	public void update() {
-		ModuleService.service.update(ids, pIds, names);
+		moduleService.update(ids, pIds, names);
 		renderText(ids);
 	}
 
@@ -61,7 +63,7 @@ public class ModuleController extends BaseController {
 	 * 删除模块
 	 */
 	public void delete() {
-		ModuleService.service.delete(ids);
+		moduleService.delete(ids);
 		renderText(ids);
 	}
 

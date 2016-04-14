@@ -28,6 +28,8 @@ public class ${className}Controller extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(${className}Controller.class);
 	
+	private ${className}Service = ${classNameSmall}Service;
+	
 	/**
 	 * 列表
 	 */
@@ -76,7 +78,7 @@ public class ${className}Controller extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		${className}Service.service.delete("${tableName}", getPara() == null ? ids : getPara());
+		${className}Service.delete("${tableName}", getPara() == null ? ids : getPara());
 		redirect("/jf/${basePath}/${classNameSmall}");
 	}
 	

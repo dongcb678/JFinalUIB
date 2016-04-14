@@ -5,20 +5,19 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
+@Service(name = "moduleService")
 public class ModuleService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ModuleService.class);
 
-	public static final ModuleService service = Enhancer.enhance(ModuleService.class);
-	
 	/**
 	 * 获取子节点数据
 	 * @param cxt

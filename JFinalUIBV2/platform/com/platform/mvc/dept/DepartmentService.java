@@ -5,19 +5,18 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
+@Service(name = "departmentService")
 public class DepartmentService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DepartmentService.class);
-	
-	public static final DepartmentService service = Enhancer.enhance(DepartmentService.class);
 	
 	/**
 	 * 获取子节点数据

@@ -3,20 +3,19 @@ package com.platform.mvc.systems;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
-import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.menu.Menu;
 import com.platform.mvc.module.Module;
 
+@Service(name = "systemsService")
 public class SystemsService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SystemsService.class);
 
-	public static final SystemsService service = Enhancer.enhance(SystemsService.class);
-	
 	/**
 	 * 保存
 	 * @param systems

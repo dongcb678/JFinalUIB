@@ -38,9 +38,10 @@ import com.platform.interceptor.ParamPkgInterceptor;
 import com.platform.plugin.ControllerPlugin;
 import com.platform.plugin.FileRenamePlugin;
 import com.platform.plugin.I18NPlugin;
-import com.platform.plugin.TableScan;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.plugin.ServicePlugin;
 import com.platform.plugin.SqlXmlPlugin;
+import com.platform.plugin.TableScan;
 import com.platform.thread.DataClear;
 import com.platform.thread.ThreadSysLog;
 import com.platform.thread.TimerResources;
@@ -169,6 +170,9 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 
 		log.info("configPlugin 注册ActiveRecordPlugin插件");
 		plugins.add(arpMain);
+
+		log.info("ServicePlugin Service注解实例化加载");
+		plugins.add(new ServicePlugin());
 		
 		log.info("I18NPlugin 国际化键值对加载");
 		plugins.add(new I18NPlugin());

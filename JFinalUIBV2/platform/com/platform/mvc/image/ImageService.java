@@ -2,17 +2,16 @@ package com.platform.mvc.image;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
+import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.tools.ToolImageResize;
 import com.platform.tools.ToolImageTailor;
 
+@Service(name = "imageService")
 public class ImageService extends BaseService {
 
 	private static Logger log = Logger.getLogger(ImageService.class);
 
-	public static final ImageService service = Enhancer.enhance(ImageService.class);
-	
 	/**
 	 * 图片裁剪
 	 * @param type

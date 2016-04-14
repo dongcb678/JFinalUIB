@@ -19,6 +19,8 @@ public class DepartmentController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DepartmentController.class);
 	
+	private DepartmentService departmentService;
+	
 	private String pIds; // 上级部门ids
 	private String names; // 部门名称
 	private int orderIds; // 部门排序号
@@ -35,7 +37,7 @@ public class DepartmentController extends BaseController {
 	 * tree节点数据
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = DepartmentService.service.childNodeData(getCxt(), ids);
+		List<ZtreeNode> nodeList = departmentService.childNodeData(getCxt(), ids);
 		renderJson(nodeList);
 	}
 	
@@ -44,7 +46,7 @@ public class DepartmentController extends BaseController {
 	 */
 	@Before(DepartmentValidator.class)
 	public void save() {
-		ids = DepartmentService.service.save(pIds, names, orderIds);
+		ids = departmentService.save(pIds, names, orderIds);
 		renderText(ids);
 	}
 	
@@ -53,7 +55,7 @@ public class DepartmentController extends BaseController {
 	 */
 	@Before(DepartmentValidator.class)
 	public void update() {
-		DepartmentService.service.update(ids, pIds, names, principalIds);
+		departmentService.update(ids, pIds, names, principalIds);
 		renderText(ids);
 	}
 	
@@ -61,7 +63,7 @@ public class DepartmentController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		boolean bool = DepartmentService.service.delete(ids);
+		boolean bool = departmentService.delete(ids);
 		renderText(String.valueOf(bool));
 	}
 	

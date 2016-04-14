@@ -23,6 +23,8 @@ public class UploadController extends BaseController {
 
 	private static Logger log = Logger.getLogger(UploadController.class);
 	
+	private UploadService uploadService;
+	
 	private static String path_web_root = null;
 	private static String path_web_inf = null;
 	
@@ -71,7 +73,7 @@ public class UploadController extends BaseController {
 		*/
 		List<UploadFile> files = getFiles("/upload", PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding);
 		
-		List<Map<String, String>> list = UploadService.service.upload(pathType, files);
+		List<Map<String, String>> list = uploadService.upload(pathType, files);
 		renderJson(list);
 	}
 	
@@ -87,7 +89,7 @@ public class UploadController extends BaseController {
 	 * 删除文件
 	 */
 	public void delete() {
-		UploadService.service.delete("pt_upload", getPara() == null ? ids : getPara());
+		uploadService.delete("pt_upload", getPara() == null ? ids : getPara());
 		redirect("/jf/platform/upload/list");
 	}
 

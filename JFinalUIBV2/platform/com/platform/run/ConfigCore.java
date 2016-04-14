@@ -19,6 +19,7 @@ import com.platform.dto.DataBase;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.TableScan;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.plugin.ServicePlugin;
 import com.platform.plugin.SqlXmlPlugin;
 import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
@@ -105,22 +106,22 @@ public class ConfigCore {
 		new TableScan(ConstantInit.db_dataSource_main, arpMain).start();
 
 		arpMain.start();
+
+		log.info("ServicePlugin Service注解实例化加载");
+		new ServicePlugin().start();
 		
 		log.info("I18NPlugin 国际化键值对加载");
-		I18NPlugin i18NPlugin = new I18NPlugin();
-		i18NPlugin.start();
+		new I18NPlugin().start();
 		
 		if(ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)){
 			log.info("EhCachePlugin EhCache缓存");
-			EhCachePlugin ehCachePlugin = new EhCachePlugin();
-			ehCachePlugin.start();
+			new EhCachePlugin().start();
 			
 		}else if(ToolCache.getCacheType().equals(ConstantCache.cache_type_redis)){
 			log.info("RedisPlugin Redis缓存");
 			String redisIp = PropKit.get(ConstantInit.config_redis_ip);
 			Integer redisPort = PropKit.getInt(ConstantInit.config_redis_port);
-			RedisPlugin systemRedis = new RedisPlugin(ConstantCache.cache_name_redis_system, redisIp, redisPort);
-			systemRedis.start();
+			new RedisPlugin(ConstantCache.cache_name_redis_system, redisIp, redisPort).start();
 		}
 		
 		log.info("SqlXmlPlugin 解析并缓存 xml sql");

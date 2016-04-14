@@ -17,12 +17,14 @@ public class ResourcesController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(ResourcesController.class);
 
+	private ResourcesService resourcesService;
+	
 	/**
 	 * 首页
 	 */
 	public void index(){;
-		setAttrs(ResourcesService.service.pv());
-		setAttrs(ResourcesService.service.getResources());
+		setAttrs(resourcesService.pv());
+		setAttrs(resourcesService.getResources());
 		render("/platform/resources/index.html");
 	}
 	

@@ -19,6 +19,8 @@ public class UserController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UserController.class);
 	
+	private UserService userService;
+	
 	private String deptIds;
 	private String groupIds;
 	
@@ -38,7 +40,7 @@ public class UserController extends BaseController {
 		String password = getPara("password");
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
-		UserService.service.save(user, password, userInfo);
+		userService.save(user, password, userInfo);
 		render("/platform/user/add.html");
 	}
 	
@@ -60,7 +62,7 @@ public class UserController extends BaseController {
 		String password = getPara("password");
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
-		UserService.service.update(user, password, userInfo);
+		userService.update(user, password, userInfo);
 		redirect("/jf/platform/user");
 	}
 
@@ -78,7 +80,7 @@ public class UserController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		UserService.service.delete(getPara() == null ? ids : getPara());
+		userService.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/user");
 	}
 
@@ -86,7 +88,7 @@ public class UserController extends BaseController {
 	 * 用户树ztree节点数据
 	 */
 	public void treeData() {
-		List<ZtreeNode> list = UserService.service.childNodeData(getCxt(), deptIds);
+		List<ZtreeNode> list = userService.childNodeData(getCxt(), deptIds);
 		renderJson(list);
 	}
 	
@@ -94,7 +96,7 @@ public class UserController extends BaseController {
 	 * 设置用户拥有的组
 	 */
 	public void setGroup(){
-		UserService.service.setGroup(ids, groupIds);
+		userService.setGroup(ids, groupIds);
 		renderText(ids);
 	}
 	
@@ -103,7 +105,7 @@ public class UserController extends BaseController {
 	 */
 	public void valiPassWord(){
 		String passWord = getPara("passWord");
-		boolean bool = UserService.service.valiPassWord(ids, passWord);
+		boolean bool = userService.valiPassWord(ids, passWord);
 		renderText(String.valueOf(bool));
 	}
 	
@@ -114,7 +116,7 @@ public class UserController extends BaseController {
 		String userName = getPara("userName");
 		String passOld = getPara("passOld");
 		String passNew = getPara("passNew");
-		UserService.service.passChange(userName, passOld, passNew);
+		userService.passChange(userName, passOld, passNew);
 		renderText("");
 	}
 	

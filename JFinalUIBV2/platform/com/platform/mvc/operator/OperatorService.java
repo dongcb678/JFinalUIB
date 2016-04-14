@@ -5,18 +5,17 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
+import com.platform.annotation.Service;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.module.Module;
 
+@Service(name = "operatorService")
 public class OperatorService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(OperatorService.class);
 
-	public static final OperatorService service = Enhancer.enhance(OperatorService.class);
-	
 	/**
 	 * 保存
 	 * @param operator

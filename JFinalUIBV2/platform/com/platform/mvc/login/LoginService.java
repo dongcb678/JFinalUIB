@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
+import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantLogin;
 import com.platform.interceptor.AuthInterceptor;
@@ -24,12 +24,11 @@ import com.platform.mvc.user.UserInfo;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.security.ToolPbkdf2;
 
+@Service(name="loginService")
 public class LoginService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginService.class);
-
-	public static final LoginService service = Enhancer.enhance(LoginService.class);
 
 	/**
 	 * 验证账号是否存在
