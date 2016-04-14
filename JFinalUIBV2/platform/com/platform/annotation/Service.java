@@ -17,13 +17,13 @@ import java.lang.annotation.Target;
 public @interface Service {
 	
 	/**
-	 * Service注解名称
+	 * Service注解名称，必填
 	 * @return
 	 */
     String name();
     
     /**
-     * 是否开启事务，默认false
+     * 是否开启事务，选填，默认false
      * @return
      */
     boolean tx() default false;
