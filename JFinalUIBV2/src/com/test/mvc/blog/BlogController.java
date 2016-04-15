@@ -1,13 +1,13 @@
 package com.test.mvc.blog;
 
-import org.apache.log4j.Logger;
-
-import com.jfinal.aop.Before;
 import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
-import com.platform.tools.ToolDateTime;
+
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Before;
 
 /**
  * XXX 管理	
@@ -43,10 +43,7 @@ public class BlogController extends BaseController {
 	 */
 	@Before(BlogValidator.class)
 	public void save() {
-		Blog blog = getModel(Blog.class);
-		blog.set(Blog.column_createtime, 
-				ToolDateTime.getSqlTimestamp(null));
-		blog.save();
+		getModel(Blog.class).save();
 		render("/test/blog/add.html");
 	}
 	
@@ -86,5 +83,3 @@ public class BlogController extends BaseController {
 	}
 	
 }
-
-
