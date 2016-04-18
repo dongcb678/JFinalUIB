@@ -175,8 +175,8 @@ public class ParamInitPlugin implements IPlugin {
 			}
 			
 			for (UserInfo userInfo : userInfoList) {
-				ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_email), userInfo);
-				ToolCache.set(ParamInitPlugin.cacheStart_user + userInfo.getStr(UserInfo.column_mobile), userInfo);
+				ToolCache.set(ParamInitPlugin.cacheStart_userInfo + userInfo.getStr(UserInfo.column_email), userInfo);
+				ToolCache.set(ParamInitPlugin.cacheStart_userInfo + userInfo.getStr(UserInfo.column_mobile), userInfo);
 			}
 			userInfoList = null;
 		}
