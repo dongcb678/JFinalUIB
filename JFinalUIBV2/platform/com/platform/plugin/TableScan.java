@@ -8,7 +8,6 @@ import com.jfinal.plugin.IPlugin;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
-import com.platform.mvc.base.BaseModelCache;
 import com.platform.tools.ToolClassSearch;
 
 /**
@@ -30,9 +29,8 @@ public class TableScan implements IPlugin {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public boolean start() {
-		// 查询所有继承BaseModel、BaseModelCache的子类
+		// 查询所有BaseModel的子类
 		List<Class<?>> modelClasses = ToolClassSearch.search(BaseModel.class);
-		modelClasses.addAll(ToolClassSearch.search(BaseModelCache.class));
 
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
