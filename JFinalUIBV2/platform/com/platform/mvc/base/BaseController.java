@@ -181,6 +181,15 @@ public abstract class BaseController extends Controller {
 	}
 
 	/**
+	 * 解决IE8下下载失败的问题
+	 */
+	@Override
+	public void renderFile(File file, String downloadSaveFileName) {
+		getResponse().reset(); 
+		super.renderFile(file, downloadSaveFileName);
+	}
+
+	/**
 	 * 表单数组映射List<Model>
 	 * @param modelClass
 	 * @return

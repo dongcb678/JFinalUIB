@@ -242,6 +242,14 @@ public class RenderFactory {
 	public Render getFileRender(File file) {
 		return new FileRender(file);
 	}
+
+	public Render getFileRender(String fileName, String downloadSaveFileName) {
+		return new FileRender(fileName);
+	}
+	
+	public Render getFileRender(File file, String downloadSaveFileName) {
+		return new FileRender(file);
+	}
 	
 	public Render getRedirectRender(String url) {
 		return new RedirectRender(url);

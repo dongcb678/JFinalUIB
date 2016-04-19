@@ -1079,6 +1079,20 @@ public abstract class Controller {
 	public void renderFile(File file) {
 		render = renderFactory.getFileRender(file);
 	}
+
+	/**
+	 * Render with file
+	 */
+	public void renderFile(String fileName, String downloadSaveFileName) {
+		render = renderFactory.getFileRender(fileName, downloadSaveFileName);
+	}
+	
+	/**
+	 * Render with file
+	 */
+	public void renderFile(File file, String downloadSaveFileName) {
+		render = renderFactory.getFileRender(file, downloadSaveFileName);
+	}
 	
 	/**
 	 * Redirect to url

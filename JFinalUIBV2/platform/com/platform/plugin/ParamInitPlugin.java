@@ -160,7 +160,7 @@ public class ParamInitPlugin implements IPlugin {
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql(UserInfo.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
-		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_userInfo ", splitDataSize);
+		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_userinfo ", splitDataSize);
 		List<UserInfo> userInfoList = null;
 		for (long i = 0; i < batchCount; i++) {
 			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){

@@ -19,13 +19,14 @@ public class EscapeXml implements Function {
 	@Override
 	public Object call(Object[] arg, Context context) {
 		if(arg.length != 1 || null == arg[0] || !(arg[0] instanceof String)){
-			return "";
+			return arg[0];
 		}
 		String content = null;// 
 		try {
 			content = (String) arg[0];
 		} catch (Exception e) {
-			return "";
+			log.error("EscapeXml参数转String异常:arg = " + arg[0]);
+			return arg[0];
 		}
 
 		return StringEscapeUtils.escapeXml11(content);
