@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModelCache;
+import com.platform.mvc.param.Param;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
 
@@ -472,11 +473,9 @@ public class Dict extends BaseModelCache<Dict> {
 	 */
 	public void cacheAdd(String ids){
 		Dict dict = Dict.dao.findById(ids);
-		ToolCache.set(ParamInitPlugin.cacheStart_dict + ids, dict);
 		ToolCache.set(ParamInitPlugin.cacheStart_dict + dict.getStr(column_numbers), dict);
 		
 		List<Dict> dictList = dict.getChild();
-		ToolCache.set(ParamInitPlugin.cacheStart_dict_child + ids, dictList);
 		ToolCache.set(ParamInitPlugin.cacheStart_dict_child + dict.getStr(column_numbers), dictList);
 
 		String parentIds = dict.getStr("parentids");
@@ -484,7 +483,6 @@ public class Dict extends BaseModelCache<Dict> {
 			Dict parent = Dict.dao.findById(parentIds);
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
-				ToolCache.set(ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
 				ToolCache.set(ParamInitPlugin.cacheStart_dict_child + parent.getStr(column_numbers), parentList);
 			}
 		}
@@ -497,9 +495,7 @@ public class Dict extends BaseModelCache<Dict> {
 	public void cacheRemove(String ids){
 		Dict dict = Dict.dao.findById(ids);
 		
-		ToolCache.remove(ParamInitPlugin.cacheStart_dict + ids);
 		ToolCache.remove(ParamInitPlugin.cacheStart_dict + dict.getStr(column_numbers));
-		ToolCache.remove(ParamInitPlugin.cacheStart_dict_child + ids);
 		ToolCache.remove(ParamInitPlugin.cacheStart_dict_child + dict.getStr(column_numbers));
 
 		String parentIds = dict.getStr("parentids");
@@ -507,7 +503,6 @@ public class Dict extends BaseModelCache<Dict> {
 			Dict parent = Dict.dao.findById(parentIds);
 			if(null != parent){
 				List<Dict> parentList = parent.getChild();
-				ToolCache.set(ParamInitPlugin.cacheStart_dict_child + parent.getPKValue(), parentList);
 				ToolCache.set(ParamInitPlugin.cacheStart_dict_child + parent.getStr(column_numbers), parentList);
 			}
 		}
@@ -515,21 +510,30 @@ public class Dict extends BaseModelCache<Dict> {
 
 	/**
 	 * 获取缓存
-	 * @param key
+	 * @param numbers
 	 * @return
 	 */
-	public Dict cacheGet(String key){
-		Dict dict = ToolCache.get(ParamInitPlugin.cacheStart_dict + key);
+	public Dict cacheGet(String numbers){
+		Dict dict = ToolCache.get(ParamInitPlugin.cacheStart_dict + numbers);
+		if(dict == null){
+			dict = Dict.dao.findFirst("platform.dict.numbers", numbers);
+			cacheAdd(dict.getPKValue());
+		}
 		return dict;
 	}
 	
 	/**
 	 * 获取缓存
-	 * @param key
+	 * @param numbers
 	 * @return
 	 */
-	public List<Dict> cacheGetChild(String key){
-		List<Dict> dictList = ToolCache.get(ParamInitPlugin.cacheStart_dict_child + key);
+	public List<Dict> cacheGetChild(String numbers){
+		List<Dict> dictList = ToolCache.get(ParamInitPlugin.cacheStart_dict_child + numbers);
+		if(dictList == null){
+			Dict pDict = cacheGet(numbers);
+			dictList = Dict.dao.find("platform.param.child", pDict.getPKValue());
+			cacheAdd(ids);
+		}
 		return dictList;
 	}
 	

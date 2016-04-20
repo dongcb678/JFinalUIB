@@ -306,6 +306,12 @@ public class Operator extends BaseModelCache<Operator> {
 	 */
 	public Operator cacheGet(String key){
 		Operator operator = ToolCache.get(ParamInitPlugin.cacheStart_operator + key);
+		if(operator == null){
+			operator = Operator.dao.findById(key);
+			if(operator == null){
+				operator = Operator.dao.findFirst("platform.operator.url", key);
+			}
+		}
 		return operator;
 	}
 	

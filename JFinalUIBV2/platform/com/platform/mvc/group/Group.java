@@ -152,6 +152,9 @@ public class Group extends BaseModelCache<Group> {
 	 */
 	public Group cacheGet(String ids){
 		Group group = ToolCache.get(ParamInitPlugin.cacheStart_group + ids);
+		if(group == null){
+			group = Group.dao.findById(ids);
+		}
 		return group;
 	}
 	

@@ -460,7 +460,6 @@ public abstract class ToolHttp {
 			}
 			
 			cookieStore = new BasicCookieStore();
-			cookieStore = new BasicCookieStore();
 			Header[] headers = loginHR.getHeaders("Set-Cookie");
 			String authmark = null;
 			for (Header header : headers) {

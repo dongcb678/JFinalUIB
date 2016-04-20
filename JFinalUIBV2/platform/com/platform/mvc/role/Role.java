@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModelCache;
+import com.platform.mvc.station.Station;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
 
@@ -171,6 +172,10 @@ public class Role extends BaseModelCache<Role> {
 	 */
 	public Role cacheGet(String key){
 		Role role = ToolCache.get(ParamInitPlugin.cacheStart_role + key);
+		if(role == null){
+			role = Role.dao.findById(ids);
+			cacheAdd(ids);
+		}
 		return role;
 	}
 	

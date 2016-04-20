@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModelCache;
+import com.platform.mvc.role.Role;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
 
@@ -471,9 +472,7 @@ public class Param extends BaseModelCache<Param> {
 	public void cacheAdd(String ids){
 		Param param = Param.dao.findById(ids);
 		List<Param> paramList = param.getChild();
-		ToolCache.set(ParamInitPlugin.cacheStart_param + ids, param);
 		ToolCache.set(ParamInitPlugin.cacheStart_param + param.getStr(column_numbers), param);
-		ToolCache.set(ParamInitPlugin.cacheStart_param_child + ids, paramList);
 		ToolCache.set(ParamInitPlugin.cacheStart_param_child + param.getStr(column_numbers), paramList);
 		
 		String paramIds = param.getStr("parentids");
@@ -481,7 +480,6 @@ public class Param extends BaseModelCache<Param> {
 			Param parent = Param.dao.findById(param.getStr("parentids"));
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
-				ToolCache.set(ParamInitPlugin.cacheStart_param_child + parent.getPKValue(), parentList);
 				ToolCache.set(ParamInitPlugin.cacheStart_param_child + parent.getStr(column_numbers), parentList);
 			}
 		}
@@ -493,9 +491,7 @@ public class Param extends BaseModelCache<Param> {
 	 */
 	public void cacheRemove(String ids){
 		Param param = Param.dao.findById(ids);
-		ToolCache.remove(ParamInitPlugin.cacheStart_param + ids);
 		ToolCache.remove(ParamInitPlugin.cacheStart_param + param.getStr(column_numbers));
-		ToolCache.remove(ParamInitPlugin.cacheStart_param_child + ids);
 		ToolCache.remove(ParamInitPlugin.cacheStart_param_child + param.getStr(column_numbers));
 
 		String paramIds = param.getStr("parentids");
@@ -503,7 +499,6 @@ public class Param extends BaseModelCache<Param> {
 			Param parent = Param.dao.findById(param.getStr("parentids"));
 			if(null != parent){
 				List<Param> parentList = parent.getChild();
-				ToolCache.set(ParamInitPlugin.cacheStart_param_child + parent.getPKValue(), parentList);
 				ToolCache.set(ParamInitPlugin.cacheStart_param_child + parent.getStr(column_numbers), parentList);
 			}
 		}
@@ -511,21 +506,30 @@ public class Param extends BaseModelCache<Param> {
 
 	/**
 	 * 获取缓存
-	 * @param key
+	 * @param numbers
 	 * @return
 	 */
-	public Param cacheGet(String key){
-		Param param = ToolCache.get(ParamInitPlugin.cacheStart_param + key);
+	public Param cacheGet(String numbers){
+		Param param = ToolCache.get(ParamInitPlugin.cacheStart_param + numbers);
+		if(param == null){
+			param = Param.dao.findFirst("platform.param.numbers", numbers);
+			cacheAdd(param.getPKValue());
+		}
 		return param;
 	}
 	
 	/**
 	 * 获取缓存
-	 * @param key
+	 * @param numbers
 	 * @return
 	 */
-	public List<Param> cacheGetChild(String key){
-		List<Param> paramList = ToolCache.get(ParamInitPlugin.cacheStart_param_child + key);
+	public List<Param> cacheGetChild(String numbers){
+		List<Param> paramList = ToolCache.get(ParamInitPlugin.cacheStart_param_child + numbers);
+		if(paramList == null){
+			Param pParam = cacheGet(numbers);
+			paramList = Param.dao.find("platform.param.child", pParam.getPKValue());
+			cacheAdd(ids);
+		}
 		return paramList;
 	}
 	

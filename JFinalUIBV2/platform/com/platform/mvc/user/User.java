@@ -397,6 +397,10 @@ public class User extends BaseModelCache<User> {
 	 */
 	public User cacheGet(String ids){
 		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + ids);
+		if(user == null){
+			user = User.dao.findById(ids);
+			cacheAdd(ids);
+		}
 		return user;
 	}
 	
