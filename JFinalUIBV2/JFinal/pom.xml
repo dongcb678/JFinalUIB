@@ -8,12 +8,10 @@
 	<parent>
 		<groupId>little.ant</groupId>
 		<artifactId>JFinalUIBV2</artifactId>
-		<version>2.0</version>
+		<version>2.2</version>
 	</parent>
 	
-	<groupId>little.ant</groupId>
 	<artifactId>JFinal</artifactId>
-	<version>2.2</version>
 	
 	<packaging>jar</packaging>
 	
