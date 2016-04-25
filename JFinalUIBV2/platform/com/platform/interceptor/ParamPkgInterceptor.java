@@ -45,7 +45,6 @@ public class ParamPkgInterceptor implements Interceptor {
 
 		// 封装Controller父类至BaseController变量值
 		Class<?> superControllerClass = controllerClass.getSuperclass(); // 获取父类
-		int superLevel = 0;
 		while (true) {
 			if(superControllerClass == BaseController.class){ // 父类是否为BaseController
 				Field[] parentFields = superControllerClass.getDeclaredFields();
@@ -55,17 +54,11 @@ public class ParamPkgInterceptor implements Interceptor {
 				break;
 			}
 			
-			if(superLevel >= 5){
-				throw new RuntimeException("请检查您的Controller继承BaseController层级是否过多，最大往上查找5层");
-			}
-			
 			superControllerClass = controllerClass.getSuperclass(); // 继续获取父类
 			Field[] parentFields = superControllerClass.getDeclaredFields();
 			for (Field field : parentFields) {
 				setControllerFieldValue(controller, field);
 			}
-			
-			superLevel += 1;
 		}
 		
 //		 判断请求是否文件上传类型
@@ -92,7 +85,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			setRequestValue(controller, field);
 		}
 		
-		// 封装baseController变量值
+		// 封装Controller父类至baseController变量值
 		while (true) {
 			if(superControllerClass == BaseController.class){
 				Field[] parentFields = superControllerClass.getDeclaredFields();
