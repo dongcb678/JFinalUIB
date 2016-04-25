@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
+import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.group.Group;
 import com.platform.mvc.menu.Menu;
@@ -14,13 +14,14 @@ import com.platform.mvc.role.Role;
 import com.platform.mvc.station.Station;
 import com.platform.mvc.user.User;
 
+@Service(name = IndexService.serviceName)
 public class IndexService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(IndexService.class);
 
-	public static final IndexService service = Enhancer.enhance(IndexService.class);
-	
+	public static final String serviceName = "indexService";
+
 	/**
 	 * 查询用户可操作的菜单
 	 * @param systemsIds

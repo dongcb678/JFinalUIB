@@ -10,19 +10,20 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
-import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.platform.annotation.Service;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.dept.Department;
 import com.platform.tools.security.ToolPbkdf2;
 
+@Service(name = UserService.serviceName)
 public class UserService extends BaseService {
 
 	private static Logger log = Logger.getLogger(UserService.class);
 
-	public static final UserService service = Enhancer.enhance(UserService.class);
-	
+	public static final String serviceName = "userService";
+
 	/**
 	 * 新增用户信息保存
 	 * @param user

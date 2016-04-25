@@ -448,6 +448,10 @@ public class UserInfo extends BaseModel<UserInfo> {
 	 */
 	public UserInfo cacheGet(String ids){
 		UserInfo userInfo = ToolCache.get(ParamInitPlugin.cacheStart_userInfo + ids);
+		if(userInfo == null){
+			userInfo = UserInfo.dao.findById(ids);
+			cacheAdd(ids);
+		}
 		return userInfo;
 	}
 	

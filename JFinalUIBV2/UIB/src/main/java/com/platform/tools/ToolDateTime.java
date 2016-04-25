@@ -25,9 +25,11 @@ public abstract class ToolDateTime {
 
 	private static Logger log = Logger.getLogger(ToolDateTime.class);
 
+	public static final String pattern_ym = "yyyy-MM"; // pattern_ym
 	public static final String pattern_ymd = "yyyy-MM-dd"; // pattern_ymd
-	public static final String pattern_ymd_hms = "yyyy-MM-dd HH:mm:ss"; // pattern_ymdtime
-	public static final String pattern_ymd_hms_s = "yyyy-MM-dd HH:mm:ss:SSS"; // pattern_ymdtimeMillisecond
+	public static final String pattern_ymd_hm = "yyyy-MM-dd HH:mm"; // pattern_ymd hm
+	public static final String pattern_ymd_hms = "yyyy-MM-dd HH:mm:ss"; // pattern_ymd time
+	public static final String pattern_ymd_hms_s = "yyyy-MM-dd HH:mm:ss:SSS"; // pattern_ymd timeMillisecond
 
 	/**
 	 * 主要是给jfinal使用，数据库只认java.sql.*

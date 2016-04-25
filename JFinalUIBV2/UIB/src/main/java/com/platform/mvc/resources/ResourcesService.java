@@ -10,10 +10,10 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
-import com.jfinal.aop.Enhancer;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseService;
 import com.platform.tools.ToolDateTime;
@@ -23,13 +23,14 @@ import com.platform.tools.ToolOS;
  * 系统资源负载
  * @author 董华健
  */
+@Service(name = ResourcesService.serviceName)
 public class ResourcesService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ResourcesService.class);
 
-	public static final ResourcesService service = Enhancer.enhance(ResourcesService.class);
-	
+	public static final String serviceName = "resourcesService";
+
 	/**
 	 * 最近15天PV
 	 * @return

@@ -22,6 +22,8 @@ public class RoleController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(RoleController.class);
 	
+	private RoleService roleService;
+	
 	private List<Group> noCheckedList; // 分组没有的角色
 	private List<Group> checkedList; // 分组拥有的角色
 	
@@ -41,7 +43,7 @@ public class RoleController extends BaseController {
 	 */
 	@Before(RoleValidator.class)
 	public void save() {
-		ids = RoleService.service.save(getModel(Role.class));
+		ids = roleService.save(getModel(Role.class));
 		redirect("/jf/platform/role");
 	}
 
@@ -58,7 +60,7 @@ public class RoleController extends BaseController {
 	 */
 	@Before(RoleValidator.class)
 	public void update() {
-		RoleService.service.update(getModel(Role.class));
+		roleService.update(getModel(Role.class));
 		redirect("/jf/platform/role");
 	}
 	
@@ -66,7 +68,7 @@ public class RoleController extends BaseController {
 	 * 删除角色
 	 */
 	public void delete() {
-		RoleService.service.delete(getPara() == null ? ids : getPara());
+		roleService.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/role");
 	}
 	
@@ -75,7 +77,7 @@ public class RoleController extends BaseController {
 	 */
 	@SuppressWarnings("unchecked")
 	public void select(){
-		Map<String,Object> map = RoleService.service.select(ids);
+		Map<String,Object> map = roleService.select(ids);
 		noCheckedList = (List<Group>) map.get("noCheckedList");
 		checkedList = (List<Group>) map.get("checkedList");
 		render("/platform/role/select.html");
@@ -93,7 +95,7 @@ public class RoleController extends BaseController {
 	 * 设置角色拥有的功能
 	 */
 	public void setOperator(){
-		RoleService.service.setOperator(ids, moduleIds, operatorIds);
+		roleService.setOperator(ids, moduleIds, operatorIds);
 		renderJson(ids);
 	}
 	

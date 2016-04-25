@@ -31,14 +31,19 @@ import com.platform.tools.ToolWeb;
 public abstract class BaseController extends Controller {
 
 	private static Logger log = Logger.getLogger(BaseController.class);
+
+	/**
+	 * 全局Service
+	 */
+	protected BaseService baseService;		// Service
 	
 	/**
 	 * 全局变量
 	 */
-	protected String ids;			// 主键
-	protected SplitPage splitPage;	// 分页封装
-	protected List<?> list;			// 公共list
-	protected Syslog reqSysLog;		// 访问日志
+	protected String ids;				// 主键
+	protected SplitPage splitPage;		// 分页封装
+	protected List<?> list;				// 公共list
+	protected Syslog reqSysLog;			// 访问日志
 	
 	/**
 	 * 请求/WEB-INF/下的视图文件
@@ -173,6 +178,15 @@ public abstract class BaseController extends Controller {
 	public void renderFile(File file) {
 		getResponse().reset(); 
 		super.renderFile(file);
+	}
+
+	/**
+	 * 解决IE8下下载失败的问题
+	 */
+	@Override
+	public void renderFile(File file, String downloadSaveFileName) {
+		getResponse().reset(); 
+		super.renderFile(file, downloadSaveFileName);
 	}
 
 	/**
@@ -369,7 +383,7 @@ public abstract class BaseController extends Controller {
 	 * @param sqlId
 	 */
 	protected void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
-		BaseService.service.paging(dataSource, splitPage, selectSqlId, fromSqlId);
+		baseService.paging(dataSource, splitPage, selectSqlId, fromSqlId);
 	}
 
 	/**
@@ -380,7 +394,7 @@ public abstract class BaseController extends Controller {
 	 * @param distinctSqlId		分页查询distinct语句，不包含from之后
 	 */
 	protected void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
-		BaseService.service.pagingDistinct(dataSource, splitPage, selectSqlId, distinctSqlId, fromSqlId);
+		baseService.pagingDistinct(dataSource, splitPage, selectSqlId, distinctSqlId, fromSqlId);
 	}
 
 	/**
@@ -389,7 +403,7 @@ public abstract class BaseController extends Controller {
      * @return
      */
 	protected String getSql(String sqlId){
-		return BaseService.service.getSql(sqlId);
+		return baseService.getSql(sqlId);
 	}
 
     /**
@@ -399,7 +413,7 @@ public abstract class BaseController extends Controller {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, Object> param){
-    	return BaseService.service.getSqlByBeetl(sqlId, param);
+    	return baseService.getSqlByBeetl(sqlId, param);
     }
     
     /**
@@ -410,7 +424,7 @@ public abstract class BaseController extends Controller {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
-    	return BaseService.service.getSqlByBeetl(sqlId, param, list);
+    	return baseService.getSqlByBeetl(sqlId, param, list);
     }
 
 	/************************************		get 	set 	方法		************************************************/

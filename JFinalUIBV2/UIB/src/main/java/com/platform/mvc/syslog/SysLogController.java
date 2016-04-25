@@ -16,6 +16,8 @@ public class SysLogController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SysLogController.class);
 	
+	private SysLogService sysLogService;
+	
 	/**
 	 * 日志管理列表
 	 */
@@ -38,7 +40,7 @@ public class SysLogController extends BaseController {
 	 * 删除日志
 	 */
 	public void delete() {
-		SysLogService.service.delete("pt_syslog", getPara() == null ? ids : getPara());
+		sysLogService.delete("pt_syslog", getPara() == null ? ids : getPara());
 		redirect("/jf/platform/sysLog");
 	}
 

@@ -5,19 +5,20 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
+@Service(name = DictService.serviceName)
 public class DictService extends BaseService {
 
 	private static Logger log = Logger.getLogger(DictService.class);
 
-	public static final DictService service = Enhancer.enhance(DictService.class);
-	
+	public static final String serviceName = "dictService";
+
 	/**
 	 * 保存
 	 * @param dict

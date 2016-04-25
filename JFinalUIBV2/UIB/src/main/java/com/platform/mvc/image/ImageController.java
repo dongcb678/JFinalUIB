@@ -15,6 +15,8 @@ public class ImageController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ImageController.class);
 
+	private ImageService imageService;
+	
 	public int type;
 	public String imageName;
 	public String imagePath;
@@ -27,7 +29,7 @@ public class ImageController extends BaseController {
 	public int h;	// 
 	
 	public void index() {
-		String result = ImageService.service.cut(type, imageName, imagePath, x1, y1, w, h);
+		String result = imageService.cut(type, imageName, imagePath, x1, y1, w, h);
 		renderText(result);
 	}
 	

@@ -9,12 +9,12 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
-import com.jfinal.aop.Enhancer;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantRender;
 import com.platform.dto.SplitPage;
@@ -26,12 +26,13 @@ import com.platform.tools.ToolString;
  * 公共方法
  * @author 董华健
  */
+@Service(name = BaseService.serviceName)
 public class BaseService {
 
 	private static Logger log = Logger.getLogger(BaseService.class);
-
-	public static final BaseService service = Enhancer.enhance(BaseService.class);
 	
+	public static final String serviceName = "baseService";
+
 	/**
 	 * 封装预处理参数解析并执行查询
 	 * @param sqlId
@@ -365,7 +366,7 @@ public class BaseService {
 	 * @param batchSize 每次数据多少条
 	 * @return
 	 */
-	public long getBatchCount(String dataSource, String sql, int batchSize){
+	public static long getBatchCount(String dataSource, String sql, int batchSize){
 		long batchCount = 0;
 		long count = Db.use(dataSource).queryNumber(" select count(*) " + sql).longValue();
 		if(count % batchSize == 0){

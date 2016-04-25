@@ -19,6 +19,8 @@ public class MenuController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(MenuController.class);
 	
+	private MenuService menuService;
+	
 	private String systemsIds; // 哪个系统下的菜单
 	private String pIds; // 菜单上级节点ids
 	private String names; // 菜单名称
@@ -36,7 +38,7 @@ public class MenuController extends BaseController {
 	 * ztree子节点数据
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = MenuService.service.childNodeData(getCxt(), systemsIds, ids, geti18nColumnSuffix());
+		List<ZtreeNode> nodeList = menuService.childNodeData(getCxt(), systemsIds, ids, geti18nColumnSuffix());
 		renderJson(nodeList);
 	}
 
@@ -45,7 +47,7 @@ public class MenuController extends BaseController {
 	 */
 	@Before(MenuValidator.class)
 	public void save() {
-		ids = MenuService.service.save(pIds, names, orderIds, geti18nColumnSuffix());
+		ids = menuService.save(pIds, names, orderIds, geti18nColumnSuffix());
 		renderText(ids);
 	}
 
@@ -54,7 +56,7 @@ public class MenuController extends BaseController {
 	 */
 	@Before(MenuValidator.class)
 	public void update() {
-		MenuService.service.update(ids, pIds, names, geti18nColumnSuffix());
+		menuService.update(ids, pIds, names, geti18nColumnSuffix());
 		renderText(ids);
 	}
 
@@ -81,7 +83,7 @@ public class MenuController extends BaseController {
 	 * 删除菜单
 	 */
 	public void delete() {
-		MenuService.service.delete(ids);
+		menuService.delete(ids);
 		renderText(ids);
 	}
 	
@@ -97,7 +99,7 @@ public class MenuController extends BaseController {
 	 * 设置菜单对应的功能
 	 */
 	public void setOperator(){
-		MenuService.service.setOperator(ids, operatorIds);
+		menuService.setOperator(ids, operatorIds);
 		renderJson(ids);
 	}
 	

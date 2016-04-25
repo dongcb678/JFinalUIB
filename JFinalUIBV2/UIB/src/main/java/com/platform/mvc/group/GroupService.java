@@ -7,17 +7,18 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.jfinal.aop.Enhancer;
+import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.user.User;
 
+@Service(name = GroupService.serviceName)
 public class GroupService extends BaseService {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(GroupService.class);
 
-	public static final GroupService service = Enhancer.enhance(GroupService.class);
-	
+	public static final String serviceName = "groupService";
+
 	/**
 	 * 保存
 	 * @param group

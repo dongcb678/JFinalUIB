@@ -177,7 +177,7 @@ public interface ConstantI18n {
 	public static final String admin_group_list_table = "admin.group.list.table";
 	
 	/**
-	 * 欢迎登陆JfinalUIB 
+	 * 欢迎登陆JFinalUIB 
 	 */
 	public static final String admin_login_title = "admin.login.title";
 	

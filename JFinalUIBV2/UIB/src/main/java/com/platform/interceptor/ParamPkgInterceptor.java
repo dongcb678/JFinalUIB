@@ -13,9 +13,11 @@ import com.jfinal.aop.Invocation;
 import com.platform.constant.ConstantWebContext;
 import com.platform.dto.SplitPage;
 import com.platform.mvc.base.BaseController;
+import com.platform.mvc.base.BaseService;
 import com.platform.mvc.operator.Operator;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
+import com.platform.plugin.ServicePlugin;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolString;
 
@@ -29,42 +31,49 @@ public class ParamPkgInterceptor implements Interceptor {
 	
 	@Override
 	public void intercept(Invocation invoc) {
-		log.debug("********* 反射获取 controller 全局变量  start *********");
+		log.debug("********* 封装参数值到 controller 全局变量  start *********");
 		
+		// 获取Controller
 		BaseController controller = (BaseController) invoc.getController();
 		
-		Class<?> controllerClass = controller.getClass();
-		Class<?> superControllerClass = controllerClass.getSuperclass();
-		
-		Field[] fields = controllerClass.getDeclaredFields();
-		Field[] parentFields = superControllerClass.getDeclaredFields();
-		
-		log.debug("********* 反射获取 controller 全局变量  end *********");
-		
-		log.debug("********* 封装参数值到 controller 全局变量  start *********");
-//		boolean isMultipart = ServletFileUpload.isMultipartContent(controller.getRequest()); // 判断是否文件上传类型
-//		if(isMultipart){
-//			controller.getFile();
-//		}
-		// 是否需要分页
-		Syslog reqSysLog = controller.getReqSysLog();
-		String operatorids = reqSysLog.getStr(Syslog.column_operatorids);
-		Operator operator = Operator.dao.cacheGet(operatorids);
-		String splitpage = operator.getStr(Operator.column_splitpage);
-		if(splitpage.equals("1")){
-			splitPage(controller, superControllerClass);
-		}
-		
 		// 封装controller变量值
+		Class<?> controllerClass = controller.getClass();
+		Field[] fields = controllerClass.getDeclaredFields();
 		for (Field field : fields) {
 			setControllerFieldValue(controller, field);
 		}
-		
-		// 封装baseController变量值
-		for (Field field : parentFields) {
-			setControllerFieldValue(controller, field);
-		}
 
+		// 封装Controller父类至BaseController变量值
+		Class<?> superControllerClass = controllerClass.getSuperclass(); // 获取父类
+		while (true) {
+			if(superControllerClass == BaseController.class){ // 父类是否为BaseController
+				Field[] parentFields = superControllerClass.getDeclaredFields();
+				for (Field field : parentFields) {
+					setControllerFieldValue(controller, field);
+				}
+				break;
+			}
+			
+			superControllerClass = controllerClass.getSuperclass(); // 继续获取父类
+			Field[] parentFields = superControllerClass.getDeclaredFields();
+			for (Field field : parentFields) {
+				setControllerFieldValue(controller, field);
+			}
+		}
+		
+//		 判断请求是否文件上传类型
+//		boolean isMultipart = ServletFileUpload.isMultipartContent(controller.getRequest()); 
+//		if(isMultipart){
+//			controller.getFile();
+//		}
+		
+		// 是否需要分页
+		String operatorIds = controller.getReqSysLog().getStr(Syslog.column_operatorids);
+		String splitpage = Operator.dao.cacheGet(operatorIds).getStr(Operator.column_splitpage);
+		if(splitpage.equals("1")){
+			splitPage(controller);
+		}
+		
 		log.debug("********* 封装参数值到 controller 全局变量  end *********");
 		
 		invoc.invoke();
@@ -76,9 +85,20 @@ public class ParamPkgInterceptor implements Interceptor {
 			setRequestValue(controller, field);
 		}
 		
-		// 封装baseController变量值
-		for (Field field : parentFields) {
-			setRequestValue(controller, field);
+		// 封装Controller父类至baseController变量值
+		while (true) {
+			if(superControllerClass == BaseController.class){
+				Field[] parentFields = superControllerClass.getDeclaredFields();
+				for (Field field : parentFields) {
+					setRequestValue(controller, field);
+				}
+				break;
+			}
+			superControllerClass = controllerClass.getSuperclass();
+			Field[] parentFields = superControllerClass.getDeclaredFields();
+			for (Field field : parentFields) {
+				setRequestValue(controller, field);
+			}
 		}
 		
 		log.debug("********* 设置全局变量值到 request end *********");
@@ -87,9 +107,8 @@ public class ParamPkgInterceptor implements Interceptor {
 	/**
 	 * 分页参数处理
 	 * @param controller
-	 * @param superControllerClass
 	 */
-	private void splitPage(BaseController controller, Class<?> superControllerClass){
+	private void splitPage(BaseController controller){
 		SplitPage splitPage = new SplitPage();
 		// 分页查询参数分拣
 		Map<String, Object> queryParam = new HashMap<String, Object>();
@@ -151,24 +170,38 @@ public class ParamPkgInterceptor implements Interceptor {
 		try {
 			field.setAccessible(true);
 			String name = field.getName();
-			String value = controller.getPara(name);
-			if(null == value || value.trim().isEmpty()){// 参数值为空直接结束
-				log.debug("封装参数值到全局变量：field name = " + name + " value = 空");
+			
+			// service对象实例填充
+			if(BaseService.class.isAssignableFrom(field.getType())){
+				BaseService service = ServicePlugin.getService(name); 
+				field.set(controller, service);
 				return;
 			}
-			log.debug("封装参数值到全局变量：field name = " + name + " value = " + value);
 			
-			String fieldType = field.getType().getSimpleName();
-			if(fieldType.equals("String")){
+			// 参数值为空直接结束
+			String value = controller.getPara(name);
+			if(null == value || value.trim().isEmpty()){
+				return;
+			}
+			
+			// 封装参数值到全局变量
+			String type = field.getType().getSimpleName();
+			if(type.equals("String")){
 				field.set(controller, value);
 			
-			}else if(fieldType.equals("int")){
+			}else if(type.equals("int")){
 				field.set(controller, Integer.parseInt(value));
 				
-			}else if(fieldType.equals("Date")){
+			}else if(type.equals("Date")){
 				int dateLength = value.length();
-				if(dateLength == ToolDateTime.pattern_ymd.length()){
+				if(dateLength == ToolDateTime.pattern_ym.length()){
+					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ym));
+				
+				}else if(dateLength == ToolDateTime.pattern_ymd.length()){
 					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd));
+				
+				}else if(dateLength == ToolDateTime.pattern_ymd_hm.length()){
+					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hm));
 				
 				}else if(dateLength == ToolDateTime.pattern_ymd_hms.length()){
 					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms));
@@ -177,7 +210,7 @@ public class ParamPkgInterceptor implements Interceptor {
 					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms_s));
 				}
 				
-			}else if(fieldType.equals("BigDecimal")){
+			}else if(type.equals("BigDecimal")){
 				BigDecimal bdValue = new BigDecimal(value);
 				field.set(controller, bdValue);
 				
@@ -187,6 +220,8 @@ public class ParamPkgInterceptor implements Interceptor {
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		} finally {
 			field.setAccessible(false);
@@ -201,15 +236,19 @@ public class ParamPkgInterceptor implements Interceptor {
 	private void setRequestValue(BaseController controller, Field field){
 		try {
 			field.setAccessible(true);
+			Class<?> type = field.getType();
 			String name = field.getName();
 			Object value = field.get(controller);
-			if(null == value 
-					|| (value instanceof String && ((String)value).isEmpty() 
-					|| value instanceof Logger)
-					){// 参数值为空直接结束
-				log.debug("设置全局变量到request：field name = " + name + " value = 空");
+			
+			// 越过空值、和指定的实例变量
+			if(null == value
+					|| BaseService.class.isAssignableFrom(type)
+					|| (String.class.isAssignableFrom(type) && ((String)value).isEmpty())
+					|| Logger.class.isAssignableFrom(type)){
+				log.debug("参数值为空，获取类型不符，直接结束");
 				return;
 			}
+
 			log.debug("设置全局变量到request：field name = " + name + " value = " + value);
 			controller.setAttr(name, value);
 		} catch (IllegalArgumentException e1) {

@@ -99,7 +99,7 @@ public class AuthInterceptor implements Interceptor {
 		Operator operator = (Operator) operatorObj;
 		reqSysLog.set(Syslog.column_operatorids, operator.getPKValue());
 
-		if (operator.get("privilegess").equals("1")) {// 是否需要权限验证
+		if (operator.get(Operator.column_privilegess).equals("1")) {// 是否需要权限验证
 			log.info("需要权限验证!");
 			if (user == null) {
 				log.info("权限认证过滤器检测:未登录!");
@@ -219,6 +219,10 @@ public class AuthInterceptor implements Interceptor {
 		Operator operator = Operator.dao.cacheGet(url);
 		if (null == operator) {
 			log.error("URL缓存不存在：" + url);
+			return false;
+		}
+		if (operator.get(Operator.column_privilegess).equals("0")) {
+			log.error("URL不需要权限验证：" + url);
 			return false;
 		}
 
@@ -382,7 +386,7 @@ public class AuthInterceptor implements Interceptor {
 		}
 
 		// 2.设置用户名到cookie
-		ToolWeb.addCookie(response, "", "/", true, "userName", user.getStr("username"), maxAgeTemp);
+		ToolWeb.addCookie(response, "", "/", true, "userName", user.getStr(User.column_username), maxAgeTemp);
 
 		// 3.生成登陆认证cookie
 		String userIds = user.getPKValue();

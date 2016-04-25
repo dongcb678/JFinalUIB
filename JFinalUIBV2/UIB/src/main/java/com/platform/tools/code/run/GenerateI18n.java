@@ -1,4 +1,4 @@
-package com.platform.tools.code;
+package com.platform.tools.code.run;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,11 +11,12 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.platform.config.run.ConfigCore;
+import com.platform.run.ConfigCore;
 import com.platform.tools.ToolDirFile;
+import com.platform.tools.code.handler.BaseHandler;
 
 /**
- * 根据国际化资源文件生成常量
+ * 根据国际化资源文件生成对应常量文件
  * @author 董华健
  */
 public class GenerateI18n  {
@@ -48,9 +49,9 @@ public class GenerateI18n  {
 			}
 			paramMap.put("i18nMap", i18nMap);
 
-			String outPath = System.getProperty("user.dir") + "/platform/com/platform/constant/ConstantI18n.java";
+			String outPath = System.getProperty("user.dir") + "/platform/com/platform/constant/ConstantI18n2.java";
 			
-			GenerateBase.createFileByTemplete("i18n.html", paramMap, outPath);
+			BaseHandler.createFileByTemplete("i18n.html", paramMap, outPath);
 		} catch (Exception exception) {
 			log.info("加载properties失败！...");
 		} finally {

@@ -50,6 +50,13 @@
     	]]>
 	</sql>
 	
+	<!-- 根据url查询功能 -->
+	<sql id="url">
+		<![CDATA[ 
+        	select * from pt_operator where url = ?
+    	]]>
+	</sql>
+	
 	<!-- 动态SQL处理 -->
 	<sql id="splitPageSelect">
 		<![CDATA[ 

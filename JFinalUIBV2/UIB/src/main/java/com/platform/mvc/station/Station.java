@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModelCache;
+import com.platform.mvc.user.UserInfo;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
 
@@ -198,6 +199,10 @@ public class Station extends BaseModelCache<Station> {
 	 */
 	public Station cacheGet(String ids){
 		Station station = ToolCache.get(ParamInitPlugin.cacheStart_station + ids);
+		if(station == null){
+			station = Station.dao.findById(ids);
+			cacheAdd(ids);
+		}
 		return station;
 	}
 	

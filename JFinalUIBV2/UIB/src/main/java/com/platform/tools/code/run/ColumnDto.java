@@ -1,10 +1,10 @@
-package com.platform.tools.code;
+package com.platform.tools.code.run;
 
 /**
  * 数据库表对应的列描述
  * @author 董华健
  */
-public class TableColumnDto {
+public class ColumnDto {
 
 	private String table_name ; // 表名称
 	
@@ -70,6 +70,5 @@ public class TableColumnDto {
 		column_className = column_className.substring(column_className.lastIndexOf(".") + 1);
 		this.column_className = column_className;
 	}
-	
 	
 }

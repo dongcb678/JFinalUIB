@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.platform.mvc.resources.ResourcesService;
 import com.platform.mvc.syslog.SysLogService;
+import com.platform.plugin.ServicePlugin;
 import com.platform.tools.ToolDateTime;
 
 /**
@@ -40,7 +41,8 @@ public class DataClear extends Timer {
 				
 				try {
 					log.info("清理访问日志数据");
-					SysLogService.service.timerDataClear();
+					SysLogService slService = (SysLogService) ServicePlugin.getService(SysLogService.serviceName);
+					slService.timerDataClear();
 				} catch (Exception e) {
 					log.error("清理访问日志数据失败：" + e.getMessage());
 					e.printStackTrace();
@@ -48,7 +50,8 @@ public class DataClear extends Timer {
 
 				try {
 					log.info("清理资源负载日志数据");
-					ResourcesService.service.timerDataClear();
+					ResourcesService rService = (ResourcesService) ServicePlugin.getService(ResourcesService.serviceName);
+					rService.timerDataClear();
 				} catch (Exception e) {
 					log.error("清理资源负载日志数据失败：" + e.getMessage());
 					e.printStackTrace();

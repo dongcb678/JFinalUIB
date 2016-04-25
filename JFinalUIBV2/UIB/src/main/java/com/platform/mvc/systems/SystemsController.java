@@ -18,6 +18,8 @@ public class SystemsController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SystemsController.class);
 	
+	private SystemsService systemsService;
+	
 	/**
 	 * 系统管理列表
 	 */
@@ -31,7 +33,7 @@ public class SystemsController extends BaseController {
 	 */
 	@Before(SystemsValidator.class)
 	public void save() {
-		SystemsService.service.save(getModel(Systems.class));
+		systemsService.save(getModel(Systems.class));
 		redirect("/jf/platform/systems");
 	}
 
@@ -56,7 +58,7 @@ public class SystemsController extends BaseController {
 	 * 删除系统
 	 */
 	public void delete() {
-		SystemsService.service.delete(getPara() == null ? ids : getPara());
+		systemsService.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/systems");
 	}
 

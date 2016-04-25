@@ -1,27 +1,36 @@
-package com.platform.config.mapping;
+package com.platform.plugin;
 
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.jfinal.plugin.IPlugin;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
-import com.platform.mvc.base.BaseModelCache;
 import com.platform.tools.ToolClassSearch;
 
-public class BaseMapping {
+/**
+ * 表自动注册注解扫描，绑定table和model
+ * @author 董华健  dongcb678@163.com
+ */
+public class TableScan implements IPlugin {
 
-	private static Logger log = Logger.getLogger(BaseMapping.class);
+	private static Logger log = Logger.getLogger(TableScan.class);
 
 	protected ActiveRecordPlugin arp;
 	protected String configName;
 
+	public TableScan(String configName, ActiveRecordPlugin arp) {
+		this.arp = arp;
+		this.configName = configName;
+	}
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void scan() {
-		// 查询所有继承BaseModel、BaseModelCache的子类
+	@Override
+	public boolean start() {
+		// 查询所有BaseModel的子类
 		List<Class<?>> modelClasses = ToolClassSearch.search(BaseModel.class);
-		modelClasses.addAll(ToolClassSearch.search(BaseModelCache.class));
 
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
@@ -61,14 +70,12 @@ public class BaseMapping {
 				log.debug("Model注册： model = " + model + ", tableName = " + tableName + ", pkName: " + pkName);
 			}
 		}
+		return true;
 	}
 
-	public void setConfigName(String configName) {
-		this.configName = configName;
-	}
-
-	public void setArp(ActiveRecordPlugin arp) {
-		this.arp = arp;
+	@Override
+	public boolean stop() {
+		return true;
 	}
 
 }

@@ -1,15 +1,16 @@
 package com.test.mvc.blog;
 
-import java.sql.Timestamp;
+import com.platform.annotation.Table;
+import com.platform.constant.ConstantInit;
+import com.platform.mvc.base.BaseModel;
+
+import java.sql.Timestamp; 
 
 import org.apache.log4j.Logger;
 
-import com.platform.annotation.Table;
-import com.platform.mvc.base.BaseModel;
-
 /**
  * 博客表 model
- * @author 董华健
+ * @author 董华健  dongcb678@163.com
  */
 @SuppressWarnings("unused")
 @Table(tableName = "test_blog")
@@ -47,11 +48,16 @@ public class Blog extends BaseModel<Blog> {
 	
 	
 	/**
-	 * sqlId : test.testBlog.splitPageFrom
+	 * sqlId : test.blog.splitPageFrom
 	 * 描述：分页from
 	 */
 	public static final String sqlId_splitPageFrom = "test.blog.splitPageFrom";
 
+	private String ids;
+	private String title;
+	private String content;
+	private String createtime;
+	
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

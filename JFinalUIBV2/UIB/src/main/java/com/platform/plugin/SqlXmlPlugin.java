@@ -104,7 +104,7 @@ public class SqlXmlPlugin implements IPlugin {
 	private static void findByJars(boolean isInit) {
     	try {
             // jar中文件查找
-        	List<String> jarList = ToolClassSearch.scanJarList();
+        	List<String> jarList = ToolClassSearch.getScanJarList();
         	int size = jarList.size();
             for (int i = 0; i < size; i++) {
                 JarFile jarFile = new JarFile(new File(ToolDirFile.getLibPath() + File.separator + jarList.get(i)));
@@ -115,7 +115,7 @@ public class SqlXmlPlugin implements IPlugin {
                     String pkgEntryName = entryName.replaceAll("/", ".");
                     
                     // 去除不需要扫描的包
-                    List<String> pkgs = ToolClassSearch.scanPkgList();
+                    List<String> pkgs = ToolClassSearch.getScanPkgList();
                     boolean pkgResult = false;
                     for (String pkg : pkgs) {
                     	if(pkgEntryName.startsWith(pkg)){

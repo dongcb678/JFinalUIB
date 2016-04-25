@@ -19,11 +19,13 @@ public class DictController extends BaseController {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DictController.class);
 	
+	private DictService dictService;
+	
 	/**
 	 * 首页
 	 */
 	public void index() {
-		String sql = DictService.service.getSql(Dict.sqlId_treeTableNodeRoot);
+		String sql = dictService.getSql(Dict.sqlId_treeTableNodeRoot);
 		list = Dict.dao.find(sql);
 		render("/platform/dict/treeTable.html");
 	}
@@ -32,7 +34,7 @@ public class DictController extends BaseController {
 	 * treeTable子节点数据获取
 	 */
 	public void treeTable() {
-		String sql = DictService.service.getSql(Dict.sqlId_treeTableChildNode);
+		String sql = dictService.getSql(Dict.sqlId_treeTableChildNode);
 		list = Dict.dao.find(sql, ids);
 		render("/platform/dict/treeTableSub.html");
 	}
@@ -41,7 +43,7 @@ public class DictController extends BaseController {
 	 * ztree子节点数据获取
 	 */
 	public void treeData()  {
-		List<ZtreeNode> nodeList = DictService.service.childNodeData(getCxt(), ids);
+		List<ZtreeNode> nodeList = dictService.childNodeData(getCxt(), ids);
 		renderJson(nodeList);
 	}
 	
@@ -50,7 +52,7 @@ public class DictController extends BaseController {
 	 */
 	@Before(DictValidator.class)
 	public void save() {
-		DictService.service.save(getModel(Dict.class));
+		dictService.save(getModel(Dict.class));
 		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html");
 	}
 	
@@ -70,7 +72,7 @@ public class DictController extends BaseController {
 	 */
 	@Before(DictValidator.class)
 	public void update() {
-		DictService.service.update(getModel(Dict.class));
+		dictService.update(getModel(Dict.class));
 		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html", true);
 	}
 	
@@ -78,7 +80,7 @@ public class DictController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		DictService.service.delete(getPara() == null ? ids : getPara());
+		dictService.delete(getPara() == null ? ids : getPara());
 		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html");
 	}
 

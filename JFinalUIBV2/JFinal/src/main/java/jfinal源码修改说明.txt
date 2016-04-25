@@ -1,4 +1,4 @@
-JFinal 2.2
+
 
 1.增加sql打印格式化
 
@@ -27,4 +27,9 @@ JFinal 2.2
 7.视图render增加耗时计算
 
 	ActionHandler.java
+	
+8.视图RenderFactory增加构造参数
+
+	可以指定下载文件名称，而不是使用默认文件名作为下载名称
+	
 	

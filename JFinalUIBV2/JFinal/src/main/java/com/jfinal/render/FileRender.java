@@ -36,6 +36,8 @@ public class FileRender extends Render {
 	private static final String DEFAULT_CONTENT_TYPE = "application/octet-stream";
 	
 	private File file;
+	private String downloadSaveFileName;
+	
 	private static String baseDownloadPath;
 	private static ServletContext servletContext;
 	
@@ -44,6 +46,14 @@ public class FileRender extends Render {
 			throw new IllegalArgumentException("file can not be null.");
 		}
 		this.file = file;
+	}
+
+	public FileRender(File file, String downloadSaveFileName) {
+		if (file == null) {
+			throw new IllegalArgumentException("file can not be null.");
+		}
+		this.file = file;
+		this.downloadSaveFileName = downloadSaveFileName;
 	}
 	
 	public FileRender(String fileName) {
@@ -65,6 +75,30 @@ public class FileRender extends Render {
 		
 		this.file = new File(fullFileName);
 	}
+
+	public FileRender(String fileName, String downloadSaveFileName) {
+		if (StrKit.isBlank(fileName)) {
+			throw new IllegalArgumentException("fileName can not be blank.");
+		}
+		if (StrKit.isBlank(downloadSaveFileName)) {
+			throw new IllegalArgumentException("downloadSaveFileName can not be blank.");
+		}
+		
+		String fullFileName;
+		fileName = fileName.trim();
+		if (fileName.startsWith("/") || fileName.startsWith("\\")) {
+			if (baseDownloadPath.equals("/")) {
+				fullFileName = fileName;
+			} else {
+				fullFileName = baseDownloadPath + fileName;	
+			}
+		} else {
+			fullFileName = baseDownloadPath + File.separator + fileName;
+		}
+		
+		this.file = new File(fullFileName);
+		this.downloadSaveFileName = downloadSaveFileName;
+	}
 	
 	static void init(String baseDownloadPath, ServletContext servletContext) {
 		FileRender.baseDownloadPath = baseDownloadPath;
@@ -78,8 +112,12 @@ public class FileRender extends Render {
         }
 		
 		// ---------
+		if(downloadSaveFileName == null || downloadSaveFileName.isEmpty()){
+			downloadSaveFileName = file.getName();
+		}
 		response.setHeader("Accept-Ranges", "bytes");
-		response.setHeader("Content-disposition", "attachment; filename=" + encodeFileName(file.getName()));
+		response.setHeader("Content-disposition", "attachment; filename=" + encodeFileName(downloadSaveFileName));
+		// 返回指定文件名的MIME类型。典型情况是基于文件扩展名，而不是文件本身的内容（它可以不必存在）。如果MIME类型未知，可以返回null
         String contentType = servletContext.getMimeType(file.getName());
         response.setContentType(contentType != null ? contentType : DEFAULT_CONTENT_TYPE);
         
