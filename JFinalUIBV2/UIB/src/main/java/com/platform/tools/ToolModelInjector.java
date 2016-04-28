@@ -52,7 +52,8 @@ public class ToolModelInjector {
 	 * @return
 	 */
 	public static <T extends BaseModel<T>> List<T> injectModels(final HttpServletRequest request, Class<? extends T> modelClass, String prefix) {
-		int index = 0;
+		int maxIndex = 0;	// 最大的数组索引
+		boolean zeroIndex = false; // 是否存在0索引
 		
 		String arrayPrefix = prefix + "[";
 		String key = null;
@@ -61,16 +62,23 @@ public class ToolModelInjector {
 			key = names.nextElement();
 			if (key.startsWith(arrayPrefix) && key.indexOf("]") != -1) {
 				int indexTemp = Integer.parseInt(key.substring(key.indexOf("[") + 1, key.indexOf("]")));
-				if(indexTemp > index){
-					index = indexTemp; // 找到最大的数组索引
+				
+				if(indexTemp == 0){
+					zeroIndex = true; // 是否存在0索引
+				} 
+				
+				if(indexTemp > maxIndex){
+					maxIndex = indexTemp; // 找到最大的数组索引
 				}
 			}
 		}
 		
 		List<T> modelList = new ArrayList<T>();
-		for (int i = 0; i <= index; i++) {
-			T baseModel = (T) Injector.injectModel(modelClass, prefix + "[" + i + "]", request, false);
-			modelList.add(baseModel);
+		for (int i = 0; i <= maxIndex; i++) {
+			if((i == 0 && zeroIndex) || i != 0){ // 避免表单空值时调用产生一个无用的值
+				T baseModel = (T) Injector.injectModel(modelClass, prefix + "[" + i + "]", request, false);
+				modelList.add(baseModel);
+			}
 		}
 		return modelList;
 	}
