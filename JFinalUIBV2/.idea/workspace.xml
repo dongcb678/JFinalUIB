@@ -57,38 +57,6 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/platform/com/platform/mvc/group/GroupController.java" line="32" class="com.platform.mvc.group.GroupController" package="com.platform.mvc.group">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/platform/com/platform/mvc/user/UserController.java" line="116" class="com.platform.mvc.user.UserController" package="com.platform.mvc.user">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -97,17 +65,7 @@
     <favorites_list name="JFinalUIBV2" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="JfinalConfig.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="11" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.34020618" vertical-offset="51" max-vertical-offset="3006">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -121,6 +79,7 @@
         <option value="$PROJECT_DIR$/JFinalUIBV2.iml" />
         <option value="$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java" />
         <option value="$PROJECT_DIR$/platform/com/platform/mvc/user/UserController.java" />
+        <option value="$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp" />
       </list>
     </option>
   </component>
@@ -138,9 +97,147 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Bundled (Maven 3)" />
+        <option name="localRepository" value="D:\DevelopmentTool\apache-maven-3.2.2\repository" />
+        <option name="mavenHome" value="D:\DevelopmentTool\apache-maven-3.2.2" />
+        <option name="userSettingsFile" value="D:\DevelopmentTool\apache-maven-3.2.2\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="WebApps Maven Webapp" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="WebApps Maven Webapp" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="WebApps Maven Webapp" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jetty" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="UIB" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="UIB" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="UIB" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="install" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="JFinalUIBV2" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="JFinalUIBV2" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="JFinalUIBV2" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="install" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-4" />
@@ -215,56 +312,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JFinalUIBV2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JFinalUIBV2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebContent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JFinalUIBV2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JFinalUIBV2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JFinalUIBV2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JFinalUIBV2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="user" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -276,13 +327,13 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/WebContent" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../workspaceUibMaven/JFinalUIBV2" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
-    <property name="options.lastSelected" value="preferences.keymap" />
+    <property name="options.lastSelected" value="reference.plugin.settings.project.settings.cfml" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -295,7 +346,117 @@
     <property name="settings.editor.splitter.proportion" value="0.28707224" />
     <property name="restartRequiresConfirmation" value="true" />
   </component>
-  <component name="RunManager" selected="Tomcat Server.tomcat7">
+  <component name="RunManager" selected="Maven.JFinalUIBV2 [install:install]">
+    <configuration default="false" name="WebApps [jetty:run]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="jetty:run" />
+              </list>
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$USER_HOME$/git/JFinalUIBV2_MAVEN/JFinalUIBV2/WebApps" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="WebApps [jetty:run] (1)" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="jetty:run" />
+              </list>
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="UIB [install:install]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="install:install" />
+              </list>
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/UIB" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="JFinalUIBV2 [install:install]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="install:install" />
+              </list>
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
       <module name="" />
       <setting name="path" value="" />
@@ -315,8 +476,29 @@
       <setting name="launchBrowser" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
-      <module name="JFinalUIBV2" />
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
@@ -628,7 +810,6 @@
       <method />
     </configuration>
     <configuration default="false" name="JfinalUIBV2-remoteDebug" type="Remote" factoryName="Remote">
-      <module name="JFinalUIBV2" />
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
@@ -717,11 +898,23 @@
       </ConfigurationWrapper>
       <method />
     </configuration>
-    <list size="3">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Application.JfinalConfig" />
       <item index="1" class="java.lang.String" itemvalue="Remote.JfinalUIBV2-remoteDebug" />
       <item index="2" class="java.lang.String" itemvalue="Tomcat Server.tomcat7" />
+      <item index="3" class="java.lang.String" itemvalue="Maven.WebApps [jetty:run]" />
+      <item index="4" class="java.lang.String" itemvalue="Maven.WebApps [jetty:run] (1)" />
+      <item index="5" class="java.lang.String" itemvalue="Maven.UIB [install:install]" />
+      <item index="6" class="java.lang.String" itemvalue="Maven.JFinalUIBV2 [install:install]" />
     </list>
+    <recent_temporary>
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Maven.JFinalUIBV2 [install:install]" />
+        <item index="1" class="java.lang.String" itemvalue="Maven.UIB [install:install]" />
+        <item index="2" class="java.lang.String" itemvalue="Maven.WebApps [jetty:run] (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Maven.WebApps [jetty:run]" />
+      </list>
+    </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -733,8 +926,23 @@
     </option>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" myUseAcceleration="nothing">
-    <configuration />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -766,11 +974,21 @@
       <workItem from="1454487779396" duration="330000" />
       <workItem from="1456724628283" duration="69000" />
       <workItem from="1458781317440" duration="1802000" />
+      <workItem from="1460007649743" duration="200000" />
+      <workItem from="1460007874499" duration="175000" />
+      <workItem from="1460008064547" duration="1197000" />
+      <workItem from="1460085084801" duration="1179000" />
+      <workItem from="1460087113516" duration="507000" />
+      <workItem from="1460087637600" duration="2667000" />
+      <workItem from="1460448227954" duration="105000" />
+      <workItem from="1460517888275" duration="531000" />
+      <workItem from="1460518448881" duration="14000" />
+      <workItem from="1461908598268" duration="288000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21410000" />
+    <option name="totallyTimeSpent" value="28273000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1060" extended-state="6" />
@@ -781,29 +999,29 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4547391" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24494143" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47923324" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12193823" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.428115" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18370607" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41214058" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47923324" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -842,88 +1060,94 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="194" column="8" selection-start="6009" selection-end="6009" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006">
-          <folding />
-        </state>
+        <state line="5" column="2" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="198" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="194" column="8" selection-start="6009" selection-end="6009" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006">
-          <folding />
-        </state>
+        <state line="5" column="2" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="198" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="194" column="8" selection-start="6009" selection-end="6009" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006">
-          <folding />
-        </state>
+        <state line="189" column="10" selection-start="5871" selection-end="5871" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="10" selection-start="6053" selection-end="6053" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006">
-          <folding />
-        </state>
+        <state line="96" column="7" selection-start="3334" selection-end="3334" vertical-scroll-proportion="0.0" vertical-offset="1824" max-vertical-offset="3173" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="115" selection-start="6450" selection-end="6541" vertical-scroll-proportion="0.0" vertical-offset="3186" max-vertical-offset="3186">
-          <folding />
-        </state>
+        <state line="49" column="11" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.0" vertical-offset="882" max-vertical-offset="3006" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="205" column="8" selection-start="6391" selection-end="6391" vertical-scroll-proportion="0.0" vertical-offset="3186" max-vertical-offset="3186">
-          <folding />
-        </state>
+        <state line="49" column="11" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.0" vertical-offset="882" max-vertical-offset="3006" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="8" selection-start="6009" selection-end="6009" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="8" selection-start="6009" selection-end="6009" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="8" selection-start="6009" selection-end="6009" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="195" column="10" selection-start="6053" selection-end="6053" vertical-scroll-proportion="0.0" vertical-offset="3006" max-vertical-offset="3006" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="206" column="115" selection-start="6450" selection-end="6541" vertical-scroll-proportion="0.0" vertical-offset="3186" max-vertical-offset="3186" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="205" column="8" selection-start="6391" selection-end="6391" vertical-scroll-proportion="0.0" vertical-offset="3186" max-vertical-offset="3186" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/mvc/group/GroupController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="11" selection-start="901" selection-end="901" vertical-scroll-proportion="0.0" vertical-offset="666" max-vertical-offset="1566">
-          <folding />
-        </state>
+        <state line="37" column="11" selection-start="901" selection-end="901" vertical-scroll-proportion="0.0" vertical-offset="666" max-vertical-offset="1566" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="2074" selection-end="2074" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="3150">
-          <folding />
-        </state>
+        <state line="58" column="0" selection-start="2074" selection-end="2074" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="3150" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="57" selection-start="2069" selection-end="2069" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="3024">
-          <folding />
-        </state>
+        <state line="58" column="57" selection-start="2069" selection-end="2069" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="3024" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="196" column="10" selection-start="5928" selection-end="5928" vertical-scroll-proportion="0.0" vertical-offset="3024" max-vertical-offset="3024">
-          <folding />
-        </state>
+        <state line="196" column="10" selection-start="5928" selection-end="5928" vertical-scroll-proportion="0.0" vertical-offset="3024" max-vertical-offset="3024" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="210" column="10" selection-start="6650" selection-end="6650" vertical-scroll-proportion="0.0" vertical-offset="3150" max-vertical-offset="3150">
-          <folding />
-        </state>
+        <state line="210" column="10" selection-start="6650" selection-end="6650" vertical-scroll-proportion="0.0" vertical-offset="3150" max-vertical-offset="3150" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="13" selection-start="1953" selection-end="1953" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3150">
-          <folding />
-        </state>
+        <state line="51" column="13" selection-start="1953" selection-end="1953" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3150" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/JFinalUIBV2.iml">
@@ -938,9 +1162,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/constant/ConstantInit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="90" selection-end="90" vertical-scroll-proportion="-3.2236843" vertical-offset="3048" max-vertical-offset="3960">
-          <folding />
-        </state>
+        <state line="6" column="17" selection-start="90" selection-end="90" vertical-scroll-proportion="-3.2236843" vertical-offset="3048" max-vertical-offset="3960" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.classpath">
@@ -978,16 +1200,9 @@
         <state line="4" column="16" selection-start="77" selection-end="77" vertical-scroll-proportion="0.10183875" vertical-offset="0" max-vertical-offset="707" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JFinalUIBV2.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="18" selection-start="4151" selection-end="4151" vertical-scroll-proportion="1.0557184" vertical-offset="936" max-vertical-offset="1890" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/mvc/group/GroupController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="11" selection-start="901" selection-end="901" vertical-scroll-proportion="-0.15899123" vertical-offset="631" max-vertical-offset="1566">
-          <folding />
-        </state>
+        <state line="37" column="11" selection-start="901" selection-end="901" vertical-scroll-proportion="-0.15899123" vertical-offset="631" max-vertical-offset="1566" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jfinal22/com/jfinal/plugin/c3p0/C3p0Plugin.java">
@@ -1012,23 +1227,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/mvc/user/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="8" selection-start="2515" selection-end="2515" vertical-scroll-proportion="0.5175258" vertical-offset="1693" max-vertical-offset="2178">
-          <folding />
-        </state>
+        <state line="115" column="8" selection-start="2515" selection-end="2515" vertical-scroll-proportion="0.5175258" vertical-offset="1693" max-vertical-offset="2178" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java">
+    <entry file="file://$PROJECT_DIR$/JFinalUIBV2.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="11" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.34020618" vertical-offset="51" max-vertical-offset="3006">
-          <folding />
-        </state>
+        <state line="36" column="74" selection-start="1792" selection-end="1792" vertical-scroll-proportion="0.7105263" vertical-offset="0" max-vertical-offset="1584" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/config/run/JFinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="189" column="10" selection-start="5871" selection-end="5871" vertical-scroll-proportion="0.7291667" vertical-offset="2071" max-vertical-offset="3006" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="581" selection-end="581" vertical-scroll-proportion="0.35526314" vertical-offset="0" max-vertical-offset="912" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="2" selection-start="222" selection-end="222" vertical-scroll-proportion="0.10169491" vertical-offset="0" max-vertical-offset="885" />
       </provider>
     </entry>
   </component>
