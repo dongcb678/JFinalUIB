@@ -64,7 +64,11 @@ public class ServicePlugin implements IPlugin {
 				if(serviceBind.tx()){
 					baseService = Enhancer.enhance(service, Tx.class); 	// 是
 				}else{
-					baseService = Enhancer.enhance(service);			// 否
+					try {
+						baseService = (BaseService) service.newInstance(); //Enhancer.enhance(service);	// 否
+					} catch (InstantiationException | IllegalAccessException e) {
+						e.printStackTrace();
+					}
 				}
 				serviceMap.put(name, baseService);
 				log.debug("Service注册： name = " + name + ", class = " + service.getName());
