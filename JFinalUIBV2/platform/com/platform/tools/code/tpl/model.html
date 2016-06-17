@@ -29,7 +29,7 @@ public class ${className} extends BaseModel<${className}> {
 	 * 字段描述：${colunm.column_desc} 
 	 * 字段类型：${colunm.column_type}  ${isEmpty(colunm.column_length) ? "" : "长度：" + colunm.column_length}
 	 */
-	public static final ${colunm.column_className} column_${colunm.column_name} = "${colunm.column_name}";
+	public static final String column_${colunm.column_name} = "${colunm.column_name}";
 	
 	<% } %>
 	
@@ -40,7 +40,7 @@ public class ${className} extends BaseModel<${className}> {
 	public static final String sqlId_splitPageFrom = "${namespace}.splitPageFrom";
 
 	<% for(colunm in colunmList){ %>
-	private String ${colunm.column_name};
+	private ${colunm.column_className} ${colunm.column_name};
 	<% } %>
 	
 	<% for(colunm in colunmList){ %>
