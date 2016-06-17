@@ -24,46 +24,46 @@ public class Role extends BaseModelCache<Role> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：描述 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：2000
 	 */
 	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：名称 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：拥有的功能ids 
-	 * 字段类型 ：text 
+	 * 字段类型：text  长度：null
 	 */
 	public static final String column_operatorids = "operatorids";
 	
 	/**
 	 * 字段描述：拥有的功能模块ids 
-	 * 字段类型 ：text 
+	 * 字段类型：text  长度：null
 	 */
 	public static final String column_moduleids = "moduleids";
 	
 	/**
 	 * 字段描述：编号 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_numbers = "numbers";
-
+	
 	/**
 	 * sqlId : platform.role.paging
 	 * 描述：查询所有角色
@@ -101,7 +101,7 @@ public class Role extends BaseModelCache<Role> {
 	public static final String sqlId_splitPageFrom = "platform.role.splitPageFrom";
 
 	private String ids;
-	private String version;
+	private Long version;
 	private String description;
 	private String names;
 	private String operatorids;

@@ -22,67 +22,67 @@ public class Department extends BaseModel<Department> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：所有子节点ids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：2000
 	 */
 	public static final String column_allchildnodeids = "allchildnodeids";
 	
 	/**
 	 * 字段描述：部门级别 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_departmentlevel = "departmentlevel";
 	
 	/**
 	 * 字段描述：部门类型 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_depttype = "depttype";
 	
 	/**
 	 * 字段描述：描述 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：图标 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_images = "images";
 	
 	/**
 	 * 字段描述：是否上级节点 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：5
 	 */
 	public static final String column_isparent = "isparent";
 	
 	/**
 	 * 字段描述：名称 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：排序号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_orderids = "orderids";
 	
 	/**
 	 * 字段描述：url 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：100
 	 */
 	public static final String column_url = "url";
 	
@@ -117,15 +117,15 @@ public class Department extends BaseModel<Department> {
 	public static final String sqlId_childCount = "platform.department.childCount";
 
 	private String ids;
-	private String version;
+	private Long version;
 	private String allchildnodeids;
-	private String departmentlevel;
+	private Long departmentlevel;
 	private String depttype;
 	private String description;
 	private String images;
 	private String isparent;
 	private String names;
-	private String orderids;
+	private Long orderids;
 	private String url;
 	private String parentdepartmentids;
 	private String principaluserids;

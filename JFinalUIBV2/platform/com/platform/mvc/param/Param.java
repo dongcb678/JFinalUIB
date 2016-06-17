@@ -28,124 +28,124 @@ public class Param extends BaseModelCache<Param> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：描述 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：图标 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_images = "images";
 	
 	/**
 	 * 字段描述：名称 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：排序号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_orderids = "orderids";
 	
 	/**
 	 * 字段描述：tree路径 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：1000
 	 */
 	public static final String column_paths = "paths";
 	
 	/**
 	 * 字段描述：状态 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_zhuangtai = "zhuangtai";
 	
 	/**
 	 * 字段描述：上级ids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_parentids = "parentids";
 	
 	/**
 	 * 字段描述：是否上级节点 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：5
 	 */
 	public static final String column_isparent = "isparent";
 	
 	/**
 	 * 字段描述：层级级别 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_levels = "levels";
 	
 	/**
 	 * 字段描述：编号 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_numbers = "numbers";
 	
 	/**
 	 * 字段描述：值 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_val = "val";
 	
 	/**
 	 * 字段描述：是否国际化 : 0否1是 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_i18n = "i18n";
 	
 	/**
 	 * 字段描述：中文简体值 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_val_zhcn = "val_zhcn";
 	
 	/**
 	 * 字段描述：中文香港值 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_val_zhhk = "val_zhhk";
 	
 	/**
 	 * 字段描述：中文台湾值 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_val_zhtw = "val_zhtw";
 	
 	/**
 	 * 字段描述：日文值 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_val_ja = "val_ja";
 	
 	/**
 	 * 字段描述：英文值 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_val_enus = "val_enus";
 	
 	/**
 	 * 字段描述：账号状态 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_status = "status";
-
+	
 	/**
 	 * sqlId : platform.param.all
 	 * 描述：查询所有参数
@@ -225,16 +225,16 @@ public class Param extends BaseModelCache<Param> {
 	public static final String sqlId_childCount = "platform.param.childCount";
 
 	private String ids;
-	private String version;
+	private Long version;
 	private String description;
 	private String images;
 	private String names;
-	private String orderids;
+	private Long orderids;
 	private String paths;
 	private String zhuangtai;
 	private String parentids;
 	private String isparent;
-	private String levels;
+	private Long levels;
 	private String numbers;
 	private String val;
 	private String i18n;

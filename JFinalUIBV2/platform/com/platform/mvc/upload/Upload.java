@@ -22,46 +22,46 @@ public class Upload extends BaseModel<Upload> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：参数key 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_parametername = "parametername";
 	
 	/**
 	 * 字段描述：文件名 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_filename = "filename";
 	
 	/**
 	 * 字段描述：contenttype 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：100
 	 */
 	public static final String column_contenttype = "contenttype";
 	
 	/**
 	 * 字段描述：原文件名 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_originalfilename = "originalfilename";
 	
 	/**
 	 * 字段描述：存放路径 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_path = "path";
-
+	
 	/**
 	 * sqlId : platform.upload.splitPageFrom
 	 * 描述：分页from
@@ -69,7 +69,7 @@ public class Upload extends BaseModel<Upload> {
 	public static final String sqlId_splitPageFrom = "platform.upload.splitPageFrom";
 
 	private String ids;
-	private String version;
+	private Long version;
 	private String parametername;
 	private String filename;
 	private String contenttype;

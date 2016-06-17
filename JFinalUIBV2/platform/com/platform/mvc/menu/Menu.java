@@ -23,88 +23,88 @@ public class Menu extends BaseModel<Menu> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：图标 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_images = "images";
 	
 	/**
 	 * 字段描述：层级级别 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_levels = "levels";
 	
 	/**
 	 * 字段描述：名称中文简体 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names_zhcn = "names_zhcn";
 	
 	/**
 	 * 字段描述：排序号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_orderids = "orderids";
 	
 	/**
 	 * 字段描述：菜单对应功能ids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_operatorids = "operatorids";
 	
 	/**
 	 * 字段描述：上级菜单ids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_parentmenuids = "parentmenuids";
 	
 	/**
 	 * 字段描述：所属系统ids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_systemsids = "systemsids";
 	
 	/**
 	 * 字段描述：是否上级节点 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：5
 	 */
 	public static final String column_isparent = "isparent";
 	
 	/**
 	 * 字段描述：名称中文台湾 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names_zhtw = "names_zhtw";
 	
 	/**
 	 * 字段描述：名称中文香港 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names_zhhk = "names_zhhk";
 	
 	/**
 	 * 字段描述：名称日文 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names_ja = "names_ja";
 	
 	/**
 	 * 字段描述：名称英文 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names_enus = "names_enus";
-
+	
 	/**
 	 * sqlId : platform.menu.root
 	 * 描述：查询根菜单
@@ -136,11 +136,11 @@ public class Menu extends BaseModel<Menu> {
 	public static final String sqlId_operator = "platform.menu.operator";
 
 	private String ids;
-	private String version;
+	private Long version;
 	private String images;
-	private String levels;
+	private Long levels;
 	private String names_zhcn;
-	private String orderids;
+	private Long orderids;
 	private String operatorids;
 	private String parentmenuids;
 	private String systemsids;

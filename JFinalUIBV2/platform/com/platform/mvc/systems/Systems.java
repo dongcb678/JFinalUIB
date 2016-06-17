@@ -22,40 +22,40 @@ public class Systems extends BaseModel<Systems> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：描述 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：名称 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：编号 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_numbers = "numbers";
 	
 	/**
 	 * 字段描述：排序号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_orderids = "orderids";
-
+	
 	/**
 	 * sqlId : platform.systems.all
 	 * 描述：
@@ -69,11 +69,11 @@ public class Systems extends BaseModel<Systems> {
 	public static final String sqlId_splitPageFrom = "platform.systems.splitPageFrom";
 
 	private String ids;
-	private String version;
+	private Long version;
 	private String description;
 	private String names;
 	private String numbers;
-	private String orderids;
+	private Long orderids;
 	
 	public void setIds(String ids){
 		set(column_ids, ids);

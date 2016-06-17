@@ -23,106 +23,106 @@ public class Operator extends BaseModelCache<Operator> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：描述 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：名称 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：url数量 : 一个还是多个url，多个用逗号隔开 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_onemany = "onemany";
 	
 	/**
 	 * 字段描述：返回参数keys 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：100
 	 */
 	public static final String column_returnparamkeys = "returnparamkeys";
 	
 	/**
 	 * 字段描述：返回url 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_returnurl = "returnurl";
 	
 	/**
 	 * 字段描述：是否行级过滤 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_rowfilter = "rowfilter";
 	
 	/**
 	 * 字段描述：url 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_url = "url";
 	
 	/**
 	 * 字段描述：模块ids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_moduleids = "moduleids";
 	
 	/**
 	 * 字段描述：是否分页 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_splitpage = "splitpage";
 	
 	/**
 	 * 字段描述：是否重复提交验证 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_formtoken = "formtoken";
 	
 	/**
 	 * 字段描述：ip黑名单过滤 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_ipblack = "ipblack";
 	
 	/**
 	 * 字段描述：是否需要权限验证 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_privilegess = "privilegess";
 	
 	/**
 	 * 字段描述：是否记录PV 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_ispv = "ispv";
 	
 	/**
 	 * 字段描述：pv类型 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_pvtype = "pvtype";
 	
 	/**
 	 * 字段描述：模块names 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_modulenames = "modulenames";
-
+	
 	/**
 	 * sqlId : platform.operator.paging
 	 * 描述：查询所有功能
@@ -160,7 +160,7 @@ public class Operator extends BaseModelCache<Operator> {
 	public static final String sqlId_splitPageFrom = "platform.operator.splitPageFrom";
 
 	private String ids;
-	private String version;
+	private Long version;
 	private String description;
 	private String names;
 	private String onemany;

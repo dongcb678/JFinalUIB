@@ -24,190 +24,190 @@ public class Syslog extends BaseModel<Syslog> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：action结束时间 
-	 * 字段类型 ：timestamp without time zone 
+	 * 字段类型：timestamp without time zone  长度：null
 	 */
 	public static final String column_actionenddate = "actionenddate";
 	
 	/**
 	 * 字段描述：action结束时间 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_actionendtime = "actionendtime";
 	
 	/**
 	 * 字段描述：action耗时 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_actionhaoshi = "actionhaoshi";
 	
 	/**
 	 * 字段描述：action开始时间 
-	 * 字段类型 ：timestamp without time zone 
+	 * 字段类型：timestamp without time zone  长度：null
 	 */
 	public static final String column_actionstartdate = "actionstartdate";
 	
 	/**
 	 * 字段描述：action开始时间 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_actionstarttime = "actionstarttime";
 	
 	/**
 	 * 字段描述：失败原因 : 0没有权限,1URL不存在,2未登录,3业务代码异常 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_cause = "cause";
 	
 	/**
 	 * 字段描述：cookie数据 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：1024
 	 */
 	public static final String column_cookie = "cookie";
 	
 	/**
 	 * 字段描述：描述 
-	 * 字段类型 ：text 
+	 * 字段类型：text  长度：null
 	 */
 	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：结束时间 
-	 * 字段类型 ：timestamp without time zone 
+	 * 字段类型：timestamp without time zone  长度：null
 	 */
 	public static final String column_enddate = "enddate";
 	
 	/**
 	 * 字段描述：结束时间 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_endtime = "endtime";
 	
 	/**
 	 * 字段描述：耗时 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_haoshi = "haoshi";
 	
 	/**
 	 * 字段描述：客户端ip 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：128
 	 */
 	public static final String column_ips = "ips";
 	
 	/**
 	 * 字段描述：访问方法 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：4
 	 */
 	public static final String column_method = "method";
 	
 	/**
 	 * 字段描述：源引用 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_referer = "referer";
 	
 	/**
 	 * 字段描述：请求路径 
-	 * 字段类型 ：text 
+	 * 字段类型：text  长度：null
 	 */
 	public static final String column_requestpath = "requestpath";
 	
 	/**
 	 * 字段描述：开始时间 
-	 * 字段类型 ：timestamp without time zone 
+	 * 字段类型：timestamp without time zone  长度：null
 	 */
 	public static final String column_startdate = "startdate";
 	
 	/**
 	 * 字段描述：开始时间 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_starttime = "starttime";
 	
 	/**
 	 * 字段描述：账号状态 
-	 * 字段类型 ：character 
+	 * 字段类型：character  长度：1
 	 */
 	public static final String column_status = "status";
 	
 	/**
 	 * 字段描述：useragent 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：1000
 	 */
 	public static final String column_useragent = "useragent";
 	
 	/**
 	 * 字段描述：视图耗时 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_viewhaoshi = "viewhaoshi";
 	
 	/**
 	 * 字段描述：菜单对应功能ids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_operatorids = "operatorids";
 	
 	/**
 	 * 字段描述：accept 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_accept = "accept";
 	
 	/**
 	 * 字段描述：acceptencoding 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_acceptencoding = "acceptencoding";
 	
 	/**
 	 * 字段描述：acceptlanguage 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_acceptlanguage = "acceptlanguage";
 	
 	/**
 	 * 字段描述：connection 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_connection = "connection";
 	
 	/**
 	 * 字段描述：host 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_host = "host";
 	
 	/**
 	 * 字段描述：xrequestedwith 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_xrequestedwith = "xrequestedwith";
 	
 	/**
 	 * 字段描述：pvids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_pvids = "pvids";
 	
 	/**
 	 * 字段描述：访问用户ids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_userids = "userids";
-
+	
 	/**
 	 * sqlId : platform.sysLog.view
 	 * 描述：
@@ -233,27 +233,27 @@ public class Syslog extends BaseModel<Syslog> {
 	public static final String sqlId_clear = "platform.sysLog.clear";
 
 	private String ids;
-	private String version;
-	private String actionenddate;
-	private String actionendtime;
-	private String actionhaoshi;
-	private String actionstartdate;
-	private String actionstarttime;
+	private Long version;
+	private Timestamp actionenddate;
+	private Long actionendtime;
+	private Long actionhaoshi;
+	private Timestamp actionstartdate;
+	private Long actionstarttime;
 	private String cause;
 	private String cookie;
 	private String description;
-	private String enddate;
-	private String endtime;
-	private String haoshi;
+	private Timestamp enddate;
+	private Long endtime;
+	private Long haoshi;
 	private String ips;
 	private String method;
 	private String referer;
 	private String requestpath;
-	private String startdate;
-	private String starttime;
+	private Timestamp startdate;
+	private Long starttime;
 	private String status;
 	private String useragent;
-	private String viewhaoshi;
+	private Long viewhaoshi;
 	private String operatorids;
 	private String accept;
 	private String acceptencoding;
@@ -450,5 +450,6 @@ public class Syslog extends BaseModel<Syslog> {
 	public String getUserids() {
 		return get(column_userids);
 	}
+	
 	
 }

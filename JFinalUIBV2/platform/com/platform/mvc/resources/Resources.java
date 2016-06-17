@@ -25,88 +25,88 @@ public class Resources extends BaseModel<Resources> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：系统名称 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_osname = "osname";
 	
 	/**
 	 * 字段描述：ip地址 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_ips = "ips";
 	
 	/**
 	 * 字段描述：主机名称 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_hostname = "hostname";
 	
 	/**
 	 * 字段描述：cpu数量 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_cpunumber = "cpunumber";
 	
 	/**
 	 * 字段描述：cpu使用率 
-	 * 字段类型 ：numeric 
+	 * 字段类型：numeric  长度：null
 	 */
 	public static final String column_cpuratio = "cpuratio";
 	
 	/**
 	 * 字段描述：物理内存 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_phymemory = "phymemory";
 	
 	/**
 	 * 字段描述：物理可用内存 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_phyfreememory = "phyfreememory";
 	
 	/**
 	 * 字段描述：jvm总内存 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_jvmtotalmemory = "jvmtotalmemory";
 	
 	/**
 	 * 字段描述：jvm可用内存 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_jvmfreememory = "jvmfreememory";
 	
 	/**
 	 * 字段描述：jvm最大内存 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_jvmmaxmemory = "jvmmaxmemory";
 	
 	/**
 	 * 字段描述：gc次数 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_gccount = "gccount";
 	
 	/**
 	 * 字段描述：创建时间 
-	 * 字段类型 ：timestamp with time zone 
+	 * 字段类型：timestamp with time zone  长度：null
 	 */
 	public static final String column_createdate = "createdate";
-
+	
 	/**
 	 * sqlId : platform.resources.pv
 	 * 描述：
@@ -120,19 +120,19 @@ public class Resources extends BaseModel<Resources> {
 	public static final String sqlId_24hour = "platform.resources.24hour";
 
 	private String ids;
-	private String version;
+	private Long version;
 	private String osname;
 	private String ips;
 	private String hostname;
-	private String cpunumber;
-	private String cpuratio;
-	private String phymemory;
-	private String phyfreememory;
-	private String jvmtotalmemory;
-	private String jvmfreememory;
-	private String jvmmaxmemory;
-	private String gccount;
-	private String createdate;
+	private Long cpunumber;
+	private BigDecimal cpuratio;
+	private Long phymemory;
+	private Long phyfreememory;
+	private Long jvmtotalmemory;
+	private Long jvmfreememory;
+	private Long jvmmaxmemory;
+	private Long gccount;
+	private Timestamp createdate;
 	
 	public void setIds(String ids){
 		set(column_ids, ids);
@@ -218,5 +218,4 @@ public class Resources extends BaseModel<Resources> {
 	public Timestamp getCreatedate() {
 		return get(column_createdate);
 	}
-	
 }

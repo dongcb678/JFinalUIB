@@ -24,64 +24,64 @@ public class Station extends BaseModelCache<Station> {
 
 	/**
 	 * 字段描述：主键 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_ids = "ids";
 	
 	/**
 	 * 字段描述：版本号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_version = "version";
 	
 	/**
 	 * 字段描述：描述 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：200
 	 */
 	public static final String column_description = "description";
 	
 	/**
 	 * 字段描述：图标 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_images = "images";
 	
 	/**
 	 * 字段描述：是否上级节点 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：5
 	 */
 	public static final String column_isparent = "isparent";
 	
 	/**
 	 * 字段描述：名称 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：排序号 
-	 * 字段类型 ：bigint 
+	 * 字段类型：bigint  长度：null
 	 */
 	public static final String column_orderids = "orderids";
 	
 	/**
 	 * 字段描述：上级岗位ids 
-	 * 字段类型 ：character varying 
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_parentstationids = "parentstationids";
 	
 	/**
 	 * 字段描述：拥有的功能ids 
-	 * 字段类型 ：text 
+	 * 字段类型：text  长度：null
 	 */
 	public static final String column_operatorids = "operatorids";
 	
 	/**
 	 * 字段描述：拥有的功能模块ids 
-	 * 字段类型 ：text 
+	 * 字段类型：text  长度：null
 	 */
 	public static final String column_moduleids = "moduleids";
-
+	
 	/**
 	 * sqlId : platform.station.paging
 	 * 描述：查询所有岗位
@@ -107,12 +107,12 @@ public class Station extends BaseModelCache<Station> {
 	public static final String sqlId_childCount = "platform.station.childCount";
 
 	private String ids;
-	private String version;
+	private Long version;
 	private String description;
 	private String images;
 	private String isparent;
 	private String names;
-	private String orderids;
+	private Long orderids;
 	private String parentstationids;
 	private String operatorids;
 	private String moduleids;
