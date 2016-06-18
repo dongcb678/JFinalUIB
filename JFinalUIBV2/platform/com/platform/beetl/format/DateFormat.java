@@ -24,7 +24,7 @@ public class DateFormat implements Format {
 	 */
 	public Object format(Object data, String pattern) {
 		if (data == null){
-			throw new RuntimeException("DateFormat 参数错误 : data不能为空");
+			return null;
 		}
 		
 		if (pattern == null || pattern.isEmpty()){
