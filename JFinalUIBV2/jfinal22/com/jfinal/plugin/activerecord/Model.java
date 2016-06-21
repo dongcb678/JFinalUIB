@@ -514,6 +514,18 @@ public abstract class Model<M extends Model> implements Serializable {
 		if (paras.size() <= 1) {	// Needn't update
 			return false;
 		}
+
+		// ################  新增代码块   start   #################
+		boolean versionModify = modifyFlag.contains("version"); 
+		// 是否包含version字段
+		if(versionModify){
+			// 新版本号
+			Long newVersion = getNumber("version").longValue(); 
+			paras.add(newVersion);
+			// 追加条件sql
+			sql.append(" and version < ? ");
+		}
+		// ################  新增代码块   end   #################
 		
 		// --------
 		Connection conn = null;
