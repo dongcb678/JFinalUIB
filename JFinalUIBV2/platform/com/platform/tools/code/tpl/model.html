@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  * @author 董华健  dongcb678@163.com
  */
 @SuppressWarnings("unused")
-@Table(${isEmpty(dataSource) ? "" : "dataSourceName = " + dataSource + ", "}tableName = "${tableName}"${isEmpty(pkName) ? "" : ", pkName = \"" + pkName + "\""})
+@Table(${isEmpty(dataSource) ? "" : "dataSourceName = " + dataSource + ", "}tableName = ${className}.table_name${isEmpty(pkName) ? "" : ", pkName = \"" + pkName + "\""})
 public class ${className} extends BaseModel<${className}> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -23,6 +23,11 @@ public class ${className} extends BaseModel<${className}> {
 	private static Logger log = Logger.getLogger(${className}.class);
 	
 	public static final ${className} dao = new ${className}();
+
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "${tableName}";
 	
 	<% for(colunm in colunmList){ %>
 	/**
