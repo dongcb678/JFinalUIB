@@ -1,0 +1,85 @@
+package ${package};
+
+import com.platform.annotation.Controller;
+import com.platform.constant.ConstantInit;
+import com.platform.mvc.base.BaseController;
+import com.platform.mvc.base.BaseModel;
+
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Before;
+
+/**
+ * XXX 管理	
+ * 描述：
+ * 
+ * /jf/${basePath}/${classNameSmall}
+ * /jf/${basePath}/${classNameSmall}/save
+ * /jf/${basePath}/${classNameSmall}/edit
+ * /jf/${basePath}/${classNameSmall}/update
+ * /jf/${basePath}/${classNameSmall}/view
+ * /jf/${basePath}/${classNameSmall}/delete
+ * /common/${classNameSmall}/add.html
+ * 
+ */
+@Controller(controllerKey = "/jf/${basePath}/${classNameSmall}")
+public class ${className}Controller extends BaseController {
+
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(${className}Controller.class);
+	
+	private ${className}Service ${classNameSmall}Service;
+	
+	/**
+	 * 列表
+	 */
+	public void index() {
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, ${className}.sqlId_splitPageFrom);
+		render("/${basePath}/${classNameSmall}/list.html");
+	}
+	
+	/**
+	 * 保存
+	 */
+	@Before(${className}Validator.class)
+	public void save() {
+		getModel(${className}.class).save();
+		render("/${basePath}/${classNameSmall}/add.html");
+	}
+	
+	/**
+	 * 准备更新
+	 */
+	public void edit() {
+		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
+		setAttr("${classNameSmall}", ${classNameSmall});
+		render("/${basePath}/${classNameSmall}/update.html");
+	}
+	
+	/**
+	 * 更新
+	 */
+	@Before(${className}Validator.class)
+	public void update() {
+		getModel(${className}.class).update();
+		redirect("/jf/${basePath}/${classNameSmall}");
+	}
+
+	/**
+	 * 查看
+	 */
+	public void view() {
+		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
+		setAttr("${classNameSmall}", ${classNameSmall});
+		render("/${basePath}/${classNameSmall}/view.html");
+	}
+	
+	/**
+	 * 删除
+	 */
+	public void delete() {
+		${classNameSmall}Service.delete("${tableName}", getPara() == null ? ids : getPara());
+		redirect("/jf/${basePath}/${classNameSmall}");
+	}
+	
+}

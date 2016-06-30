@@ -1,0 +1,13 @@
+
+<% for(colunm in colunmList){ %>
+<div class="form-group">
+	<label class="col-sm-2 control-label">${colunm.column_desc}</label>
+	<div class="col-sm-7">
+		<input type="text" name="${classNameSmall}.${colunm.column_name}" value="\${${classNameSmall}.${colunm.column_name}}" 
+			class="form-control" maxlength="xxx" vMin="xxx" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> xxx-xxx位任意字符 </span>
+</div>
+
+<% } %>

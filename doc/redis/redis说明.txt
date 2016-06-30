@@ -1,0 +1,4 @@
+
+windows版本的redis，仅作测试使用
+
+启动方式请查看README.md文件

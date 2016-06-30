@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var localFunc = function(data){
+		 alert('我是本地a.com函数，被跨域的b.com/jsonp/test.action文件调用，远程js带来的参数数据是：' + data.content);
+	};
+	
+	var script = document.createElement('script');// 创建script标签，设置其属性
+	script.setAttribute('src', "http://b.com/jsonp?callback=localFunc");
+	
+	document.getElementsByTagName('head')[0].appendChild(script);// 把script标签加入head，此时调用开始
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Marker Animations</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+		
+		// 默认地图中心位置
+		var defaultCenter = new google.maps.LatLng(59.32522, 18.07002);
+		
+		// 默认标记显示的位置
+		var defaultMarker = new google.maps.LatLng(59.327383, 18.06747);
+		
+		var map; //地图对象
+		var marker; // 标记对象
+
+		function initialize() {
+			var mapOptions = {
+				zoom: 13,
+				center: defaultCenter
+			};
+
+			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+			// map事件
+// 			google.maps.event.addListener(map, 'dblclick', function(event){    
+// 				var lat = event.latLng.lat();//纬度    
+// 				var lng = event.latLng.lng();//经度			
+// 				alert("纬度 ：" + lat + "\n经度 ：" + lng);
+// 			});
+			
+			marker = new google.maps.Marker({
+				map:map,
+				draggable:true,
+				animation: google.maps.Animation.DROP,
+				position: defaultMarker,
+				title: "移动我选取位置"
+			});
+			
+			google.maps.event.addListener(marker, 'click', function(event) { 
+				var lat = event.latLng.lat();//纬度    
+				var lng = event.latLng.lng();//经度			
+				alert("纬度 ：" + lat + "\n经度 ：" + lng);
+			}); 
+		}
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>

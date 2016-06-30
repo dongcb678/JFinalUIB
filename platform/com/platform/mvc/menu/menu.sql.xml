@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	菜单sql
+-->
+<sql-statement namespace="platform.menu">
+	
+	<!-- 查询根菜单 -->
+	<sql id="root">
+		<![CDATA[ 
+        	select ids, ${names}, isparent, images from pt_menu where parentMenuIds is null and systemsIds = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询子菜单 -->
+	<sql id="child">
+		<![CDATA[ 
+        	select ids, ${names}, isparent, images from pt_menu where parentMenuIds = ? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 查询子菜单数量 -->
+	<sql id="childCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_menu where parentmenuids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询根菜单id -->
+	<sql id="rootId">
+		<![CDATA[ 
+        	select ids from pt_menu where parentmenuids is null and systemsIds = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询根菜单，包含对应功能 -->
+	<sql id="operator">
+		<![CDATA[ 
+        	select m.${names}, o.url  from pt_menu m left join pt_operator o on m.operatorids=o.ids 
+        	where parentmenuids = ? and m.operatorids in ( ${fitler} ) order by orderids asc
+    	]]>
+	</sql>
+	
+	<!-- 根据系统id清理模块数据 -->
+	<sql id="deleteBySystemsId">
+		<![CDATA[ 
+        	delete from pt_menu where systemsids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

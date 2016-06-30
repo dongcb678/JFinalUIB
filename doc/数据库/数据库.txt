@@ -1,0 +1,5 @@
+
+/jf/platform/resources/refreshParamCache
+/jf/platform/resources/refreshSqlCache
+
+/platform/login/lock_screen.html

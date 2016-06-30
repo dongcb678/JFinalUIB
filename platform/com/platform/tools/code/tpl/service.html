@@ -1,0 +1,17 @@
+package ${package};
+
+import org.apache.log4j.Logger;
+
+import com.platform.annotation.Service;
+
+import com.platform.mvc.base.BaseService;
+
+@Service(name = ${className}Service.serviceName)
+public class ${className}Service extends BaseService {
+
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(${className}Service.class);
+	
+	public static final String serviceName = "${classNameSmall}Service";
+	
+}

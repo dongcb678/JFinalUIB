@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="UTF-8" />
+<title>JFinalUIBV3</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+
+<!-- start: The fav icon -->
+<link rel="icon" type="image/x-icon" href="${cxt!}/files/images/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="${cxt!}/files/images/favicon.ico" />
+<!-- end: The fav icon -->
+
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/assets/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/assets/bootstrap/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/assets/bootstrap/css/bootstrap-fileupload.css" />
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/assets/font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/css/style-responsive.css" />
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/css/style-default.css" id="style_color" />
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" />
+
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/assets/fancybox/source/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/metroLab/assets/uniform/css/uniform.default.css"/>
+
+<!-- start: artDialog -->
+<link rel="stylesheet" type="text/css" href="${cxt!}/jsFile/artDialog/css/ui-dialog.css" />
+<!-- end: artDialog -->
+
+<!-- start: ztree -->
+<link rel="stylesheet" type="text/css" href="${cxt!}/jsFile/zTree/css/zTreeStyle/zTreeStyle.css">
+<style type="text/css">
+.ztree li span.button.name {
+	margin-right: 2px;
+	background-position: -126px 0;
+	vertical-align: top;
+	*vertical-align: middle
+}
+
+.ztree li span.button.operator {
+	margin-right: 2px;
+	background-position: -126px -64px;
+	vertical-align: top;
+	*vertical-align: middle
+}
+
+.ztree li span.button.param {
+	margin-right: 2px;
+	background-position: -126px 0;
+	vertical-align: top;
+	*vertical-align: middle
+}
+
+.ztree li span.button.add {
+	margin-left: 2px;
+	margin-right: -1px;
+	background-position: -144px 0;
+	vertical-align: top;
+	*vertical-align: middle
+}
+
+.ztree li span.button.icon {
+	margin-right: 2px;
+	background-position: -126px -80px;
+	vertical-align: top;
+	*vertical-align: middle
+}
+</style>
+<!-- end: ztree -->
+
+<!-- start: common js -->
+<script type="text/javascript">
+	var cxt = "${cxt!}";
+</script>
+<!-- end: common js -->
+
+<% include("/platform/index/i18n.html"){} %>
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+
+	<% include("/platform/index/header.html"){} %>
+
+	<!-- BEGIN CONTAINER -->
+	<div id="container" class="row-fluid">
+
+		<% include("/platform/index/sidebar-scroll.html"){} %>
+
+		<!-- BEGIN PAGE -->
+		<div id="main-content"><% include("/platform/index/content.html"){} %></div>
+		<!-- END PAGE -->
+
+	</div>
+	<!-- END CONTAINER -->
+
+	<!-- BEGIN FOOTER -->
+	<div id="footer">2016 &copy; JFinalUIBV3.</div>
+	<!-- END FOOTER -->
+
+	<!-- BEGIN JAVASCRIPTS -->
+	<!-- Load javascripts at bottom, this will reduce page load time /ui/metroLab/js/jquery-1.8.3.min.js-->
+	<script type="text/javascript" src="${cxt!}/jsFile/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/jquery/jquery.form.js"></script>
+	<script type="text/javascript" src="${cxt!}/ui/metroLab/js/jquery.nicescroll.js"></script>
+	<script type="text/javascript" src="${cxt!}/ui/metroLab/assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js"></script>
+	<script type="text/javascript" src="${cxt!}/ui/metroLab/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="${cxt!}/ui/metroLab/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
+	<script type="text/javascript" src="${cxt!}/ui/metroLab/assets/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- ie8 fixes -->
+	<!--[if lt IE 9]>
+   	<script type="text/javascript" src="${cxt!}/ui/metroLab/js/excanvas.js"></script>
+   	<script type="text/javascript" src="${cxt!}/ui/metroLab/js/respond.js"></script>
+   	<![endif]-->
+
+	<!--common script for all pages-->
+	<script type="text/javascript" src="${cxt!}/ui/metroLab/js/common-scripts.js"></script>
+
+	<!--script for this page only-->
+	<script type="text/javascript" src="${cxt!}/ui/metroLab/js/home-page-calender.js"></script>
+
+	<script type="text/javascript" src="${cxt!}/jsFile/metroLab/common/string.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/metroLab/common/ajax.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/metroLab/common/common.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/metroLab/common/splitPage.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/metroLab/common/verify.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/artDialog/dist/dialog-min.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/metroLab/common/modals.js"></script>
+
+	<!-- start: ztree -->
+	<script type="text/javascript" src="${cxt!}/jsFile/zTree/js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/zTree/js/jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsFile/zTree/js/jquery.ztree.exedit-3.5.js"></script>
+	<!-- end: ztree -->
+
+	<!-- start: echarts -->
+	<script type="text/javascript" src="${cxt!}/jsFile/echarts/echarts-all.js"></script>
+	<!-- end: echarts -->
+	<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

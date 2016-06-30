@@ -1,0 +1,20 @@
+
+	<h1><i class="fa fa-lock"></i> ${i18nMap["admin.top.exitSystem"]}</h1>
+
+	<span><em>请输入您的密码解锁</em></span>
+	
+	<form action="${cxt!}/jf/platform/login/pass" method="post">
+		<div class="input-group">
+			<input type="text" placeholder="Password" class="span8" name="password">
+			<span class="input-group-btn">
+				<button class="btn btn-green" type="submit">
+					<i class="fa fa-chevron-right"></i>
+				</button> 
+			</span>
+		</div>
+		<div class="relogin">
+			<a href="${cxt!}/jf/platform/login/logout">
+				您不是&nbsp;${i18nMap["admin.top.exitSystem"]}？</a>
+		</div>
+	</form>
+					

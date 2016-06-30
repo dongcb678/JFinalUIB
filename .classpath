@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="platform"/>
+	<classpathentry kind="src" path="jfinal22"/>
+	<classpathentry kind="src" path="junit"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/javax.el-3.0.0.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/javax.servlet.jsp-2.3.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/javax.servlet.jsp-api-2.3.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/javax.servlet.jsp.jstl-1.2.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/jetty-all-9.2.12.v20150709.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/jetty-jsp-9.2.12.v20150709.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/jetty-jsp-jdt-2.3.3.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.apache.taglibs.taglibs-standard-impl-1.2.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.apache.taglibs.taglibs-standard-spec-1.2.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.eclipse.jdt.core-3.8.2.v20130121.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.eclipse.jetty.apache-jsp-9.2.12.v20150709.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.eclipse.jetty.orbit.javax.servlet.jsp.jstl-1.2.0.v201105211821.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.eclipse.jetty.orbit.org.eclipse.jdt.core-3.8.2.v20130121.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.mortbay.jasper.apache-el-8.0.9.M3.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/org.mortbay.jasper.apache-jsp-8.0.9.M3.jar"/>
+	<classpathentry kind="lib" path="build-lib/jetty-9.2-jdk7+/servlet-api-3.1.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/freemarker-2.3.22.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/velocity-1.7-dep.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/velocity-1.7.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-annotations-2.7.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-core-2.7.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-databind-2.7.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
+</classpath>
