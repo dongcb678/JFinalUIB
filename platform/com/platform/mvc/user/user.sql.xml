@@ -113,7 +113,21 @@
 			<% } %>
 			
 			<% if(!isEmpty(birthday)){ %>
-					and ui.birthday = #'$birthday$'#
+				<% if(db_type == "mysql"){ %>
+						
+				<% } else if(db_type == "postgresql"){ %>
+						and ui.birthday = to_date(#'$birthday$'#, 'YYYY-mm-dd')
+						
+				<% } else if(db_type == "oracle"){ %>
+				
+				<% } else if(db_type == "sqlserver"){ %>
+				
+				<% } else if(db_type == "db2"){ %>
+				
+				<% } else { %>
+						and ui.birthday = #'$birthday$'#
+						
+				<% }%>
 			<% } %>
     	]]>
 	</sql>

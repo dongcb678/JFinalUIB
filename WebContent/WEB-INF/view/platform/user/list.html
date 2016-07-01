@@ -39,7 +39,11 @@
 						<input class="medium" type="text" name="_query.email" value='${escapeXml(paramMap["_query.email"])}' maxlength="40">
 
 						${i18nMap["admin.user.property.birthday"]} 
-						<input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}' data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
+						<div class="controls input-append date form_datetime">
+		                    <input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}' class="form-control date-picker" readonly>
+		                    <span class="add-on"><i class="icon-remove"></i></span>
+							<span class="add-on"><i class="icon-th"></i></span>
+		                </div>
 
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -181,4 +185,17 @@
 	jQuery(document).ready(function() {
 
 	});
+	
+	$('.form_datetime').datetimepicker({
+        language:  'zh-CN',
+    	//format: 'yyyy-mm-dd hh:mm:ss',
+    	format: 'yyyy-mm-dd',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
 </script>
