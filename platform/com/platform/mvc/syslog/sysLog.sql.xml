@@ -31,7 +31,27 @@
     	]]>
 	</sql>
 	
-	<!-- 动态SQL处理 -->
+	<!-- 动态SQL处理 
+			to_char(a.video_date, 'YYYY-MM-DD')
+			
+			to_char(collect_time, 'YYYY-MM-DD HH24:MI:SS')
+			
+			<% if(!isEmpty(startdate_start)){ %>
+					and p.startdate >= to_date(#'$startdate_start$'#, 'YYYY-mm-dd')
+			<% } %>
+			
+			<% if(!isEmpty(startdate_end)){ %>
+					and p.startdate <= to_date(#'$startdate_end$'#, 'YYYY-mm-dd')
+			<% } %>
+			
+			<% if(!isEmpty(startdate_start)){ %>
+					and s.startdate >= to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:ss') 
+			<% } %>
+			
+			<% if(!isEmpty(startdate_end)){ %>
+					and s.startdate <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:ss')
+			<% } %>
+	-->
 	<sql id="splitPageFrom">
 		<![CDATA[ 
         	from 
@@ -60,6 +80,14 @@
 			
 			<% if(!isEmpty(status)){ %>
 					and s.status = #'$status$'#
+			<% } %>
+			
+			<% if(!isEmpty(startdate_start)){ %>
+					and s.startdate >= to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:ss') 
+			<% } %>
+			
+			<% if(!isEmpty(startdate_end)){ %>
+					and s.startdate <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:ss')
 			<% } %>
     	]]>
 	</sql>

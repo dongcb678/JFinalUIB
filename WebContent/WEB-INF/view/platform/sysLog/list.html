@@ -52,6 +52,11 @@
 							<option value="0" ${paramMap["_query.status"]! == "0" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.error"]}</option>
 						</select>
 							
+						${i18nMap["admin.sysLog.property.startdate"]} 
+		                <input type="text" name="_query.startdate_start" value='${escapeXml(paramMap["_query.startdate_start"])}' class="form-control form_datetime" style="width: 150px" readonly>
+						至
+		                <input type="text" name="_query.startdate_end" value='${escapeXml(paramMap["_query.startdate_end"])}' class="form-control form_datetime" style="width: 150px" readonly>
+		                
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
 					</div>
@@ -194,6 +199,18 @@
 	jQuery(document).ready(function() {
 
 	});
+	
+	$('.form_datetime').datetimepicker({
+        language:  'zh-CN',
+    	format: 'yyyy-mm-dd hh:mm:ss',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
 </script>
 
 

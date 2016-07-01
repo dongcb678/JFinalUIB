@@ -39,12 +39,8 @@
 						<input class="medium" type="text" name="_query.email" value='${escapeXml(paramMap["_query.email"])}' maxlength="40">
 
 						${i18nMap["admin.user.property.birthday"]} 
-						<div class="controls input-append date form_datetime">
-		                    <input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}' class="form-control date-picker" readonly>
-		                    <span class="add-on"><i class="icon-remove"></i></span>
-							<span class="add-on"><i class="icon-th"></i></span>
-		                </div>
-
+		                <input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}' class="form-control form_datetime" readonly>
+		                
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
 					</div>
