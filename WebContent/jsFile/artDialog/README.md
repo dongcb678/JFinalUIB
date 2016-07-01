@@ -1,24 +1,31 @@
 #	artDialog
 
-artDialog v6 —— 经典的网页对话框组件，内外皆用心雕琢。
+artDialog——经典、优雅的网页对话框控件。
+文档与示例：<http://aui.github.io/artDialog/doc/index.html>
 
-##	用户
+AngularJS 版本：<https://github.com/aui/angular-popups>
 
-四年来，有超过 40 万网站在使用 artDialog，其中不乏国内顶尖的产品：
+##	成功案例
+
+超过 40 万网站在使用 artDialog，其中不乏国内顶尖的产品：
 
 *	[QQ空间 v8（腾讯）](http://qzone.qq.com)
 *	[Phpcms（盛大）](http://www.phpcms.cn)
 *	[极路由](http://www.hiwifi.com)
-
-##	文档与示例
-
-<http://aui.github.io/artDialog/doc/index.html>
-
-##	兼容性
-
-测试通过：IE6-IE11、Chrome、Firefox、Safari、Opera
+*	...
 
 ##	更新历史
+
+6.0.4
+
+1. ``content()``方法传入隐藏元素并显示，并且``remove()``的时候会将元素插入到``body``避免被销毁 [#103](https://github.com/aui/artDialog/issues/103) [#126](https://github.com/aui/artDialog/issues/126)
+2. 修复``button``方法可能会多次绑定事件的问题
+3. 模态对话框可以避免 shift + tab 将焦点移出对话框 [#67](https://github.com/aui/artDialog/issues/67)
+
+6.0.3
+
+1. 修复``button``方法直接传入 html 不显示的问题
+2. 修复版本管理导致[#78](https://github.com/aui/artDialog/issues/78)重现问题
 
 6.0.2
 
@@ -42,9 +49,3 @@ artDialog v6 —— 经典的网页对话框组件，内外皆用心雕琢。
 ##	授权协议
 
 免费，且开源，基于[LGPL](./LICENSE.md)协议。
-
-##	支持我们
-
-[贡献代码](https://github.com/aui/artDialog) || [捐赠一杯咖啡](https://me.alipay.com/planeart) || [商业授权](./LICENSE.md)
-
-artDialog，献给那些愿意为 web 极致体验付出的人们！

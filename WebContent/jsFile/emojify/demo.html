@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>emojify.js</title>
+  <script src="js/emojify.min.js"></script>
+  <link href="css/data-uri/emojify-emoticons.min.css" rel="stylesheet" type="text/css">
+  	<script type="text/javascript" src="../jquery/jquery-1.12.4.min.js" ></script>
+  	<script type="text/javascript" src="../common/utils.js" ></script>
+  <style>
+    	.emoji { width: 1.5em; height: 1.5em; display: inline-block; margin-bottom: -.25em; background-size: 1.5em; }
+    	
+    	
+    	.emojifySelect{
+    			display: none;
+    			position: absolute;
+    			left: 0px;
+    			top: 120px;
+    			width: 400px;
+    			height: 280px;
+    			background-color: #FFFFFF;
+			    z-index: 1000;
+    	}
+    	
+    	.emojifylogo{
+    			float: left;
+    			margin: 0px 0px 0px 0px;
+    	}
+  </style>
+</head>
+
+<body>
+		<div>
+				<textarea id="dt" cols="20" rows="3"></textarea><br />
+				<input type="button" onclick="utils.emojifySelect()" /><br />
+		</div>
+		
+  	<div class="emojifySelect">
+				<div class="emojifylogo">:bowtie:</div>
+				<div class="emojifylogo">:smile:</div>
+				<div class="emojifylogo">:laughing:</div>
+				<div class="emojifylogo">:blush:</div>
+				<div class="emojifylogo">:smiley:</div>
+				<div class="emojifylogo">:relaxed:</div>
+				<div class="emojifylogo">:smirk:</div>
+				<div class="emojifylogo">:heart_eyes:</div>
+				<div class="emojifylogo">:kissing_heart:</div>
+				<div class="emojifylogo">:kissing_closed_eyes:</div>
+				<div class="emojifylogo">:flushed:</div>
+				<div class="emojifylogo">:relieved:</div>
+				<div class="emojifylogo">:satisfied:</div>
+				<div class="emojifylogo">:grin:</div>
+				<div class="emojifylogo">:wink:</div>
+				<div class="emojifylogo">:stuck_out_tongue_winking_eye:</div>
+				<div class="emojifylogo">:stuck_out_tongue_closed_eyes:</div>
+				<div class="emojifylogo">:grinning:</div>
+				<div class="emojifylogo">:kissing:</div>
+				<div class="emojifylogo">:kissing_smiling_eyes:</div>
+				<div class="emojifylogo">:stuck_out_tongue:</div>
+				<div class="emojifylogo">:sleeping:</div>
+				<div class="emojifylogo">:worried:</div>
+				<div class="emojifylogo">:frowning:</div>
+				<div class="emojifylogo">:anguished:</div>
+				<div class="emojifylogo">:open_mouth:</div>
+				<div class="emojifylogo">:grimacing:</div>
+				<div class="emojifylogo">:confused:</div>
+				<div class="emojifylogo">:hushed:</div>
+				<div class="emojifylogo">:expressionless:</div>
+				<div class="emojifylogo">:unamused:</div>
+				<div class="emojifylogo">:sweat_smile:</div>
+				<div class="emojifylogo">:sweat:</div>
+				<div class="emojifylogo">:weary:</div>
+				<div class="emojifylogo">:pensive:</div>
+				<div class="emojifylogo">:disappointed:</div>
+				<div class="emojifylogo">:confounded:</div>
+				<div class="emojifylogo">:fearful:</div>
+				<div class="emojifylogo">:cold_sweat:</div>
+				<div class="emojifylogo">:persevere:</div>
+				<div class="emojifylogo">:cry:</div>
+				<div class="emojifylogo">:sob:</div>
+				<div class="emojifylogo">:joy:</div>
+				<div class="emojifylogo">:astonished:</div>
+				<div class="emojifylogo">:scream:</div>
+				<div class="emojifylogo">:neckbeard:</div>
+				<div class="emojifylogo">:tired_face:</div>
+				<div class="emojifylogo">:angry:</div>
+				<div class="emojifylogo">:rage:</div>
+				<div class="emojifylogo">:triumph:</div>
+				<div class="emojifylogo">:sleepy:</div>
+				<div class="emojifylogo">:yum:</div>
+				<div class="emojifylogo">:mask:</div>
+				<div class="emojifylogo">:sunglasses:</div>
+				<div class="emojifylogo">:dizzy_face:</div>
+				<div class="emojifylogo">:imp:</div>
+				<div class="emojifylogo">:smiling_imp:</div>
+				<div class="emojifylogo">:neutral_face:</div>
+				<div class="emojifylogo">:no_mouth:</div>
+				<div class="emojifylogo">:innocent:</div>
+				<div class="emojifylogo">:alien:</div>
+				<div class="emojifylogo">:yellow_heart:</div>
+				<div class="emojifylogo">:blue_heart:</div>
+				<div class="emojifylogo">:purple_heart:</div>
+				<div class="emojifylogo">:heart:</div>
+				<div class="emojifylogo">:green_heart:</div>
+				<div class="emojifylogo">:broken_heart:</div>
+				<div class="emojifylogo">:heartbeat:</div>
+				<div class="emojifylogo">:heartpulse:</div>
+				<div class="emojifylogo">:two_hearts:</div>
+				<div class="emojifylogo">:revolving_hearts:</div>
+				<div class="emojifylogo">:cupid:</div>
+				<div class="emojifylogo">:sparkling_heart:</div>
+				<div class="emojifylogo">:sparkles:</div>
+				<div class="emojifylogo">:star:</div>
+				<div class="emojifylogo">:star2:</div>
+				<div class="emojifylogo">:dizzy:</div>
+				<div class="emojifylogo">:boom:</div>
+				<div class="emojifylogo">:collision:</div>
+				<div class="emojifylogo">:anger:</div>
+				<div class="emojifylogo">:exclamation:</div>
+				<div class="emojifylogo">:question:</div>
+				<div class="emojifylogo">:grey_exclamation:</div>
+				<div class="emojifylogo">:grey_question:</div>
+				<div class="emojifylogo">:zzz:</div>
+				<div class="emojifylogo">:dash:</div>
+				<div class="emojifylogo">:sweat_drops:</div>
+				<div class="emojifylogo">:notes:</div>
+				<div class="emojifylogo">:musical_note:</div>
+				<div class="emojifylogo">:fire:</div>
+				<div class="emojifylogo">:hankey:</div>
+				<div class="emojifylogo">:poop:</div>
+				<div class="emojifylogo">:shit:</div>
+				<div class="emojifylogo">:+1:</div>
+				<div class="emojifylogo">:thumbsup:</div>
+				<div class="emojifylogo">:-1:</div>
+				<div class="emojifylogo">:thumbsdown:</div>
+				<div class="emojifylogo">:ok_hand:</div>
+				<div class="emojifylogo">:punch:</div>
+				<div class="emojifylogo">:facepunch:</div>
+				<div class="emojifylogo">:fist:</div>
+				<div class="emojifylogo">:v:</div>
+				<div class="emojifylogo">:wave:</div>
+				<div class="emojifylogo">:hand:</div>
+				<div class="emojifylogo">:open_hands:</div>
+				<div class="emojifylogo">:point_up:</div>
+				<div class="emojifylogo">:point_down:</div>
+				<div class="emojifylogo">:point_left:</div>
+				<div class="emojifylogo">:point_right:</div>
+				<div class="emojifylogo">:raised_hands:</div>
+				<div class="emojifylogo">:pray:</div>
+				<div class="emojifylogo">:point_up_2:</div>
+				<div class="emojifylogo">:clap:</div>
+				<div class="emojifylogo">:muscle:</div>
+				<div class="emojifylogo">:metal:</div>
+				<div class="emojifylogo">:walking:</div>
+				<div class="emojifylogo">:runner:</div>
+				<div class="emojifylogo">:running:</div>
+				<div class="emojifylogo">:couple:</div>
+				<div class="emojifylogo">:family:</div>
+				<div class="emojifylogo">:two_men_holding_hands:</div>
+				<div class="emojifylogo">:two_women_holding_hands:</div>
+				<div class="emojifylogo">:dancer:</div>
+				<div class="emojifylogo">:dancers:</div>
+				<div class="emojifylogo">:ok_woman:</div>
+				<div class="emojifylogo">:no_good:</div>
+				<div class="emojifylogo">:information_desk_person:</div>
+				<div class="emojifylogo">:raised_hand:</div>
+				<div class="emojifylogo">:bride_with_veil:</div>
+				<div class="emojifylogo">:person_with_pouting_face:</div>
+				<div class="emojifylogo">:person_frowning:</div>
+				<div class="emojifylogo">:bow:</div>
+				<div class="emojifylogo">:couplekiss:</div>
+				<div class="emojifylogo">:couple_with_heart:</div>
+				<div class="emojifylogo">:massage:</div>
+				<div class="emojifylogo">:haircut:</div>
+				<div class="emojifylogo">:nail_care:</div>
+				<div class="emojifylogo">:boy:</div>
+				<div class="emojifylogo">:girl:</div>
+				<div class="emojifylogo">:woman:</div>
+				<div class="emojifylogo">:man:</div>
+				<div class="emojifylogo">:baby:</div>
+				<div class="emojifylogo">:older_woman:</div>
+				<div class="emojifylogo">:older_man:</div>
+				<div class="emojifylogo">:person_with_blond_hair:</div>
+				<div class="emojifylogo">:man_with_gua_pi_mao:</div>
+				<div class="emojifylogo">:man_with_turban:</div>
+				<div class="emojifylogo">:construction_worker:</div>
+				<div class="emojifylogo">:cop:</div>
+				<div class="emojifylogo">:angel:</div>
+				<div class="emojifylogo">:princess:</div>
+				<div class="emojifylogo">:smiley_cat:</div>
+				<div class="emojifylogo">:smile_cat:</div>
+				<div class="emojifylogo">:heart_eyes_cat:</div>
+				<div class="emojifylogo">:kissing_cat:</div>
+				<div class="emojifylogo">:smirk_cat:</div>
+				<div class="emojifylogo">:scream_cat:</div>
+				<div class="emojifylogo">:crying_cat_face:</div>
+				<div class="emojifylogo">:joy_cat:</div>
+				<div class="emojifylogo">:pouting_cat:</div>
+				<div class="emojifylogo">:japanese_ogre:</div>
+				<div class="emojifylogo">:japanese_goblin:</div>
+				<div class="emojifylogo">:see_no_evil:</div>
+				<div class="emojifylogo">:hear_no_evil:</div>
+				<div class="emojifylogo">:speak_no_evil:</div>
+				<div class="emojifylogo">:guardsman:</div>
+				<div class="emojifylogo">:skull:</div>
+				<div class="emojifylogo">:feet:</div>
+				<div class="emojifylogo">:lips:</div>
+				<div class="emojifylogo">:kiss:</div>
+				<div class="emojifylogo">:droplet:</div>
+				<div class="emojifylogo">:ear:</div>
+				<div class="emojifylogo">:eyes:</div>
+				<div class="emojifylogo">:nose:</div>
+				<div class="emojifylogo">:tongue:</div>
+				<div class="emojifylogo">:love_letter:</div>
+				<div class="emojifylogo">:bust_in_silhouette:</div>
+				<div class="emojifylogo">:busts_in_silhouette:</div>
+				<div class="emojifylogo">:speech_balloon:</div>
+				<div class="emojifylogo">:thought_balloon:</div>
+				<div class="emojifylogo">:feelsgood:</div>
+				<div class="emojifylogo">:finnadie:</div>
+				<div class="emojifylogo">:goberserk:</div>
+				<div class="emojifylogo">:godmode:</div>
+				<div class="emojifylogo">:hurtrealbad:</div>
+				<div class="emojifylogo">:rage1:</div>
+				<div class="emojifylogo">:rage2:</div>
+				<div class="emojifylogo">:rage3:</div>
+				<div class="emojifylogo">:rage4:</div>
+				<div class="emojifylogo">:suspect:</div>
+				<div class="emojifylogo">:trollface:</div>
+  	</div>
+  
+</body>
+
+<script type="text/javascript">
+      emojify.setConfig({emojify_tag_type:'div', img_dir : "images/basic"});
+      emojify.run();
+      
+      $(".emojifylogo").click(function(){
+      		var logo = $(this).children(":first-child").attr("title");
+      		$("#dt").val($("#dt").val()+logo);
+      });
+</script>
+
+</html>

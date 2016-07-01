@@ -17,29 +17,45 @@ public abstract class ToolRandoms {
 	private static final Random random = new Random();
 
 	// 定义验证码字符.去除了O、I、l、、等容易混淆的字母
-	public static final char authCode[] = { 
-		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'G', 'K', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 
+	public static final char authCodeAll[] = { 
+		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 
 		'a', 'c', 'd', 'e', 'f', 'g', 'h', 'k', 'm', 'n', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 
 		'3', '4', '5', '7', '8' };
+
+	// 定义验证码数字
+	public static final char authCodeNumber[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 	
-	public static final int length = authCode.length;
+	public static final int authCodeAllLength = authCodeAll.length;
+	public static final int authCodeNumberLength = authCodeNumber.length;
 	
 	/**
 	 * 生成验证码
 	 * @return
 	 */
-	public static char getAuthCodeChar() {
-		return authCode[number(0, length)];
+	public static char getAuthCodeAllChar() {
+		return authCodeAll[number(0, authCodeAllLength)];
 	}
 	
 	/**
 	 * 生成验证码
 	 * @return
 	 */
-	public static String getAuthCode(int length) {
+	public static String getAuthCodeAll(int length) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < length; i++) {
-			sb.append(authCode[number(0, length)]);
+			sb.append(authCodeAll[number(0, length)]);
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * 生成验证码，纯数字
+	 * @return
+	 */
+	public static String getAuthCodeNumber(int length) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < length; i++) {
+			sb.append(authCodeNumber[number(0, length)]);
 		}
 		return sb.toString();
 	}

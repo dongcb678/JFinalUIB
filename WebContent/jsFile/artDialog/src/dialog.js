@@ -1,6 +1,6 @@
 /*!
  * artDialog
- * Date: 2014-06-29
+ * Date: 2014-11-09
  * https://github.com/aui/artDialog
  * (c) 2009-2014 TangBin, http://www.planeArt.cn
  *
@@ -31,7 +31,7 @@ if (css) {
 
 
 var _count = 0;
-var _expando = new Date() - 0; // Data.now()
+var _expando = new Date() - 0; // Date.now()
 var _isIE6 = !('minWidth' in $('html')[0].style);
 var _isMobile = 'createTouch' in document && !('onmousemove' in document)
     || /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
@@ -50,7 +50,7 @@ var artDialog = function (options, ok, cancel) {
     
 
     options = $.extend(true, {}, artDialog.defaults, options);
-    options._ = originalOptions;
+    options.original = originalOptions;
 
     var id = options.id = options.id || _expando + _count;
     var api = artDialog.get(id);
@@ -71,9 +71,7 @@ var artDialog = function (options, ok, cancel) {
     // 快捷关闭支持：点击对话框外快速关闭对话框
     if (options.quickClose) {
         options.modal = true;
-        if (!originalOptions.backdropOpacity) {
-            options.backdropOpacity = 0;
-        }
+        options.backdropOpacity = 0;
     }
     
 
@@ -125,7 +123,9 @@ artDialog.create = function (options) {
 
     $.extend(this, new Popup());
 
+    var originalOptions = options.original;
     var $popup = $(this.node).html(options.innerHTML);
+    var $backdrop = $(this.backdrop);
 
     this.options = options;
     this._popup = $popup;
@@ -170,26 +170,27 @@ artDialog.create = function (options) {
     this._$('body').css('padding', this.padding);
 
 
-    // 按钮组点击
-    $popup.on('click', '[data-id]', function (event) {
-        var $this = $(this);
-        if (!$this.attr('disabled')) {// IE BUG
-            that._trigger($this.data('id'));
-        }
-    
-        event.preventDefault();
-    });
-
-
-    // 点击遮罩自动关闭对话框
+    // 点击任意空白处关闭对话框
     if (options.quickClose) {
-        $(this.backdrop).on(
+        $backdrop
+        .on(
             'onmousedown' in document ? 'mousedown' : 'click',
             function () {
             that._trigger('cancel');
             return false;// 阻止抢夺焦点
         });
     }
+
+
+    // 遮罩设置
+    this.addEventListener('show', function () {
+        $backdrop.css({
+            opacity: 0,
+            background: options.backdropBackground
+        }).animate(
+            {opacity: options.backdropOpacity}
+        , 150);
+    });
 
 
     // ESC 快捷键关闭对话框
@@ -332,8 +333,19 @@ $.extend(prototype, {
      */
     content: function (html) {
     
-        this._$('content').empty('')
-        [typeof html === 'object' ? 'append' : 'html'](html);
+        var $content = this._$('content');
+
+        // HTMLElement
+        if (typeof html === 'object') {
+            html = $(html);
+            $content.empty('').append(html.show());
+            this.addEventListener('beforeremove', function () {
+                $('body').append(html.hide());
+            });
+        // String
+        } else {
+            $content.html(html);
+        }
                 
         return this.reset();
     },
@@ -367,6 +379,7 @@ $.extend(prototype, {
     /**
      * 设置按钮组
      * @param   {Array, String}
+     * Options: value, callback, autofocus, disabled 
      */
     button: function (args) {
         args = args || [];
@@ -374,18 +387,18 @@ $.extend(prototype, {
         var html = '';
         var number = 0;
         this.callbacks = {};
-
         
            
         if (typeof args === 'string') {
             html = args;
+            number ++;
         } else {
             $.each(args, function (i, val) {
 
-                val.id = val.id || val.value;
-                that.callbacks[val.id] = val.callback;
-
+                var id = val.id = val.id || val.value;
                 var style = '';
+                that.callbacks[id] = val.callback;
+
 
                 if (val.display === false) {
                     style = ' style="display:none"';
@@ -396,7 +409,7 @@ $.extend(prototype, {
                 html +=
                   '<button'
                 + ' type="button"'
-                + ' data-id="' + val.id + '"'
+                + ' i-id="' + id + '"'
                 + style
                 + (val.disabled ? ' disabled' : '')
                 + (val.autofocus ? ' autofocus class="ui-dialog-autofocus"' : '')
@@ -404,12 +417,22 @@ $.extend(prototype, {
                 +   val.value
                 + '</button>';
 
+                that._$('button')
+                .on('click', '[i-id=' + id +']', function (event) {                
+                    var $this = $(this);
+                    if (!$this.attr('disabled')) {// IE BUG
+                        that._trigger(id);
+                    }
+                
+                    event.preventDefault();
+                });
+
             });
         }
 
-        this._$('footer')[number ? 'show' : 'hide']();
         this._$('button').html(html);
-        
+        this._$('footer')[number ? 'show' : 'hide']();
+
         return this;
     },
 
@@ -429,7 +452,6 @@ $.extend(prototype, {
     
     // 触发按钮回调函数
     _trigger: function (id) {
-    
         var fn = this.callbacks[id];
             
         return typeof fn !== 'function' || fn.call(this) !== false ?
@@ -444,7 +466,7 @@ artDialog.oncreate = $.noop;
 
 
 
-/** 最顶层的对话框API */
+/** 获取最顶层的对话框API */
 artDialog.getCurrent = function () {
     return Popup.current;
 };
