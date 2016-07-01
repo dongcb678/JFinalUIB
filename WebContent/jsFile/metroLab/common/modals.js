@@ -50,6 +50,7 @@ var common_modals = function() {
 	 */
 	var dialogSelect = function(title, content, func){
 		var d = dialog({
+			align: 'bottom',
 			title: title, 
 		    content: content,
 		    okValue: i18n_modals_common_determine, // 确定
@@ -63,7 +64,7 @@ var common_modals = function() {
 		    cancelValue: i18n_modals_common_close, // 取消
 		    cancel: function () {}
 		});
-		d.showModal();
+		d.showModal(document.getElementById('header'));
 	};
 	
 	/**
