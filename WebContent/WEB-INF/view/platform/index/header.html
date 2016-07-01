@@ -13,9 +13,11 @@
 			<!--END SIDEBAR TOGGLE-->
 			
 			<!-- BEGIN LOGO -->
+			<% /* %>
 			<a class="brand" href="index.html"> 
 				<img src="${cxt!}/ui/metroLab/img/logo.png" alt="Metro Lab" />
 			</a>
+			<% */ %>
 			<!-- END LOGO -->
 			
 			<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -151,8 +153,11 @@
 					<!-- END INBOX DROPDOWN -->
 					
 					<!-- BEGIN NOTIFICATION DROPDOWN -->
-					<li class="dropdown" id="header_notification_bar"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-bell-alt"></i> <span class="badge badge-warning">7</span>
-					</a>
+					<li class="dropdown" id="header_notification_bar">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+							<i class="icon-bell-alt"></i> 
+							<span class="badge badge-warning">7</span>
+						</a>
 						<ul class="dropdown-menu extended notification">
 							<li>
 								<p>You have 7 new notifications</p>
@@ -174,14 +179,57 @@
 				</ul>
 			</div>
 			<!-- END  NOTIFICATION -->
+			
+			<!-- BEGIN TOP NAVIGATION MENU -->
 			<div class="top-nav ">
 				<ul class="nav pull-right top-menu">
 					<!-- BEGIN SUPPORT -->
-					<li class="dropdown mtop5"><a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Chat"> <i class="icon-comments-alt"></i>
-					</a></li>
-					<li class="dropdown mtop5"><a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Help"> <i class="icon-headphones"></i>
-					</a></li>
+					<li class="dropdown mtop5">
+						<a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Chat"> 
+							<i class="icon-comments-alt"></i>
+						</a>
+					</li>
+					<li class="dropdown mtop5">
+						<a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Help"> 
+							<i class="icon-headphones"></i>
+						</a>
+					</li>
 					<!-- END SUPPORT -->
+					
+					<!-- BEGIN 语言选择 -->
+					<li class="dropdown mtop5">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+							<span class="username">${i18nMap["admin.top.language"]}</span>
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu extended logout">
+							<li><a href="${cxt!}/platform/index?localePram=zh_CN"><i class="icon-cog"></i>${i18nMap["admin.top.language.zhcn"]}</a></li>
+							<li><a href="${cxt!}/platform/index?localePram=en_US"><i class="icon-cog"></i>${i18nMap["admin.top.language.enus"]}</a></li>
+							<li><a href="${cxt!}/platform/index?localePram=zh_TW"><i class="icon-cog"></i>${i18nMap["admin.top.language.zhtw"]}</a></li>
+							<li><a href="${cxt!}/platform/index?localePram=zh_HK"><i class="icon-cog"></i>${i18nMap["admin.top.language.zhhk"]}</a></li>
+							<li><a href="${cxt!}/platform/index?localePram=ja"><i class="icon-cog"></i>${i18nMap["admin.top.language.ja"]}</a></li>
+						</ul>
+					</li>
+					<!-- END 系统切换 -->
+					
+					<!-- BEGIN 系统切换 -->
+					<li class="dropdown mtop5">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+							<span class="username">系统切换</span>
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu extended logout">
+							<% for(systems in systemsList){ %>
+								<li>
+									<a href="${cxt!}/platform/index?ids=${systems.ids!}">
+										<i class="icon-cog"></i>${escapeXml(systems.names!)}
+									</a>
+								</li>
+							<% } %>
+						</ul>
+					</li>
+					<!-- END 系统切换 -->
+					
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
@@ -190,17 +238,27 @@
 							<b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu extended logout">
-							<li><a href="javascript:void(0)"> <i class="icon-user"></i> ${i18nMap["admin.top.passChange"]}
-							</a></li>
-							<li><a href="${cxt!}/jf/platform/index/toUrl?toUrl=/platform/login/lock_screen.html"> <i class="icon-cog"></i> 锁屏
-							</a></li>
-							<li><a href="${cxt!}/jf/platform/login/logout"> <i class="icon-key"></i> ${i18nMap["admin.top.exitSystem"]}
-							</a></li>
+							<li>
+								<a href="javascript:void(0)"> 
+									<i class="icon-user"></i> ${i18nMap["admin.top.passChange"]}
+								</a>
+							</li>
+							<li>
+								<a href="${cxt!}/jf/platform/index/toUrl?toUrl=/platform/login/lock_screen.html"> 
+									<i class="icon-cog"></i> 锁屏
+								</a>
+							</li>
+							<li>
+								<a href="${cxt!}/jf/platform/login/logout"> 
+									<i class="icon-key"></i> ${i18nMap["admin.top.exitSystem"]}
+								</a>
+							</li>
 						</ul>
 					</li>
 					<!-- END USER LOGIN DROPDOWN -->
 				</ul>
 				<!-- END TOP NAVIGATION MENU -->
+				
 			</div>
 		</div>
 	</div>
