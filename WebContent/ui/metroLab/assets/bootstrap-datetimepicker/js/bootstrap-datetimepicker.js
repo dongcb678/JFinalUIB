@@ -392,6 +392,9 @@
 
     getDate: function () {
       var d = this.getUTCDate();
+      if(d == null){
+    	  return new Date();
+      }
       return new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
     },
 

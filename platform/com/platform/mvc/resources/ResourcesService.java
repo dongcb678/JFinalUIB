@@ -10,7 +10,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
-import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
@@ -39,10 +38,7 @@ public class ResourcesService extends BaseService {
 		Date endDate = ToolDateTime.endDateByDay(ToolDateTime.getDate());
 		Date startDate = ToolDateTime.startDateByDay(endDate, -14);
 
-		String db_type = PropKit.get(ConstantInit.db_type_key);
-		
 		Map<String, Object> sqlMap = new HashMap<String, Object>();
-		sqlMap.put("db_type", db_type);
 		
 		String sql = getSqlByBeetl(Resources.sqlId_pv, sqlMap);
 		List<Record> list = Db.use(ConstantInit.db_dataSource_main).find(sql, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
