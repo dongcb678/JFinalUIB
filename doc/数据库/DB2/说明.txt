@@ -4,7 +4,7 @@
 
 首先命令行进入数据库备份的存放目录，最好是空目录，导出的文件会很多
 
-db2move uibv2 export -u ADMINISTRATOR -p 678789
+db2move uibv3 export -u ADMINISTRATOR -p 678789
 
 根据自己时间情况修改数据库名、账户、密码
 
@@ -14,7 +14,7 @@ db2move uibv2 export -u ADMINISTRATOR -p 678789
 
 首先命令行进入数据库备份的存放目录，然后执行下面的命令
 
-db2move uibv2 import -u ADMINISTRATOR -p 678789
+db2move uibv3 import -u ADMINISTRATOR -p 678789
 
 根据自己时间情况修改数据库名、账户、密码
 
@@ -22,7 +22,7 @@ db2move uibv2 import -u ADMINISTRATOR -p 678789
 导出DDL
 ============================================================
 
-db2look -d uibv2 -e -o DDL.sql -i ADMINISTRATOR -w 678789
+db2look -d uibv3 -e -o DDL.sql -i ADMINISTRATOR -w 678789
 
 
 开发测试环境DB2版本信息
