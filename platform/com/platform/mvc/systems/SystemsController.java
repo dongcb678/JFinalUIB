@@ -12,7 +12,7 @@ import com.platform.mvc.base.BaseModel;
  * 系统管理
  * @author 董华健
  */
-@Controller(controllerKey = "/jf/platform/systems")
+@Controller(controllerKey = "/platform/systems")
 public class SystemsController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -34,7 +34,7 @@ public class SystemsController extends BaseController {
 	@Before(SystemsValidator.class)
 	public void save() {
 		systemsService.save(getModel(Systems.class));
-		redirect("/jf/platform/systems");
+		redirect("/platform/systems");
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class SystemsController extends BaseController {
 	@Before(SystemsValidator.class)
 	public void update() {
 		getModel(Systems.class).update();
-		redirect("/jf/platform/systems");
+		redirect("/platform/systems");
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class SystemsController extends BaseController {
 	 */
 	public void delete() {
 		systemsService.delete(getPara() == null ? ids : getPara());
-		redirect("/jf/platform/systems");
+		redirect("/platform/systems");
 	}
 
 }

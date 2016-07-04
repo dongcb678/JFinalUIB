@@ -2,8 +2,8 @@
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/test/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/test/blog');">博客管理</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/test/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/test/blog');">博客管理</a></li>
 			<li class="active">添加</li>
 		</ol>
 	</div>
@@ -23,14 +23,14 @@
 			
 			<div class="panel-body">	
 			
-				<form id="editForm" action="${cxt!}/jf/test/blog/save" 
+				<form id="editForm" action="${cxt!}/test/blog/save" 
 					method="POST" role="form" class="form-horizontal">
 					
 					<% include("/test/blog/form.html"){} %>
 					
 					<div class="control-group">
 						<div class="col-sm-2 col-sm-offset-3">
-							<% if(authUrl("/jf/test/blog/save")){ %>
+							<% if(authUrl("/test/blog/save")){ %>
 								<button type="button" class="btn btn-red" 
 									onclick="platform_verify.formValiSubmit(this.form);">
 									${i18nMap["admin.common.submit"]}	

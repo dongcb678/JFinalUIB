@@ -1,4 +1,4 @@
-<form id="splitPage" action="${cxt!}/jf/platform/user" method="POST" class="form-horizontal">
+<form id="splitPage" action="${cxt!}/platform/user" method="POST" class="form-horizontal">
 
 	<!-- BEGIN PAGE CONTAINER-->
 	<div class="container-fluid">
@@ -9,7 +9,7 @@
 				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 				<ul class="breadcrumb">
 					<li>
-						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
+						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
 						<span class="divider">/</span>
 					</li>
 					<li><a href="#">用户权限</a> <span class="divider">/</span></li>
@@ -56,10 +56,10 @@
 				<div class="widget red">
 
 					<% 
-						var view = authUrl("/jf/platform/user/view"); 
-						var edit = authUrl("/jf/platform/user/edit"); 
-						var delete = authUrl("/jf/platform/user/delete"); 
-						var group = authUrl("/jf/platform/group/select"); 
+						var view = authUrl("/platform/user/view"); 
+						var edit = authUrl("/platform/user/edit"); 
+						var delete = authUrl("/platform/user/delete"); 
+						var group = authUrl("/platform/group/select"); 
 					%>
 
 					<div class="widget-title">
@@ -71,7 +71,7 @@
 					<div class="widget-body">
 						<span class="tools"> 
 							<% if(authUrl("/platform/user/add.html")){ %>
-							<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/toUrl?toUrl=/platform/user/add.html');">
+							<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanel('/platform/user/toUrl?toUrl=/platform/user/add.html');">
 								<i class="icon-plus icon-white"></i>
 								${i18nMap["admin.user.add"]}
 							</button> 
@@ -129,14 +129,14 @@
 									</td>
 									<td class="hidden-phone">
 										<% if(view == true){ %>
-											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/view/${user.ids!}');">
+											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/platform/user/view/${user.ids!}');">
 												<i class="icon-eye-open"></i> 
 												${i18nMap["admin.common.see"]}
 											</button> 
 										<% } %> 
 										
 										<% if(edit == true){ %>
-											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/jf/platform/user/edit/${user.ids!}');">
+											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/platform/user/edit/${user.ids!}');">
 												<i class="icon-refresh icon-white"></i>
 												${i18nMap["admin.common.edit"]}
 											</button> 
@@ -150,7 +150,7 @@
 										<% } %> 
 										
 										<% if(delete == true){ %>
-										<button type="button" class="btn btn-small btn-danger" data-bb="deleteOne" data-url="/jf/platform/user/delete/${user.ids!}">
+										<button type="button" class="btn btn-small btn-danger" data-bb="deleteOne" data-url="/platform/user/delete/${user.ids!}">
 											<i class="icon-remove icon-white"></i>
 											${i18nMap["admin.common.delete"]}
 										</button> 

@@ -14,7 +14,7 @@
          <!-- BEGIN SIDEBAR MENU -->
           <ul class="sidebar-menu">
               <li class="sub-menu active">
-                  <a class="" href="${cxt!}/jf/platform/index">
+                  <a class="" href="${cxt!}/platform/index">
                       <i class="icon-dashboard"></i>
                       <span>主页</span>
                   </a>
@@ -36,7 +36,7 @@
 												${two.names} <i class="icon-arrow"></i>
 											</a>
 										<% }else{ %>
-											<a href="#" onclick='common_ajax.ajaxMainPanel("/jf/platform/index/toUrl?toUrl=${two.url!}");'>
+											<a href="#" onclick='common_ajax.ajaxMainPanel("/platform/index/toUrl?toUrl=${two.url!}");'>
 												${two.names} <i class="icon-arrow"></i>
 											</a>
 										<% } %>
@@ -48,7 +48,7 @@
 				<% } %>
 							
               <li>
-                  <a class="" href="${cxt!}/jf/platform/login/logout">
+                  <a class="" href="${cxt!}/platform/login/logout">
                     <i class="icon-user"></i>
                     <span>${i18nMap["admin.top.exitSystem"]}</span>
                   </a>

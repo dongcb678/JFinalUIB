@@ -13,16 +13,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/${basePath}/${classNameSmall}
- * /jf/${basePath}/${classNameSmall}/save
- * /jf/${basePath}/${classNameSmall}/edit
- * /jf/${basePath}/${classNameSmall}/update
- * /jf/${basePath}/${classNameSmall}/view
- * /jf/${basePath}/${classNameSmall}/delete
+ * /${basePath}/${classNameSmall}
+ * /${basePath}/${classNameSmall}/save
+ * /${basePath}/${classNameSmall}/edit
+ * /${basePath}/${classNameSmall}/update
+ * /${basePath}/${classNameSmall}/view
+ * /${basePath}/${classNameSmall}/delete
  * /common/${classNameSmall}/add.html
  * 
  */
-@Controller(controllerKey = "/jf/${basePath}/${classNameSmall}")
+@Controller(controllerKey = "/${basePath}/${classNameSmall}")
 public class ${className}Controller extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -62,7 +62,7 @@ public class ${className}Controller extends BaseController {
 	@Before(${className}Validator.class)
 	public void update() {
 		getModel(${className}.class).update();
-		redirect("/jf/${basePath}/${classNameSmall}");
+		redirect("/${basePath}/${classNameSmall}");
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class ${className}Controller extends BaseController {
 	 */
 	public void delete() {
 		${classNameSmall}Service.delete("${tableName}", getPara() == null ? ids : getPara());
-		redirect("/jf/${basePath}/${classNameSmall}");
+		redirect("/${basePath}/${classNameSmall}");
 	}
 	
 }

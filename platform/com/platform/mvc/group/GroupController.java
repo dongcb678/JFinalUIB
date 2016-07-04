@@ -17,7 +17,7 @@ import com.platform.mvc.base.BaseService;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = "/jf/platform/group")
+@Controller(controllerKey = "/platform/group")
 public class GroupController extends BaseController {
 
 	private static Logger log = Logger.getLogger(GroupController.class);
@@ -42,7 +42,7 @@ public class GroupController extends BaseController {
 	@Before(GroupValidator.class)
 	public void save() {
 		ids = groupService.save(getModel(Group.class));
-		redirect("/jf/platform/group");
+		redirect("/platform/group");
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class GroupController extends BaseController {
 	@Before(GroupValidator.class)
 	public void update() {
 		groupService.update(getModel(Group.class));
-		redirect("/jf/platform/group");
+		redirect("/platform/group");
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class GroupController extends BaseController {
 	 */
 	public void delete() {
 		groupService.delete(getPara() == null ? ids : getPara());
-		redirect("/jf/platform/group");
+		redirect("/platform/group");
 	}
 
 	/**

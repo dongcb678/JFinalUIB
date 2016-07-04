@@ -4,7 +4,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt!}/jf/platform/station/treeData',
+			url : '${cxt!}/platform/station/treeData',
 			autoParam : ["id=ids"],//, "name=n", "level=lv"
 			//otherParam : {"otherParam" : "zTreeAsyncTest"},
 			dataFilter : filter,
@@ -69,7 +69,7 @@
 
 		var result = true;
 		if(confirm("确认删除<" + treeNode.name + ">岗位吗？")){
-			var url = "/jf/platform/station/delete";
+			var url = "/platform/station/delete";
 			var data = { "ids" : treeNode.id };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != treeNode.id){
@@ -89,7 +89,7 @@
 			toastr.warning("岗位名称不能为空！");
 			return false;
 		}else{
-			var url = "/jf/platform/station/update";
+			var url = "/platform/station/update";
 			var data = { "ids" : treeNode.id, "names" : newName };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData == treeNode.id){
@@ -118,7 +118,7 @@
 			var addName = "新增岗位" + (newCount++);//岗位初始化名称
 			var orderIds = (treeNode.children == undefined ? 1 : (treeNode.children.length + 1));
 			
-			var url = "/jf/platform/station/save";
+			var url = "/platform/station/save";
 			var data = { 
 				"pIds" : treeNode.id, 
 				"names" : addName, 
@@ -360,7 +360,7 @@
 			var dragId = treeNodes[0].id;//被拖拽岗位
 			var targetId = targetNode.id;//拖拽到的目标岗位
 			
-			var url = "/jf/platform/station/update";
+			var url = "/platform/station/update";
 			var data = { "ids" : dragId, "pIds" : targetId };
 			
 			var reData = common_ajax.ajaxFunc(url, data);
@@ -407,7 +407,7 @@
 		<div class="span12">
 			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 			<ul class="breadcrumb">
-				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 				<li><a href="#">用户权限</a> <span class="divider">/</span></li>
 				<li class="active">${i18nMap["admin.station.tree"]}</li>
 			</ul>

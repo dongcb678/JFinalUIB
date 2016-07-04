@@ -35,7 +35,7 @@
 
 	<div class="lock-header">
 		<!-- BEGIN LOGO -->
-		<a class="center" id="logo" href="${cxt!}/jf/platform/index"> 
+		<a class="center" id="logo" href="${cxt!}/platform/index"> 
 			JFinalUIBV3
 			<% /** %>
 			<img class="center" alt="logo" src="${cxt!}/ui/metroLab/img/logo.png">
@@ -44,7 +44,7 @@
 		<!-- END LOGO -->
 	</div>
 
-	<form action="${cxt!}/jf/platform/login/vali" method="post">
+	<form action="${cxt!}/platform/login/vali" method="post">
 
 		<div class="login-wrap">
 			<div class="metro single-size red">
@@ -147,7 +147,7 @@
 		});
 
 		function showImage(node) {
-			var imageHtml = '<a href="javascript:void(0)" onclick="showImage(this);"><img id="yanZhengMa" src="${cxt!}/jf/platform/authImg?rand='
+			var imageHtml = '<a href="javascript:void(0)" onclick="showImage(this);"><img id="yanZhengMa" src="${cxt!}/platform/authImg?rand='
 					+ Math.random() + '" width="120" height="25"/></a>';
 			$(node).replaceWith(imageHtml);
 		}

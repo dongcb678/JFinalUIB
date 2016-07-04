@@ -72,8 +72,8 @@ public class GenerateCode {
 	 * <blockquote><pre>
 	 * 
 	 * controller基础路径，例如
-	 * @Controller(controllerKey = "/jf/platform/authImg") 中的platform
-	 * @Controller(controllerKey = "/jf/wx/authImg") 中的wx
+	 * @Controller(controllerKey = "/platform/authImg") 中的platform
+	 * @Controller(controllerKey = "/wx/authImg") 中的wx
 	 * 
 	 * render基础路径，例如
 	 * /platform/user/add.jsp 中的 platform

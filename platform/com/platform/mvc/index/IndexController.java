@@ -15,7 +15,7 @@ import com.platform.mvc.user.User;
  * 首页处理
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = {"/jf/platform/", "/jf/platform/index"})
+@Controller(controllerKey = {"/platform/", "/platform/index"})
 public class IndexController extends BaseController {
 
 	private static Logger log = Logger.getLogger(IndexController.class);

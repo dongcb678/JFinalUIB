@@ -22,7 +22,7 @@ import com.platform.tools.ToolSqlXml;
  * @author 董华健
  * 描述：比如首页登陆进去显示的数据处理
  */
-@Controller(controllerKey = "/jf/platform/test")
+@Controller(controllerKey = "/platform/test")
 public class TestController extends BaseController {
 
 	@SuppressWarnings("unused")

@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
 /**
  * 用户管理
  */
-@Controller(controllerKey = "/jf/platform/user")
+@Controller(controllerKey = "/platform/user")
 public class UserController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -63,7 +63,7 @@ public class UserController extends BaseController {
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
 		userService.update(user, password, userInfo);
-		redirect("/jf/platform/user");
+		redirect("/platform/user");
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class UserController extends BaseController {
 	 */
 	public void delete() {
 		userService.delete(getPara() == null ? ids : getPara());
-		redirect("/jf/platform/user");
+		redirect("/platform/user");
 	}
 
 	/**

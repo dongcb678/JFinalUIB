@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * 参数管理
  * @author 董华健
  */
-@Controller(controllerKey = "/jf/platform/param")
+@Controller(controllerKey = "/platform/param")
 public class ParamController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -53,7 +53,7 @@ public class ParamController extends BaseController {
 	@Before(ParamValidator.class)
 	public void save() {
 		paramService.save(getModel(Param.class));
-		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html");
+		redirect("/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html");
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class ParamController extends BaseController {
 	@Before(ParamValidator.class)
 	public void update() {
 		paramService.update(getModel(Param.class));
-		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html", true);
+		redirect("/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html", true);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class ParamController extends BaseController {
 	 */
 	public void delete() {
 		paramService.delete(getPara() == null ? ids : getPara());
-		redirect("/jf/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html");
+		redirect("/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html");
 	}
 
 	/**

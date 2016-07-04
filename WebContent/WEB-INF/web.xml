@@ -43,7 +43,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>pageCacheFilter</filter-name>
-		<url-pattern>/jf/ca/*</url-pattern>
+		<url-pattern>/ca/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
@@ -59,7 +59,13 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>JFinal</filter-name>
-		<url-pattern>/jf/*</url-pattern>
+		<url-pattern>/platform/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>JFinal</filter-name>
+		<url-pattern>/test/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>

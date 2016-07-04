@@ -215,8 +215,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("configInterceptor 配置开启事物规则");
 		interceptors.add(new TxByMethods("save", "update", "delete"));
 		interceptors.add(new TxByMethodRegex("(.*save.*|.*update.*|.*delete.*)")); // 2.1只支持单实例添加，多方法名匹配使用一个正则匹配
-		interceptors.add(new TxByActionKeys("/jf/wx/message", "/jf/wx/message/index"));
-		interceptors.add(new TxByActionKeyRegex("/jf/wx/message.*"));
+		interceptors.add(new TxByActionKeys("/wx/message", "/wx/message/index"));
+		interceptors.add(new TxByActionKeyRegex("/wx/message.*"));
 
 		log.info("configInterceptor i18n拦截器");
 		interceptors.add(new I18nInterceptor());

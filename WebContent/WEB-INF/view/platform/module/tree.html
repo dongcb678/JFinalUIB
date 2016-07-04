@@ -3,7 +3,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt!}/jf/platform/module/treeData?systemsIds=${paramMap["systemsIds"]!}',
+			url : '${cxt!}/platform/module/treeData?systemsIds=${paramMap["systemsIds"]!}',
 			autoParam : ["id=ids"],//, "name=n", "level=lv"
 			//otherParam : {"otherParam" : "zTreeAsyncTest"},
 			dataFilter : filter,
@@ -68,7 +68,7 @@
 
 		var result = false;
 		if(confirm("确认删除<" + treeNode.name + ">模块吗？")){
-			var url = "/jf/platform/module/delete";
+			var url = "/platform/module/delete";
 			var data = { "ids" : treeNode.id };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != treeNode.id){
@@ -89,7 +89,7 @@
 			toastr.warning("模块名称不能为空！");
 			return false;
 		}else{
-			var url = "/jf/platform/module/update";
+			var url = "/platform/module/update";
 			var data = { "ids" : treeNode.id, "names" : newName };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData == treeNode.id){
@@ -119,7 +119,7 @@
 			var addName = "新增模块" + (newCount++);//模块初始化名称
 			var orderIds = (treeNode.children == undefined ? 1 : (treeNode.children.length + 1));
 			
-			var url = "/jf/platform/module/save";
+			var url = "/platform/module/save";
 			var data = { 
 					"pIds" : treeNode.id, 
 					"names" : addName, 
@@ -351,7 +351,7 @@
 			var dragId = treeNodes[0].id;//被拖拽模块
 			var targetId = targetNode.id;//拖拽到的目标模块
 			
-			var url = "/jf/platform/module/update";
+			var url = "/platform/module/update";
 			var data = { "ids" : dragId, "pIds" : targetId };
 			
 			var reData = common_ajax.ajaxFunc(url, data);
@@ -397,7 +397,7 @@
 		<div class="span12">
 			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 			<ul class="breadcrumb">
-				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 				<li><a href="#">用户权限</a> <span class="divider">/</span></li>
 				<li class="active">${i18nMap["admin.module.tree"]}</li>
 			</ul>

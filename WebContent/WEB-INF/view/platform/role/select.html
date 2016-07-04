@@ -26,7 +26,7 @@
 			roleIds += checkedRole.options[i].value + ",";
 	    }
 		
-		var url = "/jf/platform/group/setRole";
+		var url = "/platform/group/setRole";
 		var data = { "ids" : userIds, "roleIds" : roleIds };
 
 		var result = common_ajax.ajaxFunc(url, data);

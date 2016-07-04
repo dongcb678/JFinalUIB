@@ -5,7 +5,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt!}/jf/platform/operator/treeData',
+			url : '${cxt!}/platform/operator/treeData',
 			autoParam : ["id=moduleIds"],//, "name=n", "level=lv"
 			dataFilter : filter,
 			type : "post"
@@ -208,7 +208,7 @@
 	}
 	
 	function getCheckedByMenu(){
-		var url = "/jf/platform/menu/getOperator";
+		var url = "/platform/menu/getOperator";
 		var data = { "ids" : "${paramMap.ids!}" };
 		var reData = common_ajax.ajaxFunc(url, data, "json");
 		
@@ -224,7 +224,7 @@
 		checkedOperatorIds = checkedOperatorIds.replace(/operator_/g, '');
 		//alert(operatorIds +'---'+ checkedOperatorIds);
 		if(operatorIds != checkedOperatorIds){
-			var url = "/jf/platform/menu/setOperator";
+			var url = "/platform/menu/setOperator";
 			var data = { "ids" : "${paramMap.ids!}", "operatorIds" : checkedOperatorIds};
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != "${paramMap.ids!}"){

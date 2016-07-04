@@ -3,7 +3,7 @@ package com.platform.mvc.jsonp;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 
-@Controller(controllerKey = "/jf/jsonp")
+@Controller(controllerKey = "/jsonp")
 public class JsonpController extends BaseController {
 
 	public void index() {

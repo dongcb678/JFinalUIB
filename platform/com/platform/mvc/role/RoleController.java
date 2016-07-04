@@ -17,7 +17,7 @@ import com.platform.mvc.group.Group;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = "/jf/platform/role")
+@Controller(controllerKey = "/platform/role")
 public class RoleController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(RoleController.class);
@@ -44,7 +44,7 @@ public class RoleController extends BaseController {
 	@Before(RoleValidator.class)
 	public void save() {
 		ids = roleService.save(getModel(Role.class));
-		redirect("/jf/platform/role");
+		redirect("/platform/role");
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class RoleController extends BaseController {
 	@Before(RoleValidator.class)
 	public void update() {
 		roleService.update(getModel(Role.class));
-		redirect("/jf/platform/role");
+		redirect("/platform/role");
 	}
 	
 	/**
@@ -69,7 +69,7 @@ public class RoleController extends BaseController {
 	 */
 	public void delete() {
 		roleService.delete(getPara() == null ? ids : getPara());
-		redirect("/jf/platform/role");
+		redirect("/platform/role");
 	}
 	
 	/**

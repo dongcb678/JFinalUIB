@@ -12,10 +12,10 @@ public class ${className}Validator extends Validator {
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/${basePath}/${classNameSmall}/save")){
+		if (actionKey.equals("/${basePath}/${classNameSmall}/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/jf/${basePath}/${classNameSmall}/update")){
+		} else if (actionKey.equals("/${basePath}/${classNameSmall}/update")){
 			
 		}
 	}
@@ -24,10 +24,10 @@ public class ${className}Validator extends Validator {
 		controller.keepModel(${className}.class);
 		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/jf/${basePath}/${classNameSmall}/save")){
+		if (actionKey.equals("/${basePath}/${classNameSmall}/save")){
 			controller.render("/${basePath}/xxx.html");
 		
-		} else if (actionKey.equals("/jf/${basePath}/${classNameSmall}/update")){
+		} else if (actionKey.equals("/${basePath}/${classNameSmall}/update")){
 			controller.render("/${basePath}/xxx.html");
 		
 		}

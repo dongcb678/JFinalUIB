@@ -5,7 +5,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt!}/jf/platform/operator/treeData',
+			url : '${cxt!}/platform/operator/treeData',
 			autoParam : ["id=moduleIds"],//, "name=n", "level=lv"
 			otherParam : {"ids" : '${paramMap["ids"]}'},
 			dataFilter : filter,
@@ -274,7 +274,7 @@
 	}
 	
 	function getCheckedByStation(){
-		var url = "/jf/platform/station/getOperator";
+		var url = "/platform/station/getOperator";
 		var data = { "ids" : '${paramMap["ids"]!}' };
 		var reData = common_ajax.ajaxFunc(url, data, "json");
 		if(reData != "error"){
@@ -292,7 +292,7 @@
 		//checkedModuleNodeIds = checkedModuleNodeIds.replace(/module_/g, '');
 		//checkedModuleNodeIds = checkedModuleNodeIds.substring(0, checkedModuleNodeIds.length-1);
 		if(moduleIds != checkedModuleNodeIds || operatorIds != checkedOperatorNodeIds){
-			var url = "/jf/platform/station/setOperator";
+			var url = "/platform/station/setOperator";
 			var data = { "ids" : "${paramMap.ids!}", "moduleIds" : checkedModuleNodeIds, "operatorIds" : checkedOperatorNodeIds};
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != "${paramMap.ids!}"){

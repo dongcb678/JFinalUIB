@@ -11,7 +11,7 @@ import com.platform.mvc.base.BaseController;
  * 验证码
  * @author 董华健
  */
-@Controller(controllerKey = "/jf/platform/authImg")
+@Controller(controllerKey = "/platform/authImg")
 public class AuthImgController extends BaseController {
 
 	@SuppressWarnings("unused")

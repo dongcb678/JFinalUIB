@@ -15,7 +15,7 @@ import com.platform.tools.security.ToolIDEA;
 /**
  * 登陆处理
  */
-@Controller(controllerKey = "/jf/platform/login")
+@Controller(controllerKey = "/platform/login")
 public class LoginController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -29,7 +29,7 @@ public class LoginController extends BaseController {
 	public void index() {
 		User user = getCUser(); // cookie认证自动登陆处理
 		if(null != user){//后台
-			redirect("/jf/platform/");
+			redirect("/platform/");
 		}else{
 			render("/platform/login/login.html");
 		}
@@ -38,7 +38,7 @@ public class LoginController extends BaseController {
 	/**
 	 * 第三方系统P3P登陆
 	 * 最后面URL的参数可以是UIB中加密过的认证字符串，也可以是其他协定好的加密串，加密串里面主要存放的是用户的id或者账号
-	 * <script type="text/javascript" src="http://www.uib.com/jf/platform/login/p3p/RUdtNVpET1E5ZWF6bFNFTGJDa0dzK2E1NURXYTF5TXpBay8zZ0p
+	 * <script type="text/javascript" src="http://www.uib.com/platform/login/p3p/RUdtNVpET1E5ZWF6bFNFTGJDa0dzK2E1NURXYTF5TXpBay8zZ0p
 	 * pN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd
 	 * 1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS"></script>
 	 */
@@ -130,13 +130,13 @@ public class LoginController extends BaseController {
 				
 				int result = loginService.login(getRequest(), getResponse(), username, password, autoLogin);
 				if(result == ConstantLogin.login_info_3){ // 登陆验证成功
-					redirect("/jf/platform/index");
+					redirect("/platform/index");
 					return;
 				}
 			}
 		}
 		
-		redirect("/jf/platform/login");
+		redirect("/platform/login");
 	}
 
 	/**
@@ -149,11 +149,11 @@ public class LoginController extends BaseController {
 		
 		int result = loginService.pass(getRequest(), getResponse(), user.getStr("username"), password);
 		if(result == ConstantLogin.login_info_3){ // 密码验证成功
-			redirect("/jf/platform/index");
+			redirect("/platform/index");
 			return;
 		}
 		
-		redirect("/jf/platform/login");
+		redirect("/platform/login");
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class LoginController extends BaseController {
 	 */
 	public void logout() {
 		ToolWeb.addCookie(getResponse(), "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
-		redirect("/jf/platform/login");
+		redirect("/platform/login");
 	}
 
 }

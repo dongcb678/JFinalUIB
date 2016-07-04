@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * 菜单管理
  * @author 董华健
  */
-@Controller(controllerKey = "/jf/platform/menu")
+@Controller(controllerKey = "/platform/menu")
 public class MenuController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -76,7 +76,7 @@ public class MenuController extends BaseController {
 		Menu menu = getModel(Menu.class);
 		menu.update();
 		menu = Menu.dao.findById(menu.getPKValue());
-		redirect("/jf/platform/menu?systemsIds=" + menu.getStr(Menu.column_systemsids));
+		redirect("/platform/menu?systemsIds=" + menu.getStr(Menu.column_systemsids));
 	}
 
 	/**

@@ -74,7 +74,7 @@ var common_modals = function() {
 	 * @param checkedIds 默认选中的部门
 	 */
 	var deptRadioDiaLog = function(deptId, deptName, checkedIds){//ids默认选中：4
-		var url = "/jf/platform/dept/toUrl";
+		var url = "/platform/dept/toUrl";
 		var data = { "toUrl" : "/platform/department/radio.html", "ids" : checkedIds, "deptId" : deptId, "deptName" : deptName };
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_department_radio, result, "setCheckValue");
@@ -88,7 +88,7 @@ var common_modals = function() {
 	 * @param checkedIds 默认选中的部门
 	 */
 	var deptCheckboxDiaLog = function(deptId, deptName, checkedIds){//ids默认选中：4,或者4,5,
-		var url = "/jf/platform/dept/toUrl";
+		var url = "/platform/dept/toUrl";
 		var data = { "toUrl" : "/platform/department/checkbox.html", "ids" : checkedIds, "deptId" : deptId, "deptName" : deptName };
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_department_checkbox, result, "setCheckValue");
@@ -104,7 +104,7 @@ var common_modals = function() {
 	 * @param callback 回调
 	 */
 	var dictRadioDiaLog = function(dictId, dictName, checkedIds, rootNumbers, callback){
-		var url = "/jf/platform/dict/toUrl";
+		var url = "/platform/dict/toUrl";
 		var data = { "toUrl" : "/platform/dict/radio.html", "ids" : checkedIds, "dictId" : dictId, "dictName" : dictName };
 		var result = common_ajax.ajaxFunc(url, data, callback);
 		dialogSelect(i18n_modals_dict_radio, result, "setCheckValue");
@@ -120,7 +120,7 @@ var common_modals = function() {
 	 * @param callback 回调
 	 */
 	var paramRadioDiaLog = function(dictId, dictName, checkedIds, rootNumbers, callback){
-		var url = "/jf/platform/param/toUrl";
+		var url = "/platform/param/toUrl";
 		var data = { "toUrl" : "/platform/param/radio.html", "ids" : checkedIds, "paramId" : dictId, "paramName" : dictName };
 		var result = common_ajax.ajaxFunc(url, data, callback);
 		dialogSelect(i18n_modals_param_radio, result, "setCheckValue");
@@ -134,7 +134,7 @@ var common_modals = function() {
 	 * @param checkedIds
 	 */
 	var moduleRadioDiaLog = function(moduleId, moduleName, checkedIds){
-		var url = "/jf/platform/module/toUrl";
+		var url = "/platform/module/toUrl";
 		var data = { "toUrl" : "/platform/module/radio.html", "ids" : checkedIds, "moduleId" : moduleId, "moduleName" : moduleName };
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_module_radio, result, "setCheckValue");
@@ -148,7 +148,7 @@ var common_modals = function() {
 	 * @param checkedIds
 	 */
 	var stationRadioDiaLog = function(stationId, stationName, checkedIds){
-		var url = "/jf/platform/station/toUrl";
+		var url = "/platform/station/toUrl";
 		var data = { "toUrl" : "/platform/station/radio.html", "ids" : checkedIds, "stationId" : stationId, "stationName" : stationName };
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_station_radio, result, "setCheckValue");
@@ -162,7 +162,7 @@ var common_modals = function() {
 	 * @param checkedIds
 	 */
 	var stationCheckboxDiaLog = function(stationId, stationName, checkedIds){
-		var url = "/jf/platform/station/toUrl";
+		var url = "/platform/station/toUrl";
 		var data = { "toUrl" : "/platform/station/checkbox.html", "ids" : checkedIds, "stationId" : stationId, "stationName" : stationName };
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_station_checkbox, result, "setCheckValue");
@@ -176,7 +176,7 @@ var common_modals = function() {
 	 * @param checkedIds
 	 */
 	var userRadioDiaLog = function(userId, userName, checkedIds){
-		var url = "/jf/platform/user/toUrl";
+		var url = "/platform/user/toUrl";
 		var data = { "toUrl" : "/platform/user/radio.html", "ids" : checkedIds, "userId" : userId, "userName" : userName };
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_user_radio, result, "setCheckValue");
@@ -193,7 +193,7 @@ var common_modals = function() {
 	 * @param checkedUserIds
 	 */
 	var userCheckboxDiaLog = function(userId, userName, deptIds, deptNames, checkedDeptIds, checkedUserIds){
-		var url = "/jf/platform/user/toUrl";
+		var url = "/platform/user/toUrl";
 		var data = { "toUrl" : "/platform/user/checkbox.html", 
 				"checkedDeptIds" : checkedDeptIds, "checkedUserIds" : checkedUserIds,
 				"userId" : userId, "userName" : userName, "deptIds" : deptIds, "deptNames" : deptNames 
@@ -210,7 +210,7 @@ var common_modals = function() {
 	 * @param deptId
 	 */
 	var setDeptPrincipalDiaLog = function(deptId){
-		var url = "/jf/platform/dept/toUrl";
+		var url = "/platform/dept/toUrl";
 		var data = { "toUrl" : "/platform/department/userTree.html", "ids" : deptId };
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_department_userTree, result, "setCheckValue");
@@ -222,7 +222,7 @@ var common_modals = function() {
 	 * @param menuIds
 	 */
 	var setMenuOperatorDiaLog = function(menuIds){
-		var url = "/jf/platform/operator/toUrl";
+		var url = "/platform/operator/toUrl";
 		var data = { "toUrl" : "/platform/menu/operatorTree.html", "ids" : menuIds };
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_menu_operatorTree, result, "setCheckValue");
@@ -234,7 +234,7 @@ var common_modals = function() {
 	 * @param menuIds
 	 */
 	var setMenuEditDiaLog = function(menuIds){
-		var url = "/jf/platform/menu/toEdit";
+		var url = "/platform/menu/toEdit";
 		var data = { "ids" : menuIds };
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_menu_edit, result, "dialogEditForm");
@@ -246,7 +246,7 @@ var common_modals = function() {
 	 * @param roleIds
 	 */
 	var setRoleOperatorDiaLog = function(roleIds){
-		var url = "/jf/platform/operator/toUrl";
+		var url = "/platform/operator/toUrl";
 		var data = { "toUrl" : "/platform/role/operatorTree.html", "ids" : roleIds};
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_role_operatorTree, result, "setCheckValue");
@@ -258,7 +258,7 @@ var common_modals = function() {
 	 * @param stationIds
 	 */
 	var setStationOperatorDiaLog = function(stationIds){
-		var url = "/jf/platform/operator/toUrl";
+		var url = "/platform/operator/toUrl";
 		var data = { "toUrl" : "/platform/station/operatorTree.html", "ids" : stationIds};
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_station_operatorTree, result, "setCheckValue");
@@ -270,7 +270,7 @@ var common_modals = function() {
 	 * @param userIds
 	 */
 	var groupSelectDialog = function(userIds){
-		var url = "/jf/platform/group/select";
+		var url = "/platform/group/select";
 		var data = { "ids" : userIds};
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_group_select, result, "");
@@ -282,7 +282,7 @@ var common_modals = function() {
 	 * @param groupIds
 	 */
 	var roleSelectDialog = function (groupIds){
-		var url = "/jf/platform/role/select";
+		var url = "/platform/role/select";
 		var data = { "ids" : groupIds};
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_role_select, result, "");

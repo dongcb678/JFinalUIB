@@ -18,7 +18,7 @@ import com.platform.tools.ToolString;
 /**
  * 文件上传
  */
-@Controller(controllerKey = {"/jf/platform/upload"})
+@Controller(controllerKey = {"/platform/upload"})
 public class UploadController extends BaseController {
 
 	private static Logger log = Logger.getLogger(UploadController.class);
@@ -90,7 +90,7 @@ public class UploadController extends BaseController {
 	 */
 	public void delete() {
 		uploadService.delete("pt_upload", getPara() == null ? ids : getPara());
-		redirect("/jf/platform/upload/list");
+		redirect("/platform/upload/list");
 	}
 
 	

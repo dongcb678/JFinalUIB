@@ -28,7 +28,7 @@ public class TestToolHttpClient {
 		loginParam.put("returnText", "true");	// 返回文本，好识别
 		
 		// 2.登陆后构建cookie认证对象,有效期是15天，过期失效需要重新登录获取cookie对象
-		CookieStore cookieStore = ToolHttp.mockCookie("http://127.0.0.1:99/jf/platform/login/vali", loginParam);
+		CookieStore cookieStore = ToolHttp.mockCookie("http://127.0.0.1:99/platform/login/vali", loginParam);
 		if(cookieStore == null){
 			log.error("登陆失败");
 		}
@@ -39,7 +39,7 @@ public class TestToolHttpClient {
 		//postParam.put("xxx", "xxx");
 		
 		// 4.进行数据请求
-		String content = ToolHttp.mockPostByCookie(cookieStore, "http://127.0.0.1:99/jf/platform/index", postParam);
+		String content = ToolHttp.mockPostByCookie(cookieStore, "http://127.0.0.1:99/platform/index", postParam);
 		if(content.indexOf("/platform/login/login.html") != -1){
 			log.error("需要重新登录，认证码失效");
 		}
@@ -64,7 +64,7 @@ public class TestToolHttpClient {
 		
 		
 		// 2.登陆后构建cookie认证对象,有效期是15天，过期失效需要重新登录获取cookie对象
-		String authmark = ToolHttp.mockHeader("http://127.0.0.1:99/jf/platform/login/vali", loginParam);
+		String authmark = ToolHttp.mockHeader("http://127.0.0.1:99/platform/login/vali", loginParam);
 		if(authmark == null){
 			log.error("登陆失败");
 		}
@@ -75,7 +75,7 @@ public class TestToolHttpClient {
 		//postParam.put("xxx", "xxx");
 		
 		// 4.进行数据请求
-		String content = ToolHttp.mockPostByHeader(authmark, "http://127.0.0.1:99/jf/platform/index", postParam);
+		String content = ToolHttp.mockPostByHeader(authmark, "http://127.0.0.1:99/platform/index", postParam);
 		if(content.indexOf("/platform/login/login.html") != -1){
 			log.error("需要重新登录，认证码失效");
 		}
@@ -98,7 +98,7 @@ public class TestToolHttpClient {
 		loginParam.put("password", "000000");	// 登陆密码
 		loginParam.put("returnText", "true");	// 返回文本，好识别
 		
-		CloseableHttpClient client = ToolHttp.mocklogin("http://127.0.0.1:99/jf/platform/login/vali", loginParam);
+		CloseableHttpClient client = ToolHttp.mocklogin("http://127.0.0.1:99/platform/login/vali", loginParam);
 		if(client == null){
 			log.error("登陆失败");
 		}
@@ -106,7 +106,7 @@ public class TestToolHttpClient {
 		Map<String, String> postParam = new HashMap<String, String>();
 //		postParam.put("xxx", "xxx");
 //		postParam.put("xxx", "xxx");
-		String content = ToolHttp.mockPostByClient(client, "http://127.0.0.1:99/jf/platform/index", postParam);
+		String content = ToolHttp.mockPostByClient(client, "http://127.0.0.1:99/platform/index", postParam);
 		if(content.indexOf("/platform/login/login.html") != -1){
 			log.error("需要重新登录，认证码失效");
 		}

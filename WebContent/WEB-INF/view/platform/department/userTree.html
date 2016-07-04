@@ -5,7 +5,7 @@
 	var setting = {
 		async: {
 			enable : true,
-			url : '${cxt!}/jf/platform/user/treeData',
+			url : '${cxt!}/platform/user/treeData',
 			autoParam : ["id=deptIds"],//, "name=n", "level=lv"
 			//otherParam : {"user.ids" : 'qqq'},
 			dataFilter : filter,
@@ -204,7 +204,7 @@
 	
 	// 获取部门负责人
 	function getDeptPrincipal(){
-		var url = "/jf/platform/dept/getPrincipal";
+		var url = "/platform/dept/getPrincipal";
 		var data = { "ids" : "${paramMap.ids!}"};
 		var reData = common_ajax.ajaxFunc(url, data, "json");
 		if(reData != "error"){
@@ -219,7 +219,7 @@
 	function setCheckValue(){
 		checkedNodeIds = checkedNodeIds.replace(/user_/g, '');
 		if(userIds != checkedNodeIds){
-			var url = "/jf/platform/dept/update";
+			var url = "/platform/dept/update";
 			var data =  { "ids" : '${paramMap.ids!}', "principalIds" : checkedNodeIds };
 			common_ajax.ajaxFunc(url, data);
 		}

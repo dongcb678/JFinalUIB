@@ -12,7 +12,7 @@ import com.platform.plugin.SqlXmlPlugin;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = "/jf/platform/resources")
+@Controller(controllerKey = "/platform/resources")
 public class ResourcesController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(ResourcesController.class);
@@ -33,7 +33,7 @@ public class ResourcesController extends BaseController {
 	 */
 	public void refreshParamCache(){
 		new ParamInitPlugin().start();
-		redirect("/jf/platform/resources");
+		redirect("/platform/resources");
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class ResourcesController extends BaseController {
 	 */
 	public void refreshSqlCache(){
 		SqlXmlPlugin.init(false);
-		redirect("/jf/platform/resources");
+		redirect("/platform/resources");
 	}
 	
 }

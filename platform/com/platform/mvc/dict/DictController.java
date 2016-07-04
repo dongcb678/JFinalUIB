@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * 字典管理
  * @author 董华健
  */
-@Controller(controllerKey = "/jf/platform/dict")
+@Controller(controllerKey = "/platform/dict")
 public class DictController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -53,7 +53,7 @@ public class DictController extends BaseController {
 	@Before(DictValidator.class)
 	public void save() {
 		dictService.save(getModel(Dict.class));
-		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html");
+		redirect("/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html");
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class DictController extends BaseController {
 	@Before(DictValidator.class)
 	public void update() {
 		dictService.update(getModel(Dict.class));
-		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html", true);
+		redirect("/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html", true);
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class DictController extends BaseController {
 	 */
 	public void delete() {
 		dictService.delete(getPara() == null ? ids : getPara());
-		redirect("/jf/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html");
+		redirect("/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html");
 	}
 
 	/**

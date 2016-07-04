@@ -13,16 +13,16 @@ import com.jfinal.aop.Before;
  * XXX 管理	
  * 描述：
  * 
- * /jf/test/blog
- * /jf/test/blog/save
- * /jf/test/blog/edit
- * /jf/test/blog/update
- * /jf/test/blog/view
- * /jf/test/blog/delete
+ * /test/blog
+ * /test/blog/save
+ * /test/blog/edit
+ * /test/blog/update
+ * /test/blog/view
+ * /test/blog/delete
  * /common/blog/add.html
  * 
  */
-@Controller(controllerKey = "/jf/test/blog")
+@Controller(controllerKey = "/test/blog")
 public class BlogController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -62,7 +62,7 @@ public class BlogController extends BaseController {
 	@Before(BlogValidator.class)
 	public void update() {
 		getModel(Blog.class).update();
-		redirect("/jf/test/blog");
+		redirect("/test/blog");
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class BlogController extends BaseController {
 	 */
 	public void delete() {
 		blogService.delete("test_blog", getPara() == null ? ids : getPara());
-		redirect("/jf/test/blog");
+		redirect("/test/blog");
 	}
 	
 }

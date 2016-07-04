@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * 模块管理
  * @author 董华健
  */
-@Controller(controllerKey = "/jf/platform/module")
+@Controller(controllerKey = "/platform/module")
 public class ModuleController extends BaseController {
 
 	@SuppressWarnings("unused")

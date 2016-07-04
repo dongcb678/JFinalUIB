@@ -1,5 +1,5 @@
 
-<form id="splitPage" action="${cxt!}/jf/platform/systems" method="POST" class="form-horizontal">
+<form id="splitPage" action="${cxt!}/platform/systems" method="POST" class="form-horizontal">
 
 	<!-- BEGIN PAGE CONTAINER-->
 	<div class="container-fluid">
@@ -10,7 +10,7 @@
 				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 				<ul class="breadcrumb">
 					<li>
-						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
+						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
 						<span class="divider">/</span>
 					</li>
 					<li><a href="#">用户权限</a> <span class="divider">/</span></li>
@@ -54,10 +54,10 @@
 				<div class="widget red">
 
 					<%
-						var edit = authUrl("/jf/platform/systems/edit");
-						var delete = authUrl("/jf/platform/systems/delete");
-						var module = authUrl("/jf/platform/module");
-						var menu = authUrl("/jf/platform/menu");
+						var edit = authUrl("/platform/systems/edit");
+						var delete = authUrl("/platform/systems/delete");
+						var module = authUrl("/platform/module");
+						var menu = authUrl("/platform/menu");
 					%>
 
 					<div class="widget-title">
@@ -69,7 +69,7 @@
 					<div class="widget-body">
 						<span class="tools"> 
 							<% if(authUrl("/platform/systems/add.html")){ %>
-							<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanel('/jf/platform/systems/toUrl?toUrl=/platform/systems/add.html');">
+							<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanel('/platform/systems/toUrl?toUrl=/platform/systems/add.html');">
 								<i class="icon-plus icon-white"></i>
 								${i18nMap["admin.systems.add"]}
 							</button> 
@@ -117,25 +117,25 @@
 									<td>${systems["orderids"]!}</td>
 									<td class="hidden-phone">
 										<% if(edit == true){ %>
-											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/jf/platform/systems/edit/${escapeXml(systems.ids!)}');"> 
+											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/platform/systems/edit/${escapeXml(systems.ids!)}');"> 
 												<i class="icon-refresh icon-white"></i> ${i18nMap["admin.common.edit"]}
 											</button>
 										<% } %>
 										
 										<% if(delete == true){ %>
-											<button type="button" class="btn btn-small btn-danger" data-bb="deleteOne" data-url="/jf/platform/systems/delete/${escapeXml(systems.ids!)}"> 
+											<button type="button" class="btn btn-small btn-danger" data-bb="deleteOne" data-url="/platform/systems/delete/${escapeXml(systems.ids!)}"> 
 												<i class="icon-remove icon-white"></i> ${i18nMap["admin.common.delete"]}
 											</button>
 										<% } %>
 										
 										<% if(module == true){ %>
-											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/jf/platform/module?systemsIds=${escapeXml(systems.ids!)}');"> 
+											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/platform/module?systemsIds=${escapeXml(systems.ids!)}');"> 
 												<i class="icon-ok icon-white"></i> ${i18nMap["admin.systems.list.table.module"]}
 											</button>
 										<% } %>
 										
 										<% if(menu == true){ %>
-											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/jf/platform/menu?systemsIds=${escapeXml(systems.ids!)}');"> 
+											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/platform/menu?systemsIds=${escapeXml(systems.ids!)}');"> 
 												<i class="icon-ok icon-white"></i> ${i18nMap["admin.systems.list.table.menu"]}
 											</button>
 										<% } %>

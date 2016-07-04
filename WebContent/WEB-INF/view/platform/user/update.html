@@ -7,7 +7,7 @@
 		<div class="span12">
 			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 			<ul class="breadcrumb">
-				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 				<li><a href="#">用户权限</a> <span class="divider">/</span></li>
 				<li><a href="#">用户管理</a> <span class="divider">/</span></li>
 				<li class="active">${i18nMap["admin.user.update"]}</li>
@@ -29,7 +29,7 @@
 				</div>
 				<div class="widget-body form">
 
-					<form id="editForm" action="${cxt!}/jf/platform/user/update" method="POST" class="form-horizontal">
+					<form id="editForm" action="${cxt!}/platform/user/update" method="POST" class="form-horizontal">
 
 						<input type="hidden" id="userIds" name="user.ids" value="${escapeXml(user.ids!)}"> 
 						<input type="hidden" name="user.version" value="${user.version!}"> 
@@ -41,7 +41,7 @@
 
 						<div class="control-group">
 							<div class="controls">
-								<% if(authUrl("/jf/platform/user/update")){ %>
+								<% if(authUrl("/platform/user/update")){ %>
 								<button type="button" class="btn btn-success" onclick="platform_user_form.submitValiFunc(this.form, false);">
 									<i class="icon-ok icon-white"></i>${i18nMap["admin.common.submit"]}
 								</button>

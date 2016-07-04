@@ -14,7 +14,7 @@ import com.platform.mvc.base.BaseController;
  * 功能管理
  * @author 董华健
  */
-@Controller(controllerKey = "/jf/platform/operator")
+@Controller(controllerKey = "/platform/operator")
 public class OperatorController extends BaseController {
 
 	@SuppressWarnings("unused")
@@ -38,7 +38,7 @@ public class OperatorController extends BaseController {
 	@Before(OperatorValidator.class)
 	public void save() {
 		ids = operatorService.save(getModel(Operator.class));
-		redirect("/jf/platform/operator");
+		redirect("/platform/operator");
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class OperatorController extends BaseController {
 	@Before(OperatorValidator.class)
 	public void update() {
 		operatorService.update(getModel(Operator.class));
-		redirect("/jf/platform/operator");
+		redirect("/platform/operator");
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class OperatorController extends BaseController {
 	 */
 	public void delete() {
 		operatorService.delete(getPara() == null ? ids : getPara());
-		redirect("/jf/platform/operator");
+		redirect("/platform/operator");
 	}
 
 	/**

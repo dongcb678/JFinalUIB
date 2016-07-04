@@ -62,7 +62,7 @@ public class AuthInterceptor implements Interceptor {
 
 		log.info("获取当前用户!");
 		boolean userAgentVali = true; // 是否验证userAgent，默认是
-		if (uri.equals("/jf/platform/ueditor") || uri.equals("/jf/platform/upload")) { // 针对ueditor特殊处理
+		if (uri.equals("/platform/ueditor") || uri.equals("/platform/upload")) { // 针对ueditor特殊处理
 			userAgentVali = false;
 		}
 		User user = getCurrentUser(request, response, userAgentVali);// 当前登录用户
@@ -193,7 +193,7 @@ public class AuthInterceptor implements Interceptor {
 	 */
 	private void toView(BaseController contro, String type, String msg) {
 		if (type.equals(ConstantAuth.auth_no_login)) {// 未登录处理
-			contro.redirect("/jf/platform/login");
+			contro.redirect("/platform/login");
 			return;
 		}
 

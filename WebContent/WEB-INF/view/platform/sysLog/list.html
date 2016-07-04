@@ -1,5 +1,5 @@
 
-<form id="splitPage" action="${cxt!}/jf/platform/sysLog" method="POST" class="form-horizontal">
+<form id="splitPage" action="${cxt!}/platform/sysLog" method="POST" class="form-horizontal">
 
 	<!-- BEGIN PAGE CONTAINER-->
 	<div class="container-fluid">
@@ -10,7 +10,7 @@
 				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 				<ul class="breadcrumb">
 					<li>
-						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
+						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
 						<span class="divider">/</span>
 					</li>
 					<li><a href="#">系统维护</a> <span class="divider">/</span></li>
@@ -74,8 +74,8 @@
 				<div class="widget red">
 
 					<%
-						var view = authUrl("/jf/platform/sysLog/view");
-						var delete = authUrl("/jf/platform/sysLog/delete");
+						var view = authUrl("/platform/sysLog/view");
+						var delete = authUrl("/platform/sysLog/delete");
 					%>
 
 					<div class="widget-title">
@@ -165,13 +165,13 @@
 									</td>
 									<td class="hidden-phone">
 										<% if(view == true){ %>
-											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/jf/platform/sysLog/view/${escapeXml(sysLog.ids!)}');">
+											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/platform/sysLog/view/${escapeXml(sysLog.ids!)}');">
 												<i class="icon-eye-open"></i> ${i18nMap["admin.common.see"]} 
 											</button>
 										<% } %>
 										
 										<% if(delete == true){ %>
-											<button type="button" class="btn btn-small btn-danger" data-bb="deleteOne" data-url="/jf/platform/sysLog/delete/${escapeXml(sysLog.ids!)}"> 
+											<button type="button" class="btn btn-small btn-danger" data-bb="deleteOne" data-url="/platform/sysLog/delete/${escapeXml(sysLog.ids!)}"> 
 												<i class="icon-remove icon-white"></i>${i18nMap["admin.common.delete"]}
 											</button>
 										<% } %>
