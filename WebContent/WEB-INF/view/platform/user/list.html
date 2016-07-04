@@ -39,7 +39,7 @@
 						<input class="medium" type="text" name="_query.email" value='${escapeXml(paramMap["_query.email"])}' maxlength="40">
 
 						${i18nMap["admin.user.property.birthday"]} 
-		                <input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}' class="form-control form_datetime" readonly>
+		                <input class="medium" type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}' onClick="WdatePicker({minDate:'1900-01-01', maxDate:'%y-%M-%d'})" readonly>
 		                
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -179,19 +179,6 @@
 
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-
+		
 	});
-	
-	$('.form_datetime').datetimepicker({
-        language:  'zh-CN',
-    	//format: 'yyyy-mm-dd hh:mm:ss',
-    	format: 'yyyy-mm-dd',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-        showMeridian: 1
-    });
 </script>

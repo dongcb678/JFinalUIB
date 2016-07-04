@@ -28,7 +28,7 @@ autoUpdateOnChanged:null,
 weekMethod:"ISO8601",
 position:{},
 lang:"auto",
-skin:"default",
+skin:"twoer",// default
 dateFmt:"yyyy-MM-dd",
 realDateFmt:"yyyy-MM-dd",
 realTimeFmt:"HH:mm:ss",
