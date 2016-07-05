@@ -36,7 +36,7 @@
 						<div class="control-group">
 							<div class="controls">
 								<% if(authUrl("/platform/role/save")){ %>
-								<button type="button" class="btn btn-success" onclick="platform_user_form.submitValiFunc(this.form, true);">
+								<button type="button" class="btn btn-success" onclick="common_ajax.ajaxForm('editForm');">
 									<i class="icon-ok icon-white"></i>${i18nMap["admin.common.submit"]}
 								</button>
 								<% } %>
