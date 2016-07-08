@@ -20,6 +20,8 @@
 			where  
 				tablename not like 'pg%'
 				and tablename not like 'sql_%' 
+			order by
+				tablename asc
     	]]>
 	</sql>
 	
