@@ -302,8 +302,12 @@ public class ParamInitPlugin implements IPlugin {
 			}
 			
 			for (Operator operator : operatorList) {
+//				long t1 = System.currentTimeMillis();
 				ToolCache.set(ParamInitPlugin.cacheStart_operator + operator.getPKValue(), operator);
+//				long t2 = System.currentTimeMillis();
 				ToolCache.set(ParamInitPlugin.cacheStart_operator + operator.getStr(Operator.column_url), operator);
+//				long t3 = System.currentTimeMillis();
+//				System.out.println("time1 = " + (t2-t1) + "  time2 = " + (t3-t2));
 			}
 			operatorList = null;
 		}
