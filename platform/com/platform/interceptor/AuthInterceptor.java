@@ -148,7 +148,7 @@ public class AuthInterceptor implements Interceptor {
 			}
 		}
 
-		log.info("权限认真成功更新日志对象属性!");
+		log.info("权限认证成功更新日志对象属性!");
 		reqSysLog.set(Syslog.column_status, "1");// 成功
 		Date actionStartDate = ToolDateTime.getDate();// action开始时间
 		reqSysLog.set(Syslog.column_actionstartdate, ToolDateTime.getSqlTimestamp(actionStartDate));
