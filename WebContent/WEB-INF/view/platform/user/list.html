@@ -78,14 +78,14 @@
 							<% } %> 
 							
 							<% if(delete == true){ %>
-							<button type="button" class="btn btn-small btn-danger">
+							<button type="button" class="btn btn-small btn-danger" data-table="dataTable" data-url="/platform/user/delete" onclick="common_modals.deleteList(this)">
 								<i class="icon-remove icon-white"></i>
 								${i18nMap["admin.common.delete"]}
 							</button> 
 							<% } %>
 						</span>
 
-						<table class="table table-striped table-bordered" id="sample_1">
+						<table class="table table-striped table-bordered" id="dataTable">
 							<thead>
 								<tr>
 									<th style="width: 8px;">
@@ -150,7 +150,7 @@
 										<% } %> 
 										
 										<% if(delete == true){ %>
-										<button type="button" class="btn btn-small btn-danger" data-bb="deleteOne" data-url="/platform/user/delete/${user.ids!}">
+										<button type="button" class="btn btn-small btn-danger" onclick="common_modals.deleteOne(this)" data-url="/platform/user/delete/${user.ids!}">
 											<i class="icon-remove icon-white"></i>
 											${i18nMap["admin.common.delete"]}
 										</button> 

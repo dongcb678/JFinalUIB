@@ -87,7 +87,7 @@
 							
 							<% if(delete == true){ %>
 								<button type="button" class="btn btn-red delete-row" 
-									data-bb="deleteList" data-url="/test/user/delete"> 
+									data-table="dataTable" onclick="common_modals.deleteList(this)" data-url="/test/user/delete">
 									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
 								</button>
 							<% } %>
@@ -153,7 +153,7 @@
 									
 									<% if(delete == true){ %>
 									<button type="button" class="btn btn-red delete-row" 
-										data-bb="deleteOne" 
+										onclick="common_modals.deleteOne(this)" 
 										data-url="/test/blog/delete/${blog.ids!}"> 
 										${i18nMap["admin.common.delete"]} 
 										<i class="fa fa-trash-o"></i>

@@ -2,47 +2,49 @@ var common_modals = function() {
 	"use strict";
 	
 	/**
-	 * 注册单行和多行删除的弹出框确认和Ajax删除处理
+	 * 删除多行数据
 	 */
-	var initDialogBoxes = function() {
-		var dialogBoxes = {};
-		// obj.die("click").live(click",function(){})
-		$(document).on("click", "button[data-bb]", function(e) {
-			e.preventDefault();
-			var type = $(this).data("bb");
-			var url = $(this).attr("data-url");
-			if ( typeof dialogBoxes[type] === 'function') {
-				dialogBoxes[type](url);
-			}
-		});
-
-		/**
-		 * 删除单行数据
-		 */
-		dialogBoxes.deleteList = function(url) {
-			var ids = common_common.getCheckFunc('dataTable');
-			if(ids != ""){
-				bootbox.confirm("确定要这样操作吗？", function(result) {
-					if(result){
-						var data = {'ids' : ids};
-						common_ajax.ajaxMainPanel(url, data);
-					}
-				});
-			}else{
-				toastr.warning("请选择操作数据！");
-			}
-		};
-		
-		/**
-		 * 删除多行数据
-		 */
-		dialogBoxes.deleteOne = function(url) {
-			bootbox.confirm("确定要这样操作吗？", function(result) {
-				if(result){
-					common_ajax.ajaxMainPanel(url);
-				}
+	var deleteList = function(button) {
+		var table = $(button).attr("data-table");
+		var url = $(button).attr("data-url");
+		var ids = common_common.getCheckFunc(table);
+		if(ids != ""){
+			var d = dialog({
+				align: 'bottom',
+				width: 180,
+				title: "确定要这样操作吗？", 
+			    okValue: i18n_modals_common_determine, // 确定
+			    ok: function () {
+			    	var data = {'ids' : ids};
+			    	common_ajax.ajaxMainPanel(url, data);
+			    },
+			    cancelValue: i18n_modals_common_close, // 取消
+			    cancel: function () {}
 			});
-		};
+			d.showModal(document.getElementById('header'));
+			
+		}else{
+			//"请选择操作数据！"
+		}
+	};
+	
+	/**
+	 * 删除单行数据
+	 */
+	var deleteOne = function(button) {
+		var url = $(button).attr("data-url");
+		var d = dialog({
+			align: 'bottom',
+			width: 180,
+			title: "确定要这样操作吗？", 
+		    okValue: i18n_modals_common_determine, // 确定
+		    ok: function () {
+		    	common_ajax.ajaxMainPanel(url);
+		    },
+		    cancelValue: i18n_modals_common_close, // 取消
+		    cancel: function () {}
+		});
+		d.showModal(document.getElementById('header'));
 	};
 	
 	/**
@@ -292,6 +294,8 @@ var common_modals = function() {
 	/**************************************		功能定制函数	end	***************************************************/	
 		
 	return {
+		deleteOne : deleteOne,
+		deleteList : deleteList,
 		deptRadioDiaLog : deptRadioDiaLog,
 		deptCheckboxDiaLog : deptCheckboxDiaLog,
 		dictRadioDiaLog : dictRadioDiaLog,
