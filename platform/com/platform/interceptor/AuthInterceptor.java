@@ -201,9 +201,9 @@ public class AuthInterceptor implements Interceptor {
 		
 		String isAjax = contro.getRequest().getHeader("X-Requested-With");
 		if(isAjax != null && isAjax.equalsIgnoreCase("XMLHttpRequest")){
-			contro.render("/common/msgAjax.html"); // Ajax页面
+			contro.render("/platform/common/msgAjax.html"); // Ajax页面
 		}else{
-			contro.render("/common/msg.html"); // 完整html页面
+			contro.render("/platform/common/msg.html"); // 完整html页面
 		}
 	}
 

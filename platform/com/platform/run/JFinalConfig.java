@@ -85,8 +85,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		ToolBeetl.regiseter();
 		
 		log.info("configConstant 视图error page设置");
-		constants.setError404View("/common/404.html");
-		constants.setError500View("/common/500.html");
+		constants.setError404View("/platform/common/404.html");
+		constants.setError500View("/platform/common/500.html");
 
 		log.info("configConstant i18n文件前缀设置设置");
 		constants.setI18nDefaultBaseName(PropKit.get(ConstantInit.config_i18n_filePrefix));
