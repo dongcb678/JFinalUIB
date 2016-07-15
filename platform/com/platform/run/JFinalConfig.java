@@ -1,5 +1,7 @@
 package com.platform.run;
 
+import java.io.File;
+
 import org.apache.log4j.Logger;
 import org.beetl.ext.jfinal.BeetlRenderFactory;
 
@@ -76,8 +78,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		//constants.setJsonFactory(JacksonFactory.me()); // Jackson
 
 		log.info("configConstant 设置path相关");
-		constants.setBaseUploadPath(PathKit.getWebRootPath() + "/files"); // 上传公共路径
-		constants.setBaseDownloadPath(PathKit.getWebRootPath() + "/files"); // 下载公共路径
+		constants.setBaseUploadPath(PathKit.getWebRootPath() + File.separator + "files"); // 上传公共路径
+		constants.setBaseDownloadPath(PathKit.getWebRootPath() + File.separator + "files"); // 下载公共路径
 		//constants.setBaseViewPath("/jf"); //设置路由公共路径
 		
 		log.info("configConstant 视图Beetl设置");
