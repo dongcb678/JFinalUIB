@@ -140,7 +140,7 @@
 		});
 		
 		//2.部门负责人设置按钮
-		var operatorStr = "<span class='button operator' id='operatorBtn_" + treeNode.tId + "' title='设置部门负责人' onfocus='this.blur();'></span>";
+		var operatorStr = "<span class='button edit' id='operatorBtn_" + treeNode.tId + "' title='设置部门负责人' onfocus='this.blur();'></span>";
 		sObj.after(operatorStr);
 		var btn = $("#operatorBtn_"+treeNode.tId);
 		if (btn) btn.bind("click", function(){

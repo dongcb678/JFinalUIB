@@ -137,7 +137,7 @@
 		});
 
 		//2.岗位功能设置
-		var operatorStr = "<span class='button operator' id='operatorBtn_" + treeNode.tId + "' title='岗位功能设置' onfocus='this.blur();'></span>";
+		var operatorStr = "<span class='button edit' id='operatorBtn_" + treeNode.tId + "' title='岗位功能设置' onfocus='this.blur();'></span>";
 		sObj.after(operatorStr);
 		var btn = $("#operatorBtn_"+treeNode.tId);
 		if (btn) btn.bind("click", function(){

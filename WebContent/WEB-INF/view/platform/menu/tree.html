@@ -142,7 +142,7 @@
 // 		});
 		
 		//3.菜单功能设置
-		var operatorControlStr = "<span class='button operator' id='operatorControlBtn_" + treeNode.tId + "' title='菜单功能设置' onfocus='this.blur();'></span>";
+		var operatorControlStr = "<span class='button edit' id='operatorControlBtn_" + treeNode.tId + "' title='菜单功能设置' onfocus='this.blur();'></span>";
 		sObj.after(operatorControlStr);
 		var operatorBtn = $("#operatorControlBtn_"+treeNode.tId);
 		if (operatorBtn) operatorBtn.bind("click", function(){
@@ -151,7 +151,7 @@
 		});
 
 		//4.菜单国际化名称设置
-		var nameControlStr = "<span class='button name' id='nameControlBtn_" + treeNode.tId + "' title='菜单国际化设置' onfocus='this.blur();'></span>";
+		var nameControlStr = "<span class='button edit' id='nameControlBtn_" + treeNode.tId + "' title='菜单国际化设置' onfocus='this.blur();'></span>";
 		sObj.after(nameControlStr);
 		var nameBtn = $("#nameControlBtn_"+treeNode.tId);
 		if (nameBtn) nameBtn.bind("click", function(){
