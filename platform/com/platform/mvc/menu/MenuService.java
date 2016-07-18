@@ -54,7 +54,7 @@ public class MenuService extends BaseService {
 			node.setId(menu.getPKValue());
 			node.setName(menu.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + menu.getStr(Menu.column_images));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + menu.getStr(Menu.column_images));
 			nodeList.add(node);
 		}
 		

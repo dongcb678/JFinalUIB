@@ -11,7 +11,7 @@ jQuery(function() {
         resize: false,
         
         // swf文件路径
-        swf: cxt + '/jsFile/ueditor/third-party/webuploader/Uploader.swf',
+        swf: cxt + '/jsfile/ueditor/third-party/webuploader/Uploader.swf',
 
         // 文件接收服务端。
         server: cxt + '/platform/upload',
@@ -106,7 +106,7 @@ jQuery(function() {
         auto: true,
 
         // swf文件路径
-        swf: cxt + '/jsFile/ueditor/third-party/webuploader/Uploader.swf',
+        swf: cxt + '/jsfile/ueditor/third-party/webuploader/Uploader.swf',
 
         // 文件接收服务端。
         server: cxt + '/platform/upload',

@@ -3,15 +3,15 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title>字典树</title>
-	<link rel="stylesheet" href="${cxt!}/jsFile/treeTable/demo/style/demo.css" type="text/css">
+	<link rel="stylesheet" href="${cxt!}/jsfile/treetable/demo/style/demo.css" type="text/css">
 	
 	<script type="text/javascript">
 		var cxt = "${cxt!}";
 	</script>
 	
-	<script type="text/javascript" src="${cxt!}/jsFile/treeTable/script/jquery.js"></script>
-    <script type="text/javascript" src="${cxt!}/jsFile/treeTable/script/treeTable/jquery.treeTable.js"></script>
-	<script type="text/javascript" src="${cxt!}/jsFile/metroLab/common/ajax.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsfile/treetable/script/jquery.js"></script>
+    <script type="text/javascript" src="${cxt!}/jsfile/treetable/script/treeTable/jquery.treeTable.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsfile/metrolab/common/ajax.js"></script>
 	
 	<style type="text/css">
 		table,td,th {  border: 1px solid #8DB9DB; padding:5px; border-collapse: collapse; font-size:14px; }
@@ -102,7 +102,7 @@
 	        <% for(dict in list){ %>
 	        	<tr id="${dict.ids!}" pId="${dict.parentids!}" hasChild='${dict.levels! != 4 ? "true" : "false"}'>
 					<td>
-						<img alt="" src="${cxt!}/jsFile/zTree/css/zTreeStyle/img/diy/1_close.png">
+						<img alt="" src="${cxt!}/jsfile/ztree/css/zTreeStyle/img/diy/1_close.png">
 						<span controller='true'>${dict.levels } ${i18nMap["admin.dict.common.level"]}</span>
 					</td>
 					<td>${dict.names }</td>

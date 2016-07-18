@@ -93,7 +93,7 @@ var Script = function () {
     });
 
     var setColor = function (color) {
-        $('#style_color').attr("href", cxt + "/ui/metroLab/css/style-" + color + ".css");
+        $('#style_color').attr("href", cxt + "/ui/metrolab/css/style-" + color + ".css");
     }
 
 // widget tools

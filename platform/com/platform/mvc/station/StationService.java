@@ -45,7 +45,7 @@ public class StationService extends BaseService {
 			node.setId(station.getPKValue());
 			node.setName(station.getStr(Station.column_names));
 			node.setIsParent(true);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + station.getStr(Station.column_images));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + station.getStr(Station.column_images));
 			nodeList.add(node);
 		}
 		

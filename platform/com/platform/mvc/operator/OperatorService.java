@@ -98,7 +98,7 @@ public class OperatorService extends BaseService {
 			node.setIsParent(true);
 			//node.setChecked(false);
 			node.setNocheck(true);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
 			nodeList.add(node);
 		}
 		
@@ -108,7 +108,7 @@ public class OperatorService extends BaseService {
 			node.setName(operator.getStr(Operator.column_names));
 			node.setIsParent(false);
 			node.setChecked(false);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/5.png");
 			nodeList.add(node);
 		}
 
@@ -135,7 +135,7 @@ public class OperatorService extends BaseService {
 			node.setIsParent(true);
 			//node.setChecked(false);
 			node.setNocheck(true);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
 			
 			recursion(cxt, node, module);
 			
@@ -164,7 +164,7 @@ public class OperatorService extends BaseService {
 			node.setName(operator.getStr(Operator.column_names));
 			node.setIsParent(false);
 			node.setChecked(false);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/5.png");
 			
 			children.add(node);
 		}
@@ -180,7 +180,7 @@ public class OperatorService extends BaseService {
 			node.setIsParent(true);
 			//node.setChecked(false);
 			node.setNocheck(true);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
 			
 			recursion(cxt, node, module);
 			

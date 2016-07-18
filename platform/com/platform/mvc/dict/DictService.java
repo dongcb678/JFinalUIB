@@ -118,7 +118,7 @@ public class DictService extends BaseService {
 			node.setId(dict.getPKValue());
 			node.setName(dict.getStr(Dict.column_names));
 			node.setIsParent(Boolean.parseBoolean(dict.getStr(Dict.column_isparent)));
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + dict.getStr(Dict.column_images));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + dict.getStr(Dict.column_images));
 			nodeList.add(node);
 		}
 		

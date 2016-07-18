@@ -6,7 +6,7 @@
 * @mail zhanchaojiang@qq.com
 */
 (function ($) {
-	var path = cxt + "/jsFile/treeTable/script/treeTable/";
+	var path = cxt + "/jsfile/treetable/script/treeTable/";
 	
     $.fn.treeTable = function (opts) {
         opts = $.extend({

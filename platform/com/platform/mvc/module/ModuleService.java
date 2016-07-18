@@ -52,7 +52,7 @@ public class ModuleService extends BaseService {
 			node.setId(module.getPKValue());
 			node.setName(module.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + module.getStr(Module.column_images));
 			nodeList.add(node);
 		}
 		

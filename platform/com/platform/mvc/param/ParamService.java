@@ -118,7 +118,7 @@ public class ParamService extends BaseService {
 			node.setId(param.getPKValue());
 			node.setName(param.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + param.getStr("images"));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + param.getStr("images"));
 			nodeList.add(node);
 		}
 		

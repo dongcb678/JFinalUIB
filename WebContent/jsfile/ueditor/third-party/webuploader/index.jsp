@@ -17,9 +17,9 @@ String path = sb.toString();
     	var cxt = "<%=path%>";
     </script>
     
-	<link rel="stylesheet" href="<%=path%>/jsFile/ueditor/third-party/webuploader/webuploader.css" type="text/css">
-	<script src="<%=path%>/jsFile/jquery/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=path%>/jsFile/ueditor/third-party/webuploader/webuploader.js"></script>
+	<link rel="stylesheet" href="<%=path%>/jsfile/ueditor/third-party/webuploader/webuploader.css" type="text/css">
+	<script src="<%=path%>/jsfile/jquery/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%=path%>/jsfile/ueditor/third-party/webuploader/webuploader.js"></script>
 
     <style type="text/css">
         
@@ -47,7 +47,7 @@ String path = sb.toString();
     <div id="filePicker">选择图片</div>
 </div>
 
-<script type="text/javascript" charset="utf-8" src="<%=path%>/jsFile/ueditor/third-party/webuploader/getting-started.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=path%>/jsfile/ueditor/third-party/webuploader/getting-started.js"></script>
 
 </body>
 </html>

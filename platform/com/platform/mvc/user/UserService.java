@@ -153,7 +153,7 @@ public class UserService extends BaseService {
 				node.setId("user_" + user.getPKValue());
 				node.setName(user.getStr("names"));
 				node.setIsParent(false);
-				node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/5.png");
+				node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/5.png");
 				nodeList.add(node);
 			}
 		}
@@ -169,7 +169,7 @@ public class UserService extends BaseService {
 			} else {
 				node.setIsParent(Boolean.parseBoolean(dept.getStr(Department.column_isparent)));
 			}
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + dept.getStr(Department.column_images));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + dept.getStr(Department.column_images));
 			nodeList.add(node);
 		}
 

@@ -45,7 +45,7 @@ public class DepartmentService extends BaseService {
 			node.setId(dept.getPKValue());
 			node.setName(dept.getStr("names"));
 			node.setIsParent(true);
-			node.setIcon(cxt + "/jsFile/zTree/css/zTreeStyle/img/diy/" + dept.getStr("images"));
+			node.setIcon(cxt + "/jsfile/ztree/css/zTreeStyle/img/diy/" + dept.getStr("images"));
 			nodeList.add(node);
 		}
 		
