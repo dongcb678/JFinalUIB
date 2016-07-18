@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 import com.platform.annotation.Controller;
-import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
 
@@ -28,7 +27,7 @@ public class UserController extends BaseController {
 	 * 默认列表
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, User.sqlId_splitPageSelect, User.sqlId_splitPageFrom);
+		paging(splitPage, User.sqlId_splitPageSelect, User.sqlId_splitPageFrom);
 		render("/platform/user/list.html");
 	}
 	

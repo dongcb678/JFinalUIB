@@ -34,7 +34,7 @@ public class RoleController extends BaseController {
 	 * 角色列表
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, Role.sqlId_splitPageFrom);
+		paging(splitPage, BaseModel.sqlId_splitPageSelect, Role.sqlId_splitPageFrom);
 		render("/platform/role/list.html");
 	}
 

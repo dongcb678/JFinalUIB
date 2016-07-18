@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 import com.platform.annotation.Controller;
-import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
 
@@ -28,7 +27,7 @@ public class OperatorController extends BaseController {
 	 * 功能管理列表页
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, Operator.sqlId_splitPageSelect, Operator.sqlId_splitPageFrom);
+		paging(splitPage, Operator.sqlId_splitPageSelect, Operator.sqlId_splitPageFrom);
 		render("/platform/operator/list.html");
 	}
 

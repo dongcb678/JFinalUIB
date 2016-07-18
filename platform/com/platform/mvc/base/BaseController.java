@@ -378,6 +378,16 @@ public abstract class BaseController extends Controller {
 
 	/**
 	 * 分页
+	 * @param splitPage		分页对象
+	 * @param selectSqlId	select之后，from之前
+	 * @param fromSqlId		from之后
+	 */
+	protected void paging(SplitPage splitPage, String selectSqlId, String fromSqlId){
+		paging(ConstantInit.db_dataSource_main, splitPage, selectSqlId, fromSqlId);
+	}
+	
+	/**
+	 * 分页
 	 * @param dataSource 数据源
 	 * @param splitPage
 	 * @param sqlId

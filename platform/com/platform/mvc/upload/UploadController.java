@@ -53,7 +53,7 @@ public class UploadController extends BaseController {
 	 * 文件列表
 	 */
 	public void list() {
-		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, Upload.sqlId_splitPageFrom);
+		paging(splitPage, BaseModel.sqlId_splitPageSelect, Upload.sqlId_splitPageFrom);
 		render("/platform/upload/list.html");
 	}
 

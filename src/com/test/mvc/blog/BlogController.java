@@ -1,13 +1,11 @@
 package com.test.mvc.blog;
 
-import com.platform.annotation.Controller;
-import com.platform.constant.ConstantInit;
-import com.platform.mvc.base.BaseController;
-import com.platform.mvc.base.BaseModel;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.platform.annotation.Controller;
+import com.platform.mvc.base.BaseController;
+import com.platform.mvc.base.BaseModel;
 
 /**
  * XXX 管理	
@@ -34,7 +32,7 @@ public class BlogController extends BaseController {
 	 * 列表
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, Blog.sqlId_splitPageFrom);
+		paging(splitPage, BaseModel.sqlId_splitPageSelect, Blog.sqlId_splitPageFrom);
 		render("/test/blog/list.html");
 	}
 	

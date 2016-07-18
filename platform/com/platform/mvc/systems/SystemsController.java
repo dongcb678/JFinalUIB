@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 import com.platform.annotation.Controller;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
@@ -24,7 +23,7 @@ public class SystemsController extends BaseController {
 	 * 系统管理列表
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, Systems.sqlId_splitPageFrom);
+		paging(splitPage, BaseModel.sqlId_splitPageSelect, Systems.sqlId_splitPageFrom);
 		render("/platform/systems/list.html");
 	}
 	
