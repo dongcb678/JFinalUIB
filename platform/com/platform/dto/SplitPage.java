@@ -42,6 +42,7 @@ public class SplitPage implements Serializable {
 	private int currentPageCount;// 当前页记录数量
 	private boolean isFirst;// 是否第一页
 	private boolean isLast;// 是否最后一页
+	private String uri;// 分页uri
 
 	/**
 	 * 分页计算
@@ -192,4 +193,11 @@ public class SplitPage implements Serializable {
 		this.extData = extData;
 	}
 
+	public String getUri() {
+		return uri;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
 }

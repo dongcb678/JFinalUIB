@@ -74,6 +74,10 @@ public abstract class Controller {
 		this.urlPara = urlPara;
 		this.urlParaArray = null;
 	}
+
+	public String getUrlPara() {
+		return urlPara;
+	}
 	
 	/**
 	 * Stores an attribute in this request

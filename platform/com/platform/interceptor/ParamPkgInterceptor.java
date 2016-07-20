@@ -71,7 +71,13 @@ public class ParamPkgInterceptor implements Interceptor {
 		String operatorIds = controller.getReqSysLog().getStr(Syslog.column_operatorids);
 		String splitpage = Operator.dao.cacheGet(operatorIds).getStr(Operator.column_splitpage);
 		if(splitpage.equals("1")){
-			splitPage(controller);
+			String uri = invoc.getActionKey(); // 默认就是ActionKey
+			String urlPara = controller.getUrlPara();
+			if(urlPara != null && !urlPara.isEmpty()){
+				uri += "/" + urlPara;
+				controller.setAttr("urlPara", urlPara + "/" + urlPara); // 设置urlPara到request
+			}
+			splitPage(controller, uri);
 		}
 		
 		log.debug("********* 封装参数值到 controller 全局变量  end *********");
@@ -108,8 +114,9 @@ public class ParamPkgInterceptor implements Interceptor {
 	 * 分页参数处理
 	 * @param controller
 	 */
-	private void splitPage(BaseController controller){
+	private void splitPage(BaseController controller, String uri){
 		SplitPage splitPage = new SplitPage();
+		splitPage.setUri(uri);
 		// 分页查询参数分拣
 		Map<String, Object> queryParam = new HashMap<String, Object>();
 		String localePram = controller.getAttr(ConstantWebContext.request_localePram);
