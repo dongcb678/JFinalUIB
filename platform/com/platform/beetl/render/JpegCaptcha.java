@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.platform.interceptor.AuthInterceptor;
+import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolRandoms;
 
 public class JpegCaptcha {
@@ -73,7 +74,8 @@ public class JpegCaptcha {
 		log.debug("验证码：" + sRand);
 
 		// 设置验证码值到cookie
-		AuthInterceptor.setAuthCode(response, sRand);
+		long date = ToolDateTime.getDateByTime();
+		AuthInterceptor.setAuthCode(response, sRand + ".#." + date);
 
 		response.setHeader("Pragma", "no-cache");
 		response.setHeader("Cache-Control", "no-cache");

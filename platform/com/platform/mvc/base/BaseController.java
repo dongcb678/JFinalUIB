@@ -21,6 +21,7 @@ import com.platform.interceptor.AuthInterceptor;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
 import com.platform.plugin.I18NPlugin;
+import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolModelInjector;
 import com.platform.tools.ToolWeb;
 
@@ -280,7 +281,14 @@ public abstract class BaseController extends Controller {
 		if (null != authCodePram && null != authCodeCookie) {
 			authCodePram = authCodePram.toLowerCase();// 统一小写
 			authCodeCookie = authCodeCookie.toLowerCase();// 统一小写
-			if (authCodePram.equals(authCodeCookie)) {
+
+			String[] cookies = authCodeCookie.split(".#.");
+			String authCode = cookies[0];
+			long time = Long.valueOf(cookies[1]);
+			long interval = (ToolDateTime.getDateByTime() - time) / 1000 / 60; // 间隔分钟
+
+			int session = PropKit.getInt(ConstantInit.config_session_key);
+			if (authCodePram.equals(authCode) && interval <= session) {
 				return true;
 			}
 		}

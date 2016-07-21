@@ -15,6 +15,7 @@ import com.platform.beetl.render.image.GifEncoder;
 import com.platform.beetl.render.image.Randoms;
 import com.platform.beetl.render.image.Streams;
 import com.platform.interceptor.AuthInterceptor;
+import com.platform.tools.ToolDateTime;
 
 public class GifCaptcha extends Captcha {
 	
@@ -48,7 +49,8 @@ public class GifCaptcha extends Captcha {
 		char[] rands = alphas();
 
 		// 设置验证码值到cookie
-		AuthInterceptor.setAuthCode(response, String.valueOf(rands));
+		long date = ToolDateTime.getDateByTime();
+		AuthInterceptor.setAuthCode(response, String.valueOf(rands) + ".#." + date);
 
 		OutputStream os = null;
 		try {
