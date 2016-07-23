@@ -422,11 +422,13 @@ public class AuthInterceptor implements Interceptor {
 	 * @param request
 	 * @return
 	 */
-	public static String getAuthCode(HttpServletRequest request){
+	public static String getAuthCode(HttpServletRequest request, HttpServletResponse response){
 		// 1.获取cookie加密数据
 		String authCode = ToolWeb.getCookieValueByName(request, ConstantWebContext.request_authCode);
+		// 2.获取验证码后清除客户端验证码信息
+		setAuthCode(response, null); 
 		if (null != authCode && !authCode.equals("")) {
-			// 2.解密数据
+			// 3.解密数据
 			authCode = ToolIDEA.decrypt(authCode);
 			return authCode;
 		}

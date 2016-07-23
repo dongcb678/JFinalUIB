@@ -275,7 +275,7 @@ public abstract class BaseController extends Controller {
 	 */
 	protected boolean authCode() {
 		String authCodePram = getPara(ConstantWebContext.request_authCode);
-		String authCodeCookie = AuthInterceptor.getAuthCode(getRequest());
+		String authCodeCookie = AuthInterceptor.getAuthCode(getRequest(), getResponse());
 		if (null != authCodePram && null != authCodeCookie) {
 			authCodePram = authCodePram.toLowerCase();// 统一小写
 			authCodeCookie = authCodeCookie.toLowerCase();// 统一小写
