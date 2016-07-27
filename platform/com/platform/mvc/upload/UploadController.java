@@ -61,7 +61,7 @@ public class UploadController extends BaseController {
 	 * 删除文件
 	 */
 	public void delete() {
-		uploadService.delete("pt_upload", getPara() == null ? ids : getPara());
+		uploadService.delete(Upload.table_name, getPara() == null ? ids : getPara());
 		redirect("/platform/upload/list");
 	}
 

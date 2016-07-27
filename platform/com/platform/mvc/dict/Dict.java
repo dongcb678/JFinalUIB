@@ -17,7 +17,7 @@ import com.platform.tools.ToolCache;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_dict")
+@Table(tableName = Dict.table_name)
 public class Dict extends BaseModelCache<Dict> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
@@ -26,6 +26,11 @@ public class Dict extends BaseModelCache<Dict> {
 	
 	public static final Dict dao = new Dict();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_dict";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32

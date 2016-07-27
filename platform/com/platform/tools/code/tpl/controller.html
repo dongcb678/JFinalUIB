@@ -78,7 +78,7 @@ public class ${className}Controller extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		${classNameSmall}Service.delete("${tableName}", getPara() == null ? ids : getPara());
+		${classNameSmall}Service.delete(${className}.table_name, getPara() == null ? ids : getPara());
 		redirect("/${basePath}/${classNameSmall}");
 	}
 	

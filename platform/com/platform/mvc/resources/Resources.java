@@ -14,7 +14,7 @@ import com.platform.mvc.base.BaseModel;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_resources")
+@Table(tableName = Resources.table_name)
 public class Resources extends BaseModel<Resources> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
@@ -23,6 +23,11 @@ public class Resources extends BaseModel<Resources> {
 	
 	public static final Resources dao = new Resources();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_resources";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32

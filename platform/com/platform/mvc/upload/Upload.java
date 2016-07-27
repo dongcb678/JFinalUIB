@@ -11,7 +11,7 @@ import com.platform.mvc.base.BaseModel;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_upload")
+@Table(tableName = Upload.table_name)
 public class Upload extends BaseModel<Upload> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
@@ -20,6 +20,11 @@ public class Upload extends BaseModel<Upload> {
 	
 	public static final Upload dao = new Upload();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_upload";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32

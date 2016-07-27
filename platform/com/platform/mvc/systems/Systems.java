@@ -11,7 +11,7 @@ import com.platform.mvc.base.BaseModel;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_systems")
+@Table(tableName = Systems.table_name)
 public class Systems extends BaseModel<Systems> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -20,6 +20,11 @@ public class Systems extends BaseModel<Systems> {
 	
 	public static final Systems dao = new Systems();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_systems";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32

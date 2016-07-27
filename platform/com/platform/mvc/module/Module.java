@@ -11,7 +11,7 @@ import com.platform.mvc.base.BaseModel;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_module")
+@Table(tableName = Module.table_name)
 public class Module extends BaseModel<Module> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -20,6 +20,11 @@ public class Module extends BaseModel<Module> {
 	
 	public static final Module dao = new Module();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_module";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32

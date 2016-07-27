@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseModel;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_syslog")
+@Table(tableName = Syslog.table_name)
 public class Syslog extends BaseModel<Syslog> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
@@ -22,6 +22,11 @@ public class Syslog extends BaseModel<Syslog> {
 	
 	public static final Syslog dao = new Syslog();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_syslog";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32

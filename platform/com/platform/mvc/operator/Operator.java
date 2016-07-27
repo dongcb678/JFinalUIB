@@ -12,7 +12,7 @@ import com.platform.tools.ToolCache;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_operator")
+@Table(tableName = Operator.table_name)
 public class Operator extends BaseModelCache<Operator> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -21,6 +21,11 @@ public class Operator extends BaseModelCache<Operator> {
 	
 	public static final Operator dao = new Operator();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_operator";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32

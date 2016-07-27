@@ -17,7 +17,7 @@ import com.platform.tools.ToolCache;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_param")
+@Table(tableName = Param.table_name)
 public class Param extends BaseModelCache<Param> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
@@ -26,6 +26,11 @@ public class Param extends BaseModelCache<Param> {
 	
 	public static final Param dao = new Param();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_param";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32

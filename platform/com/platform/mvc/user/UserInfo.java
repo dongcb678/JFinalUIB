@@ -16,7 +16,7 @@ import com.platform.tools.ToolCache;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_userinfo")
+@Table(tableName = UserInfo.table_name)
 public class UserInfo extends BaseModel<UserInfo> {
 
 	private static final long serialVersionUID = 2592706064072264621L;
@@ -25,6 +25,11 @@ public class UserInfo extends BaseModel<UserInfo> {
 	
 	public static final UserInfo dao = new UserInfo();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_userinfo";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32

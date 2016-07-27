@@ -13,7 +13,7 @@ import com.platform.tools.ToolCache;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Table(tableName = "pt_role")
+@Table(tableName = Role.table_name)
 public class Role extends BaseModelCache<Role> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
@@ -22,6 +22,11 @@ public class Role extends BaseModelCache<Role> {
 	
 	public static final Role dao = new Role();
 
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "pt_role";
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32
