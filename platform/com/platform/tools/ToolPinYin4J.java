@@ -76,7 +76,7 @@ public class ToolPinYin4J {
 	 * @return
 	 */
 	public static String getCnASCII(String cnStr) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		byte[] strByte = cnStr.getBytes(Charset.forName("UTF-8"));
 		for (int i = 0; i < strByte.length; i++) {
 			// System.out.println(Integer.toHexString(bGBK[i]&0xff));

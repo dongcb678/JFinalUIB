@@ -42,7 +42,7 @@ public abstract class ToolFormatSql {
 	 */
 	private static class FormatProcessDDL {
 		private static String formatCommentOn(String sql) {
-			StringBuffer result = new StringBuffer(60).append("\n    ");
+			StringBuilder result = new StringBuilder(60).append("\n    ");
 			StringTokenizer tokens = new StringTokenizer(sql, " '[]\"", true);
 
 			boolean quoted = false;
@@ -62,7 +62,7 @@ public abstract class ToolFormatSql {
 		}
 
 		private static String formatAlterTable(String sql) {
-			StringBuffer result = new StringBuffer(60).append("\n    ");
+			StringBuilder result = new StringBuilder(60).append("\n    ");
 			StringTokenizer tokens = new StringTokenizer(sql, " (,)'[]\"", true);
 
 			boolean quoted = false;
@@ -82,7 +82,7 @@ public abstract class ToolFormatSql {
 		}
 
 		private static String formatCreateTable(String sql) {
-			StringBuffer result = new StringBuffer(60).append("\n    ");
+			StringBuilder result = new StringBuilder(60).append("\n    ");
 			StringTokenizer tokens = new StringTokenizer(sql, "(,)'[]\"", true);
 
 			int depth = 0;
@@ -194,7 +194,7 @@ public abstract class ToolFormatSql {
 
 		int indent = 1;
 
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		StringTokenizer tokens;
 		String lastToken;
 		String token;

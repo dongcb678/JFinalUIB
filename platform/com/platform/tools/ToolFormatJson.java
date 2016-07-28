@@ -15,7 +15,7 @@ public abstract class ToolFormatJson {
 	 */
 	public static String format(String jsonStr) {
 		int level = 0;
-		StringBuffer jsonForMatStr = new StringBuffer();
+		StringBuilder jsonForMatStr = new StringBuilder();
 		for (int i = 0; i < jsonStr.length(); i++) {
 			char c = jsonStr.charAt(i);
 			if (level > 0 && '\n' == jsonForMatStr.charAt(jsonForMatStr.length() - 1)) {
@@ -48,7 +48,7 @@ public abstract class ToolFormatJson {
 	}
 
 	private static String getLevelStr(int level) {
-		StringBuffer levelStr = new StringBuffer();
+		StringBuilder levelStr = new StringBuilder();
 		for (int levelI = 0; levelI < level; levelI++) {
 			levelStr.append("\t");
 		}
