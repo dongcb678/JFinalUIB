@@ -39,10 +39,11 @@ public class SplitPage implements Serializable {
 	/**
 	 * 分页显示辅助属性
 	 */
-	private int currentPageCount;// 当前页记录数量
-	private boolean isFirst;// 是否第一页
-	private boolean isLast;// 是否最后一页
+	private int currentPageCount = -1;// 当前页记录数量
+	private boolean isFirst = false;// 是否第一页
+	private boolean isLast = false;// 是否最后一页
 	private String uri;// 分页uri
+	private int start = -1;// 记录开始序号
 
 	/**
 	 * 分页计算
@@ -69,6 +70,8 @@ public class SplitPage implements Serializable {
 		} else {
 			this.isLast = false;
 		}
+		
+		start = (pageNumber - 1) * pageSize;
 	}
 
 	/**
@@ -162,6 +165,9 @@ public class SplitPage implements Serializable {
 	}
 
 	public int getCurrentPageCount() {
+		if(currentPageCount == -1){
+			currentPageCount = (null != this.list ? this.list.size() : 0);
+		}
 		return currentPageCount;
 	}
 
@@ -200,4 +206,16 @@ public class SplitPage implements Serializable {
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
+	
+	public int getStart() {
+		if(start == -1){
+			start = (pageNumber - 1) * pageSize;
+		}
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
 }
