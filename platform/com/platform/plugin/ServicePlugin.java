@@ -62,7 +62,7 @@ public class ServicePlugin implements IPlugin {
 				BaseService baseService = null;
 				// 是否需要对service中的所有方法开启事务管理
 				if(serviceBind.tx()){
-					baseService = Enhancer.enhance(service, Tx.class); 	// 是
+					baseService = (BaseService) Enhancer.enhance(service, Tx.class); 	// 是
 				}else{
 					try {
 						baseService = (BaseService) service.newInstance(); //Enhancer.enhance(service);	// 否
