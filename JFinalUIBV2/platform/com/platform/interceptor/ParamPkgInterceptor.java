@@ -54,7 +54,7 @@ public class ParamPkgInterceptor implements Interceptor {
 				break;
 			}
 			
-			superControllerClass = controllerClass.getSuperclass(); // 继续获取父类
+			superControllerClass = superControllerClass.getSuperclass(); // 继续获取父类
 			Field[] parentFields = superControllerClass.getDeclaredFields();
 			for (Field field : parentFields) {
 				setControllerFieldValue(controller, field);
