@@ -39,7 +39,7 @@ public class SysLogController extends BaseController {
 	 * 删除日志
 	 */
 	public void delete() {
-		sysLogService.delete(Syslog.table_name, getPara() == null ? ids : getPara());
+		sysLogService.baseDelete(Syslog.table_name, getPara() == null ? ids : getPara());
 		redirect("/platform/sysLog");
 	}
 

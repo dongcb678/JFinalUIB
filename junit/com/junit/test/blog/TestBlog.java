@@ -17,7 +17,7 @@ public class TestBlog extends TestBase {
 	@Test
     public void delete() throws SQLException{
 		BaseService bService = (BaseService) ServicePlugin.getService(BaseService.baseServiceName);
-		bService.delete("test_blog", "ids001,ids002");
+		bService.baseDelete("test_blog", "ids001,ids002");
     }
 
 }

@@ -310,7 +310,7 @@ public class BaseService {
 	 * @param ids 逗号分隔的列值
 	 */
 	@Before(Tx.class)
-	public void delete(String table, String ids){
+	public void baseDelete(String table, String ids){
 		String sqlIn = sqlIn(ids);
 
 		Map<String, Object> param = new HashMap<String, Object>();
