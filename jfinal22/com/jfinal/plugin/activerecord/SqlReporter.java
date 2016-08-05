@@ -55,11 +55,14 @@ public class SqlReporter implements InvocationHandler {
 		try {
 			if (method.getName().equals("prepareStatement")) {
 				String info = "\r\n Sql: \r\n " + format(String.valueOf(args[0])) + " \r\n ";
+				log.info(info);
+				/*
 				if (logOn){
 					log.info(info);
 				}else{
 					System.out.println(info);
 				}
+				*/
 			}
 			return method.invoke(conn, args);
 		} catch (InvocationTargetException e) {
