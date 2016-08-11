@@ -181,10 +181,7 @@ public class SqlXmlPlugin implements IPlugin {
 					log.error("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
 					throw new RuntimeException("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
 					
-				} else if(null != ToolCache.get(cacheStart_sql + key)){
-					log.error("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
-					throw new RuntimeException("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
-				}
+				} 
 				
 				sql = sql.replaceAll("[\\s]{2,}", " ");
 				ToolCache.set(cacheStart_sql + key, sql);
