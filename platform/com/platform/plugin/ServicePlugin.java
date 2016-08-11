@@ -48,14 +48,14 @@ public class ServicePlugin implements IPlugin {
 			Service serviceBind = (Service) service.getAnnotation(Service.class);
 			if (serviceBind == null) {
 				log.warn(service.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
-				continue;
+				throw new RuntimeException(service.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
 			}
 		
 			// 获取映射属性
 			String name = serviceBind.name().trim();
 			if (name.equals("")) {
 				log.error(service.getName() + "注解错误，name不能为空 ！！！");
-				break;
+				throw new RuntimeException(service.getName() + "注解错误，name不能为空 ！！！");
 			}
 		
 			if (serviceMap.get(name) == null) {
@@ -74,7 +74,7 @@ public class ServicePlugin implements IPlugin {
 				log.debug("Service注册： name = " + name + ", class = " + service.getName());
 			}else{
 				log.error(service.getName() + "注解错误，Service name重复注册 ！！！");
-				break;
+				throw new RuntimeException(service.getName() + "注解错误，Service name重复注册 ！！！");
 			}
 		}
 		

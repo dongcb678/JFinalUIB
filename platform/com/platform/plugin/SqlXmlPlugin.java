@@ -168,21 +168,19 @@ public class SqlXmlPlugin implements IPlugin {
 				
 				if(null == id || id.trim().isEmpty()){
 					log.error("sql xml文件" + fileName + "的存在没有id的sql语句");
-					continue;
+					throw new RuntimeException("sql xml文件" + fileName + "的存在没有id的sql语句");
 				}
 				
 				String sql = element.getText();
 				if(null == sql || sql.trim().isEmpty()){
 					log.error("sql xml文件" + fileName + "的存在没有内容的sql语句，sqlId = " + key);
-					continue;
+					throw new RuntimeException("sql xml文件" + fileName + "的存在没有内容的sql语句，sqlId = " + key);
 				}
 				
 				if(isInit && null != ToolCache.get(cacheStart_sql + key)){
 					log.error("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
-					continue;
-				} else if(null != ToolCache.get(cacheStart_sql + key)){
-					log.error("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
-				}
+					throw new RuntimeException("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
+				} 
 				
 				sql = sql.replaceAll("[\\s]{2,}", " ");
 				ToolCache.set(cacheStart_sql + key, sql);

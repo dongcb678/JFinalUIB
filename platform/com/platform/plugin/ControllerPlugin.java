@@ -37,7 +37,7 @@ public class ControllerPlugin implements IPlugin {
 			Controller controllerBind = (Controller) controller.getAnnotation(Controller.class);
 			if (controllerBind == null) {
 				log.warn(controller.getName() + "继承了BaseController，但是没有注解绑定映射路径，请检查是否已经手动绑定 ！！！");
-				continue;
+				throw new RuntimeException(controller.getName() + "继承了BaseController，但是没有注解绑定映射路径，请检查是否已经手动绑定 ！！！");
 			}
 
 			// 获取映射路径数组
@@ -46,7 +46,7 @@ public class ControllerPlugin implements IPlugin {
 				controllerKey = controllerKey.trim();
 				if (controllerKey.equals("")) {
 					log.error(controller.getName() + "注解错误，映射路径为空");
-					continue;
+					throw new RuntimeException(controller.getName() + "注解错误，映射路径为空");
 				}
 				// 注册映射
 				routes.add(controllerKey, controller);

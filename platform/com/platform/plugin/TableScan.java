@@ -44,7 +44,7 @@ public class TableScan implements IPlugin {
 			Table tableBind = (Table) model.getAnnotation(Table.class);
 			if (tableBind == null) {
 				log.warn(model.getName() + "继承了BaseModel，但是没有注解绑定表名，请检查是否已经手动绑定 ！！！");
-				continue;
+				throw new RuntimeException(model.getName() + "继承了BaseModel，但是没有注解绑定表名，请检查是否已经手动绑定 ！！！");
 			}
 
 			// 获取映射属性
@@ -53,17 +53,17 @@ public class TableScan implements IPlugin {
 			String pkName = tableBind.pkName().trim();
 			if (dataSourceName.equals("") || tableName.equals("") || pkName.equals("")) {
 				log.error(model.getName() + "注解错误，数据源、表名、主键名为空 ！！！");
-				break;
+				throw new RuntimeException(model.getName() + "注解错误，数据源、表名、主键名为空 ！！！");
 			}
 
 			// 映射注册
 			if (configName == null) {
 				log.error(model.getName() + "ActiveRecordPlugin configName不能为null ！！！");
-				break;
+				throw new RuntimeException(model.getName() + "ActiveRecordPlugin configName不能为null ！！！");
 			}
 			if (arp == null) {
 				log.error(model.getName() + "ActiveRecordPlugin不能为null ！！！");
-				break;
+				throw new RuntimeException(model.getName() + "ActiveRecordPlugin不能为null ！！！");
 			}
 			if (dataSourceName.equals(configName)) {
 				arp.addMapping(tableName, pkName, model);
