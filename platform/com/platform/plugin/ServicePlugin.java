@@ -1,5 +1,6 @@
 package com.platform.plugin;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,43 +39,79 @@ public class ServicePlugin implements IPlugin {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public boolean start() {
-		// 扫描所有继承BaseService的类
+		// 1.扫描所有继承BaseService的类
 		List<Class<?>> modelClasses = ToolClassSearch.search(BaseService.class);
 		modelClasses.add(BaseService.class); // 加入BaseService本身
 		
-		// 循环处理Service实例化
-		for (Class service : modelClasses) {
-			// 获取注解对象
-			Service serviceBind = (Service) service.getAnnotation(Service.class);
+		// 2.循环处理Service实例化
+		for (Class serviceClass : modelClasses) {
+			// 获取Service注解对象
+			Service serviceBind = (Service) serviceClass.getAnnotation(Service.class);
 			if (serviceBind == null) {
-				log.warn(service.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
-				throw new RuntimeException(service.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
+				log.warn(serviceClass.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
+				throw new RuntimeException(serviceClass.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
 			}
 		
-			// 获取映射属性
+			// 获取Service注解属性
 			String name = serviceBind.name().trim();
 			if (name.equals("")) {
-				log.error(service.getName() + "注解错误，name不能为空 ！！！");
-				throw new RuntimeException(service.getName() + "注解错误，name不能为空 ！！！");
+				log.error(serviceClass.getName() + "注解错误，name不能为空 ！！！");
+				throw new RuntimeException(serviceClass.getName() + "注解错误，name不能为空 ！！！");
 			}
 		
 			if (serviceMap.get(name) == null) {
 				BaseService baseService = null;
 				// 是否需要对service中的所有方法开启事务管理
 				if(serviceBind.tx()){
-					baseService = (BaseService) Enhancer.enhance(service, Tx.class); 	// 是
+					baseService = (BaseService) Enhancer.enhance(serviceClass, Tx.class); 	// 是
 				}else{
 					try {
-						baseService = (BaseService) service.newInstance(); //Enhancer.enhance(service);	// 否
+						baseService = (BaseService) serviceClass.newInstance(); //Enhancer.enhance(service);	// 否
 					} catch (InstantiationException | IllegalAccessException e) {
 						e.printStackTrace();
 					}
 				}
 				serviceMap.put(name, baseService);
-				log.debug("Service注册： name = " + name + ", class = " + service.getName());
+				log.debug("Service注册： name = " + name + ", class = " + serviceClass.getName());
 			}else{
-				log.error(service.getName() + "注解错误，Service name重复注册 ！！！");
-				throw new RuntimeException(service.getName() + "注解错误，Service name重复注册 ！！！");
+				log.error(serviceClass.getName() + "注解错误，Service name重复注册 ！！！");
+				throw new RuntimeException(serviceClass.getName() + "注解错误，Service name重复注册 ！！！");
+			}
+		}
+		
+		// 3.循环处理Service相互注入
+		for (Class serviceClass : modelClasses) {
+			// 获取Service注解对象
+			Service serviceBind = (Service) serviceClass.getAnnotation(Service.class);
+			
+			// 获取Service注解属性
+			String serviceName = serviceBind.name().trim();
+			
+			// 获取Service实例
+			BaseService myService = ServicePlugin.getService(serviceName); 
+			
+			// 查找成员变量
+			Field[] parentFields = serviceClass.getDeclaredFields();
+			for (Field field : parentFields) {
+				try {
+					field.setAccessible(true);
+					String name = field.getName();
+					// 是否service类型成员变量
+					if(BaseService.class.isAssignableFrom(field.getType())){
+						// 获取目标Service实例
+						BaseService targetService = ServicePlugin.getService(name); 
+						// 注入目标service实例
+						field.set(myService, targetService);
+					}
+				} catch (IllegalArgumentException e1) {
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				} finally {
+					field.setAccessible(false);
+				}
 			}
 		}
 		
