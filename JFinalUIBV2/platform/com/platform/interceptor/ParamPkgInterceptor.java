@@ -36,29 +36,20 @@ public class ParamPkgInterceptor implements Interceptor {
 		// 获取Controller
 		BaseController controller = (BaseController) invoc.getController();
 		
-		// 封装controller变量值
+		// 封装Controller至父类BaseController变量值
 		Class<?> controllerClass = controller.getClass();
-		Field[] fields = controllerClass.getDeclaredFields();
-		for (Field field : fields) {
-			setControllerFieldValue(controller, field);
-		}
-
-		// 封装Controller父类至BaseController变量值
-		Class<?> superControllerClass = controllerClass.getSuperclass(); // 获取父类
 		while (true) {
-			if(superControllerClass == BaseController.class){ // 父类是否为BaseController
-				Field[] parentFields = superControllerClass.getDeclaredFields();
-				for (Field field : parentFields) {
-					setControllerFieldValue(controller, field);
-				}
+			Field[] fields = controllerClass.getDeclaredFields();
+			
+			for (Field field : fields) {
+				setControllerFieldValue(controller, field);
+			}
+
+			if(controllerClass == BaseController.class){ // 父类是否为BaseController
 				break;
 			}
 			
-			Field[] parentFields = superControllerClass.getDeclaredFields();
-			for (Field field : parentFields) {
-				setControllerFieldValue(controller, field);
-			}
-            superControllerClass = superControllerClass.getSuperclass(); // 继续获取父类
+			controllerClass = controllerClass.getSuperclass(); // 继续获取父类
 		}
 		
 //		 判断请求是否文件上传类型
@@ -80,25 +71,20 @@ public class ParamPkgInterceptor implements Interceptor {
 		
 		log.debug("********* 设置全局变量值到 request start *********");
 
-		// 封装controller变量值
-		for (Field field : fields) {
-			setRequestValue(controller, field);
-		}
-		
-		// 封装Controller父类至baseController变量值
+		// 封装Controller至父类baseController变量值
+		controllerClass = controller.getClass();
 		while (true) {
-			if(superControllerClass == BaseController.class){
-				Field[] parentFields = superControllerClass.getDeclaredFields();
-				for (Field field : parentFields) {
-					setRequestValue(controller, field);
-				}
-				break;
-			}
-			superControllerClass = controllerClass.getSuperclass();
-			Field[] parentFields = superControllerClass.getDeclaredFields();
-			for (Field field : parentFields) {
+			Field[] fields = controllerClass.getDeclaredFields();
+			
+			for (Field field : fields) {
 				setRequestValue(controller, field);
 			}
+			
+			if(controllerClass == BaseController.class){
+				break;
+			}
+			
+			controllerClass = controllerClass.getSuperclass();
 		}
 		
 		log.debug("********* 设置全局变量值到 request end *********");
