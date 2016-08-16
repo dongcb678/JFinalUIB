@@ -54,11 +54,11 @@ public class ParamPkgInterceptor implements Interceptor {
 				break;
 			}
 			
-			superControllerClass = superControllerClass.getSuperclass(); // 继续获取父类
 			Field[] parentFields = superControllerClass.getDeclaredFields();
 			for (Field field : parentFields) {
 				setControllerFieldValue(controller, field);
 			}
+            superControllerClass = superControllerClass.getSuperclass(); // 继续获取父类
 		}
 		
 //		 判断请求是否文件上传类型
