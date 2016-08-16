@@ -26,12 +26,13 @@ public class UserService extends BaseService {
 
 	/**
 	 * 新增用户信息保存
+	 * @param pkIds
 	 * @param user
-	 * @param passWord
+	 * @param password
 	 * @param userInfo
 	 */
 	@Before(Tx.class)
-	public void save(User user, String password, UserInfo userInfo) {
+	public void save(String pkIds, User user, String password, UserInfo userInfo) {
 		try {
 			// 密码加密
 			byte[] salt = ToolPbkdf2.generateSalt();// 密码盐
@@ -40,13 +41,13 @@ public class UserService extends BaseService {
 			user.set(User.column_password, encryptedPassword);
 
 			// 保存用户信息
-			userInfo.save();
+			userInfo.save(pkIds);
 
 			// 保存用户
 			user.set(User.column_userinfoids, userInfo.getPKValue());
 			user.set(User.column_errorcount, 0);
 			user.set(User.column_status, "1");
-			user.save();
+			user.save(pkIds);
 
 			// 缓存
 			User.dao.cacheAdd(user.getPKValue());

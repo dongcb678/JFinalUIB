@@ -74,6 +74,15 @@
 						</div>
 						
 						<div class="control-group">
+							<label class="control-label">头像</label>
+							<div class="controls">
+								<% if(!isEmpty(upload)){%>
+									<img alt="头像" src="${cxt!}/files/upload/${upload.filename!}" width="200" height="200">
+								<% } %>
+							</div>
+						</div>
+						
+						<div class="control-group">
 							<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
 							<div class="controls">
 								<input type="text" class="span8" readonly="readonly" value="${escapeXml(userInfo.email!)}">

@@ -256,11 +256,11 @@ var platform_verify = function() {
 	}
 		
 	/**
-	 * 判断文件上传类型
+	 * 判断图片文件上传类型
 	 * @param valuePath
 	 * @returns
 	 */
-	var valiFile = function(valuePath){
+	var valiImage = function(valuePath){
 		var imageGeShi = valuePath.substr(valuePath.lastIndexOf(".")+1);
 		var geShi = ["jpg", "jpeg", "png"];
 		var imageResult = false;
@@ -410,6 +410,9 @@ var platform_verify = function() {
 					
 				}else if(vType == "avoirdupoi"){//体重
 					resultArr = avoirdupoi(value);
+					
+				}else if(vType == "valiImage"){//图片文件上传类型
+					resultArr = valiImage(value);
 					
 				}
 				

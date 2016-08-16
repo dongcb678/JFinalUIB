@@ -243,6 +243,21 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	/**
 	 * 重写save方法
 	 */
+	public boolean save(String pkIds) {
+		String[] pkArr = getTable().getPrimaryKey();
+		
+		this.set(pkArr[0], pkIds); // 设置主键值
+		
+		if(getTable().hasColumnLabel(column_version)){ // 是否需要乐观锁控制
+			this.set(column_version, Long.valueOf(0)); // 初始化乐观锁版本号
+		}
+		
+		return super.save();
+	}
+
+	/**
+	 * 重写save方法
+	 */
 	public boolean save(Map<String, Object> pkMap) {
 		Set<String> pkSet = pkMap.keySet();
 		for (String pk : pkSet) {

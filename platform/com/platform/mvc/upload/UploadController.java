@@ -41,6 +41,7 @@ public class UploadController extends BaseController {
 		} else {
 			log.info("默认保存到/WebRoot/files/upload");
 			path = "files" + File.separator + "/upload";
+			pathType = "webRoot";
 		}
 		
 		List<UploadFile> files = getFiles(path, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding);

@@ -72,6 +72,18 @@
 </div>
 
 <div class="control-group">
+	<label class="control-label">头像</label>
+	<div class="controls">
+		<% if(!isEmpty(upload)){%>
+			<img alt="头像" src="${cxt!}/files/upload/${upload.filename!}" width="200" height="200">
+		<% } %>
+		<input type="file" class="span8" name="logo" value="" 
+			maxlength="1000" vMin="0" vType="valiImage" onblur="platform_verify.onblurVali(this);" placeholder="选择jpg、jpeg、png类型图片">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.password"]}</label>
 	<div class="controls">
 		<input type="password" id="pass1Id" name="password" class="span8" autocomplete="off"
