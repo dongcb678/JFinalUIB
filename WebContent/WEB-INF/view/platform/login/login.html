@@ -19,7 +19,15 @@
 <link rel="stylesheet" href="${cxt!}/ui/metrolab/css/style-responsive.css" />
 <link rel="stylesheet" href="${cxt!}/ui/metrolab/css/style-default.css" id="style_color" />
 
+<!-- start: artdialog -->
+<link rel="stylesheet" href="${cxt!}/jsfile/artdialog/css/ui-dialog.css" type="text/css"/>
+<!-- end: artdialog -->
+
 <script type="text/javascript" src="${cxt!}/jsfile/jquery/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript" src="${cxt!}/jsfile/metrolab/common/ajax.js"></script>
+<script type="text/javascript" src="${cxt!}/jsfile/artdialog/dist/dialog-min.js"></script>
+<script type="text/javascript" src="${cxt!}/jsfile/metrolab/common/modals.js"></script>
 
 <!-- start: common js -->
 <script type="text/javascript">
@@ -44,7 +52,7 @@
 		<!-- END LOGO -->
 	</div>
 
-	<form action="${cxt!}/platform/login/vali" method="post">
+	<form id="loginForm" action="${cxt!}/platform/login/vali" method="post">
 
 		<div class="login-wrap">
 			<div class="metro single-size red">
@@ -78,7 +86,7 @@
 				</div>
 			</div>
 			<div class="metro single-size terques login">
-				<button type="submit" class="btn login-btn">
+				<button type="button" onclick="submitFunc();" class="btn login-btn">
 					提交 <i class=" icon-long-arrow-right"></i>
 				</button>
 			</div>
@@ -120,6 +128,32 @@
 	</form>
 
 	<script type="text/javascript">
+
+		function showImage(node) {
+			var imageHtml = '<a href="javascript:void(0)" onclick="showImage(this);"><img id="yanZhengMa" src="${cxt!}/platform/authImg?rand=' + Math.random() + '" width="120" height="25"/></a>';
+			$(node).replaceWith(imageHtml);
+		}
+		
+		function submitFunc(){
+			// 验证账号是否存在
+			var userName = $("#login_username").val();
+			if (userName == "") {
+				common_modals.alert("请输入登录账号");
+				return;
+			}
+			/* 
+			var param = {"userName" : userName};
+			var result = common_ajax.ajaxFunc("/platform/login/valiUserName", param);
+			if(result == "true"){
+				common_modals.alert("输入账号不存在");
+				return;
+			} 
+			*/
+
+			// 提交表单
+			$("#loginForm").submit();
+		}
+
 		jQuery(document).ready(function() {
 			// 初始化页面焦点
 			var userName = $("#login_username");
@@ -140,17 +174,12 @@
 				var myEvent = event || window.event; //解决不同浏览器获取事件对象的差异
 				switch (myEvent.keyCode) {
 				case 13://回车事件
-					$("#login_submit").click();
+					submitFunc();
 					break;
 				}
 			});
 		});
 
-		function showImage(node) {
-			var imageHtml = '<a href="javascript:void(0)" onclick="showImage(this);"><img id="yanZhengMa" src="${cxt!}/platform/authImg?rand='
-					+ Math.random() + '" width="120" height="25"/></a>';
-			$(node).replaceWith(imageHtml);
-		}
 	</script>
 
 </body>

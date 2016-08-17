@@ -1,5 +1,17 @@
 var common_modals = function() {
 	"use strict";
+
+	/**
+	 * 操作提示弹出框
+	 */
+	var alert = function(content) {
+		var d = dialog({
+		    title: '操作提示',
+		    content: content
+		});
+		d.show();
+		return;
+	};
 	
 	/**
 	 * 删除多行数据
@@ -294,6 +306,7 @@ var common_modals = function() {
 	/**************************************		功能定制函数	end	***************************************************/	
 		
 	return {
+		alert : alert,
 		deleteOne : deleteOne,
 		deleteList : deleteList,
 		deptRadioDiaLog : deptRadioDiaLog,
