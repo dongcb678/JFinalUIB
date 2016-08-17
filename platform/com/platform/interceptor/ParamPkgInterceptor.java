@@ -77,7 +77,7 @@ public class ParamPkgInterceptor implements Interceptor {
 		
 		log.debug("********* 设置全局变量值到 request start *********");
 
-		// 封装Controller至父类baseController变量值
+		// 封装Controller至父类baseController变量值request
 		controllerClass = controller.getClass();
 		while (true) {
 			Field[] fields = controllerClass.getDeclaredFields();

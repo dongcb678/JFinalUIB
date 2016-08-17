@@ -426,13 +426,16 @@ public class AuthInterceptor implements Interceptor {
 	public static String getAuthCode(HttpServletRequest request, HttpServletResponse response){
 		// 1.获取cookie加密数据
 		String authCode = ToolWeb.getCookieValueByName(request, ConstantWebContext.request_authCode);
+		
 		// 2.获取验证码后清除客户端验证码信息
 		AuthInterceptor.setAuthCode(response, ""); 
+
+		// 3.解密数据
 		if (null != authCode && !authCode.equals("")) {
-			// 3.解密数据
 			authCode = ToolIDEA.decrypt(authCode);
 			return authCode;
 		}
+		
 		return null;
 	}
 
