@@ -19,6 +19,7 @@ import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ServicePlugin;
 import com.platform.tools.ToolDateTime;
+import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 
 /**
@@ -102,12 +103,19 @@ public class ParamPkgInterceptor implements Interceptor {
 	 */
 	private void splitPage(BaseController controller, String uri){
 		SplitPage splitPage = new SplitPage();
+		
+		// 设置分页请求uri
 		splitPage.setUri(uri);
-		// 分页查询参数分拣
+		
+		// 存储分页查询参数
 		Map<String, Object> queryParam = new HashMap<String, Object>();
+		
+		// 国际化相关参数
 		String localePram = controller.getAttr(ConstantWebContext.request_localePram);
 		queryParam.put(ConstantWebContext.request_localePram, localePram); // 设置国际化当前语言环境
 		queryParam.put(ConstantWebContext.request_i18nColumnSuffix, I18NPlugin.columnSuffix(localePram)); // 设置国际化动态列后缀
+		
+		// 分拣请求参数
 		Enumeration<String> paramNames = controller.getParaNames();
 		String name = null;
 		String value = null;
@@ -115,7 +123,8 @@ public class ParamPkgInterceptor implements Interceptor {
 		while (paramNames.hasMoreElements()) {
 			name = paramNames.nextElement();
 			value = controller.getPara(name);
-			if (name.startsWith(ConstantWebContext.request_query) && null != value && !value.trim().isEmpty()) {// 查询参数分拣
+			// 是否以_query.开头
+			if (name.startsWith(ConstantWebContext.request_query) && null != value && !value.trim().isEmpty()) {
 				log.debug("分页，查询参数：name = " + name + " value = " + value);
 				key = name.substring(7);
 				if(ToolString.regExpVali(key, ToolString.regExp_letter_5)){
@@ -127,25 +136,41 @@ public class ParamPkgInterceptor implements Interceptor {
 		}
 		splitPage.setQueryParam(queryParam);
 		
-		String orderColunm = controller.getPara(ConstantWebContext.request_orderColunm);// 排序条件
+		// 排序条件
+		String orderColunm = controller.getPara(ConstantWebContext.request_orderColunm);
 		if(null != orderColunm && !orderColunm.isEmpty()){
 			log.debug("分页，排序条件：orderColunm = " + orderColunm);
+			
+			if(ToolSqlXml.keywordVali(orderColunm)){
+				log.error("排序列包含不安全字符：" + orderColunm);
+				throw new RuntimeException("排序列包含不安全字符：" + orderColunm);
+			}
+			
 			splitPage.setOrderColunm(orderColunm);
 		}
 
-		String orderMode = controller.getPara(ConstantWebContext.request_orderMode);// 排序方式
+		// 排序方式
+		String orderMode = controller.getPara(ConstantWebContext.request_orderMode);
 		if(null != orderMode && !orderMode.isEmpty()){
 			log.debug("分页，排序方式：orderMode = " + orderMode);
+
+			if(ToolSqlXml.keywordVali(orderMode)){
+				log.error("排序方式包含不安全字符：" + orderMode);
+				throw new RuntimeException("排序方式包含不安全字符：" + orderMode);
+			}
+			
 			splitPage.setOrderMode(orderMode);
 		}
 
-		String pageNumber = controller.getPara(ConstantWebContext.request_pageNumber);// 第几页
+		// 第几页
+		String pageNumber = controller.getPara(ConstantWebContext.request_pageNumber);
 		if(null != pageNumber && !pageNumber.isEmpty()){
 			log.debug("分页，第几页：pageNumber = " + pageNumber);
 			splitPage.setPageNumber(Integer.parseInt(pageNumber));
 		}
 		
-		String pageSize = controller.getPara(ConstantWebContext.request_pageSize);// 每页显示几多
+		// 每页显示几多
+		String pageSize = controller.getPara(ConstantWebContext.request_pageSize);
 		if(null != pageSize && !pageSize.isEmpty()){
 			log.debug("分页，每页显示几多：pageSize = " + pageSize);
 			splitPage.setPageSize(Integer.parseInt(pageSize));

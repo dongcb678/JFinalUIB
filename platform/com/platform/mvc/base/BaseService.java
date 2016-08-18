@@ -217,7 +217,7 @@ public class BaseService {
 				log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
-			sqlSb.append(" '").append(id).append("', ");
+			sqlSb.append(" '").append(id).append("', "); 
 		}
 		
 		if(length != 0){
@@ -360,7 +360,7 @@ public class BaseService {
 	}
 
 	/**
-	 * 根据数据量计算分多少次批处理
+	 * 根据数据量计算分多少次批处理，自定义数据源
 	 * @param dataSource
 	 * @param sql
 	 * @param batchSize 每次数据多少条
@@ -375,6 +375,16 @@ public class BaseService {
 			batchCount = count / batchSize + 1;
 		}
 		return batchCount;
+	}
+	
+	/**
+	 * 根据数据量计算分多少次批处理，默认主数据源
+	 * @param sql
+	 * @param batchSize 每次数据多少条
+	 * @return
+	 */
+	public static long getBatchCount(String sql, int batchSize){
+		return getBatchCount(ConstantInit.db_dataSource_main, sql, batchSize);
 	}
 	
 }

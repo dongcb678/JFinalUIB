@@ -23,6 +23,7 @@ import com.platform.mvc.user.User;
 import com.platform.plugin.I18NPlugin;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolModelInjector;
+import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolWeb;
 
 /**
@@ -177,7 +178,10 @@ public abstract class BaseController extends Controller {
 	 */
 	@Override
 	public void renderFile(File file) {
-		getResponse().reset(); 
+		String userAgent = getRequest().getHeader("User-Agent");
+		if(userAgent.toLowerCase().indexOf("msie") != -1){
+			getResponse().reset(); 
+		}
 		super.renderFile(file);
 	}
 
@@ -186,7 +190,10 @@ public abstract class BaseController extends Controller {
 	 */
 	@Override
 	public void renderFile(File file, String downloadSaveFileName) {
-		getResponse().reset(); 
+		String userAgent = getRequest().getHeader("User-Agent");
+		if(userAgent.toLowerCase().indexOf("msie") != -1){
+			getResponse().reset(); 
+		}
 		super.renderFile(file, downloadSaveFileName);
 	}
 
@@ -359,6 +366,16 @@ public abstract class BaseController extends Controller {
 	 */
 	protected void defaultOrder(String colunm, String mode){
 		if(null == splitPage.getOrderColunm() || splitPage.getOrderColunm().isEmpty()){
+			if(ToolSqlXml.keywordVali(colunm)){
+				log.error("排序列包含不安全字符：" + colunm);
+				throw new RuntimeException("排序列包含不安全字符：" + colunm);
+			}
+			
+			if(ToolSqlXml.keywordVali(mode)){
+				log.error("排序方式包含不安全字符：" + mode);
+				throw new RuntimeException("排序方式包含不安全字符：" + mode);
+			}
+			
 			splitPage.setOrderColunm(colunm);
 			splitPage.setOrderMode(mode);
 		}
