@@ -34,11 +34,9 @@ public abstract class ToolSqlXml {
      * 加载关键字到List
      */
     static {
-    	String badStr = "'|and|exec|execute|insert|select|delete|update|count|drop|*|%|chr|mid|master|truncate|" +
-                "char|declare|sitename|net user|xp_cmdshell|;|or|-|+|,|like'|and|exec|execute|insert|create|drop|" +
-                "table|from|grant|use|group_concat|column_name|" +
-                "information_schema.columns|table_schema|union|where|select|delete|update|order|by|count|*|" +
-                "chr|mid|master|truncate|char|declare|or|;|-|--|+|,|like|//|/|%|#";
+    	String badStr = "and|exec|execute|insert|select|delete|update|count|drop|chr|mid|master|truncate|" +
+                "char|declare|sitename|net user|xp_cmdshell|like|like'|create|table|from|grant|use|group_concat|column_name|" +
+                "information_schema.columns|table_schema|union|where|order|by|'|*|%|;|or|-|+|,|--|//|/|#";
     	badKeyWordList.addAll(Arrays.asList(badStr.split("\\|")));
     }
     
