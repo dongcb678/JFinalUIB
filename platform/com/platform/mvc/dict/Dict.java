@@ -521,7 +521,8 @@ public class Dict extends BaseModelCache<Dict> {
 	public Dict cacheGet(String numbers){
 		Dict dict = ToolCache.get(ParamInitPlugin.cacheStart_dict + numbers);
 		if(dict == null){
-			dict = Dict.dao.findFirst("platform.dict.numbers", numbers);
+			String sql = getSql("platform.dict.numbers");
+			dict = Dict.dao.findFirst(sql, numbers);
 			cacheAdd(dict.getPKValue());
 		}
 		return dict;
@@ -536,7 +537,8 @@ public class Dict extends BaseModelCache<Dict> {
 		List<Dict> dictList = ToolCache.get(ParamInitPlugin.cacheStart_dict_child + numbers);
 		if(dictList == null){
 			Dict pDict = cacheGet(numbers);
-			dictList = Dict.dao.find("platform.param.child", pDict.getPKValue());
+			String sql = getSql("platform.param.child");
+			dictList = Dict.dao.find(sql, pDict.getPKValue());
 			cacheAdd(ids);
 		}
 		return dictList;
