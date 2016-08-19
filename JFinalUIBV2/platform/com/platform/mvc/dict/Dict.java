@@ -532,7 +532,7 @@ public class Dict extends BaseModelCache<Dict> {
 		List<Dict> dictList = ToolCache.get(ParamInitPlugin.cacheStart_dict_child + numbers);
 		if(dictList == null){
 			Dict pDict = cacheGet(numbers);
-			String sql = getSql("platform.param.child");
+			String sql = getSql("platform.dict.child");
 			dictList = Dict.dao.find(sql, pDict.getPKValue());
 			cacheAdd(ids);
 		}
