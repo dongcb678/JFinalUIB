@@ -512,7 +512,8 @@ public class Param extends BaseModelCache<Param> {
 	public Param cacheGet(String numbers){
 		Param param = ToolCache.get(ParamInitPlugin.cacheStart_param + numbers);
 		if(param == null){
-			param = Param.dao.findFirst("platform.param.numbers", numbers);
+			String sql = getSql("platform.param.numbers");
+			param = Param.dao.findFirst(sql, numbers);
 			cacheAdd(param.getPKValue());
 		}
 		return param;
@@ -527,7 +528,8 @@ public class Param extends BaseModelCache<Param> {
 		List<Param> paramList = ToolCache.get(ParamInitPlugin.cacheStart_param_child + numbers);
 		if(paramList == null){
 			Param pParam = cacheGet(numbers);
-			paramList = Param.dao.find("platform.param.child", pParam.getPKValue());
+			String sql = getSql("platform.param.child");
+			paramList = Param.dao.find(sql, pParam.getPKValue());
 			cacheAdd(ids);
 		}
 		return paramList;
