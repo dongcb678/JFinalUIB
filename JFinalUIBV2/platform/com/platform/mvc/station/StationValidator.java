@@ -3,9 +3,9 @@ package com.platform.mvc.station;
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
-import com.jfinal.validate.Validator;
+import com.platform.mvc.base.BaseValidator;
 
-public class StationValidator extends Validator {
+public class StationValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(StationValidator.class);

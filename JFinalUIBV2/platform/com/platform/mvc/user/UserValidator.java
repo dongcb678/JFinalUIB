@@ -5,11 +5,11 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
-import com.jfinal.validate.Validator;
+import com.platform.mvc.base.BaseValidator;
 import com.platform.tools.ToolDateTime;
 
 @SuppressWarnings({"unused", "deprecation"})
-public class UserValidator extends Validator {
+public class UserValidator extends BaseValidator {
 
 	private static Logger log = Logger.getLogger(UserValidator.class);
 	

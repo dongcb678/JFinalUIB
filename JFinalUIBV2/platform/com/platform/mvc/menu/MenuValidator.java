@@ -3,9 +3,9 @@ package com.platform.mvc.menu;
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
-import com.jfinal.validate.Validator;
+import com.platform.mvc.base.BaseValidator;
 
-public class MenuValidator extends Validator {
+public class MenuValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(MenuValidator.class);

@@ -1,13 +1,12 @@
 package com.test.mvc.blog;
 
+import org.apache.log4j.Logger;
+
+import com.jfinal.aop.Before;
 import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
-
-import org.apache.log4j.Logger;
-
-import com.jfinal.aop.Before;
 
 /**
  * XXX 管理	
