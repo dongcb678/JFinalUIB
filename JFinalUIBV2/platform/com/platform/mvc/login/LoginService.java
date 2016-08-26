@@ -162,7 +162,7 @@ public class LoginService extends BaseService {
 		int passErrorCount = PropKit.getInt(ConstantInit.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate(User.column_stopdate);
-			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
+			int hourSpace = ToolDateTime.getDateHourSpace(stopDate, ToolDateTime.getDate());
 			int passErrorHour = PropKit.getInt(ConstantInit.config_passErrorHour_key);
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
@@ -235,7 +235,7 @@ public class LoginService extends BaseService {
 		int passErrorCount = PropKit.getInt(ConstantInit.config_passErrorCount_key);
 		if(errorCount >= passErrorCount){
 			Date stopDate = user.getDate(User.column_stopdate);
-			int hourSpace = ToolDateTime.getDateHourSpace(ToolDateTime.getDate(), stopDate);
+			int hourSpace = ToolDateTime.getDateHourSpace(stopDate, ToolDateTime.getDate());
 			int passErrorHour = PropKit.getInt(ConstantInit.config_passErrorHour_key);
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
