@@ -3,9 +3,9 @@ package com.test.mvc.blog;
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
-import com.jfinal.validate.Validator;
+import com.platform.mvc.base.BaseValidator;
 
-public class BlogValidator extends Validator {
+public class BlogValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(BlogValidator.class);

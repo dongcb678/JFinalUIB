@@ -166,7 +166,12 @@ public abstract class ToolString {
 	 * 常用正则表达式：IP
 	 */
 	public final static String regExp_ip = "\\d+\\.\\d+\\.\\d+\\.\\d+";
-	
+
+	/**
+	 * 常用正则表达式：手机号
+	 */
+	public final static String regExp_mobile = "^0?(13[0-9]|15[012356789]|18[01236789]|14[57])[0-9]{8}$";
+		
 	/**
 	 * 字符编码
 	 */
