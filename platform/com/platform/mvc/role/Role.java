@@ -52,18 +52,6 @@ public class Role extends BaseModelCache<Role> {
 	public static final String column_names = "names";
 	
 	/**
-	 * 字段描述：拥有的功能ids 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_operatorids = "operatorids";
-	
-	/**
-	 * 字段描述：拥有的功能模块ids 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_moduleids = "moduleids";
-	
-	/**
 	 * 字段描述：编号 
 	 * 字段类型：character varying  长度：50
 	 */
@@ -109,8 +97,6 @@ public class Role extends BaseModelCache<Role> {
 	private Long version;
 	private String description;
 	private String names;
-	private String operatorids;
-	private String moduleids;
 	private String numbers;
 	
 	public void setIds(String ids){
@@ -136,18 +122,6 @@ public class Role extends BaseModelCache<Role> {
 	}
 	public String getNames() {
 		return get(column_names);
-	}
-	public void setOperatorids(String operatorids){
-		set(column_operatorids, operatorids);
-	}
-	public String getOperatorids() {
-		return get(column_operatorids);
-	}
-	public void setModuleids(String moduleids){
-		set(column_moduleids, moduleids);
-	}
-	public String getModuleids() {
-		return get(column_moduleids);
 	}
 	public void setNumbers(String numbers){
 		set(column_numbers, numbers);

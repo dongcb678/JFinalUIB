@@ -36,8 +36,44 @@
 	<!-- 查询根菜单，包含对应功能 -->
 	<sql id="operator">
 		<![CDATA[ 
-        	select m.${names}, o.url  from pt_menu m left join pt_operator o on m.operatorids=o.ids 
-        	where parentmenuids = ? and m.operatorids in ( ${fitler} ) order by orderids asc
+        	select 
+        		m.${names}, o.url  
+        	from 
+        		pt_menu m 
+        		left join pt_operator o on m.operatorids=o.ids 
+        	where 
+        		parentmenuids = ? 
+        		and (
+	        		m.operatorids in (  
+	        			select 
+			        		ro.operatorids 
+			        		
+			        	from 
+			        		pt_roleoperator ro
+			        		left join pt_grouprole gr on gr.roleids = ro.roleids
+			        		left join pt_usergroup ug on ug.groupids = gr.groupids
+			        		
+			        	where 
+			        		ug.userids = ?
+	        		) 
+	        		
+	        		or
+	        		
+	        		m.operatorids in (
+	        			select 
+			        		so.operatorids 
+			        		
+			        	from 
+			        		pt_stationoperator so
+			        		left join pt_station s on s.ids = so.stationids
+			        		left join pt_user u on u.stationids = s.ids
+			        		
+			        	where 
+			        		u.ids = ?
+	        		)
+        		)
+        	order by 
+        		orderids asc
     	]]>
 	</sql>
 	

@@ -25,9 +25,6 @@ public class StationController extends BaseController {
 	private String names;
 	private int orderIds;
 
-	private String moduleIds;
-	private String operatorIds;
-	
 	/**
 	 * 岗位首页tree
 	 */
@@ -69,22 +66,6 @@ public class StationController extends BaseController {
 		renderText(ids);
 	}
 
-	/**
-	 * 获取岗位对应的功能
-	 */
-	public void getOperator(){
-		Station station = Station.dao.findById(ids);
-		renderJson(station);
-	}
-
-	/**
-	 * 设置岗位对应的功能
-	 */
-	public void setOperator(){
-		stationService.setOperator(ids, moduleIds, operatorIds);
-		renderJson(ids);
-	}
-	
 }
 
 

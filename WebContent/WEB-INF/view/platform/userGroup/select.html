@@ -5,7 +5,10 @@
 		var option = sNode.options[index];
 		option.selected = false;
 		document.getElementById("checkedGroup").add(option);
-		setGroup();
+
+		var url = "/platform/userGroup/addGroup";
+		var data = { "ids" : "${escapeXml(ids!)}", "groupIds" : option.value };
+		var result = common_ajax.ajaxFunc(url, data);
 	}
 
 	function delChecked(sNode){
@@ -13,24 +16,12 @@
 		var option = sNode.options[index];
 		option.selected = false;
 		document.getElementById("allGroup").add(option);
-		setGroup();
-	}
-	
-	function setGroup(){
-		var userIds = "${escapeXml(ids!)}";
-		var groupIds = "";
 		
-		var checkedGroup = document.getElementById("checkedGroup");
-		var length = checkedGroup.length;
-		for (var i=0; i<length; i++){
-			groupIds += checkedGroup.options[i].value + ",";
-	    }
-
-		var url = "/platform/user/setGroup";
-		var data = { "ids" : userIds, "groupIds" : groupIds };
-
+		var url = "/platform/userGroup/delGroup";
+		var data = { "ids" : option.value };
 		var result = common_ajax.ajaxFunc(url, data);
 	}
+	
 </script>
 
 <div class="span3">
@@ -56,8 +47,8 @@
 	</div>
 	<div class="panel-body">
 		<select id="checkedGroup" ondblclick="delChecked(this);" multiple="multiple" size="5" style="height: 300px">
-			<% for(group in checkedList){ %>
-				<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
+			<% for(userGroup in checkedList){ %>
+				<option value='${escapeXml(userGroup.ids!)}'>${escapeXml(userGroup.gname!)}</option>
 			<% } %>
 	  	</select>
 	</div>

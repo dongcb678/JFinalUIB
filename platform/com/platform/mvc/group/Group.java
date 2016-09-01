@@ -51,12 +51,6 @@ public class Group extends BaseModelCache<Group> {
 	public static final String column_names = "names";
 	
 	/**
-	 * 字段描述：拥有的角色ids 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_roleids = "roleids";
-	
-	/**
 	 * 字段描述：编号 
 	 * 字段类型：character varying  长度：50
 	 */
@@ -74,29 +68,10 @@ public class Group extends BaseModelCache<Group> {
 	 */
 	public static final String sqlId_paging = "platform.group.paging";
 
-	/**
-	 * sqlId : platform.group.noCheckedFilter
-	 * 描述：用户分组选择：未选择
-	 */
-	public static final String sqlId_noCheckedFilter = "platform.group.noCheckedFilter";
-
-	/**
-	 * sqlId : platform.group.checkedFilter
-	 * 描述：用户分组选择：已选择
-	 */
-	public static final String sqlId_checkedFilter = "platform.group.checkedFilter";
-
-	/**
-	 * sqlId : platform.group.noChecked
-	 * 描述：用户分组选择：所有未选择
-	 */
-	public static final String sqlId_noChecked = "platform.group.noChecked";
-
 	private String ids;
 	private Long version;
 	private String description;
 	private String names;
-	private String roleids;
 	private String numbers;
 	
 	public void setIds(String ids){
@@ -122,12 +97,6 @@ public class Group extends BaseModelCache<Group> {
 	}
 	public String getNames() {
 		return get(column_names);
-	}
-	public void setRoleids(String roleids){
-		set(column_roleids, roleids);
-	}
-	public String getRoleids() {
-		return get(column_roleids);
 	}
 	public void setNumbers(String numbers){
 		set(column_numbers, numbers);

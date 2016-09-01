@@ -50,7 +50,13 @@ public class GenerateCode {
 //		{null, "pt_syslog", null, "SysLog"},
 //		{null, "pt_resources", null, "Resources"},
 //		{null, "pt_user", null, "User"},
-//		{null, "pt_userinfo", null, "UserInfo"}
+//		{null, "pt_userinfo", null, "UserInfo"},
+		
+//		{null, "pt_usergroup", null, "UserGroup"},
+//		{null, "pt_grouprole", null, "GroupRole"},
+//		{null, "pt_userstation", null, "UserStation"},
+//		{null, "pt_roleoperator", null, "RoleOperator"},
+//		{null, "pt_stationoperator", null, "StationOperator"}
 	};
 	
 	/**

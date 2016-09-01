@@ -141,10 +141,10 @@ public class ParamPkgInterceptor implements Interceptor {
 		if(null != orderColunm && !orderColunm.isEmpty()){
 			log.debug("分页，排序条件：orderColunm = " + orderColunm);
 			
-			if(ToolSqlXml.keywordVali(orderColunm)){
-				log.error("排序列包含不安全字符：" + orderColunm);
-				throw new RuntimeException("排序列包含不安全字符：" + orderColunm);
-			}
+//			if(ToolSqlXml.keywordVali(orderColunm)){
+//				log.error("排序列包含不安全字符：" + orderColunm);
+//				throw new RuntimeException("排序列包含不安全字符：" + orderColunm);
+//			}
 			
 			splitPage.setOrderColunm(orderColunm);
 		}
@@ -154,10 +154,10 @@ public class ParamPkgInterceptor implements Interceptor {
 		if(null != orderMode && !orderMode.isEmpty()){
 			log.debug("分页，排序方式：orderMode = " + orderMode);
 
-			if(ToolSqlXml.keywordVali(orderMode)){
-				log.error("排序方式包含不安全字符：" + orderMode);
-				throw new RuntimeException("排序方式包含不安全字符：" + orderMode);
-			}
+//			if(ToolSqlXml.keywordVali(orderMode)){
+//				log.error("排序方式包含不安全字符：" + orderMode);
+//				throw new RuntimeException("排序方式包含不安全字符：" + orderMode);
+//			}
 			
 			splitPage.setOrderMode(orderMode);
 		}

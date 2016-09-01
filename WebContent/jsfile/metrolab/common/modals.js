@@ -284,7 +284,7 @@ var common_modals = function() {
 	 * @param userIds
 	 */
 	var groupSelectDialog = function(userIds){
-		var url = "/platform/group/select";
+		var url = "/platform/userGroup/select";
 		var data = { "ids" : userIds};
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_group_select, result, "");
@@ -296,7 +296,7 @@ var common_modals = function() {
 	 * @param groupIds
 	 */
 	var roleSelectDialog = function (groupIds){
-		var url = "/platform/role/select";
+		var url = "/platform/groupRole/select";
 		var data = { "ids" : groupIds};
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_role_select, result, "");

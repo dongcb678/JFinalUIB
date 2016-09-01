@@ -20,5 +20,15 @@ public interface ConstantRender {
 	 * 解析sql和param的类型：freeMarker
 	 */
 	public static final String sql_renderType_freeMarker = "freeMarker";
+
+	/**
+	 * render success
+	 */
+	public static final String render_success = "success";
+
+	/**
+	 * render error
+	 */
+	public static final String render_error = "error";
 	
 }

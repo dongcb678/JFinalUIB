@@ -76,18 +76,6 @@ public class Station extends BaseModelCache<Station> {
 	public static final String column_parentstationids = "parentstationids";
 	
 	/**
-	 * 字段描述：拥有的功能ids 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_operatorids = "operatorids";
-	
-	/**
-	 * 字段描述：拥有的功能模块ids 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_moduleids = "moduleids";
-	
-	/**
 	 * sqlId : platform.station.paging
 	 * 描述：查询所有岗位
 	 */
@@ -119,8 +107,6 @@ public class Station extends BaseModelCache<Station> {
 	private String names;
 	private Long orderids;
 	private String parentstationids;
-	private String operatorids;
-	private String moduleids;
 	
 	public void setIds(String ids){
 		set(column_ids, ids);
@@ -169,18 +155,6 @@ public class Station extends BaseModelCache<Station> {
 	}
 	public String getParentstationids() {
 		return get(column_parentstationids);
-	}
-	public void setOperatorids(String operatorids){
-		set(column_operatorids, operatorids);
-	}
-	public String getOperatorids() {
-		return get(column_operatorids);
-	}
-	public void setModuleids(String moduleids){
-		set(column_moduleids, moduleids);
-	}
-	public String getModuleids() {
-		return get(column_moduleids);
 	}
 	
 	/**

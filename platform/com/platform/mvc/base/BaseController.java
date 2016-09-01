@@ -15,7 +15,9 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.render.JsonRender;
 import com.platform.constant.ConstantInit;
+import com.platform.constant.ConstantRender;
 import com.platform.constant.ConstantWebContext;
+import com.platform.dto.RenderBean;
 import com.platform.dto.SplitPage;
 import com.platform.interceptor.AuthInterceptor;
 import com.platform.mvc.syslog.Syslog;
@@ -198,6 +200,44 @@ public abstract class BaseController extends Controller {
 	}
 
 	/**
+	 * 自定义render
+	 * @param data 正常情况下返回的数据
+	 * 描述：公共render，所有的renderJson都必须返回RenderObject，包含处理状态、返回数据、失败下的状态码、失败描述
+	 */
+	public void renderSuccess(Object data) {
+		RenderBean renderBean = new RenderBean();
+		renderBean.setStatus(ConstantRender.render_success);
+		renderBean.setData(data);
+		renderJson(renderBean);
+	}
+
+	/**
+	 * 自定义render失败
+	 * @param description 错误描述
+	 * 描述：公共render，所有的renderJson都必须返回RenderObject，包含处理状态、返回数据、失败下的状态码、失败描述
+	 */
+	public void renderError(String description) {
+		RenderBean renderBean = new RenderBean();
+		renderBean.setStatus(ConstantRender.render_error);
+		renderBean.setDescription(description);
+		renderJson(renderBean);
+	}
+
+	/**
+	 * 自定义render失败
+	 * @param errorCode 错误码
+	 * @param description 错误描述
+	 * 描述：公共render，所有的renderJson都必须返回RenderObject，包含处理状态、返回数据、失败下的状态码、失败描述
+	 */
+	public void renderError(String errorCode, String description) {
+		RenderBean renderBean = new RenderBean();
+		renderBean.setStatus(ConstantRender.render_error);
+		renderBean.setErrorCode(errorCode);
+		renderBean.setDescription(description);
+		renderJson(renderBean);
+	}
+
+	/**
 	 * 表单数组映射List<Model>
 	 * @param modelClass
 	 * @return
@@ -366,15 +406,15 @@ public abstract class BaseController extends Controller {
 	 */
 	protected void defaultOrder(String colunm, String mode){
 		if(null == splitPage.getOrderColunm() || splitPage.getOrderColunm().isEmpty()){
-			if(ToolSqlXml.keywordVali(colunm)){
-				log.error("排序列包含不安全字符：" + colunm);
-				throw new RuntimeException("排序列包含不安全字符：" + colunm);
-			}
-			
-			if(ToolSqlXml.keywordVali(mode)){
-				log.error("排序方式包含不安全字符：" + mode);
-				throw new RuntimeException("排序方式包含不安全字符：" + mode);
-			}
+//			if(ToolSqlXml.keywordVali(colunm)){
+//				log.error("排序列包含不安全字符：" + colunm);
+//				throw new RuntimeException("排序列包含不安全字符：" + colunm);
+//			}
+//			
+//			if(ToolSqlXml.keywordVali(mode)){
+//				log.error("排序方式包含不安全字符：" + mode);
+//				throw new RuntimeException("排序方式包含不安全字符：" + mode);
+//			}
 			
 			splitPage.setOrderColunm(colunm);
 			splitPage.setOrderMode(mode);
@@ -419,6 +459,16 @@ public abstract class BaseController extends Controller {
 	 */
 	protected void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
 		baseService.paging(dataSource, splitPage, selectSqlId, fromSqlId);
+	}
+
+	/**
+	 * Distinct分页
+	 * @param splitPage			分页对象
+	 * @param sqlId				完整的分页sql语句
+	 * @param distinctSqlId		分页查询distinct语句，不包含from之后
+	 */
+	protected void pagingDistinct(SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
+		baseService.pagingDistinct(ConstantInit.db_dataSource_main, splitPage, selectSqlId, distinctSqlId, fromSqlId);
 	}
 
 	/**

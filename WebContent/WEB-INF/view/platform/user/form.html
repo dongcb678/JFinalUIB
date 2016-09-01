@@ -2,8 +2,8 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.department"]}</label>
 	<div class="controls">
-		<input type="hidden" id="deptId" name="user.departmentids" value="${escapeXml(user.departmentids!)}"/>
-		<input type="text" class="span8" id="deptName" name="user.departmentnames" value="${escapeXml(user.departmentnames!)}" 
+		<input type="hidden" id="deptId" name="user.departmentids" value="${escapeXml(dept.ids!)}"/>
+		<input type="text" class="span8" id="deptName" value="${escapeXml(dept.names!)}" 
 			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 		
 		<span class="help-inline"> 
@@ -16,8 +16,8 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.station"]}</label>
 	<div class="controls">
-		<input type="hidden" id="stationId" name="user.stationids" value="${escapeXml(user.stationids!)}"/>
-		<input type="text" class="span8" id="stationName" name="user.stationnames" value="${escapeXml(user.stationnames!)}" 
+		<input type="hidden" id="stationId" name="user.stationids" value="${escapeXml(station.ids!)}"/>
+		<input type="text" class="span8" id="stationName" value="${escapeXml(station.names!)}" 
 			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 		
 		<span class="help-inline"> 
@@ -27,6 +27,8 @@
 	</div>
 </div>
 
+<%
+/* 无用代码，暂存，多选用户，作为存储选择部门和人员的示例
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.dataAccess"]}</label>
 	<div class="controls">
@@ -43,6 +45,8 @@
 		</span>
 	</div>
 </div>
+*/
+%>
 
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>

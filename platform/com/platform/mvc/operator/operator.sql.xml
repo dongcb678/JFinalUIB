@@ -31,8 +31,19 @@
 	<!-- 获取模块根节点 -->
 	<sql id="rootModule">
 		<![CDATA[ 
-        	select pm.ids as ids, (select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, pm.isParent, pm.images 
-        	from pt_module pm where pm.parentModuleIds is null order by pm.orderIds asc
+        	select 
+        		pm.ids as ids, 
+        		(select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, 
+        		pm.isParent, pm.images 
+        		
+        	from 
+        		pt_module pm 
+        		
+        	where 
+        		pm.parentModuleIds is null 
+        		
+        	order by 
+        		pm.orderIds asc
     	]]>
 	</sql>
 	
@@ -77,7 +88,24 @@
         		pt_operator o
         		left join pt_module m on o.moduleids = m.ids
         		left join pt_systems s on s.ids = m.systemsids
+        	
         	where 1=1
+			
+			<% if(!isEmpty(sids)){ %>
+					and s.ids = #'$sids$'#
+			<% } %>
+			
+			<% if(!isEmpty(sname)){ %>
+					and s.names like #'%$sname$%'#
+			<% } %>
+			
+			<% if(!isEmpty(mids)){ %>
+					and m.ids = #'$mids$'#
+			<% } %>
+			
+			<% if(!isEmpty(mname)){ %>
+					and m.names like #'%$mname$%'#
+			<% } %>
 			
 			<% if(!isEmpty(names)){ %>
 					and o.names like #'%$names$%'#

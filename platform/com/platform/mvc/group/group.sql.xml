@@ -28,27 +28,6 @@
     	]]>
 	</sql>
 	
-	<!-- 用户分组选择：未选择 -->
-	<sql id="noCheckedFilter">
-		<![CDATA[ 
-        	select ids, names from pt_group where ids not in ( ${fitler} ) order by names asc
-    	]]>
-	</sql>
-	
-	<!-- 用户分组选择：已选择  -->
-	<sql id="checkedFilter">
-		<![CDATA[ 
-        	select ids, names from pt_group where ids in ( ${fitler} ) order by names asc
-    	]]>
-	</sql>
-	
-	<!-- 用户分组选择：所有未选择 -->
-	<sql id="noChecked">
-		<![CDATA[ 
-        	select ids, names from pt_group order by names asc
-    	]]>
-	</sql>
-	
 	<!-- 动态SQL处理 -->
 	<sql id="splitPageFrom">
 		<![CDATA[ 

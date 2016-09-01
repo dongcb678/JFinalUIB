@@ -118,7 +118,7 @@
 										<% } %>
 										
 										<% if(operator == true){ %>
-											<button type="button" class="btn btn-small btn-success" onclick="common_modals.setRoleOperatorDiaLog('${role.ids!}')">
+											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/platform/roleOperator?_query.roleIds=${escapeXml(role.ids!)}');">
 												<i class="icon-ok icon-white"></i>
 												${i18nMap["admin.role.list.table.operator"]}
 											</button> 

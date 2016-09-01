@@ -40,14 +40,14 @@ public class UserService extends BaseService {
 			user.set(User.column_salt, salt);
 			user.set(User.column_password, encryptedPassword);
 
-			// 保存用户信息
-			userInfo.save(pkIds);
-
 			// 保存用户
 			user.set(User.column_userinfoids, userInfo.getPKValue());
 			user.set(User.column_errorcount, 0);
 			user.set(User.column_status, "1");
 			user.save(pkIds);
+
+			// 保存用户扩展信息
+			userInfo.save(pkIds);
 
 			// 缓存
 			User.dao.cacheAdd(user.getPKValue());
@@ -61,7 +61,7 @@ public class UserService extends BaseService {
 	/**
 	 * 更新用户信息
 	 * @param user
-	 * @param passWord
+	 * @param password
 	 * @param userInfo
 	 */
 	@Before(Tx.class)
@@ -77,6 +77,8 @@ public class UserService extends BaseService {
 
 			// 更新用户
 			user.update();
+
+			// 更新用户扩展信息
 			userInfo.update();
 
 			// 缓存
@@ -104,20 +106,6 @@ public class UserService extends BaseService {
 			User.dao.deleteById(userIds);
 			UserInfo.dao.deleteById(userInfoIds);
 		}
-	}
-
-	/**
-	 * 设置用户所在的组
-	 * 
-	 * @param userIds
-	 * @param groupIds
-	 */
-	public void setGroup(String userIds, String groupIds) {
-		User user = User.dao.findById(userIds);
-		user.set(User.column_groupids, groupIds).update();
-
-		// 缓存
-		User.dao.cacheAdd(userIds);
 	}
 
 	/**

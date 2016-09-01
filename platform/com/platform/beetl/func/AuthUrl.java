@@ -6,6 +6,7 @@ import org.beetl.core.Function;
 
 import com.platform.constant.ConstantWebContext;
 import com.platform.interceptor.AuthInterceptor;
+import com.platform.mvc.operator.Operator;
 import com.platform.mvc.syslog.Syslog;
 
 /**
@@ -25,10 +26,20 @@ public class AuthUrl implements Function {
 			log.error("权限标签验证，参数不正确");
 			return false;
 		}
+		
 		String url = null;
+		String operatorIds = null;
 		String userIds = null;
+		
 		try {
 			url = (String) arg[0]; 
+			Object operatorObj = Operator.dao.cacheGet(url);
+			if (null == operatorObj) {
+				log.error("URI不存在!");
+			}
+			Operator operator = (Operator) operatorObj;
+			operatorIds = operator.getPKValue();
+			
 			Syslog reqSysLog = (Syslog) context.getGlobal(ConstantWebContext.reqSysLogKey);
 			userIds = reqSysLog.getStr(Syslog.column_userids);
 		} catch (Exception e) {
@@ -36,7 +47,7 @@ public class AuthUrl implements Function {
 			return false;
 		}
 		
-		boolean bool = AuthInterceptor.hasPrivilegeUrl(userIds, url);
+		boolean bool = AuthInterceptor.hasPrivilegeUrl(operatorIds, userIds);
 		
 		//log.debug("beetl HasPrivilegeUrl 权限标签验证：userIds=" + userIds + "，url=" + url + "，验证结果" + bool);
 		

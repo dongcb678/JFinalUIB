@@ -98,57 +98,9 @@ public class User extends BaseModelCache<User> {
 	
 	/**
 	 * 字段描述：所在岗位ids 
-	 * 字段类型：text  长度：null
+	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_stationids = "stationids";
-	
-	/**
-	 * 字段描述：行级部门ids 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_deptids = "deptids";
-	
-	/**
-	 * 字段描述：行级人员ids 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_userids = "userids";
-	
-	/**
-	 * 字段描述：所在分组ids 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_groupids = "groupids";
-	
-	/**
-	 * 字段描述：所在部门names 
-	 * 字段类型：character varying  长度：25
-	 */
-	public static final String column_departmentnames = "departmentnames";
-	
-	/**
-	 * 字段描述：所在岗位names 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_stationnames = "stationnames";
-	
-	/**
-	 * 字段描述：行级部门names 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_deptnames = "deptnames";
-	
-	/**
-	 * 字段描述：行级人员names 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_usernames = "usernames";
-	
-	/**
-	 * 字段描述：所在分组names 
-	 * 字段类型：text  长度：null
-	 */
-	public static final String column_groupnames = "groupnames";
 	
 	/**
 	 * sqlId : platform.user.splitPageSelect
@@ -204,13 +156,9 @@ public class User extends BaseModelCache<User> {
 	private String departmentids;
 	private String userinfoids;
 	private String stationids;
-	private String deptids;
-	private String userids;
 	private String groupids;
 	private String departmentnames;
 	private String stationnames;
-	private String deptnames;
-	private String usernames;
 	private String groupnames;
 	
 	public void setIds(String ids){
@@ -284,54 +232,6 @@ public class User extends BaseModelCache<User> {
 	}
 	public String getStationids() {
 		return get(column_stationids);
-	}
-	public void setDeptids(String deptids){
-		set(column_deptids, deptids);
-	}
-	public String getDeptids() {
-		return get(column_deptids);
-	}
-	public void setUserids(String userids){
-		set(column_userids, userids);
-	}
-	public String getUserids() {
-		return get(column_userids);
-	}
-	public void setGroupids(String groupids){
-		set(column_groupids, groupids);
-	}
-	public String getGroupids() {
-		return get(column_groupids);
-	}
-	public void setDepartmentnames(String departmentnames){
-		set(column_departmentnames, departmentnames);
-	}
-	public String getDepartmentnames() {
-		return get(column_departmentnames);
-	}
-	public void setStationnames(String stationnames){
-		set(column_stationnames, stationnames);
-	}
-	public String getStationnames() {
-		return get(column_stationnames);
-	}
-	public void setDeptnames(String deptnames){
-		set(column_deptnames, deptnames);
-	}
-	public String getDeptnames() {
-		return get(column_deptnames);
-	}
-	public void setUsernames(String usernames){
-		set(column_usernames, usernames);
-	}
-	public String getUsernames() {
-		return get(column_usernames);
-	}
-	public void setGroupnames(String groupnames){
-		set(column_groupnames, groupnames);
-	}
-	public String getGroupnames() {
-		return get(column_groupnames);
 	}
 	
 	/**

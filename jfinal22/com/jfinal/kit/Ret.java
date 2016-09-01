@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class Ret {
 	
-	private Map<Object, Object> data = new HashMap<Object, Object>();
+	private Map<String, Object> data = new HashMap<String, Object>();
 	
 	public Ret() {
 		
@@ -34,11 +34,11 @@ public class Ret {
 		return new Ret();
 	}
 	
-	public static Ret create(Object key, Object value) {
+	public static Ret create(String key, Object value) {
 		return new Ret().put(key, value);
 	}
 	
-	public Ret put(Object key, Object value) {
+	public Ret put(String key, Object value) {
 		data.put(key, value);
 		return this;
 	}
@@ -122,7 +122,7 @@ public class Ret {
 		return (T)data.remove(key);
 	}
 	
-	public Map<Object, Object> getData() {
+	public Map<String, Object> getData() {
 		return data;
 	}
 }

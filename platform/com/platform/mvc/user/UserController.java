@@ -10,6 +10,8 @@ import com.jfinal.upload.UploadFile;
 import com.platform.annotation.Controller;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
+import com.platform.mvc.dept.Department;
+import com.platform.mvc.station.Station;
 import com.platform.mvc.upload.Upload;
 import com.platform.mvc.upload.UploadService;
 import com.platform.tools.ToolRandoms;
@@ -26,9 +28,6 @@ public class UserController extends BaseController {
 	
 	private UserService userService;
 	private UploadService uploadService;
-	
-	private String deptIds;
-	private String groupIds;
 	
 	/**
 	 * 默认列表
@@ -47,7 +46,7 @@ public class UserController extends BaseController {
 		
 		List<UploadFile> files = getFiles("files" + File.separator + "upload", 1 * 1024 * 1024, ToolString.encoding); // 1M
 		uploadService.upload("webRoot", files.get(0), ids);
-		
+
 		String password = getPara("password");
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
@@ -63,7 +62,9 @@ public class UserController extends BaseController {
 	public void edit() {
 		User user = User.dao.findById(getPara());
 		setAttr("user", user);
-		setAttr("userInfo", UserInfo.dao.findById(user.getStr(User.column_userinfoids)));
+		setAttr("userInfo", UserInfo.dao.findById(user.getPKValue()));
+		setAttr("station", Station.dao.findById(user.getStationids()));
+		setAttr("dept", Department.dao.findById(user.getDepartmentids()));
 		setAttr("upload", Upload.dao.findById(user.getPKValue()));
 		render("/platform/user/update.html");
 	}
@@ -98,6 +99,8 @@ public class UserController extends BaseController {
 		User user = User.dao.findById(getPara());
 		setAttr("user", user);
 		setAttr("userInfo", user.getUserInfo());
+		setAttr("station", Station.dao.findById(user.getStationids()));
+		setAttr("dept", Department.dao.findById(user.getDepartmentids()));
 		setAttr("upload", Upload.dao.findById(user.getPKValue()));
 		render("/platform/user/view.html");
 	}
@@ -114,16 +117,8 @@ public class UserController extends BaseController {
 	 * 用户树ztree节点数据
 	 */
 	public void treeData() {
-		List<ZtreeNode> list = userService.childNodeData(getCxt(), deptIds);
+		List<ZtreeNode> list = userService.childNodeData(getCxt(), getPara("deptIds"));
 		renderJson(list);
-	}
-	
-	/**
-	 * 设置用户拥有的组
-	 */
-	public void setGroup(){
-		userService.setGroup(ids, groupIds);
-		renderText(ids);
 	}
 	
 	/**

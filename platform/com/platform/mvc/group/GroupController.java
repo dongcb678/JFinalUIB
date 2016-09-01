@@ -24,10 +24,6 @@ public class GroupController extends BaseController {
 	
 	private GroupService groupService;
 	
-	private List<Group> noCheckedList; // 用户不在的组
-	private List<Group> checkedList; // 用户所在的组
-	private String roleIds; // 组拥有的角色
-	
 	/**
 	 * 分组管理列表
 	 */
@@ -70,24 +66,6 @@ public class GroupController extends BaseController {
 		redirect("/platform/group");
 	}
 
-	/**
-	 * 人员分组弹出框
-	 */
-	@SuppressWarnings("unchecked")
-	public void select(){
-		Map<String,Object> map = groupService.select(ids);
-		noCheckedList = (List<Group>) map.get("noCheckedList");
-		checkedList = (List<Group>) map.get("checkedList");
-		render("/platform/group/select.html");
-	}
-	
-	/**
-	 * 设置分组对应的角色
-	 */
-	public void setRole(){
-		groupService.setRole(ids, roleIds);
-		renderText(ids);
-	}
 }
 
 

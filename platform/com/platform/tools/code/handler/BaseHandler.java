@@ -17,6 +17,7 @@ import java.util.Set;
 import org.beetl.core.BeetlKit;
 
 import com.jfinal.plugin.activerecord.DbKit;
+import com.platform.constant.ConstantInit;
 import com.platform.tools.code.run.ColumnDto;
 import com.platform.tools.code.run.GenerateCode;
 
@@ -66,7 +67,7 @@ public abstract class BaseHandler {
 	    ResultSet rs = null;
 	    
 		try {
-			conn = DbKit.getConfig().getConnection();
+			conn = DbKit.getConfig(ConstantInit.db_dataSource_main).getConnection();
 			st = conn.createStatement();    
 		    String sql = "select * from " + tableName + " where 1 != 1 ";   
 		    rs = st.executeQuery(sql);    

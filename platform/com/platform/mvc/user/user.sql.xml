@@ -71,7 +71,7 @@
 		<![CDATA[ 
         	from 
         		pt_user u 
-				left join pt_userinfo ui on u.userinfoids = ui.ids 
+				left join pt_userinfo ui on u.ids = ui.ids 
 				left join pt_department d on u.departmentids = d.ids 
 			
 			where 1=1 

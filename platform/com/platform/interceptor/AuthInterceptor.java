@@ -13,17 +13,16 @@ import org.apache.log4j.MDC;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.Db;
 import com.platform.constant.ConstantAuth;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantWebContext;
 import com.platform.mvc.base.BaseController;
-import com.platform.mvc.group.Group;
 import com.platform.mvc.operator.Operator;
-import com.platform.mvc.role.Role;
-import com.platform.mvc.station.Station;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
 import com.platform.tools.ToolDateTime;
+import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolWeb;
 import com.platform.tools.security.ToolIDEA;
 
@@ -83,7 +82,7 @@ public class AuthInterceptor implements Interceptor {
 
 		log.info("判断URI是否存在!");
 		if (null == operatorObj) {
-			log.info("URI不存在!");
+			log.info("URI不存在!uri = " + uri);
 
 			log.info("访问失败时保存日志!");
 			reqSysLog.set(Syslog.column_status, "0");// 失败
@@ -112,7 +111,7 @@ public class AuthInterceptor implements Interceptor {
 				return;
 			}
 
-			if (!hasPrivilegeUrl(user.getPKValue(), uri)) {// 权限验证
+			if (!hasPrivilegeUrl(operator.getPKValue(), user.getPKValue())) {// 权限验证
 				log.info("权限验证失败，没有权限!");
 
 				reqSysLog.set(Syslog.column_status, "0");// 失败
@@ -208,73 +207,31 @@ public class AuthInterceptor implements Interceptor {
 	}
 
 	/**
-	 * 判断用户是否拥有某个url的操作权限
+	 * 判断用户是否拥有某个功能的操作权限
 	 * 
+	 * @param operatorIds
 	 * @param userIds
-	 * @param url
 	 * @return
 	 */
-	public static boolean hasPrivilegeUrl(String userIds, String url) {
-		// 基于缓存查询operator
-		Operator operator = Operator.dao.cacheGet(url);
-		if (null == operator) {
-			log.error("URL缓存不存在：" + url);
-			return false;
-		}
-		if (operator.get(Operator.column_privilegess).equals("0")) {
-			log.error("URL不需要权限验证：" + url);
-			return false;
-		}
-
-		// 基于缓存查询user
-		Object userObj = User.dao.cacheGet(userIds);
-		if (null == userObj) {
-			log.error("用户缓存不存在：" + userIds);
-			return false;
-		}
-		User user = (User) userObj;
-
-		// 权限验证对象
-		String operatorIds = operator.getPKValue() + ",";
-		String groupIds = user.getStr(User.column_groupids);
-		String stationIds = user.getStr(User.column_stationids);
-
-		// 根据分组查询权限
-		if (null != groupIds) {
-			String[] groupIdsArr = groupIds.split(",");
-			for (String groupIdsTemp : groupIdsArr) {
-				Group group = Group.dao.cacheGet(groupIdsTemp);
-				String roleIdsStr = group.getStr(Group.column_roleids);
-				if (null == roleIdsStr || roleIdsStr.equals("")) {
-					continue;
-				}
-				String[] roleIdsArr = roleIdsStr.split(",");
-				for (String roleIdsTemp : roleIdsArr) {
-					Role role = Role.dao.cacheGet(roleIdsTemp);
-					String operatorIdsStr = role.getStr(Role.column_operatorids);
-					if (operatorIdsStr.indexOf(operatorIds) != -1) {
-						return true;
-					}
-				}
-			}
+	public static boolean hasPrivilegeUrl(String operatorIds, String userIds) {
+		return true;
+		/*
+		// 根据分组角色查询权限
+		String roleSql = ToolSqlXml.getSql("platform.roleOperator.hasUrlByOperatorAndUserIds");
+		long roleCount = Db.use(ConstantInit.db_dataSource_main).queryNumber(roleSql, operatorIds, userIds).longValue();
+		if (roleCount > 0) {
+			return true;
 		}
 
 		// 根据岗位查询权限
-		if (null != stationIds) {
-			String[] stationIdsArr = stationIds.split(",");
-			for (String ids : stationIdsArr) {
-				Station station = Station.dao.cacheGet(ids);
-				String operatorIdsStr = station.getStr(Station.column_operatorids);
-				if (null == operatorIdsStr || operatorIdsStr.equals("")) {
-					continue;
-				}
-				if (operatorIdsStr.indexOf(operatorIds) != -1) {
-					return true;
-				}
-			}
+		String stationSql = ToolSqlXml.getSql("platform.stationOperator.hasUrlByOperatorAndUserIds");
+		long stationCount = Db.use(ConstantInit.db_dataSource_main).queryNumber(stationSql, operatorIds, userIds).longValue();
+		if (stationCount > 0) {
+			return true;
 		}
 
 		return false;
+		*/
 	}
 
 	/**
