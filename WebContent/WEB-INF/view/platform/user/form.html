@@ -51,7 +51,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" id="idcardId" name="userInfo.idcard" value="${escapeXml(userInfo.idcard!)}"
+		<input type="text" class="span8" id="idcardId" name="user.idcard" value="${escapeXml(user.idcard!)}"
 			maxlength="18" vMin="15" vType="idCard" onblur="platform_verify.onblurVali(this);" placeholder="15-18位字母数字">
 		<span class="help-inline"></span>
 	</div>
@@ -110,7 +110,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" id="mailboxId" name="userInfo.email" value="${escapeXml(userInfo.email!)}" 
+		<input type="text" class="span8" id="mailboxId" name="user.email" value="${escapeXml(user.email!)}" 
 			maxlength="30" vMin="6" vType="email" onblur="platform_verify.onblurVali(this);" placeholder="6-30位邮箱规则">
 		<span class="help-inline"> </span>
 	</div>
@@ -119,7 +119,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" id="mobileId" name="userInfo.mobile" value="${escapeXml(userInfo.mobile!)}" 
+		<input type="text" class="span8" id="mobileId" name="user.mobile" value="${escapeXml(user.mobile!)}" 
 			maxlength="11" vMin="11" vType="phone" onblur="platform_verify.onblurVali(this);" placeholder="11位数字">
 		<span class="help-inline"> </span>
 	</div>
