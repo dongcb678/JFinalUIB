@@ -81,8 +81,10 @@ public class ToolPbkdf2 {
 	public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		String pass = "000000";
 		byte[] salt = generateSalt();
+//		String saltStr = Base64.encodeBase64String(salt);
 
 		byte[] encryptedPassword = getEncryptedPassword(pass, salt);
+//		String encryptedPasswordStr = Base64.encodeBase64String(encryptedPassword);
 
 		boolean bool = authenticate(pass, encryptedPassword, salt);
 		System.out.println(bool);

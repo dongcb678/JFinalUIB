@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2016-09-02 16:22:02
+Date: 2016-09-02 17:16:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -995,8 +995,8 @@ CREATE TABLE `pt_user` (
   `version` bigint(20) DEFAULT NULL,
   `errorcount` bigint(20) DEFAULT NULL,
   `orderids` bigint(20) DEFAULT NULL,
-  `password` blob,
-  `salt` blob,
+  `password` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `salt` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `status` char(1) COLLATE utf8_bin DEFAULT NULL,
   `stopdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `username` varchar(50) COLLATE utf8_bin DEFAULT NULL,
@@ -1005,6 +1005,7 @@ CREATE TABLE `pt_user` (
   `email` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `idcard` varchar(25) COLLATE utf8_bin DEFAULT NULL,
   `mobile` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `names` varchar(25) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ids`),
   KEY `usernameindex` (`username`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -1012,7 +1013,7 @@ CREATE TABLE `pt_user` (
 -- ----------------------------
 -- Records of pt_user
 -- ----------------------------
-INSERT INTO `pt_user` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '0', '0', 0xF1F086AE167055D1183C2CF37EEB10EF41EFFCD6, 0x87FFE243576B1A8C, '1', '2016-09-02 16:20:13', 'admins', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'dongcb678@163.com', '420881198609283721', '13871558042');
+INSERT INTO `pt_user` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '0', '0', 'GKw78xJqQ9aBY31IaojrIDtVBpY=', 'DdDxMWSgtsQ=', '1', '2016-09-02 17:14:59', 'admins', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'dongcb678@163.com', '420881198609283721', '13871558042', '管理员');
 
 -- ----------------------------
 -- Table structure for `pt_usergroup`
@@ -1054,7 +1055,6 @@ CREATE TABLE `pt_userinfo` (
   `householder` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `marriage` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `msn` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  `names` varchar(25) COLLATE utf8_bin DEFAULT NULL,
   `nativityaddress` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `postboy` varchar(6) COLLATE utf8_bin DEFAULT NULL,
   `qq` varchar(20) COLLATE utf8_bin DEFAULT NULL,
@@ -1075,7 +1075,7 @@ CREATE TABLE `pt_userinfo` (
 -- ----------------------------
 -- Records of pt_userinfo
 -- ----------------------------
-INSERT INTO `pt_userinfo` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '湖北钟祥', null, '55', '2012-03-07', 'bloodGroup_A', '2015-03-26 19:16:26', '2014-06-09 11:21:13', 'wenHuaChenDu_chuZhong', '湖北钟祥', '2010-10-25', 'folk_han', 'government_dangYuan', 'http://www.4bu4.com', '湖北钟祥', 'marriage_no', null, '董华健', '湖北钟祥', '431924', '150584428', '西安外事学院', 'man', '电子商务', '165', '027-65155060');
+INSERT INTO `pt_userinfo` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '湖北钟祥', null, '55', '2012-03-07', 'bloodGroup_A', '2015-03-26 19:16:26', '2014-06-09 11:21:13', 'wenHuaChenDu_chuZhong', '湖北钟祥', '2010-10-25', 'folk_han', 'government_dangYuan', 'http://www.4bu4.com', '湖北钟祥', 'marriage_no', null, '湖北钟祥', '431924', '150584428', '西安外事学院', 'man', '电子商务', '165', '027-65155060');
 
 -- ----------------------------
 -- Table structure for `test_blog`

@@ -139,12 +139,6 @@ public class UserInfo extends BaseModel<UserInfo> {
 	public static final String column_msn = "msn";
 	
 	/**
-	 * 字段描述：名称 
-	 * 字段类型：character varying  长度：25
-	 */
-	public static final String column_names = "names";
-	
-	/**
 	 * 字段描述：出生地 
 	 * 字段类型：character varying  长度：20
 	 */
@@ -216,7 +210,6 @@ public class UserInfo extends BaseModel<UserInfo> {
 	private String householder;
 	private String marriage;
 	private String msn;
-	private String names;
 	private String nativityaddress;
 	private String postboy;
 	private String qq;
@@ -333,12 +326,6 @@ public class UserInfo extends BaseModel<UserInfo> {
 	}
 	public String getMsn() {
 		return get(column_msn);
-	}
-	public void setNames(String names){
-		set(column_names, names);
-	}
-	public String getNames() {
-		return get(column_names);
 	}
 	public void setNativityaddress(String nativityaddress){
 		set(column_nativityaddress, nativityaddress);

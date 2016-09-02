@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
 import com.jfinal.kit.PropKit;
@@ -145,8 +146,10 @@ public class LoginService extends BaseService {
 		}
 
 		// 4.验证密码
-		byte[] salt = user.getBytes(User.column_salt);// 密码盐
-		byte[] encryptedPassword = user.getBytes(User.column_password);
+		String saltStr = user.getSalt();			// 密码盐
+		byte[] salt = Base64.decodeBase64(saltStr);
+		String passStr = user.getPassword();		// 密码
+		byte[] encryptedPassword = Base64.decodeBase64(passStr);
 		boolean bool = false;
 		try {
 			bool = ToolPbkdf2.authenticate(passWord, encryptedPassword, salt);
@@ -208,8 +211,10 @@ public class LoginService extends BaseService {
 		}
 
 		// 4.验证密码
-		byte[] salt = user.getBytes(User.column_salt);// 密码盐
-		byte[] encryptedPassword = user.getBytes(User.column_password);
+		String saltStr = user.getSalt();			// 密码盐
+		byte[] salt = Base64.decodeBase64(saltStr);
+		String passStr = user.getPassword();		// 密码
+		byte[] encryptedPassword = Base64.decodeBase64(passStr);
 		boolean bool = false;
 		try {
 			bool = ToolPbkdf2.authenticate(passWord, encryptedPassword, salt);

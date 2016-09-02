@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
@@ -37,8 +38,8 @@ public class UserService extends BaseService {
 			// 密码加密
 			byte[] salt = ToolPbkdf2.generateSalt();// 密码盐
 			byte[] encryptedPassword = ToolPbkdf2.getEncryptedPassword(password, salt);
-			user.set(User.column_salt, salt);
-			user.set(User.column_password, encryptedPassword);
+			user.set(User.column_salt, Base64.encodeBase64String(salt));
+			user.set(User.column_password, Base64.encodeBase64String(encryptedPassword));
 
 			// 保存用户
 			user.set(User.column_errorcount, 0);
@@ -69,9 +70,10 @@ public class UserService extends BaseService {
 			// 密码加密
 			if (null != password && !password.trim().equals("")) {
 				User oldUser = User.dao.findById(user.getPKValue());
-				byte[] salt = oldUser.getBytes(User.column_salt);// 密码盐
+				String saltStr = oldUser.getSalt();// 密码盐
+				byte[] salt = Base64.decodeBase64(saltStr);
 				byte[] encryptedPassword = ToolPbkdf2.getEncryptedPassword(password, salt);
-				user.set(User.column_password, encryptedPassword);
+				user.set(User.column_password, Base64.encodeBase64String(encryptedPassword));
 			}
 
 			// 更新用户
@@ -173,7 +175,8 @@ public class UserService extends BaseService {
 			param.put("column", User.column_username);
 			String sql = getSqlByBeetl(User.sqlId_column, param);
 			User user = User.dao.findFirst(sql, userName);
-			byte[] salt = user.getBytes(User.column_salt);// 密码盐
+			String saltStr = user.getSalt();// 密码盐
+			byte[] salt = Base64.decodeBase64(saltStr);
 			byte[] encryptedPassword = user.getBytes(User.column_password);
 			boolean bool = ToolPbkdf2.authenticate(passWord, encryptedPassword, salt);
 			if (bool) {
@@ -200,8 +203,10 @@ public class UserService extends BaseService {
 			User user = User.dao.findFirst(sql, userName);
 			
 			// 验证密码
-			byte[] salt = user.getBytes(User.column_salt);// 密码盐
-			byte[] encryptedPassword = user.getBytes(User.column_password);
+			String saltStr = user.getSalt();			// 密码盐
+			byte[] salt = Base64.decodeBase64(saltStr);
+			String passStr = user.getPassword();		// 密码
+			byte[] encryptedPassword = Base64.decodeBase64(passStr);
 			boolean bool = false;
 			try {
 				bool = ToolPbkdf2.authenticate(passOld, encryptedPassword, salt);
@@ -213,8 +218,8 @@ public class UserService extends BaseService {
 			if (bool) {
 				byte[] saltNew = ToolPbkdf2.generateSalt();// 密码盐
 				byte[] encryptedPasswordNew = ToolPbkdf2.getEncryptedPassword(passNew, saltNew);
-				user.set(User.column_salt, saltNew);
-				user.set(User.column_password, encryptedPasswordNew);
+				user.set(User.column_salt, Base64.encodeBase64String(saltNew));
+				user.set(User.column_password, Base64.encodeBase64String(encryptedPasswordNew));
 				// 更新用户
 				user.update();
 				// 缓存

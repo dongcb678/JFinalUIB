@@ -58,13 +58,13 @@ public class User extends BaseModel<User> {
 	
 	/**
 	 * 字段描述：密码 
-	 * 字段类型：bytea  长度：null
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_password = "password";
 	
 	/**
 	 * 字段描述：密钥 
-	 * 字段类型：bytea  长度：null
+	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_salt = "salt";
 	
@@ -85,6 +85,12 @@ public class User extends BaseModel<User> {
 	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_username = "username";
+
+	/**
+	 * 字段描述：名称 
+	 * 字段类型：character varying  长度：25
+	 */
+	public static final String column_names = "names";
 	
 	/**
 	 * 字段描述：所在部门ids 
@@ -162,11 +168,12 @@ public class User extends BaseModel<User> {
 	private Long version;
 	private Long errorcount;
 	private Long orderids;
-	private byte[] password;
-	private byte[] salt;
+	private String password;
+	private String salt;
 	private String status;
 	private Timestamp stopdate;
 	private String username;
+	private String names;
 	private String departmentids;
 	private String stationids;
 	private String groupids;
@@ -198,16 +205,16 @@ public class User extends BaseModel<User> {
 	public Long getOrderids() {
 		return get(column_orderids);
 	}
-	public void setPassword(byte[] password){
+	public void setPassword(String password){
 		set(column_password, password);
 	}
-	public byte[] getPassword() {
+	public String getPassword() {
 		return get(column_password);
 	}
-	public void setSalt(byte[] salt){
+	public void setSalt(String salt){
 		set(column_salt, salt);
 	}
-	public byte[] getSalt() {
+	public String getSalt() {
 		return get(column_salt);
 	}
 	public void setStatus(String status){
@@ -227,6 +234,12 @@ public class User extends BaseModel<User> {
 	}
 	public String getUsername() {
 		return get(column_username);
+	}
+	public void setNames(String names){
+		set(column_names, names);
+	}
+	public String getNames() {
+		return get(column_names);
 	}
 	public void setDepartmentids(String departmentids){
 		set(column_departmentids, departmentids);

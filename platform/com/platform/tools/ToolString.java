@@ -204,10 +204,16 @@ public abstract class ToolString {
 	 * @return String 编码数据
 	 * @throws Exception
 	 */
-	public static String encode(String data) throws Exception {
-		// 执行编码
-		byte[] b = Base64.encodeBase64URLSafe(data.getBytes(encoding));
-		return new String(b, encoding);
+	public static String encode(String data) {
+		String str = null;
+		try {
+			// 执行编码
+			byte[] b = Base64.encodeBase64URLSafe(data.getBytes(encoding));
+			str = new String(b, encoding);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return str;
 	}
 
 	/**
@@ -218,10 +224,17 @@ public abstract class ToolString {
 	 * @return String 解码数据
 	 * @throws Exception
 	 */
-	public static String decode(String data) throws Exception {
-		// 执行解码
-		byte[] b = Base64.decodeBase64(data.getBytes(encoding));
-		return new String(b, encoding);
+	public static String decode(String data) {
+		String str = null;
+		try {
+			// 执行解码
+			byte[] b = Base64.decodeBase64(data.getBytes(encoding));
+			str = new String(b, encoding);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return str;
 	}
 
 	/**

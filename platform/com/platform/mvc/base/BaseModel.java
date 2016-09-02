@@ -282,12 +282,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		if(hasVersion){// 是否需要乐观锁控制，表是否有version字段
 			Set<String> modifyFlag = null;
 			try {
-				Field field = null;
-				if(this.getClass().getSuperclass().getName().endsWith("BaseModel")){
-					field = this.getClass().getSuperclass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
-				}else{
-					field = this.getClass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
-				}
+				Field field = this.getClass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
 				field.setAccessible(true);
 				Object object = field.get(this);
 				if(null != object){
