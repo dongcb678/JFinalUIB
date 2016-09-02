@@ -25,7 +25,6 @@ import com.platform.mvc.user.User;
 import com.platform.plugin.I18NPlugin;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolModelInjector;
-import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolWeb;
 
 /**
