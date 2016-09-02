@@ -19,7 +19,6 @@ import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ServicePlugin;
 import com.platform.tools.ToolDateTime;
-import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 
 /**
@@ -61,7 +60,7 @@ public class ParamPkgInterceptor implements Interceptor {
 		
 		// 是否需要分页
 		String operatorIds = controller.getReqSysLog().getStr(Syslog.column_operatorids);
-		String splitpage = Operator.dao.cacheGet(operatorIds).getStr(Operator.column_splitpage);
+		String splitpage = Operator.cacheGet(operatorIds).getStr(Operator.column_splitpage);
 		if(splitpage.equals("1")){
 			String uri = invoc.getActionKey(); // 默认就是ActionKey
 			String urlPara = controller.getUrlPara();

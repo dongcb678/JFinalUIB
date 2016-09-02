@@ -23,7 +23,6 @@ public class GroupService extends BaseService {
 		group.save();
 		
 		// 缓存
-		Group.dao.cacheAdd(group.getPKValue());
 		
 		return group.getPKValue();
 	}
@@ -37,7 +36,6 @@ public class GroupService extends BaseService {
 		group.update();
 
 		// 缓存
-		Group.dao.cacheAdd(group.getPKValue());
 	}
 
 	/**
@@ -48,7 +46,6 @@ public class GroupService extends BaseService {
 		String[] idsArr = splitByComma(ids);
 		for (String groupIds : idsArr) {
 			// 缓存
-			Group.dao.cacheRemove(groupIds);
 			
 			// 删除
 			Group.dao.deleteById(groupIds);

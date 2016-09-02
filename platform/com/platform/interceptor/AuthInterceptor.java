@@ -3,6 +3,7 @@ package com.platform.interceptor;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,16 +14,17 @@ import org.apache.log4j.MDC;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.kit.PropKit;
-import com.jfinal.plugin.activerecord.Db;
 import com.platform.constant.ConstantAuth;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantWebContext;
 import com.platform.mvc.base.BaseController;
+import com.platform.mvc.grouprole.GroupRoleService;
 import com.platform.mvc.operator.Operator;
+import com.platform.mvc.stationoperator.StationOperatorService;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
+import com.platform.mvc.usergroup.UserGroup;
 import com.platform.tools.ToolDateTime;
-import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolWeb;
 import com.platform.tools.security.ToolIDEA;
 
@@ -78,10 +80,10 @@ public class AuthInterceptor implements Interceptor {
 		}
 
 		log.info("获取URI对象!");
-		Object operatorObj = Operator.dao.cacheGet(uri);
+		Operator operator = Operator.cacheGet(uri);
 
 		log.info("判断URI是否存在!");
-		if (null == operatorObj) {
+		if (null == operator) {
 			log.info("URI不存在!uri = " + uri);
 
 			log.info("访问失败时保存日志!");
@@ -95,7 +97,6 @@ public class AuthInterceptor implements Interceptor {
 		}
 
 		log.info("URI存在!");
-		Operator operator = (Operator) operatorObj;
 		reqSysLog.set(Syslog.column_operatorids, operator.getPKValue());
 
 		if (operator.get(Operator.column_privilegess).equals("1")) {// 是否需要权限验证
@@ -214,6 +215,10 @@ public class AuthInterceptor implements Interceptor {
 	 * @return
 	 */
 	public static boolean hasPrivilegeUrl(String operatorIds, String userIds) {
+		
+		/**  
+		 * 1.直接查询数据库表验证操作权限
+		 * 
 		// 根据分组角色查询权限
 		String roleSql = ToolSqlXml.getSql("platform.roleOperator.hasUrlByOperatorAndUserIds");
 		long roleCount = Db.use(ConstantInit.db_dataSource_main).queryNumber(roleSql, operatorIds, userIds).longValue();
@@ -227,7 +232,34 @@ public class AuthInterceptor implements Interceptor {
 		if (stationCount > 0) {
 			return true;
 		}
-
+		**/
+		
+		/**
+		 * 2.取缓存验证操作权限
+		 **/
+		
+		// 根据分组角色查询权限
+		User user = User.cacheGet(userIds);
+		List<UserGroup> ugList = user.get("ugList");
+		for (UserGroup ug : ugList) {
+			String groupIds = ug.getGroupids();
+			List<Operator> oList = GroupRoleService.cacheGet(groupIds);
+			for (Operator operator : oList) {
+				if(operatorIds.equals(operator.getPKValue())){
+					return true;
+				}
+			}
+		}
+		
+		// 根据岗位查询权限
+		String stationIds = user.getStationids();
+		List<Operator> oList = StationOperatorService.cacheGet(stationIds);
+		for (Operator operator : oList) {
+			if(operatorIds.equals(operator.getPKValue())){
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
@@ -314,11 +346,7 @@ public class AuthInterceptor implements Interceptor {
 				}
 				
 				// 返回用户数据
-				Object userObj = User.dao.cacheGet(userIds);
-				if (null != userObj) {
-					User user = (User) userObj;
-					return user;
-				}
+				return User.cacheGet(userIds);
 			}
 		}
 

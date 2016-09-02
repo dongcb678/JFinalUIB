@@ -39,7 +39,7 @@ public class BaseService {
 	 * @param param
 	 * @return
 	 */
-	public <T> List<T> query(String sqlId, Map<String, Object> param){
+	public static <T> List<T> query(String sqlId, Map<String, Object> param){
 		LinkedList<Object> paramValue = new LinkedList<Object>();
 		String sql = getSqlByBeetl(sqlId, param, paramValue);
 		return Db.query(sql, paramValue.toArray());
@@ -51,7 +51,7 @@ public class BaseService {
 	 * @param param
 	 * @return
 	 */
-	public List<Record> find(String sqlId, Map<String, Object> param){
+	public static List<Record> find(String sqlId, Map<String, Object> param){
 		LinkedList<Object> paramValue = new LinkedList<Object>();
 		String sql = getSqlByBeetl(sqlId, param, paramValue);
 		return Db.find(sql, paramValue.toArray());
@@ -63,7 +63,7 @@ public class BaseService {
 	 * @param param
 	 * @return
 	 */
-	public int update(String sqlId, Map<String, Object> param){
+	public static int update(String sqlId, Map<String, Object> param){
 		LinkedList<Object> paramValue = new LinkedList<Object>();
 		String sql = getSqlByBeetl(sqlId, param, paramValue);
 		return Db.update(sql, paramValue.toArray());
@@ -77,7 +77,7 @@ public class BaseService {
 	 * @param fromSqlId		from之后
 	 */
 	@SuppressWarnings("unchecked")
-	public void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
+	public static void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
 		String selectSql = getSqlByBeetl(selectSqlId, splitPage.getQueryParam());
 		
 		Map<String, Object> map = getFromSql(splitPage, fromSqlId);
@@ -101,7 +101,7 @@ public class BaseService {
 	 * @param fromSqlId			from之后
 	 */
 	@SuppressWarnings("unchecked")
-	public void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
+	public static void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
 		String selectSql = getSqlByBeetl(selectSqlId, splitPage.getQueryParam());
 		
 		String distinctSql = getSqlByBeetl(distinctSqlId, splitPage.getQueryParam());
@@ -124,7 +124,7 @@ public class BaseService {
 	 * @param sqlId
 	 * @return
 	 */
-	private Map<String, Object> getFromSql(SplitPage splitPage, String sqlId){
+	private static Map<String, Object> getFromSql(SplitPage splitPage, String sqlId){
 		// 接收返回值对象
 		StringBuilder formSqlSb = new StringBuilder();
 		LinkedList<Object> paramValue = new LinkedList<Object>();
@@ -132,9 +132,6 @@ public class BaseService {
 		// 调用生成from sql，并构造paramValue
 		String sql = getSqlByBeetl(sqlId, splitPage.getQueryParam(), paramValue);
 		formSqlSb.append(sql);
-		
-		// 行级：过滤，暂未做实现
-		rowFilter(formSqlSb);
 		
 		// 排序
 		String orderColunm = splitPage.getOrderColunm();
@@ -157,7 +154,7 @@ public class BaseService {
      * @param sqlId
      * @return
      */
-	public String getSql(String sqlId){
+	public static String getSql(String sqlId){
 		return ToolSqlXml.getSql(sqlId);
 	}
 
@@ -167,7 +164,7 @@ public class BaseService {
      * @param param
      * @return
      */
-	public String getSqlByBeetl(String sqlId, Map<String, Object> param){
+	public static String getSqlByBeetl(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
     }
     
@@ -178,7 +175,7 @@ public class BaseService {
      * @param list 用于接收预处理的值
      * @return
      */
-	public String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
+	public static String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
@@ -187,7 +184,7 @@ public class BaseService {
 	 * @param ids
 	 * @return
 	 */
-	public String sqlIn(String ids){
+	public  static String sqlIn(String ids){
 		if(null == ids || ids.trim().isEmpty()){
 			return null;
 		}
@@ -202,7 +199,7 @@ public class BaseService {
 	 * @param ids
 	 * @return
 	 */
-	public String sqlIn(String[] idsArr){
+	public static String sqlIn(String[] idsArr){
 		if(idsArr == null || idsArr.length == 0){
 			return null;
 		}
@@ -241,7 +238,7 @@ public class BaseService {
 	 * 一是 name=? or name=? or name=? or ...
 	 * 二是 list = ['11','22','33'...]
 	 */
-	public Map<String, Object> sqlOr(String column, String ids){
+	public static Map<String, Object> sqlOr(String column, String ids){
 		if(null == ids || ids.trim().isEmpty()){
 			return null;
 		}
@@ -287,7 +284,7 @@ public class BaseService {
 	 * @return
 	 * 描述：把字符串分割成数组返回，并验证分割后的数据
 	 */
-	public String[] splitByComma(String ids){
+	public static String[] splitByComma(String ids){
 		if(null == ids || ids.trim().isEmpty()){
 			return null;
 		}
@@ -323,14 +320,6 @@ public class BaseService {
 	}
 
 	/**
-	 * 行级：过滤
-	 * @param formSqlSb
-	 */
-	public void rowFilter(StringBuilder formSqlSb){
-		
-	}
-
-	/**
 	 * 发送邮件对象
 	 * @param sendType 发送邮件的类型：text 、html
 	 * @param to	接收者
@@ -338,7 +327,7 @@ public class BaseService {
 	 * @param content 邮件的文本内容
 	 * @param attachFileNames 附件
 	 */
-	public void sendTextMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
+	public static void sendTextMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
 		String host = PropKit.get(ConstantInit.config_mail_host);		// 发送邮件的服务器的IP
 		String port = PropKit.get(ConstantInit.config_mail_port);	// 发送邮件的服务器的端口
 

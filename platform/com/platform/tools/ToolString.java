@@ -2,16 +2,13 @@ package com.platform.tools;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
-import com.platform.constant.ConstantRender;
 import com.platform.mvc.user.User;
 
 /**
@@ -19,7 +16,6 @@ import com.platform.mvc.user.User;
  */
 public abstract class ToolString {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ToolString.class);
 
 	/**
@@ -303,20 +299,7 @@ public abstract class ToolString {
 	        //System.out.println(str);
 	        html.append(contents.substring(lastIdx, matchr.start()));
 	         
-	        User user = null;
-			Object userObj = User.dao.cacheGet(userName);
-			if (null != userObj) {
-				user = (User) userObj;
-			} else {
-				Map<String, Object> param = new HashMap<String, Object>();
-				param.put("column", "username");
-				String sql = ToolSqlXml.getSql(User.sqlId_column, param, ConstantRender.sql_renderType_beetl);
-				List<User> userList = User.dao.find(sql, userName);
-				if (userList.size() == 1) {
-					user = userList.get(0);
-				}
-			}
-	        
+	        User user = User.cacheGet(userName);
 	        if(user != null){
 	            html.append("<a href='http://www.xx.com/"+user.getStr("username")+"' class='referer' target='_blank'>@");
 	            html.append(userName.trim());
@@ -325,6 +308,7 @@ public abstract class ToolString {
 	            	userReferers.add(user.getPKValue());
 	            }
 	        } else {
+	        	log.error("用户不存在 userName = " + userName);
 	            html.append(origion_str);
 	        }
 	        lastIdx = matchr.end();

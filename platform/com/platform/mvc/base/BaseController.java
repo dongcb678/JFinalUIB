@@ -457,7 +457,7 @@ public abstract class BaseController extends Controller {
 	 * @param sqlId
 	 */
 	protected void paging(String dataSource, SplitPage splitPage, String selectSqlId, String fromSqlId){
-		baseService.paging(dataSource, splitPage, selectSqlId, fromSqlId);
+		BaseService.paging(dataSource, splitPage, selectSqlId, fromSqlId);
 	}
 
 	/**
@@ -467,7 +467,7 @@ public abstract class BaseController extends Controller {
 	 * @param distinctSqlId		分页查询distinct语句，不包含from之后
 	 */
 	protected void pagingDistinct(SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
-		baseService.pagingDistinct(ConstantInit.db_dataSource_main, splitPage, selectSqlId, distinctSqlId, fromSqlId);
+		BaseService.pagingDistinct(ConstantInit.db_dataSource_main, splitPage, selectSqlId, distinctSqlId, fromSqlId);
 	}
 
 	/**
@@ -478,7 +478,7 @@ public abstract class BaseController extends Controller {
 	 * @param distinctSqlId		分页查询distinct语句，不包含from之后
 	 */
 	protected void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
-		baseService.pagingDistinct(dataSource, splitPage, selectSqlId, distinctSqlId, fromSqlId);
+		BaseService.pagingDistinct(dataSource, splitPage, selectSqlId, distinctSqlId, fromSqlId);
 	}
 
 	/**
@@ -487,7 +487,7 @@ public abstract class BaseController extends Controller {
      * @return
      */
 	protected String getSql(String sqlId){
-		return baseService.getSql(sqlId);
+		return BaseService.getSql(sqlId);
 	}
 
     /**
@@ -497,7 +497,7 @@ public abstract class BaseController extends Controller {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, Object> param){
-    	return baseService.getSqlByBeetl(sqlId, param);
+    	return BaseService.getSqlByBeetl(sqlId, param);
     }
     
     /**
@@ -508,7 +508,7 @@ public abstract class BaseController extends Controller {
      * @return
      */
 	protected String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
-    	return baseService.getSqlByBeetl(sqlId, param, list);
+    	return BaseService.getSqlByBeetl(sqlId, param, list);
     }
 
 	/************************************		get 	set 	方法		************************************************/

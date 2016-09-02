@@ -31,9 +31,6 @@ public class RoleService extends BaseService {
 	public void update(Role role){
 		// 更新
 		role.update();
-		
-		// 缓存
-		Role.dao.cacheAdd(role.getPKValue());
 	}
 
 	/**
@@ -43,9 +40,6 @@ public class RoleService extends BaseService {
 	public void delete(String ids){
 		String[] idsArr = splitByComma(ids);
 		for (String roleIds : idsArr) {
-			// 缓存
-			Role.dao.cacheRemove(roleIds);
-			
 			// 删除
 			Role.dao.deleteById(roleIds);
 		}

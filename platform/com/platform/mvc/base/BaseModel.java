@@ -81,7 +81,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param sqlId
      * @return
      */
-	protected String getSql(String sqlId){
+	protected static String getSql(String sqlId){
 		return ToolSqlXml.getSql(sqlId);
 	}
 	
@@ -91,7 +91,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param param
      * @return
      */
-	protected String getSqlByBeetl(String sqlId, Map<String, Object> param){
+	protected static String getSqlByBeetl(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
     }
     
@@ -102,7 +102,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
+	protected static String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
@@ -112,7 +112,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param param
      * @return
      */
-	protected String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
+	protected static String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker);
     }
     
@@ -123,7 +123,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByFreeMarker(String sqlId, Map<String, Object> param, LinkedList<Object> list){
+	protected static String getSqlByFreeMarker(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker, list);
     }
 
@@ -133,7 +133,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param param
      * @return
      */
-	protected String getSqlByVelocity(String sqlId, Map<String, Object> param){
+	protected static String getSqlByVelocity(String sqlId, Map<String, Object> param){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity);
     }
     
@@ -144,7 +144,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param list 用于接收预处理的值
      * @return
      */
-	protected String getSqlByVelocity(String sqlId, Map<String, Object> param, LinkedList<Object> list){
+	protected static String getSqlByVelocity(String sqlId, Map<String, Object> param, LinkedList<Object> list){
     	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity, list);
     }
 	
@@ -283,7 +283,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 			Set<String> modifyFlag = null;
 			try {
 				Field field = null;
-				if(this.getClass().getSuperclass().getName().endsWith("BaseModelCache")){
+				if(this.getClass().getSuperclass().getName().endsWith("BaseModel")){
 					field = this.getClass().getSuperclass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");
 				}else{
 					field = this.getClass().getSuperclass().getSuperclass().getDeclaredField("modifyFlag");

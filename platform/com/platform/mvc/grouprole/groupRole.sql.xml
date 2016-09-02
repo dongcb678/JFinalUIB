@@ -80,4 +80,20 @@
     	]]>
 	</sql>
 	
+	<!-- 根据分组ids查询拥有的功能 -->
+	<sql id="findOperatorByGroupIds">
+		<![CDATA[ 
+			select 
+        		o.ids, o.url
+        		
+        	from 
+        		pt_operator o
+        		left join pt_roleoperator ro on ro.operatorids = o.ids
+        		left join pt_grouprole gr on gr.roleids = ro.roleids
+        		
+        	where 
+        		gr.groupids = ?
+    	]]>
+	</sql>
+	
 </sql-statement>

@@ -40,7 +40,8 @@ public class StationOperatorController extends BaseController {
 	 * 删除岗位拥有的功能
 	 */
 	public void del() {
-		StationOperator.dao.deleteById(getPara());
+		String stationOperatorIds = getPara();
+		stationOperatorService.del(stationOperatorIds);
 		renderSuccess(null);
 	}
 	

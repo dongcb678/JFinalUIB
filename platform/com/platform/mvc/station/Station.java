@@ -3,7 +3,7 @@ package com.platform.mvc.station;
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
-import com.platform.mvc.base.BaseModelCache;
+import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.user.UserInfo;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
@@ -14,7 +14,7 @@ import com.platform.tools.ToolCache;
  */
 @SuppressWarnings("unused")
 @Table(tableName = Station.table_name)
-public class Station extends BaseModelCache<Station> {
+public class Station extends BaseModel<Station> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
@@ -155,34 +155,6 @@ public class Station extends BaseModelCache<Station> {
 	}
 	public String getParentstationids() {
 		return get(column_parentstationids);
-	}
-	
-	/**
-	 * 添加或者更新缓存
-	 */
-	public void cacheAdd(String ids){
-		ToolCache.set(ParamInitPlugin.cacheStart_station + ids, Station.dao.findById(ids));
-	}
-
-	/**
-	 * 删除缓存
-	 */
-	public void cacheRemove(String ids){
-		ToolCache.remove(ParamInitPlugin.cacheStart_station + ids);
-	}
-
-	/**
-	 * 获取缓存
-	 * @param ids
-	 * @return
-	 */
-	public Station cacheGet(String ids){
-		Station station = ToolCache.get(ParamInitPlugin.cacheStart_station + ids);
-		if(station == null){
-			station = Station.dao.findById(ids);
-			cacheAdd(ids);
-		}
-		return station;
 	}
 	
 }

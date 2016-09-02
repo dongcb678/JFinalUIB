@@ -34,12 +34,6 @@ public class TableScan implements IPlugin {
 
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
-			// 剔除BaseModelCache
-			if (model.getName().endsWith("BaseModelCache")) {
-				log.info("剔除BaseModelCache");
-				continue;
-			}
-
 			// 获取注解对象
 			Table tableBind = (Table) model.getAnnotation(Table.class);
 			if (tableBind == null) {

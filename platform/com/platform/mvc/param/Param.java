@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
-import com.platform.mvc.base.BaseModelCache;
+import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.role.Role;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
@@ -18,7 +18,7 @@ import com.platform.tools.ToolCache;
  */
 @SuppressWarnings("unused")
 @Table(tableName = Param.table_name)
-public class Param extends BaseModelCache<Param> {
+public class Param extends BaseModel<Param> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 

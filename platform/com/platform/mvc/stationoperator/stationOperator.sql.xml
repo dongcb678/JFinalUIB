@@ -98,4 +98,19 @@
     	]]>
 	</sql>
 	
+	<!-- 根据岗位ids查询拥有的功能 -->
+	<sql id="findOperatorByStationIds">
+		<![CDATA[ 
+			select 
+        		o.ids, o.url
+        		
+        	from 
+        		pt_operator o
+        		left join pt_stationoperator so on so.operatorids = o.ids
+        		
+        	where 
+        		so.stationids = ?
+    	]]>
+	</sql>
+	
 </sql-statement>

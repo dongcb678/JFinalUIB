@@ -9,6 +9,9 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
+import com.platform.mvc.operator.Operator;
+import com.platform.plugin.ParamInitPlugin;
+import com.platform.tools.ToolCache;
 
 @Service(name = GroupRoleService.serviceName)
 public class GroupRoleService extends BaseService {
@@ -48,7 +51,7 @@ public class GroupRoleService extends BaseService {
 		gr.save();
 		
 		// 缓存
-		
+		cacheAdd(groupIds);
 	}
 
 	/**
@@ -56,10 +59,45 @@ public class GroupRoleService extends BaseService {
 	 * @param groupRoleIds
 	 */
 	public void delRole(String groupRoleIds){
-		GroupRole.dao.deleteById(groupRoleIds);
+		GroupRole gr = GroupRole.dao.findById(groupRoleIds);
+		String groupIds = gr.getRoleids();
+		gr.delete();
 		
 		// 缓存
-		
+		cacheRemove(groupIds);
+	}
+	
+	/**
+	 * 添加或者更新缓存
+	 * 描述：分组拥有的功能
+	 */
+	public static void cacheAdd(String groupIds){
+		String sql = getSql("platform.groupRole.findOperatorByGroupIds");
+		List<Operator> olist = Operator.dao.find(sql, groupIds);
+		ToolCache.set(ParamInitPlugin.cacheStart_group_operator + groupIds, olist);
+	}
+
+	/**
+	 * 删除缓存
+	 * 描述：分组拥有的功能
+	 */
+	public static void cacheRemove(String groupIds){
+		ToolCache.remove(ParamInitPlugin.cacheStart_group_operator + groupIds);
+	}
+
+	/**
+	 * 获取缓存
+	 * 描述：分组拥有的功能
+	 * @param ids
+	 * @return
+	 */
+	public static List<Operator> cacheGet(String groupIds){
+		List<Operator> olist = ToolCache.get(ParamInitPlugin.cacheStart_group_operator + groupIds);
+		if(olist == null){
+			String sql = getSql("platform.groupRole.findOperatorByGroupIds");
+			olist = Operator.dao.find(sql, groupIds);
+		}
+		return olist;
 	}
 	
 }

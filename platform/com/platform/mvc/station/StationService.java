@@ -79,9 +79,6 @@ public class StationService extends BaseService {
 		station.set(Station.column_images, images);
 		station.save();
 		
-		// 缓存
-		Station.dao.cacheAdd(station.getPKValue());
-		
 		return station.getPKValue();
 	}
 	
@@ -101,9 +98,6 @@ public class StationService extends BaseService {
 			//更新上级模块
 			station.set(Station.column_parentstationids, pIds).update();
 		}
-
-		// 缓存
-		Station.dao.cacheAdd(ids);
 	}
 	
 	/**
@@ -129,9 +123,6 @@ public class StationService extends BaseService {
 			pStation.update();
 		}
 	    
-		// 缓存
-		Station.dao.cacheRemove(ids);
-		
 		// 删除
 	    Station.dao.deleteById(ids);
 	    

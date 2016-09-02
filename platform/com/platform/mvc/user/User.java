@@ -1,13 +1,15 @@
 package com.platform.mvc.user;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
-import com.platform.mvc.base.BaseModelCache;
+import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.dept.Department;
 import com.platform.mvc.station.Station;
+import com.platform.mvc.usergroup.UserGroup;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
 
@@ -17,7 +19,7 @@ import com.platform.tools.ToolCache;
  */
 @SuppressWarnings("unused")
 @Table(tableName = User.table_name)
-public class User extends BaseModelCache<User> {
+public class User extends BaseModel<User> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
@@ -91,16 +93,28 @@ public class User extends BaseModelCache<User> {
 	public static final String column_departmentids = "departmentids";
 	
 	/**
-	 * 字段描述：用户扩展信息ids 
-	 * 字段类型：character varying  长度：32
-	 */
-	public static final String column_userinfoids = "userinfoids";
-	
-	/**
 	 * 字段描述：所在岗位ids 
 	 * 字段类型：character varying  长度：32
 	 */
 	public static final String column_stationids = "stationids";
+
+	/**
+	 * 字段描述：身份证号 
+	 * 字段类型：character varying  长度：25
+	 */
+	public static final String column_idcard = "idcard";
+	
+	/**
+	 * 字段描述：手机号 
+	 * 字段类型：character varying  长度：20
+	 */
+	public static final String column_mobile = "mobile";
+
+	/**
+	 * 字段描述：邮箱 
+	 * 字段类型：character varying  长度：100
+	 */
+	public static final String column_email = "email";
 	
 	/**
 	 * sqlId : platform.user.splitPageSelect
@@ -154,12 +168,11 @@ public class User extends BaseModelCache<User> {
 	private Timestamp stopdate;
 	private String username;
 	private String departmentids;
-	private String userinfoids;
 	private String stationids;
 	private String groupids;
-	private String departmentnames;
-	private String stationnames;
-	private String groupnames;
+	private String idcard;
+	private String email;
+	private String mobile;
 	
 	public void setIds(String ids){
 		set(column_ids, ids);
@@ -221,17 +234,29 @@ public class User extends BaseModelCache<User> {
 	public String getDepartmentids() {
 		return get(column_departmentids);
 	}
-	public void setUserinfoids(String userinfoids){
-		set(column_userinfoids, userinfoids);
-	}
-	public String getUserinfoids() {
-		return get(column_userinfoids);
-	}
 	public void setStationids(String stationids){
 		set(column_stationids, stationids);
 	}
 	public String getStationids() {
 		return get(column_stationids);
+	}
+	public void setEmail(String email){
+		set(column_email, email);
+	}
+	public String getEmail() {
+		return get(column_email);
+	}
+	public void setMobile(String mobile){
+		set(column_mobile, mobile);
+	}
+	public String getMobile() {
+		return get(column_mobile);
+	}
+	public void setIdcard(String idcard){
+		set(column_idcard, idcard);
+	}
+	public String getIdcard() {
+		return get(column_idcard);
 	}
 	
 	/**
@@ -239,11 +264,7 @@ public class User extends BaseModelCache<User> {
 	 * @return
 	 */
 	public UserInfo getUserInfo(){
-		String userinfoIds = get(column_userinfoids);
-		if(null != userinfoIds && !userinfoIds.isEmpty()){
-			return UserInfo.dao.findById(userinfoIds);
-		}
-		return null;
+		return UserInfo.dao.findById(this.getPKValue());
 	}
 
 	/**
@@ -251,11 +272,7 @@ public class User extends BaseModelCache<User> {
 	 * @return
 	 */
 	public Department getDepartment(){
-		String departmentids = get(column_departmentids);
-		if(null != departmentids && !departmentids.isEmpty()){
-			return Department.dao.findById(departmentids);
-		}
-		return null;
+		return Department.dao.findById(this.getDepartmentids());
 	}
 
 	/**
@@ -263,36 +280,37 @@ public class User extends BaseModelCache<User> {
 	 * @return
 	 */
 	public Station getStation(){
-		String stationids = get(column_stationids);
-		if(null != stationids && !stationids.isEmpty()){
-			return Station.dao.findById(stationids);
-		}
-		return null;
+		return Station.dao.findById(this.getStationids());
 	}
 	
 	/**
 	 * 添加或者更新缓存
 	 */
-	public void cacheAdd(String ids){
+	public static void cacheAdd(String ids){
 		User user = User.dao.findById(ids);
+		
+		String sql = getSql("platform.userGroup.findGroupIdsByUserIds");
+		List<UserGroup> ugList = UserGroup.dao.find(sql, user.getPKValue());
+		user.put("ugList", ugList);
 		
 		ToolCache.set(ParamInitPlugin.cacheStart_user + ids, user);
 		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_username), user);
-		
-		String userInfoIds = user.getStr(User.column_userinfoids);
-		UserInfo.dao.cacheAdd(userInfoIds);
+		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_mobile), user);
+		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_email), user);
+		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_idcard), user);
 	}
 
 	/**
 	 * 删除缓存
 	 */
-	public void cacheRemove(String ids){
+	public static void cacheRemove(String ids){
 		User user = User.dao.findById(ids);
+		
 		ToolCache.remove(ParamInitPlugin.cacheStart_user + ids);
 		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_username));
-
-		String userInfoIds = user.getStr(User.column_userinfoids);
-		UserInfo.dao.cacheRemove(userInfoIds);
+		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_mobile));
+		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_email));
+		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_idcard));
 	}
 
 	/**
@@ -300,7 +318,7 @@ public class User extends BaseModelCache<User> {
 	 * @param ids
 	 * @return
 	 */
-	public User cacheGet(String ids){
+	public static User cacheGet(String ids){
 		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + ids);
 		if(user == null){
 			user = User.dao.findById(ids);

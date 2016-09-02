@@ -24,7 +24,7 @@ public class OperatorService extends BaseService {
 		String ids = operator.getPKValue();
 		
 		// 缓存
-		Operator.dao.cacheAdd(ids);
+		Operator.cacheAdd(ids);
 		
 		return ids;
 	}
@@ -39,7 +39,7 @@ public class OperatorService extends BaseService {
 		String ids = operator.getPKValue();
 		
 		// 缓存
-		Operator.dao.cacheAdd(ids);
+		Operator.cacheAdd(ids);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class OperatorService extends BaseService {
 		String[] idsArr = splitByComma(ids);
 		for (String operatorIds : idsArr) {
 			// 缓存
-			Operator.dao.cacheRemove(operatorIds);
+			Operator.cacheRemove(operatorIds);
 			
 			// 删除
 			Operator.dao.deleteById(operatorIds);

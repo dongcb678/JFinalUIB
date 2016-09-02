@@ -3,7 +3,7 @@ package com.platform.mvc.role;
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
-import com.platform.mvc.base.BaseModelCache;
+import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.station.Station;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.tools.ToolCache;
@@ -14,7 +14,7 @@ import com.platform.tools.ToolCache;
  */
 @SuppressWarnings("unused")
 @Table(tableName = Role.table_name)
-public class Role extends BaseModelCache<Role> {
+public class Role extends BaseModel<Role> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
@@ -57,12 +57,6 @@ public class Role extends BaseModelCache<Role> {
 	 */
 	public static final String column_numbers = "numbers";
 	
-	/**
-	 * sqlId : platform.role.paging
-	 * 描述：查询所有角色
-	 */
-	public static final String sqlId_paging = "platform.role.paging";
-
 	/**
 	 * sqlId : platform.role.noCheckedFilter
 	 * 描述：
@@ -128,34 +122,6 @@ public class Role extends BaseModelCache<Role> {
 	}
 	public String getNumbers() {
 		return get(column_numbers);
-	}
-	
-	/**
-	 * 添加或者更新缓存
-	 */
-	public void cacheAdd(String ids){
-		ToolCache.set(ParamInitPlugin.cacheStart_role + ids, Role.dao.findById(ids));
-	}
-
-	/**
-	 * 删除缓存
-	 */
-	public void cacheRemove(String ids){
-		ToolCache.remove(ParamInitPlugin.cacheStart_role + ids);
-	}
-
-	/**
-	 * 获取缓存
-	 * @param key
-	 * @return
-	 */
-	public Role cacheGet(String key){
-		Role role = ToolCache.get(ParamInitPlugin.cacheStart_role + key);
-		if(role == null){
-			role = Role.dao.findById(ids);
-			cacheAdd(ids);
-		}
-		return role;
 	}
 	
 }

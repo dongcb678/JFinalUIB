@@ -19,6 +19,20 @@
 	</sql>
 	
 	<!-- 根据用户ids查询 -->
+	<sql id="findGroupIdsByUserIds">
+		<![CDATA[ 
+        	select 
+        		ug.groupids
+        		
+        	from 
+        		pt_usergroup ug
+        		
+        	where 
+        		ug.userids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据用户ids查询 -->
 	<sql id="findByUserIds">
 		<![CDATA[ 
         	select 

@@ -51,7 +51,7 @@ public class LoginController extends BaseController {
 			
 			// 2. 分解认证数据
 			String userIds = datas[1]; // 用户id
-			User user = User.dao.cacheGet(userIds);
+			User user = User.cacheGet(userIds);
 			if(user != null){
 				getResponse().setHeader("P3P", "CP=\"NON DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAa IVDa CONa HISa TELa OTPa OUR UNRa IND UNI COM NAV INT DEM CNT PRE LOC\""); 
 				AuthInterceptor.setCurrentUser(getRequest(), getResponse(), user, false);

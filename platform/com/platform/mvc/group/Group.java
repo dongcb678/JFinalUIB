@@ -3,9 +3,7 @@ package com.platform.mvc.group;
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Table;
-import com.platform.mvc.base.BaseModelCache;
-import com.platform.plugin.ParamInitPlugin;
-import com.platform.tools.ToolCache;
+import com.platform.mvc.base.BaseModel;
 
 /**
  * 人员分组model
@@ -13,7 +11,7 @@ import com.platform.tools.ToolCache;
  */
 @SuppressWarnings("unused")
 @Table(tableName = Group.table_name)
-public class Group extends BaseModelCache<Group> {
+public class Group extends BaseModel<Group> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
@@ -103,33 +101,6 @@ public class Group extends BaseModelCache<Group> {
 	}
 	public String getNumbers() {
 		return get(column_numbers);
-	}
-	
-	/**
-	 * 添加或者更新缓存
-	 */
-	public void cacheAdd(String ids){
-		ToolCache.set(ParamInitPlugin.cacheStart_group + ids, Group.dao.findById(ids));
-	}
-
-	/**
-	 * 删除缓存
-	 */
-	public void cacheRemove(String ids){
-		ToolCache.remove(ParamInitPlugin.cacheStart_group + ids);
-	}
-
-	/**
-	 * 获取缓存
-	 * @param ids
-	 * @return
-	 */
-	public Group cacheGet(String ids){
-		Group group = ToolCache.get(ParamInitPlugin.cacheStart_group + ids);
-		if(group == null){
-			group = Group.dao.findById(ids);
-		}
-		return group;
 	}
 	
 }

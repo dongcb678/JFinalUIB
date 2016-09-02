@@ -41,7 +41,6 @@ public class UserService extends BaseService {
 			user.set(User.column_password, encryptedPassword);
 
 			// 保存用户
-			user.set(User.column_userinfoids, userInfo.getPKValue());
 			user.set(User.column_errorcount, 0);
 			user.set(User.column_status, "1");
 			user.save(pkIds);
@@ -50,7 +49,7 @@ public class UserService extends BaseService {
 			userInfo.save(pkIds);
 
 			// 缓存
-			User.dao.cacheAdd(user.getPKValue());
+			User.cacheAdd(user.getPKValue());
 		} catch (NoSuchAlgorithmException  | InvalidKeySpecException e) {
 			throw new RuntimeException("保存用户密码加密操作异常", e);
 		} catch (Exception e) {
@@ -82,7 +81,7 @@ public class UserService extends BaseService {
 			userInfo.update();
 
 			// 缓存
-			User.dao.cacheAdd(user.getPKValue());
+			User.cacheAdd(user.getPKValue());
 		} catch (Exception e) {
 			throw new RuntimeException("更新用户异常", e);
 		}
@@ -96,15 +95,12 @@ public class UserService extends BaseService {
 	public void delete(String ids) {
 		String[] idsArr = splitByComma(ids);
 		for (String userIds : idsArr) {
-			User user = User.dao.findById(userIds);
-			String userInfoIds = user.getStr(User.column_userinfoids);
-
 			// 缓存
-			User.dao.cacheRemove(userIds);
+			User.cacheRemove(userIds);
 
 			// 删除
 			User.dao.deleteById(userIds);
-			UserInfo.dao.deleteById(userInfoIds);
+			UserInfo.dao.deleteById(userIds);
 		}
 	}
 
@@ -222,7 +218,7 @@ public class UserService extends BaseService {
 				// 更新用户
 				user.update();
 				// 缓存
-				User.dao.cacheAdd(user.getPKValue());
+				User.cacheAdd(user.getPKValue());
 			}
 		} catch (Exception e) {
 			log.error("更新用户密码异常，userName:" + userName + "，旧密码：" + passOld + "，新密码：" + passNew, e);

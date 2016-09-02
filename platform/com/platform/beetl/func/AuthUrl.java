@@ -33,11 +33,10 @@ public class AuthUrl implements Function {
 		
 		try {
 			url = (String) arg[0]; 
-			Object operatorObj = Operator.dao.cacheGet(url);
-			if (null == operatorObj) {
+			Operator operator = Operator.cacheGet(url);
+			if (null == operator) {
 				log.error("URI不存在!");
 			}
-			Operator operator = (Operator) operatorObj;
 			operatorIds = operator.getPKValue();
 			
 			Syslog reqSysLog = (Syslog) context.getGlobal(ConstantWebContext.reqSysLogKey);

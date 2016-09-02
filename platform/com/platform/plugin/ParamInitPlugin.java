@@ -12,12 +12,12 @@ import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.dict.Dict;
 import com.platform.mvc.group.Group;
+import com.platform.mvc.grouprole.GroupRoleService;
 import com.platform.mvc.operator.Operator;
 import com.platform.mvc.param.Param;
-import com.platform.mvc.role.Role;
 import com.platform.mvc.station.Station;
+import com.platform.mvc.stationoperator.StationOperatorService;
 import com.platform.mvc.user.User;
-import com.platform.mvc.user.UserInfo;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolSqlXml;
 
@@ -40,24 +40,14 @@ public class ParamInitPlugin implements IPlugin {
 	public static String cacheStart_user = "user_";
 
     /**
-     * 用户缓存key前缀
+     * 分组功能缓存key前缀
      */
-	public static String cacheStart_userInfo = "userInfo_";
+	public static String cacheStart_group_operator = "group_operator_";
 
     /**
-     * 分组缓存key前缀
+     * 岗位功能缓存key前缀
      */
-	public static String cacheStart_group = "group_";
-
-    /**
-     * 角色缓存key前缀
-     */
-	public static String cacheStart_role = "role_";
-
-    /**
-     * 岗位缓存key前缀
-     */
-	public static String cacheStart_station = "station_";
+	public static String cacheStart_station_operator = "station_operator_";
     
 	/**
      * 功能缓存key前缀
@@ -90,21 +80,17 @@ public class ParamInitPlugin implements IPlugin {
 
 		// 1.缓存用户
 		platform_cacheUser();
-		platform_cacheUserInfo();
 		
 		// 2.缓存组
-		platform_cacheGroup();
+		platform_cacheGroupOperator();
 
-		// 3.缓存角色
-		platform_cacheRole();
+		// 3.缓存岗位
+		platform_cacheStationOperator();
 
-		// 4.缓存岗位
-		platform_cacheStation();
-
-		// 5.缓存功能
+		// 4.缓存功能
 		platform_cacheOperator();
 
-		// 6.缓存字典
+		// 5.缓存字典
 		platform_cacheDict();
 
 		// 6.缓存参数
@@ -143,8 +129,7 @@ public class ParamInitPlugin implements IPlugin {
 			}
 			
 			for (User user : userList) {
-				ToolCache.set(ParamInitPlugin.cacheStart_user + user.getPKValue(), user);
-				ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(User.column_username), user);
+				User.cacheAdd(user.getPKValue());
 			}
 			userList = null;
 		}
@@ -152,43 +137,11 @@ public class ParamInitPlugin implements IPlugin {
 	}
 
 	/**
-	 * 缓存所有用户
-	 * @author 董华健    2012-10-16 下午1:16:48
-	 */
-	public static void platform_cacheUserInfo() {
-		log.info("缓存加载：UserInfo start");
-		String db_type = PropKit.get(ConstantInit.db_type_key);
-		String sql = ToolSqlXml.getSql(UserInfo.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
-		
-		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_userinfo ", splitDataSize);
-		List<UserInfo> userInfoList = null;
-		for (long i = 0; i < batchCount; i++) {
-			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
-				userInfoList = UserInfo.dao.find(sql, splitDataSize, i * splitDataSize); // start 0
-				
-			}else if(db_type.equals(ConstantInit.db_type_oracle) || db_type.equals(ConstantInit.db_type_db2)){
-				userInfoList = UserInfo.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
-			
-			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
-				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
-				userInfoList = UserInfo.dao.find(topSql);
-			}
-			
-			for (UserInfo userInfo : userInfoList) {
-				ToolCache.set(ParamInitPlugin.cacheStart_userInfo + userInfo.getStr(UserInfo.column_email), userInfo);
-				ToolCache.set(ParamInitPlugin.cacheStart_userInfo + userInfo.getStr(UserInfo.column_mobile), userInfo);
-			}
-			userInfoList = null;
-		}
-		log.info("缓存加载：UserInfo end");
-	}
-
-	/**
-	 * 缓存所有组
+	 * 缓存所有组功能
 	 * @author 董华健    2012-10-16 下午1:17:20
 	 */
-	public static void platform_cacheGroup() {
-		log.info("缓存加载：Group start");
+	public static void platform_cacheGroupOperator() {
+		log.info("缓存加载：Group Operator start");
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql(Group.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
@@ -207,51 +160,20 @@ public class ParamInitPlugin implements IPlugin {
 			}
 			
 			for (Group group : groupList) {
-				ToolCache.set(ParamInitPlugin.cacheStart_group + group.getPKValue(), group);
+				GroupRoleService.cacheAdd(group.getPKValue());
 			}
 			groupList = null;
 		}
 		
-		log.info("缓存加载：Group end");
+		log.info("缓存加载：Group Operator end");
 	}
 
 	/**
-	 * 缓存所有角色
-	 * @author 董华健    2012-10-16 下午1:17:20
-	 */
-	public static void platform_cacheRole() {
-		log.info("缓存加载：Role start");
-		String db_type = PropKit.get(ConstantInit.db_type_key);
-		String sql = ToolSqlXml.getSql(Role.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
-		
-		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_role ", splitDataSize);
-		List<Role> roleList = null;
-		for (long i = 0; i < batchCount; i++) {
-			if(db_type.equals(ConstantInit.db_type_postgresql) || db_type.equals(ConstantInit.db_type_mysql)){
-				roleList = Role.dao.find(sql, splitDataSize, i * splitDataSize);
-				
-			}else if(db_type.equals(ConstantInit.db_type_oracle) || db_type.equals(ConstantInit.db_type_db2)){
-				roleList = Role.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
-			
-			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
-				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
-				roleList = Role.dao.find(topSql);
-			}
-			
-			for (Role role : roleList) {
-				ToolCache.set(ParamInitPlugin.cacheStart_role + role.getPKValue(), role);
-			}
-			roleList = null;
-		}
-		log.info("缓存加载：Role end");
-	}
-	
-	/**
-	 * 缓存所有的岗位
+	 * 缓存所有的岗位功能
 	 * @author 董华健    2013-07-16 下午1:17:20
 	 */
-	public static void platform_cacheStation() {
-		log.info("缓存加载：Station start");
+	public static void platform_cacheStationOperator() {
+		log.info("缓存加载：Station Operator start");
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		String sql = ToolSqlXml.getSql(Station.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
@@ -270,12 +192,12 @@ public class ParamInitPlugin implements IPlugin {
 			}
 			
 			for (Station station : stationList) {
-				ToolCache.set(ParamInitPlugin.cacheStart_station + station.getPKValue(), station);
+				StationOperatorService.cacheAdd(station.getPKValue());
 			}
 			stationList = null;
 		}
 		
-		log.info("缓存加载：Station end");
+		log.info("缓存加载：Station Operator end");
 	}
 
 	/**
