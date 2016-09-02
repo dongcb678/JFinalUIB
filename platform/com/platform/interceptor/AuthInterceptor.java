@@ -214,8 +214,6 @@ public class AuthInterceptor implements Interceptor {
 	 * @return
 	 */
 	public static boolean hasPrivilegeUrl(String operatorIds, String userIds) {
-		return true;
-		/*
 		// 根据分组角色查询权限
 		String roleSql = ToolSqlXml.getSql("platform.roleOperator.hasUrlByOperatorAndUserIds");
 		long roleCount = Db.use(ConstantInit.db_dataSource_main).queryNumber(roleSql, operatorIds, userIds).longValue();
@@ -231,7 +229,6 @@ public class AuthInterceptor implements Interceptor {
 		}
 
 		return false;
-		*/
 	}
 
 	/**

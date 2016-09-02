@@ -33,7 +33,7 @@
 						</span>
 					</div>
 					<div class="widget-body form switch-form">
-						<input type="hidden" name="_query.roleIds" value='${escapeXml(paramMap["_query.roleIds"])}'>
+						<input type="hidden" name="_query.stationIds" value='${escapeXml(paramMap["_query.stationIds"])}'>
 						
 						系统名称
 						<input class="medium" type="text" name="_query.sname" value='${escapeXml(paramMap["_query.sname"])}' maxlength="20">
@@ -95,8 +95,7 @@
 									<td>${escapeXml(sm.mname!)}</td>
 									<td>
 										<% for(o in sm.list){ %>
-											<input type="checkbox" name="${o.ids!}" value="${o.soids!}" onchange='changeFunc(this);' 
-												 ${ isEmpty(o.soids!) ? "" : "checked='checked'" } > ${o.names!} &nbsp;&nbsp;
+											<input type="checkbox" name="${o.ids!}" value="${o.soids!}" onchange='changeFunc(this);' ${isEmpty(o.soids!) ? "" : "checked='checked'"}> ${o.names!} &nbsp;&nbsp;
 										<% } %>
 									</td>
 								</tr>
@@ -128,8 +127,8 @@
 		var soids = box.value;		// 岗位功能ids
 		
 		if(check){
-			var url = "/platform/roleOperator/add";
-			var data = { "roleIds" : '${escapeXml(splitPage.extData.ids!)}', "operatorIds" : oids };
+			var url = "/platform/stationOperator/add";
+			var data = { "stationIds" : '${escapeXml(splitPage.extData.ids!)}', "operatorIds" : oids };
 			var result = common_ajax.ajaxFunc(url, data, "json");
 			if(result.status == "success"){
 				box.value = result.data; // 返回岗位功能主键
@@ -139,7 +138,7 @@
 			
 		}else{
 			
-			var url = "/platform/roleOperator/del/" + soids;
+			var url = "/platform/stationOperator/del/" + soids;
 			var result = common_ajax.ajaxFunc(url, {}, "json");
 			if(result.status == "success"){
 				box.value = "";

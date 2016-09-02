@@ -141,7 +141,8 @@
 		sObj.after(operatorStr);
 		var btn = $("#operatorBtn_"+treeNode.tId);
 		if (btn) btn.bind("click", function(){
-			common_modals.setStationOperatorDiaLog(treeNode.id);
+			//common_modals.setStationOperatorDiaLog(treeNode.id);
+			common_ajax.ajaxMainPanel('/platform/stationOperator?_query.stationIds=' + treeNode.id);
 			return false;
 		});
 	};

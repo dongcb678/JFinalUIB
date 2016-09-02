@@ -94,7 +94,7 @@
         		
         	where 
         		so.operatorids = ? 
-        		and us.userids = ?
+        		and u.ids = ?
     	]]>
 	</sql>
 	

@@ -10,7 +10,7 @@ import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.SplitPage;
 import com.platform.mvc.base.BaseService;
-import com.platform.mvc.role.Role;
+import com.platform.mvc.station.Station;
 
 @Service(name = StationOperatorService.serviceName)
 public class StationOperatorService extends BaseService {
@@ -31,10 +31,10 @@ public class StationOperatorService extends BaseService {
 		
 		String stationIds = (String) splitPage.getQueryParam().get("stationIds");
 		
-		Role role = Role.dao.findById(stationIds);
-		splitPage.setExtData(role);
+		Station station = Station.dao.findById(stationIds);
+		splitPage.setExtData(station);
 		
-		String sql = getSql("platform.roleOperator.findByRoleIds");
+		String sql = getSql("platform.stationOperator.findByStationIds");
 		
 		List<Record> smList = (List<Record>) splitPage.getList();
 		for (Record sm : smList) {
