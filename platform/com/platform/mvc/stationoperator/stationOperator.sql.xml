@@ -43,7 +43,8 @@
 					<% } %>
 				
 	        	group by 
-	        		s.ids, m.ids
+	        		s.ids , s.names , s.orderids , 
+		        	m.ids , m.names , m.orderids  
 			) a
 			
     	]]>
