@@ -12,7 +12,7 @@ import com.platform.plugin.SqlXmlPlugin;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = "/platform/resources")
+@Controller("/platform/resources")
 public class ResourcesController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(ResourcesController.class);

@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * Ueditor编辑器
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = {"/platform/ueditor"})
+@Controller({"/platform/ueditor"})
 public class UeditorController extends BaseController {
 
 	private static Logger log = Logger.getLogger(UeditorController.class);

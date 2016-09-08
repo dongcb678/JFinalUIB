@@ -9,7 +9,7 @@ import com.platform.mvc.base.BaseController;
  * 角色功能 管理	
  * 描述：
  */
-@Controller(controllerKey = "/platform/roleOperator")
+@Controller("/platform/roleOperator")
 public class RoleOperatorController extends BaseController {
 
 	@SuppressWarnings("unused")

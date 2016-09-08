@@ -15,7 +15,7 @@ import com.platform.tools.security.ToolIDEA;
 /**
  * 登陆处理
  */
-@Controller(controllerKey = "/platform/login")
+@Controller("/platform/login")
 public class LoginController extends BaseController {
 
 	@SuppressWarnings("unused")

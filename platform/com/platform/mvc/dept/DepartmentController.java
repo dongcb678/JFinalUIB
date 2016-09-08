@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * 部门管理
  * @author 董华健
  */
-@Controller(controllerKey = "/platform/dept")
+@Controller("/platform/dept")
 public class DepartmentController extends BaseController {
 
 	@SuppressWarnings("unused")

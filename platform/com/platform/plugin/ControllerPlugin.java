@@ -41,16 +41,16 @@ public class ControllerPlugin implements IPlugin {
 			}
 
 			// 获取映射路径数组
-			String[] controllerKeys = controllerBind.controllerKey();
+			String[] controllerKeys = controllerBind.value();
 			for (String controllerKey : controllerKeys) {
-				controllerKey = controllerKey.trim();
+				controllerKey.trim();
 				if (controllerKey.equals("")) {
 					log.error(controller.getName() + "注解错误，映射路径为空");
 					throw new RuntimeException(controller.getName() + "注解错误，映射路径为空");
 				}
 				// 注册映射
 				routes.add(controllerKey, controller);
-				log.debug("Controller注册： controller = " + controller + ", controllerKey = " + controllerKey);
+				log.debug("Controller注册： controller = " + controller + ", " + controllerKey);
 			}
 		}
 		return true;

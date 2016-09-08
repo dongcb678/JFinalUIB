@@ -10,7 +10,7 @@ import com.platform.mvc.base.BaseController;
  * 功能管理
  * @author 董华健
  */
-@Controller(controllerKey = "/platform/operator")
+@Controller("/platform/operator")
 public class OperatorController extends BaseController {
 
 	@SuppressWarnings("unused")

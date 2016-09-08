@@ -10,7 +10,7 @@ import com.platform.mvc.base.BaseController;
  * 分组角色 管理	
  * 描述：
  */
-@Controller(controllerKey = "/platform/groupRole")
+@Controller("/platform/groupRole")
 public class GroupRoleController extends BaseController {
 
 	@SuppressWarnings("unused")

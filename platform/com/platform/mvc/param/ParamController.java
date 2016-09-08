@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * 参数管理
  * @author 董华健
  */
-@Controller(controllerKey = "/platform/param")
+@Controller("/platform/param")
 public class ParamController extends BaseController {
 
 	@SuppressWarnings("unused")

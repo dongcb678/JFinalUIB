@@ -9,7 +9,7 @@ import com.platform.mvc.base.BaseController;
  * 图片裁剪
  * @author 董华健
  */
-@Controller(controllerKey = "/platform/image")
+@Controller("/platform/image")
 public class ImageController extends BaseController {
 
 	@SuppressWarnings("unused")

@@ -17,7 +17,7 @@ import com.platform.mvc.base.BaseService;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = "/platform/group")
+@Controller("/platform/group")
 public class GroupController extends BaseController {
 
 	private static Logger log = Logger.getLogger(GroupController.class);

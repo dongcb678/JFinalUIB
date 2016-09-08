@@ -11,7 +11,7 @@ import com.platform.mvc.base.BaseModel;
  * 系统管理
  * @author 董华健
  */
-@Controller(controllerKey = "/platform/systems")
+@Controller("/platform/systems")
 public class SystemsController extends BaseController {
 
 	@SuppressWarnings("unused")

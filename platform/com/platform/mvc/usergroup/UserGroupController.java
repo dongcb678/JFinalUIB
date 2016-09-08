@@ -10,7 +10,7 @@ import com.platform.mvc.base.BaseController;
  * 用户分组 管理	
  * 描述：
  */
-@Controller(controllerKey = "/platform/userGroup")
+@Controller("/platform/userGroup")
 public class UserGroupController extends BaseController {
 
 	@SuppressWarnings("unused")

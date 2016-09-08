@@ -20,7 +20,7 @@ import com.platform.tools.ToolString;
 /**
  * 用户管理
  */
-@Controller(controllerKey = "/platform/user")
+@Controller("/platform/user")
 public class UserController extends BaseController {
 
 	@SuppressWarnings("unused")

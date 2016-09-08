@@ -12,7 +12,7 @@ import com.platform.mvc.base.BaseModel;
  * @author 董华健
  */
 @SuppressWarnings("unused")
-@Controller(controllerKey = "/platform/role")
+@Controller("/platform/role")
 public class RoleController extends BaseController {
 	
 	private static Logger log = Logger.getLogger(RoleController.class);

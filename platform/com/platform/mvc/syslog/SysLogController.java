@@ -9,7 +9,7 @@ import com.platform.mvc.base.BaseController;
  * 系统日志管理
  * @author 董华健
  */
-@Controller(controllerKey = "/platform/sysLog")
+@Controller("/platform/sysLog")
 public class SysLogController extends BaseController {
 
 	@SuppressWarnings("unused")

@@ -17,7 +17,7 @@ import com.platform.tools.ToolString;
 /**
  * 文件上传
  */
-@Controller(controllerKey = {"/platform/upload"})
+@Controller({"/platform/upload"})
 public class UploadController extends BaseController {
 
 	private static Logger log = Logger.getLogger(UploadController.class);

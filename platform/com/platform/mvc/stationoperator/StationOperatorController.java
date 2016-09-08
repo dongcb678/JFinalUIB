@@ -9,7 +9,7 @@ import com.platform.mvc.base.BaseController;
  * 岗位功能 管理	
  * 描述：
  */
-@Controller(controllerKey = "/platform/stationOperator")
+@Controller("/platform/stationOperator")
 public class StationOperatorController extends BaseController {
 
 	@SuppressWarnings("unused")

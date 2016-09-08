@@ -20,7 +20,7 @@ import com.platform.mvc.base.BaseModel;
  * /common/blog/add.html
  * 
  */
-@Controller(controllerKey = "/test/blog")
+@Controller("/test/blog")
 public class BlogController extends BaseController {
 
 	@SuppressWarnings("unused")

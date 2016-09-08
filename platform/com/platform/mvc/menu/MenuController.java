@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * 菜单管理
  * @author 董华健
  */
-@Controller(controllerKey = "/platform/menu")
+@Controller("/platform/menu")
 public class MenuController extends BaseController {
 
 	@SuppressWarnings("unused")

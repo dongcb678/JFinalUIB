@@ -13,7 +13,7 @@ import com.platform.mvc.base.BaseController;
  * 字典管理
  * @author 董华健
  */
-@Controller(controllerKey = "/platform/dict")
+@Controller("/platform/dict")
 public class DictController extends BaseController {
 
 	@SuppressWarnings("unused")
