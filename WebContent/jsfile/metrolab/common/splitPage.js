@@ -16,17 +16,11 @@ var common_splitPage = function() {
 	 * @param orderColunm
 	 * @param orderMode
 	 * @param currentPageCount
+	 * @param startRow
+	 * @param endRow
 	 * @returns {String}
 	 */
-	var splitPageHtml = function(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode, currentPageCount){
-		var start = 1;
-		var end = currentPageCount;
-		
-		if(pageNumber != 1){
-			start = (pageNumber - 1) * pageSize + 1;
-			end = start + currentPageCount - 1;
-		}
-		
+	var splitPageHtml = function(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode, currentPageCount, startRow, endRow){
 		var splitStr = '';
 		
 		splitStr += '<ul>';
@@ -99,7 +93,7 @@ var common_splitPage = function() {
 			splitStr += '<input type="hidden" name="pageSize">';
 		}
 		
-		splitStr += '&nbsp;&nbsp;<li>显示<strong>' + start + '至<strong>' + end + '</strong>条，共<strong>' + totalRow + '</strong>' + i18n_common_splitPage_records + '</li>';
+		splitStr += '&nbsp;&nbsp;<li>显示<strong>' + startRow + '至<strong>' + endRow + '</strong>条，共<strong>' + totalRow + '</strong>' + i18n_common_splitPage_records + '</li>';
 		
 		splitStr += '</ul>';
 	

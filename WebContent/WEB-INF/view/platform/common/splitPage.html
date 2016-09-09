@@ -10,6 +10,8 @@
 		var totalPages = ${splitPage.totalPage!};		// 总页数 
 		
 		var currentPageCount = ${splitPage.currentPageCount!};		// 当前页记录数量
+		var startRow = ${splitPage.startRow!}; 			// 当前页面第一个元素在数据库中的行号
+		var endRow = ${splitPage.endRow!}; 				// 当前页面最后一个元素在数据库中的行号
 
 		var isSelectPage = true;							// 是否显示第几页
 		var isSelectSize = true;							// 是否显示每页显示多少条
@@ -18,7 +20,7 @@
 		var orderMode = "${splitPage.orderMode!}";			// 排序的方式
 
 		// 获取分页HTML信息
-		var splitStr = common_splitPage.splitPage(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode, currentPageCount);
+		var splitStr = common_splitPage.splitPage(divId, formId, totalRow, pageSize, pageNumber, totalPages, isSelectPage, isSelectSize, orderColunm, orderMode, currentPageCount, startRow, endRow);
 		
 		// 显示分页信息
 		$("#" + splitPageDiv).html(splitStr);

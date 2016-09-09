@@ -25,38 +25,35 @@ public class SplitPage implements Serializable {
 	private int pageSize = ConstantSplitPage.default_pageSize;// 每页显示几多
 
 	/**
-	 * 分页结果住数据
+	 * 分页结果数据
 	 */
 	private List<?> list; // 当前页数据
 	private int totalPage; // 总页数
 	private int totalRow; // 总行数
-
-	/**
-	 * 分页返回扩展数据
-	 */
 	private Object extData; // 返回扩展数据
-	
+
 	/**
 	 * 分页显示辅助属性
 	 */
 	private int currentPageCount = -1;// 当前页记录数量
 	private boolean isFirst = false;// 是否第一页
 	private boolean isLast = false;// 是否最后一页
+	private int startRow; // 当前页面第一个元素在数据库中的行号
+	private int endRow; // 当前页面最后一个元素在数据库中的行号
 	private String uri;// 分页uri
-	private int start = -1;// 记录开始序号
 
 	/**
 	 * 分页计算
 	 */
 	public void compute() {
-		if(totalRow == 0){
+		if (totalRow == 0) {
 			getTotalPage();
 		}
-		
-		if(pageNumber > totalPage){
+
+		if (pageNumber > totalPage) {
 			pageNumber = totalPage;
 		}
-		
+
 		this.currentPageCount = (null != this.list ? this.list.size() : 0);// 当前页记录数
 
 		if (pageNumber == 1) {
@@ -70,12 +67,19 @@ public class SplitPage implements Serializable {
 		} else {
 			this.isLast = false;
 		}
-		
-		start = (pageNumber - 1) * pageSize;
+
+		// 起止行号
+		startRow = 1;
+		endRow = currentPageCount;
+		if (pageNumber != 1) {
+			startRow = (pageNumber - 1) * pageSize + 1;
+			endRow = startRow + currentPageCount - 1;
+		}
 	}
 
 	/**
 	 * 计算总页数
+	 * 
 	 * @return
 	 */
 	public int getTotalPage() {
@@ -133,6 +137,7 @@ public class SplitPage implements Serializable {
 
 	/**
 	 * 需要查询显示第几页
+	 * 
 	 * @return
 	 */
 	public int getPageNumber() {
@@ -148,6 +153,7 @@ public class SplitPage implements Serializable {
 
 	/**
 	 * 每页显示多少条数据
+	 * 
 	 * @return
 	 */
 	public int getPageSize() {
@@ -165,7 +171,7 @@ public class SplitPage implements Serializable {
 	}
 
 	public int getCurrentPageCount() {
-		if(currentPageCount == -1){
+		if (currentPageCount == -1) {
 			currentPageCount = (null != this.list ? this.list.size() : 0);
 		}
 		return currentPageCount;
@@ -206,16 +212,21 @@ public class SplitPage implements Serializable {
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
-	
-	public int getStart() {
-		if(start == -1){
-			start = (pageNumber - 1) * pageSize;
-		}
-		return start;
+
+	public int getStartRow() {
+		return startRow;
 	}
 
-	public void setStart(int start) {
-		this.start = start;
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
 
 }

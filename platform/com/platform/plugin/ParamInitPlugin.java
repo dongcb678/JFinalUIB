@@ -124,7 +124,7 @@ public class ParamInitPlugin implements IPlugin {
 				userList = User.dao.find(sql, (i + 1) * splitDataSize, i == 0 ? 1 : (i * splitDataSize + 1)); // start 1
 			
 			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
-				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);
+				String topSql = MessageFormat.format(sql, splitDataSize, i * splitDataSize);  // start 0
 				userList = User.dao.find(topSql);
 			}
 			
