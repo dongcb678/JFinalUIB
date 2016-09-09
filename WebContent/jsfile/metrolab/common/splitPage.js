@@ -38,12 +38,14 @@ var common_splitPage = function() {
 		}
 		
 		for (var i = 1; i <= totalPages; i++) {
-	        if (i == 2 && pageNumber - 4 > 1) {
+	        if (i == 2 && (pageNumber - 4) > 1) {
 	        	splitStr += '<li><a href="javascript:void(0)">...</a></li>';
 	            i = pageNumber - 4;
-	        } else if (i == pageNumber + 4 && pageNumber + 4 < totalPages) {
+	            
+	        } else if (i == (pageNumber + 4) && (pageNumber + 4) < totalPages) {
 	        	splitStr += '<li><a href="javascript:void(0)">...</a></li>';
 	            i = totalPages - 1;
+	            
 	        } else {
 	            if (pageNumber == i) {
 	            	splitStr += '<li class="active"><a href="javascript:void(0)" style="color: #272727; font-size: 14px; text-decoration: none;">' + pageNumber + '</a></li>';
