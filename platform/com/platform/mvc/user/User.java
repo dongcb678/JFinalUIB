@@ -176,7 +176,6 @@ public class User extends BaseModel<User> {
 	private String names;
 	private String departmentids;
 	private String stationids;
-	private String groupids;
 	private String idcard;
 	private String email;
 	private String mobile;
