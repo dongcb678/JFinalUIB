@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script>
+		var map;
+		var myCenter = new google.maps.LatLng(35.69299, 139.77);
+		var marker = null;
+		
+		function initialize(){
+			var mapProp = {
+			  	center:myCenter,
+			  	zoom:10,
+			  	mapTypeId:google.maps.MapTypeId.ROADMAP
+		  	};
+		
+		  	map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			
+		  	// 进行地点标记
+		  	google.maps.event.addListener(map, 'click', function(event) {
+		    	placeMarker(event.latLng);//标记事件
+		  	});
+		  	
+		  	// 标记展示
+// 		  	var contentString = '<div id="content"><img class="img" src="http://www.phpernote.com/images/logo.gif" />哥曾经住过这里！<a target="_blank" href="http://www.phpernote.com/">点击访问我的网站</a>！<br />这块内容是自定义的，只要你设计的足够好看，这里一样可以做的非常好看！</div>';
+
+// 		    var infowindow = new google.maps.InfoWindow({
+// 		        content: contentString
+// 		    });
+
+// 		    marker = new google.maps.Marker({
+// 		        position: myCenter,
+// 		        map: map,
+// 		        title:"Uluru (Ayers Rock)"
+// 		    });
+
+// 		    google.maps.event.addListener(marker, 'click', function() {
+// 		       	infowindow.open(map, marker);
+// 		    });
+		}
+		
+		function placeMarker(location) {
+			if(marker != null){
+				marker.setMap(null);
+			}
+		  	marker = new google.maps.Marker({
+		    	position: location,
+		    	map: map,
+		  	});
+		  	var infowindow = new google.maps.InfoWindow({
+		    	content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+		  	});
+		  	infowindow.open(map,marker);
+		  	alert('地图标注：\n Latitude: ' + location.lat() + '\n Longitude: ' + location.lng());
+		}
+		
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+</head>
+<body>
+
+<div id="googleMap" style="width:1000px;height:600px;"></div>
+
+</body>
+</html>
+			

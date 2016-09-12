@@ -1,0 +1,39 @@
+<%
+	var view = authUrl("/platform/dict/view");
+	var edit = authUrl("/platform/dict/edit");
+	var delete = authUrl("/platform/dict/delete");
+%>
+
+<% for(dict in list){ %>
+   	<tr id="${dict.ids!}" pId="${dict.parentids!}" hasChild='${dict.levels! != 4 ? "true" : "false"}'>
+		<td>
+			<% if(dict.levels == 1){ %>
+				<img alt="" src="${cxt!}/jsfile/ztree/css/zTreeStyle/img/diy/1_open.png">
+			<% }else if(dict.levels == 2){ %>
+				<img alt="" src="${cxt!}/jsfile/ztree/css/zTreeStyle/img/diy/2.png">
+			<% }else if(dict.levels == 3){ %>
+				<img alt="" src="${cxt!}/jsfile/ztree/css/zTreeStyle/img/diy/3.png">
+			<% }else if(dict.levels == 4){ %>
+				<img alt="" src="${cxt!}/jsfile/ztree/css/zTreeStyle/img/diy/4.png">
+			<% }else if(dict.levels == 5){ %>
+				<img alt="" src="${cxt!}/jsfile/ztree/css/zTreeStyle/img/diy/5.png">
+			<% } %>
+			<span controller='true'>${dict.levels }${i18nMap["admin.dict.common.level"]}</span>
+		</td>
+		<td>${dict.names }</td>
+		<td>${dict.status == "1" ? i18nMap["admin.dict.property.status.start"] : i18nMap["admin.dict.property.status.stop"]}</td>
+		<td>
+			<% if(dict.levels != 0){ %>
+				<% if(view == true){ %>
+					<a href='#' onclick='view("${dict.ids!}")'>${i18nMap["admin.common.see"]}</a>&nbsp;&nbsp;
+				<% } %>
+				<% if(edit == true){ %>
+					<a href='#' onclick='update("${dict.ids!}")'>${i18nMap["admin.common.edit"]}</a>&nbsp;&nbsp;
+				<% } %>
+				<% if(delete == true){ %>
+					<a href='#' onclick='deleteFunc("${dict.ids!}")'>${i18nMap["admin.common.delete"]}</a>
+				<% } %>
+			<% } %>
+		</td>
+	</tr>
+<% } %>

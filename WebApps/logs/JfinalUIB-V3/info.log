@@ -1,0 +1,2078 @@
+2016-09-12 17:54:50.319 [] [] INFO [main] <JFinalConfig.java [64] - configConstant> <configConstant 缓存 properties>
+2016-09-12 17:54:50.327 [] [] INFO [main] <JFinalConfig.java [67] - configConstant> <configConstant 设置字符集>
+2016-09-12 17:54:50.330 [] [] INFO [main] <JFinalConfig.java [70] - configConstant> <configConstant 设置是否开发模式>
+2016-09-12 17:54:50.336 [] [] INFO [main] <JFinalConfig.java [78] - configConstant> <configConstant 设置path相关>
+2016-09-12 17:54:50.342 [] [] INFO [main] <JFinalConfig.java [83] - configConstant> <configConstant 视图Beetl设置>
+2016-09-12 17:54:50.392 [] [] INFO [main] <JFinalConfig.java [87] - configConstant> <configConstant 视图error page设置>
+2016-09-12 17:54:50.394 [] [] INFO [main] <JFinalConfig.java [91] - configConstant> <configConstant i18n文件前缀设置设置>
+2016-09-12 17:54:50.401 [] [] INFO [main] <JFinalConfig.java [100] - configRoute> <configRoute 注解注册路由>
+2016-09-12 17:54:50.603 [] [] INFO [main] <JFinalConfig.java [108] - configPlugin> <注册paltform ActiveRecordPlugin>
+2016-09-12 17:54:50.605 [] [] INFO [main] <JFinalConfig.java [109] - configPlugin> <configPlugin 配置Druid数据库连接池连接属性>
+2016-09-12 17:54:50.608 [] [] INFO [main] <JFinalConfig.java [117] - configPlugin> <configPlugin 配置Druid数据库连接池大小>
+2016-09-12 17:54:50.610 [] [] INFO [main] <JFinalConfig.java [123] - configPlugin> <configPlugin 配置Druid数据库连接池过滤器配制>
+2016-09-12 17:54:50.632 [] [] INFO [main] <JFinalConfig.java [132] - configPlugin> <configPlugin 配置ActiveRecordPlugin插件>
+2016-09-12 17:54:50.635 [] [] INFO [main] <JFinalConfig.java [140] - configPlugin> <configPlugin 数据库类型判断>
+2016-09-12 17:54:50.637 [] [] INFO [main] <JFinalConfig.java [143] - configPlugin> <configPlugin 使用数据库类型是 postgresql>
+2016-09-12 17:54:50.640 [] [] INFO [main] <JFinalConfig.java [165] - configPlugin> <configPlugin 添加druidPlugin插件>
+2016-09-12 17:54:50.642 [] [] INFO [main] <JFinalConfig.java [168] - configPlugin> <configPlugin 表自动扫描注册>
+2016-09-12 17:54:50.729 [] [] INFO [main] <JFinalConfig.java [171] - configPlugin> <configPlugin 注册ActiveRecordPlugin插件>
+2016-09-12 17:54:50.731 [] [] INFO [main] <JFinalConfig.java [174] - configPlugin> <ServicePlugin Service注解实例化加载>
+2016-09-12 17:54:50.734 [] [] INFO [main] <JFinalConfig.java [177] - configPlugin> <I18NPlugin 国际化键值对加载>
+2016-09-12 17:54:50.737 [] [] INFO [main] <JFinalConfig.java [181] - configPlugin> <EhCachePlugin EhCache缓存>
+2016-09-12 17:54:50.739 [] [] INFO [main] <JFinalConfig.java [192] - configPlugin> <SqlXmlPlugin 解析并缓存 xml sql>
+2016-09-12 17:54:50.742 [] [] INFO [main] <JFinalConfig.java [195] - configPlugin> <afterJFinalStart 缓存参数>
+2016-09-12 17:54:50.745 [] [] INFO [main] <JFinalConfig.java [198] - configPlugin> <afterJFinalStart 配置文件上传命名策略插件>
+2016-09-12 17:54:53.838 [] [] INFO [main] <ParamInitPlugin.java [79] - start> <缓存参数初始化 start ...>
+2016-09-12 17:54:53.839 [] [] INFO [main] <ParamInitPlugin.java [113] - platform_cacheUser> <缓存加载：User start>
+2016-09-12 17:54:53.989 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        count(*)  
+    from
+        pt_user  
+ >
+2016-09-12 17:54:54.047 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:54:54.050 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_user 
+    order by
+        ids asc limit ? offset ?  
+ >
+2016-09-12 17:54:54.056 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 2 
+ param index: 1   param type: Integer   param value: 10000 
+ param index: 2   param type: Long   param value: 0 
+ >
+2016-09-12 17:54:54.060 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_user" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.067 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ >
+2016-09-12 17:54:54.070 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ug.groupids 
+    from
+        pt_usergroup ug 
+    where
+        ug.userids = ?  
+ >
+2016-09-12 17:54:54.073 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ >
+2016-09-12 17:54:54.076 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_user" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.078 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 3f33600d631e4b67af6f5d850d4a78de 
+ >
+2016-09-12 17:54:54.080 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ug.groupids 
+    from
+        pt_usergroup ug 
+    where
+        ug.userids = ?  
+ >
+2016-09-12 17:54:54.083 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 3f33600d631e4b67af6f5d850d4a78de 
+ >
+2016-09-12 17:54:54.085 [] [] INFO [main] <ParamInitPlugin.java [136] - platform_cacheUser> <缓存加载：User end>
+2016-09-12 17:54:54.087 [] [] INFO [main] <ParamInitPlugin.java [144] - platform_cacheGroupOperator> <缓存加载：Group Operator start>
+2016-09-12 17:54:54.094 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        count(*)  
+    from
+        pt_group  
+ >
+2016-09-12 17:54:54.098 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:54:54.099 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_group 
+    order by
+        ids asc limit ? offset ?  
+ >
+2016-09-12 17:54:54.103 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 2 
+ param index: 1   param type: Integer   param value: 10000 
+ param index: 2   param type: Long   param value: 0 
+ >
+2016-09-12 17:54:54.105 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_roleoperator ro 
+            on ro.operatorids = o.ids 
+    left join
+        pt_grouprole gr 
+            on gr.roleids = ro.roleids 
+    where
+        gr.groupids = ?  
+ >
+2016-09-12 17:54:54.111 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0028 
+ >
+2016-09-12 17:54:54.117 [] [] INFO [main] <ParamInitPlugin.java [168] - platform_cacheGroupOperator> <缓存加载：Group Operator end>
+2016-09-12 17:54:54.119 [] [] INFO [main] <ParamInitPlugin.java [176] - platform_cacheStationOperator> <缓存加载：Station Operator start>
+2016-09-12 17:54:54.127 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        count(*)  
+    from
+        pt_station  
+ >
+2016-09-12 17:54:54.132 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:54:54.134 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_station 
+    order by
+        ids asc limit ? offset ?  
+ >
+2016-09-12 17:54:54.138 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 2 
+ param index: 1   param type: Integer   param value: 10000 
+ param index: 2   param type: Long   param value: 0 
+ >
+2016-09-12 17:54:54.141 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_stationoperator so 
+            on so.operatorids = o.ids 
+    where
+        so.stationids = ?  
+ >
+2016-09-12 17:54:54.145 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:54:54.147 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_stationoperator so 
+            on so.operatorids = o.ids 
+    where
+        so.stationids = ?  
+ >
+2016-09-12 17:54:54.151 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0021 
+ >
+2016-09-12 17:54:54.153 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_stationoperator so 
+            on so.operatorids = o.ids 
+    where
+        so.stationids = ?  
+ >
+2016-09-12 17:54:54.156 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0022 
+ >
+2016-09-12 17:54:54.158 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_stationoperator so 
+            on so.operatorids = o.ids 
+    where
+        so.stationids = ?  
+ >
+2016-09-12 17:54:54.161 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0023 
+ >
+2016-09-12 17:54:54.163 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_stationoperator so 
+            on so.operatorids = o.ids 
+    where
+        so.stationids = ?  
+ >
+2016-09-12 17:54:54.167 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0024 
+ >
+2016-09-12 17:54:54.170 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_stationoperator so 
+            on so.operatorids = o.ids 
+    where
+        so.stationids = ?  
+ >
+2016-09-12 17:54:54.173 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0025 
+ >
+2016-09-12 17:54:54.175 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_stationoperator so 
+            on so.operatorids = o.ids 
+    where
+        so.stationids = ?  
+ >
+2016-09-12 17:54:54.179 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0026 
+ >
+2016-09-12 17:54:54.183 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_stationoperator so 
+            on so.operatorids = o.ids 
+    where
+        so.stationids = ?  
+ >
+2016-09-12 17:54:54.189 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0027 
+ >
+2016-09-12 17:54:54.191 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        o.ids,
+        o.url 
+    from
+        pt_operator o 
+    left join
+        pt_stationoperator so 
+            on so.operatorids = o.ids 
+    where
+        so.stationids = ?  
+ >
+2016-09-12 17:54:54.195 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0028 
+ >
+2016-09-12 17:54:54.198 [] [] INFO [main] <ParamInitPlugin.java [200] - platform_cacheStationOperator> <缓存加载：Station Operator end>
+2016-09-12 17:54:54.200 [] [] INFO [main] <ParamInitPlugin.java [208] - platform_cacheOperator> <缓存加载：Operator start>
+2016-09-12 17:54:54.214 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        count(*)  
+    from
+        pt_operator  
+ >
+2016-09-12 17:54:54.217 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:54:54.219 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_operator 
+    order by
+        ids asc limit ? offset ?  
+ >
+2016-09-12 17:54:54.222 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 2 
+ param index: 1   param type: Integer   param value: 10000 
+ param index: 2   param type: Long   param value: 0 
+ >
+2016-09-12 17:54:54.237 [] [] INFO [main] <ParamInitPlugin.java [237] - platform_cacheOperator> <缓存加载：Operator end>
+2016-09-12 17:54:54.244 [] [] INFO [main] <ParamInitPlugin.java [245] - platform_cacheDict> <缓存加载：Dict start>
+2016-09-12 17:54:54.246 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids 
+    from
+        pt_dict  
+ >
+2016-09-12 17:54:54.250 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:54:54.253 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_dict" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.261 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8094c60d7a594b36bb0187cbce9c4188 
+ >
+2016-09-12 17:54:54.264 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_dict 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.292 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8094c60d7a594b36bb0187cbce9c4188 
+ >
+2016-09-12 17:54:54.296 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_dict" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.300 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.303 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_dict 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.307 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.310 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_dict" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.312 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 0c78f87750a745bbb59005a6ca0f744a 
+ >
+2016-09-12 17:54:54.315 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_dict 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.318 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 0c78f87750a745bbb59005a6ca0f744a 
+ >
+2016-09-12 17:54:54.320 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_dict" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.322 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.325 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_dict 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.328 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.332 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_dict" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.335 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 7381008292054bccba20224bc33774d7 
+ >
+2016-09-12 17:54:54.337 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_dict 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.341 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 7381008292054bccba20224bc33774d7 
+ >
+2016-09-12 17:54:54.343 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_dict" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.346 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.349 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_dict 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.352 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.355 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_dict" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.357 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:54:54.360 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_dict 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.363 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:54:54.365 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_dict" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.368 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.370 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_dict 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.373 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.376 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_dict" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.378 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:54:54.381 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_dict 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.384 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:54:54.386 [] [] INFO [main] <ParamInitPlugin.java [252] - platform_cacheDict> <缓存加载：Dict end, size = 5>
+2016-09-12 17:54:54.389 [] [] INFO [main] <ParamInitPlugin.java [261] - platform_cacheParam> <缓存加载：Param start>
+2016-09-12 17:54:54.391 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids 
+    from
+        pt_param  
+ >
+2016-09-12 17:54:54.393 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:54:54.395 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_param" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.399 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 0c78f87750a745bbb59005a6ca0f744a 
+ >
+2016-09-12 17:54:54.401 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_param 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.405 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 0c78f87750a745bbb59005a6ca0f744a 
+ >
+2016-09-12 17:54:54.408 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_param" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.410 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.413 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_param 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.416 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.418 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_param" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.420 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 7381008292054bccba20224bc33774d7 
+ >
+2016-09-12 17:54:54.422 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_param 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.426 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 7381008292054bccba20224bc33774d7 
+ >
+2016-09-12 17:54:54.428 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_param" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.430 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.432 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_param 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.435 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.438 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_param" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.440 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8094c60d7a594b36bb0187cbce9c4188 
+ >
+2016-09-12 17:54:54.442 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_param 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.445 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8094c60d7a594b36bb0187cbce9c4188 
+ >
+2016-09-12 17:54:54.447 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_param" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.449 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.451 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_param 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.454 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.456 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_param" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.459 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.460 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_param 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.464 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 83f4b0ee56904cbeb5f91696ad804c29 
+ >
+2016-09-12 17:54:54.466 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_param" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.468 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:54:54.470 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_param 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.473 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:54:54.475 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        "pt_param" 
+    where
+        "ids" = ? 
+ >
+2016-09-12 17:54:54.477 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:54:54.479 [] [] INFO [main] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        * 
+    from
+        pt_param 
+    where
+        parentids = ? 
+        and status = '1' 
+    order by
+        orderids asc  
+ >
+2016-09-12 17:54:54.482 [] [] INFO [main] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:54:54.484 [] [] INFO [main] <ParamInitPlugin.java [268] - platform_cacheParam> <缓存加载：Param end, size = 5>
+2016-09-12 17:54:54.485 [] [] INFO [main] <ParamInitPlugin.java [99] - start> <缓存参数初始化 end ...>
+2016-09-12 17:54:54.489 [] [] INFO [main] <JFinalConfig.java [209] - configInterceptor> <configInterceptor 权限认证拦截器>
+2016-09-12 17:54:54.491 [] [] INFO [main] <JFinalConfig.java [212] - configInterceptor> <configInterceptor 参数封装拦截器>
+2016-09-12 17:54:54.493 [] [] INFO [main] <JFinalConfig.java [215] - configInterceptor> <configInterceptor 配置开启事物规则>
+2016-09-12 17:54:54.496 [] [] INFO [main] <JFinalConfig.java [221] - configInterceptor> <configInterceptor i18n拦截器>
+2016-09-12 17:54:54.497 [] [] INFO [main] <JFinalConfig.java [229] - configHandler> <configHandler 全局配置处理器，主要是记录日志和request域值处理>
+2016-09-12 17:54:54.563 [] [] INFO [main] <JFinalConfig.java [237] - afterJFinalStart> <afterJFinalStart 启动操作日志入库线程>
+2016-09-12 17:54:54.567 [] [] INFO [main] <JFinalConfig.java [240] - afterJFinalStart> <afterJFinalStart 系统负载>
+2016-09-12 17:54:54.569 [] [] INFO [main] <TimerResources.java [29] - start> <开始启动任务>
+2016-09-12 17:54:54.570 [] [] INFO [main] <TimerResources.java [45] - start> <启动任务完成>
+2016-09-12 17:54:54.571 [] [] INFO [main] <JFinalConfig.java [243] - afterJFinalStart> <afterJFinalStart 数据清理>
+2016-09-12 17:54:54.573 [] [] INFO [main] <DataClear.java [31] - start> <开始启动任务>
+2016-09-12 17:54:54.575 [] [] INFO [main] <DataClear.java [64] - start> <启动任务完成>
+2016-09-12 17:54:55.571 [] [] INFO [Timer-0] <TimerResources.java [35] - run> <定时记录系统资源负载开始>
+2016-09-12 17:54:55.794 [] [] INFO [Timer-0] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_resources"
+        ("cpunumber", "cpuratio", "createdate", "gccount", "hostname", "ids", "ips", "jvmfreememory", "jvmmaxmemory", "jvmtotalmemory", "osname", "phyfreememory", "phymemory", "version") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:54:55.802 [] [] INFO [Timer-0] <Dialect.java [102] - fillStatement> <
+ Sql param: 14 
+ param index: 1   param type: Integer   param value: 8 
+ param index: 2   param type: Double   param value: 0.0 
+ param index: 3   param type: Timestamp   param value: 2016-09-12 17:54:55.793 
+ param index: 4   param type: Long   param value: 11 
+ param index: 5   param type: String   param value: PC-DONGHUAJIAN 
+ param index: 6   param type: String   param value: 4c3c1556001440509e6260aa62b3c213 
+ param index: 7   param type: String   param value: 10.192.66.8 
+ param index: 8   param type: Long   param value: 278 
+ param index: 9   param type: Long   param value: 1813 
+ param index: 10   param type: Long   param value: 339 
+ param index: 11   param type: String   param value: Windows 7 
+ param index: 12   param type: Long   param value: 838 
+ param index: 13   param type: Long   param value: 8155 
+ param index: 14   param type: Long   param value: 0 
+ >
+2016-09-12 17:54:55.824 [] [] INFO [Timer-0] <TimerResources.java [37] - run> <定时记录系统资源负载结束>
+2016-09-12 17:55:02.276 [] [] INFO [qtp347791431-42] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:02.279 [] [] INFO [qtp347791431-42] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:02.279 [] [] INFO [qtp347791431-42] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:02.282 [] [] INFO [qtp347791431-42] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:02.284 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:02.284 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:02.284 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:02.285 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:02.713 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:02.713 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:02.714 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:02.714 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:02.714 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:02.715 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:02.715 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:02.741 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        count(*)  
+    from
+        pt_user u 
+    left join
+        pt_userinfo ui 
+            on u.ids = ui.ids 
+    left join
+        pt_department d 
+            on u.departmentids = d.ids 
+    where
+        1=1  
+ >
+2016-09-12 17:55:02.742 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:55:02.744 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        u.ids,
+        u.username,
+        u.names,
+        u.email,
+        u.mobile,
+        ui.birthday,
+        d.names as deptnames   
+    from
+        pt_user u 
+    left join
+        pt_userinfo ui 
+            on u.ids = ui.ids 
+    left join
+        pt_department d 
+            on u.departmentids = d.ids 
+    where
+        1=1  limit 20 offset 0 
+ >
+2016-09-12 17:55:02.746 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:55:02.824 [] [] INFO [qtp347791431-42] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:02.824 [] [] INFO [qtp347791431-42] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:02.967 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:02.968 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:02.969 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/html, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 475 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:02.715 
+ param index: 6   param type: Long   param value: 1473674102715 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=NzNrT2FYUWhVSTJaOHI4SSthZWxKK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:02.824 
+ param index: 10   param type: Long   param value: 545 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: 3a354ed0d58e4c119116185a6f0d9975 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 91baed789bc14efdbebb10b49c69ee5b 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/user 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:02.279 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 70 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:02.992 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:03.330 [] [] INFO [qtp347791431-41] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:03.331 [] [] INFO [qtp347791431-41] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:03.332 [] [] INFO [qtp347791431-41] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:03.333 [] [] INFO [qtp347791431-41] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:03.334 [] [] INFO [qtp347791431-41] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:03.334 [] [] INFO [qtp347791431-41] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:03.334 [] [] INFO [qtp347791431-41] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:03.335 [] [] INFO [qtp347791431-41] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:03.337 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:03.337 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:03.337 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:03.338 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:03.338 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:03.339 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:03.339 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:03.346 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        count(*)  
+    from
+        pt_group 
+    where
+        1=1  
+ >
+2016-09-12 17:55:03.349 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:55:03.356 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        *   
+    from
+        pt_group 
+    where
+        1=1  limit 20 offset 0 
+ >
+2016-09-12 17:55:03.357 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:55:03.382 [] [] INFO [qtp347791431-41] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:03.385 [] [] INFO [qtp347791431-41] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:03.392 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:03.393 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:03.394 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/html, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 33 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:03.339 
+ param index: 6   param type: Long   param value: 1473674103339 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFcyamJhdHl4cU91ZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:03.383 
+ param index: 10   param type: Long   param value: 52 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: a71e6caf556c4fe897b75e5e3c5f3d38 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 1b0d7476974e4bf9b52f75fb82f87330 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/group 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:03.331 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 19 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:03.397 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:03.972 [] [] INFO [qtp347791431-39] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:03.974 [] [] INFO [qtp347791431-39] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:03.974 [] [] INFO [qtp347791431-39] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:03.976 [] [] INFO [qtp347791431-39] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:03.977 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:03.977 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:03.977 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:03.977 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:03.978 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:03.978 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:03.978 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:03.979 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:03.979 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:03.979 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:03.979 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:03.990 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        count(*)  
+    from
+        pt_role 
+    where
+        1=1  
+ >
+2016-09-12 17:55:04.003 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:55:04.008 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        *   
+    from
+        pt_role 
+    where
+        1=1  limit 20 offset 0 
+ >
+2016-09-12 17:55:04.009 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:55:04.029 [] [] INFO [qtp347791431-39] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:04.032 [] [] INFO [qtp347791431-39] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:04.167 [] [] INFO [little-ant-Thread-SysLog-insertDB-5] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:04.168 [] [] INFO [little-ant-Thread-SysLog-insertDB-5] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:04.169 [] [] INFO [little-ant-Thread-SysLog-insertDB-5] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/html, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 43 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:03.979 
+ param index: 6   param type: Long   param value: 1473674103979 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFZwZFFUYU1XZC8yT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:04.032 
+ param index: 10   param type: Long   param value: 58 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: 7a54e508f4f9484f9acfe52d36a65395 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 7ae62737df444d619f8fd376360d160c 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/role 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:03.974 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 15 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:04.185 [] [] INFO [little-ant-Thread-SysLog-insertDB-5] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:04.610 [] [] INFO [qtp347791431-42] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:04.611 [] [] INFO [qtp347791431-42] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:04.612 [] [] INFO [qtp347791431-42] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:04.614 [] [] INFO [qtp347791431-42] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:04.614 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:04.615 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:04.615 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:04.616 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:04.618 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:04.618 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:04.618 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:04.619 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:04.619 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:04.620 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:04.620 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:04.638 [] [] INFO [qtp347791431-42] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:04.638 [] [] INFO [qtp347791431-42] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:04.663 [] [] INFO [qtp347791431-39] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:04.664 [] [] INFO [qtp347791431-39] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:04.664 [] [] INFO [qtp347791431-39] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:04.665 [] [] INFO [qtp347791431-39] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:04.665 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:04.665 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:04.665 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:04.666 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:04.667 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:04.667 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:04.667 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:04.667 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:04.668 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:04.668 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:04.668 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:04.669 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds is null 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:04.670 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <Dialect.java [129] - fillStatement> <
+ Sql param:  empty  
+ >
+2016-09-12 17:55:04.679 [] [] INFO [qtp347791431-39] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:04.679 [] [] INFO [qtp347791431-39] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:04.767 [] [] INFO [little-ant-Thread-SysLog-insertDB-1] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:04.767 [] [] INFO [little-ant-Thread-SysLog-insertDB-3] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:04.768 [] [] INFO [little-ant-Thread-SysLog-insertDB-1] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:04.768 [] [] INFO [little-ant-Thread-SysLog-insertDB-3] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:04.768 [] [] INFO [little-ant-Thread-SysLog-insertDB-1] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/html, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 21 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:04.62 
+ param index: 6   param type: Long   param value: 1473674104620 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFd5V1JDM3hLSnZLdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:04.638 
+ param index: 10   param type: Long   param value: 27 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: 8056a13418d64def965b99c782d67385 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 233356b63d8e477fb6e948b703232809 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:04.611 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 6 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:04.769 [] [] INFO [little-ant-Thread-SysLog-insertDB-3] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 14 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:04.668 
+ param index: 6   param type: Long   param value: 1473674104668 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFdRWUxETkZHWlU5ZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:04.679 
+ param index: 10   param type: Long   param value: 15 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: 57481a511f0640239b38fb4cabb59445 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:04.664 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 1 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:04.771 [] [] INFO [little-ant-Thread-SysLog-insertDB-1] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:04.777 [] [] INFO [little-ant-Thread-SysLog-insertDB-3] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:05.165 [] [] INFO [qtp347791431-42] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:05.166 [] [] INFO [qtp347791431-42] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:05.166 [] [] INFO [qtp347791431-42] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:05.171 [] [] INFO [qtp347791431-42] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:05.172 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:05.173 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:05.173 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:05.174 [] [] INFO [qtp347791431-42] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:05.176 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:05.176 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:05.177 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:05.177 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:05.178 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:05.178 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:05.178 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:05.180 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds = ? 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:05.182 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-42] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0020 
+ >
+2016-09-12 17:55:05.192 [] [] INFO [qtp347791431-42] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:05.192 [] [] INFO [qtp347791431-42] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:05.206 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:05.210 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:05.212 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 27 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:05.179 
+ param index: 6   param type: Long   param value: 1473674105179 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFY1KzF6N0hheTZKT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:05.192 
+ param index: 10   param type: Long   param value: 27 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: 7f8c271b4d45484dafa251ffe40e99ce 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:05.165 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 0 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:05.216 [] [] INFO [little-ant-Thread-SysLog-insertDB-4] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:05.217 [] [] INFO [qtp347791431-38] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:05.220 [] [] INFO [qtp347791431-38] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:05.220 [] [] INFO [qtp347791431-38] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:05.221 [] [] INFO [qtp347791431-39] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:05.222 [] [] INFO [qtp347791431-39] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:05.223 [] [] INFO [qtp347791431-39] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:05.217 [] [] INFO [qtp347791431-41] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:05.224 [] [] INFO [qtp347791431-39] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:05.224 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:05.224 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:05.225 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:05.225 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:05.222 [] [] INFO [qtp347791431-48] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:05.226 [] [] INFO [qtp347791431-48] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:05.226 [] [] INFO [qtp347791431-48] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:05.222 [] [] INFO [qtp347791431-47] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:05.220 [] [] INFO [qtp347791431-45] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:05.226 [] [] INFO [qtp347791431-38] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:05.226 [] [] INFO [qtp347791431-47] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:05.227 [] [] INFO [qtp347791431-47] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:05.226 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:05.224 [] [] INFO [qtp347791431-41] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:05.228 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:05.228 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:05.227 [] [] INFO [qtp347791431-38] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:05.227 [] [] INFO [qtp347791431-45] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:05.229 [] [] INFO [qtp347791431-38] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:05.229 [] [] INFO [qtp347791431-48] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:05.229 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:05.228 [] [] INFO [qtp347791431-41] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:05.230 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:05.230 [] [] INFO [qtp347791431-48] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:05.231 [] [] INFO [qtp347791431-47] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:05.229 [] [] INFO [qtp347791431-38] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:05.231 [] [] INFO [qtp347791431-38] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:05.229 [] [] INFO [qtp347791431-45] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:05.233 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-38] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:05.233 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-38] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:05.233 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-38] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:05.231 [] [] INFO [qtp347791431-47] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:05.234 [] [] INFO [qtp347791431-47] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:05.230 [] [] INFO [qtp347791431-48] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:05.230 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:05.234 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:05.234 [] [] INFO [qtp347791431-48] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:05.234 [] [] INFO [qtp347791431-47] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:05.235 [] [] INFO [qtp347791431-47] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:05.233 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-38] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:05.235 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-38] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:05.236 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-38] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:05.239 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-38] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:05.235 [] [] INFO [qtp347791431-48] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:05.241 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:05.241 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:05.241 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:05.242 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:05.242 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:05.242 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:05.244 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds = ? 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:05.242 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:05.245 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-38] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds = ? 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:05.245 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-38] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0027 
+ >
+2016-09-12 17:55:05.236 [] [] INFO [qtp347791431-45] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:05.246 [] [] INFO [qtp347791431-45] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:05.246 [] [] INFO [qtp347791431-45] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:05.246 [] [] INFO [qtp347791431-45] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:05.247 [] [] INFO [qtp347791431-45] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:05.236 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-47] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:05.248 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds = ? 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:05.248 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-45] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:05.248 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-45] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:05.249 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-45] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:05.249 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-45] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:05.249 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-45] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:05.249 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-45] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:05.249 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-45] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:05.250 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-45] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds = ? 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:05.244 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0023 
+ >
+2016-09-12 17:55:05.252 [] [] INFO [qtp347791431-41] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:05.251 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-45] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0021 
+ >
+2016-09-12 17:55:05.251 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0024 
+ >
+2016-09-12 17:55:05.247 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-47] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:05.252 [] [] INFO [qtp347791431-41] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:05.257 [] [] INFO [qtp347791431-41] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:05.257 [] [] INFO [qtp347791431-41] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:05.258 [] [] INFO [qtp347791431-41] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:05.256 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-47] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:05.258 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:05.260 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:05.260 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:05.261 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:05.261 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:05.261 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:05.259 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-47] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:05.262 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:05.263 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-47] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:05.272 [] [] INFO [qtp347791431-38] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:05.269 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-47] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:05.272 [] [] INFO [qtp347791431-38] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:05.273 [] [] INFO [qtp347791431-39] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:05.271 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds = ? 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:05.274 [] [] INFO [qtp347791431-39] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:05.275 [] [] INFO [qtp347791431-48] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:05.272 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-47] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:05.275 [] [] INFO [qtp347791431-48] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:05.276 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-47] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds = ? 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:05.277 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-47] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0022 
+ >
+2016-09-12 17:55:05.274 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-41] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0025 
+ >
+2016-09-12 17:55:05.282 [] [] INFO [qtp347791431-45] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:05.282 [] [] INFO [qtp347791431-45] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:05.295 [] [] INFO [qtp347791431-48] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:05.297 [] [] INFO [qtp347791431-48] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:05.298 [] [] INFO [qtp347791431-48] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:05.295 [] [] INFO [qtp347791431-39] <GlobalHandler.java [34] - handle> <初始化访问系统功能日志>
+2016-09-12 17:55:05.300 [] [] INFO [qtp347791431-41] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:05.300 [] [] INFO [qtp347791431-39] <GlobalHandler.java [40] - handle> <设置 web 路径>
+2016-09-12 17:55:05.301 [] [] INFO [qtp347791431-48] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:05.301 [] [] INFO [qtp347791431-41] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:05.302 [] [] INFO [qtp347791431-47] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:05.301 [] [] INFO [qtp347791431-48] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:05.301 [] [] INFO [qtp347791431-39] <GlobalHandler.java [44] - handle> <request 随机分配一个请求id>
+2016-09-12 17:55:05.302 [] [] INFO [qtp347791431-48] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:05.302 [] [] INFO [qtp347791431-47] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:05.302 [] [] INFO [qtp347791431-48] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:05.303 [] [] INFO [qtp347791431-48] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:05.303 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:05.304 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:05.304 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:05.304 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:05.305 [] [] INFO [qtp347791431-39] <GlobalHandler.java [77] - handle> <设置Header>
+2016-09-12 17:55:05.305 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:05.305 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:05.305 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [49] - intercept> <获取reqSysLog!>
+2016-09-12 17:55:05.305 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:05.305 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [53] - intercept> <获取用户请求的URI，两种形式，参数传递和直接request获取>
+2016-09-12 17:55:05.306 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [59] - intercept> <druid特殊处理>
+2016-09-12 17:55:05.306 [] [] INFO [qtp347791431-39] <AuthInterceptor.java [64] - intercept> <获取当前用户!>
+2016-09-12 17:55:05.307 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds = ? 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:05.307 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-48] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0028 
+ >
+2016-09-12 17:55:05.307 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [82] - intercept> <获取URI对象!>
+2016-09-12 17:55:05.308 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [85] - intercept> <判断URI是否存在!>
+2016-09-12 17:55:05.309 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [99] - intercept> <URI存在!>
+2016-09-12 17:55:05.309 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [103] - intercept> <需要权限验证!>
+2016-09-12 17:55:05.309 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [128] - intercept> <不需要权限验证、权限认证成功!!!继续处理请求...>
+2016-09-12 17:55:05.310 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [130] - intercept> <是否需要表单重复提交验证!>
+2016-09-12 17:55:05.310 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <AuthInterceptor.java [151] - intercept> <权限认证成功更新日志对象属性!>
+2016-09-12 17:55:05.310 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    select
+        ids,
+        names,
+        isparent,
+        images 
+    from
+        pt_station 
+    where
+        parentStationIds = ? 
+    order by
+        orderIds asc  
+ >
+2016-09-12 17:55:05.313 [03a44ba0aa4e4905bea726d4da976ba5] [admins] INFO [qtp347791431-39] <Dialect.java [129] - fillStatement> <
+ Sql param: 1 
+ param index: 1   param type: String   param value: 8a40c0353fa828a6013fa898d4ac0026 
+ >
+2016-09-12 17:55:05.319 [] [] INFO [qtp347791431-48] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:05.319 [] [] INFO [qtp347791431-48] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:05.323 [] [] INFO [qtp347791431-39] <GlobalHandler.java [85] - handle> <请求处理完毕，计算耗时>
+2016-09-12 17:55:05.323 [] [] INFO [qtp347791431-39] <GlobalHandler.java [105] - handle> <日志添加到入库队列>
+2016-09-12 17:55:05.367 [] [] INFO [little-ant-Thread-SysLog-insertDB-2] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:05.367 [] [] INFO [little-ant-Thread-SysLog-insertDB-7] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:05.367 [] [] INFO [little-ant-Thread-SysLog-insertDB-2] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:05.368 [] [] INFO [little-ant-Thread-SysLog-insertDB-6] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:05.368 [] [] INFO [little-ant-Thread-SysLog-insertDB-2] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 46 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:05.239 
+ param index: 6   param type: Long   param value: 1473674105239 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFZrQkIyTHBSZi8xdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:05.272 
+ param index: 10   param type: Long   param value: 52 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: 9236227bea8e4e3da4c1afb6e29ce04a 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:05.22 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 6 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:05.368 [] [] INFO [little-ant-Thread-SysLog-insertDB-7] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:05.370 [] [] INFO [little-ant-Thread-SysLog-insertDB-7] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 48 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:05.235 
+ param index: 6   param type: Long   param value: 1473674105235 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFZrQkIyTHBSZi8xdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:05.273 
+ param index: 10   param type: Long   param value: 51 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: e7822f7accb343489e9162367079300f 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:05.222 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 3 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:05.369 [] [] INFO [little-ant-Thread-SysLog-insertDB-8] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:05.368 [] [] INFO [little-ant-Thread-SysLog-insertDB-9] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:05.372 [] [] INFO [little-ant-Thread-SysLog-insertDB-8] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:05.368 [] [] INFO [little-ant-Thread-SysLog-insertDB-6] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:05.373 [] [] INFO [little-ant-Thread-SysLog-insertDB-6] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 48 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:05.244 
+ param index: 6   param type: Long   param value: 1473674105244 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFZrQkIyTHBSZi8xdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:05.275 
+ param index: 10   param type: Long   param value: 49 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: a1c211824dfc44438b1818e37f03e103 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:05.226 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 1 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:05.372 [] [] INFO [little-ant-Thread-SysLog-insertDB-9] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:05.371 [] [] INFO [little-ant-Thread-SysLog-insertDB-10] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:05.376 [] [] INFO [little-ant-Thread-SysLog-insertDB-10] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:05.371 [] [] INFO [little-ant-Thread-SysLog-insertDB-1] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:05.377 [] [] INFO [little-ant-Thread-SysLog-insertDB-3] <ThreadSysLog.java [91] - run> <保存操作日志到数据库start......>
+2016-09-12 17:55:05.377 [] [] INFO [little-ant-Thread-SysLog-insertDB-3] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:05.379 [] [] INFO [little-ant-Thread-SysLog-insertDB-6] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:05.376 [] [] INFO [little-ant-Thread-SysLog-insertDB-10] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 20 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:05.306 
+ param index: 6   param type: Long   param value: 1473674105306 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFhGMkxkWVJMSnNBT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:05.319 
+ param index: 10   param type: Long   param value: 22 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: c28daf5e8cd3439295c0303d79d4988d 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:05.297 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 2 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:05.375 [] [] INFO [little-ant-Thread-SysLog-insertDB-9] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 48 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:05.25 
+ param index: 6   param type: Long   param value: 1473674105250 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFZrQkIyTHBSZi8xdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:05.282 
+ param index: 10   param type: Long   param value: 55 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: 7c72b8f10dd640d9a42df896a36864ba 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:05.227 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 7 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:05.373 [] [] INFO [little-ant-Thread-SysLog-insertDB-8] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 74 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:05.264 
+ param index: 6   param type: Long   param value: 1473674105264 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFZrQkIyTHBSZi8xdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:05.301 
+ param index: 10   param type: Long   param value: 77 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: 47cb9a92bc7a47249a172d2c88e506cd 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:05.224 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 3 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:05.380 [] [] INFO [little-ant-Thread-SysLog-insertDB-7] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:05.380 [] [] INFO [little-ant-Thread-SysLog-insertDB-2] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:05.380 [] [] INFO [little-ant-Thread-SysLog-insertDB-3] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 22 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:05.31 
+ param index: 6   param type: Long   param value: 1473674105310 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFhGMkxkWVJMSnNBT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:05.323 
+ param index: 10   param type: Long   param value: 23 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: b1286f7b7a7c40ebb275baac8e827b55 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:05.3 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 1 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:05.378 [] [] INFO [little-ant-Thread-SysLog-insertDB-1] <SqlReporter.java [58] - invoke> <
+ Sql: 
+ 
+    insert 
+    into
+        "pt_syslog"
+        ("accept", "acceptencoding", "acceptlanguage", "actionhaoshi", "actionstartdate", "actionstarttime", "connection", "cookie", "enddate", "haoshi", "host", "ids", "ips", "method", "operatorids", "referer", "requestpath", "startdate", "status", "useragent", "userids", "version", "viewhaoshi", "xrequestedwith") 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+ >
+2016-09-12 17:55:05.393 [] [] INFO [little-ant-Thread-SysLog-insertDB-1] <Dialect.java [102] - fillStatement> <
+ Sql param: 24 
+ param index: 1   param type: String   param value: text/plain, */*; q=0.01 
+ param index: 2   param type: String   param value: gzip, deflate 
+ param index: 3   param type: String   param value: zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1 
+ param index: 4   param type: Long   param value: 74 
+ param index: 5   param type: Timestamp   param value: 2016-09-12 17:55:05.275 
+ param index: 6   param type: Long   param value: 1473674105275 
+ param index: 7   param type: String   param value: keep-alive 
+ param index: 8   param type: String   param value: JSESSIONID=1a8x2o65nokfmx7hzhudzj76v; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=akgyS1liaHRDeFZrQkIyTHBSZi8xdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS 
+ param index: 9   param type: Timestamp   param value: 2016-09-12 17:55:05.302 
+ param index: 10   param type: Long   param value: 76 
+ param index: 11   param type: String   param value: 127.0.0.1:8899 
+ param index: 12   param type: String   param value: b6d970de7cc24959b7b525894ecf8806 
+ param index: 13   param type: String   param value: 127.0.0.1 
+ param index: 14   param type: String   param value: POST 
+ param index: 15   param type: String   param value: 09b6ce29313c4051ba765de516a9b283 
+ param index: 16   param type: String   param value: http://127.0.0.1:8899/platform/ 
+ param index: 17   param type: String   param value: /platform/station/treeData 
+ param index: 18   param type: Timestamp   param value: 2016-09-12 17:55:05.226 
+ param index: 19   param type: String   param value: 1 
+ param index: 20   param type: String   param value: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0 
+ param index: 21   param type: String   param value: 03a44ba0aa4e4905bea726d4da976ba5 
+ param index: 22   param type: Long   param value: 0 
+ param index: 23   param type: Long   param value: 2 
+ param index: 24   param type: String   param value: XMLHttpRequest 
+ >
+2016-09-12 17:55:05.396 [] [] INFO [little-ant-Thread-SysLog-insertDB-10] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:05.402 [] [] INFO [little-ant-Thread-SysLog-insertDB-8] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:05.402 [] [] INFO [little-ant-Thread-SysLog-insertDB-3] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:05.402 [] [] INFO [little-ant-Thread-SysLog-insertDB-9] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:05.408 [] [] INFO [little-ant-Thread-SysLog-insertDB-1] <ThreadSysLog.java [93] - run> <保存操作日志到数据库end......>
+2016-09-12 17:55:11.451 [] [] INFO [Thread-1] <JFinalConfig.java [251] - beforeJFinalStop> <beforeJFinalStop 释放日志入库线程>
+2016-09-12 17:55:11.456 [] [] INFO [Thread-1] <JFinalConfig.java [254] - beforeJFinalStop> <beforeJFinalStop 释放系统负载抓取线程>
+2016-09-12 17:55:11.460 [] [] INFO [Thread-1] <TimerResources.java [52] - stop> <任务退出开始>
+2016-09-12 17:55:11.465 [] [] INFO [Thread-1] <TimerResources.java [54] - stop> <任务退出成功>
+2016-09-12 17:55:11.471 [] [] INFO [Thread-1] <JFinalConfig.java [257] - beforeJFinalStop> <beforeJFinalStop 数据清理>
+2016-09-12 17:55:11.476 [] [] INFO [Thread-1] <DataClear.java [71] - stop> <任务退出开始>
+2016-09-12 17:55:11.481 [] [] INFO [Thread-1] <DataClear.java [73] - stop> <任务退出成功>

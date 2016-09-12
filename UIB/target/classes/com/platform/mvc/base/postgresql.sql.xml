@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	postgresql
+-->
+<sql-statement namespace="platform.postgresql">
+	
+	<!-- 查询所有数据库名称 -->
+	<sql id="getDatabase">
+		<![CDATA[ 
+        	select datname from pg_database
+    	]]>
+	</sql>
+	
+	<!-- 查询所有表名称 -->
+	<sql id="getTables">
+		<![CDATA[ 
+        	select   
+        		tablename from  pg_tables   
+			where  
+				tablename not like 'pg%'
+				and tablename not like 'sql_%' 
+			order by
+				tablename asc
+    	]]>
+	</sql>
+	
+	<!-- 查询所有列名称 -->
+	<sql id="getColumns">
+		<![CDATA[ 
+        	select 
+        		column_name, data_type, character_maximum_length
+			from 
+				information_schema.columns
+			where 
+				table_name = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询表名注释和列注释 -->
+	<sql id="getColumnsInfo">
+		<![CDATA[ 
+        	select 
+				tbl.tablename, des.objsubid, des.description,
+				(select att.attname from pg_attribute att where c.oid = att.attrelid and des.objsubid = att.attnum) attname
+			from 
+				pg_tables as tbl 
+				inner join pg_class c ON tbl.tablename = c.relname
+				left join pg_description as des ON c.oid = des.objoid
+			where 
+				tbl.schemaname != 'pg_catalog' AND tbl.schemaname != 'information_schema' and tbl.tablename = ?
+			order by des.objsubid asc
+    	]]>
+	</sql>
+	
+	<!-- 递归查询岗位树 -->
+	<sql id="treeSql">
+		<![CDATA[ 
+        	WITH RECURSIVE ptTree AS (   
+				SELECT * FROM pt_station WHERE (parentstationids is null or parentstationids = '')
+     			union   ALL   
+       			SELECT pt_station.* FROM pt_station, ptTree WHERE pt_station.parentstationids = ptTree.ids   
+			) 
+			SELECT * FROM ptTree
+    	]]>
+	</sql>
+	
+</sql-statement>

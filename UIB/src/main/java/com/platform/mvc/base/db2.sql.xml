@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	db2
+-->
+<sql-statement namespace="platform.db2">
+	
+	<!-- 
+		查询表注释 
+	-->
+	<sql id="getTableComments">
+		<![CDATA[ 
+        	select 
+        		lower(t.name) name, lower(t.remarks) remarks
+        	from 
+        		SYSIBM.SYSTABLES t where creator = ? and name = upper(?)
+    	]]>
+	</sql>
+	
+	<!-- 
+		查询列和注释
+	-->
+	<sql id="getColumnComments">
+		<![CDATA[ 
+        	select  
+				lower(t.colname) colname, lower(t.typename) typename, t.length, t.remarks
+			from 
+				syscat.columns t 
+			where 
+				tabschema = ? 
+				and tabname = upper(?)
+    	]]>
+	</sql>
+	
+</sql-statement>

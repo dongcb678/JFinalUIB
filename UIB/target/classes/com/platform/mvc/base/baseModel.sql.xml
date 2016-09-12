@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	baseModel公共sql
+-->
+<sql-statement namespace="platform.baseModel">
+	
+	<!-- 通用查询 -->
+	<sql id="select">
+		<![CDATA[ 
+        	select ${column} from ${table} where ${condition} = ?
+    	]]>
+	</sql>
+	
+	<!-- 通用更新 -->
+	<sql id="update">
+		<![CDATA[ 
+        	update ${table} set ${column} = ? where ${condition} = ?
+    	]]>
+	</sql>
+	
+	<!-- 通用删除 -->
+	<sql id="delete">
+		<![CDATA[ 
+        	delete from ${table} where ${column} = ?
+    	]]>
+	</sql>
+	
+	<!-- 通用删除 -->
+	<sql id="deleteIn">
+		<![CDATA[ 
+        	delete from ${table} where ids in( ${sqlIn} )
+    	]]>
+	</sql>
+	
+	<!-- 通用删除 -->
+	<sql id="deleteOr">
+		<![CDATA[ 
+        	delete from ${table} where ${sqlOr}
+    	]]>
+	</sql>
+	
+	<!-- 分页公共select -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select * 
+    	]]>
+	</sql>
+	
+</sql-statement>

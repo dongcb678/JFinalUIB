@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	sqlserver
+-->
+<sql-statement namespace="platform.sqlserver">
+	
+	<!-- 查询所有表名称：
+		USE information_schema; 
+	-->
+	<sql id="getTables">
+		<![CDATA[ 
+        	select 
+        		a.name, b.value 
+        	from 
+				sysobjects a
+				left join sys.extended_properties b on a.id=b.major_id and b.minor_id=0
+			where 
+				xtype='U' 
+				and a.name = ?
+    	]]>
+	</sql>
+	
+	<!-- 
+		查询所有列名称：
+	-->
+	<sql id="getColumns">
+		<![CDATA[ 
+        	select
+				a.name, b.name type, a.length, isnull(g.[value],'') remarks
+			from 
+				syscolumns a
+				left join  systypes b on a.xusertype=b.xusertype
+				inner join sysobjects d on a.id=d.id and d.xtype='U' and  d.name <> 'dtproperties'
+				left join sys.extended_properties g on a.id=G.major_id and a.colid = g.minor_id  
+			where 
+				d.name = ? 
+			order by 
+				a.id, a.colorder
+    	]]>
+	</sql>
+
+</sql-statement>

@@ -1,0 +1,17 @@
+package ${package};
+
+/**
+ * 国际化资源常量
+ * @author 董华健
+ */
+public interface ${className} {
+
+	<% for(entry in i18nMap){ %>
+	/**
+	 * ${entry.value} 
+	 */
+	public static final String ${ strutil.replace (entry.key, ".", "_")} = "${entry.key}";
+	
+	<% } %>
+
+}

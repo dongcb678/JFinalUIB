@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.userGroup">
+	
+	<!-- 根据用户、分组ids查询 -->
+	<sql id="findByUserAndGroupIds">
+		<![CDATA[ 
+        	select 
+        		ug.*, u.username, g.ids gid, g.names gname
+        		
+        	from 
+        		pt_usergroup ug
+        		left join pt_group g on g.ids = ug.groupids
+        		left join pt_user u on u.ids = ug.userids
+        		
+        	where 
+        		ug.userids = ? and ug.groupids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据用户ids查询 -->
+	<sql id="findGroupIdsByUserIds">
+		<![CDATA[ 
+        	select 
+        		ug.groupids
+        		
+        	from 
+        		pt_usergroup ug
+        		
+        	where 
+        		ug.userids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据用户ids查询 -->
+	<sql id="findByUserIds">
+		<![CDATA[ 
+        	select 
+        		ug.*, u.username, g.ids gid, g.names gname
+        		
+        	from 
+        		pt_usergroup ug
+        		left join pt_group g on g.ids = ug.groupids
+        		left join pt_user u on u.ids = ug.userids
+        		
+        	where 
+        		ug.userids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据分组ids查询 -->
+	<sql id="findByGroupIds">
+		<![CDATA[ 
+			select 
+        		ug.*, u.username, g.ids gid, g.names gname
+        		
+        	from 
+        		pt_usergroup ug
+        		left join pt_group g on g.ids = ug.groupids
+        		left join pt_user u on u.ids = ug.userids
+        		
+        	where 
+        		ug.groupids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据用户ids查询 -->
+	<sql id="findByNotUserIds">
+		<![CDATA[ 
+			select 
+        		g.*
+        		
+        	from 
+        		pt_group g
+        		
+        	where 
+        		g.ids not in ( select ug.groupids from pt_usergroup ug where ug.userids = ? )
+    	]]>
+	</sql>
+	
+	<!-- 根据分组ids查询 -->
+	<sql id="findByNotGroupIds">
+		<![CDATA[ 
+			select 
+        		ug.*, u.username, g.ids gid, g.names gname
+        		
+        	from 
+        		pt_usergroup ug
+        		left join pt_group g on g.ids = ug.groupids
+        		left join pt_user u on u.ids = ug.userids
+        		
+        	where 
+        		ug.groupids != ?
+    	]]>
+	</sql>
+	
+</sql-statement>
