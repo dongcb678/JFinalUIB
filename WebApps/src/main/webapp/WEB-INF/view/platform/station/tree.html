@@ -73,7 +73,7 @@
 			var data = { "ids" : treeNode.id };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != treeNode.id){
-				toastr.warning("删除<" + treeNode.name + ">岗位失败！");
+				common_modals.alert("删除<" + treeNode.name + ">岗位失败！");
 				result = false;
 			}
 		}
@@ -86,7 +86,7 @@
 		if (treeNode.name == newName) {
 			return true;
 		}else if (newName.length == 0) {
-			toastr.warning("岗位名称不能为空！");
+			common_modals.alert("岗位名称不能为空！");
 			return false;
 		}else{
 			var url = "/platform/station/update";
@@ -95,7 +95,7 @@
 			if(reData == treeNode.id){
 				return true;
 	     	}else{
-				toastr.warning("修改<" + treeNode.name + ">岗位名称失败！");
+				common_modals.alert("修改<" + treeNode.name + ">岗位名称失败！");
 				return false;
 	     	}
 			return true;
@@ -130,7 +130,7 @@
 				var zTree = $.fn.zTree.getZTreeObj("zTreeStationContent");
 	     		zTree.addNodes(treeNode, {id : reData, pId : treeNode.id, name : addName});
 	     	}else{
-	     		toastr.warning("新增岗位失败！");
+	     		common_modals.alert("新增岗位失败！");
 	     	}
 			
 			return false;
@@ -366,7 +366,7 @@
 			
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != dragId){
-	     		toastr.warning("移动岗位失败！");
+	     		common_modals.alert("移动岗位失败！");
 	     	}
 		}
 	}

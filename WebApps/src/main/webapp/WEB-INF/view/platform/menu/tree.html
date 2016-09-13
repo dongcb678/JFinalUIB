@@ -74,7 +74,7 @@
 			var data = { "ids" : treeNode.id };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != treeNode.id){
-				toastr.warning("删除<" + treeNode.name + ">菜单失败！");
+				common_modals.alert("删除<" + treeNode.name + ">菜单失败！");
 			}else{
 				result = true;
 			}
@@ -88,7 +88,7 @@
 		if (treeNode.name == newName) {
 			return true;
 		}else if (newName.length == 0) {
-			toastr.warning("菜单名称不能为空！");
+			common_modals.alert("菜单名称不能为空！");
 			return false;
 		}else{
 			var url = "/platform/menu/update";
@@ -97,7 +97,7 @@
 			if(reData == treeNode.id){
 				return true;
 	     	}else{
-				toastr.warning("修改<" + treeNode.name + ">菜单名称失败！");
+				common_modals.alert("修改<" + treeNode.name + ">菜单名称失败！");
 				return false;
 	     	}
 		}
@@ -126,7 +126,7 @@
 				var zTree = $.fn.zTree.getZTreeObj("zTreeMenuContent");
 	     		zTree.addNodes(treeNode, {id : reData, pId : treeNode.id, name : addName});
 	     	}else{
-	     		toastr.warning("新增菜单失败！");
+	     		common_modals.alert("新增菜单失败！");
 	     	}
 			
 			return false;
@@ -400,7 +400,7 @@
 			
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != dragId){
-	     		toastr.warning("移动菜单失败！");
+	     		common_modals.alert("移动菜单失败！");
 	     	}
 		}
 	}
