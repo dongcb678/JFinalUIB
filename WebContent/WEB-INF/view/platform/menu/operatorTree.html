@@ -213,10 +213,10 @@
 		var reData = common_ajax.ajaxFunc(url, data, "json");
 		
 		if(reData != "error"){
-			operatorIds = (data.operatorids == null? '' : reData.operatorids); 
+			operatorIds = (reData.operatorids == null ? '' : reData.operatorids); 
 			checkedOperatorIds = operatorIds;
      	}else{
-			toastr.warning("查询菜单对应的功能失败！");
+			common_modals.alert("查询菜单对应的功能失败！");
      	}
 	}
 
@@ -228,7 +228,7 @@
 			var data = { "ids" : "${paramMap.ids!}", "operatorIds" : checkedOperatorIds};
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != "${paramMap.ids!}"){
-				toastr.warning("设置菜单对应功能失败！");
+				common_modals.alert("设置菜单对应功能失败！");
 	     	}
 		}
 	}

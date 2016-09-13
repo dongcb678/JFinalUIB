@@ -75,7 +75,7 @@
 			
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData == "false"){
-				toastr.warning("删除<" + treeNode.name + ">部门失败！");
+				common_modals.alert("删除<" + treeNode.name + ">部门失败！");
 			}else{
 				result = true;
 			}
@@ -89,7 +89,7 @@
 		if (treeNode.name == newName) {
 			return true;
 		}else if (newName.length == 0) {
-			toastr.warning("部门名称不能为空！");
+			common_modals.alert("部门名称不能为空！");
 			return false;
 		}else{
 			var url = "/platform/dept/update";
@@ -99,7 +99,7 @@
 			if(reData == treeNode.id){
 				return true;
 	     	}else{
-	     		toastr.warning("修改<" + treeNode.name + ">部门名称失败！");
+	     		common_modals.alert("修改<" + treeNode.name + ">部门名称失败！");
 				return false;
 	     	}
 		}
@@ -133,7 +133,7 @@
 				var zTree = $.fn.zTree.getZTreeObj("zTreeDeptContent");
 	     		zTree.addNodes(treeNode, {id : reData, pId : treeNode.id, name : addName});
 	     	}else{
-	     		toastr.warning("新增部门失败！");
+	     		common_modals.alert("新增部门失败！");
 	     	}
 			
 			return false;
@@ -368,7 +368,7 @@
 			
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != dragId){
-	     		toastr.warning("移动部门失败！");
+	     		common_modals.alert("移动部门失败！");
 	     	}
 		}
 	}

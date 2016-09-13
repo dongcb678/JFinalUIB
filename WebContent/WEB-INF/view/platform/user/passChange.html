@@ -6,13 +6,13 @@
 		var newPass1 = $("#newPass1").val();
 		var newPass2 = $("#newPass2").val();
 		if(newPass1 != newPass2){
-			toastr.warning("两次输入密码不一致，请从新输入！");
+			common_modals.alert("两次输入密码不一致，请从新输入！");
 	 		return false;
 		}
 		
 		var errorCount = platform_verify.formVali(document.getElementById("passChangeForm"));
 		if(errorCount != 0){
-			toastr.warning("有" + errorCount + "处错误，请修正！");
+			common_modals.alert("有" + errorCount + "处错误，请修正！");
 	 		return false;
 		}
 		

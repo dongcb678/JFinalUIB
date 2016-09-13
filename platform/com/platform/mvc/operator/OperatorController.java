@@ -1,9 +1,12 @@
 package com.platform.mvc.operator;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 import com.platform.annotation.Controller;
+import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
 
 /**
@@ -17,6 +20,8 @@ public class OperatorController extends BaseController {
 	private static Logger log = Logger.getLogger(OperatorController.class);
 	
 	private OperatorService operatorService;
+
+	private String moduleIds; // 功能对应的模块
 	
 	/**
 	 * 功能管理列表页
@@ -68,6 +73,21 @@ public class OperatorController extends BaseController {
 		redirect("/platform/operator");
 	}
 
+	/**
+	 * 功能treeData
+	 */
+	public void treeData() {
+		List<ZtreeNode> nodeList = operatorService.treeData(getCxt(), moduleIds);
+		renderJson(nodeList);
+	}
+	
+	/**
+	 * 功能treeData，一次性加载
+	 */
+	public void tree() {
+		List<ZtreeNode> nodeList = operatorService.tree(getCxt());
+		renderJson(nodeList);
+	}
 }
 
 
