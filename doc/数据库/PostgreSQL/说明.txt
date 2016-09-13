@@ -1,0 +1,5 @@
+
+jfinaluib.backup 是自带的pgAdmin导出的，建议用它新建一个库，然后恢复文件
+
+
+

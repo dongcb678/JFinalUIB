@@ -1,0 +1,10 @@
+
+/platform/resources/refreshParamCache
+/platform/resources/refreshSqlCache
+
+/platform/login/lock_screen.html
+
+
+URL简化：剩下DB2和sqlserver没有修改
+
+update pt_operator set url = replace(url, '/jf/', '/') where url like '%/jf/%'
