@@ -27,6 +27,7 @@ import com.jfinal.plugin.activerecord.tx.TxByActionKeys;
 import com.jfinal.plugin.activerecord.tx.TxByMethodRegex;
 import com.jfinal.plugin.activerecord.tx.TxByMethods;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.druid.DruidStatViewHandler;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.platform.constant.ConstantCache;
@@ -226,6 +227,9 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 * 配置处理器
 	 */
 	public void configHandler(Handlers handlers) {
+		log.info("configHandler 全局配置处理器，主要是druid监控页面展示");
+		handlers.add(new DruidStatViewHandler("/platform/druid"));
+		
 		log.info("configHandler 全局配置处理器，主要是记录日志和request域值处理");
 		handlers.add(new GlobalHandler());
 	}

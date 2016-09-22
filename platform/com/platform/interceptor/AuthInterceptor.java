@@ -56,14 +56,9 @@ public class AuthInterceptor implements Interceptor {
 			uri = ToolWeb.getParam(request, ConstantWebContext.request_toUrl); // 否则就是toUrl的值
 		}
 
-		log.info("druid特殊处理");
-		if (uri.startsWith("/platform/druid")) {
-			uri = "/platform/druid/iframe.html"; // 所有的druid授权都绑定到一个iframe.html授权
-		}
-
 		log.info("获取当前用户!");
 		boolean userAgentVali = true; // 是否验证userAgent，默认是
-		if (uri.equals("/platform/ueditor") || uri.equals("/platform/upload")) { // 针对ueditor特殊处理
+		if (uri.equals("/platform/ueditor") || uri.equals("/platform/upload")) { // 针对ueditor特殊处理，flash上传userAgent和浏览器并不一致
 			userAgentVali = false;
 		}
 		User user = getCurrentUser(request, response, userAgentVali);// 当前登录用户

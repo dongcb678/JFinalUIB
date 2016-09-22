@@ -21,20 +21,6 @@
 		<url-pattern>/se/log4j</url-pattern>
 	</servlet-mapping>
 	
-	<!-- Druid 数据源查看 -->
-	<servlet>
-		<servlet-name>DruidStatView</servlet-name>
-		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
-		<init-param>
-			<param-name>resetEnable</param-name>
-			<param-value>false</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DruidStatView</servlet-name>
-		<url-pattern>/druid/*</url-pattern>
-	</servlet-mapping>
-	
 	<!-- URL 缓存 -->
 	<filter>
 		<filter-name>pageCacheFilter</filter-name>
