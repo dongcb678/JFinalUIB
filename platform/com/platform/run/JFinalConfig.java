@@ -132,7 +132,13 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		
 		log.info("configPlugin 配置ActiveRecordPlugin插件");
 		ActiveRecordPlugin arpMain = new ActiveRecordPlugin(ConstantInit.db_dataSource_main, druidPlugin);
-		//arpMain.setTransactionLevel(4);//事务隔离级别
+		/**
+		 * Connection.TRANSACTION_READ_UNCOMMITTED 最底级别：只保证不会读到非法数据，上述3个问题有可能发生
+		 * Connection.TRANSACTION_READ_COMMITTED 默认级别：可以防止脏读
+		 * Connection.TRANSACTION_REPEATABLE_READ 可以防止脏读和不可重复读取
+		 * Connection.TRANSACTION_SERIALIZABLE 最高级别：防止上述3种情况，事务串行执行，慎用
+		 */
+		//arpMain.setTransactionLevel(4);//默认事务隔离级别4
 		boolean devMode = Boolean.parseBoolean(PropKit.get(ConstantInit.config_devMode));
 		arpMain.setDevMode(devMode); // 设置开发模式
 		arpMain.setShowSql(devMode); // 是否显示SQL
