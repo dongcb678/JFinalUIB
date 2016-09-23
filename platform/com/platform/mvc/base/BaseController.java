@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.render.JsonRender;
 import com.platform.constant.ConstantInit;
@@ -255,6 +256,33 @@ public abstract class BaseController extends Controller {
 		return ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
 	}
 
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @return
+	 */
+	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass) {
+		String modelName = StrKit.firstCharToLowerCase(modelClass.getSimpleName());
+		keepModels(modelClass, modelName);
+		return this;
+	}
+	
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @param modelName
+	 * @return
+	 */
+	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass, String modelName) {
+		if (StrKit.notBlank(modelName)) {
+			List<T> model = getModels(modelClass, modelName);
+			setAttr(modelName, model);
+		} else {
+			keepPara();
+		}
+		return this;
+	}
+	
 	/**
 	 * 表单数组映射Record
 	 * @param modelClass
