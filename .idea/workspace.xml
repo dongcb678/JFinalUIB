@@ -79,7 +79,7 @@
         <option value="$PROJECT_DIR$/JFinalUIBV2.iml" />
         <option value="$PROJECT_DIR$/platform/com/platform/config/run/JfinalConfig.java" />
         <option value="$PROJECT_DIR$/platform/com/platform/mvc/user/UserController.java" />
-        <option value="$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp" />
+        <option value="$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp" />
       </list>
     </option>
   </component>
@@ -397,7 +397,7 @@
               <map />
             </option>
             <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps" />
+            <option name="workingDirPath" value="$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/WebApps" />
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
@@ -423,7 +423,7 @@
               <map />
             </option>
             <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/UIB" />
+            <option name="workingDirPath" value="$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/UIB" />
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
@@ -449,7 +449,7 @@
               <map />
             </option>
             <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2" />
+            <option name="workingDirPath" value="$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2" />
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
@@ -809,7 +809,7 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="JfinalUIBV2-remoteDebug" type="Remote" factoryName="Remote">
+    <configuration default="false" name="JfinalUIBV3-remoteDebug" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
@@ -900,7 +900,7 @@
     </configuration>
     <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Application.JfinalConfig" />
-      <item index="1" class="java.lang.String" itemvalue="Remote.JfinalUIBV2-remoteDebug" />
+      <item index="1" class="java.lang.String" itemvalue="Remote.JfinalUIBV3-remoteDebug" />
       <item index="2" class="java.lang.String" itemvalue="Tomcat Server.tomcat7" />
       <item index="3" class="java.lang.String" itemvalue="Maven.WebApps [jetty:run]" />
       <item index="4" class="java.lang.String" itemvalue="Maven.WebApps [jetty:run] (1)" />
@@ -1060,12 +1060,12 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp">
+    <entry file="file://$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="2" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="198" />
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp">
+    <entry file="file://$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="2" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="198" />
       </provider>
@@ -1245,12 +1245,12 @@
         <state line="189" column="10" selection-start="5871" selection-end="5871" vertical-scroll-proportion="0.7291667" vertical-offset="2071" max-vertical-offset="3006" />
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/pom.xml">
+    <entry file="file://$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="0" selection-start="581" selection-end="581" vertical-scroll-proportion="0.35526314" vertical-offset="0" max-vertical-offset="912" />
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/git/JfinalUIBV2_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp">
+    <entry file="file://$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/WebApps/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="2" selection-start="222" selection-end="222" vertical-scroll-proportion="0.10169491" vertical-offset="0" max-vertical-offset="885" />
       </provider>

@@ -1,6 +1,6 @@
 JFinal高级学习交流QQ群：309647612
 
-JFinalUIB现在分为两个版本:
+JFinalUIB现在分为3个版本:
 
 	JFinalUIB_V1版本：基于JFinal1.9 + charisma UI（老版本，几乎停止维护）
 	JFinalUIB_V2版本：基于JFinal2.2 + rapido UI

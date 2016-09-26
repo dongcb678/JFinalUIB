@@ -2,9 +2,9 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	id="JFinalUIB" version="3.0">
+	id="JfinalUIBV3" version="3.0">
 	
-	<display-name>JfinalUIBV2</display-name>
+	<display-name>JfinalUIBV3</display-name>
 	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
