@@ -75,6 +75,9 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		//constants.setJsonFactory(JFinalJsonFactory.me()); // 默认无需设置
 		//constants.setJsonFactory(FastJsonFactory.me()); // FastJson
 		//constants.setJsonFactory(JacksonFactory.me()); // Jackson
+		
+		//log.info("configConstant 设置log工厂类");
+		//constants.setLogFactory(new LogBackFactory()); // 参考Log4jLogFactory、Log4jLog实现LogBackFactory、LogBackLog
 
 		log.info("configConstant 设置path相关");
 		constants.setBaseUploadPath(PathKit.getWebRootPath()); // 上传公共路径 + File.separator + "files"
