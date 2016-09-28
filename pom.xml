@@ -29,7 +29,7 @@
 		<module>WebApps</module>
 	</modules>
 	
-	<!--  -->
+	<!--  
     <repositories>
         <repository>
             <id>nexus</id>
@@ -37,5 +37,6 @@
         	<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
         </repository>
     </repositories>
+    -->
     
 </project>

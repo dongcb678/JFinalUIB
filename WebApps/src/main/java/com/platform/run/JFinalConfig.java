@@ -265,7 +265,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 * 2. idea 中运行webAppDir路径可能需要适当调整，可以设置为WebContent的绝对路径
 	 */
 	public static void main(String[] args) {
-		JFinal.start("WebContent", 8899, "/", 5);
+		JFinal.start("src/main/webapp", 8899, "/", 5);
 		//JFinal.start("D:\\DevelopmentTool\\IntelliJIDEA14.1.4\\IdeaProjects\\JFinalUIBV3\\JFinalUIBV3\\WebContent", 99, "/", 5);
 	}
 }

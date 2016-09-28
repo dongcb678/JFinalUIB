@@ -49,6 +49,11 @@ public abstract class ToolDirFile {
 	public static String getLibPath() {
 		if (libPath == null) {
 			libPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "lib";
+			
+			/**
+			 * maven模块化时用main方法运行时需要启用下面一行
+			 */
+			//libPath = PathKit.getRootClassPath().replace("classes", "JFinalUIBV3") + File.separator + "WEB-INF" + File.separator + "lib";
 		}
 		return libPath;
 	}
