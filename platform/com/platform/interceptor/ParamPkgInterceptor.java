@@ -203,37 +203,8 @@ public class ParamPkgInterceptor implements Interceptor {
 			
 			// 封装参数值到全局变量
 			String type = field.getType().getSimpleName();
-			if(type.equals("String")){
-				field.set(controller, value);
-			
-			}else if(type.equals("int")){
-				field.set(controller, Integer.parseInt(value));
-				
-			}else if(type.equals("Date")){
-				int dateLength = value.length();
-				if(dateLength == ToolDateTime.pattern_ym.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ym));
-				
-				}else if(dateLength == ToolDateTime.pattern_ymd.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd));
-				
-				}else if(dateLength == ToolDateTime.pattern_ymd_hm.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hm));
-				
-				}else if(dateLength == ToolDateTime.pattern_ymd_hms.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms));
-				
-				}else if(dateLength == ToolDateTime.pattern_ymd_hms_s.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms_s));
-				}
-				
-			}else if(type.equals("BigDecimal")){
-				BigDecimal bdValue = new BigDecimal(value);
-				field.set(controller, bdValue);
-				
-			}else{
-				log.debug("没有解析到有效字段类型");
-			}
+			Object valueObj = dataParse(type, value); // 数据类型解析
+			field.set(controller, valueObj);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
@@ -274,6 +245,92 @@ public class ParamPkgInterceptor implements Interceptor {
 			e1.printStackTrace();
 		} finally {
 			field.setAccessible(false);
+		}
+	}
+	
+	/**
+	 * 数据类型解析
+	 * @param type
+	 * @param value
+	 * @return
+	 */
+	private Object dataParse(String type, String value){
+		switch (type) {
+		case "String":
+			return value;
+
+		case "int":
+			return Integer.parseInt(value);
+
+		case "Integer":
+			return Integer.valueOf(value);
+
+		case "long":
+			return Long.parseLong(value);
+
+		case "Long":
+			return Long.valueOf(value);
+
+		case "double":
+			return Double.parseDouble(value);
+
+		case "Double":
+			return Double.valueOf(value);
+
+		case "float":
+			return Float.parseFloat(value);
+
+		case "Float":
+			return Float.valueOf(value);
+
+		case "short":
+			return Short.parseShort(value);
+			
+		case "Short":
+			return Short.valueOf(value);
+			
+		case "BigDecimal":
+			BigDecimal bdValue = new BigDecimal(value);
+			return bdValue;
+			
+		case "boolean":
+			return Boolean.getBoolean(value);
+
+		case "Boolean":
+			return Boolean.valueOf(value);
+
+		case "char":
+			return value.toCharArray()[0];
+
+		case "Character":
+			return Character.valueOf(value.toCharArray()[0]);
+
+		case "Date":
+			int dateLength = value.length();
+			switch (dateLength) {
+			case ToolDateTime.pattern_ym_length:
+				return ToolDateTime.parse(value, ToolDateTime.pattern_ym);
+
+			case ToolDateTime.pattern_ymd_length:
+				return ToolDateTime.parse(value, ToolDateTime.pattern_ymd);
+
+			case ToolDateTime.pattern_ymd_hm_length:
+				return ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hm);
+
+			case ToolDateTime.pattern_ymd_hms_length:
+				return ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms);
+
+			case ToolDateTime.pattern_ymd_hms_s_length:
+				return ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms_s);
+
+			default:
+				log.debug("没有解析到有效字段日期长度类型");
+				return null;
+			}
+			
+		default:
+			log.debug("没有解析到有效字段类型");
+			return null;
 		}
 	}
 	
