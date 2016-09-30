@@ -115,7 +115,7 @@ public abstract class BaseHandler {
 		paraMap.put("dataTypes", getJataTypeList(tableName));
 		
 		String filePath = System.getProperty("user.dir") + "/" + GenerateCode.srcFolder + "/" + packages.replace(".", "/") + "/" + className + ".java";
-		createFileByTemplete("model.html", paraMap, filePath);
+		createFileByTemplete("java/model.html", paraMap, filePath);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public abstract class BaseHandler {
 		paraMap.put("dataTypes", getJataTypeList(tableName));
 		
 		String filePath = System.getProperty("user.dir") + "/" + GenerateCode.srcFolder + "/" + packages.replace(".", "/") + "/" + className + "Dto.java";
-		createFileByTemplete("dto.html", paraMap, filePath);
+		createFileByTemplete("java/dto.html", paraMap, filePath);
 	}
 
 	/**
@@ -153,7 +153,7 @@ public abstract class BaseHandler {
 		paraMap.put("tableName", tableName);
 		
 		String filePath = System.getProperty("user.dir") + "/" + GenerateCode.srcFolder + "/" + packages.replace(".", "/") + "/" + classNameSmall + ".sql.xml";
-		createFileByTemplete("sql.html", paraMap, filePath);
+		createFileByTemplete("java/sql.html", paraMap, filePath);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public abstract class BaseHandler {
 		paraMap.put("tableName", tableName);
 		
 		String filePath = System.getProperty("user.dir") + "/" + GenerateCode.srcFolder + "/" + packages.replace(".", "/") + "/" + className + "Controller.java";
-		createFileByTemplete("controller.html", paraMap, filePath);
+		createFileByTemplete("java/controller.html", paraMap, filePath);
 	}
 
 	/**
@@ -188,7 +188,7 @@ public abstract class BaseHandler {
 		paraMap.put("basePath", GenerateCode.basePath);
 		
 		String filePath = System.getProperty("user.dir") + "/" + GenerateCode.srcFolder + "/" + packages.replace(".", "/") + "/" + className + "Validator.java";
-		createFileByTemplete("validator.html", paraMap, filePath);
+		createFileByTemplete("java/validator.html", paraMap, filePath);
 	}
 	
 	/**
@@ -205,9 +205,54 @@ public abstract class BaseHandler {
 		paraMap.put("namespace", GenerateCode.srcFolder + "." + classNameSmall);
 		
 		String filePath = System.getProperty("user.dir") + "/" + GenerateCode.srcFolder + "/" + packages.replace(".", "/") + "/" + className + "Service.java";
-		createFileByTemplete("service.html", paraMap, filePath);
+		createFileByTemplete("java/service.html", paraMap, filePath);
 	}
-	
+
+	/**
+	 * 生成list.html
+	 * @param classNameSmall 	类名称，且首字母小写
+	 * @param colunmList		model字段信息
+	 */
+	public void list(String classNameSmall, List<ColumnDto> colunmList){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("basePath", GenerateCode.basePath);
+		paraMap.put("classNameSmall", classNameSmall);
+		paraMap.put("colunmList", colunmList);
+		
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + GenerateCode.basePath + "/" + classNameSmall + "/list.html";
+		createFileByTemplete("html/list.html", paraMap, filePath);
+	}
+
+	/**
+	 * 生成add.html
+	 * @param classNameSmall 	类名称，且首字母小写
+	 * @param colunmList		model字段信息
+	 */
+	public void add(String classNameSmall, List<ColumnDto> colunmList){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("basePath", GenerateCode.basePath);
+		paraMap.put("classNameSmall", classNameSmall);
+		paraMap.put("colunmList", colunmList);
+		
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + GenerateCode.basePath + "/" + classNameSmall + "/add.html";
+		createFileByTemplete("html/add.html", paraMap, filePath);
+	}
+
+	/**
+	 * 生成update.html
+	 * @param classNameSmall 	类名称，且首字母小写
+	 * @param colunmList		model字段信息
+	 */
+	public void update(String classNameSmall, List<ColumnDto> colunmList){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("basePath", GenerateCode.basePath);
+		paraMap.put("classNameSmall", classNameSmall);
+		paraMap.put("colunmList", colunmList);
+		
+		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + GenerateCode.basePath + "/" + classNameSmall + "/update.html";
+		createFileByTemplete("html/update.html", paraMap, filePath);
+	}
+
 	/**
 	 * 生成form.html
 	 * @param classNameSmall 	类名称，且首字母小写
@@ -215,11 +260,12 @@ public abstract class BaseHandler {
 	 */
 	public void form(String classNameSmall, List<ColumnDto> colunmList){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("basePath", GenerateCode.basePath);
 		paraMap.put("classNameSmall", classNameSmall);
 		paraMap.put("colunmList", colunmList);
 		
 		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + GenerateCode.basePath + "/" + classNameSmall + "/form.html";
-		createFileByTemplete("form.html", paraMap, filePath);
+		createFileByTemplete("html/form.html", paraMap, filePath);
 	}
 
 	/**
@@ -229,11 +275,12 @@ public abstract class BaseHandler {
 	 */
 	public void view(String classNameSmall, List<ColumnDto> colunmList){
 		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("basePath", GenerateCode.basePath);
 		paraMap.put("classNameSmall", classNameSmall);
 		paraMap.put("colunmList", colunmList);
 		
 		String filePath = System.getProperty("user.dir") + "/WebContent/WEB-INF/view/" + GenerateCode.basePath + "/" + classNameSmall + "/view.html";
-		createFileByTemplete("view.html", paraMap, filePath);
+		createFileByTemplete("html/view.html", paraMap, filePath);
 	}
 
 	/**

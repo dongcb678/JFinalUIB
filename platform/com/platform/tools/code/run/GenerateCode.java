@@ -149,6 +149,9 @@ public class GenerateCode {
 			//handler.dto(className, classNameSmall, dataSource, tableName, colunmList); 
 			
 			// 7.生成视图文件
+			//handler.list(classNameSmall, colunmList);
+			//handler.add(classNameSmall, colunmList);
+			//handler.update(classNameSmall, colunmList);
 			//handler.form(classNameSmall, colunmList);
 			//handler.view(classNameSmall, colunmList);
 		}
