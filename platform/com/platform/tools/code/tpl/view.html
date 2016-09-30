@@ -1,41 +1,52 @@
 
-<div class="row">
-	<div class="col-md-12">
-		<ol class="breadcrumb">
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">xxx</a></li>
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/platform/operator');">xxx</a></li>
-			<li class="active">查看</li>
-		</ol>
-	</div>
-</div>
+<!-- BEGIN PAGE CONTAINER-->
+<div class="container-fluid">
 
-<div class="row">
-	<div class="col-md-12">
-		<!-- start: BORDERED TABLE PANEL -->
-		<div class="panel panel-white">
-			
-			<div class="panel-heading">
-				<h4 class="panel-title"><span class="text-bold">查看</span></h4>
-				<div class="panel-tools">										
-					xxxx
-				</div>
-			</div>
-			
-			<div class="panel-body">	
-				<form role="form" class="form-horizontal">
-					
-					<% for(colunm in colunmList){ %>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">${colunm.column_desc} </label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" readonly="readonly" value="\${${classNameSmall}.${colunm.column_name}}">
-						</div>
-					</div>
-					
-					<% } %>
-				</form>
-			</div>
-		
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+			<ul class="breadcrumb">
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="#">xxx</a> <span class="divider">/</span></li>
+				<li class="active">查看</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
 		</div>
 	</div>
-</div>	
+	<!-- END PAGE HEADER-->
+
+	<!-- BEGIN PAGE CONTENT-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN VALIDATION STATES-->
+			<div class="widget red">
+				<div class="widget-title">
+					<h4>
+						<i class=" icon-key"></i> 查看
+					</h4>
+				</div>
+				<div class="widget-body form">	
+			
+					<form role="form" class="form-horizontal">
+						
+						<% for(colunm in colunmList){ %>
+						<div class="control-group">
+							<label class="control-label">${colunm.column_desc}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="\${${classNameSmall}.${colunm.column_name}}">
+							</div>
+						</div>
+						
+						<% } %>
+						
+					</form>
+			
+				</div>
+			</div>
+			<!-- END VALIDATION STATES-->
+		</div>
+	</div>
+
+	<!-- END PAGE CONTAINER-->
+</div>
