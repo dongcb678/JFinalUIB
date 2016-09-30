@@ -6,6 +6,7 @@ import com.jfinal.aop.Before;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
+import com.platform.tools.ToolDateTime;
 
 /**
  * XXX 管理	
@@ -41,7 +42,9 @@ public class BlogController extends BaseController {
 	 */
 	@Before(BlogValidator.class)
 	public void save() {
-		getModel(Blog.class).save();
+		Blog blog = getModel(Blog.class);
+		blog.setCreatetime(ToolDateTime.getSqlTimestamp());
+		blog.save();
 		render("/test/blog/add.html");
 	}
 	
