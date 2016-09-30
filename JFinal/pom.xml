@@ -190,9 +190,9 @@
 		</dependency>
 		
 		<dependency>
-		  	<groupId>little.ant.fst.one</groupId>
-		  	<artifactId>fst-one</artifactId>
-		  	<version>2.4.0</version>
+		  	<groupId>de.ruedigermoeller</groupId>
+  			<artifactId>fst</artifactId>
+  			<version>2.48</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   

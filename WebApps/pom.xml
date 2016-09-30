@@ -246,8 +246,8 @@
 		
 		<dependency>
 			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.4-1205-jdbc41</version>
+  			<artifactId>postgresql</artifactId>
+  			<version>9.4.1211.jre7</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -806,14 +806,12 @@
 		</plugins>
 	</build>
 	
-	<!--  
     <repositories>
         <repository>
-            <id>nexus</id>
-        	<name>local private nexus</name>
-        	<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+	      	<id>alimaven</id>
+	      	<name>aliyun maven</name>
+	      	<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
     </repositories>
-    -->
     
 </project>

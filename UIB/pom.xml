@@ -137,8 +137,8 @@
 		
 		<dependency>
 			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.4-1205-jdbc41</version>
+  			<artifactId>postgresql</artifactId>
+  			<version>9.4.1211.jre7</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
