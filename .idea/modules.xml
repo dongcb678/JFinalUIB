@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/JFinal/JFinal.iml" filepath="$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/JFinal/JFinal.iml" />
-      <module fileurl="file://$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/JFinalUIBV2.iml" filepath="$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/JFinalUIBV2.iml" />
-      <module fileurl="file://$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/Test/Test.iml" filepath="$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/Test/Test.iml" />
-      <module fileurl="file://$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/UIB/UIB.iml" filepath="$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/UIB/UIB.iml" />
-      <module fileurl="file://$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/WebApps/WebApps.iml" filepath="$USER_HOME$/git/JfinalUIBV3_MAVEN/JFinalUIBV2/WebApps/WebApps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JFinalUIBV3.iml" filepath="$PROJECT_DIR$/JFinalUIBV3.iml" />
     </modules>
   </component>
 </project>
-
