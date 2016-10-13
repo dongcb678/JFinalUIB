@@ -11,6 +11,7 @@ import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
+import com.platform.mvc.stationoperator.StationOperatorService;
 
 @Service(name = StationService.serviceName)
 public class StationService extends BaseService {
@@ -122,6 +123,9 @@ public class StationService extends BaseService {
 			pStation.set(Station.column_isparent, "false");
 			pStation.update();
 		}
+		
+		// 缓存
+		StationOperatorService.cacheRemove(ids);
 	    
 		// 删除
 	    Station.dao.deleteById(ids);
