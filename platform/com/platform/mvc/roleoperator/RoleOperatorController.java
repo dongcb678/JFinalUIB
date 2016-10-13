@@ -40,7 +40,7 @@ public class RoleOperatorController extends BaseController {
 	 * 删除角色拥有的功能
 	 */
 	public void del() {
-		RoleOperator.dao.deleteById(getPara());
+		roleOperatorService.del(getPara());
 		renderSuccess(null);
 	}
 	

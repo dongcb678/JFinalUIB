@@ -10,6 +10,8 @@ import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.SplitPage;
 import com.platform.mvc.base.BaseService;
+import com.platform.mvc.grouprole.GroupRole;
+import com.platform.mvc.grouprole.GroupRoleService;
 import com.platform.mvc.role.Role;
 
 @Service(name = RoleOperatorService.serviceName)
@@ -19,7 +21,7 @@ public class RoleOperatorService extends BaseService {
 	private static Logger log = Logger.getLogger(RoleOperatorService.class);
 	
 	public static final String serviceName = "roleOperatorService";
-	
+
 	/**
 	 * 获取角色拥有的功能
 	 * @param roleIds
@@ -55,11 +57,40 @@ public class RoleOperatorService extends BaseService {
 	 * @return
 	 */
 	public String add(String roleIds, String operatorIds){
+		// 保存
 		RoleOperator ro = new RoleOperator();
 		ro.setRoleids(roleIds);
 		ro.setOperatorids(operatorIds);
 		ro.save();
+		
+		// 更新group功能缓存
+		String sql = getSql("platform.roleOperator.getGroupByRole");
+		List<GroupRole> grList = GroupRole.dao.find(sql, roleIds);
+		for (GroupRole groupRole : grList) {
+			GroupRoleService.cacheAdd(groupRole.getGroupids());
+		}
+		
 		return ro.getPKValue();
+	}
+
+	/**
+	 * 删除角色拥有的功能
+	 * @param roleOperatorIds
+	 */
+	public void del(String roleOperatorIds){
+		// 查询角色ids
+		RoleOperator ro = RoleOperator.dao.findById(roleOperatorIds);
+		String roleIds = ro.getRoleids();
+
+		// 更新group功能缓存
+		String sql = getSql("platform.roleOperator.getGroupByRole");
+		List<GroupRole> grList = GroupRole.dao.find(sql, roleIds);
+		for (GroupRole groupRole : grList) {
+			GroupRoleService.cacheAdd(groupRole.getGroupids());
+		}
+		
+		// 删除数据
+		ro.delete();
 	}
 	
 }

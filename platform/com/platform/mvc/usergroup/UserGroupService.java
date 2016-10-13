@@ -9,6 +9,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
+import com.platform.mvc.user.User;
 
 @Service(name = UserGroupService.serviceName)
 public class UserGroupService extends BaseService {
@@ -48,7 +49,7 @@ public class UserGroupService extends BaseService {
 		ug.save();
 		
 		// 缓存
-		
+		User.cacheAdd(userIds);
 	}
 
 	/**
@@ -56,10 +57,14 @@ public class UserGroupService extends BaseService {
 	 * @param userGroupIds
 	 */
 	public void delGroup(String userGroupIds){
-		UserGroup.dao.deleteById(userGroupIds);
-		
+		UserGroup ug = UserGroup.dao.findById(userGroupIds);
+		String userIds = ug.getUserids();
+
 		// 缓存
+		User.cacheAdd(userIds);
 		
+		// 删除
+		ug.delete();
 	}
 	
 }
