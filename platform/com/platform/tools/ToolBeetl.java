@@ -20,7 +20,6 @@ import com.platform.beetl.func.OrderBy;
 import com.platform.beetl.tag.DictTag;
 import com.platform.beetl.tag.ParamTag;
 import com.platform.constant.ConstantInit;
-import com.platform.plugin.ParamInitPlugin;
 
 /**
  * Beetl工具类
@@ -28,7 +27,7 @@ import com.platform.plugin.ParamInitPlugin;
  */
 public abstract class ToolBeetl {
 
-	private static Logger log = Logger.getLogger(ParamInitPlugin.class);
+	private static Logger log = Logger.getLogger(ToolBeetl.class);
 
 	/**
 	 * 模板扩展
