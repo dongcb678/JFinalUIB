@@ -12,7 +12,6 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
-import com.jfinal.ext.handler.FakeStaticHandler;
 import com.jfinal.i18n.I18nInterceptor;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;

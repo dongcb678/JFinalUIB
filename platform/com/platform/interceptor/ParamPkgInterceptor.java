@@ -1,7 +1,6 @@
 package com.platform.interceptor;
 
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +17,8 @@ import com.platform.mvc.operator.Operator;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ServicePlugin;
-import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolString;
+import com.platform.tools.ToolTypeConverter;
 
 /**
  * 参数封装拦截器
@@ -202,8 +201,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			}
 			
 			// 封装参数值到全局变量
-			String type = field.getType().getSimpleName();
-			Object valueObj = dataParse(type, value); // 数据类型解析
+			Object valueObj = ToolTypeConverter.dataParse(field.getType(), value); // 数据类型解析
 			field.set(controller, valueObj);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
@@ -247,91 +245,5 @@ public class ParamPkgInterceptor implements Interceptor {
 			field.setAccessible(false);
 		}
 	}
-	
-	/**
-	 * 数据类型解析
-	 * @param type
-	 * @param value
-	 * @return
-	 */
-	private Object dataParse(String type, String value){
-		switch (type) {
-		case "String":
-			return value;
 
-		case "int":
-			return Integer.parseInt(value);
-
-		case "Integer":
-			return Integer.valueOf(value);
-
-		case "long":
-			return Long.parseLong(value);
-
-		case "Long":
-			return Long.valueOf(value);
-
-		case "double":
-			return Double.parseDouble(value);
-
-		case "Double":
-			return Double.valueOf(value);
-
-		case "float":
-			return Float.parseFloat(value);
-
-		case "Float":
-			return Float.valueOf(value);
-
-		case "short":
-			return Short.parseShort(value);
-			
-		case "Short":
-			return Short.valueOf(value);
-			
-		case "BigDecimal":
-			BigDecimal bdValue = new BigDecimal(value);
-			return bdValue;
-			
-		case "boolean":
-			return Boolean.getBoolean(value);
-
-		case "Boolean":
-			return Boolean.valueOf(value);
-
-		case "char":
-			return value.toCharArray()[0];
-
-		case "Character":
-			return Character.valueOf(value.toCharArray()[0]);
-
-		case "Date":
-			int dateLength = value.length();
-			switch (dateLength) {
-			case ToolDateTime.pattern_ym_length:
-				return ToolDateTime.parse(value, ToolDateTime.pattern_ym);
-
-			case ToolDateTime.pattern_ymd_length:
-				return ToolDateTime.parse(value, ToolDateTime.pattern_ymd);
-
-			case ToolDateTime.pattern_ymd_hm_length:
-				return ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hm);
-
-			case ToolDateTime.pattern_ymd_hms_length:
-				return ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms);
-
-			case ToolDateTime.pattern_ymd_hms_s_length:
-				return ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms_s);
-
-			default:
-				log.debug("没有解析到有效字段日期长度类型");
-				return null;
-			}
-			
-		default:
-			log.debug("没有解析到有效字段类型");
-			return null;
-		}
-	}
-	
 }
