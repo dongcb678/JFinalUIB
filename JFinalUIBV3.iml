@@ -45,7 +45,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/WebContent/WEB-INF/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
@@ -271,7 +271,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>

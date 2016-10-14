@@ -45,7 +45,7 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="localRepository" value="D:\DevelopmentTool\maven\apache-maven-3.2.1\repository" />
-        <option name="mavenHome" value="$PROJECT_DIR$/../../../../maven/apache-maven-3.2.1" />
+        <option name="mavenHome" value="C:/maven/apache-maven-3.2.1" />
         <option name="userSettingsFile" value="D:\DevelopmentTool\maven\apache-maven-3.2.1\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -60,7 +60,7 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/WebContent/WEB-INF/classes" />
   </component>
 </project>

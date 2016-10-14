@@ -12,6 +12,7 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
+import com.jfinal.ext.handler.FakeStaticHandler;
 import com.jfinal.i18n.I18nInterceptor;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
@@ -214,8 +215,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 */
 	public void configInterceptor(Interceptors interceptors) {
 		//log.info("configInterceptor 支持使用session");
-		//me.add(new SessionInViewInterceptor(true));
-		
+		//interceptors.add(new SessionInViewInterceptor(true));
+
 		log.info("configInterceptor 权限认证拦截器");
 		interceptors.add(new AuthInterceptor());
 		
@@ -236,10 +237,16 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 * 配置处理器
 	 */
 	public void configHandler(Handlers handlers) {
-		log.info("configHandler 全局配置处理器，主要是druid监控页面展示");
+		//log.info("configHandler 全局配置处理器，设置上下文路径");
+		//handlers.add(new ContextPathHandler("cxt")); // 由于UIB在GlobalHandler中已经统一处理，所以此处不必启用
+
+		//log.info("configHandler 全局配置处理器，伪静态处理，开启此功能你需要把所有jfinal请求加上后缀，默认后缀是.html");
+		//handlers.add(new FakeStaticHandler(".html")); // 默认伪静态后缀是.html，所以此处的参数可以不用传，如果是其他后缀，你可以自定义传参
+		
+		log.info("configHandler 全局配置处理器，druid监控页面展示");
 		handlers.add(new DruidStatViewHandler("/platform/druid"));
 		
-		log.info("configHandler 全局配置处理器，主要是记录日志和request域值处理");
+		log.info("configHandler 全局配置处理器，记录日志和request域值处理");
 		handlers.add(new GlobalHandler());
 	}
 	
@@ -279,6 +286,5 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 */
 	public static void main(String[] args) {
 		JFinal.start("WebContent", 8899, "/", 5);
-		//JFinal.start("D:\\DevelopmentTool\\IntelliJIDEA14.1.4\\IdeaProjects\\JFinalUIBV2\\JFinalUIBV2\\WebContent", 99, "/", 5);
 	}
 }
