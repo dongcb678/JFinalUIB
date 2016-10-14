@@ -2,7 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3acf1df7-2c5d-47b5-afea-f6d12a9f7e67" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/javax.el-3.0.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/javax.servlet.jsp-2.3.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/javax.servlet.jsp-api-2.3.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/javax.servlet.jsp.jstl-1.2.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/jetty-all-9.2.12.v20150709.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/jetty-jsp-9.2.12.v20150709.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/jetty-jsp-jdt-2.3.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/org.apache.taglibs.taglibs-standard-impl-1.2.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/org.apache.taglibs.taglibs-standard-spec-1.2.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/org.eclipse.jdt.core-3.8.2.v20130121.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/org.eclipse.jetty.apache-jsp-9.2.12.v20150709.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/org.eclipse.jetty.orbit.javax.servlet.jsp.jstl-1.2.0.v201105211821.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/org.eclipse.jetty.orbit.org.eclipse.jdt.core-3.8.2.v20130121.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/org.mortbay.jasper.apache-el-8.0.9.M3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/org.mortbay.jasper.apache-jsp-8.0.9.M3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/servlet-api-3.1.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JFinalUIBV3.iml" afterPath="$PROJECT_DIR$/JFinalUIBV3.iml" />
     </list>
     <ignored path="JfinalUIB_V3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,26 +42,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="JFinalConfig.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JFinalConfig.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/platform/com/platform/run/JFinalConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
+            <state relative-caret-position="416">
               <caret line="236" column="7" selection-start-line="236" selection-start-column="7" selection-end-line="236" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#10077#10078#0" expanded="true" />
-                <element signature="e#10124#10125#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ControllerPlugin.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/platform/com/platform/plugin/ControllerPlugin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -203,10 +209,10 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/build-lib/jfinal22/velocity-1.7.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/servlet-api-3.1.jar!/" />
   </component>
   <component name="RunManager" selected="Application.JFinalConfig">
     <configuration default="false" name="JFinalConfig" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -736,11 +742,12 @@
       <workItem from="1476409616820" duration="1341000" />
       <workItem from="1476434744137" duration="2717000" />
       <workItem from="1476446484328" duration="1431000" />
+      <workItem from="1476462774871" duration="184000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7775000" />
+    <option name="totallyTimeSpent" value="7959000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1426" extended-state="6" />
@@ -754,8 +761,8 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48894155" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -765,8 +772,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39968404" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -799,12 +806,28 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/platform/com/platform/run/JFinalConfig.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2618">
+          <caret line="236" column="7" selection-start-line="236" selection-start-column="7" selection-end-line="236" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/plugin/ControllerPlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/run/JFinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10077#10078#0" expanded="true" />
-            <element signature="e#10124#10125#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -815,8 +838,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10077#10078#0" expanded="true" />
-            <element signature="e#10124#10125#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -827,8 +848,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10077#10078#0" expanded="true" />
-            <element signature="e#10124#10125#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -839,8 +858,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10077#10078#0" expanded="true" />
-            <element signature="e#10124#10125#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -888,41 +905,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/com/platform/run/JFinalConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="236" column="7" selection-start-line="236" selection-start-column="7" selection-end-line="236" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#10077#10078#0" expanded="true" />
-            <element signature="e#10124#10125#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/jetty-all-9.2.12.v20150709.jar!/org/eclipse/jetty/server/handler/ContextHandler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="649">
-          <caret line="157" column="41" selection-start-line="157" selection-start-column="41" selection-end-line="157" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$PROJECT_DIR$/build-lib/jetty-9.2-jdk7+/jetty-all-9.2.12.v20150709.jar!/org/eclipse/jetty/server/handler/ContextHandler.class" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
           <caret line="845" column="0" selection-start-line="845" selection-start-column="0" selection-end-line="845" selection-end-column="0" />
-          <folding>
-            <element signature="e#31086#31087#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/com/platform/plugin/ControllerPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="686">
+          <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/com/platform/run/JFinalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="236" column="7" selection-start-line="236" selection-start-column="7" selection-end-line="236" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
