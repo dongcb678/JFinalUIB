@@ -1,36 +1,34 @@
-package com.platform.mvc.roleoperator;
+package com.platform.mvc.syslog;
 
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
 import com.platform.mvc.base.BaseValidator;
 
-public class RoleOperatorValidator extends BaseValidator {
+public class SyslogValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(RoleOperatorValidator.class);
+	private static Logger log = Logger.getLogger(SyslogValidator.class);
 
 	@SuppressWarnings("unused")
-	private RoleOperatorService roleOperatorService;
+	private SysLogService sysLogService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
-		if (actionKey.equals("/platform/roleOperator/save")){
+		if (actionKey.equals("/platform/sysLog/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
-		} else if (actionKey.equals("/platform/roleOperator/update")){
+		} else if (actionKey.equals("/platform/sysLog/update")){
 			
 		}
 	}
 	
 	protected void handleError(Controller controller) {
-		controller.keepModel(RoleOperator.class);
-		
 		String actionKey = getActionKey();
-		if (actionKey.equals("/platform/roleOperator/save")){
+		if (actionKey.equals("/platform/sysLog/save")){
 			controller.render("/platform/xxx.html");
 		
-		} else if (actionKey.equals("/platform/roleOperator/update")){
+		} else if (actionKey.equals("/platform/sysLog/update")){
 			controller.render("/platform/xxx.html");
 		
 		}

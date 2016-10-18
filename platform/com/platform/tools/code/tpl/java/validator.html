@@ -3,12 +3,16 @@ package ${package};
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
-import com.jfinal.validate.Validator;
 
-public class ${className}Validator extends Validator {
+import com.platform.mvc.base.BaseValidator;
+
+public class ${className}Validator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(${className}Validator.class);
+	
+	@SuppressWarnings("unused")
+	private ${className}Service ${classNameSmall}Service;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

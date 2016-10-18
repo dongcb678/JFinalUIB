@@ -9,6 +9,9 @@ public class DictValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DictValidator.class);
+
+	@SuppressWarnings("unused")
+	private DictService dictService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

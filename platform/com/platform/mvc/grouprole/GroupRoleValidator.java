@@ -3,12 +3,15 @@ package com.platform.mvc.grouprole;
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
-import com.jfinal.validate.Validator;
+import com.platform.mvc.base.BaseValidator;
 
-public class GroupRoleValidator extends Validator {
+public class GroupRoleValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(GroupRoleValidator.class);
+
+	@SuppressWarnings("unused")
+	private GroupRoleService groupRoleService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

@@ -26,6 +26,7 @@ public class LoginController extends BaseController {
 	/**
 	 * 准备登陆
 	 */
+	@Before(LoginValidator.class)
 	public void index() {
 		User user = getCUser(); // cookie认证自动登陆处理
 		if(null != user){//后台

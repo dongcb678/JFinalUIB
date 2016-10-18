@@ -9,6 +9,9 @@ public class SystemsValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SystemsValidator.class);
+
+	@SuppressWarnings("unused")
+	private SystemsService systemsService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

@@ -3,12 +3,15 @@ package com.platform.mvc.stationoperator;
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
-import com.jfinal.validate.Validator;
+import com.platform.mvc.base.BaseValidator;
 
-public class StationOperatorValidator extends Validator {
+public class StationOperatorValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(StationOperatorValidator.class);
+
+	@SuppressWarnings("unused")
+	private StationOperatorService stationOperatorService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

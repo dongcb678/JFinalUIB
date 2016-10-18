@@ -9,6 +9,9 @@ public class StationValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(StationValidator.class);
+
+	@SuppressWarnings("unused")
+	private StationService stationService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

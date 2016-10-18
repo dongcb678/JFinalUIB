@@ -9,6 +9,9 @@ public class DepartmentValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DepartmentValidator.class);
+
+	@SuppressWarnings("unused")
+	private DepartmentService departmentService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

@@ -12,6 +12,8 @@ import com.platform.tools.ToolDateTime;
 public class UserValidator extends BaseValidator {
 
 	private static Logger log = Logger.getLogger(UserValidator.class);
+
+	private UserService userService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

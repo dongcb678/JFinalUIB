@@ -9,6 +9,9 @@ public class ParamValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ParamValidator.class);
+
+	@SuppressWarnings("unused")
+	private ParamService paramService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

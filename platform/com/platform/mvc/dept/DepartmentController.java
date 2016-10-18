@@ -18,7 +18,7 @@ public class DepartmentController extends BaseController {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(DepartmentController.class);
-	
+
 	private DepartmentService departmentService;
 	
 	private String pIds; // 上级部门ids

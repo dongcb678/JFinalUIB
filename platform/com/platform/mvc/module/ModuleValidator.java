@@ -9,6 +9,9 @@ public class ModuleValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ModuleValidator.class);
+
+	@SuppressWarnings("unused")
+	private ModuleService moduleService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

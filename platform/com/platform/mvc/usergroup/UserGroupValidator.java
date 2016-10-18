@@ -3,13 +3,16 @@ package com.platform.mvc.usergroup;
 import org.apache.log4j.Logger;
 
 import com.jfinal.core.Controller;
-import com.jfinal.validate.Validator;
+import com.platform.mvc.base.BaseValidator;
 
-public class UserGroupValidator extends Validator {
+public class UserGroupValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(UserGroupValidator.class);
-	
+
+	@SuppressWarnings("unused")
+	private UserGroupService userGroupService;
+
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
 		if (actionKey.equals("/platform/userGroup/save")){

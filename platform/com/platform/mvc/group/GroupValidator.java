@@ -9,6 +9,9 @@ public class GroupValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(GroupValidator.class);
+
+	@SuppressWarnings("unused")
+	private GroupService groupService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

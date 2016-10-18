@@ -32,6 +32,13 @@
 
 	可以指定下载文件名称，而不是使用默认文件名作为下载名称
 	
-9.Controller.java的78行增加获取urlPara方法
+9.Controller.java
+	
+	78行增加获取urlPara方法
+
+10.Validator.java
+
+	intercept方法，去掉final，支持BaseValidator重写此方法，增加service实例注入
+	并把validator声明为类成员变量，增加instance方法实例化验证器,方便子类访问
 	
 	

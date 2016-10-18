@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
@@ -33,7 +34,7 @@ import com.jfinal.kit.StrKit;
  * Validator.
  */
 public abstract class Validator implements Interceptor {
-	
+
 	protected Controller controller;
 	protected Invocation invocation;
 	protected boolean shortCircuit = false;
@@ -55,15 +56,21 @@ public abstract class Validator implements Interceptor {
 	protected String getDatePattern() {
 		return (datePattern != null ? datePattern : DEFAULT_DATE_PATTERN);
 	}
+
+	protected Validator validator = null;
 	
-	final public void intercept(Invocation invocation) {
-		Validator validator = null;
+	/**
+	 * 实例化拦截器
+	 */
+	public void instance(){
 		try {
 			validator = getClass().newInstance();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		
+	}
+	
+	public void intercept(Invocation invocation) {
 		validator.controller = invocation.getController();
 		validator.invocation = invocation;
 		

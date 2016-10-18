@@ -9,7 +9,10 @@ public class OperatorValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(OperatorValidator.class);
-	
+
+	@SuppressWarnings("unused")
+	private OperatorService operatorService;
+
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
 		if (actionKey.equals("/operator/save")){

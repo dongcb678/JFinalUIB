@@ -9,6 +9,9 @@ public class LoginValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginValidator.class);
+
+	@SuppressWarnings("unused")
+	private LoginService loginService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

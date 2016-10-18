@@ -9,6 +9,9 @@ public class MenuValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(MenuValidator.class);
+
+	@SuppressWarnings("unused")
+	private MenuService menuService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();
