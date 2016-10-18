@@ -117,7 +117,7 @@ public class LoginService extends BaseService {
 	 */
 	public int login(HttpServletRequest request, HttpServletResponse response, String userName, String passWord, boolean autoLogin) {
 		// 1.取用户
-		User user = User.cacheGet(userName);
+		User user = User.cacheGetByUserName(userName);
 		if (null == user) {
 			return ConstantLogin.login_info_0;// 用户不存在
 		}
@@ -182,7 +182,7 @@ public class LoginService extends BaseService {
 	 */
 	public int pass(HttpServletRequest request, HttpServletResponse response, String userName, String passWord) {
 		// 1.取用户
-		User user = User.cacheGet(userName);
+		User user = User.cacheGetByUserName(userName);
 		if (null == user) {
 			return ConstantLogin.login_info_0;// 用户不存在
 		} 

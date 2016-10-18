@@ -234,7 +234,7 @@ public class AuthInterceptor implements Interceptor {
 		 **/
 		
 		// 根据分组角色查询权限
-		User user = User.cacheGet(userIds);
+		User user = User.cacheGetByUserId(userIds);
 		List<UserGroup> ugList = user.get("ugList");
 		for (UserGroup ug : ugList) {
 			String groupIds = ug.getGroupids();
@@ -341,7 +341,7 @@ public class AuthInterceptor implements Interceptor {
 				}
 				
 				// 返回用户数据
-				return User.cacheGet(userIds);
+				return User.cacheGetByUserId(userIds);
 			}
 		}
 

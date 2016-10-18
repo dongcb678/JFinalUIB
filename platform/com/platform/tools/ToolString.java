@@ -312,7 +312,7 @@ public abstract class ToolString {
 	        //System.out.println(str);
 	        html.append(contents.substring(lastIdx, matchr.start()));
 	         
-	        User user = User.cacheGet(userName);
+	        User user = User.cacheGetByUserName(userName);
 	        if(user != null){
 	            html.append("<a href='http://www.xx.com/"+user.getStr("username")+"' class='referer' target='_blank'>@");
 	            html.append(userName.trim());
