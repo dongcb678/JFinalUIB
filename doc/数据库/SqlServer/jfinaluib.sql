@@ -1,672 +1,2980 @@
+/*
+Navicat SQL Server Data Transfer
 
-/* Drop Indexes */
+Source Server         : localhost-sqlserver
+Source Server Version : 105000
+Source Host           : 127.0.0.1:1433
+Source Database       : jfinaluibv3
+Source Schema         : dbo
 
-DROP INDEX [onemanyindex] ON [pt_operator];
-DROP INDEX [returnparamkeysindex] ON [pt_operator];
-DROP INDEX [returnurlindex] ON [pt_operator];
-DROP INDEX [rowfilterindex] ON [pt_operator];
-DROP INDEX [urlindex] ON [pt_operator];
-DROP INDEX [usernameindex] ON [pt_user];
-DROP INDEX [bloodgroupindex] ON [pt_userinfo];
-DROP INDEX [emailindex] ON [pt_userinfo];
-DROP INDEX [msnindex] ON [pt_userinfo];
-DROP INDEX [nativityaddressindex] ON [pt_userinfo];
-DROP INDEX [postboyindex] ON [pt_userinfo];
-DROP INDEX [schoolnameindex] ON [pt_userinfo];
-DROP INDEX [specialityindex] ON [pt_userinfo];
+Target Server Type    : SQL Server
+Target Server Version : 105000
+File Encoding         : 65001
 
+Date: 2016-10-18 17:43:13
+*/
 
 
-/* Drop Tables */
-
-IF ObJECt_ID('[pt_department]') IS NOT NULL DROP TABLE [pt_department];
-IF ObJECt_ID('[pt_dict]') IS NOT NULL DROP TABLE [pt_dict];
-IF ObJECt_ID('[pt_group]') IS NOT NULL DROP TABLE [pt_group];
-IF ObJECt_ID('[pt_grouprole]') IS NOT NULL DROP TABLE [pt_grouprole];
-IF ObJECt_ID('[pt_menu]') IS NOT NULL DROP TABLE [pt_menu];
-IF ObJECt_ID('[pt_module]') IS NOT NULL DROP TABLE [pt_module];
-IF ObJECt_ID('[pt_operator]') IS NOT NULL DROP TABLE [pt_operator];
-IF ObJECt_ID('[pt_param]') IS NOT NULL DROP TABLE [pt_param];
-IF ObJECt_ID('[pt_resources]') IS NOT NULL DROP TABLE [pt_resources];
-IF ObJECt_ID('[pt_role]') IS NOT NULL DROP TABLE [pt_role];
-IF ObJECt_ID('[pt_roleOperator]') IS NOT NULL DROP TABLE [pt_roleOperator];
-IF ObJECt_ID('[pt_station]') IS NOT NULL DROP TABLE [pt_station];
-IF ObJECt_ID('[pt_stationOperator]') IS NOT NULL DROP TABLE [pt_stationOperator];
-IF ObJECt_ID('[pt_syslog]') IS NOT NULL DROP TABLE [pt_syslog];
-IF ObJECt_ID('[pt_systems]') IS NOT NULL DROP TABLE [pt_systems];
-IF ObJECt_ID('[pt_upload]') IS NOT NULL DROP TABLE [pt_upload];
-IF ObJECt_ID('[pt_user]') IS NOT NULL DROP TABLE [pt_user];
-IF ObJECt_ID('[pt_usergroup]') IS NOT NULL DROP TABLE [pt_usergroup];
-IF ObJECt_ID('[pt_userinfo]') IS NOT NULL DROP TABLE [pt_userinfo];
-
+-- ----------------------------
+-- Table structure for [dbo].[pt_department]
+-- ----------------------------
+DROP TABLE [dbo].[pt_department]
+GO
+CREATE TABLE [dbo].[pt_department] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[allchildnodeids] varchar(2000) NULL ,
+[departmentlevel] bigint NULL ,
+[depttype] char(1) NULL ,
+[description] varchar(200) NULL ,
+[images] varchar(50) NULL ,
+[isparent] varchar(5) NULL ,
+[names] varchar(25) NULL ,
+[orderids] bigint NULL ,
+[url] varchar(100) NULL ,
+[parentdepartmentids] varchar(32) NULL ,
+[principaluserids] varchar(32) NULL 
+)
 
 
+GO
 
-/* Create Tables */
+-- ----------------------------
+-- Records of pt_department
+-- ----------------------------
+INSERT INTO [dbo].[pt_department] ([ids], [version], [allchildnodeids], [departmentlevel], [depttype], [description], [images], [isparent], [names], [orderids], [url], [parentdepartmentids], [principaluserids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0026', N'0', null, N'-1', null, N'根节点', N'1_open.png', N'true', N'公司部门组织结构', N'1', N'#', null, null);
+GO
+INSERT INTO [dbo].[pt_department] ([ids], [version], [allchildnodeids], [departmentlevel], [depttype], [description], [images], [isparent], [names], [orderids], [url], [parentdepartmentids], [principaluserids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0027', N'0', null, N'0', null, N'系统平台部', N'2.png', N'true', N'系统平台部', N'0', null, N'8a40c0353fa828a6013fa898d4ac0026', null);
+GO
+INSERT INTO [dbo].[pt_department] ([ids], [version], [allchildnodeids], [departmentlevel], [depttype], [description], [images], [isparent], [names], [orderids], [url], [parentdepartmentids], [principaluserids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0028', N'0', null, N'0', null, N'运维部', N'3.png', N'false', N'运维部', N'0', null, N'8a40c0353fa828a6013fa898d4ac0027', N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_department] ([ids], [version], [allchildnodeids], [departmentlevel], [depttype], [description], [images], [isparent], [names], [orderids], [url], [parentdepartmentids], [principaluserids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0029', N'0', null, N'0', null, N'测试账户', N'4.png', N'true', N'测试部门', N'0', null, N'8a40c0353fa828a6013fa898d4ac0026', null);
+GO
+INSERT INTO [dbo].[pt_department] ([ids], [version], [allchildnodeids], [departmentlevel], [depttype], [description], [images], [isparent], [names], [orderids], [url], [parentdepartmentids], [principaluserids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0030', N'0', null, N'0', null, N'子部门2', N'5.png', N'true', N'平台组', N'0', null, N'8a40c0353fa828a6013fa898d4ac0029', N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
 
--- 部门表
-CREATE TABLE [pt_department]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 所有子节点
-	[allchildnodeids] varchar(2000),
-	-- 节点级别
-	[departmentlevel] bigint,
-	-- 部门类型
-	[depttype] char,
-	-- 描述
-	[description] varchar(200),
-	-- 图片
-	[images] varchar(50),
-	-- 是否上级节点
-	[isparent] varchar(5),
-	-- 部门名称
-	[names] varchar(25),
-	-- 排序号
-	[orderids] bigint,
-	-- url
-	[url] varchar(100),
-	-- 上级部门ids
-	[parentdepartmentids] varchar(32),
-	-- 部门负责人
-	[principaluserids] varchar(32),
-	PRIMARY KEY ([ids])
-);
-
-
--- 字典表
-CREATE TABLE [pt_dict]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 描述
-	[description] varchar(200),
-	-- 图片
-	[images] varchar(50),
-	-- 部门名称
-	[names] varchar(25),
-	-- 排序号
-	[orderids] bigint,
-	-- paths
-	[paths] varchar(1000),
-	-- 状态
-	[zhuangtai] char,
-	-- 上级节点ids
-	[parentids] varchar(32),
-	-- 是否上级节点
-	[isparent] varchar(5),
-	-- 层级级别
-	[levels] bigint,
-	-- 编号
-	[numbers] varchar(50),
-	-- 值
-	[val] varchar(500),
-	-- 是否国际化 : 是否国际化
-	[i18n] char,
-	-- 中文简体
-	[val_zhcn] varchar(500),
-	-- 中文香港
-	[val_zhhk] varchar(500),
-	-- 中文台湾
-	[val_zhtw] varchar(500),
-	-- 日文
-	[val_ja] varchar(500),
-	-- 英文
-	[val_enus] varchar(500),
-	-- 状态
-	[status] char,
-	PRIMARY KEY ([ids])
-);
+-- ----------------------------
+-- Table structure for [dbo].[pt_dict]
+-- ----------------------------
+DROP TABLE [dbo].[pt_dict]
+GO
+CREATE TABLE [dbo].[pt_dict] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[description] varchar(200) NULL ,
+[images] varchar(50) NULL ,
+[names] varchar(25) NULL ,
+[orderids] bigint NULL ,
+[paths] varchar(1000) NULL ,
+[zhuangtai] char(1) NULL ,
+[parentids] varchar(32) NULL ,
+[isparent] varchar(5) NULL ,
+[levels] bigint NULL ,
+[numbers] varchar(50) NULL ,
+[val] varchar(500) NULL ,
+[i18n] char(1) NULL ,
+[val_zhcn] varchar(500) NULL ,
+[val_zhhk] varchar(500) NULL ,
+[val_zhtw] varchar(500) NULL ,
+[val_ja] varchar(500) NULL ,
+[val_enus] varchar(500) NULL ,
+[status] char(1) NULL 
+)
 
 
--- 用户分组表
-CREATE TABLE [pt_group]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 描述
-	[description] varchar(2000),
-	-- 名称
-	[names] varchar(50),
-	-- 角色ids
-	[roleids] text,
-	-- 编号
-	[numbers] varchar(50),
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_dict
+-- ----------------------------
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'0c78f87750a745bbb59005a6ca0f744a', N'0', null, N'3.png', N'weixinToken', N'3', N'100103root/83f4b0ee56904cbeb5f91696ad804c29/0c78f87750a745bbb59005a6ca0f744a', N'1', N'83f4b0ee56904cbeb5f91696ad804c29', N'false', N'2', N'weixinToken', N'123', N'1', null, null, null, null, null, N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'10c3fc9a884a4cfc91f47e197913fd50', N'1', null, N'2.png', N'钟祥市', N'1', N'100103root/31b6516f36d44fc280b82affc270c479/a1f14efbb8cb4e44a30bd32194d0f24b/10c3fc9a884a4cfc91f47e197913fd50', N'1', N'a1f14efbb8cb4e44a30bd32194d0f24b', N'true', N'3', N'zhongXiangShi', null, null, N'钟祥市', N'钟祥市', N'钟祥市', N'钟祥市', N'钟祥市', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'18a137a0b92944ba857b5dec39b4fa69', N'0', null, N'2.png', N'河南省', N'2', N'100103root/31b6516f36d44fc280b82affc270c479/18a137a0b92944ba857b5dec39b4fa69', N'1', N'31b6516f36d44fc280b82affc270c479', N'false', N'2', N'heNanSheng', null, N'1', N'河南省', N'河南省', N'河南省', N'河南省', N'河南省', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'3082e48992104e3ca8c2f542bbcfbe63', N'0', null, N'2.png', N'三室一厅', N'1', N'100103root/56e8bdbc8d77460da17e473ee30906b0/3082e48992104e3ca8c2f542bbcfbe63', N'1', N'56e8bdbc8d77460da17e473ee30906b0', N'false', N'2', N'sanShiYiTing', null, N'1', N'三室一厅', N'三室一厅', N'三室一厅', N'三室一厅', N'三室一厅', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'31b6516f36d44fc280b82affc270c479', N'2', null, N'2.png', N'省市区', N'1', N'100103root/31b6516f36d44fc280b82affc270c479', N'1', N'8a40c0353fa828a6013fa898d4ac0020', N'true', N'1', N'shengShiQu', null, null, N'省市区', N'省市区', N'省市区', N'省市区', N'省市区', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'325acbd77f5b43a894ec4ef53ba20914', N'0', null, N'2.png', N'洪山区', N'1', N'100103root/31b6516f36d44fc280b82affc270c479/a1f14efbb8cb4e44a30bd32194d0f24b/64659405a79a4ecb9f116ae84ec55902/325acbd77f5b43a894ec4ef53ba20914', N'1', N'64659405a79a4ecb9f116ae84ec55902', N'false', N'4', N'hongShanQu', null, N'1', N'洪山区', N'洪山区', N'洪山区', N'洪山区', N'洪山区', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'405dc683656a4b328de5d5a19d1662d3', N'0', null, N'2.png', N'胡集镇', N'1', N'100103root/31b6516f36d44fc280b82affc270c479/a1f14efbb8cb4e44a30bd32194d0f24b/10c3fc9a884a4cfc91f47e197913fd50/405dc683656a4b328de5d5a19d1662d3', null, N'10c3fc9a884a4cfc91f47e197913fd50', N'false', N'4', N'huJiZhen', null, N'1', N'胡集镇', N'胡集镇', N'胡集镇', N'胡集镇', N'胡集镇', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'56e8bdbc8d77460da17e473ee30906b0', N'0', null, N'2.png', N'房屋结构', N'2', N'100103root/56e8bdbc8d77460da17e473ee30906b0', N'1', N'8a40c0353fa828a6013fa898d4ac0020', N'true', N'1', N'fangWuJieGou', null, N'1', N'房屋结构', N'房屋结构', N'房屋结构', N'房屋结构', N'房屋结构', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'64659405a79a4ecb9f116ae84ec55902', N'0', null, N'2.png', N'武汉市', N'2', N'100103root/31b6516f36d44fc280b82affc270c479/a1f14efbb8cb4e44a30bd32194d0f24b/64659405a79a4ecb9f116ae84ec55902', N'1', N'a1f14efbb8cb4e44a30bd32194d0f24b', N'true', N'3', N'wuHanShi', null, N'1', N'武汉市', N'武汉市', N'武汉市', N'武汉市', N'武汉市', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'7381008292054bccba20224bc33774d7', N'6', null, N'2.png', N'weixinAppID', N'1', N'100103root/83f4b0ee56904cbeb5f91696ad804c29/7381008292054bccba20224bc33774d7', N'1', N'83f4b0ee56904cbeb5f91696ad804c29', N'false', N'2', N'weixinAppID', N'123', N'1', N'1234', N'1234', N'1234', N'1234', N'1234', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'8094c60d7a594b36bb0187cbce9c4188', N'0', null, N'2.png', N'weixinAppSecret', N'2', N'100103root/83f4b0ee56904cbeb5f91696ad804c29/8094c60d7a594b36bb0187cbce9c4188', N'1', N'83f4b0ee56904cbeb5f91696ad804c29', N'false', N'2', N'weixinAppSecret', N'123', N'1', null, null, null, null, null, N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'83f4b0ee56904cbeb5f91696ad804c29', N'0', null, N'2.png', N'微信配置', N'1', N'100103root/83f4b0ee56904cbeb5f91696ad804c29', N'1', N'8a40c0353fa828a6013fa898d4ac0020', N'true', N'1', N'weixinConfig', null, N'1', null, null, null, null, null, N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'8a40c0353fa828a6013fa898d4ac0020', N'0', N'字典树', N'1_open.png', N'字典树', N'1', N'100103root', N'1', null, N'true', N'0', null, null, N'0', null, null, null, null, null, N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'a1f14efbb8cb4e44a30bd32194d0f24b', N'0', null, N'2.png', N'湖北省', N'1', N'100103root/31b6516f36d44fc280b82affc270c479/a1f14efbb8cb4e44a30bd32194d0f24b', N'1', N'31b6516f36d44fc280b82affc270c479', N'true', N'2', N'huBeiSheng', null, N'1', N'湖北省', N'湖北省', N'湖北省', N'湖北省', N'湖北省', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'a929cbf789a74107a74aec88c0bcc8fe', N'0', null, N'2.png', N'柴湖镇', N'1', N'100103root/31b6516f36d44fc280b82affc270c479/a1f14efbb8cb4e44a30bd32194d0f24b/10c3fc9a884a4cfc91f47e197913fd50/a929cbf789a74107a74aec88c0bcc8fe', null, N'10c3fc9a884a4cfc91f47e197913fd50', N'false', N'4', N'chaiHuZhen', null, N'1', N'柴湖镇', N'柴湖镇', N'柴湖镇', N'柴湖镇', N'柴湖镇', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'bf1bf96a123447c58b7f181d3e4e6099', N'0', null, N'2.png', N'两室一厅', N'2', N'100103root/56e8bdbc8d77460da17e473ee30906b0/bf1bf96a123447c58b7f181d3e4e6099', N'1', N'56e8bdbc8d77460da17e473ee30906b0', N'false', N'2', N'laingshiyiting', null, N'1', N'两室一厅', N'两室一厅', N'两室一厅', N'两室一厅', N'两室一厅', N'1');
+GO
+INSERT INTO [dbo].[pt_dict] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'ddbe84891d8b4632ac0dc2bd36f7f323', N'0', null, N'2.png', N'江岸区', N'2', N'100103root/31b6516f36d44fc280b82affc270c479/a1f14efbb8cb4e44a30bd32194d0f24b/64659405a79a4ecb9f116ae84ec55902/ddbe84891d8b4632ac0dc2bd36f7f323', N'1', N'64659405a79a4ecb9f116ae84ec55902', N'false', N'4', N'jiangAnQu', null, N'1', N'江岸区', N'江岸区', N'江岸区', N'江岸区', N'江岸区', N'1');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_group]
+-- ----------------------------
+DROP TABLE [dbo].[pt_group]
+GO
+CREATE TABLE [dbo].[pt_group] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[description] varchar(2000) NULL ,
+[names] varchar(50) NULL ,
+[roleids] text NULL ,
+[numbers] varchar(50) NULL 
+)
 
 
--- 分组角色
-CREATE TABLE [pt_grouprole]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 分组ids
-	[groupids] varchar(32),
-	-- 角色ids
-	[roleids] varchar(32),
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_group
+-- ----------------------------
+INSERT INTO [dbo].[pt_group] ([ids], [version], [description], [names], [roleids], [numbers]) VALUES (N'8a40c0353fa828a6013fa898d4ac0028', N'4', N'系统管理员组', N'超级管理员', N'8a40c0353fa828a6013fa898d4ac0023,', N'SuperAdmin');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_grouprole]
+-- ----------------------------
+DROP TABLE [dbo].[pt_grouprole]
+GO
+CREATE TABLE [dbo].[pt_grouprole] (
+[ids] varchar(32) NOT NULL ,
+[groupids] varchar(32) NULL ,
+[roleids] varchar(32) NULL 
+)
 
 
--- 菜单表
-CREATE TABLE [pt_menu]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 图片
-	[images] varchar(50),
-	-- 层级级别
-	[levels] bigint,
-	-- 排序号
-	[orderids] bigint,
-	-- 功能ids
-	[operatorids] varchar(32),
-	-- 上级菜单ids
-	[parentmenuids] varchar(32),
-	-- 所属系统ids
-	[systemsids] varchar(32),
-	-- 是否上级节点
-	[isparent] varchar(5),
-	-- names_zhcn
-	[names_zhcn] varchar(25),
-	-- names_zhhk
-	[names_zhhk] varchar(25),
-	-- names_zhtw
-	[names_zhtw] varchar(25),
-	-- names_enus
-	[names_enus] varchar(25),
-	-- names_ja
-	[names_ja] varchar(25),
-	-- 菜单链接点击参数
-	[param] varchar(200),
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_grouprole
+-- ----------------------------
+INSERT INTO [dbo].[pt_grouprole] ([ids], [groupids], [roleids]) VALUES (N'b0afd556f2e6421298f6aca3ef226afa', N'8a40c0353fa828a6013fa898d4ac0028', N'8a40c0353fa828a6013fa898d4ac0023');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_menu]
+-- ----------------------------
+DROP TABLE [dbo].[pt_menu]
+GO
+CREATE TABLE [dbo].[pt_menu] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[images] varchar(50) NULL ,
+[levels] bigint NULL ,
+[orderids] bigint NULL ,
+[operatorids] varchar(32) NULL ,
+[parentmenuids] varchar(32) NULL ,
+[systemsids] varchar(32) NULL ,
+[isparent] varchar(5) NULL ,
+[names_zhcn] varchar(25) NULL ,
+[names_zhhk] varchar(25) NULL ,
+[names_zhtw] varchar(25) NULL ,
+[names_enus] varchar(25) NULL ,
+[names_ja] varchar(25) NULL ,
+[param] varchar(200) NULL 
+)
 
 
--- 功能模块表
-CREATE TABLE [pt_module]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 描述
-	[description] varchar(200),
-	-- 图片
-	[images] varchar(50),
-	-- 是否上级节点
-	[isparent] varchar(5),
-	-- 部门名称
-	[names] varchar(25),
-	-- 排序号
-	[orderids] bigint,
-	-- 上级模块ids
-	[parentmoduleids] varchar(32),
-	-- 所属系统ids
-	[systemsids] varchar(32),
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_menu
+-- ----------------------------
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'017173f642e545b8a7b02fc6f5246b2f', N'0', N'2.png', null, N'2', N'dfe9d74fe0ef4220bfcfe6d7bb2f9436', N'625f1e0e951a4199a7262e064512e2c7', null, N'false', N'用户管理', null, null, null, null, null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'294ab73cc8274f1fa0663bf9c1bbe4d4', N'1', N'2.png', null, N'3', null, N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020', N'true', N'配置项', N'配置项', N'配置项', N'Configuration item', N'構成項目', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'297e0cf944f8cce70144f8dce1540069', N'2', N'8.png', N'0', N'8', N'8897dbe85b3e4e6989d662495272cf26', N'294ab73cc8274f1fa0663bf9c1bbe4d4', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'字典管理', N'字典管理', N'字典管理', N'dictionary management', N'辞書の管理', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'3272e2e0a7cd4d7f8e1e88abe9d70ae4', N'1', N'2.png', null, N'2', N'9adcc4c40e3148988e5003aaedbb4948', N'294ab73cc8274f1fa0663bf9c1bbe4d4', null, N'false', N'参数管理', N'参数管理', N'参数管理', N'Parameter management', N'パラメータの管理', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'3ffaf784ef95497b803d7a9f43c9e7a8', N'0', N'5.png', null, N'5', N'0773a58c4bdb4858ab062c4a2a4da69a', N'625f1e0e951a4199a7262e064512e2c7', null, N'false', N'自动回复', null, null, null, null, null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'4600e755ec5f4dc6a5783a4d097a42f2', N'0', N'4.png', null, N'4', N'420d8ebc68ad44dc8188d4c27dc585d1', N'625f1e0e951a4199a7262e064512e2c7', null, N'false', N'位置管理', null, null, null, null, null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'4bae83d582744c928cb8c8f419586a31', N'1', N'2.png', null, N'1', null, N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'用户权限', N'用户权限', N'用户权限', N'User privilege', N'ユーザの権限', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'625f1e0e951a4199a7262e064512e2c7', N'0', N'5.png', null, N'5', null, N'8a40c0353fa828a6013fa898d4ac1100', null, N'true', N'微信管理', null, null, null, null, null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'75e3b493276146eb839ed9fb3285e829', N'1', N'4.png', null, N'4', N'15495beebe984cd19dc30d65676c4c4d', N'ed90c7b40be74552bbfa7ac58efdc5fe', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'资源负载', N'资源负载', N'资源负载', N'资源负载', N'资源负载', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac0020', N'1', N'3.png', N'-1', N'1', null, null, N'8a40c0353fa828a6013fa898d4ac0020', N'true', N'菜单管理', N'菜单管理', N'菜单管理', N'Menu management', N'管理メニュー', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac0021', N'1', N'3.png', N'2', N'1', N'91baed789bc14efdbebb10b49c69ee5b', N'4bae83d582744c928cb8c8f419586a31', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'用户管理', N'用户管理', N'用户管理', N'User management', N'ユーザーの管理', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac0022', N'1', N'3.png', N'2', N'2', N'1b0d7476974e4bf9b52f75fb82f87330', N'4bae83d582744c928cb8c8f419586a31', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'分组管理', N'分组管理', N'分组管理', N'Group management', N'グループの管理', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac0023', N'1', N'3.png', N'2', N'3', N'7ae62737df444d619f8fd376360d160c', N'4bae83d582744c928cb8c8f419586a31', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'角色管理', N'角色管理', N'角色管理', N'Role management', N'キャラクターの管理', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac0024', N'1', N'3.png', N'2', N'5', N'7eab5f800bab4efb8df1b2e8a0575f73', N'4bae83d582744c928cb8c8f419586a31', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'系统管理', N'系统管理', N'系统管理', N'System management', N'システム管理', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac0025', N'1', N'3.png', N'2', N'6', N'0da15c49299d41a4b720f787d053e3cb', N'4bae83d582744c928cb8c8f419586a31', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'功能管理', N'功能管理', N'功能管理', N'Functional management', N'機能管理', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac0026', N'1', N'8.png', N'2', N'4', N'233356b63d8e477fb6e948b703232809', N'4bae83d582744c928cb8c8f419586a31', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'岗位管理', N'岗位管理', N'岗位管理', N'Post management', N'ポストの管理', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac0027', N'1', N'3.png', N'2', N'7', N'ad09a1b897744812875c752c2d70f11a', N'a5bf1c38a2ea4b6085d15b830cb80518', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'部门管理', N'部门管理', N'部门管理', N'Department management', N'部門の管理', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac1100', N'0', N'3.png', N'-1', N'1', null, null, N'd3a5c976c4c24751b6b00ec775692683', N'true', N'后台菜单组织结构', null, null, null, null, null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'8a40c0353fa828a6013fa898d4ac2200', N'0', N'3.png', N'-1', N'1', null, null, N'0c1230c98ef34e58947903fab5a4fa85', N'true', N'后台菜单组织结构', null, null, null, null, null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'9fd1692ae1fc4f3dab4f0fca7c2a6d68', N'1', N'3.png', null, N'3', N'36d3b89e378b451ca89d1a41a3c53e10', N'ed90c7b40be74552bbfa7ac58efdc5fe', null, N'false', N'在线Log4j', N'在线Log4j', N'在线Log4j', N'Online Log4j', N'オンラインLog4j', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'a5bf1c38a2ea4b6085d15b830cb80518', N'1', N'2.png', null, N'2', null, N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'组织机构', N'组织机构', N'组织机构', N'Organization', N'組織機構', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'aa2b382e85b348e6a9cd0cb967ff4006', N'0', N'3.png', null, N'3', null, N'625f1e0e951a4199a7262e064512e2c7', null, N'false', N'消息管理', null, null, null, null, null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'bd5d741147f74a058a03bbb5164f392b', N'1', N'2.png', null, N'9', N'd496b161d2564111992687b948862244', N'ed90c7b40be74552bbfa7ac58efdc5fe', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'数据源', N'数据源', N'数据源', N'Data source', N'データソース', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'cdfd617ec645490f98a64bf36102d44f', N'6', N'6.png', null, N'6', null, N'625f1e0e951a4199a7262e064512e2c7', null, N'false', N'新增菜单12', N'新增菜单13', N'新增菜单14', N'222', N'111', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'ed30f3cd2e9f4e0aa0b950c147035b67', N'0', N'2.png', null, N'2', N'2c91467f905a4f5ba9f52830131c8ad9', N'625f1e0e951a4199a7262e064512e2c7', null, N'false', N'分组管理', null, null, null, null, null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'ed90c7b40be74552bbfa7ac58efdc5fe', N'1', N'2.png', null, N'2', null, N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020', N'true', N'系统维护', N'系统维护', N'系统维护', N'System maintenance', N'システムのメンテナンス', null);
+GO
+INSERT INTO [dbo].[pt_menu] ([ids], [version], [images], [levels], [orderids], [operatorids], [parentmenuids], [systemsids], [isparent], [names_zhcn], [names_zhhk], [names_zhtw], [names_enus], [names_ja], [param]) VALUES (N'f353e484ce074b86b0210f66346d9a80', N'1', N'9.png', null, N'10', N'235d855d7b914d728e434f0f309aa04d', N'ed90c7b40be74552bbfa7ac58efdc5fe', N'8a40c0353fa828a6013fa898d4ac0020', N'false', N'系统日志', N'系统日志', N'系统日志', N'The system log', N'システムログ', null);
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_module]
+-- ----------------------------
+DROP TABLE [dbo].[pt_module]
+GO
+CREATE TABLE [dbo].[pt_module] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[description] varchar(200) NULL ,
+[images] varchar(50) NULL ,
+[isparent] varchar(5) NULL ,
+[names] varchar(25) NULL ,
+[orderids] bigint NULL ,
+[parentmoduleids] varchar(32) NULL ,
+[systemsids] varchar(32) NULL 
+)
 
 
--- 功能表
-CREATE TABLE [pt_operator]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 描述
-	[description] varchar(200),
-	-- 部门名称
-	[names] varchar(25),
-	-- url数量 : 功能url一个还是多个，多个用逗号隔开
-	[onemany] char,
-	-- 返回参数key : 返回参数key,多个逗号隔开
-	[returnparamkeys] varchar(100),
-	-- 返回目标url地址
-	[returnurl] varchar(200),
-	-- 是否行过滤
-	[rowfilter] char,
-	-- 功能url
-	[url] varchar(200),
-	-- 所属模块
-	[moduleids] varchar(32),
-	-- 模块名称
-	[modulenames] varchar(50),
-	-- 是否分页
-	[splitpage] char,
-	-- 表单token : 是否验证表单重复提交
-	[formtoken] char,
-	-- IP黑名单 : 是否验证IP
-	[ipblack] char,
-	-- 是否权限验证
-	[privilegess] char,
-	-- 是否统计PV
-	[ispv] char,
-	-- pv类型
-	[pvtype] char,
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_module
+-- ----------------------------
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'297e0cf944e9762e0144e97dfd6e00c9', N'0', N'数据源', N'2.png', N'true', N'数据源', N'2', N'ec01ee2ea97a4ff1b2371304b8d0fe34', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'33a6f5664a194da8bc2394826cc25bc3', N'0', null, N'2.png', N'true', N'岗位功能', N'2', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'377c7b7a896b43d0992c630d62bd596d', N'0', null, N'2.png', N'true', N'用户岗位', N'2', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'417ed3d3cf4d4b7a939613829e8db17d', N'0', null, N'3.png', N'true', N'消息管理', N'3', N'8a40c0353fa828a6013fa898d4ac1100', N'd3a5c976c4c24751b6b00ec775692683');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'4c343ddf030d4e17b6db83465600778b', N'0', null, N'2.png', N'true', N'验证码', N'2', N'75f9bd430f4a4ec7b0a71928e15ea5f7', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'529d39f773a54ff39eea877f606d74b0', N'0', null, N'2.png', N'true', N'Ueditor', N'2', N'75f9bd430f4a4ec7b0a71928e15ea5f7', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'625e895224aa424693149208c9d4073e', N'0', null, N'2.png', N'true', N'分组角色', N'2', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'68422887e56645728038cdde08caef9a', N'0', null, N'2.png', N'true', N'Test', N'2', N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'6c4e642b911e468dbdcb62c9b4669eb3', N'0', null, N'2.png', N'true', N'权限', N'2', N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'75f9bd430f4a4ec7b0a71928e15ea5f7', N'0', null, N'2.png', N'true', N'通用功能', N'2', N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'7a35846a305c42abb68601b4f7347289', N'0', null, N'4.png', N'true', N'主页管理', N'4', N'8a40c0353fa828a6013fa898d4ac1100', N'd3a5c976c4c24751b6b00ec775692683');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'7cbeac9418c946a2bda0c6aabf23c276', N'0', null, N'2.png', N'true', N'博客', N'2', N'68422887e56645728038cdde08caef9a', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0020', N'0', N'根节点', N'3.png', N'true', N'根节点', N'1', null, N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0021', N'0', N'后台登陆', N'8.png', N'true', N'登陆', N'1', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0022', N'0', N'字典', N'2.png', N'true', N'字典', N'2', N'eabc054760164b4cb730c4f5c2a4d305', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0023', N'0', N'用户分组管理', N'2.png', N'true', N'分组', N'2', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0024', N'0', N'角色管理', N'2.png', N'true', N'角色', N'3', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0025', N'0', N'岗位管理', N'5.png', N'true', N'岗位', N'4', N'cbe70ed41ad040938cfd7bcc5f4f0c58', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0026', N'0', N'系统管理', N'5.png', N'true', N'系统', N'5', N'cbe70ed41ad040938cfd7bcc5f4f0c58', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0027', N'0', N'功能管理', N'7.png', N'true', N'功能', N'6', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0028', N'0', N'部门管理', N'3.png', N'true', N'部门', N'7', N'cbe70ed41ad040938cfd7bcc5f4f0c58', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0029', N'0', N'日志管理', N'6.png', N'true', N'日志', N'11', N'ec01ee2ea97a4ff1b2371304b8d0fe34', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0030', N'0', N'用户管理', N'3.png', N'true', N'用户', N'1', N'cbe70ed41ad040938cfd7bcc5f4f0c58', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0031', N'0', N'公共功能', N'5.png', N'true', N'公共', N'1', N'75f9bd430f4a4ec7b0a71928e15ea5f7', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0032', N'0', N'菜单管理', N'8.png', N'true', N'菜单', N'1', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0033', N'0', N'模块管理', N'7.png', N'true', N'模块', N'1', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac1100', N'0', N'根节点', N'3.png', N'true', N'根节点', N'1', null, N'd3a5c976c4c24751b6b00ec775692683');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8a40c0353fa828a6013fa898d4ac2200', N'0', N'根节点', N'3.png', N'true', N'根节点', N'1', null, N'0c1230c98ef34e58947903fab5a4fa85');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'8f53706d4af541588bde334d99d44727', N'0', null, N'6.png', N'true', N'自动回复', N'6', N'8a40c0353fa828a6013fa898d4ac1100', N'd3a5c976c4c24751b6b00ec775692683');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'c4ab6b8d50434ddf8fa0ec106fcfc6ea', N'0', null, N'2.png', N'true', N'角色功能', N'2', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'c4e63c4171db4ae2a83f7dfcc2656b0e', N'0', null, N'2.png', N'true', N'用户管理', N'2', N'8a40c0353fa828a6013fa898d4ac1100', N'd3a5c976c4c24751b6b00ec775692683');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'c87c35097a2d4bc898fe6e9b1e280a3d', N'0', null, N'5.png', N'true', N'位置管理', N'5', N'8a40c0353fa828a6013fa898d4ac1100', N'd3a5c976c4c24751b6b00ec775692683');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'c9cbb508c11b4b10aeac87a4f3ebc340', N'0', null, N'2.png', N'true', N'资源负载', N'2', N'ec01ee2ea97a4ff1b2371304b8d0fe34', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'cbe70ed41ad040938cfd7bcc5f4f0c58', N'0', null, N'2.png', N'true', N'组织机构', N'2', N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'e6eb0165223447218410f867a9614300', N'0', null, N'2.png', N'true', N'分组管理', N'2', N'8a40c0353fa828a6013fa898d4ac1100', N'd3a5c976c4c24751b6b00ec775692683');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'eabc054760164b4cb730c4f5c2a4d305', N'0', null, N'2.png', N'true', N'配置项', N'2', N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'ec01ee2ea97a4ff1b2371304b8d0fe34', N'0', null, N'2.png', N'true', N'运维', N'2', N'8a40c0353fa828a6013fa898d4ac0020', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'f2496d3a9635448280b28fbc373f6db6', N'0', null, N'2.png', N'true', N'新增模块9', N'2', N'cbe70ed41ad040938cfd7bcc5f4f0c58', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'f7fbc8e3ee59405dabe02e18d562abf4', N'0', null, N'2.png', N'true', N'用户分组', N'2', N'6c4e642b911e468dbdcb62c9b4669eb3', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'f85f516c0b86439087d48a45173ba0e7', N'0', null, N'2.png', N'true', N'Log4j', N'2', N'ec01ee2ea97a4ff1b2371304b8d0fe34', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+INSERT INTO [dbo].[pt_module] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentmoduleids], [systemsids]) VALUES (N'ffeeb72e053a4a86a4fe242642877a44', N'0', null, N'2.png', N'true', N'参数管理', N'2', N'eabc054760164b4cb730c4f5c2a4d305', N'8a40c0353fa828a6013fa898d4ac0020');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_operator]
+-- ----------------------------
+DROP TABLE [dbo].[pt_operator]
+GO
+CREATE TABLE [dbo].[pt_operator] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[description] varchar(200) NULL ,
+[names] varchar(25) NULL ,
+[onemany] char(1) NULL ,
+[returnparamkeys] varchar(100) NULL ,
+[returnurl] varchar(200) NULL ,
+[rowfilter] char(1) NULL ,
+[url] varchar(200) NULL ,
+[moduleids] varchar(32) NULL ,
+[modulenames] varchar(50) NULL ,
+[splitpage] char(1) NULL ,
+[formtoken] char(1) NULL ,
+[ipblack] char(1) NULL ,
+[privilegess] char(1) NULL ,
+[ispv] char(1) NULL ,
+[pvtype] char(1) NULL 
+)
 
 
--- 参数表
-CREATE TABLE [pt_param]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 描述
-	[description] varchar(200),
-	-- 图片
-	[images] varchar(50),
-	-- 部门名称
-	[names] varchar(25),
-	-- 排序号
-	[orderids] bigint,
-	-- paths
-	[paths] varchar(1000),
-	-- 状态
-	[zhuangtai] char,
-	-- 上级节点ids
-	[parentids] varchar(32),
-	-- 是否上级节点
-	[isparent] varchar(5),
-	-- 层级级别
-	[levels] bigint,
-	-- 编号
-	[numbers] varchar(50),
-	-- 值
-	[val] varchar(500),
-	-- 是否国际化 : 是否国际化
-	[i18n] char,
-	-- 中文简体
-	[val_zhcn] varchar(500),
-	-- 中文香港
-	[val_zhhk] varchar(500),
-	-- 中文台湾
-	[val_zhtw] varchar(500),
-	-- 日文
-	[val_ja] varchar(500),
-	-- 英文
-	[val_enus] varchar(500),
-	-- 状态
-	[status] char,
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_operator
+-- ----------------------------
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'01aa0c85c8b84ae8aca7f5484336b203', N'0', null, N'保存', null, null, null, N'0', N'/platform/dict/save', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'0478826a46df4f20b12f4043a97f8209', N'0', null, N'验证码', null, null, null, N'0', N'/platform/authImg', N'4c343ddf030d4e17b6db83465600778b', N'验证码', N'0', N'0', N'0', N'0', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'05114c0cbe1f4c2095b3216f13cfb681', N'0', null, N'保存', null, null, null, N'0', N'/wx/keyword/save', N'8f53706d4af541588bde334d99d44727', N'自动回复', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'053d330462e1459ca1012c9d29113bc4', N'0', null, N'获取部门负责人', null, null, null, N'0', N'/platform/dept/getPrincipal', N'8a40c0353fa828a6013fa898d4ac0028', N'部门', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'0773a58c4bdb4858ab062c4a2a4da69a', N'0', null, N'默认主页', null, null, null, N'0', N'/wx/keyword', N'8f53706d4af541588bde334d99d44727', N'自动回复', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'08a96d5dd37f49459eeb02eebeb0a78c', N'0', null, N'列表', null, null, null, N'0', N'/platform/roleOperator', N'c4ab6b8d50434ddf8fa0ec106fcfc6ea', N'角色功能', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'091855dd809b418fae88a7fec6d9f246', N'0', null, N'准备更新', null, null, null, N'0', N'/platform/dict/edit', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'09b6ce29313c4051ba765de516a9b283', N'0', null, N'treeData', null, null, null, N'0', N'/platform/station/treeData', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'0da15c49299d41a4b720f787d053e3cb', N'0', null, N'默认列表', null, null, null, N'0', N'/platform/operator', N'8a40c0353fa828a6013fa898d4ac0027', N'功能', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'0fb7938c7d614fc389568eb67b442303', N'0', null, N'单选', null, null, null, N'0', N'/platform/module/radio.html', N'8a40c0353fa828a6013fa898d4ac0033', N'模块', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'1046389d8525451697f2793185e7d6ee', N'0', null, N'更新', null, null, null, N'0', N'/platform/dept/update', N'8a40c0353fa828a6013fa898d4ac0028', N'部门', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'10499bc7f9cb4adf99beba00343b4ea6', N'0', null, N'获取菜单功能', null, null, null, N'0', N'/platform/menu/getOperator', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'12141c1c3be241ca8a868bce9cd610d5', N'0', null, N'准备添加', null, null, null, N'0', N'/platform/dict/add.html', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'15566e63f3104c73b4a0b4a784dd11ca', N'0', null, N'保存', null, null, null, N'0', N'/platform/role/save', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'18f50e0f48ef4dd9bec85f5612ab10c0', N'0', null, N'功能列表', null, null, null, N'0', N'/platform/test/operator', N'68422887e56645728038cdde08caef9a', N'Test', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'1a8b4d8e4411412fa8bb561393563a85', N'0', null, N'准备添加', null, null, null, N'0', N'/platform/user/add.html', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'1b0d7476974e4bf9b52f75fb82f87330', N'0', null, N'分组默认列表', null, null, null, N'0', N'/platform/group', N'8a40c0353fa828a6013fa898d4ac0023', N'分组', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'1b1a809815574b2a9c1d0e18d692de17', N'0', null, N'更新', null, null, null, N'0', N'/platform/operator/update', N'8a40c0353fa828a6013fa898d4ac0027', N'功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'1f05b6496a494f488e4cacd2a449c37a', N'0', null, N'删除', null, null, null, N'0', N'/platform/stationOperator/del', N'33a6f5664a194da8bc2394826cc25bc3', N'岗位功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'21141da4febe4c929abe37126b37fd12', N'0', null, N'多选', null, null, null, N'0', N'/platform/station/checkbox.html', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'21b0a910ef6e4c60a325d5e57e6e6f65', N'0', null, N'单选', null, null, null, N'0', N'/platform/dict/radio.html', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'22926eb196a14b48be775f4880b5ba94', N'0', null, N'保存', null, null, null, N'0', N'/platform/group/save', N'8a40c0353fa828a6013fa898d4ac0023', N'分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'233356b63d8e477fb6e948b703232809', N'0', null, N'默认树', null, null, null, N'0', N'/platform/station', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'235d855d7b914d728e434f0f309aa04d', N'0', null, N'默认列表', null, null, null, N'0', N'/platform/sysLog', N'8a40c0353fa828a6013fa898d4ac0029', N'日志', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'29c18b3394924c30882da049da14ad99', N'0', null, N'更新', null, null, null, N'0', N'/platform/role/update', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'2bd0e8f116f9420692a81d1723cecf5c', N'0', null, N'日志列表', null, null, null, N'0', N'/platform/test/sysLog', N'68422887e56645728038cdde08caef9a', N'Test', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'2be34991827e4e8da8e92f9b9e8bce25', N'0', null, N'treeTableSub', null, null, null, N'0', N'/platform/dict/treeTable', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'2c2063e17dc742a3b9c330b84c5dfa6a', N'0', null, N'自动补全', null, null, null, N'0', N'/platform/test/autoComplete', N'68422887e56645728038cdde08caef9a', N'Test', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'2c91467f905a4f5ba9f52830131c8ad9', N'0', null, N'默认分组列表', null, null, null, N'0', N'/wx/group', N'e6eb0165223447218410f867a9614300', N'分组管理', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'2e32e08e495b4ccea6148774e9f91182', N'0', null, N'查看', null, null, null, N'0', N'/platform/param/view', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'2fbbc9cfb0bf4b5bb504ead155c3423c', N'0', null, N'保存', null, null, null, N'0', N'/platform/station/save', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'2fee901117c64e18873f60e8f800713d', N'0', null, N'单选', null, null, null, N'0', N'/platform/station/radio.html', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'3085a3b0c20d4f3aaa7c2d27fe986aba', N'0', null, N'博客添加', null, null, null, N'0', N'/test/blog/add.html', N'7cbeac9418c946a2bda0c6aabf23c276', N'博客', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'30bf01ffe1cb4ed39e92c6600ea39e93', N'0', null, N'添加', null, null, null, N'0', N'/platform/groupRole/addRole', N'625e895224aa424693149208c9d4073e', N'分组角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'32a3e59964204a3c8848e84b864306ae', N'0', null, N'删除', null, null, null, N'0', N'/platform/systems/delete', N'8a40c0353fa828a6013fa898d4ac0026', N'系统', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'335d1f8f46eb47a18001889f8cc21348', N'0', null, N'删除', null, null, null, N'0', N'/platform/role/delete', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'351851fb7fce48f9a0ff6747971715ac', N'0', null, N'lucene', null, null, null, N'0', N'/platform/test/lucene', N'68422887e56645728038cdde08caef9a', N'Test', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'362cf247241c4d12b6242301e4a73516', N'0', null, N'删除', null, null, null, N'0', N'/platform/station/delete', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'37218fb52ec94fb4bf76209a17916094', N'0', null, N'默认树', null, null, null, N'0', N'/platform/module', N'8a40c0353fa828a6013fa898d4ac0033', N'模块', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'39d82b5574b540b88d3723b36eb3e577', N'0', null, N'验证手机号是否存在', null, null, null, N'0', N'/platform/login/valiMobile', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'3da96263a14343eaa7b409a93ec9e1db', N'0', null, N'treeTable', null, null, null, N'0', N'/platform/param/treeTable', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'3dd486cd58da467dbd83ae420db14815', N'0', null, N'准备添加', null, null, null, N'0', N'/weiXin/keyword/add.html', N'8f53706d4af541588bde334d99d44727', N'自动回复', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'3e4e9e72dab243d38a1785d157c24cb6', N'0', null, N'博客更新', null, null, null, N'0', N'/test/blog/update', N'7cbeac9418c946a2bda0c6aabf23c276', N'博客', N'0', N'1', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'3ee5f986289d4a1990f4e42c9a0caadb', N'0', null, N'准备添加', null, null, null, N'0', N'/platform/group/add.html', N'8a40c0353fa828a6013fa898d4ac0023', N'分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'420d8ebc68ad44dc8188d4c27dc585d1', N'0', null, N'位置默认列表', null, null, null, N'0', N'/wx/location', N'c87c35097a2d4bc898fe6e9b1e280a3d', N'位置管理', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'423e8c2e2a644bbda0803f46ea8f31e2', N'0', null, N'准备国际化编辑', null, null, null, N'0', N'/platform/menu/toEdit', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'4376888fd74f4247a926529e5da03442', N'0', null, N'treeData', null, null, null, N'0', N'/platform/user/treeData', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'437e05d09dd94720b67c4f230cdebe58', N'0', null, N'更新', null, null, null, N'0', N'/platform/module/update', N'8a40c0353fa828a6013fa898d4ac0033', N'模块', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'46b7269a26044dfebb4edd06a2f9cd83', N'0', null, N'博客列表', null, null, null, N'0', N'/test/blog', N'7cbeac9418c946a2bda0c6aabf23c276', N'博客', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'46e00ef0fd234e9dbf68ed9bbb437d0f', N'0', null, N'多选', null, null, null, N'0', N'/platform/department/checkbox.html', N'8a40c0353fa828a6013fa898d4ac0028', N'部门', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'481d4d5c0a634c4085c72c990260e58d', N'0', null, N'微信管理主页', null, null, null, N'0', N'/wx/index/content', N'7a35846a305c42abb68601b4f7347289', N'主页管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'483bdacba04f4663986e6339166e8321', N'0', null, N'验证账号是否存在', null, null, null, N'0', N'/platform/login/valiUserName', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'48db51f20b504c4ab489b1dcfd3ecbd9', N'0', null, N'密码变更', null, null, null, N'0', N'/platform/user/passChange.html', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'4959d88b8ca64eb19310c30799faa07c', N'0', null, N'准备添加', null, null, null, N'0', N'/platform/param/add.html', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'4a6544ae7a2548ad81c0e3994999023c', N'0', null, N'准备设置菜单功能', null, null, null, N'0', N'/platform/menu/operatorTree.html', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'4bebccaa8f0c4bfbaa2ff89f00706100', N'0', null, N'博客编辑', null, null, null, N'0', N'/test/blog/edit', N'7cbeac9418c946a2bda0c6aabf23c276', N'博客', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'4df80521e66447618796c3cfe02bf239', N'0', null, N'默认treeTable', null, null, null, N'0', N'/platform/dict', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'4e03be6af2c74dae99a131a1ab3569f6', N'0', null, N'编辑', null, null, null, N'0', N'/platform/param/edit', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'5148ea207b974ee197f0bc57060ab1ad', N'0', null, N'删除', null, null, null, N'0', N'/wx/location/delete', N'c87c35097a2d4bc898fe6e9b1e280a3d', N'位置管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'58a85040aa9f40cca0bdba6e23e30363', N'0', null, N'保存', null, null, null, N'0', N'/platform/dept/save', N'8a40c0353fa828a6013fa898d4ac0028', N'部门', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'5b249ad344d948b99f58768c323f5f71', N'0', null, N'准备添加', null, null, null, N'0', N'/platform/systems/add.html', N'8a40c0353fa828a6013fa898d4ac0026', N'系统', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'5b47ae382f42421682852f889c176d49', N'0', null, N'验证身份证是否存在', null, null, null, N'0', N'/platform/login/valiIdcard', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'5c2bdc059ae24ffda2758a2781bb46da', N'0', null, N'log4jServlet', null, null, null, N'0', N'/se/log4j', N'f85f516c0b86439087d48a45173ba0e7', N'Log4j', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'5fcac107c80d493d91b53a815d4b297a', N'0', null, N'保存', null, null, null, N'0', N'/platform/user/save', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'61da3d9c60704621aa60d1da4553a264', N'0', null, N'添加', null, null, null, N'0', N'/platform/userGroup/addGroup', N'f7fbc8e3ee59405dabe02e18d562abf4', N'用户分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'6324ff9e83654aa0bf7f9d918b636b55', N'0', null, N'查看字典', null, null, null, N'0', N'/platform/dict/view', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'6566adb7fc6347e7b01a3c47129b5eb5', N'0', null, N'ueditor', null, null, null, N'0', N'/platform/ueditor', N'529d39f773a54ff39eea877f606d74b0', N'Ueditor', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'6569e0d9f2cd4e3a97af4e1b0cd8d2f7', N'0', null, N'删除', null, null, null, N'0', N'/platform/dict/delete', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'671ce1e6167840baaa6d27f4f04574c9', N'0', null, N'主页', null, null, null, N'0', N'/platform/param', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'6b527ed138c343a89ddf73cf16fef565', N'0', null, N'更新', null, null, null, N'0', N'/wx/keyword/update', N'8f53706d4af541588bde334d99d44727', N'自动回复', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'6daed51284f94923b1c8a6414e646959', N'0', null, N'treeData', null, null, null, N'0', N'/platform/operator/treeData', N'8a40c0353fa828a6013fa898d4ac0027', N'功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'721f7255449c445faf36607c254eea06', N'0', null, N'iframe', null, null, null, N'0', N'/platform/log4j/iframe.html', N'f85f516c0b86439087d48a45173ba0e7', N'Log4j', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'77823e12391a47729a1f82a00bc15c5b', N'0', null, N'准备更新', null, null, null, N'0', N'/wx/keyword/edit', N'8f53706d4af541588bde334d99d44727', N'自动回复', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'78c6026c6af44b41a6bef4cdb4cfb414', N'0', null, N'获取角色功能', null, null, null, N'0', N'/platform/role/getOperator', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'79039a2260da46b0aabb5a62e8db6c87', N'0', null, N'查看', null, null, null, N'0', N'/platform/user/view', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'7ae62737df444d619f8fd376360d160c', N'0', null, N'默认列表', null, null, null, N'0', N'/platform/role', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'7b4281dd247c4624bee0d8f84c2c2715', N'0', null, N'保存', null, null, null, N'0', N'/platform/systems/save', N'8a40c0353fa828a6013fa898d4ac0026', N'系统', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'7bd7ca42560140ee8573b2ade6388f3e', N'0', null, N'用户分组选择', null, null, null, N'0', N'/platform/userGroup/select', N'f7fbc8e3ee59405dabe02e18d562abf4', N'用户分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'7cc12b5c154a4a9782c518c57e8ab3aa', N'0', null, N'准备更新', null, null, null, N'0', N'/platform/role/edit', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'7eab5f800bab4efb8df1b2e8a0575f73', N'0', null, N'默认列表', null, null, null, N'0', N'/platform/systems', N'8a40c0353fa828a6013fa898d4ac0026', N'系统', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'0', null, N'登陆验证', null, null, null, N'0', N'/platform/login/vali', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'0', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'827a7067a28d442da3ddd834677127af', N'0', null, N'国际化编辑', null, null, null, N'0', N'/platform/menu/edit', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'83ef85fd17804bb195d0ad3c07f88c30', N'0', null, N'准备更新', null, null, null, N'0', N'/platform/operator/edit', N'8a40c0353fa828a6013fa898d4ac0027', N'功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'88298fbd650d49f492e268816feffd15', N'0', null, N'验证邮箱是否存在', null, null, null, N'0', N'/platform/login/valiMailBox', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'886bd497064b4c9f87d8461ebba421d1', N'0', null, N'首页', null, null, null, N'0', N'/platform/index', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'8897dbe85b3e4e6989d662495272cf26', N'0', null, N'Iframe', null, null, null, N'0', N'/platform/dict/treeTableIframe.html', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'8b1c1c86385642f2b6c97930b44bbbcf', N'0', null, N'单选', null, null, null, N'0', N'/platform/param/radio.html', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'8bd9c0e14df941cdaf6253cd08dbd9cd', N'0', null, N'准备更新', null, null, null, N'0', N'/platform/systems/edit', N'8a40c0353fa828a6013fa898d4ac0026', N'系统', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'8ca8af501522439d8c9249e00db5d78d', N'0', null, N'查看', null, null, null, N'0', N'/platform/sysLog/view', N'8a40c0353fa828a6013fa898d4ac0029', N'日志', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'8f79857b31d4475a94c712e997e89c99', N'0', null, N'更新', null, null, null, N'0', N'/platform/dict/update', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'90c3cee940ea4211a714f5111d24ff5d', N'0', null, N'treeData', null, null, null, N'0', N'/platform/param/treeData', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'910955c2192a418995eeab8bf15372e9', N'0', null, N'准备添加', null, null, null, N'0', N'/platform/operator/add.html', N'8a40c0353fa828a6013fa898d4ac0027', N'功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'91baed789bc14efdbebb10b49c69ee5b', N'0', null, N'默认主页列表', null, null, null, N'0', N'/platform/user', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'9750ea3ee4474711b9acbda8d5b87ee7', N'0', null, N'删除', null, null, null, N'0', N'/platform/groupRole/delRole', N'625e895224aa424693149208c9d4073e', N'分组角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'9765e6bb76eb40ab800cb8954822190e', N'0', null, N'删除', null, null, null, N'0', N'/wx/keyword/delete', N'8f53706d4af541588bde334d99d44727', N'自动回复', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'9a708f39e123455e84b6125774bab1ea', N'0', null, N'treeData', null, null, null, N'0', N'/platform/module/treeData', N'8a40c0353fa828a6013fa898d4ac0033', N'模块', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'9adcc4c40e3148988e5003aaedbb4948', N'0', null, N'treeTableIframe', null, null, null, N'0', N'/platform/param/treeTableIframe.html', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'9c0ae757fc564f27860b975e5792ae6a', N'0', null, N'log4jhtml', null, null, null, N'0', N'/platform/log4j/log4j.html', N'f85f516c0b86439087d48a45173ba0e7', N'Log4j', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'9f75b47bdc0249e2b493c47384785a72', N'0', null, N'保存', null, null, null, N'0', N'/platform/menu/save', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a0c01a5248cd4bf38e57945dbb2b98c5', N'0', null, N'更新', null, null, null, N'0', N'/platform/group/update', N'8a40c0353fa828a6013fa898d4ac0023', N'分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a0d2897ee9194378819e78538189faa0', N'0', null, N'列表', null, null, null, N'0', N'/platform/stationOperator', N'33a6f5664a194da8bc2394826cc25bc3', N'岗位功能', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a1ff68acf9b24c34b347ff21e333cb70', N'0', null, N'设置菜单功能', null, null, null, N'0', N'/platform/menu/setOperator', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a2727f19f7cd4a038dd1a94f042a8cf1', N'0', null, N'博客保存', null, null, null, N'0', N'/test/blog/save', N'7cbeac9418c946a2bda0c6aabf23c276', N'博客', N'0', N'1', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a5289b2638d845fbb06dedbcdd517f97', N'0', null, N'删除', null, null, null, N'0', N'/platform/group/delete', N'8a40c0353fa828a6013fa898d4ac0023', N'分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a6623c65480f4f2cb63a4d7673f81e3a', N'0', null, N'treeData', null, null, null, N'0', N'/platform/menu/treeData', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'aa126932641f4e068ed8278a332de85d', N'0', null, N'默认主页', null, null, null, N'0', N'/platform/index/content', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'acbceb432b5849aca9e9b284240281ec', N'0', null, N'分组角色下拉选择', null, null, null, N'0', N'/platform/role/select', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'ad09a1b897744812875c752c2d70f11a', N'0', null, N'默认树', null, null, null, N'0', N'/platform/dept', N'8a40c0353fa828a6013fa898d4ac0028', N'部门', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'ad51a6ca95c646ce9c03778eda715734', N'0', null, N'保存', null, null, null, N'0', N'/platform/operator/save', N'8a40c0353fa828a6013fa898d4ac0027', N'功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'b13b002e2fad4e95bbe0e4dbc9fbdfe1', N'0', null, N'保存', null, null, null, N'0', N'/platform/module/save', N'8a40c0353fa828a6013fa898d4ac0033', N'模块', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'b23b17d4c83242e8a1a8ee8cfcde9907', N'0', null, N'查看', null, null, null, N'0', N'/platform/operator/view', N'8a40c0353fa828a6013fa898d4ac0027', N'功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'b4ee4ae4391f4243be69e838545d2131', N'0', null, N'treeData', null, null, null, N'0', N'/platform/dept/treeData', N'8a40c0353fa828a6013fa898d4ac0028', N'部门', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'b8218945b8e743f29651569950014511', N'0', null, N'单选', null, null, null, N'0', N'/platform/department/radio.html', N'8a40c0353fa828a6013fa898d4ac0028', N'部门', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'b82d86fb7b64498a9c2b8b9a99b3fbeb', N'0', null, N'删除', null, null, null, N'0', N'/platform/menu/delete', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'b8339f29d8d84a4ead6454295f87b79c', N'0', null, N'人员分组设置', null, null, null, N'0', N'/platform/group/select', N'8a40c0353fa828a6013fa898d4ac0023', N'分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'bc2c865be6af42cf861294d446fb1c6f', N'0', null, N'单选', null, null, null, N'0', N'/platform/user/radio.html', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'c04adcd019e04cf3ba7c66af721a18dc', N'0', null, N'删除', null, null, null, N'0', N'/platform/user/delete', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'c05642442e0a468ebe4f0b7771a803ae', N'0', null, N'更新', null, null, null, N'0', N'/platform/systems/update', N'8a40c0353fa828a6013fa898d4ac0026', N'系统', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'c081c50918f4459f8e36ab8cb4151a61', N'0', null, N'准备岗位功能设置', null, null, null, N'0', N'/platform/station/operatorTree.html', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'c0ccfcd127c347a8b9db140e5aa62188', N'0', null, N'准备添加', null, null, null, N'0', N'/platform/role/add.html', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'c1e991d1f56749298c18ff69d7777e0b', N'0', null, N'删除', null, null, null, N'0', N'/platform/module/delete', N'8a40c0353fa828a6013fa898d4ac0033', N'模块', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'c29ea4cbd9044bc786e9f4584ad840ff', N'0', null, N'获取岗位功能', null, null, null, N'0', N'/platform/station/getOperator', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'c7132250f5054b808bb119122a6ecb52', N'0', null, N'设置岗位功能', null, null, null, N'0', N'/platform/station/setOperator', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'c9d013d14cbd4f148fb4562c91803ee8', N'0', null, N'准备更新', null, null, null, N'0', N'/platform/group/edit', N'8a40c0353fa828a6013fa898d4ac0023', N'分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'ca0f6da01ada419eaa7739d9790e5b88', N'0', null, N'准备角色功能设置', null, null, null, N'0', N'/platform/role/operatorTree.html', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'cc6bcbee40ab43b2bd5aff6d9385e1fc', N'0', null, N'删除', null, null, null, N'0', N'/platform/operator/delete', N'8a40c0353fa828a6013fa898d4ac0027', N'功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'cc88acee3a664c58861a872c351385e6', N'0', null, N'选择', null, null, null, N'0', N'/platform/groupRole/select', N'625e895224aa424693149208c9d4073e', N'分组角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'ccf9b69e151840a28be75d8443b70273', N'0', null, N'更新', null, null, null, N'0', N'/platform/param/update', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'cf26c1d2baa24a8791b3d264154b80d4', N'0', null, N'默认树', null, null, null, N'0', N'/platform/menu', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'd115d08591ef4c0eaebef15f8294b287', N'0', null, N'准备设置部门负责人', null, null, null, N'0', N'/platform/department/userTree.html', N'8a40c0353fa828a6013fa898d4ac0028', N'部门', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'd247fb45be724ed2a2bb5c92d73bf6cf', N'0', null, N'设置用户的组', null, null, null, N'0', N'/platform/user/setGroup', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'd479dbdc901f4d85a207b9bace6465ac', N'0', null, N'更新', null, null, null, N'0', N'/platform/user/update', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'd496b161d2564111992687b948862244', N'0', null, N'iframe', null, null, null, N'0', N'/platform/druid/iframe.html', N'297e0cf944e9762e0144e97dfd6e00c9', N'数据源', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'd5c8bdf7a49a4e46b776c05dc9ead484', N'0', null, N'treeData', null, null, null, N'0', N'/platform/dict/treeData', N'8a40c0353fa828a6013fa898d4ac0022', N'字典', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'd646da8707ae41838fd2ec9bf0d467ee', N'0', null, N'设置角色功能', null, null, null, N'0', N'/platform/role/setOperator', N'8a40c0353fa828a6013fa898d4ac0024', N'角色', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'da6077ec1f354a409d0385b2c063e044', N'0', null, N'添加功能', null, null, null, N'0', N'/platform/roleOperator/add', N'c4ab6b8d50434ddf8fa0ec106fcfc6ea', N'角色功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'dc750e57b54f4baca78d66969321ee51', N'0', null, N'更新', null, null, null, N'0', N'/platform/station/update', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'df0aa534655242e4a0bcd638b51a4e03', N'0', null, N'更新', null, null, null, N'0', N'/platform/menu/update', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'dfc7af0979a54e8e9a3f18b7a5d66030', N'0', null, N'查看', null, null, null, N'0', N'/wx/keyword/view', N'8f53706d4af541588bde334d99d44727', N'自动回复', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'dfe9d74fe0ef4220bfcfe6d7bb2f9436', N'0', null, N'默认用户列表', null, null, null, N'0', N'/wx/user', N'c4e63c4171db4ae2a83f7dfcc2656b0e', N'用户管理', N'1', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'e037e0bae9a94e549d6b647db49a64a1', N'0', null, N'角色设置', null, null, null, N'0', N'/platform/group/setRole', N'8a40c0353fa828a6013fa898d4ac0023', N'分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'e1ac811d2a16495d927f994dd006e824', N'0', null, N'删除', null, null, null, N'0', N'/platform/param/delete', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'e2cead0f68ac4a2d98765264578a9f83', N'0', null, N'删除', null, null, null, N'0', N'/platform/userGroup/delGroup', N'f7fbc8e3ee59405dabe02e18d562abf4', N'用户分组', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'e4f182b4009e48a58673134324b2ec56', N'0', null, N'资源负载', null, null, null, N'0', N'/platform/resources', N'c9cbb508c11b4b10aeac87a4f3ebc340', N'资源负载', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'e754dfdb794d4e7db6023c9b089a340c', N'0', null, N'多选', null, null, null, N'0', N'/platform/user/checkbox.html', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'ee27f5c23b6d4217b3b66295a3506a40', N'0', null, N'删除功能', null, null, null, N'0', N'/platform/roleOperator/del', N'c4ab6b8d50434ddf8fa0ec106fcfc6ea', N'角色功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'f1f6f2c8f026498c8ee64b7a918d06df', N'0', null, N'准备更新', null, null, null, N'0', N'/platform/user/edit', N'8a40c0353fa828a6013fa898d4ac0030', N'用户', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'f604f021cba44b6fb96115265e557521', N'0', null, N'添加', null, null, null, N'0', N'/platform/stationOperator/add', N'33a6f5664a194da8bc2394826cc25bc3', N'岗位功能', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'f771691134c34174a819b5990310d000', N'0', null, N'首页', null, null, null, N'0', N'/platform/', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'f771691134c34174a819b5990310da56', N'0', null, N'注销', null, null, null, N'0', N'/platform/login/logout', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'f82c021dc443419fb2469032af73bf3e', N'0', null, N'删除', null, null, null, N'0', N'/platform/dept/delete', N'8a40c0353fa828a6013fa898d4ac0028', N'部门', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'fb487ba403254ce8843b39a768422f04', N'0', null, N'保存', null, null, null, N'0', N'/platform/param/save', N'ffeeb72e053a4a86a4fe242642877a44', N'参数管理', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'0', null, N'准备登陆', null, null, null, N'0', N'/platform/login', N'8a40c0353fa828a6013fa898d4ac0021', N'登陆', N'0', N'0', N'0', N'0', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'fd9978df5c5a47f298e2d28e21e70b15', N'0', null, N'删除', null, null, null, N'0', N'/platform/sysLog/delete', N'8a40c0353fa828a6013fa898d4ac0029', N'日志', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'fdaeeb41691d460b8f142066d1f79927', N'0', null, N'博客删除', null, null, null, N'0', N'/test/blog/delete', N'7cbeac9418c946a2bda0c6aabf23c276', N'博客', N'0', N'0', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'ff91363b32424fa399e44cc0dfd688e9', N'0', null, N'博客查看', null, null, null, N'0', N'/test/blog/view', N'7cbeac9418c946a2bda0c6aabf23c276', N'博客', N'0', N'0', N'0', N'1', null, null);
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_param]
+-- ----------------------------
+DROP TABLE [dbo].[pt_param]
+GO
+CREATE TABLE [dbo].[pt_param] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[description] varchar(200) NULL ,
+[images] varchar(50) NULL ,
+[names] varchar(25) NULL ,
+[orderids] bigint NULL ,
+[paths] varchar(1000) NULL ,
+[zhuangtai] char(1) NULL ,
+[parentids] varchar(32) NULL ,
+[isparent] varchar(5) NULL ,
+[levels] bigint NULL ,
+[numbers] varchar(50) NULL ,
+[val] varchar(500) NULL ,
+[i18n] char(1) NULL ,
+[val_zhcn] varchar(500) NULL ,
+[val_zhhk] varchar(500) NULL ,
+[val_zhtw] varchar(500) NULL ,
+[val_ja] varchar(500) NULL ,
+[val_enus] varchar(500) NULL ,
+[status] char(1) NULL 
+)
 
 
--- 资源负载表
-CREATE TABLE [pt_resources]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 系统名称
-	[osname] varchar(200),
-	-- IP地址
-	[ips] varchar(50),
-	-- 主机名
-	[hostname] varchar(200),
-	-- cpu数量
-	[cpunumber] bigint,
-	-- cpu负载
-	[cpuratio] decimal(20,10),
-	-- 物理内存大小
-	[phymemory] bigint,
-	-- 内存可用大小
-	[phyfreememory] bigint,
-	-- jvm总内存
-	[jvmtotalmemory] bigint,
-	-- jvm可用内存
-	[jvmfreememory] bigint,
-	-- jvm最大内存
-	[jvmmaxmemory] bigint,
-	-- gc次数
-	[gccount] bigint,
-	-- 创建时间
-	[createdate] datetime,
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_param
+-- ----------------------------
+INSERT INTO [dbo].[pt_param] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'0c78f87750a745bbb59005a6ca0f744a', N'1', null, N'3.png', N'weixinToken', N'3', N'100103root/83f4b0ee56904cbeb5f91696ad804c29/0c78f87750a745bbb59005a6ca0f744a', null, N'83f4b0ee56904cbeb5f91696ad804c29', N'false', N'2', N'weixinToken', N'weixinchat', N'0', N'weixinchat', N'weixinchat', N'weixinchat', N'weixinchat', N'weixinchat', N'1');
+GO
+INSERT INTO [dbo].[pt_param] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'7381008292054bccba20224bc33774d7', N'7', null, N'2.png', N'weixinAppID', N'1', N'100103root/83f4b0ee56904cbeb5f91696ad804c29/7381008292054bccba20224bc33774d7', null, N'83f4b0ee56904cbeb5f91696ad804c29', N'false', N'2', N'weixinAppID', N'123', N'0', N'1234', N'1234', N'1234', N'1234', N'1234', N'1');
+GO
+INSERT INTO [dbo].[pt_param] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'8094c60d7a594b36bb0187cbce9c4188', N'0', null, N'2.png', N'weixinAppSecret', N'2', N'100103root/83f4b0ee56904cbeb5f91696ad804c29/8094c60d7a594b36bb0187cbce9c4188', null, N'83f4b0ee56904cbeb5f91696ad804c29', N'false', N'2', N'weixinAppSecret', N'123', N'0', null, null, null, null, null, N'1');
+GO
+INSERT INTO [dbo].[pt_param] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'83f4b0ee56904cbeb5f91696ad804c29', N'0', null, N'2.png', N'微信配置', N'1', N'100103root/83f4b0ee56904cbeb5f91696ad804c29', null, N'8a40c0353fa828a6013fa898d4ac0020', N'true', N'1', N'weixinConfig', null, N'0', null, null, null, null, null, N'1');
+GO
+INSERT INTO [dbo].[pt_param] ([ids], [version], [description], [images], [names], [orderids], [paths], [zhuangtai], [parentids], [isparent], [levels], [numbers], [val], [i18n], [val_zhcn], [val_zhhk], [val_zhtw], [val_ja], [val_enus], [status]) VALUES (N'8a40c0353fa828a6013fa898d4ac0020', N'0', N'参数树', N'1_open.png', N'参数树', N'1', N'100103root', N'1', null, N'true', N'0', null, null, N'0', null, null, null, null, null, N'1');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_resources]
+-- ----------------------------
+DROP TABLE [dbo].[pt_resources]
+GO
+CREATE TABLE [dbo].[pt_resources] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[osname] varchar(200) NULL ,
+[ips] varchar(50) NULL ,
+[hostname] varchar(200) NULL ,
+[cpunumber] bigint NULL ,
+[cpuratio] decimal(20,10) NULL ,
+[phymemory] bigint NULL ,
+[phyfreememory] bigint NULL ,
+[jvmtotalmemory] bigint NULL ,
+[jvmfreememory] bigint NULL ,
+[jvmmaxmemory] bigint NULL ,
+[gccount] bigint NULL ,
+[createdate] datetime NULL 
+)
 
 
--- 角色表
-CREATE TABLE [pt_role]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 编号
-	[numbers] varchar(50),
-	-- 名称
-	[names] varchar(50),
-	-- 描述
-	[description] varchar(2000),
-	-- 权限功能ids
-	[operatorids] text,
-	-- 权限功能模块ids
-	[moduleids] text,
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_resources
+-- ----------------------------
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'01403c1e94dd42809db8e0d701619233', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0333532608', N'8155', N'1730', N'353', N'190', N'1813', N'8', N'2016-09-12 16:07:14.217');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'046161f058254725924973a88729d3c5', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'3202', N'992', N'838', N'1963', N'1', N'2016-02-01 09:46:30.957');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'0bb3be3059f045a5870c134e31167d4a', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'1842', N'217', N'183', N'1813', N'6', N'2016-09-12 16:01:14.397');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'0decfaeb715d4f9787d39911f5a6737c', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0254882739', N'8155', N'2755', N'992', N'892', N'1963', N'4', N'2016-02-01 09:58:45.437');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'0e99516f855748e6b6879076c65e335f', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0428563861', N'8155', N'2746', N'992', N'819', N'1963', N'2', N'2016-02-01 10:01:04.503');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'129d2f7d394b46bfbb6ad2e75e8054e9', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'1544', N'992', N'843', N'1963', N'1', N'2016-01-30 15:03:29.777');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'184c122636bf41e998c668484f6dc863', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0344745102', N'8155', N'1724', N'352', N'191', N'1813', N'8', N'2016-09-12 16:00:32.327');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'1c4f850d9a214df0b25ccf915118cc04', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'1858', N'217', N'180', N'1813', N'6', N'2016-09-12 15:50:32.507');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'1d0f3a706129487b87245da950af2beb', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'2200', N'992', N'835', N'1963', N'1', N'2016-01-30 15:05:54.233');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'1e717299b14b46d787f9f55940b4d2c3', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0486131773', N'8155', N'1821', N'222', N'67', N'1813', N'7', N'2016-09-12 15:48:42.547');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'2a5bab28880b4d08805d12e3cc2aa509', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0468570002', N'8155', N'1687', N'353', N'218', N'1813', N'8', N'2016-09-12 16:05:14.217');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'2cc39edd8e64412c9ef2626b9b33b1eb', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0000000000', N'8155', N'1932', N'218', N'183', N'1813', N'6', N'2016-09-12 15:46:43.217');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'36130682a274499e83ad3ed1e05c6071', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0425832527', N'8155', N'1560', N'353', N'168', N'1813', N'8', N'2016-09-12 16:09:14.220');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'3a097e6b86484cf0ad12d3e5bde188f8', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'2189', N'992', N'839', N'1963', N'1', N'2016-01-30 15:07:59.797');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'3d02ef05ee92491cba95f5469323b64f', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0339949131', N'8155', N'2826', N'992', N'846', N'1963', N'2', N'2016-02-01 09:56:29.537');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'3d3a63d5117948599d9a39a12ba66c2a', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'2252', N'992', N'841', N'1963', N'1', N'2016-01-30 15:16:01.687');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'43865fae2b774a56a9abbe6909dc6611', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0324900231', N'8155', N'2076', N'992', N'924', N'1963', N'3', N'2016-01-30 15:09:59.567');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'504426f6c47647298df347949d134fd4', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0235220182', N'8155', N'1477', N'992', N'848', N'1963', N'3', N'2016-01-30 15:02:07.857');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'50b265b81fc64eb2bd3be57a298b5019', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0250483301', N'8155', N'2250', N'992', N'840', N'1963', N'1', N'2016-01-30 15:25:15.150');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'5e5b51a017714d8fa6a7af469ad8b336', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0000000000', N'8155', N'1542', N'184', N'120', N'1813', N'7', N'2016-10-18 17:39:13.200');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'64d8e840e802430694baf6125c75bd62', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'2694', N'362', N'250', N'1813', N'6', N'2016-02-02 10:49:48.217');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'650d931bb4ee4cce93701034c77ed462', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0107478010', N'8155', N'2245', N'992', N'791', N'1963', N'1', N'2016-01-30 15:27:14.933');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'67b38da23304459d985ed6d2aab96688', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0430738664', N'8155', N'1741', N'352', N'292', N'1813', N'8', N'2016-09-12 15:52:32.323');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'6c15086cc81e4e649c3124b8aaf8668b', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'2244', N'992', N'838', N'1963', N'1', N'2016-01-30 15:24:12.633');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'6f47c96d605846e7a84744265ccec7bb', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0351407588', N'8155', N'1730', N'352', N'238', N'1813', N'8', N'2016-09-12 15:56:32.323');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'7c02b543622d46cbb5ccee32038885cf', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0000000000', N'8155', N'2254', N'992', N'841', N'1963', N'1', N'2016-01-30 15:19:17.523');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'897d2b52f49e443b9de975cf6fee4cb3', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0161607745', N'8155', N'2738', N'992', N'787', N'1963', N'2', N'2016-02-01 10:03:04.503');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'8fafda9cb13448fb870b857101ec6ebb', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0352502821', N'8155', N'2855', N'992', N'911', N'1963', N'3', N'2016-02-01 09:48:30.707');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'a01970967f61437390a4bb906c762466', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.1145738916', N'8155', N'2737', N'992', N'956', N'1963', N'4', N'2016-02-01 09:56:45.427');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'a28940af50ad4dc18eea6f6c3ab7710c', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0308825676', N'8155', N'1487', N'992', N'919', N'1963', N'3', N'2016-01-30 14:58:07.853');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'a3e6e59fe347469cb15c9ca3cff71be6', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0250649957', N'8155', N'2243', N'992', N'840', N'1963', N'1', N'2016-01-30 15:29:46.747');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'b7f79cbdf21d40488b3fdf580181d898', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0347507599', N'8155', N'1715', N'352', N'214', N'1813', N'8', N'2016-09-12 15:58:32.327');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'c167842282ef461fa4d4cdf77a42f8f2', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0482869991', N'8155', N'1712', N'352', N'265', N'1813', N'8', N'2016-09-12 15:54:32.323');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'c8d231dffc3046408256f8da9091e7b2', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0442290577', N'8155', N'1716', N'353', N'243', N'1813', N'8', N'2016-09-12 16:03:14.217');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'd5172249a960450091971d94ac1b0432', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'1744', N'992', N'841', N'1963', N'1', N'2016-01-30 14:56:08.173');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'd8ee142d186347208e7b87ddd03aaf80', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'2324', N'217', N'183', N'1813', N'6', N'2016-09-12 16:14:00.117');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'd937cc2d590f47d98cea12fd826b3624', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'2852', N'992', N'841', N'1963', N'1', N'2016-02-01 09:54:29.750');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'da7a53a3b13a4b0e8ef643dc1912752d', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'.0225714153', N'8155', N'1498', N'992', N'886', N'1963', N'3', N'2016-01-30 15:00:07.853');
+GO
+INSERT INTO [dbo].[pt_resources] ([ids], [version], [osname], [ips], [hostname], [cpunumber], [cpuratio], [phymemory], [phyfreememory], [jvmtotalmemory], [jvmfreememory], [jvmmaxmemory], [gccount], [createdate]) VALUES (N'e56781ccd4d5416cb4e374d90b5b0dbb', N'0', N'Windows 7', N'10.192.66.8', N'PC-DONGHUAJIAN', N'8', N'1.0000000000', N'8155', N'2847', N'992', N'843', N'1963', N'1', N'2016-02-01 09:59:04.700');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_role]
+-- ----------------------------
+DROP TABLE [dbo].[pt_role]
+GO
+CREATE TABLE [dbo].[pt_role] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[numbers] varchar(50) NULL ,
+[names] varchar(50) NULL ,
+[description] varchar(2000) NULL ,
+[operatorids] text NULL ,
+[moduleids] text NULL 
+)
 
 
--- 角色功能
-CREATE TABLE [pt_roleOperator]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 角色ids
-	[roleIds] varchar(32),
-	-- 功能ids
-	[operatorIds] varchar(32),
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_role
+-- ----------------------------
+INSERT INTO [dbo].[pt_role] ([ids], [version], [numbers], [names], [description], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0023', N'2', N'SuperAdmin', N'超级管理员', N'超级管理员', N'operator_8f9ab71d526c45359c4476f957987e6d,operator_37218fb52ec94fb4bf76209a17916094,operator_c1e991d1f56749298c18ff69d7777e0b,operator_b13b002e2fad4e95bbe0e4dbc9fbdfe1,operator_9a708f39e123455e84b6125774bab1ea,operator_437e05d09dd94720b67c4f230cdebe58,operator_0fb7938c7d614fc389568eb67b442303,operator_91baed789bc14efdbebb10b49c69ee5b,operator_c04adcd019e04cf3ba7c66af721a18dc,operator_f1f6f2c8f026498c8ee64b7a918d06df,operator_5fcac107c80d493d91b53a815d4b297a,operator_d247fb45be724ed2a2bb5c92d73bf6cf,operator_4376888fd74f4247a926529e5da03442,operator_d479dbdc901f4d85a207b9bace6465ac,operator_79039a2260da46b0aabb5a62e8db6c87,operator_1a8b4d8e4411412fa8bb561393563a85,operator_e754dfdb794d4e7db6023c9b089a340c,operator_48db51f20b504c4ab489b1dcfd3ecbd9,operator_bc2c865be6af42cf861294d446fb1c6f,operator_cf26c1d2baa24a8791b3d264154b80d4,operator_b82d86fb7b64498a9c2b8b9a99b3fbeb,operator_10499bc7f9cb4adf99beba00343b4ea6,operator_9f75b47bdc0249e2b493c47384785a72,operator_a1ff68acf9b24c34b347ff21e333cb70,operator_a6623c65480f4f2cb63a4d7673f81e3a,operator_df0aa534655242e4a0bcd638b51a4e03,operator_4a6544ae7a2548ad81c0e3994999023c,operator_f771691134c34174a819b5990310d000,operator_886bd497064b4c9f87d8461ebba421d1,operator_aa126932641f4e068ed8278a332de85d,operator_fb6a0c1e618041bcbbf8cfd41311b1fa,operator_f771691134c34174a819b5990310da56,operator_7ed5eefbbf3d4aa78d0c5b99f3b7010c,operator_1b0d7476974e4bf9b52f75fb82f87330,operator_a5289b2638d845fbb06dedbcdd517f97,operator_c9d013d14cbd4f148fb4562c91803ee8,operator_22926eb196a14b48be775f4880b5ba94,operator_b8339f29d8d84a4ead6454295f87b79c,operator_e037e0bae9a94e549d6b647db49a64a1,operator_a0c01a5248cd4bf38e57945dbb2b98c5,operator_3ee5f986289d4a1990f4e42c9a0caadb,operator_d496b161d2564111992687b948862244,operator_4df80521e66447618796c3cfe02bf239,operator_6569e0d9f2cd4e3a97af4e1b0cd8d2f7,operator_f16cadd8f81e4bef926e09f718db8fe2,operator_091855dd809b418fae88a7fec6d9f246,operator_01aa0c85c8b84ae8aca7f5484336b203,operator_d5c8bdf7a49a4e46b776c05dc9ead484,operator_2be34991827e4e8da8e92f9b9e8bce25,operator_8f79857b31d4475a94c712e997e89c99,operator_12141c1c3be241ca8a868bce9cd610d5,operator_21b0a910ef6e4c60a325d5e57e6e6f65,operator_d1e14e0b7f69478394850d2238214692,operator_74aa20442105408d90f9e6469a3a92b5,operator_8897dbe85b3e4e6989d662495272cf26,operator_7ae62737df444d619f8fd376360d160c,operator_335d1f8f46eb47a18001889f8cc21348,operator_7cc12b5c154a4a9782c518c57e8ab3aa,operator_78c6026c6af44b41a6bef4cdb4cfb414,operator_15566e63f3104c73b4a0b4a784dd11ca,operator_acbceb432b5849aca9e9b284240281ec,operator_d646da8707ae41838fd2ec9bf0d467ee,operator_29c18b3394924c30882da049da14ad99,operator_c0ccfcd127c347a8b9db140e5aa62188,operator_ca0f6da01ada419eaa7739d9790e5b88,operator_233356b63d8e477fb6e948b703232809,operator_362cf247241c4d12b6242301e4a73516,operator_c29ea4cbd9044bc786e9f4584ad840ff,operator_2fbbc9cfb0bf4b5bb504ead155c3423c,operator_c7132250f5054b808bb119122a6ecb52,operator_09b6ce29313c4051ba765de516a9b283,operator_dc750e57b54f4baca78d66969321ee51,operator_21141da4febe4c929abe37126b37fd12,operator_c081c50918f4459f8e36ab8cb4151a61,operator_2fee901117c64e18873f60e8f800713d,operator_7eab5f800bab4efb8df1b2e8a0575f73,operator_32a3e59964204a3c8848e84b864306ae,operator_8bd9c0e14df941cdaf6253cd08dbd9cd,operator_7b4281dd247c4624bee0d8f84c2c2715,operator_c05642442e0a468ebe4f0b7771a803ae,operator_5b249ad344d948b99f58768c323f5f71,operator_0da15c49299d41a4b720f787d053e3cb,operator_cc6bcbee40ab43b2bd5aff6d9385e1fc,operator_83ef85fd17804bb195d0ad3c07f88c30,operator_ad51a6ca95c646ce9c03778eda715734,operator_6daed51284f94923b1c8a6414e646959,operator_1b1a809815574b2a9c1d0e18d692de17,operator_b23b17d4c83242e8a1a8ee8cfcde9907,operator_910955c2192a418995eeab8bf15372e9,operator_ad09a1b897744812875c752c2d70f11a,operator_f82c021dc443419fb2469032af73bf3e,operator_053d330462e1459ca1012c9d29113bc4,operator_58a85040aa9f40cca0bdba6e23e30363,operator_b4ee4ae4391f4243be69e838545d2131,operator_1046389d8525451697f2793185e7d6ee,operator_46e00ef0fd234e9dbf68ed9bbb437d0f,operator_b8218945b8e743f29651569950014511,operator_d115d08591ef4c0eaebef15f8294b287,operator_235d855d7b914d728e434f0f309aa04d,operator_fd9978df5c5a47f298e2d28e21e70b15,operator_8ca8af501522439d8c9249e00db5d78d,operator_dfe9d74fe0ef4220bfcfe6d7bb2f9436,operator_2c91467f905a4f5ba9f52830131c8ad9,operator_481d4d5c0a634c4085c72c990260e58d,operator_420d8ebc68ad44dc8188d4c27dc585d1,operator_5148ea207b974ee197f0bc57060ab1ad,operator_0773a58c4bdb4858ab062c4a2a4da69a,operator_9765e6bb76eb40ab800cb8954822190e,operator_77823e12391a47729a1f82a00bc15c5b,operator_05114c0cbe1f4c2095b3216f13cfb681,operator_6b527ed138c343a89ddf73cf16fef565,operator_dfc7af0979a54e8e9a3f18b7a5d66030,operator_3dd486cd58da467dbd83ae420db14815,operator_36d3b89e378b451ca89d1a41a3c53e10,operator_99a42a467bbf4e829fd0706507c9f7a7,operator_2b7f6e28f9a74854b7399e8740b765fd,operator_d1b453799d62485b82e027b96b596ccd,operator_37a9a6966448469f9d9abe2e8aeb1b9e,operator_3b1e7c5d5e0e461c90e1f0032f679a25,operator_afe893c6be744c4f98187b084ac832e7,operator_f57388d139034099932c36a955df625a,operator_f7c220a81ba843938f8ccb108bec9c03,operator_4a05ffcfe351476391a036937eaf733f,operator_beeaa7f4b2444430a6732ecc83c453a2,operator_6131942dd2644790b80df13c14fb3ae8,operator_b352e4246e754a9691bcc9011f445665,operator_5982350f7d0e4b2ca72de64300d75223,operator_dad107c1aeb0419b8004d57f9d70223e,operator_91f78713c3084b6e9b7419e2a97c7dac,operator_3b6a8f61e20e4bf2943421af2119e9b9,operator_9ee4ee562eaa475a95f45d3daeb0220a,operator_06244cf3520c49e8a45cbde82a53fa5e,operator_666f50e0f3b04f4ba43bcb4e719c1e8d,operator_45cf6e8f9c254e509399deda080f0e20,operator_dfa8256651a84269869c35ca1f10cae5,operator_1553d9a97a4b4063a46f4be41e7adedd,operator_86a502729bda46f0b607c2b4c6531bd3,operator_15495beebe984cd19dc30d65676c4c4d,operator_38f3871f789c4936b37d17ea4823da58,operator_b3af8fb65a00418c966b8f2a5ac97400,operator_4f7a5bd18e1e4ed3849a94c48c14c5a1,operator_5c15cf5c3761419a9029e4e094c8f53c,operator_271a4ae9860341e6a30602070268e1e4,operator_bcf8cf5ad0734dc785cba716ab437c93,operator_3bfc62720fef4706b22c78d69d27a275,operator_ee781545af7144a18f30b5492ee49fc8,operator_fe0be0443cba4a5993b6d5f91eae8e89,operator_4c501cf7b83f4b058a05be15127c8edb,', N'module_8a40c0353fa828a6013fa898d4ac0033,module_8a40c0353fa828a6013fa898d4ac0030,module_8a40c0353fa828a6013fa898d4ac0031,module_8a40c0353fa828a6013fa898d4ac0021,module_8a40c0353fa828a6013fa898d4ac0023,module_297e0cf944e9762e0144e97dfd6e00c9,module_8a40c0353fa828a6013fa898d4ac0024,module_8a40c0353fa828a6013fa898d4ac0025,module_8a40c0353fa828a6013fa898d4ac0026,module_8a40c0353fa828a6013fa898d4ac0027,module_8a40c0353fa828a6013fa898d4ac0028,module_8a40c0353fa828a6013fa898d4ac0029,module_8a40c0353fa828a6013fa898d4ac1100,module_c4e63c4171db4ae2a83f7dfcc2656b0e,module_e6eb0165223447218410f867a9614300,module_417ed3d3cf4d4b7a939613829e8db17d,module_7a35846a305c42abb68601b4f7347289,module_c87c35097a2d4bc898fe6e9b1e280a3d,module_8f53706d4af541588bde334d99d44727,module_8a40c0353fa828a6013fa898d4ac2200,module_3bf4c1829bf447979865fc4d2ab75801,module_4090cac06e15459789bc5154eef67e4e,module_3dec44186175424cbee2d05ffbb690dd,module_8a1b51bb6fae4fac8591f4f387d250ff,module_3e048ee263c344318e9c4995a5cd35e0,module_e86e5bc9ae5d44e78a48543cf348ca82,');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_roleOperator]
+-- ----------------------------
+DROP TABLE [dbo].[pt_roleOperator]
+GO
+CREATE TABLE [dbo].[pt_roleOperator] (
+[ids] varchar(32) NOT NULL ,
+[roleIds] varchar(32) NULL ,
+[operatorIds] varchar(32) NULL 
+)
 
 
--- 岗位表
-CREATE TABLE [pt_station]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 描述
-	[description] varchar(200),
-	-- 图片
-	[images] varchar(50),
-	-- 是否上级节点
-	[isparent] varchar(5),
-	-- 部门名称
-	[names] varchar(25),
-	-- 排序号
-	[orderids] bigint,
-	-- 上级岗位ids
-	[parentstationids] varchar(32),
-	-- 权限功能ids
-	[operatorids] text,
-	-- 权限功能模块ids
-	[moduleids] text,
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_roleOperator
+-- ----------------------------
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'021a2c6466994f258c57659b45026593', N'8a40c0353fa828a6013fa898d4ac0023', N'3e4e9e72dab243d38a1785d157c24cb6');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'03f99ab1f9104620b619fec5eaed0480', N'8a40c0353fa828a6013fa898d4ac0023', N'e037e0bae9a94e549d6b647db49a64a1');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'053476ee46c44552beac3c3ef14fa037', N'8a40c0353fa828a6013fa898d4ac0023', N'6daed51284f94923b1c8a6414e646959');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'064f21920eeb481c86ae50879cd09d34', N'8a40c0353fa828a6013fa898d4ac0023', N'a0c01a5248cd4bf38e57945dbb2b98c5');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'07e6c367e68a437e87126b3345b7ff44', N'8a40c0353fa828a6013fa898d4ac0023', N'a2727f19f7cd4a038dd1a94f042a8cf1');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0814045ac9ec4230a0b391e425a59540', N'8a40c0353fa828a6013fa898d4ac0023', N'79039a2260da46b0aabb5a62e8db6c87');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'09c97f5c18ac4b40bfb2d514d69b22b7', N'8a40c0353fa828a6013fa898d4ac0023', N'7b4281dd247c4624bee0d8f84c2c2715');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0a08705ce1dd44c8b64ffb4af78d57d4', N'8a40c0353fa828a6013fa898d4ac0023', N'b4ee4ae4391f4243be69e838545d2131');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0a1c22befe984c6cbbb49ca98c85ca08', N'8a40c0353fa828a6013fa898d4ac0023', N'483bdacba04f4663986e6339166e8321');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0bdcecb579304334a80dd169197bc7f1', N'8a40c0353fa828a6013fa898d4ac0023', N'827a7067a28d442da3ddd834677127af');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0cfbb583544d43c7aca70f991ad0f746', N'8a40c0353fa828a6013fa898d4ac0023', N'7eab5f800bab4efb8df1b2e8a0575f73');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0d57b3a3c5264e1e997b18183074d535', N'8a40c0353fa828a6013fa898d4ac0023', N'a6623c65480f4f2cb63a4d7673f81e3a');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0dfd8909022e48caa30a3bb9f7e48f1e', N'8a40c0353fa828a6013fa898d4ac0023', N'12141c1c3be241ca8a868bce9cd610d5');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0e5432e4c8834200a58fd13a118cd0ce', N'8a40c0353fa828a6013fa898d4ac0023', N'2c91467f905a4f5ba9f52830131c8ad9');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0f58a58a34984332af791d1767b7ab0a', N'8a40c0353fa828a6013fa898d4ac0023', N'8ca8af501522439d8c9249e00db5d78d');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'0f9c37f0970d4f3981ddbef662f0f861', N'8a40c0353fa828a6013fa898d4ac0023', N'1b1a809815574b2a9c1d0e18d692de17');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'121ba805f7514e64bb415ffc9bf61180', N'8a40c0353fa828a6013fa898d4ac0023', N'5c2bdc059ae24ffda2758a2781bb46da');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'129675d8bb95482aaca4b3ef673a4c0a', N'8a40c0353fa828a6013fa898d4ac0023', N'77823e12391a47729a1f82a00bc15c5b');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'12a9ee5e7eca44c5ba6e79dedfbc4049', N'8a40c0353fa828a6013fa898d4ac0023', N'2c2063e17dc742a3b9c330b84c5dfa6a');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'1322a73d36824bf9bcde729eba789e84', N'8a40c0353fa828a6013fa898d4ac0023', N'7ae62737df444d619f8fd376360d160c');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'139064e3c70c4e00babba49593146b1a', N'8a40c0353fa828a6013fa898d4ac0023', N'1b0d7476974e4bf9b52f75fb82f87330');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'1491b0d0f9fb406e92f1a990fb8268fe', N'8a40c0353fa828a6013fa898d4ac0023', N'dfe9d74fe0ef4220bfcfe6d7bb2f9436');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'16e9ecd28cc842048a16f8304f3fd571', N'8a40c0353fa828a6013fa898d4ac0023', N'18f50e0f48ef4dd9bec85f5612ab10c0');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'1c26cfb2d7d94ad38ce0c553644f9ddd', N'8a40c0353fa828a6013fa898d4ac0023', N'091855dd809b418fae88a7fec6d9f246');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'1cd441db6daf407492d9b32a597232b1', N'8a40c0353fa828a6013fa898d4ac0023', N'08a96d5dd37f49459eeb02eebeb0a78c');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'1d18394cb6ed4f71b60c2eb3f8b511d9', N'8a40c0353fa828a6013fa898d4ac0023', N'8897dbe85b3e4e6989d662495272cf26');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'1f5bd29eabd84310b935ac26e4865aa8', N'8a40c0353fa828a6013fa898d4ac0023', N'1f05b6496a494f488e4cacd2a449c37a');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'20d039c9d09d427e802607a4d026300b', N'8a40c0353fa828a6013fa898d4ac0023', N'3da96263a14343eaa7b409a93ec9e1db');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'22eb103099d2495f98d1bc4dc449933a', N'8a40c0353fa828a6013fa898d4ac0023', N'f604f021cba44b6fb96115265e557521');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'2336da1b46bb47629cd265869b3f7308', N'8a40c0353fa828a6013fa898d4ac0023', N'0da15c49299d41a4b720f787d053e3cb');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'260a75c9b59644eeb72a3fd8966cf5c9', N'8a40c0353fa828a6013fa898d4ac0023', N'cc88acee3a664c58861a872c351385e6');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'26d880cfc63f48b5ad42fc170d69693e', N'8a40c0353fa828a6013fa898d4ac0023', N'b8218945b8e743f29651569950014511');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'27274973f3e54783ae986912b84d91bc', N'8a40c0353fa828a6013fa898d4ac0023', N'6569e0d9f2cd4e3a97af4e1b0cd8d2f7');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'2897ed0986344de0a790c1c315381a43', N'8a40c0353fa828a6013fa898d4ac0023', N'4a6544ae7a2548ad81c0e3994999023c');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'2b0fc857882b4fd0a068d8ddaf514eab', N'8a40c0353fa828a6013fa898d4ac0023', N'053d330462e1459ca1012c9d29113bc4');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'2bc4654b3cc74eccad6ff320ede62385', N'8a40c0353fa828a6013fa898d4ac0023', N'cc6bcbee40ab43b2bd5aff6d9385e1fc');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'2c2d096b627e4d3681f494e4ef38e6f0', N'8a40c0353fa828a6013fa898d4ac0023', N'b13b002e2fad4e95bbe0e4dbc9fbdfe1');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'2c4b1fd860a4423a8590460f0b438ce0', N'8a40c0353fa828a6013fa898d4ac0023', N'9adcc4c40e3148988e5003aaedbb4948');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'2cbe2ac6fb8949e7be60da86395c5c88', N'8a40c0353fa828a6013fa898d4ac0023', N'd5c8bdf7a49a4e46b776c05dc9ead484');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'2e1c21e46cd24d828de30f883f131f26', N'8a40c0353fa828a6013fa898d4ac0023', N'fdaeeb41691d460b8f142066d1f79927');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'308307140623475bbbd3812288c68a4b', N'8a40c0353fa828a6013fa898d4ac0023', N'01aa0c85c8b84ae8aca7f5484336b203');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'32042be89a574cefaa2697f2d7fee41a', N'8a40c0353fa828a6013fa898d4ac0023', N'9750ea3ee4474711b9acbda8d5b87ee7');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'3601e3cd19e842f4bbf2d438857a7c68', N'8a40c0353fa828a6013fa898d4ac0023', N'29c18b3394924c30882da049da14ad99');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'382c564f5d6e4d11b17b2b729c8d30d0', N'8a40c0353fa828a6013fa898d4ac0023', N'3ee5f986289d4a1990f4e42c9a0caadb');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'38829184b84a44eeb82e00a8db46d3a2', N'8a40c0353fa828a6013fa898d4ac0023', N'4df80521e66447618796c3cfe02bf239');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'3bd650048f764fbf93a427c31a27274c', N'8a40c0353fa828a6013fa898d4ac0023', N'8bd9c0e14df941cdaf6253cd08dbd9cd');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'3c6b00c1db03430cb7e78880e4f283ec', N'8a40c0353fa828a6013fa898d4ac0023', N'ad09a1b897744812875c752c2d70f11a');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'3d6a531acb2a4b199be1bd541f85caf4', N'8a40c0353fa828a6013fa898d4ac0023', N'5b47ae382f42421682852f889c176d49');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'3f60245dacb14844a6968a2884edaf07', N'8a40c0353fa828a6013fa898d4ac0023', N'e2cead0f68ac4a2d98765264578a9f83');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'40707f58daee4d81b19b214c52eeb6a7', N'8a40c0353fa828a6013fa898d4ac0023', N'c29ea4cbd9044bc786e9f4584ad840ff');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'41a43064ffa240ee9e9c84dff0d9e371', N'8a40c0353fa828a6013fa898d4ac0023', N'e1ac811d2a16495d927f994dd006e824');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'41ed858aaaae4fc2bc1f197fe295af52', N'8a40c0353fa828a6013fa898d4ac0023', N'e4f182b4009e48a58673134324b2ec56');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'42fbd1334a0849f6a06db739c11280f1', N'8a40c0353fa828a6013fa898d4ac0023', N'f771691134c34174a819b5990310d000');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'43666165e4dd4cf3901e690613e47a66', N'8a40c0353fa828a6013fa898d4ac0023', N'46b7269a26044dfebb4edd06a2f9cd83');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'461c341a4da84a828fd720559c8116a4', N'8a40c0353fa828a6013fa898d4ac0023', N'09b6ce29313c4051ba765de516a9b283');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'46b9e0e47ad347dcb53e123c466db2a4', N'8a40c0353fa828a6013fa898d4ac0023', N'b82d86fb7b64498a9c2b8b9a99b3fbeb');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'46f79be38d3340a0a752ef2f53ae661a', N'8a40c0353fa828a6013fa898d4ac0023', N'91baed789bc14efdbebb10b49c69ee5b');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'48db3f1015414972b274fcee382b5283', N'8a40c0353fa828a6013fa898d4ac0023', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'4ce7264311a3437db22445df4b643066', N'8a40c0353fa828a6013fa898d4ac0023', N'30bf01ffe1cb4ed39e92c6600ea39e93');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'4ddf4f2e1b9b495ebadeaef3029fd410', N'8a40c0353fa828a6013fa898d4ac0023', N'235d855d7b914d728e434f0f309aa04d');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'4eae708ad5974a57b0accc638eadac99', N'8a40c0353fa828a6013fa898d4ac0023', N'fb6a0c1e618041bcbbf8cfd41311b1fa');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'521239b354cb482ba643238799d17e43', N'8a40c0353fa828a6013fa898d4ac0023', N'481d4d5c0a634c4085c72c990260e58d');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'535104b0d1d841eda391e58f2427fccc', N'8a40c0353fa828a6013fa898d4ac0023', N'4bebccaa8f0c4bfbaa2ff89f00706100');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'5459dad86a584a598ad51c10fcee1f7c', N'8a40c0353fa828a6013fa898d4ac0023', N'671ce1e6167840baaa6d27f4f04574c9');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'574921333dd64e4b8e4956436a698ec5', N'8a40c0353fa828a6013fa898d4ac0023', N'3085a3b0c20d4f3aaa7c2d27fe986aba');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'598267639b534e7ca95a8248b7e1250a', N'8a40c0353fa828a6013fa898d4ac0023', N'c7132250f5054b808bb119122a6ecb52');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'5d0a48f1e78844cb9ed82c71b720f961', N'8a40c0353fa828a6013fa898d4ac0023', N'aa126932641f4e068ed8278a332de85d');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'5fcb0597c6494021b0cb167161227d75', N'8a40c0353fa828a6013fa898d4ac0023', N'4376888fd74f4247a926529e5da03442');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'612117075c2d47c09df60c7ec316a466', N'8a40c0353fa828a6013fa898d4ac0023', N'437e05d09dd94720b67c4f230cdebe58');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'623d81207a5142638a8ba821dff1dbc3', N'8a40c0353fa828a6013fa898d4ac0023', N'da6077ec1f354a409d0385b2c063e044');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'65bfac49893b406db04811795ff89f50', N'8a40c0353fa828a6013fa898d4ac0023', N'a5289b2638d845fbb06dedbcdd517f97');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'65ee6094c4254096ab682c2699045fbe', N'8a40c0353fa828a6013fa898d4ac0023', N'37218fb52ec94fb4bf76209a17916094');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'6678e6fe003f43cc974fe6843da8688f', N'8a40c0353fa828a6013fa898d4ac0023', N'21b0a910ef6e4c60a325d5e57e6e6f65');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'6779f7b61b354ff88f4b72d6bab43c60', N'8a40c0353fa828a6013fa898d4ac0023', N'22926eb196a14b48be775f4880b5ba94');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'6aff9f7ef6344466a81de2c7eae4526a', N'8a40c0353fa828a6013fa898d4ac0023', N'9765e6bb76eb40ab800cb8954822190e');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'6b79fc49b2ed47e788c17fe41f217881', N'8a40c0353fa828a6013fa898d4ac0023', N'ccf9b69e151840a28be75d8443b70273');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'6beeb6d1ee5544d49d03bfec34ceb56a', N'8a40c0353fa828a6013fa898d4ac0023', N'f82c021dc443419fb2469032af73bf3e');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'6bf45b956cae4a1abed8865aa135fb6f', N'8a40c0353fa828a6013fa898d4ac0023', N'15566e63f3104c73b4a0b4a784dd11ca');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'6e3f829795a843b3b6f1044d7d19fbdb', N'8a40c0353fa828a6013fa898d4ac0023', N'233356b63d8e477fb6e948b703232809');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'71b8572ae55c41c4ba79151001166116', N'8a40c0353fa828a6013fa898d4ac0023', N'5b249ad344d948b99f58768c323f5f71');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'71d7a275c84044e9b5cc1562f4bf3396', N'8a40c0353fa828a6013fa898d4ac0023', N'6324ff9e83654aa0bf7f9d918b636b55');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'71eebd3168454ea0951e7182cf00e3c9', N'8a40c0353fa828a6013fa898d4ac0023', N'90c3cee940ea4211a714f5111d24ff5d');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'7396df5d012b412e9651805a4458a982', N'8a40c0353fa828a6013fa898d4ac0023', N'0773a58c4bdb4858ab062c4a2a4da69a');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'7611c160125a4b92ba67a6e924597ddb', N'8a40c0353fa828a6013fa898d4ac0023', N'1046389d8525451697f2793185e7d6ee');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'76e452d549b341b88fd8d5d51844d4f1', N'8a40c0353fa828a6013fa898d4ac0023', N'5fcac107c80d493d91b53a815d4b297a');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'7a42d1b5ab884d7098f913c16bcc7b48', N'8a40c0353fa828a6013fa898d4ac0023', N'c081c50918f4459f8e36ab8cb4151a61');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'7b5c188e225d4fb9982e8973c1a49e90', N'8a40c0353fa828a6013fa898d4ac0023', N'39d82b5574b540b88d3723b36eb3e577');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'7fd3982f773b4a8987ab69cfd101af11', N'8a40c0353fa828a6013fa898d4ac0023', N'6b527ed138c343a89ddf73cf16fef565');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'814f34aa1cde4a6a9c37e5966ed4ed5b', N'8a40c0353fa828a6013fa898d4ac0023', N'58a85040aa9f40cca0bdba6e23e30363');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'81b4dfa9ce5a4bc09e77e361b3bd5e6d', N'8a40c0353fa828a6013fa898d4ac0023', N'335d1f8f46eb47a18001889f8cc21348');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'82b6a5c1589b4a75b472a858462f9a5c', N'8a40c0353fa828a6013fa898d4ac0023', N'5148ea207b974ee197f0bc57060ab1ad');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'848474d1de20428ca6749f49b3e260da', N'8a40c0353fa828a6013fa898d4ac0023', N'd496b161d2564111992687b948862244');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'85da45980b4247f0abc6e09ffafd7f8f', N'8a40c0353fa828a6013fa898d4ac0023', N'2fee901117c64e18873f60e8f800713d');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'8718e76a4ed14c609501acf0efe44c61', N'8a40c0353fa828a6013fa898d4ac0023', N'2be34991827e4e8da8e92f9b9e8bce25');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'87e0d85628b24118b9506babc049e6e7', N'8a40c0353fa828a6013fa898d4ac0023', N'88298fbd650d49f492e268816feffd15');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'8be5e404ae3149eb87eb0d3e32c178be', N'8a40c0353fa828a6013fa898d4ac0023', N'c9d013d14cbd4f148fb4562c91803ee8');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'8d6b0c75af9340afaf812bdc9b737df7', N'8a40c0353fa828a6013fa898d4ac0023', N'b8339f29d8d84a4ead6454295f87b79c');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'905956517a0f48a59c7481507c3dc2c4', N'8a40c0353fa828a6013fa898d4ac0023', N'4e03be6af2c74dae99a131a1ab3569f6');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'93192c14c94c4aab86520e29bc8cf3a8', N'8a40c0353fa828a6013fa898d4ac0023', N'351851fb7fce48f9a0ff6747971715ac');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'942227d7d02342d9a3d4d0cedc272a88', N'8a40c0353fa828a6013fa898d4ac0023', N'886bd497064b4c9f87d8461ebba421d1');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'98ea132c9f3c41f7a14e75a54b25cb4b', N'8a40c0353fa828a6013fa898d4ac0023', N'cf26c1d2baa24a8791b3d264154b80d4');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'9bb5bde523264234b36f6a6f1790b097', N'8a40c0353fa828a6013fa898d4ac0023', N'fb487ba403254ce8843b39a768422f04');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'9f84e5533e804e709c2f63eb2e958729', N'8a40c0353fa828a6013fa898d4ac0023', N'a1ff68acf9b24c34b347ff21e333cb70');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'a11a562993784cabb5ae5d9ce3bda6cd', N'8a40c0353fa828a6013fa898d4ac0023', N'2bd0e8f116f9420692a81d1723cecf5c');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'a303d192041f40468970a75118d2b3e6', N'8a40c0353fa828a6013fa898d4ac0023', N'a0d2897ee9194378819e78538189faa0');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'a3a679f9187d4bd8819c77e67dfae367', N'8a40c0353fa828a6013fa898d4ac0023', N'4959d88b8ca64eb19310c30799faa07c');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'a77dc935e8c0491e9c272bcfd67fa7c1', N'8a40c0353fa828a6013fa898d4ac0023', N'2fbbc9cfb0bf4b5bb504ead155c3423c');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'a851dde123ab4697b74225e8725f4633', N'8a40c0353fa828a6013fa898d4ac0023', N'ad51a6ca95c646ce9c03778eda715734');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'ac26282436074fad81655fd5d639454f', N'8a40c0353fa828a6013fa898d4ac0023', N'd646da8707ae41838fd2ec9bf0d467ee');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'ac2b6a038db74fe39664222aae93d1ff', N'8a40c0353fa828a6013fa898d4ac0023', N'32a3e59964204a3c8848e84b864306ae');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'ac4a6c8005de4afca3aa04f82b0f64d1', N'8a40c0353fa828a6013fa898d4ac0023', N'ee27f5c23b6d4217b3b66295a3506a40');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'ac74144a8d7d4d5790073c0387d7a20c', N'8a40c0353fa828a6013fa898d4ac0023', N'c04adcd019e04cf3ba7c66af721a18dc');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'aee1eb6feb4943798513c1770a41e9ae', N'8a40c0353fa828a6013fa898d4ac0023', N'acbceb432b5849aca9e9b284240281ec');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'b0bfdc9cfedf407cabd2964630c4262e', N'8a40c0353fa828a6013fa898d4ac0023', N'f771691134c34174a819b5990310da56');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'b1eb78ff76de482bb88e0fb8acca7d5a', N'8a40c0353fa828a6013fa898d4ac0023', N'78c6026c6af44b41a6bef4cdb4cfb414');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'b5bb8efe0adc4a62a606d768c61e10e8', N'8a40c0353fa828a6013fa898d4ac0023', N'6566adb7fc6347e7b01a3c47129b5eb5');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'b8481bf5a29e41d8994b11542bae9a46', N'8a40c0353fa828a6013fa898d4ac0023', N'721f7255449c445faf36607c254eea06');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'b91ff9778e70437da2c875f433fb9cf7', N'8a40c0353fa828a6013fa898d4ac0023', N'f1f6f2c8f026498c8ee64b7a918d06df');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'b9370c02cc8248f2aa415e0f5c2b083c', N'8a40c0353fa828a6013fa898d4ac0023', N'bc2c865be6af42cf861294d446fb1c6f');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'c0a5951482284b10ba6d7c7e0c5131fc', N'8a40c0353fa828a6013fa898d4ac0023', N'8b1c1c86385642f2b6c97930b44bbbcf');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'c433c6229611482f812595ed46c8c87b', N'8a40c0353fa828a6013fa898d4ac0023', N'd479dbdc901f4d85a207b9bace6465ac');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'c8193e0665dc466f81c1785cf9a06eb5', N'8a40c0353fa828a6013fa898d4ac0023', N'e754dfdb794d4e7db6023c9b089a340c');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'c9f24b55cf28484db39e137ea4fa35df', N'8a40c0353fa828a6013fa898d4ac0023', N'df0aa534655242e4a0bcd638b51a4e03');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'cb88488a98ad4f17b2b0c23f3d386344', N'8a40c0353fa828a6013fa898d4ac0023', N'c05642442e0a468ebe4f0b7771a803ae');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'cbd5349f6175452fba4aae0b628e9cce', N'8a40c0353fa828a6013fa898d4ac0023', N'61da3d9c60704621aa60d1da4553a264');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'cede53073ad749bc9bb4621249c92852', N'8a40c0353fa828a6013fa898d4ac0023', N'8f79857b31d4475a94c712e997e89c99');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'd233b60121504d9ca79138c0778fdd8a', N'8a40c0353fa828a6013fa898d4ac0023', N'9a708f39e123455e84b6125774bab1ea');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'd32280e50ef74270803dfaac49b7b5b2', N'8a40c0353fa828a6013fa898d4ac0023', N'dfc7af0979a54e8e9a3f18b7a5d66030');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'd4c6a7deed2847e8bad34b69a559a53e', N'8a40c0353fa828a6013fa898d4ac0023', N'0478826a46df4f20b12f4043a97f8209');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'd4f1296a506e48c39291e2b55a5deb33', N'8a40c0353fa828a6013fa898d4ac0023', N'2e32e08e495b4ccea6148774e9f91182');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'db0dcaa30f7948c59d857da13eb368ef', N'8a40c0353fa828a6013fa898d4ac0023', N'1a8b4d8e4411412fa8bb561393563a85');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'dc7210d217c54f09ac800e47b2cabf69', N'8a40c0353fa828a6013fa898d4ac0023', N'ff91363b32424fa399e44cc0dfd688e9');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'dcaaf233f3344fa183ea6fcf4838107f', N'8a40c0353fa828a6013fa898d4ac0023', N'c0ccfcd127c347a8b9db140e5aa62188');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'dd46b92bb26f4bc1b474c157d60245f8', N'8a40c0353fa828a6013fa898d4ac0023', N'362cf247241c4d12b6242301e4a73516');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'df4ce9dce40941e6b97ac7ef6caa0878', N'8a40c0353fa828a6013fa898d4ac0023', N'dc750e57b54f4baca78d66969321ee51');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'df5eca83889a4057b2a1581bcfc84c52', N'8a40c0353fa828a6013fa898d4ac0023', N'48db51f20b504c4ab489b1dcfd3ecbd9');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e00da5f72a8545e58f41723e4aaf9815', N'8a40c0353fa828a6013fa898d4ac0023', N'10499bc7f9cb4adf99beba00343b4ea6');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e060f34c9f1744d1aeb1e01a920158ba', N'8a40c0353fa828a6013fa898d4ac0023', N'21141da4febe4c929abe37126b37fd12');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e0613568a4df4bfb8e6a6b4a691775e8', N'8a40c0353fa828a6013fa898d4ac0023', N'420d8ebc68ad44dc8188d4c27dc585d1');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e32d74ddaae549cc830a6f030a4508c6', N'8a40c0353fa828a6013fa898d4ac0023', N'46e00ef0fd234e9dbf68ed9bbb437d0f');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e3e0093504904769a12d7814a90ecc5e', N'8a40c0353fa828a6013fa898d4ac0023', N'9f75b47bdc0249e2b493c47384785a72');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e50e023a31e34903816644e3246f740b', N'8a40c0353fa828a6013fa898d4ac0023', N'9c0ae757fc564f27860b975e5792ae6a');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e54f1e31da9a4f728f66fdfd94d0bb5b', N'8a40c0353fa828a6013fa898d4ac0023', N'b23b17d4c83242e8a1a8ee8cfcde9907');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e597c74ee6d44858b3c99b157b3e92e8', N'8a40c0353fa828a6013fa898d4ac0023', N'd247fb45be724ed2a2bb5c92d73bf6cf');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e62ace3aeff74b18a215dc41dfece9e0', N'8a40c0353fa828a6013fa898d4ac0023', N'd115d08591ef4c0eaebef15f8294b287');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e6685532fd524e7380a560b4ecdb00da', N'8a40c0353fa828a6013fa898d4ac0023', N'7cc12b5c154a4a9782c518c57e8ab3aa');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e81aad2c22d746d9902630ff3c521fcf', N'8a40c0353fa828a6013fa898d4ac0023', N'c1e991d1f56749298c18ff69d7777e0b');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e87c7e1f682e421bad56c9f97f5c3d2e', N'8a40c0353fa828a6013fa898d4ac0023', N'423e8c2e2a644bbda0803f46ea8f31e2');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'e9f51cc82e6641cc9a4889a696f2977b', N'8a40c0353fa828a6013fa898d4ac0023', N'910955c2192a418995eeab8bf15372e9');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'ec385c4831f145e286b528e077d450d6', N'8a40c0353fa828a6013fa898d4ac0023', N'05114c0cbe1f4c2095b3216f13cfb681');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'edae7d1fceea4a2ea20a7ec403686277', N'8a40c0353fa828a6013fa898d4ac0023', N'3dd486cd58da467dbd83ae420db14815');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'eeed83d366eb4083968cfdae9dba28b1', N'8a40c0353fa828a6013fa898d4ac0023', N'ca0f6da01ada419eaa7739d9790e5b88');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'f0141c6068f74b8a95c3bf732c0111b8', N'8a40c0353fa828a6013fa898d4ac0023', N'7bd7ca42560140ee8573b2ade6388f3e');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'f2cfb3f642f64fdc80daecf002266bb9', N'8a40c0353fa828a6013fa898d4ac0023', N'0fb7938c7d614fc389568eb67b442303');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'f7dcf386fcf4407b863c923290200154', N'8a40c0353fa828a6013fa898d4ac0023', N'83ef85fd17804bb195d0ad3c07f88c30');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'fec66e284bd8410bbcf863da0f9fe91d', N'8a40c0353fa828a6013fa898d4ac0023', N'fd9978df5c5a47f298e2d28e21e70b15');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_station]
+-- ----------------------------
+DROP TABLE [dbo].[pt_station]
+GO
+CREATE TABLE [dbo].[pt_station] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[description] varchar(200) NULL ,
+[images] varchar(50) NULL ,
+[isparent] varchar(5) NULL ,
+[names] varchar(25) NULL ,
+[orderids] bigint NULL ,
+[parentstationids] varchar(32) NULL ,
+[operatorids] text NULL ,
+[moduleids] text NULL 
+)
 
 
--- 岗位功能
-CREATE TABLE [pt_stationOperator]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 岗位ids
-	[stationids] varchar(32),
-	-- 功能ids
-	[operatorids] varchar(32),
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_station
+-- ----------------------------
+INSERT INTO [dbo].[pt_station] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentstationids], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0020', N'0', N'根节点', N'1_open.png', N'true', N'岗位组织结构', N'1', null, N'', N'');
+GO
+INSERT INTO [dbo].[pt_station] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentstationids], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0021', N'0', N'人事经理', N'2.png', N'false', N'人事经理', N'6', N'8a40c0353fa828a6013fa898d4ac0020', N'operator_520,operator_526,operator_530,operator_527,', N'module_8a40c0353fe0565b0130001,module_8a40c0353fe0565b0130002,');
+GO
+INSERT INTO [dbo].[pt_station] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentstationids], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0022', N'0', N'财务经理', N'3.png', N'false', N'财务经理', N'8', N'8a40c0353fa828a6013fa898d4ac0020', N'', N'');
+GO
+INSERT INTO [dbo].[pt_station] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentstationids], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0023', N'0', N'行政经理', N'4.png', N'false', N'行政经理', N'7', N'8a40c0353fa828a6013fa898d4ac0020', N'operator_520,operator_526,operator_530,operator_529,', N'module_8a40c0353fe0565b0130001,module_8a40c0353fe0565b0130002,');
+GO
+INSERT INTO [dbo].[pt_station] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentstationids], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0024', N'0', N'测试经理', N'5.png', N'false', N'测试经理111', N'9', N'8a40c0353fa828a6013fa898d4ac0020', N'', N'');
+GO
+INSERT INTO [dbo].[pt_station] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentstationids], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0025', N'0', N'研发经理', N'6.png', N'false', N'研发经理', N'1', N'8a40c0353fa828a6013fa898d4ac0020', N'', N'');
+GO
+INSERT INTO [dbo].[pt_station] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentstationids], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0026', N'0', N'应用Java', N'8.png', N'false', N'应用Java', N'3', N'8a40c0353fa828a6013fa898d4ac0027', N'operator_37218fb52ec94fb4bf76209a17916094,operator_c1e991d1f56749298c18ff69d7777e0b,operator_b13b002e2fad4e95bbe0e4dbc9fbdfe1,operator_9a708f39e123455e84b6125774bab1ea,operator_437e05d09dd94720b67c4f230cdebe58,operator_0fb7938c7d614fc389568eb67b442303,operator_f771691134c34174a819b5990310d000,operator_886bd497064b4c9f87d8461ebba421d1,operator_aa126932641f4e068ed8278a332de85d,operator_fb6a0c1e618041bcbbf8cfd41311b1fa,operator_f771691134c34174a819b5990310da56,operator_7ed5eefbbf3d4aa78d0c5b99f3b7010c,operator_cf26c1d2baa24a8791b3d264154b80d4,operator_b82d86fb7b64498a9c2b8b9a99b3fbeb,operator_10499bc7f9cb4adf99beba00343b4ea6,operator_9f75b47bdc0249e2b493c47384785a72,operator_a1ff68acf9b24c34b347ff21e333cb70,operator_a6623c65480f4f2cb63a4d7673f81e3a,operator_df0aa534655242e4a0bcd638b51a4e03,operator_4a6544ae7a2548ad81c0e3994999023c,operator_91baed789bc14efdbebb10b49c69ee5b,operator_c04adcd019e04cf3ba7c66af721a18dc,operator_f1f6f2c8f026498c8ee64b7a918d06df,operator_5fcac107c80d493d91b53a815d4b297a,operator_d247fb45be724ed2a2bb5c92d73bf6cf,operator_4376888fd74f4247a926529e5da03442,operator_d479dbdc901f4d85a207b9bace6465ac,operator_79039a2260da46b0aabb5a62e8db6c87,operator_1a8b4d8e4411412fa8bb561393563a85,operator_e754dfdb794d4e7db6023c9b089a340c,operator_48db51f20b504c4ab489b1dcfd3ecbd9,operator_bc2c865be6af42cf861294d446fb1c6f,operator_d496b161d2564111992687b948862244,operator_1b0d7476974e4bf9b52f75fb82f87330,operator_a5289b2638d845fbb06dedbcdd517f97,operator_c9d013d14cbd4f148fb4562c91803ee8,operator_22926eb196a14b48be775f4880b5ba94,operator_b8339f29d8d84a4ead6454295f87b79c,operator_e037e0bae9a94e549d6b647db49a64a1,operator_a0c01a5248cd4bf38e57945dbb2b98c5,operator_3ee5f986289d4a1990f4e42c9a0caadb,operator_4df80521e66447618796c3cfe02bf239,operator_6569e0d9f2cd4e3a97af4e1b0cd8d2f7,operator_f16cadd8f81e4bef926e09f718db8fe2,operator_091855dd809b418fae88a7fec6d9f246,operator_01aa0c85c8b84ae8aca7f5484336b203,operator_d5c8bdf7a49a4e46b776c05dc9ead484,operator_2be34991827e4e8da8e92f9b9e8bce25,operator_8f79857b31d4475a94c712e997e89c99,operator_12141c1c3be241ca8a868bce9cd610d5,operator_21b0a910ef6e4c60a325d5e57e6e6f65,operator_d1e14e0b7f69478394850d2238214692,operator_74aa20442105408d90f9e6469a3a92b5,operator_8897dbe85b3e4e6989d662495272cf26,operator_7ae62737df444d619f8fd376360d160c,operator_335d1f8f46eb47a18001889f8cc21348,operator_7cc12b5c154a4a9782c518c57e8ab3aa,operator_78c6026c6af44b41a6bef4cdb4cfb414,operator_15566e63f3104c73b4a0b4a784dd11ca,operator_acbceb432b5849aca9e9b284240281ec,operator_d646da8707ae41838fd2ec9bf0d467ee,operator_29c18b3394924c30882da049da14ad99,operator_c0ccfcd127c347a8b9db140e5aa62188,operator_ca0f6da01ada419eaa7739d9790e5b88,operator_233356b63d8e477fb6e948b703232809,operator_362cf247241c4d12b6242301e4a73516,operator_c29ea4cbd9044bc786e9f4584ad840ff,operator_2fbbc9cfb0bf4b5bb504ead155c3423c,operator_c7132250f5054b808bb119122a6ecb52,operator_09b6ce29313c4051ba765de516a9b283,operator_dc750e57b54f4baca78d66969321ee51,operator_21141da4febe4c929abe37126b37fd12,operator_c081c50918f4459f8e36ab8cb4151a61,operator_2fee901117c64e18873f60e8f800713d,operator_7eab5f800bab4efb8df1b2e8a0575f73,operator_32a3e59964204a3c8848e84b864306ae,operator_8bd9c0e14df941cdaf6253cd08dbd9cd,operator_7b4281dd247c4624bee0d8f84c2c2715,operator_c05642442e0a468ebe4f0b7771a803ae,operator_5b249ad344d948b99f58768c323f5f71,operator_0da15c49299d41a4b720f787d053e3cb,operator_cc6bcbee40ab43b2bd5aff6d9385e1fc,operator_83ef85fd17804bb195d0ad3c07f88c30,operator_ad51a6ca95c646ce9c03778eda715734,operator_6daed51284f94923b1c8a6414e646959,operator_1b1a809815574b2a9c1d0e18d692de17,operator_b23b17d4c83242e8a1a8ee8cfcde9907,operator_910955c2192a418995eeab8bf15372e9,operator_ad09a1b897744812875c752c2d70f11a,operator_f82c021dc443419fb2469032af73bf3e,operator_053d330462e1459ca1012c9d29113bc4,operator_58a85040aa9f40cca0bdba6e23e30363,operator_b4ee4ae4391f4243be69e838545d2131,operator_1046389d8525451697f2793185e7d6ee,operator_46e00ef0fd234e9dbf68ed9bbb437d0f,operator_b8218945b8e743f29651569950014511,operator_d115d08591ef4c0eaebef15f8294b287,operator_235d855d7b914d728e434f0f309aa04d,operator_fd9978df5c5a47f298e2d28e21e70b15,operator_8ca8af501522439d8c9249e00db5d78d,operator_dfe9d74fe0ef4220bfcfe6d7bb2f9436,operator_2c91467f905a4f5ba9f52830131c8ad9,operator_481d4d5c0a634c4085c72c990260e58d,operator_420d8ebc68ad44dc8188d4c27dc585d1,operator_5148ea207b974ee197f0bc57060ab1ad,operator_0773a58c4bdb4858ab062c4a2a4da69a,operator_9765e6bb76eb40ab800cb8954822190e,operator_77823e12391a47729a1f82a00bc15c5b,operator_05114c0cbe1f4c2095b3216f13cfb681,operator_6b527ed138c343a89ddf73cf16fef565,operator_dfc7af0979a54e8e9a3f18b7a5d66030,operator_3dd486cd58da467dbd83ae420db14815,operator_36d3b89e378b451ca89d1a41a3c53e10,operator_99a42a467bbf4e829fd0706507c9f7a7,operator_2b7f6e28f9a74854b7399e8740b765fd,operator_d1b453799d62485b82e027b96b596ccd,operator_37a9a6966448469f9d9abe2e8aeb1b9e,operator_3b1e7c5d5e0e461c90e1f0032f679a25,operator_f7c220a81ba843938f8ccb108bec9c03,operator_4a05ffcfe351476391a036937eaf733f,operator_beeaa7f4b2444430a6732ecc83c453a2,operator_6131942dd2644790b80df13c14fb3ae8,operator_b352e4246e754a9691bcc9011f445665,operator_5982350f7d0e4b2ca72de64300d75223,operator_dad107c1aeb0419b8004d57f9d70223e,operator_91f78713c3084b6e9b7419e2a97c7dac,operator_3b6a8f61e20e4bf2943421af2119e9b9,operator_9ee4ee562eaa475a95f45d3daeb0220a,operator_06244cf3520c49e8a45cbde82a53fa5e,operator_666f50e0f3b04f4ba43bcb4e719c1e8d,operator_f57388d139034099932c36a955df625a,operator_afe893c6be744c4f98187b084ac832e7,operator_b3af8fb65a00418c966b8f2a5ac97400,operator_4f7a5bd18e1e4ed3849a94c48c14c5a1,operator_5c15cf5c3761419a9029e4e094c8f53c,operator_bcf8cf5ad0734dc785cba716ab437c93,operator_86a502729bda46f0b607c2b4c6531bd3,operator_1553d9a97a4b4063a46f4be41e7adedd,operator_45cf6e8f9c254e509399deda080f0e20,operator_dfa8256651a84269869c35ca1f10cae5,operator_15495beebe984cd19dc30d65676c4c4d,operator_3bfc62720fef4706b22c78d69d27a275,operator_ee781545af7144a18f30b5492ee49fc8,operator_fe0be0443cba4a5993b6d5f91eae8e89,operator_4c501cf7b83f4b058a05be15127c8edb,operator_271a4ae9860341e6a30602070268e1e4,operator_38f3871f789c4936b37d17ea4823da58,', N'module_8a40c0354328e527014328e884be0016,module_pingTai,module_pingTai00020,module_pingTai0004,module_pingTai00016,module_pingTai0007,module_pingTai00012,module_297e0cf944f8cce70144f8e166a40167,module_pingTai00015,module_pingTai00022,module_pingTai00010,module_pingTai00018,module_pingTai0006,module_pingTai00023,module_pingTai00011,module_8a40c0353fa828a6013fa898d4ac0020,module_8a40c0353fa828a6013fa898d4ac0033,module_8a40c0353fa828a6013fa898d4ac0021,module_8a40c0353fa828a6013fa898d4ac0031,module_8a40c0353fa828a6013fa898d4ac0030,module_297e0cf944e9762e0144e97dfd6e00c9,module_8a40c0353fa828a6013fa898d4ac0023,module_8a40c0353fa828a6013fa898d4ac0024,module_8a40c0353fa828a6013fa898d4ac0025,module_8a40c0353fa828a6013fa898d4ac0026,module_8a40c0353fa828a6013fa898d4ac0027,module_8a40c0353fa828a6013fa898d4ac0028,module_8a40c0353fa828a6013fa898d4ac0029,module_8a40c0353fa828a6013fa898d4ac1100,module_c4e63c4171db4ae2a83f7dfcc2656b0e,module_e6eb0165223447218410f867a9614300,module_417ed3d3cf4d4b7a939613829e8db17d,module_7a35846a305c42abb68601b4f7347289,module_c87c35097a2d4bc898fe6e9b1e280a3d,module_8f53706d4af541588bde334d99d44727,module_8a40c0353fa828a6013fa898d4ac2200,module_3bf4c1829bf447979865fc4d2ab75801,module_4090cac06e15459789bc5154eef67e4e,module_3dec44186175424cbee2d05ffbb690dd,module_8a1b51bb6fae4fac8591f4f387d250ff,module_3e048ee263c344318e9c4995a5cd35e0,');
+GO
+INSERT INTO [dbo].[pt_station] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentstationids], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0027', N'0', N'应用经理', N'7.png', N'true', N'应用经理', N'2', N'8a40c0353fa828a6013fa898d4ac0020', N'', N'');
+GO
+INSERT INTO [dbo].[pt_station] ([ids], [version], [description], [images], [isparent], [names], [orderids], [parentstationids], [operatorids], [moduleids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0028', N'0', N'应用C++', N'2.png', N'false', N'应用C++', N'5', N'8a40c0353fa828a6013fa898d4ac0027', N'', N'');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_stationOperator]
+-- ----------------------------
+DROP TABLE [dbo].[pt_stationOperator]
+GO
+CREATE TABLE [dbo].[pt_stationOperator] (
+[ids] varchar(32) NOT NULL ,
+[stationids] varchar(32) NULL ,
+[operatorids] varchar(32) NULL 
+)
 
 
--- 日志表
-CREATE TABLE [pt_syslog]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 开始时间
-	[startdate] datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-	-- 开始时间
-	[starttime] bigint,
-	-- 结束时间
-	[enddate] datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-	-- 结束时间
-	[endtime] bigint,
-	-- action结束时间
-	[actionenddate] datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	-- action结束时间
-	[actionendtime] bigint,
-	-- action开始时间
-	[actionstartdate] datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-	-- action开始时间
-	[actionstarttime] bigint,
-	-- action耗时
-	[actionhaoshi] bigint,
-	-- 视图耗时
-	[viewhaoshi] bigint,
-	-- 总耗时
-	[haoshi] bigint,
-	-- cause
-	[cause] char,
-	-- cookie
-	[cookie] varchar(1024),
-	-- 描述
-	[description] text,
-	-- ip地址
-	[ips] varchar(128),
-	-- 请求方法类型 : get 、 post
-	[method] varchar(4),
-	-- referer
-	[referer] varchar(500),
-	-- 请求路径
-	[requestpath] text,
-	-- 状态
-	[status] char,
-	-- useragent
-	[useragent] varchar(1000),
-	-- 功能ids
-	[operatorids] varchar(32),
-	-- accept
-	[accept] varchar(200),
-	-- acceptencoding
-	[acceptencoding] varchar(200),
-	-- acceptlanguage
-	[acceptlanguage] varchar(200),
-	-- connection
-	[connection] varchar(200),
-	-- host
-	[host] varchar(200),
-	-- xrequestedwith
-	[xrequestedwith] varchar(200),
-	-- pvids
-	[pvids] varchar(32),
-	-- 操作人ids
-	[userids] varchar(32),
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_stationOperator
+-- ----------------------------
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'00502f4cf0c24bd68cf98691cbd92279', N'8a40c0353fa828a6013fa898d4ac0026', N'1f05b6496a494f488e4cacd2a449c37a');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'02ac78ef2c574e56afc9bb37b296d947', N'8a40c0353fa828a6013fa898d4ac0026', N'da6077ec1f354a409d0385b2c063e044');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'0314a857a41a463296a4f646d14dd02b', N'8a40c0353fa828a6013fa898d4ac0026', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'07297e25620e43928ddd21de0cc0e3da', N'8a40c0353fa828a6013fa898d4ac0026', N'10499bc7f9cb4adf99beba00343b4ea6');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'0753f83d4b9749e581a0d4b5388a64c5', N'8a40c0353fa828a6013fa898d4ac0026', N'c9d013d14cbd4f148fb4562c91803ee8');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'077005c2e19d498b8c4e24b7988fa1f5', N'8a40c0353fa828a6013fa898d4ac0026', N'2e32e08e495b4ccea6148774e9f91182');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'07d0294bb41e47bd9e531ad8d6cf4037', N'8a40c0353fa828a6013fa898d4ac0026', N'fb487ba403254ce8843b39a768422f04');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'0a8e21a3952d4307a198ebef2a62ee27', N'8a40c0353fa828a6013fa898d4ac0026', N'362cf247241c4d12b6242301e4a73516');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'0aed618e795d4eb4ae11cef12f0a9a05', N'8a40c0353fa828a6013fa898d4ac0026', N'235d855d7b914d728e434f0f309aa04d');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'0c6421b8174144b19ad0ad112bb6f230', N'8a40c0353fa828a6013fa898d4ac0026', N'2c2063e17dc742a3b9c330b84c5dfa6a');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'0fcb2abde5bb497da08ec6965a475f38', N'8a40c0353fa828a6013fa898d4ac0026', N'48db51f20b504c4ab489b1dcfd3ecbd9');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'11354618ab2a41e38ea7af6c4bdeaa34', N'8a40c0353fa828a6013fa898d4ac0026', N'437e05d09dd94720b67c4f230cdebe58');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'11cc4d801a6c480984774295dbef07c3', N'8a40c0353fa828a6013fa898d4ac0026', N'12141c1c3be241ca8a868bce9cd610d5');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'153c3eb1fa6046f187ec7e528a6b4cbc', N'8a40c0353fa828a6013fa898d4ac0026', N'9f75b47bdc0249e2b493c47384785a72');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'16a5d266dec74e5383bd39d9113d33f9', N'8a40c0353fa828a6013fa898d4ac0026', N'4e03be6af2c74dae99a131a1ab3569f6');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'16b501a5dd354d4fbc3ab90b5868ab7e', N'8a40c0353fa828a6013fa898d4ac0026', N'b8339f29d8d84a4ead6454295f87b79c');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'171ee8ac60f34b1bb6707788f6d1e1e6', N'8a40c0353fa828a6013fa898d4ac0026', N'f771691134c34174a819b5990310da56');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'17757d37e01e474caa7f1aa00aa49c59', N'8a40c0353fa828a6013fa898d4ac0026', N'c7132250f5054b808bb119122a6ecb52');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'177bfc023f02485196e0fcc6b4124510', N'8a40c0353fa828a6013fa898d4ac0026', N'd247fb45be724ed2a2bb5c92d73bf6cf');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'187de98458444712bc7e8bc38b5fc78f', N'8a40c0353fa828a6013fa898d4ac0026', N'1a8b4d8e4411412fa8bb561393563a85');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'19535ce9d32b4d4da6255eee9755a9af', N'8a40c0353fa828a6013fa898d4ac0026', N'7cc12b5c154a4a9782c518c57e8ab3aa');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'19851b764a044cba974c9e5aa102ceef', N'8a40c0353fa828a6013fa898d4ac0026', N'30bf01ffe1cb4ed39e92c6600ea39e93');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'1bcb0fa822004becb90426cc24bfa033', N'8a40c0353fa828a6013fa898d4ac0026', N'f771691134c34174a819b5990310d000');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'1c688e36f32c4885b95ecb10e54eeb21', N'8a40c0353fa828a6013fa898d4ac0026', N'7eab5f800bab4efb8df1b2e8a0575f73');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'1d9e2ba7549344cd9eaee78ae46813b7', N'8a40c0353fa828a6013fa898d4ac0026', N'c081c50918f4459f8e36ab8cb4151a61');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'1dfc77c086694b43a0904b6668b848b3', N'8a40c0353fa828a6013fa898d4ac0026', N'3dd486cd58da467dbd83ae420db14815');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'1ec4e181cdd14199a17054c37391d86a', N'8a40c0353fa828a6013fa898d4ac0026', N'ca0f6da01ada419eaa7739d9790e5b88');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'1fba3ec512b84337be1058c17052b82c', N'8a40c0353fa828a6013fa898d4ac0026', N'dfe9d74fe0ef4220bfcfe6d7bb2f9436');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'20e52832a59a4830a336f32b2fc8421f', N'8a40c0353fa828a6013fa898d4ac0026', N'b4ee4ae4391f4243be69e838545d2131');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'23855c2fed254537bdb5080ac723dfb7', N'8a40c0353fa828a6013fa898d4ac0026', N'e037e0bae9a94e549d6b647db49a64a1');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'23dcc95be308435a8b76fe05ed933406', N'8a40c0353fa828a6013fa898d4ac0026', N'483bdacba04f4663986e6339166e8321');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'25eecf20d8454b029326831e48fe96ec', N'8a40c0353fa828a6013fa898d4ac0026', N'5148ea207b974ee197f0bc57060ab1ad');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'27a107010397418498de98b2cd4ea85d', N'8a40c0353fa828a6013fa898d4ac0026', N'fb6a0c1e618041bcbbf8cfd41311b1fa');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'28ec713379a94469952df240c6a4550b', N'8a40c0353fa828a6013fa898d4ac0026', N'351851fb7fce48f9a0ff6747971715ac');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'2daa51b270ba4fb6aa6d4f1eaf1bb00c', N'8a40c0353fa828a6013fa898d4ac0026', N'3e4e9e72dab243d38a1785d157c24cb6');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'2ef9ddc95cee4c53ad03a3ddb465d1ed', N'8a40c0353fa828a6013fa898d4ac0026', N'46e00ef0fd234e9dbf68ed9bbb437d0f');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'2f2e74a589cf4d17bf9600599d18b505', N'8a40c0353fa828a6013fa898d4ac0026', N'8897dbe85b3e4e6989d662495272cf26');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'2f66b1e0f89e42bcaf2f493b7cb95272', N'8a40c0353fa828a6013fa898d4ac0026', N'c0ccfcd127c347a8b9db140e5aa62188');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'2fa388e8fd8a48218b6941c7cad57a05', N'8a40c0353fa828a6013fa898d4ac0026', N'c29ea4cbd9044bc786e9f4584ad840ff');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'32a3f0baa91a493b93dd0533e37876b8', N'8a40c0353fa828a6013fa898d4ac0026', N'4a6544ae7a2548ad81c0e3994999023c');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'32d7c0dfe9884d3496bcd2a1b9f4ab04', N'8a40c0353fa828a6013fa898d4ac0026', N'df0aa534655242e4a0bcd638b51a4e03');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'340522c11889454685865fe7d915fcb5', N'8a40c0353fa828a6013fa898d4ac0026', N'233356b63d8e477fb6e948b703232809');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'353a9045f0d9492197e228e562b366ae', N'8a40c0353fa828a6013fa898d4ac0026', N'f82c021dc443419fb2469032af73bf3e');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'3710db5a86414e7d96e15bfaa5d474bf', N'8a40c0353fa828a6013fa898d4ac0026', N'b8218945b8e743f29651569950014511');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'3884b26baa0a46c790b423035346f3e1', N'8a40c0353fa828a6013fa898d4ac0026', N'd646da8707ae41838fd2ec9bf0d467ee');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'3976e4ce61104d2fa9979ad4414a52ad', N'8a40c0353fa828a6013fa898d4ac0026', N'61da3d9c60704621aa60d1da4553a264');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'3a19b275fc9b4ed1af13b5c0cbbc9839', N'8a40c0353fa828a6013fa898d4ac0026', N'c1e991d1f56749298c18ff69d7777e0b');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'3b37d007ad2a4393aba200661b08cc60', N'8a40c0353fa828a6013fa898d4ac0026', N'2fee901117c64e18873f60e8f800713d');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'3e37137580f740e7944de46949656b00', N'8a40c0353fa828a6013fa898d4ac0026', N'0478826a46df4f20b12f4043a97f8209');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'4265a12c57cd4f98ac3a486852efa881', N'8a40c0353fa828a6013fa898d4ac0026', N'cc88acee3a664c58861a872c351385e6');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'4592e55302274567b73da0d11dd90d20', N'8a40c0353fa828a6013fa898d4ac0026', N'6569e0d9f2cd4e3a97af4e1b0cd8d2f7');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'478aeeb582084963bc360fe6da40babb', N'8a40c0353fa828a6013fa898d4ac0026', N'3da96263a14343eaa7b409a93ec9e1db');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'4ceb54a2dc474f3f95f7d7f1e692dcd9', N'8a40c0353fa828a6013fa898d4ac0026', N'90c3cee940ea4211a714f5111d24ff5d');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'4df6f2638f4442dca9a5e3e9359c7de1', N'8a40c0353fa828a6013fa898d4ac0026', N'9750ea3ee4474711b9acbda8d5b87ee7');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'4f8ea806583743dabc90a50aac487958', N'8a40c0353fa828a6013fa898d4ac0026', N'9765e6bb76eb40ab800cb8954822190e');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'50c0423cd3504f89a21085a2bb94560e', N'8a40c0353fa828a6013fa898d4ac0026', N'39d82b5574b540b88d3723b36eb3e577');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'5127119fe83047558d9ccb22902a89b4', N'8a40c0353fa828a6013fa898d4ac0026', N'a6623c65480f4f2cb63a4d7673f81e3a');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'538eafde5f5e42609981c4760c79df4c', N'8a40c0353fa828a6013fa898d4ac0026', N'6324ff9e83654aa0bf7f9d918b636b55');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'5559248f2f4041239bf1abc94c7e2d0e', N'8a40c0353fa828a6013fa898d4ac0026', N'88298fbd650d49f492e268816feffd15');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'57421907b0b3489ea333b7c417e635e1', N'8a40c0353fa828a6013fa898d4ac0026', N'6b527ed138c343a89ddf73cf16fef565');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'582e360a54364cf4937140b8b76d004d', N'8a40c0353fa828a6013fa898d4ac0026', N'77823e12391a47729a1f82a00bc15c5b');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'5973a8b38b6844e4ab98dccca8651d85', N'8a40c0353fa828a6013fa898d4ac0026', N'acbceb432b5849aca9e9b284240281ec');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'5a9784012bce4d728e6547bd089f849c', N'8a40c0353fa828a6013fa898d4ac0026', N'aa126932641f4e068ed8278a332de85d');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'5b14361097994fcb86d12991ae355dfd', N'8a40c0353fa828a6013fa898d4ac0026', N'15566e63f3104c73b4a0b4a784dd11ca');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'5c1f785ed3cf46be9fb0b7e32f528f54', N'8a40c0353fa828a6013fa898d4ac0026', N'423e8c2e2a644bbda0803f46ea8f31e2');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'5c64a1bb5d3f4bff8a3e36d0e7bcede1', N'8a40c0353fa828a6013fa898d4ac0026', N'21141da4febe4c929abe37126b37fd12');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'5e80e37a8195482ab79b200b124f192b', N'8a40c0353fa828a6013fa898d4ac0026', N'8bd9c0e14df941cdaf6253cd08dbd9cd');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'606474f45001428085bc32389410f209', N'8a40c0353fa828a6013fa898d4ac0026', N'5b47ae382f42421682852f889c176d49');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'60c21a81cfe4457f8181583dc94f7fa6', N'8a40c0353fa828a6013fa898d4ac0026', N'091855dd809b418fae88a7fec6d9f246');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'655adf858cd64f80bb8ab1f048950008', N'8a40c0353fa828a6013fa898d4ac0026', N'1b0d7476974e4bf9b52f75fb82f87330');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'67e5e6767cc049e6a3e216b21e036c25', N'8a40c0353fa828a6013fa898d4ac0026', N'4bebccaa8f0c4bfbaa2ff89f00706100');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'67ef52dc4fb24ba8a5862f859c5f650f', N'8a40c0353fa828a6013fa898d4ac0026', N'91baed789bc14efdbebb10b49c69ee5b');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'6a0c5de6e62440da86c4c3bec873bbad', N'8a40c0353fa828a6013fa898d4ac0026', N'a2727f19f7cd4a038dd1a94f042a8cf1');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'6efc736d451c4be0a7369a6e5b52bb7d', N'8a40c0353fa828a6013fa898d4ac0026', N'e2cead0f68ac4a2d98765264578a9f83');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'710ef10e206a406f8e4266b61ed7f603', N'8a40c0353fa828a6013fa898d4ac0026', N'4376888fd74f4247a926529e5da03442');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'7119cd163424438dbb369f236ca95e48', N'8a40c0353fa828a6013fa898d4ac0026', N'f604f021cba44b6fb96115265e557521');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'7384588cb54e4461ad4b6d1b4b9fff15', N'8a40c0353fa828a6013fa898d4ac0026', N'ee27f5c23b6d4217b3b66295a3506a40');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'79ca251be03347869e5031d592b9536d', N'8a40c0353fa828a6013fa898d4ac0026', N'fdaeeb41691d460b8f142066d1f79927');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'7f98538b125d4f84b274b81e1ef4f95d', N'8a40c0353fa828a6013fa898d4ac0026', N'7bd7ca42560140ee8573b2ade6388f3e');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'802ecb2bb69143d5ba89bacfad4cb794', N'8a40c0353fa828a6013fa898d4ac0026', N'58a85040aa9f40cca0bdba6e23e30363');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'830dcc9ea4d54c83aa261b93a40834a8', N'8a40c0353fa828a6013fa898d4ac0026', N'ccf9b69e151840a28be75d8443b70273');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8335a5122d3d4ea7ba608d6b152b548a', N'8a40c0353fa828a6013fa898d4ac0026', N'2bd0e8f116f9420692a81d1723cecf5c');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'836547167f4e47b1b02ee5d23c1d7ce3', N'8a40c0353fa828a6013fa898d4ac0026', N'7ae62737df444d619f8fd376360d160c');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'83ca6ac5d4854b0e8d5cb94ca04fc633', N'8a40c0353fa828a6013fa898d4ac0026', N'420d8ebc68ad44dc8188d4c27dc585d1');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'884840dd5cb14653a708e895d7f20473', N'8a40c0353fa828a6013fa898d4ac0026', N'21b0a910ef6e4c60a325d5e57e6e6f65');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8a12f74f06f547e08132c632f2e75215', N'8a40c0353fa828a6013fa898d4ac0026', N'5fcac107c80d493d91b53a815d4b297a');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8b4410c4f75c47eca03fcd8f0c5491ae', N'8a40c0353fa828a6013fa898d4ac0026', N'ad51a6ca95c646ce9c03778eda715734');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8ca3b4dd6f0d4aebad4db75ea8b93525', N'8a40c0353fa828a6013fa898d4ac0026', N'c04adcd019e04cf3ba7c66af721a18dc');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8cfddbf64e4f4b72b354bf82d87fe525', N'8a40c0353fa828a6013fa898d4ac0026', N'dfc7af0979a54e8e9a3f18b7a5d66030');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8d17b3c5831a429585d46f778d316a8d', N'8a40c0353fa828a6013fa898d4ac0026', N'fd9978df5c5a47f298e2d28e21e70b15');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8d1f1e2309eb42a0b417f799d1107079', N'8a40c0353fa828a6013fa898d4ac0026', N'4df80521e66447618796c3cfe02bf239');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8e281cc556434f05b78b4c2a02de1463', N'8a40c0353fa828a6013fa898d4ac0026', N'886bd497064b4c9f87d8461ebba421d1');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8f06cd6b36a140a788514a36f80c38b1', N'8a40c0353fa828a6013fa898d4ac0026', N'8b1c1c86385642f2b6c97930b44bbbcf');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8f0e619fee124ee09779e7043baaa9ca', N'8a40c0353fa828a6013fa898d4ac0026', N'0fb7938c7d614fc389568eb67b442303');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'8f5895aea5e944eb8250cabba2c4b320', N'8a40c0353fa828a6013fa898d4ac0026', N'a0c01a5248cd4bf38e57945dbb2b98c5');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'9029854f53214a3296531926fc06b357', N'8a40c0353fa828a6013fa898d4ac0026', N'05114c0cbe1f4c2095b3216f13cfb681');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'9210ef1ed90743eca910e6311bc919c9', N'8a40c0353fa828a6013fa898d4ac0026', N'2be34991827e4e8da8e92f9b9e8bce25');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'94d9dd332adf4da18703b7ea4666617d', N'8a40c0353fa828a6013fa898d4ac0026', N'2fbbc9cfb0bf4b5bb504ead155c3423c');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'9716e5bd908447658fa4ba28242373e5', N'8a40c0353fa828a6013fa898d4ac0026', N'b23b17d4c83242e8a1a8ee8cfcde9907');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'99b4a86646fb4c889aa900ec86d3c21a', N'8a40c0353fa828a6013fa898d4ac0026', N'6566adb7fc6347e7b01a3c47129b5eb5');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'9a165d64aea94588aec25bc7198207f4', N'8a40c0353fa828a6013fa898d4ac0026', N'd5c8bdf7a49a4e46b776c05dc9ead484');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'9b2366e6df3244c0b7663c76a7ed52ee', N'8a40c0353fa828a6013fa898d4ac0026', N'335d1f8f46eb47a18001889f8cc21348');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'a197dce7400e491989a6cb3e6f463d0f', N'8a40c0353fa828a6013fa898d4ac0026', N'9a708f39e123455e84b6125774bab1ea');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'a2625d85ccff4b098697236d2934e94c', N'8a40c0353fa828a6013fa898d4ac0026', N'46b7269a26044dfebb4edd06a2f9cd83');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'a2d1614dce624e06933a84e3111f36d4', N'8a40c0353fa828a6013fa898d4ac0026', N'6daed51284f94923b1c8a6414e646959');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'a556af7e9e45497ebbb9e6a9ba57ada4', N'8a40c0353fa828a6013fa898d4ac0026', N'09b6ce29313c4051ba765de516a9b283');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'a6a0ed877d50441ab588a45640da3dc2', N'8a40c0353fa828a6013fa898d4ac0026', N'd479dbdc901f4d85a207b9bace6465ac');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'a860c5db7b9142babef25426561bd48a', N'8a40c0353fa828a6013fa898d4ac0026', N'f1f6f2c8f026498c8ee64b7a918d06df');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'a913798ec9214f8c87d6ed628bec4e8f', N'8a40c0353fa828a6013fa898d4ac0026', N'a1ff68acf9b24c34b347ff21e333cb70');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'a9e033ee2bc0477f91576490eb4ee6cd', N'8a40c0353fa828a6013fa898d4ac0026', N'827a7067a28d442da3ddd834677127af');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'aa60fd299e3c4b5282ecea6727fe3c45', N'8a40c0353fa828a6013fa898d4ac0026', N'4959d88b8ca64eb19310c30799faa07c');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'aaee4022b84e4373b2e586f7488d9368', N'8a40c0353fa828a6013fa898d4ac0026', N'cc6bcbee40ab43b2bd5aff6d9385e1fc');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'b1aeb99260cc4ce39e783193bdd348c9', N'8a40c0353fa828a6013fa898d4ac0026', N'e4f182b4009e48a58673134324b2ec56');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'b30ce8795d834b2787e53f41d3714c0c', N'8a40c0353fa828a6013fa898d4ac0026', N'83ef85fd17804bb195d0ad3c07f88c30');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'b3d491ee10dd43ef8f29243eb31bef95', N'8a40c0353fa828a6013fa898d4ac0026', N'd115d08591ef4c0eaebef15f8294b287');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'b458e2ce27bd44f0a31a5f0793acc434', N'8a40c0353fa828a6013fa898d4ac0026', N'8f79857b31d4475a94c712e997e89c99');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'b50ac327cbde47babd13106c99c8dbdd', N'8a40c0353fa828a6013fa898d4ac0026', N'481d4d5c0a634c4085c72c990260e58d');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'b548070c4da8400481a4e9ea805e48ff', N'8a40c0353fa828a6013fa898d4ac0026', N'b82d86fb7b64498a9c2b8b9a99b3fbeb');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'ba3a698ab8fe4c6bbad58c215d2c9a71', N'8a40c0353fa828a6013fa898d4ac0026', N'b13b002e2fad4e95bbe0e4dbc9fbdfe1');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'c082ff78bd6f46529066bf3be1934d89', N'8a40c0353fa828a6013fa898d4ac0026', N'9c0ae757fc564f27860b975e5792ae6a');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'c1c59c73e4d447939f250c41e668f276', N'8a40c0353fa828a6013fa898d4ac0026', N'0773a58c4bdb4858ab062c4a2a4da69a');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'c1e9d0f4c8d14a93a287d12a1729d6d5', N'8a40c0353fa828a6013fa898d4ac0026', N'e1ac811d2a16495d927f994dd006e824');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'c37ab72ab967407ab1f1f35eebe6ceea', N'8a40c0353fa828a6013fa898d4ac0026', N'dc750e57b54f4baca78d66969321ee51');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'c77f667641e044a499c999aa48c147da', N'8a40c0353fa828a6013fa898d4ac0026', N'910955c2192a418995eeab8bf15372e9');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'c92ebef135d44cd7a1303b661e12812a', N'8a40c0353fa828a6013fa898d4ac0026', N'c05642442e0a468ebe4f0b7771a803ae');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'ca68408ea43c42a088d8be77429d50bd', N'8a40c0353fa828a6013fa898d4ac0026', N'78c6026c6af44b41a6bef4cdb4cfb414');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'cac39f7a75dd499988e19ed1923bd973', N'8a40c0353fa828a6013fa898d4ac0026', N'd496b161d2564111992687b948862244');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'cacb4fee167e445f96484295dfcfb34a', N'8a40c0353fa828a6013fa898d4ac0026', N'7b4281dd247c4624bee0d8f84c2c2715');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'ccedf261952a46aba525d866d54c4cee', N'8a40c0353fa828a6013fa898d4ac0026', N'22926eb196a14b48be775f4880b5ba94');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'cd37af6893f84ea78b676c39460d877b', N'8a40c0353fa828a6013fa898d4ac0026', N'01aa0c85c8b84ae8aca7f5484336b203');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'cee8c9b275ba4de3a1bd42f728d907b1', N'8a40c0353fa828a6013fa898d4ac0026', N'9adcc4c40e3148988e5003aaedbb4948');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'cfe54a80698243fcb9e10afd065a011e', N'8a40c0353fa828a6013fa898d4ac0026', N'cf26c1d2baa24a8791b3d264154b80d4');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'd0ef1362d1ff43c8a25eea07f4447244', N'8a40c0353fa828a6013fa898d4ac0026', N'671ce1e6167840baaa6d27f4f04574c9');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'd0f6c77416d7443fb08459b9eaa0f9d6', N'8a40c0353fa828a6013fa898d4ac0026', N'a0d2897ee9194378819e78538189faa0');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'd40d3b1a7044480a96ff5f78c222e15e', N'8a40c0353fa828a6013fa898d4ac0026', N'5c2bdc059ae24ffda2758a2781bb46da');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'db91cffbaa8a4043948715e35ee96408', N'8a40c0353fa828a6013fa898d4ac0026', N'721f7255449c445faf36607c254eea06');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'dbbd5d1929394401b468f816595235a0', N'8a40c0353fa828a6013fa898d4ac0026', N'08a96d5dd37f49459eeb02eebeb0a78c');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'dc0f0346b7ef4b76b84cc036f97ab23f', N'8a40c0353fa828a6013fa898d4ac0026', N'37218fb52ec94fb4bf76209a17916094');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'dfc925c3f9984304955fc8293810ddcb', N'8a40c0353fa828a6013fa898d4ac0026', N'e754dfdb794d4e7db6023c9b089a340c');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'e0968a2e83794d37a280638bd0359dfd', N'8a40c0353fa828a6013fa898d4ac0026', N'1b1a809815574b2a9c1d0e18d692de17');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'e0a9173a2d584fc0b5bb5665a7941171', N'8a40c0353fa828a6013fa898d4ac0026', N'2c91467f905a4f5ba9f52830131c8ad9');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'e1c2318018ac4fe4ac0eb36c6c6fb797', N'8a40c0353fa828a6013fa898d4ac0026', N'1046389d8525451697f2793185e7d6ee');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'e26b70cfb6ce477c8fae7688187b8235', N'8a40c0353fa828a6013fa898d4ac0026', N'a5289b2638d845fbb06dedbcdd517f97');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'eadf28f160604847833c4f1d88ed4715', N'8a40c0353fa828a6013fa898d4ac0026', N'18f50e0f48ef4dd9bec85f5612ab10c0');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'ebec92a266d5413e8442b47fe37aa7e2', N'8a40c0353fa828a6013fa898d4ac0026', N'29c18b3394924c30882da049da14ad99');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'ec31d96b679a4f09957e203f274ec5ae', N'8a40c0353fa828a6013fa898d4ac0026', N'bc2c865be6af42cf861294d446fb1c6f');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'ec65641ec125424187243d8530f6b56c', N'8a40c0353fa828a6013fa898d4ac0026', N'053d330462e1459ca1012c9d29113bc4');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'edfae92ea85d4532977ead9c4e772117', N'8a40c0353fa828a6013fa898d4ac0026', N'0da15c49299d41a4b720f787d053e3cb');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'eff46328c2dc41a38de09ee76f1b4584', N'8a40c0353fa828a6013fa898d4ac0026', N'5b249ad344d948b99f58768c323f5f71');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'f1f05094d7b649ab94c90669714a1d14', N'8a40c0353fa828a6013fa898d4ac0026', N'8ca8af501522439d8c9249e00db5d78d');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'f423cb2b3bee47d29e20259bba7186ad', N'8a40c0353fa828a6013fa898d4ac0026', N'ad09a1b897744812875c752c2d70f11a');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'f4ae287215d54609a5d5934263a62753', N'8a40c0353fa828a6013fa898d4ac0026', N'32a3e59964204a3c8848e84b864306ae');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'f83cdeaef7934597a3706e39d7ff3d72', N'8a40c0353fa828a6013fa898d4ac0026', N'ff91363b32424fa399e44cc0dfd688e9');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'f97d8f7f69db42b5af558571b2c00e1b', N'8a40c0353fa828a6013fa898d4ac0026', N'3ee5f986289d4a1990f4e42c9a0caadb');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'fc86de2044414d72b1e4b1ec782d735e', N'8a40c0353fa828a6013fa898d4ac0026', N'3085a3b0c20d4f3aaa7c2d27fe986aba');
+GO
+INSERT INTO [dbo].[pt_stationOperator] ([ids], [stationids], [operatorids]) VALUES (N'fecc208b276240a69dfc6cfac333d73d', N'8a40c0353fa828a6013fa898d4ac0026', N'79039a2260da46b0aabb5a62e8db6c87');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_syslog]
+-- ----------------------------
+DROP TABLE [dbo].[pt_syslog]
+GO
+CREATE TABLE [dbo].[pt_syslog] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[startdate] datetime NOT NULL DEFAULT ('0000-00-00 00:00:00') ,
+[starttime] bigint NULL ,
+[enddate] datetime NOT NULL DEFAULT ('0000-00-00 00:00:00') ,
+[endtime] bigint NULL ,
+[actionenddate] datetime NOT NULL DEFAULT (getdate()) ,
+[actionendtime] bigint NULL ,
+[actionstartdate] datetime NOT NULL DEFAULT ('0000-00-00 00:00:00') ,
+[actionstarttime] bigint NULL ,
+[actionhaoshi] bigint NULL ,
+[viewhaoshi] bigint NULL ,
+[haoshi] bigint NULL ,
+[cause] char(1) NULL ,
+[cookie] varchar(1024) NULL ,
+[description] text NULL ,
+[ips] varchar(128) NULL ,
+[method] varchar(4) NULL ,
+[referer] varchar(500) NULL ,
+[requestpath] text NULL ,
+[status] char(1) NULL ,
+[useragent] varchar(1000) NULL ,
+[operatorids] varchar(32) NULL ,
+[accept] varchar(200) NULL ,
+[acceptencoding] varchar(200) NULL ,
+[acceptlanguage] varchar(200) NULL ,
+[connection] varchar(200) NULL ,
+[host] varchar(200) NULL ,
+[xrequestedwith] varchar(200) NULL ,
+[pvids] varchar(32) NULL ,
+[userids] varchar(32) NULL 
+)
 
 
--- 系统表
-CREATE TABLE [pt_systems]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 描述
-	[description] varchar(200),
-	-- 部门名称
-	[names] varchar(25),
-	-- numbers
-	[numbers] varchar(25),
-	-- 排序号
-	[orderids] bigint,
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_syslog
+-- ----------------------------
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'00d92358aa814400822a7ccc12874567', N'0', N'2016-10-18 17:39:34.417', null, N'2016-10-18 17:39:34.437', null, N'2016-10-18 17:39:34.517', null, N'2016-10-18 17:39:34.420', N'1476783574421', N'15', N'4', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aks0NE5PNjJEZXpDK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'01b54ccdc292474a84f06b767a2d0e28', N'0', N'2016-01-30 15:03:47.387', null, N'2016-01-30 15:03:59.630', null, N'2016-01-30 15:08:05.140', null, N'2016-01-30 15:03:47.390', N'1454137427390', N'11676', N'0', N'11676', null, N'JSESSIONID=15e1qxgry54kx11y7uss5pw1cp; authCode=ZVFnZElQdGJmVFU9', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/', N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'038274e152b24f2ab6dcf6ea451956d3', N'0', N'2016-10-18 17:40:03.907', null, N'2016-10-18 17:40:03.910', null, N'2016-10-18 17:40:04.830', null, N'2016-10-18 17:40:03.907', N'1476783603907', N'5', N'0', N'5', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3hSbzFlQ1ZWS2lzK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0398393f4ff84dd1b842c007051a748d', N'0', N'2016-10-18 17:39:52.773', null, N'2016-10-18 17:39:52.807', null, N'2016-10-18 17:39:52.877', null, N'2016-10-18 17:39:52.780', N'1476783592779', N'32', N'1', N'33', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'04dfa42377dd44c8a1d360fc880136e9', N'0', N'2016-10-18 17:39:52.683', null, N'2016-10-18 17:39:52.700', null, N'2016-10-18 17:39:52.703', null, N'2016-10-18 17:39:52.690', N'1476783592690', N'16', N'1', N'17', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwrbXhWVEEwRzJKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'06a69e3d51084cf492929fa96d18539b', N'0', N'2016-01-30 15:20:06.697', null, N'2016-01-30 15:20:06.757', null, N'2016-01-30 15:24:12.877', null, N'2016-01-30 15:20:06.707', N'1454138406705', N'26', N'31', N'57', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZENSSFNZRXY1K0VJZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/role', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ae62737df444d619f8fd376360d160c', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'08215674cf224e2592c5d99e6f383859', N'0', N'2016-10-18 17:40:04.637', null, N'2016-10-18 17:40:04.670', null, N'2016-10-18 17:40:04.700', null, N'2016-10-18 17:40:04.650', N'1476783604649', N'33', N'1', N'34', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'090b363ea10944d092c001811714256d', N'0', N'2016-01-30 15:06:27.333', null, N'2016-01-30 15:06:27.397', null, N'2016-01-30 15:10:33.387', null, N'2016-01-30 15:06:27.337', N'1454137587338', N'13', N'49', N'62', null, N'JSESSIONID=15e1qxgry54kx11y7uss5pw1cp; authCode=NzhpbmtLWTBuTlk9', null, N'127.0.0.1', N'GET', null, N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0a4bbca6cba44ba39d8becf16708f20b', N'0', N'2016-10-18 17:40:04.513', null, N'2016-10-18 17:40:04.533', null, N'2016-10-18 17:40:04.687', null, N'2016-10-18 17:40:04.517', N'1476783604516', N'19', N'1', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3kwVk1GRE5jci9KK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0abedca3743b4be98fdf8d1d93d6b364', N'0', N'2016-01-30 15:20:08.310', null, N'2016-01-30 15:20:08.347', null, N'2016-01-30 15:24:14.463', null, N'2016-01-30 15:20:08.320', N'1454138408320', N'29', N'7', N'36', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERvbzlkbWtnbkk2K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0ba704f6aa0847f49f7072d0be58f613', N'0', N'2016-01-30 15:03:40.780', null, N'2016-01-30 15:03:41.760', null, N'2016-01-30 15:07:47.917', null, N'2016-01-30 15:03:40.787', N'1454137420787', N'18', N'962', N'980', null, N'JSESSIONID=15e1qxgry54kx11y7uss5pw1cp; authCode=Z2ppWFVHbHYxMTQ9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/', N'/jf/platform/authImg?rand=0.5757632656547925', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0be8d9087ffc4c669c75d41adf63cf53', N'0', N'2016-01-30 15:20:46.143', null, N'2016-01-30 15:20:46.157', null, N'2016-01-30 15:24:52.267', null, N'2016-01-30 15:20:46.147', N'1454138446148', N'11', N'1', N'12', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZENoNkFTMHBpS21TK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/dept/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'b4ee4ae4391f4243be69e838545d2131', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0c4fd5e31d064dbdb07075adf89eb7ae', N'0', N'2016-10-18 17:39:38.243', null, N'2016-10-18 17:39:38.253', null, N'2016-10-18 17:39:38.373', null, N'2016-10-18 17:39:38.247', N'1476783578247', N'11', N'0', N'11', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxVb3EvdGVGcHMvdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0e83b5f9ffbf4c0cbb55b3763c83c172', N'0', N'2016-10-18 17:39:38.300', null, N'2016-10-18 17:39:38.323', null, N'2016-10-18 17:39:38.397', null, N'2016-10-18 17:39:38.307', N'1476783578307', N'17', N'7', N'24', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0ec86b1a9bc94a01a089a23342082afd', N'0', N'2016-10-18 17:39:38.200', null, N'2016-10-18 17:39:38.223', null, N'2016-10-18 17:39:38.227', null, N'2016-10-18 17:39:38.210', N'1476783578211', N'22', N'0', N'22', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktXaXcrc3NvdER6T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0f7f2039a25e49df86445e648671b49f', N'0', N'2016-02-01 09:59:13.443', null, N'2016-02-01 09:59:13.787', null, N'2016-02-01 10:03:19.370', null, N'2016-02-01 09:59:13.447', N'1454291953448', N'17', N'328', N'345', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cTlPTnlWUW4zanc9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/authImg?rand=0.5671106957810877', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'0fb95320f99543da8fdb630b63d3bb6f', N'0', N'2016-10-18 17:39:52.817', null, N'2016-10-18 17:39:52.857', null, N'2016-10-18 17:39:52.880', null, N'2016-10-18 17:39:52.833', N'1476783592833', N'38', N'4', N'42', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'1046f8fcad8b4f7f80f649e99232d754', N'0', N'2016-02-01 09:54:57.860', null, N'2016-02-01 09:54:57.867', null, N'2016-02-01 09:59:03.417', null, N'2016-02-01 09:54:57.863', N'1454291697862', N'6', N'1', N'7', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cU1TRldxeUhsKzQ9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'10ffc6f0fce344c29b8231f6e485f344', N'0', N'2016-09-12 16:14:46.323', null, N'2016-09-12 16:14:46.380', null, N'2016-09-12 16:14:46.520', null, N'2016-09-12 16:14:46.327', N'1473668086328', N'22', N'35', N'57', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=cTdObzVxcDg1S3hGSncvNGk0UWFaZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/operator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0da15c49299d41a4b720f787d053e3cb', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'11720e8e97f2403a887620de0915d6da', N'0', N'2016-01-30 15:06:27.837', null, N'2016-01-30 15:06:28.783', null, N'2016-01-30 15:10:34.773', null, N'2016-01-30 15:06:27.843', N'1454137587842', N'16', N'930', N'946', null, N'JSESSIONID=2vjcvewb49e41ljv3xxgl1556; authCode=NzhpbmtLWTBuTlk9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/', N'/jf/platform/authImg?rand=0.6808849884365038', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'12a5020f02cf4239b52d05c7248569ff', N'0', N'2016-10-18 17:40:04.783', null, N'2016-10-18 17:40:04.810', null, N'2016-10-18 17:40:04.910', null, N'2016-10-18 17:40:04.797', N'1476783604798', N'25', N'1', N'26', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lVamZkZkQ0UUF6dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'13280e5d2b9640cfa3dcc58cd52365cc', N'0', N'2016-01-30 15:20:58.423', null, N'2016-01-30 15:20:58.507', null, N'2016-01-30 15:25:04.470', null, N'2016-01-30 15:20:58.427', N'1454138458426', N'16', N'69', N'85', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEQ2VFY3eW0wYTdmdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/param', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'f7c220a81ba843938f8ccb108bec9c03', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'148d13a3344b4ef5a7e729e98c03eed6', N'0', N'2016-09-12 16:14:45.677', null, N'2016-09-12 16:14:45.717', null, N'2016-09-12 16:14:45.720', null, N'2016-09-12 16:14:45.680', N'1473668085680', N'14', N'27', N'41', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=cTdObzVxcDg1S3d2MXo0bDBGUzFZZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/systems', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7eab5f800bab4efb8df1b2e8a0575f73', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'14d7d2f3459c4474b400e9e69d7efdf4', N'0', N'2016-09-12 16:01:29.673', null, N'2016-09-12 16:01:29.893', null, N'2016-09-12 16:01:30.130', null, N'2016-09-12 16:01:29.677', N'1473667289677', N'123', N'97', N'220', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzVYa2NaN2xzZ2NidWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/user', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'91baed789bc14efdbebb10b49c69ee5b', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'15a19f11694d4d59872d78cdbe0293f4', N'0', N'2016-01-30 15:20:06.300', null, N'2016-01-30 15:20:06.900', null, N'2016-01-30 15:24:12.500', null, N'2016-01-30 15:20:06.700', N'1454138406008', N'54', N'35', N'89', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERXUDVKcjI4eURQK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/group', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'1b0d7476974e4bf9b52f75fb82f87330', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'15fe37278fb54f11a3f4a522f487d3c4', N'0', N'2016-10-18 17:39:52.687', null, N'2016-10-18 17:39:52.707', null, N'2016-10-18 17:39:52.707', null, N'2016-10-18 17:39:52.697', N'1476783592696', N'19', N'1', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwrbXhWVEEwRzJKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'16325ae3e2cd439493c2e47e1783926c', N'0', N'2016-10-18 17:39:38.327', null, N'2016-10-18 17:39:38.363', null, N'2016-10-18 17:39:38.403', null, N'2016-10-18 17:39:38.337', N'1476783578335', N'34', N'2', N'36', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'16559fd6f9ef49548cafeb4ad9098cd5', N'0', N'2016-02-01 09:48:20.967', null, N'2016-02-01 09:48:21.700', null, N'2016-02-01 09:52:26.590', null, N'2016-02-01 09:48:20.970', N'1454291300970', N'41', N'0', N'41', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=MUVVY0NKcyt3Tk09', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'16682e85e8da4c5fafa1a037272b54ad', N'0', N'2016-09-12 16:01:32.750', null, N'2016-09-12 16:01:32.773', null, N'2016-09-12 16:01:32.813', null, N'2016-09-12 16:01:32.757', N'1473667292758', N'21', N'2', N'23', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzZseGFrM3JOMTA3dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'17ed4dd5a40f4f8a89bb01cda21ce047', N'0', N'2016-09-12 16:01:24.707', null, N'2016-09-12 16:01:25.450', null, N'2016-09-12 16:01:25.620', null, N'2016-09-12 16:01:25.440', N'1473667285441', N'742', N'2', N'744', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=ejNOWUZ4WDVpYmVJMm56c3lJbGJsdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=kupbc7hgmu9kufpmpfk1mkh1', null, N'127.0.0.1', N'GET', null, N'/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'184d6bc6f47b48d28a2a64342206ea39', N'0', N'2016-10-18 17:39:38.123', null, N'2016-10-18 17:39:38.140', null, N'2016-10-18 17:39:38.163', null, N'2016-10-18 17:39:38.133', N'1476783578132', N'18', N'1', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktub0RHS3BhTm5RZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'19053536f06542579f29124928c12b2e', N'0', N'2016-10-18 17:40:04.697', null, N'2016-10-18 17:40:04.773', null, N'2016-10-18 17:40:04.907', null, N'2016-10-18 17:40:04.707', N'1476783604708', N'25', N'53', N'78', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'193ba4db8af641ecad06cb475a7bd964', N'0', N'2016-10-18 17:39:52.557', null, N'2016-10-18 17:39:52.587', null, N'2016-10-18 17:39:52.637', null, N'2016-10-18 17:39:52.563', N'1476783592564', N'32', N'0', N'32', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpWeTBnZ3NTaUtvT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'199a2f84856b4d4ea0d101e022e89972', N'0', N'2016-01-30 14:57:17.767', null, N'2016-01-30 14:57:20.157', null, N'2016-01-30 15:01:26.250', null, N'2016-01-30 14:57:17.807', N'1454137037807', N'155', N'2238', N'2393', null, N'JSESSIONID=1by1vg3624z7thijtrdx9tvao', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/', N'/jf/platform/authImg?rand=0.9796590661703558', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'1bb80a321e924dab8c0b90a5531e42e5', N'0', N'2016-09-12 16:01:30.580', null, N'2016-09-12 16:01:30.653', null, N'2016-09-12 16:01:30.653', null, N'2016-09-12 16:01:30.590', N'1473667290589', N'29', N'42', N'71', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzZFNnVJYUlZZTNnK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/group', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'1b0d7476974e4bf9b52f75fb82f87330', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'1c8f3923ecb7459ba32c194247b0c828', N'0', N'2016-10-18 17:39:38.123', null, N'2016-10-18 17:39:38.140', null, N'2016-10-18 17:39:38.167', null, N'2016-10-18 17:39:38.130', N'1476783578131', N'17', N'2', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktub0RHS3BhTm5RZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'1dab096c19de4b9884c39f04135bf729', N'0', N'2016-10-18 17:39:34.487', null, N'2016-10-18 17:39:34.537', null, N'2016-10-18 17:39:34.553', null, N'2016-10-18 17:39:34.503', N'1476783574502', N'48', N'2', N'50', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktpbmNKNyt0RGlKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'1db354d8740347f6a238f6df7d640b83', N'0', N'2016-10-18 17:39:27.410', null, N'2016-10-18 17:39:28.217', null, N'2016-10-18 17:39:28.297', null, N'2016-10-18 17:39:28.130', N'1476783568014', N'703', N'104', N'807', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RVhjbEc2aDJzUGdzRSt6UTBoRVFGdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', null, N'/platform/index', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'886bd497064b4c9f87d8461ebba421d1', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'1e70a5efb9464e6e85ff9ffad811f970', N'0', N'2016-09-12 15:50:56.447', null, N'2016-09-12 15:50:57.387', null, N'2016-09-12 15:50:57.390', null, N'2016-09-12 15:50:56.493', N'1473666656494', N'54', N'886', N'940', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=d09FQWtlV09DKzR4STVsV3l2bnZWT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=kupbc7hgmu9kufpmpfk1mkh1', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:8899/', N'/platform/authImg?rand=0.6783036661361249', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0478826a46df4f20b12f4043a97f8209', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'1f967276a12d407ebe0dcb39ae4dd2aa', N'0', N'2016-09-12 16:01:46.203', null, N'2016-09-12 16:01:46.233', null, N'2016-09-12 16:01:46.240', null, N'2016-09-12 16:01:46.210', N'1473667306210', N'24', N'4', N'28', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=K2ozZWMwRWlmNmVYcVFTKzBybUZIK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/operator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0da15c49299d41a4b720f787d053e3cb', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'2018f5abe119405c80d67b382146000b', N'0', N'2016-01-30 15:00:58.490', null, N'2016-01-30 15:00:58.527', null, N'2016-01-30 15:05:04.500', null, N'2016-01-30 15:00:58.493', N'1454137258492', N'35', N'2', N'37', N'3', N'JSESSIONID=1by1vg3624z7thijtrdx9tvao; authCode=Z2ppWFVHbHYxMTQ9', N'com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: ''u'' 附近有语法错误。
+	at com.jfinal.plugin.activerecord.DbPro.update(DbPro.java:283)
+	at com.platform.mvc.login.LoginService.login(LoginService.java:194)
+	at com.platform.mvc.login.LoginService$$EnhancerByCGLIB$$12dab1db.CGLIB$login$0(<generated>)
+	at com.platform.mvc.login.LoginService$$EnhancerByCGLIB$$12dab1db$$FastClassByCGLIB$$b7787a7e.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:82)
+	at com.jfinal.aop.Callback.intercept(Callback.java:96)
+	at com.platform.mvc.login.LoginService$$EnhancerByCGLIB$$12dab1db.login(<generated>)
+	at com.platform.mvc.login.LoginController.vali(LoginController.java:116)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.jfinal.validate.Validator.intercept(Validator.java:80)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.i18n.I18nInterceptor.intercept(I18nInterceptor.java:106)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeyRegex.intercept(TxByActionKeyRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeys.intercept(TxByActionKeys.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethodRegex.intercept(TxByMethodRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethods.intercept(TxByMethods.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.ParamPkgInterceptor.intercept(ParamPkgInterceptor.java:70)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.AuthInterceptor.intercept(AuthInterceptor.java:158)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.platform.handler.GlobalHandler.handle(GlobalHandler.java:83)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:499)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.sql.SQLException: ''u'' 附近有语法错误。
+	at net.sourceforge.jtds.jdbc.SQLDiagnostic.addDiagnostic(SQLDiagnostic.java:372)
+	at net.sourceforge.jtds.jdbc.TdsCore.tdsErrorToken(TdsCore.java:2988)
+	at net.sourceforge.jtds.jdbc.TdsCore.nextToken(TdsCore.java:2421)
+	at net.sourceforge.jtds.jdbc.TdsCore.getMoreResults(TdsCore.java:671)
+	at net.sourceforge.jtds.jdbc.JtdsStatement.processResults(JtdsStatement.java:613)
+	at net.sourceforge.jtds.jdbc.JtdsStatement.executeSQL(JtdsStatement.java:572)
+	at net.sourceforge.jtds.jdbc.JtdsPreparedStatement.executeUpdate(JtdsPreparedStatement.java:727)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeUpdate(FilterChainImpl.java:2723)
+	at com.alibaba.druid.wall.WallFilter.preparedStatement_executeUpdate(WallFilter.java:621)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeUpdate(FilterChainImpl.java:2721)
+	at com.alibaba.druid.filter.FilterAdapter.preparedStatement_executeUpdate(FilterAdapter.java:1069)
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_executeUpdate(FilterEventAdapter.java:491)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeUpdate(FilterChainImpl.java:2721)
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.executeUpdate(PreparedStatementProxyImpl.java:158)
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.executeUpdate(DruidPooledPreparedStatement.java:253)
+	at com.jfinal.plugin.activerecord.DbPro.update(DbPro.java:264)
+	at com.jfinal.plugin.activerecord.DbPro.update(DbPro.java:281)
+	... 50 more
+', N'127.0.0.1', N'POST', N'http://127.0.0.1:99/', N'/jf/platform/login/vali', N'0', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'205566847b544002bd7f95d5e0f2d3f4', N'0', N'2016-10-18 17:40:04.497', null, N'2016-10-18 17:40:04.530', null, N'2016-10-18 17:40:04.687', null, N'2016-10-18 17:40:04.500', N'1476783604500', N'32', N'1', N'33', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3kwVk1GRE5jci9KK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'20d07ab915874a4982aaa46a2168cec0', N'0', N'2016-02-01 09:59:13.233', null, N'2016-02-01 09:59:13.283', null, N'2016-02-01 10:03:18.807', null, N'2016-02-01 09:59:13.237', N'1454291953235', N'6', N'44', N'50', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cTlPTnlWUW4zanc9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'2236a2d5033f406fbadbdf35fb98439f', N'0', N'2016-10-18 17:40:04.670', null, N'2016-10-18 17:40:04.687', null, N'2016-10-18 17:40:04.703', null, N'2016-10-18 17:40:04.677', N'1476783604675', N'16', N'0', N'16', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'241006fc536f4d619514a180ada1e5c8', N'0', N'2016-01-30 15:24:19.743', null, N'2016-01-30 15:24:19.797', null, N'2016-01-30 15:28:25.767', null, N'2016-01-30 15:24:19.747', N'1454138659745', N'6', N'48', N'54', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'243f6226b69c46188ab99d2b66a3d323', N'0', N'2016-01-30 15:08:09.480', null, N'2016-01-30 15:08:10.403', null, N'2016-01-30 15:12:16.537', null, N'2016-01-30 15:08:09.483', N'1454137689484', N'149', N'774', N'923', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=YWhkWEdvN0VBTmltK2Q3MWFJSEN4ZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/', N'/jf/platform/index', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'886bd497064b4c9f87d8461ebba421d1', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'247c26fc48544ee98882884f1bd6711e', N'0', N'2016-10-18 17:40:04.640', null, N'2016-10-18 17:40:04.667', null, N'2016-10-18 17:40:04.700', null, N'2016-10-18 17:40:04.647', N'1476783604645', N'23', N'4', N'27', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'24b20cb1b7164844b83de01ec8e71d34', N'0', N'2016-01-30 15:16:06.963', null, N'2016-01-30 15:16:07.937', null, N'2016-01-30 15:20:14.200', null, N'2016-01-30 15:16:07.620', N'1454138167621', N'749', N'226', N'975', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=YWhkWEdvN0VBTmcxNkdISy85N3Q1dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', null, N'/jf/platform/index', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'886bd497064b4c9f87d8461ebba421d1', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'24bc46112e6d48a49b763a2c32ec50f1', N'0', N'2016-09-12 15:51:13.397', null, N'2016-09-12 15:51:13.507', null, N'2016-09-12 15:51:13.567', null, N'2016-09-12 15:51:13.400', N'1473666673401', N'95', N'15', N'110', N'3', N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=ejNOWUZ4WDVpYmM5bVlwNjJtSk1LdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=kupbc7hgmu9kufpmpfk1mkh1', N'com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: 数据类型 text 和 varchar 在 equal to 运算符中不兼容。
+	at com.jfinal.plugin.activerecord.Model.find(Model.java:577)
+	at com.platform.mvc.index.IndexService.menu(IndexService.java:47)
+	at com.platform.mvc.index.IndexController.index(IndexController.java:40)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.jfinal.i18n.I18nInterceptor.intercept(I18nInterceptor.java:106)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeyRegex.intercept(TxByActionKeyRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeys.intercept(TxByActionKeys.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethodRegex.intercept(TxByMethodRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethods.intercept(TxByMethods.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.ParamPkgInterceptor.intercept(ParamPkgInterceptor.java:76)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.AuthInterceptor.intercept(AuthInterceptor.java:158)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.platform.handler.GlobalHandler.handle(GlobalHandler.java:83)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:499)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.sql.SQLException: 数据类型 text 和 varchar 在 equal to 运算符中不兼容。
+	at net.sourceforge.jtds.jdbc.SQLDiagnostic.addDiagnostic(SQLDiagnostic.java:372)
+	at net.sourceforge.jtds.jdbc.TdsCore.tdsErrorToken(TdsCore.java:2988)
+	at net.sourceforge.jtds.jdbc.TdsCore.nextToken(TdsCore.java:2421)
+	at net.sourceforge.jtds.jdbc.TdsCore.getMoreResults(TdsCore.java:671)
+	at net.sourceforge.jtds.jdbc.JtdsStatement.executeSQLQuery(JtdsStatement.java:505)
+	at net.sourceforge.jtds.jdbc.JtdsPreparedStatement.executeQuery(JtdsPreparedStatement.java:1029)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeQuery(FilterChainImpl.java:2714)
+	at com.alibaba.druid.wall.WallFilter.preparedStatement_executeQuery(WallFilter.java:621)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeQuery(FilterChainImpl.java:2711)
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_executeQuery(FilterEventAdapter.java:465)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeQuery(FilterChainImpl.java:2711)
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.executeQuery(PreparedStatementProxyImpl.java:145)
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.executeQuery(DruidPooledPreparedStatement.java:227)
+	at com.jfinal.plugin.activerecord.Model.find(Model.java:558)
+	at com.jfinal.plugin.activerecord.Model.find(Model.java:575)
+	... 42 more
+', N'127.0.0.1', N'GET', N'http://127.0.0.1:8899/', N'/platform/index', N'0', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'886bd497064b4c9f87d8461ebba421d1', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'24e199b38b6144a8b011a79e582322d3', N'0', N'2016-10-18 17:40:04.547', null, N'2016-10-18 17:40:04.573', null, N'2016-10-18 17:40:04.693', null, N'2016-10-18 17:40:04.547', N'1476783604548', N'26', N'0', N'26', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3kwVk1GRE5jci9KK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'2591e2d485f54bca86c9c54bbf969f0b', N'0', N'2016-10-18 17:39:38.373', null, N'2016-10-18 17:39:38.393', null, N'2016-10-18 17:39:38.457', null, N'2016-10-18 17:39:38.383', N'1476783578382', N'19', N'1', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxVb3EvdGVGcHMvdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'25e454c572b44601a33285f322cb97b4', N'0', N'2016-02-01 09:58:49.460', null, N'2016-02-01 09:58:49.557', null, N'2016-02-01 10:02:55.130', null, N'2016-02-01 09:58:49.467', N'1454291929465', N'50', N'44', N'94', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cTlPTnlWUW4zanc9; userName=admins; authmark=bUxHblg5eW9VNDFGR05aSk13cjdsT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/test/sysLog?pageSize=10', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'dfa8256651a84269869c35ca1f10cae5', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'2772808dae124ef7b829ab12654e4e23', N'0', N'2016-10-18 17:39:52.833', null, N'2016-10-18 17:39:52.873', null, N'2016-10-18 17:39:52.883', null, N'2016-10-18 17:39:52.843', N'1476783592843', N'35', N'4', N'39', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akszblQvbElQTytUT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'27a08e6e780844d6ad55af3645102ec3', N'0', N'2016-01-30 15:20:08.357', null, N'2016-01-30 15:20:08.367', null, N'2016-01-30 15:24:14.467', null, N'2016-01-30 15:20:08.360', N'1454138408360', N'10', N'1', N'11', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEJhTUdiL1g2S0plZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'28adf816baf14ff2947225323cb5d900', N'0', N'2016-10-18 17:40:03.867', null, N'2016-10-18 17:40:03.873', null, N'2016-10-18 17:40:03.883', null, N'2016-10-18 17:40:03.870', N'1476783603870', N'5', N'2', N'7', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxPZFlOWXYzekY1K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/toUrl', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'4a6544ae7a2548ad81c0e3994999023c', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'28ff979d5ac34ca9930b31a9eeff421d', N'0', N'2016-01-30 15:01:36.377', null, N'2016-01-30 15:02:16.633', null, N'2016-01-30 15:06:22.710', null, N'2016-01-30 15:01:36.383', N'1454137296383', N'40252', N'3', N'40255', N'3', N'JSESSIONID=1by1vg3624z7thijtrdx9tvao; authCode=Z2ppWFVHbHYxMTQ9', N'com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: ''u'' 附近有语法错误。
+	at com.jfinal.plugin.activerecord.DbPro.update(DbPro.java:283)
+	at com.platform.mvc.login.LoginService.login(LoginService.java:194)
+	at com.platform.mvc.login.LoginService$$EnhancerByCGLIB$$12dab1db.CGLIB$login$0(<generated>)
+	at com.platform.mvc.login.LoginService$$EnhancerByCGLIB$$12dab1db$$FastClassByCGLIB$$b7787a7e.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:82)
+	at com.jfinal.aop.Callback.intercept(Callback.java:96)
+	at com.platform.mvc.login.LoginService$$EnhancerByCGLIB$$12dab1db.login(<generated>)
+	at com.platform.mvc.login.LoginController.vali(LoginController.java:116)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.jfinal.validate.Validator.intercept(Validator.java:80)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.i18n.I18nInterceptor.intercept(I18nInterceptor.java:106)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeyRegex.intercept(TxByActionKeyRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeys.intercept(TxByActionKeys.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethodRegex.intercept(TxByMethodRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethods.intercept(TxByMethods.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.ParamPkgInterceptor.intercept(ParamPkgInterceptor.java:70)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.AuthInterceptor.intercept(AuthInterceptor.java:158)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.platform.handler.GlobalHandler.handle(GlobalHandler.java:83)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:499)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.sql.SQLException: ''u'' 附近有语法错误。
+	at net.sourceforge.jtds.jdbc.SQLDiagnostic.addDiagnostic(SQLDiagnostic.java:372)
+	at net.sourceforge.jtds.jdbc.TdsCore.tdsErrorToken(TdsCore.java:2988)
+	at net.sourceforge.jtds.jdbc.TdsCore.nextToken(TdsCore.java:2421)
+	at net.sourceforge.jtds.jdbc.TdsCore.getMoreResults(TdsCore.java:671)
+	at net.sourceforge.jtds.jdbc.JtdsStatement.processResults(JtdsStatement.java:613)
+	at net.sourceforge.jtds.jdbc.JtdsStatement.executeSQL(JtdsStatement.java:572)
+	at net.sourceforge.jtds.jdbc.JtdsPreparedStatement.executeUpdate(JtdsPreparedStatement.java:727)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeUpdate(FilterChainImpl.java:2723)
+	at com.alibaba.druid.wall.WallFilter.preparedStatement_executeUpdate(WallFilter.java:621)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeUpdate(FilterChainImpl.java:2721)
+	at com.alibaba.druid.filter.FilterAdapter.preparedStatement_executeUpdate(FilterAdapter.java:1069)
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_executeUpdate(FilterEventAdapter.java:491)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeUpdate(FilterChainImpl.java:2721)
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.executeUpdate(PreparedStatementProxyImpl.java:158)
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.executeUpdate(DruidPooledPreparedStatement.java:253)
+	at com.jfinal.plugin.activerecord.DbPro.update(DbPro.java:264)
+	at com.jfinal.plugin.activerecord.DbPro.update(DbPro.java:281)
+	... 50 more
+', N'127.0.0.1', N'POST', N'http://127.0.0.1:99/', N'/jf/platform/login/vali', N'0', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'2ce48c819dad4c72b273a87f4befea5f', N'0', N'2016-09-12 16:01:32.750', null, N'2016-09-12 16:01:32.777', null, N'2016-09-12 16:01:32.817', null, N'2016-09-12 16:01:32.770', N'1473667292769', N'26', N'1', N'27', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzZseGFrM3JOMTA3dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'2e41d8583e714d6c9c349dcb27d043a6', N'0', N'2016-10-18 17:39:38.360', null, N'2016-10-18 17:39:38.383', null, N'2016-10-18 17:39:38.457', null, N'2016-10-18 17:39:38.370', N'1476783578369', N'21', N'0', N'21', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'2ff79b36b74c4c40a8fcd72b8d7964db', N'0', N'2016-10-18 17:39:38.257', null, N'2016-10-18 17:39:38.270', null, N'2016-10-18 17:39:38.383', null, N'2016-10-18 17:39:38.263', N'1476783578262', N'14', N'0', N'14', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxCemU0Mk1vYmhxK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'309ae9bd99574463aeec813a80e9d8ec', N'0', N'2016-01-30 15:08:09.287', null, N'2016-01-30 15:08:09.477', null, N'2016-01-30 15:12:15.543', null, N'2016-01-30 15:08:09.290', N'1454137689290', N'188', N'1', N'189', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/', N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'30ca995b8e1b43079b12fa71a65ab3c2', N'0', N'2016-10-18 17:39:52.797', null, N'2016-10-18 17:39:52.813', null, N'2016-10-18 17:39:52.877', null, N'2016-10-18 17:39:52.800', N'1476783592801', N'18', N'1', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'32334b0514f74e3986452a0148618c41', N'0', N'2016-10-18 17:39:34.537', null, N'2016-10-18 17:39:34.563', null, N'2016-10-18 17:39:34.610', null, N'2016-10-18 17:39:34.557', N'1476783574555', N'27', N'0', N'27', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aksvM2JhVmQrd3ZTK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'343dc7cbfc854c6284f467834c919715', N'0', N'2016-10-18 17:40:17.530', null, N'2016-10-18 17:40:17.547', null, N'2016-10-18 17:40:17.717', null, N'2016-10-18 17:40:17.533', N'1476783617532', N'8', N'8', N'16', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lKejV3dFBoRmYzK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:8899/platform/index', N'/platform/dict', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'4df80521e66447618796c3cfe02bf239', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'35c01a256c3c4854a19070b5c932a88f', N'0', N'2016-10-18 17:40:14.330', null, N'2016-10-18 17:40:14.357', null, N'2016-10-18 17:40:14.513', null, N'2016-10-18 17:40:14.333', N'1476783614333', N'17', N'8', N'25', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ppeWNLV0hzcWx6K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', null, N'/platform/index', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'886bd497064b4c9f87d8461ebba421d1', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'35f837c6d83e4c2a8f7a1a7cbbbe5259', N'0', N'2016-10-18 17:39:38.243', null, N'2016-10-18 17:39:38.253', null, N'2016-10-18 17:39:38.377', null, N'2016-10-18 17:39:38.247', N'1476783578248', N'9', N'1', N'10', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxVb3EvdGVGcHMvdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3c18601d41aa45328bd8c7905335af27', N'0', N'2016-09-12 16:01:42.737', null, N'2016-09-12 16:01:42.777', null, N'2016-09-12 16:01:42.823', null, N'2016-09-12 16:01:42.763', N'1473667302764', N'38', N'4', N'42', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzdTMjl5bXJQaVd0ZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/operator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0da15c49299d41a4b720f787d053e3cb', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3c5d14f524334c2785cba5143a6a4ad3', N'0', N'2016-10-18 17:40:19.250', null, N'2016-10-18 17:40:19.257', null, N'2016-10-18 17:40:19.337', null, N'2016-10-18 17:40:19.253', N'1476783619253', N'5', N'1', N'6', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3pqR1ozbDArQm1EZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:8899/platform/index', N'/platform/dict', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'4df80521e66447618796c3cfe02bf239', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3caee0a95a01496eae3689d11472197a', N'0', N'2016-10-18 17:40:04.440', null, N'2016-10-18 17:40:04.460', null, N'2016-10-18 17:40:04.517', null, N'2016-10-18 17:40:04.450', N'1476783604449', N'18', N'0', N'18', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3czWWdQT05vUWNOT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3cec871af3af4635aeec59660c4b978d', N'0', N'2016-01-30 15:20:08.747', null, N'2016-01-30 15:20:08.803', null, N'2016-01-30 15:24:14.873', null, N'2016-01-30 15:20:08.757', N'1454138408755', N'21', N'34', N'55', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEJ5WkhMcW8zTjRBK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/systems', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7eab5f800bab4efb8df1b2e8a0575f73', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3d0566794fb8479e8bad1d55e169d055', N'0', N'2016-09-12 16:01:32.180', null, N'2016-09-12 16:01:32.277', null, N'2016-09-12 16:01:32.410', null, N'2016-09-12 16:01:32.183', N'1473667292183', N'97', N'1', N'98', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzdEaENhT09TQUpZK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3d2968d2f27f459fba61890815409d1c', N'0', N'2016-09-12 16:01:32.790', null, N'2016-09-12 16:01:32.800', null, N'2016-09-12 16:01:32.817', null, N'2016-09-12 16:01:32.793', N'1473667292794', N'10', N'0', N'10', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzV2QXZZWHg4d0JHK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3d9e61aca63c4038acd30e76a7a6cc6f', N'0', N'2016-02-01 09:48:08.513', null, N'2016-02-01 09:48:08.527', null, N'2016-02-01 09:52:14.100', null, N'2016-02-01 09:48:08.517', N'1454291288516', N'5', N'7', N'12', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=K3JDamdxWjRGQjQ9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/authImg?rand=0.6842286293595222', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3eae51b86dec414291c3a9a6949c2ba7', N'0', N'2016-09-12 16:01:32.103', null, N'2016-09-12 16:01:32.163', null, N'2016-09-12 16:01:32.210', null, N'2016-09-12 16:01:32.107', N'1473667292108', N'17', N'43', N'60', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzdyYWpTdXhldjJ2ZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'233356b63d8e477fb6e948b703232809', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3f523a8bfcda4beda910930036c11995', N'0', N'2016-10-18 17:39:38.300', null, N'2016-10-18 17:39:38.337', null, N'2016-10-18 17:39:38.400', null, N'2016-10-18 17:39:38.320', N'1476783578321', N'36', N'2', N'38', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akttRk94WTAvbEUyT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3f835cfb7c784f77adddeb4b1503190f', N'0', N'2016-10-18 17:39:38.123', null, N'2016-10-18 17:39:38.143', null, N'2016-10-18 17:39:38.170', null, N'2016-10-18 17:39:38.127', N'1476783578126', N'20', N'1', N'21', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktub0RHS3BhTm5RZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'3f998ee8d3754915b65e80c1ad0d5596', N'0', N'2016-10-18 17:39:52.593', null, N'2016-10-18 17:39:52.617', null, N'2016-10-18 17:39:52.640', null, N'2016-10-18 17:39:52.600', N'1476783592600', N'23', N'1', N'24', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktaRlZ6UnZOSzlYdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'40f523c894aa48f7860a08ca4c8d61b4', N'0', N'2016-02-01 09:59:28.990', null, N'2016-02-01 09:59:29.230', null, N'2016-02-01 10:03:34.783', null, N'2016-02-01 09:59:28.997', N'1454291968998', N'79', N'161', N'240', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=a0FrRkdLc3EzUE09; userName=admins; authmark=bUxHblg5eW9VNDBrWVpHTTVhbUdxdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/index', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'886bd497064b4c9f87d8461ebba421d1', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'4114eef05ee14e96908f8bfeb3b05597', N'0', N'2016-09-12 16:01:32.753', null, N'2016-09-12 16:01:32.783', null, N'2016-09-12 16:01:32.817', null, N'2016-09-12 16:01:32.773', N'1473667292774', N'30', N'1', N'31', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzZseGFrM3JOMTA3dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'429af69ce0314b95a90e05cab06e3d81', N'0', N'2016-10-18 17:39:37.530', null, N'2016-10-18 17:39:37.547', null, N'2016-10-18 17:39:37.560', null, N'2016-10-18 17:39:37.537', N'1476783577537', N'12', N'6', N'18', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl0YjFIWElvTVFYT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/toUrl', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'4a6544ae7a2548ad81c0e3994999023c', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'42f749d98f714d53899ceb49c82d90c7', N'0', N'2016-01-30 15:29:50.927', null, N'2016-01-30 15:29:51.613', null, N'2016-01-30 15:33:57.670', null, N'2016-01-30 15:29:50.933', N'1454138990932', N'682', N'3', N'685', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=MjNMN2l0OWpKSVU9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', null, N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'43002f2b04254896ab28fa5f63132996', N'0', N'2016-10-18 17:39:38.190', null, N'2016-10-18 17:39:38.213', null, N'2016-10-18 17:39:38.223', null, N'2016-10-18 17:39:38.197', N'1476783578197', N'22', N'1', N'23', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktXaXcrc3NvdER6T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'43aa486d416e43508b1a33b5ba75a5a4', N'0', N'2016-02-01 09:59:29.773', null, N'2016-02-01 09:59:29.850', null, N'2016-02-01 10:03:35.383', null, N'2016-02-01 09:59:29.777', N'1454291969778', N'26', N'51', N'77', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=a0FrRkdLc3EzUE09; userName=admins; authmark=bUxHblg5eW9VNDBHQ290V09mRE5jZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/test/sysLog?pageSize=10', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'dfa8256651a84269869c35ca1f10cae5', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'4400f31d719f4ed8aa906e58c314fdd8', N'0', N'2016-10-18 17:40:04.477', null, N'2016-10-18 17:40:04.540', null, N'2016-10-18 17:40:04.690', null, N'2016-10-18 17:40:04.480', N'1476783604481', N'60', N'2', N'62', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3h4UnNncnBua05odWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'459cc63b5cd74bd98274f38d10f8352d', N'0', N'2016-10-18 17:39:52.683', null, N'2016-10-18 17:39:52.703', null, N'2016-10-18 17:39:52.703', null, N'2016-10-18 17:39:52.693', N'1476783592694', N'17', N'1', N'18', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwrbXhWVEEwRzJKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'4643e23a59f042eeb46917a326dd8c8f', N'0', N'2016-10-18 17:40:04.537', null, N'2016-10-18 17:40:04.567', null, N'2016-10-18 17:40:04.690', null, N'2016-10-18 17:40:04.550', N'1476783604549', N'30', N'0', N'30', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3kwVk1GRE5jci9KK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'46d4cfa253b247f6bc212a0f34a655f3', N'0', N'2016-10-18 17:39:38.327', null, N'2016-10-18 17:39:38.363', null, N'2016-10-18 17:39:38.403', null, N'2016-10-18 17:39:38.343', N'1476783578343', N'37', N'1', N'38', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'46f1ffe1840245d78874f5863290d778', N'0', N'2016-10-18 17:39:52.593', null, N'2016-10-18 17:39:52.617', null, N'2016-10-18 17:39:52.640', null, N'2016-10-18 17:39:52.597', N'1476783592596', N'22', N'2', N'24', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktaRlZ6UnZOSzlYdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'489a83f2925a49dc82f14a33816cbb55', N'0', N'2016-01-30 15:29:51.823', null, N'2016-01-30 15:29:52.237', null, N'2016-01-30 15:33:58.270', null, N'2016-01-30 15:29:51.827', N'1454138991828', N'17', N'395', N'412', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=MjNMN2l0OWpKSVU9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/authImg?rand=0.6438290607016854', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'48e5e3252bc1448a8c2ab6ff04d797eb', N'0', N'2016-01-30 15:20:45.500', null, N'2016-01-30 15:20:45.563', null, N'2016-01-30 15:24:51.667', null, N'2016-01-30 15:20:45.507', N'1454138445507', N'14', N'50', N'64', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZENNeVk2RktTa2JCZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/dept', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'ad09a1b897744812875c752c2d70f11a', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'48e99f14b5ef4576b0d6f749d654644e', N'0', N'2016-01-30 15:20:46.143', null, N'2016-01-30 15:20:46.157', null, N'2016-01-30 15:24:52.270', null, N'2016-01-30 15:20:46.150', N'1454138446150', N'12', N'0', N'12', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZENoNkFTMHBpS21TK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/dept/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'b4ee4ae4391f4243be69e838545d2131', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'491d20238b3d42b68452c5f5c4c5c9e0', N'0', N'2016-10-18 17:39:52.787', null, N'2016-10-18 17:39:52.837', null, N'2016-10-18 17:39:52.880', null, N'2016-10-18 17:39:52.803', N'1476783592802', N'49', N'1', N'50', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'49ffb31028474a03a4fced8294c925ab', N'0', N'2016-10-18 17:39:52.737', null, N'2016-10-18 17:39:52.753', null, N'2016-10-18 17:39:52.853', null, N'2016-10-18 17:39:52.743', N'1476783592743', N'18', N'0', N'18', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktHSXJtV05DSjhBK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'4b1b860735644caaa72e6ea58a8d629c', N'0', N'2016-10-18 17:39:52.810', null, N'2016-10-18 17:39:52.853', null, N'2016-10-18 17:39:52.883', null, N'2016-10-18 17:39:52.837', N'1476783592836', N'42', N'2', N'44', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'4c57bc65b02d49e2b45119f13d4783f8', N'0', N'2016-10-18 17:40:04.630', null, N'2016-10-18 17:40:04.640', null, N'2016-10-18 17:40:04.693', null, N'2016-10-18 17:40:04.630', N'1476783604631', N'10', N'0', N'10', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3pPTGFLb1pSQzN1ZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'4ff39713fdeb46fdbcd128dfb1c871b7', N'0', N'2016-01-30 15:03:40.563', null, N'2016-01-30 15:03:40.627', null, N'2016-01-30 15:07:46.717', null, N'2016-01-30 15:03:40.570', N'1454137420570', N'14', N'48', N'62', null, N'JSESSIONID=1by1vg3624z7thijtrdx9tvao; authCode=Z2ppWFVHbHYxMTQ9', null, N'127.0.0.1', N'GET', null, N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'516b21fdcf90422181db8d8cfa2e8bf9', N'0', N'2016-10-18 17:39:38.160', null, N'2016-10-18 17:39:38.193', null, N'2016-10-18 17:39:38.223', null, N'2016-10-18 17:39:38.177', N'1476783578176', N'33', N'1', N'34', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxSTnZSZ3IyUjFCT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'5213de9c992c41fdb16df50e387c67e1', N'0', N'2016-02-01 09:54:58.700', null, N'2016-02-01 09:54:58.123', null, N'2016-02-01 09:59:03.607', null, N'2016-02-01 09:54:58.100', N'1454291698011', N'6', N'108', N'114', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cU1TRldxeUhsKzQ9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/authImg?rand=0.3537868480760722', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'53e0a12a51a749c098f8adee06f713c0', N'0', N'2016-10-18 17:40:04.520', null, N'2016-10-18 17:40:04.547', null, N'2016-10-18 17:40:04.690', null, N'2016-10-18 17:40:04.527', N'1476783604528', N'26', N'0', N'26', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3kwVk1GRE5jci9KK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'53e8fef2b82f48efb08e12697f519390', N'0', N'2016-10-18 17:39:34.413', null, N'2016-10-18 17:39:34.443', null, N'2016-10-18 17:39:34.517', null, N'2016-10-18 17:39:34.417', N'1476783574415', N'31', N'1', N'32', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aks0NE5PNjJEZXpDK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'53fa23d75de4472fa0567e3b165161f1', N'0', N'2016-10-18 17:39:34.507', null, N'2016-10-18 17:39:34.540', null, N'2016-10-18 17:39:34.553', null, N'2016-10-18 17:39:34.513', N'1476783574514', N'30', N'3', N'33', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aksvM2JhVmQrd3ZTK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'548cc723276b447481b7970d175409e8', N'0', N'2016-09-12 16:14:42.790', null, N'2016-09-12 16:14:43.720', null, N'2016-09-12 16:14:43.923', null, N'2016-09-12 16:14:43.563', N'1473668083564', N'822', N'107', N'929', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=cTdObzVxcDg1S3pjOFhCanF4ZGgzdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/user', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'91baed789bc14efdbebb10b49c69ee5b', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'54b6e1252440479f966da76688f59677', N'0', N'2016-02-01 09:58:24.970', null, N'2016-02-01 09:58:47.350', null, N'2016-02-01 10:02:52.937', null, N'2016-02-01 09:58:24.100', N'1454291904100', N'23253', N'1', N'23254', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cTlPTnlWUW4zanc9', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'551efb291a6c44f78c54b85fb491fc96', N'0', N'2016-01-30 15:20:08.233', null, N'2016-01-30 15:20:08.257', null, N'2016-01-30 15:24:14.290', null, N'2016-01-30 15:20:08.240', N'1454138408240', N'22', N'1', N'23', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEJrcXErTXQ0SlM5dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'572c3cc97f7d45c08658e0e241e0dd85', N'0', N'2016-01-30 15:08:02.500', null, N'2016-01-30 15:08:02.560', null, N'2016-01-30 15:12:08.530', null, N'2016-01-30 15:08:02.507', N'1454137682506', N'13', N'48', N'61', null, N'JSESSIONID=2vjcvewb49e41ljv3xxgl1556; authCode=Q2NMYnowSlBwMlk9', null, N'127.0.0.1', N'GET', null, N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'5780093247144ef190c4120af9e1df5e', N'0', N'2016-10-18 17:39:52.853', null, N'2016-10-18 17:39:52.890', null, N'2016-10-18 17:39:52.897', null, N'2016-10-18 17:39:52.880', N'1476783592879', N'35', N'1', N'36', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akszblQvbElQTytUT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'57f42e66445647ddbfb837f9687a8b29', N'0', N'2016-10-18 17:39:38.367', null, N'2016-10-18 17:39:38.380', null, N'2016-10-18 17:39:38.453', null, N'2016-10-18 17:39:38.373', N'1476783578372', N'14', N'1', N'15', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akt2YTlRY1NTNitoZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'58a53e37b76e4e769cd08006d5571e8f', N'0', N'2016-01-30 15:08:02.707', null, N'2016-01-30 15:08:03.660', null, N'2016-01-30 15:12:09.733', null, N'2016-01-30 15:08:02.717', N'1454137682715', N'19', N'933', N'952', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=Q2NMYnowSlBwMlk9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/', N'/jf/platform/authImg?rand=0.6878655323730916', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'58f7fcea3de5403c8653edd850a0ebb2', N'0', N'2016-09-12 15:50:55.360', null, N'2016-09-12 15:50:56.217', null, N'2016-09-12 15:50:56.327', null, N'2016-09-12 15:50:56.110', N'1473666656110', N'790', N'66', N'856', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=d09FQWtlV09DKzR4STVsV3l2bnZWT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=13gledkhuowok0jhp0vq0lo5', null, N'127.0.0.1', N'GET', null, N'/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'58fbf3f0f1c842699e65aac7f1c79f88', N'0', N'2016-02-01 09:48:08.360', null, N'2016-02-01 09:48:08.370', null, N'2016-02-01 09:52:14.300', null, N'2016-02-01 09:48:08.363', N'1454291288363', N'4', N'5', N'9', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=K3JDamdxWjRGQjQ9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/', N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'596a6e857d04487faeab1002a496808b', N'0', N'2016-01-30 15:20:08.300', null, N'2016-01-30 15:20:08.340', null, N'2016-01-30 15:24:14.463', null, N'2016-01-30 15:20:08.307', N'1454138408307', N'39', N'1', N'40', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERvbzlkbWtnbkk2K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'5a3c77f2f63a4844b6973b490df24967', N'0', N'2016-01-30 15:20:09.507', null, N'2016-01-30 15:20:09.593', null, N'2016-01-30 15:24:15.660', null, N'2016-01-30 15:20:09.513', N'1454138409512', N'28', N'60', N'88', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEFKbGd1Mk1CL3ZMdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/operator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0da15c49299d41a4b720f787d053e3cb', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'5b3ec1b905c8485782a941800d63c330', N'0', N'2016-01-30 15:29:51.617', null, N'2016-01-30 15:29:51.673', null, N'2016-01-30 15:33:57.670', null, N'2016-01-30 15:29:51.617', N'1454138991618', N'6', N'52', N'58', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=MjNMN2l0OWpKSVU9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', null, N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'5ddfd309aae94f3ba16b324f7bcc37a0', N'0', N'2016-02-01 09:58:49.190', null, N'2016-02-01 09:58:49.347', null, N'2016-02-01 10:02:54.927', null, N'2016-02-01 09:58:49.193', N'1454291929193', N'146', N'9', N'155', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cTlPTnlWUW4zanc9; userName=admins; authmark=bUxHblg5eW9VNDNSdEpndkxXZjM3K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/content', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'aa126932641f4e068ed8278a332de85d', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'5de410090e954eadb80ff6baecb00c3c', N'0', N'2016-10-18 17:40:16.747', null, N'2016-10-18 17:40:16.777', null, N'2016-10-18 17:40:16.917', null, N'2016-10-18 17:40:16.747', N'1476783616747', N'5', N'26', N'31', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3hEU3dXL24ydzBkZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:8899/platform/index', N'/platform/param', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'671ce1e6167840baaa6d27f4f04574c9', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'5f4778e684fe4131b2281a60c9d4a27a', N'0', N'2016-10-18 17:39:38.257', null, N'2016-10-18 17:39:38.277', null, N'2016-10-18 17:39:38.390', null, N'2016-10-18 17:39:38.263', N'1476783578264', N'18', N'2', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxCemU0Mk1vYmhxK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'5f862dceb3ee40bbbe24338c380a32bd', N'0', N'2016-10-18 17:40:04.667', null, N'2016-10-18 17:40:04.687', null, N'2016-10-18 17:40:04.703', null, N'2016-10-18 17:40:04.677', N'1476783604676', N'17', N'1', N'18', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'60004e6f9e474b84b765b56377f7b4df', N'0', N'2016-10-18 17:40:04.670', null, N'2016-10-18 17:40:04.687', null, N'2016-10-18 17:40:04.710', null, N'2016-10-18 17:40:04.677', N'1476783604678', N'16', N'0', N'16', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'60f8923bd7ff49dabbab2f1637334263', N'0', N'2016-01-30 15:19:53.663', null, N'2016-01-30 15:19:54.643', null, N'2016-01-30 15:24:00.657', null, N'2016-01-30 15:19:54.317', N'1454138394316', N'743', N'238', N'981', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=cmp2S2d1TWd3NlduZzR3QUlxS2JET2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', null, N'/jf/platform/index', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'886bd497064b4c9f87d8461ebba421d1', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'614f7bed16674628b4fe583e4031cf28', N'0', N'2016-09-12 16:01:45.360', null, N'2016-09-12 16:01:45.387', null, N'2016-09-12 16:01:45.423', null, N'2016-09-12 16:01:45.363', N'1473667305364', N'22', N'7', N'29', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=K2ozZWMwRWlmNmZsVjd2Z2FSWE1lT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/operator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0da15c49299d41a4b720f787d053e3cb', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'61c22d2be4fa49d3a117de0390de4e16', N'0', N'2016-01-30 15:30:51.973', null, N'2016-01-30 15:30:52.830', null, N'2016-01-30 15:34:58.630', null, N'2016-01-30 15:30:51.977', N'1454139051976', N'51', N'61', N'112', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=UzEvWXJQUmlRczg9; userName=admins; authmark=cGg4bEtESmh0WDRGMDA1WWxUNmxpK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/test/operator?pageSize=10', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'45cf6e8f9c254e509399deda080f0e20', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'68a631772d57403ba4687077b4a579d8', N'0', N'2016-10-18 17:40:04.640', null, N'2016-10-18 17:40:04.673', null, N'2016-10-18 17:40:04.703', null, N'2016-10-18 17:40:04.647', N'1476783604646', N'31', N'1', N'32', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'6a5953b6ab834ee89442e49ac47494f4', N'0', N'2016-01-30 15:20:46.103', null, N'2016-01-30 15:20:46.127', null, N'2016-01-30 15:24:52.830', null, N'2016-01-30 15:20:46.110', N'1454138446111', N'20', N'1', N'21', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERKdGhPcDRtLzNsK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/dept/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'b4ee4ae4391f4243be69e838545d2131', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'6bc4f7a9ea654ceb98a62bacb09ce436', N'0', N'2016-10-18 17:39:32.357', null, N'2016-10-18 17:39:32.423', null, N'2016-10-18 17:39:32.480', null, N'2016-10-18 17:39:32.360', N'1476783572359', N'29', N'38', N'67', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aklwd0xGU1BjVVpwdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/systems', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7eab5f800bab4efb8df1b2e8a0575f73', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'6c06e54ea51d4e60b07b8b0e9c751d6e', N'0', N'2016-09-12 16:01:31.493', null, N'2016-09-12 16:01:31.557', null, N'2016-09-12 16:01:31.613', null, N'2016-09-12 16:01:31.500', N'1473667291499', N'25', N'39', N'64', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzdwcmNHSEEvdDJ3T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/role', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ae62737df444d619f8fd376360d160c', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'6ec4e2513e654eb0af842b0e8df33432', N'0', N'2016-01-30 15:20:08.310', null, N'2016-01-30 15:20:08.343', null, N'2016-01-30 15:24:14.463', null, N'2016-01-30 15:20:08.317', N'1454138408316', N'33', N'1', N'34', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERvbzlkbWtnbkk2K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'6eee75904c414a8da5efc6800e56ac1f', N'0', N'2016-10-18 17:39:34.470', null, N'2016-10-18 17:39:34.517', null, N'2016-10-18 17:39:34.547', null, N'2016-10-18 17:39:34.487', N'1476783574488', N'46', N'1', N'47', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktpbmNKNyt0RGlKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'6fa49187ffbb4b97a081cd1a5cbdedea', N'0', N'2016-01-30 15:27:51.887', null, N'2016-01-30 15:27:52.247', null, N'2016-01-30 15:31:58.300', null, N'2016-01-30 15:27:51.890', N'1454138871891', N'18', N'343', N'361', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=SmRYRDBDejNlaXc9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/authImg?rand=0.7900693449649532', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'6fb4cc513b414ed2ae614079949f0f76', N'0', N'2016-10-18 17:40:04.440', null, N'2016-10-18 17:40:04.460', null, N'2016-10-18 17:40:04.490', null, N'2016-10-18 17:40:04.447', N'1476783604448', N'18', N'1', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3czWWdQT05vUWNOT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'712457839fa84f05aeda8e1c5cc6131a', N'0', N'2016-10-18 17:40:04.537', null, N'2016-10-18 17:40:04.560', null, N'2016-10-18 17:40:04.690', null, N'2016-10-18 17:40:04.543', N'1476783604543', N'23', N'1', N'24', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3kwVk1GRE5jci9KK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7305dcf7f3dc44a5bd7881cb4e0abf86', N'0', N'2016-10-18 17:39:34.413', null, N'2016-10-18 17:39:34.487', null, N'2016-10-18 17:39:34.530', null, N'2016-10-18 17:39:34.440', N'1476783574439', N'74', N'0', N'74', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aks0NE5PNjJEZXpDK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'732f0f2f011f463aafd72e8c99920053', N'0', N'2016-10-18 17:39:52.757', null, N'2016-10-18 17:39:52.773', null, N'2016-10-18 17:39:52.870', null, N'2016-10-18 17:39:52.763', N'1476783592763', N'16', N'0', N'16', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwzRWo4TE9mcU9XK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7391bac698fe4a6e884d9c60f4246f65', N'0', N'2016-10-18 17:40:04.477', null, N'2016-10-18 17:40:04.497', null, N'2016-10-18 17:40:04.507', null, N'2016-10-18 17:40:04.480', N'1476783604480', N'20', N'1', N'21', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3h4UnNncnBua05odWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'743396e16dab427cac09380b77135c59', N'0', N'2016-10-18 17:40:19.207', null, N'2016-10-18 17:40:19.213', null, N'2016-10-18 17:40:19.337', null, N'2016-10-18 17:40:19.210', N'1476783619210', N'6', N'1', N'7', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3hocUk3V1Y1bFpNK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/index/toUrl?toUrl=/platform/dict/treeTableIframe.html', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'8897dbe85b3e4e6989d662495272cf26', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'77192a1a5b0e4c5fb7f11e67e82c5b08', N'0', N'2016-10-18 17:40:04.443', null, N'2016-10-18 17:40:04.460', null, N'2016-10-18 17:40:04.517', null, N'2016-10-18 17:40:04.453', N'1476783604452', N'19', N'0', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3czWWdQT05vUWNOT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'77e217ddcd8440c1a06b165200573023', N'0', N'2016-01-30 15:16:08.293', null, N'2016-01-30 15:16:17.103', null, N'2016-01-30 15:20:23.193', null, N'2016-01-30 15:16:08.297', N'1454138168296', N'8805', N'6', N'8811', N'3', N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=cmp2S2d1TWd3NldaTkx6WktBUnJXdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', N'com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: 列名 ''adates'' 无效。
+	at com.jfinal.plugin.activerecord.DbPro.find(DbPro.java:315)
+	at com.platform.mvc.resources.ResourcesService.pv(ResourcesService.java:57)
+	at com.platform.mvc.resources.ResourcesService$$EnhancerByCGLIB$$8618855b.CGLIB$pv$1(<generated>)
+	at com.platform.mvc.resources.ResourcesService$$EnhancerByCGLIB$$8618855b$$FastClassByCGLIB$$c88a28fa.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:82)
+	at com.jfinal.aop.Callback.intercept(Callback.java:96)
+	at com.platform.mvc.resources.ResourcesService$$EnhancerByCGLIB$$8618855b.pv(<generated>)
+	at com.platform.mvc.index.IndexController.content(IndexController.java:48)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.jfinal.i18n.I18nInterceptor.intercept(I18nInterceptor.java:106)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeyRegex.intercept(TxByActionKeyRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeys.intercept(TxByActionKeys.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethodRegex.intercept(TxByMethodRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethods.intercept(TxByMethods.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.ParamPkgInterceptor.intercept(ParamPkgInterceptor.java:70)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.AuthInterceptor.intercept(AuthInterceptor.java:158)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.platform.handler.GlobalHandler.handle(GlobalHandler.java:83)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:499)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.sql.SQLException: 列名 ''adates'' 无效。
+	at net.sourceforge.jtds.jdbc.SQLDiagnostic.addDiagnostic(SQLDiagnostic.java:372)
+	at net.sourceforge.jtds.jdbc.TdsCore.tdsErrorToken(TdsCore.java:2988)
+	at net.sourceforge.jtds.jdbc.TdsCore.nextToken(TdsCore.java:2421)
+	at net.sourceforge.jtds.jdbc.TdsCore.getMoreResults(TdsCore.java:671)
+	at net.sourceforge.jtds.jdbc.JtdsStatement.executeSQLQuery(JtdsStatement.java:505)
+	at net.sourceforge.jtds.jdbc.JtdsPreparedStatement.executeQuery(JtdsPreparedStatement.java:1029)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeQuery(FilterChainImpl.java:2714)
+	at com.alibaba.druid.wall.WallFilter.preparedStatement_executeQuery(WallFilter.java:609)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeQuery(FilterChainImpl.java:2711)
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_executeQuery(FilterEventAdapter.java:465)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeQuery(FilterChainImpl.java:2711)
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.executeQuery(PreparedStatementProxyImpl.java:145)
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.executeQuery(DruidPooledPreparedStatement.java:227)
+	at com.jfinal.plugin.activerecord.DbPro.find(DbPro.java:300)
+	at com.jfinal.plugin.activerecord.DbPro.find(DbPro.java:313)
+	... 48 more
+', N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/content', N'0', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'aa126932641f4e068ed8278a332de85d', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7987086a919e4151adc9d1502915dd81', N'0', N'2016-10-18 17:39:52.400', null, N'2016-10-18 17:39:52.430', null, N'2016-10-18 17:39:52.500', null, N'2016-10-18 17:39:52.400', N'1476783592041', N'5', N'0', N'5', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aklyall4Ky9NZHdLdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/getOperator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'10499bc7f9cb4adf99beba00343b4ea6', N'application/json, text/javascript, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7a0cdde9bd464bfdb5fa747ac654b415', N'0', N'2016-10-18 17:39:34.373', null, N'2016-10-18 17:39:34.390', null, N'2016-10-18 17:39:34.427', null, N'2016-10-18 17:39:34.380', N'1476783574380', N'14', N'2', N'16', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxXYXFmT1JYUmRHZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7a243bba3e234e4dab1a453411bf4cbc', N'0', N'2016-10-18 17:39:52.683', null, N'2016-10-18 17:39:52.693', null, N'2016-10-18 17:39:52.697', null, N'2016-10-18 17:39:52.683', N'1476783592684', N'10', N'0', N'10', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwrbXhWVEEwRzJKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7a24461d2f304584ba1bbdf8c3e14d30', N'0', N'2016-10-18 17:40:04.780', null, N'2016-10-18 17:40:04.803', null, N'2016-10-18 17:40:04.910', null, N'2016-10-18 17:40:04.790', N'1476783604789', N'21', N'1', N'22', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lVamZkZkQ0UUF6dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7a4ae16039224f3dbefd764702287ad5', N'0', N'2016-09-12 16:01:32.760', null, N'2016-09-12 16:01:32.783', null, N'2016-09-12 16:01:32.817', null, N'2016-09-12 16:01:32.777', N'1473667292778', N'22', N'1', N'23', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzZseGFrM3JOMTA3dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7aff0fcf99da4d49a02e5ff5455f6f7a', N'0', N'2016-10-18 17:40:04.633', null, N'2016-10-18 17:40:04.653', null, N'2016-10-18 17:40:04.697', null, N'2016-10-18 17:40:04.637', N'1476783604636', N'16', N'3', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7beccc115bdc44b7a2b6332c418de10b', N'0', N'2016-10-18 17:40:17.497', null, N'2016-10-18 17:40:17.503', null, N'2016-10-18 17:40:17.517', null, N'2016-10-18 17:40:17.500', N'1476783617499', N'4', N'2', N'6', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lHSmQwMXpaR1M5ZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/index/toUrl?toUrl=/platform/dict/treeTableIframe.html', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'8897dbe85b3e4e6989d662495272cf26', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7c139c1213a04c0ca26ca170ad20cf84', N'0', N'2016-10-18 17:40:04.540', null, N'2016-10-18 17:40:04.570', null, N'2016-10-18 17:40:04.693', null, N'2016-10-18 17:40:04.543', N'1476783604542', N'30', N'1', N'31', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lheFJGVDhxdjNVT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7cd706b3645140e492a9df5029314516', N'0', N'2016-10-18 17:39:38.193', null, N'2016-10-18 17:39:38.220', null, N'2016-10-18 17:39:38.227', null, N'2016-10-18 17:39:38.200', N'1476783578201', N'25', N'3', N'28', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktXaXcrc3NvdER6T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7d302e2816f0458097f25248bb444255', N'0', N'2016-01-30 15:20:59.430', null, N'2016-01-30 15:20:59.830', null, N'2016-01-30 15:25:05.700', null, N'2016-01-30 15:20:59.530', N'1454138459052', N'13', N'26', N'39', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERST2ZWOUttVWNLK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/toUrl?toUrl=/platform/dict/treeTableIframe.html', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'74aa20442105408d90f9e6469a3a92b5', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7ddaa984bb134cab80c8528691543f30', N'0', N'2016-09-12 16:01:32.793', null, N'2016-09-12 16:01:32.803', null, N'2016-09-12 16:01:32.817', null, N'2016-09-12 16:01:32.797', N'1473667292796', N'10', N'0', N'10', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzV2QXZZWHg4d0JHK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7e3c32bc833d4887a5497edf330eb950', N'0', N'2016-01-30 15:20:47.637', null, N'2016-01-30 15:20:47.660', null, N'2016-01-30 15:24:53.663', null, N'2016-01-30 15:20:47.640', N'1454138447640', N'10', N'15', N'25', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEFLMWZFbTh6RVZ1K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/toUrl?toUrl=/platform/log4j/iframe.html', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'36d3b89e378b451ca89d1a41a3c53e10', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7e4a5bcee156403d905e55333ffdf59c', N'0', N'2016-01-30 15:19:55.450', null, N'2016-01-30 15:19:55.550', null, N'2016-01-30 15:24:01.660', null, N'2016-01-30 15:19:55.453', N'1454138395453', N'45', N'56', N'101', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=eUN0VC9JZHQ5ck9xTi9RbGVSQWxBK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/test/sysLog?pageSize=10', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'dfa8256651a84269869c35ca1f10cae5', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7ec8186ff0bc4a52b637ffd0b9389e8f', N'0', N'2016-10-18 17:39:52.737', null, N'2016-10-18 17:39:52.760', null, N'2016-10-18 17:39:52.870', null, N'2016-10-18 17:39:52.750', N'1476783592749', N'22', N'1', N'23', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktHSXJtV05DSjhBK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7f03bb82c2994c88bd7318a776f651c0', N'0', N'2016-10-18 17:40:04.640', null, N'2016-10-18 17:40:04.673', null, N'2016-10-18 17:40:04.703', null, N'2016-10-18 17:40:04.650', N'1476783604651', N'31', N'1', N'32', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7f4a68f177e84d5f8a64cb8d68e09c64', N'0', N'2016-10-18 17:40:04.783', null, N'2016-10-18 17:40:04.807', null, N'2016-10-18 17:40:04.910', null, N'2016-10-18 17:40:04.790', N'1476783604790', N'21', N'1', N'22', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lVamZkZkQ0UUF6dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7fa0e16470d44e3393e1ffb61ff3e915', N'0', N'2016-01-30 15:20:08.327', null, N'2016-01-30 15:20:08.350', null, N'2016-01-30 15:24:14.467', null, N'2016-01-30 15:20:08.330', N'1454138408330', N'23', N'1', N'24', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERvbzlkbWtnbkk2K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'7fed6a7977cc4e90af31d434c4755ecf', N'0', N'2016-10-18 17:39:37.590', null, N'2016-10-18 17:39:37.603', null, N'2016-10-18 17:39:37.640', null, N'2016-10-18 17:39:37.593', N'1476783577593', N'10', N'1', N'11', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aklsYjROSjVPME5EdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'807e82a199694d21929f15e8ae3640d8', N'0', N'2016-10-18 17:39:34.537', null, N'2016-10-18 17:39:34.560', null, N'2016-10-18 17:39:34.613', null, N'2016-10-18 17:39:34.547', N'1476783574548', N'23', N'1', N'24', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aklkT0Q0Y2YwTDBRT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'80e8139489c24ecb8d4e5750d2044cbb', N'0', N'2016-02-01 09:48:08.170', null, N'2016-02-01 09:48:08.357', null, N'2016-02-01 09:52:14.700', null, N'2016-02-01 09:48:08.177', N'1454291288175', N'188', N'0', N'188', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=K3JDamdxWjRGQjQ9', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/', N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'81703a8070814068a8d9a2d6e97472ba', N'0', N'2016-10-18 17:39:38.303', null, N'2016-10-18 17:39:38.337', null, N'2016-10-18 17:39:38.400', null, N'2016-10-18 17:39:38.317', N'1476783578316', N'31', N'1', N'32', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8285b434dcbd43e3af0c9c2adef53727', N'0', N'2016-10-18 17:39:33.870', null, N'2016-10-18 17:39:33.883', null, N'2016-10-18 17:39:33.890', null, N'2016-10-18 17:39:33.873', N'1476783573874', N'12', N'1', N'13', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktQQ0xqOXQwa2dDZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'82ed7039ac014d758837364006d00add', N'0', N'2016-10-18 17:40:04.780', null, N'2016-10-18 17:40:04.807', null, N'2016-10-18 17:40:04.910', null, N'2016-10-18 17:40:04.790', N'1476783604791', N'23', N'1', N'24', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lVamZkZkQ0UUF6dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8348b88d4df74841967ae623ef3f6229', N'0', N'2016-10-18 17:40:04.773', null, N'2016-10-18 17:40:04.803', null, N'2016-10-18 17:40:04.910', null, N'2016-10-18 17:40:04.787', N'1476783604785', N'28', N'0', N'28', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lVamZkZkQ0UUF6dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'834c29c3d1804e09ab55d553c38d5189', N'0', N'2016-02-01 09:54:47.230', null, N'2016-02-01 09:54:57.857', null, N'2016-02-01 09:59:03.417', null, N'2016-02-01 09:54:47.270', N'1454291687028', N'10831', N'1', N'10832', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cU1TRldxeUhsKzQ9', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'84858e210c34419bb7864d02ded16b02', N'0', N'2016-10-18 17:39:52.737', null, N'2016-10-18 17:39:52.760', null, N'2016-10-18 17:39:52.870', null, N'2016-10-18 17:39:52.743', N'1476783592743', N'22', N'2', N'24', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwzRWo4TE9mcU9XK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'84e5e501705544789b187814ba8f211c', N'0', N'2016-10-18 17:39:38.373', null, N'2016-10-18 17:39:38.397', null, N'2016-10-18 17:39:38.457', null, N'2016-10-18 17:39:38.387', N'1476783578386', N'20', N'1', N'21', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxVb3EvdGVGcHMvdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'85b9478225db40a9bf78d2a694dfe45b', N'0', N'2016-10-18 17:40:18.657', null, N'2016-10-18 17:40:18.663', null, N'2016-10-18 17:40:18.747', null, N'2016-10-18 17:40:18.657', N'1476783618658', N'6', N'1', N'7', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3pqU3Z4TldOTUdIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/index/toUrl?toUrl=/platform/param/treeTableIframe.html', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'9adcc4c40e3148988e5003aaedbb4948', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'862155ff462e453c834d2cf208abbdc1', N'0', N'2016-10-18 17:39:33.817', null, N'2016-10-18 17:39:33.840', null, N'2016-10-18 17:39:33.887', null, N'2016-10-18 17:39:33.827', N'1476783573827', N'18', N'7', N'25', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwxSUxCTjFmYks5K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu?systemsIds=8a40c0353fa828a6013fa898d4ac0020', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'cf26c1d2baa24a8791b3d264154b80d4', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8640745c827c48559beb1f203358b97b', N'0', N'2016-10-18 17:39:52.587', null, N'2016-10-18 17:39:52.607', null, N'2016-10-18 17:39:52.640', null, N'2016-10-18 17:39:52.590', N'1476783592591', N'17', N'2', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktaRlZ6UnZOSzlYdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'86e3013464ef445e85b6f78ac8f6ec45', N'0', N'2016-10-18 17:39:34.443', null, N'2016-10-18 17:39:34.507', null, N'2016-10-18 17:39:34.540', null, N'2016-10-18 17:39:34.447', N'1476783574448', N'62', N'1', N'63', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akovMXBiVjMzYlJEK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'873f64c32e8242838a957b82e5b0532c', N'0', N'2016-10-18 17:39:38.357', null, N'2016-10-18 17:39:38.373', null, N'2016-10-18 17:39:38.403', null, N'2016-10-18 17:39:38.360', N'1476783578361', N'16', N'1', N'17', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'87935854e6e248ccbd6bfa7ad16ad3c7', N'0', N'2016-10-18 17:39:51.983', null, N'2016-10-18 17:39:51.990', null, N'2016-10-18 17:39:52.330', null, N'2016-10-18 17:39:51.987', N'1476783591986', N'6', N'2', N'8', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akw5NXMzT3llZmR1dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/toUrl', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'4a6544ae7a2548ad81c0e3994999023c', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8908b20914f64258b7314d846d870bb0', N'0', N'2016-10-18 17:39:52.737', null, N'2016-10-18 17:39:52.753', null, N'2016-10-18 17:39:52.853', null, N'2016-10-18 17:39:52.740', N'1476783592740', N'16', N'2', N'18', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxlVmU2SkdNMGsxZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'892292c33de940c3a29e5813186cd841', N'0', N'2016-09-12 16:01:34.330', null, N'2016-09-12 16:01:34.397', null, N'2016-09-12 16:01:34.420', null, N'2016-09-12 16:01:34.333', N'1473667294333', N'19', N'47', N'66', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzVRaC9IckxzM2trT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/operator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0da15c49299d41a4b720f787d053e3cb', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8a962b1d2108406eb745b02e90e2988c', N'0', N'2016-10-18 17:39:52.757', null, N'2016-10-18 17:39:52.773', null, N'2016-10-18 17:39:52.870', null, N'2016-10-18 17:39:52.763', N'1476783592762', N'15', N'1', N'16', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwzRWo4TE9mcU9XK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8aba4049cab94fb3bf36f9518e4e3401', N'0', N'2016-02-01 09:48:21.100', null, N'2016-02-01 09:48:21.170', null, N'2016-02-01 09:52:26.590', null, N'2016-02-01 09:48:21.130', N'1454291301013', N'5', N'1', N'6', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=MUVVY0NKcyt3Tk09', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8b01b35114754bcfadfd66362c5e92d3', N'0', N'2016-02-01 09:59:12.570', null, N'2016-02-01 09:59:13.230', null, N'2016-02-01 10:03:18.780', null, N'2016-02-01 09:59:13.220', N'1454291953219', N'655', N'3', N'658', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cTlPTnlWUW4zanc9; userName=admins; authmark=bUxHblg5eW9VNDFzRlMrZlZ4MElJZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/login/logout', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'f771691134c34174a819b5990310da56', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8bb21e64b097484c95558400e6e00ff6', N'0', N'2016-10-18 17:39:52.807', null, N'2016-10-18 17:39:52.850', null, N'2016-10-18 17:39:52.880', null, N'2016-10-18 17:39:52.813', N'1476783592812', N'43', N'1', N'44', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8bcde3b9df274508ac6b442d9a26952d', N'0', N'2016-01-30 15:24:19.950', null, N'2016-01-30 15:24:20.310', null, N'2016-01-30 15:28:26.357', null, N'2016-01-30 15:24:19.957', N'1454138659956', N'16', N'343', N'359', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/authImg?rand=0.38885724338260974', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8d397c9a17074f9ea537329668a33eb0', N'0', N'2016-10-18 17:39:52.837', null, N'2016-10-18 17:39:52.887', null, N'2016-10-18 17:39:52.897', null, N'2016-10-18 17:39:52.850', N'1476783592851', N'46', N'2', N'48', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akszblQvbElQTytUT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8df5f6ed42664db191a8852a67c15a2f', N'0', N'2016-09-12 15:51:13.210', null, N'2016-09-12 15:51:13.393', null, N'2016-09-12 15:51:13.520', null, N'2016-09-12 15:51:13.217', N'1473666673218', N'180', N'1', N'181', null, N'authCode=UDRRdlc1YUI1WC9QYzFnWEZmbUp0em9NWktMUVo5Zkg; userName=admins; authmark=d09FQWtlV09DKzR4STVsV3l2bnZWT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=kupbc7hgmu9kufpmpfk1mkh1', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/', N'/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8df6d9b8a68948e6a3e9f9d38774ca30', N'0', N'2016-10-18 17:39:38.163', null, N'2016-10-18 17:39:38.190', null, N'2016-10-18 17:39:38.217', null, N'2016-10-18 17:39:38.180', N'1476783578179', N'28', N'1', N'29', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxSTnZSZ3IyUjFCT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8e3583c5a6264a14ac81a66b77d47215', N'0', N'2016-10-18 17:40:04.700', null, N'2016-10-18 17:40:04.780', null, N'2016-10-18 17:40:04.907', null, N'2016-10-18 17:40:04.717', N'1476783604716', N'80', N'1', N'81', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'8ee74bd759cd42c49a277450bbe4d0b4', N'0', N'2016-10-18 17:40:03.913', null, N'2016-10-18 17:40:03.920', null, N'2016-10-18 17:40:04.830', null, N'2016-10-18 17:40:03.913', N'1476783603914', N'8', N'1', N'9', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lLVis4SFl3SFJYZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/getOperator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'10499bc7f9cb4adf99beba00343b4ea6', N'application/json, text/javascript, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'906de11356944a5b95e61b1a65935503', N'0', N'2016-10-18 17:39:38.333', null, N'2016-10-18 17:39:38.360', null, N'2016-10-18 17:39:38.403', null, N'2016-10-18 17:39:38.347', N'1476783578345', N'28', N'0', N'28', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'90b5bd3a2b444c419362aa265c828aa9', N'0', N'2016-01-30 15:30:51.887', null, N'2016-01-30 15:30:51.967', null, N'2016-01-30 15:34:58.630', null, N'2016-01-30 15:30:51.890', N'1454139051890', N'77', N'2', N'79', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=UzEvWXJQUmlRczg9; userName=admins; authmark=cGg4bEtESmh0WDd0ZzlhTGVxMlF0ZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/content', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'aa126932641f4e068ed8278a332de85d', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'925b085fc63c433ea7197aa07289c531', N'0', N'2016-10-18 17:39:52.790', null, N'2016-10-18 17:39:52.817', null, N'2016-10-18 17:39:52.880', null, N'2016-10-18 17:39:52.797', N'1476783592797', N'22', N'6', N'28', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'927853e6a8034917b62123212d1853dd', N'0', N'2016-10-18 17:39:52.673', null, N'2016-10-18 17:39:52.680', null, N'2016-10-18 17:39:52.697', null, N'2016-10-18 17:39:52.677', N'1476783592675', N'6', N'0', N'6', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwrbXhWVEEwRzJKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'92798f5fcd8240c88c05950d497c1892', N'0', N'2016-10-18 17:40:16.697', null, N'2016-10-18 17:40:16.703', null, N'2016-10-18 17:40:16.717', null, N'2016-10-18 17:40:16.697', N'1476783616698', N'3', N'3', N'6', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lIV0ttSG80dndLZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/index/toUrl?toUrl=/platform/param/treeTableIframe.html', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'9adcc4c40e3148988e5003aaedbb4948', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'92ccfe84e75646a1ad68c923d1c14bcc', N'0', N'2016-10-18 17:39:49.173', null, N'2016-10-18 17:39:49.190', null, N'2016-10-18 17:39:49.230', null, N'2016-10-18 17:39:49.177', N'1476783589176', N'17', N'1', N'18', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxHUHIvdlZ2MEV3dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/setOperator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a1ff68acf9b24c34b347ff21e333cb70', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'94a01b0465ae49ccacdb12c19ed6982d', N'0', N'2016-10-18 17:39:38.300', null, N'2016-10-18 17:39:38.327', null, N'2016-10-18 17:39:38.397', null, N'2016-10-18 17:39:38.307', N'1476783578305', N'26', N'0', N'26', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akttRk94WTAvbEUyT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'962fd4f726e34d739cfba63a8e096b17', N'0', N'2016-09-12 16:01:44.157', null, N'2016-09-12 16:01:44.177', null, N'2016-09-12 16:01:44.223', null, N'2016-09-12 16:01:44.163', N'1473667304162', N'15', N'4', N'19', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=K2ozZWMwRWlmNmRkMy92ZHh0bC8xK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/operator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0da15c49299d41a4b720f787d053e3cb', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'9642e4d530bd429cac3242b9e23ff27c', N'0', N'2016-09-12 16:01:32.750', null, N'2016-09-12 16:01:32.773', null, N'2016-09-12 16:01:32.813', null, N'2016-09-12 16:01:32.763', N'1473667292762', N'22', N'1', N'23', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzZseGFrM3JOMTA3dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'9a7050cb7bc8486e8647e87b4abc1bbb', N'0', N'2016-01-30 15:24:19.570', null, N'2016-01-30 15:24:19.740', null, N'2016-01-30 15:28:25.767', null, N'2016-01-30 15:24:19.730', N'1454138659729', N'678', N'3', N'681', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEN3enZIVGtrNGpBT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/login/logout', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'f771691134c34174a819b5990310da56', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'9c65ebc1473045cfaa1f8e4f393a95b6', N'0', N'2016-09-12 16:14:44.673', null, N'2016-09-12 16:14:44.730', null, N'2016-09-12 16:14:44.740', null, N'2016-09-12 16:14:44.680', N'1473668084679', N'23', N'32', N'55', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=cTdObzVxcDg1S3lxK0tnUUpvdkZPZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/role', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ae62737df444d619f8fd376360d160c', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'9dd3e4ff1a844cd09b15d7aa60224e5b', N'0', N'2016-01-30 15:20:07.660', null, N'2016-01-30 15:20:07.707', null, N'2016-01-30 15:24:13.667', null, N'2016-01-30 15:20:07.663', N'1454138407663', N'10', N'36', N'46', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEFIdHlrUlMyMEpHZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'233356b63d8e477fb6e948b703232809', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'9eb0369c5f0f433abb30cc9edf06ebd0', N'0', N'2016-10-18 17:40:04.477', null, N'2016-10-18 17:40:04.510', null, N'2016-10-18 17:40:04.523', null, N'2016-10-18 17:40:04.490', N'1476783604490', N'34', N'1', N'35', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3h4UnNncnBua05odWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'9f09b3048e8f45abb1ac058c6285b15b', N'0', N'2016-01-30 15:20:08.290', null, N'2016-01-30 15:20:08.300', null, N'2016-01-30 15:24:14.290', null, N'2016-01-30 15:20:08.297', N'1454138408295', N'9', N'0', N'9', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERvbzlkbWtnbkk2K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'9f3584c9a2f94caea1be7640eafd2cb5', N'0', N'2016-10-18 17:39:52.763', null, N'2016-10-18 17:39:52.783', null, N'2016-10-18 17:39:52.873', null, N'2016-10-18 17:39:52.773', N'1476783592772', N'19', N'2', N'21', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akszblQvbElQTytUT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'a0c672bd608f4382938a0189de8d532b', N'0', N'2016-10-18 17:39:52.737', null, N'2016-10-18 17:39:52.757', null, N'2016-10-18 17:39:52.857', null, N'2016-10-18 17:39:52.747', N'1476783592745', N'17', N'2', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwzRWo4TE9mcU9XK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'a1191212b2ad469db41d81dc140c205e', N'0', N'2016-01-30 15:20:58.343', null, N'2016-01-30 15:20:58.377', null, N'2016-01-30 15:25:04.470', null, N'2016-01-30 15:20:58.350', N'1454138458349', N'11', N'22', N'33', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEFLMXlFL2hOdzJLZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/toUrl?toUrl=/platform/param/treeTableIframe.html', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'06244cf3520c49e8a45cbde82a53fa5e', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'a1e26e9444a74fd2a56e97d3c3c3809c', N'0', N'2016-02-01 09:48:21.167', null, N'2016-02-01 09:48:21.193', null, N'2016-02-01 09:52:26.793', null, N'2016-02-01 09:48:21.170', N'1454291301171', N'6', N'18', N'24', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=MUVVY0NKcyt3Tk09', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/authImg?rand=0.6561212625359022', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'a206ec5a315948678b897cc323a40f22', N'0', N'2016-01-30 15:08:11.467', null, N'2016-01-30 15:08:23.290', null, N'2016-01-30 15:12:29.327', null, N'2016-01-30 15:08:11.470', N'1454137691470', N'11809', N'15', N'11824', N'3', N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=YWhkWEdvN0VBTmkrN05iUDQzOVFTK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', N'java.lang.NullPointerException
+	at com.platform.mvc.resources.ResourcesService.pv(ResourcesService.java:58)
+	at com.platform.mvc.resources.ResourcesService$$EnhancerByCGLIB$$f40ea275.CGLIB$pv$1(<generated>)
+	at com.platform.mvc.resources.ResourcesService$$EnhancerByCGLIB$$f40ea275$$FastClassByCGLIB$$a0ba39d.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:82)
+	at com.jfinal.aop.Callback.intercept(Callback.java:96)
+	at com.platform.mvc.resources.ResourcesService$$EnhancerByCGLIB$$f40ea275.pv(<generated>)
+	at com.platform.mvc.index.IndexController.content(IndexController.java:48)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.jfinal.i18n.I18nInterceptor.intercept(I18nInterceptor.java:106)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeyRegex.intercept(TxByActionKeyRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeys.intercept(TxByActionKeys.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethodRegex.intercept(TxByMethodRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethods.intercept(TxByMethods.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.ParamPkgInterceptor.intercept(ParamPkgInterceptor.java:70)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.AuthInterceptor.intercept(AuthInterceptor.java:158)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.platform.handler.GlobalHandler.handle(GlobalHandler.java:83)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:499)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:744)
+', N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/content', N'0', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'aa126932641f4e068ed8278a332de85d', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'a4c6ac8b97ba408daf74966ebe321d0c', N'0', N'2016-01-30 15:20:50.437', null, N'2016-01-30 15:20:50.460', null, N'2016-01-30 15:24:56.473', null, N'2016-01-30 15:20:50.440', N'1454138450440', N'7', N'18', N'25', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEJuSUErUXFaTU9ZK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/toUrl?toUrl=/platform/druid/iframe.html', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'd496b161d2564111992687b948862244', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'a5c22b6e15744f88a77c9f9238075ccb', N'0', N'2016-10-18 17:39:52.870', null, N'2016-10-18 17:39:52.890', null, N'2016-10-18 17:39:52.897', null, N'2016-10-18 17:39:52.883', N'1476783592884', N'18', N'1', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akszblQvbElQTytUT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'a5d85ecb567340d2b9adecb4dab3f531', N'0', N'2016-09-12 16:01:32.750', null, N'2016-09-12 16:01:32.773', null, N'2016-09-12 16:01:32.813', null, N'2016-09-12 16:01:32.760', N'1473667292759', N'23', N'0', N'23', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzZseGFrM3JOMTA3dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'a73f12f153574ab49a77a4627eb37148', N'0', N'2016-10-18 17:39:52.737', null, N'2016-10-18 17:39:52.763', null, N'2016-10-18 17:39:52.870', null, N'2016-10-18 17:39:52.750', N'1476783592751', N'23', N'1', N'24', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktHSXJtV05DSjhBK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'a9461c87b92e438aaf7bc9fc8a1bc87a', N'0', N'2016-10-18 17:39:38.163', null, N'2016-10-18 17:39:38.197', null, N'2016-10-18 17:39:38.223', null, N'2016-10-18 17:39:38.177', N'1476783578175', N'34', N'2', N'36', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxSTnZSZ3IyUjFCT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'aa9f577d0cf840cda73c2a4c14f3f19b', N'0', N'2016-01-30 14:57:24.463', null, N'2016-01-30 14:57:24.727', null, N'2016-01-30 15:01:30.893', null, N'2016-01-30 14:57:24.467', N'1454137044468', N'200', N'61', N'261', N'3', N'JSESSIONID=1by1vg3624z7thijtrdx9tvao; authCode=Z2ppWFVHbHYxMTQ9', N'com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: ''u'' 附近有语法错误。
+	at com.jfinal.plugin.activerecord.DbPro.update(DbPro.java:283)
+	at com.platform.mvc.login.LoginService.login(LoginService.java:194)
+	at com.platform.mvc.login.LoginService$$EnhancerByCGLIB$$12dab1db.CGLIB$login$0(<generated>)
+	at com.platform.mvc.login.LoginService$$EnhancerByCGLIB$$12dab1db$$FastClassByCGLIB$$b7787a7e.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:82)
+	at com.jfinal.aop.Callback.intercept(Callback.java:96)
+	at com.platform.mvc.login.LoginService$$EnhancerByCGLIB$$12dab1db.login(<generated>)
+	at com.platform.mvc.login.LoginController.vali(LoginController.java:116)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.jfinal.validate.Validator.intercept(Validator.java:80)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.i18n.I18nInterceptor.intercept(I18nInterceptor.java:106)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeyRegex.intercept(TxByActionKeyRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByActionKeys.intercept(TxByActionKeys.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethodRegex.intercept(TxByMethodRegex.java:61)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.plugin.activerecord.tx.TxByMethods.intercept(TxByMethods.java:57)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.ParamPkgInterceptor.intercept(ParamPkgInterceptor.java:70)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.platform.interceptor.AuthInterceptor.intercept(AuthInterceptor.java:158)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.platform.handler.GlobalHandler.handle(GlobalHandler.java:83)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:499)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.sql.SQLException: ''u'' 附近有语法错误。
+	at net.sourceforge.jtds.jdbc.SQLDiagnostic.addDiagnostic(SQLDiagnostic.java:372)
+	at net.sourceforge.jtds.jdbc.TdsCore.tdsErrorToken(TdsCore.java:2988)
+	at net.sourceforge.jtds.jdbc.TdsCore.nextToken(TdsCore.java:2421)
+	at net.sourceforge.jtds.jdbc.TdsCore.getMoreResults(TdsCore.java:671)
+	at net.sourceforge.jtds.jdbc.JtdsStatement.processResults(JtdsStatement.java:613)
+	at net.sourceforge.jtds.jdbc.JtdsStatement.executeSQL(JtdsStatement.java:572)
+	at net.sourceforge.jtds.jdbc.JtdsPreparedStatement.executeUpdate(JtdsPreparedStatement.java:727)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeUpdate(FilterChainImpl.java:2723)
+	at com.alibaba.druid.wall.WallFilter.preparedStatement_executeUpdate(WallFilter.java:621)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeUpdate(FilterChainImpl.java:2721)
+	at com.alibaba.druid.filter.FilterAdapter.preparedStatement_executeUpdate(FilterAdapter.java:1069)
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_executeUpdate(FilterEventAdapter.java:491)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_executeUpdate(FilterChainImpl.java:2721)
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.executeUpdate(PreparedStatementProxyImpl.java:158)
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.executeUpdate(DruidPooledPreparedStatement.java:253)
+	at com.jfinal.plugin.activerecord.DbPro.update(DbPro.java:264)
+	at com.jfinal.plugin.activerecord.DbPro.update(DbPro.java:281)
+	... 50 more
+', N'127.0.0.1', N'POST', N'http://127.0.0.1:99/', N'/jf/platform/login/vali', N'0', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'abcb61a866364ed28c3e974a947a41e5', N'0', N'2016-10-18 17:39:52.763', null, N'2016-10-18 17:39:52.783', null, N'2016-10-18 17:39:52.873', null, N'2016-10-18 17:39:52.770', N'1476783592771', N'20', N'2', N'22', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akszblQvbElQTytUT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'aefc8aefcdc148cd97fdff13d0d3c8ee', N'0', N'2016-10-18 17:39:37.607', null, N'2016-10-18 17:39:37.617', null, N'2016-10-18 17:39:37.627', null, N'2016-10-18 17:39:37.607', N'1476783577608', N'8', N'1', N'9', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktSS1lQVWtyQm5IT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/getOperator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'10499bc7f9cb4adf99beba00343b4ea6', N'application/json, text/javascript, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'af0f03a5ac7d44f69c87ab1550847579', N'0', N'2016-10-18 17:39:34.420', null, N'2016-10-18 17:39:34.457', null, N'2016-10-18 17:39:34.520', null, N'2016-10-18 17:39:34.433', N'1476783574434', N'37', N'1', N'38', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aks0NE5PNjJEZXpDK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'afe1df5a767b46e09df90d085bef0a51', N'0', N'2016-10-18 17:39:38.187', null, N'2016-10-18 17:39:38.210', null, N'2016-10-18 17:39:38.223', null, N'2016-10-18 17:39:38.193', N'1476783578193', N'21', N'0', N'21', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktXaXcrc3NvdER6T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'b02badd417574dc1b3f24d389ae5e3cc', N'0', N'2016-10-18 17:39:52.597', null, N'2016-10-18 17:39:52.627', null, N'2016-10-18 17:39:52.647', null, N'2016-10-18 17:39:52.603', N'1476783592603', N'29', N'0', N'29', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktaRlZ6UnZOSzlYdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'b2134b17c67e4b929b7f6eef9b875963', N'0', N'2016-10-18 17:39:34.520', null, N'2016-10-18 17:39:34.553', null, N'2016-10-18 17:39:34.557', null, N'2016-10-18 17:39:34.530', N'1476783574530', N'30', N'2', N'32', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aksvM2JhVmQrd3ZTK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'b51d240e96d94775b03e0d4eb551bd45', N'0', N'2016-10-18 17:39:34.473', null, N'2016-10-18 17:39:34.493', null, N'2016-10-18 17:39:34.537', null, N'2016-10-18 17:39:34.483', N'1476783574483', N'20', N'0', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktpbmNKNyt0RGlKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'b5d41ac8f05c4e619ceb1d4b1ee289a8', N'0', N'2016-01-30 15:03:59.240', null, N'2016-01-30 15:03:59.250', null, N'2016-01-30 15:08:05.333', null, N'2016-01-30 15:03:59.240', N'1454137439241', N'4', N'7', N'11', null, N'JSESSIONID=15e1qxgry54kx11y7uss5pw1cp; authCode=ZVFnZElQdGJmVFU9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/authImg?rand=0.4901056705714475', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'b5f908172ef84d878d38a268d79d0b0a', N'0', N'2016-01-30 15:20:08.363', null, N'2016-01-30 15:20:08.373', null, N'2016-01-30 15:24:14.467', null, N'2016-01-30 15:20:08.367', N'1454138408366', N'9', N'1', N'10', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEJhTUdiL1g2S0plZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'b79372aba59f428abc3918441c8b3509', N'0', N'2016-01-30 15:20:07.727', null, N'2016-01-30 15:20:07.893', null, N'2016-01-30 15:24:13.860', null, N'2016-01-30 15:20:07.730', N'1454138407731', N'165', N'1', N'166', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZENteWpnZVlkUTNKT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'b8d2aaa894904ec8803c51cd03db5943', N'0', N'2016-09-12 16:01:38.370', null, N'2016-09-12 16:01:38.700', null, N'2016-09-12 16:01:38.220', null, N'2016-09-12 16:01:38.400', N'1473667298041', N'23', N'12', N'35', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzRITGNlSllOK3RFZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/operator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0da15c49299d41a4b720f787d053e3cb', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'b92bc00f8ce844cda50159a1af863943', N'0', N'2016-10-18 17:39:38.163', null, N'2016-10-18 17:39:38.187', null, N'2016-10-18 17:39:38.217', null, N'2016-10-18 17:39:38.170', N'1476783578171', N'22', N'1', N'23', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxSTnZSZ3IyUjFCT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'b93f250788c84d55ade7e55b2b7daca1', N'0', N'2016-10-18 17:39:38.323', null, N'2016-10-18 17:39:38.353', null, N'2016-10-18 17:39:38.400', null, N'2016-10-18 17:39:38.337', N'1476783578338', N'31', N'1', N'32', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'ba30fb6a7e314b86b24775f216ac5d22', N'0', N'2016-10-18 17:39:52.763', null, N'2016-10-18 17:39:52.790', null, N'2016-10-18 17:39:52.877', null, N'2016-10-18 17:39:52.770', N'1476783592770', N'22', N'4', N'26', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'bd76f6f8b42a4824bf66c829ed29a3d8', N'0', N'2016-10-18 17:39:34.470', null, N'2016-10-18 17:39:34.530', null, N'2016-10-18 17:39:34.547', null, N'2016-10-18 17:39:34.487', N'1476783574488', N'58', N'2', N'60', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktpbmNKNyt0RGlKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'be844380e0d34a2cb134c22e2d4f86b3', N'0', N'2016-01-30 15:19:55.223', null, N'2016-01-30 15:19:55.387', null, N'2016-01-30 15:24:01.460', null, N'2016-01-30 15:19:55.230', N'1454138395230', N'70', N'92', N'162', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=eUN0VC9JZHQ5ck1TcFZkU1IvWGI0dWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/test/operator?pageSize=10', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'45cf6e8f9c254e509399deda080f0e20', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'bf6916f37498407298b5fa3a74776bb7', N'0', N'2016-09-12 16:01:33.133', null, N'2016-09-12 16:01:33.270', null, N'2016-09-12 16:01:33.420', null, N'2016-09-12 16:01:33.140', N'1473667293139', N'23', N'115', N'138', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzRDcld0a1hBZGNDK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/systems', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7eab5f800bab4efb8df1b2e8a0575f73', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'bf8989b8baea4356a2d6c0f1ff3e7465', N'0', N'2016-10-18 17:39:52.557', null, N'2016-10-18 17:39:52.583', null, N'2016-10-18 17:39:52.637', null, N'2016-10-18 17:39:52.563', N'1476783592562', N'24', N'1', N'25', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpWeTBnZ3NTaUtvT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'bfacaabc9f5a41109451cc22ef375e01', N'0', N'2016-10-18 17:39:52.757', null, N'2016-10-18 17:39:52.783', null, N'2016-10-18 17:39:52.873', null, N'2016-10-18 17:39:52.767', N'1476783592767', N'26', N'1', N'27', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwzRWo4TE9mcU9XK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'bfbb0891377f4b0cb402bd94b2cff71c', N'0', N'2016-10-18 17:39:34.460', null, N'2016-10-18 17:39:34.480', null, N'2016-10-18 17:39:34.523', null, N'2016-10-18 17:39:34.463', N'1476783574464', N'19', N'1', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akovMXBiVjMzYlJEK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'bfd80bfb41e546f3956ec64fe91aee00', N'0', N'2016-10-18 17:40:04.550', null, N'2016-10-18 17:40:04.567', null, N'2016-10-18 17:40:04.693', null, N'2016-10-18 17:40:04.557', N'1476783604556', N'15', N'1', N'16', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lheFJGVDhxdjNVT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c0a4c39a598b4bccbe0226f6626256bc', N'0', N'2016-10-18 17:39:38.187', null, N'2016-10-18 17:39:38.210', null, N'2016-10-18 17:39:38.223', null, N'2016-10-18 17:39:38.193', N'1476783578193', N'22', N'1', N'23', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktXaXcrc3NvdER6T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c0b356112b9f44d3877b667368175f56', N'0', N'2016-02-01 09:59:29.593', null, N'2016-02-01 09:59:29.677', null, N'2016-02-01 10:03:35.183', null, N'2016-02-01 09:59:29.597', N'1454291969597', N'80', N'3', N'83', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=a0FrRkdLc3EzUE09; userName=admins; authmark=bUxHblg5eW9VNDIyK3BodUdBWERZK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/content', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'aa126932641f4e068ed8278a332de85d', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c0bb6c3372264af2a1facc41b443effe', N'0', N'2016-09-12 16:01:39.543', null, N'2016-09-12 16:01:39.570', null, N'2016-09-12 16:01:39.620', null, N'2016-09-12 16:01:39.550', N'1473667299550', N'21', N'6', N'27', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzcySWtDeWpRUk1ldWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/operator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'0da15c49299d41a4b720f787d053e3cb', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c2eb85f161994919a5b995b1296355a5', N'0', N'2016-10-18 17:39:34.487', null, N'2016-10-18 17:39:34.537', null, N'2016-10-18 17:39:34.550', null, N'2016-10-18 17:39:34.490', N'1476783574491', N'47', N'1', N'48', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktpbmNKNyt0RGlKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c4aa4b92fb7749bdb796cb71a50164fe', N'0', N'2016-10-18 17:40:04.477', null, N'2016-10-18 17:40:04.517', null, N'2016-10-18 17:40:04.520', null, N'2016-10-18 17:40:04.487', N'1476783604487', N'39', N'1', N'40', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3h4UnNncnBua05odWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c5335d47a5594e5fa05584c3aba4e207', N'0', N'2016-01-30 15:20:04.377', null, N'2016-01-30 15:20:04.450', null, N'2016-01-30 15:24:10.460', null, N'2016-01-30 15:20:04.383', N'1454138404382', N'39', N'35', N'74', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=eUN0VC9JZHQ5ck1uMUJ0RHhCcFUzdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/user', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'91baed789bc14efdbebb10b49c69ee5b', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c5e970f6ad9241f780f9eb252fca2074', N'0', N'2016-01-30 14:57:16.913', null, N'2016-01-30 14:57:17.670', null, N'2016-01-30 15:01:23.570', null, N'2016-01-30 14:57:16.920', N'1454137036921', N'21', N'132', N'153', null, null, null, N'127.0.0.1', N'GET', null, N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c8ef99cf6df146439d1e10a9c738ba57', N'0', N'2016-02-01 09:54:38.850', null, N'2016-02-01 09:54:39.867', null, N'2016-02-01 09:58:45.400', null, N'2016-02-01 09:54:38.857', N'1454291678855', N'17', N'999', N'1016', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=bjJxRDkwS0R6VGs9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/authImg?rand=0.09768432737911803', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c8f1c9a42c1d43ff9a3fd532e767d92b', N'0', N'2016-10-18 17:40:18.693', null, N'2016-10-18 17:40:18.700', null, N'2016-10-18 17:40:18.750', null, N'2016-10-18 17:40:18.697', N'1476783618695', N'5', N'1', N'6', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3hHVjF4Z3Q5S3B6ZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:8899/platform/index', N'/platform/param', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'671ce1e6167840baaa6d27f4f04574c9', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'c98b321e03c44d519903cd81d18a8f19', N'0', N'2016-10-18 17:39:52.597', null, N'2016-10-18 17:39:52.620', null, N'2016-10-18 17:39:52.643', null, N'2016-10-18 17:39:52.610', N'1476783592609', N'25', N'0', N'25', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktaRlZ6UnZOSzlYdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'ca59cf84dc8046b9946b937bdb3f7867', N'0', N'2016-01-30 15:19:55.130', null, N'2016-01-30 15:19:55.197', null, N'2016-01-30 15:24:01.257', null, N'2016-01-30 15:19:55.170', N'1454138395018', N'170', N'12', N'182', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=eUN0VC9JZHQ5ck5aWVVyNlFiVHJoZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/content', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'aa126932641f4e068ed8278a332de85d', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'cad4e637d3104a02827a5bf5dd51d9fc', N'0', N'2016-10-18 17:39:52.300', null, N'2016-10-18 17:39:52.370', null, N'2016-10-18 17:39:52.430', null, N'2016-10-18 17:39:52.330', N'1476783592033', N'6', N'0', N'6', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktvc0Y4QlU3TCtEZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'cb16182af34849de9f9ef8a48e23ae8a', N'0', N'2016-10-18 17:40:04.697', null, N'2016-10-18 17:40:04.780', null, N'2016-10-18 17:40:04.907', null, N'2016-10-18 17:40:04.713', N'1476783604713', N'80', N'1', N'81', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'cb180b567ad9468481f95df29d106ca8', N'0', N'2016-01-30 15:20:46.167', null, N'2016-01-30 15:20:46.177', null, N'2016-01-30 15:24:52.270', null, N'2016-01-30 15:20:46.170', N'1454138446170', N'11', N'2', N'13', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEFOOUQ4dzQwdFJoT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/dept/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'b4ee4ae4391f4243be69e838545d2131', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'cba39de50f5344bba4e29dd1ac447e88', N'0', N'2016-10-18 17:39:38.300', null, N'2016-10-18 17:39:38.320', null, N'2016-10-18 17:39:38.393', null, N'2016-10-18 17:39:38.307', N'1476783578308', N'19', N'1', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akttRk94WTAvbEUyT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'cc453273632b44c298100f423379c803', N'0', N'2016-02-01 09:47:59.107', null, N'2016-02-01 09:47:59.260', null, N'2016-02-01 09:52:04.797', null, N'2016-02-01 09:47:59.147', N'1454291279148', N'81', N'73', N'154', null, null, null, N'127.0.0.1', N'GET', null, N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'ccc19a537f62483c859d1eb497c45650', N'0', N'2016-10-18 17:40:04.550', null, N'2016-10-18 17:40:04.570', null, N'2016-10-18 17:40:04.693', null, N'2016-10-18 17:40:04.560', N'1476783604559', N'19', N'0', N'19', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lheFJGVDhxdjNVT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'cfbe7468994f47108572e86e9e4cbad3', N'0', N'2016-10-18 17:39:38.163', null, N'2016-10-18 17:39:38.187', null, N'2016-10-18 17:39:38.217', null, N'2016-10-18 17:39:38.170', N'1476783578170', N'22', N'1', N'23', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxSTnZSZ3IyUjFCT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd00ead4397714363b9dfc15431944b4f', N'0', N'2016-10-18 17:40:04.673', null, N'2016-10-18 17:40:04.687', null, N'2016-10-18 17:40:04.710', null, N'2016-10-18 17:40:04.680', N'1476783604681', N'13', N'1', N'14', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd037bf7bed464fc5883d0b4f29bea6b6', N'0', N'2016-02-01 09:58:47.357', null, N'2016-02-01 09:58:48.153', null, N'2016-02-01 10:02:53.723', null, N'2016-02-01 09:58:47.363', N'1454291927363', N'117', N'681', N'798', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cTlPTnlWUW4zanc9; userName=admins; authmark=bUxHblg5eW9VNDNhTDZQbE1SMGM3K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/index', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'886bd497064b4c9f87d8461ebba421d1', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd11f935a0cd84cb7a09da4ab7b562ef1', N'0', N'2016-01-30 15:30:51.247', null, N'2016-01-30 15:30:51.507', null, N'2016-01-30 15:34:57.463', null, N'2016-01-30 15:30:51.257', N'1454139051256', N'79', N'180', N'259', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=UzEvWXJQUmlRczg9; userName=admins; authmark=cGg4bEtESmh0WDdlUkRPTlpUMFRNZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/index', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'886bd497064b4c9f87d8461ebba421d1', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd1614a2b50dd4b22ab16cea8534beb03', N'0', N'2016-10-18 17:39:38.363', null, N'2016-10-18 17:39:38.387', null, N'2016-10-18 17:39:38.457', null, N'2016-10-18 17:39:38.373', N'1476783578373', N'23', N'1', N'24', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd2e0f310cf944093bd150db0086798ac', N'0', N'2016-10-18 17:39:52.773', null, N'2016-10-18 17:39:52.793', null, N'2016-10-18 17:39:52.877', null, N'2016-10-18 17:39:52.783', N'1476783592783', N'19', N'1', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd364928582a34228b036f735aaa1b793', N'0', N'2016-10-18 17:39:52.557', null, N'2016-10-18 17:39:52.573', null, N'2016-10-18 17:39:52.637', null, N'2016-10-18 17:39:52.567', N'1476783592565', N'17', N'1', N'18', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpWeTBnZ3NTaUtvT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd523c24e6f4b41e5a95215e126635441', N'0', N'2016-10-18 17:40:04.653', null, N'2016-10-18 17:40:04.667', null, N'2016-10-18 17:40:04.703', null, N'2016-10-18 17:40:04.657', N'1476783604658', N'13', N'1', N'14', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd590396b68c14d298ac8fe475d90d851', N'0', N'2016-01-30 15:20:55.447', null, N'2016-01-30 15:20:55.500', null, N'2016-01-30 15:25:01.470', null, N'2016-01-30 15:20:55.450', N'1454138455450', N'34', N'18', N'52', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZENnOFJwZFVlVTdBT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/sysLog', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'235d855d7b914d728e434f0f309aa04d', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd61c6a35328949b69c3a02c5a91f677f', N'0', N'2016-02-01 09:59:29.687', null, N'2016-02-01 09:59:29.770', null, N'2016-02-01 10:03:35.387', null, N'2016-02-01 09:59:29.690', N'1454291969689', N'31', N'53', N'84', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=a0FrRkdLc3EzUE09; userName=admins; authmark=bUxHblg5eW9VNDB5VDQzblhlZUFvZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/test/operator?pageSize=10', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'45cf6e8f9c254e509399deda080f0e20', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd65489d49ed44dd08e8976cbc67ad867', N'0', N'2016-10-18 17:39:38.257', null, N'2016-10-18 17:39:38.277', null, N'2016-10-18 17:39:38.393', null, N'2016-10-18 17:39:38.267', N'1476783578266', N'19', N'1', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxCemU0Mk1vYmhxK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd6e8715a8a1a4c1e87e544db43a82399', N'0', N'2016-01-30 15:30:52.127', null, N'2016-01-30 15:30:52.200', null, N'2016-01-30 15:34:58.260', null, N'2016-01-30 15:30:52.130', N'1454139052130', N'25', N'48', N'73', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=UzEvWXJQUmlRczg9; userName=admins; authmark=cGg4bEtESmh0WDdEQnByaUtnck1jT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/test/sysLog?pageSize=10', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'dfa8256651a84269869c35ca1f10cae5', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd817644436424ba78ff4a80501a277b0', N'0', N'2016-10-18 17:39:52.790', null, N'2016-10-18 17:39:52.847', null, N'2016-10-18 17:39:52.880', null, N'2016-10-18 17:39:52.833', N'1476783592832', N'55', N'2', N'57', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'd99aa2b2d5c04bd5aa0dfa56bd52e7a2', N'0', N'2016-01-30 15:20:08.317', null, N'2016-01-30 15:20:08.350', null, N'2016-01-30 15:24:14.467', null, N'2016-01-30 15:20:08.327', N'1454138408326', N'33', N'0', N'33', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERvbzlkbWtnbkk2K2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'dabb3430d61a446a95cb9d9b37194970', N'0', N'2016-01-30 15:03:59.830', null, N'2016-01-30 15:03:59.930', null, N'2016-01-30 15:08:05.140', null, N'2016-01-30 15:03:59.870', N'1454137439088', N'7', N'1', N'8', null, N'JSESSIONID=15e1qxgry54kx11y7uss5pw1cp; authCode=ZVFnZElQdGJmVFU9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/', N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'dadcfab6a92a4a6c92108189e7137992', N'0', N'2016-02-01 09:59:18.490', null, N'2016-02-01 09:59:28.983', null, N'2016-02-01 10:03:34.583', null, N'2016-02-01 09:59:18.493', N'1454291958492', N'10493', N'1', N'10494', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=a0FrRkdLc3EzUE09; userName=admins; authmark=', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'dce665a51ebf4e08b4ec4aacffd5222a', N'0', N'2016-10-18 17:39:38.257', null, N'2016-10-18 17:39:38.273', null, N'2016-10-18 17:39:38.387', null, N'2016-10-18 17:39:38.263', N'1476783578264', N'15', N'1', N'16', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxCemU0Mk1vYmhxK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'ddda9e8e58fe407ba8846044e0719f31', N'0', N'2016-10-18 17:40:04.700', null, N'2016-10-18 17:40:04.780', null, N'2016-10-18 17:40:04.910', null, N'2016-10-18 17:40:04.717', N'1476783604715', N'81', N'1', N'82', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'dea56b24c83343159f895fffce269f2e', N'0', N'2016-10-18 17:39:38.337', null, N'2016-10-18 17:39:38.370', null, N'2016-10-18 17:39:38.403', null, N'2016-10-18 17:39:38.350', N'1476783578349', N'33', N'1', N'34', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'def180cee68a4268abbc4d647911c889', N'0', N'2016-10-18 17:39:34.533', null, N'2016-10-18 17:39:34.560', null, N'2016-10-18 17:39:34.610', null, N'2016-10-18 17:39:34.547', N'1476783574548', N'25', N'1', N'26', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aksvM2JhVmQrd3ZTK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'df234d8a90d5424583929d34219851c5', N'0', N'2016-10-18 17:40:04.700', null, N'2016-10-18 17:40:04.797', null, N'2016-10-18 17:40:04.910', null, N'2016-10-18 17:40:04.777', N'1476783604777', N'96', N'2', N'98', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'df2c6d41c5df46419e14118b0bab6a65', N'0', N'2016-09-12 16:01:32.687', null, N'2016-09-12 16:01:32.707', null, N'2016-09-12 16:01:32.813', null, N'2016-09-12 16:01:32.697', N'1473667292697', N'21', N'1', N'22', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzVubnlDTFJLdHVWZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/station/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'09b6ce29313c4051ba765de516a9b283', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e02a0bddb4cf47efb979fa09af9d4f7a', N'0', N'2016-10-18 17:39:38.197', null, N'2016-10-18 17:39:38.227', null, N'2016-10-18 17:39:38.227', null, N'2016-10-18 17:39:38.207', N'1476783578205', N'29', N'1', N'30', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktXaXcrc3NvdER6T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e036ff4d246d49ef9fe0b42ee875c961', N'0', N'2016-01-30 15:20:59.103', null, N'2016-01-30 15:20:59.177', null, N'2016-01-30 15:25:05.270', null, N'2016-01-30 15:20:59.107', N'1454138459107', N'18', N'54', N'72', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEI2T0l5UDdGaHdJdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/dict', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'4df80521e66447618796c3cfe02bf239', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e05a194ca11945b49730336935f09abd', N'0', N'2016-01-30 15:20:51.567', null, N'2016-01-30 15:20:51.673', null, N'2016-01-30 15:24:57.667', null, N'2016-01-30 15:20:51.570', N'1454138451571', N'39', N'65', N'104', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZENnS1VVNlVlMzlKT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/sysLog', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'235d855d7b914d728e434f0f309aa04d', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e1276b7984ee482397c7543956cdfa34', N'0', N'2016-10-18 17:39:52.590', null, N'2016-10-18 17:39:52.627', null, N'2016-10-18 17:39:52.643', null, N'2016-10-18 17:39:52.593', N'1476783592592', N'36', N'1', N'37', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktaRlZ6UnZOSzlYdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e13857c4a40340ef9126d7277b1b5294', N'0', N'2016-10-18 17:39:38.160', null, N'2016-10-18 17:39:38.190', null, N'2016-10-18 17:39:38.217', null, N'2016-10-18 17:39:38.173', N'1476783578173', N'27', N'1', N'28', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxSTnZSZ3IyUjFCT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e1f2b9b39afe489ab2a21616e689edbe', N'0', N'2016-10-18 17:40:04.477', null, N'2016-10-18 17:40:04.537', null, N'2016-10-18 17:40:04.690', null, N'2016-10-18 17:40:04.490', N'1476783604489', N'59', N'1', N'60', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3h4UnNncnBua05odWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e26b2bd4324a4a9e9584c0886c545887', N'0', N'2016-01-30 15:20:45.613', null, N'2016-01-30 15:20:45.643', null, N'2016-01-30 15:24:51.670', null, N'2016-01-30 15:20:45.617', N'1454138445617', N'27', N'1', N'28', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEJja2dQbE9NcHJVZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/dept/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'b4ee4ae4391f4243be69e838545d2131', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e426599015f6467fb87a7725dd6fa092', N'0', N'2016-02-01 09:47:59.650', null, N'2016-02-01 09:48:02.760', null, N'2016-02-01 09:52:08.430', null, N'2016-02-01 09:47:59.657', N'1454291279657', N'157', N'2953', N'3110', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/', N'/jf/platform/authImg?rand=0.29045644840134777', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'666f50e0f3b04f4ba43bcb4e719c1e8d', N'image/png,image/*;q=0.8,*/*;q=0.5', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e6b269a88c5b489dac2314371b61a5f7', N'0', N'2016-01-30 15:27:51.200', null, N'2016-01-30 15:27:51.663', null, N'2016-01-30 15:31:57.710', null, N'2016-01-30 15:27:51.270', N'1454138871028', N'640', N'3', N'643', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=SmRYRDBDejNlaXc9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', null, N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e79c7f07925740ae8969bd4156b205cb', N'0', N'2016-10-18 17:39:52.783', null, N'2016-10-18 17:39:52.807', null, N'2016-10-18 17:39:52.877', null, N'2016-10-18 17:39:52.790', N'1476783592791', N'21', N'1', N'22', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akl3aWtvR0NVc0hIZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e822b5a3bad74b468147b0b0a0e82953', N'0', N'2016-10-18 17:39:52.683', null, N'2016-10-18 17:39:52.703', null, N'2016-10-18 17:39:52.703', null, N'2016-10-18 17:39:52.690', N'1476783592690', N'19', N'1', N'20', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akwrbXhWVEEwRzJKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'e8a93adf6104490a807c8cd02e8b48bf', N'0', N'2016-01-30 15:27:51.667', null, N'2016-01-30 15:27:51.720', null, N'2016-01-30 15:31:57.710', null, N'2016-01-30 15:27:51.670', N'1454138871670', N'7', N'45', N'52', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=SmRYRDBDejNlaXc9; userName=admins; authmark=', null, N'127.0.0.1', N'GET', null, N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'eb7e98d5b9e149d3b9e6bf986c35cc7b', N'0', N'2016-09-12 16:14:49.133', null, N'2016-09-12 16:14:49.210', null, N'2016-09-12 16:14:49.320', null, N'2016-09-12 16:14:49.137', N'1473668089136', N'8', N'71', N'79', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=cTdObzVxcDg1S3hUOEhCdm1ZZU9MZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/', N'/platform/operator/edit/01aa0c85c8b84ae8aca7f5484336b203', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'83ef85fd17804bb195d0ad3c07f88c30', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'ebe6e44b39ca4da787225d07a8516ad7', N'0', N'2016-10-18 17:39:38.340', null, N'2016-10-18 17:39:38.380', null, N'2016-10-18 17:39:38.457', null, N'2016-10-18 17:39:38.367', N'1476783578367', N'40', N'1', N'41', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akpneG5CYzU4MVE4T2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'edc5c9bf886d4d20aec60dc753f77bb2', N'0', N'2016-10-18 17:40:04.700', null, N'2016-10-18 17:40:04.783', null, N'2016-10-18 17:40:04.910', null, N'2016-10-18 17:40:04.713', N'1476783604713', N'81', N'2', N'83', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'eece95751f504c5d8f939240b011b56d', N'0', N'2016-01-30 15:20:46.167', null, N'2016-01-30 15:20:46.180', null, N'2016-01-30 15:24:52.273', null, N'2016-01-30 15:20:46.170', N'1454138446171', N'13', N'1', N'14', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEJ4UVhSSWFJMk5LZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/dept/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'b4ee4ae4391f4243be69e838545d2131', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'ef3d92b5e04d457ea65cebcdc0b6c672', N'0', N'2016-09-12 16:01:25.463', null, N'2016-09-12 16:01:26.830', null, N'2016-09-12 16:01:26.213', null, N'2016-09-12 16:01:25.467', N'1473667285468', N'338', N'281', N'619', null, N'authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=QXZRTUVnRU03dzc2ODlxckI3V3FEdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS; JSESSIONID=1dqx1gsdyi2in8rhx6nrp0eui', null, N'127.0.0.1', N'GET', null, N'/platform/', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'f771691134c34174a819b5990310d000', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'f1d120b2060f4745bd5b0ce2a8da7461', N'0', N'2016-10-18 17:39:38.300', null, N'2016-10-18 17:39:38.330', null, N'2016-10-18 17:39:38.400', null, N'2016-10-18 17:39:38.310', N'1476783578309', N'29', N'2', N'31', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akttRk94WTAvbEUyT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'f3075ad721574e2299056620c5a1469e', N'0', N'2016-10-18 17:39:38.243', null, N'2016-10-18 17:39:38.253', null, N'2016-10-18 17:39:38.383', null, N'2016-10-18 17:39:38.247', N'1476783578248', N'10', N'0', N'10', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxVb3EvdGVGcHMvdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'f34a787416cf4963b8173276a1c5f8ea', N'0', N'2016-01-30 15:20:47.710', null, N'2016-01-30 15:20:47.763', null, N'2016-01-30 15:24:53.867', null, N'2016-01-30 15:20:47.713', N'1454138447713', N'6', N'48', N'54', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZERFRy92aFgyVWhEZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/index/toUrl?toUrl=/platform/log4j/log4j.html', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'99a42a467bbf4e829fd0706507c9f7a7', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'f43fd6f731b44b75baef678f43495793', N'0', N'2016-10-18 17:39:38.257', null, N'2016-10-18 17:39:38.273', null, N'2016-10-18 17:39:38.387', null, N'2016-10-18 17:39:38.263', N'1476783578262', N'16', N'0', N'16', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3akxCemU0Mk1vYmhxK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'f515b9c5c66142c59a3c99d8d5bb8361', N'0', N'2016-10-18 17:40:04.477', null, N'2016-10-18 17:40:04.550', null, N'2016-10-18 17:40:04.690', null, N'2016-10-18 17:40:04.507', N'1476783604505', N'72', N'1', N'73', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3h4UnNncnBua05odWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'f6e0dcfe9481455bbde9a47af91a43fe', N'0', N'2016-10-18 17:40:12.643', null, N'2016-10-18 17:40:12.670', null, N'2016-10-18 17:40:12.713', null, N'2016-10-18 17:40:12.647', N'1476783612648', N'24', N'1', N'25', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3lHeGIvRCtjSmZUZWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/setOperator', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a1ff68acf9b24c34b347ff21e333cb70', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'f77dd057ac2e4d418b03c3a9dc8981fd', N'0', N'2016-10-18 17:40:04.637', null, N'2016-10-18 17:40:04.673', null, N'2016-10-18 17:40:04.710', null, N'2016-10-18 17:40:04.657', N'1476783604655', N'38', N'0', N'38', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=eDh5N3hUVzZWc3ptTnZUbnhuZjdtK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/operator/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'6daed51284f94923b1c8a6414e646959', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'f8546fce34274c3eb55422025ccb2888', N'0', N'2016-01-30 15:20:48.763', null, N'2016-01-30 15:20:48.800', null, N'2016-01-30 15:24:54.870', null, N'2016-01-30 15:20:48.770', N'1454138448771', N'24', N'14', N'38', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=elB0bnFtVy9id2c9; userName=admins; authmark=TFNPYVRQclFEZEN3aXd6aENhZEtCT2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/resources', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'15495beebe984cd19dc30d65676c4c4d', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'fa3e68ec77464beb8548cf708941d11b', N'0', N'2016-10-18 17:39:34.497', null, N'2016-10-18 17:39:34.527', null, N'2016-10-18 17:39:34.550', null, N'2016-10-18 17:39:34.497', N'1476783574498', N'29', N'1', N'30', null, N'language=zh_CN; JSESSIONID=zlfl59sbwywvus53rt13h4k0; authCode=ei94SEYwYm1vRTg9; userName=admins; authmark=RWFEWitDaUh3aktpbmNKNyt0RGlKdWE1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:8899/platform/index', N'/platform/menu/treeData', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'a6623c65480f4f2cb63a4d7673f81e3a', N'text/plain, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:8899', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'facce645d0c242e19a54b3a961dc2a6d', N'0', N'2016-01-30 15:30:01.977', null, N'2016-01-30 15:30:51.240', null, N'2016-01-30 15:34:57.260', null, N'2016-01-30 15:30:01.980', N'1454139001979', N'49264', N'1', N'49265', null, N'JSESSIONID=efyb8oj6349y3zk04enxonao; authCode=UzEvWXJQUmlRczg9; userName=admins; authmark=', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/login/vali', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'fb748a5909274e018408622e2c7fb0c3', N'0', N'2016-02-01 09:58:49.350', null, N'2016-02-01 09:58:49.457', null, N'2016-02-01 10:02:54.930', null, N'2016-02-01 09:58:49.357', N'1454291929355', N'37', N'67', N'104', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=cTlPTnlWUW4zanc9; userName=admins; authmark=bUxHblg5eW9VNDArRWV0b05EYklPK2E1NURXYTF5TXpBay8zZ0ppN040SDd1bWI5OVFtTlJkdTh1ZVRnbU1Cem42MGxBVEx1U2lOUVBKYTNDdmhiVGpNL1VKQkVKdHJ5U0xFZXJ3aFpCd0pobUJRTWQvbWNCRFYzMFZ3aXM0dU1oWjFMVWZPWVd1N2hxWjBnNjk2Y29sMmVtSDdlR3A5alZ4aGdvNnZWNGRhMlhFUkhDU0ZIOVZvVExRL2hiekpS', null, N'127.0.0.1', N'POST', N'http://127.0.0.1:99/jf/platform/index', N'/jf/platform/test/operator?pageSize=10', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'45cf6e8f9c254e509399deda080f0e20', N'text/html, */*; q=0.01', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', N'XMLHttpRequest', null, N'03a44ba0aa4e4905bea726d4da976ba5');
+GO
+INSERT INTO [dbo].[pt_syslog] ([ids], [version], [startdate], [starttime], [enddate], [endtime], [actionenddate], [actionendtime], [actionstartdate], [actionstarttime], [actionhaoshi], [viewhaoshi], [haoshi], [cause], [cookie], [description], [ips], [method], [referer], [requestpath], [status], [useragent], [operatorids], [accept], [acceptencoding], [acceptlanguage], [connection], [host], [xrequestedwith], [pvids], [userids]) VALUES (N'ff9542c5dba8492b8668bde0016864d1', N'0', N'2016-02-01 09:54:38.640', null, N'2016-02-01 09:54:38.707', null, N'2016-02-01 09:58:44.217', null, N'2016-02-01 09:54:38.653', N'1454291678652', N'22', N'45', N'67', null, N'JSESSIONID=1czgxhvv4bg42148wvy1417o0v; authCode=bjJxRDkwS0R6VGs9', null, N'127.0.0.1', N'GET', N'http://127.0.0.1:99/jf/platform/login', N'/jf/platform/login', N'1', N'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', N'fb6a0c1e618041bcbbf8cfd41311b1fa', N'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', N'gzip, deflate', N'zh-CN,en-US;q=0.9,ja;q=0.7,zh-HK;q=0.6,zh-TW;q=0.4,zh;q=0.3,en;q=0.1', N'keep-alive', N'127.0.0.1:99', null, null, null);
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_systems]
+-- ----------------------------
+DROP TABLE [dbo].[pt_systems]
+GO
+CREATE TABLE [dbo].[pt_systems] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[description] varchar(200) NULL ,
+[names] varchar(25) NULL ,
+[numbers] varchar(25) NULL ,
+[orderids] bigint NULL 
+)
 
 
--- 文件上传表
-CREATE TABLE [pt_upload]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- parametername
-	[parametername] varchar(50),
-	-- filename
-	[filename] varchar(50),
-	-- contenttype
-	[contenttype] varchar(100),
-	-- originalfilename
-	[originalfilename] varchar(500),
-	-- path
-	[path] varchar(500),
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_systems
+-- ----------------------------
+INSERT INTO [dbo].[pt_systems] ([ids], [version], [description], [names], [numbers], [orderids]) VALUES (N'0c1230c98ef34e58947903fab5a4fa85', N'0', null, N'易信平台', N'yiXin', N'3');
+GO
+INSERT INTO [dbo].[pt_systems] ([ids], [version], [description], [names], [numbers], [orderids]) VALUES (N'8a40c0353fa828a6013fa898d4ac0020', N'0', N'基础平台', N'基础平台', N'platform', N'1');
+GO
+INSERT INTO [dbo].[pt_systems] ([ids], [version], [description], [names], [numbers], [orderids]) VALUES (N'd3a5c976c4c24751b6b00ec775692683', N'0', null, N'微信平台', N'weiXin', N'2');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_upload]
+-- ----------------------------
+DROP TABLE [dbo].[pt_upload]
+GO
+CREATE TABLE [dbo].[pt_upload] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[parametername] varchar(50) NULL ,
+[filename] varchar(50) NULL ,
+[contenttype] varchar(100) NULL ,
+[originalfilename] varchar(500) NULL ,
+[path] varchar(500) NULL 
+)
 
 
--- 用户表
-CREATE TABLE [pt_user]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- 排序号
-	[orderids] bigint,
-	-- 密码
-	[password] varbinary(100),
-	-- 密码错误次数
-	[errorcount] bigint,
-	-- 密钥
-	[salt] varbinary(1000),
-	-- 状态
-	[status] char,
-	-- 账号停用时间
-	[stopdate] datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	-- 账号
-	[username] varchar(50),
-	-- 部门ids
-	[departmentids] varchar(32),
-	-- 部门names
-	[departmentnames] varchar(25),
-	-- 用户扩展信息ids
-	[userinfoids] varchar(32),
-	-- 岗位ids
-	[stationids] text,
-	-- 岗位名称
-	[stationnames] text,
-	-- 行级过滤部门ids
-	[deptids] text,
-	-- 行级过滤部门names
-	[deptnames] text,
-	-- 行级过滤用户ids
-	[userids] text,
-	-- 行级过滤用户names
-	[usernames] text,
-	-- 所在组ids
-	[groupids] text,
-	-- 所在组names
-	[groupnames] text,
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_upload
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_user]
+-- ----------------------------
+DROP TABLE [dbo].[pt_user]
+GO
+CREATE TABLE [dbo].[pt_user] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[orderids] bigint NULL ,
+[errorcount] bigint NULL ,
+[status] char(1) NULL ,
+[stopdate] datetime NOT NULL DEFAULT (getdate()) ,
+[username] varchar(50) NULL ,
+[departmentids] varchar(32) NULL ,
+[email] varchar(100) NULL ,
+[idcard] varchar(25) NULL ,
+[mobile] varchar(20) NULL ,
+[names] varchar(25) NULL ,
+[password] varchar(500) NULL ,
+[salt] varchar(500) NULL ,
+[stationids] varchar(32) NULL 
+)
 
 
--- 用户分组
-CREATE TABLE [pt_usergroup]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 用户ids
-	[userids] varchar(32),
-	-- 分组ids
-	[groupids] varchar(32),
-	PRIMARY KEY ([ids])
-);
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'pt_user', 
+NULL, NULL)) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'用户表'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'pt_user'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'用户表'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'pt_user'
+GO
+
+-- ----------------------------
+-- Records of pt_user
+-- ----------------------------
+INSERT INTO [dbo].[pt_user] ([ids], [version], [orderids], [errorcount], [status], [stopdate], [username], [departmentids], [email], [idcard], [mobile], [names], [password], [salt], [stationids]) VALUES (N'03a44ba0aa4e4905bea726d4da976ba5', N'6', N'0', N'4', N'1', N'2016-02-01 09:54:57.820', N'admins', N'8a40c0353fa828a6013fa898d4ac0028', N'dongcb678@163.com', N'430881198609285833', N'13871558042', N'管理员', N'kOkaSEILIwNt3WtQs9htKQUdTsU=', N'OXT9j9IRMno=', null);
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_usergroup]
+-- ----------------------------
+DROP TABLE [dbo].[pt_usergroup]
+GO
+CREATE TABLE [dbo].[pt_usergroup] (
+[ids] varchar(32) NOT NULL ,
+[userids] varchar(32) NULL ,
+[groupids] varchar(32) NULL 
+)
 
 
--- pt_userinfo
-CREATE TABLE [pt_userinfo]
-(
-	-- 主键
-	[ids] varchar(32) NOT NULL,
-	-- 版本号
-	[version] bigint,
-	-- address
-	[address] varchar(300),
-	-- addressinfo
-	[addressinfo] varchar(300),
-	-- avoirdupois
-	[avoirdupois] varchar(5),
-	-- birthday
-	[birthday] date,
-	-- bloodgroup
-	[bloodgroup] varchar(15),
-	-- clientlevelend
-	[clientlevelend] datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	-- clientlevelstart
-	[clientlevelstart] datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-	-- culture
-	[culture] varchar(30),
-	-- 描述
-	[description] varchar(200),
-	-- email
-	[email] varchar(100),
-	-- finishschooldate
-	[finishschooldate] date,
-	-- folk
-	[folk] varchar(20),
-	-- government
-	[government] varchar(25),
-	-- homepage
-	[homepage] varchar(100),
-	-- householder
-	[householder] varchar(20),
-	-- idcard
-	[idcard] varchar(25),
-	-- marriage
-	[marriage] varchar(20),
-	-- mobile
-	[mobile] varchar(20),
-	-- msn
-	[msn] varchar(20),
-	-- 部门名称
-	[names] varchar(25),
-	-- nativityaddress
-	[nativityaddress] varchar(20),
-	-- postboy
-	[postboy] varchar(6),
-	-- qq
-	[qq] varchar(20),
-	-- schoolname
-	[schoolname] varchar(20),
-	-- sex
-	[sex] varchar(5),
-	-- speciality
-	[speciality] varchar(20),
-	-- stature
-	[stature] varchar(5),
-	-- telephone
-	[telephone] varchar(20),
-	PRIMARY KEY ([ids])
-);
+GO
+
+-- ----------------------------
+-- Records of pt_usergroup
+-- ----------------------------
+INSERT INTO [dbo].[pt_usergroup] ([ids], [userids], [groupids]) VALUES (N'5ccf0b1d605c49938fa8c4369c8a34c6', N'03a44ba0aa4e4905bea726d4da976ba5', N'8a40c0353fa828a6013fa898d4ac0028');
+GO
+INSERT INTO [dbo].[pt_usergroup] ([ids], [userids], [groupids]) VALUES (N'baeadb794a5241a888cd9346f07212a8', N'3f33600d631e4b67af6f5d850d4a78de', N'8a40c0353fa828a6013fa898d4ac0028');
+GO
+
+-- ----------------------------
+-- Table structure for [dbo].[pt_userinfo]
+-- ----------------------------
+DROP TABLE [dbo].[pt_userinfo]
+GO
+CREATE TABLE [dbo].[pt_userinfo] (
+[ids] varchar(32) NOT NULL ,
+[version] bigint NULL ,
+[address] varchar(300) NULL ,
+[addressinfo] varchar(300) NULL ,
+[avoirdupois] varchar(5) NULL ,
+[birthday] date NULL ,
+[bloodgroup] varchar(15) NULL ,
+[clientlevelend] datetime NOT NULL DEFAULT (getdate()) ,
+[clientlevelstart] datetime NOT NULL DEFAULT ('0000-00-00 00:00:00') ,
+[culture] varchar(30) NULL ,
+[description] varchar(200) NULL ,
+[finishschooldate] date NULL ,
+[folk] varchar(20) NULL ,
+[government] varchar(25) NULL ,
+[homepage] varchar(100) NULL ,
+[householder] varchar(20) NULL ,
+[marriage] varchar(20) NULL ,
+[msn] varchar(20) NULL ,
+[nativityaddress] varchar(20) NULL ,
+[postboy] varchar(6) NULL ,
+[qq] varchar(20) NULL ,
+[schoolname] varchar(20) NULL ,
+[sex] varchar(5) NULL ,
+[speciality] varchar(20) NULL ,
+[stature] varchar(5) NULL ,
+[telephone] varchar(20) NULL 
+)
 
 
+GO
 
-/* Create Indexes */
+-- ----------------------------
+-- Records of pt_userinfo
+-- ----------------------------
+INSERT INTO [dbo].[pt_userinfo] ([ids], [version], [address], [addressinfo], [avoirdupois], [birthday], [bloodgroup], [clientlevelend], [clientlevelstart], [culture], [description], [finishschooldate], [folk], [government], [homepage], [householder], [marriage], [msn], [nativityaddress], [postboy], [qq], [schoolname], [sex], [speciality], [stature], [telephone]) VALUES (N'03a44ba0aa4e4905bea726d4da976ba5', N'6', N'湖北钟祥', null, N'55', N'2012-03-07', N'bloodGroup_A', N'2015-03-26 19:16:26.000', N'2014-06-09 11:21:13.000', N'wenHuaChenDu_chuZhong', N'湖北钟祥', N'2010-10-25', N'folk_han', N'government_dangYuan', N'http://www.4bu4.com', N'湖北钟祥', N'marriage_no', null, N'湖北钟祥', N'431924', N'150584428', N'西安外事学院', N'man', N'电子商务', N'165', N'027-65155060');
+GO
 
-CREATE INDEX [onemanyindex] ON [pt_operator] USING BTREE ([onemany]);
-CREATE INDEX [returnparamkeysindex] ON [pt_operator] USING BTREE ([returnparamkeys]);
-CREATE INDEX [returnurlindex] ON [pt_operator] USING BTREE ([returnurl]);
-CREATE INDEX [rowfilterindex] ON [pt_operator] USING BTREE ([rowfilter]);
-CREATE INDEX [urlindex] ON [pt_operator] USING BTREE ([url]);
-CREATE INDEX [usernameindex] ON [pt_user] USING BTREE ([username]);
-CREATE INDEX [bloodgroupindex] ON [pt_userinfo] USING BTREE ([bloodgroup]);
-CREATE INDEX [emailindex] ON [pt_userinfo] USING BTREE ([email]);
-CREATE INDEX [msnindex] ON [pt_userinfo] USING BTREE ([msn]);
-CREATE INDEX [nativityaddressindex] ON [pt_userinfo] USING BTREE ([nativityaddress]);
-CREATE INDEX [postboyindex] ON [pt_userinfo] USING BTREE ([postboy]);
-CREATE INDEX [schoolnameindex] ON [pt_userinfo] USING BTREE ([schoolname]);
-CREATE INDEX [specialityindex] ON [pt_userinfo] USING BTREE ([speciality]);
+-- ----------------------------
+-- Table structure for [dbo].[test_blog]
+-- ----------------------------
+DROP TABLE [dbo].[test_blog]
+GO
+CREATE TABLE [dbo].[test_blog] (
+[ids] varchar(32) NOT NULL ,
+[title] varchar(200) NULL ,
+[content] text NULL ,
+[createTime] datetimeoffset(7) NULL 
+)
 
 
+GO
 
+-- ----------------------------
+-- Records of test_blog
+-- ----------------------------
+
+-- ----------------------------
+-- Indexes structure for table pt_department
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_department]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_department] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_dict
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_dict]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_dict] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_group
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_group]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_group] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_grouprole
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_grouprole]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_grouprole] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_menu
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_menu]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_menu] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_module
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_module]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_module] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_operator
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_operator]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_operator] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_param
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_param]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_param] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_resources
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_resources]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_resources] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_role
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_role]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_role] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_roleOperator
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_roleOperator]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_roleOperator] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_station
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_station]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_station] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_stationOperator
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_stationOperator]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_stationOperator] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_syslog
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_syslog]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_syslog] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_systems
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_systems]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_systems] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_upload
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_upload]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_upload] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_user
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_user]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_user] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_usergroup
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_usergroup]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_usergroup] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table pt_userinfo
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[pt_userinfo]
+-- ----------------------------
+ALTER TABLE [dbo].[pt_userinfo] ADD PRIMARY KEY ([ids])
+GO
+
+-- ----------------------------
+-- Indexes structure for table test_blog
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table [dbo].[test_blog]
+-- ----------------------------
+ALTER TABLE [dbo].[test_blog] ADD PRIMARY KEY ([ids])
+GO
