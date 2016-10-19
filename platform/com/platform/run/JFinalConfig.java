@@ -224,9 +224,9 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		
 		log.info("configInterceptor 配置开启事物规则");
 		interceptors.add(new TxByMethods("save", "update", "delete"));
-		interceptors.add(new TxByMethodRegex("(.*save.*|.*update.*|.*delete.*)")); // 2.1只支持单实例添加，多方法名匹配使用一个正则匹配
-		interceptors.add(new TxByActionKeys("/wx/message", "/wx/message/index"));
-		interceptors.add(new TxByActionKeyRegex("/wx/message.*"));
+		interceptors.add(new TxByMethodRegex("(.*save.*|.*update.*|.*delete.*)")); // 2.1开始只支持单实例添加，多方法名匹配使用一个正则匹配
+		interceptors.add(new TxByActionKeys("/test/user/save", "/test/user/delete"));
+		interceptors.add(new TxByActionKeyRegex("/test/user.*"));
 
 		log.info("configInterceptor i18n拦截器");
 		interceptors.add(new I18nInterceptor());
@@ -279,11 +279,13 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 
 	/**
 	 * 运行此 main 方法可以启动项目
+	 * 
 	 * 说明：
-	 * 1. linux 下非root账户运行端口要>1024
-	 * 2. idea 中运行webAppDir路径可能需要适当调整，可以设置为WebContent的绝对路径
+	 * 		1. linux 下非root账户运行端口要>1024
+	 * 		2. idea 中运行webAppDir路径可能需要适当调整
 	 */
 	public static void main(String[] args) {
 		JFinal.start("WebContent", 8899, "/", 5);
 	}
+	
 }
