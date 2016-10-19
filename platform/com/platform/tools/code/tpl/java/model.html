@@ -8,7 +8,7 @@ import com.platform.mvc.base.BaseModel;
 import ${dataType}; 
 <% } %>
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 /**
  * ${colunmList[0].table_desc} model
@@ -20,7 +20,7 @@ public class ${className} extends BaseModel<${className}> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(${className}.class);
+	private static final Log log = Log.getLog(${className}.class);
 	
 	public static final ${className} dao = new ${className}();
 

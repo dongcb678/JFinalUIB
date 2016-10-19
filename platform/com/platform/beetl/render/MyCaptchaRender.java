@@ -1,7 +1,6 @@
 package com.platform.beetl.render;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.render.Render;
 import com.platform.tools.ToolRandoms;
 
@@ -11,7 +10,8 @@ import com.platform.tools.ToolRandoms;
  */
 public class MyCaptchaRender extends Render {
 
-	private static Logger log = Logger.getLogger(MyCaptchaRender.class);
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(MyCaptchaRender.class);
 
 	@Override
 	public void render() {

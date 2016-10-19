@@ -3,8 +3,7 @@ package com.platform.thread;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.mvc.resources.Resources;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolOS;
@@ -15,7 +14,7 @@ import com.platform.tools.ToolOS;
  */
 public class TimerResources extends Timer {
 
-	private static Logger log = Logger.getLogger(TimerResources.class);
+	private static final Log log = Log.getLog(TimerResources.class);
 	
 	/**
 	 * 定时任务对象

@@ -1,14 +1,13 @@
 package com.platform.mvc.group;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 import com.platform.mvc.base.BaseValidator;
 
 public class GroupValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(GroupValidator.class);
+	private static final Log log = Log.getLog(GroupValidator.class);
 
 	@SuppressWarnings("unused")
 	private GroupService groupService;

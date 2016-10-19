@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.constant.ConstantInit;
@@ -21,7 +20,7 @@ import com.platform.tools.code.run.ColumnDto;
  */
 public class OracleHandler extends BaseHandler {
 
-	private static Logger log = Logger.getLogger(OracleHandler.class);
+	private static final Log log = Log.getLog(OracleHandler.class);
 	
 	public OracleHandler() {
     	String db_type = PropKit.get(ConstantInit.db_type_key);

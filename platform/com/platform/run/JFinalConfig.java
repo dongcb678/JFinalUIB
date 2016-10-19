@@ -1,6 +1,5 @@
 package com.platform.run;
 
-import org.apache.log4j.Logger;
 import org.beetl.ext.jfinal.BeetlRenderFactory;
 
 import com.alibaba.druid.filter.stat.StatFilter;
@@ -15,6 +14,7 @@ import com.jfinal.core.JFinal;
 import com.jfinal.i18n.I18nInterceptor;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
@@ -56,7 +56,7 @@ import com.platform.tools.ToolString;
  */
 public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	
-	private static Logger log = Logger.getLogger(JFinalConfig.class);
+	private static final Log log = Log.getLog(JFinalConfig.class);
 	
 	/**
 	 * 配置常量

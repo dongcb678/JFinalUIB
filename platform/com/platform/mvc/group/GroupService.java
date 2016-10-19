@@ -2,8 +2,7 @@ package com.platform.mvc.group;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.grouprole.GroupRoleService;
@@ -14,7 +13,7 @@ import com.platform.mvc.usergroup.UserGroup;
 public class GroupService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(GroupService.class);
+	private static final Log log = Log.getLog(GroupService.class);
 
 	public static final String serviceName = "groupService";
 

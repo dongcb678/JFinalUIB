@@ -1,16 +1,10 @@
 package com.platform.mvc.group;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
-import com.platform.mvc.base.BaseService;
 
 /**
  * 人员分组管理
@@ -20,7 +14,7 @@ import com.platform.mvc.base.BaseService;
 @Controller("/platform/group")
 public class GroupController extends BaseController {
 
-	private static Logger log = Logger.getLogger(GroupController.class);
+	private static final Log log = Log.getLog(GroupController.class);
 	
 	private GroupService groupService;
 	

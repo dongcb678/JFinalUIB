@@ -3,6 +3,7 @@ package com.platform.mvc.base;
 import java.lang.reflect.Field;
 
 import com.jfinal.aop.Invocation;
+import com.jfinal.log.Log;
 import com.jfinal.validate.Validator;
 import com.platform.plugin.ServicePlugin;
 import com.platform.tools.ToolString;
@@ -12,6 +13,9 @@ import com.platform.tools.ToolString;
  * @author 董华健  dongcb678@163.com
  */
 public abstract class BaseValidator extends Validator {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(BaseValidator.class);
 	
 	protected BaseService baseService;		// Service
 	

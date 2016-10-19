@@ -10,6 +10,7 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.jfinal.log.Log;
 import com.platform.beetl.render.image.Captcha;
 import com.platform.beetl.render.image.GifEncoder;
 import com.platform.beetl.render.image.Randoms;
@@ -18,7 +19,10 @@ import com.platform.interceptor.AuthInterceptor;
 import com.platform.tools.ToolDateTime;
 
 public class GifCaptcha extends Captcha {
-	
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(GifCaptcha.class);
+
 	public GifCaptcha() {
 		
 	}

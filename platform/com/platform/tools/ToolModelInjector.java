@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jfinal.core.Injector;
 import com.jfinal.kit.StrKit;
+import com.jfinal.log.Log;
 import com.platform.mvc.base.BaseModel;
 
 /**
@@ -31,7 +32,10 @@ import com.platform.mvc.base.BaseModel;
  * 		List<Group> groupList = ToolModelInjector.injectModels(getRequest(), Group.class); // 默认的prefix是Model类的首字母小写加上List
  */
 public class ToolModelInjector {
-	
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolModelInjector.class);
+
 	/**
 	 * 将页面中的数组对象转换成List
 	 * @param request

@@ -10,8 +10,7 @@ import java.io.FileOutputStream;
 
 import javax.imageio.ImageIO;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
@@ -23,7 +22,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 public abstract class ToolImagePressText {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolImagePressText.class);
+	private static final Log log = Log.getLog(ToolImagePressText.class);
 
 	/**
 	 * 把图片印刷到图片上

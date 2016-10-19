@@ -5,9 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Enhancer;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.platform.annotation.Service;
@@ -20,8 +19,8 @@ import com.platform.tools.ToolClassSearch;
  */
 public class ServicePlugin implements IPlugin {
 
-    protected static final Logger log = Logger.getLogger(ServicePlugin.class);
-    
+	private static final Log log = Log.getLog(ServicePlugin.class);
+
     /**
      * 存放service实例
      */

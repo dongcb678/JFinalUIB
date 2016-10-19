@@ -1,13 +1,13 @@
 package com.junit;
 
-import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 
+import com.jfinal.log.Log;
 import com.platform.run.ConfigCore;
 
 public class TestBase {
 
-	private static Logger log = Logger.getLogger(TestBase.class);
+	private static final Log log = Log.getLog(TestBase.class);
 	
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {

@@ -1,9 +1,9 @@
 package com.platform.beetl.func;
 
-import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantWebContext;
 import com.platform.interceptor.AuthInterceptor;
 import com.platform.mvc.operator.Operator;
@@ -15,7 +15,7 @@ import com.platform.mvc.syslog.Syslog;
  */
 public class AuthUrl implements Function {
 
-	private static Logger log = Logger.getLogger(AuthUrl.class);
+	private static final Log log = Log.getLog(AuthUrl.class);
 	
 	/**
 	 * 页面按钮权限验证

@@ -1,9 +1,7 @@
 package com.platform.mvc.menu;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.operator.Operator;
 
@@ -17,7 +15,7 @@ public class Menu extends BaseModel<Menu> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(Menu.class);
+	private static final Log log = Log.getLog(Menu.class);
 	
 	public static final Menu dao = new Menu();
 

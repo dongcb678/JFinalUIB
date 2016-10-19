@@ -10,6 +10,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
+import com.jfinal.log.Log;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
@@ -22,7 +23,10 @@ import com.thoughtworks.xstream.mapper.MapperWrapper;
  * @author 董华健
  */
 public abstract class ToolXml {
-	
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolXml.class);
+
 	/**
 	 * 获取XStream对象
 	 * @return

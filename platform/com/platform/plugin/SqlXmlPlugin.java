@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolClassSearch;
@@ -27,7 +27,7 @@ import com.platform.tools.ToolDirFile;
  */
 public class SqlXmlPlugin implements IPlugin {
 
-    protected static final Logger log = Logger.getLogger(SqlXmlPlugin.class);
+	private static final Log log = Log.getLog(SqlXmlPlugin.class);
     
     /**
      * sql放入cache中时的key前缀

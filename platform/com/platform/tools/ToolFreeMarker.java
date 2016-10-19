@@ -10,7 +10,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
@@ -24,7 +24,7 @@ import freemarker.template.TemplateException;
  */
 public abstract class ToolFreeMarker {
 
-	private static Logger log = Logger.getLogger(ToolFreeMarker.class);
+	private static final Log log = Log.getLog(ToolFreeMarker.class);
 	
 	/**
 	 * 渲染模板

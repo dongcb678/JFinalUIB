@@ -2,10 +2,8 @@ package com.platform.mvc.syslog;
 
 import java.sql.Timestamp;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 
 /**
@@ -18,7 +16,7 @@ public class Syslog extends BaseModel<Syslog> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 
-	private static Logger log = Logger.getLogger(Syslog.class);
+	private static final Log log = Log.getLog(Syslog.class);
 	
 	public static final Syslog dao = new Syslog();
 

@@ -1,8 +1,7 @@
 package com.platform.run;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
@@ -17,10 +16,10 @@ import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
 import com.platform.plugin.I18NPlugin;
-import com.platform.plugin.TableScan;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.plugin.ServicePlugin;
 import com.platform.plugin.SqlXmlPlugin;
+import com.platform.plugin.TableScan;
 import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolDataBase;
@@ -32,7 +31,7 @@ import com.platform.tools.ToolDataBase;
  */
 public class ConfigCore {
 
-	private static Logger log = Logger.getLogger(ConfigCore.class);
+	private static final Log log = Log.getLog(ConfigCore.class);
 
 	private static volatile ConfigCore configCore;
 	

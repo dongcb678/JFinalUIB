@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.platform.annotation.Service;
 import com.platform.dto.ZtreeNode;
@@ -21,7 +21,7 @@ import com.platform.tools.security.ToolPbkdf2;
 @Service(name = UserService.serviceName)
 public class UserService extends BaseService {
 
-	private static Logger log = Logger.getLogger(UserService.class);
+	private static final Log log = Log.getLog(UserService.class);
 
 	public static final String serviceName = "userService";
 

@@ -5,12 +5,16 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import com.jfinal.log.Log;
+
 /**
  * SQL格式化处理
  * @author 董华健
  */
 @SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 public abstract class ToolFormatSql {
+
+	private static final Log log = Log.getLog(ToolFormatSql.class);
 
 	/**
 	 * sql格式化方法

@@ -2,9 +2,8 @@ package com.platform.mvc.grouprole;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.Ret;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
@@ -17,7 +16,7 @@ import com.platform.tools.ToolCache;
 public class GroupRoleService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(GroupRoleService.class);
+	private static final Log log = Log.getLog(GroupRoleService.class);
 	
 	public static final String serviceName = "groupRoleService";
 

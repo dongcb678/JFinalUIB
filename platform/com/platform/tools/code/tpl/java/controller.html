@@ -5,8 +5,7 @@ import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.aop.Before;
 
 /**
@@ -26,7 +25,7 @@ import com.jfinal.aop.Before;
 public class ${className}Controller extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(${className}Controller.class);
+	private static final Log log = Log.getLog(${className}Controller.class);
 	
 	private ${className}Service ${classNameSmall}Service;
 	

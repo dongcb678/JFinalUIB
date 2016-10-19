@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
 
@@ -15,6 +16,9 @@ import com.platform.dto.DataBase;
  * @author 董华健
  */
 public abstract class ToolDataBase {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolDataBase.class);
 
 	/**
 	 * 分解数据库连接url

@@ -24,8 +24,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
@@ -37,7 +36,7 @@ import com.jfinal.plugin.activerecord.Table;
  */
 public abstract class Dialect {
 
-	private static Logger log = Logger.getLogger(Dialect.class);
+	private static final Log log = Log.getLog(Dialect.class);
 	
 	// Methods for common
 	public abstract String forTableBuilderDoBuild(String tableName);

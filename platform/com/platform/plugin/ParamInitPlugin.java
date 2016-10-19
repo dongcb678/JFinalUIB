@@ -3,9 +3,8 @@ package com.platform.plugin;
 import java.text.MessageFormat;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantRender;
@@ -27,7 +26,7 @@ import com.platform.tools.ToolSqlXml;
  */
 public class ParamInitPlugin implements IPlugin {
 	
-	private static Logger log = Logger.getLogger(ParamInitPlugin.class);
+	private static final Log log = Log.getLog(ParamInitPlugin.class);
 
 	/**
 	 * 数据批处理大小，每批次处理一万行

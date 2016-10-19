@@ -8,12 +8,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantAuth;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantWebContext;
@@ -38,7 +38,7 @@ import com.platform.tools.security.ToolIDEA;
  */
 public class AuthInterceptor implements Interceptor {
 
-	private static Logger log = Logger.getLogger(AuthInterceptor.class);
+	private static final Log log = Log.getLog(AuthInterceptor.class);
 
 	@Override
 	public void intercept(Invocation invoc) {

@@ -50,7 +50,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+
+import com.jfinal.log.Log;
 
 /**
  * HTTP请求相关
@@ -59,7 +60,7 @@ import org.apache.log4j.Logger;
 @SuppressWarnings("deprecation")
 public abstract class ToolHttp {
 
-	private static Logger log = Logger.getLogger(ToolHttp.class);
+	private static final Log log = Log.getLog(ToolHttp.class);
 
 	/**
 	 * HTTP请求方法GET
@@ -159,7 +160,7 @@ public abstract class ToolHttp {
 				}
 			}
 		} catch (UnsupportedEncodingException e) {
-			log.error(e);
+			log.error(e.getMessage());
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 			log.error("连接超时：" + url);

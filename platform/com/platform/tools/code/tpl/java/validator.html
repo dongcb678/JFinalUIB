@@ -1,7 +1,6 @@
 package ${package};
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.core.Controller;
 
 import com.platform.mvc.base.BaseValidator;
@@ -9,7 +8,7 @@ import com.platform.mvc.base.BaseValidator;
 public class ${className}Validator extends BaseValidator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(${className}Validator.class);
+	private static final Log log = Log.getLog(${className}Validator.class);
 	
 	@SuppressWarnings("unused")
 	private ${className}Service ${classNameSmall}Service;

@@ -3,7 +3,7 @@ package com.platform.tools;
 import java.util.Random;
 import java.util.UUID;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 /**
  * 随机数类
@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 public abstract class ToolRandoms {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolRandoms.class);
+	private static final Log log = Log.getLog(ToolRandoms.class);
 
 	private static final Random random = new Random();
 

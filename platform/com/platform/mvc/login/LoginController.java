@@ -1,8 +1,7 @@
 package com.platform.mvc.login;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.constant.ConstantLogin;
 import com.platform.constant.ConstantWebContext;
@@ -19,7 +18,7 @@ import com.platform.tools.security.ToolIDEA;
 public class LoginController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(LoginController.class);
+	private static final Log log = Log.getLog(LoginController.class);
 	
 	private LoginService loginService;
 	

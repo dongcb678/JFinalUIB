@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 /**
  * Log4j在线查看
@@ -21,7 +21,7 @@ public class Log4j extends HttpServlet {
 
 	private static final long serialVersionUID = -260157400324419618L;
 
-	private static Logger log = Logger.getLogger(Log4j.class);
+	private static final Log log = Log.getLog(Log4j.class);
 	
 	/**
 	 * 将客户端注册到监听Logger的消息队列中

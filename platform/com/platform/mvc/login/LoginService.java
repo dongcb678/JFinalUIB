@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
@@ -28,7 +28,7 @@ import com.platform.tools.security.ToolPbkdf2;
 public class LoginService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(LoginService.class);
+	private static final Log log = Log.getLog(LoginService.class);
 
 	public static final String serviceName = "loginService";
 

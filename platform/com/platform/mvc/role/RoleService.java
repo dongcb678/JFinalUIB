@@ -1,7 +1,6 @@
 package com.platform.mvc.role;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 
@@ -9,7 +8,7 @@ import com.platform.mvc.base.BaseService;
 public class RoleService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(RoleService.class);
+	private static final Log log = Log.getLog(RoleService.class);
 
 	public static final String serviceName = "roleService";
 

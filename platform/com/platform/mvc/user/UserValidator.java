@@ -2,16 +2,15 @@ package com.platform.mvc.user;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 import com.platform.mvc.base.BaseValidator;
 import com.platform.tools.ToolDateTime;
 
 @SuppressWarnings({"unused", "deprecation"})
 public class UserValidator extends BaseValidator {
 
-	private static Logger log = Logger.getLogger(UserValidator.class);
+	private static final Log log = Log.getLog(UserValidator.class);
 
 	private UserService userService;
 	

@@ -23,7 +23,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 /**
  * 邮件发送
@@ -36,7 +36,7 @@ import org.apache.log4j.Logger;
  */
 public class ToolMail {
 	
-	private static Logger log = Logger.getLogger(ToolMail.class);
+	private static final Log log = Log.getLog(ToolMail.class);
 
 	public static final String sendType_text = "text";
 
@@ -114,7 +114,7 @@ public class ToolMail {
  */
 class SendMail extends Thread {
 
-	private static Logger log = Logger.getLogger(SendMail.class);
+	private static final Log log = Log.getLog(SendMail.class);
 	
 	private String sendType;		// 发送邮件的类型：text 、html
 	

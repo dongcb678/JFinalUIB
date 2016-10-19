@@ -8,11 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.render.JsonRender;
 import com.platform.constant.ConstantInit;
@@ -34,7 +33,7 @@ import com.platform.tools.ToolWeb;
  */
 public abstract class BaseController extends Controller {
 
-	private static Logger log = Logger.getLogger(BaseController.class);
+	private static final Log log = Log.getLog(BaseController.class);
 
 	/**
 	 * 全局Service

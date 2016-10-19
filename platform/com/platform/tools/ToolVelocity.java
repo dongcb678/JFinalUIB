@@ -14,6 +14,8 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
+import com.jfinal.log.Log;
+
 import freemarker.template.TemplateException;
 
 /**
@@ -21,6 +23,9 @@ import freemarker.template.TemplateException;
  * @author 董华健
  */
 public abstract class ToolVelocity {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolVelocity.class);
 
 	/**
 	 * 渲染模板

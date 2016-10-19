@@ -3,8 +3,7 @@ package com.platform.thread;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.mvc.syslog.Syslog;
 
 /**
@@ -12,7 +11,7 @@ import com.platform.mvc.syslog.Syslog;
  */
 public class ThreadSysLog {
 
-	private static Logger log = Logger.getLogger(ThreadSysLog.class);
+	private static final Log log = Log.getLog(ThreadSysLog.class);
 	
 //	private static final int queueSize = 5000; // 入库队列大小
 	private static boolean threadRun = true; // 线程是否运行

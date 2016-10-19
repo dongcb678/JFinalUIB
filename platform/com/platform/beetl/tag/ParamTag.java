@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.beetl.core.Tag;
 
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantWebContext;
 import com.platform.mvc.param.Param;
 import com.platform.plugin.I18NPlugin;
@@ -18,7 +18,7 @@ import com.platform.plugin.I18NPlugin;
  */
 public class ParamTag extends Tag {
 
-	private static Logger log = Logger.getLogger(ParamTag.class);
+	private static final Log log = Log.getLog(ParamTag.class);
 
 	@SuppressWarnings("unchecked")
 	@Override

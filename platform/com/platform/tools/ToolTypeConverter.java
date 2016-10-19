@@ -2,11 +2,11 @@ package com.platform.tools;
 
 import java.math.BigDecimal;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 public class ToolTypeConverter {
 
-	private static Logger log = Logger.getLogger(ToolTypeConverter.class);
+	private static final Log log = Log.getLog(ToolTypeConverter.class);
 	
 	/**
 	 * 数据类型解析

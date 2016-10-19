@@ -1,14 +1,13 @@
 package com.platform.mvc.stationoperator;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 import com.platform.mvc.base.BaseValidator;
 
 public class StationOperatorValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(StationOperatorValidator.class);
+	private static final Log log = Log.getLog(StationOperatorValidator.class);
 
 	@SuppressWarnings("unused")
 	private StationOperatorService stationOperatorService;

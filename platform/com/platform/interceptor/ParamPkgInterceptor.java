@@ -5,10 +5,9 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantWebContext;
 import com.platform.dto.SplitPage;
 import com.platform.mvc.base.BaseController;
@@ -26,7 +25,7 @@ import com.platform.tools.ToolTypeConverter;
  */
 public class ParamPkgInterceptor implements Interceptor {
 	
-	private static Logger log = Logger.getLogger(ParamPkgInterceptor.class);
+	private static final Log log = Log.getLog(ParamPkgInterceptor.class);
 	
 	@Override
 	public void intercept(Invocation invoc) {
@@ -230,7 +229,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			if(null == value
 					|| BaseService.class.isAssignableFrom(type)
 					|| (String.class.isAssignableFrom(type) && ((String)value).isEmpty())
-					|| Logger.class.isAssignableFrom(type)){
+					|| Log.class.isAssignableFrom(type)){
 				log.debug("参数值为空，获取类型不符，直接结束");
 				return;
 			}

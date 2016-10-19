@@ -1,12 +1,10 @@
 package com.test.mvc.blog;
 
+import java.sql.Timestamp;
+
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
-
-import java.sql.Timestamp; 
-
-import org.apache.log4j.Logger;
 
 /**
  * 博客表 model
@@ -18,7 +16,7 @@ public class Blog extends BaseModel<Blog> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(Blog.class);
+	private static final Log log = Log.getLog(Blog.class);
 	
 	public static final Blog dao = new Blog();
 	

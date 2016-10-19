@@ -1,21 +1,21 @@
 package com.platform.tools;
 
-import java.io.BufferedReader;  
-import java.io.File;  
-import java.io.FileInputStream;  
-import java.io.FileNotFoundException;  
-import java.io.FileOutputStream;  
-import java.io.IOException;  
-import java.io.InputStream;  
-import java.io.InputStreamReader;  
-import java.io.UnsupportedEncodingException;  
-import java.util.HashMap;  
-import java.util.Iterator;  
-import java.util.Map;  
-import java.util.regex.Matcher;  
-import java.util.regex.Pattern;  
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
   
 /**
  * 代码注释处理：清除注释 
@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 public abstract class ToolComment {  
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolComment.class);
+	private static final Log log = Log.getLog(ToolComment.class);
 	
 	public static String basePath = "C:\\Users\\Administrator\\Desktop\\SSHD\\";
 	

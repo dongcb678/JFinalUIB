@@ -7,10 +7,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.handler.Handler;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantWebContext;
 import com.platform.mvc.syslog.Syslog;
@@ -27,7 +26,7 @@ import com.platform.tools.ToolWeb;
  */
 public class GlobalHandler extends Handler {
 	
-	private static Logger log = Logger.getLogger(GlobalHandler.class);
+	private static final Log log = Log.getLog(GlobalHandler.class);
 
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {

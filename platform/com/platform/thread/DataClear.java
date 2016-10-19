@@ -4,8 +4,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.mvc.resources.ResourcesService;
 import com.platform.mvc.syslog.SysLogService;
 import com.platform.plugin.ServicePlugin;
@@ -17,7 +16,7 @@ import com.platform.tools.ToolDateTime;
  */
 public class DataClear extends Timer {
 
-	private static Logger log = Logger.getLogger(DataClear.class);
+	private static final Log log = Log.getLog(DataClear.class);
 	
 	/**
 	 * 定时任务对象

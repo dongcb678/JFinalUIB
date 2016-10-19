@@ -10,9 +10,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.beetl.core.BeetlKit;
 
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantRender;
 import com.platform.plugin.SqlXmlPlugin;
 
@@ -23,7 +23,7 @@ import com.platform.plugin.SqlXmlPlugin;
  */
 public abstract class ToolSqlXml {
 
-    protected static final Logger log = Logger.getLogger(ToolSqlXml.class);
+	private static final Log log = Log.getLog(ToolSqlXml.class);
 
     /**
      * 过滤掉的sql关键字

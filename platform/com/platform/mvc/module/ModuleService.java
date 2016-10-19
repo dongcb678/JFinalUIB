@@ -3,8 +3,7 @@ package com.platform.mvc.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
@@ -16,7 +15,7 @@ import com.platform.mvc.base.BaseService;
 public class ModuleService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ModuleService.class);
+	private static final Log log = Log.getLog(ModuleService.class);
 
 	public static final String serviceName = "moduleService";
 

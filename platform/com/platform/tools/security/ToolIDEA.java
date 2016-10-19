@@ -10,10 +10,10 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantInit;
 import com.platform.tools.ToolString;
 
@@ -24,7 +24,7 @@ import com.platform.tools.ToolString;
  */
 public class ToolIDEA {
 
-	private static Logger log = Logger.getLogger(ToolIDEA.class);
+	private static final Log log = Log.getLog(ToolIDEA.class);
 
 	/**
 	 * 密钥算法

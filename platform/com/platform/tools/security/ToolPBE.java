@@ -10,7 +10,8 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
+
+import com.jfinal.log.Log;
 
 /**
  * PBE安全编码组件
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
 public class ToolPBE {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolPBE.class);
+	private static final Log log = Log.getLog(ToolPBE.class);
 
 	/**
 	 * Java 6 支持以下任意一种算法

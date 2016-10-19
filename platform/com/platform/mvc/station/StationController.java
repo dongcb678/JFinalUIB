@@ -2,9 +2,8 @@ package com.platform.mvc.station;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
@@ -17,7 +16,7 @@ import com.platform.mvc.base.BaseController;
 public class StationController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(StationController.class);
+	private static final Log log = Log.getLog(StationController.class);
 	
 	private StationService stationService;
 	

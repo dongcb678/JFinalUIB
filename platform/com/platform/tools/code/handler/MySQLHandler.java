@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.Db;
@@ -26,7 +25,7 @@ import com.platform.tools.code.run.ColumnDto;
  */
 public class MySQLHandler extends BaseHandler {
 
-	private static Logger log = Logger.getLogger(MySQLHandler.class);
+	private static final Log log = Log.getLog(MySQLHandler.class);
 
 	public MySQLHandler() {
     	String db_type = PropKit.get(ConstantInit.db_type_key);

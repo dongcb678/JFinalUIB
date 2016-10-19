@@ -1,8 +1,7 @@
 package com.platform.mvc.systems;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
@@ -15,7 +14,7 @@ import com.platform.mvc.base.BaseModel;
 public class SystemsController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(SystemsController.class);
+	private static final Log log = Log.getLog(SystemsController.class);
 	
 	private SystemsService systemsService;
 	

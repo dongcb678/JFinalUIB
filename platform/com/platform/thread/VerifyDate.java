@@ -2,7 +2,7 @@ package com.platform.thread;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 /**
  * 时间校验检测
@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
  */
 public class VerifyDate extends Thread {
 
-	private static Logger log = Logger.getLogger(VerifyDate.class);
+	private static final Log log = Log.getLog(VerifyDate.class);
 	
 	private static final long interval = 1000 * 60 * 10; // 10 分钟
 	

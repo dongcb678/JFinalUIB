@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jfinal.log.Log;
 import com.platform.beetl.render.image.Captcha;
 import com.platform.beetl.render.image.Randoms;
 import com.platform.beetl.render.image.Streams;
@@ -18,6 +19,9 @@ import com.platform.interceptor.AuthInterceptor;
 import com.platform.tools.ToolDateTime;
 
 public class PngCaptcha extends Captcha {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(PngCaptcha.class);
 	
 	public PngCaptcha() {
 	}

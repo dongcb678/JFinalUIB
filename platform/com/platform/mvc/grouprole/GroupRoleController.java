@@ -1,8 +1,7 @@
 package com.platform.mvc.grouprole;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.Ret;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 
@@ -14,7 +13,7 @@ import com.platform.mvc.base.BaseController;
 public class GroupRoleController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(GroupRoleController.class);
+	private static final Log log = Log.getLog(GroupRoleController.class);
 
 	private GroupRoleService groupRoleService;
 	

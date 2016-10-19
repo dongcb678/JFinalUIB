@@ -20,8 +20,7 @@ import java.io.OutputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -34,7 +33,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 public abstract class ToolImageResize {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolImageResize.class);
+	private static final Log log = Log.getLog(ToolImageResize.class);
 
 	public static final MediaTracker tracker = new MediaTracker(new Component() {
 		private static final long serialVersionUID = 1234162663955668507L;

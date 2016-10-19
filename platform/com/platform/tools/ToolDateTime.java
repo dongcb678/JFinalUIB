@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 /**
  * 日期时间相关
@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class ToolDateTime {
 
-	private static Logger log = Logger.getLogger(ToolDateTime.class);
+	private static final Log log = Log.getLog(ToolDateTime.class);
 
 	public static final String pattern_ym = "yyyy-MM"; // pattern_ym
 	public static final int pattern_ym_length = 7;

@@ -2,8 +2,7 @@ package com.platform.mvc.roleoperator;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
@@ -18,7 +17,7 @@ import com.platform.mvc.role.Role;
 public class RoleOperatorService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(RoleOperatorService.class);
+	private static final Log log = Log.getLog(RoleOperatorService.class);
 	
 	public static final String serviceName = "roleOperatorService";
 

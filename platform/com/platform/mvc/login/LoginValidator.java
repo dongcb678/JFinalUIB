@@ -1,14 +1,13 @@
 package com.platform.mvc.login;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 import com.platform.mvc.base.BaseValidator;
 
 public class LoginValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(LoginValidator.class);
+	private static final Log log = Log.getLog(LoginValidator.class);
 
 	@SuppressWarnings("unused")
 	private LoginService loginService;

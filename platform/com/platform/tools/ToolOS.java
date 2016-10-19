@@ -6,8 +6,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.sun.management.OperatingSystemMXBean;
 
 /**
@@ -18,7 +17,7 @@ import com.sun.management.OperatingSystemMXBean;
 public abstract class ToolOS {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolOS.class);
+	private static final Log log = Log.getLog(ToolOS.class);
 
 	public static final String java_version = "java.version"; // Java的运行环境版本
 	public static final String java_vendo = "java.vendor"; // Java的运行环境供应商

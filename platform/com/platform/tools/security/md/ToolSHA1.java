@@ -4,11 +4,16 @@ import java.security.MessageDigest;
 
 import org.bouncycastle.util.encoders.Hex;
 
+import com.jfinal.log.Log;
+
 /**
  * SHA-1加密
  */
 public class ToolSHA1 {
-	
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolSHA1.class);
+
 	/**
 	 * SHA-1加密
 	 * 

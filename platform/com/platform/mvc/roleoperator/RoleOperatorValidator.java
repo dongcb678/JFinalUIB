@@ -1,14 +1,13 @@
 package com.platform.mvc.roleoperator;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 import com.platform.mvc.base.BaseValidator;
 
 public class RoleOperatorValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(RoleOperatorValidator.class);
+	private static final Log log = Log.getLog(RoleOperatorValidator.class);
 
 	@SuppressWarnings("unused")
 	private RoleOperatorService roleOperatorService;

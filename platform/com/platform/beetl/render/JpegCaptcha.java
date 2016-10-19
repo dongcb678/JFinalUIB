@@ -15,15 +15,14 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.interceptor.AuthInterceptor;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolRandoms;
 
 public class JpegCaptcha {
 
-	private static Logger log = Logger.getLogger(JpegCaptcha.class);
+	private static final Log log = Log.getLog(JpegCaptcha.class);
 
 	// 定义图形验证码中绘制字符的字体
 	// private final Font mFont = new Font("Arial Black", Font.PLAIN, 16);

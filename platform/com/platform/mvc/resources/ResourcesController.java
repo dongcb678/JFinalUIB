@@ -1,7 +1,6 @@
 package com.platform.mvc.resources;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 import com.platform.plugin.ParamInitPlugin;
@@ -15,7 +14,7 @@ import com.platform.plugin.SqlXmlPlugin;
 @Controller("/platform/resources")
 public class ResourcesController extends BaseController {
 	
-	private static Logger log = Logger.getLogger(ResourcesController.class);
+	private static final Log log = Log.getLog(ResourcesController.class);
 
 	private ResourcesService resourcesService;
 	

@@ -3,8 +3,7 @@ package com.platform.mvc.operator;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Service;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
@@ -14,7 +13,7 @@ import com.platform.mvc.module.Module;
 public class OperatorService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(OperatorService.class);
+	private static final Log log = Log.getLog(OperatorService.class);
 
 	public static final String serviceName = "operatorService";
 

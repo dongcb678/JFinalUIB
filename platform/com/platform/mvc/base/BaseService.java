@@ -6,10 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -29,7 +28,7 @@ import com.platform.tools.ToolString;
 @Service(name = BaseService.baseServiceName)
 public class BaseService {
 
-	private static Logger log = Logger.getLogger(BaseService.class);
+	private static final Log log = Log.getLog(BaseService.class);
 	
 	public static final String baseServiceName = "baseService";
 

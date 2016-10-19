@@ -1,14 +1,13 @@
 package com.platform.mvc.dept;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 import com.platform.mvc.base.BaseValidator;
 
 public class DepartmentValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(DepartmentValidator.class);
+	private static final Log log = Log.getLog(DepartmentValidator.class);
 
 	@SuppressWarnings("unused")
 	private DepartmentService departmentService;

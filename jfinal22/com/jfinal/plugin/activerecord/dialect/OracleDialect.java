@@ -22,10 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.log4j.Logger;
-
 import java.util.Set;
 
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.Table;
@@ -35,7 +34,7 @@ import com.jfinal.plugin.activerecord.Table;
  */
 public class OracleDialect extends Dialect {
 
-	private static Logger log = Logger.getLogger(OracleDialect.class);
+	private static final Log log = Log.getLog(OracleDialect.class);
 	
 	public String forTableBuilderDoBuild(String tableName) {
 		return "select * from " + tableName + " where rownum < 1";

@@ -5,10 +5,15 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.jfinal.log.Log;
+
 /**
  * MAC加密组件
  */
 public abstract class ToolMAC {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolMAC.class);
 
 	/**
 	 * 初始化HmacMD5密钥

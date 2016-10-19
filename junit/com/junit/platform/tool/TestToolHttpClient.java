@@ -6,14 +6,14 @@ import java.util.Map;
 
 import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import com.jfinal.log.Log;
 import com.platform.tools.ToolHttp;
 
 public class TestToolHttpClient {
 
-	private static Logger log = Logger.getLogger(TestToolHttpClient.class);
+	private static final Log log = Log.getLog(TestToolHttpClient.class);
 
 	/**
 	 * 方法1：建议使用此方法

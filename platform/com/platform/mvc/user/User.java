@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.dept.Department;
@@ -25,7 +24,7 @@ public class User extends BaseModel<User> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(User.class);
+	private static final Log log = Log.getLog(User.class);
 	
 	public static final User dao = new User();
 

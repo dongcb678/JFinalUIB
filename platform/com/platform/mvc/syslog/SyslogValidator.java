@@ -1,14 +1,13 @@
 package com.platform.mvc.syslog;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 import com.platform.mvc.base.BaseValidator;
 
 public class SyslogValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(SyslogValidator.class);
+	private static final Log log = Log.getLog(SyslogValidator.class);
 
 	@SuppressWarnings("unused")
 	private SysLogService sysLogService;

@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.beetl.core.BeetlKit;
 
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.platform.constant.ConstantInit;
 import com.platform.tools.code.run.ColumnDto;
@@ -27,6 +28,9 @@ import com.platform.tools.code.run.GenerateCode;
  */
 public abstract class BaseHandler {
 
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(BaseHandler.class);
+	
 	/**
 	 * 获取表的所有字段信息
 	 * @param tableName

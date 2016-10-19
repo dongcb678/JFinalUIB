@@ -25,9 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
-import org.apache.log4j.Logger;
 
 import com.jfinal.kit.PathKit;
+import com.jfinal.log.Log;
 
 /**
  * 文件和目录相关
@@ -36,7 +36,7 @@ import com.jfinal.kit.PathKit;
  */
 public abstract class ToolDirFile {
 
-	private static Logger log = Logger.getLogger(ToolDirFile.class);
+	private static final Log log = Log.getLog(ToolDirFile.class);
 
 	private static String libPath;
 	private static String classesPath;

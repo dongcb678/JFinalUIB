@@ -12,7 +12,7 @@ import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 /**
  * 图片裁剪
@@ -20,7 +20,8 @@ import org.apache.log4j.Logger;
  */
 public abstract class ToolImageTailor {
 
-	static Logger log = Logger.getLogger(ToolImageTailor.class);
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolImageTailor.class);
 
 	/**
 	 * 裁剪

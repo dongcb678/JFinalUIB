@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.beetl.core.BeetlKit;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
 import org.beetl.ext.jfinal.BeetlRenderFactory;
 
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.beetl.format.DateFormat;
 import com.platform.beetl.func.AuthUrl;
 import com.platform.beetl.func.EscapeXml;
@@ -27,7 +27,7 @@ import com.platform.constant.ConstantInit;
  */
 public abstract class ToolBeetl {
 
-	private static Logger log = Logger.getLogger(ToolBeetl.class);
+	private static final Log log = Log.getLog(ToolBeetl.class);
 
 	/**
 	 * 模板扩展

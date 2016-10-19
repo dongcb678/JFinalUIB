@@ -2,10 +2,15 @@ package com.platform.tools.security.md;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.jfinal.log.Log;
+
 /**
  * SHA加密组件
  */
 public abstract class ToolSHA2_Codec {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolSHA2_Codec.class);
 
 	/**
 	 * SHA256加密

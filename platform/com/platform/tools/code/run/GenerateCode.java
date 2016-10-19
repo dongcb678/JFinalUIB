@@ -2,9 +2,8 @@ package com.platform.tools.code.run;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantInit;
 import com.platform.run.ConfigCore;
 import com.platform.tools.ToolString;
@@ -25,7 +24,7 @@ import com.platform.tools.code.handler.SqlServerHandler;
  */
 public class GenerateCode {
 
-	private static Logger log = Logger.getLogger(GenerateCode.class);
+	private static final Log log = Log.getLog(GenerateCode.class);
 
 	/**
 	 * <blockquote><pre>

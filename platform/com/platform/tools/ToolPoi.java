@@ -5,13 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.jfinal.kit.PathKit;
+import com.jfinal.log.Log;
 import com.platform.plugin.ParamInitPlugin;
 
 /**
@@ -21,7 +21,7 @@ import com.platform.plugin.ParamInitPlugin;
  */
 public abstract class ToolPoi {
 
-	private static Logger log = Logger.getLogger(ParamInitPlugin.class);
+	private static final Log log = Log.getLog(ParamInitPlugin.class);
 
 	/**
 	 * excel导出

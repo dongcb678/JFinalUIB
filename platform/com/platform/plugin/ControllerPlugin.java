@@ -2,9 +2,8 @@ package com.platform.plugin;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.config.Routes;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
@@ -17,7 +16,7 @@ import com.platform.tools.ToolClassSearch;
  */
 public class ControllerPlugin implements IPlugin {
 
-	protected final Logger log = Logger.getLogger(getClass());
+	private static final Log log = Log.getLog(ControllerPlugin.class);
 
 	private Routes routes;
 

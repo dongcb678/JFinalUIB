@@ -4,12 +4,17 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
+import com.jfinal.log.Log;
+
 /**
  * Html处理
  * @author 董华健
  */
 public abstract class ToolHtml {
-	
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolHtml.class);
+
 	/**
 	 * 特殊字符转义，避免XSS
 	 * @param content

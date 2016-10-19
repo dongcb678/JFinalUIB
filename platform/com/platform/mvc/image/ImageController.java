@@ -1,7 +1,6 @@
 package com.platform.mvc.image;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 
@@ -13,7 +12,7 @@ import com.platform.mvc.base.BaseController;
 public class ImageController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ImageController.class);
+	private static final Log log = Log.getLog(ImageController.class);
 
 	private ImageService imageService;
 	

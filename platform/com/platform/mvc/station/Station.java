@@ -1,12 +1,8 @@
 package com.platform.mvc.station;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
-import com.platform.mvc.user.UserInfo;
-import com.platform.plugin.ParamInitPlugin;
-import com.platform.tools.ToolCache;
 
 /**
  * 岗位model
@@ -18,7 +14,7 @@ public class Station extends BaseModel<Station> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(Station.class);
+	private static final Log log = Log.getLog(Station.class);
 	
 	public static final Station dao = new Station();
 

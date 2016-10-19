@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantInit;
 
 /**
@@ -19,7 +18,7 @@ import com.platform.constant.ConstantInit;
  */
 public abstract class ToolClassSearch {
 
-	private static final Logger log = Logger.getLogger(ToolClassSearch.class);
+	private static final Log log = Log.getLog(ToolClassSearch.class);
 
 	/**
 	 * 需要扫描的jar

@@ -1,8 +1,7 @@
 package com.test.mvc.blog;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
@@ -25,7 +24,7 @@ import com.platform.tools.ToolDateTime;
 public class BlogController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(BlogController.class);
+	private static final Log log = Log.getLog(BlogController.class);
 	
 	private BlogService blogService;
 	

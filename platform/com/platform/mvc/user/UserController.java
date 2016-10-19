@@ -3,9 +3,8 @@ package com.platform.mvc.user;
 import java.io.File;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.jfinal.upload.UploadFile;
 import com.platform.annotation.Controller;
 import com.platform.dto.ZtreeNode;
@@ -24,7 +23,7 @@ import com.platform.tools.ToolString;
 public class UserController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(UserController.class);
+	private static final Log log = Log.getLog(UserController.class);
 	
 	private UserService userService;
 	private UploadService uploadService;

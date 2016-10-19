@@ -2,8 +2,7 @@ package com.platform.plugin;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.platform.annotation.Table;
@@ -16,7 +15,7 @@ import com.platform.tools.ToolClassSearch;
  */
 public class TableScan implements IPlugin {
 
-	private static Logger log = Logger.getLogger(TableScan.class);
+	private static final Log log = Log.getLog(TableScan.class);
 
 	protected ActiveRecordPlugin arp;
 	protected String configName;

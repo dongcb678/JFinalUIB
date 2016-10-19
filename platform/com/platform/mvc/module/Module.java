@@ -1,9 +1,7 @@
 package com.platform.mvc.module;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 
 /**
@@ -16,7 +14,7 @@ public class Module extends BaseModel<Module> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(Module.class);
+	private static final Log log = Log.getLog(Module.class);
 	
 	public static final Module dao = new Module();
 

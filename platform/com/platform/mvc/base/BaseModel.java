@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
@@ -32,7 +31,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 
 	private static final long serialVersionUID = -900378319414539856L;
 
-	private static Logger log = Logger.getLogger(BaseModel.class);
+	private static final Log log = Log.getLog(BaseModel.class);
 
 	/**
 	 * 字段描述：版本号 

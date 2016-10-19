@@ -2,9 +2,8 @@ package com.platform.mvc.usergroup;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.Ret;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
@@ -15,7 +14,7 @@ import com.platform.mvc.user.User;
 public class UserGroupService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(UserGroupService.class);
+	private static final Log log = Log.getLog(UserGroupService.class);
 	
 	public static final String serviceName = "userGroupService";
 
