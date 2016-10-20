@@ -11,6 +11,7 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
+import com.jfinal.ext.handler.UrlSkipHandler;
 import com.jfinal.i18n.I18nInterceptor;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
@@ -236,14 +237,20 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 * 配置处理器
 	 */
 	public void configHandler(Handlers handlers) {
+//		log.info("configHandler 全局配置处理器，http 301 请求的网页已永久移动到新位置，服务器返回此响应(对 GET 或 HEAD 请求的响应)时，会自动将请求者转到新位置");
+//		handlers.add(new ServerNameRedirect301Handler("http://127.0.0.1", "http://localhost"));
+		
+		log.info("configHandler 全局配置处理器，druid监控页面展示");
+		handlers.add(new DruidStatViewHandler("/platform/druid"));
+		
 		//log.info("configHandler 全局配置处理器，设置上下文路径");
 		//handlers.add(new ContextPathHandler("cxt")); // 由于UIB在GlobalHandler中已经统一处理，所以此处不必启用
 
 		//log.info("configHandler 全局配置处理器，伪静态处理，开启此功能你需要把所有jfinal请求加上后缀，默认后缀是.html");
 		//handlers.add(new FakeStaticHandler(".html")); // 默认伪静态后缀是.html，所以此处的参数可以不用传，如果是其他后缀，你可以自定义传参
-		
-		log.info("configHandler 全局配置处理器，druid监控页面展示");
-		handlers.add(new DruidStatViewHandler("/platform/druid"));
+
+		//log.info("configHandler 全局配置处理器，设置跳过哪些URL不处理");
+		handlers.add(new UrlSkipHandler("/ca/.*|/se/.*|.*.jsp|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z", false));
 		
 		log.info("configHandler 全局配置处理器，记录日志和request域值处理");
 		handlers.add(new GlobalHandler());
