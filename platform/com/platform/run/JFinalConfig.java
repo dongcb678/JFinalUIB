@@ -250,7 +250,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		//handlers.add(new FakeStaticHandler(".html")); // 默认伪静态后缀是.html，所以此处的参数可以不用传，如果是其他后缀，你可以自定义传参
 
 		//log.info("configHandler 全局配置处理器，设置跳过哪些URL不处理");
-		handlers.add(new UrlSkipHandler("/ca/.*|/se/.*|.*.jsp|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z", false));
+		handlers.add(new UrlSkipHandler("/ca/.*|/se/.*|.*.jsp|.*.htm|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z", false));
 		
 		log.info("configHandler 全局配置处理器，记录日志和request域值处理");
 		handlers.add(new GlobalHandler());
