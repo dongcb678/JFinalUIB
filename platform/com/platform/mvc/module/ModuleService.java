@@ -78,7 +78,7 @@ public class ModuleService extends BaseService {
 		}
 
 		Module module = new Module();
-		module.set(Module.column_isparent, "true");
+		module.set(Module.column_isparent, "false");
 		module.set(Module.column_parentmoduleids, pIds);
 		module.set(Module.column_systemsids, pDept.getStr(Module.column_systemsids));//冗余系统ids
 		module.set(Module.column_orderids, orderIds);
