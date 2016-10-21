@@ -22,24 +22,29 @@ public class TestToolCache extends TestBase {
 		System.out.println(operator2.getPKValue());
     }
 
+	/**
+	 * 需要注意ehcache中cache属性，默认是读写同一个对象地址，最好加入下列两个属性配置，隔离读写对象
+	 * copyOnWrite="true" copyOnRead="true"
+	 */
 	@Test
     public void testCacheKit(){
-		List<User> userList3 = User.dao.find("select * from pt_user");
-		System.out.println(userList3.get(0).getEmail());
-		CacheKit.put("system", "userList3", userList3);
+		List<User> userList1 = User.dao.find("select * from pt_user");
+		System.out.println(userList1.get(0).getEmail());
+		CacheKit.put("system", "userList", userList1);
 		
-		List<User> userList3_1 = CacheKit.get("system", "userList3");
-		System.out.println(userList3_1.get(0).getEmail());
-		userList3_1.get(0).setEmail("xxoo@163.com");
+		List<User> userList2 = CacheKit.get("system", "userList");
+		System.out.println(userList2.get(0).getEmail());
+		userList2.get(0).setEmail("xxoo@163.com");
 
-		List<User> userList3_2 = CacheKit.get("system", "userList3");
-		System.out.println(userList3_2.get(0).getEmail());
+		List<User> userList3 = CacheKit.get("system", "userList");
+		System.out.println(userList3.get(0).getEmail());
     }
 	
 	@Test
     public void testFindByCache(){
 		List<User> userList1 = User.dao.findByCache("system", "userList", "select * from pt_user");
 		System.out.println(userList1.get(0).getEmail());
+		
 		userList1.get(0).setEmail("xxoo@163.com");
 		System.out.println(userList1.get(0).getEmail());
 		
