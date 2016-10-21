@@ -75,9 +75,9 @@ JFinalUIB_V3 登陆账号密码：
 
 如果觉得此项目对您有帮助，可以进行捐助，谢谢！
 
-![image](http://git.oschina.net/dongcb678/JfinalUIB/blob/2d050d0ddbfee41aa5aa47248f333e35910878dd/doc/捐助/支付宝.jpg)
-	
-![image](http://git.oschina.net/dongcb678/JfinalUIB/blob/2d050d0ddbfee41aa5aa47248f333e35910878dd/doc/捐助/微信.jpg)
+![image](http://git.oschina.net/dongcb678/JfinalUIB/raw/2d050d0ddbfee41aa5aa47248f333e35910878dd/doc/捐助/支付宝.jpg)
+
+![image](http://git.oschina.net/dongcb678/JfinalUIB/raw/2d050d0ddbfee41aa5aa47248f333e35910878dd/doc/捐助/微信.jpg)
 
 
 	
