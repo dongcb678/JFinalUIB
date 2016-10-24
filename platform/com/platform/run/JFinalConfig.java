@@ -83,7 +83,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("configConstant 设置path相关");
 		constants.setBaseUploadPath(PathKit.getWebRootPath()); // 上传公共路径 + File.separator + "files"
 		constants.setBaseDownloadPath(PathKit.getWebRootPath()); // 下载公共路径 + File.separator + "files"
-		//constants.setBaseViewPath("/jf"); //设置路由公共路径
+		//constants.setBaseViewPath("/platform"); //设置路由公共路径
 		
 		log.info("configConstant 视图Beetl设置");
 		constants.setMainRenderFactory(new BeetlRenderFactory());
