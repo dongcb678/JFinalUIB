@@ -24,7 +24,9 @@ public class GroupService extends BaseService {
 	 */
 	public String save(Group group){
 		group.save();
-		return group.getPKValue();
+		String groupIds = group.getPKValue();
+		GroupRoleService.cacheAdd(groupIds);
+		return groupIds;
 	}
 
 	/**
@@ -46,7 +48,8 @@ public class GroupService extends BaseService {
 			// 缓存1：更新所有关联此分组的用户缓存
 			List<UserGroup> ugList = UserGroup.dao.find(sql, groupIds);
 			for (UserGroup userGroup : ugList) {
-				User.cacheAdd(userGroup.getUserids());
+				userGroup.delete(); // 删除关联数据
+				User.cacheAdd(userGroup.getUserids()); // 重新缓存
 			}
 			
 			// 缓存2：删除分组对应的功能缓存

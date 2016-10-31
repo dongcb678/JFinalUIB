@@ -80,6 +80,9 @@ public class RoleOperatorService extends BaseService {
 		// 查询角色ids
 		RoleOperator ro = RoleOperator.dao.findById(roleOperatorIds);
 		String roleIds = ro.getRoleids();
+		
+		// 删除数据
+		ro.delete();
 
 		// 更新group功能缓存
 		String sql = getSql("platform.roleOperator.getGroupByRole");
@@ -87,9 +90,6 @@ public class RoleOperatorService extends BaseService {
 		for (GroupRole groupRole : grList) {
 			GroupRoleService.cacheAdd(groupRole.getGroupids());
 		}
-		
-		// 删除数据
-		ro.delete();
 	}
 	
 }

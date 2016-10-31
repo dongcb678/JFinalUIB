@@ -58,11 +58,12 @@ public class GroupRoleService extends BaseService {
 	 * @param groupRoleIds
 	 */
 	public void delRole(String groupRoleIds){
+		// 删除数据
 		GroupRole gr = GroupRole.dao.findById(groupRoleIds);
 		String groupIds = gr.getRoleids();
 		gr.delete();
 		
-		// 缓存
+		// 重新缓存
 		cacheRemove(groupIds);
 	}
 	

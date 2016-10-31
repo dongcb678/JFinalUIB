@@ -8,6 +8,8 @@ import com.platform.annotation.Service;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.module.Module;
+import com.platform.mvc.roleoperator.RoleOperator;
+import com.platform.mvc.roleoperator.RoleOperatorService;
 
 @Service(name = OperatorService.serviceName)
 public class OperatorService extends BaseService {
@@ -17,6 +19,8 @@ public class OperatorService extends BaseService {
 
 	public static final String serviceName = "operatorService";
 
+	private RoleOperatorService roleOperatorService;
+	
 	/**
 	 * 保存
 	 * @param operator
@@ -52,12 +56,20 @@ public class OperatorService extends BaseService {
 	 */
 	public void delete(String ids){
 		String[] idsArr = splitByComma(ids);
+		
+		String sql = getSql("platform.operator.getRoleoperatorByOperatorids");
+		
 		for (String operatorIds : idsArr) {
 			// 缓存
-			Operator.cacheRemove(operatorIds);
-			
+			List<RoleOperator> roList = RoleOperator.dao.find(sql, operatorIds);
+			for (RoleOperator roleOperator : roList) {
+				roleOperatorService.del(roleOperator.getPKValue());
+			}
+
 			// 删除
 			Operator.dao.deleteById(operatorIds);
+			// 缓存
+			Operator.cacheRemove(operatorIds);
 		}
 		
 	}
