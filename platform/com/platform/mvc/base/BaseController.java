@@ -46,7 +46,7 @@ public abstract class BaseController extends Controller {
 	protected String ids;				// 主键
 	protected SplitPage splitPage;		// 分页封装
 	protected List<?> list;				// 公共list
-	protected Syslog reqSysLog;			// 访问日志
+	protected Syslog reqSysLog;			// 当前访问日志
 	
 	/**
 	 * 请求/WEB-INF/下的视图文件
