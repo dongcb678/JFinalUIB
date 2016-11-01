@@ -59,17 +59,6 @@ public abstract class Validator implements Interceptor {
 
 	protected Validator validator = null;
 	
-	/**
-	 * 实例化拦截器
-	 */
-	public void instance(){
-		try {
-			validator = getClass().newInstance();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
 	public void intercept(Invocation invocation) {
 		validator.controller = invocation.getController();
 		validator.invocation = invocation;

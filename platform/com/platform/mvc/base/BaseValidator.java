@@ -18,6 +18,17 @@ public abstract class BaseValidator extends Validator {
 	private static final Log log = Log.getLog(BaseValidator.class);
 	
 	protected BaseService baseService;		// Service
+
+	/**
+	 * 实例化拦截器
+	 */
+	public void instance(){
+		try {
+			validator = getClass().newInstance();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 	@Override
 	public void intercept(Invocation invocation) {
