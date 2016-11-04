@@ -18,6 +18,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
+import com.jfinal.plugin.activerecord.SqlReporter;
 import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.dialect.OracleDialect;
@@ -95,7 +96,12 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 
 		log.info("configConstant i18n文件前缀设置设置");
 		constants.setI18nDefaultBaseName(PropKit.get(ConstantInit.config_i18n_filePrefix));
-		//constants.setI18nDefaultLocale("zh_CN");
+		//constants.setI18nDefaultLocale("zh_CN");		
+		
+		log.info("configConstant 把预处理sql打印到Log，而不是控制台输出");
+		if(constants.getDevMode()){
+			SqlReporter.setLog(true);
+		}
 	}
 	
 	/**
