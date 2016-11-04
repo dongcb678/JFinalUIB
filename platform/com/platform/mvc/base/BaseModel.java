@@ -224,7 +224,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	}
 
 	/**
-	 * 重写save方法
+	 * 重写save方法，自动赋值，生成UUID值
 	 */
 	public boolean save() {
 		String[] pkArr = getTable().getPrimaryKey();
@@ -240,7 +240,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	}
 
 	/**
-	 * 重写save方法
+	 * 重写save方法，单主键，自定义主键值
 	 */
 	public boolean save(String pkIds) {
 		String[] pkArr = getTable().getPrimaryKey();
@@ -255,7 +255,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	}
 
 	/**
-	 * 重写save方法
+	 * 重写save方法，复合主键，自定义主键值
 	 */
 	public boolean save(Map<String, Object> pkMap) {
 		Set<String> pkSet = pkMap.keySet();
@@ -272,6 +272,8 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 
 	/**
 	 * 重写update方法
+	 * 如果存在版本号字段，则验证Model中的modifyFlag集合中是否包含version字段，
+	 * 如果包含，则自动将版本号加1，并重新set版本号值
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean update() {
