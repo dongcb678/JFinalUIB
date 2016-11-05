@@ -27,12 +27,12 @@ public class GenerateCode {
 	private static final Log log = Log.getLog(GenerateCode.class);
 
 	/**
-	 * <blockquote><pre>
-	 * 二维数组说明：数据源（默认可以是null）、 表名、主键名（默认可以是null）、类名（不包含后缀.java）
-	 * </pre></blockquote>
+	 * 二维数组说明：
+	 * 数据源（默认可以是null）、 表名、主键名（默认可以是null）、类名（不包含后缀.java）
 	 */
 	public static String[][] tableArr = {
-//		{"ConstantInit.db_dataSource_main", "test_blog", "ids", "TestBlog"}
+		//{"数据源名称", "表名称", "主键列名称", "生成类名称"}
+//		{"ConstantInit.db_dataSource_main", "test_blog", "ids", "Blog"}
 		{null, "test_blog", null, "Blog"}
 
 //		{null, "pt_department", null, "Department"},
@@ -64,27 +64,19 @@ public class GenerateCode {
 	public static final String srcFolder = "src";
 
 	/**
-	 * <blockquote><pre>
-	 * 
 	 * 生成的文件存放的包，公共基础包
-	 * 描述：比如platform所在的包就是com.platform，weixin所在的包就是com.weixin
-	 * 
-	 * </pre></blockquote>
+	 * 描述：比如platform所在的包就是com.platform，test所在的包就是com.test
 	 */
-	public static final String packageBase = "com.test2.mvc";
-	
+	public static final String packageBase = "com.test.mvc";
+
 	/**
-	 * <blockquote><pre>
-	 * 
 	 * controller基础路径，例如
 	 * @Controller("/platform/authImg") 中的platform
-	 * @Controller("/wx/authImg") 中的wx
+	 * @Controller("/test/blog") 中的test
 	 * 
 	 * render基础路径，例如
 	 * /platform/user/add.jsp 中的 platform
-	 * /weiXin/user/list.jsp 中的 weiXin
-	 * 
-	 * </pre></blockquote>
+	 * /test/blog/list.jsp 中的 test
 	 */
 	public static final String basePath = "test";
 
