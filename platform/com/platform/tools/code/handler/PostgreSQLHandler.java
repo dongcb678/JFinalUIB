@@ -65,16 +65,15 @@ public class PostgreSQLHandler extends BaseHandler {
 			}
 			
 			ColumnDto table = new ColumnDto();
-			table.setTable_name(tableName);
-			table.setTable_desc(listDesc.get(0).getStr("description"));
-			
-			table.setColumn_name(column_name);
+			table.setTable_name(tableName); // 表名称
+			table.setTable_desc(listDesc.get(0).getStr("description")); // 表描述
+			table.setColumn_name(column_name); // 列名称
+			 // 列名称，首字母大写
 			table.setColumn_name_upperCaseFirstOne(ToolString.toUpperCaseFirstOne(column_name));
-			
-			table.setColumn_type(data_type);
-			table.setColumn_length(character_maximum_length);
-			table.setColumn_desc(map.get(column_name));
-
+			table.setColumn_type(data_type); // 列类型
+			table.setColumn_length(character_maximum_length); // 列最大长度
+			table.setColumn_desc(map.get(column_name)); // 列描述
+			// 对应的java数据类型
 			table.setColumn_className(columnJavaTypeMap.get(column_name.toLowerCase()));
 			
 			list.add(table);

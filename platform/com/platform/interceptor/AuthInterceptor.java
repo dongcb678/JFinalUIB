@@ -167,10 +167,10 @@ public class AuthInterceptor implements Interceptor {
 
 			log.error("返回失败提示页面!Exception = " + e.getMessage());
 			
-//			if(e instanceof RuntimeException){
-//				expMessage = "自定义异常描述11" + expMessage;
-//			} else if(e instanceof RuntimeException){
-//				expMessage = "自定义异常描述22" + expMessage;
+//			if(e instanceof My1Exception){
+//				expMessage = "自定义异常描述1" + expMessage;
+//			} else if(e instanceof My2Exception){
+//				expMessage = "自定义异常描述2" + expMessage;
 //			}
 
 			toView(contro, ConstantAuth.auth_exception, "业务逻辑代码遇到异常Exception = " + expMessage);
