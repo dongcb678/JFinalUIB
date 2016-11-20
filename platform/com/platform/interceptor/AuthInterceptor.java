@@ -67,9 +67,11 @@ public class AuthInterceptor implements Interceptor {
 			contro.setAttr(ConstantWebContext.request_cUser, user);
 			contro.setAttr(ConstantWebContext.request_cUserIds, user.getPKValue());
 			
+			MDC.put("userIP", reqSysLog.getIps());
 			MDC.put("userId", user.getPKValue());
 			MDC.put("userName", user.getUsername());
 		}else{
+			MDC.put("userIP", reqSysLog.getIps());
 			MDC.put("userId", "*unknown userId*");
 			MDC.put("userName", "*unknown userName*");
 		}
@@ -175,6 +177,7 @@ public class AuthInterceptor implements Interceptor {
 
 			toView(contro, ConstantAuth.auth_exception, "业务逻辑代码遇到异常Exception = " + expMessage);
 		} finally {
+			MDC.remove("userIP");
 			MDC.remove("userId");
 			MDC.remove("userName");
 		}

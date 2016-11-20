@@ -38,13 +38,11 @@ import com.platform.dto.DataBase;
 import com.platform.handler.GlobalHandler;
 import com.platform.interceptor.AuthInterceptor;
 import com.platform.interceptor.ParamPkgInterceptor;
-import com.platform.plugin.ControllerPlugin;
 import com.platform.plugin.FileRenamePlugin;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.plugin.ServicePlugin;
 import com.platform.plugin.SqlXmlPlugin;
-import com.platform.plugin.TableScan;
 import com.platform.thread.DataClear;
 import com.platform.thread.ThreadSysLog;
 import com.platform.thread.TimerResources;
@@ -109,7 +107,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 */
 	public void configRoute(Routes routes) { 
 		log.info("configRoute 注解注册路由");
-		new ControllerPlugin(routes).start(); // 注解路由扫描
+		routes.add(new RoutesScan());
 	}
 	
 	/**
@@ -179,11 +177,11 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 			arpMain.setDialect(new AnsiSqlDialect());
 		}
 
-		log.info("configPlugin 添加druidPlugin插件");
-		plugins.add(druidPlugin); // 多数据源继续添加
-
 		log.info("configPlugin 表自动扫描注册");
-		new TableScan(ConstantInit.db_dataSource_main, arpMain).start();
+		ModelScan.scan(ConstantInit.db_dataSource_main, arpMain);
+
+		log.info("configPlugin 添加druidPlugin插件");
+		plugins.add(druidPlugin);
 
 		log.info("configPlugin 注册ActiveRecordPlugin插件");
 		plugins.add(arpMain);

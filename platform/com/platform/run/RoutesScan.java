@@ -1,10 +1,9 @@
-package com.platform.plugin;
+package com.platform.run;
 
 import java.util.List;
 
 import com.jfinal.config.Routes;
 import com.jfinal.log.Log;
-import com.jfinal.plugin.IPlugin;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 import com.platform.tools.ToolClassSearch;
@@ -14,19 +13,13 @@ import com.platform.tools.ToolClassSearch;
  * 
  * @author 董华健 dongcb678@163.com
  */
-public class ControllerPlugin implements IPlugin {
+public class RoutesScan extends Routes {
 
-	private static final Log log = Log.getLog(ControllerPlugin.class);
+	private static final Log log = Log.getLog(RoutesScan.class);
 
-	private Routes routes;
-
-	public ControllerPlugin(Routes routes) {
-		this.routes = routes;
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public boolean start() {
+	public void config() {
 		// 查询所有继承BaseController的子类
 		List<Class<?>> controllerClasses = ToolClassSearch.search(BaseController.class);
 
@@ -48,16 +41,10 @@ public class ControllerPlugin implements IPlugin {
 					throw new RuntimeException(controller.getName() + "注解错误，映射路径为空");
 				}
 				// 注册映射
-				routes.add(controllerKey, controller);
+				add(controllerKey, controller);
 				log.debug("Controller注册： controller = " + controller + ", " + controllerKey);
 			}
 		}
-		return true;
-	}
-
-	@Override
-	public boolean stop() {
-		return true;
 	}
 
 }

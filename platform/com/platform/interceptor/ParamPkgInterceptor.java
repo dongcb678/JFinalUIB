@@ -230,7 +230,6 @@ public class ParamPkgInterceptor implements Interceptor {
 					|| BaseService.class.isAssignableFrom(type)
 					|| (String.class.isAssignableFrom(type) && ((String)value).isEmpty())
 					|| Log.class.isAssignableFrom(type)){
-				log.debug("参数值为空，获取类型不符，直接结束");
 				return;
 			}
 

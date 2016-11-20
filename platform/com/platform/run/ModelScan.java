@@ -1,9 +1,8 @@
-package com.platform.plugin;
+package com.platform.run;
 
 import java.util.List;
 
 import com.jfinal.log.Log;
-import com.jfinal.plugin.IPlugin;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
@@ -13,21 +12,12 @@ import com.platform.tools.ToolClassSearch;
  * 表自动注册注解扫描，绑定table和model
  * @author 董华健  dongcb678@163.com
  */
-public class TableScan implements IPlugin {
+public class ModelScan {
 
-	private static final Log log = Log.getLog(TableScan.class);
-
-	protected ActiveRecordPlugin arp;
-	protected String configName;
-
-	public TableScan(String configName, ActiveRecordPlugin arp) {
-		this.arp = arp;
-		this.configName = configName;
-	}
+	private static final Log log = Log.getLog(ModelScan.class);
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public boolean start() {
+	public static void scan(String configName, ActiveRecordPlugin arp) {
 		// 查询所有BaseModel的子类
 		List<Class<?>> modelClasses = ToolClassSearch.search(BaseModel.class);
 
@@ -58,17 +48,12 @@ public class TableScan implements IPlugin {
 				log.error(model.getName() + "ActiveRecordPlugin不能为null ！！！");
 				throw new RuntimeException(model.getName() + "ActiveRecordPlugin不能为null ！！！");
 			}
+			
 			if (dataSourceName.equals(configName)) {
 				arp.addMapping(tableName, pkName, model);
 				log.debug("Model注册： model = " + model + ", tableName = " + tableName + ", pkName: " + pkName);
 			}
 		}
-		return true;
-	}
-
-	@Override
-	public boolean stop() {
-		return true;
 	}
 
 }

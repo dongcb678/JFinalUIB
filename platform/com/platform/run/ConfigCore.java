@@ -19,7 +19,6 @@ import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.plugin.ServicePlugin;
 import com.platform.plugin.SqlXmlPlugin;
-import com.platform.plugin.TableScan;
 import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolDataBase;
@@ -98,12 +97,11 @@ public class ConfigCore {
 			druidPlugin.setValidationQuery("select 1 from sysibm.sysdummy1"); //连接验证语句
 			arpMain.setDialect(new AnsiSqlDialect());
 		}
-		
-		druidPlugin.start();
-		
-		log.info("configPlugin 表扫描注册");
-		new TableScan(ConstantInit.db_dataSource_main, arpMain).start();
 
+		log.info("configPlugin 表扫描注册");
+		ModelScan.scan(ConstantInit.db_dataSource_main, arpMain);
+
+		druidPlugin.start();
 		arpMain.start();
 
 		log.info("ServicePlugin Service注解实例化加载");
