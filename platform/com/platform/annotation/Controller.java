@@ -24,4 +24,10 @@ public @interface Controller {
 	 */
     String[] value();
 
+    /**
+     * 视图模板基础路径
+     * @return
+     */
+    String viewPath() default "";
+    
 }

@@ -34,6 +34,7 @@ public class RoutesScan extends Routes {
 
 			// 获取映射路径数组
 			String[] controllerKeys = controllerBind.value();
+			String viewPath = controllerBind.viewPath();
 			for (String controllerKey : controllerKeys) {
 				controllerKey.trim();
 				if (controllerKey.equals("")) {
@@ -41,7 +42,14 @@ public class RoutesScan extends Routes {
 					throw new RuntimeException(controller.getName() + "注解错误，映射路径为空");
 				}
 				// 注册映射
-				add(controllerKey, controller);
+				if(viewPath != null){
+					viewPath = viewPath.trim();
+					if(viewPath.isEmpty()){
+						add(controllerKey, controller, viewPath);
+					}
+				}else{
+					add(controllerKey, controller);
+				}
 				log.debug("Controller注册： controller = " + controller + ", " + controllerKey);
 			}
 		}
