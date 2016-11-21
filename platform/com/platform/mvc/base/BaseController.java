@@ -1,6 +1,7 @@
 package com.platform.mvc.base;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -22,7 +23,6 @@ import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
 import com.platform.plugin.I18NPlugin;
 import com.platform.tools.ToolDateTime;
-import com.platform.tools.ToolModelInjector;
 import com.platform.tools.ToolWeb;
 
 /**
@@ -240,17 +240,65 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass){
-		return ToolModelInjector.injectModels(getRequest(), modelClass);
+		String modelName = modelClass.getSimpleName();
+		String prefix = StrKit.firstCharToLowerCase(modelName) + "List";
+		return getModels(modelClass, prefix);
 	}
 	
 	/**
 	 * 表单数组映射List<Model>
 	 * @param modelClass
 	 * @param prefix
-	 * @return
+	 * 
+	 * 描述：
+	 * 		
+	 * 		表单	
+	 *		<input type="hidden" name="groupList[0].ids" value="111"/>
+	 *		<input type="text" name="groupList[0].names" value="222"/>
+	 *		
+	 *		<input type="hidden" name="groupList[1].ids" value="333"/>
+	 *		<input type="text" name="groupList[1].names" value="444"/>
+	 *		
+	 *		<input type="hidden" name="groupList[3].ids" value="555"/>
+	 *		<input type="text" name="groupList[3].names" value="666"/>
+	 * 
+	 * 		调用方法 
+	 * 		List<Group> groupList = ToolModelInjector.injectModels(getRequest(), Group.class, "groupList");
+	 * 		
+	 * 		// 默认的prefix是Model类的首字母小写加上List
+	 * 		List<Group> groupList = ToolModelInjector.injectModels(getRequest(), Group.class); 
 	 */
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix){
-		return ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
+		int maxIndex = 0;	// 最大的数组索引
+		boolean zeroIndex = false; // 是否存在0索引
+		
+		String arrayPrefix = prefix + "[";
+		String key = null;
+		Enumeration<String> names = getRequest().getParameterNames();
+		while (names.hasMoreElements()) {
+			key = names.nextElement();
+			if (key.startsWith(arrayPrefix) && key.indexOf("]") != -1) {
+				int indexTemp = Integer.parseInt(key.substring(key.indexOf("[") + 1, key.indexOf("]")));
+				
+				if(indexTemp == 0){
+					zeroIndex = true; // 是否存在0索引
+				} 
+				
+				if(indexTemp > maxIndex){
+					maxIndex = indexTemp; // 找到最大的数组索引
+				}
+			}
+		}
+		
+		List<T> modelList = new ArrayList<T>();
+		for (int i = 0; i <= maxIndex; i++) {
+			if((i == 0 && zeroIndex) || i != 0){ // 避免表单空值时调用产生一个无用的值
+				T baseModel = (T) getModel(modelClass, prefix + "[" + i + "]", false);
+				modelList.add(baseModel);
+			}
+		}
+		
+		return modelList;
 	}
 
 	/**

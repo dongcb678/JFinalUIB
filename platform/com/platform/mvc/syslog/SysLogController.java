@@ -39,7 +39,7 @@ public class SysLogController extends BaseController {
 	 */
 	public void delete() {
 		sysLogService.baseDelete(Syslog.table_name, getPara() == null ? ids : getPara());
-		redirect("/platform/sysLog");
+		forwardAction("/platform/sysLog/backOff");
 	}
 
 }

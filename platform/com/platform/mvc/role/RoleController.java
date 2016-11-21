@@ -32,7 +32,7 @@ public class RoleController extends BaseController {
 	@Before(RoleValidator.class)
 	public void save() {
 		ids = roleService.save(getModel(Role.class));
-		redirect("/platform/role");
+		forwardAction("/platform/role/backOff");
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class RoleController extends BaseController {
 	@Before(RoleValidator.class)
 	public void update() {
 		roleService.update(getModel(Role.class));
-		redirect("/platform/role");
+		forwardAction("/platform/role/backOff");
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class RoleController extends BaseController {
 	 */
 	public void delete() {
 		roleService.delete(getPara() == null ? ids : getPara());
-		redirect("/platform/role");
+		forwardAction("/platform/role/backOff");
 	}
 	
 }

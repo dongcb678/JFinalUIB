@@ -32,7 +32,7 @@ public class GroupController extends BaseController {
 	@Before(GroupValidator.class)
 	public void save() {
 		ids = groupService.save(getModel(Group.class));
-		redirect("/platform/group");
+		forwardAction("/platform/group/backOff");
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class GroupController extends BaseController {
 	@Before(GroupValidator.class)
 	public void update() {
 		groupService.update(getModel(Group.class));
-		redirect("/platform/group");
+		forwardAction("/platform/group/backOff");
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class GroupController extends BaseController {
 	 */
 	public void delete() {
 		groupService.delete(getPara() == null ? ids : getPara());
-		redirect("/platform/group");
+		forwardAction("/platform/group/backOff");
 	}
 
 }

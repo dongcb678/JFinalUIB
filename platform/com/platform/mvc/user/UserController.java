@@ -51,8 +51,8 @@ public class UserController extends BaseController {
 		UserInfo userInfo = getModel(UserInfo.class);
 		
 		userService.save(ids, user, password, userInfo);
-		
-		render("/platform/user/add.html");
+
+		forwardAction("/platform/user/backOff");
 	}
 	
 	/**
@@ -88,7 +88,7 @@ public class UserController extends BaseController {
 		}
 		
 		userService.update(user, password, userInfo);
-		redirect("/platform/user");
+		forwardAction("/platform/user/backOff");
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class UserController extends BaseController {
 	 */
 	public void delete() {
 		userService.delete(getPara() == null ? ids : getPara());
-		redirect("/platform/user");
+		forwardAction("/platform/user/backOff");
 	}
 
 	/**

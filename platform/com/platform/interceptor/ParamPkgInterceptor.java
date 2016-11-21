@@ -8,6 +8,7 @@ import java.util.Map;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.log.Log;
+import com.platform.constant.ConstantSplitPage;
 import com.platform.constant.ConstantWebContext;
 import com.platform.dto.SplitPage;
 import com.platform.mvc.base.BaseController;
@@ -16,6 +17,7 @@ import com.platform.mvc.operator.Operator;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ServicePlugin;
+import com.platform.tools.ToolCache;
 import com.platform.tools.ToolString;
 import com.platform.tools.ToolTypeConverter;
 
@@ -99,7 +101,23 @@ public class ParamPkgInterceptor implements Interceptor {
 	 * @param controller
 	 */
 	private void splitPage(BaseController controller, String uri){
-		SplitPage splitPage = new SplitPage();
+		SplitPage splitPage = null;
+		
+		// 缓存回退分页条件
+		String backOff = controller.getPara();
+		if((backOff != null && backOff.equals("backOff")) || controller.getParaToBoolean("backOff", false)){
+			String userIds = controller.getReqSysLog().getUserids();
+			if(userIds != null && !userIds.isEmpty()){
+				SplitPage splitPageCache = ToolCache.get(ConstantSplitPage.cacheStart_splitPage_backOff + userIds);
+				if(splitPageCache != null && uri.startsWith(splitPageCache.getUri())){
+					splitPage = splitPageCache;
+				}
+			}
+		}
+		
+		if(splitPage == null){
+			splitPage = new SplitPage();
+		}
 		
 		// 设置分页请求uri
 		splitPage.setUri(uri);
@@ -171,6 +189,12 @@ public class ParamPkgInterceptor implements Interceptor {
 		if(null != pageSize && !pageSize.isEmpty()){
 			log.debug("分页，每页显示几多：pageSize = " + pageSize);
 			splitPage.setPageSize(Integer.parseInt(pageSize));
+		}
+
+		// 缓存回退分页条件
+		String userIds = controller.getReqSysLog().getUserids();
+		if(userIds != null && !userIds.isEmpty()){
+			ToolCache.set(ConstantSplitPage.cacheStart_splitPage_backOff + userIds, splitPage);
 		}
 		
 		controller.setSplitPage(splitPage);

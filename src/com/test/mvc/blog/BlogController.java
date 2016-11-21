@@ -44,7 +44,7 @@ public class BlogController extends BaseController {
 		Blog blog = getModel(Blog.class);
 		blog.setCreatetime(ToolDateTime.getSqlTimestamp());
 		blog.save();
-		render("/test/blog/add.html");
+		forwardAction("/test/blog/backOff");
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class BlogController extends BaseController {
 	@Before(BlogValidator.class)
 	public void update() {
 		getModel(Blog.class).update();
-		redirect("/test/blog");
+		forwardAction("/test/blog/backOff");
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class BlogController extends BaseController {
 	 */
 	public void delete() {
 		blogService.baseDelete("test_blog", getPara() == null ? ids : getPara());
-		redirect("/test/blog");
+		forwardAction("/test/blog/backOff");
 	}
 	
 }

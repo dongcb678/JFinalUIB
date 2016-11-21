@@ -36,7 +36,7 @@ public class OperatorController extends BaseController {
 	@Before(OperatorValidator.class)
 	public void save() {
 		ids = operatorService.save(getModel(Operator.class));
-		redirect("/platform/operator");
+		forwardAction("/platform/operator/backOff");
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class OperatorController extends BaseController {
 	@Before(OperatorValidator.class)
 	public void update() {
 		operatorService.update(getModel(Operator.class));
-		redirect("/platform/operator");
+		forwardAction("/platform/operator/backOff");
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class OperatorController extends BaseController {
 	 */
 	public void delete() {
 		operatorService.delete(getPara() == null ? ids : getPara());
-		redirect("/platform/operator");
+		forwardAction("/platform/operator/backOff");
 	}
 
 	/**

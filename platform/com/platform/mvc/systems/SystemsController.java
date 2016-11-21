@@ -32,7 +32,7 @@ public class SystemsController extends BaseController {
 	@Before(SystemsValidator.class)
 	public void save() {
 		systemsService.save(getModel(Systems.class));
-		redirect("/platform/systems");
+		forwardAction("/platform/systems/backOff");
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class SystemsController extends BaseController {
 	@Before(SystemsValidator.class)
 	public void update() {
 		getModel(Systems.class).update();
-		redirect("/platform/systems");
+		forwardAction("/platform/systems/backOff");
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class SystemsController extends BaseController {
 	 */
 	public void delete() {
 		systemsService.delete(getPara() == null ? ids : getPara());
-		redirect("/platform/systems");
+		forwardAction("/platform/systems/backOff");
 	}
 
 }

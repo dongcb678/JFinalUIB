@@ -43,7 +43,7 @@ public class ${className}Controller extends BaseController {
 	@Before(${className}Validator.class)
 	public void save() {
 		getModel(${className}.class).save();
-		render("/${basePath}/${classNameSmall}/add.html");
+		forwardAction("/${basePath}/${classNameSmall}/backOff");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class ${className}Controller extends BaseController {
 	@Before(${className}Validator.class)
 	public void update() {
 		getModel(${className}.class).update();
-		redirect("/${basePath}/${classNameSmall}");
+		forwardAction("/${basePath}/${classNameSmall}/backOff");
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class ${className}Controller extends BaseController {
 	 */
 	public void delete() {
 		${classNameSmall}Service.baseDelete(${className}.table_name, getPara() == null ? ids : getPara());
-		redirect("/${basePath}/${classNameSmall}");
+		forwardAction("/${basePath}/${classNameSmall}/backOff");
 	}
 	
 }
