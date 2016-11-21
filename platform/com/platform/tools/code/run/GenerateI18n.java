@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.jfinal.log.Log;
-import com.platform.run.ConfigCore;
+import com.platform.config.ConfigCore;
 import com.platform.tools.ToolDirFile;
 import com.platform.tools.code.handler.BaseHandler;
 

@@ -1,4 +1,4 @@
-package com.platform.run;
+package com.platform.config;
 
 import java.util.List;
 

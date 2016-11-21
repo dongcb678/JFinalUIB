@@ -1,4 +1,4 @@
-package com.platform.run;
+package com.platform.config;
 
 import org.beetl.ext.jfinal.BeetlRenderFactory;
 
@@ -10,7 +10,6 @@ import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
-import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.UrlSkipHandler;
 import com.jfinal.i18n.I18nInterceptor;
 import com.jfinal.kit.PathKit;
@@ -288,15 +287,4 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		DataClear.stop();
 	}
 
-	/**
-	 * 运行此 main 方法可以启动项目
-	 * 
-	 * 说明：
-	 * 		1. linux 下非root账户运行端口要>1024
-	 * 		2. idea 中运行webAppDir路径可能需要适当调整
-	 */
-	public static void main(String[] args) {
-		JFinal.start("WebContent", 8899, "/", 5);
-	}
-	
 }

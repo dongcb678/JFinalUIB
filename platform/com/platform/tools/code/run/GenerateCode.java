@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
+import com.platform.config.ConfigCore;
 import com.platform.constant.ConstantInit;
-import com.platform.run.ConfigCore;
 import com.platform.tools.ToolString;
 import com.platform.tools.code.handler.BaseHandler;
 import com.platform.tools.code.handler.DB2Handler;

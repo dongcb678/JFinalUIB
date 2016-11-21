@@ -1,4 +1,4 @@
-package com.platform.run;
+package com.platform.config;
 
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
