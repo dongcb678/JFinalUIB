@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.log.Log;
@@ -43,7 +44,7 @@ public class GifCaptcha extends Captcha {
 	}
 
 	@Override
-	public void out(HttpServletResponse response) {
+	public void out(HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Pragma", "No-cache");//设置响应头信息，告诉浏览器不要缓存此内容
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expire", 0);
@@ -54,7 +55,7 @@ public class GifCaptcha extends Captcha {
 
 		// 设置验证码值到cookie
 		long date = ToolDateTime.getDateByTime();
-		AuthInterceptor.setAuthCode(response, String.valueOf(rands) + ".#." + date);
+		AuthInterceptor.setAuthCode(request, response, String.valueOf(rands) + ".#." + date);
 
 		OutputStream os = null;
 		try {

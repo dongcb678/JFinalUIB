@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.log.Log;
@@ -66,7 +67,7 @@ public class JpegCaptcha {
 	private final static int IMG_WIDTH = 150;
 	private final static int IMG_HEIGTH = 40;
 	
-	public static void out(HttpServletResponse response){
+	public static void out(HttpServletRequest request, HttpServletResponse response){
 		BufferedImage bufferedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGTH, BufferedImage.TYPE_INT_RGB);
 
 		String sRand = graphics(bufferedImage).toLowerCase();
@@ -74,7 +75,7 @@ public class JpegCaptcha {
 
 		// 设置验证码值到cookie
 		long date = ToolDateTime.getDateByTime();
-		AuthInterceptor.setAuthCode(response, sRand + ".#." + date);
+		AuthInterceptor.setAuthCode(request, response, sRand + ".#." + date);
 
 		response.setHeader("Pragma", "no-cache");
 		response.setHeader("Cache-Control", "no-cache");

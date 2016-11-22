@@ -17,11 +17,11 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">${i18nMap["admin.operator.property.name"]}</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.names" value='${escapeXml(paramMap["_query.names"])}' maxlength="20" >
+					  		<input class="form-control focused" type="text" name="_query.names" value='${escapeXml(splitPage.queryParam["names"])}' maxlength="20" >
 						</div>
 						<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
 						<div class="col-sm-4">
-					  		<input class="span8" type="text" name="_query.url" value='${escapeXml(paramMap["_query.url"])}' maxlength="40" >
+					  		<input class="span8" type="text" name="_query.url" value='${escapeXml(splitPage.queryParam["url"])}' maxlength="40" >
 						</div>
 				  	</div>
 				

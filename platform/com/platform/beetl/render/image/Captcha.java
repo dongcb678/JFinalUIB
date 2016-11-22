@@ -3,6 +3,7 @@ package com.platform.beetl.render.image;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public abstract class Captcha {
@@ -81,7 +82,7 @@ public abstract class Captcha {
 	 * @param response
 	 *            输出流
 	 */
-	public abstract void out(HttpServletResponse response);
+	public abstract void out(HttpServletRequest request, HttpServletResponse response);
 
 	/**
 	 * 获取随机字符串
