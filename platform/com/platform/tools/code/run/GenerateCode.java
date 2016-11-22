@@ -2,10 +2,11 @@ package com.platform.tools.code.run;
 
 import java.util.List;
 
-import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.platform.config.ConfigCore;
 import com.platform.constant.ConstantInit;
+import com.platform.dto.DataBase;
+import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolString;
 import com.platform.tools.code.handler.BaseHandler;
 import com.platform.tools.code.handler.DB2Handler;
@@ -80,6 +81,8 @@ public class GenerateCode {
 	 */
 	public static final String basePath = "test";
 
+	public static final String dataSource = ConstantInit.db_dataSource_main;
+	
 	/**
 	 * 循环生成文件
 	 */
@@ -89,22 +92,30 @@ public class GenerateCode {
     	log.info("启动ConfigCore end ......");
     	
 		log.info("根据不同的数据库加载不同的处理器");
+		DataBase dataBase = ToolDataBase.getDbMap(dataSource);
+		
     	BaseHandler handler = null;
-    	String db_type = PropKit.get(ConstantInit.db_type_key);
+    	String db_type = dataBase.getType();
 		if(db_type.equals(ConstantInit.db_type_postgresql)){
 			handler = new PostgreSQLHandler();
+			handler.setDataBase(dataBase);
 			
 		}else if(db_type.equals(ConstantInit.db_type_mysql)){
 			handler = new MySQLHandler();
+			handler.setDataBase(dataBase);
+			handler.init();
 			
 		}else if(db_type.equals(ConstantInit.db_type_oracle)){
 			handler = new OracleHandler();
+			handler.setDataBase(dataBase);
 			
 		}else if(db_type.equals(ConstantInit.db_type_db2)){
 			handler = new DB2Handler();
+			handler.setDataBase(dataBase);
 			
 		}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
 			handler = new SqlServerHandler();
+			handler.setDataBase(dataBase);
 		}
     	
 		for (int i = 0; i < tableArr.length; i++) {

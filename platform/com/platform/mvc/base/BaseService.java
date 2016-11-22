@@ -307,6 +307,17 @@ public class BaseService {
 	 */
 	@Before(Tx.class)
 	public void baseDelete(String table, String ids){
+		baseDelete(ConstantInit.db_dataSource_main, table, ids);
+	}
+	
+	/**
+	 * 通用删除
+	 * @param dataSource 数据源
+	 * @param table
+	 * @param ids 逗号分隔的列值
+	 */
+	@Before(Tx.class)
+	public void baseDelete(String dataSource, String table, String ids){
 		String sqlIn = sqlIn(ids);
 
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -315,7 +326,7 @@ public class BaseService {
 		
 		String sql = getSqlByBeetl(BaseModel.sqlId_deleteIn, param);
 		
-		Db.use(ConstantInit.db_dataSource_main).update(sql);
+		Db.use(dataSource).update(sql);
 	}
 
 	/**

@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.platform.constant.ConstantInit;
-import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 import com.platform.tools.code.run.ColumnDto;
@@ -20,27 +17,21 @@ import com.platform.tools.code.run.ColumnDto;
  */
 public class DB2Handler extends BaseHandler {
 
+	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(BaseHandler.class);
 	
-	public DB2Handler() {
-		String db_type = PropKit.get(ConstantInit.db_type_key);
-		log.info("db_type = " + db_type);
-		if(!db_type.equals(ConstantInit.db_type_db2)){
-			throw new RuntimeException("请设置init.properties配置文件db.type = db2");
-		}
-	}
-
 	@Override
 	public List<ColumnDto> getColunm(String tableName) {
-		String dbUser = ToolDataBase.getDbInfo().getUserName();
-
+		String dbUser = getDataBase().getUserName();
+		String name = getDataBase().getName();
+		
 		// 1.查询表和字段描述信息
 		String tcSql = ToolSqlXml.getSql("platform.db2.getTableComments");
-		String tableDesc = Db.use(ConstantInit.db_dataSource_main).findFirst(tcSql, dbUser, tableName).getStr("REMARKS");
+		String tableDesc = Db.use(name).findFirst(tcSql, dbUser, tableName).getStr("REMARKS");
 
 		// 2.查询表字段信息
 		String ccSql = ToolSqlXml.getSql("platform.db2.getColumnComments");
-		List<Record> listColumnComments = Db.use(ConstantInit.db_dataSource_main).find(ccSql, dbUser, tableName);
+		List<Record> listColumnComments = Db.use(name).find(ccSql, dbUser, tableName);
 
 		// 3.查询表字段对应的所有java数据类型
 		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
@@ -76,6 +67,11 @@ public class DB2Handler extends BaseHandler {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public void init() {
+		
 	}
 	
 	

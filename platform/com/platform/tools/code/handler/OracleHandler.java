@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.platform.constant.ConstantInit;
-import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 import com.platform.tools.code.run.ColumnDto;
@@ -20,27 +17,21 @@ import com.platform.tools.code.run.ColumnDto;
  */
 public class OracleHandler extends BaseHandler {
 
+	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(OracleHandler.class);
 	
-	public OracleHandler() {
-    	String db_type = PropKit.get(ConstantInit.db_type_key);
-		log.info("db_type = " + db_type);
-		if(!db_type.equals(ConstantInit.db_type_oracle)){
-			throw new RuntimeException("请设置init.properties配置文件db.type = oracle");
-		}
-	}
-
 	@Override
 	public List<ColumnDto> getColunm(String tableName) {
-		String dbUser = ToolDataBase.getDbInfo().getUserName();
+		String dbUser = getDataBase().getUserName();
+		String name = getDataBase().getName();
 
 		// 1.查询表和字段描述信息
 		String tcSql = ToolSqlXml.getSql("platform.oracle.getTableComments");
-		String tableDesc = Db.use(ConstantInit.db_dataSource_main).findFirst(tcSql, dbUser, tableName).getStr("COMMENTS");
+		String tableDesc = Db.use(name).findFirst(tcSql, dbUser, tableName).getStr("COMMENTS");
 
 		// 2.查询表字段信息
 		String ccSql = ToolSqlXml.getSql("platform.oracle.getColumnComments");
-		List<Record> listColumnComments = Db.use(ConstantInit.db_dataSource_main).find(ccSql, dbUser, tableName, tableName);
+		List<Record> listColumnComments = Db.use(name).find(ccSql, dbUser, tableName, tableName);
 
 		// 3.查询表字段对应的所有java数据类型
 		Map<String, String> columnJavaTypeMap = getJavaType(tableName);
@@ -77,5 +68,5 @@ public class OracleHandler extends BaseHandler {
 		
 		return list;
 	}
-	
+
 }

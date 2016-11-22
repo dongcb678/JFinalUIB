@@ -105,11 +105,21 @@ public interface ConstantInit {
 	 *  国际化配置，资源文件前缀
 	 */
 	public static final String config_i18n_filePrefix = "config.i18n.filePrefix";
-	
+
 	/**
-	 * 当前数据库类型
+	 * 数据源个数
 	 */
-	public static final String db_type_key = "db.type";
+	public static final String db_count_key = "db.count";
+
+	/**
+	 * 当前数据源名称
+	 */
+	public static final String db_name_key = "name";
+
+	/**
+	 * 当前数据源类型
+	 */
+	public static final String db_type_key = "type";
 
 	/**
 	 * 当前数据库类型：postgresql
@@ -239,21 +249,21 @@ public interface ConstantInit {
 	/**
 	 * 数据库连接池参数：初始化连接大小
 	 */
-	public static final String db_initialSize = "db.initialSize";
+	public static final String db_initialSize = "initialSize";
 
 	/**
 	 * 数据库连接池参数：最少连接数
 	 */
-	public static final String db_minIdle = "db.minIdle";
+	public static final String db_minIdle = "minIdle";
 
 	/**
 	 * 数据库连接池参数：最多连接数
 	 */
-	public static final String db_maxActive = "db.maxActive";
+	public static final String db_maxActive = "maxActive";
 
 	/**
 	 *  主数据源名称：系统主数据源
 	 */
-	public static final String db_dataSource_main = "db.dataSource.main";
+	public static final String db_dataSource_main = "dataSource.main";
 
 }

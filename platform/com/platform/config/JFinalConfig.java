@@ -1,5 +1,7 @@
 package com.platform.config;
 
+import java.util.Map;
+
 import org.beetl.ext.jfinal.BeetlRenderFactory;
 
 import com.alibaba.druid.filter.stat.StatFilter;
@@ -114,77 +116,75 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 */
 	public void configPlugin(Plugins plugins) {
 		log.info("注册paltform ActiveRecordPlugin");
-		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		DataBase db = ToolDataBase.getDbInfo();
-		String driverClass = db.getDriverClass();
-		String jdbcUrl = db.getJdbcUrl();
-		String username = db.getUserName();
-		String password = db.getPassWord();
-		DruidPlugin druidPlugin = new DruidPlugin(jdbcUrl, username, password, driverClass);
+		
+		Map<String, DataBase> dbMap = ToolDataBase.getDbMap();
+		for (String dbName : dbMap.keySet()) {
+			DataBase db = dbMap.get(dbName);
+			String db_type = db.getType();
 
-		log.info("configPlugin 配置Druid数据库连接池大小");
-		druidPlugin.set(
-				PropKit.getInt(ConstantInit.db_initialSize), 
-				PropKit.getInt(ConstantInit.db_minIdle), 
-				PropKit.getInt(ConstantInit.db_maxActive));
-		
-		log.info("configPlugin 配置Druid数据库连接池过滤器配制");
-		druidPlugin.addFilter(new StatFilter());
-		WallFilter wall = new WallFilter();
-		wall.setDbType(PropKit.get(ConstantInit.db_type_key));
-		WallConfig config = new WallConfig();
-		config.setFunctionCheck(false); // 支持数据库函数
-		wall.setConfig(config);
-		druidPlugin.addFilter(wall);
-		
-		log.info("configPlugin 配置ActiveRecordPlugin插件");
-		ActiveRecordPlugin arpMain = new ActiveRecordPlugin(ConstantInit.db_dataSource_main, druidPlugin);
-		/**
-		 * Connection.TRANSACTION_READ_UNCOMMITTED 最底级别：只保证不会读到非法数据，上述3个问题有可能发生
-		 * Connection.TRANSACTION_READ_COMMITTED 默认级别：可以防止脏读
-		 * Connection.TRANSACTION_REPEATABLE_READ 可以防止脏读和不可重复读取
-		 * Connection.TRANSACTION_SERIALIZABLE 最高级别：防止上述3种情况，事务串行执行，慎用
-		 */
-		//arpMain.setTransactionLevel(4);//默认事务隔离级别4
-		boolean devMode = Boolean.parseBoolean(PropKit.get(ConstantInit.config_devMode));
-		arpMain.setDevMode(devMode); // 设置开发模式
-		arpMain.setShowSql(devMode); // 是否显示SQL
-		arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 大小写不敏感
-		
-		log.info("configPlugin 数据库类型判断");
-		String db_type = PropKit.get(ConstantInit.db_type_key);
-		if(db_type.equals(ConstantInit.db_type_postgresql)){
-			log.info("configPlugin 使用数据库类型是 postgresql");
-			arpMain.setDialect(new PostgreSqlDialect());
+			log.info("configPlugin 配置Druid数据库连接池连接属性");
+			DruidPlugin druidPlugin = new DruidPlugin(db.getJdbcUrl(), db.getUserName(), db.getPassWord(), db.getDriverClass());
+
+			log.info("configPlugin 配置Druid数据库连接池大小");
+			druidPlugin.set(db.getInitialSize(), db.getMinIdle(), db.getMaxActive());
 			
-		}else if(db_type.equals(ConstantInit.db_type_mysql)){
-			log.info("configPlugin 使用数据库类型是 mysql");
-			arpMain.setDialect(new MysqlDialect());
+			log.info("configPlugin 配置Druid数据库连接池过滤器配制");
+			druidPlugin.addFilter(new StatFilter());
+			WallFilter wall = new WallFilter();
+			wall.setDbType(db_type);
+			WallConfig config = new WallConfig();
+			config.setFunctionCheck(false); // 支持数据库函数
+			wall.setConfig(config);
+			druidPlugin.addFilter(wall);
 			
-		}else if(db_type.equals(ConstantInit.db_type_oracle)){
-			log.info("configPlugin 使用数据库类型是 oracle");
-			druidPlugin.setValidationQuery("select 1 FROM DUAL"); //连接验证语句
-			arpMain.setDialect(new OracleDialect());
+			log.info("configPlugin 配置ActiveRecordPlugin插件");
+			ActiveRecordPlugin arp = new ActiveRecordPlugin(dbName, druidPlugin);
+			/**
+			 * Connection.TRANSACTION_READ_UNCOMMITTED 最底级别：只保证不会读到非法数据，上述3个问题有可能发生
+			 * Connection.TRANSACTION_READ_COMMITTED 默认级别：可以防止脏读
+			 * Connection.TRANSACTION_REPEATABLE_READ 可以防止脏读和不可重复读取
+			 * Connection.TRANSACTION_SERIALIZABLE 最高级别：防止上述3种情况，事务串行执行，慎用
+			 */
+			//arp.setTransactionLevel(4);//默认事务隔离级别4
+			boolean devMode = Boolean.parseBoolean(PropKit.get(ConstantInit.config_devMode));
+			arp.setDevMode(devMode); // 设置开发模式
+			arp.setShowSql(devMode); // 是否显示SQL
+			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 大小写不敏感
 			
-		}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
-			log.info("configPlugin 使用数据库类型是 sqlserver");
-			arpMain.setDialect(new SqlServerDialect());
-			
-		}else if(db_type.equals(ConstantInit.db_type_db2)){
-			log.info("configPlugin 使用数据库类型是 db2");
-			druidPlugin.setValidationQuery("select 1 from sysibm.sysdummy1"); //连接验证语句
-			arpMain.setDialect(new AnsiSqlDialect());
+			log.info("configPlugin 数据库类型判断");
+			if(db_type.equals(ConstantInit.db_type_postgresql)){
+				log.info("configPlugin 使用数据库类型是 postgresql");
+				arp.setDialect(new PostgreSqlDialect());
+				
+			}else if(db_type.equals(ConstantInit.db_type_mysql)){
+				log.info("configPlugin 使用数据库类型是 mysql");
+				arp.setDialect(new MysqlDialect());
+				
+			}else if(db_type.equals(ConstantInit.db_type_oracle)){
+				log.info("configPlugin 使用数据库类型是 oracle");
+				druidPlugin.setValidationQuery("select 1 FROM DUAL"); //连接验证语句
+				arp.setDialect(new OracleDialect());
+				
+			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
+				log.info("configPlugin 使用数据库类型是 sqlserver");
+				arp.setDialect(new SqlServerDialect());
+				
+			}else if(db_type.equals(ConstantInit.db_type_db2)){
+				log.info("configPlugin 使用数据库类型是 db2");
+				druidPlugin.setValidationQuery("select 1 from sysibm.sysdummy1"); //连接验证语句
+				arp.setDialect(new AnsiSqlDialect());
+			}
+
+			log.info("configPlugin 表自动扫描注册");
+			ModelScan.scan(dbName, arp);
+
+			log.info("configPlugin 添加druidPlugin插件");
+			plugins.add(druidPlugin);
+
+			log.info("configPlugin 注册ActiveRecordPlugin插件");
+			plugins.add(arp);
 		}
-
-		log.info("configPlugin 表自动扫描注册");
-		ModelScan.scan(ConstantInit.db_dataSource_main, arpMain);
-
-		log.info("configPlugin 添加druidPlugin插件");
-		plugins.add(druidPlugin);
-
-		log.info("configPlugin 注册ActiveRecordPlugin插件");
-		plugins.add(arpMain);
-
+		
 		log.info("ServicePlugin Service注解实例化加载");
 		plugins.add(new ServicePlugin());
 		

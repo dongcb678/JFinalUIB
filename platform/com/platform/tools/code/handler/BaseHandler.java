@@ -18,7 +18,7 @@ import org.beetl.core.BeetlKit;
 
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.DbKit;
-import com.platform.constant.ConstantInit;
+import com.platform.dto.DataBase;
 import com.platform.tools.code.run.ColumnDto;
 import com.platform.tools.code.run.GenerateCode;
 
@@ -30,6 +30,23 @@ public abstract class BaseHandler {
 
 	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(BaseHandler.class);
+	
+	protected DataBase dataBase;
+	
+	public DataBase getDataBase() {
+		return dataBase;
+	}
+
+	public void setDataBase(DataBase dataBase) {
+		this.dataBase = dataBase;
+	}
+
+	/**
+	 * 初始化参数
+	 */
+	public void init(){
+		
+	}
 	
 	/**
 	 * 获取表的所有字段信息
@@ -63,6 +80,8 @@ public abstract class BaseHandler {
 	 * @return
 	 */
 	public Map<String, String> getJavaType(String tableName){
+		String name = getDataBase().getName();
+		
         //  获取字段数
 	    Map<String, String> columnJavaTypeMap = new HashMap<String, String>();
 	    
@@ -71,7 +90,7 @@ public abstract class BaseHandler {
 	    ResultSet rs = null;
 	    
 		try {
-			conn = DbKit.getConfig(ConstantInit.db_dataSource_main).getConnection();
+			conn = DbKit.getConfig(name).getConnection();
 			st = conn.createStatement();    
 		    String sql = "select * from " + tableName + " where 1 != 1 ";   
 		    rs = st.executeQuery(sql);    

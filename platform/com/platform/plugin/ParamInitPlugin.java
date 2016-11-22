@@ -3,11 +3,11 @@ package com.platform.plugin;
 import java.text.MessageFormat;
 import java.util.List;
 
-import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantRender;
+import com.platform.dto.DataBase;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.dict.Dict;
 import com.platform.mvc.group.Group;
@@ -18,6 +18,7 @@ import com.platform.mvc.station.Station;
 import com.platform.mvc.stationoperator.StationOperatorService;
 import com.platform.mvc.user.User;
 import com.platform.tools.ToolCache;
+import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolSqlXml;
 
 /**
@@ -110,7 +111,10 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheUser() {
 		log.info("缓存加载：User start");
-		String db_type = PropKit.get(ConstantInit.db_type_key);
+		
+		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
+		String db_type = dataBase.getType();
+		
 		String sql = ToolSqlXml.getSql(User.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_user ", splitDataSize);
@@ -141,7 +145,9 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheGroupOperator() {
 		log.info("缓存加载：Group Operator start");
-		String db_type = PropKit.get(ConstantInit.db_type_key);
+		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
+		String db_type = dataBase.getType();
+		
 		String sql = ToolSqlXml.getSql(Group.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_group ", splitDataSize);
@@ -173,7 +179,9 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheStationOperator() {
 		log.info("缓存加载：Station Operator start");
-		String db_type = PropKit.get(ConstantInit.db_type_key);
+		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
+		String db_type = dataBase.getType();
+		
 		String sql = ToolSqlXml.getSql(Station.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_station ", splitDataSize);
@@ -205,7 +213,9 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheOperator() {
 		log.info("缓存加载：Operator start");
-		String db_type = PropKit.get(ConstantInit.db_type_key);
+		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
+		String db_type = dataBase.getType();
+		
 		String sql = ToolSqlXml.getSql(Operator.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_operator ", splitDataSize);
