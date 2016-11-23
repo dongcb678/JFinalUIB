@@ -55,8 +55,9 @@ public class ConfigCore {
     	
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
 		Map<String, DataBase> dbMap = ToolDataBase.getDbMap();
-		for (String dbName : dbMap.keySet()) {
-			DataBase db = dbMap.get(dbName);
+		for (String name : dbMap.keySet()) {
+			DataBase db = dbMap.get(name);
+			String db_type = db.getType();
 			String driverClass = db.getDriverClass();
 			String jdbcUrl = db.getJdbcUrl();
 			String username = db.getUserName();
@@ -64,13 +65,10 @@ public class ConfigCore {
 			DruidPlugin druidPlugin = new DruidPlugin(jdbcUrl, username, password, driverClass);
 
 			log.info("configPlugin 配置Druid数据库连接池大小");
-			druidPlugin.set(
-					PropKit.getInt(ConstantInit.db_initialSize), 
-					PropKit.getInt(ConstantInit.db_minIdle), 
-					PropKit.getInt(ConstantInit.db_maxActive));
+			druidPlugin.set(db.getInitialSize(), db.getMinIdle(), db.getMaxActive());
 			
 			log.info("configPlugin 配置ActiveRecord插件");
-			ActiveRecordPlugin arpMain = new ActiveRecordPlugin(dbName, druidPlugin);
+			ActiveRecordPlugin arpMain = new ActiveRecordPlugin(name, druidPlugin);
 			//arpMain.setTransactionLevel(4);//事务隔离级别
 			boolean devMode = Boolean.parseBoolean(PropKit.get(ConstantInit.config_devMode));
 			arpMain.setDevMode(devMode); // 设置开发模式
@@ -78,7 +76,6 @@ public class ConfigCore {
 			arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 大小写不敏感
 			
 			log.info("configPlugin 数据库类型判断");
-			String db_type = PropKit.get(ConstantInit.db_type_key);
 			if(db_type.equals(ConstantInit.db_type_postgresql)){
 				log.info("configPlugin 使用数据库类型是 postgresql");
 				arpMain.setDialect(new PostgreSqlDialect());
@@ -103,7 +100,7 @@ public class ConfigCore {
 			}
 
 			log.info("configPlugin 表扫描注册");
-			ModelScan.scan(dbName, arpMain);
+			ModelScan.scan(name, arpMain);
 
 			druidPlugin.start();
 			arpMain.start();

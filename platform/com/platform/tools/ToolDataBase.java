@@ -69,7 +69,8 @@ public abstract class ToolDataBase {
 		for (int i = 1; i <= count; i++) {
 			prefix = db_start + i + db_end + ".";
 			
-			String db_name = PropKit.get(prefix + ConstantInit.db_name_key);
+			// 数据源名称
+			String name = PropKit.get(prefix + ConstantInit.db_name_key);
 			
 			// 判断数据库类型
 			String db_type = PropKit.get(prefix + ConstantInit.db_type_key);
@@ -165,6 +166,8 @@ public abstract class ToolDataBase {
 			// 把数据库连接信息写入常用map
 			DataBase db = new DataBase();
 			
+			db.setName(name);
+			
 			db.setType(db_type);
 			
 			db.setDriverClass(driverClass);
@@ -180,7 +183,7 @@ public abstract class ToolDataBase {
 			db.setMinIdle(PropKit.getInt(prefix + ConstantInit.db_minIdle));
 			db.setMaxActive(PropKit.getInt(prefix + ConstantInit.db_maxActive));
 			
-			dbMap.put(db_name, db);
+			dbMap.put(name, db);
 		}
 	}
 	

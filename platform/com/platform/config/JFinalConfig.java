@@ -118,8 +118,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("注册paltform ActiveRecordPlugin");
 		
 		Map<String, DataBase> dbMap = ToolDataBase.getDbMap();
-		for (String dbName : dbMap.keySet()) {
-			DataBase db = dbMap.get(dbName);
+		for (String name : dbMap.keySet()) {
+			DataBase db = dbMap.get(name);
 			String db_type = db.getType();
 
 			log.info("configPlugin 配置Druid数据库连接池连接属性");
@@ -138,7 +138,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 			druidPlugin.addFilter(wall);
 			
 			log.info("configPlugin 配置ActiveRecordPlugin插件");
-			ActiveRecordPlugin arp = new ActiveRecordPlugin(dbName, druidPlugin);
+			ActiveRecordPlugin arp = new ActiveRecordPlugin(name, druidPlugin);
 			/**
 			 * Connection.TRANSACTION_READ_UNCOMMITTED 最底级别：只保证不会读到非法数据，上述3个问题有可能发生
 			 * Connection.TRANSACTION_READ_COMMITTED 默认级别：可以防止脏读
@@ -176,7 +176,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 			}
 
 			log.info("configPlugin 表自动扫描注册");
-			ModelScan.scan(dbName, arp);
+			ModelScan.scan(name, arp);
 
 			log.info("configPlugin 添加druidPlugin插件");
 			plugins.add(druidPlugin);

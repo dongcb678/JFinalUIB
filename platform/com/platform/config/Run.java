@@ -4,7 +4,6 @@ import com.jfinal.core.JFinal;
 
 public class Run {
 
-
 	/**
 	 * 运行此 main 方法可以启动项目
 	 * 

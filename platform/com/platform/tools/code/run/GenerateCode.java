@@ -68,7 +68,7 @@ public class GenerateCode {
 	 * 生成的文件存放的包，公共基础包
 	 * 描述：比如platform所在的包就是com.platform，test所在的包就是com.test
 	 */
-	public static final String packageBase = "com.test.mvc";
+	public static final String packageBase = "com.test2.mvc";
 
 	/**
 	 * controller基础路径，例如
