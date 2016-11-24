@@ -17,6 +17,7 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
+import com.platform.dto.Redis;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ParamInitPlugin;
 import com.platform.plugin.ServicePlugin;
@@ -24,6 +25,7 @@ import com.platform.plugin.SqlXmlPlugin;
 import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolDataBase;
+import com.platform.tools.ToolRedis;
 
 /**
  * 独立启动JFinal中的插件，不依赖web容器调用插件
@@ -118,9 +120,13 @@ public class ConfigCore {
 			
 		}else if(ToolCache.getCacheType().equals(ConstantCache.cache_type_redis)){
 			log.info("RedisPlugin Redis缓存");
-			String redisIp = PropKit.get(ConstantInit.config_redis_ip);
-			Integer redisPort = PropKit.getInt(ConstantInit.config_redis_port);
-			new RedisPlugin(ConstantCache.cache_name_redis_system, redisIp, redisPort).start();
+			Map<String, Redis> redisMap = ToolRedis.getRedisMap();
+			Redis redis = null;
+			for (String name : redisMap.keySet()) {
+				redis = redisMap.get(name);
+				RedisPlugin rp = new RedisPlugin(redis.getName(), redis.getIp(), redis.getPort(), redis.getTimeout(), redis.getPassword());
+				rp.start();
+			}
 		}
 		
 		log.info("SqlXmlPlugin 解析并缓存 xml sql");

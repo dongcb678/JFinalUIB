@@ -36,6 +36,7 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
+import com.platform.dto.Redis;
 import com.platform.handler.GlobalHandler;
 import com.platform.interceptor.AuthInterceptor;
 import com.platform.interceptor.ParamPkgInterceptor;
@@ -50,6 +51,7 @@ import com.platform.thread.TimerResources;
 import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolDataBase;
+import com.platform.tools.ToolRedis;
 import com.platform.tools.ToolString;
 
 /**
@@ -197,10 +199,13 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 			
 		}else if(ToolCache.getCacheType().equals(ConstantCache.cache_type_redis)){
 			log.info("RedisPlugin Redis缓存");
-			String redisIp = PropKit.get(ConstantInit.config_redis_ip);
-			Integer redisPort = PropKit.getInt(ConstantInit.config_redis_port);
-			RedisPlugin systemRedis = new RedisPlugin(ConstantCache.cache_name_redis_system, redisIp, redisPort);
-			plugins.add(systemRedis);
+			Map<String, Redis> redisMap = ToolRedis.getRedisMap();
+			Redis redis = null;
+			for (String name : redisMap.keySet()) {
+				redis = redisMap.get(name);
+				RedisPlugin rp = new RedisPlugin(redis.getName(), redis.getIp(), redis.getPort(), redis.getTimeout(), redis.getPassword());
+				plugins.add(rp);
+			}
 		}
 		
 		log.info("SqlXmlPlugin 解析并缓存 xml sql");

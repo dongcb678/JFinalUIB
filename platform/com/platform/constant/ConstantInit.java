@@ -92,14 +92,9 @@ public interface ConstantInit {
 	public static final String config_cache_type = "config.cache.type";
 
 	/**
-	 *  redis 配置：ip
+	 *  redis 配置：数量
 	 */
-	public static final String config_redis_ip = "config.redis.ip";
-
-	/**
-	 *  redis 配置：port
-	 */
-	public static final String config_redis_port = "config.redis.port";
+	public static final String config_redis_count = "redis.count";
 
 	/**
 	 *  国际化配置，资源文件前缀
@@ -264,6 +259,6 @@ public interface ConstantInit {
 	/**
 	 *  主数据源名称：系统主数据源
 	 */
-	public static final String db_dataSource_main = "dataSource.main";
+	public static final String db_dataSource_main = "main";
 
 }

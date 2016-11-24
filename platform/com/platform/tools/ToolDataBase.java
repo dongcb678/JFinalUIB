@@ -10,6 +10,7 @@ import java.util.Map;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
+import com.platform.config.ConfigCore;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
 
@@ -30,28 +31,32 @@ public abstract class ToolDataBase {
 	 */
 	public static Map<String, DataBase> getDbMap(){
 		if(dbMap.isEmpty()){
-			getDbInfo();
+			synchronized (ConfigCore.class) {
+				if(dbMap.isEmpty()){
+					parseDbInfo();
+				}
+			}
 		}
 		return dbMap;
 	}
 
 	/**
 	 * 获取指定数据源对象
-	 * @param dbName
+	 * @param name
 	 * @return
 	 */
-	public static DataBase getDbMap(String dbName){
+	public static DataBase getDbMap(String name){
 		if(dbMap.isEmpty()){
-			getDbInfo();
+			parseDbInfo();
 		}
-		return dbMap.get(dbName);
+		return dbMap.get(name);
 	}
 	
 	/**
 	 * 分解数据库连接url
 	 * @return
 	 */
-	public static void getDbInfo(){
+	private static void parseDbInfo(){
 		String driverClass = null;
 		String jdbcUrl = null;
 		String userName = null;
@@ -63,6 +68,8 @@ public abstract class ToolDataBase {
 		String db_start = "db[";
 		String db_end = "]";
 		String prefix = null;
+		
+		DataBase db = null;
 		
 		int count = PropKit.getInt(ConstantInit.db_count_key);
 
@@ -164,7 +171,7 @@ public abstract class ToolDataBase {
 			}
 			
 			// 把数据库连接信息写入常用map
-			DataBase db = new DataBase();
+			db = new DataBase();
 			
 			db.setName(name);
 			
