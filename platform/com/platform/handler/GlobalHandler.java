@@ -94,7 +94,7 @@ public class GlobalHandler extends Handler {
 		// 视图耗时
 		long renderTime = 0;
 		if(null != request.getAttribute(ConstantWebContext.renderTimeKey)){
-			renderTime = (long) request.getAttribute(ConstantWebContext.renderTimeKey);
+			renderTime = (Long) request.getAttribute(ConstantWebContext.renderTimeKey);
 		}
 		reqSysLog.set(Syslog.column_viewhaoshi, renderTime);
 		

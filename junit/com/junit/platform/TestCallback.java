@@ -15,11 +15,11 @@ public class TestCallback extends TestBase {
 		DateClearCallback callback = new DateClearCallback();
 		
 		callback.setCtype("pt_resources");
-		boolean boolRes = (boolean) Db.execute(callback); 
+		Boolean boolRes = (Boolean) Db.execute(callback); 
 		System.out.println("删除资源采集，调用执行结果：" + boolRes);
 
 		callback.setCtype("pt_resources");
-		boolean boolLog = (boolean) Db.execute(callback); 
+		Boolean boolLog = (Boolean) Db.execute(callback); 
 		System.out.println("删除系统日志，调用执行结果：" + boolLog);
 		
         System.out.println("-------------end------------");

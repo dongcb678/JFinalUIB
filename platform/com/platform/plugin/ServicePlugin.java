@@ -66,7 +66,9 @@ public class ServicePlugin implements IPlugin {
 				}else{
 					try {
 						baseService = (BaseService) serviceClass.newInstance(); //Enhancer.enhance(service);	// 否
-					} catch (InstantiationException | IllegalAccessException e) {
+					} catch (InstantiationException  e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
 						e.printStackTrace();
 					}
 				}

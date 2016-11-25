@@ -96,5 +96,15 @@
         <jarDirectory url="file://$MODULE_DIR$/build-lib/junit" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/build-lib/spring" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/build-lib/spring" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

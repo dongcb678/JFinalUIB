@@ -51,9 +51,11 @@ public class UserService extends BaseService {
 
 			// 缓存
 			User.cacheAdd(user.getPKValue());
-		} catch (NoSuchAlgorithmException  | InvalidKeySpecException e) {
+		} catch (NoSuchAlgorithmException  e) {
 			throw new RuntimeException("保存用户密码加密操作异常", e);
-		} catch (Exception e) {
+		} catch (InvalidKeySpecException e) {
+			throw new RuntimeException("保存用户密码加密操作异常", e);
+		}catch (Exception e) {
 			throw new RuntimeException("保存用户异常", e);
 		}
 	}

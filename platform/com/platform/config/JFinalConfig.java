@@ -43,11 +43,13 @@ import com.platform.interceptor.ParamPkgInterceptor;
 import com.platform.plugin.FileRenamePlugin;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ParamInitPlugin;
+import com.platform.plugin.QuartzPlugin;
 import com.platform.plugin.ServicePlugin;
 import com.platform.plugin.SqlXmlPlugin;
 import com.platform.thread.DataClear;
 import com.platform.thread.ThreadSysLog;
 import com.platform.thread.TimerResources;
+import com.platform.thread.job.ResourcesJob;
 import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolDataBase;
@@ -216,6 +218,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		
 		log.info("afterJFinalStart 配置文件上传命名策略插件");
 		plugins.add(new FileRenamePlugin());
+		
+		plugins.add(new QuartzPlugin());
 	}
 
 	/**
@@ -276,6 +280,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		
 		log.info("afterJFinalStart 数据清理");
 		DataClear.start();
+		
+		QuartzPlugin.addJob("ResourcesJob", "0/13 * * * * ?", ResourcesJob.class);
 	}
 	
 	/**

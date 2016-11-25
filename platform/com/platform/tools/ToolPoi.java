@@ -62,7 +62,11 @@ public abstract class ToolPoi {
 			swb.write(os);  
 			
 			return path;
-		} catch (IOException | InvalidFormatException e) {
+		} catch (IOException e) {
+			log.error("导出失败：" + e.getMessage());
+			e.printStackTrace();
+			return null;
+		} catch (InvalidFormatException e) {
 			log.error("导出失败：" + e.getMessage());
 			e.printStackTrace();
 			return null;
