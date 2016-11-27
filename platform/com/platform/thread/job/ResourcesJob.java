@@ -12,7 +12,8 @@ public class ResourcesJob implements Job {
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		System.out.println(ToolDateTime.format(new Date(), ToolDateTime.pattern_ymd_hms_s));
+		
+		System.out.println("quartz测试" + ToolDateTime.format(new Date(), ToolDateTime.pattern_ymd_hms_s));
 
 	}
 
