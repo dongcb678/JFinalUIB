@@ -289,9 +289,10 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		ThreadSysLog.setThreadRun(false);
 
 		log.info("beforeJFinalStop 系统负载");
+		QuartzPlugin.deleteJob("ResourcesJob");
 		
 		log.info("beforeJFinalStop 数据清理");
-
+		QuartzPlugin.deleteJob("DataClearJob");
 	}
 
 }
