@@ -46,9 +46,8 @@ import com.platform.plugin.ParamInitPlugin;
 import com.platform.plugin.QuartzPlugin;
 import com.platform.plugin.ServicePlugin;
 import com.platform.plugin.SqlXmlPlugin;
-import com.platform.thread.DataClear;
 import com.platform.thread.ThreadSysLog;
-import com.platform.thread.TimerResources;
+import com.platform.thread.job.DataClearJob;
 import com.platform.thread.job.ResourcesJob;
 import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
@@ -276,12 +275,10 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		ThreadSysLog.startSaveDBThread();
 
 		log.info("afterJFinalStart 系统负载");
-		TimerResources.start();
-		
+		QuartzPlugin.addJob("ResourcesJob", "0 0/2 * * * ?", ResourcesJob.class);
+
 		log.info("afterJFinalStart 数据清理");
-		DataClear.start();
-		
-		QuartzPlugin.addJob("ResourcesJob", "0/13 * * * * ?", ResourcesJob.class);
+		QuartzPlugin.addJob("DataClearJob", "0 0 2 * * ?", DataClearJob.class);
 	}
 	
 	/**
@@ -290,12 +287,11 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	public void beforeJFinalStop() {
 		log.info("beforeJFinalStop 释放日志入库线程");
 		ThreadSysLog.setThreadRun(false);
-	
-		log.info("beforeJFinalStop 释放系统负载抓取线程");
-		TimerResources.stop();
-	
+
+		log.info("beforeJFinalStop 系统负载");
+		
 		log.info("beforeJFinalStop 数据清理");
-		DataClear.stop();
+
 	}
 
 }

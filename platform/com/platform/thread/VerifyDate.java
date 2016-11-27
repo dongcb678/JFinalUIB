@@ -35,12 +35,9 @@ public class VerifyDate extends Thread {
 					Date newDate = new Date();
 					long milliSeconds = newDate.getTime() - date.getTime();
 					if(milliSeconds < - interval){
-						// 重新触发timer
-						DataClear.stop();
-						DataClear.start();
-						
-						TimerResources.stop();
-						TimerResources.start();
+						// 停止调度任务
+
+						// 启动调度任务
 						
 						// 重置时间变量
 						date = newDate;
@@ -61,6 +58,7 @@ public class VerifyDate extends Thread {
 		log.info("启动任务成功");
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static synchronized void stopVerify(){
 		log.info("任务退出开始");
 		verifyDate.stop();
