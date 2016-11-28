@@ -209,15 +209,16 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 			}
 		}
 		
-		log.info("SqlXmlPlugin 解析并缓存 xml sql");
+		log.info("configPlugin SqlXmlPlugin 解析并缓存 xml sql");
 		plugins.add(new SqlXmlPlugin());
 		
-		log.info("afterJFinalStart 缓存参数");
+		log.info("configPlugin ParamInitPlugin 缓存参数");
 		plugins.add(new ParamInitPlugin());
 		
-		log.info("afterJFinalStart 配置文件上传命名策略插件");
+		log.info("configPlugin FileRenamePlugin 配置文件上传命名策略插件");
 		plugins.add(new FileRenamePlugin());
-		
+
+		log.info("configPlugin QuartzPlugin 配置文件上传命名策略插件");
 		plugins.add(new QuartzPlugin());
 	}
 

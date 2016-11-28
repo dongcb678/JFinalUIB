@@ -3,6 +3,9 @@ package com.platform.thread;
 import java.util.Date;
 
 import com.jfinal.log.Log;
+import com.platform.plugin.QuartzPlugin;
+import com.platform.thread.job.DataClearJob;
+import com.platform.thread.job.ResourcesJob;
 
 /**
  * 时间校验检测
@@ -36,8 +39,12 @@ public class VerifyDate extends Thread {
 					long milliSeconds = newDate.getTime() - date.getTime();
 					if(milliSeconds < - interval){
 						// 停止调度任务
-
+						QuartzPlugin.deleteJob("ResourcesJob");
+						QuartzPlugin.deleteJob("DataClearJob");
+						
 						// 启动调度任务
+						QuartzPlugin.addJob("ResourcesJob", "0 0/2 * * * ?", ResourcesJob.class);
+						QuartzPlugin.addJob("DataClearJob", "0 0 2 * * ?", DataClearJob.class);
 						
 						// 重置时间变量
 						date = newDate;

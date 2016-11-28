@@ -7,10 +7,12 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
+import org.quartz.ScheduleBuilder;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
@@ -30,6 +32,16 @@ public class QuartzPlugin implements IPlugin {
 	private static List<String> triggerKeyList = new ArrayList<String>();
 	
 	private static long delayTimes = 5000; // 延迟xx毫秒执行，0表示不延迟
+
+	/**
+	 * 添加调度任务
+	 * @param triggerKey
+	 * @param cron
+	 * @param classs
+	 */
+	public static void addJob(String triggerKey, String cron, Class<? extends Job> classs){
+		addJob(triggerKey, cron, classs, null);
+	}
 	
 	/**
 	 * 添加调度任务
@@ -39,6 +51,27 @@ public class QuartzPlugin implements IPlugin {
 	 * @param param 调度任务参数
 	 */
 	public static void addJob(String triggerKey, String cron, Class<? extends Job> classs, Map<String, String> param){
+		ScheduleBuilder<CronTrigger> schedBuilder = CronScheduleBuilder.cronSchedule(cron);
+		addJob(triggerKey, schedBuilder, classs, param);
+	}
+	
+	/**
+	 * 添加调度任务
+	 * @param triggerKey 全局唯一调度任务id
+	 * @param schedBuilder 调度任务表达式
+	 * @param classs 调度处理类
+	 * @param param 调度任务参数
+	
+	 * ScheduleBuilder常见调度类型
+	 * 1.CronScheduleBuilder.cronSchedule(cron) // 轮询时间，表达式
+	 * 2.SimpleScheduleBuilder.repeatHourlyForever(24) // 轮询时间，24小时
+	 * 3.SimpleScheduleBuilder.repeatMinutelyForever(60) // 轮询时间，60分钟
+	 * 4.SimpleScheduleBuilder.repeatSecondlyForever(60) // 轮询时间，60秒
+	 * 5.SimpleScheduleBuilder.simpleSchedule()
+                        .withIntervalInSeconds(10) //时间间隔
+                        .withRepeatCount(5)        //重复次数(将执行6次)
+	 */
+	public static void addJob(String triggerKey, ScheduleBuilder<CronTrigger> schedBuilder, Class<? extends Job> classs, Map<String, String> param){
 		for (String key : triggerKeyList) {
 			if(triggerKey.equals(key)){
 				throw new RuntimeException("不能条件重复调度任务triggerKey = " + triggerKey);
@@ -52,15 +85,8 @@ public class QuartzPlugin implements IPlugin {
 			jobDetail.getJobDataMap().putAll(param);
 		}
 		
-		/**
-		 * withSchedule
-		 * 1.SimpleScheduleBuilder.repeatHourlyForever(24) // 轮询时间，24小时
-		 * 2.SimpleScheduleBuilder.repeatSecondlyForever(60) // 轮询时间，60秒
-		 * 3.CronScheduleBuilder.cronSchedule(cron) // 轮询时间，表达式
-		 */
-		
 		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey, Scheduler.DEFAULT_GROUP)
-				.withSchedule(CronScheduleBuilder.cronSchedule(cron)) 
+				.withSchedule(schedBuilder) 
 				.startAt(new Date(System.currentTimeMillis() + delayTimes))
 				.build();
 		
@@ -69,17 +95,6 @@ public class QuartzPlugin implements IPlugin {
 		} catch (SchedulerException e) {
 			e.printStackTrace();
 		}
-	}
-	
-
-	/**
-	 * 添加调度任务
-	 * @param triggerKey
-	 * @param cron
-	 * @param classs
-	 */
-	public static void addJob(String triggerKey, String cron, Class<? extends Job> classs){
-		addJob(triggerKey, cron, classs, null);
 	}
 	
 	/**

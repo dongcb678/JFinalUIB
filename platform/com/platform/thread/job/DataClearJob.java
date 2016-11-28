@@ -14,8 +14,12 @@ public class DataClearJob implements Job {
 	private static final Log log = Log.getLog(DataClearJob.class);
 	
 	@Override
-	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
+			// 调度任务参数
+//			JobDataMap dataMap = context.getJobDetail().getJobDataMap();
+//			String xxx = (String) dataMap.get("xxx");
+			
 			try {
 				log.info("清理访问日志数据");
 				SysLogService slService = (SysLogService) ServicePlugin.getService(SysLogService.serviceName);

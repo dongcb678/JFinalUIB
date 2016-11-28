@@ -14,8 +14,12 @@ public class ResourcesJob implements Job {
 	private static final Log log = Log.getLog(ResourcesJob.class);
 	
 	@Override
-	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
+			// 调度任务参数
+//			JobDataMap dataMap = context.getJobDetail().getJobDataMap();
+//			String xxx = (String) dataMap.get("xxx");
+			
 			log.info("定时记录系统资源负载开始");
 			resources();
 			log.info("定时记录系统资源负载结束");
