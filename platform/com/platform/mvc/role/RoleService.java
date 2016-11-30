@@ -48,12 +48,14 @@ public class RoleService extends BaseService {
 		String grSql = getSql("platform.role.getGrouproleByRoleids");
 		
 		for (String roleIds : idsArr) {
+			// 删除角色功能关联数据
 			List<RoleOperator> roList = RoleOperator.dao.find(roSql, roleIds);
 			for (RoleOperator ro : roList) {
-				// 删除关联数据
+				
 				ro.delete(); 
 			}
 			
+			// 删除分组角色关联数据，并重新缓存分组功能
 			List<GroupRole> grList = GroupRole.dao.find(grSql, roleIds);
 			for (GroupRole gr : grList) {
 				String groupIds = gr.getGroupids();
@@ -65,7 +67,7 @@ public class RoleService extends BaseService {
 				GroupRoleService.cacheAdd(groupIds);
 			}
 			
-			// 删除
+			// 删除角色
 			Role.dao.deleteById(roleIds);
 		}
 	}

@@ -59,11 +59,11 @@ public class UserGroupService extends BaseService {
 		UserGroup ug = UserGroup.dao.findById(userGroupIds);
 		String userIds = ug.getUserids();
 
-		// 缓存
-		User.cacheAdd(userIds);
-		
 		// 删除
 		ug.delete();
+		
+		// 缓存
+		User.cacheAdd(userIds);
 	}
 	
 }

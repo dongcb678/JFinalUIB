@@ -23,9 +23,13 @@ public class GroupService extends BaseService {
 	 * @return
 	 */
 	public String save(Group group){
+		// 保存
 		group.save();
 		String groupIds = group.getPKValue();
+		
+		// 缓存
 		GroupRoleService.cacheAdd(groupIds);
+		
 		return groupIds;
 	}
 

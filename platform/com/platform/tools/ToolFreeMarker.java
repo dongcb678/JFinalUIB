@@ -31,8 +31,6 @@ public abstract class ToolFreeMarker {
 	 * @param templateContent
 	 * @param paramMap
 	 * @return
-	 * @throws IOException
-	 * @throws TemplateException
 	 */
 	public static String render(String templateContent, Map<String, Object> paramMap) {
 		StringWriter writer = new StringWriter();

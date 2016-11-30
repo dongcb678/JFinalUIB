@@ -99,12 +99,12 @@ public class UserService extends BaseService {
 	public void delete(String ids) {
 		String[] idsArr = splitByComma(ids);
 		for (String userIds : idsArr) {
-			// 缓存
-			User.cacheRemove(userIds);
-
 			// 删除
 			User.dao.deleteById(userIds);
 			UserInfo.dao.deleteById(userIds);
+			
+			// 缓存
+			User.cacheRemove(userIds);
 		}
 	}
 
