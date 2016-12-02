@@ -242,7 +242,29 @@ public abstract class BaseController extends Controller {
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass){
 		String modelName = modelClass.getSimpleName();
 		String prefix = StrKit.firstCharToLowerCase(modelName) + "List";
-		return getModels(modelClass, prefix);
+		return getModels(modelClass, prefix, false);
+	}
+
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, boolean skipConvertError){
+		String modelName = modelClass.getSimpleName();
+		String prefix = StrKit.firstCharToLowerCase(modelName) + "List";
+		return getModels(modelClass, prefix, skipConvertError);
+	}
+	
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @param prefix
+	 * @return
+	 */
+	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix){
+		return getModels(modelClass, prefix, false);
 	}
 	
 	/**
@@ -268,7 +290,7 @@ public abstract class BaseController extends Controller {
 	 * 		// 默认的prefix是Model类的首字母小写加上List
 	 * 		List<Group> groupList = ToolModelInjector.injectModels(getRequest(), Group.class); 
 	 */
-	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix){
+	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix, boolean skipConvertError){
 		int maxIndex = 0;	// 最大的数组索引
 		boolean zeroIndex = false; // 是否存在0索引
 		
@@ -293,12 +315,83 @@ public abstract class BaseController extends Controller {
 		List<T> modelList = new ArrayList<T>();
 		for (int i = 0; i <= maxIndex; i++) {
 			if((i == 0 && zeroIndex) || i != 0){ // 避免表单空值时调用产生一个无用的值
-				T baseModel = (T) getModel(modelClass, prefix + "[" + i + "]", false);
+				T baseModel = (T) getModel(modelClass, prefix + "[" + i + "]", skipConvertError);
 				modelList.add(baseModel);
 			}
 		}
 		
 		return modelList;
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @return
+	 */
+	public <T> List<T> getBeans(Class<T> beanClass){
+		String modelName = beanClass.getSimpleName();
+		String prefix = StrKit.firstCharToLowerCase(modelName) + "List";
+		return getBeans(beanClass, prefix, false);
+	}
+
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T> List<T> getBeans(Class<T> beanClass, boolean skipConvertError){
+		String modelName = beanClass.getSimpleName();
+		String prefix = StrKit.firstCharToLowerCase(modelName) + "List";
+		return getBeans(beanClass, prefix, skipConvertError);
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param prefix
+	 * @return
+	 */
+	public <T> List<T> getBeans(Class<T> beanClass, String prefix){
+		return getBeans(beanClass, prefix, false);
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param prefix
+	 */
+	public <T> List<T> getBeans(Class<T> beanClass, String prefix, boolean skipConvertError){
+		int maxIndex = 0;	// 最大的数组索引
+		boolean zeroIndex = false; // 是否存在0索引
+		
+		String arrayPrefix = prefix + "[";
+		String key = null;
+		Enumeration<String> names = getRequest().getParameterNames();
+		while (names.hasMoreElements()) {
+			key = names.nextElement();
+			if (key.startsWith(arrayPrefix) && key.indexOf("]") != -1) {
+				int indexTemp = Integer.parseInt(key.substring(key.indexOf("[") + 1, key.indexOf("]")));
+				
+				if(indexTemp == 0){
+					zeroIndex = true; // 是否存在0索引
+				} 
+				
+				if(indexTemp > maxIndex){
+					maxIndex = indexTemp; // 找到最大的数组索引
+				}
+			}
+		}
+		
+		List<T> beanList = new ArrayList<T>();
+		for (int i = 0; i <= maxIndex; i++) {
+			if((i == 0 && zeroIndex) || i != 0){ // 避免表单空值时调用产生一个无用的值
+				T baseModel = (T) getBean(beanClass, prefix + "[" + i + "]", skipConvertError);
+				beanList.add(baseModel);
+			}
+		}
+		
+		return beanList;
 	}
 
 	/**
@@ -308,10 +401,20 @@ public abstract class BaseController extends Controller {
 	 */
 	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass) {
 		String modelName = StrKit.firstCharToLowerCase(modelClass.getSimpleName());
-		keepModels(modelClass, modelName);
-		return this;
+		return keepModels(modelClass, modelName, false);
 	}
 	
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass, boolean skipConvertError){
+		String modelName = StrKit.firstCharToLowerCase(modelClass.getSimpleName());
+		return keepModels(modelClass, modelName, skipConvertError);
+	}
+
 	/**
 	 * 表单数组映射List<Model>
 	 * @param modelClass
@@ -319,9 +422,68 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass, String modelName) {
+		return keepModels(modelClass, modelName, false);
+	}
+	
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @param modelName
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass, String modelName, boolean skipConvertError) {
 		if (StrKit.notBlank(modelName)) {
-			List<T> model = getModels(modelClass, modelName);
+			List<T> model = getModels(modelClass, modelName, skipConvertError);
 			setAttr(modelName, model);
+		} else {
+			keepPara();
+		}
+		return this;
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @return
+	 */
+	public <T> Controller keepBeans(Class<T> beanClass) {
+		String modelName = StrKit.firstCharToLowerCase(beanClass.getSimpleName());
+		return keepBeans(beanClass, modelName, false);
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T> Controller keepBeans(Class<T> beanClass, boolean skipConvertError){
+		String modelName = StrKit.firstCharToLowerCase(beanClass.getSimpleName());
+		return keepBeans(beanClass, modelName, skipConvertError);
+	}
+
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param beanName
+	 * @return
+	 */
+	public <T> Controller keepBeans(Class<T> beanClass, String beanName) {
+		return keepBeans(beanClass, beanName, false);
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param beanName
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T> Controller keepBeans(Class<T> beanClass, String beanName, boolean skipConvertError) {
+		if (StrKit.notBlank(beanName)) {
+			List<T> model = getBeans(beanClass, beanName, skipConvertError);
+			setAttr(beanName, model);
 		} else {
 			keepPara();
 		}
