@@ -66,10 +66,11 @@ public class OperatorService extends BaseService {
 				roleOperatorService.del(roleOperator.getPKValue());
 			}
 
-			// 删除
-			Operator.dao.deleteById(operatorIds);
-			// 缓存
+			// 删除缓存
 			Operator.cacheRemove(operatorIds);
+			
+			// 删除Operator
+			Operator.dao.deleteById(operatorIds);
 		}
 		
 	}
