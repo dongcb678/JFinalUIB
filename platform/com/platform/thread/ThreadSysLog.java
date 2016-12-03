@@ -77,27 +77,28 @@ public class ThreadSysLog {
 			for (int i = 0; i < 10; i++) {
 				Thread insertDbThread = new Thread(new Runnable() {
 					public void run() {
-						
+						Syslog sysLog = null;
 						while (threadRun) {
-							
 							try {
 								// 取队列数据
 								//Syslog sysLog = queue.take(); // 基于LinkedBlockingQueue
-								Syslog sysLog = getSyslog();
+								sysLog = getSyslog();
 								if(null == sysLog){
 									Thread.sleep(200);
 								} else {
 									log.info("保存操作日志到数据库start......");
 									sysLog.save();// 日志入库
+									sysLog = null;
 									log.info("保存操作日志到数据库end......");
 								}
 							} catch (Exception e) {
+								if(null != sysLog){
+									sysLog = null;
+								}
 								log.error("保存操作日志到数据库异常：" + e.getMessage());
 								e.printStackTrace();
 							}
-							
 						}
-						
 					}
 				});
 

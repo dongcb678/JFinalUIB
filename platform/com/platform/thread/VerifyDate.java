@@ -38,11 +38,15 @@ public class VerifyDate extends Thread {
 					Date newDate = new Date();
 					long milliSeconds = newDate.getTime() - date.getTime();
 					if(milliSeconds < - interval){
+						QuartzPlugin quartzPlugin = new QuartzPlugin();
+						
 						// 停止调度任务
 						QuartzPlugin.deleteJob("ResourcesJob");
 						QuartzPlugin.deleteJob("DataClearJob");
+						quartzPlugin.stop();
 						
 						// 启动调度任务
+						quartzPlugin.start();
 						QuartzPlugin.addJob("ResourcesJob", "0 0/2 * * * ?", ResourcesJob.class);
 						QuartzPlugin.addJob("DataClearJob", "0 0 2 * * ?", DataClearJob.class);
 						
