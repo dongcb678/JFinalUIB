@@ -41,4 +41,10 @@
 	intercept方法，去掉final，支持BaseValidator重写此方法，增加service实例注入
 	并把validator声明为类成员变量，增加instance方法实例化验证器,方便子类访问
 	
+11.文件下载，IE下中文名称乱码
+
+	RenderFactory中getFileRender方法，带有downloadSaveFileName参数却没有传递，增加参数传递
+	
+	FileRender中的encodeFileName方法继续使用老版本中GBK编码，新版UTF-8编码导致IE下中文文件名乱码
+
 	

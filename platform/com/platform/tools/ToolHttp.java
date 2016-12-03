@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -22,11 +23,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.mail.internet.MimeUtility;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -55,6 +59,7 @@ import com.jfinal.log.Log;
 
 /**
  * HTTP请求相关
+ * 
  * @author 董华健
  */
 @SuppressWarnings("deprecation")
@@ -74,25 +79,27 @@ public abstract class ToolHttp {
 
 	/**
 	 * 进行HttpClient get连接
-	 * @param isHttps 是否ssl链接
+	 * 
+	 * @param isHttps
+	 *            是否ssl链接
 	 * @param url
 	 * @return
 	 */
 	public static String get(boolean isHttps, String url) {
 		CloseableHttpClient httpClient = null;
 		try {
-			if(!isHttps){
+			if (!isHttps) {
 				httpClient = HttpClients.createDefault();
-			}else{
+			} else {
 				httpClient = createSSLInsecureClient();
 			}
 			HttpGet httpget = new HttpGet(url);
-			//httpget.addHeader(new BasicHeader("", ""));
-			//httpget.addHeader("", "");
+			// httpget.addHeader(new BasicHeader("", ""));
+			// httpget.addHeader("", "");
 			CloseableHttpResponse response = httpClient.execute(httpget);
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				// 获取状态行
-				//System.out.println(response.getStatusLine());
+				// System.out.println(response.getStatusLine());
 				HttpEntity entity = response.getEntity();
 				if (entity != null) {
 					String out = EntityUtils.toString(entity, ToolString.encoding);
@@ -107,7 +114,7 @@ public abstract class ToolHttp {
 			return null;
 		} finally {
 			try {
-				if(null != httpClient){
+				if (null != httpClient) {
 					httpClient.close();
 				}
 			} catch (IOException e) {
@@ -119,7 +126,9 @@ public abstract class ToolHttp {
 
 	/**
 	 * 进行HttpClient post连接
-	 * @param isHttps 是否ssl链接
+	 * 
+	 * @param isHttps
+	 *            是否ssl链接
 	 * @param url
 	 * @param data
 	 * @param contentType
@@ -128,26 +137,28 @@ public abstract class ToolHttp {
 	public static String post(boolean isHttps, String url, String data, String contentType) {
 		CloseableHttpClient httpClient = null;
 		try {
-			if(!isHttps){
+			if (!isHttps) {
 				httpClient = HttpClients.createDefault();
-			}else{
+			} else {
 				httpClient = createSSLInsecureClient();
 			}
 			HttpPost httpPost = new HttpPost(url);
-			//(name, value);.addRequestHeader("Content-Type","text/html;charset=UTF-8");
-			//httpPost.getParams().setParameter(HttpMethod.HTTP_CONTENT_CHARSET, "UTF-8");
-			
-			if(null != data){
+			// (name,
+			// value);.addRequestHeader("Content-Type","text/html;charset=UTF-8");
+			// httpPost.getParams().setParameter(HttpMethod.HTTP_CONTENT_CHARSET,
+			// "UTF-8");
+
+			if (null != data) {
 				StringEntity stringEntity = new StringEntity(data, ToolString.encoding);
 				stringEntity.setContentEncoding(ToolString.encoding);
 				if (null != contentType) {
 					stringEntity.setContentType(contentType);
-				}else{
+				} else {
 					stringEntity.setContentType("application/json");
 				}
 				httpPost.setEntity(stringEntity);
 			}
-			
+
 			RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(2000).setConnectTimeout(2000).build();// 设置请求和传输超时时间
 			httpPost.setConfig(requestConfig);
 
@@ -169,7 +180,7 @@ public abstract class ToolHttp {
 			log.error("IO异常:" + url);
 		} finally {
 			try {
-				if(null != httpClient){
+				if (null != httpClient) {
 					httpClient.close();
 				}
 			} catch (IOException e) {
@@ -178,18 +189,20 @@ public abstract class ToolHttp {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * HTTPS访问对象，信任所有证书
+	 * 
 	 * @return
 	 */
 	public static CloseableHttpClient createSSLInsecureClient() {
 		try {
 			SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-				//信任所有
+				// 信任所有
 				public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 					return true;
-				}}).build();
+				}
+			}).build();
 			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
 			return HttpClients.custom().setSSLSocketFactory(sslsf).build();
 		} catch (KeyManagementException e) {
@@ -199,42 +212,51 @@ public abstract class ToolHttp {
 		} catch (KeyStoreException e) {
 			e.printStackTrace();
 		}
-		return  HttpClients.createDefault();
+		return HttpClients.createDefault();
 	}
-	
+
 	/**
 	 * 原生方式请求
-	 * @param isHttps 是否https
-	 * @param requestUrl 请求地址
-	 * @param requestMethod 请求方式（GET、POST）
-	 * @param outputStr 提交的数据
+	 * 
+	 * @param isHttps
+	 *            是否https
+	 * @param requestUrl
+	 *            请求地址
+	 * @param requestMethod
+	 *            请求方式（GET、POST）
+	 * @param outputStr
+	 *            提交的数据
 	 * @return
 	 */
 	public static String httpRequest(boolean isHttps, String requestUrl, String requestMethod, String outputStr) {
 		HttpURLConnection conn = null;
-		
+
 		OutputStream outputStream = null;
 		OutputStreamWriter outputStreamWriter = null;
 		PrintWriter printWriter = null;
-		
+
 		InputStream inputStream = null;
 		InputStreamReader inputStreamReader = null;
 		BufferedReader bufferedReader = null;
-		
+
 		try {
 			URL url = new URL(requestUrl);
 			conn = (HttpURLConnection) url.openConnection();
-			if(isHttps){
+			if (isHttps) {
 				HttpsURLConnection httpsConn = (HttpsURLConnection) conn;
 				// 创建SSLContext对象，并使用我们指定的信任管理器初始化
 				TrustManager[] tm = { new X509TrustManager() {
 					@Override
-					public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+					public void checkClientTrusted(X509Certificate[] chain, String authType)
+							throws CertificateException {
 						// 检查客户端证书
 					}
-					public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+					public void checkServerTrusted(X509Certificate[] chain, String authType)
+							throws CertificateException {
 						// 检查服务器端证书
 					}
+
 					public X509Certificate[] getAcceptedIssuers() {
 						// 返回受信任的X509证书数组
 						return null;
@@ -246,31 +268,31 @@ public abstract class ToolHttp {
 				httpsConn.setSSLSocketFactory(ssf);
 				conn = httpsConn;
 			}
-			
+
 			// 超时设置，防止 网络异常的情况下，可能会导致程序僵死而不继续往下执行
 			conn.setConnectTimeout(30000);
 			conn.setReadTimeout(30000);
-			
+
 			// 设置是否向httpUrlConnection输出，因为这个是post请求，参数要放在
 			// http正文内，因此需要设为true, 默认情况下是false;
 			conn.setDoOutput(true);
-			
+
 			// 设置是否从httpUrlConnection读入，默认情况下是true;
 			conn.setDoInput(true);
-			
+
 			// Post 请求不能使用缓存
 			conn.setUseCaches(false);
-			
+
 			// 设定传送的内容类型是可序列化的java对象
 			// (如果不设此项,在传送序列化对象时,当WEB服务默认的不是这种类型时可能抛java.io.EOFException)
 			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
-			
+
 			// 设置请求方式（GET/POST），默认是GET
 			conn.setRequestMethod(requestMethod);
-			
+
 			// 连接，上面对urlConn的所有配置必须要在connect之前完成，
 			conn.connect();
-			
+
 			// 当outputStr不为null时向输出流写数据
 			if (null != outputStr) {
 				outputStream = conn.getOutputStream();
@@ -290,18 +312,18 @@ public abstract class ToolHttp {
 			while ((str = bufferedReader.readLine()) != null) {
 				buffer.append(str).append("\n");
 			}
-			
+
 			return buffer.toString();
 		} catch (ConnectException ce) {
 			log.error("连接超时：{}", ce);
 			return null;
-			
+
 		} catch (Exception e) {
 			log.error("https请求异常：{}", e);
 			return null;
-			
+
 		} finally { // 释放资源
-			if(null != outputStream){
+			if (null != outputStream) {
 				try {
 					outputStream.close();
 				} catch (IOException e) {
@@ -309,8 +331,8 @@ public abstract class ToolHttp {
 				}
 				outputStream = null;
 			}
-			
-			if(null != outputStreamWriter){
+
+			if (null != outputStreamWriter) {
 				try {
 					outputStreamWriter.close();
 				} catch (IOException e) {
@@ -318,13 +340,13 @@ public abstract class ToolHttp {
 				}
 				outputStreamWriter = null;
 			}
-			
-			if(null != printWriter){
+
+			if (null != printWriter) {
 				printWriter.close();
 				printWriter = null;
 			}
-			
-			if(null != bufferedReader){
+
+			if (null != bufferedReader) {
 				try {
 					bufferedReader.close();
 				} catch (IOException e) {
@@ -332,8 +354,8 @@ public abstract class ToolHttp {
 				}
 				bufferedReader = null;
 			}
-			
-			if(null != inputStreamReader){
+
+			if (null != inputStreamReader) {
 				try {
 					inputStreamReader.close();
 				} catch (IOException e) {
@@ -341,8 +363,8 @@ public abstract class ToolHttp {
 				}
 				inputStreamReader = null;
 			}
-			
-			if(null != inputStream){
+
+			if (null != inputStream) {
 				try {
 					inputStream.close();
 				} catch (IOException e) {
@@ -350,18 +372,18 @@ public abstract class ToolHttp {
 				}
 				inputStream = null;
 			}
-			
-			if(null != conn){
+
+			if (null != conn) {
 				conn.disconnect();
 				conn = null;
 			}
 		}
 	}
-	
+
 	/**
-	 * 模拟登陆，返回的client对象可以保存cookie和session信息，
-	 * 然后按权限继续进行其他URL请求，
-	 * 切记：使用完关闭对象try catch finally client.close();
+	 * 模拟登陆，返回的client对象可以保存cookie和session信息， 然后按权限继续进行其他URL请求， 切记：使用完关闭对象try
+	 * catch finally client.close();
+	 * 
 	 * @param loginUrl
 	 * @param loginParam
 	 * @return
@@ -371,7 +393,7 @@ public abstract class ToolHttp {
 		try {
 			// 直接创建client
 			client = HttpClients.createDefault();
-			
+
 			// 执行post登陆请求
 			HttpPost loginHP = new HttpPost(loginUrl);
 			UrlEncodedFormEntity loginEntity = new UrlEncodedFormEntity(getParam(loginParam), "UTF-8");
@@ -379,7 +401,7 @@ public abstract class ToolHttp {
 			HttpResponse loginHR = client.execute(loginHP);
 			HttpEntity loginHE = loginHR.getEntity();
 			String loginReturn = EntityUtils.toString(loginHE);
-			if(!loginReturn.equals("success")){
+			if (!loginReturn.equals("success")) {
 				log.error("登录失败");
 				return null;
 			}
@@ -387,18 +409,19 @@ public abstract class ToolHttp {
 			return client;
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 		return null;
 	}
 
 	/**
 	 * 使用登陆成功的client对象继续其他post请求
+	 * 
 	 * @param client
 	 * @param dataUrl
 	 * @param dataParam
 	 * @return
 	 */
-	public static String mockPostByClient(CloseableHttpClient client, String dataUrl, Map<String, String> dataParam)  {
+	public static String mockPostByClient(CloseableHttpClient client, String dataUrl, Map<String, String> dataParam) {
 		String dataReturn = null;
 		try {
 			// 使用post方式请求URL数据
@@ -410,18 +433,19 @@ public abstract class ToolHttp {
 			dataReturn = EntityUtils.toString(dataHE);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 		return dataReturn;
 	}
 
 	/**
 	 * 使用登陆成功的client对象继续其他get请求
+	 * 
 	 * @param client
 	 * @param dataUrl
 	 * @param dataParam
 	 * @return
 	 */
-	public static String mockGetByClient(CloseableHttpClient client, String dataUrl, Map<String, String> dataParam)  {
+	public static String mockGetByClient(CloseableHttpClient client, String dataUrl, Map<String, String> dataParam) {
 		String dataReturn = null;
 		try {
 			// 使用get方式请求URL数据
@@ -431,12 +455,13 @@ public abstract class ToolHttp {
 			dataReturn = EntityUtils.toString(dataHE);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 		return dataReturn;
 	}
-	
+
 	/**
 	 * 模拟登陆，并取出登陆验证cookie，然后构造自己的通用cookie对象
+	 * 
 	 * @param loginUrl
 	 * @param loginParam
 	 * @return
@@ -447,7 +472,7 @@ public abstract class ToolHttp {
 		try {
 			// 直接创建client
 			client = HttpClients.createDefault();
-			
+
 			// 执行post登陆请求
 			HttpPost loginHP = new HttpPost(loginUrl);
 			UrlEncodedFormEntity loginEntity = new UrlEncodedFormEntity(getParam(loginParam), "UTF-8");
@@ -455,23 +480,23 @@ public abstract class ToolHttp {
 			HttpResponse loginHR = client.execute(loginHP);
 			HttpEntity loginHE = loginHR.getEntity();
 			String loginReturn = EntityUtils.toString(loginHE);
-			if(!loginReturn.equals("success")){
+			if (!loginReturn.equals("success")) {
 				log.error("登录失败");
 				return null;
 			}
-			
+
 			cookieStore = new BasicCookieStore();
 			Header[] headers = loginHR.getHeaders("Set-Cookie");
 			String authmark = null;
 			for (Header header : headers) {
-				authmark = 	header.getValue();
-				if(authmark.indexOf("authmark=") != -1){
+				authmark = header.getValue();
+				if (authmark.indexOf("authmark=") != -1) {
 					authmark = authmark.replace("authmark=", "");
 					authmark = authmark.substring(0, authmark.indexOf(";"));
 					break;
 				}
 			}
-			
+
 			// 新建一个Cookie
 			BasicClientCookie cookie = new BasicClientCookie("authmark", authmark);
 			cookie.setVersion(0);
@@ -491,18 +516,19 @@ public abstract class ToolHttp {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return cookieStore;
 	}
 
 	/**
 	 * 使用登陆成功的Cookie对象继续其他post请求
+	 * 
 	 * @param cookie
 	 * @param dataUrl
 	 * @param dataParam
 	 * @return
 	 */
-	public static String mockPostByCookie(CookieStore cookie, String dataUrl, Map<String, String> dataParam)  {
+	public static String mockPostByCookie(CookieStore cookie, String dataUrl, Map<String, String> dataParam) {
 		CloseableHttpClient client = null;
 		String dataReturn = null;
 		try {
@@ -528,12 +554,13 @@ public abstract class ToolHttp {
 
 	/**
 	 * 使用登陆成功的Cookie对象继续其他get请求
+	 * 
 	 * @param cookie
 	 * @param dataUrl
 	 * @param dataParam
 	 * @return
 	 */
-	public static String mockGetByCookie(CookieStore cookie, String dataUrl, Map<String, String> dataParam)  {
+	public static String mockGetByCookie(CookieStore cookie, String dataUrl, Map<String, String> dataParam) {
 		CloseableHttpClient client = null;
 		String dataReturn = null;
 		try {
@@ -557,6 +584,7 @@ public abstract class ToolHttp {
 
 	/**
 	 * 模拟登陆，并取出登陆验证标示，然后构造在header中使用
+	 * 
 	 * @param loginUrl
 	 * @param loginParam
 	 * @return
@@ -567,7 +595,7 @@ public abstract class ToolHttp {
 		try {
 			// 直接创建client
 			client = HttpClients.createDefault();
-			
+
 			// 执行post登陆请求
 			HttpPost loginHP = new HttpPost(loginUrl);
 			UrlEncodedFormEntity loginEntity = new UrlEncodedFormEntity(getParam(loginParam), "UTF-8");
@@ -575,15 +603,15 @@ public abstract class ToolHttp {
 			HttpResponse loginHR = client.execute(loginHP);
 			HttpEntity loginHE = loginHR.getEntity();
 			String loginReturn = EntityUtils.toString(loginHE);
-			if(!loginReturn.equals("success")){
+			if (!loginReturn.equals("success")) {
 				log.error("登录失败");
 				return null;
 			}
-			
+
 			Header[] headers = loginHR.getHeaders("Set-Cookie");
 			for (Header header : headers) {
-				authmark = 	header.getValue();
-				if(authmark.indexOf("authmark=") != -1){
+				authmark = header.getValue();
+				if (authmark.indexOf("authmark=") != -1) {
 					authmark = authmark.replace("authmark=", "");
 					authmark = authmark.substring(0, authmark.indexOf(";"));
 					break;
@@ -598,18 +626,19 @@ public abstract class ToolHttp {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return authmark;
 	}
 
 	/**
 	 * 使用登陆成功的Cookie对象继续其他post请求
+	 * 
 	 * @param cookie
 	 * @param dataUrl
 	 * @param dataParam
 	 * @return
 	 */
-	public static String mockPostByHeader(String authmark, String dataUrl, Map<String, String> dataParam)  {
+	public static String mockPostByHeader(String authmark, String dataUrl, Map<String, String> dataParam) {
 		CloseableHttpClient client = null;
 		String dataReturn = null;
 		try {
@@ -636,6 +665,7 @@ public abstract class ToolHttp {
 
 	/**
 	 * map参数转list
+	 * 
 	 * @param parameterMap
 	 * @return
 	 */
@@ -648,35 +678,82 @@ public abstract class ToolHttp {
 		}
 		return param;
 	}
-	
-	public static void main(String[] args){
-		//System.out.println(get("http://127.0.0.1:89/platform/login"));
-		//System.out.println(post("http://127.0.0.1:89/platform/login", null, null));
-		
-		//System.out.println(get("http://littleant.duapp.com/msg"));
 
-		/*String returnMsg = "<xml>";
-		returnMsg += "<ToUserName><![CDATA[dongcb678]]></ToUserName>";
-		returnMsg += "<FromUserName><![CDATA[jiu_guang]]></FromUserName>";
-		returnMsg += "<CreateTime>"+ToolDateTime.getDateByTime()+"</CreateTime>";
-		returnMsg += "<MsgType><![CDATA[text]]></MsgType>";
-		returnMsg += "<Content><![CDATA[你好]]></Content>";
-		returnMsg += "</xml>";*/
+	/**
+	 * 文件下载文件名编码
+	 * @param request
+	 * @param fileName
+	 * @return
+	 */
+	public static void downloadSaveFileName(HttpServletRequest request, HttpServletResponse response, String fileName) {
+		String userAgent = request.getHeader("User-Agent");
+		String retFileName = null;
+		try {
+			String newFileName = URLEncoder.encode(fileName, "UTF-8");
+			// 如果没有UA，则默认使用IE的方式进行编码，因为毕竟IE还是占多数的
+			retFileName = "filename=\"" + newFileName + "\"";
+			if (userAgent != null) {
+				userAgent = userAgent.toLowerCase();
+				
+				if (userAgent.indexOf("msie") != -1) { // IE浏览器，只能采用URLEncoder编码
+					retFileName = "filename=\"" + newFileName + "\"";
+					
+				} else if (userAgent.indexOf("opera") != -1) { // Opera浏览器只能采用filename*
+					retFileName = "filename*=UTF-8''" + newFileName;
+					
+				} else if (userAgent.indexOf("safari") != -1) { // Safari浏览器，只能采用ISO编码的中文输出
+					retFileName = "filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO8859-1") + "\"";
+					
+				} else if (userAgent.indexOf("applewebkit") != -1) { // Chrome浏览器，只能采用MimeUtility编码或ISO编码的中文输出
+					newFileName = MimeUtility.encodeText(fileName, "UTF8", "B");
+					retFileName = "filename=\"" + newFileName + "\"";
+					
+				} else if (userAgent.indexOf("mozilla") != -1) { // FireFox浏览器，可以使用MimeUtility或filename*或ISO编码的中文输出
+					retFileName = "filename*=UTF-8''" + newFileName;
+				}
+			}
+		} catch (UnsupportedEncodingException e) {
+			log.error(e.getMessage());
+		}
 		
-		/*String returnMsg = "<xml>";
-		returnMsg += " <ToUserName><![CDATA[jiu_guang]]></ToUserName>";
-		returnMsg += " <FromUserName><![CDATA[dongcb678]]></FromUserName> ";
-		returnMsg += " <CreateTime>1348831860</CreateTime>";
-		returnMsg += " <MsgType><![CDATA[text]]></MsgType>";
-		returnMsg += " <Content><![CDATA[this is a test]]></Content>";
-		returnMsg += " <MsgId>1234567890123456</MsgId>";
-		returnMsg += " </xml>";*/
-		
-		//System.out.println(post("http://127.0.0.1:88/msg", returnMsg, "application/xml"));
-		//System.out.println(post("http://littleant.duapp.com/msg", returnMsg, "application/xml"));
-		
-		//System.out.println(post(true, "https://www.oschina.net/home/login?goto_page=http%3A%2F%2Fwww.oschina.net%2F", null, "application/text"));
-		//System.out.println(httpRequest(false, "https://passport.csdn.net/account/login", "GET", null));
+		response.setHeader("Content-disposition", "attachment; " + retFileName);
+	}
+
+	public static void main(String[] args) {
+		// System.out.println(get("http://127.0.0.1:89/platform/login"));
+		// System.out.println(post("http://127.0.0.1:89/platform/login", null,
+		// null));
+
+		// System.out.println(get("http://littleant.duapp.com/msg"));
+
+		/*
+		 * String returnMsg = "<xml>"; returnMsg +=
+		 * "<ToUserName><![CDATA[dongcb678]]></ToUserName>"; returnMsg +=
+		 * "<FromUserName><![CDATA[jiu_guang]]></FromUserName>"; returnMsg +=
+		 * "<CreateTime>"+ToolDateTime.getDateByTime()+"</CreateTime>";
+		 * returnMsg += "<MsgType><![CDATA[text]]></MsgType>"; returnMsg +=
+		 * "<Content><![CDATA[你好]]></Content>"; returnMsg += "</xml>";
+		 */
+
+		/*
+		 * String returnMsg = "<xml>"; returnMsg +=
+		 * " <ToUserName><![CDATA[jiu_guang]]></ToUserName>"; returnMsg +=
+		 * " <FromUserName><![CDATA[dongcb678]]></FromUserName> "; returnMsg +=
+		 * " <CreateTime>1348831860</CreateTime>"; returnMsg +=
+		 * " <MsgType><![CDATA[text]]></MsgType>"; returnMsg +=
+		 * " <Content><![CDATA[this is a test]]></Content>"; returnMsg +=
+		 * " <MsgId>1234567890123456</MsgId>"; returnMsg += " </xml>";
+		 */
+
+		// System.out.println(post("http://127.0.0.1:88/msg", returnMsg,
+		// "application/xml"));
+		// System.out.println(post("http://littleant.duapp.com/msg", returnMsg,
+		// "application/xml"));
+
+		// System.out.println(post(true,
+		// "https://www.oschina.net/home/login?goto_page=http%3A%2F%2Fwww.oschina.net%2F",
+		// null, "application/text"));
+		// System.out.println(httpRequest(false,
+		// "https://passport.csdn.net/account/login", "GET", null));
 	}
 }
-

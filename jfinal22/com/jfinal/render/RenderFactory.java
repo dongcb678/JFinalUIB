@@ -244,11 +244,11 @@ public class RenderFactory {
 	}
 
 	public Render getFileRender(String fileName, String downloadSaveFileName) {
-		return new FileRender(fileName);
+		return new FileRender(fileName, downloadSaveFileName);
 	}
 	
 	public Render getFileRender(File file, String downloadSaveFileName) {
-		return new FileRender(file);
+		return new FileRender(file, downloadSaveFileName);
 	}
 	
 	public Render getRedirectRender(String url) {
