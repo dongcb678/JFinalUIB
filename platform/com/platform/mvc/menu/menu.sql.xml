@@ -4,6 +4,76 @@
 	菜单sql
 -->
 <sql-statement namespace="platform.menu">
+		
+	<!-- 分页select -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select 
+				a.*
+    	]]>
+	</sql>
+	
+	<!-- 分页from -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+			from (
+				select 
+					s.ids sids, s.names sname, s.orderids sorder, 
+		        	m.ids mids, m.names mname, m.orderids morder 
+		        		
+	        	from 
+	        		pt_operator o 
+	        		left join pt_module m on m.ids = o.moduleids 
+	        		left join pt_systems s on s.ids = m.systemsids 
+	        	
+	        	where 
+	        		1=1
+	        		
+					<% if(!isEmpty(oname)){ %>
+							and o.names like #'%$oname$%'#
+					<% } %>
+				
+					<% if(!isEmpty(ourl)){ %>
+							and o.url like #'%$ourl$%'#
+					<% } %>
+					
+					<% if(!isEmpty(sname)){ %>
+							and s.names like #'%$sname$%'#
+					<% } %>
+				
+					<% if(!isEmpty(mname)){ %>
+							and m.names like #'%$mname$%'#
+					<% } %>
+				
+	        	group by 
+	        		s.ids , s.names , s.orderids , 
+		        	m.ids , m.names , m.orderids  
+			) a
+			
+    	]]>
+	</sql>
+		
+	<!-- 根据模块和角色id查询 -->
+	<sql id="findByModuleAndRoleIds">
+		<![CDATA[ 
+        	select 
+        		o.ids, o.names, o.url,
+				( select m.ids from pt_menu m where m.ids = ? and m.operatorids = o.ids ) mids
+        		
+        	from 
+        		pt_operator o 
+        		
+        	where
+        		o.moduleids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询菜单 -->
+	<sql id="findByIds">
+		<![CDATA[ 
+        	select ids, ${names}, isparent, images from pt_menu where ids = ?
+    	]]>
+	</sql>
 	
 	<!-- 查询根菜单 -->
 	<sql id="root">

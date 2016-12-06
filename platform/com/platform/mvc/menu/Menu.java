@@ -107,7 +107,19 @@ public class Menu extends BaseModel<Menu> {
 	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names_enus = "names_enus";
-	
+
+	/**
+	 * sqlId : platform.roleOperator.splitPageSelect
+	 * 描述：通用select *
+	 */
+	public static final String sqlId_splitPageSelect = "platform.menu.splitPageSelect";
+
+	/**
+	 * sqlId : platform.roleOperator.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPageFrom = "platform.menu.splitPageFrom";
+
 	/**
 	 * sqlId : platform.menu.root
 	 * 描述：查询根菜单
