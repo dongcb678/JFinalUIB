@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2016-10-18 17:24:02
+Date: 2016-12-08 11:26:36
 */
 
 
@@ -458,6 +458,8 @@ INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('4bebccaa8f0c4bfbaa2ff89f0070610
 INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('3e4e9e72dab243d38a1785d157c24cb6', '0', null, '博客更新', null, null, null, '0', '/test/blog/update', '7cbeac9418c946a2bda0c6aabf23c276', '0', '1', '0', '1', null, null, '博客');
 INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('ff91363b32424fa399e44cc0dfd688e9', '0', null, '博客查看', null, null, null, '0', '/test/blog/view', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', null, null, '博客');
 INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('08a96d5dd37f49459eeb02eebeb0a78c', '0', null, '列表', null, null, null, '0', '/platform/roleOperator', 'c4ab6b8d50434ddf8fa0ec106fcfc6ea', '1', '0', '0', '1', null, null, '角色功能');
+INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('09dbbe046d6e469d8a5ba12e29abc522', '0', null, '菜单功能列表', null, null, null, '0', '/platform/menu/list', '8a40c0353fa828a6013fa898d4ac0032', '1', '0', '0', '1', null, null, '菜单');
+INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('a498a20dd4824b8fb103202360669de4', '0', null, '菜单功能设置', null, null, null, '0', '/platform/menu/set', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
 
 -- ----------------------------
 -- Table structure for "JFINALUIBV3"."PT_PARAM"
@@ -770,6 +772,8 @@ INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('41ed858aaaae4fc2bc1f197fe29
 INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('a303d192041f40468970a75118d2b3e6', '8a40c0353fa828a6013fa898d4ac0023', 'a0d2897ee9194378819e78538189faa0');
 INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('1f5bd29eabd84310b935ac26e4865aa8', '8a40c0353fa828a6013fa898d4ac0023', '1f05b6496a494f488e4cacd2a449c37a');
 INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('22eb103099d2495f98d1bc4dc449933a', '8a40c0353fa828a6013fa898d4ac0023', 'f604f021cba44b6fb96115265e557521');
+INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('7e3f2af3206846fd8e35be1520e474e8', '8a40c0353fa828a6013fa898d4ac0023', '09dbbe046d6e469d8a5ba12e29abc522');
+INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('476fd5e99b214541aefd5c81982f624d', '8a40c0353fa828a6013fa898d4ac0023', 'a498a20dd4824b8fb103202360669de4');
 
 -- ----------------------------
 -- Table structure for "JFINALUIBV3"."PT_STATION"

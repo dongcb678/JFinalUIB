@@ -11,7 +11,7 @@ Target Server Type    : SQL Server
 Target Server Version : 105000
 File Encoding         : 65001
 
-Date: 2016-10-18 17:43:13
+Date: 2016-12-08 10:28:40
 */
 
 
@@ -402,6 +402,8 @@ INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onem
 GO
 INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'09b6ce29313c4051ba765de516a9b283', N'0', null, N'treeData', null, null, null, N'0', N'/platform/station/treeData', N'8a40c0353fa828a6013fa898d4ac0025', N'岗位', N'0', N'0', N'0', N'1', null, null);
 GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'09dbbe046d6e469d8a5ba12e29abc522', N'0', null, N'菜单功能列表', null, null, null, N'0', N'/platform/menu/list', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'1', N'0', N'0', N'1', null, null);
+GO
 INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'0da15c49299d41a4b720f787d053e3cb', N'0', null, N'默认列表', null, null, null, N'0', N'/platform/operator', N'8a40c0353fa828a6013fa898d4ac0027', N'功能', N'1', N'0', N'0', N'1', null, null);
 GO
 INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'0fb7938c7d614fc389568eb67b442303', N'0', null, N'单选', null, null, null, N'0', N'/platform/module/radio.html', N'8a40c0353fa828a6013fa898d4ac0033', N'模块', N'0', N'0', N'0', N'1', null, null);
@@ -591,6 +593,8 @@ GO
 INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a1ff68acf9b24c34b347ff21e333cb70', N'0', null, N'设置菜单功能', null, null, null, N'0', N'/platform/menu/setOperator', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
 GO
 INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a2727f19f7cd4a038dd1a94f042a8cf1', N'0', null, N'博客保存', null, null, null, N'0', N'/test/blog/save', N'7cbeac9418c946a2bda0c6aabf23c276', N'博客', N'0', N'1', N'0', N'1', null, null);
+GO
+INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a498a20dd4824b8fb103202360669de4', N'0', null, N'菜单功能设置', null, null, null, N'0', N'/platform/menu/set', N'8a40c0353fa828a6013fa898d4ac0032', N'菜单', N'0', N'0', N'0', N'1', null, null);
 GO
 INSERT INTO [dbo].[pt_operator] ([ids], [version], [description], [names], [onemany], [returnparamkeys], [returnurl], [rowfilter], [url], [moduleids], [modulenames], [splitpage], [formtoken], [ipblack], [privilegess], [ispv], [pvtype]) VALUES (N'a5289b2638d845fbb06dedbcdd517f97', N'0', null, N'删除', null, null, null, N'0', N'/platform/group/delete', N'8a40c0353fa828a6013fa898d4ac0023', N'分组', N'0', N'0', N'0', N'1', null, null);
 GO
@@ -1006,6 +1010,8 @@ INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'
 GO
 INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'46f79be38d3340a0a752ef2f53ae661a', N'8a40c0353fa828a6013fa898d4ac0023', N'91baed789bc14efdbebb10b49c69ee5b');
 GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'476fd5e99b214541aefd5c81982f624d', N'8a40c0353fa828a6013fa898d4ac0023', N'a498a20dd4824b8fb103202360669de4');
+GO
 INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'48db3f1015414972b274fcee382b5283', N'8a40c0353fa828a6013fa898d4ac0023', N'7ed5eefbbf3d4aa78d0c5b99f3b7010c');
 GO
 INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'4ce7264311a3437db22445df4b643066', N'8a40c0353fa828a6013fa898d4ac0023', N'30bf01ffe1cb4ed39e92c6600ea39e93');
@@ -1065,6 +1071,8 @@ GO
 INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'7a42d1b5ab884d7098f913c16bcc7b48', N'8a40c0353fa828a6013fa898d4ac0023', N'c081c50918f4459f8e36ab8cb4151a61');
 GO
 INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'7b5c188e225d4fb9982e8973c1a49e90', N'8a40c0353fa828a6013fa898d4ac0023', N'39d82b5574b540b88d3723b36eb3e577');
+GO
+INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'7e3f2af3206846fd8e35be1520e474e8', N'8a40c0353fa828a6013fa898d4ac0023', N'09dbbe046d6e469d8a5ba12e29abc522');
 GO
 INSERT INTO [dbo].[pt_roleOperator] ([ids], [roleIds], [operatorIds]) VALUES (N'7fd3982f773b4a8987ab69cfd101af11', N'8a40c0353fa828a6013fa898d4ac0023', N'6b527ed138c343a89ddf73cf16fef565');
 GO

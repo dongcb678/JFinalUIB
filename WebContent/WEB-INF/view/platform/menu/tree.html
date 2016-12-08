@@ -146,8 +146,8 @@
 		sObj.after(operatorControlStr);
 		var operatorBtn = $("#operatorControlBtn_"+treeNode.tId);
 		if (operatorBtn) operatorBtn.bind("click", function(){
-			common_modals.setMenuOperatorDiaLog(treeNode.id);
-// 			common_ajax.ajaxMainPanel('/platform/menu/list?_query.menuIds=' + treeNode.id);
+// 			common_modals.setMenuOperatorDiaLog(treeNode.id);
+			common_ajax.ajaxMainPanel('/platform/menu/list?_query.menuIds=' + treeNode.id);
 			return false;
 		});
 
