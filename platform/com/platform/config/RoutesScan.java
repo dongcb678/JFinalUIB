@@ -1,7 +1,6 @@
 package com.platform.config;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import com.jfinal.config.Routes;
 import com.jfinal.log.Log;
@@ -22,12 +21,8 @@ public class RoutesScan extends Routes {
 	@Override
 	public void config() {
 		// 查询所有继承BaseController的子类
-		List<Class<?>> controllerClasses = new ArrayList<Class<?>>();
-		List<String> pkgs = ToolClassSearch.getScanPkgList();
-		for (String pkg : pkgs) {
-			controllerClasses.addAll(ToolClassSearch.search(pkg, BaseController.class));
-		}
-
+		Set<Class<?>> controllerClasses = ToolClassSearch.searchByClassLoader(BaseController.class);
+		
 		// 循环处理自动注册映射
 		for (Class controller : controllerClasses) {
 			// 获取注解对象

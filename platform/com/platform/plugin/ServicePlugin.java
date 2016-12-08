@@ -1,10 +1,9 @@
 package com.platform.plugin;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.jfinal.aop.Enhancer;
 import com.jfinal.log.Log;
@@ -40,11 +39,7 @@ public class ServicePlugin implements IPlugin {
     @Override
     public boolean start() {
 		// 1.扫描所有继承BaseService的类
-		List<Class<?>> modelClasses = new ArrayList<Class<?>>();
-		List<String> pkgs = ToolClassSearch.getScanPkgList();
-		for (String pkg : pkgs) {
-			modelClasses.addAll(ToolClassSearch.search(pkg, BaseService.class));
-		}
+		Set<Class<?>> modelClasses = ToolClassSearch.searchByClassLoader(BaseService.class);
 		modelClasses.add(BaseService.class); // 加入BaseService本身
 		
 		// 2.循环处理Service实例化

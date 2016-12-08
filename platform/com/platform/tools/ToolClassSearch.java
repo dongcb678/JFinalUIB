@@ -77,7 +77,8 @@ public abstract class ToolClassSearch {
      * @param target 指定类或者接口
      * @return
      */
-    public static List<Class<?>> search11(Class<?> target){
+	@Deprecated
+    public static List<Class<?>> searchByPath(Class<?> target){
     	// 1.查找classes目录
     	List<String> classFileList = findFiles(ToolDirFile.getClassesPath());
     	
@@ -96,6 +97,7 @@ public abstract class ToolClassSearch {
 	 * @param classFileList 
 	 * @return
 	 */
+	@Deprecated
 	@SuppressWarnings({ "unchecked" })
 	private static <T> List<Class<? extends T>> isAssignableFrom(Class<?> target, List<String> classFileList) {
         List<Class<? extends T>> classList = new ArrayList<Class<? extends T>>();
@@ -120,6 +122,7 @@ public abstract class ToolClassSearch {
      * @param dirPath
      * @return
      */
+	@Deprecated
     private static List<String> findFiles(String dirPath) {
         List<String> classFiles = new ArrayList<String>();
         
@@ -160,6 +163,7 @@ public abstract class ToolClassSearch {
      * 查找lib目录jar中.class文件
      * @return
      */
+	@Deprecated
     private static List<String> findJarFiles() {
         List<String> classFiles = new ArrayList<String>();;
         try {
@@ -206,16 +210,19 @@ public abstract class ToolClassSearch {
 	 * 根据ClassLoader读取类文件，此方法更加通用
      * maven环境中，适合使用此方式，根据包名称查找所有加载的class
 	 */
-	public static Set<Class<?>> search(String pkg, Class<?> target) {
+	public static Set<Class<?>> searchByClassLoader(Class<?> target) {
 		Set<Class<?>> retSet = new HashSet<Class<?>>();
 
-		Set<Class<?>> set = getClasses(pkg);
-		for (Class<?> class2 : set) {
-			if (target.isAssignableFrom(class2) && class2 != target) {
-				retSet.add(class2);
-            }
+		List<String> pkgs = ToolClassSearch.getScanPkgList();
+		for (String pkg : pkgs) {
+			Set<Class<?>> set = getClasses(pkg);
+			for (Class<?> class2 : set) {
+				if (target.isAssignableFrom(class2) && class2 != target) {
+					retSet.add(class2);
+	            }
+			}
 		}
-
+		
 		return retSet;
 	}
 

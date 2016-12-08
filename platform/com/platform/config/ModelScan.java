@@ -1,7 +1,6 @@
 package com.platform.config;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -20,11 +19,7 @@ public class ModelScan {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void scan(String configName, ActiveRecordPlugin arp) {
 		// 查询所有BaseModel的子类
-		List<Class<?>> modelClasses = new ArrayList<Class<?>>();
-		List<String> pkgs = ToolClassSearch.getScanPkgList();
-		for (String pkg : pkgs) {
-			modelClasses.addAll(ToolClassSearch.search(pkg, BaseModel.class));
-		}
+		Set<Class<?>> modelClasses = ToolClassSearch.searchByClassLoader(BaseModel.class);
 		
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
