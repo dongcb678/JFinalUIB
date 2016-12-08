@@ -39,7 +39,7 @@ public class ResourcesController extends BaseController {
 	 * 刷新Sql缓存，重新加载Sql XML
 	 */
 	public void refreshSqlCache(){
-		SqlXmlPlugin.init(false);
+		SqlXmlPlugin.initByClassLoader(false);
 		redirect("/platform/resources");
 	}
 	

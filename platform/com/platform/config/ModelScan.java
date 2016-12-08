@@ -1,5 +1,6 @@
 package com.platform.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jfinal.log.Log;
@@ -19,8 +20,12 @@ public class ModelScan {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void scan(String configName, ActiveRecordPlugin arp) {
 		// 查询所有BaseModel的子类
-		List<Class<?>> modelClasses = ToolClassSearch.search(BaseModel.class);
-
+		List<Class<?>> modelClasses = new ArrayList<Class<?>>();
+		List<String> pkgs = ToolClassSearch.getScanPkgList();
+		for (String pkg : pkgs) {
+			modelClasses.addAll(ToolClassSearch.search(pkg, BaseModel.class));
+		}
+		
 		// 循环处理自动注册映射
 		for (Class model : modelClasses) {
 			// 获取注解对象

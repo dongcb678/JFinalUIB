@@ -77,7 +77,7 @@ public abstract class ToolClassSearch {
      * @param target 指定类或者接口
      * @return
      */
-    public static List<Class<?>> search(Class<?> target){
+    public static List<Class<?>> search11(Class<?> target){
     	// 1.查找classes目录
     	List<String> classFileList = findFiles(ToolDirFile.getClassesPath());
     	
