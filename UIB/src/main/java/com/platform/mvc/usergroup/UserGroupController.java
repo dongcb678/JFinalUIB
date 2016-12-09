@@ -1,8 +1,7 @@
 package com.platform.mvc.usergroup;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.Ret;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 
@@ -14,7 +13,7 @@ import com.platform.mvc.base.BaseController;
 public class UserGroupController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(UserGroupController.class);
+	private static final Log log = Log.getLog(UserGroupController.class);
 
 	private UserGroupService userGroupService;
 

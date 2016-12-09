@@ -1,16 +1,10 @@
 package com.platform.mvc.group;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
-import com.platform.mvc.base.BaseService;
 
 /**
  * 人员分组管理
@@ -20,7 +14,7 @@ import com.platform.mvc.base.BaseService;
 @Controller("/platform/group")
 public class GroupController extends BaseController {
 
-	private static Logger log = Logger.getLogger(GroupController.class);
+	private static final Log log = Log.getLog(GroupController.class);
 	
 	private GroupService groupService;
 	
@@ -38,7 +32,7 @@ public class GroupController extends BaseController {
 	@Before(GroupValidator.class)
 	public void save() {
 		ids = groupService.save(getModel(Group.class));
-		redirect("/platform/group");
+		forwardAction("/platform/group/backOff");
 	}
 	
 	/**
@@ -55,7 +49,7 @@ public class GroupController extends BaseController {
 	@Before(GroupValidator.class)
 	public void update() {
 		groupService.update(getModel(Group.class));
-		redirect("/platform/group");
+		forwardAction("/platform/group/backOff");
 	}
 
 	/**
@@ -63,7 +57,7 @@ public class GroupController extends BaseController {
 	 */
 	public void delete() {
 		groupService.delete(getPara() == null ? ids : getPara());
-		redirect("/platform/group");
+		forwardAction("/platform/group/backOff");
 	}
 
 }

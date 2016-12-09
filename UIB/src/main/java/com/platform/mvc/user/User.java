@@ -1,10 +1,11 @@
 package com.platform.mvc.user;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.dept.Department;
@@ -23,7 +24,7 @@ public class User extends BaseModel<User> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(User.class);
+	private static final Log log = Log.getLog(User.class);
 	
 	public static final User dao = new User();
 
@@ -300,16 +301,17 @@ public class User extends BaseModel<User> {
 	 */
 	public static void cacheAdd(String ids){
 		User user = User.dao.findById(ids);
-		
-		String sql = getSql("platform.userGroup.findGroupIdsByUserIds");
-		List<UserGroup> ugList = UserGroup.dao.find(sql, user.getPKValue());
-		user.put("ugList", ugList);
-		
-		ToolCache.set(ParamInitPlugin.cacheStart_user + ids, user);
-		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_username), user);
-		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_mobile), user);
-		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_email), user);
-		ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_idcard), user);
+		if(user != null){
+			String sql = getSql("platform.userGroup.findGroupIdsByUserIds");
+			List<UserGroup> ugList = UserGroup.dao.find(sql, user.getPKValue());
+			user.put("ugList", ugList);
+			
+			ToolCache.set(ParamInitPlugin.cacheStart_user + ids, user);
+			ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_username), user);
+			ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_mobile), user);
+			ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_email), user);
+			ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_idcard), user);
+		}
 	}
 
 	/**
@@ -317,12 +319,13 @@ public class User extends BaseModel<User> {
 	 */
 	public static void cacheRemove(String ids){
 		User user = User.dao.findById(ids);
-		
-		ToolCache.remove(ParamInitPlugin.cacheStart_user + ids);
-		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_username));
-		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_mobile));
-		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_email));
-		ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_idcard));
+		if(user != null){
+			ToolCache.remove(ParamInitPlugin.cacheStart_user + ids);
+			ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_username));
+			ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_mobile));
+			ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_email));
+			ToolCache.remove(ParamInitPlugin.cacheStart_user + user.getStr(column_idcard));
+		}
 	}
 
 	/**
@@ -330,11 +333,89 @@ public class User extends BaseModel<User> {
 	 * @param ids
 	 * @return
 	 */
-	public static User cacheGet(String ids){
+	public static User cacheGetByUserId(String ids){
 		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + ids);
 		if(user == null){
 			user = User.dao.findById(ids);
-			cacheAdd(ids);
+			if(user != null){
+				cacheAdd(ids);
+			}
+		}
+		return user;
+	}
+
+	/**
+	 * 获取缓存
+	 * @param userName
+	 * @return
+	 */
+	public static User cacheGetByUserName(String userName){
+		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + userName);
+		if(user == null){
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", column_username);
+			String sql = getSqlByBeetl("platform.user.column", param);
+			user = User.dao.findFirst(sql, userName);
+			if(user != null){
+				cacheAdd(user.getPKValue());
+			}
+		}
+		return user;
+	}
+
+	/**
+	 * 获取缓存
+	 * @param mobile
+	 * @return
+	 */
+	public static User cacheGetByMobile(String mobile){
+		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + mobile);
+		if(user == null){
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", column_mobile);
+			String sql = getSqlByBeetl("platform.user.column", param);
+			user = User.dao.findFirst(sql, mobile);
+			if(user != null){
+				cacheAdd(user.getPKValue());
+			}
+		}
+		return user;
+	}
+
+	/**
+	 * 获取缓存
+	 * @param email
+	 * @return
+	 */
+	public static User cacheGetByEmail(String email){
+		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + email);
+		if(user == null){
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", column_email);
+			String sql = getSqlByBeetl("platform.user.column", param);
+			user = User.dao.findFirst(sql, email);
+			if(user != null){
+				cacheAdd(user.getPKValue());
+			}
+		}
+		return user;
+	}
+
+	/**
+	 * 获取缓存
+	 * @param idcard
+	 * @return
+	 */
+	public static User cacheGetByIdcard(String idcard){
+		User user = ToolCache.get(ParamInitPlugin.cacheStart_user + idcard);
+		if(user == null){
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("column", column_idcard);
+			String sql = getSqlByBeetl("platform.user.column", param);
+			user = User.dao.findFirst(sql, idcard);
+			if(user != null){
+				cacheAdd(user.getPKValue());
+			}
 		}
 		return user;
 	}

@@ -10,11 +10,16 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import com.jfinal.log.Log;
+
 /**
  * xml 格式化
  * @author 董华健  dongcb678@163.com
  */
 public abstract class ToolFormatXml {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolFormatXml.class);
 
 	public static void main(String[] args) {
 		String xml = "<xml>";

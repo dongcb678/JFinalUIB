@@ -120,4 +120,11 @@
     	]]>
 	</sql>
 	
+	<!-- 根据角色查询关联分组 -->
+	<sql id="getGroupByRole">
+		<![CDATA[ 
+        	select groupids from pt_grouprole where roleids = ?
+    	]]>
+	</sql>
+	
 </sql-statement>

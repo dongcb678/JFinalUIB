@@ -44,4 +44,18 @@
     	]]>
 	</sql>
 	
+	<!--  -->
+	<sql id="getGrouproleByRoleids">
+		<![CDATA[ 
+        	select * from pt_grouprole where roleids = ?
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="getRoleoperatorByRoleids">
+		<![CDATA[ 
+        	select * from pt_roleoperator where roleids = ?
+    	]]>
+	</sql>
+	
 </sql-statement>

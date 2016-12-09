@@ -8,12 +8,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantAuth;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantWebContext;
@@ -38,7 +38,7 @@ import com.platform.tools.security.ToolIDEA;
  */
 public class AuthInterceptor implements Interceptor {
 
-	private static Logger log = Logger.getLogger(AuthInterceptor.class);
+	private static final Log log = Log.getLog(AuthInterceptor.class);
 
 	@Override
 	public void intercept(Invocation invoc) {
@@ -56,14 +56,9 @@ public class AuthInterceptor implements Interceptor {
 			uri = ToolWeb.getParam(request, ConstantWebContext.request_toUrl); // 否则就是toUrl的值
 		}
 
-		log.info("druid特殊处理");
-		if (uri.startsWith("/platform/druid")) {
-			uri = "/platform/druid/iframe.html"; // 所有的druid授权都绑定到一个iframe.html授权
-		}
-
 		log.info("获取当前用户!");
 		boolean userAgentVali = true; // 是否验证userAgent，默认是
-		if (uri.equals("/platform/ueditor") || uri.equals("/platform/upload")) { // 针对ueditor特殊处理
+		if (uri.equals("/platform/ueditor") || uri.equals("/platform/upload")) { // 针对ueditor特殊处理，flash上传userAgent和浏览器并不一致
 			userAgentVali = false;
 		}
 		User user = getCurrentUser(request, response, userAgentVali);// 当前登录用户
@@ -72,9 +67,11 @@ public class AuthInterceptor implements Interceptor {
 			contro.setAttr(ConstantWebContext.request_cUser, user);
 			contro.setAttr(ConstantWebContext.request_cUserIds, user.getPKValue());
 			
+			MDC.put("userIP", reqSysLog.getIps());
 			MDC.put("userId", user.getPKValue());
 			MDC.put("userName", user.getUsername());
 		}else{
+			MDC.put("userIP", reqSysLog.getIps());
 			MDC.put("userId", "*unknown userId*");
 			MDC.put("userName", "*unknown userName*");
 		}
@@ -172,14 +169,15 @@ public class AuthInterceptor implements Interceptor {
 
 			log.error("返回失败提示页面!Exception = " + e.getMessage());
 			
-//			if(e instanceof RuntimeException){
-//				expMessage = "自定义异常描述11" + expMessage;
-//			} else if(e instanceof RuntimeException){
-//				expMessage = "自定义异常描述22" + expMessage;
+//			if(e instanceof My1Exception){
+//				expMessage = "自定义异常描述1" + expMessage;
+//			} else if(e instanceof My2Exception){
+//				expMessage = "自定义异常描述2" + expMessage;
 //			}
 
 			toView(contro, ConstantAuth.auth_exception, "业务逻辑代码遇到异常Exception = " + expMessage);
 		} finally {
+			MDC.remove("userIP");
 			MDC.remove("userId");
 			MDC.remove("userName");
 		}
@@ -239,7 +237,7 @@ public class AuthInterceptor implements Interceptor {
 		 **/
 		
 		// 根据分组角色查询权限
-		User user = User.cacheGet(userIds);
+		User user = User.cacheGetByUserId(userIds);
 		List<UserGroup> ugList = user.get("ugList");
 		for (UserGroup ug : ugList) {
 			String groupIds = ug.getGroupids();
@@ -271,6 +269,11 @@ public class AuthInterceptor implements Interceptor {
 	 * @return
 	 */
 	public static User getCurrentUser(HttpServletRequest request, HttpServletResponse response, boolean userAgentVali) {
+		String cxtPath = request.getContextPath();
+		if(cxtPath == null || cxtPath.isEmpty()){
+			cxtPath = "/";
+		}
+		
 		// 加密串存储位置，默认先取header
 		String store = ConstantAuth.auth_store_header;
 		String loginCookie = request.getHeader(ConstantWebContext.cookie_authmark);
@@ -285,7 +288,7 @@ public class AuthInterceptor implements Interceptor {
 			// 1.解密认证数据
 			String data = ToolIDEA.decrypt(loginCookie);
 			if(null == data || data.isEmpty()){
-				ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
+				ToolWeb.addCookie(response, "", cxtPath, true, ConstantWebContext.cookie_authmark, null, 0);
 				return null;
 			}
 			String[] datas = data.split(".#.");	//arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
@@ -304,7 +307,7 @@ public class AuthInterceptor implements Interceptor {
 				autoLogin = Boolean.valueOf(datas[4]); // 是否自动登录
 			} catch (Exception e) {
 				if(store.equals(ConstantAuth.auth_store_cookie)){
-					ToolWeb.addCookie(response, "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
+					ToolWeb.addCookie(response, "", cxtPath, true, ConstantWebContext.cookie_authmark, null, 0);
 				}
 				return null;
 			}
@@ -337,7 +340,7 @@ public class AuthInterceptor implements Interceptor {
 						// 添加到Cookie
 						if(store.equals(ConstantAuth.auth_store_cookie)){
 							int maxAgeTemp = -1; // 设置cookie有效时间
-							ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
+							ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
 						
 						}else if(store.equals(ConstantAuth.auth_store_header)){
 							response.setHeader(ConstantWebContext.cookie_authmark, authmark);
@@ -346,7 +349,7 @@ public class AuthInterceptor implements Interceptor {
 				}
 				
 				// 返回用户数据
-				return User.cacheGet(userIds);
+				return User.cacheGetByUserId(userIds);
 			}
 		}
 
@@ -361,6 +364,11 @@ public class AuthInterceptor implements Interceptor {
 	 * @param autoLogin
 	 */
 	public static void setCurrentUser(HttpServletRequest request, HttpServletResponse response, User user, boolean autoLogin) {
+		String cxtPath = request.getContextPath();
+		if(cxtPath == null || cxtPath.isEmpty()){
+			cxtPath = "/";
+		}
+		
 		// 1.设置cookie有效时间
 		int maxAgeTemp = -1;
 		if (autoLogin) {
@@ -368,7 +376,7 @@ public class AuthInterceptor implements Interceptor {
 		}
 
 		// 2.设置用户名到cookie
-		ToolWeb.addCookie(response, "", "/", true, "userName", user.getStr(User.column_username), maxAgeTemp);
+		ToolWeb.addCookie(response, "", cxtPath, true, "userName", user.getStr(User.column_username), maxAgeTemp);
 
 		// 3.生成登陆认证cookie
 		String userIds = user.getPKValue();
@@ -381,22 +389,28 @@ public class AuthInterceptor implements Interceptor {
 		String authmark = ToolIDEA.encrypt(token.toString());
 		
 		// 4. 添加到Cookie和header
-		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
+		ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
 		response.setHeader(ConstantWebContext.cookie_authmark, authmark);
 	}
 	
 	/**
 	 * 设置验证码
+	 * @param request
 	 * @param response
 	 * @param authCode
 	 */
-	public static void setAuthCode(HttpServletResponse response, String authCode){
+	public static void setAuthCode(HttpServletRequest request, HttpServletResponse response, String authCode){
+		String cxtPath = request.getContextPath();
+		if(cxtPath == null || cxtPath.isEmpty()){
+			cxtPath = "/";
+		}
+		
 		// 1.生成验证码加密cookie
 		String authCodeCookie = ToolIDEA.encrypt(authCode);
 		
 		// 2.设置登陆验证码cookie
 		int maxAgeTemp = -1;
-		ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.request_authCode, authCodeCookie, maxAgeTemp);
+		ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.request_authCode, authCodeCookie, maxAgeTemp);
 	}
 
 	/**
@@ -410,7 +424,7 @@ public class AuthInterceptor implements Interceptor {
 		String authCode = ToolWeb.getCookieValueByName(request, ConstantWebContext.request_authCode);
 		
 		// 2.获取验证码后清除客户端验证码信息
-		AuthInterceptor.setAuthCode(response, ""); 
+		AuthInterceptor.setAuthCode(request, response, ""); 
 
 		// 3.解密数据
 		if (null != authCode && !authCode.equals("")) {

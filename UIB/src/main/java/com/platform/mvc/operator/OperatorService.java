@@ -3,21 +3,24 @@ package com.platform.mvc.operator;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Service;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.module.Module;
+import com.platform.mvc.roleoperator.RoleOperator;
+import com.platform.mvc.roleoperator.RoleOperatorService;
 
 @Service(name = OperatorService.serviceName)
 public class OperatorService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(OperatorService.class);
+	private static final Log log = Log.getLog(OperatorService.class);
 
 	public static final String serviceName = "operatorService";
 
+	private RoleOperatorService roleOperatorService;
+	
 	/**
 	 * 保存
 	 * @param operator
@@ -53,11 +56,20 @@ public class OperatorService extends BaseService {
 	 */
 	public void delete(String ids){
 		String[] idsArr = splitByComma(ids);
+		
+		String sql = getSql("platform.operator.getRoleoperatorByOperatorids");
+		
 		for (String operatorIds : idsArr) {
 			// 缓存
+			List<RoleOperator> roList = RoleOperator.dao.find(sql, operatorIds);
+			for (RoleOperator roleOperator : roList) {
+				roleOperatorService.del(roleOperator.getPKValue());
+			}
+
+			// 删除缓存
 			Operator.cacheRemove(operatorIds);
 			
-			// 删除
+			// 删除Operator
 			Operator.dao.deleteById(operatorIds);
 		}
 		

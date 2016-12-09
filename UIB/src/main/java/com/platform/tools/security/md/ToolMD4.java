@@ -6,10 +6,15 @@ import java.security.Security;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
 
+import com.jfinal.log.Log;
+
 /**
  * MD4加密组件
  */
 public class ToolMD4 {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolMD4.class);
 
 	/**
 	 * MD4加密

@@ -4,10 +4,10 @@ import java.text.MessageFormat;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantWebContext;
 
 /**
@@ -19,7 +19,7 @@ import com.platform.constant.ConstantWebContext;
  */
 public class I18nFormat implements Function {
 
-	private static Logger log = Logger.getLogger(I18nFormat.class);
+	private static final Log log = Log.getLog(I18nFormat.class);
 	
 	/**
 	 * 过滤xml文档函数实现

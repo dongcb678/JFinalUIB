@@ -1,12 +1,8 @@
 package com.platform.mvc.role;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
-import com.platform.mvc.station.Station;
-import com.platform.plugin.ParamInitPlugin;
-import com.platform.tools.ToolCache;
 
 /**
  * 角色model
@@ -18,7 +14,7 @@ public class Role extends BaseModel<Role> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(Role.class);
+	private static final Log log = Log.getLog(Role.class);
 	
 	public static final Role dao = new Role();
 

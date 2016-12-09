@@ -1,6 +1,7 @@
 package com.platform.tools;
 
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.plugin.redis.Cache;
 import com.jfinal.plugin.redis.Redis;
@@ -12,7 +13,10 @@ import com.platform.constant.ConstantInit;
  * @author 董华健  dongcb678@163.com
  */
 public abstract class ToolCache {
-	
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolCache.class);
+
 	/**
 	 * 缓存类型
 	 */

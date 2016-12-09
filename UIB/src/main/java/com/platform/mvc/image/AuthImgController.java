@@ -1,7 +1,6 @@
 package com.platform.mvc.image;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.render.Render;
 import com.platform.annotation.Controller;
 import com.platform.beetl.render.MyCaptchaRender;
@@ -15,7 +14,7 @@ import com.platform.mvc.base.BaseController;
 public class AuthImgController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(AuthImgController.class);
+	private static final Log log = Log.getLog(AuthImgController.class);
 	
 	public void index() {
 		Render render = new MyCaptchaRender();

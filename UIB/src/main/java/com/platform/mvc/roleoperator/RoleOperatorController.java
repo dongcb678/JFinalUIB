@@ -1,7 +1,6 @@
 package com.platform.mvc.roleoperator;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 
@@ -13,7 +12,7 @@ import com.platform.mvc.base.BaseController;
 public class RoleOperatorController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(RoleOperatorController.class);
+	private static final Log log = Log.getLog(RoleOperatorController.class);
 
 	private RoleOperatorService roleOperatorService;
 	
@@ -40,7 +39,7 @@ public class RoleOperatorController extends BaseController {
 	 * 删除角色拥有的功能
 	 */
 	public void del() {
-		RoleOperator.dao.deleteById(getPara());
+		roleOperatorService.del(getPara());
 		renderSuccess(null);
 	}
 	

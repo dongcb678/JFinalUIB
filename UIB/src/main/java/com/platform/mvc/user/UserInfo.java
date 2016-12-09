@@ -3,13 +3,9 @@ package com.platform.mvc.user;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
-import com.platform.plugin.ParamInitPlugin;
-import com.platform.tools.ToolCache;
 
 /**
  * 用户详情model
@@ -21,7 +17,7 @@ public class UserInfo extends BaseModel<UserInfo> {
 
 	private static final long serialVersionUID = 2592706064072264621L;
 
-	private static Logger log = Logger.getLogger(UserInfo.class);
+	private static final Log log = Log.getLog(UserInfo.class);
 	
 	public static final UserInfo dao = new UserInfo();
 

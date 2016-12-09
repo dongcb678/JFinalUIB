@@ -6,11 +6,16 @@ import java.security.Security;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
 
+import com.jfinal.log.Log;
+
 /**
  * MD系列加密组件<br>
  * Tiger、Whirlpool和GOST3411共3种算法
  */
 public abstract class ToolMD {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolMD.class);
 
 	/**
 	 * Tiger加密

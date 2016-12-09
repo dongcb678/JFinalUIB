@@ -4,10 +4,15 @@ import java.security.MessageDigest;
 
 import org.bouncycastle.util.encoders.Hex;
 
+import com.jfinal.log.Log;
+
 /**
  * MD加密组件
  */
 public abstract class ToolMD2 {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolMD2.class);
 
 	/**
 	 * MD2加密

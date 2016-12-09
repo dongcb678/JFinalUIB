@@ -1,9 +1,10 @@
 package com.platform.beetl.func;
 
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
+
+import com.jfinal.log.Log;
 
 /**
  * 过滤xml文档函数
@@ -11,7 +12,7 @@ import org.beetl.core.Function;
  */
 public class EscapeXml implements Function {
 
-	private static Logger log = Logger.getLogger(EscapeXml.class);
+	private static final Log log = Log.getLog(EscapeXml.class);
 	
 	/**
 	 * 过滤xml文档函数实现

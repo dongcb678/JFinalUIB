@@ -2,8 +2,7 @@ package com.platform.mvc.index;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.menu.Menu;
@@ -18,7 +17,7 @@ import com.platform.mvc.user.User;
 @Controller({"/platform/", "/platform/index"})
 public class IndexController extends BaseController {
 
-	private static Logger log = Logger.getLogger(IndexController.class);
+	private static final Log log = Log.getLog(IndexController.class);
 	
 	private IndexService indexService;
 	private ResourcesService resourcesService;

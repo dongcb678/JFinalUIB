@@ -46,4 +46,11 @@
     	]]>
 	</sql>
 	
+	<!-- 查询分组下的用户 -->
+	<sql id="getUserByGroup">
+		<![CDATA[ 
+        	select userIds from pt_usergroup where groupIds = ?
+    	]]>
+	</sql>
+	
 </sql-statement>

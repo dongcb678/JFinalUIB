@@ -5,13 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.beetl.core.BeetlKit;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
 import org.beetl.ext.jfinal.BeetlRenderFactory;
 
-import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.beetl.format.DateFormat;
 import com.platform.beetl.func.AuthUrl;
 import com.platform.beetl.func.EscapeXml;
@@ -20,7 +19,7 @@ import com.platform.beetl.func.OrderBy;
 import com.platform.beetl.tag.DictTag;
 import com.platform.beetl.tag.ParamTag;
 import com.platform.constant.ConstantInit;
-import com.platform.plugin.ParamInitPlugin;
+import com.platform.dto.DataBase;
 
 /**
  * Beetl工具类
@@ -28,15 +27,18 @@ import com.platform.plugin.ParamInitPlugin;
  */
 public abstract class ToolBeetl {
 
-	private static Logger log = Logger.getLogger(ParamInitPlugin.class);
+	private static final Log log = Log.getLog(ToolBeetl.class);
 
 	/**
 	 * 模板扩展
 	 */
 	@SuppressWarnings("static-access")
 	public static GroupTemplate regiseter(){
+		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
+		String db_type = dataBase.getType();
+		
 		Map<String, Object> sharedVars = new HashMap<String, Object>();
-		sharedVars.put("db_type", PropKit.get(ConstantInit.db_type_key));
+		sharedVars.put("db_type", db_type);
 		
 		log.debug("注册全局web视图模板解析");
 		GroupTemplate mainGT = BeetlRenderFactory.groupTemplate;

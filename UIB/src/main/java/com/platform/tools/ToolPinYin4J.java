@@ -2,6 +2,8 @@ package com.platform.tools;
 
 import java.nio.charset.Charset;
 
+import com.jfinal.log.Log;
+
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
@@ -14,6 +16,9 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  * @author 董华健  2012-9-3 下午8:08:17
  */
 public class ToolPinYin4J {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolPinYin4J.class);
 
 	/**
 	 * 得到 全拼

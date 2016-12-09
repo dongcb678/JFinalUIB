@@ -7,8 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 
+import com.jfinal.log.Log;
 import com.platform.mvc.user.User;
 
 /**
@@ -16,7 +16,7 @@ import com.platform.mvc.user.User;
  */
 public abstract class ToolString {
 
-	private static Logger log = Logger.getLogger(ToolString.class);
+	private static final Log log = Log.getLog(ToolString.class);
 
 	/**
 	 * 常用正则表达式：匹配非负整数（正整数 + 0）
@@ -312,7 +312,7 @@ public abstract class ToolString {
 	        //System.out.println(str);
 	        html.append(contents.substring(lastIdx, matchr.start()));
 	         
-	        User user = User.cacheGet(userName);
+	        User user = User.cacheGetByUserName(userName);
 	        if(user != null){
 	            html.append("<a href='http://www.xx.com/"+user.getStr("username")+"' class='referer' target='_blank'>@");
 	            html.append(userName.trim());

@@ -9,9 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.platform.constant.ConstantInit;
 import com.platform.tools.ToolDirFile;
@@ -22,8 +21,8 @@ import com.platform.tools.ToolDirFile;
  */
 public class I18NPlugin implements IPlugin {
 
-    protected final Logger log = Logger.getLogger(getClass());
-    
+	private static final Log log = Log.getLog(I18NPlugin.class);
+
     public static final String i18n_local_zh_CN = "zh_CN";
     
     public static final String i18n_local_zh_HK = "zh_HK";

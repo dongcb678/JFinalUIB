@@ -117,4 +117,11 @@
     	]]>
 	</sql>
 	
+	<!--  -->
+	<sql id="getRoleoperatorByOperatorids">
+		<![CDATA[ 
+        	select * from pt_roleoperator where operatorids = ?
+    	]]>
+	</sql>
+	
 </sql-statement>

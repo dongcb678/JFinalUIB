@@ -10,6 +10,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
+import com.jfinal.log.Log;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
@@ -22,7 +23,10 @@ import com.thoughtworks.xstream.mapper.MapperWrapper;
  * @author 董华健
  */
 public abstract class ToolXml {
-	
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolXml.class);
+
 	/**
 	 * 获取XStream对象
 	 * @return
@@ -123,15 +127,15 @@ public abstract class ToolXml {
 	}
 	
 	public static void main(String[] args) {
-		String xml = "<xml>";
-		xml += "<URL><![CDATA[http://littleant.duapp.com/msg]]></URL>";
-		xml += "<ToUserName><![CDATA[jiu_guang]]></ToUserName>";
-		xml += "<FromUserName><![CDATA[dongcb678]]></FromUserName>";
-		xml += "<CreateTime>11</CreateTime>";
-		xml += "<MsgType><![CDATA[text\\//]]></MsgType>";
-		xml += "<Content><![CDATA[wentest]]></Content>";
-		xml += "<MsgId>11</MsgId>";
-		xml += "</xml>";
+//		String xml = "<xml>";
+//		xml += "<URL><![CDATA[http://littleant.duapp.com/msg]]></URL>";
+//		xml += "<ToUserName><![CDATA[jiu_guang]]></ToUserName>";
+//		xml += "<FromUserName><![CDATA[dongcb678]]></FromUserName>";
+//		xml += "<CreateTime>11</CreateTime>";
+//		xml += "<MsgType><![CDATA[text\\//]]></MsgType>";
+//		xml += "<Content><![CDATA[wentest]]></Content>";
+//		xml += "<MsgId>11</MsgId>";
+//		xml += "</xml>";
 
 //		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
 //		map.put("xml", RecevieMsgText.class);

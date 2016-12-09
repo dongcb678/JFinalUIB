@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.platform.annotation.Service;
 import com.platform.dto.ZtreeNode;
@@ -21,7 +21,7 @@ import com.platform.tools.security.ToolPbkdf2;
 @Service(name = UserService.serviceName)
 public class UserService extends BaseService {
 
-	private static Logger log = Logger.getLogger(UserService.class);
+	private static final Log log = Log.getLog(UserService.class);
 
 	public static final String serviceName = "userService";
 
@@ -51,9 +51,11 @@ public class UserService extends BaseService {
 
 			// 缓存
 			User.cacheAdd(user.getPKValue());
-		} catch (NoSuchAlgorithmException  | InvalidKeySpecException e) {
+		} catch (NoSuchAlgorithmException  e) {
 			throw new RuntimeException("保存用户密码加密操作异常", e);
-		} catch (Exception e) {
+		} catch (InvalidKeySpecException e) {
+			throw new RuntimeException("保存用户密码加密操作异常", e);
+		}catch (Exception e) {
 			throw new RuntimeException("保存用户异常", e);
 		}
 	}
@@ -99,7 +101,7 @@ public class UserService extends BaseService {
 		for (String userIds : idsArr) {
 			// 缓存
 			User.cacheRemove(userIds);
-
+			
 			// 删除
 			User.dao.deleteById(userIds);
 			UserInfo.dao.deleteById(userIds);

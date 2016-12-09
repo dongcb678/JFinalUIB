@@ -2,7 +2,6 @@
     <wb-module deploy-name="JFinalUIBV3">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <dependent-module archiveName="JFinal-2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JFinal/JFinal">
             <dependency-type>uses</dependency-type>
         </dependent-module>

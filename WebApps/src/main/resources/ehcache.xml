@@ -28,7 +28,10 @@
            diskExpiryThreadIntervalSeconds="120"
            
            memoryStoreEvictionPolicy="LFU"
-           transactionalMode="off">
+           transactionalMode="off"
+           
+           copyOnWrite="true"
+           copyOnRead="true">
     </defaultCache>
     
     <!-- URL缓存 ：1小时 -->
@@ -47,7 +50,10 @@
            diskExpiryThreadIntervalSeconds="120"
            
            memoryStoreEvictionPolicy="LFU"
-           transactionalMode="off">
+           transactionalMode="off"
+           
+           copyOnWrite="true"
+           copyOnRead="true">
     </cache>
     
     <!-- 系统全局变量：永不过期-->
@@ -64,7 +70,10 @@
            diskExpiryThreadIntervalSeconds="120"
            
            memoryStoreEvictionPolicy="LFU"
-           transactionalMode="off">
+           transactionalMode="off"
+           
+           copyOnWrite="true"
+           copyOnRead="true">
     </cache>
     
 </ehcache>
@@ -96,4 +105,7 @@
         
         maxEntriesLocalHeap="0"
         maxEntriesLocalDisk="1000"
+        
+        copyOnRead：当指定该属性为true时，我们在从Cache中读数据时取到的是Cache中对应元素的一个copy副本，而不是对应的一个引用。默认为false。
+       	copyOnWrite：当指定该属性为true时，我们在往Cache中写入数据时用的是原对象的一个copy副本，而不是对应的一个引用。默认为false。
     -->

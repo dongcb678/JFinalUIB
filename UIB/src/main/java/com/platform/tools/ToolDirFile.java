@@ -25,9 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
-import org.apache.log4j.Logger;
 
 import com.jfinal.kit.PathKit;
+import com.jfinal.log.Log;
 
 /**
  * 文件和目录相关
@@ -36,7 +36,7 @@ import com.jfinal.kit.PathKit;
  */
 public abstract class ToolDirFile {
 
-	private static Logger log = Logger.getLogger(ToolDirFile.class);
+	private static final Log log = Log.getLog(ToolDirFile.class);
 
 	private static String libPath;
 	private static String classesPath;
@@ -49,11 +49,6 @@ public abstract class ToolDirFile {
 	public static String getLibPath() {
 		if (libPath == null) {
 			libPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "lib";
-			
-			/**
-			 * maven模块化时用main方法运行时需要启用下面一行
-			 */
-			//libPath = PathKit.getRootClassPath().replace("classes", "JFinalUIBV3") + File.separator + "WEB-INF" + File.separator + "lib";
 		}
 		return libPath;
 	}
@@ -69,12 +64,12 @@ public abstract class ToolDirFile {
 			 * 1.兼容运行模式 直接运行 JFinalConfig 中的 main 方法 maven： 直接运行 JFinalConfig 中的
 			 * main 方法 maven： jetty:run maven： tomcat7:run
 			 */
-			classesPath = PathKit.getRootClassPath();
+			 classesPath = PathKit.getRootClassPath();
 
 			/**
 			 * 2.兼容jboss war部署
 			 */
-			// classesPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
+//			classesPath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
 		}
 		return classesPath;
 	}

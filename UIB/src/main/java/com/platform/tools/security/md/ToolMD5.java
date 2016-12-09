@@ -2,10 +2,15 @@ package com.platform.tools.security.md;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.jfinal.log.Log;
+
 /**
  * MD5加密组件
  */
 public class ToolMD5 {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolMD5.class);
 
 	/**
 	 * MD5加密

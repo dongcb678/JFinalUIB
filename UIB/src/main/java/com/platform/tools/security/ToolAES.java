@@ -8,7 +8,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
+
+import com.jfinal.log.Log;
 
 /**
  * AES安全编码组件
@@ -26,7 +27,7 @@ import org.apache.log4j.Logger;
 public class ToolAES {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ToolAES.class);
+	private static final Log log = Log.getLog(ToolAES.class);
 
 	/**
 	 * 密钥算法

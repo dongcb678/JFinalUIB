@@ -1,14 +1,16 @@
 package com.platform.mvc.dict;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 import com.platform.mvc.base.BaseValidator;
 
 public class DictValidator extends BaseValidator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(DictValidator.class);
+	private static final Log log = Log.getLog(DictValidator.class);
+
+	@SuppressWarnings("unused")
+	private DictService dictService;
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

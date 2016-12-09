@@ -1,25 +1,32 @@
 package com.platform.tools;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
+import java.net.JarURLConnection;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantInit;
 
 /**
- * 类文件检索
+ * 根据路径检索类文件
  * @author 董华健  dongcb678@163.com
+ * 在普通方式构建项目中，直接根据固定的路径读取类文件，但在maven构建中，依赖模块和jar文件不方便根据路径读取
  */
 public abstract class ToolClassSearch {
 
-	private static final Logger log = Logger.getLogger(ToolClassSearch.class);
+	private static final Log log = Log.getLog(ToolClassSearch.class);
 
 	/**
 	 * 需要扫描的jar
@@ -70,7 +77,8 @@ public abstract class ToolClassSearch {
      * @param target 指定类或者接口
      * @return
      */
-    public static List<Class<?>> search(Class<?> target){
+	@Deprecated
+    public static List<Class<?>> searchByPath(Class<?> target){
     	// 1.查找classes目录
     	List<String> classFileList = findFiles(ToolDirFile.getClassesPath());
     	
@@ -89,6 +97,7 @@ public abstract class ToolClassSearch {
 	 * @param classFileList 
 	 * @return
 	 */
+	@Deprecated
 	@SuppressWarnings({ "unchecked" })
 	private static <T> List<Class<? extends T>> isAssignableFrom(Class<?> target, List<String> classFileList) {
         List<Class<? extends T>> classList = new ArrayList<Class<? extends T>>();
@@ -113,6 +122,7 @@ public abstract class ToolClassSearch {
      * @param dirPath
      * @return
      */
+	@Deprecated
     private static List<String> findFiles(String dirPath) {
         List<String> classFiles = new ArrayList<String>();
         
@@ -153,6 +163,7 @@ public abstract class ToolClassSearch {
      * 查找lib目录jar中.class文件
      * @return
      */
+	@Deprecated
     private static List<String> findJarFiles() {
         List<String> classFiles = new ArrayList<String>();;
         try {
@@ -188,5 +199,129 @@ public abstract class ToolClassSearch {
         }
         return classFiles;
     }
+    
+	/**
+	 * 查找指定报名下target子类
+	 * @param pkg
+	 * @param target
+	 * @return
+	 * 
+	 * 描述：
+	 * 根据ClassLoader读取类文件，此方法更加通用
+     * maven环境中，适合使用此方式，根据包名称查找所有加载的class
+	 */
+	public static Set<Class<?>> searchByClassLoader(Class<?> target) {
+		Set<Class<?>> retSet = new HashSet<Class<?>>();
+
+		List<String> pkgs = ToolClassSearch.getScanPkgList();
+		for (String pkg : pkgs) {
+			Set<Class<?>> set = getClasses(pkg);
+			for (Class<?> class2 : set) {
+				if (target.isAssignableFrom(class2) && class2 != target) {
+					retSet.add(class2);
+	            }
+			}
+		}
+		
+		return retSet;
+	}
+
+	/**
+	 * 从包package中获取所有的Class
+	 * 
+	 * @param pkg
+	 * @return
+	 */
+	private static Set<Class<?>> getClasses(String pkg) {
+		Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
+		// 是否循环迭代
+		boolean recursive = true;
+		String packageName = pkg;
+		String packageDirName = packageName.replace('.', '/');
+		Enumeration<URL> dirs;
+		try {
+			dirs = Thread.currentThread().getContextClassLoader().getResources(packageDirName);
+			while (dirs.hasMoreElements()) {
+				URL url = dirs.nextElement();
+				String protocol = url.getProtocol();
+				if ("file".equals(protocol)) {
+					// 如果是以文件的形式保存在服务器上
+					String filePath = URLDecoder.decode(url.getFile(), "UTF-8");
+					findAndAddClassesInPackageByFile(packageName, filePath, recursive, classes);
+				} else if ("jar".equals(protocol)) {
+					// 如果是jar包文件
+					JarFile jar;
+					try {
+						jar = ((JarURLConnection) url.openConnection()).getJarFile();
+						Enumeration<JarEntry> entries = jar.entries();
+						while (entries.hasMoreElements()) {
+							JarEntry entry = entries.nextElement();
+							String name = entry.getName();
+							if (name.charAt(0) == '/') {
+								name = name.substring(1);
+							}
+							if (name.startsWith(packageDirName)) {
+								int idx = name.lastIndexOf('/');
+								if (idx != -1) {
+									packageName = name.substring(0, idx).replace('/', '.');
+								}
+								if ((idx != -1) || recursive) {
+									if (name.endsWith(".class") && !entry.isDirectory()) {
+										String className = name.substring(packageName.length() + 1, name.length() - 6);
+										try {
+											classes.add(Class.forName(packageName + '.' + className));
+										} catch (ClassNotFoundException e) {
+											e.printStackTrace();
+										}
+									}
+								}
+							}
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return classes;
+	}
+
+	/**
+	 * 以文件的形式来获取包下的所有Class
+	 * 
+	 * @param packageName
+	 * @param packagePath
+	 * @param recursive
+	 * @param classes
+	 */
+	private static void findAndAddClassesInPackageByFile(String packageName, String packagePath, final boolean recursive,
+			Set<Class<?>> classes) {
+		File dir = new File(packagePath);
+		if (!dir.exists() || !dir.isDirectory()) {
+			return;
+		}
+		File[] dirfiles = dir.listFiles(new FileFilter() {
+			public boolean accept(File file) {
+				return (recursive && file.isDirectory()) || (file.getName().endsWith(".class"));
+			}
+		});
+		for (File file : dirfiles) {
+			if (file.isDirectory()) {
+				findAndAddClassesInPackageByFile(packageName + "." + file.getName(), file.getAbsolutePath(), recursive,
+						classes);
+			} else {
+				String className = file.getName().substring(0, file.getName().length() - 6);
+				try {
+					classes.add(
+							Thread.currentThread().getContextClassLoader().loadClass(packageName + '.' + className));
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 }

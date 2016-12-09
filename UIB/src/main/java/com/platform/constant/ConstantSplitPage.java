@@ -7,6 +7,11 @@ package com.platform.constant;
 public interface ConstantSplitPage {
 
 	/**
+	 * 分页信息缓存，处理回退
+	 */
+	public static final String cacheStart_splitPage_backOff = "splitPage_backOff_";
+	
+	/**
 	 * 分页参数初始化值：默认显示第几页
 	 */
 	public static final int default_pageNumber = 1;

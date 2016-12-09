@@ -1,7 +1,6 @@
 package com.platform.mvc.syslog;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 
@@ -13,7 +12,7 @@ import com.platform.mvc.base.BaseController;
 public class SysLogController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(SysLogController.class);
+	private static final Log log = Log.getLog(SysLogController.class);
 	
 	private SysLogService sysLogService;
 	
@@ -40,7 +39,7 @@ public class SysLogController extends BaseController {
 	 */
 	public void delete() {
 		sysLogService.baseDelete(Syslog.table_name, getPara() == null ? ids : getPara());
-		redirect("/platform/sysLog");
+		forwardAction("/platform/sysLog/backOff");
 	}
 
 }

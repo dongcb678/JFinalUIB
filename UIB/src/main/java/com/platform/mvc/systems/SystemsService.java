@@ -1,8 +1,7 @@
 package com.platform.mvc.systems;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.platform.annotation.Service;
@@ -14,7 +13,7 @@ import com.platform.mvc.module.Module;
 public class SystemsService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(SystemsService.class);
+	private static final Log log = Log.getLog(SystemsService.class);
 
 	public static final String serviceName = "systemsService";
 

@@ -1,9 +1,9 @@
 package com.platform.beetl.func;
 
-import org.apache.log4j.Logger;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantWebContext;
 import com.platform.dto.SplitPage;
 
@@ -13,7 +13,7 @@ import com.platform.dto.SplitPage;
  */
 public class OrderBy implements Function {
 
-	private static Logger log = Logger.getLogger(OrderBy.class);
+	private static final Log log = Log.getLog(OrderBy.class);
 	
 	/**
 	 * 分页列表排序

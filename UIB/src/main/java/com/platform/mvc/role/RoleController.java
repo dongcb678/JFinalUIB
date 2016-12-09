@@ -1,8 +1,7 @@
 package com.platform.mvc.role;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
@@ -15,7 +14,7 @@ import com.platform.mvc.base.BaseModel;
 @Controller("/platform/role")
 public class RoleController extends BaseController {
 	
-	private static Logger log = Logger.getLogger(RoleController.class);
+	private static final Log log = Log.getLog(RoleController.class);
 	
 	private RoleService roleService;
 	
@@ -33,7 +32,7 @@ public class RoleController extends BaseController {
 	@Before(RoleValidator.class)
 	public void save() {
 		ids = roleService.save(getModel(Role.class));
-		redirect("/platform/role");
+		forwardAction("/platform/role/backOff");
 	}
 
 	/**
@@ -50,7 +49,7 @@ public class RoleController extends BaseController {
 	@Before(RoleValidator.class)
 	public void update() {
 		roleService.update(getModel(Role.class));
-		redirect("/platform/role");
+		forwardAction("/platform/role/backOff");
 	}
 	
 	/**
@@ -58,7 +57,7 @@ public class RoleController extends BaseController {
 	 */
 	public void delete() {
 		roleService.delete(getPara() == null ? ids : getPara());
-		redirect("/platform/role");
+		forwardAction("/platform/role/backOff");
 	}
 	
 }

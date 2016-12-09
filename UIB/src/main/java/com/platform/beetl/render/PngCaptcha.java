@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jfinal.log.Log;
 import com.platform.beetl.render.image.Captcha;
 import com.platform.beetl.render.image.Randoms;
 import com.platform.beetl.render.image.Streams;
@@ -18,6 +20,9 @@ import com.platform.interceptor.AuthInterceptor;
 import com.platform.tools.ToolDateTime;
 
 public class PngCaptcha extends Captcha {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(PngCaptcha.class);
 	
 	public PngCaptcha() {
 	}
@@ -44,7 +49,7 @@ public class PngCaptcha extends Captcha {
 	 *             IO异常
 	 */
 	@Override
-	public void out(HttpServletResponse response) {
+	public void out(HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Pragma", "No-cache");//设置响应头信息，告诉浏览器不要缓存此内容
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expire", 0);
@@ -55,7 +60,7 @@ public class PngCaptcha extends Captcha {
 
 		// 设置验证码值到cookie
 		long date = ToolDateTime.getDateByTime();
-		AuthInterceptor.setAuthCode(response, String.valueOf(rands) + ".#." + date);
+		AuthInterceptor.setAuthCode(request, response, String.valueOf(rands) + ".#." + date);
 
 		OutputStream os = null;
 		try {

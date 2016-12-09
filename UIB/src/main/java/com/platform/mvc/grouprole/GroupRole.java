@@ -1,11 +1,8 @@
 package com.platform.mvc.grouprole;
 
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
-
-
-import org.apache.log4j.Logger;
 
 /**
  * 分组角色 model
@@ -17,7 +14,7 @@ public class GroupRole extends BaseModel<GroupRole> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(GroupRole.class);
+	private static final Log log = Log.getLog(GroupRole.class);
 	
 	public static final GroupRole dao = new GroupRole();
 

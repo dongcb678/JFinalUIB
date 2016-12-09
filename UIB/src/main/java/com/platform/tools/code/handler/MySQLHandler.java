@@ -4,18 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
-import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
-import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
-import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
 import com.platform.tools.code.run.ColumnDto;
@@ -26,21 +22,15 @@ import com.platform.tools.code.run.ColumnDto;
  */
 public class MySQLHandler extends BaseHandler {
 
-	private static Logger log = Logger.getLogger(MySQLHandler.class);
+	private static final Log log = Log.getLog(MySQLHandler.class);
 
-	public MySQLHandler() {
-    	String db_type = PropKit.get(ConstantInit.db_type_key);
-		log.info("db_type = " + db_type);
-		if(!db_type.equals(ConstantInit.db_type_mysql)){
-			throw new RuntimeException("请设置init.properties配置文件db.type = mysql");
-		}
-    	
+	public void init() {
 		log.info("configPlugin 配置Druid数据库连接池连接属性");
-		DataBase db = ToolDataBase.getDbInfo();
-		String username = db.getUserName();
-		String password = db.getPassWord();
-		String jdbcUrl = db.getJdbcUrl();
-		String dbName = ToolDataBase.getDbInfo().getDbName();
+		DataBase dataBase = getDataBase();
+		String username = dataBase.getUserName();
+		String password = dataBase.getPassWord();
+		String jdbcUrl = dataBase.getJdbcUrl();
+		String dbName = dataBase.getDbName();
 		jdbcUrl = jdbcUrl.replace(dbName, "information_schema");
 		DruidPlugin druidPluginIS = new DruidPlugin(jdbcUrl, username, password, "com.mysql.jdbc.Driver");
 		druidPluginIS.start();
@@ -56,7 +46,7 @@ public class MySQLHandler extends BaseHandler {
 	
 	@Override
 	public List<ColumnDto> getColunm(String tableName)  {
-		String dbName = ToolDataBase.getDbInfo().getDbName();
+		String dbName = getDataBase().getDbName();
 
 		// 1.查询表和字段描述信息
 		String tSql = ToolSqlXml.getSql("platform.mysql.getTables");

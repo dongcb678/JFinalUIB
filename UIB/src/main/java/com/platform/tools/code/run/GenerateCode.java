@@ -2,11 +2,11 @@ package com.platform.tools.code.run;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
-import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
+import com.platform.config.ConfigCore;
 import com.platform.constant.ConstantInit;
-import com.platform.run.ConfigCore;
+import com.platform.dto.DataBase;
+import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolString;
 import com.platform.tools.code.handler.BaseHandler;
 import com.platform.tools.code.handler.DB2Handler;
@@ -25,15 +25,15 @@ import com.platform.tools.code.handler.SqlServerHandler;
  */
 public class GenerateCode {
 
-	private static Logger log = Logger.getLogger(GenerateCode.class);
+	private static final Log log = Log.getLog(GenerateCode.class);
 
 	/**
-	 * <blockquote><pre>
-	 * 二维数组说明：数据源（默认可以是null）、 表名、主键名（默认可以是null）、类名（不包含后缀.java）
-	 * </pre></blockquote>
+	 * 二维数组说明：
+	 * 数据源（默认可以是null）、 表名、主键名（默认可以是null）、类名（不包含后缀.java）
 	 */
 	public static String[][] tableArr = {
-//		{"ConstantInit.db_dataSource_main", "test_blog", "ids", "TestBlog"}
+		//{"数据源名称", "表名称", "主键列名称", "生成类名称"}
+//		{"ConstantInit.db_dataSource_main", "test_blog", "ids", "Blog"}
 		{null, "test_blog", null, "Blog"}
 
 //		{null, "pt_department", null, "Department"},
@@ -65,30 +65,24 @@ public class GenerateCode {
 	public static final String srcFolder = "src";
 
 	/**
-	 * <blockquote><pre>
-	 * 
 	 * 生成的文件存放的包，公共基础包
-	 * 描述：比如platform所在的包就是com.platform，weixin所在的包就是com.weixin
-	 * 
-	 * </pre></blockquote>
+	 * 描述：比如platform所在的包就是com.platform，test所在的包就是com.test
 	 */
 	public static final String packageBase = "com.test2.mvc";
-	
+
 	/**
-	 * <blockquote><pre>
-	 * 
 	 * controller基础路径，例如
 	 * @Controller("/platform/authImg") 中的platform
-	 * @Controller("/wx/authImg") 中的wx
+	 * @Controller("/test/blog") 中的test
 	 * 
 	 * render基础路径，例如
 	 * /platform/user/add.jsp 中的 platform
-	 * /weiXin/user/list.jsp 中的 weiXin
-	 * 
-	 * </pre></blockquote>
+	 * /test/blog/list.jsp 中的 test
 	 */
 	public static final String basePath = "test";
 
+	public static final String dataSource = ConstantInit.db_dataSource_main;
+	
 	/**
 	 * 循环生成文件
 	 */
@@ -98,22 +92,30 @@ public class GenerateCode {
     	log.info("启动ConfigCore end ......");
     	
 		log.info("根据不同的数据库加载不同的处理器");
+		DataBase dataBase = ToolDataBase.getDbMap(dataSource);
+		
     	BaseHandler handler = null;
-    	String db_type = PropKit.get(ConstantInit.db_type_key);
+    	String db_type = dataBase.getType();
 		if(db_type.equals(ConstantInit.db_type_postgresql)){
 			handler = new PostgreSQLHandler();
+			handler.setDataBase(dataBase);
 			
 		}else if(db_type.equals(ConstantInit.db_type_mysql)){
 			handler = new MySQLHandler();
+			handler.setDataBase(dataBase);
+			handler.init();
 			
 		}else if(db_type.equals(ConstantInit.db_type_oracle)){
 			handler = new OracleHandler();
+			handler.setDataBase(dataBase);
 			
 		}else if(db_type.equals(ConstantInit.db_type_db2)){
 			handler = new DB2Handler();
+			handler.setDataBase(dataBase);
 			
 		}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
 			handler = new SqlServerHandler();
+			handler.setDataBase(dataBase);
 		}
     	
 		for (int i = 0; i < tableArr.length; i++) {
@@ -149,6 +151,9 @@ public class GenerateCode {
 			//handler.dto(className, classNameSmall, dataSource, tableName, colunmList); 
 			
 			// 7.生成视图文件
+			//handler.list(classNameSmall, colunmList);
+			//handler.add(classNameSmall, colunmList);
+			//handler.update(classNameSmall, colunmList);
 			//handler.form(classNameSmall, colunmList);
 			//handler.view(classNameSmall, colunmList);
 		}

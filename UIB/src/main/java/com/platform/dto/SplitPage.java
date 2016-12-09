@@ -11,7 +11,7 @@ import com.platform.constant.ConstantSplitPage;
  * 
  * @author 董华健
  */
-public class SplitPage implements Serializable {
+public class SplitPage implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -7914983945613661637L;
 

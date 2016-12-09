@@ -2,7 +2,10 @@ package com.platform.thread;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
+import com.platform.plugin.QuartzPlugin;
+import com.platform.thread.job.DataClearJob;
+import com.platform.thread.job.ResourcesJob;
 
 /**
  * 时间校验检测
@@ -18,7 +21,7 @@ import org.apache.log4j.Logger;
  */
 public class VerifyDate extends Thread {
 
-	private static Logger log = Logger.getLogger(VerifyDate.class);
+	private static final Log log = Log.getLog(VerifyDate.class);
 	
 	private static final long interval = 1000 * 60 * 10; // 10 分钟
 	
@@ -35,12 +38,17 @@ public class VerifyDate extends Thread {
 					Date newDate = new Date();
 					long milliSeconds = newDate.getTime() - date.getTime();
 					if(milliSeconds < - interval){
-						// 重新触发timer
-						DataClear.stop();
-						DataClear.start();
+						QuartzPlugin quartzPlugin = new QuartzPlugin();
 						
-						TimerResources.stop();
-						TimerResources.start();
+						// 停止调度任务
+						QuartzPlugin.deleteJob("ResourcesJob");
+						QuartzPlugin.deleteJob("DataClearJob");
+						quartzPlugin.stop();
+						
+						// 启动调度任务
+						quartzPlugin.start();
+						QuartzPlugin.addJob("ResourcesJob", "0 0/2 * * * ?", ResourcesJob.class);
+						QuartzPlugin.addJob("DataClearJob", "0 0 2 * * ?", DataClearJob.class);
 						
 						// 重置时间变量
 						date = newDate;
@@ -61,6 +69,7 @@ public class VerifyDate extends Thread {
 		log.info("启动任务成功");
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static synchronized void stopVerify(){
 		log.info("任务退出开始");
 		verifyDate.stop();

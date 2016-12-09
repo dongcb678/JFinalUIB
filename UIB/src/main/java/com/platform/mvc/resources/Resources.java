@@ -3,10 +3,8 @@ package com.platform.mvc.resources;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 
 /**
@@ -19,7 +17,7 @@ public class Resources extends BaseModel<Resources> {
 	
 	private static final long serialVersionUID = 2051998642258015518L;
 
-	private static Logger log = Logger.getLogger(Resources.class);
+	private static final Log log = Log.getLog(Resources.class);
 	
 	public static final Resources dao = new Resources();
 

@@ -1,7 +1,6 @@
 package com.platform.mvc.group;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
 
@@ -15,7 +14,7 @@ public class Group extends BaseModel<Group> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(Group.class);
+	private static final Log log = Log.getLog(Group.class);
 	
 	public static final Group dao = new Group();
 

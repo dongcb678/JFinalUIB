@@ -9,7 +9,7 @@
 			<ul class="breadcrumb">
 				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
 				<li><a href="#">用户权限</a> <span class="divider">/</span></li>
-				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/systems');">${i18nMap["admin.systems.common.name"]}</a> <span class="divider">/</span></li>
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/systems/backOff');">${i18nMap["admin.systems.common.name"]}</a> <span class="divider">/</span></li>
 				<li class="active">${i18nMap["admin.systems.add"]}</li>
 			</ul>
 			<!-- END PAGE TITLE & BREADCRUMB-->
@@ -36,7 +36,7 @@
 						<div class="control-group">
 							<div class="controls">
 								<% if(authUrl("/platform/systems/save")){ %>
-								<button type="button" class="btn btn-success" onclick="common_ajax.ajaxForm('editForm');">
+								<button type="button" class="btn btn-success" onclick="common_ajax.ajaxFormMainPanel('editForm');">
 									<i class="icon-ok icon-white"></i>${i18nMap["admin.common.submit"]}
 								</button>
 								<% } %>

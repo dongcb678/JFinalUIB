@@ -1,9 +1,7 @@
 package com.platform.mvc.dept;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 
 /**
@@ -16,7 +14,7 @@ public class Department extends BaseModel<Department> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(Department.class);
+	private static final Log log = Log.getLog(Department.class);
 	
 	public static final Department dao = new Department();
 

@@ -1,7 +1,6 @@
 package com.platform.tools;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
@@ -14,7 +13,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import freemarker.template.TemplateException;
+import com.jfinal.log.Log;
 
 /**
  * Velocity工具类
@@ -22,13 +21,14 @@ import freemarker.template.TemplateException;
  */
 public abstract class ToolVelocity {
 
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolVelocity.class);
+
 	/**
 	 * 渲染模板
 	 * @param templateContent
 	 * @param paramMap
 	 * @return
-	 * @throws IOException
-	 * @throws TemplateException
 	 */
 	public static String render(String templateContent, Map<String, Object> paramMap) {
 		// 初始化并取得Velocity引擎

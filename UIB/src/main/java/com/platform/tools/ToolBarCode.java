@@ -25,6 +25,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.jfinal.log.Log;
 
 /**
  * 条码处理
@@ -32,6 +33,9 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
  * @author 董华健
  */
 public abstract class ToolBarCode {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolBarCode.class);
 
 	/**
 	 * 生成二维码

@@ -2,9 +2,8 @@ package com.platform.mvc.menu;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
@@ -17,7 +16,7 @@ import com.platform.mvc.base.BaseController;
 public class MenuController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(MenuController.class);
+	private static final Log log = Log.getLog(MenuController.class);
 	
 	private MenuService menuService;
 	
@@ -102,7 +101,27 @@ public class MenuController extends BaseController {
 		menuService.setOperator(ids, operatorIds);
 		renderJson(ids);
 	}
+
+	/**
+	 * 展示菜单对应的功能和所有功能列表
+	 */
+	public void list(){
+		defaultOrder(" sorder asc, ", " morder asc ");
+		menuService.paging(splitPage);
+		render("/platform/menu/list.html");
+	}
 	
+	/**
+	 * 设置菜单对应的功能
+	 */
+	public void set() {
+		String menuIds = getPara("menuIds");
+		String operatorIds = getPara("operatorIds");
+		Menu menu = Menu.dao.findById(menuIds);
+		menu.setOperatorids(operatorIds);
+		menu.update();
+		renderSuccess(null);
+	}
 }
 
 

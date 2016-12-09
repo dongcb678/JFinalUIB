@@ -2,8 +2,7 @@ package com.platform.mvc.stationoperator;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
@@ -19,7 +18,7 @@ import com.platform.tools.ToolCache;
 public class StationOperatorService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(StationOperatorService.class);
+	private static final Log log = Log.getLog(StationOperatorService.class);
 	
 	public static final String serviceName = "stationOperatorService";
 

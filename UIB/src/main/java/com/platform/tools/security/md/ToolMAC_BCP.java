@@ -10,10 +10,15 @@ import javax.crypto.spec.SecretKeySpec;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
 
+import com.jfinal.log.Log;
+
 /**
  * MAC消息摘要组件
  */
 public abstract class ToolMAC_BCP {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolMAC_BCP.class);
 
 	/**
 	 * 初始化HmacMD2密钥

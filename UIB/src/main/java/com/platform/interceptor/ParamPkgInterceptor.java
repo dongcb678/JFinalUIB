@@ -1,15 +1,14 @@
 package com.platform.interceptor;
 
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
+import com.jfinal.log.Log;
+import com.platform.constant.ConstantSplitPage;
 import com.platform.constant.ConstantWebContext;
 import com.platform.dto.SplitPage;
 import com.platform.mvc.base.BaseController;
@@ -18,8 +17,9 @@ import com.platform.mvc.operator.Operator;
 import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ServicePlugin;
-import com.platform.tools.ToolDateTime;
+import com.platform.tools.ToolCache;
 import com.platform.tools.ToolString;
+import com.platform.tools.ToolTypeConverter;
 
 /**
  * 参数封装拦截器
@@ -27,7 +27,7 @@ import com.platform.tools.ToolString;
  */
 public class ParamPkgInterceptor implements Interceptor {
 	
-	private static Logger log = Logger.getLogger(ParamPkgInterceptor.class);
+	private static final Log log = Log.getLog(ParamPkgInterceptor.class);
 	
 	@Override
 	public void intercept(Invocation invoc) {
@@ -101,78 +101,100 @@ public class ParamPkgInterceptor implements Interceptor {
 	 * @param controller
 	 */
 	private void splitPage(BaseController controller, String uri){
-		SplitPage splitPage = new SplitPage();
+		SplitPage splitPage = null;
 		
-		// 设置分页请求uri
-		splitPage.setUri(uri);
-		
-		// 存储分页查询参数
-		Map<String, Object> queryParam = new HashMap<String, Object>();
-		
-		// 国际化相关参数
-		String localePram = controller.getAttr(ConstantWebContext.request_localePram);
-		queryParam.put(ConstantWebContext.request_localePram, localePram); // 设置国际化当前语言环境
-		queryParam.put(ConstantWebContext.request_i18nColumnSuffix, I18NPlugin.columnSuffix(localePram)); // 设置国际化动态列后缀
-		
-		// 分拣请求参数
-		Enumeration<String> paramNames = controller.getParaNames();
-		String name = null;
-		String value = null;
-		String key = null;
-		while (paramNames.hasMoreElements()) {
-			name = paramNames.nextElement();
-			value = controller.getPara(name);
-			// 是否以_query.开头
-			if (name.startsWith(ConstantWebContext.request_query) && null != value && !value.trim().isEmpty()) {
-				log.debug("分页，查询参数：name = " + name + " value = " + value);
-				key = name.substring(7);
-				if(ToolString.regExpVali(key, ToolString.regExp_letter_5)){
-					queryParam.put(key, value.trim());
-				}else{
-					log.error("分页，查询参数存在恶意提交字符：name = " + name + " value = " + value);
+		// 缓存回退分页条件
+		String backOff = controller.getPara();
+		if((backOff != null && backOff.equals("backOff")) || controller.getParaToBoolean("backOff", false)){
+			String userIds = controller.getReqSysLog().getUserids();
+			if(userIds != null && !userIds.isEmpty()){
+				SplitPage splitPageCache = ToolCache.get(ConstantSplitPage.cacheStart_splitPage_backOff + userIds);
+				if(splitPageCache != null && uri.startsWith(splitPageCache.getUri())){
+					splitPage = splitPageCache;
 				}
 			}
 		}
-		splitPage.setQueryParam(queryParam);
 		
-		// 排序条件
-		String orderColunm = controller.getPara(ConstantWebContext.request_orderColunm);
-		if(null != orderColunm && !orderColunm.isEmpty()){
-			log.debug("分页，排序条件：orderColunm = " + orderColunm);
-			
-//			if(ToolSqlXml.keywordVali(orderColunm)){
-//				log.error("排序列包含不安全字符：" + orderColunm);
-//				throw new RuntimeException("排序列包含不安全字符：" + orderColunm);
-//			}
-			
-			splitPage.setOrderColunm(orderColunm);
-		}
-
-		// 排序方式
-		String orderMode = controller.getPara(ConstantWebContext.request_orderMode);
-		if(null != orderMode && !orderMode.isEmpty()){
-			log.debug("分页，排序方式：orderMode = " + orderMode);
-
-//			if(ToolSqlXml.keywordVali(orderMode)){
-//				log.error("排序方式包含不安全字符：" + orderMode);
-//				throw new RuntimeException("排序方式包含不安全字符：" + orderMode);
-//			}
-			
-			splitPage.setOrderMode(orderMode);
-		}
-
-		// 第几页
-		String pageNumber = controller.getPara(ConstantWebContext.request_pageNumber);
-		if(null != pageNumber && !pageNumber.isEmpty()){
-			log.debug("分页，第几页：pageNumber = " + pageNumber);
-			splitPage.setPageNumber(Integer.parseInt(pageNumber));
-		}
+		if(splitPage == null){
+			splitPage = new SplitPage();
 		
-		// 每页显示几多
-		String pageSize = controller.getPara(ConstantWebContext.request_pageSize);
-		if(null != pageSize && !pageSize.isEmpty()){
-			log.debug("分页，每页显示几多：pageSize = " + pageSize);
-			splitPage.setPageSize(Integer.parseInt(pageSize));
+			// 设置分页请求uri
+			splitPage.setUri(uri);
+			
+			// 存储分页查询参数
+			Map<String, Object> queryParam = new HashMap<String, Object>();
+			
+			// 国际化相关参数
+			String localePram = controller.getAttr(ConstantWebContext.request_localePram);
+			queryParam.put(ConstantWebContext.request_localePram, localePram); // 设置国际化当前语言环境
+			queryParam.put(ConstantWebContext.request_i18nColumnSuffix, I18NPlugin.columnSuffix(localePram)); // 设置国际化动态列后缀
+			
+			// 分拣请求参数
+			Enumeration<String> paramNames = controller.getParaNames();
+			String name = null;
+			String value = null;
+			String key = null;
+			while (paramNames.hasMoreElements()) {
+				name = paramNames.nextElement();
+				value = controller.getPara(name);
+				// 是否以_query.开头
+				if (name.startsWith(ConstantWebContext.request_query) && null != value && !value.trim().isEmpty()) {
+					log.debug("分页，查询参数：name = " + name + " value = " + value);
+					key = name.substring(7);
+					if(ToolString.regExpVali(key, ToolString.regExp_letter_5)){
+						queryParam.put(key, value.trim());
+					}else{
+						log.error("分页，查询参数存在恶意提交字符：name = " + name + " value = " + value);
+					}
+				}
+			}
+			splitPage.setQueryParam(queryParam);
+			
+			// 排序条件
+			String orderColunm = controller.getPara(ConstantWebContext.request_orderColunm);
+			if(null != orderColunm && !orderColunm.isEmpty()){
+				log.debug("分页，排序条件：orderColunm = " + orderColunm);
+				
+	//			if(ToolSqlXml.keywordVali(orderColunm)){
+	//				log.error("排序列包含不安全字符：" + orderColunm);
+	//				throw new RuntimeException("排序列包含不安全字符：" + orderColunm);
+	//			}
+				
+				splitPage.setOrderColunm(orderColunm);
+			}
+	
+			// 排序方式
+			String orderMode = controller.getPara(ConstantWebContext.request_orderMode);
+			if(null != orderMode && !orderMode.isEmpty()){
+				log.debug("分页，排序方式：orderMode = " + orderMode);
+	
+	//			if(ToolSqlXml.keywordVali(orderMode)){
+	//				log.error("排序方式包含不安全字符：" + orderMode);
+	//				throw new RuntimeException("排序方式包含不安全字符：" + orderMode);
+	//			}
+				
+				splitPage.setOrderMode(orderMode);
+			}
+	
+			// 第几页
+			String pageNumber = controller.getPara(ConstantWebContext.request_pageNumber);
+			if(null != pageNumber && !pageNumber.isEmpty()){
+				log.debug("分页，第几页：pageNumber = " + pageNumber);
+				splitPage.setPageNumber(Integer.parseInt(pageNumber));
+			}
+			
+			// 每页显示几多
+			String pageSize = controller.getPara(ConstantWebContext.request_pageSize);
+			if(null != pageSize && !pageSize.isEmpty()){
+				log.debug("分页，每页显示几多：pageSize = " + pageSize);
+				splitPage.setPageSize(Integer.parseInt(pageSize));
+			}
+		}
+
+		// 缓存回退分页条件
+		String userIds = controller.getReqSysLog().getUserids();
+		if(userIds != null && !userIds.isEmpty()){
+			ToolCache.set(ConstantSplitPage.cacheStart_splitPage_backOff + userIds, splitPage);
 		}
 		
 		controller.setSplitPage(splitPage);
@@ -202,38 +224,8 @@ public class ParamPkgInterceptor implements Interceptor {
 			}
 			
 			// 封装参数值到全局变量
-			String type = field.getType().getSimpleName();
-			if(type.equals("String")){
-				field.set(controller, value);
-			
-			}else if(type.equals("int")){
-				field.set(controller, Integer.parseInt(value));
-				
-			}else if(type.equals("Date")){
-				int dateLength = value.length();
-				if(dateLength == ToolDateTime.pattern_ym.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ym));
-				
-				}else if(dateLength == ToolDateTime.pattern_ymd.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd));
-				
-				}else if(dateLength == ToolDateTime.pattern_ymd_hm.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hm));
-				
-				}else if(dateLength == ToolDateTime.pattern_ymd_hms.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms));
-				
-				}else if(dateLength == ToolDateTime.pattern_ymd_hms_s.length()){
-					field.set(controller, ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms_s));
-				}
-				
-			}else if(type.equals("BigDecimal")){
-				BigDecimal bdValue = new BigDecimal(value);
-				field.set(controller, bdValue);
-				
-			}else{
-				log.debug("没有解析到有效字段类型");
-			}
+			Object valueObj = ToolTypeConverter.dataParse(field.getType(), value); // 数据类型解析
+			field.set(controller, valueObj);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
@@ -261,8 +253,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			if(null == value
 					|| BaseService.class.isAssignableFrom(type)
 					|| (String.class.isAssignableFrom(type) && ((String)value).isEmpty())
-					|| Logger.class.isAssignableFrom(type)){
-				log.debug("参数值为空，获取类型不符，直接结束");
+					|| Log.class.isAssignableFrom(type)){
 				return;
 			}
 
@@ -276,5 +267,5 @@ public class ParamPkgInterceptor implements Interceptor {
 			field.setAccessible(false);
 		}
 	}
-	
+
 }

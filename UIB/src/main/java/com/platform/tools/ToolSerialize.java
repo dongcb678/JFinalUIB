@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 /**
  * 序列化操作
@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class ToolSerialize {
 
-	private static Logger log = Logger.getLogger(ToolRandoms.class);
+	private static final Log log = Log.getLog(ToolRandoms.class);
 	
 	/**
      * 序列化

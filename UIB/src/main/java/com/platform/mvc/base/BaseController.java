@@ -8,11 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PropKit;
-import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.kit.StrKit;
+import com.jfinal.log.Log;
 import com.jfinal.render.JsonRender;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantRender;
@@ -24,7 +23,6 @@ import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
 import com.platform.plugin.I18NPlugin;
 import com.platform.tools.ToolDateTime;
-import com.platform.tools.ToolModelInjector;
 import com.platform.tools.ToolWeb;
 
 /**
@@ -33,7 +31,7 @@ import com.platform.tools.ToolWeb;
  */
 public abstract class BaseController extends Controller {
 
-	private static Logger log = Logger.getLogger(BaseController.class);
+	private static final Log log = Log.getLog(BaseController.class);
 
 	/**
 	 * 全局Service
@@ -46,7 +44,7 @@ public abstract class BaseController extends Controller {
 	protected String ids;				// 主键
 	protected SplitPage splitPage;		// 分页封装
 	protected List<?> list;				// 公共list
-	protected Syslog reqSysLog;			// 访问日志
+	protected Syslog reqSysLog;			// 当前访问日志
 	
 	/**
 	 * 请求/WEB-INF/下的视图文件
@@ -242,7 +240,21 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass){
-		return ToolModelInjector.injectModels(getRequest(), modelClass);
+		String modelName = modelClass.getSimpleName();
+		String prefix = StrKit.firstCharToLowerCase(modelName) + "List";
+		return getModels(modelClass, prefix, false);
+	}
+
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, boolean skipConvertError){
+		String modelName = modelClass.getSimpleName();
+		String prefix = StrKit.firstCharToLowerCase(modelName) + "List";
+		return getModels(modelClass, prefix, skipConvertError);
 	}
 	
 	/**
@@ -252,57 +264,230 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix){
-		return ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
-	}
-
-	/**
-	 * 表单数组映射Record
-	 * @param modelClass
-	 * @return
-	 */
-	public <T extends BaseModel<T>> Record getRecord(Class<? extends T> modelClass){
-		return getModel(modelClass).toRecord();
+		return getModels(modelClass, prefix, false);
 	}
 	
 	/**
-	 * 表单数组映射Record
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @param prefix
+	 * 
+	 * 描述：
+	 * 		
+	 * 		表单	
+	 *		<input type="hidden" name="groupList[0].ids" value="111"/>
+	 *		<input type="text" name="groupList[0].names" value="222"/>
+	 *		
+	 *		<input type="hidden" name="groupList[1].ids" value="333"/>
+	 *		<input type="text" name="groupList[1].names" value="444"/>
+	 *		
+	 *		<input type="hidden" name="groupList[3].ids" value="555"/>
+	 *		<input type="text" name="groupList[3].names" value="666"/>
+	 * 
+	 * 		调用方法 
+	 * 		List<Group> groupList = ToolModelInjector.injectModels(getRequest(), Group.class, "groupList");
+	 * 		
+	 * 		// 默认的prefix是Model类的首字母小写加上List
+	 * 		List<Group> groupList = ToolModelInjector.injectModels(getRequest(), Group.class); 
+	 */
+	public <T extends BaseModel<T>> List<T> getModels(Class<? extends T> modelClass, String prefix, boolean skipConvertError){
+		int maxIndex = 0;	// 最大的数组索引
+		boolean zeroIndex = false; // 是否存在0索引
+		
+		String arrayPrefix = prefix + "[";
+		String key = null;
+		Enumeration<String> names = getRequest().getParameterNames();
+		while (names.hasMoreElements()) {
+			key = names.nextElement();
+			if (key.startsWith(arrayPrefix) && key.indexOf("]") != -1) {
+				int indexTemp = Integer.parseInt(key.substring(key.indexOf("[") + 1, key.indexOf("]")));
+				
+				if(indexTemp == 0){
+					zeroIndex = true; // 是否存在0索引
+				} 
+				
+				if(indexTemp > maxIndex){
+					maxIndex = indexTemp; // 找到最大的数组索引
+				}
+			}
+		}
+		
+		List<T> modelList = new ArrayList<T>();
+		for (int i = 0; i <= maxIndex; i++) {
+			if((i == 0 && zeroIndex) || i != 0){ // 避免表单空值时调用产生一个无用的值
+				T baseModel = (T) getModel(modelClass, prefix + "[" + i + "]", skipConvertError);
+				modelList.add(baseModel);
+			}
+		}
+		
+		return modelList;
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @return
+	 */
+	public <T> List<T> getBeans(Class<T> beanClass){
+		String modelName = beanClass.getSimpleName();
+		String prefix = StrKit.firstCharToLowerCase(modelName) + "List";
+		return getBeans(beanClass, prefix, false);
+	}
+
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T> List<T> getBeans(Class<T> beanClass, boolean skipConvertError){
+		String modelName = beanClass.getSimpleName();
+		String prefix = StrKit.firstCharToLowerCase(modelName) + "List";
+		return getBeans(beanClass, prefix, skipConvertError);
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param prefix
+	 * @return
+	 */
+	public <T> List<T> getBeans(Class<T> beanClass, String prefix){
+		return getBeans(beanClass, prefix, false);
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param prefix
+	 */
+	public <T> List<T> getBeans(Class<T> beanClass, String prefix, boolean skipConvertError){
+		int maxIndex = 0;	// 最大的数组索引
+		boolean zeroIndex = false; // 是否存在0索引
+		
+		String arrayPrefix = prefix + "[";
+		String key = null;
+		Enumeration<String> names = getRequest().getParameterNames();
+		while (names.hasMoreElements()) {
+			key = names.nextElement();
+			if (key.startsWith(arrayPrefix) && key.indexOf("]") != -1) {
+				int indexTemp = Integer.parseInt(key.substring(key.indexOf("[") + 1, key.indexOf("]")));
+				
+				if(indexTemp == 0){
+					zeroIndex = true; // 是否存在0索引
+				} 
+				
+				if(indexTemp > maxIndex){
+					maxIndex = indexTemp; // 找到最大的数组索引
+				}
+			}
+		}
+		
+		List<T> beanList = new ArrayList<T>();
+		for (int i = 0; i <= maxIndex; i++) {
+			if((i == 0 && zeroIndex) || i != 0){ // 避免表单空值时调用产生一个无用的值
+				T baseModel = (T) getBean(beanClass, prefix + "[" + i + "]", skipConvertError);
+				beanList.add(baseModel);
+			}
+		}
+		
+		return beanList;
+	}
+
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @return
+	 */
+	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass) {
+		String modelName = StrKit.firstCharToLowerCase(modelClass.getSimpleName());
+		return keepModels(modelClass, modelName, false);
+	}
+	
+	/**
+	 * 表单数组映射List<Model>
+	 * @param modelClass
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass, boolean skipConvertError){
+		String modelName = StrKit.firstCharToLowerCase(modelClass.getSimpleName());
+		return keepModels(modelClass, modelName, skipConvertError);
+	}
+
+	/**
+	 * 表单数组映射List<Model>
 	 * @param modelClass
 	 * @param modelName
 	 * @return
 	 */
-	public <T extends BaseModel<T>> Record getRecord(Class<? extends T> modelClass, String modelName){
-		return getModel(modelClass, modelName).toRecord();
+	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass, String modelName) {
+		return keepModels(modelClass, modelName, false);
 	}
 	
 	/**
-	 * 表单数组映射List<Record>
+	 * 表单数组映射List<Model>
 	 * @param modelClass
+	 * @param modelName
+	 * @param skipConvertError
 	 * @return
 	 */
-	@SuppressWarnings({ "rawtypes" })
-	public <T extends BaseModel<T>> List<Record> getRecords(Class<? extends T> modelClass){
-		List<T> models = ToolModelInjector.injectModels(getRequest(), modelClass);
-		List<Record> records = new ArrayList<Record>(models.size());
-		for (BaseModel model : models) {
-			records.add(model.toRecord());
+	public <T extends BaseModel<T>> Controller keepModels(Class<? extends T> modelClass, String modelName, boolean skipConvertError) {
+		if (StrKit.notBlank(modelName)) {
+			List<T> model = getModels(modelClass, modelName, skipConvertError);
+			setAttr(modelName, model);
+		} else {
+			keepPara();
 		}
-		return records;
+		return this;
 	}
 	
 	/**
-	 * 表单数组映射List<Record>
-	 * @param modelClass
-	 * @param prefix
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
 	 * @return
 	 */
-	@SuppressWarnings({ "rawtypes" })
-	public <T extends BaseModel<T>> List<Record> getRecords(Class<? extends T> modelClass, String prefix){
-		List<T> models = ToolModelInjector.injectModels(getRequest(), modelClass, prefix);
-		List<Record> records = new ArrayList<Record>(models.size());
-		for (BaseModel model : models) {
-			records.add(model.toRecord());
+	public <T> Controller keepBeans(Class<T> beanClass) {
+		String modelName = StrKit.firstCharToLowerCase(beanClass.getSimpleName());
+		return keepBeans(beanClass, modelName, false);
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T> Controller keepBeans(Class<T> beanClass, boolean skipConvertError){
+		String modelName = StrKit.firstCharToLowerCase(beanClass.getSimpleName());
+		return keepBeans(beanClass, modelName, skipConvertError);
+	}
+
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param beanName
+	 * @return
+	 */
+	public <T> Controller keepBeans(Class<T> beanClass, String beanName) {
+		return keepBeans(beanClass, beanName, false);
+	}
+	
+	/**
+	 * 表单数组映射List<Bean>
+	 * @param beanClass
+	 * @param beanName
+	 * @param skipConvertError
+	 * @return
+	 */
+	public <T> Controller keepBeans(Class<T> beanClass, String beanName, boolean skipConvertError) {
+		if (StrKit.notBlank(beanName)) {
+			List<T> model = getBeans(beanClass, beanName, skipConvertError);
+			setAttr(beanName, model);
+		} else {
+			keepPara();
 		}
-		return records;
+		return this;
 	}
 	
 	/**

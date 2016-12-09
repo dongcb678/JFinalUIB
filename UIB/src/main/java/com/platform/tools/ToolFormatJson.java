@@ -1,6 +1,11 @@
 package com.platform.tools;
 
+import com.jfinal.log.Log;
+
 public abstract class ToolFormatJson {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolFormatJson.class);
 
 	public static void main(String[] args) {
 		String jsonStr = "{\"id\":\"1\",\"name\":\"a1\",\"obj\":{\"id\":11,\"name\":\"a11\",\"array\":[{\"id\":111,\"name\":\"a111\"},{\"id\":112,\"name\":\"a112\"}]}}";

@@ -3,9 +3,9 @@ package com.platform.beetl.format;
 import java.sql.SQLException;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
 import org.beetl.core.Format;
 
+import com.jfinal.log.Log;
 import com.platform.tools.ToolDateTime;
 
 import oracle.sql.DATE;
@@ -17,7 +17,7 @@ import oracle.sql.TIMESTAMP;
  */
 public class DateFormat implements Format {
 
-	private static Logger log = Logger.getLogger(DateFormat.class);
+	private static final Log log = Log.getLog(DateFormat.class);
 	
 	/**
 	 * 实现格式化处理方法

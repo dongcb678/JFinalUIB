@@ -2,9 +2,8 @@ package com.platform.mvc.operator;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseController;
@@ -17,7 +16,7 @@ import com.platform.mvc.base.BaseController;
 public class OperatorController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(OperatorController.class);
+	private static final Log log = Log.getLog(OperatorController.class);
 	
 	private OperatorService operatorService;
 
@@ -37,7 +36,7 @@ public class OperatorController extends BaseController {
 	@Before(OperatorValidator.class)
 	public void save() {
 		ids = operatorService.save(getModel(Operator.class));
-		redirect("/platform/operator");
+		forwardAction("/platform/operator/backOff");
 	}
 
 	/**
@@ -54,7 +53,7 @@ public class OperatorController extends BaseController {
 	@Before(OperatorValidator.class)
 	public void update() {
 		operatorService.update(getModel(Operator.class));
-		redirect("/platform/operator");
+		forwardAction("/platform/operator/backOff");
 	}
 
 	/**
@@ -70,7 +69,7 @@ public class OperatorController extends BaseController {
 	 */
 	public void delete() {
 		operatorService.delete(getPara() == null ? ids : getPara());
-		redirect("/platform/operator");
+		forwardAction("/platform/operator/backOff");
 	}
 
 	/**

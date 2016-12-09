@@ -3,20 +3,20 @@ package com.platform.mvc.station;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
+import com.platform.mvc.stationoperator.StationOperatorService;
 
 @Service(name = StationService.serviceName)
 public class StationService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(StationService.class);
+	private static final Log log = Log.getLog(StationService.class);
 
 	public static final String serviceName = "stationService";
 
@@ -122,6 +122,9 @@ public class StationService extends BaseService {
 			pStation.set(Station.column_isparent, "false");
 			pStation.update();
 		}
+		
+		// 缓存
+		StationOperatorService.cacheRemove(ids);
 	    
 		// 删除
 	    Station.dao.deleteById(ids);

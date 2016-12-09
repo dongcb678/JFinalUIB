@@ -1,8 +1,7 @@
 package com.platform.mvc.login;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
+import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.constant.ConstantLogin;
 import com.platform.constant.ConstantWebContext;
@@ -19,7 +18,7 @@ import com.platform.tools.security.ToolIDEA;
 public class LoginController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(LoginController.class);
+	private static final Log log = Log.getLog(LoginController.class);
 	
 	private LoginService loginService;
 	
@@ -51,7 +50,7 @@ public class LoginController extends BaseController {
 			
 			// 2. 分解认证数据
 			String userIds = datas[1]; // 用户id
-			User user = User.cacheGet(userIds);
+			User user = User.cacheGetByUserId(userIds);
 			if(user != null){
 				getResponse().setHeader("P3P", "CP=\"NON DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAa IVDa CONa HISa TELa OTPa OUR UNRa IND UNI COM NAV INT DEM CNT PRE LOC\""); 
 				AuthInterceptor.setCurrentUser(getRequest(), getResponse(), user, false);

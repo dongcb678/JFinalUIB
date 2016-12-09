@@ -4,9 +4,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.upload.UploadFile;
 import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
@@ -20,7 +19,7 @@ import com.platform.tools.ToolString;
 @Controller({"/platform/upload"})
 public class UploadController extends BaseController {
 
-	private static Logger log = Logger.getLogger(UploadController.class);
+	private static final Log log = Log.getLog(UploadController.class);
 	
 	private UploadService uploadService;
 	

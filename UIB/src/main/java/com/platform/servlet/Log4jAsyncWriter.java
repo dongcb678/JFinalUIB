@@ -10,8 +10,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.servlet.AsyncContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.jfinal.log.Log;
 
 /**
  * log4j异步输出处理类
@@ -20,7 +19,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Log4jAsyncWriter extends Writer {
 
-	private static final Log log = LogFactory.getLog(Log4jAsyncWriter.class);
+	private static final Log log = Log.getLog(Log4jAsyncWriter.class);
+	
 
 	/**
 	 * AsyncContext队列

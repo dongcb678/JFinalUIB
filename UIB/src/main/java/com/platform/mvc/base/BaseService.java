@@ -6,10 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -29,7 +28,7 @@ import com.platform.tools.ToolString;
 @Service(name = BaseService.baseServiceName)
 public class BaseService {
 
-	private static Logger log = Logger.getLogger(BaseService.class);
+	private static final Log log = Log.getLog(BaseService.class);
 	
 	public static final String baseServiceName = "baseService";
 
@@ -308,6 +307,17 @@ public class BaseService {
 	 */
 	@Before(Tx.class)
 	public void baseDelete(String table, String ids){
+		baseDelete(ConstantInit.db_dataSource_main, table, ids);
+	}
+	
+	/**
+	 * 通用删除
+	 * @param dataSource 数据源
+	 * @param table
+	 * @param ids 逗号分隔的列值
+	 */
+	@Before(Tx.class)
+	public void baseDelete(String dataSource, String table, String ids){
 		String sqlIn = sqlIn(ids);
 
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -316,7 +326,7 @@ public class BaseService {
 		
 		String sql = getSqlByBeetl(BaseModel.sqlId_deleteIn, param);
 		
-		Db.use(ConstantInit.db_dataSource_main).update(sql);
+		Db.use(dataSource).update(sql);
 	}
 
 	/**

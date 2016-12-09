@@ -1,11 +1,8 @@
 package com.platform.mvc.usergroup;
 
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
-
-
-import org.apache.log4j.Logger;
 
 /**
  * 用户分组 model
@@ -17,7 +14,7 @@ public class UserGroup extends BaseModel<UserGroup> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(UserGroup.class);
+	private static final Log log = Log.getLog(UserGroup.class);
 	
 	public static final UserGroup dao = new UserGroup();
 

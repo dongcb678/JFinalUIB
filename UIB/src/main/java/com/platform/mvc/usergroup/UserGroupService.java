@@ -2,19 +2,19 @@ package com.platform.mvc.usergroup;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.kit.Ret;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
+import com.platform.mvc.user.User;
 
 @Service(name = UserGroupService.serviceName)
 public class UserGroupService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(UserGroupService.class);
+	private static final Log log = Log.getLog(UserGroupService.class);
 	
 	public static final String serviceName = "userGroupService";
 
@@ -48,7 +48,7 @@ public class UserGroupService extends BaseService {
 		ug.save();
 		
 		// 缓存
-		
+		User.cacheAdd(userIds);
 	}
 
 	/**
@@ -56,10 +56,14 @@ public class UserGroupService extends BaseService {
 	 * @param userGroupIds
 	 */
 	public void delGroup(String userGroupIds){
-		UserGroup.dao.deleteById(userGroupIds);
+		UserGroup ug = UserGroup.dao.findById(userGroupIds);
+		String userIds = ug.getUserids();
+
+		// 删除
+		ug.delete();
 		
 		// 缓存
-		
+		User.cacheAdd(userIds);
 	}
 	
 }

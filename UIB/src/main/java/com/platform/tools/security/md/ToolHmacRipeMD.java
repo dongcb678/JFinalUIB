@@ -10,11 +10,16 @@ import javax.crypto.spec.SecretKeySpec;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
 
+import com.jfinal.log.Log;
+
 /**
  * HmacRipeMD系列加密组件<br>
  * HmacRipeMD128、HmacRipeMD160共2种算法
  */
 public abstract class ToolHmacRipeMD {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolHmacRipeMD.class);
 
 	/**
 	 * 初始化HmacRipeMD128密钥

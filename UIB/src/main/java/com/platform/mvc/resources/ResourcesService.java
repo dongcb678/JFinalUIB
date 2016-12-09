@@ -7,9 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.alibaba.fastjson.JSON;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
@@ -26,7 +25,7 @@ import com.platform.tools.ToolOS;
 public class ResourcesService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(ResourcesService.class);
+	private static final Log log = Log.getLog(ResourcesService.class);
 
 	public static final String serviceName = "resourcesService";
 

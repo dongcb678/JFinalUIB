@@ -5,12 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
+import com.platform.constant.ConstantWebContext;
+import com.platform.dto.SplitPage;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 
@@ -18,7 +19,7 @@ import com.platform.mvc.base.BaseService;
 public class MenuService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(MenuService.class);
+	private static final Log log = Log.getLog(MenuService.class);
 
 	public static final String serviceName = "menuService";
 
@@ -155,5 +156,36 @@ public class MenuService extends BaseService {
 		Menu menu = Menu.dao.findById(menuIds);
 		menu.set(Menu.column_operatorids, operatorIds).update();
 	}
-	
+
+	/**
+	 * 获取菜单对应的功能
+	 * @param roleIds
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public void paging(SplitPage splitPage){
+		paging(ConstantInit.db_dataSource_main, splitPage, Menu.sqlId_splitPageSelect, Menu.sqlId_splitPageFrom);
+		
+		String menuIds = (String) splitPage.getQueryParam().get("menuIds");
+
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("names", "names" + splitPage.getQueryParam().get(ConstantWebContext.request_i18nColumnSuffix) + " as names");
+		String menuSql = getSqlByBeetl("platform.menu.findByIds", param);
+		Record menu = Db.findFirst(menuSql, menuIds);
+		splitPage.setExtData(menu);
+		
+		String operatorSql = getSql("platform.menu.findByModuleAndRoleIds");
+		
+		List<Record> smList = (List<Record>) splitPage.getList();
+		for (Record sm : smList) {
+			String mids = sm.getStr("mids");
+			List<Record> olist = Db.find(operatorSql, menuIds, mids);
+			if(olist != null && olist.size() != 0){
+				sm.set("list", olist);
+			}else{
+				smList.remove(sm);
+			}
+		}
+	}
+
 }

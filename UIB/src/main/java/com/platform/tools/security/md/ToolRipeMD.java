@@ -6,11 +6,16 @@ import java.security.Security;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
 
+import com.jfinal.log.Log;
+
 /**
  * RipeMD系列消息摘要组件<br>
  * 包含RipeMD128、RipeMD160、RipeMD256和RipeMD320共4种RipeMD系列算法
  */
 public abstract class ToolRipeMD {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(ToolRipeMD.class);
 
 	/**
 	 * RipeMD128消息摘要

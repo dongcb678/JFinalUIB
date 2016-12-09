@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.menu.Menu;
@@ -15,7 +14,7 @@ import com.platform.mvc.user.User;
 public class IndexService extends BaseService {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(IndexService.class);
+	private static final Log log = Log.getLog(IndexService.class);
 
 	public static final String serviceName = "indexService";
 

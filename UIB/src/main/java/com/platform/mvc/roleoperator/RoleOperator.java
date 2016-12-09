@@ -1,11 +1,8 @@
 package com.platform.mvc.roleoperator;
 
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
-
-
-import org.apache.log4j.Logger;
 
 /**
  * 角色功能 model
@@ -17,7 +14,7 @@ public class RoleOperator extends BaseModel<RoleOperator> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(RoleOperator.class);
+	private static final Log log = Log.getLog(RoleOperator.class);
 	
 	public static final RoleOperator dao = new RoleOperator();
 

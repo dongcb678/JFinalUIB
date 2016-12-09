@@ -9,9 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-
-import com.platform.run.ConfigCore;
+import com.jfinal.log.Log;
+import com.platform.config.ConfigCore;
 import com.platform.tools.ToolDirFile;
 import com.platform.tools.code.handler.BaseHandler;
 
@@ -21,7 +20,7 @@ import com.platform.tools.code.handler.BaseHandler;
  */
 public class GenerateI18n  {
 
-	private static Logger log = Logger.getLogger(GenerateI18n.class);
+	private static final Log log = Log.getLog(GenerateI18n.class);
 
 	public static void main(String[] args) throws IOException {
 		log.info("启动ConfigCore start ......");

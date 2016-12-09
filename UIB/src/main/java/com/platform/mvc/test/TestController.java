@@ -5,8 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Controller;
@@ -26,7 +25,7 @@ import com.platform.tools.ToolSqlXml;
 public class TestController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(TestController.class);
+	private static final Log log = Log.getLog(TestController.class);
 
 	/**
 	 * 功能查询显示

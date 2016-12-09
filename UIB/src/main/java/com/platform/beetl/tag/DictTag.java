@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.beetl.core.Tag;
 
+import com.jfinal.log.Log;
 import com.platform.constant.ConstantWebContext;
 import com.platform.mvc.dict.Dict;
 import com.platform.plugin.I18NPlugin;
@@ -18,7 +18,7 @@ import com.platform.plugin.I18NPlugin;
  */
 public class DictTag extends Tag {
 
-	private static Logger log = Logger.getLogger(DictTag.class);
+	private static final Log log = Log.getLog(DictTag.class);
 
 	@SuppressWarnings("unchecked")
 	@Override

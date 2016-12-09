@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ICallback;
 
 /**
@@ -11,6 +12,9 @@ import com.jfinal.plugin.activerecord.ICallback;
  * @author 董华健  dongcb678@163.com
  */
 public class DateClearCallback implements ICallback {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(DateClearCallback.class);
 	
 	private String ctype;
 

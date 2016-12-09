@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
@@ -32,7 +31,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 
 	private static final long serialVersionUID = -900378319414539856L;
 
-	private static Logger log = Logger.getLogger(BaseModel.class);
+	private static final Log log = Log.getLog(BaseModel.class);
 
 	/**
 	 * 字段描述：版本号 
@@ -225,7 +224,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	}
 
 	/**
-	 * 重写save方法
+	 * 重写save方法，自动赋值，生成UUID值
 	 */
 	public boolean save() {
 		String[] pkArr = getTable().getPrimaryKey();
@@ -241,7 +240,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	}
 
 	/**
-	 * 重写save方法
+	 * 重写save方法，单主键，自定义主键值
 	 */
 	public boolean save(String pkIds) {
 		String[] pkArr = getTable().getPrimaryKey();
@@ -256,7 +255,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	}
 
 	/**
-	 * 重写save方法
+	 * 重写save方法，复合主键，自定义主键值
 	 */
 	public boolean save(Map<String, Object> pkMap) {
 		Set<String> pkSet = pkMap.keySet();
@@ -273,6 +272,8 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 
 	/**
 	 * 重写update方法
+	 * 如果存在版本号字段，则验证Model中的modifyFlag集合中是否包含version字段，
+	 * 如果包含，则自动将版本号加1，并重新set版本号值
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean update() {
@@ -289,11 +290,15 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 					modifyFlag = (Set<String>) object;
 				}
 				field.setAccessible(false);
-			} catch (NoSuchFieldException | SecurityException e) {
+			} catch (NoSuchFieldException e) {
 				log.error("业务Model类必须继承BaseModel");
 				e.printStackTrace();
 				throw new RuntimeException("业务Model类必须继承BaseModel");
-			} catch (IllegalArgumentException | IllegalAccessException e) {
+			} catch (IllegalArgumentException e) {
+				log.error("BaseModel访问modifyFlag异常");
+				e.printStackTrace();
+				throw new RuntimeException("BaseModel访问modifyFlag异常");
+			} catch (IllegalAccessException e) {
 				log.error("BaseModel访问modifyFlag异常");
 				e.printStackTrace();
 				throw new RuntimeException("BaseModel访问modifyFlag异常");

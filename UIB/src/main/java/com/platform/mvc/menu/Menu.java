@@ -1,9 +1,7 @@
 package com.platform.mvc.menu;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Table;
-import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.operator.Operator;
 
@@ -17,7 +15,7 @@ public class Menu extends BaseModel<Menu> {
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
-	private static Logger log = Logger.getLogger(Menu.class);
+	private static final Log log = Log.getLog(Menu.class);
 	
 	public static final Menu dao = new Menu();
 
@@ -109,7 +107,19 @@ public class Menu extends BaseModel<Menu> {
 	 * 字段类型：character varying  长度：25
 	 */
 	public static final String column_names_enus = "names_enus";
-	
+
+	/**
+	 * sqlId : platform.roleOperator.splitPageSelect
+	 * 描述：通用select *
+	 */
+	public static final String sqlId_splitPageSelect = "platform.menu.splitPageSelect";
+
+	/**
+	 * sqlId : platform.roleOperator.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPageFrom = "platform.menu.splitPageFrom";
+
 	/**
 	 * sqlId : platform.menu.root
 	 * 描述：查询根菜单

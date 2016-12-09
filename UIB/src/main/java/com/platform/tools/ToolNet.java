@@ -9,12 +9,13 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.net.telnet.TelnetClient;
-import org.apache.log4j.Logger;
+
+import com.jfinal.log.Log;
 
 public abstract class ToolNet {
 
-    protected static final Logger log = Logger.getLogger(ToolNet.class);
-    
+	private static final Log log = Log.getLog(ToolNet.class);
+
 	/**
 	 * ping ip并返回结果
 	 * @param ip

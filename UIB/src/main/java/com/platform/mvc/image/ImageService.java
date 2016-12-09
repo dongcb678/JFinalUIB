@@ -1,7 +1,6 @@
 package com.platform.mvc.image;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.tools.ToolImageResize;
@@ -10,7 +9,7 @@ import com.platform.tools.ToolImageTailor;
 @Service(name = ImageService.serviceName)
 public class ImageService extends BaseService {
 
-	private static Logger log = Logger.getLogger(ImageService.class);
+	private static final Log log = Log.getLog(ImageService.class);
 
 	public static final String serviceName = "imageService";
 
