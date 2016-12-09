@@ -15,5 +15,4 @@ public class Run {
 		JFinal.start("src/main/webapp", 8899, "/", 5);
 	}
 	
-
 }
