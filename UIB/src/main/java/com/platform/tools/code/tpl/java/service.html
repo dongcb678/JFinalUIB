@@ -1,0 +1,17 @@
+package ${package};
+
+import com.jfinal.log.Log;
+
+import com.platform.annotation.Service;
+
+import com.platform.mvc.base.BaseService;
+
+@Service(name = ${className}Service.serviceName)
+public class ${className}Service extends BaseService {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(${className}Service.class);
+	
+	public static final String serviceName = "${classNameSmall}Service";
+	
+}

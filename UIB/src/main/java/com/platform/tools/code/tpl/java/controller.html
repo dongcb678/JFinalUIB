@@ -1,0 +1,84 @@
+package ${package};
+
+import com.platform.annotation.Controller;
+import com.platform.constant.ConstantInit;
+import com.platform.mvc.base.BaseController;
+import com.platform.mvc.base.BaseModel;
+
+import com.jfinal.log.Log;
+import com.jfinal.aop.Before;
+
+/**
+ * XXX 管理	
+ * 描述：
+ * 
+ * /${basePath}/${classNameSmall}
+ * /${basePath}/${classNameSmall}/save
+ * /${basePath}/${classNameSmall}/edit
+ * /${basePath}/${classNameSmall}/update
+ * /${basePath}/${classNameSmall}/view
+ * /${basePath}/${classNameSmall}/delete
+ * /common/${classNameSmall}/add.html
+ * 
+ */
+@Controller("/${basePath}/${classNameSmall}")
+public class ${className}Controller extends BaseController {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(${className}Controller.class);
+	
+	private ${className}Service ${classNameSmall}Service;
+	
+	/**
+	 * 列表
+	 */
+	public void index() {
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, ${className}.sqlId_splitPageFrom);
+		render("/${basePath}/${classNameSmall}/list.html");
+	}
+	
+	/**
+	 * 保存
+	 */
+	@Before(${className}Validator.class)
+	public void save() {
+		getModel(${className}.class).save();
+		forwardAction("/${basePath}/${classNameSmall}/backOff");
+	}
+	
+	/**
+	 * 准备更新
+	 */
+	public void edit() {
+		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
+		setAttr("${classNameSmall}", ${classNameSmall});
+		render("/${basePath}/${classNameSmall}/update.html");
+	}
+	
+	/**
+	 * 更新
+	 */
+	@Before(${className}Validator.class)
+	public void update() {
+		getModel(${className}.class).update();
+		forwardAction("/${basePath}/${classNameSmall}/backOff");
+	}
+
+	/**
+	 * 查看
+	 */
+	public void view() {
+		${className} ${classNameSmall} = ${className}.dao.findById(getPara());
+		setAttr("${classNameSmall}", ${classNameSmall});
+		render("/${basePath}/${classNameSmall}/view.html");
+	}
+	
+	/**
+	 * 删除
+	 */
+	public void delete() {
+		${classNameSmall}Service.baseDelete(${className}.table_name, getPara() == null ? ids : getPara());
+		forwardAction("/${basePath}/${classNameSmall}/backOff");
+	}
+	
+}

@@ -49,12 +49,15 @@ class JettyServer implements IServer {
 	private WebAppContext webApp;
 	
 	JettyServer(String webAppDir, int port, String context, int scanIntervalSeconds) {
-		if (webAppDir == null)
+		if (webAppDir == null) {
 			throw new IllegalStateException("Invalid webAppDir of web server: " + webAppDir);
-		if (port < 0 || port > 65536)
+		}
+		if (port < 0 || port > 65535) {
 			throw new IllegalArgumentException("Invalid port of web server: " + port);
-		if (StrKit.isBlank(context))
+		}
+		if (StrKit.isBlank(context)) {
 			throw new IllegalStateException("Invalid context of web server: " + context);
+		}
 		
 		this.webAppDir = webAppDir;
 		this.port = port;
@@ -64,8 +67,13 @@ class JettyServer implements IServer {
 	
 	public void start() {
 		if (!running) {
-			try {doStart();} catch (Exception e) {LogKit.error(e.getMessage(), e);}
-			running = true;
+			try {
+				running = true;
+				doStart();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				LogKit.error(e.getMessage(), e);
+			}
 		}
 	}
 	
@@ -77,8 +85,9 @@ class JettyServer implements IServer {
 	}
 	
 	private void doStart() throws IOException {
-		if (!available(port))
+		if (!available(port)) {
 			throw new IllegalStateException("port: " + port + " already in use!");
+		}
 		
 		deleteSessionData();
 		
@@ -142,12 +151,12 @@ class JettyServer implements IServer {
 		return;
 	}
 	
-	@SuppressWarnings("resource")
 	private void changeClassLoader(WebAppContext webApp) {
 		try {
 			String classPath = getClassPath();
-			JFinalClassLoader wacl = new JFinalClassLoader(webApp, classPath);
-			wacl.addClassPath(classPath);
+			JFinalClassLoader jfcl = new JFinalClassLoader(webApp, classPath);
+			jfcl.addClassPath(classPath);
+			webApp.setClassLoader(jfcl);
 		} catch (IOException e) {
 			LogKit.error(e.getMessage(), e);
 		}
@@ -168,8 +177,9 @@ class JettyServer implements IServer {
 	
 	private String getStoreDir() {
 		String storeDir = PathKit.getWebRootPath() + "/../../session_data" + context;
-		if ("\\".equals(File.separator))
+		if ("\\".equals(File.separator)) {
 			storeDir = storeDir.replaceAll("/", "\\\\");
+		}
 		return storeDir;
 	}
 	

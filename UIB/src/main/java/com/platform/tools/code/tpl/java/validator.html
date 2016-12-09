@@ -1,0 +1,39 @@
+package ${package};
+
+import com.jfinal.log.Log;
+import com.jfinal.core.Controller;
+
+import com.platform.mvc.base.BaseValidator;
+
+public class ${className}Validator extends BaseValidator {
+
+	@SuppressWarnings("unused")
+	private static final Log log = Log.getLog(${className}Validator.class);
+	
+	@SuppressWarnings("unused")
+	private ${className}Service ${classNameSmall}Service;
+	
+	protected void validate(Controller controller) {
+		String actionKey = getActionKey();
+		if (actionKey.equals("/${basePath}/${classNameSmall}/save")){
+			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
+			
+		} else if (actionKey.equals("/${basePath}/${classNameSmall}/update")){
+			
+		}
+	}
+	
+	protected void handleError(Controller controller) {
+		controller.keepModel(${className}.class);
+		
+		String actionKey = getActionKey();
+		if (actionKey.equals("/${basePath}/${classNameSmall}/save")){
+			controller.render("/${basePath}/xxx.html");
+		
+		} else if (actionKey.equals("/${basePath}/${classNameSmall}/update")){
+			controller.render("/${basePath}/xxx.html");
+		
+		}
+	}
+	
+}
