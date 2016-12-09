@@ -19,6 +19,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * @author 董华健
  *
  */
+@SuppressWarnings("restriction")
 public abstract class ToolImagePressText {
 
 	@SuppressWarnings("unused")

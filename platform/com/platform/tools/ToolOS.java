@@ -14,6 +14,7 @@ import com.sun.management.OperatingSystemMXBean;
  * 
  * @author 董华健 2012-9-7 下午2:09:41
  */
+@SuppressWarnings("restriction")
 public abstract class ToolOS {
 
 	@SuppressWarnings("unused")

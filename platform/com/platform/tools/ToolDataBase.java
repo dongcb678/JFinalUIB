@@ -180,6 +180,8 @@ public abstract class ToolDataBase {
 			db.setDriverClass(driverClass);
 			db.setJdbcUrl(jdbcUrl);
 			db.setUserName(userName);
+			
+			// passWord = ConfigTools.decrypt(publicKey, passWord); // druid 密码解密
 			db.setPassWord(passWord);
 			
 			db.setIp(ip);

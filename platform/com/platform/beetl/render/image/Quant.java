@@ -324,8 +324,8 @@ public class Quant
     /* Unbias network to give byte values 0..255 and record position i to prepare for sort
        ----------------------------------------------------------------------------------- */
     public void unbiasnet() {
-
-        int i, j;
+//        int i, j;
+        int i;
 
         for (i = 0; i < netsize; i++) {
             network[i][0] >>= netbiasshift;

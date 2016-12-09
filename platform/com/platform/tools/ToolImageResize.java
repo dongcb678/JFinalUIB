@@ -30,6 +30,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * 
  * @author 董华健 2012-9-3 下午7:34:20
  */
+@SuppressWarnings("restriction")
 public abstract class ToolImageResize {
 
 	@SuppressWarnings("unused")
