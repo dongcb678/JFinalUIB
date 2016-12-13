@@ -491,7 +491,7 @@ CREATE TABLE `pt_resources` (
   `jvmfreememory` bigint(20) DEFAULT NULL,
   `jvmmaxmemory` bigint(20) DEFAULT NULL,
   `gccount` bigint(20) DEFAULT NULL,
-  `createdate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ids`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -899,22 +899,22 @@ DROP TABLE IF EXISTS `pt_syslog`;
 CREATE TABLE `pt_syslog` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL,
-  `actionenddate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `actionenddate` timestamp NOT NULL DEFAULT NULL,
   `actionendtime` bigint(20) DEFAULT NULL,
   `actionhaoshi` bigint(20) DEFAULT NULL,
-  `actionstartdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `actionstartdate` timestamp NOT NULL DEFAULT NULL,
   `actionstarttime` bigint(20) DEFAULT NULL,
   `cause` char(1) COLLATE utf8_bin DEFAULT NULL,
   `cookie` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
   `description` text COLLATE utf8_bin,
-  `enddate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `enddate` timestamp NOT NULL DEFAULT NULL,
   `endtime` bigint(20) DEFAULT NULL,
   `haoshi` bigint(20) DEFAULT NULL,
   `ips` varchar(128) COLLATE utf8_bin DEFAULT NULL,
   `method` varchar(4) COLLATE utf8_bin DEFAULT NULL,
   `referer` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `requestpath` text COLLATE utf8_bin,
-  `startdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `startdate` timestamp NOT NULL DEFAULT NULL,
   `starttime` bigint(20) DEFAULT NULL,
   `status` char(1) COLLATE utf8_bin DEFAULT NULL,
   `useragent` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
@@ -1105,7 +1105,7 @@ CREATE TABLE `pt_user` (
   `password` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `salt` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `status` char(1) COLLATE utf8_bin DEFAULT NULL,
-  `stopdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `stopdate` timestamp NOT NULL DEFAULT NULL,
   `username` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `departmentids` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   `stationids` text COLLATE utf8_bin,
@@ -1151,7 +1151,7 @@ CREATE TABLE `pt_userinfo` (
   `avoirdupois` varchar(5) COLLATE utf8_bin DEFAULT NULL,
   `birthday` date DEFAULT NULL,
   `bloodgroup` varchar(15) COLLATE utf8_bin DEFAULT NULL,
-  `clientlevelend` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `clientlevelend` timestamp NOT NULL DEFAULT NULL,
   `clientlevelstart` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `culture` varchar(30) COLLATE utf8_bin DEFAULT NULL,
   `description` varchar(200) COLLATE utf8_bin DEFAULT NULL,
@@ -1192,7 +1192,7 @@ CREATE TABLE `test_blog` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL COMMENT '主键',
   `title` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '标题',
   `content` text COLLATE utf8_bin COMMENT '内容',
-  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `createTime` timestamp NOT NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`ids`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
