@@ -159,7 +159,12 @@ public class LoginController extends BaseController {
 	 * 注销
 	 */
 	public void logout() {
-		ToolWeb.addCookie(getResponse(), "", "/", true, ConstantWebContext.cookie_authmark, null, 0);
+		String cxtPath = getRequest().getContextPath();
+		if(cxtPath == null || cxtPath.isEmpty()){
+			cxtPath = "/";
+		}
+		
+		ToolWeb.addCookie(getResponse(), "", cxtPath, true, ConstantWebContext.cookie_authmark, null, 0);
 		redirect("/platform/login");
 	}
 

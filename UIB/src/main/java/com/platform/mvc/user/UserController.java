@@ -44,7 +44,9 @@ public class UserController extends BaseController {
 		String ids = ToolRandoms.getUuid(true);
 		
 		List<UploadFile> files = getFiles("files" + File.separator + "upload", 1 * 1024 * 1024, ToolString.encoding); // 1M
-		uploadService.upload("webRoot", files.get(0), ids);
+		if(files != null && files.size() != 0){
+			uploadService.upload("webRoot", files.get(0), ids);
+		}
 
 		String password = getPara("password");
 		User user = getModel(User.class);

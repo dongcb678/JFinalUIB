@@ -53,9 +53,14 @@ public class GlobalHandler extends Handler {
 		log.debug("request 国际化");
 		String localePram = request.getParameter(ConstantWebContext.request_localePram);
 		if(null != localePram && !localePram.isEmpty()){
+			String cxtPath = request.getContextPath();
+			if(cxtPath == null || cxtPath.isEmpty()){
+				cxtPath = "/";
+			}
+			
 			int maxAge = PropKit.getInt(ConstantInit.config_maxAge_key);
 			localePram = I18NPlugin.localParse(localePram);
-			ToolWeb.addCookie(response,  "", "/", true, ConstantWebContext.cookie_language, localePram, maxAge);
+			ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.cookie_language, localePram, maxAge);
 		}else {
 			localePram = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_language);
 			if(null == localePram || localePram.isEmpty()){

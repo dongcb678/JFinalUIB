@@ -1,8 +1,10 @@
 package com.platform.tools;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -15,7 +17,35 @@ import com.jfinal.log.Log;
 public abstract class ToolNet {
 
 	private static final Log log = Log.getLog(ToolNet.class);
+	
+	/**
+	 * 本机IP
+	 * @return
+	 */
+	public static String ip() {  
+		try {
+			InetAddress addr = InetAddress.getLocalHost();
+			return addr.getHostAddress();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	/**
+	 * 本机名称
+	 * @return
+	 */
+	public static String name() {  
+		try {
+			InetAddress addr = InetAddress.getLocalHost();
+			return addr.getHostName();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * ping ip并返回结果
 	 * @param ip
