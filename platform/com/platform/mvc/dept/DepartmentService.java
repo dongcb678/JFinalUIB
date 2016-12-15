@@ -114,7 +114,14 @@ public class DepartmentService extends BaseService {
 		
 		// 是否存在子节点
 		if(department.getStr(Department.column_isparent).equals("true")){
-			return false; //存在子节点，不能直接删除
+			return false; // 存在子节点，不能直接删除
+		}
+		
+		//部门下是否存在人
+		String countSql = getSql(Department.sqlId_userCount);
+		long count = Db.use(ConstantInit.db_dataSource_main).queryNumber(countSql, ids).longValue();
+		if(count != 0){
+			return false; // 部门下存在人，不能删除
 		}
 
 		// 修改上级节点的isparent

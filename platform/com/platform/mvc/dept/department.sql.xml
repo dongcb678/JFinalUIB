@@ -26,4 +26,11 @@
     	]]>
 	</sql>
 	
+	<!-- 查询部门下人员数量 -->
+	<sql id="userCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_user where departmentids = ?
+    	]]>
+	</sql>
+	
 </sql-statement>

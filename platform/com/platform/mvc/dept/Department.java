@@ -119,6 +119,12 @@ public class Department extends BaseModel<Department> {
 	 */
 	public static final String sqlId_childCount = "platform.department.childCount";
 
+	/**
+	 * sqlId : platform.department.userCount
+	 * 描述：查询部门下人员数量
+	 */
+	public static final String sqlId_userCount = "platform.department.userCount";
+
 	private String ids;
 	private Long version;
 	private String allchildnodeids;
