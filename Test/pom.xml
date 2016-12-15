@@ -1,28 +1,26 @@
 <?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>little.ant</groupId>
 		<artifactId>JFinalUIBV3</artifactId>
 		<version>2.2</version>
 	</parent>
-	
+
 	<artifactId>Test</artifactId>
-	
+
+	<packaging>jar</packaging>
+
 	<name>Test</name>
 	<url>http://maven.apache.org</url>
-	
-	<packaging>jar</packaging>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -30,123 +28,123 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>little.ant</groupId>
 			<artifactId>JFinal</artifactId>
 			<version>2.2</version>
-			<exclusions>   
-		        <exclusion>   
-		            <groupId>*</groupId>   
-		            <artifactId>*</artifactId>   
-		        </exclusion>   
-		    </exclusions>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>little.ant</groupId>
 			<artifactId>UIB</artifactId>
 			<version>2.2</version>
-			<exclusions>   
-		        <exclusion>   
-		            <groupId>*</groupId>   
-		            <artifactId>*</artifactId>   
-		        </exclusion>   
-		    </exclusions>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
-			<exclusions>   
-		        <exclusion>   
-		            <groupId>*</groupId>   
-		            <artifactId>*</artifactId>   
-		        </exclusion>   
-		    </exclusions>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		
+
 	</dependencies>
-	
+
 	<build>
 		<finalName>Test</finalName>
-		
+
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>true</filtering>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
 			</resource>
-			
+
 			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>*.properties</include>
 					<include>*.xml</include>
 				</includes>
-                <filtering>true</filtering>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
-		
+
 		<testResources>
 			<testResource>
 				<directory>src/main/java</directory>
 				<includes>
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>true</filtering>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
 			</testResource>
-			
+
 			<testResource>
 				<directory>src/main/resources</directory>
 				<includes>
-                    <include>**/*.xml</include>
+					<include>**/*.xml</include>
 					<include>**/*.properties</include>
-                </includes>
+				</includes>
 				<filtering>true</filtering>
 			</testResource>
 		</testResources>
-		
+
 		<plugins>
-            <!-- Compile -->
+			<!-- Compile -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
 					<skip>true</skip>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<encoding>UTF-8</encoding>
-					<compilerArguments>  
-			        	<verbose />  
-			        	<bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>  
-			        </compilerArguments>  
+					<compilerArguments>
+						<verbose />
+						<bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
+					</compilerArguments>
 				</configuration>
 			</plugin>
-			
-            <!-- Test -->
+
+			<!-- Test -->
 			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-            
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
-	
-    <repositories>
-        <repository>
-		      <id>alimaven</id>
-		      <name>aliyun maven</name>
-		      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
-    
+
+	<repositories>
+		<repository>
+			<id>alimaven</id>
+			<name>aliyun maven</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+
 </project>
