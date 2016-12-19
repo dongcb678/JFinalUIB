@@ -9,7 +9,7 @@ import com.jfinal.log.Log;
 /**
  * SHA-1加密
  */
-public class ToolSHA1 {
+public abstract class ToolSHA1 {
 
 	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(ToolSHA1.class);

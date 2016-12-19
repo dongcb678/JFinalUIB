@@ -7,7 +7,7 @@ import com.jfinal.log.Log;
 /**
  * MD5加密组件
  */
-public class ToolMD5 {
+public abstract class ToolMD5 {
 
 	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(ToolMD5.class);

@@ -22,7 +22,7 @@ import com.platform.tools.ToolString;
  * 
  * 国际数据加密标准---IDEA：完全是新突破，几乎同时和AES出现
  */
-public class ToolIDEA {
+public abstract class ToolIDEA {
 
 	private static final Log log = Log.getLog(ToolIDEA.class);
 
@@ -195,31 +195,6 @@ public class ToolIDEA {
 		}
 
 		return securityCookie;
-	}
-
-	/**
-	 * IDEA测试
-	 * 
-	 * @throws Exception
-	 */
-	public static void main() throws Exception {
-		String inputStr = "IDEA";
-		byte[] inputData = inputStr.getBytes();
-		System.err.println("原文:\t" + inputStr);
-
-		// 初始化密钥
-		byte[] key = initKey();
-		System.err.println("密钥:\t" + Base64.encodeBase64String(key));
-
-		// 加密
-		inputData = encrypt(inputData, key);
-		System.err.println("加密后:\t" + Base64.encodeBase64String(inputData));
-
-		// 解密
-		byte[] outputData = decrypt(inputData, key);
-
-		String outputStr = new String(outputData);
-		System.err.println("解密后:\t" + outputStr);
 	}
 
 }

@@ -11,7 +11,7 @@ import com.jfinal.log.Log;
 /**
  * MD4加密组件
  */
-public class ToolMD4 {
+public abstract class ToolMD4 {
 
 	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(ToolMD4.class);

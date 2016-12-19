@@ -7,8 +7,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.Base64;
-
 import com.jfinal.log.Log;
 
 /**
@@ -24,7 +22,7 @@ import com.jfinal.log.Log;
  * 有安装说明。就是替换${java_home}/jre/lib/security/
  * 下面的local_policy.jar和US_export_policy.jar
  */
-public class ToolAES {
+public abstract class ToolAES {
 
 	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(ToolAES.class);
@@ -130,28 +128,5 @@ public class ToolAES {
 		return secretKey.getEncoded();
 	}
 
-	/**
-	 * 测试
-	 * 
-	 * @throws Exception
-	 */
-	public static void main() throws Exception {
-		String inputStr = "AES";
-		byte[] inputData = inputStr.getBytes();
-		System.err.println("原文:\t" + inputStr);
 
-		// 初始化密钥
-		byte[] key = initKey();
-		System.err.println("密钥:\t" + Base64.encodeBase64String(key));
-
-		// 加密
-		inputData = encrypt(inputData, key);
-		System.err.println("加密后:\t" + Base64.encodeBase64String(inputData));
-
-		// 解密
-		byte[] outputData = decrypt(inputData, key);
-
-		String outputStr = new String(outputData);
-		System.err.println("解密后:\t" + outputStr);
-	}
 }

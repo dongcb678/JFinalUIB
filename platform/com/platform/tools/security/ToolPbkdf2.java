@@ -23,7 +23,7 @@ import com.jfinal.log.Log;
  * 
  * 3.当用户修改密码的时候，仍然可以使用原来的盐，只需要调用getEncryptedPassword()方法重新生成密文就可以了。
  */
-public class ToolPbkdf2 {
+public abstract class ToolPbkdf2 {
 
 	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(ToolPbkdf2.class);
@@ -76,18 +76,6 @@ public class ToolPbkdf2 {
 		byte[] salt = new byte[8];
 		random.nextBytes(salt);
 		return salt;
-	}
-
-	public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		String pass = "000000";
-		byte[] salt = generateSalt();
-//		String saltStr = Base64.encodeBase64String(salt);
-
-		byte[] encryptedPassword = getEncryptedPassword(pass, salt);
-//		String encryptedPasswordStr = Base64.encodeBase64String(encryptedPassword);
-
-		boolean bool = authenticate(pass, encryptedPassword, salt);
-		System.out.println(bool);
 	}
 
 }

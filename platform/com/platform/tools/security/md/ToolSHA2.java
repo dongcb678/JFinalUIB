@@ -11,7 +11,7 @@ import com.jfinal.log.Log;
 /**
  * SHA-2 的变种 SHA- 224、 SHA- 256、 SHA-384 、 SHA-512
  */
-public class ToolSHA2 {
+public abstract class ToolSHA2 {
 
 	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(ToolSHA2.class);

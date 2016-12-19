@@ -9,8 +9,6 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-import org.apache.commons.codec.binary.Base64;
-
 import com.jfinal.log.Log;
 
 /**
@@ -19,7 +17,7 @@ import com.jfinal.log.Log;
  * 基于口令的加密---PBE：前面的对称加密几乎如出一辙，流程基本一致，PBE综合了对称加密和消息摘要算法的优势，形成对称加密算法的一个特例。没有密钥的概念
  * ，使用口令代替密钥
  */
-public class ToolPBE {
+public abstract class ToolPBE {
 
 	@SuppressWarnings("unused")
 	private static final Log log = Log.getLog(ToolPBE.class);
@@ -127,31 +125,6 @@ public class ToolPBE {
 
 		// 执行操作
 		return cipher.doFinal(data);
-	}
-
-	/**
-	 * 测试
-	 */
-	public static void main() throws Exception {
-		String inputStr = "PBE";
-		System.err.println("原文：" + inputStr);
-		byte[] input = inputStr.getBytes();
-
-		String pwd = "snowolf@zlex.org";
-		System.err.println("密码：\t" + pwd);
-
-		// 初始化盐
-		byte[] salt = initSalt();
-		System.err.println("盐：\t" + Base64.encodeBase64String(salt));
-
-		// 加密
-		byte[] data = encrypt(input, pwd, salt);
-		System.err.println("加密后：\t" + Base64.encodeBase64String(data));
-
-		// 解密
-		byte[] output = decrypt(data, pwd, salt);
-		String outputStr = new String(output);
-		System.err.println("解密后：\t" + outputStr);
 	}
 
 }
