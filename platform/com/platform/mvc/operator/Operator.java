@@ -313,7 +313,8 @@ public class Operator extends BaseModel<Operator> {
 		if(operator == null){
 			operator = Operator.dao.findById(key);
 			if(operator == null){
-				operator = Operator.dao.findFirst("platform.operator.url", key);
+				String sql = getSql("platform.operator.url");
+				operator = Operator.dao.findFirst(sql, key);
 			}
 		}
 		return operator;
