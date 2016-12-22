@@ -337,7 +337,7 @@ public class BaseService {
 	 * @param content 邮件的文本内容
 	 * @param attachFileNames 附件
 	 */
-	public static void sendTextMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
+	public static void sendMail(String sendType, List<String> to, String subject, String content, String[] attachFileNames){
 		String host = PropKit.get(ConstantInit.config_mail_host);		// 发送邮件的服务器的IP
 		String port = PropKit.get(ConstantInit.config_mail_port);	// 发送邮件的服务器的端口
 
