@@ -15,6 +15,13 @@ var common_ajax = function() {
 			dataType = "html";
 		}
 		
+		// 所有请求加上当前语言标示环境
+		if(!data){
+			data = {"localePram" : localePram};
+		}else{
+			data.localePram = localePram;
+		}
+		
 		var result = "";
 		$.ajax({
 			type : "post",
@@ -101,12 +108,13 @@ var common_ajax = function() {
 		if(dataType == undefined || dataType == null){
 			dataType = "html";
 		}
-		
+
 		var result = "";
 		$("#" + formId).ajaxSubmit({
 			dataType : dataType,
 			async: false,
 			cache: false,
+			data: {"localePram" : localePram}, // 所有请求加上当前语言标示环境
 		    success:  function (data) {
 		    	result = data;
 		    	

@@ -511,15 +511,20 @@ public abstract class BaseController extends Controller {
 		if (null != authCodePram && null != authCodeCookie) {
 			authCodePram = authCodePram.toLowerCase();// 统一小写
 			authCodeCookie = authCodeCookie.toLowerCase();// 统一小写
+			try {
+				String[] cookies = authCodeCookie.split(".#.");
+				String authCode = cookies[0];
+				long time = Long.valueOf(cookies[1]);
+				long interval = (ToolDateTime.getDateByTime() - time) / 1000 / 60; // 间隔分钟
 
-			String[] cookies = authCodeCookie.split(".#.");
-			String authCode = cookies[0];
-			long time = Long.valueOf(cookies[1]);
-			long interval = (ToolDateTime.getDateByTime() - time) / 1000 / 60; // 间隔分钟
-
-			int session = PropKit.getInt(ConstantInit.config_session_key);
-			if (authCodePram.equals(authCode) && interval <= session) {
-				return true;
+				int session = PropKit.getInt(ConstantInit.config_session_key);
+				if (authCodePram.equals(authCode) && interval <= session) {
+					return true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				log.error("验证码处理异常，使用了已失效的cookie验证码");
+				return false;
 			}
 		}
 		return false;
