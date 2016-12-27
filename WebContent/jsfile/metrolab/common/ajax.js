@@ -16,16 +16,17 @@ var common_ajax = function() {
 		}
 		
 		// 所有请求加上当前语言标示环境
-		if(!data){
-			data = {"localePram" : localePram};
-		}else{
-			data.localePram = localePram;
-		}
+//		if(!data){
+//			data = {"localePram" : localePram};
+//		}else{
+//			data.localePram = localePram;
+//		}
 		
 		var result = "";
 		$.ajax({
 			type : "post",
 			url : encodeURI(encodeURI(cxt + url)),
+			headers : {"localePram" : localePram}, // 所有请求加上当前语言标示环境
 			data : data,
 			dataType : dataType,
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -114,7 +115,8 @@ var common_ajax = function() {
 			dataType : dataType,
 			async: false,
 			cache: false,
-			data: {"localePram" : localePram}, // 所有请求加上当前语言标示环境
+			headers : {"localePram" : localePram}, // 所有请求加上当前语言标示环境
+			//data: {"localePram" : localePram}, // 所有请求加上当前语言标示环境
 		    success:  function (data) {
 		    	result = data;
 		    	

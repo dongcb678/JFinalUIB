@@ -425,11 +425,16 @@ public class AuthInterceptor implements Interceptor {
 	 * @return
 	 */
 	public static String getAuthCode(HttpServletRequest request, HttpServletResponse response){
+		String cxtPath = request.getContextPath();
+		if(cxtPath == null || cxtPath.isEmpty()){
+			cxtPath = "/";
+		}
+		
 		// 1.获取cookie加密数据
 		String authCode = ToolWeb.getCookieValueByName(request, ConstantWebContext.request_authCode);
 		
 		// 2.获取验证码后清除客户端验证码信息
-		AuthInterceptor.setAuthCode(request, response, ""); 
+		ToolWeb.addCookie(response, "", cxtPath, true, ConstantWebContext.request_authCode, null, 0);
 
 		// 3.解密数据
 		if (null != authCode && !authCode.equals("")) {

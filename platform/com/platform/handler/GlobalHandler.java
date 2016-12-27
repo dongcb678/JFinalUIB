@@ -52,6 +52,9 @@ public class GlobalHandler extends Handler {
 
 		log.debug("request 国际化");
 		String localePram = request.getParameter(ConstantWebContext.request_localePram);
+		if(localePram == null || localePram.isEmpty()){
+			localePram = request.getHeader("localePram");
+		}
 		if(null != localePram && !localePram.isEmpty()){
 			String cxtPath = request.getContextPath();
 			if(cxtPath == null || cxtPath.isEmpty()){
@@ -77,6 +80,7 @@ public class GlobalHandler extends Handler {
 		Map<String, String> i18nMap = I18NPlugin.get(localePram);
 		request.setAttribute(ConstantWebContext.request_localePram, localePram);
 		request.setAttribute(ConstantWebContext.request_i18nMap, i18nMap);
+		response.setHeader(ConstantWebContext.request_localePram, localePram);
 		
 		log.info("设置Header");
 		request.setAttribute("decorator", "none");
