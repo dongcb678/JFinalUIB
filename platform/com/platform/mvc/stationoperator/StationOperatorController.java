@@ -20,7 +20,6 @@ public class StationOperatorController extends BaseController {
 	 * 展示岗位拥有的功能和所有功能列表
 	 */
 	public void index(){
-		defaultOrder(" sorder asc, ", " morder asc ");
 		stationOperatorService.paging(splitPage);
 		render("/platform/stationOperator/list.html");
 	}

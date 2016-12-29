@@ -80,6 +80,9 @@
 									<th width="10%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'a.sname')">
 										${i18nMap["admin.operator.property.sname"]}	${orderBy("a.sname")}
 									</th>
+									<th width="10%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'a.pmname')">
+										上级模块
+									</th>
 									<th width="10%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'a.mname')">
 										${i18nMap["admin.operator.property.mname"]}	${orderBy("a.mname")}
 									</th>
@@ -92,6 +95,7 @@
 								<% for(sm in splitPage.list){ %>
 								<tr class="odd gradeX">
 									<td>${escapeXml(sm.sname!)}</td>
+									<td>${escapeXml(sm.pmname!)}</td>
 									<td>${escapeXml(sm.mname!)}</td>
 									<td>
 										<% for(o in sm.list){ %>

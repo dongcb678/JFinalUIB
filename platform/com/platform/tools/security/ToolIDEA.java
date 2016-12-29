@@ -126,12 +126,12 @@ public abstract class ToolIDEA {
 
 	/**
 	 * 解密加密字符串
-	 * 
-	 * @param content
-	 *            待加密的字符串
-	 * @return 说明：增加Base64编码
+	 * @param securityKey 密钥
+	 * @param content 待加密的字符串
+	 * @return
+	 * 说明：增加Base64编码
 	 */
-	public static String decrypt(String content) {
+	public static String decrypt(String securityKey, String content) {
 		// 1. Base64解码cookie令牌
 		try {
 			content = ToolString.decode(content);
@@ -142,8 +142,6 @@ public abstract class ToolIDEA {
 
 		// 2. 解密cookie令牌
 		byte[] securityByte = Base64.decodeBase64(content);
-
-		String securityKey = PropKit.get(ConstantInit.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		byte[] dataByte = null;
@@ -157,15 +155,26 @@ public abstract class ToolIDEA {
 
 		return data;
 	}
+	
+	/**
+	 * 解密加密字符串
+	 * @param content 待加密的字符串
+	 * @return 
+	 * 说明：增加Base64编码
+	 */
+	public static String decrypt(String content) {
+		String securityKey = PropKit.get(ConstantInit.config_securityKey_key);
+		return decrypt(securityKey, content);
+	}
 
 	/**
 	 * 生成加密字符串
-	 * 
-	 * @param content
-	 *            待加密的字符串
-	 * @return 说明：增加Base64编码
+	 * @param securityKey 密钥
+	 * @param content	待加密的字符串
+	 * @return 
+	 * 说明：增加Base64编码
 	 */
-	public static String encrypt(String content) {
+	public static String encrypt(String securityKey, String content) {
 		byte[] authTokenByte = null;
 		try {
 			authTokenByte = content.getBytes(ToolString.encoding);
@@ -173,7 +182,6 @@ public abstract class ToolIDEA {
 			log.error("字符串数据转byte异常：content = " + content);
 			return null;
 		}
-		String securityKey = PropKit.get(ConstantInit.config_securityKey_key);
 		byte[] keyByte = Base64.decodeBase64(securityKey);
 
 		// 认证cookie加密
@@ -195,6 +203,17 @@ public abstract class ToolIDEA {
 		}
 
 		return securityCookie;
+	}
+	
+	/**
+	 * 生成加密字符串
+	 * @param content 待加密的字符串
+	 * @return 
+	 * 说明：增加Base64编码
+	 */
+	public static String encrypt(String content) {
+		String securityKey = PropKit.get(ConstantInit.config_securityKey_key);
+		return encrypt(securityKey, content);
 	}
 
 }

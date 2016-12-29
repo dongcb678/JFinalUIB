@@ -16,11 +16,13 @@
 			from (
 				select 
 					s.ids sids, s.names sname, s.orderids sorder, 
-		        	m.ids mids, m.names mname, m.orderids morder 
+		        	m.ids mids, m.names mname, m.orderids morder,
+		        	pm.ids pmids, pm.names pmname, pm.orderids pmorder 
 		        		
 	        	from 
 	        		pt_operator o 
 	        		left join pt_module m on m.ids = o.moduleids 
+	        		left join pt_module pm on pm.ids = m.parentmoduleids 
 	        		left join pt_systems s on s.ids = m.systemsids 
 	        	
 	        	where 
@@ -44,9 +46,12 @@
 				
 	        	group by 
 	        		s.ids , s.names , s.orderids , 
-		        	m.ids , m.names , m.orderids  
+		        	m.ids , m.names , m.orderids ,
+		        	pm.ids, pm.names, pm.orderids
+		        	
+		        order by 
+		        	s.orderids asc, pm.names asc, m.names asc
 			) a
-			
     	]]>
 	</sql>
 	

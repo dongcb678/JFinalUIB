@@ -20,7 +20,6 @@ public class RoleOperatorController extends BaseController {
 	 * 展示角色拥有的功能和所有功能列表
 	 */
 	public void index(){
-		defaultOrder(" sorder asc, ", " morder asc ");
 		roleOperatorService.paging(splitPage);
 		render("/platform/roleOperator/list.html");
 	}
