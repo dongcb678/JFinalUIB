@@ -1,10 +1,7 @@
 package com.platform.plugin;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
@@ -28,8 +25,6 @@ public class QuartzPlugin implements IPlugin {
 	private static final Log log = Log.getLog(QuartzPlugin.class);
 
 	private static Scheduler scheduler = null;
-	
-	private static List<String> triggerKeyList = new ArrayList<String>();
 	
 	private static long delayTimes = 5000; // 延迟xx毫秒执行，0表示不延迟
 
@@ -72,25 +67,24 @@ public class QuartzPlugin implements IPlugin {
                         .withRepeatCount(5)        //重复次数(将执行6次)
 	 */
 	public static void addJob(String triggerKey, ScheduleBuilder<CronTrigger> schedBuilder, Class<? extends Job> classs, Map<String, String> param){
-		for (String key : triggerKeyList) {
-			if(triggerKey.equals(key)){
-				throw new RuntimeException("不能条件重复调度任务triggerKey = " + triggerKey);
-			}
-		}
-		triggerKeyList.add(triggerKey);
-		
-		JobDetail jobDetail = JobBuilder.newJob(classs).withIdentity(triggerKey, Scheduler.DEFAULT_GROUP).build();
-		
-		if(param != null && !param.isEmpty()){
-			jobDetail.getJobDataMap().putAll(param);
-		}
-		
-		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey, Scheduler.DEFAULT_GROUP)
-				.withSchedule(schedBuilder) 
-				.startAt(new Date(System.currentTimeMillis() + delayTimes))
-				.build();
-		
 		try {
+			boolean exists = scheduler.checkExists(TriggerKey.triggerKey(triggerKey, Scheduler.DEFAULT_GROUP));
+			if(exists){
+				log.warn("调度任务已经存在triggerKey = " + triggerKey);
+				return;
+			}
+			
+			JobDetail jobDetail = JobBuilder.newJob(classs).withIdentity(triggerKey, Scheduler.DEFAULT_GROUP).build();
+			
+			if(param != null && !param.isEmpty()){
+				jobDetail.getJobDataMap().putAll(param);
+			}
+			
+			Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey, Scheduler.DEFAULT_GROUP)
+					.withSchedule(schedBuilder) 
+					.startAt(new Date(System.currentTimeMillis() + delayTimes))
+					.build();
+		
 			scheduler.scheduleJob(jobDetail, trigger);
 		} catch (SchedulerException e) {
 			e.printStackTrace();
@@ -114,14 +108,11 @@ public class QuartzPlugin implements IPlugin {
 	@Override
 	public boolean start() {
 		if(scheduler == null){
-			StdSchedulerFactory factory = new StdSchedulerFactory();
-			
-			Properties props = new Properties();
-			props.put(StdSchedulerFactory.PROP_THREAD_POOL_CLASS, "org.quartz.simpl.SimpleThreadPool");
-			props.put("org.quartz.threadPool.threadCount", "10");
-
 			try {
-				factory.initialize(props);
+				// 加载配置文件
+				StdSchedulerFactory factory = new StdSchedulerFactory("quartz.properties");
+				factory.initialize();
+				
 				scheduler = factory.getScheduler();
 				scheduler.start();
 			} catch (SchedulerException e) {
@@ -134,10 +125,6 @@ public class QuartzPlugin implements IPlugin {
 	@Override
 	public boolean stop() {
 		try {
-			for (String triggerKey : triggerKeyList) {
-				deleteJob(triggerKey);
-			}
-			
 			if (scheduler != null && !scheduler.isShutdown()) {
 				scheduler.shutdown();
 			}

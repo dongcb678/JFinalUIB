@@ -218,7 +218,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("configPlugin FileRenamePlugin 配置文件上传命名策略插件");
 		plugins.add(new FileRenamePlugin());
 
-		log.info("configPlugin QuartzPlugin 配置文件上传命名策略插件");
+		log.info("configPlugin QuartzPlugin 配置Quartz插件");
 		plugins.add(new QuartzPlugin());
 	}
 
