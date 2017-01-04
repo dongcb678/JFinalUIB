@@ -49,8 +49,20 @@
 		        	m.ids , m.names , m.orderids ,
 		        	pm.ids, pm.names, pm.orderids
 		        	
-		        order by 
-		        	s.orderids asc, pm.names asc, m.names asc
+        		<% if(db_type == "mysql" || db_type == "postgresql"){ %>
+        				order by 
+		        			s.orderids asc, pm.names asc, m.names asc
+		        			
+        		<% } else if(db_type == "oracle"){ %>
+        				order by 
+		        			s.orderids asc, pm.names asc, m.names asc
+        	
+	        	<% } else if(db_type == "sqlserver"){ %>
+        				
+	        	<% } else if(db_type == "db2"){ %>
+        				order by 
+		        			s.orderids asc, pm.names asc, m.names asc
+	        	<% } %>
 			) a
     	]]>
 	</sql>
