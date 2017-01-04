@@ -347,7 +347,9 @@ var platform_verify = function() {
 			if(result != true){
 				hiddenInputColor(inputNode);
 				showInputColor(inputNode, "error");
-				inputNode.next().html("验证失败！");
+				if(inputNode.next().html().indexOf("class") == -1){
+					inputNode.next().html("验证失败！");
+				}
 				return false;
 			}else if(vType == "length"){//如果只验证长度
 				hiddenInputColor(inputNode);
@@ -422,7 +424,9 @@ var platform_verify = function() {
 				if(result != true){
 					hiddenInputColor(inputNode);
 					showInputColor(inputNode, "error");
-					inputNode.next().html("验证失败！");
+					if(inputNode.next().html().indexOf("class") == -1){
+						inputNode.next().html("验证失败！");
+					}
 					return false;
 				}else{
 					hiddenInputColor(inputNode);
@@ -452,7 +456,7 @@ var platform_verify = function() {
 	var formVali = function(formNode){
 		var length = formNode.length;
 		var errorCount = 0;
-		for ( var i = 0; i < length; i++) {
+		for ( var i = 0; i < length; i++ ) {
 			var node = formNode.elements[i];
 			node = $(node);
 			var result = inputDataVali(node);

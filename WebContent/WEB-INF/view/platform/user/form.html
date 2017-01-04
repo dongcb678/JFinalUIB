@@ -4,7 +4,7 @@
 	<div class="controls">
 		<input type="hidden" id="deptId" name="user.departmentids" value="${escapeXml(dept.ids!)}"/>
 		<input type="text" class="span8" id="deptName" value="${escapeXml(dept.names!)}" 
-			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="必选">
 		
 		<span class="help-inline"> 
 			<a href="javascript:void(0)" class="btn btn-primary" 
@@ -18,7 +18,7 @@
 	<div class="controls">
 		<input type="hidden" id="stationId" name="user.stationids" value="${escapeXml(station.ids!)}"/>
 		<input type="text" class="span8" id="stationName" value="${escapeXml(station.names!)}" 
-			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="必选">
 		
 		<span class="help-inline"> 
 			<a href="javascript:void(0)" class="btn btn-primary" 
