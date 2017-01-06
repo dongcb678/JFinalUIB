@@ -14,7 +14,6 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.platform.dto.DataBase;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
-import com.platform.tools.code.run.ColumnDto;
 
 /**
  * 定制MySQL下的代码生成

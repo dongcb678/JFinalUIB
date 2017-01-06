@@ -1,4 +1,4 @@
-package com.platform.tools.code.run;
+package com.platform.tools.code.handler;
 
 /**
  * 数据库表对应的列描述

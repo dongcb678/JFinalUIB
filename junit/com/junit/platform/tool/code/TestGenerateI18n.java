@@ -1,4 +1,4 @@
-package com.platform.tools.code.run;
+package com.junit.platform.tool.code;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,8 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.junit.Test;
+
 import com.jfinal.log.Log;
-import com.platform.config.ConfigCore;
+import com.junit.TestBase;
 import com.platform.tools.ToolDirFile;
 import com.platform.tools.code.handler.BaseHandler;
 
@@ -18,15 +20,12 @@ import com.platform.tools.code.handler.BaseHandler;
  * 根据国际化资源文件生成对应常量文件
  * @author 董华健
  */
-public class GenerateI18n  {
+public class TestGenerateI18n extends TestBase {
 
-	private static final Log log = Log.getLog(GenerateI18n.class);
+	private static final Log log = Log.getLog(TestGenerateI18n.class);
 
-	public static void main(String[] args) throws IOException {
-		log.info("启动ConfigCore start ......");
-    	ConfigCore.getSingleton();
-    	log.info("启动ConfigCore end ......");
-
+	@Test
+	public void generate() throws IOException {
 		String propPath = ToolDirFile.getClassesPath() + File.separator + "message_zh_CN.properties";
 		InputStream inputStream = null;
 		try {
@@ -50,7 +49,7 @@ public class GenerateI18n  {
 
 			String outPath = System.getProperty("user.dir") + "/platform/com/platform/constant/ConstantI18n2.java";
 			
-			BaseHandler.createFileByTemplete("i18n.html", paramMap, outPath);
+			BaseHandler.createFileByTemplete("java/i18n.html", paramMap, outPath);
 		} catch (Exception exception) {
 			log.info("加载properties失败！...");
 		} finally {
@@ -62,8 +61,6 @@ public class GenerateI18n  {
 				log.info("加载properties后关闭失败！...");
 			}
 		}
-			
-		System.exit(0);
 	}
 	
 }

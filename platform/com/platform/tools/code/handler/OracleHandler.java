@@ -9,7 +9,6 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.tools.ToolSqlXml;
 import com.platform.tools.ToolString;
-import com.platform.tools.code.run.ColumnDto;
 
 /**
  * 定制Oracle下的代码生成

@@ -1,14 +1,17 @@
-package com.platform.tools.code.run;
+package com.junit.platform.tool.code;
 
 import java.util.List;
 
+import org.junit.Test;
+
 import com.jfinal.log.Log;
-import com.platform.config.ConfigCore;
+import com.junit.TestBase;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
 import com.platform.tools.ToolDataBase;
 import com.platform.tools.ToolString;
 import com.platform.tools.code.handler.BaseHandler;
+import com.platform.tools.code.handler.ColumnDto;
 import com.platform.tools.code.handler.DB2Handler;
 import com.platform.tools.code.handler.MySQLHandler;
 import com.platform.tools.code.handler.OracleHandler;
@@ -23,9 +26,9 @@ import com.platform.tools.code.handler.SqlServerHandler;
  * 
  * @author 董华健
  */
-public class GenerateCode {
+public class TestGenerateCode extends TestBase {
 
-	private static final Log log = Log.getLog(GenerateCode.class);
+	private static final Log log = Log.getLog(TestGenerateCode.class);
 
 	/**
 	 * 二维数组说明：
@@ -86,37 +89,34 @@ public class GenerateCode {
 	/**
 	 * 循环生成文件
 	 */
-	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		log.info("启动ConfigCore start ......");
-    	ConfigCore.getSingleton();
-    	log.info("启动ConfigCore end ......");
-    	
+	@Test
+	public void generate() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		log.info("根据不同的数据库加载不同的处理器");
 		DataBase dataBase = ToolDataBase.getDbMap(dataSource);
-		
-    	BaseHandler handler = null;
     	String db_type = dataBase.getType();
+    	BaseHandler handler = null;
 		if(db_type.equals(ConstantInit.db_type_postgresql)){
 			handler = new PostgreSQLHandler();
-			handler.setDataBase(dataBase);
 			
 		}else if(db_type.equals(ConstantInit.db_type_mysql)){
 			handler = new MySQLHandler();
-			handler.setDataBase(dataBase);
-			handler.init();
 			
 		}else if(db_type.equals(ConstantInit.db_type_oracle)){
 			handler = new OracleHandler();
-			handler.setDataBase(dataBase);
 			
 		}else if(db_type.equals(ConstantInit.db_type_db2)){
 			handler = new DB2Handler();
-			handler.setDataBase(dataBase);
 			
 		}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
 			handler = new SqlServerHandler();
-			handler.setDataBase(dataBase);
 		}
+		
+		handler.setDataBase(dataBase);
+		
+		handler.setSrcFolder(srcFolder);
+		handler.setPackageBase(packageBase);
+		handler.setBasePath(basePath);
+		handler.setDataSource(dataSource);
     	
 		for (int i = 0; i < tableArr.length; i++) {
 			// 数据源名称
