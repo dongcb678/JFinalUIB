@@ -20,20 +20,22 @@ public abstract class BaseValidator extends Validator {
 	protected BaseService baseService;		// Service
 
 	/**
-	 * 实例化拦截器
+	 * 
 	 */
 	public void instance(){
+		
+	}
+	
+	@Override
+	public void intercept(Invocation invocation) {
+		// 实例化拦截器
 		try {
 			validator = getClass().newInstance();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	}
-	
-	@Override
-	public void intercept(Invocation invocation) {
-		instance();
 		
+		// 注入全局Service变量
 		Field[] parentFields = getClass().getDeclaredFields();
 		for (Field field : parentFields) {
 			try {
@@ -57,6 +59,7 @@ public abstract class BaseValidator extends Validator {
 			}
 		}
 		
+		// 执行父类原始业务方法
 		super.intercept(invocation);
 	}
 
@@ -79,6 +82,13 @@ public abstract class BaseValidator extends Validator {
 	 */
 	protected void validateIdCard(String field, String errorKey, String errorMessage) {
 		validateRegex(field, ToolString.regExp_idCard, false, errorKey, errorMessage);
+	}
+
+	/**
+	 * 验证IP
+	 */
+	protected void validateIp(String field, String errorKey, String errorMessage) {
+		validateRegex(field, ToolString.regExp_ip, false, errorKey, errorMessage);
 	}
 	
 }

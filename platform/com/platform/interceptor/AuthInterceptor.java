@@ -46,17 +46,17 @@ public class AuthInterceptor implements Interceptor {
 		HttpServletRequest request = contro.getRequest();
 		HttpServletResponse response = contro.getResponse();
 
-		log.info("获取reqSysLog!");
+		log.debug("获取reqSysLog!");
 		Syslog reqSysLog = contro.getAttr(ConstantWebContext.reqSysLogKey);
 		contro.setReqSysLog(reqSysLog);
 
-		log.info("获取用户请求的URI，两种形式，参数传递和直接request获取");
+		log.debug("获取用户请求的URI，两种形式，参数传递和直接request获取");
 		String uri = invoc.getActionKey(); // 默认就是ActionKey
 		if (invoc.getMethodName().equals(ConstantWebContext.request_toUrl)) {
 			uri = ToolWeb.getParam(request, ConstantWebContext.request_toUrl); // 否则就是toUrl的值
 		}
 
-		log.info("获取当前用户!");
+		log.debug("获取当前用户!");
 		boolean userAgentVali = true; // 是否验证userAgent，默认是
 		if (uri.equals("/platform/ueditor") || uri.equals("/platform/upload")) { // 针对ueditor特殊处理，flash上传userAgent和浏览器并不一致
 			userAgentVali = false;
@@ -76,30 +76,30 @@ public class AuthInterceptor implements Interceptor {
 			MDC.put("userName", "*unknown userName*");
 		}
 
-		log.info("获取URI对象!");
+		log.debug("获取URI对象!");
 		Operator operator = Operator.cacheGet(uri);
 
-		log.info("判断URI是否存在!");
+		log.debug("判断URI是否存在!");
 		if (null == operator) {
-			log.info("URI不存在!uri = " + uri);
+			log.debug("URI不存在!uri = " + uri);
 
-			log.info("访问失败时保存日志!");
+			log.debug("访问失败时保存日志!");
 			reqSysLog.set(Syslog.column_status, "0");// 失败
 			reqSysLog.set(Syslog.column_description, "URL不存在");
 			reqSysLog.set(Syslog.column_cause, "1");// URL不存在
 
-			log.info("返回失败提示页面!");
+			log.debug("返回失败提示页面!");
 			toView(contro, ConstantAuth.auth_no_url, "权限认证过滤器检测：URI不存在");
 			return;
 		}
 
-		log.info("URI存在!");
+		log.debug("URI存在!");
 		reqSysLog.set(Syslog.column_operatorids, operator.getPKValue());
 
 		if (operator.get(Operator.column_privilegess).equals("1")) {// 是否需要权限验证
-			log.info("需要权限验证!");
+			log.debug("需要权限验证!");
 			if (user == null) {
-				log.info("权限认证过滤器检测:未登录!");
+				log.debug("权限认证过滤器检测:未登录!");
 
 				reqSysLog.set(Syslog.column_status, "0");// 失败
 				reqSysLog.set(Syslog.column_description, "未登录");
@@ -110,29 +110,29 @@ public class AuthInterceptor implements Interceptor {
 			}
 
 			if (!hasPrivilegeUrl(operator.getPKValue(), user.getPKValue())) {// 权限验证
-				log.info("权限验证失败，没有权限!");
+				log.debug("权限验证失败，没有权限!");
 
 				reqSysLog.set(Syslog.column_status, "0");// 失败
 				reqSysLog.set(Syslog.column_description, "没有权限!");
 				reqSysLog.set(Syslog.column_cause, "0");// 没有权限
 
-				log.info("返回失败提示页面!");
+				log.debug("返回失败提示页面!");
 				toView(contro, ConstantAuth.auth_no_permissions, "权限验证失败，您没有操作权限");
 				return;
 			}
 		}
 
-		log.info("不需要权限验证、权限认证成功!!!继续处理请求...");
+		log.debug("不需要权限验证、权限认证成功!!!继续处理请求...");
 
-		log.info("是否需要表单重复提交验证!");
+		log.debug("是否需要表单重复提交验证!");
 		if (operator.getStr(Operator.column_formtoken).equals("1")) {
 			String tokenRequest = ToolWeb.getParam(request, ConstantWebContext.request_formToken);
 			String tokenCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_token);
 			if (null == tokenRequest || tokenRequest.equals("")) {
-				log.info("tokenRequest为空，无需表单验证!");
+				log.debug("tokenRequest为空，无需表单验证!");
 
 			} else if (null == tokenCookie || tokenCookie.equals("") || !tokenCookie.equals(tokenRequest)) {
-				log.info("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
+				log.debug("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
 				String cxtPath = request.getContextPath();
 				if(cxtPath == null || cxtPath.isEmpty()){
 					cxtPath = "/";
@@ -141,7 +141,7 @@ public class AuthInterceptor implements Interceptor {
 				ToolWeb.addCookie(response, "", cxtPath, true, ConstantWebContext.cookie_token, tokenRequest, 0);
 
 			} else if (tokenCookie.equals(tokenRequest)) {
-				log.info("表单重复提交!");
+				log.debug("表单重复提交!");
 				toView(contro, ConstantAuth.auth_form, "请不要重复提交表单");
 				return;
 
@@ -150,7 +150,7 @@ public class AuthInterceptor implements Interceptor {
 			}
 		}
 
-		log.info("权限认证成功更新日志对象属性!");
+		log.debug("权限认证成功更新日志对象属性!");
 		reqSysLog.set(Syslog.column_status, "1");// 成功
 		Date actionStartDate = ToolDateTime.getDate();// action开始时间
 		reqSysLog.set(Syslog.column_actionstartdate, ToolDateTime.getSqlTimestamp(actionStartDate));

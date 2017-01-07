@@ -30,17 +30,17 @@ public class GlobalHandler extends Handler {
 
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-		log.info("初始化访问系统功能日志");
+		log.debug("初始化访问系统功能日志");
 		Syslog reqSysLog = getSysLog(request);
 		long starttime = ToolDateTime.getDateByTime();
 		reqSysLog.set(Syslog.column_startdate, ToolDateTime.getSqlTimestamp(starttime));//开始时间
 		request.setAttribute(ConstantWebContext.reqSysLogKey, reqSysLog);
 		
-		log.info("设置 web 路径");
+		log.debug("设置 web 路径");
 		String cxt = ToolWeb.getContextPath(request);
 		request.setAttribute(ConstantWebContext.request_cxt, cxt);
 
-		log.info("request 随机分配一个请求id");
+		log.debug("request 随机分配一个请求id");
 		request.setAttribute(ConstantWebContext.request_id, ToolRandoms.getUuid(true));
 		
 		log.debug("request cookie 处理");
@@ -82,7 +82,7 @@ public class GlobalHandler extends Handler {
 		request.setAttribute(ConstantWebContext.request_i18nMap, i18nMap);
 		response.setHeader(ConstantWebContext.request_localePram, localePram);
 		
-		log.info("设置Header");
+		log.debug("设置Header");
 		request.setAttribute("decorator", "none");
 		response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
 		response.setHeader("Pragma","no-cache"); //HTTP 1.0
@@ -90,7 +90,7 @@ public class GlobalHandler extends Handler {
 		
 		next.handle(target, request, response, isHandled);
 		
-		log.info("请求处理完毕，计算耗时");
+		log.debug("请求处理完毕，计算耗时");
 		
 		// 结束时间
 		long endtime = ToolDateTime.getDateByTime();
@@ -110,7 +110,7 @@ public class GlobalHandler extends Handler {
 		// action耗时
 		reqSysLog.set(Syslog.column_actionhaoshi, haoshi - renderTime);
 		
-		log.info("日志添加到入库队列");
+		log.debug("日志添加到入库队列");
 		ThreadSysLog.add(reqSysLog);
 	}
 	

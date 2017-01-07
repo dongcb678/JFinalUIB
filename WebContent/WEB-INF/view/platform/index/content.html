@@ -19,12 +19,14 @@
 	<div class="row-fluid">
 
 		<div class="span5">
+			
 			<div class="widget green">
 				<div class="widget-title">
 					<h4>
 						<i class="icon-calendar"></i> Draggable Events
 					</h4>
 				</div>
+				
 				<div class="widget-body">
 					<div id='external-events'>
 						<div class='external-event label'>My Event 1</div>
@@ -43,6 +45,12 @@
 					</div>
 				</div>
 			</div>
+			
+            <div class="widget red">
+                <img alt="捐助" src="${cxt!}/files/images/alipay.jpg" style="width: 300px;">
+                <img alt="捐助" src="${cxt!}/files/images/wechat.jpg" style="width: 300px;">
+            </div>
+            
 		</div>
 
 		<div class="span7 responsive" data-tablet="span7 fix-margin" data-desktop="span7">
@@ -52,15 +60,25 @@
 					<h4>
 						<i class="icon-calendar"></i> 日历
 					</h4>
-					<span class="tools"> <a href="javascript:;" class="icon-chevron-down"></a> <a href="javascript:;" class="icon-remove"></a>
+					<span class="tools"> 
+						<a href="javascript:;" class="icon-chevron-down"></a> 
+						<a href="javascript:;" class="icon-remove"></a>
 					</span>
 				</div>
+				
 				<div class="widget-body">
 					<div id="calendar" class="has-toolbar"></div>
 				</div>
 			</div>
 			<!-- END CALENDAR PORTLET-->
+			
+			<br>
+			<button class="btn btn-large btn-success" type="button" onclick="window.open('${cxt!}/jsfile/ueditor/index.jsp');">ueditor富文本编辑示例</button>
+             <button class="btn btn-large btn-success" type="button" onclick="window.open('${cxt!}/jsfile/ueditor/third-party/webuploader/index.jsp');">webuploader文件上传示例</button>
+			<br>
+			
 		</div>
+		
 	</div>
 	<!-- END PAGE CONTENT-->
 

@@ -84,6 +84,9 @@ public class TestGenerateCode extends TestBase {
 	 */
 	public static final String basePath = "test";
 
+	/**
+	 * 表所在的数据源名称
+	 */
 	public static final String dataSource = ConstantInit.db_dataSource_main;
 	
 	/**

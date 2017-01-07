@@ -96,7 +96,7 @@ var common_splitPage = function() {
 		splitStr += '&nbsp;&nbsp;<li>显示<strong>' + startRow + '至<strong>' + endRow + '</strong>条，共<strong>' + totalRow + '</strong>' + i18n_common_splitPage_records + '</li>';
 		
 		splitStr += '</ul>';
-	
+		
 		splitStr += '<input type="hidden" name="orderColunm" value="'+orderColunm+'"/>';
 		splitStr += '<input type="hidden" name="orderMode" value="'+orderMode+'"/>';
 		
