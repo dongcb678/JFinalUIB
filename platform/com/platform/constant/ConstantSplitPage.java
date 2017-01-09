@@ -25,5 +25,10 @@ public interface ConstantSplitPage {
 	 * 分页参数初始化值：最多显示多少条数据
 	 */
 	public static final int default_maxSize = 200;
+
+	/**
+	 * 分页参数初始化值：导出，最多显示多少条数据
+	 */
+	public static final int default_export_maxSize = 10 * 10000;
 	
 }

@@ -93,7 +93,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_department_radio, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 部门多选
@@ -107,7 +107,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_department_checkbox, result, "setCheckValue");
 		return result;
-	}
+	};
 		
 	/**
 	 * 字典单选
@@ -123,7 +123,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data, callback);
 		dialogSelect(i18n_modals_dict_radio, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 参数单选
@@ -139,7 +139,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data, callback);
 		dialogSelect(i18n_modals_param_radio, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 模块单选
@@ -153,7 +153,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_module_radio, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 岗位单选
@@ -167,7 +167,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_station_radio, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 岗位多选
@@ -181,7 +181,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_station_checkbox, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 人员单选
@@ -195,7 +195,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_user_radio, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 人员多选
@@ -215,7 +215,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_user_checkbox, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**************************************		功能定制函数	start	***************************************************/
 	
@@ -229,7 +229,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_department_userTree, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 菜单功能设置
@@ -241,7 +241,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_menu_operatorTree, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 菜单国际化名称设置
@@ -253,7 +253,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_menu_edit, result, "dialogEditForm");
 		return result;
-	}
+	};
 	
 	/**
 	 * 角色功能设置
@@ -265,7 +265,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_role_operatorTree, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 岗位功能设置
@@ -277,7 +277,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_station_operatorTree, result, "setCheckValue");
 		return result;
-	}
+	};
 	
 	/**
 	 * 用户的分组设置
@@ -289,7 +289,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_group_select, result, "");
 		return result;
-	}
+	};
 	
 	/**
 	 * 分组的角色设置
@@ -301,7 +301,7 @@ var common_modals = function() {
 		var result = common_ajax.ajaxFunc(url, data);
 		dialogSelect(i18n_modals_role_select, result, "");
 		return result;
-	}
+	};
 	
 	/**************************************		功能定制函数	end	***************************************************/	
 		

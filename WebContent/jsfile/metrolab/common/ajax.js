@@ -41,7 +41,7 @@ var common_ajax = function() {
 			}
 		});
 		return result;
-	}
+	};
 
 	/**
 	 * ajax请求，执行前进行确认
@@ -64,7 +64,7 @@ var common_ajax = function() {
 	var ajaxDiv = function(divId, url, data, callback){
 		var result = ajaxFunc(url, data, callback);
 		$("#" + divId).html(result);
-	}
+	};
 	
 	/**
 	 * ajaxForm请求，执行前进行确认
@@ -86,7 +86,7 @@ var common_ajax = function() {
 	var ajaxMainPanel = function(url, data, callback){
 		var result = ajaxFunc(url, data, callback);
 		$("#main-content").html(result);
-	}
+	};
 	
 	/**
 	 * ajaxForm请求，执行前进行确认
@@ -127,7 +127,7 @@ var common_ajax = function() {
 		    }
 		});
 		return result;
-	}
+	};
 	
 	/**
 	 * ajaxForm请求，执行前进行确认
@@ -149,7 +149,7 @@ var common_ajax = function() {
 	var ajaxFormDiv = function(divId, formId, callback){
 		var result = ajaxForm(formId, callback);
 		$("#" + divId).html(result);
-	}
+	};
 	
 	/**
 	 * ajaxFormDiv请求，执行前进行确认
@@ -170,7 +170,7 @@ var common_ajax = function() {
 	var ajaxFormMainPanel = function(formId, callback){
 		var result = ajaxForm(formId, callback);
 		$("#main-content").html(result);
-	}
+	};
 
 	/**
 	 * ajaxFormMainPanel请求，执行前进行确认

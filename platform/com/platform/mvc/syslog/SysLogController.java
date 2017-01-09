@@ -1,7 +1,10 @@
 package com.platform.mvc.syslog;
 
+import java.io.File;
+
 import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
+import com.platform.constant.ConstantSplitPage;
 import com.platform.mvc.base.BaseController;
 
 /**
@@ -17,12 +20,25 @@ public class SysLogController extends BaseController {
 	private SysLogService sysLogService;
 	
 	/**
-	 * 日志管理列表
+	 * 日志列表
 	 */
 	public void index() {
 		defaultOrder(Syslog.column_startdate, "desc"); // 默认排序方式，指定列名和排序方式
 		paging(splitPage, Syslog.sqlId_splitPageSelect, Syslog.sqlId_splitPageFrom);
 		render("/platform/sysLog/list.html");
+	}
+
+	/**
+	 * 日志导出
+	 */
+	public void export() {
+		defaultOrder(Syslog.column_startdate, "desc"); // 默认排序方式，指定列名和排序方式
+		splitPage.setExport(true); // 是否导出 
+		splitPage.setPageNumber(1); // 只能是第一页
+		splitPage.setPageSize(ConstantSplitPage.default_export_maxSize); // 单页最大导出数据量
+		paging(splitPage, Syslog.sqlId_splitPageSelect, Syslog.sqlId_splitPageFrom);
+		String path = sysLogService.export(getI18nMap(), splitPage);
+		renderFile(new File(path));
 	}
 
 	/**

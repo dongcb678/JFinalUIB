@@ -101,7 +101,7 @@ var common_splitPage = function() {
 		splitStr += '<input type="hidden" name="orderMode" value="'+orderMode+'"/>';
 		
 		return splitStr;
-	}
+	};
 	
 	/**
 	 * 分页链接处理
@@ -117,7 +117,7 @@ var common_splitPage = function() {
 		}else{
 			common_ajax.ajaxFormDiv(divId, formId);
 		}
-	}
+	};
 	
 	/**
 	 * 分页列排序点击事件处理
@@ -152,7 +152,7 @@ var common_splitPage = function() {
 		}else{
 			common_ajax.ajaxFormDiv(divId, formId);
 		}
-	}
+	};
 	
 	return {
 		splitPage : splitPageHtml,

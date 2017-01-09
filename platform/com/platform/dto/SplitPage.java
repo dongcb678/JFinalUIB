@@ -46,6 +46,8 @@ public class SplitPage implements Serializable, Cloneable {
 	
 	private String uri;// 分页uri
 
+	private boolean isExport = false; // 是否导出操作，如果是导出操作，不对每页显示多少条做限制
+	
 	/**
 	 * 分页计算
 	 */
@@ -125,8 +127,11 @@ public class SplitPage implements Serializable, Cloneable {
 		if (pageSize <= 0) {
 			pageSize = ConstantSplitPage.default_pageSize;
 		}
-		if (pageSize > ConstantSplitPage.default_maxSize) {
+		if (!isExport && pageSize > ConstantSplitPage.default_maxSize) {
 			pageSize = ConstantSplitPage.default_pageSize;
+		}
+		if (isExport && pageSize > ConstantSplitPage.default_export_maxSize) {
+			pageSize = ConstantSplitPage.default_export_maxSize;
 		}
 		return pageSize;
 	}
@@ -253,6 +258,14 @@ public class SplitPage implements Serializable, Cloneable {
 
 	public void setHasNextPage(boolean hasNextPage) {
 		this.hasNextPage = hasNextPage;
+	}
+
+	public boolean isExport() {
+		return isExport;
+	}
+
+	public void setExport(boolean isExport) {
+		this.isExport = isExport;
 	}
 
 }

@@ -12,7 +12,7 @@ var common_common = function() {
 		$("#" + id + " input[name='checkIds']").each(function(){
 			$(this).prop("checked", checked);
 	    });
-	}
+	};
 	
 	/**
 	 * 全选、反选
@@ -25,7 +25,7 @@ var common_common = function() {
 			ids += $(this).val() + ",";
 	    });
 		return ids;
-	}
+	};
 
 	return {
 		checkFunc : checkFunc,

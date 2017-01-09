@@ -31,7 +31,7 @@ var platform_verify = function() {
 		}else{
 			return {"result" : true, "message" : ""};
 		}
-	}
+	};
 	
 	/**
 	 * 整数
@@ -45,7 +45,7 @@ var platform_verify = function() {
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
-	}
+	};
 	
 	/**
 	 * 正整数
@@ -59,7 +59,7 @@ var platform_verify = function() {
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
-	}
+	};
 	
 	/**
 	 * 正浮点数，可验证>=0 && <=99999999.99 的数字
@@ -73,7 +73,7 @@ var platform_verify = function() {
 	    }else{
 	    	return {"result" : false, "message" : i18n_utils_msg_positiveInteger};
 	    }
-	}
+	};
 	
 	/**
 	 * 中文_字母_数字
@@ -86,7 +86,7 @@ var platform_verify = function() {
 		}else{ 
 			return {"result" : false, "message" : "只能包含中文、字母、数字！"};
 		} 
-	}
+	};
 	 */
 		
 	/**
@@ -102,7 +102,7 @@ var platform_verify = function() {
 			showMessage = "";
 			return {"result" : false, "message" : i18n_utils_msg_lettersNumbers};
 		}
-	}
+	};
 	
 	/**
 	 * 验证邮箱
@@ -116,7 +116,7 @@ var platform_verify = function() {
 		}else {
 			return {"result" : false, "message" : i18n_utils_msg_format};
 		}
-	}
+	};
 	
 	/**
 	 * 匹配固定电话或小灵通，例如：031185907468或02185907468格式
@@ -130,7 +130,7 @@ var platform_verify = function() {
 		}else{
 			return {"result" : false, "message" : i18n_utils_msg_format};
 		}
-	}
+	};
 	
 	/**
 	 * 手机
@@ -144,7 +144,7 @@ var platform_verify = function() {
 		}else{
 			return {"result" : false, "message" : i18n_utils_msg_format};
 		}
-	}
+	};
 	
 	/**
 	 * 邮编
@@ -158,7 +158,7 @@ var platform_verify = function() {
 		}else{
 			return {"result" : false, "message" : i18n_utils_msg_format};
 		}
-	}
+	};
 	
 	/**
 	 * 身份证号15-18位
@@ -172,7 +172,7 @@ var platform_verify = function() {
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
-	}
+	};
 	
 	/**
 	 * qq
@@ -186,7 +186,7 @@ var platform_verify = function() {
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
-	}
+	};
 	
 	/**
 	 * URL 网址
@@ -200,7 +200,7 @@ var platform_verify = function() {
 	    }else{
 	    	return {"result" : true, "message" : ""};
 	    }
-	}
+	};
 	
 	/**
 	 * 	IP 地址
@@ -219,7 +219,7 @@ var platform_verify = function() {
 	        }
 	    }
 	    return {"result" : true, "message" : ""};
-	}
+	};
 	
 	/**
 	 * 身高
@@ -236,7 +236,7 @@ var platform_verify = function() {
 			}
 	    	return {"result" : true, "message" : ""};
 	    }
-	}
+	};
 		
 	/**
 	 * 体重
@@ -253,7 +253,7 @@ var platform_verify = function() {
 			}
 	    	return {"result" : true, "message" : ""};
 	    }
-	}
+	};
 		
 	/**
 	 * 判断图片文件上传类型
@@ -274,7 +274,7 @@ var platform_verify = function() {
 		}else{
 			return {"result" : true, "message" : ""};
 		}
-	}
+	};
 
 	/****************************************************************************************************************/
 	/******************************************* 2. 针对UI进行绑定处理 **************************************************/
@@ -293,7 +293,7 @@ var platform_verify = function() {
 				node.value = node.value.trim();
 			}
 		}
-	}
+	};
 
 	/**
 	 * 显示输入框验证提示
@@ -308,7 +308,7 @@ var platform_verify = function() {
 		}else if(type == "warning"){
 			controlGroupDiv.addClass("warning");
 		}
-	}
+	};
 	
 	/**
 	 * 隐藏输入框提示
@@ -319,7 +319,7 @@ var platform_verify = function() {
 		controlGroupDiv.removeClass("error");
 		controlGroupDiv.removeClass("success");
 		controlGroupDiv.removeClass("warning");
-	}
+	};
 
 	/**
 	 * 输入框数据验证
@@ -436,7 +436,7 @@ var platform_verify = function() {
 			}
 		}
 		return true;
-	}	
+	};
 	
 	/**
 	 * 失去焦点时验证
@@ -446,7 +446,7 @@ var platform_verify = function() {
 	var onblurVali = function(inputNode){
 		inputNode = $(inputNode);
 		inputDataVali(inputNode);
-	}
+	};
 	
 	/**
 	 * 整个form一次验证
@@ -465,7 +465,7 @@ var platform_verify = function() {
 			}
 		}
 		return errorCount;
-	}
+	};
 	
 	/**
 	 * 整个form一次验证并提交
@@ -479,7 +479,7 @@ var platform_verify = function() {
 		}else{
 			common_ajax.ajaxFormMainPanel(formNode.id);
 		}
-	}
+	};
 	
 	return {
 		onblurVali : onblurVali,

@@ -51,7 +51,7 @@
 							<option value="1" ${splitPage.queryParam["status"]! == "1" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.success"]}</option>
 							<option value="0" ${splitPage.queryParam["status"]! == "0" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.error"]}</option>
 						</select>
-							
+						
 						${i18nMap["admin.sysLog.property.startdate"]} 
 		                <input class="medium" type="text" name="_query.startdate_start" value='${escapeXml(splitPage.queryParam["startdate_start"])}' 
 		                	id="startDate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate:'2016-07-01', maxDate:'#F{$dp.$D(\'endDate\')}'})" style="width: 135px" readonly>
@@ -60,6 +60,7 @@
 		                	id="endDate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate:'#F{$dp.$D(\'startDate\')}', maxDate:'%y-%M-%d'})" style="width: 135px" readonly>
 		                
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="button" class="btn btn-danger" onclick='platform_windows.open("${cxt!}/platform/sysLog/export", "splitPage");'>${i18nMap["admin.common.export"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
 					</div>
 				</div>
