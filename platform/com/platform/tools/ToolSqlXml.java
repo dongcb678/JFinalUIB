@@ -171,7 +171,7 @@ public abstract class ToolSqlXml {
 			if(clounm.equals("#" + clounm2 + "#")){ // 数值型，可以对应处理int、long、bigdecimal、double等等
 				String val = String.valueOf(param.get(clounm3));
 				try {
-					Integer.parseInt(val);
+					Double.parseDouble(val);
 					sql = sql.replace(clounm, val);
 				} catch (NumberFormatException e) {
 					log.error("查询参数值错误，整型值传入了字符串，非法字符串是：" + val);
