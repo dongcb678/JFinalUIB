@@ -198,38 +198,30 @@ public abstract class BaseController extends Controller {
 
 	/**
 	 * 自定义render
-	 * @param data 正常情况下返回的数据
+	 * @param code 状态码
+	 * @param data 返回数据
+	 * @param description 描述
 	 * 描述：公共render，所有的renderJson都必须返回RenderObject，包含处理状态、返回数据、失败下的状态码、失败描述
 	 */
-	public void renderSuccess(Object data) {
+	public void renderSuccess(String code, Object data, String description) {
 		RenderBean renderBean = new RenderBean();
 		renderBean.setStatus(ConstantRender.render_success);
 		renderBean.setData(data);
-		renderJson(renderBean);
-	}
-
-	/**
-	 * 自定义render失败
-	 * @param description 错误描述
-	 * 描述：公共render，所有的renderJson都必须返回RenderObject，包含处理状态、返回数据、失败下的状态码、失败描述
-	 */
-	public void renderError(String description) {
-		RenderBean renderBean = new RenderBean();
-		renderBean.setStatus(ConstantRender.render_error);
 		renderBean.setDescription(description);
 		renderJson(renderBean);
 	}
 
 	/**
 	 * 自定义render失败
-	 * @param errorCode 错误码
-	 * @param description 错误描述
+	 * @param code 状态码
+	 * @param data 返回数据
+	 * @param description 描述
 	 * 描述：公共render，所有的renderJson都必须返回RenderObject，包含处理状态、返回数据、失败下的状态码、失败描述
 	 */
-	public void renderError(String errorCode, String description) {
+	public void renderError(String code, Object data, String description) {
 		RenderBean renderBean = new RenderBean();
 		renderBean.setStatus(ConstantRender.render_error);
-		renderBean.setErrorCode(errorCode);
+		renderBean.setCode(code);
 		renderBean.setDescription(description);
 		renderJson(renderBean);
 	}

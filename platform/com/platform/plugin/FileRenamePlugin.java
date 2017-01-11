@@ -25,11 +25,9 @@ public class FileRenamePlugin implements IPlugin {
 		        int pot = file.getName().lastIndexOf(".");   
 		        if(pot != -1){   
 		        	ext = file.getName().substring(pot);   
-		        }else{   
-		        	ext = "";   
-		        }   
+		        }
 		        String newName = ToolRandoms.getUuid(true) + ext;   
-		        file = new File(file.getParent(),newName);   
+		        file = new File(file.getParent(), newName);   
 		        return file;
 			}
 		});

@@ -31,7 +31,7 @@ public class StationOperatorController extends BaseController {
 		String stationIds = getPara("stationIds");
 		String operatorIds = getPara("operatorIds");
 		String ids = stationOperatorService.add(stationIds, operatorIds);
-		renderSuccess(ids);
+		renderSuccess(null, ids, null);
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class StationOperatorController extends BaseController {
 	public void del() {
 		String stationOperatorIds = getPara();
 		stationOperatorService.del(stationOperatorIds);
-		renderSuccess(null);
+		renderSuccess(null, null, null);
 	}
 	
 }

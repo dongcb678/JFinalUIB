@@ -414,7 +414,7 @@ public class AuthInterceptor implements Interceptor {
 		String authCodeCookie = ToolIDEA.encrypt(authCode);
 		
 		// 2.设置登陆验证码cookie
-		int maxAgeTemp = -1;
+		int maxAgeTemp = 30 * 60; // 半小时
 		ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.request_authCode, authCodeCookie, maxAgeTemp);
 	}
 

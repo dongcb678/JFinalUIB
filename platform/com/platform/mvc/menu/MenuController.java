@@ -120,7 +120,7 @@ public class MenuController extends BaseController {
 		Menu menu = Menu.dao.findById(menuIds);
 		menu.setOperatorids(operatorIds);
 		menu.update();
-		renderSuccess(null);
+		renderSuccess(null, null, null);
 	}
 }
 

@@ -16,12 +16,12 @@ public class RenderBean implements Serializable{
 	private String status = "";
 	
 	/**
-	 * 失败时的错误码
+	 * 状态码
 	 */
-	private String errorCode = "";
+	private String code = "";
 
 	/**
-	 * 错误描述
+	 * 描述
 	 */
 	private String description = "";
 	
@@ -38,12 +38,12 @@ public class RenderBean implements Serializable{
 		this.status = status;
 	}
 
-	public String getErrorCode() {
-		return errorCode;
+	public String getCode() {
+		return code;
 	}
 
-	public void setErrorCode(String errorCode) {
-		this.errorCode = errorCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getDescription() {

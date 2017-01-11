@@ -31,7 +31,7 @@ public class RoleOperatorController extends BaseController {
 		String roleIds = getPara("roleIds");
 		String operatorIds = getPara("operatorIds");
 		String ids = roleOperatorService.add(roleIds, operatorIds);
-		renderSuccess(ids);
+		renderSuccess(null, ids, null);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class RoleOperatorController extends BaseController {
 	 */
 	public void del() {
 		roleOperatorService.del(getPara());
-		renderSuccess(null);
+		renderSuccess(null, null, null);
 	}
 	
 }

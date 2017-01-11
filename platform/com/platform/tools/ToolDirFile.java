@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -352,7 +353,42 @@ public abstract class ToolDirFile {
 			e.printStackTrace();
 		}
 	}
-
+	
+    /**
+     * 指定位置开始写入文件
+     * @param outPath  输出文件的路径(路径+文件名)
+     * @param tempFile  输入文件
+     * 描述 ：把目标文件的指针，移到文件末尾，然后把分片文件追加进去，实现文件合并
+     */
+    public static void writeFile(String outPath, File tempFile) {
+        RandomAccessFile  raFile = null;
+        BufferedInputStream inputStream=null;
+        try{
+            File dirFile = new File(outPath);
+            raFile = new RandomAccessFile(dirFile, "rw"); //以读写的方式打开目标文件
+            raFile.seek(raFile.length());
+            inputStream = new BufferedInputStream(new FileInputStream(tempFile));
+            byte[] buf = new byte[1024];
+            int length = 0;
+            while ((length = inputStream.read(buf)) != -1) {
+                raFile.write(buf, 0, length);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (raFile != null) {
+                    raFile.close();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    
 	/***
 	 * 压缩GZip
 	 * 
