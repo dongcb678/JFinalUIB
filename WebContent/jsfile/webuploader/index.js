@@ -23,6 +23,10 @@ jQuery(function() {
 
     // 当有文件添加进来的时候
     uploader.on( 'fileQueued', function( file ) {
+	  	console.log("文件大小(MB):" + file.size/(1024 * 1024));
+  		if(file.size > (100 * 1024 * 1024)){ //大于100MB直接结束
+  			return false;
+  		}
         $list.append( '<div id="' + file.id + '" class="item">' +
             '<h4 class="info">' + file.name + '</h4>' +
             '<p class="state">等待上传...</p>' +
@@ -128,6 +132,10 @@ jQuery(function() {
 
     // 当有文件添加进来的时候
     uploader.on( 'fileQueued', function( file ) {
+	  	console.log("文件大小(MB):" + file.size/(1024 * 1024));
+  		if(file.size > (2 * 1024 * 1024)){ //大于2MB直接结束
+  			return false;
+  		}
         var $li = $(
                 '<div id="' + file.id + '" class="file-item thumbnail">' +
                     '<img>' +
