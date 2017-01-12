@@ -32,14 +32,35 @@ $(function(){
 	});  
      
   	// 当有文件添加进来的时候
-	uploader.on( "fileQueued", function(file) {
+	uploader.on("fileQueued", function(file) {
 		console.log("fileQueued:");
 		$list.append( "<div id='"+  file.id + "' class='item'>" +
 	             "<h4 class='info'>" + file.name + "</h4>" +
 	             "<p class='state'>等待上传...</p>" +
 	         "</div>" );
 	});
-     
+
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on('uploadProgress', function( file, percentage ) {
+        var $li = $( '#'+file.id ),
+            $percent = $li.find('.progress .progress-bar');
+
+        // 避免重复创建
+        if ( !$percent.length ) {
+            $percent = $('<div class="progress progress-striped active">' +
+              '<div class="progress-bar" role="progressbar" style="width: 0%; background-color: red;">' +
+              '</div>' +
+            '</div>').appendTo( $li ).find('.progress-bar');
+        }
+
+        $li.find('p.state').text('上传中');
+
+  		//console.log("li:"+ $li.html());
+  		//console.log("进度:"+ parseInt(percentage * 100) + '%');
+  		
+        $percent.css( 'width', percentage * 100 + '%' ).html("上传进度:" + parseInt(percentage * 100) + '%');
+    });
+
     // 当某个文件的分块在发送前触发
     uploader.on("uploadBeforeSend",function(object, data){
     	console.log("uploadBeforeSend");
@@ -75,7 +96,12 @@ $(function(){
         uploader.removeFile(file,true);
         //uploader.reset();
     });
-     
+
+    // 上传结束
+    uploader.on('uploadComplete', function( file ) {
+        //$( '#'+file.id ).find('.progress').fadeOut();
+    });
+
     // 上传点击事件
     $("#upload").on("click", function() {
     	uploader.upload();
@@ -125,7 +151,28 @@ $(function(){
              	"<p class='state'>等待上传...</p>" +
         	"</div>" );
     });
-     
+
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on('uploadProgress', function( file, percentage ) {
+        var $li = $( '#'+file.id ),
+            $percent = $li.find('.progress .progress-bar');
+
+        // 避免重复创建
+        if ( !$percent.length ) {
+            $percent = $('<div class="progress progress-striped active">' +
+              '<div class="progress-bar" role="progressbar" style="width: 0%; background-color: red;">' +
+              '</div>' +
+            '</div>').appendTo( $li ).find('.progress-bar');
+        }
+
+        $li.find('p.state').text('上传中');
+
+  		//console.log("li:"+ $li.html());
+  		//console.log("进度:"+ parseInt(percentage * 100) + '%');
+  		
+        $percent.css( 'width', percentage * 100 + '%' ).html("上传进度:" + parseInt(percentage * 100) + '%');
+    });
+
   	// 当开始上传流程时触发
     uploader.on("startUpload", function() {
        console.log("startUpload");
@@ -151,7 +198,8 @@ $(function(){
         	 alert("error");
          }
     });
-     
+    
+    // 上传成功
     uploader.on("uploadSuccess", function( file ) {
     	$("#" + file.id).find("p.state").text("已上传");
     });
@@ -176,7 +224,12 @@ $(function(){
         fileName = [];
         fileSizeOneByOne=[];
      });
-     
+
+    // 上传结束
+    uploader.on('uploadComplete', function( file ) {
+        //$( '#'+file.id ).find('.progress').fadeOut();
+    });
+
     //当validate不通过时，会以派送错误事件的形式通知调用者
     uploader.on("error",function(){
     	console.log("error");
