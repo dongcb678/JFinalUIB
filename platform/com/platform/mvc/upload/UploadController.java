@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.upload.UploadFile;
 import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
@@ -27,17 +28,17 @@ public class UploadController extends BaseController {
 	/**
 	 * 默认保存到/WebRoot/files/upload
 	 */
-	private static final String pathRoot = "files" + File.separator + "upload";
+	public static final String path_root = "files" + File.separator + "upload";
 	
 	/**
 	 * 指定保存到/WebRoot/WEB-INF/files/upload
 	 */
-    private static final String pathWebInf = "WEB-INF" + File.separator + "files" + File.separator + "upload";
+	public static final String path_webInf = "WEB-INF" + File.separator + "files" + File.separator + "upload";
 
 	/**
 	 * 分片上传临时目录
 	 */
-    private static final String pathTemp = "WEB-INF" + File.separator + "files" + File.separator + "temp";
+	public static final String path_temp = "WEB-INF" + File.separator + "files" + File.separator + "temp";
     
 	/**
 	 * 文件存放路径
@@ -62,10 +63,10 @@ public class UploadController extends BaseController {
 	 */
 	private String path(){
 		if(null != pathType && pathType.equals("webInf")){
-			return pathWebInf;
+			return path_webInf;
 		} else {
 			pathType = "webRoot";
-			return pathRoot;
+			return path_root;
 		}
 	}
 	
@@ -85,7 +86,7 @@ public class UploadController extends BaseController {
 	public void slice(){
 		try {
 			// 1.临时文件
-			UploadFile uploadFile = getFiles(pathTemp, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding).get(0);
+			UploadFile uploadFile = getFiles(path_temp, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding).get(0);
 
 			// 2.目标文件路径
 			String basePath = new StringBuffer()
@@ -126,7 +127,7 @@ public class UploadController extends BaseController {
 	public void slices(){
 		try {
 			// 1.临时文件
-			UploadFile uploadFile = getFiles(pathTemp, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding).get(0);
+			UploadFile uploadFile = getFiles(path_temp, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding).get(0);
 
 			// 2.目标文件路径
 			String basePath = new StringBuffer()
@@ -159,6 +160,16 @@ public class UploadController extends BaseController {
 		} catch (Exception e) {
 			renderError(null, null, "上传失败");
 		}
+	}
+	
+	/**
+	 * 验证文件MD5摘要是否存在
+	 */
+	public void md5(){
+		String md5 = getPara();
+		String sql = getSql(Upload.sqlId_md5);
+		long count = Db.use(ConstantInit.db_dataSource_main).queryNumber(sql, md5).longValue();
+		renderSuccess(null, count, null);
 	}
 	
 	/**

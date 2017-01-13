@@ -73,7 +73,7 @@ public class TestMD5 {
 	@Test
 	public void testByMessageDigest() throws Exception {
 		// 文件路径
-		String path = "D:\\mysql-essential-5.1.38-win32.msi";
+		String path = "E:\\JFinalUIB_V3.rar";
 
 		// 构建文件输入流
 		FileInputStream fis = new FileInputStream(new File(path));
@@ -107,7 +107,7 @@ public class TestMD5 {
 		String md5hex = Hex.encodeHexString(b);
 
 		// 验证
-		assertEquals(md5hex, "5a077abefee447cbb271e2aa7f6d5a47");
+		assertEquals(md5hex, "2cc902e05d7554985cb9f68aee4ac9eb");
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class TestMD5 {
 	@Test
 	public void testByDigestUtils() throws Exception {
 		// 文件路径
-		String path = "D:\\mysql-essential-5.1.38-win32.msi";
+		String path = "E:\\JFinalUIB_V3.rar";
 
 		// 构建文件输入流
 		FileInputStream fis = new FileInputStream(new File(path));
@@ -130,7 +130,7 @@ public class TestMD5 {
 		fis.close();
 
 		// 验证
-		assertEquals(md5hex, "5a077abefee447cbb271e2aa7f6d5a47");
+		assertEquals(md5hex, "2cc902e05d7554985cb9f68aee4ac9eb");
 	}
 
 }

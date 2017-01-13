@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2017-01-11 16:27:03
+Date: 2017-01-13 16:08:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -318,6 +318,7 @@ INSERT INTO `pt_operator` VALUES ('2fee901117c64e18873f60e8f800713d', '0', null,
 INSERT INTO `pt_operator` VALUES ('3085a3b0c20d4f3aaa7c2d27fe986aba', '0', null, '博客添加', null, null, null, '0', '/test/blog/add.html', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', null, null, '博客');
 INSERT INTO `pt_operator` VALUES ('30bf01ffe1cb4ed39e92c6600ea39e93', '0', null, '添加', null, null, null, '0', '/platform/groupRole/addRole', '625e895224aa424693149208c9d4073e', '0', '0', '0', '1', null, null, '分组角色');
 INSERT INTO `pt_operator` VALUES ('32a3e59964204a3c8848e84b864306ae', '0', null, '删除', null, null, null, '0', '/platform/systems/delete', '8a40c0353fa828a6013fa898d4ac0026', '0', '0', '0', '1', null, null, '系统');
+INSERT INTO `pt_operator` VALUES ('3329f58a0eed44e195dec78bddc591b8', '0', null, '验证文件md5', null, null, null, '0', '/platform/upload/md5', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '上传文件');
 INSERT INTO `pt_operator` VALUES ('335d1f8f46eb47a18001889f8cc21348', '0', null, '删除', null, null, null, '0', '/platform/role/delete', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
 INSERT INTO `pt_operator` VALUES ('351851fb7fce48f9a0ff6747971715ac', '0', null, 'lucene', null, null, null, '0', '/platform/test/lucene', '68422887e56645728038cdde08caef9a', '1', '0', '0', '1', null, null, 'Test');
 INSERT INTO `pt_operator` VALUES ('362cf247241c4d12b6242301e4a73516', '0', null, '删除', null, null, null, '0', '/platform/station/delete', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
@@ -575,6 +576,7 @@ INSERT INTO `pt_roleoperator` VALUES ('27274973f3e54783ae986912b84d91bc', '8a40c
 INSERT INTO `pt_roleoperator` VALUES ('2897ed0986344de0a790c1c315381a43', '8a40c0353fa828a6013fa898d4ac0023', '4a6544ae7a2548ad81c0e3994999023c');
 INSERT INTO `pt_roleoperator` VALUES ('2a0b60e808e145989a031277b83efae7', '8a40c0353fa828a6013fa898d4ac0023', '1329f58a0eed44e195dec78bddc591b6');
 INSERT INTO `pt_roleoperator` VALUES ('2a0b60e808e145989a031277b83efae8', '8a40c0353fa828a6013fa898d4ac0023', '2329f58a0eed44e195dec78bddc591b7');
+INSERT INTO `pt_roleoperator` VALUES ('2a0b60e808e145989a031277b83efae9', '8a40c0353fa828a6013fa898d4ac0023', '3329f58a0eed44e195dec78bddc591b8');
 INSERT INTO `pt_roleoperator` VALUES ('2b0fc857882b4fd0a068d8ddaf514eab', '8a40c0353fa828a6013fa898d4ac0023', '053d330462e1459ca1012c9d29113bc4');
 INSERT INTO `pt_roleoperator` VALUES ('2bc4654b3cc74eccad6ff320ede62385', '8a40c0353fa828a6013fa898d4ac0023', 'cc6bcbee40ab43b2bd5aff6d9385e1fc');
 INSERT INTO `pt_roleoperator` VALUES ('2c2d096b627e4d3681f494e4ef38e6f0', '8a40c0353fa828a6013fa898d4ac0023', 'b13b002e2fad4e95bbe0e4dbc9fbdfe1');
@@ -979,7 +981,10 @@ CREATE TABLE `pt_upload` (
   `contenttype` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `originalfilename` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `path` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`ids`)
+  `md5` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '文件MD5摘要',
+  PRIMARY KEY (`ids`),
+  UNIQUE KEY `md5_index` (`md5`) USING HASH,
+  UNIQUE KEY `filename_index` (`filename`) USING HASH
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------

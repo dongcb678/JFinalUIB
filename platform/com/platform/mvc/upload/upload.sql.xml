@@ -31,4 +31,16 @@
     	]]>
 	</sql>
 	
+	<!-- 根据MD5值查询 -->
+	<sql id="md5">
+		<![CDATA[ 
+        	select 
+        		count(ids)
+        	from 
+        		pt_upload 
+        	where 
+        		md5 = ?
+    	]]>
+	</sql>
+	
 </sql-statement>

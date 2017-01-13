@@ -27,10 +27,24 @@ jQuery(function() {
   		if(file.size > (100 * 1024 * 1024)){ //大于100MB直接结束
   			return false;
   		}
-        $list.append( '<div id="' + file.id + '" class="item">' +
-            '<h4 class="info">' + file.name + '</h4>' +
-            '<p class="state">等待上传...</p>' +
-        '</div>' );
+  		
+  		uploader.md5File( file ).progress(function(percentage) { // 及时显示MD5进度
+            console.log('md5 Percentage:', percentage);
+        }).then(function(val) { // 完成
+            console.log('md5 result:', val);
+            
+            // ajax url示例 ： /platform/upload/md5/2cc902e05d7554985cb9f68aee4ac9eb ，返回值等于0表示服务端不存在，需要上传，不等于0表示已经存在，不需要上传
+            if(val == "2cc902e05d7554985cb9f68aee4ac9eb"){ // 这里可以根据MD5值实现秒传，验证服务器是否存在此文件MD5值
+            	uploader.skipFile(file); // 跳过一个文件上传，直接标记指定文件为已上传状态
+                console.log('秒传成功');
+                return false;
+            }
+            
+            $list.append( '<div id="' + file.id + '" class="item">' +
+                '<h4 class="info">' + file.name + '</h4>' +
+                '<p class="state">等待上传...</p>' +
+            '</div>' );
+        });
     });
 
     // 文件上传过程中创建进度条实时显示。

@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jfinal.kit.PathKit;
 import com.jfinal.log.Log;
 import com.jfinal.upload.UploadFile;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
 import com.platform.tools.ToolRandoms;
+import com.platform.tools.security.md.ToolMD5;
 
 @Service(name = UploadService.serviceName)
 public class UploadService extends BaseService {
@@ -33,13 +35,29 @@ public class UploadService extends BaseService {
 			String fileName = uploadFile.getFileName();
 			String contentType = uploadFile.getContentType();
 			String originalFileName = uploadFile.getOriginalFileName();
+
+			String basePath = null;
+			if(pathType.equals("webInf")){
+				basePath = new StringBuffer()
+						.append(PathKit.getWebRootPath()).append(File.separator)
+						.append(UploadController.path_webInf).append(File.separator)
+						.toString();
+			} else {
+				basePath = new StringBuffer()
+						.append(PathKit.getWebRootPath()).append(File.separator)
+						.append(UploadController.path_root).append(File.separator)
+						.toString();
+			}
 			
+	        String md5 = ToolMD5.encodeMD5HexFile(basePath + fileName); // 文件MD5摘要
+	        
 			Upload upload = new Upload();
 			upload.set(Upload.column_parametername, parameterName);
 			upload.set(Upload.column_filename, fileName);
 			upload.set(Upload.column_contenttype, contentType);
 			upload.set(Upload.column_originalfilename, originalFileName);
 			upload.set(Upload.column_path, pathType);
+			upload.setMd5(md5);
 			upload.save();
 			
 			Map<String, String> map = new HashMap<String, String>();
@@ -67,13 +85,29 @@ public class UploadService extends BaseService {
 		String fileName = uploadFile.getFileName();
 		String contentType = uploadFile.getContentType();
 		String originalFileName = uploadFile.getOriginalFileName();
+
+		String basePath = null;
+		if(pathType.equals("webInf")){
+			basePath = new StringBuffer()
+					.append(PathKit.getWebRootPath()).append(File.separator)
+					.append(UploadController.path_webInf).append(File.separator)
+					.toString();
+		} else {
+			basePath = new StringBuffer()
+					.append(PathKit.getWebRootPath()).append(File.separator)
+					.append(UploadController.path_root).append(File.separator)
+					.toString();
+		}
 		
+        String md5 = ToolMD5.encodeMD5HexFile(basePath + fileName); // 文件MD5摘要
+        
 		Upload upload = new Upload();
 		upload.set(Upload.column_parametername, parameterName);
 		upload.set(Upload.column_filename, fileName);
 		upload.set(Upload.column_contenttype, contentType);
 		upload.set(Upload.column_originalfilename, originalFileName);
 		upload.set(Upload.column_path, pathType);
+		upload.setMd5(md5);
 		upload.save(ids);
 		
 		Map<String, String> map = new HashMap<String, String>();
@@ -93,27 +127,29 @@ public class UploadService extends BaseService {
 	 * @return
 	 */
 	public Map<String, String> slice(String pathType, UploadFile uploadFile, String basePath, String storePath){
-		String originalFileName = uploadFile.getOriginalFileName();
-		
-		String ext = "";   
+		String originalFileName = uploadFile.getOriginalFileName(); // 原文件名
+		String ext = "";   // 后缀
         int pot = originalFileName.lastIndexOf(".");   
         if(pot != -1){   
         	ext = originalFileName.substring(pot);   
         }
-        
+		String fileName = ToolRandoms.getUuid(true) + ext;   // 新文件名
 		String parameterName = uploadFile.getParameterName();
-		String fileName = ToolRandoms.getUuid(true) + ext;   
 		String contentType = uploadFile.getContentType();
 		
         File file = new File(storePath);
-        file.renameTo(new File(basePath + File.separator + fileName));
+        String toPath = new StringBuffer().append(basePath).append(File.separator).append(fileName).toString();
+        file.renameTo(new File(toPath));
+        
+        String md5 = ToolMD5.encodeMD5HexFile(toPath); // 文件MD5摘要
         
 		Upload upload = new Upload();
-		upload.set(Upload.column_parametername, parameterName);
-		upload.set(Upload.column_filename, fileName);
-		upload.set(Upload.column_contenttype, contentType);
-		upload.set(Upload.column_originalfilename, originalFileName);
-		upload.set(Upload.column_path, pathType);
+		upload.setParametername(parameterName);
+		upload.setFilename(fileName);
+		upload.setContenttype(contentType);
+		upload.setOriginalfilename(originalFileName);
+		upload.setPath(pathType);
+		upload.setMd5(md5);
 		upload.save();
 		
 		Map<String, String> map = new HashMap<String, String>();

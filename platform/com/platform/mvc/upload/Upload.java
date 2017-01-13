@@ -64,12 +64,24 @@ public class Upload extends BaseModel<Upload> {
 	 * 字段类型：character varying  长度：500
 	 */
 	public static final String column_path = "path";
+
+	/**
+	 * 字段描述：文件MD5摘要
+	 * 字段类型：character varying  长度：100
+	 */
+	public static final String column_md5 = "md5";
 	
 	/**
 	 * sqlId : platform.upload.splitPageFrom
 	 * 描述：分页from
 	 */
 	public static final String sqlId_splitPageFrom = "platform.upload.splitPageFrom";
+
+	/**
+	 * sqlId : platform.upload.md5
+	 * 描述：md5查询
+	 */
+	public static final String sqlId_md5 = "platform.upload.md5";
 
 	private String ids;
 	private Long version;
@@ -78,6 +90,7 @@ public class Upload extends BaseModel<Upload> {
 	private String contenttype;
 	private String originalfilename;
 	private String path;
+	private String md5;
 	
 	public void setIds(String ids){
 		set(column_ids, ids);
@@ -120,6 +133,12 @@ public class Upload extends BaseModel<Upload> {
 	}
 	public String getPath() {
 		return get(column_path);
+	}
+	public String getMd5() {
+		return get(column_md5);
+	}
+	public void setMd5(String md5) {
+		set(column_md5, md5);
 	}
 	
 }
