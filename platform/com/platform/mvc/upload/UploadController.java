@@ -40,20 +40,7 @@ public class UploadController extends BaseController {
 	 */
 	public static final String path_temp = "WEB-INF" + File.separator + "files" + File.separator + "temp";
     
-	/**
-	 * 文件存放路径
-	 */
-	private String pathType;  
-
-    /**
-     * webupload自带的参数，当前分片索引，从0开始
-     */
-    private String chunk;
-
-    /**
-     * webupload自带的参数，分片总数
-     */
-    private int chunks;
+	private String pathType;  // 文件存放路径，使用get方式提交，此参数放在URL中，否则在getFile之前无法获取
 
 	private UploadService uploadService;
 	
@@ -99,15 +86,15 @@ public class UploadController extends BaseController {
 			File tempFile = uploadFile.getFile(); // 临时文件
 			ToolDirFile.writeFile(storePath, tempFile); // 追加临时文件到目标文件
 			tempFile.delete(); // 删除临时文件
-			
+
 			// 4.分片处理
-			chunk = getPara("chunk");
+		    String chunk = getPara("chunk"); // webupload自带的参数，当前分片索引，从0开始
 	        if(StringUtils.isEmpty(chunk)){ // 4.1不分片的情况，文件小于分片大小，比如指定的5MB
 	        	Map<String, String> upload = uploadService.slice(pathType, uploadFile, basePath, storePath);
 	    		renderSuccess(null, upload, "小于分片大小，一次上传成功");
 	        	
 	        }else{ // 4.2分片的情况
-				chunks = getParaToInt("chunks"); // 总分片数
+	        	int chunks = getParaToInt("chunks"); // webupload自带的参数，分片总数
 	            if (Integer.valueOf(chunk) == (chunks - 1)) { // 最后一个分片
 	            	Map<String, String> upload = uploadService.slice(pathType, uploadFile, basePath, storePath);
 		        	renderSuccess(null, upload, "所有分片上传成功");
@@ -142,13 +129,13 @@ public class UploadController extends BaseController {
 			tempFile.delete(); // 删除临时文件
 			
 			// 4.分片处理
-			chunk = getPara("chunk");
+			String chunk = getPara("chunk");
 	        if(StringUtils.isEmpty(chunk)){ // 4.1不分片的情况，文件小于分片大小，比如指定的5MB
 	        	Map<String, String> upload = uploadService.slice(pathType, uploadFile, basePath, storePath);
 	    		renderSuccess(null, upload, "小于分片大小，一次上传成功");
 	        	
 	        }else{ // 4.2分片的情况
-				chunks = getParaToInt("chunks"); // 总分片数
+				int chunks = getParaToInt("chunks"); // 总分片数
 	            if (Integer.valueOf(chunk) == (chunks - 1)) { // 最后一个分片
 	            	Map<String, String> upload = uploadService.slice(pathType, uploadFile, basePath, storePath);
 		        	renderSuccess(null, upload, "所有分片上传成功");
