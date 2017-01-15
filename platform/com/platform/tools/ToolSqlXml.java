@@ -6,10 +6,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.beetl.core.BeetlKit;
 
 import com.jfinal.log.Log;
@@ -104,17 +105,15 @@ public abstract class ToolSqlXml {
     		sql = ToolVelocity.render(sqlTemplete, param);
     	} 
 		
-		Set<String> keySet = param.keySet();
-		for (String key : keySet) {
-			if(param.get(key) == null){
+		for (Map.Entry<String, Object> entry : param.entrySet()){
+			Object paramValue = entry.getValue();
+			if(paramValue == null){
 				break;
 			}
-			
-			Object paramValue = param.get(key);
 			if(paramValue instanceof String){
 				String value = (String) paramValue;
 				value = value.replace("'", "").replace(";", "").replace("--", "");
-				sql = sql.replace("#" + key + "#", value);
+				sql = sql.replace("#" + entry.getKey() + "#", value);
 			}
 		}
 		
@@ -160,29 +159,28 @@ public abstract class ToolSqlXml {
 		Matcher matcher = pattern.matcher(sql);
 		
 		while (matcher.find()) {
-			String clounm = matcher.group(0); // 得到的结果形式：#'%$names$%'#
+			String column = matcher.group(0); // 得到的结果形式：#'%$names$%'#
 			
-			Matcher matcher2 = pattern2.matcher(clounm);
+			Matcher matcher2 = pattern2.matcher(column);
 			matcher2.find();
-			String clounm2 = matcher2.group(0); // 得到的结果形式：$names$
+			String column2 = matcher2.group(0); // 得到的结果形式：$names$
 			
-			String clounm3 = clounm2.replace("$", "");
+			String column3 = StringUtils.replace(column2, "$", ""); // column2.replace("$", "");
 			
-			if(clounm.equals("#" + clounm2 + "#")){ // 数值型，可以对应处理int、long、bigdecimal、double等等
-				String val = String.valueOf(param.get(clounm3));
-				try {
-					Double.parseDouble(val);
-					sql = sql.replace(clounm, val);
-				} catch (NumberFormatException e) {
+			if(column.equals("#" + column2 + "#")){ // 数值型，可以对应处理int、long、bigdecimal、double等等
+				String val = String.valueOf(param.get(column3));
+				if (NumberUtils.isDigits(val)) {
+					sql = sql.replace(column, val);
+				}else{
 					log.error("查询参数值错误，整型值传入了字符串，非法字符串是：" + val);
 					return null;
 				}
 				
 			}else{ // 字符串，主要是字符串模糊查询、日期比较的查询
 				
-				String val = (String) param.get(clounm3); // 预处理参数值
+				String val = (String) param.get(column3); // 预处理参数值
 				
-				if(clounm.indexOf("%") != -1){ 	// 判断是否like查询，like查询一般都含有%，然后处理最常见的占位符%和_
+				if(column.indexOf("%") != -1){ 	// 判断是否like查询，like查询一般都含有%，然后处理最常见的占位符%和_
 					if(val.indexOf("%") != -1){
 						val = val.replace("%", "\\%");
 					}
@@ -191,10 +189,10 @@ public abstract class ToolSqlXml {
 					}
 				}
 				
-				String clounm4 = clounm.replace("#", "").replace("'", "").replace(clounm2, val);
-				list.add(clounm4); // 预处理值
+				String column4 = column.replace("#", "").replace("'", "").replace(column2, val);
+				list.add(column4); // 预处理值
 				
-				sql = sql.replace(clounm, "?");
+				sql = sql.replace(column, "?");
 			}
 		}
 		
