@@ -23,6 +23,15 @@ public abstract class ToolHtml {
 	public static String escapeXml(String content){
 		return StringEscapeUtils.escapeXml11(content);
 	}
+
+	/**
+	 * 特殊字符转义，避免XSS
+	 * @param content
+	 * @return
+	 */
+	public static String escapehtml(String content){
+		return StringEscapeUtils.escapeHtml4(content);
+	}
 	
 	/**
 	 * 富文本内容处理返回纯文本

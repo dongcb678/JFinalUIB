@@ -1,10 +1,10 @@
 package com.platform.beetl.func;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.beetl.core.Context;
 import org.beetl.core.Function;
 
 import com.jfinal.log.Log;
+import com.platform.tools.ToolHtml;
 
 /**
  * 过滤xml文档函数
@@ -30,7 +30,7 @@ public class EscapeXml implements Function {
 			return arg[0];
 		}
 
-		return StringEscapeUtils.escapeXml11(content);
+		return ToolHtml.escapehtml(content);
 	}
 
 }

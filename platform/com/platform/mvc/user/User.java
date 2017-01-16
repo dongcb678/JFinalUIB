@@ -122,6 +122,12 @@ public class User extends BaseModel<User> {
 	 * 字段类型：character varying  长度：100
 	 */
 	public static final String column_email = "email";
+
+	/**
+	 * 字段描述：idea加密key 
+	 * 字段类型：character varying  长度：100
+	 */
+	public static final String column_secretkey = "secretkey";
 	
 	/**
 	 * sqlId : platform.user.splitPageSelect
@@ -180,6 +186,7 @@ public class User extends BaseModel<User> {
 	private String idcard;
 	private String email;
 	private String mobile;
+	private String secretkey;
 	
 	public void setIds(String ids){
 		set(column_ids, ids);
@@ -270,6 +277,12 @@ public class User extends BaseModel<User> {
 	}
 	public String getIdcard() {
 		return get(column_idcard);
+	}
+	public String getSecretkey() {
+		return get(column_secretkey);
+	}
+	public void setSecretkey(String secretkey) {
+		set(column_secretkey, secretkey);
 	}
 	
 	/**

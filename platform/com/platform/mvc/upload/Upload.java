@@ -70,6 +70,30 @@ public class Upload extends BaseModel<Upload> {
 	 * 字段类型：character varying  长度：100
 	 */
 	public static final String column_md5 = "md5";
+
+	/**
+	 * 字段描述：文件描述
+	 * 字段类型：text 
+	 */
+	public static final String column_describe = "describe";
+	
+	/**
+	 * 字段描述：文件依赖目标ids 
+	 * 字段类型：character varying  长度：32
+	 */
+	public static final String column_targetids = "targetids";
+
+	/**
+	 * 字段描述：排序号 
+	 * 字段类型：bigint  长度：null
+	 */
+	public static final String column_orderids = "orderids";
+
+	/**
+	 * 字段描述：文件大小，字节
+	 * 字段类型：bigint  长度：null
+	 */
+	public static final String column_size = "size";
 	
 	/**
 	 * sqlId : platform.upload.splitPageFrom
@@ -91,6 +115,10 @@ public class Upload extends BaseModel<Upload> {
 	private String originalfilename;
 	private String path;
 	private String md5;
+	private String describe;
+	private String targetids;
+	private Long orderids;
+	private Long size;
 	
 	public void setIds(String ids){
 		set(column_ids, ids);
@@ -139,6 +167,30 @@ public class Upload extends BaseModel<Upload> {
 	}
 	public void setMd5(String md5) {
 		set(column_md5, md5);
+	}
+	public String getDescribe() {
+		return get(column_describe);
+	}
+	public void setDescribe(String describe) {
+		set(column_describe, describe);
+	}
+	public String getTargetids() {
+		return get(column_targetids);
+	}
+	public void setTargetids(String targetids) {
+		set(column_targetids, targetids);
+	}
+	public Long getOrderids() {
+		return get(column_orderids);
+	}
+	public void setOrderids(Long orderids) {
+		set(column_orderids, orderids);
+	}
+	public Long getSize() {
+		return get(column_size);
+	}
+	public void setSize(Long size) {
+		set(column_size, size);
 	}
 	
 }

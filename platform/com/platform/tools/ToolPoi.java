@@ -43,6 +43,7 @@ public abstract class ToolPoi {
 	 * 
 	 * @param templatePath 模板路径
 	 */
+	@SuppressWarnings("unused")
 	public static String export(String templatePath) {
 		// 导出文件存放目录
 		String filePath = PathKit.getWebRootPath() + File.separator + "exportFile";

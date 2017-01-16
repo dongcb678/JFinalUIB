@@ -31,39 +31,7 @@ public class UploadService extends BaseService {
 	public List<Map<String, String>> upload(String pathType, List<UploadFile> files){
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		for (UploadFile uploadFile : files) {
-			String parameterName = uploadFile.getParameterName();
-			String fileName = uploadFile.getFileName();
-			String contentType = uploadFile.getContentType();
-			String originalFileName = uploadFile.getOriginalFileName();
-
-			String basePath = null;
-			if(pathType.equals("webInf")){
-				basePath = new StringBuffer()
-						.append(PathKit.getWebRootPath()).append(File.separator)
-						.append(UploadController.path_webInf).append(File.separator)
-						.toString();
-			} else {
-				basePath = new StringBuffer()
-						.append(PathKit.getWebRootPath()).append(File.separator)
-						.append(UploadController.path_root).append(File.separator)
-						.toString();
-			}
-			
-	        String md5 = ToolMD5.encodeMD5HexFile(basePath + fileName); // 文件MD5摘要
-	        
-			Upload upload = new Upload();
-			upload.set(Upload.column_parametername, parameterName);
-			upload.set(Upload.column_filename, fileName);
-			upload.set(Upload.column_contenttype, contentType);
-			upload.set(Upload.column_originalfilename, originalFileName);
-			upload.set(Upload.column_path, pathType);
-			upload.setMd5(md5);
-			upload.save();
-			
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("ids", upload.getPKValue());
-			map.put("fileName", fileName);
-			map.put("pathType", pathType);
+			Map<String, String> map = upload(pathType, uploadFile, null, null, null, 0l);
 			list.add(map);
 		}
 		return list;
@@ -77,14 +45,25 @@ public class UploadService extends BaseService {
 	 * @return
 	 */
 	public Map<String, String> upload(String pathType, UploadFile uploadFile, String ids){
-		if(ids == null || ids.isEmpty()){
-			ids = ToolRandoms.getUuid(true);
-		}
-		
+		return upload(pathType, uploadFile, ids, null, null, 0l);
+	}
+
+	/**
+	 * 单文件上传处理
+	 * @param pathType
+	 * @param uploadFile
+	 * @param ids
+	 * @param describe
+	 * @param orderids
+	 * @param targetIds
+	 * @return
+	 */
+	public Map<String, String> upload(String pathType, UploadFile uploadFile, String ids, String targetIds, String describe, Long orderids){
 		String parameterName = uploadFile.getParameterName();
 		String fileName = uploadFile.getFileName();
 		String contentType = uploadFile.getContentType();
 		String originalFileName = uploadFile.getOriginalFileName();
+		long size = uploadFile.getFile().length();
 
 		String basePath = null;
 		if(pathType.equals("webInf")){
@@ -108,7 +87,11 @@ public class UploadService extends BaseService {
 		upload.set(Upload.column_originalfilename, originalFileName);
 		upload.set(Upload.column_path, pathType);
 		upload.setMd5(md5);
-		upload.save(ids);
+		upload.setDescribe(describe);
+		upload.setOrderids(orderids);
+		upload.setTargetids(targetIds);
+		upload.setSize(size);
+		upload.save();
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("ids", upload.getPKValue());
@@ -136,6 +119,7 @@ public class UploadService extends BaseService {
 		String fileName = ToolRandoms.getUuid(true) + ext;   // 新文件名
 		String parameterName = uploadFile.getParameterName();
 		String contentType = uploadFile.getContentType();
+		long size = uploadFile.getFile().length();
 		
         File file = new File(storePath);
         String toPath = new StringBuffer().append(basePath).append(File.separator).append(fileName).toString();
@@ -150,6 +134,7 @@ public class UploadService extends BaseService {
 		upload.setOriginalfilename(originalFileName);
 		upload.setPath(pathType);
 		upload.setMd5(md5);
+		upload.setSize(size);
 		upload.save();
 		
 		Map<String, String> map = new HashMap<String, String>();

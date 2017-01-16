@@ -16,6 +16,7 @@ import com.platform.annotation.Service;
 import com.platform.dto.ZtreeNode;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.dept.Department;
+import com.platform.tools.security.ToolIDEA;
 import com.platform.tools.security.ToolPbkdf2;
 
 @Service(name = UserService.serviceName)
@@ -41,6 +42,10 @@ public class UserService extends BaseService {
 			user.set(User.column_salt, Base64.encodeBase64String(salt));
 			user.set(User.column_password, Base64.encodeBase64String(encryptedPassword));
 
+			// 初始化idea密钥
+			String secretKey = Base64.encodeBase64String(ToolIDEA.initKey());
+			user.setSecretkey(secretKey);
+			
 			// 保存用户
 			user.set(User.column_errorcount, 0);
 			user.set(User.column_status, "1");

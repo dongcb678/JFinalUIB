@@ -1,22 +1,22 @@
 package com.platform.interceptor;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.kit.StrKit;
 import com.jfinal.upload.MultipartRequest;
+import com.platform.tools.ToolHtml;
 
 /**
  * XSS拦截器
+ * 描述：重写get参数或属性系列方法，参数值增加html转义
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class XSSInterceptor implements Interceptor {
 
 	@Override
@@ -30,11 +30,19 @@ public class XSSInterceptor implements Interceptor {
 		inv.invoke();
 	}
 
+	/**
+	 * 是否enctype="multipart/form-data"
+	 * @param inv
+	 * @return
+	 */
 	private boolean isMultipartRequest(Invocation inv) {
 		String contentType = inv.getController().getRequest().getContentType();
 		return contentType != null && contentType.toLowerCase().indexOf("multipart") != -1;
 	}
 
+	/**
+	 * 重写get参数或属性系列方法，参数值增加html转义
+	 */
 	static class XSSMutipartRequest extends MultipartRequest {
 		public XSSMutipartRequest(HttpServletRequest request) {
 			super(request);
@@ -44,7 +52,7 @@ public class XSSInterceptor implements Interceptor {
 		public String getParameter(String name) {
 			String value = super.getParameter(name);
 			if (StrKit.notBlank(value)) {
-				value = escape(value);
+				value = ToolHtml.escapehtml(value);
 			}
 			return value;
 		}
@@ -53,7 +61,7 @@ public class XSSInterceptor implements Interceptor {
 		public Object getAttribute(String name) {
 			Object value = super.getAttribute(name);
 			if (value instanceof String) {
-				value = escape(String.valueOf(value));
+				value = ToolHtml.escapehtml(String.valueOf(value));
 			}
 			return value;
 		}
@@ -63,7 +71,7 @@ public class XSSInterceptor implements Interceptor {
 			String[] values = super.getParameterValues(name);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
-					values[i] = escape(values[i]);
+					values[i] = ToolHtml.escapehtml(values[i]);
 				}
 			}
 			return values;
@@ -74,23 +82,20 @@ public class XSSInterceptor implements Interceptor {
 			HashMap<String, String[]> paramMap = (HashMap<String, String[]>) super.getParameterMap();
 			paramMap = (HashMap) paramMap.clone();
 
-			for (Iterator<Map.Entry<String, String[]>> iterator = paramMap.entrySet().iterator(); iterator.hasNext();) {
-				Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator.next();
+			for (Map.Entry<String, String[]> entry : paramMap.entrySet()){
 				String[] values = entry.getValue();
 				for (int i = 0; i < values.length; i++) {
-					values[i] = escape(values[i]);
+					values[i] = ToolHtml.escapehtml(values[i]);
 				}
 				entry.setValue(values);
 			}
 			return paramMap;
 		}
-
-		private String escape(String value) {
-			return StringEscapeUtils.escapeHtml4(value);
-		}
-
 	}
 
+	/**
+	 * 重写get参数或属性系列方法，参数值增加html转义
+	 */
 	static class EscapeXSSHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
 		public EscapeXSSHttpServletRequestWrapper(HttpServletRequest request) {
@@ -101,7 +106,7 @@ public class XSSInterceptor implements Interceptor {
 		public String getParameter(String name) {
 			String value = super.getParameter(name);
 			if (StrKit.notBlank(value)) {
-				value = escape(value);
+				value = ToolHtml.escapehtml(value);
 			}
 			return value;
 		}
@@ -110,7 +115,7 @@ public class XSSInterceptor implements Interceptor {
 		public Object getAttribute(String name) {
 			Object value = super.getAttribute(name);
 			if (value instanceof String) {
-				value = escape(String.valueOf(value));
+				value = ToolHtml.escapehtml(String.valueOf(value));
 			}
 			return value;
 		}
@@ -120,7 +125,7 @@ public class XSSInterceptor implements Interceptor {
 			String[] values = super.getParameterValues(name);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
-					values[i] = escape(values[i]);
+					values[i] = ToolHtml.escapehtml(values[i]);
 				}
 			}
 			return values;
@@ -131,19 +136,15 @@ public class XSSInterceptor implements Interceptor {
 			HashMap<String, String[]> paramMap = (HashMap<String, String[]>) super.getParameterMap();
 			paramMap = (HashMap) paramMap.clone();
 
-			for (Iterator<Map.Entry<String, String[]>> iterator = paramMap.entrySet().iterator(); iterator.hasNext();) {
-				Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator.next();
+			for (Map.Entry<String, String[]> entry : paramMap.entrySet()){
 				String[] values = entry.getValue();
 				for (int i = 0; i < values.length; i++) {
-					values[i] = escape(values[i]);
+					values[i] = ToolHtml.escapehtml(values[i]);
 				}
 				entry.setValue(values);
 			}
 			return paramMap;
 		}
-
-		private String escape(String value) {
-			return StringEscapeUtils.escapeHtml4(value);
-		}
 	}
+	
 }

@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2016-12-08 11:26:36
+Date: 2017-01-16 15:15:09
 */
 
 
@@ -269,6 +269,7 @@ INSERT INTO "JFINALUIBV3"."PT_MODULE" VALUES ('4c343ddf030d4e17b6db83465600778b'
 INSERT INTO "JFINALUIBV3"."PT_MODULE" VALUES ('297e0cf944e9762e0144e97dfd6e00c9', '0', '数据源', '2.png', 'true', '数据源', '2', 'ec01ee2ea97a4ff1b2371304b8d0fe34', '8a40c0353fa828a6013fa898d4ac0020');
 INSERT INTO "JFINALUIBV3"."PT_MODULE" VALUES ('c9cbb508c11b4b10aeac87a4f3ebc340', '0', null, '2.png', 'true', '资源负载', '2', 'ec01ee2ea97a4ff1b2371304b8d0fe34', '8a40c0353fa828a6013fa898d4ac0020');
 INSERT INTO "JFINALUIBV3"."PT_MODULE" VALUES ('8a40c0353fa828a6013fa898d4ac0026', '0', '系统管理', '5.png', 'true', '系统', '5', 'cbe70ed41ad040938cfd7bcc5f4f0c58', '8a40c0353fa828a6013fa898d4ac0020');
+INSERT INTO "JFINALUIBV3"."PT_MODULE" VALUES ('8d7a260e02674bd3873656deb716202e', '0', null, '4.png', 'false', '上传文件', '4', '75f9bd430f4a4ec7b0a71928e15ea5f7', '8a40c0353fa828a6013fa898d4ac0020');
 
 -- ----------------------------
 -- Table structure for "JFINALUIBV3"."PT_OPERATOR"
@@ -460,6 +461,13 @@ INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('ff91363b32424fa399e44cc0dfd688e
 INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('08a96d5dd37f49459eeb02eebeb0a78c', '0', null, '列表', null, null, null, '0', '/platform/roleOperator', 'c4ab6b8d50434ddf8fa0ec106fcfc6ea', '1', '0', '0', '1', null, null, '角色功能');
 INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('09dbbe046d6e469d8a5ba12e29abc522', '0', null, '菜单功能列表', null, null, null, '0', '/platform/menu/list', '8a40c0353fa828a6013fa898d4ac0032', '1', '0', '0', '1', null, null, '菜单');
 INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('a498a20dd4824b8fb103202360669de4', '0', null, '菜单功能设置', null, null, null, '0', '/platform/menu/set', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
+INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('235d855d7b914d728e434f0f309ab041', '0', null, '导出', null, null, null, '0', '/platform/sysLog/export', '8a40c0353fa828a6013fa898d4ac0029', '1', '0', '0', '1', null, null, '日志');
+INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('8329f58a0eed44e195dec78bddc591b5', '0', null, '上传', null, null, null, '0', '/platform/upload', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '上传文件');
+INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('1d2b6919b80a4a21821adc3efcda77b2', '0', null, '列表', null, null, null, '0', '/platform/upload/list', '8d7a260e02674bd3873656deb716202e', '1', '0', '0', '1', null, null, '上传文件');
+INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('5d6f2bb8faa948108081492179d0c0ad', '0', null, '删除', null, null, null, '0', '/platform/upload/delete', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '上传文件');
+INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('1329f58a0eed44e195dec78bddc591b6', '0', null, '单文件分片上传', null, null, null, '0', '/platform/upload/slice', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '上传文件');
+INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('2329f58a0eed44e195dec78bddc591b7', '0', null, '多文件分片上传', null, null, null, '0', '/platform/upload/slices', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '上传文件');
+INSERT INTO "JFINALUIBV3"."PT_OPERATOR" VALUES ('3329f58a0eed44e195dec78bddc591b8', '0', null, '验证文件md5', null, null, null, '0', '/platform/upload/md5', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '上传文件');
 
 -- ----------------------------
 -- Table structure for "JFINALUIBV3"."PT_PARAM"
@@ -774,6 +782,13 @@ INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('1f5bd29eabd84310b935ac26e48
 INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('22eb103099d2495f98d1bc4dc449933a', '8a40c0353fa828a6013fa898d4ac0023', 'f604f021cba44b6fb96115265e557521');
 INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('7e3f2af3206846fd8e35be1520e474e8', '8a40c0353fa828a6013fa898d4ac0023', '09dbbe046d6e469d8a5ba12e29abc522');
 INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('476fd5e99b214541aefd5c81982f624d', '8a40c0353fa828a6013fa898d4ac0023', 'a498a20dd4824b8fb103202360669de4');
+INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('aedaaa19e1da475d8f9a71c4217a80b9', '8a40c0353fa828a6013fa898d4ac0023', '235d855d7b914d728e434f0f309ab041');
+INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('1a0b60e808e145989a031277b83efae6', '8a40c0353fa828a6013fa898d4ac0023', '8329f58a0eed44e195dec78bddc591b5');
+INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('bafd8455940a46d9af5b42fa6d01aeba', '8a40c0353fa828a6013fa898d4ac0023', '1d2b6919b80a4a21821adc3efcda77b2');
+INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('bee5de9aa4714491b9cda9b3430aefd0', '8a40c0353fa828a6013fa898d4ac0023', '5d6f2bb8faa948108081492179d0c0ad');
+INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('2a0b60e808e145989a031277b83efae7', '8a40c0353fa828a6013fa898d4ac0023', '1329f58a0eed44e195dec78bddc591b6');
+INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('2a0b60e808e145989a031277b83efae8', '8a40c0353fa828a6013fa898d4ac0023', '2329f58a0eed44e195dec78bddc591b7');
+INSERT INTO "JFINALUIBV3"."PT_ROLEOPERATOR" VALUES ('2a0b60e808e145989a031277b83efae9', '8a40c0353fa828a6013fa898d4ac0023', '3329f58a0eed44e195dec78bddc591b8');
 
 -- ----------------------------
 -- Table structure for "JFINALUIBV3"."PT_STATION"
@@ -1832,7 +1847,12 @@ CREATE TABLE "JFINALUIBV3"."PT_UPLOAD" (
 "FILENAME" VARCHAR2(50 BYTE) NULL ,
 "CONTENTTYPE" VARCHAR2(100 BYTE) NULL ,
 "ORIGINALFILENAME" VARCHAR2(500 BYTE) NULL ,
-"PATH" VARCHAR2(500 BYTE) NULL 
+"PATH" VARCHAR2(500 BYTE) NULL ,
+"MD5" VARCHAR2(100 BYTE) NULL ,
+"TARGETIDS" VARCHAR2(32 BYTE) NULL ,
+"DESCRIBE" CLOB NULL ,
+"ORDERIDS" NUMBER(19) NULL ,
+"SIZE" NUMBER(19) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -1863,7 +1883,8 @@ CREATE TABLE "JFINALUIBV3"."PT_USER" (
 "NAMES" VARCHAR2(25 BYTE) NULL ,
 "PASSWORD" VARCHAR2(500 BYTE) NULL ,
 "SALT" VARCHAR2(500 BYTE) NULL ,
-"STATIONIDS" VARCHAR2(32 BYTE) NULL 
+"STATIONIDS" VARCHAR2(32 BYTE) NULL ,
+"SECRETKEY" VARCHAR2(100 BYTE) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -1874,7 +1895,7 @@ NOCACHE
 -- ----------------------------
 -- Records of PT_USER
 -- ----------------------------
-INSERT INTO "JFINALUIBV3"."PT_USER" VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '0', '0', '0', '1', null, 'admins', '8a40c0353fa828a6013fa898d4ac0028', 'dongcb678@163.com', '420881198609283721', '13871558042', '管理员', 'tY4pNgHnToFQAcDouI4GtSdwgaE=', 'wrNkWeoP9Y8=', '8a40c0353fa828a6013fa898d4ac0026');
+INSERT INTO "JFINALUIBV3"."PT_USER" VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '0', '0', '0', '1', null, 'admins', '8a40c0353fa828a6013fa898d4ac0028', 'dongcb678@163.com', '420881198609283721', '13871558042', '管理员', 'tY4pNgHnToFQAcDouI4GtSdwgaE=', 'wrNkWeoP9Y8=', '8a40c0353fa828a6013fa898d4ac0026', null);
 
 -- ----------------------------
 -- Table structure for "JFINALUIBV3"."PT_USERGROUP"

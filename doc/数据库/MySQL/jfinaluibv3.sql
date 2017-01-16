@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2017-01-13 16:08:42
+Date: 2017-01-16 14:49:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -982,6 +982,10 @@ CREATE TABLE `pt_upload` (
   `originalfilename` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `path` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `md5` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '文件MD5摘要',
+  `describe` text COLLATE utf8_bin,
+  `orderids` bigint(20) DEFAULT NULL,
+  `size` bigint(20) DEFAULT NULL,
+  `targetids` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ids`),
   UNIQUE KEY `md5_index` (`md5`) USING HASH,
   UNIQUE KEY `filename_index` (`filename`) USING HASH
@@ -1011,6 +1015,7 @@ CREATE TABLE `pt_user` (
   `idcard` varchar(25) COLLATE utf8_bin DEFAULT NULL,
   `mobile` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `names` varchar(25) COLLATE utf8_bin DEFAULT NULL,
+  `secretkey` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ids`),
   KEY `usernameindex` (`username`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -1018,8 +1023,8 @@ CREATE TABLE `pt_user` (
 -- ----------------------------
 -- Records of pt_user
 -- ----------------------------
-INSERT INTO `pt_user` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '0', '0', 'GKw78xJqQ9aBY31IaojrIDtVBpY=', 'DdDxMWSgtsQ=', '1', '2016-09-02 17:14:59', 'admins', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'dongcb678@163.com', '420881198609283721', '13871558042', '管理员');
-INSERT INTO `pt_user` VALUES ('ef15e94a52584743b2b9bf604fccd0cc', '0', '0', null, 'WE+OFSzgmA8qQxTms6SBdBIBC4U=', '5kqjzm8LeEM=', '1', null, 'littleant', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'littleant@163.com', '420881198809555685', '13584778623', 'littleant');
+INSERT INTO `pt_user` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '0', '0', 'GKw78xJqQ9aBY31IaojrIDtVBpY=', 'DdDxMWSgtsQ=', '1', '2016-09-02 17:14:59', 'admins', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'dongcb678@163.com', '420881198609283721', '13871558042', '管理员', null);
+INSERT INTO `pt_user` VALUES ('ef15e94a52584743b2b9bf604fccd0cc', '0', '0', null, 'WE+OFSzgmA8qQxTms6SBdBIBC4U=', '5kqjzm8LeEM=', '1', null, 'littleant', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'littleant@163.com', '420881198809555685', '13584778623', 'littleant', null);
 
 -- ----------------------------
 -- Table structure for `pt_usergroup`
