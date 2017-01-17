@@ -126,7 +126,32 @@ public class Operator extends BaseModel<Operator> {
 	 * 字段类型：character varying  长度：50
 	 */
 	public static final String column_modulenames = "modulenames";
-	
+
+	/**
+	 * 字段描述：是否需要csrf验证 
+	 * 字段类型：character  长度：1
+	 */
+	public static final String column_csrf = "csrf";
+
+	/**
+	 * 字段描述：是否需要referer验证 
+	 * 字段类型：character  长度：1
+	 */
+	public static final String column_referer = "referer";
+
+	/**
+	 * 字段描述：请求方法验证 
+	 * 字段类型：character  长度：1
+	 * 值说明：0不需要验证，1指定get请求，2指定post请求
+	 */
+	public static final String column_method = "method";
+
+	/**
+	 * 字段描述：是否需要记录syslog 
+	 * 字段类型：character  长度：1
+	 */
+	public static final String column_syslog = "syslog";
+
 	/**
 	 * sqlId : platform.operator.paging
 	 * 描述：查询所有功能
@@ -180,6 +205,10 @@ public class Operator extends BaseModel<Operator> {
 	private String ispv;
 	private String pvtype;
 	private String modulenames;
+	private String csrf;
+	private String referer;
+	private String method;
+	private String syslog;
 	
 	public void setIds(String ids){
 		set(column_ids, ids);
@@ -282,6 +311,30 @@ public class Operator extends BaseModel<Operator> {
 	}
 	public String getModulenames() {
 		return get(column_modulenames);
+	}
+	public String getCsrf() {
+		return get(column_csrf);
+	}
+	public void setCsrf(String csrf) {
+		set(column_csrf, csrf);
+	}
+	public String getReferer() {
+		return get(column_referer);
+	}
+	public void setReferer(String referer) {
+		set(column_referer, referer);
+	}
+	public String getMethod() {
+		return get(column_method);
+	}
+	public void setMethod(String method) {
+		set(column_method, method);
+	}
+	public String getSyslog() {
+		return get(column_syslog);
+	}
+	public void setSyslog(String syslog) {
+		set(column_syslog, syslog);
 	}
 	
 	/**

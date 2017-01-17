@@ -30,6 +30,7 @@
 				<div class="widget-body form">
 
 					<form id="editForm" action="${cxt!}/platform/operator/update" method="POST" class="form-horizontal">
+						<input type="hidden" name="csrfToken" value="${csrfToken!}">
 						<input type="hidden" name="operator.ids" value="${escapeXml(operator.ids!)}" >
 						<input type="hidden" name="operator.version" value="${operator.version!}">
 

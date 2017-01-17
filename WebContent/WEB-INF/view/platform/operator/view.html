@@ -50,6 +50,41 @@
 							</div>
 						</div>
 						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.csrf"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.csrf == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.referer"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.referer == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.method"]}</label>
+							<div class="controls">
+								<% if(operator["method"] == "0"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.method.0"]}'>
+										
+								<% }else if(operator["method"] == "1"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.method.1"]}'>
+										
+								<% }else if(operator["method"] == "2"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.method.2"]}'>
+										
+								<% }else{ %>
+										
+								<% } %>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.syslog"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.syslog == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
 							<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
 							<div class="controls">
 								<input type="text" class="span8" readonly="readonly" value='${escapeXml(operator.url!)}'>

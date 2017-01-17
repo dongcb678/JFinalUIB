@@ -16,7 +16,6 @@ import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
 import com.platform.thread.ThreadSysLog;
 import com.platform.tools.ToolDateTime;
-import com.platform.tools.ToolRandoms;
 import com.platform.tools.ToolWeb;
 
 /**
@@ -33,16 +32,13 @@ public class GlobalHandler extends Handler {
 		log.debug("初始化访问系统功能日志");
 		Syslog reqSysLog = getSysLog(request);
 		long starttime = ToolDateTime.getDateByTime();
-		reqSysLog.set(Syslog.column_startdate, ToolDateTime.getSqlTimestamp(starttime));//开始时间
+		reqSysLog.set(Syslog.column_startdate, ToolDateTime.getSqlTimestamp(starttime)); // 开始时间
 		request.setAttribute(ConstantWebContext.reqSysLogKey, reqSysLog);
 		
 		log.debug("设置 web 路径");
 		String cxt = ToolWeb.getContextPath(request);
 		request.setAttribute(ConstantWebContext.request_cxt, cxt);
 
-		log.debug("request 随机分配一个请求id");
-		request.setAttribute(ConstantWebContext.request_id, ToolRandoms.getUuid(true));
-		
 		log.debug("request cookie 处理");
 		Map<String, Cookie> cookieMap = ToolWeb.readCookieMap(request);
 		request.setAttribute(ConstantWebContext.request_cookieMap, cookieMap);
@@ -84,9 +80,9 @@ public class GlobalHandler extends Handler {
 		
 		log.debug("设置Header");
 		request.setAttribute("decorator", "none");
-		response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
-		response.setHeader("Pragma","no-cache"); //HTTP 1.0
-		response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+		response.setHeader("Cache-Control","no-cache"); // HTTP 1.1
+		response.setHeader("Pragma","no-cache"); // HTTP 1.0
+		response.setDateHeader ("Expires", 0); // prevents caching at the proxy server
 		
 		next.handle(target, request, response, isHandled);
 		
@@ -111,7 +107,9 @@ public class GlobalHandler extends Handler {
 		reqSysLog.set(Syslog.column_actionhaoshi, haoshi - renderTime);
 		
 		log.debug("日志添加到入库队列");
-		ThreadSysLog.add(reqSysLog);
+		if(reqSysLog.getSyslog().equals("1")){
+			ThreadSysLog.add(reqSysLog);
+		}
 	}
 	
 	/**

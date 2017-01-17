@@ -33,6 +33,7 @@
 				<div class="widget-body form">
 
 					<form id="editForm" action="${cxt!}/platform/param/update" method="POST" class="form-horizontal">
+						<input type="hidden" name="csrfToken" value="${csrfToken!}">
 						<input type="hidden" name="param.ids" value="${param.ids!}" >
 						<input type="hidden" name="param.version" value="${param.version!}">
 

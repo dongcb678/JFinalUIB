@@ -28,6 +28,7 @@
 
 <div class="modal-body">
 	<form id="passChangeForm" action="${cxt!}/platform/user/passChange" method="POST" role="form" class="form-horizontal">
+		<input type="hidden" name="csrfToken" value="${csrfToken!}">
 		<input type="hidden" name="userName" value="${cookieMap.userName.value!}">
 
 		<div class="control-group">

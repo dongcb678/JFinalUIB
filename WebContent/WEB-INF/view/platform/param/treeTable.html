@@ -73,7 +73,7 @@
 				    okValue: '确定',
 				    ok: function () {
 				        //this.title('提交中…');
-				        parent.window.common_ajax.ajaxMainPanel('/platform/param/delete/' + ids);
+				        parent.window.common_ajax.ajaxMainPanel('/platform/param/delete/' + ids + "?csrfToken=${csrfToken!}");
 				        return true;
 				    },
 				    cancelValue: '取消',

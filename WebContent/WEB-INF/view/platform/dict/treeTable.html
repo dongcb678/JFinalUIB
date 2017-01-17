@@ -73,7 +73,7 @@
 				    okValue: '确定',
 				    ok: function () {
 				        //this.title('提交中…');
-				        parent.window.common_ajax.ajaxMainPanel('/platform/dict/delete/' + ids);
+				        parent.window.common_ajax.ajaxMainPanel('/platform/dict/delete/' + ids + "?csrfToken=${csrfToken!}");
 				        return true;
 				    },
 				    cancelValue: '取消',

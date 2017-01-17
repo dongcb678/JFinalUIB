@@ -133,7 +133,7 @@
 		
 		if(check){
 			var url = "/platform/roleOperator/add";
-			var data = { "roleIds" : '${escapeXml(splitPage.extData.ids!)}', "operatorIds" : oids };
+			var data = { "roleIds" : '${escapeXml(splitPage.extData.ids!)}', "operatorIds" : oids, "csrfToken" : "${csrfToken!}" };
 			var result = common_ajax.ajaxFunc(url, data, "json");
 			if(result.status == "success"){
 				box.value = result.data; // 返回角色功能主键
@@ -144,7 +144,7 @@
 		}else{
 			
 			var url = "/platform/roleOperator/del/" + roids;
-			var result = common_ajax.ajaxFunc(url, {}, "json");
+			var result = common_ajax.ajaxFunc(url, {"csrfToken" : "${csrfToken!}"}, "json");
 			if(result.status == "success"){
 				box.value = "";
 			}else{

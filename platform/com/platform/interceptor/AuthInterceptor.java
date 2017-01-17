@@ -13,6 +13,7 @@ import org.apache.log4j.MDC;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.constant.ConstantAuth;
 import com.platform.constant.ConstantInit;
@@ -25,6 +26,7 @@ import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
 import com.platform.mvc.usergroup.UserGroup;
 import com.platform.tools.ToolDateTime;
+import com.platform.tools.ToolRandoms;
 import com.platform.tools.ToolWeb;
 import com.platform.tools.security.ToolIDEA;
 
@@ -45,17 +47,17 @@ public class AuthInterceptor implements Interceptor {
 		BaseController contro = (BaseController) invoc.getController();
 		HttpServletRequest request = contro.getRequest();
 		HttpServletResponse response = contro.getResponse();
-
+		
 		log.debug("获取reqSysLog!");
 		Syslog reqSysLog = contro.getAttr(ConstantWebContext.reqSysLogKey);
 		contro.setReqSysLog(reqSysLog);
-
+		
 		log.debug("获取用户请求的URI，两种形式，参数传递和直接request获取");
 		String uri = invoc.getActionKey(); // 默认就是ActionKey
 		if (invoc.getMethodName().equals(ConstantWebContext.request_toUrl)) {
 			uri = ToolWeb.getParam(request, ConstantWebContext.request_toUrl); // 否则就是toUrl的值
 		}
-
+		
 		log.debug("获取当前用户!");
 		boolean userAgentVali = true; // 是否验证userAgent，默认是
 		if (uri.equals("/platform/ueditor") || uri.equals("/platform/upload")) { // 针对ueditor特殊处理，flash上传userAgent和浏览器并不一致
@@ -84,9 +86,9 @@ public class AuthInterceptor implements Interceptor {
 			log.debug("URI不存在!uri = " + uri);
 
 			log.debug("访问失败时保存日志!");
-			reqSysLog.set(Syslog.column_status, "0");// 失败
+			reqSysLog.set(Syslog.column_status, "0"); // 失败
 			reqSysLog.set(Syslog.column_description, "URL不存在");
-			reqSysLog.set(Syslog.column_cause, "1");// URL不存在
+			reqSysLog.set(Syslog.column_cause, "1"); // URL不存在
 
 			log.debug("返回失败提示页面!");
 			toView(contro, ConstantAuth.auth_no_url, "权限认证过滤器检测：URI不存在");
@@ -95,35 +97,48 @@ public class AuthInterceptor implements Interceptor {
 
 		log.debug("URI存在!");
 		reqSysLog.set(Syslog.column_operatorids, operator.getPKValue());
+		reqSysLog.setSyslog(operator.getSyslog()); // 指定日志是否入库
 
-		if (operator.get(Operator.column_privilegess).equals("1")) {// 是否需要权限验证
-			log.debug("需要权限验证!");
-			if (user == null) {
-				log.debug("权限认证过滤器检测:未登录!");
-
-				reqSysLog.set(Syslog.column_status, "0");// 失败
-				reqSysLog.set(Syslog.column_description, "未登录");
-				reqSysLog.set(Syslog.column_cause, "2");// 2 未登录
-
-				toView(contro, ConstantAuth.auth_no_login, "权限认证过滤器检测：未登录");
-				return;
+		log.debug("method校验");
+		String method = request.getMethod().toLowerCase();
+		if((operator.getMethod().equals("1") && !method.equals("get"))
+				|| operator.getMethod().equals("2") && !method.equals("post")){
+			log.info("method校验失败，operator.method=" + operator.getMethod() + "，request.method=" + method);
+			return;
+		}
+		
+		log.debug("csrf校验");
+		if (user != null) { // 理论上csrf安全涉及到的是后台数据更新和删除操作URL安全问题，所以不可能存在用户未登录情况
+			if(operator.getCsrf().equals("1")){
+				String csrfToken = contro.getPara("csrfToken");
+				if(StrKit.isBlank(csrfToken)){
+					log.info("csrf校验失败，当前请求没有提交csrfToken参数");
+					return;
+				}
+				
+				String csrfTokenDecrypt = ToolIDEA.decrypt(user.getSecretkey(), csrfToken); // 使用用户私有密钥，不易伪造，可以定期更新密钥
+				long csrfTokenTime = Long.parseLong(csrfTokenDecrypt.split(".#.")[1]);
+				Date start = ToolDateTime.getDate();
+				start.setTime(csrfTokenTime); // csrfToken生成时间
+				int minute = ToolDateTime.getDateMinuteSpace(start, ToolDateTime.getDate()); // 已经生成多少分钟
+				if(minute > 30){
+					log.info("超过30分钟，视为无效Token，需要刷新页面重新提交");
+					return;
+				}
 			}
-
-			if (!hasPrivilegeUrl(operator.getPKValue(), user.getPKValue())) {// 权限验证
-				log.debug("权限验证失败，没有权限!");
-
-				reqSysLog.set(Syslog.column_status, "0");// 失败
-				reqSysLog.set(Syslog.column_description, "没有权限!");
-				reqSysLog.set(Syslog.column_cause, "0");// 没有权限
-
-				log.debug("返回失败提示页面!");
-				toView(contro, ConstantAuth.auth_no_permissions, "权限验证失败，您没有操作权限");
+			contro.setAttr(ConstantWebContext.request_id, // 生成随机csrfToken，传递给页面使用
+					ToolIDEA.encrypt(user.getSecretkey(), ToolRandoms.getUuid(true) + ".#." + ToolDateTime.getDateByTime()));
+		}
+		
+		log.debug("referer校验");
+		if(operator.getReferer().equals("1")){
+			boolean referer = ToolWeb.authReferer(request);
+			if(!referer){
+				log.info("referer校验失败");
 				return;
 			}
 		}
-
-		log.debug("不需要权限验证、权限认证成功!!!继续处理请求...");
-
+		
 		log.debug("是否需要表单重复提交验证!");
 		if (operator.getStr(Operator.column_formtoken).equals("1")) {
 			String tokenRequest = ToolWeb.getParam(request, ConstantWebContext.request_formToken);
@@ -149,6 +164,35 @@ public class AuthInterceptor implements Interceptor {
 				log.error("表单重复提交验证异常!!!");
 			}
 		}
+
+		log.debug("是否需要权限验证!");
+		if (operator.get(Operator.column_privilegess).equals("1")) {
+			log.debug("需要权限验证!");
+			if (user == null) {
+				log.debug("权限认证过滤器检测:未登录!");
+				
+				reqSysLog.set(Syslog.column_status, "0");// 失败
+				reqSysLog.set(Syslog.column_description, "未登录");
+				reqSysLog.set(Syslog.column_cause, "2");// 2 未登录
+				
+				toView(contro, ConstantAuth.auth_no_login, "权限认证过滤器检测：未登录");
+				return;
+			}
+			
+			if (!hasPrivilegeUrl(operator.getPKValue(), user.getPKValue())) {// 权限验证
+				log.debug("权限验证失败，没有权限!");
+				
+				reqSysLog.set(Syslog.column_status, "0");// 失败
+				reqSysLog.set(Syslog.column_description, "没有权限!");
+				reqSysLog.set(Syslog.column_cause, "0");// 没有权限
+				
+				log.debug("返回失败提示页面!");
+				toView(contro, ConstantAuth.auth_no_permissions, "权限验证失败，您没有操作权限");
+				return;
+			}
+		}
+		
+		log.debug("不需要权限验证，或权限认证成功!!!继续处理请求...");
 
 		log.debug("权限认证成功更新日志对象属性!");
 		reqSysLog.set(Syslog.column_status, "1");// 成功

@@ -523,27 +523,6 @@ public abstract class BaseController extends Controller {
 	}
 
 	/**
-	 * 效验Referer有效性
-	 * 
-	 * @author 董华健 2012-10-30 上午10:26:04
-	 * @return
-	 */
-	protected boolean authReferer() {
-		String referer = getRequest().getHeader("Referer");
-		if (null != referer && !referer.trim().equals("")) {
-			referer = referer.toLowerCase();
-			String domainStr = PropKit.get(ConstantInit.config_domain_key);
-			String[] domainArr = domainStr.split(",");
-			for (String domain : domainArr) {
-				if (referer.indexOf(domain.trim()) != -1) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	/**
 	 * 判断请求者和数据创建者是否一致
 	 * @param entity
 	 * @param user

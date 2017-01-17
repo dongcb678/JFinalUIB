@@ -33,7 +33,8 @@
 				<div class="widget-body form">
 
 					<form id="editForm" action="${cxt!}/platform/param/save" method="POST" class="form-horizontal">
-
+						<input type="hidden" name="csrfToken" value="${csrfToken!}">
+						
 						<% include("/platform/param/form.html"){} %>
 
 						<div class="control-group">

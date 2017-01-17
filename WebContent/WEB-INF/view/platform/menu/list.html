@@ -130,7 +130,7 @@
 	function changeFunc(check, oids, mids){
 		if(check){
 			var url = "/platform/menu/set";
-			var data = { "menuIds" : '${escapeXml(splitPage.extData.ids!)}', "operatorIds" : oids };
+			var data = { "menuIds" : '${escapeXml(splitPage.extData.ids!)}', "operatorIds" : oids, "csrfToken" : "${csrfToken!}" };
 			var result = common_ajax.ajaxFunc(url, data, "json");
 			if(result.status != "success"){
 				common_modals.alert("添加角色功能设置失败！");

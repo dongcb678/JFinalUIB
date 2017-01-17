@@ -132,7 +132,7 @@
 		
 		if(check){
 			var url = "/platform/stationOperator/add";
-			var data = { "stationIds" : '${escapeXml(splitPage.extData.ids!)}', "operatorIds" : oids };
+			var data = { "stationIds" : '${escapeXml(splitPage.extData.ids!)}', "operatorIds" : oids, "csrfToken" : "${csrfToken!}" };
 			var result = common_ajax.ajaxFunc(url, data, "json");
 			if(result.status == "success"){
 				box.value = result.data; // 返回岗位功能主键
@@ -143,7 +143,7 @@
 		}else{
 			
 			var url = "/platform/stationOperator/del/" + soids;
-			var result = common_ajax.ajaxFunc(url, {}, "json");
+			var result = common_ajax.ajaxFunc(url, {"csrfToken" : "${csrfToken!}"}, "json");
 			if(result.status == "success"){
 				box.value = "";
 			}else{

@@ -70,7 +70,7 @@
 		var result = true;
 		if(confirm("确认删除<" + treeNode.name + ">岗位吗？")){
 			var url = "/platform/station/delete";
-			var data = { "ids" : treeNode.id };
+			var data = { "ids" : treeNode.id, "csrfToken" : "${csrfToken!}" };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != treeNode.id){
 				common_modals.alert("删除<" + treeNode.name + ">岗位失败！");
@@ -90,7 +90,7 @@
 			return false;
 		}else{
 			var url = "/platform/station/update";
-			var data = { "ids" : treeNode.id, "names" : newName };
+			var data = { "ids" : treeNode.id, "names" : newName, "csrfToken" : "${csrfToken!}" };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData == treeNode.id){
 				return true;
@@ -122,7 +122,8 @@
 			var data = { 
 				"pIds" : treeNode.id, 
 				"names" : addName, 
-				"orderIds" : orderIds
+				"orderIds" : orderIds, 
+				"csrfToken" : "${csrfToken!}"
 			};
 			
 			var reData = common_ajax.ajaxFunc(url, data);

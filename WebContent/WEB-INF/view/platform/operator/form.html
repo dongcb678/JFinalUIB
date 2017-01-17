@@ -34,6 +34,51 @@
 </div>
 
 <div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.csrf"]}</label>
+	<div class="controls">
+		<select name="operator.csrf" class="combox">
+			<option value="1" ${operator.csrf! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			<option value="0" ${operator.csrf! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.referer"]}</label>
+	<div class="controls">
+		<select name="operator.referer" class="combox">
+			<option value="1" ${operator.referer! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			<option value="0" ${operator.referer! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.method"]}</label>
+	<div class="controls">
+		<select name="operator.method" class="combox">
+			<option value="2" ${operator.method! == "2" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.method.2"]}</option>
+			<option value="0" ${operator.method! == "0" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.method.0"]}</option>
+			<option value="1" ${operator.method! == "1" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.method.1"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.syslog"]}</label>
+	<div class="controls">
+		<select name="operator.syslog" class="combox">
+			<option value="1" ${operator.syslog! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			<option value="0" ${operator.syslog! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
 	<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
 	<div class="controls">
 		<input type="text" name="operator.url" value="${escapeXml(operator.url!)}" 

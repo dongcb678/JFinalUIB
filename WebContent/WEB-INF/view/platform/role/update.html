@@ -30,7 +30,7 @@
 				<div class="widget-body form">
 
 					<form id="editForm" action="${cxt!}/platform/role/update" method="POST" class="form-horizontal">
-						
+						<input type="hidden" name="csrfToken" value="${csrfToken!}">
 						<input type="hidden" name="role.ids" value="${escapeXml(role.ids!)}" >
 						<input type="hidden" name="role.version" value="${role.version!}">
 						

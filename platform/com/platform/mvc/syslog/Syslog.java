@@ -267,6 +267,15 @@ public class Syslog extends BaseModel<Syslog> {
 	private String pvids;
 	private String userids;
 	
+	// 传值属性，不和数据库字段对应
+	private String syslog;
+	
+	public String getSyslog() {
+		return syslog;
+	}
+	public void setSyslog(String syslog) {
+		this.syslog = syslog;
+	}
 	public void setIds(String ids){
 		set(column_ids, ids);
 	}

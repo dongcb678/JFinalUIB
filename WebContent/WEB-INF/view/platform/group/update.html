@@ -30,7 +30,7 @@
 				<div class="widget-body form">
 
 					<form id="editForm" action="${cxt!}/platform/group/update" method="POST" class="form-horizontal">
-						
+						<input type="hidden" name="csrfToken" value="${csrfToken!}">
 						<input type="hidden" name="group.ids" value="${escapeXml(group.ids!)}" >
 						<input type="hidden" name="group.version" value="${group.version!}">
 						

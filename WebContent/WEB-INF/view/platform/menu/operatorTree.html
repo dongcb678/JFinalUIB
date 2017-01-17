@@ -225,7 +225,7 @@
 		//alert(operatorIds +'---'+ checkedOperatorIds);
 		if(operatorIds != checkedOperatorIds){
 			var url = "/platform/menu/setOperator";
-			var data = { "ids" : "${paramMap.ids!}", "operatorIds" : checkedOperatorIds};
+			var data = { "ids" : "${paramMap.ids!}", "operatorIds" : checkedOperatorIds, "csrfToken" : "${csrfToken!}"};
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != "${paramMap.ids!}"){
 				common_modals.alert("设置菜单对应功能失败！");

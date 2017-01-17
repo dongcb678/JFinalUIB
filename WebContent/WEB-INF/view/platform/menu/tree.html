@@ -71,7 +71,7 @@
 		var result = false;
 		if(confirm("确认删除<" + treeNode.name + ">菜单吗？")){
 			var url = "/platform/menu/delete";
-			var data = { "ids" : treeNode.id };
+			var data = { "ids" : treeNode.id, "csrfToken" : "${csrfToken!}" };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != treeNode.id){
 				common_modals.alert("删除<" + treeNode.name + ">菜单失败！");
@@ -92,7 +92,7 @@
 			return false;
 		}else{
 			var url = "/platform/menu/update";
-			var data = { "ids" : treeNode.id, "names" : newName };
+			var data = { "ids" : treeNode.id, "names" : newName, "csrfToken" : "${csrfToken!}" };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData == treeNode.id){
 				return true;
@@ -120,7 +120,7 @@
 			var orderIds = (treeNode.children == undefined ? 1 : (treeNode.children.length + 1));
 			
 			var url = "/platform/menu/save";
-			var data = { "pIds" : treeNode.id, "names" : addName, "orderIds" : orderIds };
+			var data = { "pIds" : treeNode.id, "names" : addName, "orderIds" : orderIds, "csrfToken" : "${csrfToken!}" };
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != ""){
 				var zTree = $.fn.zTree.getZTreeObj("zTreeMenuContent");
@@ -397,7 +397,7 @@
 			var targetId = targetNode.id;//拖拽到的目标菜单
 			
 			var url = "/platform/menu/update";
-			var data = { "ids" : dragId, "pIds" : targetId };
+			var data = { "ids" : dragId, "pIds" : targetId, "csrfToken" : "${csrfToken!}" };
 			
 			var reData = common_ajax.ajaxFunc(url, data);
 			if(reData != dragId){

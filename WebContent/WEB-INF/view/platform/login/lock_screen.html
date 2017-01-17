@@ -4,6 +4,7 @@
 	<span><em>请输入您的密码解锁</em></span>
 	
 	<form action="${cxt!}/platform/login/pass" method="post">
+		<input type="hidden" name="csrfToken" value="${csrfToken!}">
 		<div class="input-group">
 			<input type="text" placeholder="Password" class="span8" name="password">
 			<span class="input-group-btn">
@@ -13,7 +14,7 @@
 			</span>
 		</div>
 		<div class="relogin">
-			<a href="${cxt!}/platform/login/logout">
+			<a href="${cxt!}/platform/login/logout?csrfToken=${csrfToken!}">
 				您不是&nbsp;${i18nMap["admin.top.exitSystem"]}？</a>
 		</div>
 	</form>

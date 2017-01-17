@@ -29,11 +29,11 @@
 				<div class="widget-body form">
 				
 					<span class="tools"> 
-						<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanelConfirm('/platform/resources/refreshParamCache');">
+						<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanelConfirm('/platform/resources/refreshParamCache?csrfToken=${csrfToken!}');">
 							<i class="icon-plus icon-white"></i>刷新缓存
 						</button>
 						
-						<button type="button" class="btn btn-small btn-danger" onclick="common_ajax.ajaxMainPanelConfirm('/platform/resources/refreshSqlCache');">
+						<button type="button" class="btn btn-small btn-danger" onclick="common_ajax.ajaxMainPanelConfirm('/platform/resources/refreshSqlCache?csrfToken=${csrfToken!}');">
 							<i class="icon-remove icon-white"></i>刷新SQL
 						</button> 
 					</span>

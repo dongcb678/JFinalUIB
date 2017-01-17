@@ -72,7 +72,7 @@
 	<sql id="splitPageSelect">
 		<![CDATA[ 
 			select 
-				o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, 
+				o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, o.csrf, o.referer, o.method,
 				m.names as modulenames, 
 				s.names as systemsnames
     	]]>
@@ -113,6 +113,30 @@
 			
 			<% if(!isEmpty(url)){ %>
 					and o.url like #'%$url$%'#
+			<% } %>
+			
+			<% if(!isEmpty(splitPage)){ %>
+					and o.splitPage = #'$splitPage$'#
+			<% } %>
+			
+			<% if(!isEmpty(formToken)){ %>
+					and o.formToken = #'$formToken$'#
+			<% } %>
+			
+			<% if(!isEmpty(privilegess)){ %>
+					and o.privilegess = #'$privilegess$'#
+			<% } %>
+			
+			<% if(!isEmpty(csrf)){ %>
+					and o.csrf = #'$csrf$'#
+			<% } %>
+			
+			<% if(!isEmpty(referer)){ %>
+					and o.referer = #'$referer$'#
+			<% } %>
+			
+			<% if(!isEmpty(method)){ %>
+					and o.method = #'$method$'#
 			<% } %>
     	]]>
 	</sql>

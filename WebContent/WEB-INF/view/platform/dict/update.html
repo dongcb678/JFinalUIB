@@ -33,6 +33,7 @@
 				<div class="widget-body form">
 
 					<form id="editForm" action="${cxt!}/platform/dict/update" method="POST" class="form-horizontal">
+						<input type="hidden" name="csrfToken" value="${csrfToken!}">
 						<input type="hidden" name="dict.ids" value="${dict.ids!}" >
 						<input type="hidden" name="dict.version" value="${dict.version!}">
 

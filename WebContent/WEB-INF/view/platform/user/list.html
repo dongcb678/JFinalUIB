@@ -78,7 +78,7 @@
 							<% } %> 
 							
 							<% if(delete == true){ %>
-							<button type="button" class="btn btn-small btn-danger" data-table="dataTable" data-url="/platform/user/delete" onclick="common_modals.deleteList(this)">
+							<button type="button" class="btn btn-small btn-danger" data-table="dataTable" data-url="/platform/user/delete?csrfToken=${csrfToken!}" onclick="common_modals.deleteList(this)">
 								<i class="icon-remove icon-white"></i>
 								${i18nMap["admin.common.delete"]}
 							</button> 
@@ -152,7 +152,7 @@
 										<% } %> 
 										
 										<% if(delete == true){ %>
-										<button type="button" class="btn btn-small btn-danger" onclick="common_modals.deleteOne(this)" data-url="/platform/user/delete/${user.ids!}">
+										<button type="button" class="btn btn-small btn-danger" onclick="common_modals.deleteOne(this)" data-url="/platform/user/delete/${user.ids!}?csrfToken=${csrfToken!}">
 											<i class="icon-remove icon-white"></i>
 											${i18nMap["admin.common.delete"]}
 										</button> 
