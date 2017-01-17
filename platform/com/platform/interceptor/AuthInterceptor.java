@@ -90,7 +90,6 @@ public class AuthInterceptor implements Interceptor {
 			reqSysLog.set(Syslog.column_description, "URL不存在");
 			reqSysLog.set(Syslog.column_cause, "1"); // URL不存在
 
-			log.debug("返回失败提示页面!");
 			toView(contro, ConstantAuth.auth_no_url, "权限认证过滤器检测：URI不存在");
 			return;
 		}
@@ -103,7 +102,9 @@ public class AuthInterceptor implements Interceptor {
 		String method = request.getMethod().toLowerCase();
 		if((operator.getMethod().equals("1") && !method.equals("get"))
 				|| operator.getMethod().equals("2") && !method.equals("post")){
-			log.info("method校验失败，operator.method=" + operator.getMethod() + "，request.method=" + method);
+			String msg = "method校验失败，operator.method=" + operator.getMethod() + "，request.method=" + method;
+			log.info(msg);
+			toView(contro, ConstantAuth.auth_method, "权限认证过滤器检测：请求方法错误，" + msg);
 			return;
 		}
 		
@@ -112,7 +113,9 @@ public class AuthInterceptor implements Interceptor {
 			if(operator.getCsrf().equals("1")){
 				String csrfToken = contro.getPara("csrfToken");
 				if(StrKit.isBlank(csrfToken)){
-					log.info("csrf校验失败，当前请求没有提交csrfToken参数");
+					String msg = "csrf校验失败，当前请求没有提交csrfToken参数";
+					log.info(msg);
+					toView(contro, ConstantAuth.auth_csrf_empty, "权限认证过滤器检测：" + msg);
 					return;
 				}
 				
@@ -122,7 +125,9 @@ public class AuthInterceptor implements Interceptor {
 				start.setTime(csrfTokenTime); // csrfToken生成时间
 				int minute = ToolDateTime.getDateMinuteSpace(start, ToolDateTime.getDate()); // 已经生成多少分钟
 				if(minute > 30){
-					log.info("超过30分钟，视为无效Token，需要刷新页面重新提交");
+					String msg = "超过30分钟，视为无效Token，需要刷新页面重新提交";
+					log.info(msg);
+					toView(contro, ConstantAuth.auth_csrf, "权限认证过滤器检测：" + msg);
 					return;
 				}
 			}
@@ -134,7 +139,9 @@ public class AuthInterceptor implements Interceptor {
 		if(operator.getReferer().equals("1")){
 			boolean referer = ToolWeb.authReferer(request);
 			if(!referer){
-				log.info("referer校验失败");
+				String msg = "referer校验失败";
+				log.info(msg);
+				toView(contro, ConstantAuth.auth_referer, "权限认证过滤器检测：" + msg);
 				return;
 			}
 		}

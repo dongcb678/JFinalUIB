@@ -26,6 +26,26 @@ public interface ConstantAuth {
 	public static final String auth_form = "form";
 
 	/**
+	 * 权限验证：请求方法验证
+	 */
+	public static final String auth_method = "method";
+
+	/**
+	 * 权限验证：csrf值为空
+	 */
+	public static final String auth_csrf_empty = "csrf_empty";
+
+	/**
+	 * 权限验证：csrf校验失败
+	 */
+	public static final String auth_csrf = "csrf";
+
+	/**
+	 * 权限验证：referer校验失败
+	 */
+	public static final String auth_referer = "referer";
+	
+	/**
 	 * 权限验证：IP黑名单
 	 */
 	public static final String auth_ip = "ip";
