@@ -35,6 +35,7 @@ var common_ajax = function() {
 			success:function(data){
 				if(data.indexOf("loginForm") != -1){
 					window.location.href = cxt + "/platform/login";
+					return;
 				}
 				result = data;
 				//扩展回调函数
@@ -123,6 +124,7 @@ var common_ajax = function() {
 		    success:  function (data) {
 				if(data.indexOf("loginForm") != -1){
 					window.location.href = cxt + "/platform/login";
+					return;
 				}
 		    	result = data;
 		    	
