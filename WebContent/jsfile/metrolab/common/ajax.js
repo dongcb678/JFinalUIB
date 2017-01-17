@@ -32,8 +32,11 @@ var common_ajax = function() {
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			async: false,
 			cache: false,
-			success:function(response){
-				result = response;
+			success:function(data){
+				if(data.indexOf("loginForm") != -1){
+					window.location.href = cxt + "/platform/login";
+				}
+				result = data;
 				//扩展回调函数
 				if( callback != null ){
 					callback();
@@ -118,6 +121,9 @@ var common_ajax = function() {
 			headers : {"localePram" : localePram}, // 所有请求加上当前语言标示环境
 			//data: {"localePram" : localePram}, // 所有请求加上当前语言标示环境
 		    success:  function (data) {
+				if(data.indexOf("loginForm") != -1){
+					window.location.href = cxt + "/platform/login";
+				}
 		    	result = data;
 		    	
 				//扩展回调函数

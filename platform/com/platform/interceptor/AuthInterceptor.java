@@ -246,6 +246,8 @@ public class AuthInterceptor implements Interceptor {
 	 * @param msg
 	 */
 	private void toView(BaseController contro, String type, String msg) {
+		String isAjax = contro.getRequest().getHeader("X-Requested-With");
+		
 		if (type.equals(ConstantAuth.auth_no_login)) {// 未登录处理
 			contro.redirect("/platform/login");
 			return;
@@ -253,7 +255,6 @@ public class AuthInterceptor implements Interceptor {
 
 		contro.setAttr("msg", msg);
 		
-		String isAjax = contro.getRequest().getHeader("X-Requested-With");
 		if(isAjax != null && isAjax.equalsIgnoreCase("XMLHttpRequest")){
 			contro.render("/platform/common/msgAjax.html"); // Ajax页面
 		}else{
