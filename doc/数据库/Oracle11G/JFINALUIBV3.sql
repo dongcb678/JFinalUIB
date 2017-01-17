@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2017-01-17 11:42:40
+Date: 2017-01-17 14:26:55
 */
 
 
@@ -1878,7 +1878,7 @@ CREATE TABLE "JFINALUIBV3"."PT_USER" (
 "ERRORCOUNT" NUMBER(19) NULL ,
 "ORDERIDS" NUMBER(19) NULL ,
 "STATUS" CHAR(1 BYTE) NULL ,
-"STOPDATE" TIMESTAMP(6)  DEFAULT CURRENT_TIMESTAMP  NULL ,
+"STOPDATE" TIMESTAMP(6)  DEFAULT null  NULL ,
 "USERNAME" VARCHAR2(50 BYTE) NULL ,
 "DEPARTMENTIDS" VARCHAR2(32 BYTE) NULL ,
 "EMAIL" VARCHAR2(100 BYTE) NULL ,
@@ -1899,7 +1899,7 @@ NOCACHE
 -- ----------------------------
 -- Records of PT_USER
 -- ----------------------------
-INSERT INTO "JFINALUIBV3"."PT_USER" VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '0', '0', '0', '1', null, 'admins', '8a40c0353fa828a6013fa898d4ac0028', 'dongcb678@163.com', '420881198609283721', '13871558042', '管理员', 'tY4pNgHnToFQAcDouI4GtSdwgaE=', 'wrNkWeoP9Y8=', '8a40c0353fa828a6013fa898d4ac0026', null);
+INSERT INTO "JFINALUIBV3"."PT_USER" VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '0', '0', '0', '1', null, 'admins', '8a40c0353fa828a6013fa898d4ac0028', 'dongcb678@163.com', '420881198609283721', '13871558042', '管理员', 'tY4pNgHnToFQAcDouI4GtSdwgaE=', 'wrNkWeoP9Y8=', '8a40c0353fa828a6013fa898d4ac0026', 'N4aJzr8KltvVIFwbzdXdhQ==');
 
 -- ----------------------------
 -- Table structure for "JFINALUIBV3"."PT_USERGROUP"

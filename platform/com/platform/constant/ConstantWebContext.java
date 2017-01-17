@@ -13,7 +13,7 @@ public interface ConstantWebContext {
 	/**
 	 * request 请求id
 	 */
-	public static final String request_id = "request_id";
+	public static final String request_csrfToken = "csrfToken";
 
 	/**
 	 * request cookie

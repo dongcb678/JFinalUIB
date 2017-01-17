@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2017-01-17 11:27:21
+Date: 2017-01-17 14:16:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1027,8 +1027,8 @@ CREATE TABLE `pt_user` (
 -- ----------------------------
 -- Records of pt_user
 -- ----------------------------
-INSERT INTO `pt_user` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '0', '0', 'GKw78xJqQ9aBY31IaojrIDtVBpY=', 'DdDxMWSgtsQ=', '1', '2016-09-02 17:14:59', 'admins', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'dongcb678@163.com', '420881198609283721', '13871558042', '管理员', null);
-INSERT INTO `pt_user` VALUES ('ef15e94a52584743b2b9bf604fccd0cc', '0', '0', null, 'WE+OFSzgmA8qQxTms6SBdBIBC4U=', '5kqjzm8LeEM=', '1', null, 'littleant', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'littleant@163.com', '420881198809555685', '13584778623', 'littleant', null);
+INSERT INTO `pt_user` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '0', '0', 'GKw78xJqQ9aBY31IaojrIDtVBpY=', 'DdDxMWSgtsQ=', '1', '2017-01-17 14:10:37', 'admins', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'dongcb678@163.com', '420881198609283721', '13871558042', '管理员', 'N4aJzr8KltvVIFwbzdXdhQ==');
+INSERT INTO `pt_user` VALUES ('ef15e94a52584743b2b9bf604fccd0cc', '0', '0', null, 'WE+OFSzgmA8qQxTms6SBdBIBC4U=', '5kqjzm8LeEM=', '1', '2017-01-17 14:10:37', 'littleant', '8a40c0353fa828a6013fa898d4ac0028', 0x3861343063303335336661383238613630313366613839386434616330303236, 'littleant@163.com', '420881198809555685', '13584778623', 'littleant', 'dRfs2ecd1dXvxbExRFnUnA==');
 
 -- ----------------------------
 -- Table structure for `pt_usergroup`

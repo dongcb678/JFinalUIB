@@ -126,8 +126,8 @@ public class AuthInterceptor implements Interceptor {
 					return;
 				}
 			}
-			contro.setAttr(ConstantWebContext.request_id, // 生成随机csrfToken，传递给页面使用
-					ToolIDEA.encrypt(user.getSecretkey(), ToolRandoms.getUuid(true) + ".#." + ToolDateTime.getDateByTime()));
+			String csrfToken = ToolIDEA.encrypt(user.getSecretkey(), ToolRandoms.getUuid(true) + ".#." + ToolDateTime.getDateByTime()); // 生成随机csrfToken，传递给页面使用
+			contro.setAttr(ConstantWebContext.request_csrfToken, csrfToken);
 		}
 		
 		log.debug("referer校验");
