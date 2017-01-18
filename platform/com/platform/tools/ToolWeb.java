@@ -325,7 +325,6 @@ public abstract class ToolWeb {
 		return cookieMap;
 	}
 
-
 	/**
 	 * 效验Referer有效性
 	 * 
@@ -339,7 +338,7 @@ public abstract class ToolWeb {
 			String domainStr = PropKit.get(ConstantInit.config_domain_key);
 			String[] domainArr = domainStr.split(",");
 			for (String domain : domainArr) {
-				if (referer.indexOf(domain.trim()) != -1) {
+				if (referer.startsWith(domain.trim())) {
 					return true;
 				}
 			}

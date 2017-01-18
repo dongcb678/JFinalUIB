@@ -111,7 +111,10 @@ public class AuthInterceptor implements Interceptor {
 		log.debug("csrf校验");
 		if (user != null) { // 理论上csrf安全涉及到的是后台数据更新和删除操作URL安全问题，所以不可能存在用户未登录情况
 			if(operator.getCsrf().equals("1")){
-				String csrfToken = contro.getPara("csrfToken");
+				String csrfToken = request.getHeader("csrfToken");
+				if(StrKit.isBlank(csrfToken)){
+					csrfToken = contro.getPara("csrfToken");
+				}
 				if(StrKit.isBlank(csrfToken)){
 					String msg = "csrf校验失败，当前请求没有提交csrfToken参数";
 					log.info(msg);
@@ -131,8 +134,11 @@ public class AuthInterceptor implements Interceptor {
 					return;
 				}
 			}
-			String csrfToken = ToolIDEA.encrypt(user.getSecretkey(), ToolRandoms.getUuid(true) + ".#." + ToolDateTime.getDateByTime()); // 生成随机csrfToken，传递给页面使用
-			contro.setAttr(ConstantWebContext.request_csrfToken, csrfToken);
+			boolean referer = ToolWeb.authReferer(request);
+			if(referer){
+				String csrfToken = ToolIDEA.encrypt(user.getSecretkey(), ToolRandoms.getUuid(true) + ".#." + ToolDateTime.getDateByTime()); // 生成随机csrfToken，传递给页面使用
+				contro.setAttr(ConstantWebContext.request_csrfToken, csrfToken);
+			}
 		}
 		
 		log.debug("referer校验");
