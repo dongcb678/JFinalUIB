@@ -156,21 +156,7 @@
 		sObj.after(nameControlStr);
 		var nameBtn = $("#nameControlBtn_"+treeNode.tId);
 		if (nameBtn) nameBtn.bind("click", function(){
-			//setMenuEditDiaLog(treeNode.id);
-			$.fn.modalmanager.defaults.resize = true;
-			$.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner = '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' + '<div class="progress progress-striped active">' + '<div class="progress-bar" style="width: 100%;"></div>' + '</div>' + '</div>';
-			var $modal = $('#ajax-modal');
-			// create the backdrop and wait for next modal to be triggered
-			$('body').modalmanager('loading');
-			
-			var url = "/platform/menu/toEdit";
-			url = encodeURI(encodeURI(cxt + url));
-			
-			var data = { "ids" : treeNode.id };
-			
-			$modal.load(url, data, function() {
-				$modal.modal();
-			});
+			common_modals.setMenuEditDiaLog(treeNode.id);
 			return false;
 		});
 	};
