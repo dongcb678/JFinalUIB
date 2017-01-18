@@ -47,4 +47,6 @@
 	
 	FileRender中的encodeFileName方法继续使用老版本中GBK编码，新版UTF-8编码导致IE下中文文件名乱码
 
-	
+12.TokenManager修改tokenId生成策略
+
+	不再调用random.nextLong()，增加getTokenId()方法，tokenId前缀固定为formToken，方便从redis取keys

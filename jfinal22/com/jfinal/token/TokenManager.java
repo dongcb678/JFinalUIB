@@ -24,6 +24,7 @@ import java.util.TimerTask;
 import com.jfinal.core.Const;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
+import com.platform.tools.ToolRandoms;
 
 /**
  * TokenManager.
@@ -32,6 +33,19 @@ public class TokenManager {
 	
 	private static ITokenCache tokenCache;
 	private static Random random = new Random();
+	
+	/**
+	 * 表单form token缓存key前缀
+	 */
+	public static final String tokenPrefix = "formToken";
+	
+	/**
+	 * 生成tokenid
+	 * @return
+	 */
+	private static String getTokenId(){
+		return tokenPrefix + ToolRandoms.getUuid(true);
+	}
 	
 	private TokenManager() {
 		
@@ -57,7 +71,7 @@ public class TokenManager {
 	 */
 	public static void createToken(Controller controller, String tokenName, int secondsOfTimeOut) {
 		if (tokenCache == null) {
-			String tokenId = String.valueOf(random.nextLong());
+			String tokenId = getTokenId(); // String.valueOf(random.nextLong());
 			controller.setAttr(tokenName, tokenId);
 			controller.setSessionAttr(tokenName, tokenId);
 			createTokenHiddenField(controller, tokenName, tokenId);
@@ -86,7 +100,7 @@ public class TokenManager {
 		do {
 			if (safeCounter-- == 0)
 				throw new RuntimeException("Can not create tokenId.");
-			tokenId = String.valueOf(random.nextLong());
+			tokenId = getTokenId(); // String.valueOf(random.nextLong());
 			token = new Token(tokenId, System.currentTimeMillis() + (secondsOfTimeOut * 1000));
 		} while(tokenId == null || tokenCache.contains(token));
 		
