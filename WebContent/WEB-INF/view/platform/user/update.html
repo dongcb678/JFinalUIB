@@ -29,8 +29,7 @@
 				</div>
 				<div class="widget-body form">
 
-					<form id="editForm" action="${cxt!}/platform/user/update" method="POST" class="form-horizontal" enctype="multipart/form-data">
-						<input type="hidden" name="csrfToken" value="${csrfToken!}">
+					<form id="editForm" action="${cxt!}/platform/user/update?csrfToken=${csrfToken!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
 						
 						<input type="hidden" id="userIds" name="user.ids" value="${escapeXml(user.ids!)}"> 
 						<input type="hidden" name="user.version" value="${user.version!}"> 

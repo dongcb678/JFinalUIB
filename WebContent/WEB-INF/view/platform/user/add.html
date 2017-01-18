@@ -29,8 +29,7 @@
 				</div>
 				<div class="widget-body form">
 
-					<form id="editForm" action="${cxt!}/platform/user/save" method="POST" class="form-horizontal" enctype="multipart/form-data">
-						<input type="hidden" name="csrfToken" value="${csrfToken!}">
+					<form id="editForm" action="${cxt!}/platform/user/save?csrfToken=${csrfToken!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
 						
 						<% include("/platform/user/form.html", {"operatorType" : "add"}){} %>
 

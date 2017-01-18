@@ -148,7 +148,8 @@
 	<div class="controls">
 		<input type="text" class="span8" name="userInfo.birthday" readonly="readonly" 
 			value='${userInfo.birthday!, dateFormat="yyyy-MM-dd"}' 
-  			data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
+			onClick="WdatePicker({dateFmt: 'yyyy-MM-dd', minDate:'1900-01-01', maxDate:'%y-%M-%d'})"
+  			>
 		<span class="help-inline"></span>
 	</div>
 </div>
