@@ -4,14 +4,13 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import com.junit.TestBase;
 import com.platform.tools.ToolSqlXml;
 
-public class TestToolSqlXml extends TestBase {
+public class TestToolSqlXml { // extends TestBase {
 	
 	@Test
     public void keywordVali() throws SQLException{
-		boolean bool = ToolSqlXml.keywordVali("username");
+		boolean bool = ToolSqlXml.keywordVali("delete");
 		System.out.println(bool);
     }
 

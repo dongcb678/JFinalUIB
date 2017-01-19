@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.constant.ConstantSplitPage;
 import com.platform.constant.ConstantWebContext;
@@ -138,10 +139,10 @@ public class ParamPkgInterceptor implements Interceptor {
 				name = paramNames.nextElement();
 				value = controller.getPara(name);
 				// 是否以_query.开头
-				if (name.startsWith(ConstantWebContext.request_query) && null != value && !value.trim().isEmpty()) {
+				if (name.startsWith(ConstantWebContext.request_query) && StrKit.notBlank(value)) {
 					log.debug("分页，查询参数：name = " + name + " value = " + value);
 					key = name.substring(7);
-					if(ToolString.regExpVali(key, ToolString.regExp_letter_5)){
+					if(ToolString.regExpVali(key, ToolString.regExp_letter_6)){
 						queryParam.put(key, value.trim());
 					}else{
 						log.error("分页，查询参数存在恶意提交字符：name = " + name + " value = " + value);
@@ -152,40 +153,32 @@ public class ParamPkgInterceptor implements Interceptor {
 			
 			// 排序条件
 			String orderColunm = controller.getPara(ConstantWebContext.request_orderColunm);
-			if(null != orderColunm && !orderColunm.isEmpty()){
+			if(StrKit.notBlank(orderColunm)){
 				log.debug("分页，排序条件：orderColunm = " + orderColunm);
-				
-	//			if(ToolSqlXml.keywordVali(orderColunm)){
-	//				log.error("排序列包含不安全字符：" + orderColunm);
-	//				throw new RuntimeException("排序列包含不安全字符：" + orderColunm);
-	//			}
-				
-				splitPage.setOrderColunm(orderColunm);
+				if(ToolString.regExpVali(orderColunm, ToolString.regExp_letter_6)){
+					splitPage.setOrderColunm(orderColunm);
+				}
 			}
 	
 			// 排序方式
 			String orderMode = controller.getPara(ConstantWebContext.request_orderMode);
-			if(null != orderMode && !orderMode.isEmpty()){
+			if(StrKit.notBlank(orderMode)){
 				log.debug("分页，排序方式：orderMode = " + orderMode);
-	
-	//			if(ToolSqlXml.keywordVali(orderMode)){
-	//				log.error("排序方式包含不安全字符：" + orderMode);
-	//				throw new RuntimeException("排序方式包含不安全字符：" + orderMode);
-	//			}
-				
-				splitPage.setOrderMode(orderMode);
+				if(ToolString.regExpVali(orderMode, ToolString.regExp_letter_6)){
+					splitPage.setOrderMode(orderMode);
+				}
 			}
 	
 			// 第几页
 			String pageNumber = controller.getPara(ConstantWebContext.request_pageNumber);
-			if(null != pageNumber && !pageNumber.isEmpty()){
+			if(StrKit.notBlank(pageNumber)){
 				log.debug("分页，第几页：pageNumber = " + pageNumber);
 				splitPage.setPageNumber(Integer.parseInt(pageNumber));
 			}
 			
 			// 每页显示几多
 			String pageSize = controller.getPara(ConstantWebContext.request_pageSize);
-			if(null != pageSize && !pageSize.isEmpty()){
+			if(StrKit.notBlank(pageSize)){
 				log.debug("分页，每页显示几多：pageSize = " + pageSize);
 				splitPage.setPageSize(Integer.parseInt(pageSize));
 			}

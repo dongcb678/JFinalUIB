@@ -33,24 +33,9 @@
 	
 	<!-- 动态SQL处理 
 			to_char(a.video_date, 'YYYY-MM-DD')
-			
 			to_char(collect_time, 'YYYY-MM-DD HH24:MI:SS')
-			
-			<% if(!isEmpty(startdate_start)){ %>
-					and p.startdate >= to_date(#'$startdate_start$'#, 'YYYY-mm-dd')
-			<% } %>
-			
-			<% if(!isEmpty(startdate_end)){ %>
-					and p.startdate <= to_date(#'$startdate_end$'#, 'YYYY-mm-dd')
-			<% } %>
-			
-			<% if(!isEmpty(startdate_start)){ %>
-					and s.startdate >= to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:ss') 
-			<% } %>
-			
-			<% if(!isEmpty(startdate_end)){ %>
-					and s.startdate <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:ss')
-			<% } %>
+			to_date(#'$startdate_start$'#, 'YYYY-mm-dd')
+			to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:ss') 
 	-->
 	<sql id="splitPageFrom">
 		<![CDATA[ 
@@ -83,11 +68,39 @@
 			<% } %>
 			
 			<% if(!isEmpty(startdate_start)){ %>
-					and s.startdate >= to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:ss') 
+				<% if(db_type == "mysql"){ %>
+						and s.startdate >= str_to_date(#'$startdate_start$'#, '%Y-%m-%d %H:%i:%s')
+						
+				<% } else if(db_type == "postgresql"){ %>
+						and s.startdate >= to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:SS')
+						
+				<% } else if(db_type == "oracle"){ %>
+						and s.startdate >= to_timestamp(#'$startdate_start$'#, 'yyyy-mm-dd hh24:mi:ss')
+						
+				<% } else if(db_type == "sqlserver"){ %>
+						and s.startdate >= CONVERT(datetime, #'$startdate_start$'#, 120)
+						
+				<% } else if(db_type == "db2"){ %>
+						and s.startdate >= to_date(#'$startdate_start$'#, 'yyyy-mm-dd hh24:mi:ss') 
+				<% }%>
 			<% } %>
 			
 			<% if(!isEmpty(startdate_end)){ %>
-					and s.startdate <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:ss')
+				<% if(db_type == "mysql"){ %>
+						and s.startdate <= str_to_date(#'$startdate_end$'#, '%Y-%m-%d %H:%i:%s')
+						
+				<% } else if(db_type == "postgresql"){ %>
+						and s.startdate <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:SS')
+						
+				<% } else if(db_type == "oracle"){ %>
+						and s.startdate <= to_timestamp(#'$startdate_end$'#, 'yyyy-mm-dd hh24:mi:ss')
+						
+				<% } else if(db_type == "sqlserver"){ %>
+						and s.startdate <= CONVERT(datetime, #'$startdate_end$'#, 120)
+						
+				<% } else if(db_type == "db2"){ %>
+						and s.startdate <= to_date(#'$startdate_end$'#, 'yyyy-mm-dd hh24:mi:ss') 
+				<% }%>
 			<% } %>
     	]]>
 	</sql>

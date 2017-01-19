@@ -60,8 +60,7 @@
 	<sql id="splitPageSelect">
 		<![CDATA[ 
 			select 
-				u.ids, u.username, 
-				u.names, u.email, u.mobile, 
+				u.ids, u.username, u.names, u.email, u.mobile, 
 				ui.birthday, 
 				d.names as deptnames
     	]]>
@@ -86,27 +85,27 @@
 			<% } %>
 			
 			<% if(!isEmpty(names)){ %>
-					and ui.names like #'%$names$%'#
+					and u.names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(email)){ %>
+					and u.email like #'%$email$%'#
+			<% } %>
+			
+			<% if(!isEmpty(mobile)){ %>
+					and u.mobile like #'%$mobile$%'#
+			<% } %>
+			
+			<% if(!isEmpty(idCard)){ %>
+					and u.idCard like #'%$idCard$%'#
 			<% } %>
 			
 			<% if(!isEmpty(sex)){ %>
 					and ui.sex like #'%$sex$%'#
 			<% } %>
 			
-			<% if(!isEmpty(email)){ %>
-					and ui.email like #'%$email$%'#
-			<% } %>
-			
-			<% if(!isEmpty(mobile)){ %>
-					and ui.mobile like #'%$mobile$%'#
-			<% } %>
-			
 			<% if(!isEmpty(telephone)){ %>
 					and ui.telephone like #'%$telephone$%'#
-			<% } %>
-			
-			<% if(!isEmpty(idCard)){ %>
-					and ui.idCard like #'%$idCard$%'#
 			<% } %>
 			
 			<% if(!isEmpty(qq)){ %>
@@ -115,19 +114,19 @@
 			
 			<% if(!isEmpty(birthday)){ %>
 				<% if(db_type == "mysql"){ %>
+						and ui.birthday = #'$birthday$'#
 						
 				<% } else if(db_type == "postgresql"){ %>
 						and ui.birthday = to_date(#'$birthday$'#, 'YYYY-mm-dd')
 						
 				<% } else if(db_type == "oracle"){ %>
-				
+						and ui.birthday = to_date(#'$birthday$'#, 'YYYY-mm-dd')
+						
 				<% } else if(db_type == "sqlserver"){ %>
-				
-				<% } else if(db_type == "db2"){ %>
-				
-				<% } else { %>
 						and ui.birthday = #'$birthday$'#
 						
+				<% } else if(db_type == "db2"){ %>
+						and ui.birthday = #'$birthday$'#
 				<% }%>
 			<% } %>
     	]]>

@@ -84,14 +84,19 @@ public abstract class ToolString {
 	public final static String regExp_letter_3 = "^[a-z]+$";
 	
 	/**
-	 * 常用正则表达式：匹配由数字和26个英文字母组成的字符串
+	 * 常用正则表达式：匹配由数字、26个英文字母组成的字符串
 	 */
 	public final static String regExp_letter_4 = "^[A-Za-z0-9]+$";
 	
 	/**
-	 * 常用正则表达式：匹配由数字、26个英文字母或者下划线组成的字符串
+	 * 常用正则表达式：匹配由数字、26个英文字母、下划线组成的字符串
 	 */
 	public final static String regExp_letter_5 = "^\\w+$";
+
+	/**
+	 * 常用正则表达式：匹配由数字、26个英文字母、下划线、中划线、点组成的字符串
+	 */
+	public final static String regExp_letter_6 = "^([a-z_A-Z-.+0-9]+)$";
 
 	/**
 	 * 常用正则表达式：匹配email地址
