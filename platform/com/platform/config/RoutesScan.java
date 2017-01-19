@@ -3,6 +3,7 @@ package com.platform.config;
 import java.util.Set;
 
 import com.jfinal.config.Routes;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
@@ -42,11 +43,8 @@ public class RoutesScan extends Routes {
 					throw new RuntimeException(controller.getName() + "注解错误，映射路径为空");
 				}
 				// 注册映射
-				if(viewPath != null){
-					viewPath = viewPath.trim();
-					if(viewPath.isEmpty()){
-						add(controllerKey, controller, viewPath);
-					}
+				if(StrKit.notBlank(viewPath)){
+					add(controllerKey, controller, viewPath);
 				}else{
 					add(controllerKey, controller);
 				}

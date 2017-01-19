@@ -10,9 +10,9 @@ import com.platform.tools.ToolHtml;
  * 过滤xml文档函数
  * @author 董华健
  */
-public class EscapeXml implements Function {
+public class EscapeHtml implements Function {
 
-	private static final Log log = Log.getLog(EscapeXml.class);
+	private static final Log log = Log.getLog(EscapeHtml.class);
 	
 	/**
 	 * 过滤xml文档函数实现
@@ -26,7 +26,7 @@ public class EscapeXml implements Function {
 		try {
 			content = (String) arg[0];
 		} catch (Exception e) {
-			log.error("EscapeXml参数转String异常:arg = " + arg[0]);
+			log.error("escapeHtml参数转String异常:arg = " + arg[0]);
 			return arg[0];
 		}
 

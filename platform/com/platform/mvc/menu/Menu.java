@@ -1,5 +1,6 @@
 package com.platform.mvc.menu;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.annotation.Table;
 import com.platform.mvc.base.BaseModel;
@@ -256,7 +257,7 @@ public class Menu extends BaseModel<Menu> {
 	 */
 	public Operator getOperator(){
 		String operatorIds = get(column_operatorids);
-		if(null != operatorIds && !operatorIds.isEmpty()){
+		if(StrKit.notBlank(operatorIds)){
 			return Operator.cacheGet(operatorIds);
 		}
 		return null;

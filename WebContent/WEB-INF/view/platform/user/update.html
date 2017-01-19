@@ -31,10 +31,10 @@
 
 					<form id="editForm" action="${cxt!}/platform/user/update?csrfToken=${csrfToken!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
 						
-						<input type="hidden" id="userIds" name="user.ids" value="${escapeXml(user.ids!)}"> 
+						<input type="hidden" id="userIds" name="user.ids" value="${escapeHtml(user.ids!)}"> 
 						<input type="hidden" name="user.version" value="${user.version!}"> 
 						
-						<input type="hidden" id="userInfoIds" name="userInfo.ids" value="${escapeXml(userInfo.ids!)}"> 
+						<input type="hidden" id="userInfoIds" name="userInfo.ids" value="${escapeHtml(userInfo.ids!)}"> 
 						<input type="hidden" name="userInfo.version" value="${userInfo.version!}"> 
 						
 						<% include("/platform/user/form.html", {"operatorType" : "update"}){} %>

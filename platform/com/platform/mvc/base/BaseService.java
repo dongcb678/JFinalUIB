@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.jfinal.aop.Before;
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -135,7 +136,7 @@ public class BaseService {
 		// 排序
 		String orderColunm = splitPage.getOrderColunm();
 		String orderMode = splitPage.getOrderMode();
-		if(null != orderColunm && !orderColunm.isEmpty() && null != orderMode && !orderMode.isEmpty()){
+		if(StrKit.notBlank(orderColunm) && StrKit.notBlank(orderMode)){
 			formSqlSb.append(" order by ").append(orderColunm).append(" ").append(orderMode);
 		}
 		
@@ -184,7 +185,7 @@ public class BaseService {
 	 * @return
 	 */
 	public  static String sqlIn(String ids){
-		if(null == ids || ids.trim().isEmpty()){
+		if(StrKit.isBlank(ids)){
 			return null;
 		}
 		
@@ -238,7 +239,7 @@ public class BaseService {
 	 * 二是 list = ['11','22','33'...]
 	 */
 	public static Map<String, Object> sqlOr(String column, String ids){
-		if(null == ids || ids.trim().isEmpty()){
+		if(StrKit.isBlank(ids)){
 			return null;
 		}
 		
@@ -284,7 +285,7 @@ public class BaseService {
 	 * 描述：把字符串分割成数组返回，并验证分割后的数据
 	 */
 	public static String[] splitByComma(String ids){
-		if(null == ids || ids.trim().isEmpty()){
+		if(StrKit.isBlank(ids)){
 			return null;
 		}
 		

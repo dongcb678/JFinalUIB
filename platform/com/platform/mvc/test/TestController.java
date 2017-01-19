@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
@@ -50,7 +51,7 @@ public class TestController extends BaseController {
 	public void autoComplete(){
 		String keyword = getPara("keyword");
 		String size = "10";//getPara("size");
-		if(null == keyword || keyword.isEmpty()){
+		if(StrKit.isBlank(keyword)){
 			renderText("[]");
 			
 		}else{

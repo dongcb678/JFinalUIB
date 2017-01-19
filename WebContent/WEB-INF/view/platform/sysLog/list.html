@@ -34,16 +34,16 @@
 					</div>
 					<div class="widget-body form switch-form">
 						${i18nMap["admin.sysLog.property.ourl"]}
-						<input class="medium" type="text" name="_query.url" value='${escapeXml(splitPage.queryParam["url"])}' maxlength="100" style="width: 250px" >
+						<input class="medium" type="text" name="_query.url" value='${escapeHtml(splitPage.queryParam["url"])}' maxlength="100" style="width: 250px" >
 
 						${i18nMap["admin.sysLog.property.oname"]}
-						<input class="medium" type="text" name="_query.names" value='${escapeXml(splitPage.queryParam["names"])}' maxlength="20" >
+						<input class="medium" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20" >
 
 						${i18nMap["admin.sysLog.property.username"]}
-					  	<input class="medium" type="text" name="_query.username" value='${escapeXml(splitPage.queryParam["username"])}' maxlength="20" >
+					  	<input class="medium" type="text" name="_query.username" value='${escapeHtml(splitPage.queryParam["username"])}' maxlength="20" >
 						
 						${i18nMap["admin.sysLog.property.ips"]}
-					  	<input class="medium" type="text" name="_query.ips" value='${escapeXml(splitPage.queryParam["ips"])}' maxlength="20" >
+					  	<input class="medium" type="text" name="_query.ips" value='${escapeHtml(splitPage.queryParam["ips"])}' maxlength="20" >
 
 						${i18nMap["admin.sysLog.property.status"]}
 				  		<select name="_query.status" class="input-small m-wrap" tabindex="1">
@@ -53,10 +53,10 @@
 						</select>
 						
 						${i18nMap["admin.sysLog.property.startdate"]} 
-		                <input class="medium" type="text" name="_query.startdate_start" value='${escapeXml(splitPage.queryParam["startdate_start"])}' 
+		                <input class="medium" type="text" name="_query.startdate_start" value='${escapeHtml(splitPage.queryParam["startdate_start"])}' 
 		                	id="startDate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate:'2016-07-01', maxDate:'#F{$dp.$D(\'endDate\')}'})" style="width: 135px" readonly>
 						至
-		                <input class="medium" type="text" name="_query.startdate_end" value='${escapeXml(splitPage.queryParam["startdate_end"])}' 
+		                <input class="medium" type="text" name="_query.startdate_end" value='${escapeHtml(splitPage.queryParam["startdate_end"])}' 
 		                	id="endDate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate:'#F{$dp.$D(\'startDate\')}', maxDate:'%y-%M-%d'})" style="width: 135px" readonly>
 		                
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
@@ -142,10 +142,10 @@
 									<td>
 										<input type="checkbox" class="checkboxes" name="checkIds" value="${sysLog.ids!}" class="flat-grey foocheck">
 									</td>
-									<td align="center">${escapeXml(sysLog["synames"]!)}</td>
-									<td align="center">${escapeXml(sysLog["mnames"]!)}</td>
-									<td align="center">${escapeXml(sysLog["onames"]!)}：${sysLog.ourl }</td>
-									<td align="center">${escapeXml(sysLog["username"]!)}</td>
+									<td align="center">${escapeHtml(sysLog["synames"]!)}</td>
+									<td align="center">${escapeHtml(sysLog["mnames"]!)}</td>
+									<td align="center">${escapeHtml(sysLog["onames"]!)}：${sysLog.ourl }</td>
+									<td align="center">${escapeHtml(sysLog["username"]!)}</td>
 									<td align="center">
 										<% if(sysLog["status"] == "1"){%>
 											<span class="label label-success">${i18nMap["admin.sysLog.property.status.success"]}</span>
@@ -153,7 +153,7 @@
 											<span class="label label-warning">${i18nMap["admin.sysLog.property.status.error"]}</span>
 										<% } %>
 									</td>
-									<td align="center">${escapeXml(sysLog["ips"]!)}</td>
+									<td align="center">${escapeHtml(sysLog["ips"]!)}</td>
 									<td align="center">
 										${sysLog.startdate !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
 									</td>
@@ -168,13 +168,13 @@
 									</td>
 									<td class="hidden-phone">
 										<% if(view == true){ %>
-											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/platform/sysLog/view/${escapeXml(sysLog.ids!)}');">
+											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/platform/sysLog/view/${escapeHtml(sysLog.ids!)}');">
 												<i class="icon-eye-open"></i> ${i18nMap["admin.common.see"]} 
 											</button>
 										<% } %>
 										
 										<% if(delete == true){ %>
-											<button type="button" class="btn btn-small btn-danger" data-url="/platform/sysLog/delete/${escapeXml(sysLog.ids!)}?csrfToken=${csrfToken!}" onclick="common_modals.deleteOne(this)"> 
+											<button type="button" class="btn btn-small btn-danger" data-url="/platform/sysLog/delete/${escapeHtml(sysLog.ids!)}?csrfToken=${csrfToken!}" onclick="common_modals.deleteOne(this)"> 
 												<i class="icon-remove icon-white"></i>${i18nMap["admin.common.delete"]}
 											</button>
 										<% } %>

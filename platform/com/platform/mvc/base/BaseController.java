@@ -23,6 +23,7 @@ import com.platform.mvc.syslog.Syslog;
 import com.platform.mvc.user.User;
 import com.platform.plugin.I18NPlugin;
 import com.platform.tools.ToolDateTime;
+import com.platform.tools.ToolString;
 import com.platform.tools.ToolWeb;
 
 /**
@@ -530,7 +531,7 @@ public abstract class BaseController extends Controller {
 	 */
 	protected <T extends BaseModel<?>>  boolean authCreate(T model){
 		String createids = model.getStr("createids");
-		if(null != createids && !createids.isEmpty()){
+		if(StrKit.notBlank(createids)){
 			String cUserIds = getCUserIds();
 			if(createids.equals(cUserIds)){
 				return true;
@@ -550,7 +551,7 @@ public abstract class BaseController extends Controller {
 		while (paramNames.hasMoreElements()) {
 			String name = paramNames.nextElement();
 			String value = getPara(name);
-			if (name.startsWith(ConstantWebContext.request_query) && null != value && !value.trim().isEmpty()) {// 查询参数分拣
+			if (name.startsWith(ConstantWebContext.request_query) && StrKit.notBlank(value)) {// 查询参数分拣
 				String key = name.substring(7);
 				queryParam.put(key, value.trim());
 			}
@@ -565,19 +566,13 @@ public abstract class BaseController extends Controller {
 	 * @param mode
 	 */
 	protected void defaultOrder(String colunm, String mode){
-		if(null == splitPage.getOrderColunm() || splitPage.getOrderColunm().isEmpty()){
-//			if(ToolSqlXml.keywordVali(colunm)){
-//				log.error("排序列包含不安全字符：" + colunm);
-//				throw new RuntimeException("排序列包含不安全字符：" + colunm);
-//			}
-//			
-//			if(ToolSqlXml.keywordVali(mode)){
-//				log.error("排序方式包含不安全字符：" + mode);
-//				throw new RuntimeException("排序方式包含不安全字符：" + mode);
-//			}
-			
-			splitPage.setOrderColunm(colunm);
-			splitPage.setOrderMode(mode);
+		if(StrKit.isBlank(splitPage.getOrderColunm())){
+			if(ToolString.regExpVali(colunm, ToolString.regExp_letter_6)){
+				splitPage.setOrderColunm(colunm);
+			}
+			if(ToolString.regExpVali(mode, ToolString.regExp_letter_6)){
+				splitPage.setOrderMode(mode);
+			}
 		}
 	}
 	

@@ -23,6 +23,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 
 /**
@@ -214,7 +215,7 @@ class SendMail extends Thread {
 			Address[] tos = new InternetAddress[to.size()];
 			for(int i=0; i<to.size(); i++){
 				String receive = to.get(i);
-				if(null != receive && !receive.isEmpty()){
+				if(StrKit.notBlank(receive)){
 					tos[i] = new InternetAddress(receive);
 				}
 			}
@@ -289,7 +290,7 @@ class SendMail extends Thread {
 			Address[] tos = new InternetAddress[to.size()];
 			for(int i=0; i<to.size(); i++){
 				String receive = to.get(i);
-				if(null != receive && !receive.isEmpty()){
+				if(StrKit.notBlank(receive)){
 					tos[i] = new InternetAddress(receive);
 				}
 			}

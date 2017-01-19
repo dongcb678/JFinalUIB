@@ -34,10 +34,10 @@
 					</div>
 					<div class="widget-body form switch-form">
 						${i18nMap["admin.operator.property.name"]}
-						<input class="medium" type="text" name="_query.names" value='${escapeXml(splitPage.queryParam["names"])}' maxlength="20">
+						<input class="medium" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20">
 					
 						${i18nMap["admin.operator.property.url"]}
-						<input class="medium" type="text" name="_query.url" value='${escapeXml(splitPage.queryParam["url"])}' maxlength="100" style="width: 250px">
+						<input class="medium" type="text" name="_query.url" value='${escapeHtml(splitPage.queryParam["url"])}' maxlength="100" style="width: 250px">
 
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -135,10 +135,10 @@
 									<td>
 										<input type="checkbox" class="checkboxes" name="checkIds" value="${operator.ids!}" class="flat-grey foocheck">
 									</td>
-									<td>${escapeXml(operator.systemsnames!)}</td>
-									<td>${escapeXml(operator.modulenames!)}</td>
-									<td>${escapeXml(operator["names"]!)}</td>
-									<td>${escapeXml(operator["url"]!)}</td>
+									<td>${escapeHtml(operator.systemsnames!)}</td>
+									<td>${escapeHtml(operator.modulenames!)}</td>
+									<td>${escapeHtml(operator["names"]!)}</td>
+									<td>${escapeHtml(operator["url"]!)}</td>
 									<td class="hidden-phone">
 										<span class="label label-success">
 											<% if(operator["rowFilter"] == "0"){ %>
@@ -210,14 +210,14 @@
 									</td>
 									<td class="hidden-phone">
 										<% if(view == true){ %>
-											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/platform/operator/view/${escapeXml(operator.ids!)}');">
+											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/platform/operator/view/${escapeHtml(operator.ids!)}');">
 												<i class="icon-eye-open"></i> 
 												${i18nMap["admin.common.see"]}
 											</button> 
 										<% } %>
 										
 										<% if(edit == true){ %>
-											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/platform/operator/edit/${escapeXml(operator.ids!)}');">
+											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/platform/operator/edit/${escapeHtml(operator.ids!)}');">
 												<i class="icon-refresh icon-white"></i>
 												${i18nMap["admin.common.edit"]}
 											</button> 

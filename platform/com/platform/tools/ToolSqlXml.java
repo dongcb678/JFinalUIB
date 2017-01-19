@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.beetl.core.BeetlKit;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.constant.ConstantRender;
 import com.platform.plugin.SqlXmlPlugin;
@@ -64,7 +65,7 @@ public abstract class ToolSqlXml {
     public static String getSql(String sqlId) {
     	String sql = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	
-    	if(null == sql || sql.isEmpty()){
+    	if(StrKit.isBlank(sql)){
 			log.error("sql语句不存在：sql id是" + sqlId);
 			return null;
     	}
@@ -82,7 +83,7 @@ public abstract class ToolSqlXml {
     public static String getSql(String sqlId, Map<String, Object> param, String renderType) {
     	String sqlTemplete = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	
-    	if(null == sqlTemplete || sqlTemplete.isEmpty()){
+    	if(StrKit.isBlank(sqlTemplete)){
 			log.error("sql语句不存在：sql id是" + sqlId);
 			return null;
     	}
@@ -130,7 +131,7 @@ public abstract class ToolSqlXml {
      */
     public static String getSql(String sqlId, Map<String, Object> param, String renderType, LinkedList<Object> list) {
     	String sqlTemplete = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
-    	if(null == sqlTemplete || sqlTemplete.isEmpty()){
+    	if(StrKit.isBlank(sqlTemplete)){
 			log.error("sql语句不存在：sql id是" + sqlId);
 			return null;
     	}

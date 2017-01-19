@@ -31,7 +31,7 @@
 
 					<form id="editForm" action="${cxt!}/test/blog/update" method="POST" class="form-horizontal">
 						<input type="hidden" name="csrfToken" value="${csrfToken!}">
-						<input type="hidden" name="blog.ids" value="${escapeXml(blog.ids!)}" >
+						<input type="hidden" name="blog.ids" value="${escapeHtml(blog.ids!)}" >
 						
 						<% include("/test/blog/form.html"){} %>
 

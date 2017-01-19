@@ -17,24 +17,24 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ourl"]}</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.url" value='${escapeXml(splitPage.queryParam["url"])}' maxlength="20" >
+					  		<input class="form-control focused" type="text" name="_query.url" value='${escapeHtml(splitPage.queryParam["url"])}' maxlength="20" >
 						</div>
 				  	
 						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.oname"]}</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.names" value='${escapeXml(splitPage.queryParam["names"])}' maxlength="20" >
+					  		<input class="form-control focused" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.username"]}</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.username" value='${escapeXml(splitPage.queryParam["username"])}' maxlength="20" >
+					  		<input class="form-control focused" type="text" name="_query.username" value='${escapeHtml(splitPage.queryParam["username"])}' maxlength="20" >
 						</div>
 				  	
 						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ips"]}</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.ips" value='${escapeXml(splitPage.queryParam["ips"])}' maxlength="20" >
+					  		<input class="form-control focused" type="text" name="_query.ips" value='${escapeHtml(splitPage.queryParam["ips"])}' maxlength="20" >
 						</div>
 				  	</div>
 				  	
@@ -109,8 +109,8 @@
 						<tbody>
 							<% for(sysLog in splitPage.list){ %>
 								<tr>
-									<td align="center">${escapeXml(sysLog["onames"]!)}：${sysLog.ourl }</td>
-									<td align="center">${escapeXml(sysLog["username"]!)}</td>
+									<td align="center">${escapeHtml(sysLog["onames"]!)}：${sysLog.ourl }</td>
+									<td align="center">${escapeHtml(sysLog["username"]!)}</td>
 									<td align="center">
 										<% if(sysLog["status"] == "1"){%>
 											<span class="label label-success">${i18nMap["admin.sysLog.property.status.success"]}</span>
@@ -118,7 +118,7 @@
 											<span class="label label-warning">${i18nMap["admin.sysLog.property.status.error"]}</span>
 										<% } %>
 									</td>
-									<td align="center">${escapeXml(sysLog["ips"]!)}</td>
+									<td align="center">${escapeHtml(sysLog["ips"]!)}</td>
 									<td align="center">
 										${sysLog.startdate !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
 									</td>

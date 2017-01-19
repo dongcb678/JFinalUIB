@@ -34,10 +34,10 @@
 					</div>
 					<div class="widget-body form switch-form">
 						原文件名
-						<input class="medium" type="text" name="_query.originalfilename" value='${escapeXml(splitPage.queryParam["originalfilename"])}' maxlength="50">
+						<input class="medium" type="text" name="_query.originalfilename" value='${escapeHtml(splitPage.queryParam["originalfilename"])}' maxlength="50">
 
 						文件名
-						<input class="medium" type="text" name="_query.filename" value='${escapeXml(splitPage.queryParam["filename"])}' maxlength="20">
+						<input class="medium" type="text" name="_query.filename" value='${escapeHtml(splitPage.queryParam["filename"])}' maxlength="20">
 
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -102,10 +102,10 @@
 									<td>
 										<input type="checkbox" class="checkboxes" name="checkIds" value="${upload.ids!}" class="flat-grey foocheck">
 									</td>
-									<td align="hidden-phone">${escapeXml(upload["filename"]!)}</td>
-									<td align="hidden-phone">${escapeXml(upload["originalfilename"]!)}</td>
-									<td align="hidden-phone">${escapeXml(upload["path"]!)}</td>
-									<td align="hidden-phone">${escapeXml(upload["contenttype"]!)}</td>
+									<td align="hidden-phone">${escapeHtml(upload["filename"]!)}</td>
+									<td align="hidden-phone">${escapeHtml(upload["originalfilename"]!)}</td>
+									<td align="hidden-phone">${escapeHtml(upload["path"]!)}</td>
+									<td align="hidden-phone">${escapeHtml(upload["contenttype"]!)}</td>
 									<td class="hidden-phone">
 										<% if(delete == true){ %>
 											<button type="button" class="btn btn-small btn-danger" onclick="common_modals.deleteOne(this)" data-url="/platform/upload/delete/${upload.ids!}?csrfToken=${csrfToken!}">

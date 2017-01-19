@@ -7,7 +7,7 @@
 		document.getElementById("checkedRole").add(option);
 		
 		var url = "/platform/groupRole/addRole";
-		var data = { "ids" : "${escapeXml(ids!)}", "roleIds" : option.value, "csrfToken" : "${csrfToken!}" };
+		var data = { "ids" : "${escapeHtml(ids!)}", "roleIds" : option.value, "csrfToken" : "${csrfToken!}" };
 		var result = common_ajax.ajaxFunc(url, data);
 	}
 	
@@ -33,7 +33,7 @@
 	<div class="panel-body">
 		<select id="allRole" multiple size="18" ondblclick="addChecked(this);" style="height: 300px;">
 			<% for(role in noCheckedList){ %>
-				<option value='${escapeXml(role.ids!)}'>${escapeXml(role.names!)}</option>
+				<option value='${escapeHtml(role.ids!)}'>${escapeHtml(role.names!)}</option>
 			<% } %>
 	  	</select>
 	</div>
@@ -48,7 +48,7 @@
 	<div class="panel-body">
 		<select id="checkedRole" multiple size="18" ondblclick="delChecked(this);" style="height: 300px;">
 			<% for(groupRole in checkedList){ %>
-				<option value='${escapeXml(groupRole.ids!)}'>${escapeXml(groupRole.rname!)}</option>
+				<option value='${escapeHtml(groupRole.ids!)}'>${escapeHtml(groupRole.rname!)}</option>
 			<% } %>
 	  	</select>
 	</div>

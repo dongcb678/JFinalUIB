@@ -17,11 +17,11 @@
 				  	<div class="control-group">
 						<label class="control-label" for="focusedInput">${i18nMap["admin.operator.property.name"]}</label>
 						<div class="col-sm-4">
-					  		<input class="form-control focused" type="text" name="_query.names" value='${escapeXml(splitPage.queryParam["names"])}' maxlength="20" >
+					  		<input class="form-control focused" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20" >
 						</div>
 						<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
 						<div class="col-sm-4">
-					  		<input class="span8" type="text" name="_query.url" value='${escapeXml(splitPage.queryParam["url"])}' maxlength="40" >
+					  		<input class="span8" type="text" name="_query.url" value='${escapeHtml(splitPage.queryParam["url"])}' maxlength="40" >
 						</div>
 				  	</div>
 				
@@ -86,10 +86,10 @@
 						<tbody>
 							<% for(operator in splitPage.list){ %>
 								<tr>
-									<td>${escapeXml(operator.systemsnames!)}</td>
-									<td>${escapeXml(operator.modulenames!)}</td>
-									<td>${escapeXml(operator["names"]!)}</td>
-									<td>${escapeXml(operator["url"]!)}</td>
+									<td>${escapeHtml(operator.systemsnames!)}</td>
+									<td>${escapeHtml(operator.modulenames!)}</td>
+									<td>${escapeHtml(operator["names"]!)}</td>
+									<td>${escapeHtml(operator["url"]!)}</td>
 									<td class="center">
 										<% if(operator["rowFilter"] == "0"){ %>
 												${i18nMap["admin.common.no"]}

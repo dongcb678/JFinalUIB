@@ -33,19 +33,19 @@
 						</span>
 					</div>
 					<div class="widget-body form switch-form">
-						<input type="hidden" name="_query.stationIds" value='${escapeXml(splitPage.queryParam["stationIds"])}'>
+						<input type="hidden" name="_query.stationIds" value='${escapeHtml(splitPage.queryParam["stationIds"])}'>
 						
 						系统名称
-						<input class="medium" type="text" name="_query.sname" value='${escapeXml(splitPage.queryParam["sname"])}' maxlength="20">
+						<input class="medium" type="text" name="_query.sname" value='${escapeHtml(splitPage.queryParam["sname"])}' maxlength="20">
 						
 						模块名称
-						<input class="medium" type="text" name="_query.mname" value='${escapeXml(splitPage.queryParam["mname"])}' maxlength="20">
+						<input class="medium" type="text" name="_query.mname" value='${escapeHtml(splitPage.queryParam["mname"])}' maxlength="20">
 						
 						功能名称
-						<input class="medium" type="text" name="_query.names" value='${escapeXml(splitPage.queryParam["names"])}' maxlength="20">
+						<input class="medium" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20">
 						
 						功能URL
-						<input class="medium" type="text" name="_query.url" value='${escapeXml(splitPage.queryParam["url"])}' maxlength="100" style="width: 250px">
+						<input class="medium" type="text" name="_query.url" value='${escapeHtml(splitPage.queryParam["url"])}' maxlength="100" style="width: 250px">
 
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -69,7 +69,7 @@
 
 					<div class="widget-body">
 						<span class="tools"> 
-							授权岗位：<button class="btn  btn-primary" type="button">${escapeXml(splitPage.extData.names!)}</button>
+							授权岗位：<button class="btn  btn-primary" type="button">${escapeHtml(splitPage.extData.names!)}</button>
 						</span>
 
                        	<div class="space15"></div>
@@ -94,9 +94,9 @@
 							<tbody>
 								<% for(sm in splitPage.list){ %>
 								<tr class="odd gradeX">
-									<td>${escapeXml(sm.sname!)}</td>
-									<td>${escapeXml(sm.pmname!)}</td>
-									<td>${escapeXml(sm.mname!)}</td>
+									<td>${escapeHtml(sm.sname!)}</td>
+									<td>${escapeHtml(sm.pmname!)}</td>
+									<td>${escapeHtml(sm.mname!)}</td>
 									<td>
 										<% for(o in sm.list){ %>
 											<input type="checkbox" name="${o.ids!}" value="${o.soids!}" onchange='changeFunc(this);' ${isEmpty(o.soids!) ? "" : "checked='checked'"}> ${o.names!} &nbsp;&nbsp;
@@ -132,7 +132,7 @@
 		
 		if(check){
 			var url = "/platform/stationOperator/add";
-			var data = { "stationIds" : '${escapeXml(splitPage.extData.ids!)}', "operatorIds" : oids, "csrfToken" : "${csrfToken!}" };
+			var data = { "stationIds" : '${escapeHtml(splitPage.extData.ids!)}', "operatorIds" : oids, "csrfToken" : "${csrfToken!}" };
 			var result = common_ajax.ajaxFunc(url, data, "json");
 			if(result.status == "success"){
 				box.value = result.data; // 返回岗位功能主键

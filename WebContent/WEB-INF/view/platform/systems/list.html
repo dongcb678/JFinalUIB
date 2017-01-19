@@ -34,10 +34,10 @@
 					</div>
 					<div class="widget-body form switch-form">
 						${i18nMap["admin.systems.property.numbers"]}
-						<input class="medium" type="text" name="_query.numbers" value='${escapeXml(splitPage.queryParam["numbers"])}' maxlength="50">
+						<input class="medium" type="text" name="_query.numbers" value='${escapeHtml(splitPage.queryParam["numbers"])}' maxlength="50">
 
 						${i18nMap["admin.systems.property.name"]}
-						<input class="medium" type="text" name="_query.names" value='${escapeXml(splitPage.queryParam["names"])}' maxlength="20">
+						<input class="medium" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20">
 
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -113,31 +113,31 @@
 										<input type="checkbox" class="checkboxes" name="checkIds" value="${systems.ids!}" class="flat-grey foocheck">
 									</td>
 									<td class="hidden-phone">
-										<span class="label label-success">${escapeXml(systems["numbers"]!)}</span>
+										<span class="label label-success">${escapeHtml(systems["numbers"]!)}</span>
 									</td>
-									<td class="hidden-phone">${escapeXml(systems["names"]!) }</td>
+									<td class="hidden-phone">${escapeHtml(systems["names"]!) }</td>
 									<td>${systems["orderids"]!}</td>
 									<td class="hidden-phone">
 										<% if(edit == true){ %>
-											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/platform/systems/edit/${escapeXml(systems.ids!)}');"> 
+											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/platform/systems/edit/${escapeHtml(systems.ids!)}');"> 
 												<i class="icon-refresh icon-white"></i> ${i18nMap["admin.common.edit"]}
 											</button>
 										<% } %>
 										
 										<% if(delete == true){ %>
-											<button type="button" class="btn btn-small btn-danger" onclick="common_modals.deleteOne(this)" data-url="/platform/systems/delete/${escapeXml(systems.ids!)}?csrfToken=${csrfToken!}"> 
+											<button type="button" class="btn btn-small btn-danger" onclick="common_modals.deleteOne(this)" data-url="/platform/systems/delete/${escapeHtml(systems.ids!)}?csrfToken=${csrfToken!}"> 
 												<i class="icon-remove icon-white"></i> ${i18nMap["admin.common.delete"]}
 											</button>
 										<% } %>
 										
 										<% if(module == true){ %>
-											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/platform/module?systemsIds=${escapeXml(systems.ids!)}');"> 
+											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/platform/module?systemsIds=${escapeHtml(systems.ids!)}');"> 
 												<i class="icon-ok icon-white"></i> ${i18nMap["admin.systems.list.table.module"]}
 											</button>
 										<% } %>
 										
 										<% if(menu == true){ %>
-											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/platform/menu?systemsIds=${escapeXml(systems.ids!)}');"> 
+											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/platform/menu?systemsIds=${escapeHtml(systems.ids!)}');"> 
 												<i class="icon-ok icon-white"></i> ${i18nMap["admin.systems.list.table.menu"]}
 											</button>
 										<% } %>

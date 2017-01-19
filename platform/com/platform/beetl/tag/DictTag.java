@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.beetl.core.Tag;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.constant.ConstantWebContext;
 import com.platform.mvc.dict.Dict;
@@ -75,7 +76,7 @@ public class DictTag extends Tag {
 	 */
 	private String select(String id, String name, String class_, String style, String number, String defaultnumber){
 		StringBuilder sb = new StringBuilder();
-		if (null != id && !id.isEmpty()) {
+		if (StrKit.notBlank(id)) {
 			sb.append("<select id=\"").append(id).append("\" name=\"").append(name);
 			sb.append("\" class=\"").append(class_).append("\" style=\"").append(style).append("\" >");
 		} else {

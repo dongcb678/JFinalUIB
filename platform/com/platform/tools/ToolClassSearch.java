@@ -16,6 +16,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.constant.ConstantInit;
 
@@ -40,7 +41,7 @@ public abstract class ToolClassSearch {
 	
 	static {
 		String scan_jar = PropKit.get(ConstantInit.config_scan_jar);
-		if(null != scan_jar && !scan_jar.isEmpty()){
+		if(StrKit.notBlank(scan_jar)){
 			String[] jars = scan_jar.split(",");
 			for (String jar : jars) {
 				scanJarList.add(jar.trim());
@@ -48,7 +49,7 @@ public abstract class ToolClassSearch {
 		}
 		
 		String scan_package = PropKit.get(ConstantInit.config_scan_package);
-		if(null != scan_package && !scan_package.isEmpty()){
+		if(StrKit.notBlank(scan_package)){
 			String[] pkgs = scan_package.split(",");
 			for (String pkg : pkgs) {
 				scanPkgList.add(pkg.trim());

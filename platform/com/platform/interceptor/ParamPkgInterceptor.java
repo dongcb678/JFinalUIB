@@ -65,7 +65,7 @@ public class ParamPkgInterceptor implements Interceptor {
 		if(splitpage.equals("1")){
 			String uri = invoc.getActionKey(); // 默认就是ActionKey
 			String urlPara = controller.getUrlPara();
-			if(urlPara != null && !urlPara.isEmpty()){
+			if(StrKit.notBlank(urlPara)){
 				uri += "/" + urlPara;
 				controller.setAttr("urlPara", urlPara + "/" + urlPara); // 设置urlPara到request
 			}
@@ -108,7 +108,7 @@ public class ParamPkgInterceptor implements Interceptor {
 		String backOff = controller.getPara();
 		if((backOff != null && backOff.equals("backOff")) || controller.getParaToBoolean("backOff", false)){
 			String userIds = controller.getReqSysLog().getUserids();
-			if(userIds != null && !userIds.isEmpty()){
+			if(StrKit.notBlank(userIds)){
 				SplitPage splitPageCache = ToolCache.get(ConstantSplitPage.cacheStart_splitPage_backOff + userIds);
 				if(splitPageCache != null && uri.startsWith(splitPageCache.getUri())){
 					splitPage = splitPageCache;
@@ -186,7 +186,7 @@ public class ParamPkgInterceptor implements Interceptor {
 
 		// 缓存回退分页条件
 		String userIds = controller.getReqSysLog().getUserids();
-		if(userIds != null && !userIds.isEmpty()){
+		if(StrKit.notBlank(userIds)){
 			ToolCache.set(ConstantSplitPage.cacheStart_splitPage_backOff + userIds, splitPage);
 		}
 		
@@ -212,7 +212,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			
 			// 参数值为空直接结束
 			String value = controller.getPara(name);
-			if(null == value || value.trim().isEmpty()){
+			if(StrKit.isBlank(value)){
 				return;
 			}
 			

@@ -17,7 +17,7 @@
 					<div class="control-group">
 						<label class="control-label">关键字</label>
 						<div class="col-sm-9">
-					  		<input class="form-control focused" type="text" name="_query.searchKeyWords" value='${escapeXml(splitPage.queryParam["searchKeyWords"])}' maxlength="20" >
+					  		<input class="form-control focused" type="text" name="_query.searchKeyWords" value='${escapeHtml(splitPage.queryParam["searchKeyWords"])}' maxlength="20" >
 						</div>
 				  	</div>
 					
@@ -61,7 +61,7 @@
 						<tbody>
 							<% for(keyword in splitPage.list!){ %>
 								<tr>
-									<td class="hidden-xs">${escapeXml(keyword.ids!)}</td>
+									<td class="hidden-xs">${escapeHtml(keyword.ids!)}</td>
 									<td class="hidden-xs">${keyword.question!}</td>
 									<td class="hidden-xs">${keyword["questionkey"]!}</td>
 									<td class="hidden-xs">${keyword["answer"]!}</td>

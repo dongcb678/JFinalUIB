@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.beetl.core.Format;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.tools.ToolDateTime;
 
@@ -27,7 +28,7 @@ public class DateFormat implements Format {
 			return null;
 		}
 		
-		if (pattern == null || pattern.isEmpty()){
+		if (StrKit.isBlank(pattern)){
 			throw new RuntimeException("DateFormat 参数错误 : pattern不能为空");
 		}
 		

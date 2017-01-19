@@ -20,19 +20,19 @@ public abstract class ToolHtml {
 	 * @param content
 	 * @return
 	 */
-	public static String escapeXml(String content){
-		return StringEscapeUtils.escapeXml11(content);
+	public static String escapehtml(String content){
+		return StringEscapeUtils.escapeHtml4(content);
 	}
-
+	
 	/**
 	 * 特殊字符转义，避免XSS
 	 * @param content
 	 * @return
 	 */
-	public static String escapehtml(String content){
-		return StringEscapeUtils.escapeHtml4(content);
+	public static String unescapehtml(String content){
+		return StringEscapeUtils.unescapeHtml4(content);
 	}
-	
+
 	/**
 	 * 富文本内容处理返回纯文本
 	 * @param unsafe

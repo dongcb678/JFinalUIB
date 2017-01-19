@@ -8,9 +8,9 @@
 	
 	cxt : ${cxt!} <br>
 	
-	cookie : ${escapeXml(cookieMap.userName.value!)} <br>
+	cookie : ${escapeHtml(cookieMap.userName.value!)} <br>
 	
-	param :  ${escapeXml(paramMap.aa!)}<br>
+	param :  ${escapeHtml(paramMap.aa!)}<br>
 	
 	<%
 		print(paramMap.aa);

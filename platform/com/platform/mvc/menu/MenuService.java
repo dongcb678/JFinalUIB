@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
@@ -107,11 +108,11 @@ public class MenuService extends BaseService {
 		String namesColunm = "names" + i18nColumnSuffix;
 		
 		Menu menu = Menu.dao.findById(ids);
-		if(null != names && !names.isEmpty()){
+		if(StrKit.notBlank(names)){
 			//更新模块名称
 			menu.set(namesColunm, names).update();
 			
-		}else if(null != pIds && !pIds.isEmpty()){
+		}else if(StrKit.notBlank(pIds)){
 			//更新上级模块
 			menu.set(Menu.column_parentmenuids, pIds).update();
 		}

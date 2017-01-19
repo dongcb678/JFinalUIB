@@ -21,6 +21,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.platform.tools.ToolCache;
@@ -290,7 +291,7 @@ public class SqlXmlPlugin implements IPlugin {
 	private static void parseDoc(boolean isInit, String fileName, Document doc) {
 		Element root = doc.getRootElement();
 		String namespace = root.attributeValue("namespace");
-		if (null == namespace || namespace.trim().isEmpty()) {
+		if (StrKit.isBlank(namespace)) {
 			log.error("sql xml文件" + fileName + "的命名空间不能为空");
 			return;
 		}
@@ -301,13 +302,13 @@ public class SqlXmlPlugin implements IPlugin {
 				String id = element.attributeValue("id");
 				String key = namespace + "." + id;
 
-				if (null == id || id.trim().isEmpty()) {
+				if (StrKit.isBlank(id)) {
 					log.error("sql xml文件" + fileName + "的存在没有id的sql语句");
 					throw new RuntimeException("sql xml文件" + fileName + "的存在没有id的sql语句");
 				}
 
 				String sql = element.getText();
-				if (null == sql || sql.trim().isEmpty()) {
+				if (StrKit.isBlank(sql)) {
 					log.error("sql xml文件" + fileName + "的存在没有内容的sql语句，sqlId = " + key);
 					throw new RuntimeException("sql xml文件" + fileName + "的存在没有内容的sql语句，sqlId = " + key);
 				}

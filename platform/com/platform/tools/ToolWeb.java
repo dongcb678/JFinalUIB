@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.constant.ConstantInit;
 
@@ -84,7 +85,7 @@ public abstract class ToolWeb {
 	 */
 	public static String getParam(HttpServletRequest request, String name) {
 		String value = request.getParameter(name);
-		if (null != value && !value.isEmpty()) {
+		if (StrKit.notBlank(value)) {
 			try {
 				return URLDecoder.decode(value, ToolString.encoding).trim();
 			} catch (UnsupportedEncodingException e) {
@@ -135,7 +136,7 @@ public abstract class ToolWeb {
 	 * @param contentType
 	 */
 	public static void outPage(HttpServletResponse response, byte[] content, String contentType) {
-		if(contentType == null || contentType.isEmpty()){
+		if(StrKit.isBlank(contentType)){
 			contentType = "text/html; charset=UTF-8";
 		}
 		response.setContentType(contentType);
@@ -244,13 +245,13 @@ public abstract class ToolWeb {
 		Cookie cookie = new Cookie(name, value);
 
 		// 所在域：比如a1.4bu4.com 和 a2.4bu4.com 共享cookie
-		if(null != domain && !domain.isEmpty()){
+		if(StrKit.notBlank(domain)){
 			cookie.setDomain(domain);			
 		}
 		
 		// 设置cookie所在路径
 		cookie.setPath("/");
-		if(null != path && !path.isEmpty()){
+		if(StrKit.notBlank(path)){
 			cookie.setPath(path);				
 		}
 		

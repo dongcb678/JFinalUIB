@@ -79,7 +79,6 @@ public abstract class ToolRedis {
 			
 			redisMap.put(name, redis);
 		}
-			
 	}
 	
 }

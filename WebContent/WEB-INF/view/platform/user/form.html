@@ -2,13 +2,13 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.department"]}</label>
 	<div class="controls">
-		<input type="hidden" id="deptId" name="user.departmentids" value="${escapeXml(dept.ids!)}"/>
-		<input type="text" class="span8" id="deptName" value="${escapeXml(dept.names!)}" 
+		<input type="hidden" id="deptId" name="user.departmentids" value="${escapeHtml(dept.ids!)}"/>
+		<input type="text" class="span8" id="deptName" value="${escapeHtml(dept.names!)}" 
 			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="必选">
 		
 		<span class="help-inline"> 
 			<a href="javascript:void(0)" class="btn btn-primary" 
-				onclick="common_modals.deptRadioDiaLog('deptId', 'deptName', '${escapeXml(user.departmentids!)}')">${i18nMap["admin.common.choice"]}</a>
+				onclick="common_modals.deptRadioDiaLog('deptId', 'deptName', '${escapeHtml(user.departmentids!)}')">${i18nMap["admin.common.choice"]}</a>
 		</span>
 	</div>
 </div>
@@ -16,13 +16,13 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.station"]}</label>
 	<div class="controls">
-		<input type="hidden" id="stationId" name="user.stationids" value="${escapeXml(station.ids!)}"/>
-		<input type="text" class="span8" id="stationName" value="${escapeXml(station.names!)}" 
+		<input type="hidden" id="stationId" name="user.stationids" value="${escapeHtml(station.ids!)}"/>
+		<input type="text" class="span8" id="stationName" value="${escapeHtml(station.names!)}" 
 			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="必选">
 		
 		<span class="help-inline"> 
 			<a href="javascript:void(0)" class="btn btn-primary" 
-				onclick="common_modals.stationRadioDiaLog('stationId', 'stationName', '${escapeXml(user.stationids!)}')">${i18nMap["admin.common.choice"]}</a>
+				onclick="common_modals.stationRadioDiaLog('stationId', 'stationName', '${escapeHtml(user.stationids!)}')">${i18nMap["admin.common.choice"]}</a>
 		</span>
 	</div>
 </div>
@@ -32,16 +32,16 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.dataAccess"]}</label>
 	<div class="controls">
-		<input type="hidden" id="deptId2" name="user.deptids" value="${escapeXml(user.deptids!)}" />
-		<input type="text" id="deptName2" name="user.deptnames" value="${escapeXml(user.deptnames!)}" class="span4" readonly="readonly" />
+		<input type="hidden" id="deptId2" name="user.deptids" value="${escapeHtml(user.deptids!)}" />
+		<input type="text" id="deptName2" name="user.deptnames" value="${escapeHtml(user.deptnames!)}" class="span4" readonly="readonly" />
 		
-		<input type="hidden" id="userId" name="user.userids" value="${escapeXml(user.userids!)}" />
-		<input type="text" id="userName" name="user.usernames" value="${escapeXml(user.usernames!)}" class="span4" readonly="readonly"
+		<input type="hidden" id="userId" name="user.userids" value="${escapeHtml(user.userids!)}" />
+		<input type="text" id="userName" name="user.usernames" value="${escapeHtml(user.usernames!)}" class="span4" readonly="readonly"
 			maxlength="10000" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 		
 		<span class="help-inline"> 
 			<a href="javascript:void(0)" class="btn btn-primary" 
-				onclick="common_modals.userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${escapeXml(user.deptids!)}', '${escapeXml(user.userids!)}')">${i18nMap["admin.common.choice"]}</a>
+				onclick="common_modals.userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${escapeHtml(user.deptids!)}', '${escapeHtml(user.userids!)}')">${i18nMap["admin.common.choice"]}</a>
 		</span>
 	</div>
 </div>
@@ -51,7 +51,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" id="idcardId" name="user.idcard" value="${escapeXml(user.idcard!)}"
+		<input type="text" class="span8" id="idcardId" name="user.idcard" value="${escapeHtml(user.idcard!)}"
 			maxlength="18" vMin="15" vType="idCard" onblur="platform_verify.onblurVali(this);" placeholder="15-18位字母数字">
 		<span class="help-inline"></span>
 	</div>
@@ -60,7 +60,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.nickname"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" name="user.names" value="${escapeXml(user.names!)}" 
+		<input type="text" class="span8" name="user.names" value="${escapeHtml(user.names!)}" 
 			maxlength="10" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="2-10位任意字符">
 		<span class="help-inline"></span>
 	</div>
@@ -69,7 +69,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.userName"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" id="usernameId" name="user.username" value="${escapeXml(user.username!)}" 
+		<input type="text" class="span8" id="usernameId" name="user.username" value="${escapeHtml(user.username!)}" 
 			maxlength="16" vMin="5" vType="letterNumber" onblur="platform_verify.onblurVali(this);" placeholder="5-16位字母数字">
 		<span class="help-inline"> </span>
 	</div>
@@ -110,7 +110,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" id="mailboxId" name="user.email" value="${escapeXml(user.email!)}" 
+		<input type="text" class="span8" id="mailboxId" name="user.email" value="${escapeHtml(user.email!)}" 
 			maxlength="30" vMin="6" vType="email" onblur="platform_verify.onblurVali(this);" placeholder="6-30位邮箱规则">
 		<span class="help-inline"> </span>
 	</div>
@@ -119,7 +119,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" id="mobileId" name="user.mobile" value="${escapeXml(user.mobile!)}" 
+		<input type="text" class="span8" id="mobileId" name="user.mobile" value="${escapeHtml(user.mobile!)}" 
 			maxlength="11" vMin="11" vType="phone" onblur="platform_verify.onblurVali(this);" placeholder="11位数字">
 		<span class="help-inline"> </span>
 	</div>
@@ -128,7 +128,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.telephone"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" name="userInfo.telephone" value="${escapeXml(userInfo.telephone!)}" 
+		<input type="text" class="span8" name="userInfo.telephone" value="${escapeHtml(userInfo.telephone!)}" 
 			maxlength="20" vMin="0" vType="tell" onblur="platform_verify.onblurVali(this);" placeholder="5-20位">
 		<span class="help-inline"> </span>
 	</div>
@@ -137,7 +137,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.user.property.qq"]}</label>
 	<div class="controls">
-		<input type="text" class="span8" name="userInfo.qq" value="${escapeXml(userInfo.qq!)}"
+		<input type="text" class="span8" name="userInfo.qq" value="${escapeHtml(userInfo.qq!)}"
 			maxlength="20" vMin="0" vType="qq" onblur="platform_verify.onblurVali(this);" placeholder="5-20位数字">
 		<span class="help-inline"> </span>
 	</div>

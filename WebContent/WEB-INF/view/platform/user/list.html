@@ -33,13 +33,13 @@
 					</div>
 					<div class="widget-body form switch-form">
 						${i18nMap["admin.user.property.userName"]} 
-						<input class="medium" type="text" name="_query.userName" value='${escapeXml(splitPage.queryParam["userName"])}' maxlength="20">
+						<input class="medium" type="text" name="_query.userName" value='${escapeHtml(splitPage.queryParam["userName"])}' maxlength="20">
 
 						${i18nMap["admin.user.property.email"]} 
-						<input class="medium" type="text" name="_query.email" value='${escapeXml(splitPage.queryParam["email"])}' maxlength="40">
+						<input class="medium" type="text" name="_query.email" value='${escapeHtml(splitPage.queryParam["email"])}' maxlength="40">
 
 						${i18nMap["admin.user.property.birthday"]} 
-		                <input class="medium" type="text" name="_query.birthday" value='${escapeXml(splitPage.queryParam["birthday"])}' onClick="WdatePicker({minDate:'1900-01-01', maxDate:'%y-%M-%d'})" readonly>
+		                <input class="medium" type="text" name="_query.birthday" value='${escapeHtml(splitPage.queryParam["birthday"])}' onClick="WdatePicker({minDate:'1900-01-01', maxDate:'%y-%M-%d'})" readonly>
 		                
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -122,12 +122,12 @@
 									<td>
 										<input type="checkbox" class="checkboxes" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
 									</td>
-									<td class="hidden-phone">${escapeXml(user.deptnames!) }</td>
-									<td class="hidden-phone">${escapeXml(user["username"]!) }</td>
-									<td class="hidden-phone">${escapeXml(user["names"]!) }</td>
-									<td class="hidden-phone">${escapeXml(user["email"]!) }</td>
+									<td class="hidden-phone">${escapeHtml(user.deptnames!) }</td>
+									<td class="hidden-phone">${escapeHtml(user["username"]!) }</td>
+									<td class="hidden-phone">${escapeHtml(user["names"]!) }</td>
+									<td class="hidden-phone">${escapeHtml(user["email"]!) }</td>
 									<td class="hidden-phone">
-										<span class="label label-success">${escapeXml(user["mobile"]!)}</span>
+										<span class="label label-success">${escapeHtml(user["mobile"]!)}</span>
 									</td>
 									<td class="hidden-phone">
 										<% if(view == true){ %>

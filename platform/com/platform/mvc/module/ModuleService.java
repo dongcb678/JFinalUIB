@@ -3,6 +3,7 @@ package com.platform.mvc.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
@@ -98,11 +99,11 @@ public class ModuleService extends BaseService {
 	 */
 	public void update(String ids, String pIds, String names) {
 		Module module = Module.dao.findById(ids);
-		if(null != names && !names.isEmpty()){
+		if(StrKit.notBlank(names)){
 			//更新模块名称
 			module.set(Module.column_names, names).update();
 			
-		}else if(null != pIds && !pIds.isEmpty()){
+		}else if(StrKit.notBlank(pIds)){
 			//更新上级模块
 			module.set(Module.column_parentmoduleids, pIds).update();
 		}

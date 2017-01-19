@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.upload.UploadFile;
 import com.platform.annotation.Controller;
@@ -89,10 +90,10 @@ public class UploadController extends BaseController {
 
 			// 4.分片处理
 		    String chunk = getPara("chunk"); // webupload自带的参数，当前分片索引，从0开始
-	        if(StringUtils.isEmpty(chunk)){ // 4.1不分片的情况，文件小于分片大小，比如指定的5MB
+	        if(StrKit.isBlank(chunk)){ // 4.1不分片的情况，文件小于分片大小，比如指定的5MB
 	        	Map<String, String> upload = uploadService.slice(pathType, uploadFile, basePath, storePath);
 	    		renderSuccess(null, upload, "小于分片大小，一次上传成功");
-	        	
+	    		
 	        }else{ // 4.2分片的情况
 	        	int chunks = getParaToInt("chunks"); // webupload自带的参数，分片总数
 	            if (Integer.valueOf(chunk) == (chunks - 1)) { // 最后一个分片
@@ -130,7 +131,7 @@ public class UploadController extends BaseController {
 			
 			// 4.分片处理
 			String chunk = getPara("chunk");
-	        if(StringUtils.isEmpty(chunk)){ // 4.1不分片的情况，文件小于分片大小，比如指定的5MB
+	        if(StrKit.isBlank(chunk)){ // 4.1不分片的情况，文件小于分片大小，比如指定的5MB
 	        	Map<String, String> upload = uploadService.slice(pathType, uploadFile, basePath, storePath);
 	    		renderSuccess(null, upload, "小于分片大小，一次上传成功");
 	        	

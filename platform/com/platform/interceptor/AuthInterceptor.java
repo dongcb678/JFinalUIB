@@ -162,7 +162,7 @@ public class AuthInterceptor implements Interceptor {
 			} else if (null == tokenCookie || tokenCookie.equals("") || !tokenCookie.equals(tokenRequest)) {
 				log.debug("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
 				String cxtPath = request.getContextPath();
-				if(cxtPath == null || cxtPath.isEmpty()){
+				if(StrKit.isBlank(cxtPath)){
 					cxtPath = "/";
 				}
 				
@@ -276,7 +276,6 @@ public class AuthInterceptor implements Interceptor {
 	 * @return
 	 */
 	public static boolean hasPrivilegeUrl(String operatorIds, String userIds) {
-		
 		/**  
 		 * 1.直接查询数据库表验证操作权限
 		 * 
@@ -298,7 +297,6 @@ public class AuthInterceptor implements Interceptor {
 		/**
 		 * 2.取缓存验证操作权限
 		 **/
-		
 		// 根据分组角色查询权限
 		User user = User.cacheGetByUserId(userIds);
 		List<UserGroup> ugList = user.get("ugList");
@@ -333,14 +331,14 @@ public class AuthInterceptor implements Interceptor {
 	 */
 	public static User getCurrentUser(HttpServletRequest request, HttpServletResponse response, boolean userAgentVali) {
 		String cxtPath = request.getContextPath();
-		if(cxtPath == null || cxtPath.isEmpty()){
+		if(StrKit.isBlank(cxtPath)){
 			cxtPath = "/";
 		}
 		
 		// 加密串存储位置，默认先取header
 		String store = ConstantAuth.auth_store_header;
 		String loginCookie = request.getHeader(ConstantWebContext.cookie_authmark);
-		if(loginCookie == null || loginCookie.isEmpty()){
+		if(StrKit.isBlank(loginCookie)){
 			// 如果为空，再取cookie
 			store = ConstantAuth.auth_store_cookie;
 			loginCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_authmark);
@@ -349,25 +347,31 @@ public class AuthInterceptor implements Interceptor {
 		// 处理加密串的解析和验证
 		if (null != loginCookie && !loginCookie.equals("")) {
 			// 1.解密认证数据
-			String data = ToolIDEA.decrypt(loginCookie);
-			if(null == data || data.isEmpty()){
+			String outer = ToolIDEA.decrypt(loginCookie);
+			if(StrKit.isBlank(outer)){
 				ToolWeb.addCookie(response, "", cxtPath, true, ConstantWebContext.cookie_authmark, null, 0);
 				return null;
 			}
-			String[] datas = data.split(".#.");	//arr[0]：时间戳，arr[1]：USERID，arr[2]：USER_IP， arr[3]：USER_AGENT
 			
 			// 2. 分解认证数据
-			long loginDateTimes;
 			String userIds = null;
+			String secretkey = null;
+			long loginDateTimes;
 			String ips = null;
 			String userAgent = null;
 			boolean autoLogin = false;
 			try {
-				loginDateTimes = Long.parseLong(datas[0]); // 时间戳
-				userIds = datas[1]; // 用户id
-				ips = datas[2]; // ip地址
-				userAgent = datas[3]; // USER_AGENT
-				autoLogin = Boolean.valueOf(datas[4]); // 是否自动登录
+				String[] outerArr = outer.split(".#.");	// arr[0]：USERID，arr[1]：inner
+				userIds = outerArr[0];
+				User user = User.cacheGetByUserId(userIds);
+				secretkey = user.getSecretkey();
+				String inner = ToolIDEA.decrypt(secretkey, outerArr[1]);
+				String[] innerArr = inner.split(".#."); // arr[0]：时间戳，arr[1]：USER_IP， arr[2]：USER_AGENT
+				
+				loginDateTimes = Long.parseLong(innerArr[0]); // 时间戳
+				ips = innerArr[1]; // ip地址
+				userAgent = innerArr[2]; // USER_AGENT
+				autoLogin = Boolean.valueOf(innerArr[3]); // 是否自动登录
 			} catch (Exception e) {
 				if(store.equals(ConstantAuth.auth_store_cookie)){
 					ToolWeb.addCookie(response, "", cxtPath, true, ConstantWebContext.cookie_authmark, null, 0);
@@ -395,18 +399,25 @@ public class AuthInterceptor implements Interceptor {
 						return null;
 					}else{
 						// 重新生成认证cookie，目的是更新时间戳
-						long date = ToolDateTime.getDateByTime();
-						StringBuilder token = new StringBuilder();// 时间戳.#.USERID.#.USER_IP.#.USER_AGENT.#.autoLogin
-						token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
-						String authmark = ToolIDEA.encrypt(token.toString());
+						long dateNew = ToolDateTime.getDateByTime();
+						
+						// 内层用户私有密钥加密
+						StringBuilder innerSb = new StringBuilder(); // 时间戳.#.USER_IP.#.USER_AGENT.#.autoLogin
+						innerSb.append(dateNew).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
+						String innerNew = ToolIDEA.encrypt(secretkey, innerSb.toString());
+						
+						// 外层使用系统公共密钥加密
+						StringBuilder outerSb = new StringBuilder(); // userIds.#.inner
+						outerSb.append(userIds).append(".#.").append(innerNew);
+						String outerNew = ToolIDEA.encrypt(outerSb.toString());
 						
 						// 添加到Cookie
 						if(store.equals(ConstantAuth.auth_store_cookie)){
 							int maxAgeTemp = -1; // 设置cookie有效时间
-							ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
+							ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.cookie_authmark, outerNew, maxAgeTemp);
 						
 						}else if(store.equals(ConstantAuth.auth_store_header)){
-							response.setHeader(ConstantWebContext.cookie_authmark, authmark);
+							response.setHeader(ConstantWebContext.cookie_authmark, outerNew);
 						}
 					}
 				}
@@ -425,10 +436,11 @@ public class AuthInterceptor implements Interceptor {
 	 * @param response
 	 * @param user
 	 * @param autoLogin
+	 * 描述：加密串分两层，外层使用系统公共密钥加密，内层使用用户私有密钥加密
 	 */
 	public static void setCurrentUser(HttpServletRequest request, HttpServletResponse response, User user, boolean autoLogin) {
 		String cxtPath = request.getContextPath();
-		if(cxtPath == null || cxtPath.isEmpty()){
+		if(StrKit.isBlank(cxtPath)){
 			cxtPath = "/";
 		}
 		
@@ -439,21 +451,29 @@ public class AuthInterceptor implements Interceptor {
 		}
 
 		// 2.设置用户名到cookie
-		ToolWeb.addCookie(response, "", cxtPath, true, "userName", user.getStr(User.column_username), maxAgeTemp);
+		ToolWeb.addCookie(response, "", cxtPath, true, "userName", user.getUsername(), maxAgeTemp);
 
 		// 3.生成登陆认证cookie
+		String secretkey = user.getSecretkey();
 		String userIds = user.getPKValue();
+		
 		String ips = ToolWeb.getIpAddr(request);
 		String userAgent = request.getHeader("User-Agent");
 		long date = ToolDateTime.getDateByTime();
 		
-		StringBuilder token = new StringBuilder();// 时间戳.#.USERID.#.USER_IP.#.USER_AGENT.#.autoLogin
-		token.append(date).append(".#.").append(userIds).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
-		String authmark = ToolIDEA.encrypt(token.toString());
+		// 内层用户私有密钥加密
+		StringBuilder innerSb = new StringBuilder(); // 时间戳.#.USER_IP.#.USER_AGENT.#.autoLogin
+		innerSb.append(date).append(".#.").append(ips).append(".#.").append(userAgent).append(".#.").append(autoLogin);
+		String inner = ToolIDEA.encrypt(secretkey, innerSb.toString());
+		
+		// 外层使用系统公共密钥加密
+		StringBuilder outerSb = new StringBuilder(); // userIds.#.inner
+		outerSb.append(userIds).append(".#.").append(inner);
+		String outer = ToolIDEA.encrypt(outerSb.toString());
 		
 		// 4. 添加到Cookie和header
-		ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.cookie_authmark, authmark, maxAgeTemp);
-		response.setHeader(ConstantWebContext.cookie_authmark, authmark);
+		ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.cookie_authmark, outer, maxAgeTemp);
+		response.setHeader(ConstantWebContext.cookie_authmark, outer);
 	}
 	
 	/**
@@ -464,7 +484,7 @@ public class AuthInterceptor implements Interceptor {
 	 */
 	public static void setAuthCode(HttpServletRequest request, HttpServletResponse response, String authCode){
 		String cxtPath = request.getContextPath();
-		if(cxtPath == null || cxtPath.isEmpty()){
+		if(StrKit.isBlank(cxtPath)){
 			cxtPath = "/";
 		}
 		
@@ -484,7 +504,7 @@ public class AuthInterceptor implements Interceptor {
 	 */
 	public static String getAuthCode(HttpServletRequest request, HttpServletResponse response){
 		String cxtPath = request.getContextPath();
-		if(cxtPath == null || cxtPath.isEmpty()){
+		if(StrKit.isBlank(cxtPath)){
 			cxtPath = "/";
 		}
 		

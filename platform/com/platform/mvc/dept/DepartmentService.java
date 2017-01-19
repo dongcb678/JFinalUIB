@@ -3,6 +3,7 @@ package com.platform.mvc.dept;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
@@ -90,15 +91,15 @@ public class DepartmentService extends BaseService {
 	 */
 	public void update(String ids, String pIds, String names, String principalIds) {
 		Department dept = Department.dao.findById(ids);
-		if(null != names && !names.isEmpty()){
+		if(StrKit.notBlank(names)){
 			//更新模块名称
 			dept.set(Department.column_names, names).update();
 			
-		}else if(null != pIds && !pIds.isEmpty()){
+		}else if(StrKit.notBlank(pIds)){
 			//更新上级模块
 			dept.set(Department.column_parentdepartmentids, pIds).update();
 			
-		}else if(null != principalIds && !principalIds.isEmpty()){
+		}else if(StrKit.notBlank(principalIds)){
 			//更新部门负责人
 			dept.set(Department.column_principaluserids, principalIds).update();
 		}

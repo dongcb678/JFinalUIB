@@ -1,6 +1,7 @@
 package com.platform.mvc.login;
 
 import com.jfinal.aop.Before;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.constant.ConstantLogin;
@@ -113,7 +114,7 @@ public class LoginController extends BaseController {
 		String returnJson = getPara("returnText");
 
 		// 如果是httpclient登陆就不处理验证码，不用担心密码暴力破解，因为init文件有密码错误次数限制
-		if(null != returnJson && !returnJson.isEmpty()){
+		if(StrKit.notBlank(returnJson)){
 			int result = loginService.login(getRequest(), getResponse(), username, password, false);
 			if(result == ConstantLogin.login_info_3){ // 登陆验证成功
 				renderText("success");
@@ -160,7 +161,7 @@ public class LoginController extends BaseController {
 	 */
 	public void logout() {
 		String cxtPath = getRequest().getContextPath();
-		if(cxtPath == null || cxtPath.isEmpty()){
+		if(StrKit.isBlank(cxtPath)){
 			cxtPath = "/";
 		}
 		

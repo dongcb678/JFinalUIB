@@ -2,13 +2,13 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.operator.property.mname"]}</label>
 	<div class="controls">
-		<input type="hidden" id="moduleId" name="operator.moduleids" value="${escapeXml(operator.moduleids!)}"/>
-		<input type="text" id="moduleName" name="operator.modulenames" value="${escapeXml(operator.modulenames!)}" 
+		<input type="hidden" id="moduleId" name="operator.moduleids" value="${escapeHtml(operator.moduleids!)}"/>
+		<input type="text" id="moduleName" name="operator.modulenames" value="${escapeHtml(operator.modulenames!)}" 
 			class="form-control focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 		
 		<span class="help-inline"> 
 			<a href="javascript:void(0)" class="btn btn-primary" 
-				onclick="common_modals.moduleRadioDiaLog('moduleId', 'moduleName', '${escapeXml(operator.moduleids!)}')">${i18nMap["admin.common.choice"]}</a>
+				onclick="common_modals.moduleRadioDiaLog('moduleId', 'moduleName', '${escapeHtml(operator.moduleids!)}')">${i18nMap["admin.common.choice"]}</a>
 		</span>
 	</div>
 </div>
@@ -16,7 +16,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.operator.property.name"]}</label>
 	<div class="controls">
-		<input type="text" name="operator.names" value="${escapeXml(operator.names!)}" 
+		<input type="text" name="operator.names" value="${escapeHtml(operator.names!)}" 
 			class="span8" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="2-25位任意字符">
 		<span class="help-inline"></span>
 	</div>
@@ -81,7 +81,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
 	<div class="controls">
-		<input type="text" name="operator.url" value="${escapeXml(operator.url!)}" 
+		<input type="text" name="operator.url" value="${escapeHtml(operator.url!)}" 
 			class="span8" maxlength="200" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="1-200位字符">
 		<span class="help-inline"></span>
 	</div>
@@ -134,7 +134,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.operator.property.returnUrl"]}</label>
 	<div class="controls">
-		<input type="text" name="operator.returnurl" value="${escapeXml(operator.returnurl!)}" 
+		<input type="text" name="operator.returnurl" value="${escapeHtml(operator.returnurl!)}" 
 			class="span8" maxlength="200" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="0-200位长度">
 		<span class="help-inline"></span>
 	</div>
@@ -143,7 +143,7 @@
 <div class="control-group">
 	<label class="control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
 	<div class="controls">
-		<input type="text" name="operator.returnparamkeys" value="${escapeXml(operator.returnparamkeys!)}" 
+		<input type="text" name="operator.returnparamkeys" value="${escapeHtml(operator.returnparamkeys!)}" 
 			class="span8" maxlength="100" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="0-100位长度">
 		<span class="help-inline"></span>
 	</div>

@@ -13,7 +13,7 @@ import org.beetl.ext.jfinal.BeetlRenderFactory;
 import com.jfinal.log.Log;
 import com.platform.beetl.format.DateFormat;
 import com.platform.beetl.func.AuthUrl;
-import com.platform.beetl.func.EscapeXml;
+import com.platform.beetl.func.EscapeHtml;
 import com.platform.beetl.func.I18nFormat;
 import com.platform.beetl.func.OrderBy;
 import com.platform.beetl.tag.DictTag;
@@ -47,7 +47,7 @@ public abstract class ToolBeetl {
 		}
 		mainGT.registerFunction("authUrl", new AuthUrl());
 		mainGT.registerFunction("orderBy", new OrderBy());
-		mainGT.registerFunction("escapeXml", new EscapeXml());
+		mainGT.registerFunction("escapeHtml", new EscapeHtml());
 		mainGT.registerFunction("i18nFormat", new I18nFormat());
 		mainGT.registerTag("dict", DictTag.class);
 		mainGT.registerTag("param", ParamTag.class);
@@ -58,7 +58,7 @@ public abstract class ToolBeetl {
 		GroupTemplate kitGT = BeetlKit.gt;
 		kitGT.registerFunction("authUrl", new AuthUrl());
 		kitGT.registerFunction("orderBy", new OrderBy());
-		kitGT.registerFunction("escapeXml", new EscapeXml());
+		kitGT.registerFunction("escapeHtml", new EscapeHtml());
 		kitGT.registerFunction("i18nFormat", new I18nFormat());
 		kitGT.registerTag("dict", DictTag.class);
 		kitGT.registerTag("param", ParamTag.class);

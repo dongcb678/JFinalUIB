@@ -40,6 +40,7 @@ import com.platform.dto.Redis;
 import com.platform.handler.GlobalHandler;
 import com.platform.interceptor.AuthInterceptor;
 import com.platform.interceptor.ParamPkgInterceptor;
+import com.platform.interceptor.XSSInterceptor;
 import com.platform.plugin.FileRenamePlugin;
 import com.platform.plugin.I18NPlugin;
 import com.platform.plugin.ParamInitPlugin;
@@ -228,7 +229,10 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	public void configInterceptor(Interceptors interceptors) {
 		//log.info("configInterceptor 支持使用session");
 		//interceptors.add(new SessionInViewInterceptor(true));
-
+		
+		log.info("configInterceptor XSS过滤");
+		interceptors.add(new XSSInterceptor());
+		
 		log.info("configInterceptor 权限认证拦截器");
 		interceptors.add(new AuthInterceptor());
 		

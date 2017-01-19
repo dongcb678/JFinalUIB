@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.handler.Handler;
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantWebContext;
@@ -48,12 +49,12 @@ public class GlobalHandler extends Handler {
 
 		log.debug("request 国际化");
 		String localePram = request.getParameter(ConstantWebContext.request_localePram);
-		if(localePram == null || localePram.isEmpty()){
+		if(StrKit.isBlank(localePram)){
 			localePram = request.getHeader("localePram");
 		}
-		if(null != localePram && !localePram.isEmpty()){
+		if(StrKit.notBlank(localePram)){
 			String cxtPath = request.getContextPath();
-			if(cxtPath == null || cxtPath.isEmpty()){
+			if(StrKit.isBlank(cxtPath)){
 				cxtPath = "/";
 			}
 			
@@ -62,12 +63,12 @@ public class GlobalHandler extends Handler {
 			ToolWeb.addCookie(response,  "", cxtPath, true, ConstantWebContext.cookie_language, localePram, maxAge);
 		}else {
 			localePram = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_language);
-			if(null == localePram || localePram.isEmpty()){
+			if(StrKit.isBlank(localePram)){
 				Locale locale = request.getLocale();
 				String language = locale.getLanguage();
 				localePram = language;
 				String country = locale.getCountry();
-				if(null != country && !country.isEmpty()){
+				if(StrKit.notBlank(country)){
 					localePram += "_" + country;
 				}
 			}

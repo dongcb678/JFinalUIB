@@ -34,7 +34,7 @@
 					</div>
 					<div class="widget-body form switch-form">
 						xxx
-						<input class="medium" type="text" name="_query.xxx" value='${escapeXml(paramMap["_query.xxx"])}' maxlength="50">
+						<input class="medium" type="text" name="_query.xxx" value='${escapeHtml(paramMap["_query.xxx"])}' maxlength="50">
 
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -97,7 +97,7 @@
 										<input type="checkbox" class="checkboxes" name="checkIds" value="${xxx.ids!}" class="flat-grey foocheck">
 									</td>
 									<td class="hidden-phone">
-										<span class="label label-success">\${escapeXml(xxx["name"]!)}</span>
+										<span class="label label-success">\${escapeHtml(xxx["name"]!)}</span>
 									</td>
 									<td class="hidden-phone">\${xxx.createtime!, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}</td>
 									<td class="hidden-phone">
@@ -109,7 +109,7 @@
 										
 										
 										
-											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/${basePath}/${classNameSmall}/edit/\${escapeXml(xxx.ids!)}');">
+											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/${basePath}/${classNameSmall}/edit/\${escapeHtml(xxx.ids!)}');">
 												<i class="icon-refresh icon-white"></i>
 												\${i18nMap["admin.common.edit"]}
 											</button> 

@@ -3,6 +3,7 @@ package com.platform.mvc.station;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
@@ -90,11 +91,11 @@ public class StationService extends BaseService {
 	 */
 	public void update(String ids, String pIds, String names) {
 		Station station = Station.dao.findById(ids);
-		if(null != names && !names.isEmpty()){
+		if(StrKit.notBlank(names)){
 			//更新模块名称
 			station.set(Station.column_names, names).update();
 			
-		}else if(null != pIds && !pIds.isEmpty()){
+		}else if(StrKit.notBlank(pIds)){
 			//更新上级模块
 			station.set(Station.column_parentstationids, pIds).update();
 		}

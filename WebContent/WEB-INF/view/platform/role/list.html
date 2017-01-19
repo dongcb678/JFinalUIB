@@ -34,10 +34,10 @@
 					</div>
 					<div class="widget-body form switch-form">
 						${i18nMap["admin.role.property.numbers"]}
-						<input class="medium" type="text" name="_query.numbers" value='${escapeXml(splitPage.queryParam["numbers"])}' maxlength="50">
+						<input class="medium" type="text" name="_query.numbers" value='${escapeHtml(splitPage.queryParam["numbers"])}' maxlength="50">
 
 						${i18nMap["admin.role.property.name"]}
-						<input class="medium" type="text" name="_query.names" value='${escapeXml(splitPage.queryParam["names"])}' maxlength="20">
+						<input class="medium" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20">
 
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -106,19 +106,19 @@
 										<input type="checkbox" class="checkboxes" name="checkIds" value="${role.ids!}" class="flat-grey foocheck">
 									</td>
 									<td class="hidden-phone">
-										<span class="label label-success">${escapeXml(role["numbers"]!)}</span>
+										<span class="label label-success">${escapeHtml(role["numbers"]!)}</span>
 									</td>
-									<td class="hidden-phone">${escapeXml(role["names"]!) }</td>
+									<td class="hidden-phone">${escapeHtml(role["names"]!) }</td>
 									<td class="hidden-phone">
 										<% if(edit == true && role["numbers"]! != "SuperAdmin"){ %>
-											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/platform/role/edit/${escapeXml(role.ids!)}');">
+											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/platform/role/edit/${escapeHtml(role.ids!)}');">
 												<i class="icon-refresh icon-white"></i>
 												${i18nMap["admin.common.edit"]}
 											</button> 
 										<% } %>
 										
 										<% if(operator == true){ %>
-											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/platform/roleOperator?_query.roleIds=${escapeXml(role.ids!)}');">
+											<button type="button" class="btn btn-small btn-success" onclick="common_ajax.ajaxMainPanel('/platform/roleOperator?_query.roleIds=${escapeHtml(role.ids!)}');">
 												<i class="icon-ok icon-white"></i>
 												${i18nMap["admin.role.list.table.operator"]}
 											</button> 

@@ -7,7 +7,7 @@
 		document.getElementById("checkedGroup").add(option);
 
 		var url = "/platform/userGroup/addGroup";
-		var data = { "ids" : "${escapeXml(ids!)}", "groupIds" : option.value, "csrfToken" : "${csrfToken!}" };
+		var data = { "ids" : "${escapeHtml(ids!)}", "groupIds" : option.value, "csrfToken" : "${csrfToken!}" };
 		var result = common_ajax.ajaxFunc(url, data);
 	}
 
@@ -33,7 +33,7 @@
 	<div class="panel-body">
 		<select id="allGroup" ondblclick="addChecked(this);" multiple="multiple" size="5" style="height: 300px">
 			<% for(group in noCheckedList){ %>
-				<option value='${escapeXml(group.ids!)}'>${escapeXml(group.names!)}</option>
+				<option value='${escapeHtml(group.ids!)}'>${escapeHtml(group.names!)}</option>
 			<% } %>
 	  	</select>
 	</div>
@@ -48,7 +48,7 @@
 	<div class="panel-body">
 		<select id="checkedGroup" ondblclick="delChecked(this);" multiple="multiple" size="5" style="height: 300px">
 			<% for(userGroup in checkedList){ %>
-				<option value='${escapeXml(userGroup.ids!)}'>${escapeXml(userGroup.gname!)}</option>
+				<option value='${escapeHtml(userGroup.ids!)}'>${escapeHtml(userGroup.gname!)}</option>
 			<% } %>
 	  	</select>
 	</div>

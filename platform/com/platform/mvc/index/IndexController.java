@@ -2,6 +2,7 @@ package com.platform.mvc.index;
 
 import java.util.List;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
@@ -33,7 +34,7 @@ public class IndexController extends BaseController {
 		if(null != user){//后台
 			String sql = getSql(Systems.sqlId_all);
 			systemsList = Systems.dao.find(sql);
-			if(null == ids || ids.isEmpty()){ // 默认系统
+			if(StrKit.isBlank(ids)){ // 默认系统
 				ids = "8a40c0353fa828a6013fa898d4ac0020";
 			}
 			menuList = indexService.menu(ids, user, geti18nColumnSuffix());

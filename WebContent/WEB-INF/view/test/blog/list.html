@@ -34,10 +34,10 @@
 					</div>
 					<div class="widget-body form switch-form">
 						标题
-						<input class="medium" type="text" name="_query.title" value='${escapeXml(splitPage.queryParam["title"])}' maxlength="50">
+						<input class="medium" type="text" name="_query.title" value='${escapeHtml(splitPage.queryParam["title"])}' maxlength="50">
 
 						内容
-						<input class="medium" type="text" name="_query.content" value='${escapeXml(splitPage.queryParam["content"])}' maxlength="50">
+						<input class="medium" type="text" name="_query.content" value='${escapeHtml(splitPage.queryParam["content"])}' maxlength="50">
 
 						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
 						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
@@ -106,7 +106,7 @@
 										<input type="checkbox" class="checkboxes" name="checkIds" value="${blog.ids!}" class="flat-grey foocheck">
 									</td>
 									<td class="hidden-phone">
-										<span class="label label-success">${escapeXml(blog["title"]!)}</span>
+										<span class="label label-success">${escapeHtml(blog["title"]!)}</span>
 									</td>
 									<td class="hidden-phone">${blog.createtime!, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}</td>
 									<td class="hidden-phone">
@@ -118,7 +118,7 @@
 										<% } %> 
 										
 										<% if(edit == true){ %>
-											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/test/blog/edit/${escapeXml(blog.ids!)}');">
+											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/test/blog/edit/${escapeHtml(blog.ids!)}');">
 												<i class="icon-refresh icon-white"></i>
 												${i18nMap["admin.common.edit"]}
 											</button> 
