@@ -315,8 +315,7 @@ public class SqlXmlPlugin implements IPlugin {
 
 				if (isInit && null != ToolCache.get(cacheStart_sql + key)) {
 					log.warn("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
-					// throw new RuntimeException("sql xml文件" + fileName +
-					// "的sql语句重复，sqlId = " + key);
+					// throw new RuntimeException("sql xml文件" + fileName + "的sql语句重复，sqlId = " + key);
 				}
 
 				sql = sql.replaceAll("[\\s]{2,}", " ");

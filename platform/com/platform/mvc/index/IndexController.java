@@ -34,8 +34,8 @@ public class IndexController extends BaseController {
 		if(null != user){//后台
 			String sql = getSql(Systems.sqlId_all);
 			systemsList = Systems.dao.find(sql);
-			if(StrKit.isBlank(ids)){ // 默认系统
-				ids = "8a40c0353fa828a6013fa898d4ac0020";
+			if(StrKit.isBlank(ids)){
+				ids = systemsList.get(0).getPKValue(); // 默认系统
 			}
 			menuList = indexService.menu(ids, user, geti18nColumnSuffix());
 			render("/platform/index/index.html");

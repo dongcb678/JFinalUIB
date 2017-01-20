@@ -11,11 +11,9 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
-import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.operator.Operator;
 import com.platform.mvc.syslog.Syslog;
-import com.platform.tools.ToolSqlXml;
 
 /**
  * 功能测试
@@ -60,7 +58,7 @@ public class TestController extends BaseController {
 			param.put("size", size);
 			
 			LinkedList<Object> paramValue = new LinkedList<Object>();
-			String sql = ToolSqlXml.getSql("platform.test.autoComplete", param, ConstantRender.sql_renderType_beetl, paramValue);
+			String sql = getSqlByBeetl("platform.test.autoComplete", param, paramValue);
 			List<Record> list = Db.use(ConstantInit.db_dataSource_main).find(sql, paramValue.toArray());
 			StringBuilder sb = new StringBuilder();
 			sb.append("[");

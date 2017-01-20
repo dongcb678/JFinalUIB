@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.NotAction;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
@@ -49,7 +49,8 @@ public class UploadController extends BaseController {
 	 * 获取路径
 	 * @return
 	 */
-	private String path(){
+	@Before(NotAction.class)
+	public String path(){
 		if(null != pathType && pathType.equals("webInf")){
 			return path_webInf;
 		} else {
