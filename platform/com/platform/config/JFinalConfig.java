@@ -100,6 +100,13 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("configConstant i18n文件前缀设置设置");
 		constants.setI18nDefaultBaseName(PropKit.get(ConstantInit.config_i18n_filePrefix));
 		//constants.setI18nDefaultLocale("zh_CN");		
+
+		log.info("configConstant formTaken缓存目标"); // JFinal默认缓存到session，本系统未启用session，所以默认是ehcache
+		if(ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)){
+			constants.setTokenCache(new FormTokenByEhcache());
+		}else if(ToolCache.getCacheType().equals(ConstantCache.cache_type_redis)){
+			constants.setTokenCache(new FormTokenByRedis());
+		}
 		
 		log.info("configConstant 把预处理sql打印到Log，而不是控制台输出");
 		if(constants.getDevMode()){

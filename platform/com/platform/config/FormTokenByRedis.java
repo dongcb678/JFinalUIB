@@ -12,7 +12,7 @@ import com.jfinal.token.TokenManager;
 import com.platform.constant.ConstantCache;
 
 /**
- * 自定义Token缓存到Redis实现了类，JFinal默认缓存为用户当前session，也可以自定义为其他容器，实现ITokenCache接口即可
+ * 自定义Token缓存到Redis实现类，JFinal默认缓存为用户当前session，也可以自定义为其他容器，实现ITokenCache接口即可
  */
 public class FormTokenByRedis implements ITokenCache {
 
