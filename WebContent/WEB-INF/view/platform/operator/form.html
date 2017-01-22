@@ -68,6 +68,19 @@
 </div>
 
 <div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.enctype"]}</label>
+	<div class="controls">
+		<select name="operator.enctype" class="combox">
+			<option value="0" ${operator.enctype! == "0" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.enctype.0"]}</option>
+			<option value="1" ${operator.enctype! == "1" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.enctype.1"]}</option>
+			<option value="2" ${operator.enctype! == "2" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.enctype.2"]}</option>
+			<option value="2" ${operator.enctype! == "3" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.enctype.3"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
 	<label class="control-label">${i18nMap["admin.operator.property.syslog"]}</label>
 	<div class="controls">
 		<select name="operator.syslog" class="combox">

@@ -99,7 +99,7 @@
 									<th width="7%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'names')">
 										${i18nMap["admin.operator.property.name"]}	${orderBy("names")}
 									</th>
-									<th width="19%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'url')">
+									<th width="10%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'url')">
 										${i18nMap["admin.operator.property.url"]}	${orderBy("url")}
 			      					</th>
 									<th width="5%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'rowFilter')">
@@ -122,6 +122,9 @@
 									</th>
 									<th width="7%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'method')">
 										${i18nMap["admin.operator.property.method"]}	${orderBy("method")}
+									</th>
+									<th width="9%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'enctype')">
+										${i18nMap["admin.operator.property.enctype"]}	${orderBy("enctype")}
 									</th>
 									<th width="5%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'syslog')">
 										${i18nMap["admin.operator.property.syslog"]}	${orderBy("syslog")}
@@ -199,6 +202,29 @@
 												
 										<% }else{ %>
 												
+										<% } %>
+									</td>
+									<td class="hidden-phone">
+										<% if(operator["method"] == "2"){ %>
+												
+												<% if(operator["enctype"] == "0"){ %>
+														${i18nMap["admin.operator.property.enctype.0"]}
+														
+												<% }else if(operator["enctype"] == "1"){ %>
+														${i18nMap["admin.operator.property.enctype.1"]}
+														
+												<% }else if(operator["enctype"] == "2"){ %>
+														${i18nMap["admin.operator.property.enctype.2"]}
+														
+												<% }else if(operator["enctype"] == "3"){ %>
+														${i18nMap["admin.operator.property.enctype.3"]}
+														
+												<% }else{ %>
+														
+												<% } %>
+												
+										<% }else{ %>
+												${i18nMap["admin.operator.property.enctype.0"]}
 										<% } %>
 									</td>
 									<td class="hidden-phone">

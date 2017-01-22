@@ -142,7 +142,10 @@ public class Operator extends BaseModel<Operator> {
 	/**
 	 * 字段描述：请求方法验证 
 	 * 字段类型：character  长度：1
-	 * 值说明：0不需要验证，1指定get请求，2指定post请求
+	 * 值说明：
+	 * 	0 -> 不需要验证，
+	 * 	1 -> 指定get请求，
+	 * 	2 -> 指定post请求
 	 */
 	public static final String column_method = "method";
 
@@ -151,7 +154,18 @@ public class Operator extends BaseModel<Operator> {
 	 * 字段类型：character  长度：1
 	 */
 	public static final String column_syslog = "syslog";
-
+	
+	/**
+	 * 字段描述：请求表单enctype类型 
+	 * 字段类型：character  长度：1
+	 * 描述：
+	 * 	0 -> 不限制
+	 * 	1 -> application/x-www-form-urlencoded 在发送前编码所有字符（默认）
+	 * 	2 -> multipart/form-data 不对字符编码。在使用包含文件上传控件的表单时，必须使用该值。
+	 * 	3 -> text/plain 空格转换为 "+" 加号，但不对特殊字符编码。
+	 */
+	public static final String column_enctype = "enctype";
+	
 	/**
 	 * sqlId : platform.operator.paging
 	 * 描述：查询所有功能
@@ -209,6 +223,7 @@ public class Operator extends BaseModel<Operator> {
 	private String referer;
 	private String method;
 	private String syslog;
+	private String enctype;
 	
 	public void setIds(String ids){
 		set(column_ids, ids);
@@ -335,6 +350,12 @@ public class Operator extends BaseModel<Operator> {
 	}
 	public void setSyslog(String syslog) {
 		set(column_syslog, syslog);
+	}
+	public String getEnctype() {
+		return get(column_enctype);
+	}
+	public void setEnctype(String enctype) {
+		set(column_enctype, enctype);
 	}
 	
 	/**

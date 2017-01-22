@@ -79,6 +79,26 @@
 							</div>
 						</div>
 						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.enctype"]}</label>
+							<div class="controls">
+								<% if(operator["enctype"] == "0"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.enctype.0"]}'>
+										
+								<% }else if(operator["enctype"] == "1"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.enctype.1"]}'>
+										
+								<% }else if(operator["enctype"] == "2"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.enctype.2"]}'>
+										
+								<% }else if(operator["enctype"] == "3"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.enctype.3"]}'>
+										
+								<% }else{ %>
+										
+								<% } %>
+							</div>
+						</div>
+						<div class="control-group">
 							<label class="control-label">${i18nMap["admin.operator.property.syslog"]}</label>
 							<div class="controls">
 								<input type="text" class="span8" readonly="readonly" value='${operator.syslog == "1" ? "是":"否"}'>

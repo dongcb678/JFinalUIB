@@ -31,6 +31,11 @@ public interface ConstantAuth {
 	public static final String auth_method = "method";
 
 	/**
+	 * 权限验证：请求编码验证
+	 */
+	public static final String auth_enctype = "enctype";
+
+	/**
 	 * 权限验证：csrf值为空
 	 */
 	public static final String auth_csrf_empty = "csrf_empty";

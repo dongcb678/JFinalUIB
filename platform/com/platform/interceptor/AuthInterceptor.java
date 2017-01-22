@@ -108,6 +108,20 @@ public class AuthInterceptor implements Interceptor {
 			return;
 		}
 		
+		log.debug("enctype校验");
+		String enctype = operator.getEnctype();
+		if(method.equals("post") && !enctype.equals("0")){
+			String contentType = request.getContentType().toLowerCase();
+			if((enctype.equals("1") && contentType.indexOf("application/x-www-form-urlencoded") == -1)
+					|| (enctype.equals("2") && contentType.indexOf("multipart/form-data") == -1)
+					|| (enctype.equals("3") && contentType.indexOf("text/plain") == -1)){
+				String msg = "enctype校验失败，operator.enctype=" + enctype + "，request.contentType=" + contentType;
+				log.info(msg);
+				toView(contro, ConstantAuth.auth_enctype, "权限认证过滤器检测：请求编码错误，" + msg);
+				return;
+			}
+		}
+		
 		log.debug("csrf校验");
 		if (user != null) { // 理论上csrf安全涉及到的是后台数据更新和删除操作URL安全问题，所以不可能存在用户未登录情况
 			if(operator.getCsrf().equals("1")){
