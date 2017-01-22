@@ -16,6 +16,7 @@ import com.platform.beetl.func.AuthUrl;
 import com.platform.beetl.func.EscapeHtml;
 import com.platform.beetl.func.I18nFormat;
 import com.platform.beetl.func.OrderBy;
+import com.platform.beetl.func.UnEscapeHtml;
 import com.platform.beetl.tag.DictTag;
 import com.platform.beetl.tag.ParamTag;
 import com.platform.constant.ConstantInit;
@@ -48,6 +49,7 @@ public abstract class ToolBeetl {
 		mainGT.registerFunction("authUrl", new AuthUrl());
 		mainGT.registerFunction("orderBy", new OrderBy());
 		mainGT.registerFunction("escapeHtml", new EscapeHtml());
+		mainGT.registerFunction("unEscapeHtml", new UnEscapeHtml());
 		mainGT.registerFunction("i18nFormat", new I18nFormat());
 		mainGT.registerTag("dict", DictTag.class);
 		mainGT.registerTag("param", ParamTag.class);
@@ -59,6 +61,7 @@ public abstract class ToolBeetl {
 		kitGT.registerFunction("authUrl", new AuthUrl());
 		kitGT.registerFunction("orderBy", new OrderBy());
 		kitGT.registerFunction("escapeHtml", new EscapeHtml());
+		kitGT.registerFunction("unEscapeHtml", new UnEscapeHtml());
 		kitGT.registerFunction("i18nFormat", new I18nFormat());
 		kitGT.registerTag("dict", DictTag.class);
 		kitGT.registerTag("param", ParamTag.class);

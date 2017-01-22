@@ -161,3 +161,36 @@
 		<span class="help-inline"></span>
 	</div>
 </div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.description"]}</label>
+	<div class="controls">
+		<script id="editor_${request_id!}" type="text/plain" style="width:100%;height:300px;"></script>
+		<input type="hidden" id="descriptionId_${request_id!}" name="operator.description">
+	</div>
+</div>
+
+<div id="hiddenDescriptionId_${request_id!}" style="display: none;">${unEscapeHtml(operator.description!)}</div>
+
+<script type="text/javascript">
+	
+	jQuery(document).ready(function() {
+		//UE.delEditor('editor_${request_id!}');
+		//UE.getEditor('editor_${request_id!}').destroy();
+		UE.getEditor('editor_${request_id!}').ready(function() {
+			var hiddenContent = $("#hiddenDescriptionId_${request_id!}").html();
+			if(hiddenContent != ''){
+				this.setContent(hiddenContent);
+			}
+		})
+	});
+
+	function submitFunc(){
+		var ue = UE.getEditor('editor_${request_id!}');
+		var content = ue.getContent();
+		$("#descriptionId_${request_id!}").val(content);
+		
+		common_ajax.ajaxFormMainPanel('editForm');
+	}
+	
+</script>

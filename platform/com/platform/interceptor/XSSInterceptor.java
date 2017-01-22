@@ -79,7 +79,7 @@ public class XSSInterceptor implements Interceptor {
 
 		@Override
 		public Map getParameterMap() {
-			HashMap<String, String[]> paramMap = (HashMap<String, String[]>) super.getParameterMap();
+			HashMap<String, String[]> paramMap = new HashMap<String,String[]>(super.getParameterMap());
 			paramMap = (HashMap) paramMap.clone();
 
 			for (Map.Entry<String, String[]> entry : paramMap.entrySet()){
@@ -133,7 +133,7 @@ public class XSSInterceptor implements Interceptor {
 
 		@Override
 		public Map getParameterMap() {
-			HashMap<String, String[]> paramMap = (HashMap<String, String[]>) super.getParameterMap();
+			HashMap<String, String[]> paramMap = new HashMap<String,String[]>(super.getParameterMap());
 			paramMap = (HashMap) paramMap.clone();
 
 			for (Map.Entry<String, String[]> entry : paramMap.entrySet()){

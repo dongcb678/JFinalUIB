@@ -17,6 +17,7 @@ import com.platform.mvc.syslog.Syslog;
 import com.platform.plugin.I18NPlugin;
 import com.platform.thread.ThreadSysLog;
 import com.platform.tools.ToolDateTime;
+import com.platform.tools.ToolRandoms;
 import com.platform.tools.ToolWeb;
 
 /**
@@ -40,6 +41,9 @@ public class GlobalHandler extends Handler {
 		String cxt = ToolWeb.getContextPath(request);
 		request.setAttribute(ConstantWebContext.request_cxt, cxt);
 
+		log.debug("request 随机分配一个请求id");
+		request.setAttribute(ConstantWebContext.request_id, ToolRandoms.getUuid(true));
+		
 		log.debug("request cookie 处理");
 		Map<String, Cookie> cookieMap = ToolWeb.readCookieMap(request);
 		request.setAttribute(ConstantWebContext.request_cookieMap, cookieMap);
