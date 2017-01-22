@@ -146,7 +146,18 @@
 								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(operator.returnparamkeys!)}">
 							</div>
 						</div>
-					
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(operator.returnparamkeys!)}">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.description"]}</label>
+							<div class="controls">
+								${unEscapeHtml(operator.description!)}
+							</div>
+						</div>
 					</form>
 			
 				</div>

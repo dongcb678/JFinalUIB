@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2017-01-22 14:21:31
+Date: 2017-01-22 16:09:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -252,7 +252,7 @@ DROP TABLE IF EXISTS `pt_operator`;
 CREATE TABLE `pt_operator` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL,
-  `description` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `description` text COLLATE utf8_bin,
   `names` varchar(25) COLLATE utf8_bin DEFAULT NULL,
   `onemany` char(1) COLLATE utf8_bin DEFAULT NULL,
   `returnparamkeys` varchar(100) COLLATE utf8_bin DEFAULT NULL,
