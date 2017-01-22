@@ -72,7 +72,7 @@
 	<sql id="splitPageSelect">
 		<![CDATA[ 
 			select 
-				o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, o.csrf, o.referer, o.method, o.enctype,
+				o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, o.csrf, o.referer, o.method, o.enctype, o.syslog,
 				m.names as modulenames, 
 				s.names as systemsnames
     	]]>
