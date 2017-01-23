@@ -130,8 +130,8 @@ public class FileRender extends Render {
 	
 	protected String encodeFileName(String fileName) {
 		try {
-			// return new String(fileName.getBytes("GBK"), "ISO8859-1");
-			return new String(fileName.getBytes(getEncoding()), "ISO8859-1");
+			return new String(fileName.getBytes("GBK"), "ISO8859-1");
+			// return new String(fileName.getBytes(getEncoding()), "ISO8859-1");
 		} catch (UnsupportedEncodingException e) {
 			return fileName;
 		}
