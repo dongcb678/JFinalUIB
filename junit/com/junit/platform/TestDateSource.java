@@ -25,7 +25,7 @@ public class TestDateSource  {
     public void test() throws Exception{
 		// 创建数据源插件
 		DruidPlugin druidPlugin = new DruidPlugin(
-				"jdbc:mysql://127.0.0.1:3306/jfinaluibv3?characterEncoding=UTF-8"
+				"jdbc:mysql://127.0.0.1:3306/jfinaluibv4?characterEncoding=UTF-8"
 				+ "&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull", 
 				"root", "678789", "com.mysql.jdbc.Driver");
 		druidPlugin.set(5, 5, 10);

@@ -4,7 +4,7 @@
     <list default="true" id="3acf1df7-2c5d-47b5-afea-f6d12a9f7e67" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JFinalUIBV3.iml" afterPath="$PROJECT_DIR$/JFinalUIBV3.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JFinalUIBV4.iml" afterPath="$PROJECT_DIR$/JFinalUIBV4.iml" />
     </list>
     <ignored path="JfinalUIB_V3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -190,7 +190,7 @@
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="JFinalUIBV3" />
+      <module name="JFinalUIBV4" />
       <envs />
       <method />
     </configuration>
@@ -500,7 +500,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="JFinalUIBV3" />
+      <module name="JFinalUIBV4" />
       <envs />
       <method />
     </configuration>
@@ -669,8 +669,8 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="JFinalUIBV3-remoteDebug" type="Remote" factoryName="Remote">
-      <module name="JFinalUIBV3" />
+    <configuration default="false" name="JFinalUIBV4-remoteDebug" type="Remote" factoryName="Remote">
+      <module name="JFinalUIBV4" />
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
@@ -683,7 +683,7 @@
       <method />
     </configuration>
     <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Remote.JFinalUIBV3-remoteDebug" />
+      <item index="0" class="java.lang.String" itemvalue="Remote.JFinalUIBV4-remoteDebug" />
       <item index="1" class="java.lang.String" itemvalue="Application.Run" />
     </list>
     <recent_temporary>
@@ -901,7 +901,7 @@
     <entry file="file://$PROJECT_DIR$/platform/com/platform/run/JFinalConfig.java" />
     <entry file="file://$PROJECT_DIR$/platform/com/platform/run/JFinalConfig.java" />
     <entry file="file://$PROJECT_DIR$/platform/com/platform/run/JFinalConfig.java" />
-    <entry file="file://$PROJECT_DIR$/JFinalUIBV3.iml">
+    <entry file="file://$PROJECT_DIR$/JFinalUIBV4.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -983,7 +983,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/数据库/Oracle11G/JFINALUIBV3.sql">
+    <entry file="file://$PROJECT_DIR$/doc/数据库/Oracle11G/JFinalUIBV4.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1990">
           <caret line="1502" column="46" selection-start-line="1502" selection-start-column="46" selection-end-line="1502" selection-end-column="46" />
@@ -1071,7 +1071,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>JFinalUIBV3</last-edited>
+          <last-edited>JFinalUIBV4</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

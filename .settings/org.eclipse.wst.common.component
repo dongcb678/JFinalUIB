@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="JFinalUIBV3">
+    <wb-module deploy-name="JFinalUIBV4">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/platform"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/junit"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/jfinal22"/>
-        <property name="context-root" value="JFinalUIBV3"/>
-        <property name="java-output-path" value="/JFinalUIBV3/build/classes"/>
+        <property name="context-root" value="JFinalUIBV4"/>
+        <property name="java-output-path" value="/JFinalUIBV4/build/classes"/>
     </wb-module>
 </project-modules>

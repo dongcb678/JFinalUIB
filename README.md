@@ -62,13 +62,13 @@ JDK要求：
 
 数据库配置：
 
-	1.数据库备份文件/JFinalUIBV3/doc/数据库
+	1.数据库备份文件/JFinalUIBV4/doc/数据库
 	2.每种数据库目录都有各自的备份恢复说明
 	3.数据库配置，修改init.properties，修改db[xx].type和指定数据库连接信息
 
 Eclipse安装配置说明：
 
-	1.用eclipse导入项目，修改受限API调用编译报错，见/JFinalUIBV3/build-lib/eclipse受限API调用设置.png
+	1.用eclipse导入项目，修改受限API调用编译报错，见/JFinalUIBV4/build-lib/eclipse受限API调用设置.png
 	2.运行com.platform.config.Run.java类
 	
 IDEA安装配置说明：

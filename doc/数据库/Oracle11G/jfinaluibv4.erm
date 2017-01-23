@@ -3157,7 +3157,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -3848,7 +3848,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -4077,7 +4077,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -4570,7 +4570,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -4898,7 +4898,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -5490,7 +5490,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -6181,7 +6181,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -6674,7 +6674,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -6936,7 +6936,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -7297,7 +7297,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -8351,7 +8351,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -8580,7 +8580,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -8842,7 +8842,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -9533,7 +9533,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -10554,7 +10554,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
@@ -10717,7 +10717,7 @@
 			<complex_unique_key_list>
 			</complex_unique_key_list>
 			<table_properties>
-				<schema>JFinalUIBV3</schema>
+				<schema>JFinalUIBV4</schema>
 			</table_properties>
 		</table>
 		<table>
