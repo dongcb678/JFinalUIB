@@ -315,7 +315,7 @@ public class User extends BaseModel<User> {
 	public static void cacheAdd(String ids){
 		User user = User.dao.findById(ids);
 		if(user != null){
-			String sql = getSql("platform.userGroup.findGroupIdsByUserIds");
+			String sql = getSqlMy("platform.userGroup.findGroupIdsByUserIds");
 			List<UserGroup> ugList = UserGroup.dao.find(sql, user.getPKValue());
 			user.put("ugList", ugList);
 			

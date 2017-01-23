@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2017-01-22 16:10:29
+Date: 2017-01-23 15:21:38
 */
 
 
@@ -308,6 +308,20 @@ NOCACHE
 -- ----------------------------
 -- Records of PT_OPERATOR
 -- ----------------------------
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('fdaeeb41691d460b8f142066d1f79927', '0', '博客删除', null, null, null, '0', '/test/blog/delete', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('4bebccaa8f0c4bfbaa2ff89f00706100', '0', '博客编辑', null, null, null, '0', '/test/blog/edit', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('3e4e9e72dab243d38a1785d157c24cb6', '0', '博客更新', null, null, null, '0', '/test/blog/update', '7cbeac9418c946a2bda0c6aabf23c276', '0', '1', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('ff91363b32424fa399e44cc0dfd688e9', '0', '博客查看', null, null, null, '0', '/test/blog/view', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('08a96d5dd37f49459eeb02eebeb0a78c', '0', '列表', null, null, null, '0', '/platform/roleOperator', 'c4ab6b8d50434ddf8fa0ec106fcfc6ea', '1', '0', '0', '1', '0', '0', '角色功能', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('09dbbe046d6e469d8a5ba12e29abc522', '0', '菜单功能列表', null, null, null, '0', '/platform/menu/list', '8a40c0353fa828a6013fa898d4ac0032', '1', '0', '0', '1', '0', '0', '菜单', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('a498a20dd4824b8fb103202360669de4', '0', '菜单功能设置', null, null, null, '0', '/platform/menu/set', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', '0', '0', '菜单', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('235d855d7b914d728e434f0f309ab041', '0', '导出', null, null, null, '0', '/platform/sysLog/export', '8a40c0353fa828a6013fa898d4ac0029', '1', '0', '0', '1', '0', '0', '日志', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('8329f58a0eed44e195dec78bddc591b5', '0', '上传', null, null, null, '0', '/platform/upload', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('1d2b6919b80a4a21821adc3efcda77b2', '0', '列表', null, null, null, '0', '/platform/upload/list', '8d7a260e02674bd3873656deb716202e', '1', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('5d6f2bb8faa948108081492179d0c0ad', '0', '删除', null, null, null, '0', '/platform/upload/delete', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('1329f58a0eed44e195dec78bddc591b6', '0', '单文件分片上传', null, null, null, '0', '/platform/upload/slice', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('2329f58a0eed44e195dec78bddc591b7', '0', '多文件分片上传', null, null, null, '0', '/platform/upload/slices', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
+INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('3329f58a0eed44e195dec78bddc591b8', '0', '验证文件md5', null, null, null, '0', '/platform/upload/md5', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
 INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('46e00ef0fd234e9dbf68ed9bbb437d0f', '0', '多选', null, null, null, '0', '/platform/department/checkbox.html', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', '0', '0', '部门', '0', '1', '0', '0', '0', null);
 INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('e754dfdb794d4e7db6023c9b089a340c', '0', '多选', null, null, null, '0', '/platform/user/checkbox.html', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', '0', '0', '用户', '0', '1', '0', '0', '0', null);
 INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('bc2c865be6af42cf861294d446fb1c6f', '0', '单选', null, null, null, '0', '/platform/user/radio.html', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', '0', '0', '用户', '0', '1', '0', '0', '0', null);
@@ -459,20 +473,6 @@ INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('5b47ae382f42421682852f889c176d4
 INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('39d82b5574b540b88d3723b36eb3e577', '0', '验证手机号是否存在', null, null, null, '0', '/platform/login/valiMobile', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '1', '0', '0', '登陆', '0', '1', '0', '0', '0', null);
 INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('a2727f19f7cd4a038dd1a94f042a8cf1', '0', '博客保存', null, null, null, '0', '/test/blog/save', '7cbeac9418c946a2bda0c6aabf23c276', '0', '1', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
 INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('46b7269a26044dfebb4edd06a2f9cd83', '0', '博客列表', null, null, null, '0', '/test/blog', '7cbeac9418c946a2bda0c6aabf23c276', '1', '0', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('fdaeeb41691d460b8f142066d1f79927', '0', '博客删除', null, null, null, '0', '/test/blog/delete', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('4bebccaa8f0c4bfbaa2ff89f00706100', '0', '博客编辑', null, null, null, '0', '/test/blog/edit', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('3e4e9e72dab243d38a1785d157c24cb6', '0', '博客更新', null, null, null, '0', '/test/blog/update', '7cbeac9418c946a2bda0c6aabf23c276', '0', '1', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('ff91363b32424fa399e44cc0dfd688e9', '0', '博客查看', null, null, null, '0', '/test/blog/view', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', '0', '0', '博客', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('08a96d5dd37f49459eeb02eebeb0a78c', '0', '列表', null, null, null, '0', '/platform/roleOperator', 'c4ab6b8d50434ddf8fa0ec106fcfc6ea', '1', '0', '0', '1', '0', '0', '角色功能', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('09dbbe046d6e469d8a5ba12e29abc522', '0', '菜单功能列表', null, null, null, '0', '/platform/menu/list', '8a40c0353fa828a6013fa898d4ac0032', '1', '0', '0', '1', '0', '0', '菜单', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('a498a20dd4824b8fb103202360669de4', '0', '菜单功能设置', null, null, null, '0', '/platform/menu/set', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', '0', '0', '菜单', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('235d855d7b914d728e434f0f309ab041', '0', '导出', null, null, null, '0', '/platform/sysLog/export', '8a40c0353fa828a6013fa898d4ac0029', '1', '0', '0', '1', '0', '0', '日志', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('8329f58a0eed44e195dec78bddc591b5', '0', '上传', null, null, null, '0', '/platform/upload', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('1d2b6919b80a4a21821adc3efcda77b2', '0', '列表', null, null, null, '0', '/platform/upload/list', '8d7a260e02674bd3873656deb716202e', '1', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('5d6f2bb8faa948108081492179d0c0ad', '0', '删除', null, null, null, '0', '/platform/upload/delete', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('1329f58a0eed44e195dec78bddc591b6', '0', '单文件分片上传', null, null, null, '0', '/platform/upload/slice', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('2329f58a0eed44e195dec78bddc591b7', '0', '多文件分片上传', null, null, null, '0', '/platform/upload/slices', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
-INSERT INTO "JFINALUIBV4"."PT_OPERATOR" VALUES ('3329f58a0eed44e195dec78bddc591b8', '0', '验证文件md5', null, null, null, '0', '/platform/upload/md5', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', '0', '0', '上传文件', '0', '1', '0', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for "JFINALUIBV4"."PT_PARAM"

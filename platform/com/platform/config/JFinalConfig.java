@@ -2,8 +2,6 @@ package com.platform.config;
 
 import java.util.Map;
 
-import org.beetl.ext.jfinal.BeetlRenderFactory;
-
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
@@ -33,6 +31,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.druid.DruidStatViewHandler;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
+import com.jfinal.template.Engine;
 import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
 import com.platform.dto.DataBase;
@@ -90,7 +89,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		//constants.setBaseViewPath("/platform"); //设置路由公共路径
 		
 		log.info("configConstant 视图Beetl设置");
-		constants.setMainRenderFactory(new BeetlRenderFactory());
+		ToolBeetl.brf.config();
+		constants.setRenderFactory(ToolBeetl.brf);
 		ToolBeetl.regiseter();
 		
 		log.info("configConstant 视图error page设置");
@@ -121,7 +121,12 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("configRoute 注解注册路由");
 		routes.add(new RoutesScan());
 	}
-	
+
+	@Override
+	public void configEngine(Engine me) {
+		
+	}
+
 	/**
 	 * 配置插件
 	 */

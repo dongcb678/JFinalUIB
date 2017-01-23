@@ -57,15 +57,15 @@ public class SystemsService extends BaseService {
 			Systems.dao.deleteById(systemsIds);
 			
 			//删除关联模块
-			String moduleSql = getSql("platform.module.deleteBySystemsId");
+			String moduleSql = getSqlMy("platform.module.deleteBySystemsId");
 			Db.update(moduleSql, systemsIds);
 			
 			//删除关联菜单
-			String menuSql = getSql("platform.menu.deleteBySystemsId");
+			String menuSql = getSqlMy("platform.menu.deleteBySystemsId");
 			Db.update(menuSql, systemsIds);
 			
 			//删除关联日志
-			String sysLogSql = getSql("platform.sysLog.deleteBySystemsId");
+			String sysLogSql = getSqlMy("platform.sysLog.deleteBySystemsId");
 			Db.update(sysLogSql, systemsIds);
 		}
 	}

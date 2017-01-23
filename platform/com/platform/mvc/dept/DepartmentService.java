@@ -29,11 +29,11 @@ public class DepartmentService extends BaseService {
 	public List<ZtreeNode> childNodeData(String cxt, String parentIds){
 		List<Department> list = null;
 		if(null != parentIds){
-			String sql = getSql(Department.sqlId_childNode);
+			String sql = getSqlMy(Department.sqlId_childNode);
 			list = Department.dao.find(sql, parentIds);
 			
 		}else{
-			String sql = getSql(Department.sqlId_rootNode);
+			String sql = getSqlMy(Department.sqlId_rootNode);
 			list = Department.dao.find(sql);
 		}
 		
@@ -119,7 +119,7 @@ public class DepartmentService extends BaseService {
 		}
 		
 		//部门下是否存在人
-		String countSql = getSql(Department.sqlId_userCount);
+		String countSql = getSqlMy(Department.sqlId_userCount);
 		long count = Db.use(ConstantInit.db_dataSource_main).queryNumber(countSql, ids).longValue();
 		if(count != 0){
 			return false; // 部门下存在人，不能删除
@@ -127,7 +127,7 @@ public class DepartmentService extends BaseService {
 
 		// 修改上级节点的isparent
 		Department pDepartment = Department.dao.findById(department.getStr(Department.column_parentdepartmentids));
-		String sql = getSql(Department.sqlId_childCount);
+		String sql = getSqlMy(Department.sqlId_childCount);
 		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pDepartment.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 		if(counts == 1){

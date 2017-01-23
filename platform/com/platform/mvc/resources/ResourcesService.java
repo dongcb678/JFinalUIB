@@ -65,7 +65,7 @@ public class ResourcesService extends BaseService {
 		
 		String hostName = ToolOS.getOsLocalHostName(); // 获取本机名称
 
-		String sql = getSql(Resources.sqlId_24hour);
+		String sql = getSqlMy(Resources.sqlId_24hour);
 		List<Resources> list = Resources.dao.find(sql, hostName, ToolDateTime.getSqlTimestamp(startDate), ToolDateTime.getSqlTimestamp(endDate));
 		
 		List<String> datesList = new LinkedList<String>();

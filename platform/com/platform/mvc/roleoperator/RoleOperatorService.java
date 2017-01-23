@@ -35,7 +35,7 @@ public class RoleOperatorService extends BaseService {
 		Role role = Role.dao.findById(roleIds);
 		splitPage.setExtData(role);
 		
-		String sql = getSql("platform.roleOperator.findByModuleAndRoleIds");
+		String sql = getSqlMy("platform.roleOperator.findByModuleAndRoleIds");
 		
 		List<Record> smList = (List<Record>) splitPage.getList();
 		for (Record sm : smList) {
@@ -63,7 +63,7 @@ public class RoleOperatorService extends BaseService {
 		ro.save();
 		
 		// 更新group功能缓存
-		String sql = getSql("platform.roleOperator.getGroupByRole");
+		String sql = getSqlMy("platform.roleOperator.getGroupByRole");
 		List<GroupRole> grList = GroupRole.dao.find(sql, roleIds);
 		for (GroupRole groupRole : grList) {
 			GroupRoleService.cacheAdd(groupRole.getGroupids());
@@ -85,7 +85,7 @@ public class RoleOperatorService extends BaseService {
 		ro.delete();
 
 		// 更新group功能缓存
-		String sql = getSql("platform.roleOperator.getGroupByRole");
+		String sql = getSqlMy("platform.roleOperator.getGroupByRole");
 		List<GroupRole> grList = GroupRole.dao.find(sql, roleIds);
 		for (GroupRole groupRole : grList) {
 			GroupRoleService.cacheAdd(groupRole.getGroupids());

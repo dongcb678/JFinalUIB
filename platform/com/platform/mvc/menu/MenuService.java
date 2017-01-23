@@ -133,7 +133,7 @@ public class MenuService extends BaseService {
 		
 		// 修改上级节点的isparent
     	Menu pMenu = Menu.dao.findById(menu.getStr(Menu.column_parentmenuids));
-		String sql = getSql(Menu.sqlId_childCount);
+		String sql = getSqlMy(Menu.sqlId_childCount);
 		Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pMenu.getPKValue());
 		Long counts = record.getNumber("counts").longValue();
 	    if(counts == 1){
@@ -175,7 +175,7 @@ public class MenuService extends BaseService {
 		Record menu = Db.findFirst(menuSql, menuIds);
 		splitPage.setExtData(menu);
 		
-		String operatorSql = getSql("platform.menu.findByModuleAndRoleIds");
+		String operatorSql = getSqlMy("platform.menu.findByModuleAndRoleIds");
 		
 		List<Record> smList = (List<Record>) splitPage.getList();
 		for (Record sm : smList) {

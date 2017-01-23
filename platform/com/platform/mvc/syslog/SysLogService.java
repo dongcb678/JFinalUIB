@@ -40,7 +40,7 @@ public class SysLogService extends BaseService {
 	public void timerDataClear(){
 		Date date = ToolDateTime.getDate(-365, 0, 0, 0, 0); // 设置时间为365天前
 		Timestamp timestamp = ToolDateTime.getSqlTimestamp(date);
-		Db.use(ConstantInit.db_dataSource_main).update(getSql(Syslog.sqlId_clear), timestamp);
+		Db.use(ConstantInit.db_dataSource_main).update(getSqlMy(Syslog.sqlId_clear), timestamp);
 	}
 	
 	/**

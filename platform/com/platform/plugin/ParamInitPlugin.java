@@ -115,7 +115,7 @@ public class ParamInitPlugin implements IPlugin {
 		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
 		String db_type = dataBase.getType();
 		
-		String sql = ToolSqlXml.getSql(User.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSqlMy(User.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_user ", splitDataSize);
 		List<User> userList = null;
@@ -148,7 +148,7 @@ public class ParamInitPlugin implements IPlugin {
 		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
 		String db_type = dataBase.getType();
 		
-		String sql = ToolSqlXml.getSql(Group.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSqlMy(Group.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_group ", splitDataSize);
 		List<Group> groupList = null;
@@ -182,7 +182,7 @@ public class ParamInitPlugin implements IPlugin {
 		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
 		String db_type = dataBase.getType();
 		
-		String sql = ToolSqlXml.getSql(Station.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSqlMy(Station.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_station ", splitDataSize);
 		List<Station> stationList = null;
@@ -216,7 +216,7 @@ public class ParamInitPlugin implements IPlugin {
 		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
 		String db_type = dataBase.getType();
 		
-		String sql = ToolSqlXml.getSql(Operator.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
+		String sql = ToolSqlXml.getSqlMy(Operator.sqlId_paging, null, ConstantRender.sql_renderType_beetl);
 		
 		long batchCount = BaseService.getBatchCount(ConstantInit.db_dataSource_main, " from pt_operator ", splitDataSize);
 		List<Operator> operatorList = null;
@@ -252,7 +252,7 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheDict() {
 		log.info("缓存加载：Dict start");
-		String sql = ToolSqlXml.getSql(Dict.sqlId_all);
+		String sql = ToolSqlXml.getSqlMy(Dict.sqlId_all);
 		List<Dict> dictList = Dict.dao.find(sql);
 		for (Dict dict : dictList) {
 			Dict.dao.cacheAdd(dict.getPKValue());
@@ -268,7 +268,7 @@ public class ParamInitPlugin implements IPlugin {
 	 */
 	public static void platform_cacheParam() {
 		log.info("缓存加载：Param start");
-		String sql = ToolSqlXml.getSql(Param.sqlId_all);
+		String sql = ToolSqlXml.getSqlMy(Param.sqlId_all);
 		List<Param> paramList = Param.dao.find(sql);
 		for (Param param : paramList) {
 			Param.dao.cacheAdd(param.getPKValue());

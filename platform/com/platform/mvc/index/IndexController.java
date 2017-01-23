@@ -32,7 +32,7 @@ public class IndexController extends BaseController {
 	public void index() {
 		User user = getCUser(); // cookie认证自动登陆处理
 		if(null != user){//后台
-			String sql = getSql(Systems.sqlId_all);
+			String sql = getSqlMy(Systems.sqlId_all);
 			systemsList = Systems.dao.find(sql);
 			if(StrKit.isBlank(ids)){
 				ids = systemsList.get(0).getPKValue(); // 默认系统

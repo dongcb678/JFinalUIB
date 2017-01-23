@@ -154,8 +154,8 @@ public class BaseService {
      * @param sqlId
      * @return
      */
-	public static String getSql(String sqlId){
-		return ToolSqlXml.getSql(sqlId);
+	public static String getSqlMy(String sqlId){
+		return ToolSqlXml.getSqlMy(sqlId);
 	}
 
     /**
@@ -165,7 +165,7 @@ public class BaseService {
      * @return
      */
 	public static String getSqlByBeetl(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
+    	return ToolSqlXml.getSqlMy(sqlId, param, ConstantRender.sql_renderType_beetl);
     }
     
     /**
@@ -176,7 +176,7 @@ public class BaseService {
      * @return
      */
 	public static String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
+    	return ToolSqlXml.getSqlMy(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
 	/**

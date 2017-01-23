@@ -35,7 +35,7 @@ public class IndexService extends BaseService {
 		String twoSql = getSqlByBeetl(Menu.sqlId_operator, param);
 		
 		// 查询根菜单节点
-		Menu menu = Menu.dao.findFirst(getSql(Menu.sqlId_rootId), systemsIds);
+		Menu menu = Menu.dao.findFirst(getSqlMy(Menu.sqlId_rootId), systemsIds);
 		String parentmenuids = menu.getPKValue();
 		
 		// 一级菜单

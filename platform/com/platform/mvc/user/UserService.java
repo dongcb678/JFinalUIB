@@ -123,17 +123,17 @@ public class UserService extends BaseService {
 		// 查询部门数据
 		List<Department> deptList = null;
 		if (null != deptIds) {
-			String sql = getSql(Department.sqlId_childNode);
+			String sql = getSqlMy(Department.sqlId_childNode);
 			deptList = Department.dao.find(sql, deptIds.replace("dept_", ""));
 		} else {
-			String sql = getSql(Department.sqlId_rootNode);
+			String sql = getSqlMy(Department.sqlId_rootNode);
 			deptList = Department.dao.find(sql);
 		}
 
 		// 查询用户数据
 		List<User> userList = null;
 		if (null != deptIds) {
-			String sql = getSql(User.sqlId_treeUserNode);
+			String sql = getSqlMy(User.sqlId_treeUserNode);
 			userList = User.dao.find(sql, deptIds.replace("dept_", ""));
 		}
 

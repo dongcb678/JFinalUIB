@@ -27,11 +27,11 @@ public class GroupRoleService extends BaseService {
 	public Ret selectRole(String groupIds){
 		Ret ret = Ret.create();
 
-		String sqlChecked = getSql("platform.groupRole.findByGroupIds");
+		String sqlChecked = getSqlMy("platform.groupRole.findByGroupIds");
 		List<Record> checkedList = Db.find(sqlChecked, groupIds);
 		ret.put("checkedList", checkedList);
 		
-		String sqlNoChecked = getSql("platform.groupRole.findByNotGroupIds");
+		String sqlNoChecked = getSqlMy("platform.groupRole.findByNotGroupIds");
 		List<Record> noCheckedList = Db.find(sqlNoChecked, groupIds);
 		ret.put("noCheckedList", noCheckedList);
 		
@@ -73,7 +73,7 @@ public class GroupRoleService extends BaseService {
 	 * 描述：分组拥有的功能
 	 */
 	public static void cacheAdd(String groupIds){
-		String sql = getSql("platform.groupRole.findOperatorByGroupIds");
+		String sql = getSqlMy("platform.groupRole.findOperatorByGroupIds");
 		List<Operator> olist = Operator.dao.find(sql, groupIds);
 		ToolCache.set(ParamInitPlugin.cacheStart_group_operator + groupIds, olist);
 	}
@@ -95,7 +95,7 @@ public class GroupRoleService extends BaseService {
 	public static List<Operator> cacheGet(String groupIds){
 		List<Operator> olist = ToolCache.get(ParamInitPlugin.cacheStart_group_operator + groupIds);
 		if(olist == null){
-			String sql = getSql("platform.groupRole.findOperatorByGroupIds");
+			String sql = getSqlMy("platform.groupRole.findOperatorByGroupIds");
 			olist = Operator.dao.find(sql, groupIds);
 		}
 		return olist;

@@ -26,7 +26,7 @@ public class PostgreSQLHandler extends BaseHandler {
 		
 		// 1.查询表和字段描述信息
 		Map<String, String> map = new HashMap<String, String>();
-		String ciSql = ToolSqlXml.getSql("platform.postgresql.getColumnsInfo");
+		String ciSql = ToolSqlXml.getSqlMy("platform.postgresql.getColumnsInfo");
 		List<Record> listDesc = Db.use(name).find(ciSql, tableName);
 		for (Record record : listDesc) {
 			if(record.getStr("attname") == null){
@@ -37,7 +37,7 @@ public class PostgreSQLHandler extends BaseHandler {
 		}
 		
 		// 2.查询表字段信息
-		String cSql = ToolSqlXml.getSql("platform.postgresql.getColumns");
+		String cSql = ToolSqlXml.getSqlMy("platform.postgresql.getColumns");
 		List<Record> listColumn = Db.use(name).find(cSql, tableName);
 
 		// 3.查询表字段对应的所有java数据类型

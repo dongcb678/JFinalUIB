@@ -47,7 +47,7 @@ public class GroupService extends BaseService {
 	 */
 	public void delete(String ids){
 		String[] idsArr = splitByComma(ids);
-		String sql = getSql("platform.group.getUserByGroup");
+		String sql = getSqlMy("platform.group.getUserByGroup");
 		for (String groupIds : idsArr) {
 			// 缓存1：更新所有关联此分组的用户缓存
 			List<UserGroup> ugList = UserGroup.dao.find(sql, groupIds);

@@ -24,11 +24,11 @@ public class SqlServerHandler extends BaseHandler {
 		String name = getDataBase().getName();
 		
 		// 1.查询表和字段描述信息
-		String tSql = ToolSqlXml.getSql("platform.sqlserver.getTables");
+		String tSql = ToolSqlXml.getSqlMy("platform.sqlserver.getTables");
 		String tableDesc = Db.use(name).findFirst(tSql, tableName).getStr("value");
 
 		// 2.查询表字段信息
-		String cSql = ToolSqlXml.getSql("platform.sqlserver.getColumns");
+		String cSql = ToolSqlXml.getSqlMy("platform.sqlserver.getColumns");
 		List<Record> listColumn = Db.use(name).find(cSql, tableName);
 
 		// 3.查询表字段对应的所有java数据类型

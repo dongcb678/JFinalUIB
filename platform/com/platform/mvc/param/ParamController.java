@@ -24,7 +24,7 @@ public class ParamController extends BaseController {
 	 * 参数管理treeTable首页
 	 */
 	public void index() {
-		String sql = getSql(Param.sqlId_treeTableNodeRoot);
+		String sql = getSqlMy(Param.sqlId_treeTableNodeRoot);
 		list = Param.dao.find(sql);
 		render("/platform/param/treeTable.html");
 	}
@@ -33,7 +33,7 @@ public class ParamController extends BaseController {
 	 * 参数管理treeTable数据
 	 */
 	public void treeTable() {
-		String sql = getSql(Param.sqlId_treeTableChildNode);
+		String sql = getSqlMy(Param.sqlId_treeTableChildNode);
 		list = Param.dao.find(sql, ids);
 		render("/platform/param/treeTableSub.html");
 	}

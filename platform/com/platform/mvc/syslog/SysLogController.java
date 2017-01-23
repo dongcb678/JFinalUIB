@@ -45,7 +45,7 @@ public class SysLogController extends BaseController {
 	 * 查看日志
 	 */
 	public void view() {
-		Syslog log =  Syslog.dao.findFirst(getSql(Syslog.sqlId_view), getPara());
+		Syslog log =  Syslog.dao.findFirst(getSqlMy(Syslog.sqlId_view), getPara());
 		setAttr("sysLog", log);
 		render("/platform/sysLog/view.html");
 	}

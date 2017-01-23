@@ -25,11 +25,11 @@ public class DB2Handler extends BaseHandler {
 		String name = getDataBase().getName();
 		
 		// 1.查询表和字段描述信息
-		String tcSql = ToolSqlXml.getSql("platform.db2.getTableComments");
+		String tcSql = ToolSqlXml.getSqlMy("platform.db2.getTableComments");
 		String tableDesc = Db.use(name).findFirst(tcSql, dbUser, tableName).getStr("REMARKS");
 
 		// 2.查询表字段信息
-		String ccSql = ToolSqlXml.getSql("platform.db2.getColumnComments");
+		String ccSql = ToolSqlXml.getSqlMy("platform.db2.getColumnComments");
 		List<Record> listColumnComments = Db.use(name).find(ccSql, dbUser, tableName);
 
 		// 3.查询表字段对应的所有java数据类型

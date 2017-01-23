@@ -392,7 +392,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public Dict getByNumber(String number){
-		String sql = getSql(sqlId_numbers);
+		String sql = getSqlMy(sqlId_numbers);
 		Dict dict = dao.findFirst(sql, number);
 		return dict;
 	}
@@ -419,7 +419,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(){
-		String sql = getSql(sqlId_child);
+		String sql = getSqlMy(sqlId_child);
 		return dao.find(sql, getPKValue());
 	}
 
@@ -429,7 +429,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public List<Dict> getChild(String prentIds){
-		String sql = getSql(sqlId_child);
+		String sql = getSqlMy(sqlId_child);
 		return dao.find(sql, prentIds);
 	}
 
@@ -453,7 +453,7 @@ public class Dict extends BaseModel<Dict> {
 	 * @return
 	 */
 	public Dict getParent(){
-		String sql = getSql(sqlId_parent);
+		String sql = getSqlMy(sqlId_parent);
 		return dao.findFirst(sql, get(column_parentids));
 	}
 
@@ -519,7 +519,7 @@ public class Dict extends BaseModel<Dict> {
 	public Dict cacheGet(String numbers){
 		Dict dict = ToolCache.get(ParamInitPlugin.cacheStart_dict + numbers);
 		if(dict == null){
-			String sql = getSql("platform.dict.numbers");
+			String sql = getSqlMy("platform.dict.numbers");
 			dict = Dict.dao.findFirst(sql, numbers);
 			cacheAdd(dict.getPKValue());
 		}
@@ -535,7 +535,7 @@ public class Dict extends BaseModel<Dict> {
 		List<Dict> dictList = ToolCache.get(ParamInitPlugin.cacheStart_dict_child + numbers);
 		if(dictList == null){
 			Dict pDict = cacheGet(numbers);
-			String sql = getSql("platform.dict.child");
+			String sql = getSqlMy("platform.dict.child");
 			dictList = Dict.dao.find(sql, pDict.getPKValue());
 			cacheAdd(ids);
 		}

@@ -36,7 +36,7 @@ public class StationOperatorService extends BaseService {
 		Station station = Station.dao.findById(stationIds);
 		splitPage.setExtData(station);
 		
-		String sql = getSql("platform.stationOperator.findByStationIds");
+		String sql = getSqlMy("platform.stationOperator.findByStationIds");
 		
 		List<Record> smList = (List<Record>) splitPage.getList();
 		for (Record sm : smList) {
@@ -86,7 +86,7 @@ public class StationOperatorService extends BaseService {
 	 * 描述：岗位拥有的功能
 	 */
 	public static void cacheAdd(String stationIds){
-		String sql = getSql("platform.stationOperator.findOperatorByStationIds");
+		String sql = getSqlMy("platform.stationOperator.findOperatorByStationIds");
 		List<Operator> olist = Operator.dao.find(sql, stationIds);
 		ToolCache.set(ParamInitPlugin.cacheStart_station_operator + stationIds, olist);
 	}
@@ -108,7 +108,7 @@ public class StationOperatorService extends BaseService {
 	public static List<Operator> cacheGet(String stationIds){
 		List<Operator> olist = ToolCache.get(ParamInitPlugin.cacheStart_station_operator + stationIds);
 		if(olist == null){
-			String sql = getSql("platform.stationOperator.findOperatorByStationIds");
+			String sql = getSqlMy("platform.stationOperator.findOperatorByStationIds");
 			olist = Operator.dao.find(sql, stationIds);
 		}
 		return olist;

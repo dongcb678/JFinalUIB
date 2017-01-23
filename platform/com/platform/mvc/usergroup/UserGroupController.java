@@ -1,6 +1,7 @@
 package com.platform.mvc.usergroup;
 
-import com.jfinal.kit.Ret;
+import java.util.HashMap;
+
 import com.jfinal.log.Log;
 import com.platform.annotation.Controller;
 import com.platform.mvc.base.BaseController;
@@ -21,8 +22,8 @@ public class UserGroupController extends BaseController {
 	 * 人员分组弹出框
 	 */
 	public void select(){
-		Ret ret = userGroupService.select(ids);
-		setAttrs(ret.getData());
+		HashMap ret = userGroupService.select(ids);
+		setAttrs(ret);
 		render("/platform/userGroup/select.html");
 	}
 	

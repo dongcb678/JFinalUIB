@@ -77,7 +77,7 @@ public class DictService extends BaseService {
 			
 			// 修改上级节点的isparent
 			Dict pDict = Dict.dao.findById(dict.getStr(Dict.column_parentids));
-			String sql = getSql(Dict.sqlId_childCount);
+			String sql = getSqlMy(Dict.sqlId_childCount);
 			Record record = Db.use(ConstantInit.db_dataSource_main).findFirst(sql, pDict.getPKValue());
 			Long counts = record.getNumber("counts").longValue();
 		    if(counts == 1){
@@ -102,10 +102,10 @@ public class DictService extends BaseService {
 	public List<ZtreeNode> childNodeData(String cxt, String parentIds){
 		List<Dict> list = null;
 		if (null != parentIds) {
-			String sql = getSql(Dict.sqlId_treeChildNode);
+			String sql = getSqlMy(Dict.sqlId_treeChildNode);
 			list = Dict.dao.find(sql, parentIds);
 		} else {
-			String sql = getSql(Dict.sqlId_treeNodeRoot);
+			String sql = getSqlMy(Dict.sqlId_treeNodeRoot);
 			list = Dict.dao.find(sql);
 		}
 

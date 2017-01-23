@@ -294,14 +294,14 @@ public class AuthInterceptor implements Interceptor {
 		 * 1.直接查询数据库表验证操作权限
 		 * 
 		// 根据分组角色查询权限
-		String roleSql = ToolSqlXml.getSql("platform.roleOperator.hasUrlByOperatorAndUserIds");
+		String roleSql = ToolSqlXml.getSqlMy("platform.roleOperator.hasUrlByOperatorAndUserIds");
 		long roleCount = Db.use(ConstantInit.db_dataSource_main).queryNumber(roleSql, operatorIds, userIds).longValue();
 		if (roleCount > 0) {
 			return true;
 		}
 
 		// 根据岗位查询权限
-		String stationSql = ToolSqlXml.getSql("platform.stationOperator.hasUrlByOperatorAndUserIds");
+		String stationSql = ToolSqlXml.getSqlMy("platform.stationOperator.hasUrlByOperatorAndUserIds");
 		long stationCount = Db.use(ConstantInit.db_dataSource_main).queryNumber(stationSql, operatorIds, userIds).longValue();
 		if (stationCount > 0) {
 			return true;

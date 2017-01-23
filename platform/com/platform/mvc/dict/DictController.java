@@ -24,7 +24,7 @@ public class DictController extends BaseController {
 	 * 首页
 	 */
 	public void index() {
-		String sql = getSql(Dict.sqlId_treeTableNodeRoot);
+		String sql = getSqlMy(Dict.sqlId_treeTableNodeRoot);
 		list = Dict.dao.find(sql);
 		render("/platform/dict/treeTable.html");
 	}
@@ -33,7 +33,7 @@ public class DictController extends BaseController {
 	 * treeTable子节点数据获取
 	 */
 	public void treeTable() {
-		String sql = getSql(Dict.sqlId_treeTableChildNode);
+		String sql = getSqlMy(Dict.sqlId_treeTableChildNode);
 		list = Dict.dao.find(sql, ids);
 		render("/platform/dict/treeTableSub.html");
 	}

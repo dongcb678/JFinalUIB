@@ -156,7 +156,7 @@ public class UploadController extends BaseController {
 	 */
 	public void md5(){
 		String md5 = getPara();
-		String sql = getSql(Upload.sqlId_md5);
+		String sql = getSqlMy(Upload.sqlId_md5);
 		long count = Db.use(ConstantInit.db_dataSource_main).queryNumber(sql, md5).longValue();
 		renderSuccess(null, count, null);
 	}

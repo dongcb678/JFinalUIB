@@ -22,7 +22,7 @@ public class GroupRoleController extends BaseController {
 	 */
 	public void select(){
 		Ret ret = groupRoleService.selectRole(ids);
-		setAttrs(ret.getData());
+		setAttrs(ret);
 		render("/platform/groupRole/select.html");
 	}
 	

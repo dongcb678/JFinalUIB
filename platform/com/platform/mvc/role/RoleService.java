@@ -44,8 +44,8 @@ public class RoleService extends BaseService {
 	public void delete(String ids){
 		String[] idsArr = splitByComma(ids);
 
-		String roSql = getSql("platform.role.getRoleoperatorByRoleids");
-		String grSql = getSql("platform.role.getGrouproleByRoleids");
+		String roSql = getSqlMy("platform.role.getRoleoperatorByRoleids");
+		String grSql = getSqlMy("platform.role.getGrouproleByRoleids");
 		
 		for (String roleIds : idsArr) {
 			// 删除角色功能关联数据

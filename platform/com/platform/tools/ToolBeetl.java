@@ -8,7 +8,7 @@ import java.util.Set;
 import org.beetl.core.BeetlKit;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
-import org.beetl.ext.jfinal.BeetlRenderFactory;
+import org.beetl.ext.jfinal3.JFinal3BeetlRenderFactory;
 
 import com.jfinal.log.Log;
 import com.platform.beetl.format.DateFormat;
@@ -30,10 +30,11 @@ public abstract class ToolBeetl {
 
 	private static final Log log = Log.getLog(ToolBeetl.class);
 
+	public static final JFinal3BeetlRenderFactory brf = new JFinal3BeetlRenderFactory();
+	
 	/**
 	 * 模板扩展
 	 */
-	@SuppressWarnings("static-access")
 	public static GroupTemplate regiseter(){
 		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
 		String db_type = dataBase.getType();
@@ -42,9 +43,11 @@ public abstract class ToolBeetl {
 		sharedVars.put("db_type", db_type);
 		
 		log.debug("注册全局web视图模板解析");
-		GroupTemplate mainGT = BeetlRenderFactory.groupTemplate;
+		GroupTemplate mainGT = brf.groupTemplate;
 		if(mainGT == null){
-			mainGT = new BeetlRenderFactory().groupTemplate;
+			JFinal3BeetlRenderFactory brfTemp = new JFinal3BeetlRenderFactory();
+			brfTemp.config();
+			mainGT = brfTemp.groupTemplate;
 		}
 		mainGT.registerFunction("authUrl", new AuthUrl());
 		mainGT.registerFunction("orderBy", new OrderBy());

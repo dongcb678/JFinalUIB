@@ -25,11 +25,11 @@ public class UserGroupService extends BaseService {
 	public Ret select(String userIds){
 		Ret ret = Ret.create();
 		
-		String sqlChecked = getSql("platform.userGroup.findByUserIds");
+		String sqlChecked = getSqlMy("platform.userGroup.findByUserIds");
 		List<Record> checkedList = Db.find(sqlChecked, userIds);
 		ret.put("checkedList", checkedList);
 		
-		String sqlNoChecked = getSql("platform.userGroup.findByNotUserIds");
+		String sqlNoChecked = getSqlMy("platform.userGroup.findByNotUserIds");
 		List<Record> noCheckedList = Db.find(sqlNoChecked, userIds);
 		ret.put("noCheckedList", noCheckedList);
 		

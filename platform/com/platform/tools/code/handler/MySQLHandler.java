@@ -48,11 +48,11 @@ public class MySQLHandler extends BaseHandler {
 		String dbName = getDataBase().getDbName();
 
 		// 1.查询表和字段描述信息
-		String tSql = ToolSqlXml.getSql("platform.mysql.getTables");
+		String tSql = ToolSqlXml.getSqlMy("platform.mysql.getTables");
 		String tableDesc = Db.use("information_schema").findFirst(tSql, dbName, tableName).getStr("table_COMMENT");
 
 		// 2.查询表字段信息
-		String cSql = ToolSqlXml.getSql("platform.mysql.getColumns");
+		String cSql = ToolSqlXml.getSqlMy("platform.mysql.getColumns");
 		List<Record> listColumn = Db.use("information_schema").find(cSql, dbName, tableName);
 
 		// 3.查询表字段对应的所有java数据类型

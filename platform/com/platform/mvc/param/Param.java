@@ -391,7 +391,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public Param getByNumber(String number){
-		String sql = getSql(sqlId_numbers);
+		String sql = getSqlMy(sqlId_numbers);
 		Param param = dao.findFirst(sql, number);
 		return param;
 	}
@@ -417,7 +417,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public List<Param> getChild(){
-		String sql = getSql(sqlId_child);
+		String sql = getSqlMy(sqlId_child);
 		return dao.find(sql, getPKValue());
 	}
 
@@ -427,7 +427,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public List<Param> getChild(String prentIds){
-		String sql = getSql(sqlId_child);
+		String sql = getSqlMy(sqlId_child);
 		return dao.find(sql, prentIds);
 	}
 
@@ -451,7 +451,7 @@ public class Param extends BaseModel<Param> {
 	 * @return
 	 */
 	public Param getParent(){
-		String sql = getSql(sqlId_parent);
+		String sql = getSqlMy(sqlId_parent);
 		return dao.findFirst(sql, get(column_parentids));
 	}
 
@@ -515,7 +515,7 @@ public class Param extends BaseModel<Param> {
 	public Param cacheGet(String numbers){
 		Param param = ToolCache.get(ParamInitPlugin.cacheStart_param + numbers);
 		if(param == null){
-			String sql = getSql("platform.param.numbers");
+			String sql = getSqlMy("platform.param.numbers");
 			param = Param.dao.findFirst(sql, numbers);
 			cacheAdd(param.getPKValue());
 		}
@@ -531,7 +531,7 @@ public class Param extends BaseModel<Param> {
 		List<Param> paramList = ToolCache.get(ParamInitPlugin.cacheStart_param_child + numbers);
 		if(paramList == null){
 			Param pParam = cacheGet(numbers);
-			String sql = getSql("platform.param.child");
+			String sql = getSqlMy("platform.param.child");
 			paramList = Param.dao.find(sql, pParam.getPKValue());
 			cacheAdd(ids);
 		}

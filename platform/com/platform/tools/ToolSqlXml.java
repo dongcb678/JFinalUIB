@@ -62,7 +62,7 @@ public abstract class ToolSqlXml {
      * @param sqlId
      * @return
      */
-    public static String getSql(String sqlId) {
+    public static String getSqlMy(String sqlId) {
     	String sql = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	
     	if(StrKit.isBlank(sql)){
@@ -80,7 +80,7 @@ public abstract class ToolSqlXml {
      * @param renderType 解析sql和param的类型，默认是beetl，还可以是Velocity、FreeMarker，还需其他请自行参考实现
      * @return
      */
-    public static String getSql(String sqlId, Map<String, Object> param, String renderType) {
+    public static String getSqlMy(String sqlId, Map<String, Object> param, String renderType) {
     	String sqlTemplete = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	
     	if(StrKit.isBlank(sqlTemplete)){
@@ -129,7 +129,7 @@ public abstract class ToolSqlXml {
      * @param list 用于接收预处理的值
      * @return
      */
-    public static String getSql(String sqlId, Map<String, Object> param, String renderType, LinkedList<Object> list) {
+    public static String getSqlMy(String sqlId, Map<String, Object> param, String renderType, LinkedList<Object> list) {
     	String sqlTemplete = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	if(StrKit.isBlank(sqlTemplete)){
 			log.error("sql语句不存在：sql id是" + sqlId);

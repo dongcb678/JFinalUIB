@@ -2,17 +2,17 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="platform"/>
-	<classpathentry kind="src" path="jfinal22"/>
+	<classpathentry kind="src" path="jfinal3"/>
 	<classpathentry kind="src" path="junit"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/c3p0-0.9.1.2.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/freemarker-2.3.22.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/velocity-1.7-dep.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/velocity-1.7.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-annotations-2.4.0.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-core-2.5.3.jar"/>
-	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-databind-2.4.3.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal3/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal3/freemarker-2.3.22.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal3/velocity-1.7-dep.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal3/velocity-1.7.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal3/jackson-annotations-2.4.0.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal3/jackson-core-2.5.3.jar"/>
+	<classpathentry kind="lib" path="build-lib/jfinal3/jackson-databind-2.4.3.jar"/>
 	<classpathentry kind="lib" path="build-lib/junit/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="lib" path="build-lib/junit/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="build-lib/spring/spring-aop-4.2.2.RELEASE.jar"/>

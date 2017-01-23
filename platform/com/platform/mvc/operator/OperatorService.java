@@ -57,7 +57,7 @@ public class OperatorService extends BaseService {
 	public void delete(String ids){
 		String[] idsArr = splitByComma(ids);
 		
-		String sql = getSql("platform.operator.getRoleoperatorByOperatorids");
+		String sql = getSqlMy("platform.operator.getRoleoperatorByOperatorids");
 		
 		for (String operatorIds : idsArr) {
 			// 缓存
@@ -87,16 +87,16 @@ public class OperatorService extends BaseService {
 		
 		if (null == moduleIds) {
 			// 1.模块功能初始化调用
-			String sql = getSql(Operator.sqlId_rootModule);
+			String sql = getSqlMy(Operator.sqlId_rootModule);
 			listModule = Module.dao.find(sql);
 			
 		} else if (null != moduleIds) {
 			moduleIds = moduleIds.replace("module_", "");
 			// 2.通用子节点查询
-			String sqlModule = getSql(Operator.sqlId_childModule);
+			String sqlModule = getSqlMy(Operator.sqlId_childModule);
 			listModule = Module.dao.find(sqlModule, moduleIds);
 			
-			String sqlOperator = getSql(Operator.sqlId_byModuleIds);
+			String sqlOperator = getSqlMy(Operator.sqlId_byModuleIds);
 			operatorList = Operator.dao.find(sqlOperator, moduleIds);
 		}
 
@@ -134,7 +134,7 @@ public class OperatorService extends BaseService {
 	 */
 	public List<ZtreeNode> tree(String cxt){
 		// 1.根模块
-		String sql = getSql(Operator.sqlId_rootModule);
+		String sql = getSqlMy(Operator.sqlId_rootModule);
 		List<Module> rootModuleList = Module.dao.find(sql);
 
 		List<ZtreeNode> nodeList = new ArrayList<ZtreeNode>();
@@ -167,7 +167,7 @@ public class OperatorService extends BaseService {
 		List<ZtreeNode> children = new ArrayList<ZtreeNode>();
 
 		// 功能
-		String sqlOperator = getSql(Operator.sqlId_byModuleIds);
+		String sqlOperator = getSqlMy(Operator.sqlId_byModuleIds);
 		List<Operator> operatorList = Operator.dao.find(sqlOperator, pModule.getPKValue());
 		for (Operator operator : operatorList) {
 			ZtreeNode node = new ZtreeNode();
@@ -182,7 +182,7 @@ public class OperatorService extends BaseService {
 		}
 		
 		// 模块
-		String sqlModule = getSql(Operator.sqlId_childModule);
+		String sqlModule = getSqlMy(Operator.sqlId_childModule);
 		List<Module> moduleList = Module.dao.find(sqlModule, pModule.getPKValue());
 		for (Module module : moduleList) {
 			ZtreeNode node = new ZtreeNode();

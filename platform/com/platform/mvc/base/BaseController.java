@@ -172,7 +172,19 @@ public abstract class BaseController extends Controller {
 			super.renderJson(object);
 		}
 	}
-	
+
+	/**
+	 * 解决IE8下下载失败的问题
+	 */
+	@Override
+	public void renderFile(String file) {
+		String userAgent = getRequest().getHeader("User-Agent");
+		if(userAgent.toLowerCase().indexOf("msie") != -1){
+			getResponse().reset(); 
+		}
+		super.renderFile(file);
+	}
+
 	/**
 	 * 解决IE8下下载失败的问题
 	 */
@@ -183,6 +195,18 @@ public abstract class BaseController extends Controller {
 			getResponse().reset(); 
 		}
 		super.renderFile(file);
+	}
+
+	/**
+	 * 解决IE8下下载失败的问题
+	 */
+	@Override
+	public void renderFile(String file, String downloadSaveFileName) {
+		String userAgent = getRequest().getHeader("User-Agent");
+		if(userAgent.toLowerCase().indexOf("msie") != -1){
+			getResponse().reset(); 
+		}
+		super.renderFile(file, downloadSaveFileName);
 	}
 
 	/**
@@ -642,8 +666,8 @@ public abstract class BaseController extends Controller {
      * @param sqlId
      * @return
      */
-	protected String getSql(String sqlId){
-		return BaseService.getSql(sqlId);
+	protected String getSqlMy(String sqlId){
+		return BaseService.getSqlMy(sqlId);
 	}
 
     /**

@@ -138,7 +138,7 @@ public class LoginService extends BaseService {
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
-				String sql = getSql(User.sqlId_start);
+				String sql = getSqlMy(User.sqlId_start);
 				Db.use(ConstantInit.db_dataSource_main).update(sql, user.getPKValue());
 				// 更新缓存
 				User.cacheAdd(user.getPKValue());
@@ -164,7 +164,7 @@ public class LoginService extends BaseService {
 			return ConstantLogin.login_info_3;
 		} else {
 			// 密码验证失败
-			String sql = getSql(User.sqlId_stop);
+			String sql = getSqlMy(User.sqlId_stop);
 			Db.use(ConstantInit.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
 			// 更新缓存
 			User.cacheAdd(user.getPKValue());
@@ -203,7 +203,7 @@ public class LoginService extends BaseService {
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
 			}else{
-				String sql = getSql(User.sqlId_start);
+				String sql = getSqlMy(User.sqlId_start);
 				Db.use(ConstantInit.db_dataSource_main).update(sql, user.getPKValue());
 				// 更新缓存
 				User.cacheAdd(user.getPKValue());
@@ -228,7 +228,7 @@ public class LoginService extends BaseService {
 			return ConstantLogin.login_info_3;
 		} else {
 			// 密码验证失败
-			String sql = getSql(User.sqlId_stop);
+			String sql = getSqlMy(User.sqlId_stop);
 			Db.use(ConstantInit.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
 			// 更新缓存
 			User.cacheAdd(user.getPKValue());

@@ -80,8 +80,8 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @param sqlId
      * @return
      */
-	protected static String getSql(String sqlId){
-		return ToolSqlXml.getSql(sqlId);
+	protected static String getSqlMy(String sqlId){
+		return ToolSqlXml.getSqlMy(sqlId);
 	}
 	
     /**
@@ -91,7 +91,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected static String getSqlByBeetl(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl);
+    	return ToolSqlXml.getSqlMy(sqlId, param, ConstantRender.sql_renderType_beetl);
     }
     
     /**
@@ -102,7 +102,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected static String getSqlByBeetl(String sqlId, Map<String, Object> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_beetl, list);
+    	return ToolSqlXml.getSqlMy(sqlId, param, ConstantRender.sql_renderType_beetl, list);
     }
 
     /**
@@ -112,7 +112,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected static String getSqlByFreeMarker(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker);
+    	return ToolSqlXml.getSqlMy(sqlId, param, ConstantRender.sql_renderType_freeMarker);
     }
     
     /**
@@ -123,7 +123,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected static String getSqlByFreeMarker(String sqlId, Map<String, Object> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_freeMarker, list);
+    	return ToolSqlXml.getSqlMy(sqlId, param, ConstantRender.sql_renderType_freeMarker, list);
     }
 
     /**
@@ -133,7 +133,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected static String getSqlByVelocity(String sqlId, Map<String, Object> param){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity);
+    	return ToolSqlXml.getSqlMy(sqlId, param, ConstantRender.sql_renderType_velocity);
     }
     
     /**
@@ -144,7 +144,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
      * @return
      */
 	protected static String getSqlByVelocity(String sqlId, Map<String, Object> param, LinkedList<Object> list){
-    	return ToolSqlXml.getSql(sqlId, param, ConstantRender.sql_renderType_velocity, list);
+    	return ToolSqlXml.getSqlMy(sqlId, param, ConstantRender.sql_renderType_velocity, list);
     }
 	
 	/**
