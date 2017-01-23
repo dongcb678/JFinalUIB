@@ -237,8 +237,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		//log.info("configInterceptor 支持使用session");
 		//interceptors.add(new SessionInViewInterceptor(true));
 		
-		log.info("configInterceptor XSS过滤");
-		interceptors.add(new XSSInterceptor());
+//		log.info("configInterceptor XSS过滤");
+//		interceptors.add(new XSSInterceptor());
 		
 		log.info("configInterceptor 权限认证拦截器");
 		interceptors.add(new AuthInterceptor());
