@@ -21,6 +21,8 @@ public class RoutesScan extends Routes {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void config() {
+		// setBaseViewPath("/platform"); // 设置路由公共路径
+		
 		// 查询所有继承BaseController的子类
 		Set<Class<?>> controllerClasses = ToolClassSearch.searchByClassLoader(BaseController.class);
 		

@@ -86,7 +86,6 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("configConstant 设置path相关");
 		constants.setBaseUploadPath(PathKit.getWebRootPath()); // 上传公共路径 + File.separator + "files"
 		constants.setBaseDownloadPath(PathKit.getWebRootPath()); // 下载公共路径 + File.separator + "files"
-		//constants.setBaseViewPath("/platform"); //设置路由公共路径
 		
 		log.info("configConstant 视图Beetl设置");
 		ToolBeetl.brf.config();
@@ -118,6 +117,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 * 配置路由
 	 */
 	public void configRoute(Routes routes) { 
+		// routes.setBaseViewPath("/platform"); // 设置路由公共路径
 		log.info("configRoute 注解注册路由");
 		routes.add(new RoutesScan());
 	}
