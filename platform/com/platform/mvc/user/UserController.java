@@ -1,6 +1,5 @@
 package com.platform.mvc.user;
 
-import java.io.File;
 import java.util.List;
 
 import com.jfinal.aop.Before;
@@ -13,8 +12,6 @@ import com.platform.mvc.dept.Department;
 import com.platform.mvc.station.Station;
 import com.platform.mvc.upload.Upload;
 import com.platform.mvc.upload.UploadService;
-import com.platform.tools.ToolRandoms;
-import com.platform.tools.ToolString;
 
 /**
  * 用户管理
@@ -41,13 +38,8 @@ public class UserController extends BaseController {
 	 */
 	@Before(UserValidator.class)
 	public void save() {
-		String ids = ToolRandoms.getUuid(true);
+		String ids = getAttr("ids");
 		
-		List<UploadFile> files = getFiles("files" + File.separator + "upload", 1 * 1024 * 1024, ToolString.encoding); // 1M
-		if(files != null && files.size() != 0){
-			uploadService.upload("webRoot", files.get(0), ids);
-		}
-
 		String password = getPara("password");
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
@@ -75,18 +67,17 @@ public class UserController extends BaseController {
 	 */
 	@Before(UserValidator.class)
 	public void update() {
-		List<UploadFile> files = getFiles("files" + File.separator + "upload", 1 * 1024 * 1024, ToolString.encoding); // 1M
-
 		String password = getPara("password");
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
 		
-		if(files != null && files.size() == 1){
+		UploadFile file = getAttr("file");
+		if(file != null){
 			// 删除旧LOGO
 			Upload.dao.deleteById(user.getPKValue());
 			
 			// 存入新LOGO
-			uploadService.upload("webRoot", files.get(0), user.getPKValue());
+			uploadService.upload("webRoot", file, user.getPKValue());
 		}
 		
 		userService.update(user, password, userInfo);
