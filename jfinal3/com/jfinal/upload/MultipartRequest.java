@@ -162,6 +162,48 @@ public class MultipartRequest extends HttpServletRequestWrapper {
 		}
 		return map;
 	}
+	
+	/*
+	public String getParameter(String name) {
+		String value = multipartRequest.getParameter(name);
+		if (StrKit.notBlank(value)) {
+			value = ToolHtml.escapehtml(value);
+		}
+		return value;
+//		return multipartRequest.getParameter(name);
+	}
+	
+	public String[] getParameterValues(String name) {
+		String[] values = multipartRequest.getParameterValues(name);
+		if (values != null) {
+			for (int i = 0; i < values.length; i++) {
+				values[i] = ToolHtml.escapehtml(values[i]);
+			}
+		}
+		return values;
+//		return multipartRequest.getParameterValues(name);
+	}
+	
+	public Map getParameterMap() {
+		Map map = new HashMap();
+		Enumeration enumm = getParameterNames();
+		while (enumm.hasMoreElements()) {
+			String name = (String) enumm.nextElement();
+			//map.put(name, multipartRequest.getParameterValues(name));
+			map.put(name, getParameterValues(name));
+		}
+		return map;
+	}
+
+	public Object getAttribute(String name) {
+		Object value = super.getAttribute(name);
+		if (value instanceof String) {
+			value = ToolHtml.escapehtml(String.valueOf(value));
+		}
+		return value;
+	}
+	*/
+	
 }
 
 

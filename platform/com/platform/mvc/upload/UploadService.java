@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jfinal.kit.PathKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.upload.UploadFile;
 import com.platform.annotation.Service;
@@ -91,7 +92,11 @@ public class UploadService extends BaseService {
 		upload.setOrderids(orderids);
 		upload.setTargetids(targetIds);
 		upload.setSize(size);
-		upload.save();
+		if(StrKit.notBlank(ids)){
+			upload.save(ids);
+		}else{
+			upload.save();
+		}
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("ids", upload.getPKValue());

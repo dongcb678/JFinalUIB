@@ -13,6 +13,9 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.render.JsonRender;
+import com.jfinal.upload.MultipartRequest;
+import com.jfinal.upload.UploadFile;
+import com.platform.config.XSSMutipartRequest;
 import com.platform.constant.ConstantInit;
 import com.platform.constant.ConstantRender;
 import com.platform.constant.ConstantWebContext;
@@ -250,7 +253,31 @@ public abstract class BaseController extends Controller {
 		renderBean.setDescription(description);
 		renderJson(renderBean);
 	}
-
+	
+	public List<UploadFile> getFiles(String uploadPath, Integer maxPostSize, String encoding) {
+		if (getRequest() instanceof XSSMutipartRequest == false)
+			setHttpServletRequest(new XSSMutipartRequest(getRequest(), uploadPath, maxPostSize, encoding));
+		return ((MultipartRequest)getRequest()).getFiles();
+	}
+	
+	public List<UploadFile> getFiles(String uploadPath, int maxPostSize) {
+		if (getRequest() instanceof XSSMutipartRequest == false)
+			setHttpServletRequest(new XSSMutipartRequest(getRequest(), uploadPath, maxPostSize));
+		return ((MultipartRequest)getRequest()).getFiles();
+	}
+	
+	public List<UploadFile> getFiles(String uploadPath) {
+		if (getRequest() instanceof XSSMutipartRequest == false)
+			setHttpServletRequest(new XSSMutipartRequest(getRequest(), uploadPath));
+		return ((MultipartRequest)getRequest()).getFiles();
+	}
+	
+	public List<UploadFile> getFiles() {
+		if (getRequest() instanceof XSSMutipartRequest == false)
+			setHttpServletRequest(new XSSMutipartRequest(getRequest()));
+		return ((MultipartRequest)getRequest()).getFiles();
+	}
+	
 	/**
 	 * 表单数组映射List<Model>
 	 * @param modelClass
