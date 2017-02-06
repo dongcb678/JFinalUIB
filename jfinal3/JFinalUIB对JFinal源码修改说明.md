@@ -48,4 +48,6 @@
 
 	不再调用random.nextLong()，增加getTokenId()方法，tokenId前缀固定为formToken，方便从redis取keys
 	
-	
+12.打开Dialect中的去除排序方法
+
+	replaceOrderBy方法继续启用Holder

@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.DbKit;
@@ -167,17 +168,17 @@ public abstract class Dialect {
 		}
 	}
 	
-	/*
+	/**/
 	protected static class Holder {
 		// "order\\s+by\\s+[^,\\s]+(\\s+asc|\\s+desc)?(\\s*,\\s*[^,\\s]+(\\s+asc|\\s+desc)?)*";
 		private static final Pattern ORDER_BY_PATTERN = Pattern.compile(
 			"order\\s+by\\s+[^,\\s]+(\\s+asc|\\s+desc)?(\\s*,\\s*[^,\\s]+(\\s+asc|\\s+desc)?)*",
 			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	}*/
+	}
 	
 	public String replaceOrderBy(String sql) {
-		// return Holder.ORDER_BY_PATTERN.matcher(sql).replaceAll("");
-		return sql;
+		return Holder.ORDER_BY_PATTERN.matcher(sql).replaceAll("");
+		//return sql;
 	}
 }
 
