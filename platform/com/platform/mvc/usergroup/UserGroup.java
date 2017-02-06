@@ -16,7 +16,7 @@ public class UserGroup extends BaseModel<UserGroup> {
 
 	private static final Log log = Log.getLog(UserGroup.class);
 	
-	public static final UserGroup dao = new UserGroup();
+	public static final UserGroup dao = new UserGroup().dao();
 
 	/**
 	 * 表名称

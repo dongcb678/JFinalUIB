@@ -18,7 +18,7 @@ public class Blog extends BaseModel<Blog> {
 
 	private static final Log log = Log.getLog(Blog.class);
 	
-	public static final Blog dao = new Blog();
+	public static final Blog dao = new Blog().dao();
 	
 	/**
 	 * 字段描述：主键 

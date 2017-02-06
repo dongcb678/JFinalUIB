@@ -16,7 +16,7 @@ public class RoleOperator extends BaseModel<RoleOperator> {
 
 	private static final Log log = Log.getLog(RoleOperator.class);
 	
-	public static final RoleOperator dao = new RoleOperator();
+	public static final RoleOperator dao = new RoleOperator().dao();
 
 	/**
 	 * 表名称

@@ -16,7 +16,7 @@ public class GroupRole extends BaseModel<GroupRole> {
 
 	private static final Log log = Log.getLog(GroupRole.class);
 	
-	public static final GroupRole dao = new GroupRole();
+	public static final GroupRole dao = new GroupRole().dao();
 
 	/**
 	 * 表名称

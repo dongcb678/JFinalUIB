@@ -16,7 +16,7 @@ public class Role extends BaseModel<Role> {
 
 	private static final Log log = Log.getLog(Role.class);
 	
-	public static final Role dao = new Role();
+	public static final Role dao = new Role().dao();
 
 	/**
 	 * 表名称

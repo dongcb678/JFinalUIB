@@ -18,7 +18,7 @@ public class Operator extends BaseModel<Operator> {
 
 	private static final Log log = Log.getLog(Operator.class);
 	
-	public static final Operator dao = new Operator();
+	public static final Operator dao = new Operator().dao();
 
 	/**
 	 * 表名称

@@ -16,7 +16,7 @@ public class Station extends BaseModel<Station> {
 
 	private static final Log log = Log.getLog(Station.class);
 	
-	public static final Station dao = new Station();
+	public static final Station dao = new Station().dao();
 
 	/**
 	 * 表名称

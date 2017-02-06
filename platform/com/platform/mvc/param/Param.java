@@ -22,7 +22,7 @@ public class Param extends BaseModel<Param> {
 
 	private static final Log log = Log.getLog(Param.class);
 	
-	public static final Param dao = new Param();
+	public static final Param dao = new Param().dao();
 
 	/**
 	 * 表名称

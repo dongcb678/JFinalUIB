@@ -16,7 +16,7 @@ public class Systems extends BaseModel<Systems> {
 
 	private static final Log log = Log.getLog(Systems.class);
 	
-	public static final Systems dao = new Systems();
+	public static final Systems dao = new Systems().dao();
 
 	/**
 	 * 表名称

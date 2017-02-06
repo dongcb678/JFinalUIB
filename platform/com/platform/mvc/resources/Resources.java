@@ -19,7 +19,7 @@ public class Resources extends BaseModel<Resources> {
 
 	private static final Log log = Log.getLog(Resources.class);
 	
-	public static final Resources dao = new Resources();
+	public static final Resources dao = new Resources().dao();
 
 	/**
 	 * 表名称

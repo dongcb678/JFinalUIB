@@ -16,7 +16,7 @@ public class Module extends BaseModel<Module> {
 
 	private static final Log log = Log.getLog(Module.class);
 	
-	public static final Module dao = new Module();
+	public static final Module dao = new Module().dao();
 
 	/**
 	 * 表名称

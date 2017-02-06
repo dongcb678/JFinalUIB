@@ -18,7 +18,7 @@ public class Syslog extends BaseModel<Syslog> {
 
 	private static final Log log = Log.getLog(Syslog.class);
 	
-	public static final Syslog dao = new Syslog();
+	public static final Syslog dao = new Syslog().dao();
 
 	/**
 	 * 表名称

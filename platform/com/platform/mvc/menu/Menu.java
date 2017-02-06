@@ -18,7 +18,7 @@ public class Menu extends BaseModel<Menu> {
 
 	private static final Log log = Log.getLog(Menu.class);
 	
-	public static final Menu dao = new Menu();
+	public static final Menu dao = new Menu().dao();
 
 	/**
 	 * 表名称

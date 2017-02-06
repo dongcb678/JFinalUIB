@@ -19,7 +19,7 @@ public class UserInfo extends BaseModel<UserInfo> {
 
 	private static final Log log = Log.getLog(UserInfo.class);
 	
-	public static final UserInfo dao = new UserInfo();
+	public static final UserInfo dao = new UserInfo().dao();
 
 	/**
 	 * 表名称

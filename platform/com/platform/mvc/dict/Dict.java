@@ -22,7 +22,7 @@ public class Dict extends BaseModel<Dict> {
 
 	private static final Log log = Log.getLog(Dict.class);
 	
-	public static final Dict dao = new Dict();
+	public static final Dict dao = new Dict().dao();
 
 	/**
 	 * 表名称

@@ -16,7 +16,7 @@ public class Upload extends BaseModel<Upload> {
 
 	private static final Log log = Log.getLog(Upload.class);
 	
-	public static final Upload dao = new Upload();
+	public static final Upload dao = new Upload().dao();
 
 	/**
 	 * 表名称

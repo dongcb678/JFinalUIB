@@ -26,7 +26,7 @@ public class User extends BaseModel<User> {
 
 	private static final Log log = Log.getLog(User.class);
 	
-	public static final User dao = new User();
+	public static final User dao = new User().dao();
 
 	/**
 	 * 表名称

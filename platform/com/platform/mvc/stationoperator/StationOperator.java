@@ -16,7 +16,7 @@ public class StationOperator extends BaseModel<StationOperator> {
 
 	private static final Log log = Log.getLog(StationOperator.class);
 	
-	public static final StationOperator dao = new StationOperator();
+	public static final StationOperator dao = new StationOperator().dao();
 
 	/**
 	 * 表名称

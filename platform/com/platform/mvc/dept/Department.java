@@ -16,7 +16,7 @@ public class Department extends BaseModel<Department> {
 
 	private static final Log log = Log.getLog(Department.class);
 	
-	public static final Department dao = new Department();
+	public static final Department dao = new Department().dao();
 
 	/**
 	 * 表名称

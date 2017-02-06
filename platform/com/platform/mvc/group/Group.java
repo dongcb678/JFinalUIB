@@ -16,7 +16,7 @@ public class Group extends BaseModel<Group> {
 
 	private static final Log log = Log.getLog(Group.class);
 	
-	public static final Group dao = new Group();
+	public static final Group dao = new Group().dao();
 
 	/**
 	 * 表名称
