@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.stationOperator">
+	
+	<!-- 分页select -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select 
+				a.*
+    	]]>
+	</sql>
+	
+	<!-- 分页from -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+			from (
+				select 
+					s.ids sids, s.names sname, s.orderids sorder, 
+		        	m.ids mids, m.names mname, m.orderids morder,
+		        	pm.ids pmids, pm.names pmname, pm.orderids pmorder 
+		        		
+	        	from 
+	        		pt_operator o 
+	        		left join pt_module m on m.ids = o.moduleids 
+	        		left join pt_module pm on pm.ids = m.parentmoduleids 
+	        		left join pt_systems s on s.ids = m.systemsids 
+	        	
+	        	where 
+	        		1=1
+	        		
+					<% if(!isEmpty(oname)){ %>
+							and o.names like #'%$oname$%'#
+					<% } %>
+				
+					<% if(!isEmpty(ourl)){ %>
+							and o.url like #'%$ourl$%'#
+					<% } %>
+					
+					<% if(!isEmpty(sname)){ %>
+							and s.names like #'%$sname$%'#
+					<% } %>
+				
+					<% if(!isEmpty(mname)){ %>
+							and m.names like #'%$mname$%'#
+					<% } %>
+				
+	        	group by 
+	        		s.ids , s.names , s.orderids , 
+		        	m.ids , m.names , m.orderids ,
+		        	pm.ids, pm.names, pm.orderids
+		        	
+        		<% if(db_type == "mysql" || db_type == "postgresql"){ %>
+        				 order by 
+		        			s.orderids asc, pm.names asc, m.names asc
+		        			
+        		<% } else if(db_type == "oracle"){ %>
+        				 order by 
+		        			s.orderids asc, pm.names asc, m.names asc
+		        			
+	        	<% } else if(db_type == "sqlserver"){ %>
+        				
+	        	<% } else if(db_type == "db2"){ %>
+        				 order by 
+		        			s.orderids asc, pm.names asc, m.names asc
+	        	<% } %>
+			) a
+    	]]>
+	</sql>
+	
+	<!-- 根据用户id查询 -->
+	<sql id="findByUserIds">
+		<![CDATA[ 
+        	select 
+        		so.operatorids 
+        		
+        	from 
+        		pt_stationoperator so
+        		left join pt_station s on s.ids = so.stationids
+        		left join pt_user u on u.stationids = s.ids
+        		
+        	where 
+        		us.userids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据岗位id查询 -->
+	<sql id="findByStationIds">
+		<![CDATA[ 
+        	select 
+        		o.ids, o.names, o.url,
+				( select ids from pt_stationoperator so where so.stationids = ? and so.operatorids = o.ids ) soids
+        		
+        	from 
+        		pt_operator o 
+        		
+        	where
+        		o.moduleids = ?
+    	]]>
+	</sql>
+	
+	
+	<!-- 根据功能id、用户id查询 -->
+	<sql id="hasUrlByOperatorAndUserIds">
+		<![CDATA[ 
+        	select 
+        		count(*) 
+        		
+        	from 
+        		pt_stationoperator so
+        		left join pt_station s on s.ids = so.stationids
+        		left join pt_user u on u.stationids = s.ids
+        		
+        	where 
+        		so.operatorids = ? 
+        		and u.ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据岗位ids查询拥有的功能 -->
+	<sql id="findOperatorByStationIds">
+		<![CDATA[ 
+			select 
+        		o.ids, o.url
+        		
+        	from 
+        		pt_operator o
+        		left join pt_stationoperator so on so.operatorids = o.ids
+        		
+        	where 
+        		so.stationids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

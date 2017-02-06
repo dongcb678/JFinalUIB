@@ -1,0 +1,60 @@
+
+<!-- BEGIN PAGE CONTAINER-->
+<div class="container-fluid">
+
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+			<ul class="breadcrumb">
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="#">配置项</a> <span class="divider">/</span></li>
+				<li class="active">${i18nMap["admin.param.common.name"]}</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
+	</div>
+	<!-- END PAGE HEADER-->
+
+	<!-- BEGIN PAGE CONTENT-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN VALIDATION STATES-->
+			<div class="widget red">
+				<div class="widget-title">
+					<h4>
+						<i class=" icon-key"></i> ${i18nMap["admin.param.common.name"]}
+					</h4>
+				</div>
+				<div class="widget-body form">
+					<span class="tools"> 
+						<% if(authUrl("/platform/param/add.html")){ %>
+							<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanel('/platform/param/toUrl?toUrl=/platform/param/add.html&i18n=1');">
+								<i class="icon-plus icon-white"></i> ${i18nMap["admin.param.treeTable.addI18n"]}
+							</button>
+							
+							<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanel('/platform/param/toUrl?toUrl=/platform/param/add.html&i18n=0');">
+								<i class="icon-plus icon-white"></i> ${i18nMap["admin.param.treeTable.addNoI18n"]}
+							</button>
+						<% } %>
+					</span>
+						
+					<iframe id="paramTreeIframe" name="paramTreeIframe" width="100%" height="500px" 
+						class="share_self" frameborder="0" scrolling="auto" src='${cxt!}/platform/param'>
+					</iframe>
+
+				</div>
+			</div>
+			<!-- END VALIDATION STATES-->
+		</div>
+	</div>
+
+	<!-- END PAGE CONTAINER-->
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		//高度
+		$("#paramTreeIframe").css("height", window.screen.availHeight - 300);
+	});
+</script>

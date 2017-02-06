@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	用户sql
+-->
+<sql-statement namespace="platform.user">
+	
+	<!-- 分页查询用户 -->
+	<sql id="paging">
+		<![CDATA[ 
+        	<% if(db_type == "mysql" || db_type == "postgresql"){ %>
+        	
+        		select * from pt_user order by ids asc limit ? offset ? 
+        	
+        	<% } else if(db_type == "oracle"){ %>
+        	
+        		select * from ( select a.*, rownum rn from (select * from pt_user) a where rownum < ? ) where rn >= ?
+        	
+        	<% } else if(db_type == "sqlserver"){ %>
+        		
+        		select top {0, number, #.#} * from pt_user where ids not in ( select top {1, number, #.#} ids from pt_user )
+        		
+        	<% } else if(db_type == "db2"){ %>
+        		
+        		select * from ( select b.*, rownumber() over() as rn from ( select * from pt_user ) as b ) as a where a.rn < ? and a.rn >= ?
+        		
+        	<% } %>
+    	]]>
+	</sql>
+	
+	<!-- 根据部门Id查询，人员树节点数据 -->
+	<sql id="treeUserNode">
+		<![CDATA[ 
+        	select ids, userName as names from pt_user where departmentIds = ? order by userName asc
+    	]]>
+	</sql>
+	
+	<!-- 查询用户，自定义字段和值 -->
+	<sql id="column">
+		<![CDATA[ 
+        	select * from pt_user where ${column} = ?
+    	]]>
+	</sql>
+	
+	<!-- 停用账户 -->
+	<sql id="stop">
+		<![CDATA[ 
+        	update pt_user set stopDate = ?, errorCount = ? where ids = ? 
+    	]]>
+	</sql>
+	
+	<!-- 启用停用账户 -->
+	<sql id="start">
+		<![CDATA[ 
+        	update pt_user set stopdate = null, errorcount = 0 where ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+			select 
+				u.ids, u.username, u.names, u.email, u.mobile, 
+				ui.birthday, 
+				d.names as deptnames
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pt_user u 
+				left join pt_userinfo ui on u.ids = ui.ids 
+				left join pt_department d on u.departmentids = d.ids 
+			
+			where 1=1 
+			
+			<% if(!isEmpty(userClass)){ %>
+					and u.userClass = #'$userClass$'#
+			<% } %>
+			
+			<% if(!isEmpty(userName)){ %>
+					and u.userName like #'%$userName$%'#
+			<% } %>
+			
+			<% if(!isEmpty(names)){ %>
+					and u.names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(email)){ %>
+					and u.email like #'%$email$%'#
+			<% } %>
+			
+			<% if(!isEmpty(mobile)){ %>
+					and u.mobile like #'%$mobile$%'#
+			<% } %>
+			
+			<% if(!isEmpty(idCard)){ %>
+					and u.idCard like #'%$idCard$%'#
+			<% } %>
+			
+			<% if(!isEmpty(sex)){ %>
+					and ui.sex like #'%$sex$%'#
+			<% } %>
+			
+			<% if(!isEmpty(telephone)){ %>
+					and ui.telephone like #'%$telephone$%'#
+			<% } %>
+			
+			<% if(!isEmpty(qq)){ %>
+					and ui.qq like #'%$qq$%'#
+			<% } %>
+			
+			<% if(!isEmpty(birthday)){ %>
+				<% if(db_type == "mysql"){ %>
+						and ui.birthday = #'$birthday$'#
+						
+				<% } else if(db_type == "postgresql"){ %>
+						and ui.birthday = to_date(#'$birthday$'#, 'YYYY-mm-dd')
+						
+				<% } else if(db_type == "oracle"){ %>
+						and ui.birthday = to_date(#'$birthday$'#, 'YYYY-mm-dd')
+						
+				<% } else if(db_type == "sqlserver"){ %>
+						and ui.birthday = #'$birthday$'#
+						
+				<% } else if(db_type == "db2"){ %>
+						and ui.birthday = #'$birthday$'#
+				<% }%>
+			<% } %>
+    	]]>
+	</sql>
+
+</sql-statement>

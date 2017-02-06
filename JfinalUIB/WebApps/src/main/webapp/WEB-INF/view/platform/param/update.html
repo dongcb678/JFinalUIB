@@ -1,0 +1,61 @@
+
+<!-- BEGIN PAGE CONTAINER-->
+<div class="container-fluid">
+
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+			<ul class="breadcrumb">
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="#">配置项</a> <span class="divider">/</span></li>
+				<li>
+					<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/param/toUrl?toUrl=/platform/param/treeTableIframe.html');">${i18nMap["admin.param.common.name"]}</a> 
+					<span class="divider">/</span>
+				</li>
+				<li class="active">${i18nMap["admin.param.update"]}</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
+	</div>
+	<!-- END PAGE HEADER-->
+
+	<!-- BEGIN PAGE CONTENT-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN VALIDATION STATES-->
+			<div class="widget red">
+				<div class="widget-title">
+					<h4>
+						<i class=" icon-key"></i> ${i18nMap["admin.param.update"]}
+					</h4>
+				</div>
+				<div class="widget-body form">
+
+					<form id="editForm" action="${cxt!}/platform/param/update" method="POST" class="form-horizontal">
+						<input type="hidden" name="csrfToken" value="${csrfToken!}">
+						<input type="hidden" name="param.ids" value="${param.ids!}" >
+						<input type="hidden" name="param.version" value="${param.version!}">
+
+						<% include("/platform/param/form.html"){} %>
+
+						<div class="control-group">
+							<div class="controls">
+								<% if(authUrl("/platform/param/update")){ %>
+								<button type="button" class="btn btn-success" onclick="common_ajax.ajaxFormMainPanel('editForm');">
+									<i class="icon-ok icon-white"></i>${i18nMap["admin.common.submit"]}
+								</button>
+								<% } %>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+			<!-- END VALIDATION STATES-->
+		</div>
+	</div>
+
+	<!-- END PAGE CONTAINER-->
+</div>

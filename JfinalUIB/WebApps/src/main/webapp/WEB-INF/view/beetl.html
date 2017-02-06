@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	cxt : ${cxt!} <br>
+	
+	cookie : ${escapeHtml(cookieMap.userName.value!)} <br>
+	
+	param :  ${escapeHtml(paramMap.aa!)}<br>
+	
+	<%
+		print(paramMap.aa);
+	%>
+	<br>
+	<%
+		print(reqSysLog.ips);
+	%>
+	
+	
+</body>
+</html>

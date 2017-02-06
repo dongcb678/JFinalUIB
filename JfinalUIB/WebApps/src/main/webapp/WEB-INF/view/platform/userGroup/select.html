@@ -1,0 +1,55 @@
+<script type="text/javascript">
+	
+	function addChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("checkedGroup").add(option);
+
+		var url = "/platform/userGroup/addGroup";
+		var data = { "ids" : "${escapeHtml(ids!)}", "groupIds" : option.value, "csrfToken" : "${csrfToken!}" };
+		var result = common_ajax.ajaxFunc(url, data);
+	}
+
+	function delChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("allGroup").add(option);
+		
+		var url = "/platform/userGroup/delGroup";
+		var data = { "ids" : option.value, "csrfToken" : "${csrfToken!}" };
+		var result = common_ajax.ajaxFunc(url, data);
+	}
+	
+</script>
+
+<div class="span3">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<i class="icon-user"></i> ${i18nMap["admin.group.select.noChecked"]}
+		</h4>
+	</div>
+	<div class="panel-body">
+		<select id="allGroup" ondblclick="addChecked(this);" multiple="multiple" size="5" style="height: 300px">
+			<% for(group in noCheckedList){ %>
+				<option value='${escapeHtml(group.ids!)}'>${escapeHtml(group.names!)}</option>
+			<% } %>
+	  	</select>
+	</div>
+</div>
+
+<div class="span3">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<i class="icon-user"></i> ${i18nMap["admin.group.select.checked"]}
+		</h4>
+	</div>
+	<div class="panel-body">
+		<select id="checkedGroup" ondblclick="delChecked(this);" multiple="multiple" size="5" style="height: 300px">
+			<% for(userGroup in checkedList){ %>
+				<option value='${escapeHtml(userGroup.ids!)}'>${escapeHtml(userGroup.gname!)}</option>
+			<% } %>
+	  	</select>
+	</div>
+</div>

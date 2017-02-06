@@ -1,0 +1,156 @@
+	
+<form id="splitPageSysLog" action="${cxt!}/platform/test/sysLog" method="POST" role="form" class="form-horizontal">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.sysLog.list.select"]}</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">	
+				  	<div class="control-group">
+						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ourl"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.url" value='${escapeHtml(splitPage.queryParam["url"])}' maxlength="20" >
+						</div>
+				  	
+						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.oname"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="control-group">
+						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.username"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.username" value='${escapeHtml(splitPage.queryParam["username"])}' maxlength="20" >
+						</div>
+				  	
+						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.ips"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.ips" value='${escapeHtml(splitPage.queryParam["ips"])}' maxlength="20" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="control-group">
+						<label class="control-label" for="focusedInput">${i18nMap["admin.sysLog.property.status"]}</label>
+						<div class="col-sm-4">
+					  		<select name="_query.status" class="combox">
+								<option></option>
+								<option value="1" ${splitPage.queryParam["status"]! == "1" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.success"]}</option>
+								<option value="0" ${splitPage.queryParam["status"]! == "0" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.error"]}</option>
+							</select>
+						</div>
+				  	</div>
+				  	
+				  	<div class="form-actions">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormDiv("sysLog", "splitPageSysLog");'>${i18nMap["admin.common.select"]}</button>
+							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
+						</div>
+				  	</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">查询列表</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">
+					
+					<table class="table table-bordered table-hover" id="dataTable">
+						<thead>
+							<tr>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('sysLog', 'splitPageSysLog', 'onames')">
+									${i18nMap["admin.sysLog.property.oname"]}	${orderBy("onames")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('sysLog', 'splitPageSysLog', 'u.username')">
+									${i18nMap["admin.sysLog.property.username"]}	${orderBy("u.username")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('sysLog', 'splitPageSysLog', 'status')">
+									${i18nMap["admin.sysLog.property.status"]}	${orderBy("status")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('sysLog', 'splitPageSysLog', 'ips')">
+									${i18nMap["admin.sysLog.property.ips"]}	${orderBy("ips")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('sysLog', 'splitPageSysLog', 'startDate')">
+									${i18nMap["admin.sysLog.property.startdate"]}	${orderBy("startDate")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('sysLog', 'splitPageSysLog', 'actionHaoShi')">
+									${i18nMap["admin.sysLog.property.actionhaoshi"]}	${orderBy("actionHaoShi")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('sysLog', 'splitPageSysLog', 'viewHaoShi')">
+									${i18nMap["admin.sysLog.property.viewhaoshi"]}	${orderBy("viewHaoShi")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('sysLog', 'splitPageSysLog', 'haoShi')">
+									${i18nMap["admin.sysLog.property.haoshi"]}	${orderBy("haoShi")}
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(sysLog in splitPage.list){ %>
+								<tr>
+									<td align="center">${escapeHtml(sysLog["onames"]!)}：${sysLog.ourl }</td>
+									<td align="center">${escapeHtml(sysLog["username"]!)}</td>
+									<td align="center">
+										<% if(sysLog["status"] == "1"){%>
+											<span class="label label-success">${i18nMap["admin.sysLog.property.status.success"]}</span>
+										<% } else if(sysLog["status"] == "0"){%>
+											<span class="label label-warning">${i18nMap["admin.sysLog.property.status.error"]}</span>
+										<% } %>
+									</td>
+									<td align="center">${escapeHtml(sysLog["ips"]!)}</td>
+									<td align="center">
+										${sysLog.startdate !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
+									</td>
+									<td align="center">${sysLog["actionhaoshi"] }</td>
+									<td align="center">${sysLog["viewhaoshi"] }</td>
+									<td align="center">
+										<% if(sysLog["haoshi"] > 1000){%>
+											<span class="label label-warning">${sysLog["haoshi"] }</span>
+										<% } else {%>
+											<span class="label label-success">${sysLog["haoshi"] }</span>
+										<% } %>	
+									</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDivSysLog">
+						<% include("/platform/common/splitPage.html", {"divId" : "sysLog", "formId" : "splitPageSysLog", "splitPageDiv" : "splitPageDivSysLog"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

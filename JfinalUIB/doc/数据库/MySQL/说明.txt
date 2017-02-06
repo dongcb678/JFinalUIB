@@ -1,0 +1,7 @@
+
+jfinaluib.sql 是用Navicat Premium导出的
+
+用jfinal链接MySQL ，查询出来的结果， 为什么类型会经常变，数据库表字段类型是bigint， 查出来总是在int和long之间随机变动：
+可能的原因是在新建时设置了“无符号型”的状态导致的
+
+http://www.oschina.net/question/99629_161363

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.groupRole">
+	
+	<!-- 根据角色、分组ids查询 -->
+	<sql id="findByGroupAndRoleIds">
+		<![CDATA[ 
+        	select 
+        		gr.*, r.ids rid, r.names rname,g.ids gid, g.names gname
+        		
+        	from 
+        		pt_grouprole gr
+        		left join pt_group g on g.ids = gr.groupids
+        		left join pt_role r on r.ids = gr.roleids
+        		
+        	where 
+        		gr.roleids = ? and gr.groupids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据角色ids查询 -->
+	<sql id="findByRoleIds">
+		<![CDATA[ 
+        	select 
+        		gr.*, r.ids rid, r.names rname,g.ids gid, g.names gname
+        		
+        	from 
+        		pt_grouprole gr
+        		left join pt_group g on g.ids = gr.groupids
+        		left join pt_role r on r.ids = gr.roleids
+        		
+        	where 
+        		gr.roleids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据分组ids查询 -->
+	<sql id="findByGroupIds">
+		<![CDATA[ 
+			select 
+        		gr.*, r.ids rid, r.names rname,g.ids gid, g.names gname
+        		
+        	from 
+        		pt_grouprole gr
+        		left join pt_group g on g.ids = gr.groupids
+        		left join pt_role r on r.ids = gr.roleids
+        		
+        	where 
+        		gr.groupids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据角色ids查询 -->
+	<sql id="findByNotRoleIds">
+		<![CDATA[ 
+			select 
+        		gr.*, r.ids rid, r.names rname,g.ids gid, g.names gname
+        		
+        	from 
+        		pt_grouprole gr
+        		left join pt_group g on g.ids = gr.groupids
+        		left join pt_role r on r.ids = gr.roleids
+        		
+        	where 
+        		gr.roleids != ?
+    	]]>
+	</sql>
+	
+	<!-- 根据分组ids查询 -->
+	<sql id="findByNotGroupIds">
+		<![CDATA[ 
+			select 
+        		r.*
+        		
+        	from 
+        		pt_role r
+        		
+        	where 
+        		r.ids not in ( select gr.roleids from pt_grouprole gr where gr.groupids = ? )
+    	]]>
+	</sql>
+	
+	<!-- 根据分组ids查询拥有的功能 -->
+	<sql id="findOperatorByGroupIds">
+		<![CDATA[ 
+			select 
+        		o.ids, o.url
+        		
+        	from 
+        		pt_operator o
+        		left join pt_roleoperator ro on ro.operatorids = o.ids
+        		left join pt_grouprole gr on gr.roleids = ro.roleids
+        		
+        	where 
+        		gr.groupids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

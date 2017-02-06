@@ -1,0 +1,143 @@
+
+<form id="splitPage" action="${cxt!}/platform/upload/list" method="POST" class="form-horizontal">
+
+	<!-- BEGIN PAGE CONTAINER-->
+	<div class="container-fluid">
+
+		<!-- BEGIN PAGE HEADER-->
+		<div class="row-fluid">
+			<div class="span12">
+				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+				<ul class="breadcrumb">
+					<li>
+						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
+						<span class="divider">/</span>
+					</li>
+					<li><a href="#">系统维护</a> <span class="divider">/</span></li>
+					<li class="active">上传文件列表</li>
+				</ul>
+				<!-- END PAGE TITLE & BREADCRUMB-->
+			</div>
+		</div>
+		<!-- END PAGE HEADER-->
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget yellow">
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> ${i18nMap["admin.upload.list.select"]}
+						</h4>
+						<span class="tools"> 
+							<a class="icon-chevron-down" href="javascript:;"></a>
+						</span>
+					</div>
+					<div class="widget-body form switch-form">
+						原文件名
+						<input class="medium" type="text" name="_query.originalfilename" value='${escapeHtml(splitPage.queryParam["originalfilename"])}' maxlength="50">
+
+						文件名
+						<input class="medium" type="text" name="_query.filename" value='${escapeHtml(splitPage.queryParam["filename"])}' maxlength="20">
+
+						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- BEGIN ADVANCED TABLE widget-->
+		<div class="row-fluid">
+			<div class="span12">
+
+				<!-- BEGIN EXAMPLE TABLE widget-->
+				<div class="widget red">
+
+					<%
+						var delete = authUrl("/platform/upload/delete");
+					%>
+
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> ${i18nMap["admin.upload.list.table"]}
+						</h4>
+					</div>
+
+					<div class="widget-body">
+						<span class="tools"> 
+							<% if(delete == true){ %>
+							<button type="button" class="btn btn-small btn-danger" data-table="dataTable" data-url="/platform/upload/delete?csrfToken=${csrfToken!}" onclick="common_modals.deleteList(this)">
+								<i class="icon-remove icon-white"></i>
+								${i18nMap["admin.common.delete"]}
+							</button> 
+							<% } %>
+						</span>
+
+                       	<div class="space15"></div>
+                       
+						<table class="table table-striped table-bordered" id="dataTable">
+							<thead>
+								<tr>
+									<th style="width: 8px;">
+										<input type="checkbox" class="group-checkable" name="checkAll" onchange="common_common.checkFunc('dataTable', this.checked);" class="flat-grey selectall">
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'filename')">
+										文件名	${orderBy("filename")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'originalfilename')">
+										原文件名	${orderBy("originalfilename")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'path')">
+										存放路径	${orderBy("path")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'contenttype')">
+										ContentType	${orderBy("contenttype")}
+									</th>
+									<th class="hidden-phone">${i18nMap["admin.common.operation"]}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(upload in splitPage.list){ %>
+								<tr class="odd gradeX">
+									<td>
+										<input type="checkbox" class="checkboxes" name="checkIds" value="${upload.ids!}" class="flat-grey foocheck">
+									</td>
+									<td align="hidden-phone">${escapeHtml(upload["filename"]!)}</td>
+									<td align="hidden-phone">${escapeHtml(upload["originalfilename"]!)}</td>
+									<td align="hidden-phone">${escapeHtml(upload["path"]!)}</td>
+									<td align="hidden-phone">${escapeHtml(upload["contenttype"]!)}</td>
+									<td class="hidden-phone">
+										<% if(delete == true){ %>
+											<button type="button" class="btn btn-small btn-danger" onclick="common_modals.deleteOne(this)" data-url="/platform/upload/delete/${upload.ids!}?csrfToken=${csrfToken!}">
+												<i class="icon-remove icon-white"></i>
+												${i18nMap["admin.common.delete"]}
+											</button> 
+										<% } %>
+									</td>
+								</tr>
+								<% } %>
+							</tbody>
+						</table>
+
+						<div id="splitPageDiv" class="pagination">
+							<% include("/platform/common/splitPage.html", {"divId" : "main-content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+						</div>
+
+					</div>
+				</div>
+				<!-- END EXAMPLE TABLE widget-->
+
+			</div>
+		</div>
+
+		<!-- END ADVANCED TABLE widget-->
+	</div>
+
+</form>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+
+	});
+</script>
+

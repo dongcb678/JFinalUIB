@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>little.ant</groupId>
+	<artifactId>JFinalUIBV3</artifactId>
+
+	<packaging>pom</packaging>
+
+	<version>2.2</version>
+	<name>JFinalUIBV3</name>
+	<url>https://git.oschina.net/dongcb678/JfinalUIB</url>
+	<description>
+		项目地址：https://git.oschina.net/dongcb678/JfinalUIB
+		不同构建版本见项目分支
+	</description>
+    <inceptionYear>2014</inceptionYear>
+
+    <organization>
+        <name>4bu4</name>
+        <url>http://www.4bu4.com</url>
+    </organization>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+	</properties>
+
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <id>dongcb678@163.com</id>
+            <name>Huanjian Dong</name>
+            <email>dongcb678@163.com</email>
+            <url>http://www.4bu4.com</url>
+            <roles>
+                <role>Lead</role>
+                <role>Initial Committer</role>
+            </roles>
+            <organization>4bu4</organization>
+            <organizationUrl>http://www.4bu4.com</organizationUrl>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+    
+    <issueManagement>
+        <system>OSC Git Issues</system>
+        <url>https://git.oschina.net/dongcb678/JfinalUIB/issues</url>
+    </issueManagement>
+
+    <scm>
+        <url>https://git.oschina.net/dongcb678/JfinalUIB</url>
+    </scm>
+    
+	<modules>
+		<module>JFinal</module>
+		<module>UIB</module>
+		<module>Test</module>
+		<module>WebApps</module>
+	</modules>
+	
+    <repositories>
+        <repository>
+		      <id>alimaven</id>
+		      <name>aliyun maven</name>
+		      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+    
+</project>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="test.blog">
+	
+	<!-- 分页查询：from -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		test_blog
+			
+			where 1=1 
+				
+			<% if(!isEmpty(title)){ %>
+					and title like #'%$title$%'#
+			<% } %>
+			
+			<% if(!isEmpty(content)){ %>
+					and content like #'%$content$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
+</sql-statement>

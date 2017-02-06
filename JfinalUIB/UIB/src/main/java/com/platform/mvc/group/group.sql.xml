@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	分组sql
+-->
+<sql-statement namespace="platform.group">
+	
+	<!-- 查询所有分组 -->
+	<sql id="paging">
+		<![CDATA[ 
+        	<% if(db_type == "mysql" || db_type == "postgresql"){ %>
+        	
+        		select * from pt_group order by ids asc limit ? offset ? 
+        	
+        	<% } else if(db_type == "oracle"){ %>
+        	
+        		select * from ( select a.*, rownum rn from (select * from pt_group) a where rownum <= ? ) where rn >= ?
+        		
+        	<% } else if(db_type == "sqlserver"){ %>
+        		
+        		select top {0, number, #.#} * from pt_group where ids not in ( select top {1, number, #.#} ids from pt_group )
+        		
+        	<% } else if(db_type == "db2"){ %>
+        		
+        		select * from ( select b.*, rownumber() over() as rn from ( select * from pt_group ) as b ) as a where a.rn < ? and a.rn >= ?
+        		
+        	<% } %>
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pt_group 
+        	where 
+        		1=1
+        		
+			<% if(!isEmpty(names)){ %>
+					and names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(numbers)){ %>
+					and numbers like #'%$numbers$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
+	<!-- 查询分组下的用户 -->
+	<sql id="getUserByGroup">
+		<![CDATA[ 
+        	select userIds from pt_usergroup where groupIds = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

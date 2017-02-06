@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	模块sql
+-->
+<sql-statement namespace="platform.module">
+	
+	<!-- 根节点 -->
+	<sql id="rootBySystemIds">
+		<![CDATA[ 
+        	select ids, names, isparent, images from pt_module where parentModuleIds is null and systemsIds = ? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 根节点 -->
+	<sql id="root">
+		<![CDATA[ 
+        	select pm.ids, (select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, pm.isParent, pm.images 
+        	from pt_module pm where pm.parentModuleIds is null order by pm.orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 子节点 -->
+	<sql id="child">
+		<![CDATA[ 
+        	select ids, names, isparent, images from pt_module where parentModuleIds = ? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 子节点数量 -->
+	<sql id="childCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_module where parentmoduleids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据系统id清理模块数据 -->
+	<sql id="deleteBySystemsId">
+		<![CDATA[ 
+        	delete from pt_module where systemsids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

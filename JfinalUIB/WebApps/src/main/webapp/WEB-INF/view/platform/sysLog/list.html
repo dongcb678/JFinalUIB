@@ -1,0 +1,209 @@
+
+<form id="splitPage" action="${cxt!}/platform/sysLog" method="POST" class="form-horizontal">
+
+	<!-- BEGIN PAGE CONTAINER-->
+	<div class="container-fluid">
+
+		<!-- BEGIN PAGE HEADER-->
+		<div class="row-fluid">
+			<div class="span12">
+				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+				<ul class="breadcrumb">
+					<li>
+						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
+						<span class="divider">/</span>
+					</li>
+					<li><a href="#">系统维护</a> <span class="divider">/</span></li>
+					<li class="active">${i18nMap["admin.sysLog.common.name"]}</li>
+				</ul>
+				<!-- END PAGE TITLE & BREADCRUMB-->
+			</div>
+		</div>
+		<!-- END PAGE HEADER-->
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget yellow">
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> ${i18nMap["admin.sysLog.list.select"]}
+						</h4>
+						<span class="tools"> 
+							<a class="icon-chevron-down" href="javascript:;"></a>
+						</span>
+					</div>
+					<div class="widget-body form switch-form">
+						${i18nMap["admin.sysLog.property.ourl"]}
+						<input class="medium" type="text" name="_query.url" value='${escapeHtml(splitPage.queryParam["url"])}' maxlength="100" style="width: 250px" >
+
+						${i18nMap["admin.sysLog.property.oname"]}
+						<input class="medium" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20" >
+
+						${i18nMap["admin.sysLog.property.username"]}
+					  	<input class="medium" type="text" name="_query.username" value='${escapeHtml(splitPage.queryParam["username"])}' maxlength="20" >
+						
+						${i18nMap["admin.sysLog.property.ips"]}
+					  	<input class="medium" type="text" name="_query.ips" value='${escapeHtml(splitPage.queryParam["ips"])}' maxlength="20" >
+
+						${i18nMap["admin.sysLog.property.status"]}
+				  		<select name="_query.status" class="input-small m-wrap" tabindex="1">
+							<option></option>
+							<option value="1" ${splitPage.queryParam["status"]! == "1" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.success"]}</option>
+							<option value="0" ${splitPage.queryParam["status"]! == "0" ? "selected='selected'":"" }>${i18nMap["admin.sysLog.property.status.error"]}</option>
+						</select>
+						
+						${i18nMap["admin.sysLog.property.startdate"]} 
+		                <input class="medium" type="text" name="_query.startdate_start" value='${escapeHtml(splitPage.queryParam["startdate_start"])}' 
+		                	id="startDate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate:'2016-07-01', maxDate:'#F{$dp.$D(\'endDate\')}'})" style="width: 135px" readonly>
+						至
+		                <input class="medium" type="text" name="_query.startdate_end" value='${escapeHtml(splitPage.queryParam["startdate_end"])}' 
+		                	id="endDate" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate:'#F{$dp.$D(\'startDate\')}', maxDate:'%y-%M-%d'})" style="width: 135px" readonly>
+		                
+						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="button" class="btn btn-danger" onclick='platform_windows.open("${cxt!}/platform/sysLog/export", "splitPage");'>${i18nMap["admin.common.export"]}</button>
+						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- BEGIN ADVANCED TABLE widget-->
+		<div class="row-fluid">
+			<div class="span12">
+
+				<!-- BEGIN EXAMPLE TABLE widget-->
+				<div class="widget red">
+
+					<%
+						var view = authUrl("/platform/sysLog/view");
+						var delete = authUrl("/platform/sysLog/delete");
+					%>
+
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> ${i18nMap["admin.sysLog.list.table"]}
+						</h4>
+					</div>
+
+					<div class="widget-body">
+						<span class="tools"> 
+							<% if(delete == true){ %>
+							<button type="button" class="btn btn-small btn-danger" data-table="dataTable" data-url="/platform/sysLog/delete?csrfToken=${csrfToken!}" onclick="common_modals.deleteList(this)">
+								<i class="icon-remove icon-white"></i>
+								${i18nMap["admin.common.delete"]}
+							</button> 
+							<% } %>
+						</span>
+
+                       	<div class="space15"></div>
+                       
+						<table class="table table-striped table-bordered" id="dataTable">
+							<thead>
+								<tr>
+									<th style="width: 8px;">
+										<input type="checkbox" class="group-checkable" name="checkAll" onchange="common_common.checkFunc('dataTable', this.checked);" class="flat-grey selectall">
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'sy.names')">
+										${i18nMap["admin.sysLog.common.synames"]}	${orderBy("sy.names")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'm.names')">
+										${i18nMap["admin.sysLog.common.mnames"]}	${orderBy("m.names")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'onames')">
+										${i18nMap["admin.sysLog.property.oname"]}	${orderBy("onames")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'u.username')">
+										${i18nMap["admin.sysLog.property.username"]}	${orderBy("u.username")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'status')">
+										${i18nMap["admin.sysLog.property.status"]}	${orderBy("status")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'ips')">
+										${i18nMap["admin.sysLog.property.ips"]}	${orderBy("ips")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'startDate')">
+										${i18nMap["admin.sysLog.property.startdate"]}	${orderBy("startDate")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'actionHaoShi')">
+										${i18nMap["admin.sysLog.property.actionhaoshi"]}	${orderBy("actionHaoShi")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'viewHaoShi')">
+										${i18nMap["admin.sysLog.property.viewhaoshi"]}	${orderBy("viewHaoShi")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'haoShi')">
+										${i18nMap["admin.sysLog.property.haoshi"]}	${orderBy("haoShi")}
+									</th>
+									<th class="hidden-phone">${i18nMap["admin.common.operation"]}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(sysLog in splitPage.list){ %>
+								<tr class="odd gradeX">
+									<td>
+										<input type="checkbox" class="checkboxes" name="checkIds" value="${sysLog.ids!}" class="flat-grey foocheck">
+									</td>
+									<td align="center">${escapeHtml(sysLog["synames"]!)}</td>
+									<td align="center">${escapeHtml(sysLog["mnames"]!)}</td>
+									<td align="center">${escapeHtml(sysLog["onames"]!)}：${sysLog.ourl }</td>
+									<td align="center">${escapeHtml(sysLog["username"]!)}</td>
+									<td align="center">
+										<% if(sysLog["status"] == "1"){%>
+											<span class="label label-success">${i18nMap["admin.sysLog.property.status.success"]}</span>
+										<% } else if(sysLog["status"] == "0"){%>
+											<span class="label label-warning">${i18nMap["admin.sysLog.property.status.error"]}</span>
+										<% } %>
+									</td>
+									<td align="center">${escapeHtml(sysLog["ips"]!)}</td>
+									<td align="center">
+										${sysLog.startdate !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
+									</td>
+									<td align="center">${sysLog["actionhaoshi"] }</td>
+									<td align="center">${sysLog["viewhaoshi"] }</td>
+									<td align="center">
+										<% if(sysLog["haoshi"] > 1000){%>
+											<span class="label label-warning">${sysLog["haoshi"] }</span>
+										<% } else {%>
+											<span class="label label-success">${sysLog["haoshi"] }</span>
+										<% } %>	
+									</td>
+									<td class="hidden-phone">
+										<% if(view == true){ %>
+											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/platform/sysLog/view/${escapeHtml(sysLog.ids!)}');">
+												<i class="icon-eye-open"></i> ${i18nMap["admin.common.see"]} 
+											</button>
+										<% } %>
+										
+										<% if(delete == true){ %>
+											<button type="button" class="btn btn-small btn-danger" data-url="/platform/sysLog/delete/${escapeHtml(sysLog.ids!)}?csrfToken=${csrfToken!}" onclick="common_modals.deleteOne(this)"> 
+												<i class="icon-remove icon-white"></i>${i18nMap["admin.common.delete"]}
+											</button>
+										<% } %>
+									</td>
+								</tr>
+								<% } %>
+							</tbody>
+						</table>
+
+						<div id="splitPageDiv" class="pagination">
+							<% include("/platform/common/splitPage.html", {"divId" : "main-content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+						</div>
+
+					</div>
+				</div>
+				<!-- END EXAMPLE TABLE widget-->
+
+			</div>
+		</div>
+
+		<!-- END ADVANCED TABLE widget-->
+	</div>
+
+</form>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+
+	});
+</script>
+
+

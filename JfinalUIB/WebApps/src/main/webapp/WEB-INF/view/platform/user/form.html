@@ -1,0 +1,292 @@
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.department"]}</label>
+	<div class="controls">
+		<input type="hidden" id="deptId" name="user.departmentids" value="${escapeHtml(dept.ids!)}"/>
+		<input type="text" class="span8" id="deptName" value="${escapeHtml(dept.names!)}" 
+			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="必选">
+		
+		<span class="help-inline"> 
+			<a href="javascript:void(0)" class="btn btn-primary" 
+				onclick="common_modals.deptRadioDiaLog('deptId', 'deptName', '${escapeHtml(user.departmentids!)}')">${i18nMap["admin.common.choice"]}</a>
+		</span>
+	</div>
+</div>
+             
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.station"]}</label>
+	<div class="controls">
+		<input type="hidden" id="stationId" name="user.stationids" value="${escapeHtml(station.ids!)}"/>
+		<input type="text" class="span8" id="stationName" value="${escapeHtml(station.names!)}" 
+			readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="必选">
+		
+		<span class="help-inline"> 
+			<a href="javascript:void(0)" class="btn btn-primary" 
+				onclick="common_modals.stationRadioDiaLog('stationId', 'stationName', '${escapeHtml(user.stationids!)}')">${i18nMap["admin.common.choice"]}</a>
+		</span>
+	</div>
+</div>
+
+<%
+/* 无用代码，暂存，多选用户，作为存储选择部门和人员的示例
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.dataAccess"]}</label>
+	<div class="controls">
+		<input type="hidden" id="deptId2" name="user.deptids" value="${escapeHtml(user.deptids!)}" />
+		<input type="text" id="deptName2" name="user.deptnames" value="${escapeHtml(user.deptnames!)}" class="span4" readonly="readonly" />
+		
+		<input type="hidden" id="userId" name="user.userids" value="${escapeHtml(user.userids!)}" />
+		<input type="text" id="userName" name="user.usernames" value="${escapeHtml(user.usernames!)}" class="span4" readonly="readonly"
+			maxlength="10000" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		
+		<span class="help-inline"> 
+			<a href="javascript:void(0)" class="btn btn-primary" 
+				onclick="common_modals.userCheckboxDiaLog('userId', 'userName', 'deptId2', 'deptName2', '${escapeHtml(user.deptids!)}', '${escapeHtml(user.userids!)}')">${i18nMap["admin.common.choice"]}</a>
+		</span>
+	</div>
+</div>
+*/
+%>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>
+	<div class="controls">
+		<input type="text" class="span8" id="idcardId" name="user.idcard" value="${escapeHtml(user.idcard!)}"
+			maxlength="18" vMin="15" vType="idCard" onblur="platform_verify.onblurVali(this);" placeholder="15-18位字母数字">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.nickname"]}</label>
+	<div class="controls">
+		<input type="text" class="span8" name="user.names" value="${escapeHtml(user.names!)}" 
+			maxlength="10" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="2-10位任意字符">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.userName"]}</label>
+	<div class="controls">
+		<input type="text" class="span8" id="usernameId" name="user.username" value="${escapeHtml(user.username!)}" 
+			maxlength="16" vMin="5" vType="letterNumber" onblur="platform_verify.onblurVali(this);" placeholder="5-16位字母数字">
+		<span class="help-inline"> </span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">头像</label>
+	<div class="controls">
+		<% if(!isEmpty(upload)){%>
+			<img alt="头像" src="${cxt!}/files/upload/${upload.filename!}" width="200" height="200">
+		<% } %>
+		<input type="file" class="span8" name="logo" value="" 
+			maxlength="1000" vMin="0" vType="valiImage" onblur="platform_verify.onblurVali(this);" placeholder="选择jpg、jpeg、png类型图片">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.password"]}</label>
+	<div class="controls">
+		<input type="password" id="pass1Id" name="password" class="span8" autocomplete="off"
+			maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' 
+			vType="letterNumber" onblur="platform_verify.onblurVali(this);" placeholder="6-18位字母数字">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.password"]}</label>
+	<div class="controls">
+		<input type="password" id="pass2Id" class="span8" autocomplete="off"
+			maxlength="18" vMin='<%if(operatorType == "add"){print("6");}else{print("0");}%>' 
+			vType="letterNumber" onblur="platform_verify.onblurVali(this);" placeholder="6-18位字母数字">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
+	<div class="controls">
+		<input type="text" class="span8" id="mailboxId" name="user.email" value="${escapeHtml(user.email!)}" 
+			maxlength="30" vMin="6" vType="email" onblur="platform_verify.onblurVali(this);" placeholder="6-30位邮箱规则">
+		<span class="help-inline"> </span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
+	<div class="controls">
+		<input type="text" class="span8" id="mobileId" name="user.mobile" value="${escapeHtml(user.mobile!)}" 
+			maxlength="11" vMin="11" vType="phone" onblur="platform_verify.onblurVali(this);" placeholder="11位数字">
+		<span class="help-inline"> </span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.telephone"]}</label>
+	<div class="controls">
+		<input type="text" class="span8" name="userInfo.telephone" value="${escapeHtml(userInfo.telephone!)}" 
+			maxlength="20" vMin="0" vType="tell" onblur="platform_verify.onblurVali(this);" placeholder="5-20位">
+		<span class="help-inline"> </span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.qq"]}</label>
+	<div class="controls">
+		<input type="text" class="span8" name="userInfo.qq" value="${escapeHtml(userInfo.qq!)}"
+			maxlength="20" vMin="0" vType="qq" onblur="platform_verify.onblurVali(this);" placeholder="5-20位数字">
+		<span class="help-inline"> </span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.user.property.birthday"]}</label>
+	<div class="controls">
+		<input type="text" class="span8" name="userInfo.birthday" readonly="readonly" 
+			value='${userInfo.birthday!, dateFormat="yyyy-MM-dd"}' 
+			onClick="WdatePicker({dateFmt: 'yyyy-MM-dd', minDate:'1900-01-01', maxDate:'%y-%M-%d'})"
+  			>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		
+	});
+	
+	/**
+	 * 用户添加和编辑页面js
+	 */
+	var platform_user_form = function() {
+		"use strict";
+		
+		/**
+		 * 验证用户名是否存在
+		 * @param userName
+		 */
+		var valiUserName = function(userName, userIds){
+			var param = {"userName" : userName, "userIds" : userIds};
+			var result = common_ajax.ajaxFunc("/platform/login/valiUserName", param);
+			return result;
+		}
+		
+		/**
+		 * 验证邮箱是否存在
+		 * @param mailBox
+		 */
+		var valiMailBox = function(mailBox, userInfoIds){
+			var param = {"mailBox" : mailBox, "userInfoIds" : userInfoIds};
+			var result = common_ajax.ajaxFunc("/platform/login/valiMailBox", param);
+			return result;
+		}
+		
+		/**
+		 * 验证身份证是否存在
+		 * @param idcard
+		 */
+		var valiIdcard = function(idcard, userInfoIds){
+			var param = {"idcard" : idcard, "userInfoIds" : userInfoIds};
+			var result = common_ajax.ajaxFunc("/platform/login/valiIdcard", param);
+			return result;
+		}
+		
+		/**
+		 *验证手机号是否存在
+		 * @param mailBox
+		 */
+		var valiMobile = function(mobile, userInfoIds){
+			var param = {"mobile" : mobile, "userInfoIds" : userInfoIds};
+			var result = common_ajax.ajaxFunc("/platform/login/valiMobile", param);
+			return result;
+		}
+		
+		var dataVali = function (form, isAdd){
+			var usernameNode = $("#usernameId");
+			var mailboxNode = $("#mailboxId");
+			var idcardNode = $("#idcardId");
+			var mobileNode = $("#mobileId");
+			
+			var usernameId = usernameNode.val();
+			var mailboxId = mailboxNode.val();
+			var idcardId = idcardNode.val();
+			var mobileId = mobileNode.val();
+			
+			if(isAdd){ // 添加
+				if(idcardId != "" && valiIdcard(idcardId) != "true"){
+					idcardNode.next().html("身份证号码不可用！");
+			 		return false;
+				}
+			
+				if(usernameId != "" && valiUserName(usernameId) != "true"){
+					usernameNode.next().html("账号不可用！");
+			 		return false;
+				}
+			
+				if(mailboxId != "" && valiMailBox(mailboxId) != "true"){
+					mailboxNode.next().html("邮箱不可用！");
+			 		return false;
+				}
+		
+				if(mobileId != "" && valiMobile(mobileId) != "true"){
+					mobileNode.next().html("手机号码不可用！");
+			 		return false;
+				}
+			
+			}else{ // 更新
+				
+				var userIds = $("#userIds").val();
+				var userInfoIds = $("#userInfoIds").val();
+				
+				if(idcardId != "" && valiIdcard(idcardId, userInfoIds) != "true"){
+					idcardNode.next().html("身份证号码不可用！");
+			 		return false;
+				}
+			
+				if(usernameId != "" && valiUserName(usernameId, userIds) != "true"){
+					usernameNode.next().html("账号不可用！");
+			 		return false;
+				}
+			
+				if(mailboxId != "" && valiMailBox(mailboxId, userInfoIds) != "true"){
+					mailboxNode.next().html("邮箱不可用！");
+			 		return false;
+				}
+		
+				if(mobileId != "" && valiMobile(mobileId, userInfoIds) != "true"){
+					mobileNode.next().html("手机号码不可用！");
+			 		return false;
+				}
+			}
+	
+			var pass1Node = $("#pass1Id");
+			var pass2Node = $("#pass2Id");
+			
+			var pass1Id = pass1Node.val();
+			var pass2Id = pass2Node.val();
+			if(pass1Id != pass2Id){
+				pass1Node.next().html("两次输入密码不一致！");
+				pass2Node.next().html("两次输入密码不一致！");
+		 		return false;
+			}
+			
+			var errorCount = platform_verify.formVali(form);
+			if(errorCount != 0){
+				common_modals.alert("有" + errorCount + "处错误，请修正！");
+		 		return false;
+			}
+			
+			common_ajax.ajaxFormMainPanel("editForm");
+		}
+	
+		return {
+			submitValiFunc: dataVali
+		};
+		
+	}();
+
+</script>

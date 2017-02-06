@@ -1,0 +1,55 @@
+
+<!-- BEGIN PAGE CONTAINER-->
+<div class="container-fluid">
+
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+			<ul class="breadcrumb">
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="#">用户权限</a> <span class="divider">/</span></li>
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/user/backOff');">用户管理</a> <span class="divider">/</span></li>
+				<li class="active">${i18nMap["admin.user.add"]}</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
+	</div>
+	<!-- END PAGE HEADER-->
+
+	<!-- BEGIN PAGE CONTENT-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN VALIDATION STATES-->
+			<div class="widget red">
+				<div class="widget-title">
+					<h4>
+						<i class=" icon-key"></i> ${i18nMap["admin.user.add"]}
+					</h4>
+				</div>
+				<div class="widget-body form">
+
+					<form id="editForm" action="${cxt!}/platform/user/save?csrfToken=${csrfToken!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+						
+						<% include("/platform/user/form.html", {"operatorType" : "add"}){} %>
+
+						<div class="control-group">
+							<div class="controls">
+								<% if(authUrl("/platform/user/save")){ %>
+								<button type="button" class="btn btn-success" onclick="platform_user_form.submitValiFunc(this.form, true);">
+									<i class="icon-ok icon-white"></i>${i18nMap["admin.common.submit"]}
+								</button>
+								<% } %>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+			<!-- END VALIDATION STATES-->
+		</div>
+	</div>
+
+	<!-- END PAGE CONTAINER-->
+</div>

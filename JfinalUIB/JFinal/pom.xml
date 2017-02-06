@@ -1,0 +1,359 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>little.ant</groupId>
+		<artifactId>JFinalUIBV3</artifactId>
+		<version>2.2</version>
+	</parent>
+
+	<artifactId>JFinal</artifactId>
+
+	<packaging>jar</packaging>
+
+	<name>JFinal</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<spring.version>4.3.4</spring.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>8.1.8</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Jetty JSP：根据 Dependency Hierarchy 视图拆分成了七个 dependency， - 方便项目以及便于 导出 war的在jetty与tomcat间无缝迁移 - Dependencies: http://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jsp <dependency> <groupId>org.eclipse.jetty</groupId> <artifactId>jetty-jsp</artifactId> <version>8.1.8.v20121106</version> <scope>provided</scope> 
+			</dependency> -->
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>javax.servlet.jsp</artifactId>
+			<version>2.2.0.v201112011158</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>org.apache.jasper.glassfish</artifactId>
+			<version>2.2.2.v201112011158</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>2.2.0.v201108011116</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>com.sun.el</artifactId>
+			<version>2.2.0.v201108011116</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>org.eclipse.jdt.core</artifactId>
+			<version>3.7.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- JSTL 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>javax.servlet.jsp.jstl</artifactId>
+			<version>1.2.0.v201105211821</version>
+			<exclusions><!-- 避免导出 servlet jar 包 -->
+				<exclusion>
+					<groupId>org.eclipse.jetty.orbit</groupId>
+					<artifactId>javax.servlet</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency><!-- JSTL 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>org.apache.taglibs.standard.glassfish</artifactId>
+			<version>1.2.0.v201112081803</version>
+			<exclusions><!-- 避免导出 servlet jar 包 -->
+				<exclusion>
+					<groupId>org.eclipse.jetty.orbit</groupId>
+					<artifactId>javax.servlet</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.23</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.17</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>cos</artifactId>
+			<version>26Dec2008</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.8.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.10.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>de.ruedigermoeller</groupId>
+			<artifactId>fst</artifactId>
+			<version>2.45</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.4.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.2.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.8</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.5.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.4.6</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.4.6</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+		  	<groupId>it.sauronsoftware.cron4j</groupId>
+		  	<artifactId>cron4j</artifactId>
+		  	<version>2.2.5</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.1</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.2.1</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+		  	<groupId>com.beust</groupId>
+		  	<artifactId>jcommander</artifactId>
+		  	<version>1.48</version>
+			<exclusions>   
+		        <exclusion>   
+		            <groupId>*</groupId>   
+		            <artifactId>*</artifactId>   
+		        </exclusion>   
+		    </exclusions>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<finalName>JFinal</finalName>
+
+		<plugins>
+			<!-- Compile -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<skip>true</skip>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+					<compilerArguments>
+						<verbose />
+						<bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+
+			<!-- Test -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>alimaven</id>
+			<name>aliyun maven</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+
+</project>

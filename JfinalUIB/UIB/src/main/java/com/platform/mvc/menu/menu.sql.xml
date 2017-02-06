@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	菜单sql
+-->
+<sql-statement namespace="platform.menu">
+		
+	<!-- 分页select -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select 
+				a.*
+    	]]>
+	</sql>
+	
+	<!-- 分页from -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+			from (
+				select 
+					s.ids sids, s.names sname, s.orderids sorder, 
+		        	m.ids mids, m.names mname, m.orderids morder 
+		        		
+	        	from 
+	        		pt_operator o 
+	        		left join pt_module m on m.ids = o.moduleids 
+	        		left join pt_systems s on s.ids = m.systemsids 
+	        	
+	        	where 
+	        		1=1
+	        		
+					<% if(!isEmpty(oname)){ %>
+							and o.names like #'%$oname$%'#
+					<% } %>
+				
+					<% if(!isEmpty(ourl)){ %>
+							and o.url like #'%$ourl$%'#
+					<% } %>
+					
+					<% if(!isEmpty(sname)){ %>
+							and s.names like #'%$sname$%'#
+					<% } %>
+				
+					<% if(!isEmpty(mname)){ %>
+							and m.names like #'%$mname$%'#
+					<% } %>
+				
+	        	group by 
+	        		s.ids , s.names , s.orderids , 
+		        	m.ids , m.names , m.orderids  
+			) a
+			
+    	]]>
+	</sql>
+		
+	<!-- 根据模块和角色id查询 -->
+	<sql id="findByModuleAndRoleIds">
+		<![CDATA[ 
+        	select 
+        		o.ids, o.names, o.url,
+				( select m.ids from pt_menu m where m.ids = ? and m.operatorids = o.ids ) mids
+        		
+        	from 
+        		pt_operator o 
+        		
+        	where
+        		o.moduleids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询菜单 -->
+	<sql id="findByIds">
+		<![CDATA[ 
+        	select ids, ${names}, isparent, images from pt_menu where ids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询根菜单 -->
+	<sql id="root">
+		<![CDATA[ 
+        	select ids, ${names}, isparent, images from pt_menu where parentMenuIds is null and systemsIds = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询子菜单 -->
+	<sql id="child">
+		<![CDATA[ 
+        	select ids, ${names}, isparent, images from pt_menu where parentMenuIds = ? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 查询子菜单数量 -->
+	<sql id="childCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_menu where parentmenuids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询根菜单id -->
+	<sql id="rootId">
+		<![CDATA[ 
+        	select ids from pt_menu where parentmenuids is null and systemsIds = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询根菜单，包含对应功能 -->
+	<sql id="operator">
+		<![CDATA[ 
+        	select 
+        		m.${names}, o.url  
+        	from 
+        		pt_menu m 
+        		left join pt_operator o on m.operatorids=o.ids 
+        	where 
+        		parentmenuids = ? 
+        		and (
+	        		m.operatorids in (  
+	        			select 
+			        		ro.operatorids 
+			        		
+			        	from 
+			        		pt_roleoperator ro
+			        		left join pt_grouprole gr on gr.roleids = ro.roleids
+			        		left join pt_usergroup ug on ug.groupids = gr.groupids
+			        		
+			        	where 
+			        		ug.userids = ?
+	        		) 
+	        		
+	        		or
+	        		
+	        		m.operatorids in (
+	        			select 
+			        		so.operatorids 
+			        		
+			        	from 
+			        		pt_stationoperator so
+			        		left join pt_station s on s.ids = so.stationids
+			        		left join pt_user u on u.stationids = s.ids
+			        		
+			        	where 
+			        		u.ids = ?
+	        		)
+        		)
+        	order by 
+        		orderids asc
+    	]]>
+	</sql>
+	
+	<!-- 根据系统id清理模块数据 -->
+	<sql id="deleteBySystemsId">
+		<![CDATA[ 
+        	delete from pt_menu where systemsids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

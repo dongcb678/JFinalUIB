@@ -1,0 +1,94 @@
+============================================================
+1.数据库导出
+============================================================
+
+首先命令行进入数据库备份的存放目录，最好是空目录，导出的文件会很多
+
+db2move uibv4 export -u ADMINISTRATOR -p 678789
+
+根据自己时间情况修改数据库名、账户、密码
+
+============================================================
+2.数据库恢复
+============================================================
+
+首先命令行进入数据库备份的存放目录，然后执行下面的命令
+
+db2move uibv4 import -u ADMINISTRATOR -p 678789
+
+根据自己时间情况修改数据库名、账户、密码
+
+============================================================
+3.导出DDL
+============================================================
+
+db2look -d uibv4 -e -o DDL.sql -i ADMINISTRATOR -w 678789
+
+
+开发测试环境DB2版本信息
+
+============================================================
+4.DB2 SQL Error: SQLCODE=-668, SQLSTATE=57016, SQLERRMC=7;
+============================================================
+	reorg   table   <tablename>   通过重构行来消除“碎片”数据并压缩信息，对表进行重组。
+	runstats   on   table   <tbschema>.<tbname>   收集表   <tbname>   的统计信息。
+	reorgchk   on   table   all   确定是否需要对表进行重组，对于对所有表自动执行   runstats   很有用。
+	reorg   和runstats   都是单个表优化，初始化的命令：
+  
+reorg table administrator.pt_department;
+reorg table administrator.pt_dict;
+reorg table administrator.pt_group;
+reorg table administrator.pt_grouprole;
+reorg table administrator.pt_log4j;
+reorg table administrator.pt_menu;
+reorg table administrator.pt_module;
+reorg table administrator.pt_operator;
+reorg table administrator.pt_param;
+reorg table administrator.pt_resources;
+reorg table administrator.pt_role;
+reorg table administrator.pt_roleoperator;
+reorg table administrator.pt_station;
+reorg table administrator.pt_stationoperator;
+reorg table administrator.pt_syslog;
+reorg table administrator.pt_systems;
+reorg table administrator.pt_upload;
+reorg table administrator.pt_user;
+reorg table administrator.pt_usergroup;
+reorg table administrator.pt_userinfo;
+reorg table administrator.test_blog;
+
+runstats on table administrator.pt_department;
+runstats on table administrator.pt_dict;
+runstats on table administrator.pt_group;
+runstats on table administrator.pt_grouprole;
+runstats on table administrator.pt_log4j;
+runstats on table administrator.pt_menu;
+runstats on table administrator.pt_module;
+runstats on table administrator.pt_operator;
+runstats on table administrator.pt_param;
+runstats on table administrator.pt_resources;
+runstats on table administrator.pt_role;
+runstats on table administrator.pt_roleoperator;
+runstats on table administrator.pt_station;
+runstats on table administrator.pt_stationoperator;
+runstats on table administrator.pt_syslog;
+runstats on table administrator.pt_systems;
+runstats on table administrator.pt_upload;
+runstats on table administrator.pt_user;
+runstats on table administrator.pt_usergroup;
+runstats on table administrator.pt_userinfo;
+runstats on table administrator.test_blog;
+
+============================================================
+5.关于 DB2 管理工具环境
+============================================================
+DB2 管理工具级别:
+产品标识                        SQL09070
+级别标识                        08010107
+级别                          DB2 v9.7.0.441
+构件级别                        s090521
+PTF                         NT3297
+============================================================
+Java development kit（JDK）:
+级别                          IBM Corporation 1.6.0
+============================================================

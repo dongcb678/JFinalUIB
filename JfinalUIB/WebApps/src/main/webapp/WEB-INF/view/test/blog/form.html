@@ -1,0 +1,19 @@
+
+<div class="control-group">
+	<label class="control-label">标题</label>
+	<div class="controls">
+		<input type="text" name="blog.title" value="${escapeHtml(blog.title!)}" 
+			class="span8" maxlength="50" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="1-50位字母数字">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">内容</label>
+	<div class="controls">
+		<input type="text" name="blog.content" value="${escapeHtml(blog.content!)}" 
+			class="span8" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="1-50位任意字符 ">
+		<span class="help-inline"></span>
+	</div>
+</div>
+	

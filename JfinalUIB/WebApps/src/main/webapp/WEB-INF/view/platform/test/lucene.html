@@ -1,0 +1,90 @@
+		
+<form id="splitPageLucene" action="${cxt!}/platform/test/lucene" method="POST" role="form" class="form-horizontal">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">lucene查询分页测试：测试关键字（早餐、歌手、刘德华等等）</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">			
+					<div class="control-group">
+						<label class="control-label">关键字</label>
+						<div class="col-sm-9">
+					  		<input class="form-control focused" type="text" name="_query.searchKeyWords" value='${escapeHtml(splitPage.queryParam["searchKeyWords"])}' maxlength="20" >
+						</div>
+				  	</div>
+					
+					<div class="control-group">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormDiv("lucene", "splitPageLucene");'>${i18nMap["admin.common.select"]}</button>
+							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
+						</div>
+				  	</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">查询列表</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">
+					
+					<table class="table table-bordered table-hover" id="dataTable">
+						<thead>
+							<tr>
+								<th class="hidden-xs">ids</th>
+								<th class="hidden-xs">question</th>
+								<th class="hidden-xs">questionkey</th>
+								<th class="hidden-xs">answer</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(keyword in splitPage.list!){ %>
+								<tr>
+									<td class="hidden-xs">${escapeHtml(keyword.ids!)}</td>
+									<td class="hidden-xs">${keyword.question!}</td>
+									<td class="hidden-xs">${keyword["questionkey"]!}</td>
+									<td class="hidden-xs">${keyword["answer"]!}</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDivLucene">
+						<% include("/platform/common/splitPage.html", {"divId" : "lucene", "formId" : "splitPageLucene", "splitPageDiv" : "splitPageDivLucene"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

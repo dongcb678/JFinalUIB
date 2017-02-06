@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	功能sql
+-->
+<sql-statement namespace="platform.operator">
+	
+	<!-- 查询所有功能 -->
+	<sql id="paging">
+		<![CDATA[ 
+        	<% if(db_type == "mysql" || db_type == "postgresql"){ %>
+        	
+        		select * from pt_operator order by ids asc limit ? offset ? 
+        	
+        	<% } else if(db_type == "oracle"){ %>
+        	
+        		select * from ( select a.*, rownum rn from (select * from pt_operator) a where rownum <= ? ) where rn >= ?
+        		
+        	<% } else if(db_type == "sqlserver"){ %>
+        		
+        		select top {0, number, #.#} * from pt_operator where ids not in ( select top {1, number, #.#} ids from pt_operator )
+        		
+        	<% } else if(db_type == "db2"){ %>
+        		
+        		select * from ( select b.*, rownumber() over() as rn from ( select * from pt_operator ) as b ) as a where a.rn < ? and a.rn >= ?
+        		
+        	<% } %>
+    	]]>
+	</sql>
+	
+	<!-- 获取模块根节点 -->
+	<sql id="rootModule">
+		<![CDATA[ 
+        	select 
+        		pm.ids as ids, 
+        		(select ps.names from pt_systems ps where ps.ids = pm.systemsIds) as names, 
+        		pm.isParent, pm.images 
+        		
+        	from 
+        		pt_module pm 
+        		
+        	where 
+        		pm.parentModuleIds is null 
+        		
+        	order by 
+        		pm.orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 获取模块子节点 -->
+	<sql id="childModule">
+		<![CDATA[ 
+        	select ids, names, isParent , images from pt_module where parentModuleIds = ? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 获取模块下面的功能 -->
+	<sql id="byModuleIds">
+		<![CDATA[ 
+        	select ids, names from pt_operator where privilegess = '1' and moduleIds = ? order by url asc
+    	]]>
+	</sql>
+	
+	<!-- 根据url查询功能 -->
+	<sql id="url">
+		<![CDATA[ 
+        	select * from pt_operator where url = ?
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+			select 
+				o.ids, o.names, o.url, o.rowFilter, o.splitPage, o.formToken, o.privilegess, o.csrf, o.referer, o.method, o.enctype, o.syslog,
+				m.names as modulenames, 
+				s.names as systemsnames
+    	]]>
+	</sql>
+	
+	<!-- 
+		动态SQL处理 
+		不区分大小写：and upper(o.url) like upper(#'%$url$%'#)
+	-->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pt_operator o
+        		left join pt_module m on o.moduleids = m.ids
+        		left join pt_systems s on s.ids = m.systemsids
+        	
+        	where 1=1
+			
+			<% if(!isEmpty(sids)){ %>
+					and s.ids = #'$sids$'#
+			<% } %>
+			
+			<% if(!isEmpty(sname)){ %>
+					and s.names like #'%$sname$%'#
+			<% } %>
+			
+			<% if(!isEmpty(mids)){ %>
+					and m.ids = #'$mids$'#
+			<% } %>
+			
+			<% if(!isEmpty(mname)){ %>
+					and m.names like #'%$mname$%'#
+			<% } %>
+			
+			<% if(!isEmpty(names)){ %>
+					and o.names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(url)){ %>
+					and o.url like #'%$url$%'#
+			<% } %>
+			
+			<% if(!isEmpty(splitPage)){ %>
+					and o.splitPage = #'$splitPage$'#
+			<% } %>
+			
+			<% if(!isEmpty(formToken)){ %>
+					and o.formToken = #'$formToken$'#
+			<% } %>
+			
+			<% if(!isEmpty(privilegess)){ %>
+					and o.privilegess = #'$privilegess$'#
+			<% } %>
+			
+			<% if(!isEmpty(csrf)){ %>
+					and o.csrf = #'$csrf$'#
+			<% } %>
+			
+			<% if(!isEmpty(referer)){ %>
+					and o.referer = #'$referer$'#
+			<% } %>
+			
+			<% if(!isEmpty(method)){ %>
+					and o.method = #'$method$'#
+			<% } %>
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="getRoleoperatorByOperatorids">
+		<![CDATA[ 
+        	select * from pt_roleoperator where operatorids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

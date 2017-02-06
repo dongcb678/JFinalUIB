@@ -1,0 +1,56 @@
+<script type="text/javascript">
+	
+	function addChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("checkedRole").add(option);
+		
+		var url = "/platform/groupRole/addRole";
+		var data = { "ids" : "${escapeHtml(ids!)}", "roleIds" : option.value, "csrfToken" : "${csrfToken!}" };
+		var result = common_ajax.ajaxFunc(url, data);
+	}
+	
+	function delChecked(sNode){
+		var index = sNode.selectedIndex;
+		var option = sNode.options[index];
+		option.selected = false;
+		document.getElementById("allRole").add(option);
+		
+		var url = "/platform/groupRole/delRole";
+		var data = { "ids" : option.value, "csrfToken" : "${csrfToken!}" };
+		var result = common_ajax.ajaxFunc(url, data);
+	}
+	
+</script>
+
+<div class="span3">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<i class="icon-user"></i> ${i18nMap["admin.role.select.noChecked"]}
+		</h4>
+	</div>
+	<div class="panel-body">
+		<select id="allRole" multiple size="18" ondblclick="addChecked(this);" style="height: 300px;">
+			<% for(role in noCheckedList){ %>
+				<option value='${escapeHtml(role.ids!)}'>${escapeHtml(role.names!)}</option>
+			<% } %>
+	  	</select>
+	</div>
+</div>
+
+<div class="span3">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<i class="icon-user"></i> ${i18nMap["admin.role.select.checked"]}
+		</h4>
+	</div>
+	<div class="panel-body">
+		<select id="checkedRole" multiple size="18" ondblclick="delChecked(this);" style="height: 300px;">
+			<% for(groupRole in checkedList){ %>
+				<option value='${escapeHtml(groupRole.ids!)}'>${escapeHtml(groupRole.rname!)}</option>
+			<% } %>
+	  	</select>
+	</div>
+</div>
+	

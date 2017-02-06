@@ -1,0 +1,69 @@
+<script type="text/javascript">
+	
+	function passChange(form){
+		//var oldPass = $("#oldPass").val();
+		
+		var newPass1 = $("#newPass1").val();
+		var newPass2 = $("#newPass2").val();
+		if(newPass1 != newPass2){
+			common_modals.alert("两次输入密码不一致，请从新输入！");
+	 		return false;
+		}
+		
+		var errorCount = platform_verify.formVali(document.getElementById("passChangeForm"));
+		if(errorCount != 0){
+			common_modals.alert("有" + errorCount + "处错误，请修正！");
+	 		return false;
+		}
+		
+		common_ajax.ajaxForm("passChangeForm");
+	}
+	
+</script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>${i18nMap["admin.user.passChange"]}</h3>
+</div>
+
+<div class="modal-body">
+	<form id="passChangeForm" action="${cxt!}/platform/user/passChange" method="POST" role="form" class="form-horizontal">
+		<input type="hidden" name="csrfToken" value="${csrfToken!}">
+		<input type="hidden" name="userName" value="${cookieMap.userName.value!}">
+
+		<div class="control-group">
+			<label class="control-label">${i18nMap["admin.user.passChange.oldPass"]}</label>
+			<div class="controls">
+				<input type="password" id="oldPass" name="passOld" class="span8" autocomplete="off" 
+					maxlength="18" vMin='6' vType="letterNumber" onblur="platform_verify.onblurVali(this);">
+			</div>
+			<span class="help-inline">6-18位字母数字</span>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
+			<div class="controls">
+				<input type="password" id="newPass1" name="passNew" class="span8" autocomplete="off" 
+					maxlength="18" vMin='6' vType="letterNumber" onblur="platform_verify.onblurVali(this);">
+			</div>
+			<span class="help-inline">6-18位字母数字</span>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">${i18nMap["admin.user.passChange.newPass"]}</label>
+			<div class="controls">
+				<input type="password" id="newPass2" class="span8" 
+					maxlength="18" vMin='6' vType="letterNumber" onblur="platform_verify.onblurVali(this);">
+				<span class="help-inline"></span>
+			</div>
+			<span class="help-inline">6-18位字母数字</span>
+		</div>
+		
+	</form>
+</div>
+
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">${i18nMap["admin.common.close"]}</button>
+	<button type="button" data-dismiss="modal" class="btn btn-primary" onclick="passChange();">${i18nMap["admin.common.determine"]}</button>
+</div>	
+	

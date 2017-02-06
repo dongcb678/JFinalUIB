@@ -1,0 +1,170 @@
+
+<!-- BEGIN PAGE CONTAINER-->
+<div class="container-fluid">
+
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+			<ul class="breadcrumb">
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="#">用户权限</a> <span class="divider">/</span></li>
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/operator/backOff');">${i18nMap["admin.operator.common.name"]}</a> <span class="divider">/</span></li>
+				<li class="active">${i18nMap["admin.operator.view"]}</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
+	</div>
+	<!-- END PAGE HEADER-->
+
+	<!-- BEGIN PAGE CONTENT-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN VALIDATION STATES-->
+			<div class="widget red">
+				<div class="widget-title">
+					<h4>
+						<i class=" icon-key"></i> ${i18nMap["admin.operator.view"]}
+					</h4>
+				</div>
+				<div class="widget-body form">
+					
+					<form role="form" class="form-horizontal">
+	
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.mname"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(operator.modulenames!)}">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.name"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(operator.names!)}">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.privilegess"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.privilegess == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.csrf"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.csrf == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.referer"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.referer == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.method"]}</label>
+							<div class="controls">
+								<% if(operator["method"] == "0"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.method.0"]}'>
+										
+								<% }else if(operator["method"] == "1"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.method.1"]}'>
+										
+								<% }else if(operator["method"] == "2"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.method.2"]}'>
+										
+								<% }else{ %>
+										
+								<% } %>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.enctype"]}</label>
+							<div class="controls">
+								<% if(operator["enctype"] == "0"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.enctype.0"]}'>
+										
+								<% }else if(operator["enctype"] == "1"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.enctype.1"]}'>
+										
+								<% }else if(operator["enctype"] == "2"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.enctype.2"]}'>
+										
+								<% }else if(operator["enctype"] == "3"){ %>
+									<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.operator.property.enctype.3"]}'>
+										
+								<% }else{ %>
+										
+								<% } %>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.syslog"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.syslog == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${escapeHtml(operator.url!)}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.splitPage"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.splitpage == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.rowFilter"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.rowfilter == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.formToken"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.formtoken == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.ip"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${operator.ipblack == "1" ? "是":"否"}'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.returnUrl"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(operator.returnurl!)}">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(operator.returnparamkeys!)}">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(operator.returnparamkeys!)}">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.operator.property.description"]}</label>
+							<div class="controls">
+								${unEscapeHtml(operator.description!)}
+							</div>
+						</div>
+					</form>
+			
+				</div>
+			</div>
+			<!-- END VALIDATION STATES-->
+		</div>
+	</div>
+
+	<!-- END PAGE CONTAINER-->
+</div>

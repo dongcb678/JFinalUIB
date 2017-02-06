@@ -1,0 +1,122 @@
+
+<!-- BEGIN PAGE CONTAINER-->
+<div class="container-fluid">
+
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+			<ul class="breadcrumb">
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="#">用户权限</a> <span class="divider">/</span></li>
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/user/backOff');">用户管理</a> <span class="divider">/</span></li>
+				<li class="active">${i18nMap["admin.user.view"]}</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
+	</div>
+	<!-- END PAGE HEADER-->
+
+	<!-- BEGIN PAGE CONTENT-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN VALIDATION STATES-->
+			<div class="widget red">
+				<div class="widget-title">
+					<h4>
+						<i class=" icon-key"></i> ${i18nMap["admin.user.view"]}
+					</h4>
+				</div>
+				<div class="widget-body form">	
+			
+					<form role="form" class="form-horizontal">
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.department"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(dept.names!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.station"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(station.names!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.idcard"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(user.idcard!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.nickname"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(user.names!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.userName"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(user.username!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">头像</label>
+							<div class="controls">
+								<% if(!isEmpty(upload)){%>
+									<img alt="头像" src="${cxt!}/files/upload/${upload.filename!}" width="200" height="200">
+								<% } %>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.email"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(user.email!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(user.mobile!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.telephone"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(userInfo.telephone!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.qq"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(userInfo.qq!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.user.property.birthday"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${userInfo.birthday!, dateFormat="yyyy-MM-dd"}'>
+							</div>
+						</div>
+						
+					</form>
+			
+				</div>
+			</div>
+			<!-- END VALIDATION STATES-->
+		</div>
+	</div>
+
+	<!-- END PAGE CONTAINER-->
+</div>

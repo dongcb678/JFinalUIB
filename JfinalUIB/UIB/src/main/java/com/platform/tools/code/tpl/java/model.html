@@ -1,0 +1,60 @@
+package ${package};
+
+import com.platform.annotation.Table;
+import com.platform.constant.ConstantInit;
+import com.platform.mvc.base.BaseModel;
+
+<% for(dataType in dataTypes){ %>
+import ${dataType}; 
+<% } %>
+
+import com.jfinal.log.Log;
+
+/**
+ * ${colunmList[0].table_desc} model
+ * @author 董华健  dongcb678@163.com
+ */
+@SuppressWarnings("unused")
+@Table(${isEmpty(dataSource) ? "" : "dataSourceName = " + dataSource + ", "}tableName = ${className}.table_name${isEmpty(pkName) ? "" : ", pkName = \"" + pkName + "\""})
+public class ${className} extends BaseModel<${className}> {
+
+	private static final long serialVersionUID = 6761767368352810428L;
+
+	private static final Log log = Log.getLog(${className}.class);
+	
+	public static final ${className} dao = new ${className}().dao();
+
+	/**
+	 * 表名称
+	 */
+	public static final String table_name = "${tableName}";
+	
+	<% for(colunm in colunmList){ %>
+	/**
+	 * 字段描述：${colunm.column_desc} 
+	 * 字段类型：${colunm.column_type}  ${isEmpty(colunm.column_length) ? "" : "长度：" + colunm.column_length}
+	 */
+	public static final String column_${colunm.column_name} = "${colunm.column_name}";
+	
+	<% } %>
+	
+	/**
+	 * sqlId : ${namespace}.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPageFrom = "${namespace}.splitPageFrom";
+
+	<% for(colunm in colunmList){ %>
+	private ${colunm.column_className} ${colunm.column_name};
+	<% } %>
+	
+	<% for(colunm in colunmList){ %>
+	public void set${colunm.column_name_upperCaseFirstOne}(${colunm.column_className} ${colunm.column_name}){
+		set(column_${colunm.column_name}, ${colunm.column_name});
+	}
+	public ${colunm.column_className} get${colunm.column_name_upperCaseFirstOne}() {
+		return get(column_${colunm.column_name});
+	}
+	<% } %>
+	
+}

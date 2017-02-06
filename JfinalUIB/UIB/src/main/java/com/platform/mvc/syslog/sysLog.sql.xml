@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	日志sql
+-->
+<sql-statement namespace="platform.sysLog">
+	
+	<!-- 查询日志明细 -->
+	<sql id="view">
+		<![CDATA[ 
+        	select 
+        		s.*, o.names onames, o.url ourl, u.username 
+        	from 
+        		pt_syslog s
+        		left join pt_user u on s.userids = u.ids
+        		left join pt_operator o on s.operatorids = o.ids
+        	where 
+        		s.ids = ?
+    	]]>
+	</sql>
+		
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+			select 
+				sy.names synames, 
+				m.names mnames, 
+				o.names onames, o.url ourl, 
+				u.username, 
+				s.* 
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 
+			to_char(a.video_date, 'YYYY-MM-DD')
+			to_char(collect_time, 'YYYY-MM-DD HH24:MI:SS')
+			to_date(#'$startdate_start$'#, 'YYYY-mm-dd')
+			to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:ss') 
+	-->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pt_syslog s 
+	        	left join pt_user u on s.userids = u.ids 
+	        	left join pt_operator o on s.operatorids = o.ids 
+	        	left join pt_module m on o.moduleids = m.ids 
+	        	left join pt_systems sy on m.systemsids = sy.ids 
+        	where 1=1 
+			
+			<% if(!isEmpty(url)){ %>
+					and o.url like #'%$url$%'#
+			<% } %>
+			
+			<% if(!isEmpty(names)){ %>
+					and o.names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(username)){ %>
+					and u.username like #'%$username$%'#
+			<% } %>
+			
+			<% if(!isEmpty(ips)){ %>
+					and s.ips like #'%$ips$%'#
+			<% } %>
+			
+			<% if(!isEmpty(status)){ %>
+					and s.status = #'$status$'#
+			<% } %>
+			
+			<% if(!isEmpty(startdate_start)){ %>
+				<% if(db_type == "mysql"){ %>
+						and s.startdate >= str_to_date(#'$startdate_start$'#, '%Y-%m-%d %H:%i:%s')
+						
+				<% } else if(db_type == "postgresql"){ %>
+						and s.startdate >= to_timestamp(#'$startdate_start$'#, 'YYYY-MM-DD HH24:MI:SS')
+						
+				<% } else if(db_type == "oracle"){ %>
+						and s.startdate >= to_timestamp(#'$startdate_start$'#, 'yyyy-mm-dd hh24:mi:ss')
+						
+				<% } else if(db_type == "sqlserver"){ %>
+						and s.startdate >= CONVERT(datetime, #'$startdate_start$'#, 120)
+						
+				<% } else if(db_type == "db2"){ %>
+						and s.startdate >= to_date(#'$startdate_start$'#, 'yyyy-mm-dd hh24:mi:ss') 
+				<% }%>
+			<% } %>
+			
+			<% if(!isEmpty(startdate_end)){ %>
+				<% if(db_type == "mysql"){ %>
+						and s.startdate <= str_to_date(#'$startdate_end$'#, '%Y-%m-%d %H:%i:%s')
+						
+				<% } else if(db_type == "postgresql"){ %>
+						and s.startdate <= to_timestamp(#'$startdate_end$'#, 'YYYY-MM-DD HH24:MI:SS')
+						
+				<% } else if(db_type == "oracle"){ %>
+						and s.startdate <= to_timestamp(#'$startdate_end$'#, 'yyyy-mm-dd hh24:mi:ss')
+						
+				<% } else if(db_type == "sqlserver"){ %>
+						and s.startdate <= CONVERT(datetime, #'$startdate_end$'#, 120)
+						
+				<% } else if(db_type == "db2"){ %>
+						and s.startdate <= to_date(#'$startdate_end$'#, 'yyyy-mm-dd hh24:mi:ss') 
+				<% }%>
+			<% } %>
+    	]]>
+	</sql>
+	
+	<!-- 清理日志 -->
+	<sql id="clear">
+		<![CDATA[ 
+        	delete from pt_syslog where startdate < ?
+    	]]>
+	</sql>
+	
+	<!-- 根据系统id清理模块数据 
+				delete 
+					s.* 
+				from 
+					pt_syslog s 
+					left join pt_operator o on s.operatorids = o.ids 
+		        	left join pt_module m on o.moduleids = m.ids 
+		        	left join pt_systems sy on m.systemsids = sy.ids 
+        		where 
+        			systemsids = ?
+	-->
+	<sql id="deleteBySystemsId">
+		<![CDATA[ 
+        	delete from pt_syslog where operatorids in (
+        		select 
+        			o.ids 
+        		from 
+        			pt_operator o 
+		        	left join pt_module m on o.moduleids = m.ids 
+		        	left join pt_systems sy on m.systemsids = sy.ids 
+        		where 
+        			systemsids = ?
+        	)
+    	]]>
+	</sql>
+	
+</sql-statement>

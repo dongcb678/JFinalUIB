@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	文件上传sql
+-->
+<sql-statement namespace="platform.upload">
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pt_upload 
+        	where 
+        		1=1 
+			
+			<% if(!isEmpty(filename)){ %>
+					and filename like #'%$filename$%'#
+			<% } %>
+			
+			<% if(!isEmpty(contenttype)){ %>
+					and contenttype like #'%$contenttype$%'#
+			<% } %>
+			
+			<% if(!isEmpty(originalfilename)){ %>
+					and originalfilename like #'%$originalfilename$%'#
+			<% } %>
+			
+			<% if(!isEmpty(path)){ %>
+					and path = #$path$#
+			<% } %>
+    	]]>
+	</sql>
+	
+	<!-- 根据MD5值查询 -->
+	<sql id="md5">
+		<![CDATA[ 
+        	select 
+        		count(ids)
+        	from 
+        		pt_upload 
+        	where 
+        		md5 = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

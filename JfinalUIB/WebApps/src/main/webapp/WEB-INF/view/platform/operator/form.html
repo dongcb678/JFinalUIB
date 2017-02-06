@@ -1,0 +1,196 @@
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.mname"]}</label>
+	<div class="controls">
+		<input type="hidden" id="moduleId" name="operator.moduleids" value="${escapeHtml(operator.moduleids!)}"/>
+		<input type="text" id="moduleName" name="operator.modulenames" value="${escapeHtml(operator.modulenames!)}" 
+			class="form-control focused" readonly="readonly" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		
+		<span class="help-inline"> 
+			<a href="javascript:void(0)" class="btn btn-primary" 
+				onclick="common_modals.moduleRadioDiaLog('moduleId', 'moduleName', '${escapeHtml(operator.moduleids!)}')">${i18nMap["admin.common.choice"]}</a>
+		</span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.name"]}</label>
+	<div class="controls">
+		<input type="text" name="operator.names" value="${escapeHtml(operator.names!)}" 
+			class="span8" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="2-25位任意字符">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.privilegess"]}</label>
+	<div class="controls">
+		<select name="operator.privilegess" class="combox">
+			<option value="1" ${operator.privilegess! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			<option value="0" ${operator.privilegess! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.csrf"]}</label>
+	<div class="controls">
+		<select name="operator.csrf" class="combox">
+			<option value="1" ${operator.csrf! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			<option value="0" ${operator.csrf! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.referer"]}</label>
+	<div class="controls">
+		<select name="operator.referer" class="combox">
+			<option value="1" ${operator.referer! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			<option value="0" ${operator.referer! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.method"]}</label>
+	<div class="controls">
+		<select name="operator.method" class="combox">
+			<option value="2" ${operator.method! == "2" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.method.2"]}</option>
+			<option value="0" ${operator.method! == "0" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.method.0"]}</option>
+			<option value="1" ${operator.method! == "1" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.method.1"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.enctype"]}</label>
+	<div class="controls">
+		<select name="operator.enctype" class="combox">
+			<option value="0" ${operator.enctype! == "0" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.enctype.0"]}</option>
+			<option value="1" ${operator.enctype! == "1" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.enctype.1"]}</option>
+			<option value="2" ${operator.enctype! == "2" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.enctype.2"]}</option>
+			<option value="2" ${operator.enctype! == "3" ? "selected='selected'":"" }>${i18nMap["admin.operator.property.enctype.3"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.syslog"]}</label>
+	<div class="controls">
+		<select name="operator.syslog" class="combox">
+			<option value="1" ${operator.syslog! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+			<option value="0" ${operator.syslog! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
+	<div class="controls">
+		<input type="text" name="operator.url" value="${escapeHtml(operator.url!)}" 
+			class="span8" maxlength="200" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="1-200位字符">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.splitPage"]}</label>
+	<div class="controls">
+		<select name="operator.splitpage" class="combox">
+			<option value="0" ${operator.splitpage! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+			<option value="1" ${operator.splitpage! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.rowFilter"]}</label>
+	<div class="controls">
+		<select name="operator.rowfilter" class="combox">
+			<option value="0" ${operator.rowfilter! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+			<option value="1" ${operator.rowfilter! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.formToken"]}</label>
+	<div class="controls">
+		<select name="operator.formtoken" class="combox">
+			<option value="0" ${operator.formtoken! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+			<option value="1" ${operator.formtoken! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.ip"]}</label>
+	<div class="controls">
+		<select name="operator.ipblack" class="combox">
+			<option value="0" ${operator.ipblack! == "0" ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+			<option value="1" ${operator.ipblack! == "1" ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.returnUrl"]}</label>
+	<div class="controls">
+		<input type="text" name="operator.returnurl" value="${escapeHtml(operator.returnurl!)}" 
+			class="span8" maxlength="200" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="0-200位长度">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.returnParam"]}</label>
+	<div class="controls">
+		<input type="text" name="operator.returnparamkeys" value="${escapeHtml(operator.returnparamkeys!)}" 
+			class="span8" maxlength="100" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="0-100位长度">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.operator.property.description"]}</label>
+	<div class="controls">
+		<script id="editor_${request_id!}" type="text/plain" style="width:100%;height:300px;"></script>
+		<input type="hidden" id="descriptionId_${request_id!}" name="operator.description">
+	</div>
+</div>
+
+<div id="hiddenDescriptionId_${request_id!}" style="display: none;">${unEscapeHtml(operator.description!)}</div>
+
+<script type="text/javascript">
+	
+	jQuery(document).ready(function() {
+		//UE.delEditor('editor_${request_id!}');
+		//UE.getEditor('editor_${request_id!}').destroy();
+		UE.getEditor('editor_${request_id!}').ready(function() {
+			var hiddenContent = $("#hiddenDescriptionId_${request_id!}").html();
+			if(hiddenContent != ''){
+				this.setContent(hiddenContent);
+			}
+		})
+	});
+
+	function submitFunc(){
+		var ue = UE.getEditor('editor_${request_id!}');
+		var content = ue.getContent();
+		$("#descriptionId_${request_id!}").val(content);
+		
+		common_ajax.ajaxFormMainPanel('editForm');
+	}
+	
+</script>

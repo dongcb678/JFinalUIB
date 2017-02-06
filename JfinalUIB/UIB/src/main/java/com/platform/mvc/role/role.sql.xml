@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	角色sql
+-->
+<sql-statement namespace="platform.role">
+	
+	<!-- -->
+	<sql id="noCheckedFilter">
+		<![CDATA[ 
+        	select ids, names from pt_role where ids not in ( ${fitler} ) order by names asc
+    	]]>
+	</sql>
+	
+	<!--   -->
+	<sql id="checkedFilter">
+		<![CDATA[ 
+        	select ids, names from pt_role where ids in ( ${fitler} ) order by names asc
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="noChecked">
+		<![CDATA[ 
+        	select ids, names from pt_role order by names asc
+    	]]>
+	</sql>
+	
+	<!-- 动态SQL处理 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pt_role 
+        	where 
+        		1=1
+			
+			<% if(!isEmpty(names)){ %>
+					and names like #'%$names$%'#
+			<% } %>
+			
+			<% if(!isEmpty(numbers)){ %>
+					and numbers like #'%$numbers$%'#
+			<% } %>
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="getGrouproleByRoleids">
+		<![CDATA[ 
+        	select * from pt_grouprole where roleids = ?
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="getRoleoperatorByRoleids">
+		<![CDATA[ 
+        	select * from pt_roleoperator where roleids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>参数树</title>
+	<link rel="stylesheet" href="${cxt!}/jsfile/treetable/demo/style/demo.css" type="text/css">
+	
+	<script type="text/javascript">
+		var cxt = "${cxt!}";
+		var localePram = "${localePram!}"; // 用户选择的语言环境，或者默认展示的语言环境
+	</script>
+	
+	<script type="text/javascript" src="${cxt!}/jsfile/treetable/script/jquery.js"></script>
+    <script type="text/javascript" src="${cxt!}/jsfile/treetable/script/treeTable/jquery.treeTable.js"></script>
+	<script type="text/javascript" src="${cxt!}/jsfile/metrolab/common/ajax.js"></script>
+	
+	<style type="text/css">
+		table,td,th {  border: 1px solid #8DB9DB; padding:5px; border-collapse: collapse; font-size:14px; }
+	</style>
+	
+	<script type="text/javascript">
+		
+		$(function(){
+	        var option = {
+	            theme:'vsStyle',
+	            expandLevel : 1,
+	            beforeExpand : function($treeTable, id) {
+	                //判断id是否已经有了孩子节点，如果有了就不再加载，这样就可以起到缓存的作用
+	                if ($('.' + id, $treeTable).length) { 
+	                	return; 
+	                }
+	                
+	                //这里的html可以是ajax请求
+	                var url = "/platform/param/treeTable";
+					var data = { ids: id };
+					var reData = common_ajax.ajaxFunc(url, data);
+					if(reData.indexOf("tr") != -1){
+                		$treeTable.addChilds(reData);
+                	}
+	            },
+	            onSelect : function($treeTable, id) {
+	                window.console && console.log('onSelect:' + id);
+	            }
+	        };
+	        
+	        option.theme = 'default';
+	        $('#treeTable').treeTable(option);
+	    });	
+
+		function view(ids){
+			var has = ${authUrl("/platform/param/view")};
+			if(has){
+				parent.window.common_ajax.ajaxMainPanel('/platform/param/view/' + ids);
+			}else{
+				parent.window.simpleDialog('操作提示', '没有操作权限！');
+			}
+		}
+	
+		function update(ids){
+			var has = ${authUrl("/platform/param/edit")};
+			if(has){
+				parent.window.common_ajax.ajaxMainPanel('/platform/param/edit/' + ids);
+			}else{
+				parent.window.simpleDialog('操作提示', '没有操作权限！');
+			}
+		}
+	
+		function deleteFunc(ids){
+			var has = ${authUrl("/platform/param/delete")};
+			if(has){
+				var d = dialog({
+				    title: '操作提示',
+				    content: "确定要这样操作吗？",
+				    okValue: '确定',
+				    ok: function () {
+				        //this.title('提交中…');
+				        parent.window.common_ajax.ajaxMainPanel('/platform/param/delete/' + ids + "?csrfToken=${csrfToken!}");
+				        return true;
+				    },
+				    cancelValue: '取消',
+				    cancel: function () {
+				    	return true ; //false
+				    }
+				});
+				d.show();
+			}else{
+				parent.window.simpleDialog('操作提示', '没有操作权限！');
+			}
+		}
+		
+	</script>
+</head>
+<body>
+
+	<div id="page">
+	    <table id="treeTable" style="width:100%">
+            <tr>
+                <td style="width:200px;"><span controller="true">${i18nMap["admin.param.treeTable.hierarchy"]}</span></td>
+                <td>${i18nMap["admin.param.property.name"]}</td>
+           		<td>${i18nMap["admin.param.property.status"]}</td>
+           		<td>${i18nMap["admin.common.operation"]}</td>
+			</tr>
+	        <% for(param in list){ %>
+	        	<tr id="${param.ids!}" pId="${param.parentids!}" hasChild='${param.levels! != 4 ? "true" : "false"}'>
+					<td>
+						<img alt="" src="${cxt!}/jsfile/ztree/css/zTreeStyle/img/diy/1_close.png">
+						<span controller='true'>${param.levels }${i18nMap["admin.param.common.level"]}</span>
+					</td>
+					<td>${param.names }</td>
+					<td>${param.status == "1" ? i18nMap["admin.param.property.status.start"] : i18nMap["admin.param.property.status.stop"]}</td>
+					<td>
+						<!-- 
+						<a href='#' onclick='view("${param.ids!}")'>${i18nMap["admin.common.see"]}</a>&nbsp;&nbsp;
+						<a href='#' onclick='update("${param.ids!}")'>${i18nMap["admin.common.edit"]}</a>&nbsp;&nbsp;
+						<a href='#' onclick='deleteFunc("${param.ids!}")'>${i18nMap["admin.common.delete"]}</a>&nbsp;&nbsp;
+						-->
+					</td>
+				</tr>
+	        <% } %>
+	    </table>
+	</div>
+		
+</body>
+</html>	
+	

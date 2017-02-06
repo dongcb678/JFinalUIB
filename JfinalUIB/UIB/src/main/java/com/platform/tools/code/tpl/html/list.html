@@ -1,0 +1,151 @@
+
+<form id="splitPage" action="${cxt!}/${basePath}/${classNameSmall}" method="POST" class="form-horizontal">
+
+	<!-- BEGIN PAGE CONTAINER-->
+	<div class="container-fluid">
+
+		<!-- BEGIN PAGE HEADER-->
+		<div class="row-fluid">
+			<div class="span12">
+				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+				<ul class="breadcrumb">
+					<li>
+						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
+						<span class="divider">/</span>
+					</li>
+					<li><a href="#">xxx</a> <span class="divider">/</span></li>
+					<li class="active">xxx管理</li>
+				</ul>
+				<!-- END PAGE TITLE & BREADCRUMB-->
+			</div>
+		</div>
+		<!-- END PAGE HEADER-->
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget yellow">
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> 查询
+						</h4>
+						<span class="tools"> 
+							<a class="icon-chevron-down" href="javascript:;"></a>
+						</span>
+					</div>
+					<div class="widget-body form switch-form">
+						xxx
+						<input class="medium" type="text" name="_query.xxx" value='${escapeHtml(paramMap["_query.xxx"])}' maxlength="50">
+
+						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- BEGIN ADVANCED TABLE widget-->
+		<div class="row-fluid">
+			<div class="span12">
+
+				<!-- BEGIN EXAMPLE TABLE widget-->
+				<div class="widget red">
+
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> 列表
+						</h4>
+					</div>
+
+					<div class="widget-body">
+						<span class="tools"> 
+							
+							<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanel('/${basePath}/${classNameSmall}/toUrl?toUrl=/${basePath}/${classNameSmall}/add.html');">
+								<i class="icon-plus icon-white"></i>
+								添加
+							</button> 
+							
+							
+							
+							<button type="button" class="btn btn-small btn-danger" data-table="dataTable" data-url="/${basePath}/${classNameSmall}/delete" onclick="common_modals.deleteList(this)">
+								<i class="icon-remove icon-white"></i>
+								删除
+							</button> 
+							
+						</span>
+
+                       	<div class="space15"></div>
+                       
+						<table class="table table-striped table-bordered" id="dataTable">
+							<thead>
+								<tr>
+									<th style="width: 8px;">
+										<input type="checkbox" class="group-checkable" name="checkAll" onchange="common_common.checkFunc('dataTable', this.checked);" class="flat-grey selectall">
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'xxx')">
+										xxx	\${orderBy("xxx")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'xxx')">
+										xxx	\${orderBy("xxx")}
+									</th>
+									<th class="hidden-phone">\${i18nMap["admin.common.operation"]}</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								<tr class="odd gradeX">
+									<td>
+										<input type="checkbox" class="checkboxes" name="checkIds" value="${xxx.ids!}" class="flat-grey foocheck">
+									</td>
+									<td class="hidden-phone">
+										<span class="label label-success">\${escapeHtml(xxx["name"]!)}</span>
+									</td>
+									<td class="hidden-phone">\${xxx.createtime!, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}</td>
+									<td class="hidden-phone">
+										
+											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/${basePath}/${classNameSmall}/view/\${xxx.ids!}');">
+												<i class="icon-eye-open"></i> 
+												\${i18nMap["admin.common.see"]}
+											</button> 
+										
+										
+										
+											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/${basePath}/${classNameSmall}/edit/\${escapeHtml(xxx.ids!)}');">
+												<i class="icon-refresh icon-white"></i>
+												\${i18nMap["admin.common.edit"]}
+											</button> 
+										
+										
+										
+											<button type="button" class="btn btn-small btn-danger" onclick="common_modals.deleteOne(this)" data-url="/${basePath}/${classNameSmall}/delete/\${xxx.ids!}">
+												<i class="icon-remove icon-white"></i>
+												\${i18nMap["admin.common.delete"]}
+											</button> 
+										
+									</td>
+								</tr>
+								<% } %>
+							</tbody>
+						</table>
+
+						<div id="splitPageDiv" class="pagination">
+							<% include("/platform/common/splitPage.html", {"divId" : "main-content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+						</div>
+
+					</div>
+				</div>
+				<!-- END EXAMPLE TABLE widget-->
+
+			</div>
+		</div>
+
+		<!-- END ADVANCED TABLE widget-->
+	</div>
+
+</form>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+
+	});
+</script>
+

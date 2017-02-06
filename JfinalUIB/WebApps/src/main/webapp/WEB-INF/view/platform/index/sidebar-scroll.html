@@ -1,0 +1,78 @@
+
+      <!-- BEGIN SIDEBAR -->
+      <div class="sidebar-scroll">
+        <div id="sidebar" class="nav-collapse collapse">
+
+         <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+         <div class="navbar-inverse">
+            <form class="navbar-search visible-phone">
+               <input type="text" class="search-query" placeholder="搜索" />
+            </form>
+         </div>
+         <!-- END RESPONSIVE QUICK SEARCH FORM -->
+         
+         <!-- BEGIN SIDEBAR MENU -->
+          <ul class="sidebar-menu">
+              <li class="sub-menu active">
+                  <a class="" href="${cxt!}/platform/index">
+                      <i class="icon-dashboard"></i>
+                      <span>主页</span>
+                  </a>
+              </li>
+              
+				<% for(one in menuList){ %>
+					<% if(isEmpty(one.subList) == false){ %>
+						<li class="sub-menu">
+			                  <a href="javascript:;" class="">
+			                      <i class="icon-book"></i>
+			                      <span>${one.names! }</span>
+			                      <span class="arrow"></span>
+			                  </a>
+			                  <ul class="sub">
+								<% for(two in one.subList){ %>
+									<li title="${two.names!}">
+										<% if(strutil.contain(two.url, ".html") == false){ %>
+											<a href="#" onclick='common_ajax.ajaxMainPanel("${two.url!}");'>
+												${two.names} <i class="icon-arrow"></i>
+											</a>
+										<% }else{ %>
+											<a href="#" onclick='common_ajax.ajaxMainPanel("/platform/index/toUrl?toUrl=${two.url!}");'>
+												${two.names} <i class="icon-arrow"></i>
+											</a>
+										<% } %>
+									</li>
+								<% } %>
+							</ul>
+              			</li>
+					<% } %>
+				<% } %>
+							
+              <li>
+                  <a class="" href="${cxt!}/platform/login/logout?csrfToken=${csrfToken!}">
+                    <i class="icon-user"></i>
+                    <span>${i18nMap["admin.top.exitSystem"]}</span>
+                  </a>
+              </li>
+          </ul>
+         <!-- END SIDEBAR MENU -->
+      	
+    	  <!-- BEGIN THEME CUSTOMIZER-->
+          <div id="theme-change" class="hidden-phone">
+              <i class="icon-cogs"></i>
+               <span class="settings">
+                   <span class="text">皮肤颜色:</span>
+                   <span class="colors">
+                       <span class="color-default" data-style="default"></span>
+                       <span class="color-green" data-style="green"></span>
+                       <span class="color-gray" data-style="gray"></span>
+                       <span class="color-purple" data-style="purple"></span>
+                       <span class="color-red" data-style="red"></span>
+                   </span>
+               </span>
+          </div>
+          <!-- END THEME CUSTOMIZER-->
+            
+      	</div>
+      </div>
+      <!-- END SIDEBAR -->
+      

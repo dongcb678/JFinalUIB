@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	部门管理sql
+-->
+<sql-statement namespace="platform.department">
+	
+	<!-- 查询根节点 -->
+	<sql id="rootNode">
+		<![CDATA[ 
+        	select ids, names, isparent, images from pt_department where parentDepartmentIds is null order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 根据上级节点id查询子部门信息 -->
+	<sql id="childNode">
+		<![CDATA[ 
+        	select ids, names, isparent, images from pt_department where parentDepartmentIds = ? order by orderIds asc
+    	]]>
+	</sql>
+	
+	<!-- 根据上级节点id查询子节点数量 -->
+	<sql id="childCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_department where parentdepartmentids = ?
+    	]]>
+	</sql>
+	
+	<!-- 查询部门下人员数量 -->
+	<sql id="userCount">
+		<![CDATA[ 
+        	select count(*) as counts from pt_user where departmentids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

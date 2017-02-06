@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+	资源sql
+-->
+<sql-statement namespace="platform.resources">
+	
+	<!--  -->
+	<sql id="pv">
+		<![CDATA[ 
+			<% if(db_type == "mysql"){ %>
+			
+					select date_format(startdate,'%Y-%m-%d') adates, count(*) acounts from pt_syslog 
+		        	where startdate>=? and startdate<=? 
+		        	group by adates order by adates asc 
+		        	
+			<% } else if(db_type == "postgresql"){ %>
+			
+					select to_char(startdate, 'yyyy-MM-DD') adates, count(*) acounts from pt_syslog 
+		        	where startdate>=? and startdate<=? 
+		        	group by adates order by adates asc 
+        	
+			<% } else if(db_type == "oracle"){ %>
+			
+					select to_char(startdate,'YYYY-MM-DD') adates, count(*) acounts from pt_syslog 
+		        	where startdate>=? and startdate<=? 
+		        	group by to_char(startdate,'YYYY-MM-DD') order by adates asc 
+			
+			<% } else if(db_type == "sqlserver"){ %>
+			
+					select 
+		        		CONVERT(varchar(100), startdate, 23) adates, 
+		        		count(*) acounts 
+		        	from 
+		        		pt_syslog 
+		        	where 
+		        		startdate>=? and startdate<=? 
+		        	group by CONVERT(varchar(100), startdate, 23) 
+		        	order by adates asc 
+			
+			<% } else if(db_type == "db2"){ %>
+			
+					select to_char(startdate,'YYYY-MM-DD') adates, count(*) acounts from pt_syslog 
+		        	where startdate>=? and startdate<=? 
+		        	group by to_char(startdate,'YYYY-MM-DD') order by adates asc 
+			
+			<% } %>
+    	]]>
+	</sql>
+	
+	<!--  -->
+	<sql id="24hour">
+		<![CDATA[ 
+        	select * from pt_resources where hostname=? and createdate>=? and createdate<=? order by createdate asc 
+    	]]>
+	</sql>
+	
+</sql-statement>

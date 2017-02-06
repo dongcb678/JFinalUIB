@@ -1,0 +1,27 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		var divId = "${divId!}"; 							/** 分页显示div */
+		var formId = "${formId!}"; 							/** 分页formId */
+		var splitPageDiv = "${splitPageDiv!}"; 				/** 分页输出显示的div */
+		
+		var totalRow = ${splitPage.totalRow!};				/** 总行数 */
+		var pageSize = ${splitPage.pageSize!};				/** 每页显示多少条 */
+		var pageNumber = ${splitPage.pageNumber!};			/** 当前第几页  */
+		var totalPages = ${splitPage.totalPage!};			/** 总页数  */
+		
+		var currentPageCount = ${splitPage.currentPageCount!};		/** 当前页记录数量 */
+		var startRow = ${splitPage.startRow!}; 						/** 当前页面第一个元素在数据库中的行号 */
+		var endRow = ${splitPage.endRow!}; 							/** 当前页面最后一个元素在数据库中的行号 */
+		
+		var isSelectPage = true;									/** 是否显示第几页 */
+		var isSelectSize = true;									/** 是否显示每页显示多少条 */
+		
+		var orderColunm = "${splitPage.orderColunm!}"; 				/** 表格排序的列 */
+		var orderMode = "${splitPage.orderMode!}";					/** 排序的方式 */
+		
+		var splitStr = common_splitPage.splitPage(divId, formId, totalRow, pageSize, pageNumber, totalPages, 
+				isSelectPage, isSelectSize, orderColunm, orderMode, currentPageCount, startRow, endRow);/** 获取分页HTML信息 */
+		
+		$("#" + splitPageDiv).html(splitStr);/** 显示分页信息 */
+	});
+</script>

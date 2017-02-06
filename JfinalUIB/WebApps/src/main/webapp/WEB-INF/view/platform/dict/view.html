@@ -1,0 +1,126 @@
+<!-- BEGIN PAGE CONTAINER-->
+<div class="container-fluid">
+
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+			<ul class="breadcrumb">
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="#">配置项</a> <span class="divider">/</span></li>
+				<li>
+					<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/dict/toUrl?toUrl=/platform/dict/treeTableIframe.html');">${i18nMap["admin.dict.common.name"]}</a> 
+					<span class="divider">/</span>
+				</li>
+				<li class="active">${i18nMap["admin.dict.view"]}</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
+	</div>
+	<!-- END PAGE HEADER-->
+
+	<!-- BEGIN PAGE CONTENT-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN VALIDATION STATES-->
+			<div class="widget red">
+				<div class="widget-title">
+					<h4>
+						<i class=" icon-key"></i> ${i18nMap["admin.dict.view"]}
+					</h4>
+				</div>
+				<div class="widget-body form">
+					
+					<form role="form" class="form-horizontal">
+	
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.parent"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(dict.parentnames!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.name"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(dict.names!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.number"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value="${escapeHtml(dict.numbers!)}">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.status"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${dict.status == "1" ? i18nMap["admin.dict.property.status.start"] : i18nMap["admin.dict.property.status.stop"]}'>
+							</div>
+						</div>
+						
+						<input type="hidden" name="dict.i18n" value='${paramMap["i18n"]}' >
+									
+						<% if(paramMap["i18n"] == "0"){ %>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.value"]}</label>
+							<div class="controls">
+								<input type="text" value="${escapeHtml(dict.val!)}" class="span8" readonly="readonly">
+							</div>
+						</div>
+						
+						<% } else { %>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+							<div class="controls">
+								<input type="text" value="${escapeHtml(dict.val_ja!)}" class="span8" readonly="readonly">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+							<div class="controls">
+								<input type="text" value="${escapeHtml(dict.val_enus!)}" class="span8" readonly="readonly">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+							<div class="controls">
+								<input type="text" value="${escapeHtml(dict.val_zhcn!)}" class="span8" readonly="readonly">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+							<div class="controls">
+								<input type="text" value="${escapeHtml(dict.val_zhhk!)}" class="span8" readonly="readonly">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.dict.property.value"]}<img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+							<div class="controls">
+								<input type="text" value="${escapeHtml(dict.val_zhtw!)}" class="span8" readonly="readonly">
+							</div>
+						</div>
+						
+						<% } %>
+						
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.common.order"]}</label>
+							<div class="controls">
+								<input type="text" value="${dict.orderids!}" class="span8" readonly="readonly">
+							</div>
+						</div>
+					
+					</form>
+			
+				</div>
+			</div>
+			<!-- END VALIDATION STATES-->
+		</div>
+	</div>
+
+	<!-- END PAGE CONTAINER-->
+</div>

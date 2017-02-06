@@ -1,0 +1,186 @@
+<form id="splitPage" action="${cxt!}/platform/user" method="POST" class="form-horizontal">
+
+	<!-- BEGIN PAGE CONTAINER-->
+	<div class="container-fluid">
+
+		<!-- BEGIN PAGE HEADER-->
+		<div class="row-fluid">
+			<div class="span12">
+				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+				<ul class="breadcrumb">
+					<li>
+						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
+						<span class="divider">/</span>
+					</li>
+					<li><a href="#">用户权限</a> <span class="divider">/</span></li>
+					<li class="active">${i18nMap["admin.user.common.name"]}</li>
+				</ul>
+				<!-- END PAGE TITLE & BREADCRUMB-->
+			</div>
+		</div>
+		<!-- END PAGE HEADER-->
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget yellow">
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> ${i18nMap["admin.user.list.select"]}
+						</h4>
+						<span class="tools"> 
+							<a class="icon-chevron-down" href="javascript:;"></a>
+						</span>
+					</div>
+					<div class="widget-body form switch-form">
+						${i18nMap["admin.user.property.userName"]} 
+						<input class="medium" type="text" name="_query.userName" value='${escapeHtml(splitPage.queryParam["userName"])}' maxlength="20">
+
+						${i18nMap["admin.user.property.email"]} 
+						<input class="medium" type="text" name="_query.email" value='${escapeHtml(splitPage.queryParam["email"])}' maxlength="40">
+
+						${i18nMap["admin.user.property.birthday"]} 
+		                <input class="medium" type="text" name="_query.birthday" value='${escapeHtml(splitPage.queryParam["birthday"])}' onClick="WdatePicker({minDate:'1900-01-01', maxDate:'%y-%M-%d'})" readonly>
+		                
+						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- BEGIN ADVANCED TABLE widget-->
+		<div class="row-fluid">
+			<div class="span12">
+
+				<!-- BEGIN EXAMPLE TABLE widget-->
+				<div class="widget red">
+
+					<% 
+						var view = authUrl("/platform/user/view"); 
+						var edit = authUrl("/platform/user/edit"); 
+						var delete = authUrl("/platform/user/delete"); 
+						var group = authUrl("/platform/group/select"); 
+					%>
+
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> ${i18nMap["admin.user.list.table"]}
+						</h4>
+					</div>
+
+					<div class="widget-body">
+						<span class="tools"> 
+							<% if(authUrl("/platform/user/add.html")){ %>
+							<button type="button" class="btn btn-small btn-warning" onclick="common_ajax.ajaxMainPanel('/platform/user/toUrl?toUrl=/platform/user/add.html');">
+								<i class="icon-plus icon-white"></i>
+								${i18nMap["admin.user.add"]}
+							</button> 
+							<% } %> 
+							
+							<% if(delete == true){ %>
+							<button type="button" class="btn btn-small btn-danger" data-table="dataTable" data-url="/platform/user/delete?csrfToken=${csrfToken!}" onclick="common_modals.deleteList(this)">
+								<i class="icon-remove icon-white"></i>
+								${i18nMap["admin.common.delete"]}
+							</button> 
+							<% } %>
+						</span>
+
+                       	<div class="space15"></div>
+                       
+						<table class="table table-striped table-bordered" id="dataTable">
+							<thead>
+								<tr>
+									<th style="width: 8px;">
+										<input type="checkbox" class="group-checkable" name="checkAll" onchange="common_common.checkFunc('dataTable', this.checked);" class="flat-grey selectall">
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'd.names')">
+										${i18nMap["admin.user.property.department"]}
+										${orderBy("d.names")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'u.userName')">
+										${i18nMap["admin.user.property.userName"]}
+										${orderBy("u.userName")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'u.names')">
+										${i18nMap["admin.user.property.nickname"]} 
+										${orderBy("u.names")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'u.email')">
+										${i18nMap["admin.user.property.email"]} 
+										${orderBy("u.email")}
+									</th>
+									<th class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'u.mobile')">
+										${i18nMap["admin.user.property.mobilePhone"]}
+										${orderBy("u.mobile")}
+									</th>
+									<th class="hidden-phone">${i18nMap["admin.common.operation"]}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(user in splitPage.list){ %>
+								<tr class="odd gradeX">
+									<td>
+										<input type="checkbox" class="checkboxes" name="checkIds" value="${user.ids!}" class="flat-grey foocheck">
+									</td>
+									<td class="hidden-phone">${escapeHtml(user.deptnames!) }</td>
+									<td class="hidden-phone">${escapeHtml(user["username"]!) }</td>
+									<td class="hidden-phone">${escapeHtml(user["names"]!) }</td>
+									<td class="hidden-phone">${escapeHtml(user["email"]!) }</td>
+									<td class="hidden-phone">
+										<span class="label label-success">${escapeHtml(user["mobile"]!)}</span>
+									</td>
+									<td class="hidden-phone">
+										<% if(view == true){ %>
+											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/platform/user/view/${user.ids!}');">
+												<i class="icon-eye-open"></i> 
+												${i18nMap["admin.common.see"]}
+											</button> 
+										<% } %> 
+										
+										<% if(edit == true){ %>
+											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/platform/user/edit/${user.ids!}');">
+												<i class="icon-refresh icon-white"></i>
+												${i18nMap["admin.common.edit"]}
+											</button> 
+										<% } %> 
+										
+										<% if(group == true){ %> 
+											<button type="button" class="btn btn-small btn-success" onclick="common_modals.groupSelectDialog('${user.ids!}')">
+												<i class="icon-ok icon-white"></i>
+												${i18nMap["admin.user.list.table.group"]}
+											</button> 
+										<% } %> 
+										
+										<% if(delete == true){ %>
+										<button type="button" class="btn btn-small btn-danger" onclick="common_modals.deleteOne(this)" data-url="/platform/user/delete/${user.ids!}?csrfToken=${csrfToken!}">
+											<i class="icon-remove icon-white"></i>
+											${i18nMap["admin.common.delete"]}
+										</button> 
+										<% } %>
+									</td>
+								</tr>
+								<% } %>
+							</tbody>
+						</table>
+
+						<div id="splitPageDiv" class="pagination">
+							<% include("/platform/common/splitPage.html", {"divId" : "main-content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+						</div>
+
+					</div>
+				</div>
+				<!-- END EXAMPLE TABLE widget-->
+
+			</div>
+		</div>
+
+		<!-- END ADVANCED TABLE widget-->
+	</div>
+
+</form>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		
+	});
+</script>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.roleOperator">
+	
+	<!-- 分页select -->
+	<sql id="splitPageSelect">
+		<![CDATA[ 
+        	select 
+				a.*
+    	]]>
+	</sql>
+	
+	<!-- 分页from -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+			from (
+				select 
+					s.ids sids, s.names sname, s.orderids sorder, 
+		        	m.ids mids, m.names mname, m.orderids morder,
+		        	pm.ids pmids, pm.names pmname, pm.orderids pmorder
+		        		
+	        	from 
+	        		pt_operator o 
+	        		left join pt_module m on m.ids = o.moduleids 
+	        		left join pt_module pm on pm.ids = m.parentmoduleids 
+	        		left join pt_systems s on s.ids = m.systemsids 
+	        	
+	        	where 
+	        		1=1
+	        		
+					<% if(!isEmpty(oname)){ %>
+							and o.names like #'%$oname$%'#
+					<% } %>
+				
+					<% if(!isEmpty(ourl)){ %>
+							and o.url like #'%$ourl$%'#
+					<% } %>
+					
+					<% if(!isEmpty(sname)){ %>
+							and s.names like #'%$sname$%'#
+					<% } %>
+				
+					<% if(!isEmpty(mname)){ %>
+							and m.names like #'%$mname$%'#
+					<% } %>
+				
+	        	group by 
+	        		s.ids , s.names , s.orderids , 
+		        	m.ids , m.names , m.orderids ,
+		        	pm.ids, pm.names, pm.orderids
+		        	
+        		<% if(db_type == "mysql" || db_type == "postgresql"){ %>
+        				order by 
+		        			s.orderids asc, pm.names asc, m.names asc
+		        			
+        		<% } else if(db_type == "oracle"){ %>
+        				order by 
+		        			s.orderids asc, pm.names asc, m.names asc
+        	
+	        	<% } else if(db_type == "sqlserver"){ %>
+        				
+	        	<% } else if(db_type == "db2"){ %>
+        				order by 
+		        			s.orderids asc, pm.names asc, m.names asc
+	        	<% } %>
+			) a
+    	]]>
+	</sql>
+	
+	<!-- 根据用户id查询 -->
+	<sql id="findByUserIds">
+		<![CDATA[ 
+        	select 
+        		ro.operatorids 
+        		
+        	from 
+        		pt_roleoperator ro
+        		left join pt_grouprole gr on gr.roleids = ro.roleids
+        		left join pt_usergroup ug on ug.groupids = gr.groupids
+        		
+        	where 
+        		ug.userids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据分组id查询 -->
+	<sql id="findByGroupIds">
+		<![CDATA[ 
+        	select 
+        		ro.operatorids 
+        		
+        	from 
+        		pt_roleoperator ro
+        		left join pt_grouprole gr on gr.roleids = ro.roleids
+        		
+        	where 
+        		gr.groupids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据模块和角色id查询 -->
+	<sql id="findByModuleAndRoleIds">
+		<![CDATA[ 
+        	select 
+        		o.ids, o.names, o.url,
+				( select ids from pt_roleoperator ro where ro.roleids = ? and ro.operatorids = o.ids ) roids
+        		
+        	from 
+        		pt_operator o 
+        		
+        	where
+        		o.moduleids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据功能id、用户id查询 -->
+	<sql id="hasUrlByOperatorAndUserIds">
+		<![CDATA[ 
+        	select 
+        		count(*)
+        		
+        	from 
+        		pt_roleoperator ro
+        		left join pt_grouprole gr on gr.roleids = ro.roleids
+        		left join pt_usergroup ug on ug.groupids = gr.groupids
+        		
+        	where 
+        		ro.operatorids = ? 
+        		and ug.userids = ? 
+    	]]>
+	</sql>
+	
+	<!-- 根据角色和功能id删除 -->
+	<sql id="delByRoleAndOperatorIds">
+		<![CDATA[ 
+        	delete from pt_roleoperator ro where ro.roleids = ? and ro.operatorids = ?
+    	]]>
+	</sql>
+	
+	<!-- 根据角色查询关联分组 -->
+	<sql id="getGroupByRole">
+		<![CDATA[ 
+        	select groupids from pt_grouprole where roleids = ?
+    	]]>
+	</sql>
+	
+</sql-statement>

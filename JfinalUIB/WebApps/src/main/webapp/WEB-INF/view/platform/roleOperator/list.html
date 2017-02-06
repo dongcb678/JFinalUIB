@@ -1,0 +1,156 @@
+
+<form id="splitPage" action="${cxt!}/platform/roleOperator" method="POST" class="form-horizontal">
+
+	<!-- BEGIN PAGE CONTAINER-->
+	<div class="container-fluid">
+
+		<!-- BEGIN PAGE HEADER-->
+		<div class="row-fluid">
+			<div class="span12">
+				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+				<ul class="breadcrumb">
+					<li>
+						<a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a>
+						<span class="divider">/</span>
+					</li>
+					<li><a href="#">用户权限</a> <span class="divider">/</span></li>
+					<li class="active">角色权限设置</li>
+				</ul>
+				<!-- END PAGE TITLE & BREADCRUMB-->
+			</div>
+		</div>
+		<!-- END PAGE HEADER-->
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget yellow">
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> 角色权限查询
+						</h4>
+						<span class="tools"> 
+							<a class="icon-chevron-down" href="javascript:;"></a>
+						</span>
+					</div>
+					<div class="widget-body form switch-form">
+						<input type="hidden" name="_query.roleIds" value='${escapeHtml(splitPage.queryParam["roleIds"])}'>
+						
+						系统名称
+						<input class="medium" type="text" name="_query.sname" value='${escapeHtml(splitPage.queryParam["sname"])}' maxlength="20">
+						
+						模块名称
+						<input class="medium" type="text" name="_query.mname" value='${escapeHtml(splitPage.queryParam["mname"])}' maxlength="20">
+						
+						功能名称
+						<input class="medium" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20">
+						
+						功能URL
+						<input class="medium" type="text" name="_query.url" value='${escapeHtml(splitPage.queryParam["url"])}' maxlength="100" style="width: 250px">
+
+						<button type="button" class="btn btn-danger" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+						<button type="reset" class="btn btn-inverse">${i18nMap["admin.common.reset"]}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- BEGIN ADVANCED TABLE widget-->
+		<div class="row-fluid">
+			<div class="span12">
+
+				<!-- BEGIN EXAMPLE TABLE widget-->
+				<div class="widget red">
+
+					<div class="widget-title">
+						<h4>
+							<i class="icon-reorder"></i> ${i18nMap["admin.operator.list.table"]}
+						</h4>
+					</div>
+
+					<div class="widget-body">
+						<span class="tools"> 
+							授权角色：<button class="btn  btn-primary" type="button">${escapeHtml(splitPage.extData.names!)}</button>
+						</span>
+
+                       	<div class="space15"></div>
+                       
+						<table class="table table-striped table-bordered" id="dataTable">
+							<thead>
+								<tr>
+									<th width="10%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'a.sname')">
+										${i18nMap["admin.operator.property.sname"]}	${orderBy("a.sname")}
+									</th>
+									<th width="10%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'a.pmname')">
+										上级模块
+									</th>
+									<th width="10%" class="hidden-phone" onclick="common_splitPage.orderbyFun('main-content', 'splitPage', 'a.mname')">
+										${i18nMap["admin.operator.property.mname"]}	${orderBy("a.mname")}
+									</th>
+									<th width="80%" class="hidden-phone">
+										功能项
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(sm in splitPage.list){ %>
+								<tr class="odd gradeX">
+									<td>${escapeHtml(sm.sname!)}</td>
+									<td>${escapeHtml(sm.pmname!)}</td>
+									<td>${escapeHtml(sm.mname!)}</td>
+									<td>
+										<% for(o in sm.list){ %>
+											<input type="checkbox" name="${o.ids!}" value="${o.roids!}" onchange='changeFunc(this);' 
+												 ${ isEmpty(o.roids!) ? "" : "checked='checked'" } > ${o.names!} &nbsp;&nbsp;
+										<% } %>
+									</td>
+								</tr>
+								<% } %>
+							</tbody>
+						</table>
+
+						<div id="splitPageDiv" class="pagination">
+							<% include("/platform/common/splitPage.html", {"divId" : "main-content", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+						</div>
+
+					</div>
+				</div>
+				<!-- END EXAMPLE TABLE widget-->
+
+			</div>
+		</div>
+
+		<!-- END ADVANCED TABLE widget-->
+	</div>
+
+</form>
+				
+<script type="text/javascript">
+
+	function changeFunc(box){
+		var check = box.checked; 	// 是否选中
+		var oids = box.name;		// 功能ids
+		var roids = box.value;		// 角色功能ids
+		
+		if(check){
+			var url = "/platform/roleOperator/add";
+			var data = { "roleIds" : '${escapeHtml(splitPage.extData.ids!)}', "operatorIds" : oids, "csrfToken" : "${csrfToken!}" };
+			var result = common_ajax.ajaxFunc(url, data, "json");
+			if(result.status == "success"){
+				box.value = result.data; // 返回角色功能主键
+			}else{
+				common_modals.alert("添加角色功能设置失败！");
+			}
+			
+		}else{
+			
+			var url = "/platform/roleOperator/del/" + roids;
+			var result = common_ajax.ajaxFunc(url, {"csrfToken" : "${csrfToken!}"}, "json");
+			if(result.status == "success"){
+				box.value = "";
+			}else{
+				common_modals.alert("删除角色功能设置失败！");
+			}
+		}
+	}
+	
+</script>

@@ -1,0 +1,61 @@
+
+<form id="dialogEditForm" action="${cxt!}/platform/menu/edit" method="POST" class="form-horizontal">
+	<input type="hidden" name="csrfToken" value="${csrfToken!}">
+	<input type="hidden" name="menu.ids" value="${menu.ids!}" >
+	<input type="hidden" name="menu.version" value="${menu.version!}">
+	
+	<div class="control-group">
+		<label class="control-label"><img src="${cxt!}/files/images/i18n/jp.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="menu.names_ja" value="${escapeHtml(menu.names_ja!)}" 
+				class="span5" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		</div>
+		<span class="help-inline">  1-25位任意字符 </span>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label"><img src="${cxt!}/files/images/i18n/us.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="menu.names_enus" value="${escapeHtml(menu.names_enus!)}" 
+				class="span5" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		</div>
+		<span class="help-inline">  1-25位任意字符 </span>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label"><img src="${cxt!}/files/images/i18n/cn.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="menu.names_zhcn" value="${escapeHtml(menu.names_zhcn!)}" 
+				class="span5" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		</div>
+		<span class="help-inline">  1-25位任意字符 </span>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label"><img src="${cxt!}/files/images/i18n/hk.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="menu.names_zhhk" value="${escapeHtml(menu.names_zhhk!)}" 
+				class="span5" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		</div>
+		<span class="help-inline">  1-25位任意字符 </span>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label"><img src="${cxt!}/files/images/i18n/tw.gif" width="34" height="18"/></label>
+		<div class="controls">
+			<input type="text" name="menu.names_zhtw" value="${escapeHtml(menu.names_zhtw!)}" 
+				class="span5" maxlength="25" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		</div>
+		<span class="help-inline">  1-25位任意字符 </span>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label">${i18nMap["admin.menu.property.orderids"]}</label>
+		<div class="controls">
+			<input type="text" name="menu.orderids" value="${menu.orderids!}" 
+				class="span5" maxlength="10" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);">
+		</div>
+		<span class="help-inline">  1-10位数字 </span>
+	</div>
+
+</form>

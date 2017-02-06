@@ -1,0 +1,232 @@
+
+<!-- BEGIN PAGE CONTAINER-->
+<div class="container-fluid">
+
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+			<ul class="breadcrumb">
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a> <span class="divider">/</span></li>
+				<li><a href="#">用户权限</a> <span class="divider">/</span></li>
+				<li><a href="javascript:void(0)" onclick="common_ajax.ajaxMainPanel('/platform/systems/backOff');">${i18nMap["admin.systems.common.name"]}</a> <span class="divider">/</span></li>
+				<li class="active">${i18nMap["admin.sysLog.view"]}</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
+	</div>
+	<!-- END PAGE HEADER-->
+
+	<!-- BEGIN PAGE CONTENT-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN VALIDATION STATES-->
+			<div class="widget red">
+				<div class="widget-title">
+					<h4>
+						<i class=" icon-key"></i> ${i18nMap["admin.sysLog.view"]}
+					</h4>
+				</div>
+				<div class="widget-body form">
+			
+				<form role="form" class="form-horizontal">
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.oname"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.onames!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.ourl"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.ourl!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.ips"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.ips!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.status"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value='<%if(sysLog.status == "0"){%>${i18nMap["admin.sysLog.property.status.error"]}<%}else{%>${i18nMap["admin.sysLog.property.status.success"]}<%}%>'>
+						</div>
+					</div>
+					
+					<% if(isEmpty(sysLog.cause)){ %>
+						
+					<% }else if(sysLog.cause == "0"){ %>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.sysLog.property.cause.0"]}'>
+							</div>
+						</div>
+						
+					<% }else if(sysLog.cause == "1"){ %>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.sysLog.property.cause.1"]}'>
+							</div>
+						</div>
+						
+					<% }else if(sysLog.cause == "2"){ %>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.sysLog.property.cause.2"]}'>
+							</div>
+						</div>
+						
+					<% }else if(sysLog.cause == "3"){ %>
+						<div class="control-group">
+							<label class="control-label">${i18nMap["admin.sysLog.property.cause"]}</label>
+							<div class="controls">
+								<input type="text" class="span8" readonly="readonly" value='${i18nMap["admin.sysLog.property.cause.3"]}'>
+							</div>
+						</div>
+					<% } %>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.username"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.username!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.startdate"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value='${sysLog.startdate!, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}'>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.enddate"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value='${sysLog.enddate!, dateFormat="yyyy-MM-dd HH:mm:ss:SSS"}'>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.haoshi"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${sysLog.haoshi!}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.actionhaoshi"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${sysLog.actionhaoshi!}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.viewhaoshi"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${sysLog.viewhaoshi!}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.description"]}</label>
+						<div class="controls">
+							<textarea class="autosize form-control">${escapeHtml(sysLog.description!)}</textarea>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.method"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.method!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.xrequestedwith"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.xrequestedwith!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.host"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.host!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.acceptlanguage"]}</label>
+						<div class="controls">
+							<textarea class="autosize form-control">${escapeHtml(sysLog.acceptlanguage!)}</textarea>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.acceptencoding"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.acceptencoding!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.accept"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.accept!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.connection"]}</label>
+						<div class="controls">
+							<input type="text" class="span8" readonly="readonly" value="${escapeHtml(sysLog.connection!)}">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.requestpath"]}</label>
+						<div class="controls">
+							<textarea class="autosize form-control">${escapeHtml(sysLog.requestpath!) }</textarea>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.useragent"]}</label>
+						<div class="controls">
+							<textarea class="autosize form-control">${escapeHtml(sysLog.useragent!) }</textarea>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.referer"]}</label>
+						<div class="controls">
+							<textarea class="autosize form-control">${escapeHtml(sysLog.referer!) }</textarea>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">${i18nMap["admin.sysLog.property.cookie"]}</label>
+						<div class="controls">
+							<textarea class="autosize form-control">${escapeHtml(sysLog.cookie!) }</textarea>
+						</div>
+					</div>
+				
+				</form>
+			
+				</div>
+			</div>
+			<!-- END VALIDATION STATES-->
+		</div>
+	</div>
+
+	<!-- END PAGE CONTAINER-->
+</div>

@@ -1,0 +1,145 @@
+	
+<form id="splitPageOperator" action="${cxt!}/platform/test/operator" method="POST" role="form" class="form-horizontal">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold"> ${i18nMap["admin.operator.list.select"]} </span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">		
+				  	<div class="control-group">
+						<label class="control-label" for="focusedInput">${i18nMap["admin.operator.property.name"]}</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.names" value='${escapeHtml(splitPage.queryParam["names"])}' maxlength="20" >
+						</div>
+						<label class="control-label">${i18nMap["admin.operator.property.url"]}</label>
+						<div class="col-sm-4">
+					  		<input class="span8" type="text" name="_query.url" value='${escapeHtml(splitPage.queryParam["url"])}' maxlength="40" >
+						</div>
+				  	</div>
+				
+				  	<div class="form-actions">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormDiv("operator", "splitPageOperator");'>${i18nMap["admin.common.select"]}</button>
+							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
+						</div>
+				  	</div>
+				
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">${i18nMap["admin.operator.list.table"]}</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">
+					
+					<table class="table table-bordered table-hover" id="dataTable">
+						<thead>
+							<tr>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('operator', 'splitPageOperator', 's.names')">
+									${i18nMap["admin.operator.property.sname"]}	${orderBy("s.names")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('operator', 'splitPageOperator', 'm.names')">
+									${i18nMap["admin.operator.property.mname"]}	${orderBy("m.names")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('operator', 'splitPageOperator', 'names')">
+									${i18nMap["admin.operator.property.name"]}	${orderBy("names")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('operator', 'splitPageOperator', 'url')">
+									${i18nMap["admin.operator.property.url"]}	${orderBy("url")}
+		      					</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('operator', 'splitPageOperator', 'rowFilter')">
+									${i18nMap["admin.operator.property.rowFilter"]}	${orderBy("rowFilter")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('operator', 'splitPageOperator', 'splitPage')">
+									${i18nMap["admin.operator.property.splitPage"]}	${orderBy("splitPage")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('operator', 'splitPageOperator', 'formToken')">
+									${i18nMap["admin.operator.property.formToken"]}	${orderBy("formToken")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('operator', 'splitPageOperator', 'privilegess')">
+									${i18nMap["admin.operator.property.privilegess"]}	${orderBy("privilegess")}
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(operator in splitPage.list){ %>
+								<tr>
+									<td>${escapeHtml(operator.systemsnames!)}</td>
+									<td>${escapeHtml(operator.modulenames!)}</td>
+									<td>${escapeHtml(operator["names"]!)}</td>
+									<td>${escapeHtml(operator["url"]!)}</td>
+									<td class="center">
+										<% if(operator["rowFilter"] == "0"){ %>
+												${i18nMap["admin.common.no"]}
+										<% }else{ %>
+												${i18nMap["admin.common.yes"]}
+										<% } %>
+									</td>
+									<td class="center">
+										<% if(operator["splitPage"] == "0"){ %>
+												${i18nMap["admin.common.no"]}
+										<% }else{ %>
+												${i18nMap["admin.common.yes"]}
+										<% } %>
+									</td>
+									<td class="center">
+										<span class="label label-success">
+											<% if(operator["formToken"] == "0"){ %>
+													${i18nMap["admin.common.no"]}
+											<% }else{ %>
+													${i18nMap["admin.common.yes"]}
+											<% } %>
+										</span>
+									</td>
+									<td class="center">
+										<% if(operator["privilegess"] == "0"){ %>
+												${i18nMap["admin.common.no"]}
+										<% }else{ %>
+												${i18nMap["admin.common.yes"]}
+										<% } %>
+									</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDivOperator">
+						<% include("/platform/common/splitPage.html", {"divId" : "operator", "formId" : "splitPageOperator", "splitPageDiv" : "splitPageDivOperator"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

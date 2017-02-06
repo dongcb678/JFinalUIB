@@ -1,0 +1,19 @@
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.role.property.numbers"]}</label>
+	<div class="controls">
+		<input type="text" name="role.numbers" value="${escapeHtml(role.numbers!)}" 
+			class="span8" maxlength="50" vMin="1" vType="letterNumber" onblur="platform_verify.onblurVali(this);" placeholder="1-50位字母数字">
+		<span class="help-inline"></span>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18nMap["admin.role.property.name"]}</label>
+	<div class="controls">
+		<input type="text" name="role.names" value="${escapeHtml(role.names!)}" 
+			class="span8" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="2-10位任意字符">
+		<span class="help-inline"></span>
+	</div>
+</div>
+	
