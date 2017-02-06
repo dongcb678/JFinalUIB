@@ -5,12 +5,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>little.ant</groupId>
-	<artifactId>JFinalUIBV3</artifactId>
+	<artifactId>JFinalUIBV4</artifactId>
 
 	<packaging>pom</packaging>
 
-	<version>2.2</version>
-	<name>JFinalUIBV3</name>
+	<version>4.0</version>
+	
+	<name>JFinalUIBV4</name>
 	<url>https://git.oschina.net/dongcb678/JfinalUIB</url>
 	<description>
 		项目地址：https://git.oschina.net/dongcb678/JfinalUIB

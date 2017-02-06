@@ -7,8 +7,8 @@
 	
 	<parent>
 		<groupId>little.ant</groupId>
-		<artifactId>JFinalUIBV3</artifactId>
-		<version>2.2</version>
+		<artifactId>JFinalUIBV4</artifactId>
+		<version>4.0</version>
 	</parent>
 	
 	<artifactId>WebApps</artifactId>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>little.ant</groupId>
 			<artifactId>JFinal</artifactId>
-			<version>2.2</version>
+			<version>3.0</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>little.ant</groupId>
 			<artifactId>UIB</artifactId>
-			<version>2.2</version>
+			<version>4.0</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
@@ -58,7 +58,7 @@
 		<dependency>
 			<groupId>little.ant</groupId>
 			<artifactId>Test</artifactId>
-			<version>2.2</version>
+			<version>4.0</version>
 			<exclusions>   
 		        <exclusion>   
 		            <groupId>*</groupId>   
