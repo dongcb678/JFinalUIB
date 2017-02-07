@@ -18,19 +18,19 @@ GIT版本分支一共有4个版本，6个分支：
 		基于maven环境构建的JFinalUIB_V4
 		
 	JFinalUIB_V3：
-		JFinalUIB_V3代码，基于常规的eclipse和idea项目配置文件构建
+		JFinalUIB_V3代码，基于常规的eclipse和idea项目配置文件构建，可以直接用eclipse和idea打开
 		
 	JFinalUIB_V3_MAVEN：
 		基于maven环境构建的JFinalUIB_V3
 		
 	JFinalUIB_V2：
-		JFinalUIB_V2代码，基于常规的eclipse和idea项目配置文件构建
+		JFinalUIB_V2代码，基于常规的eclipse和idea项目配置文件构建，可以直接用eclipse和idea打开
 		
 	JFinalUIB_V2_MAVEN：
 		基于maven环境构建的JFinalUIB_V2
 		
 	JFinalUIB_V1：
-		老版本，几乎停止维护，基于常规的eclipse和idea项目配置文件构建
+		老版本，几乎停止维护，基于常规的eclipse和idea项目配置文件构建，可以直接用eclipse和idea打开
 
 V1主要信息：
 
