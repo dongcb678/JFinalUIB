@@ -63,11 +63,6 @@ public class TestGenerateCode extends TestBase {
 	};
 	
 	/**
-	 * 生成的包和类所在的源码根目录，比如src或者是weiXin
-	 */
-	public static final String srcFolder = "src";
-
-	/**
 	 * 生成的文件存放的包，公共基础包
 	 * 描述：比如platform所在的包就是com.platform，test所在的包就是com.test
 	 */
@@ -84,9 +79,6 @@ public class TestGenerateCode extends TestBase {
 	 */
 	public static final String basePath = "test";
 
-	/**
-	 * 表所在的数据源名称
-	 */
 	public static final String dataSource = ConstantInit.db_dataSource_main;
 	
 	/**
@@ -116,7 +108,6 @@ public class TestGenerateCode extends TestBase {
 		
 		handler.setDataBase(dataBase);
 		
-		handler.setSrcFolder(srcFolder);
 		handler.setPackageBase(packageBase);
 		handler.setBasePath(basePath);
 		handler.setDataSource(dataSource);

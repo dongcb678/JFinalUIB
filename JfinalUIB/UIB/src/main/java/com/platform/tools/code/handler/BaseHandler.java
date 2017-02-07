@@ -30,7 +30,6 @@ public abstract class BaseHandler {
 	private static final Log log = Log.getLog(BaseHandler.class);
 	
 	protected DataBase dataBase;
-	protected String srcFolder;
 	protected String packageBase;
 	protected String basePath;
 	protected String dataSource;
@@ -124,7 +123,7 @@ public abstract class BaseHandler {
 		paraMap.put("colunmList", colunmList);
 		paraMap.put("dataTypes", getJataTypeList(tableName));
 		
-		String filePath = System.getProperty("user.dir") + "/" + srcFolder + "/" + packages.replace(".", "/") + "/" + className + ".java";
+		String filePath = System.getProperty("user.dir") + "/src/main/java/" + packages.replace(".", "/") + "/" + className + ".java";
 		createFileByTemplete("java/model.html", paraMap, filePath);
 	}
 
@@ -147,7 +146,7 @@ public abstract class BaseHandler {
 		paraMap.put("colunmList", colunmList);
 		paraMap.put("dataTypes", getJataTypeList(tableName));
 		
-		String filePath = System.getProperty("user.dir") + "/" + srcFolder + "/" + packages.replace(".", "/") + "/" + className + "Dto.java";
+		String filePath = System.getProperty("user.dir") + "/src/main/java/" + packages.replace(".", "/") + "/" + className + "Dto.java";
 		createFileByTemplete("java/dto.html", paraMap, filePath);
 	}
 
@@ -162,7 +161,7 @@ public abstract class BaseHandler {
 		paraMap.put("namespace", basePath + "." + classNameSmall);
 		paraMap.put("tableName", tableName);
 		
-		String filePath = System.getProperty("user.dir") + "/" + srcFolder + "/" + packages.replace(".", "/") + "/" + classNameSmall + ".sql.xml";
+		String filePath = System.getProperty("user.dir") + "/src/main/java/" + packages.replace(".", "/") + "/" + classNameSmall + ".sql.xml";
 		createFileByTemplete("java/sql.html", paraMap, filePath);
 	}
 
@@ -180,7 +179,7 @@ public abstract class BaseHandler {
 		paraMap.put("basePath", basePath);
 		paraMap.put("tableName", tableName);
 		
-		String filePath = System.getProperty("user.dir") + "/" + srcFolder + "/" + packages.replace(".", "/") + "/" + className + "Controller.java";
+		String filePath = System.getProperty("user.dir") + "/src/main/java/" + packages.replace(".", "/") + "/" + className + "Controller.java";
 		createFileByTemplete("java/controller.html", paraMap, filePath);
 	}
 
@@ -197,7 +196,7 @@ public abstract class BaseHandler {
 		paraMap.put("classNameSmall", classNameSmall);
 		paraMap.put("basePath", basePath);
 		
-		String filePath = System.getProperty("user.dir") + "/" + srcFolder + "/" + packages.replace(".", "/") + "/" + className + "Validator.java";
+		String filePath = System.getProperty("user.dir") + "/src/main/java/" + packages.replace(".", "/") + "/" + className + "Validator.java";
 		createFileByTemplete("java/validator.html", paraMap, filePath);
 	}
 	
@@ -212,9 +211,8 @@ public abstract class BaseHandler {
 		paraMap.put("package", packages);
 		paraMap.put("className", className);
 		paraMap.put("classNameSmall", classNameSmall);
-		paraMap.put("namespace", srcFolder + "." + classNameSmall);
 		
-		String filePath = System.getProperty("user.dir") + "/" + srcFolder + "/" + packages.replace(".", "/") + "/" + className + "Service.java";
+		String filePath = System.getProperty("user.dir") + "/src/main/java/" + packages.replace(".", "/") + "/" + className + "Service.java";
 		createFileByTemplete("java/service.html", paraMap, filePath);
 	}
 
@@ -303,7 +301,7 @@ public abstract class BaseHandler {
 		InputStream is = null;
 		BufferedWriter output = null;
 		try {
-			is = BaseHandler.class.getResourceAsStream("/com/platform/tools/code/tpl/" + templateFileName);
+			is = BaseHandler.class.getClassLoader().getResourceAsStream("com/platform/tools/code/tpl/" + templateFileName);
 			int count = 0;
 			while (count == 0) {
 				count = is.available();
@@ -355,14 +353,6 @@ public abstract class BaseHandler {
 
 	public void setDataBase(DataBase dataBase) {
 		this.dataBase = dataBase;
-	}
-
-	public String getSrcFolder() {
-		return srcFolder;
-	}
-
-	public void setSrcFolder(String srcFolder) {
-		this.srcFolder = srcFolder;
 	}
 
 	public String getPackageBase() {
