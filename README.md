@@ -9,7 +9,7 @@ JFinalUIB现在分为3个版本:
 	JFinalUIB_V3版本：基于JFinal2.2 + metrolab UI
 	JFinalUIB_V4版本：基于JFinal3.0 + metrolab UI
 
-GIT版本分支一共有4个版本，6个分支：
+GIT版本分支一共有4个版本，7个分支：
 
 	JFinalUIB_V4：（默认分支）
 		JFinalUIB_V4代码，基于常规的eclipse和idea项目配置文件构建，可以直接用eclipse和idea打开
