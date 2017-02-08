@@ -117,7 +117,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 	 * 配置路由
 	 */
 	public void configRoute(Routes routes) { 
-		// routes.setBaseViewPath("/platform"); // 设置路由公共路径
+		// routes.setBaseViewPath("/platform"); // 设置视图模板公共路径，值针对当前Routes，每个Routes调用设置完全独立
 		log.info("configRoute 注解注册路由");
 		routes.add(new RoutesScan());
 	}

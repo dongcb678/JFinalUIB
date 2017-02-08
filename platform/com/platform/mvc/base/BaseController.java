@@ -254,24 +254,36 @@ public abstract class BaseController extends Controller {
 		renderJson(renderBean);
 	}
 	
+	/**
+	 * 重写MultipartRequest，增加自定义XSSMutipartRequest参数过滤
+	 */
 	public List<UploadFile> getFiles(String uploadPath, Integer maxPostSize, String encoding) {
 		if (getRequest() instanceof XSSMutipartRequest == false)
 			setHttpServletRequest(new XSSMutipartRequest(getRequest(), uploadPath, maxPostSize, encoding));
 		return ((MultipartRequest)getRequest()).getFiles();
 	}
-	
+
+	/**
+	 * 重写MultipartRequest，增加自定义XSSMutipartRequest参数过滤
+	 */
 	public List<UploadFile> getFiles(String uploadPath, int maxPostSize) {
 		if (getRequest() instanceof XSSMutipartRequest == false)
 			setHttpServletRequest(new XSSMutipartRequest(getRequest(), uploadPath, maxPostSize));
 		return ((MultipartRequest)getRequest()).getFiles();
 	}
-	
+
+	/**
+	 * 重写MultipartRequest，增加自定义XSSMutipartRequest参数过滤
+	 */
 	public List<UploadFile> getFiles(String uploadPath) {
 		if (getRequest() instanceof XSSMutipartRequest == false)
 			setHttpServletRequest(new XSSMutipartRequest(getRequest(), uploadPath));
 		return ((MultipartRequest)getRequest()).getFiles();
 	}
-	
+
+	/**
+	 * 重写MultipartRequest，增加自定义XSSMutipartRequest参数过滤
+	 */
 	public List<UploadFile> getFiles() {
 		if (getRequest() instanceof XSSMutipartRequest == false)
 			setHttpServletRequest(new XSSMutipartRequest(getRequest()));

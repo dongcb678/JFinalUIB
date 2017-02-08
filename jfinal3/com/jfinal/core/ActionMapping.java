@@ -67,28 +67,28 @@ final class ActionMapping {
 	
 	void buildActionMapping() {
 		mapping.clear();
-		Set<String> excludedMethodName = buildExcludedMethodName();
-		InterceptorManager interMan = InterceptorManager.me();
+		Set<String> excludedMethodName = buildExcludedMethodName(); // 需要排除的方法
+		InterceptorManager interMan = InterceptorManager.me(); // 拦截器管理类
 		for (Routes routes : getRoutesList()) {
-		for (Route route : routes.getRouteItemList()) {
-			Class<? extends Controller> controllerClass = route.getControllerClass();
-			Interceptor[] controllerInters = interMan.createControllerInterceptor(controllerClass);
+		for (Route route : routes.getRouteItemList()) { // 循环已注册路由
+			Class<? extends Controller> controllerClass = route.getControllerClass(); // 控制器类
+			Interceptor[] controllerInters = interMan.createControllerInterceptor(controllerClass); // 控制器级拦截器
 			
-			boolean sonOfController = (controllerClass.getSuperclass() == Controller.class);
-			Method[] methods = (sonOfController ? controllerClass.getDeclaredMethods() : controllerClass.getMethods());
-			for (Method method : methods) {
-				String methodName = method.getName();
-				if (excludedMethodName.contains(methodName) || method.getParameterTypes().length != 0)
+			boolean sonOfController = (controllerClass.getSuperclass() == Controller.class); // 是否Controller.class的一级子类
+			Method[] methods = (sonOfController ? controllerClass.getDeclaredMethods() : controllerClass.getMethods()); // 如果是，获取类自身声明的所有方法，如果不是，获取类的所有共有方法
+			for (Method method : methods) { // 循环处理方法
+				String methodName = method.getName(); // 方法名称
+				if (excludedMethodName.contains(methodName) || method.getParameterTypes().length != 0) // 如果，包含在排除方法集合中，或者为有参数方法，直接结束
 					continue ;
-				if (sonOfController && !Modifier.isPublic(method.getModifiers()))
+				if (sonOfController && !Modifier.isPublic(method.getModifiers())) // 是Controller.class的一级子类，并且非public方法，直接结束
 					continue ;
 				
-				Interceptor[] actionInters = interMan.buildControllerActionInterceptor(routes.getInterceptors(), controllerInters, controllerClass, method);
-				String controllerKey = route.getControllerKey();
+				Interceptor[] actionInters = interMan.buildControllerActionInterceptor(routes.getInterceptors(), controllerInters, controllerClass, method); // action级拦截器
+				String controllerKey = route.getControllerKey(); // 路由注册controllerKey
 				
-				ActionKey ak = method.getAnnotation(ActionKey.class);
+				ActionKey ak = method.getAnnotation(ActionKey.class); // 获取ActionKey注解
 				String actionKey;
-				if (ak != null) {
+				if (ak != null) {  // 如果存在ActionKey注解，actionkey等于注解值
 					actionKey = ak.value().trim();
 					if ("".equals(actionKey))
 						throw new IllegalArgumentException(controllerClass.getName() + "." + methodName + "(): The argument of ActionKey can not be blank.");
@@ -96,13 +96,14 @@ final class ActionMapping {
 					if (!actionKey.startsWith(SLASH))
 						actionKey = SLASH + actionKey;
 				}
-				else if (methodName.equals("index")) {
+				else if (methodName.equals("index")) { // 如果是index方法，actionKey等于路由注册时的controllerKey
 					actionKey = controllerKey;
 				}
-				else {
+				else { // actionKey 等于 controllerKey + 方法名
 					actionKey = controllerKey.equals(SLASH) ? SLASH + methodName : controllerKey + SLASH + methodName;
 				}
 				
+				// 创建 Action，每个Routes下都有自己的视图基础路径
 				Action action = new Action(controllerKey, actionKey, controllerClass, method, methodName, actionInters, route.getFinalViewPath(routes.getBaseViewPath()));
 				if (mapping.put(actionKey, action) != null) {
 					throw new RuntimeException(buildMsg(actionKey, controllerClass, method));

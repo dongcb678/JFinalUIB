@@ -16,7 +16,7 @@ public class XSSInterceptor implements Interceptor {
 	public void intercept(Invocation inv) {
 		HttpServletRequest request = inv.getController().getRequest();
 		
-		// 只过滤普通请求，把XSSMutipartRequest中重写的方法全部移动到JFinal的MultipartRequest类，解决文件上传类型参数过滤
+		// 这里只过滤普通请求，在BaseController重写getFile系列方法，解决文件上传类型参数过滤
 		inv.getController().setHttpServletRequest(new EscapeXSSHttpServletRequestWrapper(request));
 		
 		inv.invoke();
