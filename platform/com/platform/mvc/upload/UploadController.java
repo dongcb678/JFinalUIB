@@ -24,8 +24,8 @@ import com.platform.tools.ToolString;
 @Controller({"/platform/upload"})
 public class UploadController extends BaseController {
 
-//	private static final Log log = Log.getLog(UploadController.class);
-
+	//	private static final Log log = Log.getLog(UploadController.class);
+	
 	/**
 	 * 默认保存到/WebRoot/files/upload
 	 */
@@ -35,14 +35,17 @@ public class UploadController extends BaseController {
 	 * 指定保存到/WebRoot/WEB-INF/files/upload
 	 */
 	public static final String path_webInf = "WEB-INF" + File.separator + "files" + File.separator + "upload";
-
+	
 	/**
 	 * 分片上传临时目录
 	 */
 	public static final String path_temp = "WEB-INF" + File.separator + "files" + File.separator + "temp";
-    
-	private String pathType;  // 文件存放路径，使用get方式提交，此参数放在URL中，否则在getFile之前无法获取
-
+	
+	/**
+	 * 文件存放路径，使用get方式提交，此参数放在URL中，否则在getFile之前无法获取
+	 */
+	private String pathType;
+	
 	private UploadService uploadService;
 	
 	/**

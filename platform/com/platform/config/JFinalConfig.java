@@ -291,10 +291,10 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
 
-		log.info("afterJFinalStart 系统负载");
+		log.info("afterJFinalStart 定时任务，系统负载");
 		QuartzPlugin.addJob("ResourcesJob", "0 0/2 * * * ?", ResourcesJob.class);
 
-		log.info("afterJFinalStart 数据清理");
+		log.info("afterJFinalStart 定时任务，数据清理");
 		QuartzPlugin.addJob("DataClearJob", "0 0 2 * * ?", DataClearJob.class);
 	}
 	
@@ -305,10 +305,10 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("beforeJFinalStop 释放日志入库线程");
 		ThreadSysLog.setThreadRun(false);
 
-		log.info("beforeJFinalStop 系统负载");
+		log.info("beforeJFinalStop 定时任务，系统负载");
 		QuartzPlugin.deleteJob("ResourcesJob");
 		
-		log.info("beforeJFinalStop 数据清理");
+		log.info("beforeJFinalStop 定时任务，数据清理");
 		QuartzPlugin.deleteJob("DataClearJob");
 	}
 
