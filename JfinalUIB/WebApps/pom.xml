@@ -839,7 +839,7 @@
                     <port>8899</port>
                     <path>/</path>
                     <uriEncoding>UTF-8</uriEncoding>
-                    <finalName>JfinalUIB_V2_FOR_MAVEN</finalName>
+                    <finalName>JfinalUIB_V4_FOR_MAVEN</finalName>
                     <server>tomcat7</server>
                 </configuration>
             </plugin>
