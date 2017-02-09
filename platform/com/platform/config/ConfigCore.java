@@ -2,6 +2,7 @@ package com.platform.config;
 
 import java.util.Map;
 
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -76,6 +77,9 @@ public class ConfigCore {
 			arpMain.setDevMode(devMode); // 设置开发模式
 			arpMain.setShowSql(devMode); // 是否显示SQL
 			arpMain.setContainerFactory(new CaseInsensitiveContainerFactory(true));// 大小写不敏感
+
+			arpMain.setBaseSqlTemplatePath(PathKit.getRootClassPath()); // 设置sql文件存放的基础路径
+			arpMain.addSqlTemplate("com/platform/mvc/user/User.sql"); // 添加sql模板
 			
 			log.info("configPlugin 数据库类型判断");
 			if(db_type.equals(ConstantInit.db_type_postgresql)){
