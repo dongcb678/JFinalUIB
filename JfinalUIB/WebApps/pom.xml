@@ -733,7 +733,10 @@
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>
+                    <include>**/*.sql</include>
                     <include>**/*.xml</include>
+                    <include>**/*.html</include>
+					<include>**/*.properties</include>
                 </includes>
                 <filtering>true</filtering>
 			</resource>
@@ -741,8 +744,10 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
-					<include>*.properties</include>
-					<include>*.xml</include>
+                    <include>**/*.sql</include>
+					<include>**/*.xml</include>
+                    <include>**/*.html</include>
+					<include>**/*.properties</include>
 				</includes>
                 <filtering>true</filtering>
 			</resource>
@@ -752,7 +757,10 @@
 			<testResource>
 				<directory>src/main/java</directory>
 				<includes>
+                    <include>**/*.sql</include>
                     <include>**/*.xml</include>
+                    <include>**/*.html</include>
+					<include>**/*.properties</include>
                 </includes>
                 <filtering>true</filtering>
 			</testResource>
@@ -760,7 +768,9 @@
 			<testResource>
 				<directory>src/main/resources</directory>
 				<includes>
+                    <include>**/*.sql</include>
                     <include>**/*.xml</include>
+                    <include>**/*.html</include>
 					<include>**/*.properties</include>
                 </includes>
 				<filtering>true</filtering>

@@ -600,6 +600,7 @@
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>
+                    <include>**/*.sql</include>
                     <include>**/*.xml</include>
                     <include>**/*.html</include>
 					<include>**/*.properties</include>
@@ -610,6 +611,7 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
+                    <include>**/*.sql</include>
                     <include>**/*.xml</include>
                     <include>**/*.html</include>
 					<include>**/*.properties</include>
@@ -622,6 +624,7 @@
 			<testResource>
 				<directory>src/main/java</directory>
 				<includes>
+                    <include>**/*.sql</include>
                     <include>**/*.xml</include>
                     <include>**/*.html</include>
 					<include>**/*.properties</include>
@@ -632,6 +635,7 @@
 			<testResource>
 				<directory>src/main/resources</directory>
 				<includes>
+                    <include>**/*.sql</include>
                     <include>**/*.xml</include>
                     <include>**/*.html</include>
 					<include>**/*.properties</include>
