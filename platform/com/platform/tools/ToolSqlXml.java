@@ -121,6 +121,16 @@ public abstract class ToolSqlXml {
         return sql.replaceAll("[\\s]{2,}", " ");
     }
 
+	/**
+	 * 匹配模式为 #'%$names$%'#
+	 */
+	private static final Pattern pattern = Pattern.compile("#[\\w\\d\\$\\'\\%\\_]+#");	//#[\\w\\d]+#    \\$
+	
+	/**
+	 * 匹配模式为 $names$
+	 */
+	private static final Pattern pattern2 = Pattern.compile("\\$[\\w\\d\\_]+\\$");
+	
     /**
      * 获取SQL，动态SQL
      * @param sqlId 
@@ -150,12 +160,6 @@ public abstract class ToolSqlXml {
     		sql = ToolVelocity.render(sqlTemplete, param);
     	
     	}
-		
-    	// 匹配模式为 #'%$names$%'#
-    	Pattern pattern = Pattern.compile("#[\\w\\d\\$\\'\\%\\_]+#");	//#[\\w\\d]+#    \\$
-		
-    	// 匹配模式为 $names$
-    	Pattern pattern2 = Pattern.compile("\\$[\\w\\d\\_]+\\$");
 		
 		Matcher matcher = pattern.matcher(sql);
 		
