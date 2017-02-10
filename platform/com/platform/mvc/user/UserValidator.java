@@ -72,14 +72,14 @@ public class UserValidator extends BaseValidator {
 		validateString("user.username", 5, 16, "usernameMsg", "登陆名不正确!");
 		
 		validateEmail("user.email", "emailMsg", "邮箱不正确!");
-		validateLong("user.mobile", 10000000000l, 99999999999l, "mobileMsg", "手机号码不正确!");
+		validateLong("user.mobile", 10000000000L, 99999999999L, "mobileMsg", "手机号码不正确!");
 		
 		if(StrKit.notBlank(controller.getPara("userInfo.telephone"))){
-			validateLong("userInfo.telephone", 1, 99999999999l, "telephoneMsg", "电话号码不正确!");
+			validateLong("userInfo.telephone", 1, 99999999999L, "telephoneMsg", "电话号码不正确!");
 		}
 
 		if(StrKit.notBlank(controller.getPara("userInfo.qq"))){
-			validateLong("userInfo.qq", 1, 999999999999999l, "qqMsg", "QQ号码不正确!");
+			validateLong("userInfo.qq", 1, 999999999999999L, "qqMsg", "QQ号码不正确!");
 		}
 
 		if(StrKit.notBlank(controller.getPara("userInfo.birthday"))){

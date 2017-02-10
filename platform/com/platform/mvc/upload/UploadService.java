@@ -32,7 +32,7 @@ public class UploadService extends BaseService {
 	public List<Map<String, String>> upload(String pathType, List<UploadFile> files){
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		for (UploadFile uploadFile : files) {
-			Map<String, String> map = upload(pathType, uploadFile, null, null, null, 0l);
+			Map<String, String> map = upload(pathType, uploadFile, null, null, null, 0L);
 			list.add(map);
 		}
 		return list;
@@ -46,7 +46,7 @@ public class UploadService extends BaseService {
 	 * @return
 	 */
 	public Map<String, String> upload(String pathType, UploadFile uploadFile, String ids){
-		return upload(pathType, uploadFile, ids, null, null, 0l);
+		return upload(pathType, uploadFile, ids, null, null, 0L);
 	}
 
 	/**

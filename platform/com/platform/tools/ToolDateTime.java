@@ -320,13 +320,13 @@ public abstract class ToolDateTime {
 		long endTime = end.getTime();
 		long between = endTime - startTime;
 
-		long count = splitCount - 1l;
+		long count = splitCount - 1L;
 		long section = between / count;
 
 		List<Date> list = new ArrayList<Date>();
 		list.add(start);
 
-		for (long i = 1l; i < count; i++) {
+		for (long i = 1L; i < count; i++) {
 			long time = startTime + section * i;
 			Date date = new Date();
 			date.setTime(time);

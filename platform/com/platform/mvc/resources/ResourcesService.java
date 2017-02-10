@@ -74,8 +74,8 @@ public class ResourcesService extends BaseService {
 		List<Long> jvmmemoryList = new LinkedList<Long>();
 		List<Long> gccountList = new LinkedList<Long>();
 		
-		Long phymemory = 0l;
-		Long jvmmaxmemory = 0l;
+		Long phymemory = 0L;
+		Long jvmmaxmemory = 0L;
 		
 		for (Resources resources : list) {
 			phymemory = resources.getNumber(Resources.column_phymemory).longValue();

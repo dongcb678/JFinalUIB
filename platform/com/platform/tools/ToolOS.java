@@ -53,7 +53,7 @@ public abstract class ToolOS {
 	private static final List<GarbageCollectorMXBean> list;
 
 	// K转换M
-	private static final long K2M = 1024l * 1024l;
+	private static final long K2M = 1024l * 1024L;
 
 	static {
 		osmxb = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
