@@ -26,7 +26,7 @@ public class ModelScan {
 			// 获取注解对象
 			Table tableBind = (Table) model.getAnnotation(Table.class);
 			if (tableBind == null) {
-				log.warn(model.getName() + "继承了BaseModel，但是没有注解绑定表名，请检查是否已经手动绑定 ！！！");
+				if(log.isWarnEnabled()) log.warn(model.getName() + "继承了BaseModel，但是没有注解绑定表名，请检查是否已经手动绑定 ！！！");
 				throw new RuntimeException(model.getName() + "继承了BaseModel，但是没有注解绑定表名，请检查是否已经手动绑定 ！！！");
 			}
 
@@ -35,23 +35,23 @@ public class ModelScan {
 			String tableName = tableBind.tableName().trim();
 			String pkName = tableBind.pkName().trim();
 			if (dataSourceName.equals("") || tableName.equals("") || pkName.equals("")) {
-				log.error(model.getName() + "注解错误，数据源、表名、主键名为空 ！！！");
+				if(log.isErrorEnabled()) log.error(model.getName() + "注解错误，数据源、表名、主键名为空 ！！！");
 				throw new RuntimeException(model.getName() + "注解错误，数据源、表名、主键名为空 ！！！");
 			}
 
 			// 映射注册
 			if (configName == null) {
-				log.error(model.getName() + "ActiveRecordPlugin configName不能为null ！！！");
+				if(log.isErrorEnabled()) log.error(model.getName() + "ActiveRecordPlugin configName不能为null ！！！");
 				throw new RuntimeException(model.getName() + "ActiveRecordPlugin configName不能为null ！！！");
 			}
 			if (arp == null) {
-				log.error(model.getName() + "ActiveRecordPlugin不能为null ！！！");
+				if(log.isErrorEnabled()) log.error(model.getName() + "ActiveRecordPlugin不能为null ！！！");
 				throw new RuntimeException(model.getName() + "ActiveRecordPlugin不能为null ！！！");
 			}
 			
 			if (dataSourceName.equals(configName)) {
 				arp.addMapping(tableName, pkName, model);
-				log.debug("Model注册： model = " + model + ", tableName = " + tableName + ", pkName: " + pkName);
+				if(log.isDebugEnabled()) log.debug("Model注册： model = " + model + ", tableName = " + tableName + ", pkName: " + pkName);
 			}
 		}
 	}

@@ -56,10 +56,10 @@ public abstract class ToolScript {
 //			t.join();
 			
 		} catch (ScriptException e) {
-			log.error("执行脚本异常");
+			if(log.isErrorEnabled()) log.error("执行脚本异常");
 		}
 //		} catch (NoSuchMethodException e) {
-//			log.error("执行脚本异常");
+//			if(log.isErrorEnabled()) log.error("执行脚本异常");
 //		}
 		
 		// 取js变量值

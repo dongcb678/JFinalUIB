@@ -41,7 +41,7 @@ public class DateFormat implements Format {
 			try {
 				date = ts.timestampValue();
 			} catch (SQLException e) {
-				log.error("DateFormat中针对Oracle的TIMESTAMP类型转Date出现异常");
+				if(log.isErrorEnabled()) log.error("DateFormat中针对Oracle的TIMESTAMP类型转Date出现异常");
 				return "";
 			}
 			return ToolDateTime.format(date, pattern);

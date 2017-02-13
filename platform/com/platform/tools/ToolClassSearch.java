@@ -130,7 +130,7 @@ public abstract class ToolClassSearch {
         // 判断目录是否存在
         File baseDir = new File(dirPath);
         if (!baseDir.exists() || !baseDir.isDirectory()) {
-            log.error("baseDirName");
+            if(log.isErrorEnabled()) log.error("baseDirName");
             return classFiles;
         } 
 

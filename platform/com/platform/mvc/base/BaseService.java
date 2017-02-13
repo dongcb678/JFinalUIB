@@ -93,18 +93,18 @@ public class BaseService {
 	}
 	
 	/**
-	 * Distinct分页
+	 * 分页，分页查询个性化count语句
 	 * @param dataSource		数据源
 	 * @param splitPage			分页对象
 	 * @param selectSqlId		select之后，from之前
-	 * @param distinctSqlId		select distinct之后，from之前
+	 * @param selectCountSqlId	select count之后，from之前
 	 * @param fromSqlId			from之后
 	 */
 	@SuppressWarnings("unchecked")
-	public static void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
+	public static void paging(String dataSource, SplitPage splitPage, String selectSqlId, String selectCountSqlId, String fromSqlId){
 		String selectSql = getSqlByBeetl(selectSqlId, splitPage.getQueryParam());
 		
-		String distinctSql = getSqlByBeetl(distinctSqlId, splitPage.getQueryParam());
+		String distinctSql = getSqlByBeetl(selectCountSqlId, splitPage.getQueryParam());
 		
 		Map<String, Object> map = getFromSql(splitPage, fromSqlId);
 		String fromSql = (String) map.get("sql");
@@ -210,8 +210,8 @@ public class BaseService {
 		
 		for (int i = 0, size = length -1; i < size; i++) {
 			String id = idsArr[i];
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
-				log.error("字符安全验证失败：" + id);
+			if(!ToolString.regExpVali(ToolString.pattern_letter_5, id)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				if(log.isErrorEnabled()) log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
 			sqlSb.append(" '").append(id).append("', "); 
@@ -219,8 +219,8 @@ public class BaseService {
 		
 		if(length != 0){
 			String id = idsArr[length-1];
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
-				log.error("字符安全验证失败：" + id);
+			if(!ToolString.regExpVali(ToolString.pattern_letter_5, id)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				if(log.isErrorEnabled()) log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
 			sqlSb.append(" '").append(id).append("' ");
@@ -251,8 +251,8 @@ public class BaseService {
 		
 		for (int i = 0, size = length -1; i < size; i++) {
 			String id = idsArr[i];
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
-				log.error("字符安全验证失败：" + id);
+			if(!ToolString.regExpVali(ToolString.pattern_letter_5, id)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				if(log.isErrorEnabled()) log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
 			
@@ -262,8 +262,8 @@ public class BaseService {
 		
 		if(length != 0){
 			String id = idsArr[length-1];
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
-				log.error("字符安全验证失败：" + id);
+			if(!ToolString.regExpVali(ToolString.pattern_letter_5, id)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				if(log.isErrorEnabled()) log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
 			
@@ -292,8 +292,8 @@ public class BaseService {
 		String[] idsArr = ids.split(",");
 		
 		for (String id : idsArr) {
-			if(!ToolString.regExpVali(id, ToolString.regExp_letter_5)){ // 匹配字符串，由数字、大小写字母、下划线组成
-				log.error("字符安全验证失败：" + id);
+			if(!ToolString.regExpVali(ToolString.pattern_letter_5, id)){ // 匹配字符串，由数字、大小写字母、下划线组成
+				if(log.isErrorEnabled()) log.error("字符安全验证失败：" + id);
 				throw new RuntimeException("字符安全验证失败：" + id);
 			}
 		}
@@ -355,7 +355,7 @@ public class BaseService {
 			ToolMail.sendHtmlMail(host, port, validate, userName, password, from, to, subject, content, attachFileNames);
 			
 		} else {
-			log.error("发送邮件参数sendType错误");
+			if(log.isErrorEnabled()) log.error("发送邮件参数sendType错误");
 		}
 	}
 

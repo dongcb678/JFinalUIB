@@ -71,7 +71,7 @@ public class JpegCaptcha {
 		BufferedImage bufferedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGTH, BufferedImage.TYPE_INT_RGB);
 
 		String sRand = graphics(bufferedImage).toLowerCase();
-		log.debug("验证码：" + sRand);
+		if(log.isDebugEnabled()) log.debug("验证码：" + sRand);
 
 		// 设置验证码值到cookie
 		long date = ToolDateTime.getDateByTime();

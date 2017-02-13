@@ -27,11 +27,11 @@ public class ThreadSysLog {
 	 * @param sysLog
 	public static void add(Syslog sysLog){
 		try {
-			log.info("put操作日志到缓存queue start......");
+			if(log.isInfoEnabled()) log.info("put操作日志到缓存queue start......");
 			queue.put(sysLog);
-			log.info("put操作日志到缓存queue end......");
+			if(log.isInfoEnabled()) log.info("put操作日志到缓存queue end......");
 		} catch (InterruptedException e) {
-			log.error("put操作日志到缓存queue异常");
+			if(log.isErrorEnabled()) log.error("put操作日志到缓存queue异常");
 			throw new RuntimeException("ThreadSysLog -> add Exception");
 		}
 	}*/
@@ -49,7 +49,7 @@ public class ThreadSysLog {
 //			synchronized(queue) {
 //				if(queue.size() == queueSize){
 //					queue.poll(); // 获取并移除此队列的头，如果此队列为空，则返回 null
-//					log.error("日志队列：超过" + queueSize);
+//					if(log.isErrorEnabled()) log.error("日志队列：超过" + queueSize);
 //				}
 				queue.offer(syslog); // 将指定元素插入此队列的尾部
 //			}
@@ -86,16 +86,16 @@ public class ThreadSysLog {
 								if(null == sysLog){
 									Thread.sleep(200);
 								} else {
-									log.info("保存操作日志到数据库start......");
+									if(log.isInfoEnabled()) log.info("保存操作日志到数据库start......");
 									sysLog.save();// 日志入库
 									sysLog = null;
-									log.info("保存操作日志到数据库end......");
+									if(log.isInfoEnabled()) log.info("保存操作日志到数据库end......");
 								}
 							} catch (Exception e) {
 								if(null != sysLog){
 									sysLog = null;
 								}
-								log.error("保存操作日志到数据库异常：" + e.getMessage());
+								if(log.isErrorEnabled()) log.error("保存操作日志到数据库异常：" + e.getMessage());
 								e.printStackTrace();
 							}
 						}

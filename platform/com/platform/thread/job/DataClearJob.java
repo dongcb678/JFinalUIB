@@ -21,24 +21,24 @@ public class DataClearJob implements Job {
 //			String xxx = (String) dataMap.get("xxx");
 			
 			try {
-				log.info("清理访问日志数据");
+				if(log.isInfoEnabled()) log.info("清理访问日志数据");
 				SysLogService slService = (SysLogService) ServicePlugin.getService(SysLogService.serviceName);
 				slService.timerDataClear();
 			} catch (Exception e) {
-				log.error("清理访问日志数据失败：" + e.getMessage());
+				if(log.isErrorEnabled()) log.error("清理访问日志数据失败：" + e.getMessage());
 				e.printStackTrace();
 			}
 
 			try {
-				log.info("清理资源负载日志数据");
+				if(log.isInfoEnabled()) log.info("清理资源负载日志数据");
 				ResourcesService rService = (ResourcesService) ServicePlugin.getService(ResourcesService.serviceName);
 				rService.timerDataClear();
 			} catch (Exception e) {
-				log.error("清理资源负载日志数据失败：" + e.getMessage());
+				if(log.isErrorEnabled()) log.error("清理资源负载日志数据失败：" + e.getMessage());
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
-			log.info("清理数据异常");
+			if(log.isInfoEnabled()) log.info("清理数据异常");
 		}
 	}
 	

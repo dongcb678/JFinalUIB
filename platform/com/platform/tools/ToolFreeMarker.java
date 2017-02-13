@@ -44,10 +44,10 @@ public abstract class ToolFreeMarker {
 			template.process(paramMap, writer);
 		} catch (IOException e) {
 			e.printStackTrace();
-			log.error(e.getMessage());
+			if(log.isErrorEnabled()) log.error(e.getMessage());
 		} catch (TemplateException e) {
 			e.printStackTrace();
-			log.error(e.getMessage());
+			if(log.isErrorEnabled()) log.error(e.getMessage());
 		}
 		return writer.toString();
 	}

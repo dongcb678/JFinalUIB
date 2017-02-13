@@ -42,7 +42,7 @@ public abstract class ToolBeetl {
 		Map<String, Object> sharedVars = new HashMap<String, Object>();
 		sharedVars.put("db_type", db_type);
 		
-		log.debug("注册全局web视图模板解析");
+		if(log.isDebugEnabled()) log.debug("注册全局web视图模板解析");
 		GroupTemplate mainGT = brf.groupTemplate;
 		if(mainGT == null){
 			JFinal3BeetlRenderFactory brfTemp = new JFinal3BeetlRenderFactory();
@@ -59,7 +59,7 @@ public abstract class ToolBeetl {
 		mainGT.registerFormat("dateFormat", new DateFormat());
 		mainGT.setSharedVars(sharedVars);
 
-		log.debug("注册全局BeetlKit模板解析");
+		if(log.isDebugEnabled()) log.debug("注册全局BeetlKit模板解析");
 		GroupTemplate kitGT = BeetlKit.gt;
 		kitGT.registerFunction("authUrl", new AuthUrl());
 		kitGT.registerFunction("orderBy", new OrderBy());

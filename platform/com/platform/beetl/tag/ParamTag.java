@@ -27,7 +27,7 @@ public class ParamTag extends Tag {
 		try {
 			Map<String, String> param = (Map<String, String>) args[1];
 
-			log.debug("获取标签属性");
+			if(log.isDebugEnabled()) log.debug("获取标签属性");
 
 			String type = param.get("type") == null ? "" : param.get("type");
 			
@@ -40,7 +40,7 @@ public class ParamTag extends Tag {
 			String number = param.get("number") == null ? "" : param.get("number");
 			String defaultnumber = param.get("defaultnumber") == null ? "" : param.get("defaultnumber");
 
-			log.debug("参数标签属性：type=" + type + "，id=" + id + "，name=" + name + "，class_=" + class_
+			if(log.isDebugEnabled()) log.debug("参数标签属性：type=" + type + "，id=" + id + "，name=" + name + "，class_=" + class_
 					+ "，style=" + style + "，number=" + number + "，defaultnumber=" + defaultnumber);
 			
 			if(type.equals("")){
@@ -100,7 +100,7 @@ public class ParamTag extends Tag {
 			String namesTemp = param.getStr("names");
 			String valueTemp = param.getStr(val);
 			if(null == status || status.equals("0")){
-				log.debug("参数" + numbersTemp + "已经停用");
+				if(log.isDebugEnabled()) log.debug("参数" + numbersTemp + "已经停用");
 				continue;
 			}
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中
@@ -148,7 +148,7 @@ public class ParamTag extends Tag {
 			String namesTemp = param.getStr("names");
 			String valueTemp = param.getStr(val);
 			if(null == status || status.equals("0")){
-				log.debug("参数" + numbersTemp + "已经停用");
+				if(log.isDebugEnabled()) log.debug("参数" + numbersTemp + "已经停用");
 				continue;
 			}
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中
@@ -194,7 +194,7 @@ public class ParamTag extends Tag {
 			String namesTemp = param.getStr("names");
 			String valueTemp = param.getStr(val);
 			if(null == status || status.equals("0")){
-				log.debug("参数" + numbersTemp + "已经停用");
+				if(log.isDebugEnabled()) log.debug("参数" + numbersTemp + "已经停用");
 				continue;
 			}
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中

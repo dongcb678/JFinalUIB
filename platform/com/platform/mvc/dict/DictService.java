@@ -71,7 +71,7 @@ public class DictService extends BaseService {
 			
 			// 是否存在子节点
 			if(dict.getStr(Dict.column_isparent).equals("true")){
-				log.error("存在子节点，不能直接删除");
+				if(log.isErrorEnabled()) log.error("存在子节点，不能直接删除");
 				return;
 			}
 			

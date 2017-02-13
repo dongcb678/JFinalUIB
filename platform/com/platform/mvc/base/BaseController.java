@@ -63,7 +63,7 @@ public abstract class BaseController extends Controller {
 	 * @param description
 	 */
 	protected void setLogDesc(String description){
-		log.debug("设置日志描述：" + description);
+		if(log.isDebugEnabled()) log.debug("设置日志描述：" + description);
 		reqSysLog.set(Syslog.column_description, description);
 	}
 
@@ -579,7 +579,7 @@ public abstract class BaseController extends Controller {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				log.error("验证码处理异常，使用了已失效的cookie验证码");
+				if(log.isErrorEnabled()) log.error("验证码处理异常，使用了已失效的cookie验证码");
 				return false;
 			}
 		}
@@ -630,10 +630,10 @@ public abstract class BaseController extends Controller {
 	 */
 	protected void defaultOrder(String colunm, String mode){
 		if(StrKit.isBlank(splitPage.getOrderColunm())){
-			if(ToolString.regExpVali(colunm, ToolString.regExp_letter_6)){
+			if(ToolString.regExpVali(ToolString.pattern_letter_6, colunm)){
 				splitPage.setOrderColunm(colunm);
 			}
-			if(ToolString.regExpVali(mode, ToolString.regExp_letter_6)){
+			if(ToolString.regExpVali(ToolString.pattern_letter_6, mode)){
 				splitPage.setOrderMode(mode);
 			}
 		}
@@ -680,24 +680,24 @@ public abstract class BaseController extends Controller {
 	}
 
 	/**
-	 * Distinct分页
+	 * 分页，分页查询个性化count语句
 	 * @param splitPage			分页对象
 	 * @param sqlId				完整的分页sql语句
-	 * @param distinctSqlId		分页查询distinct语句，不包含from之后
+	 * @param selectCountSqlId	分页查询个性化count语句，不包含from之后
 	 */
-	protected void pagingDistinct(SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
-		BaseService.pagingDistinct(ConstantInit.db_dataSource_main, splitPage, selectSqlId, distinctSqlId, fromSqlId);
+	protected void paging(SplitPage splitPage, String selectSqlId, String selectCountSqlId, String fromSqlId){
+		BaseService.paging(ConstantInit.db_dataSource_main, splitPage, selectSqlId, selectCountSqlId, fromSqlId);
 	}
 
 	/**
-	 * Distinct分页
+	 * 分页，分页查询个性化count语句
 	 * @param dataSource 		数据源
 	 * @param splitPage			分页对象
 	 * @param sqlId				完整的分页sql语句
-	 * @param distinctSqlId		分页查询distinct语句，不包含from之后
+	 * @param selectCountSqlId	分页查询个性化count语句，不包含from之后
 	 */
-	protected void pagingDistinct(String dataSource, SplitPage splitPage, String selectSqlId, String distinctSqlId, String fromSqlId){
-		BaseService.pagingDistinct(dataSource, splitPage, selectSqlId, distinctSqlId, fromSqlId);
+	protected void paging(String dataSource, SplitPage splitPage, String selectSqlId, String selectCountSqlId, String fromSqlId){
+		BaseService.paging(dataSource, splitPage, selectSqlId, selectCountSqlId, fromSqlId);
 	}
 
 	/**

@@ -53,10 +53,10 @@ public class ConfigCore {
     private ConfigCore() {
     	PropKit.use("init.properties");
 
-		log.info("Beetl设置");
+		if(log.isInfoEnabled()) log.info("Beetl设置");
     	ToolBeetl.regiseter();
     	
-		log.info("configPlugin 配置Druid数据库连接池连接属性");
+		if(log.isInfoEnabled()) log.info("configPlugin 配置Druid数据库连接池连接属性");
 		Map<String, DataBase> dbMap = ToolDataBase.getDbMap();
 		for (String name : dbMap.keySet()) {
 			DataBase db = dbMap.get(name);
@@ -67,10 +67,10 @@ public class ConfigCore {
 			String password = db.getPassWord();
 			DruidPlugin druidPlugin = new DruidPlugin(jdbcUrl, username, password, driverClass);
 
-			log.info("configPlugin 配置Druid数据库连接池大小");
+			if(log.isInfoEnabled()) log.info("configPlugin 配置Druid数据库连接池大小");
 			druidPlugin.set(db.getInitialSize(), db.getMinIdle(), db.getMaxActive());
 			
-			log.info("configPlugin 配置ActiveRecord插件");
+			if(log.isInfoEnabled()) log.info("configPlugin 配置ActiveRecord插件");
 			ActiveRecordPlugin arpMain = new ActiveRecordPlugin(name, druidPlugin);
 			//arpMain.setTransactionLevel(4);//事务隔离级别
 			boolean devMode = Boolean.parseBoolean(PropKit.get(ConstantInit.config_devMode));
@@ -81,49 +81,49 @@ public class ConfigCore {
 			arpMain.setBaseSqlTemplatePath(PathKit.getRootClassPath()); // 设置sql文件存放的基础路径
 			arpMain.addSqlTemplate("com/platform/mvc/user/User.sql"); // 添加sql模板
 			
-			log.info("configPlugin 数据库类型判断");
+			if(log.isInfoEnabled()) log.info("configPlugin 数据库类型判断");
 			if(db_type.equals(ConstantInit.db_type_postgresql)){
-				log.info("configPlugin 使用数据库类型是 postgresql");
+				if(log.isInfoEnabled()) log.info("configPlugin 使用数据库类型是 postgresql");
 				arpMain.setDialect(new PostgreSqlDialect());
 				
 			}else if(db_type.equals(ConstantInit.db_type_mysql)){
-				log.info("configPlugin 使用数据库类型是 mysql");
+				if(log.isInfoEnabled()) log.info("configPlugin 使用数据库类型是 mysql");
 				arpMain.setDialect(new MysqlDialect());
 				
 			}else if(db_type.equals(ConstantInit.db_type_oracle)){
-				log.info("configPlugin 使用数据库类型是 oracle");
+				if(log.isInfoEnabled()) log.info("configPlugin 使用数据库类型是 oracle");
 				druidPlugin.setValidationQuery("select 1 FROM DUAL"); //指定连接验证语句
 				arpMain.setDialect(new OracleDialect());
 				
 			}else if(db_type.equals(ConstantInit.db_type_sqlserver)){
-				log.info("configPlugin 使用数据库类型是 sqlserver");
+				if(log.isInfoEnabled()) log.info("configPlugin 使用数据库类型是 sqlserver");
 				arpMain.setDialect(new SqlServerDialect());
 				
 			}else if(db_type.equals(ConstantInit.db_type_db2)){
-				log.info("configPlugin 使用数据库类型是 db2");
+				if(log.isInfoEnabled()) log.info("configPlugin 使用数据库类型是 db2");
 				druidPlugin.setValidationQuery("select 1 from sysibm.sysdummy1"); //连接验证语句
 				arpMain.setDialect(new AnsiSqlDialect());
 			}
 
-			log.info("configPlugin 表扫描注册");
+			if(log.isInfoEnabled()) log.info("configPlugin 表扫描注册");
 			ModelScan.scan(name, arpMain);
 
 			druidPlugin.start();
 			arpMain.start();
 		}
 		
-		log.info("ServicePlugin Service注解实例化加载");
+		if(log.isInfoEnabled()) log.info("ServicePlugin Service注解实例化加载");
 		new ServicePlugin().start();
 		
-		log.info("I18NPlugin 国际化键值对加载");
+		if(log.isInfoEnabled()) log.info("I18NPlugin 国际化键值对加载");
 		new I18NPlugin().start();
 		
 		if(ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)){
-			log.info("EhCachePlugin EhCache缓存");
+			if(log.isInfoEnabled()) log.info("EhCachePlugin EhCache缓存");
 			new EhCachePlugin().start();
 			
 		}else if(ToolCache.getCacheType().equals(ConstantCache.cache_type_redis)){
-			log.info("RedisPlugin Redis缓存");
+			if(log.isInfoEnabled()) log.info("RedisPlugin Redis缓存");
 			Map<String, Redis> redisMap = ToolRedis.getRedisMap();
 			Redis redis = null;
 			for (String name : redisMap.keySet()) {
@@ -133,11 +133,11 @@ public class ConfigCore {
 			}
 		}
 		
-		log.info("SqlXmlPlugin 解析并缓存 xml sql");
+		if(log.isInfoEnabled()) log.info("SqlXmlPlugin 解析并缓存 xml sql");
 		SqlXmlPlugin sqlXmlPlugin = new SqlXmlPlugin();
 		sqlXmlPlugin.start();
 		
-		log.info("afterJFinalStart 缓存参数");
+		if(log.isInfoEnabled()) log.info("afterJFinalStart 缓存参数");
 		ParamInitPlugin paramInitPlugin = new ParamInitPlugin();
 		paramInitPlugin.start();
     }

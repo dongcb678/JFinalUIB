@@ -24,7 +24,7 @@ public class MySQLHandler extends BaseHandler {
 	private static final Log log = Log.getLog(MySQLHandler.class);
 
 	public void init() {
-		log.info("configPlugin 配置Druid数据库连接池连接属性");
+		if(log.isInfoEnabled()) log.info("configPlugin 配置Druid数据库连接池连接属性");
 		DataBase dataBase = getDataBase();
 		String username = dataBase.getUserName();
 		String password = dataBase.getPassWord();
@@ -34,7 +34,7 @@ public class MySQLHandler extends BaseHandler {
 		DruidPlugin druidPluginIS = new DruidPlugin(jdbcUrl, username, password, "com.mysql.jdbc.Driver");
 		druidPluginIS.start();
 		
-		log.info("configPlugin 配置ActiveRecord插件");
+		if(log.isInfoEnabled()) log.info("configPlugin 配置ActiveRecord插件");
 		ActiveRecordPlugin arpIS = new ActiveRecordPlugin("information_schema", druidPluginIS);
 		arpIS.setDevMode(true); // 设置开发模式
 		arpIS.setShowSql(true); // 是否显示SQL

@@ -523,7 +523,8 @@ public class DbPro {
 		}
 		
 		if (pageNumber > totalPage) {
-			return new Page<Record>(new ArrayList<Record>(0), pageNumber, pageSize, totalPage, (int)totalRow);
+			// return new Page<Record>(new ArrayList<Record>(0), pageNumber, pageSize, totalPage, (int)totalRow);
+			pageNumber = totalPage; // 修复分页bug，这样会存在pageNumber过大导致空数据，非常不友好
 		}
 		
 		// --------

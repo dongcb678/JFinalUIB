@@ -48,17 +48,17 @@ public class AuthInterceptor implements Interceptor {
 		HttpServletRequest request = contro.getRequest();
 		HttpServletResponse response = contro.getResponse();
 		
-		log.debug("获取reqSysLog!");
+		if(log.isDebugEnabled()) log.debug("获取reqSysLog!");
 		Syslog reqSysLog = contro.getAttr(ConstantWebContext.reqSysLogKey);
 		contro.setReqSysLog(reqSysLog);
 		
-		log.debug("获取用户请求的URI，两种形式，参数传递和直接request获取");
+		if(log.isDebugEnabled()) log.debug("获取用户请求的URI，两种形式，参数传递和直接request获取");
 		String uri = invoc.getActionKey(); // 默认就是ActionKey
 		if (invoc.getMethodName().equals(ConstantWebContext.request_toUrl)) {
 			uri = ToolWeb.getParam(request, ConstantWebContext.request_toUrl); // 否则就是toUrl的值
 		}
 		
-		log.debug("获取当前用户!");
+		if(log.isDebugEnabled()) log.debug("获取当前用户!");
 		boolean userAgentVali = true; // 是否验证userAgent，默认是
 		if (uri.equals("/platform/ueditor") || uri.equals("/platform/upload")) { // 针对ueditor特殊处理，flash上传userAgent和浏览器并不一致
 			userAgentVali = false;
@@ -78,14 +78,14 @@ public class AuthInterceptor implements Interceptor {
 			MDC.put("userName", "*unknown userName*");
 		}
 
-		log.debug("获取URI对象!");
+		if(log.isDebugEnabled()) log.debug("获取URI对象!");
 		Operator operator = Operator.cacheGet(uri);
 
-		log.debug("判断URI是否存在!");
+		if(log.isDebugEnabled()) log.debug("判断URI是否存在!");
 		if (null == operator) {
-			log.debug("URI不存在!uri = " + uri);
+			if(log.isDebugEnabled()) log.debug("URI不存在!uri = " + uri);
 
-			log.debug("访问失败时保存日志!");
+			if(log.isDebugEnabled()) log.debug("访问失败时保存日志!");
 			reqSysLog.set(Syslog.column_status, "0"); // 失败
 			reqSysLog.set(Syslog.column_description, "URL不存在");
 			reqSysLog.set(Syslog.column_cause, "1"); // URL不存在
@@ -94,21 +94,21 @@ public class AuthInterceptor implements Interceptor {
 			return;
 		}
 
-		log.debug("URI存在!");
+		if(log.isDebugEnabled()) log.debug("URI存在!");
 		reqSysLog.set(Syslog.column_operatorids, operator.getPKValue());
 		reqSysLog.setSyslog(operator.getSyslog()); // 指定日志是否入库
 
-		log.debug("method校验");
+		if(log.isDebugEnabled()) log.debug("method校验");
 		String method = request.getMethod().toLowerCase();
 		if((operator.getMethod().equals("1") && !method.equals("get"))
 				|| operator.getMethod().equals("2") && !method.equals("post")){
 			String msg = "method校验失败，operator.method=" + operator.getMethod() + "，request.method=" + method;
-			log.info(msg);
+			if(log.isInfoEnabled()) log.info(msg);
 			toView(contro, ConstantAuth.auth_method, "权限认证过滤器检测：请求方法错误，" + msg);
 			return;
 		}
 		
-		log.debug("enctype校验");
+		if(log.isDebugEnabled()) log.debug("enctype校验");
 		String enctype = operator.getEnctype();
 		if(method.equals("post") && !enctype.equals("0")){
 			String contentType = request.getContentType().toLowerCase();
@@ -116,13 +116,13 @@ public class AuthInterceptor implements Interceptor {
 					|| (enctype.equals("2") && contentType.indexOf("multipart/form-data") == -1)
 					|| (enctype.equals("3") && contentType.indexOf("text/plain") == -1)){
 				String msg = "enctype校验失败，operator.enctype=" + enctype + "，request.contentType=" + contentType;
-				log.info(msg);
+				if(log.isInfoEnabled()) log.info(msg);
 				toView(contro, ConstantAuth.auth_enctype, "权限认证过滤器检测：请求编码错误，" + msg);
 				return;
 			}
 		}
 		
-		log.debug("csrf校验");
+		if(log.isDebugEnabled()) log.debug("csrf校验");
 		if (user != null) { // 理论上csrf安全涉及到的是后台数据更新和删除操作URL安全问题，所以不可能存在用户未登录情况
 			if(operator.getCsrf().equals("1")){
 				String csrfToken = request.getHeader("csrfToken");
@@ -131,7 +131,7 @@ public class AuthInterceptor implements Interceptor {
 				}
 				if(StrKit.isBlank(csrfToken)){
 					String msg = "csrf校验失败，当前请求没有提交csrfToken参数";
-					log.info(msg);
+					if(log.isInfoEnabled()) log.info(msg);
 					toView(contro, ConstantAuth.auth_csrf_empty, "权限认证过滤器检测：" + msg);
 					return;
 				}
@@ -143,7 +143,7 @@ public class AuthInterceptor implements Interceptor {
 				int minute = ToolDateTime.getDateMinuteSpace(start, ToolDateTime.getDate()); // 已经生成多少分钟
 				if(minute > 30){
 					String msg = "超过30分钟，视为无效Token，需要刷新页面重新提交";
-					log.info(msg);
+					if(log.isInfoEnabled()) log.info(msg);
 					toView(contro, ConstantAuth.auth_csrf, "权限认证过滤器检测：" + msg);
 					return;
 				}
@@ -155,26 +155,26 @@ public class AuthInterceptor implements Interceptor {
 			}
 		}
 		
-		log.debug("referer校验");
+		if(log.isDebugEnabled()) log.debug("referer校验");
 		if(operator.getReferer().equals("1")){
 			boolean referer = ToolWeb.authReferer(request);
 			if(!referer){
 				String msg = "referer校验失败";
-				log.info(msg);
+				if(log.isInfoEnabled()) log.info(msg);
 				toView(contro, ConstantAuth.auth_referer, "权限认证过滤器检测：" + msg);
 				return;
 			}
 		}
 		
-		log.debug("是否需要表单重复提交验证!");
+		if(log.isDebugEnabled()) log.debug("是否需要表单重复提交验证!");
 		if (operator.getStr(Operator.column_formtoken).equals("1")) {
 			String tokenRequest = ToolWeb.getParam(request, ConstantWebContext.request_formToken);
 			String tokenCookie = ToolWeb.getCookieValueByName(request, ConstantWebContext.cookie_token);
 			if (null == tokenRequest || tokenRequest.equals("")) {
-				log.debug("tokenRequest为空，无需表单验证!");
+				if(log.isDebugEnabled()) log.debug("tokenRequest为空，无需表单验证!");
 
 			} else if (null == tokenCookie || tokenCookie.equals("") || !tokenCookie.equals(tokenRequest)) {
-				log.debug("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
+				if(log.isDebugEnabled()) log.debug("tokenCookie为空，或者两个值不相等，把tokenRequest放入cookie!");
 				String cxtPath = request.getContextPath();
 				if(StrKit.isBlank(cxtPath)){
 					cxtPath = "/";
@@ -183,20 +183,20 @@ public class AuthInterceptor implements Interceptor {
 				ToolWeb.addCookie(response, "", cxtPath, true, ConstantWebContext.cookie_token, tokenRequest, 0);
 
 			} else if (tokenCookie.equals(tokenRequest)) {
-				log.debug("表单重复提交!");
+				if(log.isDebugEnabled()) log.debug("表单重复提交!");
 				toView(contro, ConstantAuth.auth_form, "请不要重复提交表单");
 				return;
 
 			} else {
-				log.error("表单重复提交验证异常!!!");
+				if(log.isErrorEnabled()) log.error("表单重复提交验证异常!!!");
 			}
 		}
 
-		log.debug("是否需要权限验证!");
+		if(log.isDebugEnabled()) log.debug("是否需要权限验证!");
 		if (operator.get(Operator.column_privilegess).equals("1")) {
-			log.debug("需要权限验证!");
+			if(log.isDebugEnabled()) log.debug("需要权限验证!");
 			if (user == null) {
-				log.debug("权限认证过滤器检测:未登录!");
+				if(log.isDebugEnabled()) log.debug("权限认证过滤器检测:未登录!");
 				
 				reqSysLog.set(Syslog.column_status, "0");// 失败
 				reqSysLog.set(Syslog.column_description, "未登录");
@@ -207,21 +207,21 @@ public class AuthInterceptor implements Interceptor {
 			}
 			
 			if (!hasPrivilegeUrl(operator.getPKValue(), user.getPKValue())) {// 权限验证
-				log.debug("权限验证失败，没有权限!");
+				if(log.isDebugEnabled()) log.debug("权限验证失败，没有权限!");
 				
 				reqSysLog.set(Syslog.column_status, "0");// 失败
 				reqSysLog.set(Syslog.column_description, "没有权限!");
 				reqSysLog.set(Syslog.column_cause, "0");// 没有权限
 				
-				log.debug("返回失败提示页面!");
+				if(log.isDebugEnabled()) log.debug("返回失败提示页面!");
 				toView(contro, ConstantAuth.auth_no_permissions, "权限验证失败，您没有操作权限");
 				return;
 			}
 		}
 		
-		log.debug("不需要权限验证，或权限认证成功!!!继续处理请求...");
+		if(log.isDebugEnabled()) log.debug("不需要权限验证，或权限认证成功!!!继续处理请求...");
 
-		log.debug("权限认证成功更新日志对象属性!");
+		if(log.isDebugEnabled()) log.debug("权限认证成功更新日志对象属性!");
 		reqSysLog.set(Syslog.column_status, "1");// 成功
 		Date actionStartDate = ToolDateTime.getDate();// action开始时间
 		reqSysLog.set(Syslog.column_actionstartdate, ToolDateTime.getSqlTimestamp(actionStartDate));
@@ -238,12 +238,12 @@ public class AuthInterceptor implements Interceptor {
 				expMessage = buf.toString();
 			}
 			
-			log.error("业务逻辑代码遇到异常时保存日志!");
+			if(log.isErrorEnabled()) log.error("业务逻辑代码遇到异常时保存日志!");
 			reqSysLog.set(Syslog.column_status, "0");// 失败
 			reqSysLog.set(Syslog.column_description, expMessage);
 			reqSysLog.set(Syslog.column_cause, "3");// 业务代码异常
 
-			log.error("返回失败提示页面!Exception = " + e.getMessage());
+			if(log.isErrorEnabled()) log.error("返回失败提示页面!Exception = " + e.getMessage());
 			
 //			if(e instanceof My1Exception){
 //				expMessage = "自定义异常描述1" + expMessage;

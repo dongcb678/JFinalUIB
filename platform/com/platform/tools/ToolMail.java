@@ -60,7 +60,7 @@ public class ToolMail {
 			String host, String port, boolean validate, String userName, String password,
 			String from, List<String> to, 
 			String subject, String content, String[] attachFileNames) {
-		log.info("发送文本邮件");
+		if(log.isInfoEnabled()) log.info("发送文本邮件");
 		SendMail mail = new SendMail(sendType_text, host, port, validate, userName, password, from, to, subject, content, attachFileNames);
 		mail.start();
 	}
@@ -82,7 +82,7 @@ public class ToolMail {
 			String host, String port, boolean validate, String userName, String password,
 			String from, List<String> to, 
 			String subject, String content, String[] attachFileNames) {
-		log.info("发送html邮件");
+		if(log.isInfoEnabled()) log.info("发送html邮件");
 		SendMail mail = new SendMail(sendType_html, host, port, validate, userName, password, from, to, subject, content, attachFileNames);
 		mail.start();
 	}
@@ -163,7 +163,7 @@ class SendMail extends Thread {
 			sendHtmlMail();
 			
 		} else {
-			log.error("发送邮件参数sendType不能为空");
+			if(log.isErrorEnabled()) log.error("发送邮件参数sendType不能为空");
 		}
 	}
 
@@ -256,11 +256,11 @@ class SendMail extends Thread {
 			
 			return true;
 		} catch (MessagingException e) {
-			log.error("发送文本邮件异常：" + e.getMessage());
+			if(log.isErrorEnabled()) log.error("发送文本邮件异常：" + e.getMessage());
 			e.printStackTrace();
 			return false;
 		} catch (UnsupportedEncodingException e) {
-			log.error("发送文本邮件异常：" + e.getMessage());
+			if(log.isErrorEnabled()) log.error("发送文本邮件异常：" + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -329,11 +329,11 @@ class SendMail extends Thread {
 			Transport.send(mailMessage);
 			return true;
 		} catch (MessagingException e) {
-			log.error("发送html邮件异常：" + e.getMessage());
+			if(log.isErrorEnabled()) log.error("发送html邮件异常：" + e.getMessage());
 			e.printStackTrace();
 			return false;
 		} catch (UnsupportedEncodingException e) {
-			log.error("发送html邮件异常：" + e.getMessage());
+			if(log.isErrorEnabled()) log.error("发送html邮件异常：" + e.getMessage());
 			e.printStackTrace();
 			e.printStackTrace();
 			return false;

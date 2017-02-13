@@ -47,14 +47,14 @@ public class ServicePlugin implements IPlugin {
 			// 获取Service注解对象
 			Service serviceBind = (Service) serviceClass.getAnnotation(Service.class);
 			if (serviceBind == null) {
-				log.warn(serviceClass.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
+				if(log.isWarnEnabled()) log.warn(serviceClass.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
 				throw new RuntimeException(serviceClass.getName() + "继承了BaseService，但是没有注解绑定 ！！！");
 			}
 		
 			// 获取Service注解属性
 			String name = serviceBind.name().trim();
 			if (name.equals("")) {
-				log.error(serviceClass.getName() + "注解错误，name不能为空 ！！！");
+				if(log.isErrorEnabled()) log.error(serviceClass.getName() + "注解错误，name不能为空 ！！！");
 				throw new RuntimeException(serviceClass.getName() + "注解错误，name不能为空 ！！！");
 			}
 		
@@ -73,9 +73,9 @@ public class ServicePlugin implements IPlugin {
 					}
 				}
 				serviceMap.put(name, baseService);
-				log.debug("Service注册： name = " + name + ", class = " + serviceClass.getName());
+				if(log.isDebugEnabled()) log.debug("Service注册： name = " + name + ", class = " + serviceClass.getName());
 			}else{
-				log.error(serviceClass.getName() + "注解错误，Service name重复注册 ！！！");
+				if(log.isErrorEnabled()) log.error(serviceClass.getName() + "注解错误，Service name重复注册 ！！！");
 				throw new RuntimeException(serviceClass.getName() + "注解错误，Service name重复注册 ！！！");
 			}
 		}

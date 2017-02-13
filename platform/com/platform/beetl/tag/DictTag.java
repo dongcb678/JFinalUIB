@@ -27,7 +27,7 @@ public class DictTag extends Tag {
 		try {
 			Map<String, String> param = (Map<String, String>) args[1];
 
-			log.debug("获取标签属性");
+			if(log.isDebugEnabled()) log.debug("获取标签属性");
 
 			String type = param.get("type") == null ? "" : param.get("type");
 			
@@ -40,7 +40,7 @@ public class DictTag extends Tag {
 			String number = param.get("number") == null ? "" : param.get("number");
 			String defaultnumber = param.get("defaultnumber") == null ? "" : param.get("defaultnumber");
 
-			log.debug("字典标签属性：type=" + type + "，id=" + id + "，name=" + name + "，class_=" + class_
+			if(log.isDebugEnabled()) log.debug("字典标签属性：type=" + type + "，id=" + id + "，name=" + name + "，class_=" + class_
 					+ "，style=" + style + "，number=" + number + "，defaultnumber=" + defaultnumber);
 			
 			if(type.equals("")){
@@ -101,7 +101,7 @@ public class DictTag extends Tag {
 			String valueTemp = dict.getStr(val);
 			
 			if(null == status || status.equals("0")){
-				log.debug("字典" + numbersTemp + "已经停用");
+				if(log.isDebugEnabled()) log.debug("字典" + numbersTemp + "已经停用");
 				continue;
 			}
 			
@@ -150,7 +150,7 @@ public class DictTag extends Tag {
 			String namesTemp = dict.getStr("names");
 			String valueTemp = dict.getStr(val);
 			if(null == status || status.equals("0")){
-				log.debug("字典" + numbersTemp + "已经停用");
+				if(log.isDebugEnabled()) log.debug("字典" + numbersTemp + "已经停用");
 				continue;
 			}
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中
@@ -196,7 +196,7 @@ public class DictTag extends Tag {
 			String namesTemp = dict.getStr("names");
 			String valueTemp = dict.getStr(val);
 			if(null == status || status.equals("0")){
-				log.debug("字典" + numbersTemp + "已经停用");
+				if(log.isDebugEnabled()) log.debug("字典" + numbersTemp + "已经停用");
 				continue;
 			}
 			if (null != defaultnumber && null != valueTemp && defaultnumber.equals(numbersTemp)) {// 默认选中

@@ -78,11 +78,11 @@ public abstract class ToolPoi {
 
 			return path;
 		} catch (IOException e) {
-			log.error("导出失败：" + e.getMessage());
+			if(log.isErrorEnabled()) log.error("导出失败：" + e.getMessage());
 			e.printStackTrace();
 			return null;
 		} catch (InvalidFormatException e) {
-			log.error("导出失败：" + e.getMessage());
+			if(log.isErrorEnabled()) log.error("导出失败：" + e.getMessage());
 			e.printStackTrace();
 			return null;
 		} finally {

@@ -67,28 +67,28 @@ public abstract class BaseValidator extends Validator {
 	 * 验证手机号
 	 */
 	protected void validateMobile(String field, String errorKey, String errorMessage) {
-		validateRegex(field, ToolString.regExp_mobile, false, errorKey, errorMessage);
+		validateRegex(field, ToolString.pattern_mobile.pattern(), false, errorKey, errorMessage);
 	}
 
 	/**
 	 * 验证邮编
 	 */
 	protected void validatePostbody(String field, String errorKey, String errorMessage) {
-		validateRegex(field, ToolString.regExp_postbody, false, errorKey, errorMessage);
+		validateRegex(field, ToolString.pattern_postbody.pattern(), false, errorKey, errorMessage);
 	}
 
 	/**
 	 * 验证身份证
 	 */
 	protected void validateIdCard(String field, String errorKey, String errorMessage) {
-		validateRegex(field, ToolString.regExp_idCard, false, errorKey, errorMessage);
+		validateRegex(field, ToolString.pattern_idCard.pattern(), false, errorKey, errorMessage);
 	}
 
 	/**
 	 * 验证IP
 	 */
 	protected void validateIp(String field, String errorKey, String errorMessage) {
-		validateRegex(field, ToolString.regExp_ip, false, errorKey, errorMessage);
+		validateRegex(field, ToolString.pattern_ip.pattern(), false, errorKey, errorMessage);
 	}
 	
 }

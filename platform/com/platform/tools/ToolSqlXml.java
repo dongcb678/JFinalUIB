@@ -66,7 +66,7 @@ public abstract class ToolSqlXml {
     	String sql = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	
     	if(StrKit.isBlank(sql)){
-			log.error("sql语句不存在：sql id是" + sqlId);
+			if(log.isErrorEnabled()) log.error("sql语句不存在：sql id是" + sqlId);
 			return null;
     	}
     	
@@ -84,7 +84,7 @@ public abstract class ToolSqlXml {
     	String sqlTemplete = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	
     	if(StrKit.isBlank(sqlTemplete)){
-			log.error("sql语句不存在：sql id是" + sqlId);
+			if(log.isErrorEnabled()) log.error("sql语句不存在：sql id是" + sqlId);
 			return null;
     	}
     	
@@ -94,15 +94,15 @@ public abstract class ToolSqlXml {
     	
     	String sql = null;
     	if(null == renderType || renderType.equals(ConstantRender.sql_renderType_beetl)){
-    		log.debug("beetl解析sql");
+    		if(log.isDebugEnabled()) log.debug("beetl解析sql");
     		sql = BeetlKit.render(sqlTemplete, param);
     		
     	} else if(renderType.equals(ConstantRender.sql_renderType_freeMarker)){
-    		log.debug("FreeMarker解析sql");
+    		if(log.isDebugEnabled()) log.debug("FreeMarker解析sql");
     		sql = ToolFreeMarker.render(sqlTemplete, param);
     		
     	} else if(renderType.equals(ConstantRender.sql_renderType_velocity)){
-    		log.debug("Velocity解析sql");
+    		if(log.isDebugEnabled()) log.debug("Velocity解析sql");
     		sql = ToolVelocity.render(sqlTemplete, param);
     	} 
 		
@@ -142,21 +142,21 @@ public abstract class ToolSqlXml {
     public static String getSqlMy(String sqlId, Map<String, Object> param, String renderType, LinkedList<Object> list) {
     	String sqlTemplete = ToolCache.get(SqlXmlPlugin.cacheStart_sql + sqlId);
     	if(StrKit.isBlank(sqlTemplete)){
-			log.error("sql语句不存在：sql id是" + sqlId);
+			if(log.isErrorEnabled()) log.error("sql语句不存在：sql id是" + sqlId);
 			return null;
     	}
     	
     	String sql = null;
     	if(null == renderType || renderType.equals(ConstantRender.sql_renderType_beetl)){
-    		log.debug("beetl解析sql");
+    		if(log.isDebugEnabled()) log.debug("beetl解析sql");
     		sql = BeetlKit.render(sqlTemplete, param);
     		
     	} else if(renderType.equals(ConstantRender.sql_renderType_freeMarker)){
-    		log.debug("FreeMarker解析sql");
+    		if(log.isDebugEnabled()) log.debug("FreeMarker解析sql");
     		sql = ToolFreeMarker.render(sqlTemplete, param);
     		
     	} else if(renderType.equals(ConstantRender.sql_renderType_velocity)){
-    		log.debug("Velocity解析sql");
+    		if(log.isDebugEnabled()) log.debug("Velocity解析sql");
     		sql = ToolVelocity.render(sqlTemplete, param);
     	
     	}
@@ -177,7 +177,7 @@ public abstract class ToolSqlXml {
 				if (NumberUtils.isDigits(val)) {
 					sql = sql.replace(column, val);
 				}else{
-					log.error("查询参数值错误，整型值传入了字符串，非法字符串是：" + val);
+					if(log.isErrorEnabled()) log.error("查询参数值错误，整型值传入了字符串，非法字符串是：" + val);
 					return null;
 				}
 				

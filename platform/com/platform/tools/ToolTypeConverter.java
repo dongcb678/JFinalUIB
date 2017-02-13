@@ -84,7 +84,7 @@ public class ToolTypeConverter {
 			return value.getBytes();
 		}
 		
-		log.error("没有解析到有效字段类型");
+		if(log.isErrorEnabled()) log.error("没有解析到有效字段类型");
 		
 		return null;
 	}
@@ -113,7 +113,7 @@ public class ToolTypeConverter {
 			return ToolDateTime.parse(value, ToolDateTime.pattern_ymd_hms_s);
 
 		default:
-			log.debug("没有解析到有效字段日期长度类型");
+			if(log.isDebugEnabled()) log.debug("没有解析到有效字段日期长度类型");
 			return null;
 		}
 	}

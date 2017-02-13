@@ -20,11 +20,11 @@ public class ResourcesJob implements Job {
 //			JobDataMap dataMap = context.getJobDetail().getJobDataMap();
 //			String xxx = (String) dataMap.get("xxx");
 			
-			log.info("定时记录系统资源负载开始");
+			if(log.isInfoEnabled()) log.info("定时记录系统资源负载开始");
 			resources();
-			log.info("定时记录系统资源负载结束");
+			if(log.isInfoEnabled()) log.info("定时记录系统资源负载结束");
 		} catch (Exception e) {
-			log.error("定时记录系统资源负载异常");
+			if(log.isErrorEnabled()) log.error("定时记录系统资源负载异常");
 		}
 	}
 	

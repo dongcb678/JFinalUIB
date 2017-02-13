@@ -190,7 +190,7 @@ public class UserService extends BaseService {
 				return true;
 			}
 		} catch (Exception e) {
-			log.error("验证密码是否正确异常，userName:" + userName + "，密码：" + passWord, e);
+			if(log.isErrorEnabled()) log.error("验证密码是否正确异常，userName:" + userName + "，密码：" + passWord, e);
 			return false;
 		}
 		return false;
@@ -233,7 +233,7 @@ public class UserService extends BaseService {
 				User.cacheAdd(user.getPKValue());
 			}
 		} catch (Exception e) {
-			log.error("更新用户密码异常，userName:" + userName + "，旧密码：" + passOld + "，新密码：" + passNew, e);
+			if(log.isErrorEnabled()) log.error("更新用户密码异常，userName:" + userName + "，旧密码：" + passOld + "，新密码：" + passNew, e);
 		}
 	}
 	

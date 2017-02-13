@@ -291,15 +291,15 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 				}
 				field.setAccessible(false);
 			} catch (NoSuchFieldException e) {
-				log.error("业务Model类必须继承BaseModel");
+				if(log.isErrorEnabled()) log.error("业务Model类必须继承BaseModel");
 				e.printStackTrace();
 				throw new RuntimeException("业务Model类必须继承BaseModel");
 			} catch (IllegalArgumentException e) {
-				log.error("BaseModel访问modifyFlag异常");
+				if(log.isErrorEnabled()) log.error("BaseModel访问modifyFlag异常");
 				e.printStackTrace();
 				throw new RuntimeException("BaseModel访问modifyFlag异常");
 			} catch (IllegalAccessException e) {
-				log.error("BaseModel访问modifyFlag异常");
+				if(log.isErrorEnabled()) log.error("BaseModel访问modifyFlag异常");
 				e.printStackTrace();
 				throw new RuntimeException("BaseModel访问modifyFlag异常");
 			}

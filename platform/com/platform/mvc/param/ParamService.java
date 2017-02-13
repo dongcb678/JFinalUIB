@@ -71,7 +71,7 @@ public class ParamService extends BaseService {
 			
 			// 是否存在子节点
 			if(param.getStr("isparent").equals("true")){
-				log.error("存在子节点，不能直接删除");
+				if(log.isErrorEnabled()) log.error("存在子节点，不能直接删除");
 				return;
 			}
 			

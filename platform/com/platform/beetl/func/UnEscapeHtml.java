@@ -26,7 +26,7 @@ public class UnEscapeHtml implements Function {
 		try {
 			content = (String) arg[0];
 		} catch (Exception e) {
-			log.error("escapeHtml参数转String异常:arg = " + arg[0]);
+			if(log.isErrorEnabled()) log.error("escapeHtml参数转String异常:arg = " + arg[0]);
 			return arg[0];
 		}
 

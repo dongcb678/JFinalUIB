@@ -47,7 +47,7 @@ public class ImageService extends BaseService {
 			// 压缩
 			ToolImageResize.resize(originalPath, targetPath + imageName, width, houZhui);
 		} catch (Exception e) {
-			log.error("图片裁剪异常：" + e.getMessage());
+			if(log.isErrorEnabled()) log.error("图片裁剪异常：" + e.getMessage());
 			return "error";
 		}
 		

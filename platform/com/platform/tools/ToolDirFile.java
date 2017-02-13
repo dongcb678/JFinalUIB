@@ -87,7 +87,7 @@ public abstract class ToolDirFile {
 			classRootPath = java.net.URLDecoder.decode(classRootPath, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-			log.error("初始化加载sql：获取classRootPath异常");
+			if(log.isErrorEnabled()) log.error("初始化加载sql：获取classRootPath异常");
 		}
 		return classRootPath;
 	}

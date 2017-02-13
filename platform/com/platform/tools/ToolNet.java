@@ -73,7 +73,7 @@ public abstract class ToolNet {
             String error = errorStream.toString(encode);  
             return out + error;  
         } catch (Exception e) {  
-            log.error("ping task failed.",e);  
+            if(log.isErrorEnabled()) log.error("ping task failed.",e);  
             return e.toString();  
         }  
     }  

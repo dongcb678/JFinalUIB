@@ -32,7 +32,7 @@ public abstract class ToolSerialize {
             byte[] bytes = baos.toByteArray();
             return bytes;
         } catch (Exception e) {
-        	log.error("序列化异常：" + e.getMessage());
+        	if(log.isErrorEnabled()) log.error("序列化异常：" + e.getMessage());
         	e.printStackTrace();
         }
         return null;
@@ -52,7 +52,7 @@ public abstract class ToolSerialize {
             ObjectInputStream ois = new ObjectInputStream(bais);
             return ois.readObject();
         } catch (Exception e) {
-        	log.error("反序列化异常：" + e.getMessage());
+        	if(log.isErrorEnabled()) log.error("反序列化异常：" + e.getMessage());
         	e.printStackTrace();
         }
         return null;

@@ -32,7 +32,7 @@ public class ParamPkgInterceptor implements Interceptor {
 	
 	@Override
 	public void intercept(Invocation invoc) {
-		log.debug("********* 封装参数值到 controller 全局变量  start *********");
+		if(log.isDebugEnabled()) log.debug("********* 封装参数值到 controller 全局变量  start *********");
 		
 		// 获取Controller
 		BaseController controller = (BaseController) invoc.getController();
@@ -72,11 +72,11 @@ public class ParamPkgInterceptor implements Interceptor {
 			splitPage(controller, uri);
 		}
 		
-		log.debug("********* 封装参数值到 controller 全局变量  end *********");
+		if(log.isDebugEnabled()) log.debug("********* 封装参数值到 controller 全局变量  end *********");
 		
 		invoc.invoke();
 		
-		log.debug("********* 设置全局变量值到 request start *********");
+		if(log.isDebugEnabled()) log.debug("********* 设置全局变量值到 request start *********");
 
 		// 封装Controller至父类baseController变量值request
 		controllerClass = controller.getClass();
@@ -94,7 +94,7 @@ public class ParamPkgInterceptor implements Interceptor {
 			controllerClass = controllerClass.getSuperclass();
 		}
 		
-		log.debug("********* 设置全局变量值到 request end *********");
+		if(log.isDebugEnabled()) log.debug("********* 设置全局变量值到 request end *********");
 	}
 	
 	/**
@@ -140,12 +140,12 @@ public class ParamPkgInterceptor implements Interceptor {
 				value = controller.getPara(name);
 				// 是否以_query.开头
 				if (name.startsWith(ConstantWebContext.request_query) && StrKit.notBlank(value)) {
-					log.debug("分页，查询参数：name = " + name + " value = " + value);
+					if(log.isDebugEnabled()) log.debug("分页，查询参数：name = " + name + " value = " + value);
 					key = name.substring(7);
-					if(ToolString.regExpVali(key, ToolString.regExp_letter_6)){
+					if(ToolString.regExpVali(ToolString.pattern_letter_6, key)){
 						queryParam.put(key, value.trim());
 					}else{
-						log.error("分页，查询参数存在恶意提交字符：name = " + name + " value = " + value);
+						if(log.isErrorEnabled()) log.error("分页，查询参数存在恶意提交字符：name = " + name + " value = " + value);
 					}
 				}
 			}
@@ -154,8 +154,8 @@ public class ParamPkgInterceptor implements Interceptor {
 			// 排序条件
 			String orderColunm = controller.getPara(ConstantWebContext.request_orderColunm);
 			if(StrKit.notBlank(orderColunm)){
-				log.debug("分页，排序条件：orderColunm = " + orderColunm);
-				if(ToolString.regExpVali(orderColunm, ToolString.regExp_letter_6)){
+				if(log.isDebugEnabled()) log.debug("分页，排序条件：orderColunm = " + orderColunm);
+				if(ToolString.regExpVali(ToolString.pattern_letter_6, orderColunm)){
 					splitPage.setOrderColunm(orderColunm);
 				}
 			}
@@ -163,8 +163,8 @@ public class ParamPkgInterceptor implements Interceptor {
 			// 排序方式
 			String orderMode = controller.getPara(ConstantWebContext.request_orderMode);
 			if(StrKit.notBlank(orderMode)){
-				log.debug("分页，排序方式：orderMode = " + orderMode);
-				if(ToolString.regExpVali(orderMode, ToolString.regExp_letter_6)){
+				if(log.isDebugEnabled()) log.debug("分页，排序方式：orderMode = " + orderMode);
+				if(ToolString.regExpVali(ToolString.pattern_letter_6, orderMode)){
 					splitPage.setOrderMode(orderMode);
 				}
 			}
@@ -172,14 +172,14 @@ public class ParamPkgInterceptor implements Interceptor {
 			// 第几页
 			String pageNumber = controller.getPara(ConstantWebContext.request_pageNumber);
 			if(StrKit.notBlank(pageNumber)){
-				log.debug("分页，第几页：pageNumber = " + pageNumber);
+				if(log.isDebugEnabled()) log.debug("分页，第几页：pageNumber = " + pageNumber);
 				splitPage.setPageNumber(Integer.parseInt(pageNumber));
 			}
 			
 			// 每页显示几多
 			String pageSize = controller.getPara(ConstantWebContext.request_pageSize);
 			if(StrKit.notBlank(pageSize)){
-				log.debug("分页，每页显示几多：pageSize = " + pageSize);
+				if(log.isDebugEnabled()) log.debug("分页，每页显示几多：pageSize = " + pageSize);
 				splitPage.setPageSize(Integer.parseInt(pageSize));
 			}
 		}
@@ -250,7 +250,7 @@ public class ParamPkgInterceptor implements Interceptor {
 				return;
 			}
 
-			log.debug("设置全局变量到request：field name = " + name + " value = " + value);
+			if(log.isDebugEnabled()) log.debug("设置全局变量到request：field name = " + name + " value = " + value);
 			controller.setAttr(name, value);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();

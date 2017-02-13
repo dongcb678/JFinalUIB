@@ -89,7 +89,7 @@ public abstract class ToolWeb {
 			try {
 				return URLDecoder.decode(value, ToolString.encoding).trim();
 			} catch (UnsupportedEncodingException e) {
-				log.error("decode异常：" + value);
+				if(log.isErrorEnabled()) log.error("decode异常：" + value);
 				return value;
 			}
 		}
@@ -197,14 +197,14 @@ public abstract class ToolWeb {
 			}
 			return sb.toString();
 		} catch (IOException e) {
-			log.error("request.getInputStream() to String 异常", e);
+			if(log.isErrorEnabled()) log.error("request.getInputStream() to String 异常", e);
 			return null;
 		} finally { // 释放资源
 			if(null != bufferedReader){
 				try {
 					bufferedReader.close();
 				} catch (IOException e) {
-					log.error("bufferedReader.close()异常", e);
+					if(log.isErrorEnabled()) log.error("bufferedReader.close()异常", e);
 				}
 				bufferedReader = null;
 			}
@@ -213,7 +213,7 @@ public abstract class ToolWeb {
 				try {
 					inputStreamReader.close();
 				} catch (IOException e) {
-					log.error("inputStreamReader.close()异常", e);
+					if(log.isErrorEnabled()) log.error("inputStreamReader.close()异常", e);
 				}
 				inputStreamReader = null;
 			}
@@ -222,7 +222,7 @@ public abstract class ToolWeb {
 				try {
 					inputStream.close();
 				} catch (IOException e) {
-					log.error("inputStream.close()异常", e);
+					if(log.isErrorEnabled()) log.error("inputStream.close()异常", e);
 				}
 				inputStream = null;
 			}
@@ -259,7 +259,7 @@ public abstract class ToolWeb {
 		try {
 			cookie.setHttpOnly(isHttpOnly);
 		} catch (Exception e) {
-			log.error("servlet容器版本太低，servlet3.0以前不支持设置cookie只读" + e.getMessage());
+			if(log.isErrorEnabled()) log.error("servlet容器版本太低，servlet3.0以前不支持设置cookie只读" + e.getMessage());
 		}
 		
 		// 设置cookie的过期时间

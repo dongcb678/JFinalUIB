@@ -11,7 +11,7 @@ public class TestToolString { // extends TestBase {
 		for (int i = 0; i < 10; i++) {
 			long start = System.currentTimeMillis();
 			
-			boolean bool = ToolString.regExpVali("12qwAS_.-", ToolString.regExp_letter_6);
+			boolean bool = ToolString.regExpVali(ToolString.pattern_letter_6, "12qwAS_.-");
 			
 			long end = System.currentTimeMillis();
 			

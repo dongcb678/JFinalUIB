@@ -70,7 +70,7 @@ public class QuartzPlugin implements IPlugin {
 		try {
 			boolean exists = scheduler.checkExists(TriggerKey.triggerKey(triggerKey, Scheduler.DEFAULT_GROUP));
 			if(exists){
-				log.warn("调度任务已经存在triggerKey = " + triggerKey);
+				if(log.isWarnEnabled()) log.warn("调度任务已经存在triggerKey = " + triggerKey);
 				return;
 			}
 			
@@ -116,7 +116,7 @@ public class QuartzPlugin implements IPlugin {
 				scheduler = factory.getScheduler();
 				scheduler.start();
 			} catch (SchedulerException e) {
-				log.error("初始化任务调度出错", e);
+				if(log.isErrorEnabled()) log.error("初始化任务调度出错", e);
 			}
 		}
 		return true;
@@ -129,7 +129,7 @@ public class QuartzPlugin implements IPlugin {
 				scheduler.shutdown();
 			}
 		} catch (SchedulerException e) {
-			log.error("关闭任务调度出错", e);
+			if(log.isErrorEnabled()) log.error("关闭任务调度出错", e);
 		}
 		return true;
 	}

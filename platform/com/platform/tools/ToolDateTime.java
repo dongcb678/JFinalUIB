@@ -85,7 +85,7 @@ public abstract class ToolDateTime {
 		try {
 			return new java.sql.Timestamp(format.parse(date).getTime());
 		} catch (ParseException e) {
-			log.error("ToolDateTime.parse异常：date值" + date + "，pattern值" + pattern);
+			if(log.isErrorEnabled()) log.error("ToolDateTime.parse异常：date值" + date + "，pattern值" + pattern);
 			return null;
 		}
 	}
@@ -188,7 +188,7 @@ public abstract class ToolDateTime {
 		try {
 			return format.parse(date);
 		} catch (ParseException e) {
-			log.error("ToolDateTime.parse异常：date值" + date + "，pattern值" + pattern);
+			if(log.isErrorEnabled()) log.error("ToolDateTime.parse异常：date值" + date + "，pattern值" + pattern);
 			return null;
 		}
 	}
@@ -204,7 +204,7 @@ public abstract class ToolDateTime {
 		try {
 			date = DateFormat.getDateTimeInstance().parse(dateStr);
 		} catch (ParseException e) {
-			log.error("ToolDateTime.parse异常：date值" + date);
+			if(log.isErrorEnabled()) log.error("ToolDateTime.parse异常：date值" + date);
 			return null;
 		}
 		return date;

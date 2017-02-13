@@ -76,7 +76,7 @@ public class ParamInitPlugin implements IPlugin {
 
 	@Override
 	public boolean start() {
-		log.info("缓存参数初始化 start ...");
+		if(log.isInfoEnabled()) log.info("缓存参数初始化 start ...");
 
 		// 1.缓存用户
 		platform_cacheUser();
@@ -96,7 +96,7 @@ public class ParamInitPlugin implements IPlugin {
 		// 6.缓存参数
 		platform_cacheParam();
 
-		log.info("缓存参数初始化 end ...");
+		if(log.isInfoEnabled()) log.info("缓存参数初始化 end ...");
 		return true;
 	}
 
@@ -110,7 +110,7 @@ public class ParamInitPlugin implements IPlugin {
 	 * @author 董华健    2012-10-16 下午1:16:48
 	 */
 	public static void platform_cacheUser() {
-		log.info("缓存加载：User start");
+		if(log.isInfoEnabled()) log.info("缓存加载：User start");
 		
 		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
 		String db_type = dataBase.getType();
@@ -136,7 +136,7 @@ public class ParamInitPlugin implements IPlugin {
 			}
 			userList = null;
 		}
-		log.info("缓存加载：User end");
+		if(log.isInfoEnabled()) log.info("缓存加载：User end");
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class ParamInitPlugin implements IPlugin {
 	 * @author 董华健    2012-10-16 下午1:17:20
 	 */
 	public static void platform_cacheGroupOperator() {
-		log.info("缓存加载：Group Operator start");
+		if(log.isInfoEnabled()) log.info("缓存加载：Group Operator start");
 		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
 		String db_type = dataBase.getType();
 		
@@ -170,7 +170,7 @@ public class ParamInitPlugin implements IPlugin {
 			groupList = null;
 		}
 		
-		log.info("缓存加载：Group Operator end");
+		if(log.isInfoEnabled()) log.info("缓存加载：Group Operator end");
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class ParamInitPlugin implements IPlugin {
 	 * @author 董华健    2013-07-16 下午1:17:20
 	 */
 	public static void platform_cacheStationOperator() {
-		log.info("缓存加载：Station Operator start");
+		if(log.isInfoEnabled()) log.info("缓存加载：Station Operator start");
 		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
 		String db_type = dataBase.getType();
 		
@@ -204,7 +204,7 @@ public class ParamInitPlugin implements IPlugin {
 			stationList = null;
 		}
 		
-		log.info("缓存加载：Station Operator end");
+		if(log.isInfoEnabled()) log.info("缓存加载：Station Operator end");
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class ParamInitPlugin implements IPlugin {
 	 * @author 董华健    2012-10-16 下午1:17:12
 	 */
 	public static void platform_cacheOperator() {
-		log.info("缓存加载：Operator start");
+		if(log.isInfoEnabled()) log.info("缓存加载：Operator start");
 		DataBase dataBase = ToolDataBase.getDbMap(ConstantInit.db_dataSource_main);
 		String db_type = dataBase.getType();
 		
@@ -243,7 +243,7 @@ public class ParamInitPlugin implements IPlugin {
 			operatorList = null;
 		}
 		
-		log.info("缓存加载：Operator end");
+		if(log.isInfoEnabled()) log.info("缓存加载：Operator end");
 	}
 
 	/**
@@ -251,14 +251,14 @@ public class ParamInitPlugin implements IPlugin {
 	 * @author 董华健    2012-10-16 下午1:17:04
 	 */
 	public static void platform_cacheDict() {
-		log.info("缓存加载：Dict start");
+		if(log.isInfoEnabled()) log.info("缓存加载：Dict start");
 		String sql = ToolSqlXml.getSqlMy(Dict.sqlId_all);
 		List<Dict> dictList = Dict.dao.find(sql);
 		for (Dict dict : dictList) {
 			Dict.dao.cacheAdd(dict.getPKValue());
 			dict = null;
 		}
-		log.info("缓存加载：Dict end, size = " + dictList.size());
+		if(log.isInfoEnabled()) log.info("缓存加载：Dict end, size = " + dictList.size());
 		dictList = null;
 	}
 
@@ -267,14 +267,14 @@ public class ParamInitPlugin implements IPlugin {
 	 * @author 董华健    2012-10-16 下午1:17:04
 	 */
 	public static void platform_cacheParam() {
-		log.info("缓存加载：Param start");
+		if(log.isInfoEnabled()) log.info("缓存加载：Param start");
 		String sql = ToolSqlXml.getSqlMy(Param.sqlId_all);
 		List<Param> paramList = Param.dao.find(sql);
 		for (Param param : paramList) {
 			Param.dao.cacheAdd(param.getPKValue());
 			param = null;
 		}
-		log.info("缓存加载：Param end, size = " + paramList.size());
+		if(log.isInfoEnabled()) log.info("缓存加载：Param end, size = " + paramList.size());
 		paramList = null;
 	}
 

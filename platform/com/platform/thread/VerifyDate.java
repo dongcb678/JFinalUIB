@@ -64,16 +64,16 @@ public class VerifyDate extends Thread {
 	}
 
 	public static synchronized void startVerify(){
-		log.info("启动任务开始");
+		if(log.isInfoEnabled()) log.info("启动任务开始");
 		verifyDate.start();
-		log.info("启动任务成功");
+		if(log.isInfoEnabled()) log.info("启动任务成功");
 	}
 	
 	@SuppressWarnings("deprecation")
 	public static synchronized void stopVerify(){
-		log.info("任务退出开始");
+		if(log.isInfoEnabled()) log.info("任务退出开始");
 		verifyDate.stop();
-		log.info("任务退出成功");
+		if(log.isInfoEnabled()) log.info("任务退出成功");
 	}
 	
 }

@@ -118,7 +118,7 @@ public abstract class ToolHttp {
 					httpClient.close();
 				}
 			} catch (IOException e) {
-				log.error("httpClient.close()异常");
+				if(log.isErrorEnabled()) log.error("httpClient.close()异常");
 			}
 		}
 		return null;
@@ -171,20 +171,20 @@ public abstract class ToolHttp {
 				}
 			}
 		} catch (UnsupportedEncodingException e) {
-			log.error(e.getMessage());
+			if(log.isErrorEnabled()) log.error(e.getMessage());
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
-			log.error("连接超时：" + url);
+			if(log.isErrorEnabled()) log.error("连接超时：" + url);
 		} catch (IOException e) {
 			e.printStackTrace();
-			log.error("IO异常:" + url);
+			if(log.isErrorEnabled()) log.error("IO异常:" + url);
 		} finally {
 			try {
 				if (null != httpClient) {
 					httpClient.close();
 				}
 			} catch (IOException e) {
-				log.error("httpClient.close()异常");
+				if(log.isErrorEnabled()) log.error("httpClient.close()异常");
 			}
 		}
 		return null;
@@ -315,11 +315,11 @@ public abstract class ToolHttp {
 
 			return buffer.toString();
 		} catch (ConnectException ce) {
-			log.error("连接超时：{}", ce);
+			if(log.isErrorEnabled()) log.error("连接超时：{}", ce);
 			return null;
 
 		} catch (Exception e) {
-			log.error("https请求异常：{}", e);
+			if(log.isErrorEnabled()) log.error("https请求异常：{}", e);
 			return null;
 
 		} finally { // 释放资源
@@ -327,7 +327,7 @@ public abstract class ToolHttp {
 				try {
 					outputStream.close();
 				} catch (IOException e) {
-					log.error("outputStream.close()异常", e);
+					if(log.isErrorEnabled()) log.error("outputStream.close()异常", e);
 				}
 				outputStream = null;
 			}
@@ -336,7 +336,7 @@ public abstract class ToolHttp {
 				try {
 					outputStreamWriter.close();
 				} catch (IOException e) {
-					log.error("outputStreamWriter.close()异常", e);
+					if(log.isErrorEnabled()) log.error("outputStreamWriter.close()异常", e);
 				}
 				outputStreamWriter = null;
 			}
@@ -350,7 +350,7 @@ public abstract class ToolHttp {
 				try {
 					bufferedReader.close();
 				} catch (IOException e) {
-					log.error("bufferedReader.close()异常", e);
+					if(log.isErrorEnabled()) log.error("bufferedReader.close()异常", e);
 				}
 				bufferedReader = null;
 			}
@@ -359,7 +359,7 @@ public abstract class ToolHttp {
 				try {
 					inputStreamReader.close();
 				} catch (IOException e) {
-					log.error("inputStreamReader.close()异常", e);
+					if(log.isErrorEnabled()) log.error("inputStreamReader.close()异常", e);
 				}
 				inputStreamReader = null;
 			}
@@ -368,7 +368,7 @@ public abstract class ToolHttp {
 				try {
 					inputStream.close();
 				} catch (IOException e) {
-					log.error("inputStream.close()异常", e);
+					if(log.isErrorEnabled()) log.error("inputStream.close()异常", e);
 				}
 				inputStream = null;
 			}
@@ -402,7 +402,7 @@ public abstract class ToolHttp {
 			HttpEntity loginHE = loginHR.getEntity();
 			String loginReturn = EntityUtils.toString(loginHE);
 			if (!loginReturn.equals("success")) {
-				log.error("登录失败");
+				if(log.isErrorEnabled()) log.error("登录失败");
 				return null;
 			}
 
@@ -481,7 +481,7 @@ public abstract class ToolHttp {
 			HttpEntity loginHE = loginHR.getEntity();
 			String loginReturn = EntityUtils.toString(loginHE);
 			if (!loginReturn.equals("success")) {
-				log.error("登录失败");
+				if(log.isErrorEnabled()) log.error("登录失败");
 				return null;
 			}
 
@@ -604,7 +604,7 @@ public abstract class ToolHttp {
 			HttpEntity loginHE = loginHR.getEntity();
 			String loginReturn = EntityUtils.toString(loginHE);
 			if (!loginReturn.equals("success")) {
-				log.error("登录失败");
+				if(log.isErrorEnabled()) log.error("登录失败");
 				return null;
 			}
 
@@ -713,7 +713,7 @@ public abstract class ToolHttp {
 				}
 			}
 		} catch (UnsupportedEncodingException e) {
-			log.error(e.getMessage());
+			if(log.isErrorEnabled()) log.error(e.getMessage());
 		}
 		
 		response.setHeader("Content-disposition", "attachment; " + retFileName);

@@ -43,23 +43,23 @@ public class Log4j extends HttpServlet {
 			public void onComplete(AsyncEvent event) throws IOException {
 				ac.getResponse().getWriter().close();
 				Log4jAsyncWriter.deleteAc(ac);
-				log.debug("AsyncListener onComplete");
+				if(log.isDebugEnabled()) log.debug("AsyncListener onComplete");
 			}
 
 			public void onTimeout(AsyncEvent event) throws IOException {
 				ac.getResponse().getWriter().close();
 				Log4jAsyncWriter.deleteAc(ac);
-				log.debug("AsyncListener onTimeout");
+				if(log.isDebugEnabled()) log.debug("AsyncListener onTimeout");
 			}
 
 			public void onError(AsyncEvent event) throws IOException {
 				ac.getResponse().getWriter().close();
 				Log4jAsyncWriter.deleteAc(ac);
-				log.debug("AsyncListener onError");
+				if(log.isDebugEnabled()) log.debug("AsyncListener onError");
 			}
 
 			public void onStartAsync(AsyncEvent event) throws IOException {
-				log.debug("AsyncListener onStartAsync");
+				if(log.isDebugEnabled()) log.debug("AsyncListener onStartAsync");
 			}
 		});
 		Log4jAsyncWriter.addAc(ac);

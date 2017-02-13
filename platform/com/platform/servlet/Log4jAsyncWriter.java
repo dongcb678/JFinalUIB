@@ -68,11 +68,11 @@ public class Log4jAsyncWriter extends Writer {
 								acWriter.flush();
 							} catch (IOException ex) {
 								acQueue.remove(asyncContext);
-								log.error("Log4jAsyncWriter IOException 异常!");
+								if(log.isErrorEnabled()) log.error("Log4jAsyncWriter IOException 异常!");
 							}
 						}
 					} catch (InterruptedException iex) {
-						log.error("Log4jAsyncWriter InterruptedException 异常! msgQueue.take()");
+						if(log.isErrorEnabled()) log.error("Log4jAsyncWriter InterruptedException 异常! msgQueue.take()");
 					}
 				}
 			}

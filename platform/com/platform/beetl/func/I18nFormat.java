@@ -28,7 +28,7 @@ public class I18nFormat implements Function {
 	@Override
 	public Object call(Object[] arg, Context context) {
 		if(arg.length == 0){
-			log.error("I18nFormat参数为空");
+			if(log.isErrorEnabled()) log.error("I18nFormat参数为空");
 			return null;
 		}
 		
