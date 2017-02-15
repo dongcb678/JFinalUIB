@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -198,42 +199,88 @@ public abstract class ToolDataBase {
 	
 	/**
 	 * 数据库导出
-	 * @param dbName
-	 * @param exportPath
+	 * @param dbName		数据源名称
 	 * @throws IOException
 	 */
-	public static void exportSql(String dbName, String exportPath) throws IOException {
-		DataBase db = getDbMap(dbName);
+	public static void dbBackup(String name) throws IOException {
+		DataBase db = getDbMap(name);
 		String username = db.getUserName();
 		String password = db.getPassWord();
 		String ip = db.getIp();
 		String port = db.getPort();
 		String database = db.getDbName();
+		String type = db.getType();
+		
+		boolean isWin = System.getProperty("os.name").toLowerCase().startsWith("win"); // 操作系统类型
 		
 		StringBuilder command = new StringBuilder();
-
-		String db_type = PropKit.get(ConstantInit.db_type_key);
-		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg
-			// pg_dump --host 127.0.0.1 --port 5432 --username "postgres" --role "postgres" --no-password  --format custom --blobs --encoding UTF8 --verbose --file "D:/jfinaluibv4.backup" "jfinaluibv4"
-			command.append(PathKit.getWebRootPath()).append("/WEB-INF/database/pg/bin/pg_dump ");
-			command.append(" --host ").append(ip).append(" --port ").append(port).append(" --username ").append(" \"postgres\" ");
-			command.append(" --role \"postgres\" --no-password  --format custom --blobs --encoding UTF8 --verbose --file ").append(exportPath).append(" \"").append(database).append("\" ");
-			
-		}else if(db_type.equals(ConstantInit.db_type_mysql)){ // mysql
-			command.append("cmd /c mysqldump -u").append(username).append(" -p").append(password)//密码是用的小p，而端口是用的大P。  
-					.append(" -h").append(ip).append(" -P").append(port).append(" ").append(database).append(" -r \"").append(exportPath+"\"");
-			
-		} else if(db_type.equals(ConstantInit.db_type_oracle)){ // oracle
-			
-		}
+		command.append(PathKit.getWebRootPath()).append(File.separator)
+			.append("WEB-INF").append(File.separator)
+			.append("files").append(File.separator)
+			.append("db");
 		
-		try {
-			Process process = Runtime.getRuntime().exec(command.toString(), null, new File(exportPath));
-			process.waitFor();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		String storePath = command.toString() + File.separator + "backup";
+		String storeName = ToolDateTime.format(new Date(), "yyyyMMdd_HHmmss_SSS") + "_" + database + ".backup";
+		
+		if(type.equals(ConstantInit.db_type_postgresql)){ // pg
+//			pg_dump --host 127.0.0.1 --port 5432 --username "postgres" --role "postgres" --no-password  --format custom --blobs --encoding UTF8 --verbose --file "D:/jfinaluibv4.backup" "jfinaluibv4"
+//			command.append(PathKit.getWebRootPath()).append("/WEB-INF/database/pg/bin/pg_dump ");
+//			command.append(" --host ").append(ip).append(" --port ").append(port).append(" --username ").append(" \"postgres\" ");
+//			command.append(" --role \"postgres\" --no-password  --format custom --blobs --encoding UTF8 --verbose --file ").append(exportPath).append(" \"").append(database).append("\" ");
+			
+			command.append(File.separator).append("script").append(File.separator).append("pg");
+			String cliPath = command.toString();
+			
+			if(isWin){ // windows
+				command.append(File.separator).append("pg-win.bat")
+				.append(" ").append(cliPath)//1-cli路径
+				.append(" ").append(username)//2
+				.append(" ").append(password)//3
+				.append(" ").append(ip)//4
+				.append(" ").append(port)//5
+				.append(" ").append(database)//6
+				.append(" ").append("\"").append(storePath).append("\"")//7
+				.append(" ").append(storeName);//8
+				
+			} else { // linux
+				command.append("sh").append(" ")
+				.append(cliPath).append(File.separator).append("pg-linux.sh")
+				.append(" ").append(storePath)//1-备份文件路径
+				.append(" ").append(username)//2
+				.append(" ").append(password)//3
+				.append(" ").append(ip)//4
+				.append(" ").append(port)//5
+				.append(" ").append(database)//6
+				.append(" ").append(storeName);//7
+			}
+			
+			try {
+				Process process = Runtime.getRuntime().exec(command.toString());
+				process.waitFor();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+		}else if(type.equals(ConstantInit.db_type_mysql)){ // mysql
+			command.append("cmd /c mysqldump -u").append(username).append(" -p").append(password)//密码是用的小p，而端口是用的大P。  
+					.append(" -h").append(ip).append(" -P").append(port).append(" ").append(database).append(" -r \"").append(storePath+"\"");
+			
+			try {
+				Process process = Runtime.getRuntime().exec(command.toString(), null, new File(storePath));
+				process.waitFor();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		} else if(type.equals(ConstantInit.db_type_oracle)){ // oracle
+			
+		} else if(type.equals(ConstantInit.db_type_sqlserver)){ // sqlServer
+			
+		} else if(type.equals(ConstantInit.db_type_db2)){ // db2
+			
 		}
 	}
 	

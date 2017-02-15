@@ -122,7 +122,7 @@ public abstract class ToolBarCode {
 	}
 
 	public static void main(String[] args) {
-		String content = "http://www.hikvision.com.cn";
+		String content = "http://www.jfinaluib.com";
 		int width = 200;
 		int height = 200;
 		String logoPath = "d:/logo.png";

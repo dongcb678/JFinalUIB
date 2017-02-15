@@ -48,6 +48,7 @@ import com.platform.plugin.ServicePlugin;
 import com.platform.plugin.SqlXmlPlugin;
 import com.platform.thread.ThreadSysLog;
 import com.platform.thread.job.DataClearJob;
+import com.platform.thread.job.DbBackupJob;
 import com.platform.thread.job.ResourcesJob;
 import com.platform.tools.ToolBeetl;
 import com.platform.tools.ToolCache;
@@ -299,6 +300,9 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 
 		if(log.isInfoEnabled()) log.info("afterJFinalStart 定时任务，数据清理");
 		QuartzPlugin.addJob("DataClearJob", "0 0 2 * * ?", DataClearJob.class);
+
+		if(log.isInfoEnabled()) log.info("afterJFinalStart 定时任务，数据库备份");
+		QuartzPlugin.addJob("DbBackupJob",  "0 0 2 * * ?", DbBackupJob.class);
 	}
 	
 	/**
@@ -313,6 +317,9 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		
 		if(log.isInfoEnabled()) log.info("beforeJFinalStop 定时任务，数据清理");
 		QuartzPlugin.deleteJob("DataClearJob");
+		
+		if(log.isInfoEnabled()) log.info("beforeJFinalStop 定时任务，数据库备份");
+		QuartzPlugin.deleteJob("DbBackupJob");
 	}
 
 }
