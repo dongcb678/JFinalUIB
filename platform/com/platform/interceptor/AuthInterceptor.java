@@ -100,8 +100,8 @@ public class AuthInterceptor implements Interceptor {
 
 		if(log.isDebugEnabled()) log.debug("method校验");
 		String method = request.getMethod().toLowerCase();
-		if((operator.getMethod().equals("1") && !method.equals("get"))
-				|| operator.getMethod().equals("2") && !method.equals("post")){
+		if( (operator.getMethod().equals("1") && !method.equals("get"))
+				|| (operator.getMethod().equals("2") && !method.equals("post")) ){
 			String msg = "method校验失败，operator.method=" + operator.getMethod() + "，request.method=" + method;
 			if(log.isInfoEnabled()) log.info(msg);
 			toView(contro, ConstantAuth.auth_method, "权限认证过滤器检测：请求方法错误，" + msg);
