@@ -19,7 +19,13 @@ public class Operator extends BaseModel<Operator> {
 	private static final Log log = Log.getLog(Operator.class);
 	
 	public static final Operator dao = new Operator().dao();
-
+	
+//	protected void filter(int filterBy) {
+//		String description = getStr(column_description);
+//		if(StrKit.notBlank(description))
+//			set(column_description, ToolHtml.escapehtml(description));
+//	}
+	
 	/**
 	 * 表名称
 	 */

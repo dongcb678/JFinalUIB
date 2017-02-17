@@ -290,20 +290,27 @@ public abstract class ToolDataBase {
 	 * @param filePath
 	 * @throws IOException
 	 */
-	public static void importSql(String dbName, String filePath) throws IOException {
-		DataBase db = getDbMap(dbName);
+	public static void importSql(String name, String filePath) throws IOException {
+		DataBase db = getDbMap(name);
 		String username = db.getUserName();
 		String password = db.getPassWord();
 		String ip = db.getIp();
 		String port = db.getPort();
 		String database = db.getDbName();
+		String type = db.getType();
+
+		boolean isWin = System.getProperty("os.name").toLowerCase().startsWith("win"); // 操作系统类型
 		
-		String db_type = PropKit.get(ConstantInit.db_type_key);
-		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg
+		if(type.equals(ConstantInit.db_type_postgresql)){ // pg
+//			/usr/bin/pg_restore --host 127.0.0.1 --port 5432 --username 'postgres' --dbname 'jfinaluibv4' --no-password '/var/lib/pgsql/bdom.backup'
+
+			if(isWin){ // windows
+				
+			} else { // linux
+				
+			}
 			
-			
-			
-		}else if(db_type.equals(ConstantInit.db_type_mysql)){ // mysql
+		}else if(type.equals(ConstantInit.db_type_mysql)){ // mysql
 			//第一步，获取登录命令语句  
 			String loginCommand = new StringBuilder().append("mysql -u").append(username).append(" -p").append(password).append(" -h").append(ip).append(" -P").append(port).toString();
 			//第二步，获取切换数据库到目标数据库的命令语句  
@@ -325,8 +332,11 @@ public abstract class ToolDataBase {
 			writer.close();
 			os.close();
 			
-		} else if(db_type.equals(ConstantInit.db_type_oracle)){ // oracle
+		} else if(type.equals(ConstantInit.db_type_oracle)){ // oracle
 			
+		} else if(type.equals(ConstantInit.db_type_sqlserver)){ // sqlServer
+			
+		} else if(type.equals(ConstantInit.db_type_db2)){ // db2
 			
 		}
 	}
