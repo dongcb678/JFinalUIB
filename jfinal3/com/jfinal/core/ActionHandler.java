@@ -18,8 +18,9 @@ package com.jfinal.core;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.jfinal.config.Constants;
+
 import com.jfinal.aop.Invocation;
+import com.jfinal.config.Constants;
 import com.jfinal.handler.Handler;
 import com.jfinal.log.Log;
 import com.jfinal.render.Render;
@@ -99,9 +100,26 @@ public class ActionHandler extends Handler {
 
 			long start = System.currentTimeMillis();
 			log.debug("视图耗时计算 start currentTimeMillis = " + start);
-			
-			render.setContext(request, response, action.getViewPath()).render();
 
+//			String rjson = controller.getPara("rjson");
+//			String rxml = controller.getPara("rxml"); 
+//			if(StrKit.notBlank(rjson) && rjson.equals("true") // 如果明确指定rjson = true，则返回json，输出request中所有att属性值
+//					&& !(render instanceof FileRender)
+//					&& !(render instanceof QrCodeRender)
+//					&& !(render instanceof JsonRender)){ // 排除文件下载、二维码图片、原本json输出
+//				new JsonRender().render();
+//				
+//			}else if(StrKit.notBlank(rxml) && rxml.equals("true") // 如果明确指定rxml = true，则返回xml，输出request中所有att属性值
+//					&& !(render instanceof FileRender)
+//					&& !(render instanceof QrCodeRender)
+//					&& !(render instanceof JsonRender)){ // 排除文件下载、二维码图片、原本json输出
+//				new MyXmlRender().render();
+//				
+//			}else{
+				
+				render.setContext(request, response, action.getViewPath()).render();
+//			}
+			
 			long end = System.currentTimeMillis();
 			long renderTime = end - start;
 			log.debug("视图耗时计算 end currentTimeMillis = " + end + "，renderTime = " + renderTime);
