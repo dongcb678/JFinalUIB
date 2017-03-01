@@ -29,6 +29,14 @@ public class MyXmlRender extends Render {
 			add("javax.servlet.request.ssl_session_mgr");
 			add("javax.servlet.request.key_size");
 			add("javax.servlet.request.cipher_suite");
+			
+			add("cUser");
+			add("reqSysLog");
+			add("cookieMap");
+			add("paramMap");
+			add("i18nMap");
+			add("_res");
+			add("decorator");
 		}
 	};
 	

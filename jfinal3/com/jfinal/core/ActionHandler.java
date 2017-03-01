@@ -107,13 +107,13 @@ public class ActionHandler extends Handler {
 //					&& !(render instanceof FileRender)
 //					&& !(render instanceof QrCodeRender)
 //					&& !(render instanceof JsonRender)){ // 排除文件下载、二维码图片、原本json输出
-//				new JsonRender().render();
+//				new MyJsonRender().setContext(request, response).render();
 //				
 //			}else if(StrKit.notBlank(rxml) && rxml.equals("true") // 如果明确指定rxml = true，则返回xml，输出request中所有att属性值
 //					&& !(render instanceof FileRender)
 //					&& !(render instanceof QrCodeRender)
 //					&& !(render instanceof JsonRender)){ // 排除文件下载、二维码图片、原本json输出
-//				new MyXmlRender().render();
+//				new MyXmlRender().setContext(request, response).render();
 //				
 //			}else{
 				
