@@ -312,7 +312,7 @@ public class User extends BaseModel<User> {
 	/**
 	 * 添加或者更新缓存
 	 */
-	public static void cacheAdd(String ids){
+	public static User cacheAdd(String ids){
 		User user = User.dao.findById(ids);
 		if(user != null){
 			String sql = getSqlMy("platform.userGroup.findGroupIdsByUserIds");
@@ -325,6 +325,7 @@ public class User extends BaseModel<User> {
 			ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_email), user);
 			ToolCache.set(ParamInitPlugin.cacheStart_user + user.getStr(column_idcard), user);
 		}
+		return user;
 	}
 
 	/**

@@ -137,11 +137,6 @@ public class LoginService extends BaseService {
 			int passErrorHour = PropKit.getInt(ConstantInit.config_passErrorHour_key);
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
-			}else{
-				String sql = getSqlMy(User.sqlId_start);
-				Db.use(ConstantInit.db_dataSource_main).update(sql, user.getPKValue());
-				// 更新缓存
-				User.cacheAdd(user.getPKValue());
 			}
 		}
 
@@ -160,12 +155,19 @@ public class LoginService extends BaseService {
 		}
 		if (bool) {
 			// 密码验证成功
+			if(errorCount != 0){
+				String sql = getSqlMy(User.sqlId_start);
+				Db.use(ConstantInit.db_dataSource_main).update(sql, user.getPKValue());
+				// 更新缓存
+				user = User.cacheAdd(user.getPKValue());
+			}
 			AuthInterceptor.setCurrentUser(request, response, user, autoLogin);// 设置登录账户
 			return ConstantLogin.login_info_3;
+			
 		} else {
 			// 密码验证失败
 			String sql = getSqlMy(User.sqlId_stop);
-			Db.use(ConstantInit.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount+1, user.getPKValue());
+			Db.use(ConstantInit.db_dataSource_main).update(sql, ToolDateTime.getSqlTimestamp(ToolDateTime.getDate()), errorCount + 1, user.getPKValue());
 			// 更新缓存
 			User.cacheAdd(user.getPKValue());
 			return ConstantLogin.login_info_4;
@@ -202,11 +204,6 @@ public class LoginService extends BaseService {
 			int passErrorHour = PropKit.getInt(ConstantInit.config_passErrorHour_key);
 			if(hourSpace < passErrorHour){
 				return ConstantLogin.login_info_2;// 密码错误次数超限，几小时内不能登录
-			}else{
-				String sql = getSqlMy(User.sqlId_start);
-				Db.use(ConstantInit.db_dataSource_main).update(sql, user.getPKValue());
-				// 更新缓存
-				User.cacheAdd(user.getPKValue());
 			}
 		}
 
@@ -225,6 +222,12 @@ public class LoginService extends BaseService {
 		}
 		if (bool) {
 			// 密码验证成功
+			if(errorCount != 0){
+				String sql = getSqlMy(User.sqlId_start);
+				Db.use(ConstantInit.db_dataSource_main).update(sql, user.getPKValue());
+				// 更新缓存
+				user = User.cacheAdd(user.getPKValue());
+			}
 			return ConstantLogin.login_info_3;
 		} else {
 			// 密码验证失败
