@@ -58,12 +58,6 @@ V4主要变动：
 
 	百度阅读地址 ：http://yuedu.baidu.com/ebook/3fc54b55d5bbfd0a7956739f
 
-如果觉得此项目对您有帮助，可以进行捐助，谢谢！
-
-![image](http://git.oschina.net/dongcb678/JfinalUIB/raw/2d050d0ddbfee41aa5aa47248f333e35910878dd/doc/捐助/支付宝.jpg)
-
-![image](http://git.oschina.net/dongcb678/JfinalUIB/raw/2d050d0ddbfee41aa5aa47248f333e35910878dd/doc/捐助/微信.jpg)
-
 JDK要求：
 
 	JDK6、JDK7、JDK8都可以，编译级别默认是1.6，可以更高
@@ -110,4 +104,52 @@ build-lib说明：
 	postgresql：在JDK6或JDK7中的驱动类
 	
 	spring：如果启用了spring插件，可以加入这些jar
+
+JFinalUIB v4 界面：
+
+登录页
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/login.png)
+首页
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/index.png)
+用户列表
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/user.png)
+分组列表
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/group.png)
+角色列表
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/role.png)
+岗位列表
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/station.png)
+子系统列表
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/system.png)
+功能管理
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/operator.png)
+部门管理
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/department.png)
+在线log4j日志
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/log4j.png)
+系统负载
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/resource.png)
+上传文件管理
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/upload.png)
+数据源
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/datasource.png)
+访问日志
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/syslog.png)
+参数设置
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/param.png)
+字典设置
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/dict.png)
+国际化
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/i18n.png)
+子系统选择
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/systemChange.png)
+登录用户设置
+![image](https://git.oschina.net/dongcb678/JfinalBook/raw/master/uibImage/userSet.png)
+
+如果觉得此项目对您有帮助，可以进行捐助，谢谢！
+
+![image](http://git.oschina.net/dongcb678/JfinalUIB/raw/2d050d0ddbfee41aa5aa47248f333e35910878dd/doc/捐助/支付宝.jpg)
+
+![image](http://git.oschina.net/dongcb678/JfinalUIB/raw/2d050d0ddbfee41aa5aa47248f333e35910878dd/doc/捐助/微信.jpg)
+
 	
