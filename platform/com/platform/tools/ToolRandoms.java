@@ -43,7 +43,7 @@ public abstract class ToolRandoms {
 	public static String getAuthCodeAll(int length) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < length; i++) {
-			sb.append(authCodeAll[number(0, length)]);
+			sb.append(getAuthCodeAllChar());
 		}
 		return sb.toString();
 	}
@@ -55,7 +55,7 @@ public abstract class ToolRandoms {
 	public static String getAuthCodeNumber(int length) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < length; i++) {
-			sb.append(authCodeNumber[number(0, length)]);
+			sb.append(authCodeNumber[number(0, authCodeNumberLength)]);
 		}
 		return sb.toString();
 	}
